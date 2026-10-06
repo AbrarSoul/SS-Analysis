@@ -49,8 +49,15 @@ here explaining why, and the original (pre-correction) value remains readable at
 - [x] **Step 6 — Recalculate statistics.** COMPLETE. Section 22's full battery rerun on corrected
       data with repository-aware bootstrapping throughout (the case-level/repo-level inconsistency
       is now fixed). See the dedicated entry below for the full before/after comparison.
-- [ ] **Step 7 — Rewrite the paper and assemble reproducibility artifacts.** Remove unsupported
-      causal claims, reconcile contradictory records, provide reproduction materials. NOT STARTED.
+- [x] **Step 7 — Rewrite the paper and assemble reproducibility artifacts.** COMPLETE.
+      `Paper_Draft_Notes.md` fully rewritten with corrected numbers throughout, every
+      multi-agent causal claim hedged as a hypothesis, the new explicit end-to-end
+      table (§7.9) added, and all manuscript-wording corrections applied (contamination
+      language, "no statistically detectable difference," regression-rate renamed,
+      generalization-scope clarification, elapsed-runtime framing). Reproducibility
+      materials: baseline preserved at git tag `baseline-pre-audit`; every correction is
+      an individually-reviewable commit on top of it; `results_corrected/` sits alongside
+      the untouched `results/` originals.
 
 ## Findings log (chronological, newest last)
 
@@ -627,3 +634,36 @@ explanation now that it's unsupported, or silently drop the paragraph, `Paper_Dr
 states this discrepancy as OPEN/unresolved. Not investigated further in this pass -- flagged as a
 genuine follow-up: a fresh look at whether this is a real temperature-sensitivity effect, a different
 case-composition interaction with the location-correctness fix, or something else entirely.
+
+### 2026-10-07 — All 7 steps complete: audit closed out
+
+All 7 steps of the protocol are now done. Summary of what changed and what didn't:
+
+**Changed**: the primary-benchmark headline ranking (DeepHat-V1-7B now 1st, was 5th); every
+MCC/VGR/PDS/FPR number in the document (Finding 1's correction, ~0.01-0.2 MCC per condition); the
+dataset size (299, not 300); the second-rater status (completed, moderate agreement on the
+scope-defining label); the benign-lookalike uncertain-negative count (4 confirmed, was "a small
+number"); the rule-repair "regression rate" label (renamed, no before/after evidence exists); the
+contamination-risk framing (no longer "provably... free"); every multi-agent causal claim (now
+explicitly hedged as a hypothesis given 3 newly-documented unmatched C2/C3/C4 variables); and one
+new open question surfaced by the correction itself (§7.3's stability-ranking discrepancy).
+
+**Did NOT change**: the single most robust finding in the whole study -- Autogrep's/C2's
+feedback-driven repair producing a large, statistically significant MCC gain over one-shot
+generation, for every one of the 8 models, both before and after every correction in this audit.
+This is the one claim in the entire document that survived completely unscathed, and it is now
+stated as such explicitly rather than left for a reader to infer.
+
+**What this audit did NOT do, stated for completeness**: no new models, fine-tuning runs, or
+direct-generation comparisons were added (none were requested); no experiment was rerun (every
+correction was a reanalysis of already-collected data, consistent with "rerun only what the audit
+shows is necessary" -- Finding 1's fix needed no new Semgrep/LLM calls, and no finding in this audit
+produced evidence that any stored artifact was lost, corrupted, or needed regenerating); the
+independent second-rater review was completed by the user, not by this session, preserving its
+validity as an independent check.
+
+**Reproducibility**: the complete, untouched original state of the project is preserved at git tag
+`baseline-pre-audit` (commit `e650422`). Every correction described in this log is a separate,
+individually-reviewable commit on top of it. `results_corrected/` holds every rescored sample log
+alongside the untouched originals under `results/` -- diffing any pair shows exactly what changed
+and why. `Paper_Draft_Notes.md` is the corrected manuscript; this file is its full audit trail.
