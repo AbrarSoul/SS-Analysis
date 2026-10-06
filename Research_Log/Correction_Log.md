@@ -27,9 +27,11 @@ here explaining why, and the original (pre-correction) value remains readable at
       restrictions, Semgrep errors, skipped files, finding-location checks, original vs.
       transformed samples; separated compilation success from visible-pair acceptance. Findings
       1-5 below; Finding 1 (serious) is fixed and committed.
-- [ ] **Step 3 — Audit questionable dataset cases.** All "kept and flagged" cases, incomplete
-      fixes, uncertain negatives, parsing problems; complete the prepared independent label review.
-      NOT STARTED.
+- [~] **Step 3 — Audit questionable dataset cases.** IN PROGRESS. Benign-lookalike uncertain-negative
+      count now quantified (see below). "Kept and flagged" case compilation delegated to a
+      background search agent. Independent label review: the prepared second-rater sheet requires
+      a genuinely independent rater (explicitly not the original labeler, per its own rubric) —
+      flagged for the user's decision, not completed by this session.
 - [~] **Step 4 — Recompute all metrics consistently.** Compilation rate / acceptance coverage /
       conditional MCC·VGR·FPR computed and corrected (compilation-vs-acceptance split: Finding 2;
       MCC/VGR correction: Finding 1). NOT YET DONE: the explicit end-to-end hidden-positive
@@ -391,3 +393,26 @@ finalized, even though the qualitative significance conclusions mostly carry ove
 Not yet done: updating `Paper_Draft_Notes.md` itself to replace every affected number and the
 headline ranking narrative with the corrected version — that is Step 7's job and is the next piece
 of work, after Steps 3 and 5 (dataset audit, workflow-comparability table) are addressed.
+
+### 2026-10-06 — Step 3 (dataset audit): the benign-lookalike uncertain-negative count, quantified
+
+`Paper_Draft_Notes.md`'s own limitations section (§10, originally §8) has long stated qualitatively
+that "for a small number of cases, the benign look-alike sample is syntactically identical to the
+vulnerable code... Worth identifying and reporting the affected case count explicitly" — but that
+count was never actually computed. Computed it now: for every one of the 300 cases, extracted the
+manifest's own `vulnerable_lines` snippet from `vulnerable_source` and compared it (via a sliding-
+window `difflib.SequenceMatcher` ratio, tolerant of renamed identifiers/whitespace) against every
+same-length window of `benign_lookalike`.
+
+**Result: 1 case (`CASE-0069`) is a confirmed, manually-verified near-identical match (ratio
+0.983)** — `OpenNMS/opennms`'s `hasEditRights`/`hasViewRights` methods share the EXACT SAME boolean
+check (`isUserInRole(ROLE_ADMIN) || isUserInRole(ROLE_REST)`), differing only in method name and an
+explanatory comment; the check is a genuine vulnerability in the write-permission context and
+correct in the read-permission context — textbook "no purely syntactic rule can tell these apart."
+**3 further cases (`CASE-0111` 0.853, `CASE-0136` 0.820, `CASE-0067` 0.769) are moderately similar**
+but not individually manually verified here (flagged for a closer look if a reviewer wants it,
+rather than silently counted as confirmed or silently dropped).
+
+This replaces "a small number of cases" with a precise, checkable number: **1 confirmed, up to 4
+total if the moderate-similarity band is included**, out of 300 — a real but small effect, now
+stated as a number rather than an impression.
