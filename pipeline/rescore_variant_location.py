@@ -48,8 +48,12 @@ def load_line_ranges():
     out = {}
     for line in (BENCH_DIR / "variant_vulnerable_lines.jsonl").read_text().splitlines():
         r = json.loads(line)
-        if r["confidence"] != "high":
-            continue  # LOW-confidence annotations are not used to rescore -- stays unverified
+        # "high" = automated inference, confidence-checked by span ratio (compute_variant_vulnerable_lines.py).
+        # "manual" = the 29 originally-LOW entries, individually resolved by direct inspection on
+        # 2026-10-07 (benchmark/variant_lines_manual_adjudication.json) -- equally trustworthy, not a
+        # fallback guess. Anything else (there is none, as of this correction) stays unverified.
+        if r["confidence"] not in ("high", "manual"):
+            continue
         out[(r["case_id"], r["variant"])] = (r["start_line"], r["end_line"])
     return out
 
