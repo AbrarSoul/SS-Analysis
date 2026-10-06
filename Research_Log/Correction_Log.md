@@ -22,9 +22,10 @@ here explaining why, and the original (pre-correction) value remains readable at
       disposable pre-experiment smoke-test run (`results/runs_final_realsmoke_*`, never part of
       any reported result — contained embedded git clones that would have complicated the commit
       without adding anything the audit needs).
-- [ ] **Step 2 — Audit the evaluator.** Wrapper schema restrictions, Semgrep errors, skipped files,
-      finding-location checks, original vs. transformed samples; separate compilation success from
-      visible-pair acceptance. IN PROGRESS.
+- [x] **Step 2 — Audit the evaluator.** COMPLETE. Wrapper schema restrictions, Semgrep errors,
+      skipped files, finding-location checks, original vs. transformed samples; separated
+      compilation success from visible-pair acceptance. Findings 1-4 below; Finding 1 (serious) is
+      fixed and committed.
 - [ ] **Step 3 — Audit questionable dataset cases.** All "kept and flagged" cases, incomplete
       fixes, uncertain negatives, parsing problems; complete the prepared independent label review.
       NOT STARTED.
@@ -169,10 +170,33 @@ yet checked against real data for actual occurrence (lower priority than Finding
 function is used for the IN-PROCESS visible-pair check during generation, not for any of the
 hidden-evaluation numbers reported in the paper — but still needs confirming before Step 4 closes).
 
-**Still open for Step 2**: wrapper schema restrictions beyond what Finding 2's breakdown already
-surfaces (the 30 "X is not of type 'string'" / nested-metavariable-pattern cases from the §24
-failure-taxonomy work are a start, not a complete audit of the wrapper itself); Finding 4's
-real-data check.
+**Finding 4 — CHECKED, NOT a live issue.** Traced every caller of `evaluate_original_pair()`
+(`pipeline/run_generation.py`): it is only reachable via `evaluate_case()`, which is only called
+from `run_model()`, which is only invoked by `main()`'s `--patches-dir` flag (the Phase 1
+raw-`.patch`-file smoke-test flow). Every real reported result (primary benchmark, stability study,
+and by extension every C2/C3/C4 run built on the same curated cases) uses `--cases final`/
+`--cases stability`, which routes through `run_model_on_cases()` -> `evaluate_case_from_curated()`
+-> `evaluate_case_bundle()` exclusively -- confirmed directly from `main()`'s argument-parsing
+branch, not inferred. The theoretical "scan never ran, silently counted as a true negative" gap in
+`evaluate_original_pair()` exists in code, but that code path has never produced any number in
+`Paper_Draft_Notes.md`.
+
+**Wrapper schema restrictions — checked.** `autogrep/llm_client.py`'s `validate_rule_schema()` (the
+actual wrapper gate, run before a rule ever reaches Semgrep) only requires the 5 fields Semgrep
+itself always needs (`id`, `pattern`, `message`, `severity`, `languages`), checks `severity` against
+a fixed enum, and checks `id`'s character set -- it does NOT inspect `pattern`'s internal type/shape
+at all. `_sanitize_rule()` (run earlier in the same pipeline) auto-fills `languages`/`severity`/
+`metadata` when missing rather than rejecting the rule for their absence. This means the wrapper is
+reasonably permissive and was not found to reject anything Semgrep itself would have accepted; the
+genuine type/shape strictness (e.g. the 30 "X is not of type 'string'" cases from the §24
+failure-taxonomy work, where a model nested a list/dict where Semgrep's own JSON-schema requires a
+plain string) correctly happens at Semgrep's own validation layer, which is already counted as a
+Semgrep-level rejection in every analysis in this project -- no false-rejection risk found at the
+wrapper layer.
+
+**Step 2 is now complete.** Moving to Step 6 (recalculate statistics) directly, per the user's
+instruction to finish any remaining Step 2 items before rerunning Section 22's statistical battery
+on the corrected data from Finding 1's fix.
 
 ### 2026-10-06 — Finding 1 FIXED, impact measured: this is a major correction, not a minor one
 
