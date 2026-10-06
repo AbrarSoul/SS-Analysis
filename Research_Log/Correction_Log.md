@@ -613,3 +613,17 @@ completed" placeholder in `Paper_Draft_Notes.md`'s limitations section, Step 7's
 "supported" scope that anchors this entire study's primary comparisons rests on a single-rater label
 whose independent-agreement rate, now measured, is moderate rather than high -- stated as a genuine
 validity threat to the comparison's scope, not hidden behind an unresolved TODO.
+
+### 2026-10-07 — Step 7 (paper rewrite), in progress: a new discrepancy found while updating §7.3
+
+While rewriting `Paper_Draft_Notes.md` with corrected numbers, re-checked §7.3's stability-experiment
+claim ("the stability-run ranking mismatch with §7.1 is fully explained by case composition, not
+temperature") against the Finding-1-corrected data on BOTH sides of that comparison. **It no longer
+holds.** Before correction, restricting the primary run's own temp-0 results to the same 51-case
+stability subset reproduced the temp-0.2 stability ranking almost exactly. After correction, the two
+rankings diverge substantially -- `DeepHat-V1-7B` and `codellama:7b-instruct-fp16` in particular swap
+from 3rd/6th (temp-0.2 mean) to 6th/1st (temp-0, same subset). Rather than keep the original
+explanation now that it's unsupported, or silently drop the paragraph, `Paper_Draft_Notes.md` §7.3 now
+states this discrepancy as OPEN/unresolved. Not investigated further in this pass -- flagged as a
+genuine follow-up: a fresh look at whether this is a real temperature-sensitivity effect, a different
+case-composition interaction with the location-correctness fix, or something else entirely.

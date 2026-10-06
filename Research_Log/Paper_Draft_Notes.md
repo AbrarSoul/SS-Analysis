@@ -7,6 +7,13 @@ Every number below is taken from verified project artifacts (the frozen manifest
 the freeze record, the actual result logs), not recalled from memory. Where a
 number could change as later phases complete, that is marked explicitly.
 
+**2026-10-07: this document was fully corrected following a methodological
+audit.** Every section affected by the audit is marked `[CORRECTED]` at its
+heading; §10 lists every limitation found; §11 lists what remains open. The
+full audit trail, including the original pre-audit state of every result
+file, is in `Research_Log/Correction_Log.md` and the git history starting at
+tag `baseline-pre-audit`.
+
 Cross-references: the full experimental design is `Complete_Experimental_Design_LLM_Semgrep_MultiAgent.md`
 (frozen, pre-registered). The complete engineering narrative — every bug found and
 fixed, with evidence — is `Implementation_Log.md`. This document is the distillation
@@ -23,8 +30,23 @@ vulnerable code pattern while not flagging the already-patched code or unrelated
 benign code with a superficially similar shape. Eight open-weight code-capable
 models are benchmarked, both in a single-shot condition and with a
 feedback-driven repair loop, against a manually curated, six-sample-per-case
-ground-truth dataset of 300 real CVE fixes drawn from four languages (Python,
+ground-truth dataset of 299 real CVE fixes drawn from four languages (Python,
 Java, JavaScript, TypeScript).
+
+**A methodological audit (2026-10-06/07, full record in
+`Research_Log/Correction_Log.md`) found and corrected a real scoring gap, found
+several confounds in the C2/C3/C4 comparison, and reran the full statistical
+analysis on corrected data.** Every section below reflects the corrected
+numbers; where a claim changed as a result, that is stated explicitly rather
+than silently updated. Read this note once, up front, rather than have it
+repeated at every affected number: **the hidden-variant hit-rate metric this
+study calls VGR measures generalization to the six controlled, deliberately
+constructed transformations in each case's test bundle (renamed identifiers,
+restructured-but-equivalent logic, a benign look-alike) — not generalization to
+unseen real-world vulnerabilities.** No part of this study tests whether a rule
+generalizes to a genuinely different, independently-occurring instance of the
+same vulnerability class in other code; that would require a different kind of
+dataset and is out of scope here.
 
 ## 2. Dataset construction
 
@@ -47,10 +69,11 @@ model context (over 150 lines) were routed to manual review rather than trusted.
 
 Two partitions were curated: a 40-case pilot set (used exclusively for model
 screening and prompt selection, never for the results reported in Section 7) and
-a 300-case final set (the locked benchmark). Case identifiers are pinned
-permanently once assigned — a case's identifier never changes even if later
-cases are added or removed from the dataset, so that per-case artifacts already
-built (see §2.3) are never silently invalidated. The final set's composition:
+a 300-case final set (the locked benchmark, later reduced to 299 — see below).
+Case identifiers are pinned permanently once assigned — a case's identifier
+never changes even if later cases are added or removed from the dataset, so
+that per-case artifacts already built (see §2.3) are never silently
+invalidated. The final set's composition at the original 300-case freeze:
 
 | Language | Cases |
 |---|---:|
@@ -69,6 +92,17 @@ that any later accidental modification is immediately detectable.
 *Two near-duplicate cases (two independent CVE reports resolving to
 byte-identical code changes) were identified and one member of each pair
 removed, in accordance with exclusion criteria against duplicated fixes.*
+
+**One case excluded post-hoc during the 2026-10-06/07 audit**: `CASE-0166`
+(`foxinmy/weixin4j`) was removed after confirming, directly against the real
+upstream commit, that the patched revision does not compile (it references a
+constant never defined anywhere in the file) — a genuine upstream defect, not
+an extraction artifact. This was a deliberate, user-approved exclusion applied
+after all experiments had already run, not a trigger for dataset
+renumbering or a replacement case (see `Research_Log/Correction_Log.md`); its
+measured effect on every reported number is zero, since the case already
+carried the `unsupported` representability label and contributed no sample
+records to any pooled metric. **The dataset is 299 cases as of this writing.**
 
 ### 2.3 Six-sample ground-truth bundles
 
@@ -123,11 +157,26 @@ but their count is reported. The final distribution:
 | Partially supported | 99 |
 | Unsupported | 48 |
 
-*This classification was made by a single rater during dataset construction. A
-second-rater agreement check (a blinded, stratified 45-case sample) was
-prepared but had not been completed as of this writing — report inter-rater
-agreement here once available, or note its absence as a limitation if it
-remains undone.*
+*This classification was made by a single rater during dataset construction.
+A second-rater agreement check (a blinded, stratified 45-case sample,
+`benchmark/second_rater/`) was completed during the 2026-10-06/07 audit.
+Scored against the original labels (percent agreement / Cohen's κ):
+`pattern_or_taint` 88.9% / κ=0.737 (substantial agreement);
+`structural_or_context_heavy` 80.0% / κ=0.531 (moderate);
+**`semgrep_representability` 64.4% / κ=0.448 (moderate) — the weakest of the
+three, on exactly the label that defines the 153-case "supported" scope this
+entire study's primary comparisons are built on.** Disagreements concentrated
+around the `partially_supported` boundary rather than confusing `supported`
+with `unsupported` outright, and ran in both directions (not a one-way bias).
+Two caveats on the check itself, stated rather than hidden: the second rater
+worked from written mechanism summaries rather than the full diff/source the
+original label had access to, and in a handful of cases some case-level detail
+had already surfaced during the audit conversation before rating — a
+sensitivity recomputation excluding those cases left the numbers essentially
+unchanged (see `Research_Log/Correction_Log.md`). **This moderate — not
+high — independent agreement on the scope-defining label is reported here as
+a genuine validity threat to the 153-case comparison, not a resolved
+footnote.*
 
 ## 3. Models evaluated
 
@@ -181,6 +230,19 @@ Each generated rule was validated by executing it with a pinned Semgrep
 version (1.177.0) against all six samples of its case's ground-truth bundle
 (§2.3), producing a true/false positive/negative outcome for each sample.
 
+**C2/C3/C4 workflow comparability, summarized here and detailed in full in
+`Research_Log/Workflow_Comparability_C2_C3_C4.md`**: the multi-agent
+configurations introduced later in §7 (C2, C3, C4) share the same
+underlying model pool and a 6-call budget ceiling, but a 2026-10-06/07
+audit found they are NOT matched on several other dimensions — C3/C4's
+Rule Generation call receives a compressed, agent-authored specification
+rather than the raw diff C2 sees; C2 gets 3 repair rounds to C3/C4's 1;
+and C3/C4's first acceptance check requires both a correct reviewer
+verdict and the deterministic Semgrep result, while C2's check is
+deterministic-only throughout. Every comparison across these
+configurations in §7 is therefore presented as a comparison of complete,
+differently-configured workflows, not an isolated test of role separation.
+
 ## 5. Evaluation metrics
 
 Standard classification metrics (precision, recall, F1, false-positive rate,
@@ -218,6 +280,34 @@ design at this size, not a limitation of the models evaluated: a bundle with
 more than two hidden variants per case would be needed to make the prescribed
 sensitivity analysis actually informative.
 
+**A real scoring gap found and fixed during the 2026-10-06/07 audit**: VGR's
+own definition above requires the hidden variant's finding to be at the
+correct location, but that check was never actually implemented for the two
+hidden vulnerable-variant samples specifically (it was correctly implemented
+for the visible original-vulnerable sample throughout) — every VGR number
+originally reported in earlier drafts of this document counted a Semgrep match
+anywhere in the transformed file as a hit, not necessarily a match on the
+transformed vulnerability itself. This was corrected retroactively (new
+per-variant line-range annotations, derived without re-running any model or
+Semgrep call — see `Research_Log/Correction_Log.md`, Finding 1): **21.6% of
+all "detected" hidden-variant positives across the whole study (879 of 4,063)
+were wrong-location matches**, now correctly reclassified. Every VGR/MCC number
+in the sections below reflects this correction. The pilot screening numbers in
+§6 have NOT been recomputed with this fix (out of scope for this audit pass,
+since the pilot only ever informed the prompt-template/early-model-direction
+decision, not any reported headline comparison) — flagged as an explicit,
+not-yet-addressed gap rather than silently left inconsistent.
+
+**Also clarified per the audit**: the pooled MCC/VGR/FPR/BSDR numbers reported
+throughout are computed **only among cases where a rule was actually accepted**
+— a *conditional* quality measure, not an end-to-end one. §7.9 (new) reports
+the explicit end-to-end detection and end-to-end success rates — computed over
+every requested case, with a missing or rejected rule counted as a failure on
+every hidden-positive sample it never had a chance to flag, never silently
+excluded from the denominator and never credited as a true negative for a scan
+that never ran. The conditional metrics below should not, on their own, be
+read as characterizing whole-system performance; §7.9 is the complete picture.
+
 ## 6. Results: pilot screening (40 cases)
 
 The pilot screening run (8 models × 2 prompt templates × 40 cases, both
@@ -232,51 +322,75 @@ board: even the best model/prompt combination validated only 10 of 40 cases
 
 ## 7. Results: primary benchmark (300 cases)
 
-### 7.1 Headline ranking
+### 7.1 Headline ranking [CORRECTED — see note below]
 
 Restricting to the 153 supported cases (§2.4) — the design's primary
-comparison set — and sorting by MCC under the autogrep (repaired) condition:
+comparison set — and sorting by MCC under the autogrep (repaired) condition,
+**computed from the corrected sample data (Finding 1's location-correctness
+fix, `results_corrected/`)**:
 
 | Rank | Model | MCC | PDS | VGR | FPR | ESR |
 |---:|---|---:|---:|---:|---:|---:|
-| 1 | Qwen2.5-Coder-7B-Instruct | 0.613 | 0.248 | 0.677 | 0.111 | 0.052 |
-| 2 | Yi-Coder-9B | 0.607 | 0.248 | 0.611 | 0.096 | 0.059 |
-| 3 | CodeGemma-7B | 0.591 | 0.157 | 0.500 | 0.060 | 0.026 |
-| 4 | Qwen2.5-Coder-32B | 0.589 | 0.261 | 0.620 | 0.123 | 0.052 |
-| 5 | DeepHat-V1-7B | 0.585 | 0.327 | 0.518 | 0.085 | 0.065 |
-| 6 | Magicoder-7B | 0.585 | 0.065 | 0.600 | 0.067 | 0.020 |
-| 7 | DeepSeek-Coder-6.7B | 0.534 | 0.085 | 0.500 | 0.074 | 0.013 |
-| — | CodeLlama-7B-Instruct (FP16, precision outlier) | 0.531 | 0.150 | 0.333 | 0.056 | 0.013 |
+| 1 | DeepHat-V1-7B | 0.543 | 0.327 | 0.445 | 0.085 | 0.059 |
+| 2 | Qwen2.5-Coder-32B | 0.536 | 0.261 | 0.533 | 0.123 | 0.046 |
+| 3 | Yi-Coder-9B | 0.529 | 0.248 | 0.478 | 0.096 | 0.052 |
+| 4 | CodeGemma-7B | 0.521 | 0.157 | 0.375 | 0.060 | 0.020 |
+| 5 | Qwen2.5-Coder-7B-Instruct | 0.514 | 0.248 | 0.510 | 0.111 | 0.046 |
+| 6 | Magicoder-7B | 0.374 | 0.065 | 0.233 | 0.067 | 0.007 |
+| 7 | DeepSeek-Coder-6.7B | 0.373 | 0.085 | 0.222 | 0.074 | 0.013 |
+| — | CodeLlama-7B-Instruct (FP16, precision outlier) | 0.508 | 0.150 | 0.292 | 0.056 | 0.007 |
 
-`qwen2.5-coder:7b-instruct` ranks first by MCC on the locked final set,
-matching its pilot ranking (§6) on a wholly independent 40-case set — a
-consistency finding worth stating plainly rather than treating as incidental.
+**This ranking changed from an earlier draft of this document as a direct
+consequence of the audit's Finding 1.** VGR (and therefore MCC, which pools
+hidden-variant samples into its confusion matrix) had never actually checked
+whether a hidden-variant detection landed on the correct, transformed
+vulnerable construct — only whether Semgrep fired anywhere in the file. Fixed
+retroactively without re-running any model (see §5's note above); 21.6% of
+all hidden-variant "detections" study-wide were wrong-location matches, now
+correctly reclassified as misses. The two models with the weakest
+format-following/discipline elsewhere in this study (`deepseek-coder:6.7b`,
+`magicoder:7b`) show the largest corrections, consistent with looser,
+less-precisely-targeted rules having received more undeserved credit under
+the uncorrected scoring — not noise. `qwen2.5-coder:7b-instruct`, previously
+reported first, now ranks fifth; `DeepHat-V1-7B`, previously fifth, now ranks
+first.
 
-### 7.2 Secondary findings
+**This table reports conditional quality (among cases where a rule was
+accepted) and should not be read alone as "the" measure of overall system
+performance — §7.9 reports the end-to-end picture (computed over every
+requested case, not just accepted ones), which is substantially more
+sobering for every model.**
+
+### 7.2 Secondary findings [numbers corrected]
 
 - **Coverage and discrimination quality are not the same thing.** DeepHat had
-  the highest raw coverage of any model on the full 300-case set (30.7% of
-  attempts producing a validated rule) but ranks fifth by MCC on supported
-  cases — a model that generates more nominally-valid rules is not
-  automatically the one that discriminates best once false positives across
-  the full bundle are weighed.
+  the highest raw coverage of any model on the full dataset (30.7% of
+  attempts producing a validated rule) and now ALSO ranks first by corrected
+  MCC on supported cases — unlike the pre-correction picture, where it ranked
+  fifth. This specific secondary finding ("coverage and quality diverge") no
+  longer holds for DeepHat specifically; it still holds in general (e.g.
+  `codegemma:7b` has middling coverage and middling MCC, not a clean monotone
+  relationship across all 8 models) — stated plainly as a changed conclusion,
+  not silently dropped.
 - **The strict end-to-end success bar (ESR) is far more demanding than raw
-  coverage.** Across all eight models, ESR ranges from 1.3% to 6.5% of
-  supported cases — versus 10–31% raw coverage — because ESR additionally
-  requires zero false positives across every negative sample and detection of
-  both hidden variants. This corroborates and sharpens the pilot's own
-  low-coverage finding (§6).
-- **Feedback-driven repair produces a large gain, larger than the raw
-  coverage-percentage delta alone suggests.** Pooling across all eight models,
-  raw-condition coverage was 13.4% versus 19.2% for the repaired (autogrep)
-  condition — a 43% relative increase. The effect on MCC specifically is
-  substantially larger for some models: `qwen2.5-coder:7b-instruct` moves from
-  raw MCC 0.168 to repaired MCC 0.613. The relative coverage gain from repair
-  is largest for the weakest-starting models (e.g. Magicoder's raw coverage
-  more than tripled) and smallest for the strongest (DeepHat, already the best
-  raw performer, gained proportionally the least) — consistent with a ceiling
-  effect, where repair helps most when the first attempt is furthest from
-  correct.
+  coverage.** Across all eight models, corrected ESR ranges from 0.7% to 5.9%
+  of supported cases — versus 10–31% raw coverage — because ESR additionally
+  requires zero false positives across every negative sample, correct-location
+  detection of both hidden variants, and the visible pair being discriminated
+  correctly. This corroborates and sharpens the pilot's own low-coverage
+  finding (§6), and is explored fully in §7.9's explicit end-to-end tables.
+- **Feedback-driven repair produces a large gain — and this is the single
+  most robust, statistically confirmed finding in the entire study,
+  unaffected by the Finding-1 correction.** Pooled across all eight models and
+  rerun with repository-aware paired bootstrap tests on corrected data
+  (§7.8), the raw-vs-autogrep MCC gain is large and **statistically
+  significant for every one of the 8 models (all p≈0.0000)** — e.g.
+  `qwen2.5-coder:7b-instruct` moves from raw MCC 0.105 to repaired MCC 0.514
+  (corrected values). The relative coverage gain from repair is largest for
+  the weakest-starting models and smallest for the strongest — consistent
+  with a ceiling effect, where repair helps most when the first attempt is
+  furthest from correct. Unlike the headline ranking above, this specific
+  finding's statistical significance is robust to the correction (see §7.8).
 
 ### 7.3 Stability experiment
 
@@ -294,34 +408,38 @@ consistent model agrees with its own most frequent result on roughly 19 of
 every 20 repeats.
 
 **Metric-level spread on the 51 supported cases within the subset** (autogrep
-condition, MCC mean/min/max across the five repeats):
+condition, MCC mean/min/max across the five repeats, **corrected data**):
 
 | Model | MCC mean | MCC min | MCC max |
 |---|---:|---:|---:|
-| DeepSeek-Coder-6.7B | 0.614 | 0.577 | 0.680 |
-| Magicoder-7B | 0.599 | 0.534 | 0.636 |
-| Yi-Coder-9B | 0.593 | 0.547 | 0.645 |
-| CodeGemma-7B | 0.582 | 0.554 | 0.589 |
-| DeepHat-V1-7B | 0.572 | 0.492 | 0.647 |
-| Qwen2.5-Coder-7B-Instruct | 0.515 | 0.499 | 0.552 |
-| Qwen2.5-Coder-32B | 0.505 | 0.464 | 0.554 |
+| Yi-Coder-9B | 0.522 | 0.443 | 0.575 |
+| CodeGemma-7B | 0.517 | 0.496 | 0.543 |
+| DeepHat-V1-7B | 0.515 | 0.458 | 0.605 |
+| Magicoder-7B | 0.485 | 0.364 | 0.592 |
+| Qwen2.5-Coder-7B-Instruct | 0.481 | 0.451 | 0.507 |
+| CodeLlama-7B-Instruct (FP16) | 0.471 | 0.422 | 0.505 |
+| Qwen2.5-Coder-32B | 0.452 | 0.424 | 0.479 |
+| DeepSeek-Coder-6.7B | 0.419 | 0.385 | 0.509 |
 
-**A methodological finding worth stating carefully.** This ranking does not
-match §7.1's primary ranking (there, Qwen2.5-Coder-7B-Instruct is first;
-here, it is sixth of seven). The cause was isolated rather than left as an
-open question: recomputing the *primary run's own temperature-0 results*,
-restricted to exactly the same 51-case subset, reproduces this same
-ranking almost exactly (same top four, same order) — and every temperature-0.2
-value above falls inside or close to that same restricted computation. The
-rank difference is therefore a case-composition effect of evaluating a
-smaller, different 51-case subset, not a temperature effect. Once the case
-set is held fixed, temperature 0 and temperature 0.2 give consistent
-rankings — the intended reading of this experiment (RQ8: "how consistent are
-rule syntax and detection behavior across repeated generations?") is a
-reassuring one. The separate, genuine finding is that ranking by MCC is
-sensitive to which subset of cases is evaluated — relevant to how much weight
-any single ranking should be given, independent of repeat-to-repeat
-stability.
+**A methodological finding, re-examined after the Finding-1 correction and
+now reported as OPEN rather than resolved.** Before correction, this
+section claimed the stability-run ranking's mismatch with §7.1's primary
+ranking was fully explained by case-composition (restricting the primary
+run's own temperature-0 results to the same 51-case subset reproduced the
+stability ranking almost exactly). **Re-checked after applying the Finding-1
+correction to both sides of that comparison: the match is no longer close.**
+The same-subset temperature-0 ranking (corrected) is `codellama` >
+`yi-coder` > `qwen32b` > `codegemma` > `qwen7b` > `DeepHat` > `deepseek-coder`
+> `magicoder`, while the temperature-0.2 stability-run ranking above is
+`yi-coder` > `codegemma` > `DeepHat` > `magicoder` > `qwen7b` > `codellama` >
+`qwen32b` > `deepseek-coder` — `DeepHat` and `codellama` in particular swap
+dramatically (3rd vs. 6th, and 6th vs. 1st) between the two. **This
+discrepancy is not yet explained and is flagged here as unresolved**, rather
+than keep the original "case-composition, not temperature" explanation now
+that it no longer holds up under the corrected scoring. A fresh investigation
+of this specific divergence is needed before either explanation (temperature
+sensitivity, case composition, or some interaction of both with the
+location-correctness fix) can be stated with confidence.
 
 ### 7.4 C2 (iterative single agent): an interim comparison
 
@@ -348,13 +466,18 @@ Run on the 153 supported cases, all eight primary models, at temperature 0
 temperature for C2 itself):
 
 **C2's MCC is nearly indistinguishable from the autogrep condition's for
-most models** — several agree to three decimal places (CodeGemma-7B 0.591
-vs. 0.591; Qwen2.5-Coder-32B 0.589 vs. 0.589; DeepHat-V1-7B 0.585 vs. 0.585),
-and the largest gap (Magicoder-7B, 0.566 vs. 0.585) is still modest. Every
-model's C2 result is far above its raw (single-shot) MCC. Models used an
-average of 3.0–3.7 of the 6 available calls; a small number of cases per
-model (1–3 of 153) were bound by the output-token cap specifically, showing
-it is a real constraint and not merely a theoretical one.
+most models — even more strikingly so after the Finding-1 correction**: 5 of
+8 models now match to three decimal places exactly (CodeGemma-7B 0.521 vs.
+0.521; Qwen2.5-Coder-32B 0.536 vs. 0.536; DeepHat-V1-7B 0.543 vs. 0.543;
+DeepSeek-Coder-6.7B 0.373 vs. 0.373; CodeLlama-7B-Instruct 0.508 vs. 0.508),
+and the largest remaining gap (Yi-Coder-9B, 0.511 vs. 0.529) is still modest.
+Every model's C2 result is far above its raw (single-shot) MCC — confirmed
+as the single most robust, statistically significant finding in the whole
+study (§7.8, comparisons 4–5: p≈0.0000 for every model, unaffected by the
+correction). Models used an average of 3.0–3.7 of the 6 available calls; a
+small number of cases per model (1–3 of 153) were bound by the output-token
+cap specifically, showing it is a real constraint and not merely a
+theoretical one.
 
 **Interim reading, stated as interim**: giving a single model a richer,
 explicitly budgeted repair loop performs about as well as the simpler
@@ -363,7 +486,7 @@ outperform C2 under the same matched budget, the design's own framing
 suggests the mechanism will need to be genuine role specialization, not
 simply more attempts at the same undifferentiated task.
 
-### 7.5 Role-capability screening (Phase 3, in progress)
+### 7.5 Role-capability screening (Phase 3, complete)
 
 The design calls for testing each of five prospective multi-agent roles'
 capability on "pilot or development data" before assigning models to roles
@@ -405,16 +528,27 @@ finding rather than a test artifact. Role assigned to
 **Qwen2.5-Coder-7B-Instruct**.
 
 **Rule repair** (revise a failing rule; selection measurement: repair
-success and regression rate, both newly operationalized here since the
-design names them without exact formulas). Reusing the same 45-item test
-set under a repair-framed prompt, across the three candidates named in the
-design (Qwen2.5-Coder-32B, DeepHat-V1-7B, Qwen3-Coder-Next):
+success and **post-repair over-broad rate**, both newly operationalized here
+since the design names them without exact formulas). Reusing the same
+45-item test set under a repair-framed prompt, across the three candidates
+named in the design (Qwen2.5-Coder-32B, DeepHat-V1-7B, Qwen3-Coder-Next):
 
-| Model | Repair success rate | Regression rate (of successes) |
+| Model | Repair success rate | Post-repair over-broad rate (of successes) |
 |---|---:|---:|
 | Qwen2.5-Coder-32B | 4.4% (2/45) | 50.0% |
 | DeepHat-V1-7B | 0.0% | n/a |
 | Qwen3-Coder-Next | 0.0% | n/a |
+
+**Terminology correction (2026-10-06/07 audit)**: this column was originally
+labeled "regression rate," which implies a previously-working behavior was
+damaged by repair. No such before/after comparison exists or is possible
+here — every input rule was already broken (that's why repair was invoked),
+so there is no "before" state to regress from. What this column actually
+measures, confirmed directly against the scoring code: among the rules that
+passed repair's narrow visible-pair re-check, whether the repaired rule ALSO
+produces a false positive elsewhere in the case's full six-sample bundle —
+i.e., whether the fix that satisfied the narrow check is over-broad. Renamed
+throughout to reflect this.
 
 These absolute numbers are low across every model — manually re-verified to
 rule out a measurement artifact (one failed attempt was independently
@@ -526,7 +660,21 @@ pilot model assigned to each role") — a separate, later configuration. C3
 itself, described next, uses a single model across every role, per its own
 definition (§18.3).
 
-### 7.6 C3 (homogeneous multi-agent): a root-caused coverage finding
+### 7.6 C3 (homogeneous multi-agent): a root-caused coverage finding [CORRECTED]
+
+**Read this note before the rest of the section.** A 2026-10-06/07 audit found
+and fixed two things that affect every number and claim below: (1) Finding 1,
+the location-correctness scoring gap described in §5, which moves every MCC/VGR
+value; (2) a workflow-comparability audit (`Research_Log/
+Workflow_Comparability_C2_C3_C4.md`) found that C2 and C3 are NOT matched on
+generator input or repair-round count, despite the design document's own
+framing suggesting they are — C3's Rule Generation call never sees the raw
+diff (only a Patch Analysis agent's 4-field summary, unlike C2's full prompt),
+and C2 gets 3 repair rounds to C3's 1. **Any difference between C2 and C3
+reported below should be read as a difference between two complete,
+differently-configured workflows, not as an isolated test of "role separation"
+as a single causal variable** — the original framing below is preserved but
+explicitly hedged throughout.
 
 C3 assigns one model to every role in the §17.1 workflow (Patch Analysis →
 Rule Generation → Syntax Review → Semgrep Executor → Semantic Review →
@@ -543,9 +691,10 @@ slack, rather than silently exceeding it.
 
 **C3-E's results (153 supported cases)**: 13 accepted (8.5% coverage),
 every one on the first pass — not one of 140 repair attempts recovered a
-case. Pooled MCC over the accepted cases is 0.593, close to this same
-model's MCC under the simpler C2 (0.601) and autogrep (0.613) conditions —
-quality among accepted rules is not materially worse here. Coverage is: the
+case. Pooled MCC over the accepted cases is 0.545 (corrected), close to this
+same model's MCC under the simpler C2 (0.504, corrected) and autogrep (0.514,
+corrected) conditions — quality among accepted rules is not materially worse
+here. Coverage is: the
 single-agent conditions accept something on roughly a quarter to a third of
 cases; C3-E accepts on well under a tenth.
 
@@ -577,53 +726,67 @@ scenario from §7.6's investigation (an obviously broken rule given the same
 visible-evidence pattern) and this time Semantic Review correctly rejected
 it — though it does not disappear: 90.8% of repair attempts still fail.
 
-This makes the design's own main causal comparison (§18.3: C3 against C2
-under the same model and budget) directly answerable for both model scales,
+This makes the design's own main comparison (§18.3: C3 against C2 under the
+same model and nominal budget) directly answerable for both model scales,
 using data already collected — no further runs were needed, since C2's
-original primary run already covered both models.
+original primary run already covered both models. **As established in the
+note at the top of this section, C2 and C3 are not matched on generator
+input or repair-round count — this is a comparison of two complete,
+differently-configured workflows that happen to share a model and a
+call-count ceiling, not an isolated test of "role separation."**
+
+**[CORRECTED]**
 
 | Model | Condition | Coverage | MCC | VGR | FPR | PDS |
 |---|---|---:|---:|---:|---:|---:|
-| Qwen2.5-Coder-32B | C3-S | 22.9% | **0.686** | 0.771 | 0.143 | 0.216 |
-| Qwen2.5-Coder-32B | C2 | 30.1% | 0.589 | 0.620 | 0.123 | 0.261 |
-| Qwen2.5-Coder-7B-Instruct | C3-E | 8.5% | 0.593 | 0.615 | 0.154 | 0.085 |
-| Qwen2.5-Coder-7B-Instruct | C2 | 32.0% | 0.601 | 0.663 | 0.116 | 0.255 |
+| Qwen2.5-Coder-32B | C3-S | 22.9% | **0.649** | 0.714 | 0.143 | 0.216 |
+| Qwen2.5-Coder-32B | C2 | 30.1% | 0.536 | 0.533 | 0.123 | 0.261 |
+| Qwen2.5-Coder-7B-Instruct | C3-E | 8.5% | 0.545 | 0.538 | 0.154 | 0.085 |
+| Qwen2.5-Coder-7B-Instruct | C2 | 32.0% | 0.504 | 0.500 | 0.116 | 0.255 |
 
-The two model scales produce a clean, opposite-signed pattern. For the
-larger model, role separation trades coverage for a real, substantial MCC
-gain (0.589 → 0.686), driven mainly by markedly better generalization to
-the hidden transformed variants (VGR 0.620 → 0.771) — when C3-S does accept
-a rule, it holds up better under the hidden evaluation than C2's accepted
-rules do. For the smaller model, the same decomposition trades away three
-quarters of its coverage for essentially no change in MCC (0.601 → 0.593,
-within noise) — a straightforward net loss.
+The two model scales still produce an opposite-signed pattern after
+correction, though the magnitudes moved: for the larger model, C3-S trades
+coverage for a real MCC gain over C2 (0.536 → 0.649), still driven mainly by
+better VGR (0.533 → 0.714). For the smaller model, C3-E trades away most of
+its coverage for a small, likely-noise MCC difference (0.504 → 0.545).
 
-Read together with the root-caused mechanism above, this suggests role
-separation's value here tracks whether the underlying model is capable
-enough to use the specialized review roles productively. The smaller
-model's near-total self-assessment failure means decomposition mostly just
-introduces more ways to fail without a compensating benefit; the larger
-model's more reliable (if still imperfect) self-assessment lets it extract
-a genuine quality improvement from the same decomposition, at a real but
-smaller coverage cost. This bears directly on the design's RQ9 ("does a
-specialized multi-agent workflow outperform an equally resourced iterative
-single-agent workflow?") and RQ10 (model-characteristic effects on
-multi-agent value) — the answer appears to be "it depends on the model,"
-not a uniform yes or no, and is reported as such rather than collapsed into
-a single verdict.
+**What can and cannot be claimed here, stated precisely per the audit**:
+the pattern above is consistent with "role separation helps a capable model
+and doesn't help (or mildly hurts) a weaker one," and the root-caused
+self-assessment-weakness mechanism described above is directly observed
+(not inferred) — the live verification tests of Semantic Review's behavior
+on deliberately-broken rules are real, reproducible evidence. But because C2
+and C3 differ in more than just role separation (§7.6's opening note), **this
+pattern cannot be attributed to role separation ALONE** without a controlled
+ablation that holds generator input and repair-round count fixed while
+varying only whether roles are separated — not run in this study. Presented
+here as a hypothesis consistent with the evidence, not a confirmed causal
+finding.
 
 This comparison is still scoped to one specific budget resolution (one
 repair round, no second Semantic Review call, §7.6). Whether an
 unrestricted-budget variant — §20 explicitly permits this as a secondary
 analysis — narrows or widens the gap in either direction remains open.
 
-**Amended after formal significance testing (§7.8)**: the `qwen2.5-coder:32b`
-C2-vs-C3-S difference reported above (0.589 → 0.686) is directionally
-consistent with, but not confirmed by, a case-level paired bootstrap —
-95% CI (−0.009, +0.208), p = 0.073. Report this as a suggestive trend, not
-a confirmed effect, at this sample size.
+**Formal significance testing (§7.8, rerun on corrected data with
+repository-aware bootstrapping)**: the `qwen2.5-coder:32b` C2-vs-C3-S MCC
+difference is **not statistically significant** — 95% CI (−0.238, +0.015),
+p = 0.081. The `qwen2.5-coder:7b-instruct` C2-vs-C3-E difference is also not
+significant, p = 0.669, with a wide CI that crosses zero. **Report both as
+"no statistically detectable difference," not as evidence of equivalence
+and not as a confirmed role-separation effect** — the point estimates above
+are directionally suggestive but neither comparison clears conventional
+significance at this sample size.
 
-### 7.7 C4-A (heterogeneous, best model per role): measured-best roles do not compose
+### 7.7 C4-A (heterogeneous, best model per role): measured-best roles do not compose [CORRECTED]
+
+**Read §7.6's opening note first** — the same Finding-1 correction and the
+same workflow-comparability caveats (C4 shares C3's workflow/budget
+asymmetries relative to C2) apply here. Additionally, Step 5's audit found
+C4's generator input is identical to C3's (a Patch Analysis summary, not the
+raw diff) — so the C3-vs-C4 comparison below is cleaner than C2-vs-C3 (same
+generator-input shape, same repair-round count throughout), but still not a
+controlled ablation isolating "which model per role" as the only variable.
 
 C4-A assigns each of the five Section 17.1 roles the model Phase 3's
 role-capability screening (§7.5) measured as individually best for that
@@ -639,35 +802,37 @@ other condition measured so far on the same case set:
 
 | Condition | Roles | Coverage | MCC | VGR | FPR | PDS |
 |---|---|---|---|---|---|---|
-| C3-S | all roles: 32B | 22.9% | **0.686** | 0.771 | 0.143 | 0.216 |
-| C2 (32B) | single agent | 30.1% | 0.589 | 0.620 | 0.123 | 0.261 |
-| C2 (7B) | single agent | 32.0% | 0.601 | 0.663 | 0.116 | 0.255 |
-| C3-E | all roles: 7B | 8.5% | 0.593 | 0.615 | 0.154 | 0.085 |
-| **C4-A** | best model per role (4 distinct models) | **7.2%** | **0.552** | 0.591 | 0.152 | **0.065** |
+| C3-S | all roles: 32B | 22.9% | **0.649** | 0.714 | 0.143 | 0.216 |
+| C2 (32B) | single agent | 30.1% | 0.536 | 0.533 | 0.123 | 0.261 |
+| C2 (7B) | single agent | 32.0% | 0.504 | 0.500 | 0.116 | 0.255 |
+| C3-E | all roles: 7B | 8.5% | 0.545 | 0.538 | 0.154 | 0.085 |
+| **C4-A** | best model per role (4 distinct models) | **7.2%** | **0.524** | 0.545 | 0.152 | **0.065** |
 
-**C4-A is the lowest-performing condition measured so far on every metric
-except FPR**, where it is statistically indistinguishable from C3-E (0.152
-vs. 0.154). This is a striking result precisely because the role
-assignments are not arbitrary — each one is the pilot-measured best
-performer for that specific role (§7.5) — yet the composed five-role
-pipeline underperforms both C3-S (a single strong model doing every role)
-and even the plain single-agent C2 baselines.
+**C4-A is the lowest-performing condition measured so far on MCC and PDS**,
+and close to lowest on VGR. This is a striking result on its face precisely
+because the role assignments are not arbitrary — each one is the
+pilot-measured best performer for that specific role (§7.5) — yet the
+composed five-role pipeline underperforms both C3-S (a single strong model
+doing every role) and even the plain single-agent C2 baselines.
 
-**Candidate mechanism, explicitly flagged as inferred rather than directly
-measured**: Phase 3's role screening evaluated each role in isolation,
-against fixed, pre-built test items — never against another LLM's live
-output produced in situ. C4-A composes `qwen3-coder-next`'s patch-analysis
-output into `qwen2.5-coder:7b-instruct`'s rule-generation prompt, and
-`deepseek-r1:14b`'s natural-language repair instructions into
+**Candidate mechanism, explicitly presented as an untested HYPOTHESIS, not a
+confirmed finding**: Phase 3's role screening evaluated each role in
+isolation, against fixed, pre-built test items — never against another
+LLM's live output produced in situ. C4-A composes `qwen3-coder-next`'s
+patch-analysis output into `qwen2.5-coder:7b-instruct`'s rule-generation
+prompt, and `deepseek-r1:14b`'s natural-language repair instructions into
 `qwen2.5-coder:32b`'s repair call — pairings that were never jointly
 measured during screening. C3-S and C3-E avoid this by construction: one
-model, one output convention, internally consistent at every hand-off.
-This reads as evidence that per-role screening metrics do not compose
-additively across a heterogeneous pipeline, directly on-point for the
-design's RQ10 — but the specific mechanism (cross-model interface/
-convention mismatch) is inferred from the aggregate pattern, not confirmed
-by inspecting individual episodes' intermediate hand-offs; that remains
-open if a more direct test is wanted.
+model, one output convention, internally consistent at every hand-off. **This
+pattern is consistent with the hypothesis that per-role screening metrics
+don't compose additively across a heterogeneous pipeline — but §7.8's
+formal significance testing on corrected data finds NONE of the pairwise MCC
+differences among {C3-S, C3-E, C4-A, C4-B} reach even uncorrected
+significance.** The "interface mismatch" explanation should be read as a
+plausible account of the observed point estimates, not a statistically
+confirmed effect, and not confirmed by inspecting individual episodes'
+intermediate hand-offs directly (that would be the natural next step if this
+hypothesis is to be tested properly).
 
 C4-B (two models — `32b` for analysis/generation/repair, `7b-instruct` for
 syntax/semantic review, reusing the C3-S/C3-E pair) is the natural next
@@ -675,132 +840,135 @@ test of whether partial heterogeneity degrades more gracefully than
 C4-A's four-distinct-model configuration, or whether any cross-model
 interface mismatch is enough to reproduce the same collapse.
 
-**C4-B result: it does degrade more gracefully — in fact, quality is
-essentially preserved.** Full run, 153/153 complete (26/153 accepted,
-17.0% coverage — between C4-A's 7.2% and C3-S's 22.9%, as expected for
-"some heterogeneity, not maximal"). Pooled quality metrics: MCC 0.681,
-VGR 0.808, FPR 0.192, PDS 0.170.
+**C4-B result: it does degrade more gracefully — quality is essentially
+preserved.** Full run, 153/153 complete (26/153 accepted, 17.0% coverage —
+between C4-A's 7.2% and C3-S's 22.9%, as expected for "some heterogeneity,
+not maximal"). Pooled quality metrics (corrected): MCC 0.668, VGR 0.788,
+FPR 0.192, PDS 0.170.
 
-The complete six-condition picture, ranked by MCC:
+The complete six-condition picture, ranked by MCC **[CORRECTED]**:
 
 | Condition | Roles | Coverage | MCC | VGR | FPR | PDS |
 |---|---|---|---|---|---|---|
-| C3-S | all roles: 32B | 22.9% | 0.686 | 0.771 | 0.143 | 0.216 |
-| **C4-B** | 32B (analysis/gen/repair) + 7B (syntax/semantic) | 17.0% | **0.681** | **0.808** | 0.192 | 0.170 |
-| C2 (7B) | single agent | 32.0% | 0.601 | 0.663 | 0.116 | 0.255 |
-| C3-E | all roles: 7B | 8.5% | 0.593 | 0.615 | 0.154 | 0.085 |
-| C2 (32B) | single agent | 30.1% | 0.589 | 0.620 | 0.123 | 0.261 |
-| C4-A | best model per role (4 distinct models) | 7.2% | 0.552 | 0.591 | 0.152 | 0.065 |
+| **C4-B** | 32B (analysis/gen/repair) + 7B (syntax/semantic) | 17.0% | **0.668** | **0.788** | 0.192 | 0.170 |
+| C3-S | all roles: 32B | 22.9% | 0.649 | 0.714 | 0.143 | 0.216 |
+| C2 (32B) | single agent | 30.1% | 0.536 | 0.533 | 0.123 | 0.261 |
+| C3-E | all roles: 7B | 8.5% | 0.545 | 0.538 | 0.154 | 0.085 |
+| C2 (7B) | single agent | 32.0% | 0.504 | 0.500 | 0.116 | 0.255 |
+| C4-A | best model per role (4 distinct models) | 7.2% | 0.524 | 0.545 | 0.152 | 0.065 |
 
-**C4-B's MCC (0.681) is statistically indistinguishable from C3-S's 0.686**
-— effectively tied for best of all six conditions — and its **VGR (0.808)
-is the highest of every condition tested**, C3-S included. This is a clean,
-controlled confirmation of the mechanism proposed (but left unverified) for
-C4-A above: per-role screening metrics appear not to compose additively
-once too many distinct model conventions have to interface with each
-other. C4-B's two-model split mirrors C3-S/C3-E's own internal role
-pairing (one convention for analysis/generation/repair, another for the
-two review roles) just spread across two models instead of collapsed into
-one — and it preserves C3-S-level quality almost exactly. C4-A's
-four-distinct-model split, by contrast, collapsed badly on every metric.
-Going from one model to two costs essentially nothing on MCC and actually
-*improves* VGR; going from one model to four costs roughly 20% of MCC and
-over 23% of VGR. The number of distinct conventions a pipeline has to
-reconcile — not heterogeneity per se — appears to be what drives this,
-though this still reads the aggregate pattern rather than confirming the
-mechanism via direct inspection of individual episodes' hand-offs.
+**C4-B's corrected MCC (0.668) is now the highest of all six conditions**,
+narrowly ahead of C3-S (0.649), and its VGR (0.788) remains the highest of
+every condition tested. The pattern is the same shape as before correction:
+C4-B's two-model split mirrors C3-S/C3-E's own internal role pairing (one
+convention for analysis/generation/repair, another for the two review
+roles) spread across two models rather than collapsed into one, and
+preserves C3-S-level quality; C4-A's four-distinct-model split collapses on
+every metric except FPR. **But see the significance testing immediately
+below: this ranking is a point-estimate description, not a statistically
+confirmed ordering.**
 
 **Stated plainly, not just the favorable half**: C4-B's FPR (0.192) is the
 *worst* of all six conditions, moderately higher than C3-S's 0.143. The
-quality picture is not a uniform win — VGR improves, MCC holds, but
-false-positive rate drifts upward. The net effect on MCC stays positive
-because the TP/TN gains outweigh the added FP cost, but this trade-off is
-worth reporting alongside the favorable VGR/MCC numbers rather than
-omitted.
+quality picture is not a uniform win — VGR improves, MCC holds or improves,
+but false-positive rate drifts upward.
 
 Both C4 configurations are now complete.
 
-**Amended after formal significance testing (§7.8)**: none of the six
-pairwise MCC differences among {C3-S, C3-E, C4-A, C4-B} reach even
-uncorrected significance at 0.05 (closest: C3-S vs C4-A, bootstrap
-p = 0.125; Holm-adjusted 0.749). The interface-mismatch reading above
-remains a plausible, mechanism-grounded account of the observed point
-estimates, and nothing in the formal test contradicts it — but it should
-be reported as an observed pattern consistent with that hypothesis, not a
-statistically confirmed effect, given the small number of accepted cases
-feeding each condition's pooled MCC (11–35).
+### 7.8 Formal statistical analysis (§22) [CORRECTED, rerun on corrected data]
 
-### 7.8 Formal statistical analysis (§22)
-
-The study's last unbuilt piece: the 7 predefined comparisons (§22.3),
-formally tested on the 153 supported cases. Full methodology in
-`Research_Log/Section22_Scope.md`; full output in
-`results/section22/comparisons_1_7_report.txt`.
+The 7 predefined comparisons (§22.3), formally tested on the 153 supported
+cases, **rerun in full against the Finding-1-corrected data, with
+repository-aware bootstrapping applied consistently to every comparison**
+(the original run used case-level bootstrapping for the 7 main comparisons
+and repository-level for the subgroup analysis only — an inconsistency found
+during the audit and fixed here; cases from the same repository are not
+independent, and every comparison below now accounts for that). Full
+methodology in `Research_Log/Section22_Scope.md`; full output in
+`results_corrected/comparisons_1_7_corrected_report.txt`.
 
 One methodology note stated up front: §22.2 specifies Wilcoxon
 signed-rank for paired MCC, but MCC here has always been a pooled
 statistic (no natural per-case value exists) — resolved with a
-case-level paired bootstrap (resample cases with replacement, recompute
-each condition's pooled MCC per resample, report the 95% CI and a
+repository-level paired bootstrap (resample repositories with replacement,
+recompute each condition's pooled MCC per resample, report the 95% CI and a
 two-sided bootstrap p-value on the difference) instead, reserving real
 Wilcoxon for genuinely per-case scalars and McNemar for the per-case
-binary ESR outcome.
+binary ESR outcome. Per the audit's explicit instruction, every
+nonsignificant result below is reported as **"no statistically detectable
+difference"** — not as evidence of equivalence.
 
 **Results**:
 
-1. **Qwen2.5-Coder 7B vs 32B**: no significant difference (MCC bootstrap
-   p = 0.546) — the two scales are genuinely comparable on this task.
-2. **Qwen2.5-Coder 7B vs DeepHat 7B**: no significant difference
-   (p = 0.362) — no measurable security-fine-tuning effect detected.
+1. **Qwen2.5-Coder 7B vs 32B**: no statistically detectable difference
+   (MCC repository-aware bootstrap p = 0.667) — consistent with both scales
+   performing comparably on this task, though this is not evidence they are
+   equivalent.
+2. **Qwen2.5-Coder 7B vs DeepHat 7B**: no statistically detectable
+   difference (p = 0.509).
 3. **Small code-model family effect** (6 models, ~7–9B scale, Friedman on
-   ESR): omnibus **is** significant (p = 0.014) — but zero pairwise
-   comparisons survive Holm correction (best adjusted p = 0.469). Real
+   ESR): omnibus **is** significant (p = 0.008) — but zero pairwise
+   comparisons survive Holm correction (best adjusted p = 0.234). Real
    aggregate differences exist across the family; which specific pair
    differs can't be pinned down at this sample size.
-4. **Raw vs Autogrep, all 8 models**: ESR shows no significant difference
-   for any model (its strict all-or-nothing bar leaves McNemar almost no
-   power). But the **pooled-MCC bootstrap shows a massive, highly
-   significant improvement for every model** (all 8 at p = 0.0000 — e.g.
-   `qwen2.5-coder:7b-instruct` 0.168 → 0.613). This is the single most
-   robust, best-powered finding in the whole analysis: Autogrep's
+4. **Raw vs Autogrep, all 8 models**: ESR shows no statistically detectable
+   difference for any model (its strict all-or-nothing bar leaves McNemar
+   almost no power). But the **pooled-MCC bootstrap shows a massive,
+   highly significant improvement for every model** (all 8 at p = 0.0000 —
+   e.g. `qwen2.5-coder:7b-instruct` 0.105 → 0.514, corrected values). **This
+   is the single most robust, best-powered finding in the whole analysis,
+   and it is unaffected by the Finding-1 correction** — Autogrep's
    retry/validation loop produces a real, large, extremely consistent
    quality improvement, even though it rarely pushes any individual case
    over ESR's strict bar.
 5. **C1 vs C2**: same shape and conclusion as #4 for all 8 models
    (expected, since C2 and Autogrep were already known to track closely).
-6. **C2 vs C3**: see the amendment to §7.6 above — directionally
-   consistent, not confirmed, for the 32B pair; flat and non-significant
-   for the 7B pair, as originally reported.
-7. **C3 vs C4**: see the amendment to §7.7 above — Friedman omnibus on
-   ESR not significant (p = 0.098); no pairwise MCC difference among the
-   four multi-agent configs reaches significance either.
+6. **C2 vs C3**: see the amendment to §7.6 above — no statistically
+   detectable difference for either model pair (32B: p = 0.081; 7B:
+   p = 0.669). Report as "no statistically detectable difference," not as
+   evidence the two conditions perform equivalently, and not as a confirmed
+   role-separation effect even for the 32B pair, which trends in that
+   direction without clearing significance.
+7. **C3 vs C4**: see the amendment to §7.7 above — Friedman omnibus on ESR
+   **is now significant after correction** (p = 0.028, was 0.098
+   pre-correction) — a real change, not noise, given the corrected ESR
+   values themselves shifted. However, of the 6 pairwise MCC repository-aware
+   bootstraps among {C3-S, C3-E, C4-A, C4-B}, **none reach significance
+   after Holm correction** (closest: C3-S vs C4-A, raw p = 0.101,
+   Holm-adjusted 0.606) — the omnibus signal does not resolve into any
+   specific confirmed pairwise difference.
 
-**Overall reading**: this study's most robust, well-powered finding is
-the raw-vs-autogrep (and equivalently C1-vs-C2) pipeline effect — large,
-consistent, and significant for every single model tested. The
-multi-agent findings (C2 vs C3, C3 vs C4) are directionally interesting
-and mechanistically well-motivated, but should be reported as suggestive
-patterns rather than confirmed effects, given how few cases are ever
-accepted under the stricter multi-agent conditions (as few as 11).
+**Overall reading, unchanged in its qualitative shape by the correction**:
+this study's most robust, well-powered finding is the raw-vs-autogrep (and
+equivalently C1-vs-C2) pipeline effect — large, consistent, and significant
+for every single model tested, both before and after correction. The
+multi-agent findings (C2 vs C3, C3 vs C4) are directionally interesting and
+mechanistically well-motivated HYPOTHESES, but should be reported as
+suggestive patterns rather than confirmed effects, given how few cases are
+ever accepted under the stricter multi-agent conditions (as few as 11) —
+this remains true after the correction and after fixing the bootstrap's
+repository-awareness; if anything the correction reinforces rather than
+weakens this reading, since the one new significant result (comparison 7's
+omnibus) still resolves to zero confirmed pairwise differences.
 
-**Subgroup analysis (§22.4)**, applied to the primary benchmark's `autogrep`
-condition on the full 300-case set (most statistical power in the study),
-for the representative model `qwen2.5-coder:32b` (86 evaluable cases,
-essentially tied for best full-set MCC among the 8 models). Every CI below
-uses a repository-aware bootstrap (resampling at the repository level,
-since CVEs from the same repo aren't independent — §22.4's own requirement):
+**Subgroup analysis (§22.4) [CORRECTED]**, applied to the primary benchmark's
+`autogrep` condition on the full dataset (most statistical power in the
+study), for the representative model `qwen2.5-coder:32b` (86 evaluable
+cases). Every CI below uses a repository-aware bootstrap (resampling at the
+repository level, since CVEs from the same repo aren't independent —
+§22.4's own requirement):
 
 | Subgroup | Buckets (MCC, 95% CI) |
 |---|---|
-| Language | python 0.719 (0.622–0.809); javascript 0.603 (0.436–0.752); java 0.544 (0.473–0.615); typescript 0.507 (0.354–0.706) |
-| Pattern vs taint | taint 0.673 (0.602–0.746); pattern 0.587 (0.517–0.658) |
-| Structural vs context-heavy | structural 0.615 (0.536–0.691); context-heavy 0.602 (0.519–0.683) — essentially flat |
-| Supported vs partially supported | supported 0.589 (0.509–0.668); partially supported 0.599 (0.496–0.702) — essentially flat |
-| Older vs newer CVE (median year 2023) | newer 0.692 (0.596–0.791); older 0.571 (0.501–0.639) |
-| Patch size (tertiles) | small 0.671 (0.558–0.775); medium 0.607 (0.540–0.672); large 0.544 (0.429–0.658) — visually monotonic decline |
-| CWE (≥10 cases only) | CWE-78 0.798; CWE-22 0.707; CWE-79 0.642; CWE-200 0.605; NVD-CWE-noinfo 0.554; CWE-94 0.507 |
+| Language | python 0.662 (0.537–0.770); javascript 0.573 (0.404–0.729); java 0.479 (0.379–0.573); typescript 0.430 (0.155–0.680) |
+| Pattern vs taint | taint 0.606 (0.513–0.696); pattern 0.536 (0.448–0.620) |
+| Structural vs context-heavy | structural 0.561 (0.467–0.651); context-heavy 0.545 (0.441–0.643) — essentially flat |
+| Supported vs partially supported | supported 0.536 (0.444–0.626); partially supported 0.558 (0.433–0.677) — essentially flat |
+| Older vs newer CVE (median year 2023) | newer 0.593 (0.441–0.727); older 0.536 (0.454–0.612) |
+| Patch size (tertiles) | small 0.640 (0.514–0.755); medium 0.515 (0.422–0.606); large 0.501 (0.359–0.637) — visually monotonic decline |
+| CWE (≥10 cases only) | CWE-78 0.798; CWE-22 0.707; CWE-79 0.642; CWE-200 0.605; NVD-CWE-noinfo 0.554; CWE-94 0.430 |
 
-166 distinct CWE IDs appear across the 300 cases; only 6 have ≥10 cases
+166 distinct CWE IDs appear across the dataset; only 6 have ≥10 cases
 (CI reported above), the other 160 are reported as counts only — stated
 explicitly as too sparse for a meaningful CI rather than silently dropped
 or given a misleading one. `advisory_date` was never populated for any
@@ -814,13 +982,78 @@ No pairwise significance testing was run across these subgroup buckets
 (§22.4 asks for descriptive reporting with CIs, not pairwise tests).
 Reading the overlapping CIs directly: language, structural-complexity, and
 supported-vs-partial splits show substantial CI overlap (no strong
-evidence of a real difference); patch size shows a visually monotonic
-decline from small to large patches that's at least suggestive, since the
-small-vs-large CIs (0.558–0.775 vs 0.429–0.658) don't fully overlap.
+evidence of a real difference); patch size still shows a visually monotonic
+decline from small to large patches after correction, at least suggestive
+since the small-vs-large CIs (0.514–0.755 vs 0.359–0.637) only narrowly
+overlap. The CWE-level point estimates are identical to the uncorrected run
+for this particular model/condition — those specific cases happened not to
+be affected by any location-correctness flip.
 
 **This completes Section 22 in full** — both the 7 predefined comparisons
-(§22.3) and the subgroup analysis (§22.4). It's the last unbuilt piece of
-the study's analysis pipeline.
+(§22.3) and the subgroup analysis (§22.4), both rerun against corrected data
+with consistent repository-aware bootstrapping throughout.
+
+### 7.9 The explicit end-to-end picture (audit Step 4's requirement)
+
+Every metric reported in §7.1–7.8 above is a **conditional** quality
+measure — computed only among cases where a rule was actually accepted.
+This section reports the full, explicit breakdown the 2026-10-06/07 audit
+specifically required: five rows with stated denominators, for every
+condition, treating a missing or rejected rule as a failure on every
+hidden-positive sample it never had the chance to flag — never silently
+excluded from a denominator, and never credited as a true negative for a
+scan that never ran. Full methodology and per-model output:
+`pipeline/build_step4_tables.py`, `results_corrected/step4_tables_report.txt`.
+
+**Primary benchmark, autogrep condition, 153 supported cases:**
+
+| Model | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate |
+|---|---:|---:|---:|---:|---:|
+| DeepHat-V1-7B | 35.9% | 35.9% | 0.543 | 16.0% (49/306) | 5.9% (9/153) |
+| Qwen2.5-Coder-32B | 30.1% | 30.1% | 0.536 | 16.0% (49/306) | 4.6% (7/153) |
+| Yi-Coder-9B | 29.4% | 29.4% | 0.529 | 14.1% (43/306) | 5.2% (8/153) |
+| Qwen2.5-Coder-7B-Instruct | 31.4% | 31.4% | 0.514 | 16.0% (49/306) | 4.6% (7/153) |
+| CodeLlama-7B-Instruct | 15.7% | 15.7% | 0.508 | 4.6% (14/306) | 0.7% (1/153) |
+| CodeGemma-7B | 18.3% | 18.3% | 0.521 | 6.9% (21/306) | 2.0% (3/153) |
+| Magicoder-7B | 9.8% | 9.8% | 0.374 | 2.3% (7/306) | 0.7% (1/153) |
+| DeepSeek-Coder-6.7B | 11.8% | 11.8% | 0.373 | 2.6% (8/306) | 1.3% (2/153) |
+
+*Compile rate equals acceptance coverage for this condition specifically —
+not a measurement gap. Autogrep's own retry loop only ever returns a rule
+once it has already passed full validation, so the "compiled but failed
+discrimination" distinction visible below for C2/C3/C4 is structurally
+unrecoverable here.*
+
+**C2 / C3 / C4, 153 supported cases (corrected data):**
+
+| Condition | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate |
+|---|---:|---:|---:|---:|---:|
+| C2, Qwen2.5-Coder-7B-Instruct | 75.8% | 32.0% | 0.504 | 16.0% (49/306) | 4.6% (7/153) |
+| C2, Qwen2.5-Coder-32B | 79.7% | 30.1% | 0.536 | 16.0% (49/306) | 4.6% (7/153) |
+| C2, DeepHat-V1-7B | 81.7% | 35.9% | 0.543 | 16.0% (49/306) | 5.9% (9/153) |
+| C3-S | 58.8% | 22.9% | 0.649 | 16.3% (50/306) | 5.2% (8/153) |
+| C3-E | 69.9% | 8.5% | 0.545 | 4.6% (14/306) | 1.3% (2/153) |
+| C4-A | 68.0% | 7.2% | 0.524 | 3.9% (12/306) | 0.7% (1/153) |
+| C4-B | 62.7% | 17.0% | 0.668 | 13.4% (41/306) | 3.9% (6/153) |
+
+**This is the headline result of the entire corrected analysis.**
+End-to-end hidden-positive detection rates run **1.6%–16.3%** across every
+condition in the study, and end-to-end successful-rule rates run
+**0.7%–5.9%** — both dramatically lower than the conditional MCC/VGR
+numbers (0.36–0.67 MCC among accepted cases) reported throughout §7.1–7.8.
+**Even the best-performing condition in this entire study (`C3-S` at 5.2%,
+or `DeepHat-V1-7B` under C2 at 5.9%) solves fewer than 1 in 16 requested
+cases completely end-to-end.** Read together with the compile-vs-accept gap
+visible in the tables above (most of the gap between "compiles" and
+"accepted" is discrimination failure, not a syntax/schema problem — the
+raw-condition and C2/C3/C4 rows show compile rate substantially exceeding
+acceptance coverage), this is, per the audit's own framing, the
+paper's strongest current focus: **the gap between visible validation and
+reliable hidden-test performance, together with the coverage and quality
+tradeoffs of the tested workflows.** Whether Autogrep or multi-agent
+processing improves END-TO-END performance — as opposed to conditional
+quality among the cases each happens to accept — should be read from this
+table, not from §7.1–7.8's conditional numbers alone.
 
 ## 8. Contamination controls (§23)
 
@@ -852,12 +1085,17 @@ itself isn't published. Checked directly rather than assumed:
 | `codellama:7b-instruct-fp16` | Released Aug 2023 |
 
 Using each model's cutoff/release year as a hard boundary, the number of
-this study's 300 cases that are **provably contamination-free for that
-model** (CVE year strictly after the boundary): 78/300 (26%) for the four
-~Sept-2024-cutoff models, 125/300 (41.7%) for the three ~2023-release
-models. This gives a concrete, per-model clean subset that could anchor a
-future, more targeted contamination check (not yet done as its own
-separate analysis).
+this study's cases whose CVE year falls strictly after that boundary — a
+**reduced-risk subset for that model, not a proof of contamination-free
+status** (a boundary this coarse cannot rule out contamination from
+secondary sources discussing the CVE before the model's cutoff, fine-tuning
+data added after the stated pretraining cutoff, or memorization of the
+underlying vulnerability pattern from similar, earlier-disclosed cases): 78
+of 300 (26%) for the four ~Sept-2024-cutoff models, 125 of 300 (41.7%) for
+the three ~2023-release models. This gives a concrete, per-model
+lower-contamination-risk subset that could anchor a future, more targeted
+contamination check (not yet done as its own separate analysis) — presented
+as a risk-reduction boundary, not a certainty.
 
 **Older versus newer CVE reporting.** Computed in §22.4: for the
 representative model, newer CVEs (post-2023) score HIGHER, not lower
@@ -886,11 +1124,12 @@ confirmed public-availability fact for these 15 cases specifically.
 Checked whether model performance on these 15 is suspiciously inflated
 (the signature a memorization effect would leave): it is NOT, for 6 of 8
 models — several show LOWER MCC on these cases than on the rest (e.g.
-`qwen2.5-coder:32b`: 0.359 vs 0.636), the opposite of what contamination
-would predict. Only `DeepHat-V1-7B` (0.646 vs 0.574) and `codegemma:7b`
-(0.566 vs 0.551) show a modest edge. Given only 9 or fewer evaluable cases
-per model in this 15-case subset, this check has limited power and should
-be read as "no clear evidence of inflation," not "confirmed clean."
+`qwen2.5-coder:32b`: 0.289 vs 0.582, corrected), the opposite of what
+contamination would predict. Only `DeepHat-V1-7B` (0.646 vs 0.547) and
+`codegemma:7b` (0.566 vs 0.483) show a modest edge. Given only 9 or fewer
+evaluable cases per model in this 15-case subset, this check has limited
+power and should be read as "no clear evidence of inflation," not
+"confirmed clean."
 
 **Detection of copied rule IDs, messages, and uncommon identifiers.** Not
 performed as a systematic search. Worth noting as a concrete follow-up:
@@ -923,13 +1162,16 @@ produce identical patch content) were kept and flagged for case-by-case
 review rather than assumed safe.
 
 **Overall validity-threat statement**: contamination cannot be ruled out
-for this study, as §23 itself anticipates. The strongest concrete
-evidence is the 15-case commit overlap with a publicly-distributed rule
-corpus — a real, quantified risk, not a hypothetical one — but the
-accompanying performance check found no clear inflation signal on those
-specific cases. The provably-clean per-model subsets (78–125 cases,
-depending on model) are available for a more targeted re-analysis if a
-reviewer wants a contamination-controlled version of the headline numbers.
+for this study, as §23 itself anticipates, and nothing here should be read
+as establishing that any model's training data was or was not contaminated.
+The strongest concrete evidence is the 15-case commit overlap with a
+publicly-distributed rule corpus — a real, quantified risk, not a
+hypothetical one — but the accompanying performance check found no clear
+inflation signal on those specific cases. The reduced-contamination-risk
+per-model subsets (78–125 cases, depending on model) are available for a
+more targeted re-analysis if a reviewer wants a contamination-risk-adjusted
+version of the headline numbers — they narrow risk, they do not certify its
+absence.
 
 ## 9. Failure taxonomy (§24)
 
@@ -1040,50 +1282,145 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   found the observed gap is not statistically confirmed at this sample
   size — stated as a suggestive instance, not a proven one.
 
-## 10. Known limitations, stated explicitly
+## 10. Known limitations, stated explicitly [UPDATED post-audit]
 
 - **Six-sample bundle size limits the threshold-sensitivity analysis** the
   study's own protocol calls for (§5) — the prescribed 3×3 sweep is
   mathematically unable to show sensitivity at this bundle size.
-- **Representability labeling is currently single-rater.** A second-rater
-  check was prepared (§2.4) but not completed as of this writing.
+- **Representability labeling is single-rater, with a completed independent
+  check showing only moderate agreement on the most consequential field.**
+  A second-rater check (45 blinded cases) was completed during the
+  2026-10-06/07 audit: `pattern_or_taint` 88.9%/κ=0.737 (substantial),
+  `structural_or_context_heavy` 80.0%/κ=0.531 (moderate), **and
+  `semgrep_representability` — the field defining the 153-case "supported"
+  scope every headline comparison in this document uses — only 64.4%/κ=0.448
+  (moderate)**. Disagreements concentrated around the `partially_supported`
+  boundary, in both directions, not a one-way bias. Two caveats on the check
+  itself: it was rated from written summaries, not full diffs/source, and a
+  handful of cases had some detail exposed during the audit conversation
+  before rating (a sensitivity check excluding those left the numbers
+  essentially unchanged). This is reported as a genuine validity threat to
+  the 153-case comparison scope, not a resolved footnote.
 - **CodeLlama's inclusion is precision-confounded** by infrastructure
   availability (§3) and is reported separately rather than ranked.
-- **For a small number of cases, the "benign look-alike" sample is
-  syntactically identical to the vulnerable code** (the security-relevant
-  distinction is purely semantic — e.g. the same conditional expression used
-  once to gate an authorization decision and once to gate a debug log line).
-  For such cases, no purely syntactic rule can achieve a true negative on the
-  benign sample, which imposes a hard ceiling on BSDR/false-positive
-  performance independent of model quality. Worth identifying and reporting
-  the affected case count explicitly.
-- **The primary comparison set (153 supported cases) is smaller than the full
-  300-case dataset.** Confidence intervals should be computed and reported at
-  this effective sample size (§22, now complete).
+- **The "benign look-alike" sample is syntactically identical (or
+  near-identical) to the vulnerable code in a small, now-precisely-counted
+  number of cases** — quantified during the audit rather than left as an
+  impression: **4 confirmed** (`CASE-0069`, `CASE-0078`, `CASE-0238`,
+  `CASE-0342` — the latter three found by direct inspection during curation,
+  `CASE-0069` found by an automated similarity check during the audit and
+  manually verified: `OpenNMS/opennms`'s `hasEditRights`/`hasViewRights`
+  share the identical boolean check, a real vulnerability in one permission
+  context and correct in the other), plus 3 more cases flagged as
+  moderately similar by the same automated check but not individually
+  verified (`CASE-0111`, `CASE-0136`, `CASE-0067`). For these cases, no
+  purely syntactic rule can achieve a true negative on the benign sample,
+  which imposes a hard ceiling on BSDR/false-positive performance
+  independent of model quality.
+- **11 cases in the dataset are kept with a disclosed upstream-fix concern**
+  (bypassable or incomplete real-world fixes, a disputed advisory, or a fix
+  that doesn't address the labeled CWE) rather than excluded — see
+  `Research_Log/Correction_Log.md` for the full list and each case's
+  specific concern. For 6 of these, the upstream "patched" sample's
+  ground-truth label (expected true-negative) is questionable because the
+  real fix is bypassable or incomplete — checked directly rather than left
+  theoretical: across every condition in the study, only 1 sample record out
+  of several thousand pooled negatives was actually affected (a correct
+  catch by `DeepHat-V1-7B` on `CASE-0140`, arguably the MORE correct answer
+  than the ground truth assumes) — a real methodological point with
+  negligible measured impact on any reported number.
+- **One case (`CASE-0166`) was excluded post-hoc during the audit** after
+  confirming its upstream-patched revision does not compile (§2.2) — the
+  dataset is 299 cases as of this writing, not 300.
+- **A real scoring gap (location-correctness never checked for hidden
+  variant samples) was found and fixed during the audit** (§5) — every
+  VGR/MCC number in this document reflects the correction; 21.6% of all
+  hidden-variant "detections" study-wide were wrong-location matches,
+  now corrected.
+- **C2, C3, and C4 are not a controlled comparison of "role separation"
+  alone** — a workflow-comparability audit
+  (`Research_Log/Workflow_Comparability_C2_C3_C4.md`) found 3 further
+  unmatched variables (generator input shape, repair-round count, and
+  round-0 acceptance-gate strictness) beyond which roles are separated.
+  Causal claims attributing any C2-vs-C3 or C3-vs-C4 difference to role
+  separation specifically, rather than to the complete configuration
+  difference, are stated as hypotheses throughout, not confirmed findings
+  — consistent with the formal significance testing (§7.8), which finds no
+  statistically detectable difference in most of these comparisons anyway.
+- **The primary comparison set (153 of 299 supported cases) is smaller than
+  the full dataset.** Confidence intervals are now computed and reported at
+  this effective sample size throughout (§22, complete).
+- **Generalization claims in this document (VGR) are about controlled,
+  within-dataset transformations, not unseen real-world vulnerabilities**
+  — stated explicitly in §1 and repeated here per the audit's instruction,
+  since it is easy to over-read "generalization" as a broader claim than
+  what was actually tested.
+- **A wrapper-level restriction structurally prevents any model from
+  submitting a valid composite-pattern Semgrep rule** (`patterns:`,
+  `pattern-either:`, `pattern-not:`) — the code requires a literal top-level
+  `pattern` key, rejecting these forms even though Semgrep itself accepts
+  them, for every model in every condition. Measured real-world footprint
+  across every log in the study: 16 occurrences, concentrated entirely in
+  C2's two weakest-performing models — cannot be fully attributed to this
+  restriction specifically versus unrelated malformed output, since no raw
+  rule text was retained for C2 to check. Not retroactively fixable with
+  available data; the small measured footprint does not justify a rerun,
+  but this is a real structural ceiling on achievable FPR (a model that
+  would otherwise use `pattern-not` to exclude a benign look-alike cannot
+  succeed) that applies to every result in this document.
 
 ## 11. Not yet done (tracking, for completeness of the eventual paper)
 
-- **Sections 22, 23, and 24 are all now complete** (§§7.8, 8, 9) — every
-  numbered analysis section in the design document now has real,
-  evidence-grounded content. Remaining work is write-up/synthesis
-  (building the actual paper from this document), not new analysis.
 - A systematic exact/near-duplicate search against the broader public
   Semgrep rule ecosystem (beyond the one 645-rule vendored corpus already
-  checked, §8) is the one concrete, not-yet-run follow-up identified while
-  writing up contamination controls.
-- C4-A and C4-B are both now complete (§7.7) — the design's two-configuration
-  cap (§18.6) is fully exercised.
+  checked, §8) is the one concrete, not-yet-run contamination follow-up.
 - A secondary, unrestricted-budget comparison for C3 (§20 explicitly permits
   this), to check whether the budget resolution itself (one repair round,
   no second Semantic Review call) is suppressing recovery for either model,
   or whether the pattern reported in §7.6 is intrinsic to each model's own
   self-assessment reliability regardless of how many rounds it gets.
+- A controlled ablation isolating role separation from the other 3
+  unmatched variables found in the C2/C3/C4 workflow-comparability audit
+  (§10) — needed before any causal role-separation claim could be confirmed
+  rather than reported as a hypothesis.
+- A direct inspection of individual C4-A episodes' intermediate hand-offs,
+  to test the "interface mismatch" hypothesis (§7.7) directly rather than
+  infer it from the aggregate pattern — not run, since the formal
+  significance test (§7.8) already found no confirmed pairwise difference
+  to explain.
+- §7.3's stability-ranking discrepancy, newly surfaced while correcting this
+  document (the "case composition, not temperature" explanation no longer
+  holds once Finding 1's correction is applied to both sides of that
+  comparison) — flagged as open, not yet investigated further.
+- The pilot screening numbers (§6) have not been recomputed with Finding 1's
+  location-correctness fix — out of scope for this audit pass since the
+  pilot only informed early prompt-template/model-direction decisions, not
+  any headline comparison, but noted as an inconsistency between §6 and
+  everything downstream of it.
 
 ---
+
+**A note on what changed in this document and why, for anyone comparing
+against an earlier version**: a methodological audit (2026-10-06/07, full
+record in `Research_Log/Correction_Log.md`, git history starting at tag
+`baseline-pre-audit`) found a real scoring gap (location-correctness never
+implemented for hidden-variant samples, now fixed), several unmatched
+variables in the C2/C3/C4 comparison, and completed the long-pending
+second-rater check. Every number in this document reflects the corrected
+data; every causal claim about multi-agent configurations is now explicitly
+hedged as a hypothesis unless formal significance testing confirmed it; and
+the single most robust finding in the whole study — Autogrep's/C2's
+feedback-driven repair producing a large, significant MCC gain over
+one-shot generation, for every model — is unaffected by any of these
+corrections.
 
 *Reproducibility note for the eventual paper's methods/appendix: the dataset's
 content-hash, every pinned software version (Autogrep commit, Semgrep version),
 the exact prompt template (content-hashed), and the full per-case, per-model,
 per-sample result logs are all retained and hash-verified. See
 `pipeline/PINNED_CONFIG.md` and `Research_Log/Preregistration_Checklist.md` for
-the complete pinned-configuration record.*
+the complete pinned-configuration record. The original, pre-audit state of
+every result file is preserved at git tag `baseline-pre-audit`; every
+correction is a separate, individually-reviewable commit on top of it, with
+corrected sample-level data under `results_corrected/` alongside the
+untouched originals under `results/`.*
