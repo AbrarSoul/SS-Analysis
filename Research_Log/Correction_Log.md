@@ -29,18 +29,17 @@ here explaining why, and the original (pre-correction) value remains readable at
 - [ ] **Step 3 — Audit questionable dataset cases.** All "kept and flagged" cases, incomplete
       fixes, uncertain negatives, parsing problems; complete the prepared independent label review.
       NOT STARTED.
-- [ ] **Step 4 — Recompute all metrics consistently.** Compilation rate / acceptance coverage /
-      conditional MCC·VGR·FPR / end-to-end hidden-positive detection rate / end-to-end successful
-      rule rate, each with an explicit, stated denominator; missing or invalid rules treated as
-      failures, never silently excluded or credited as true negatives. NOT STARTED (depends on
-      Step 2's evaluator audit being complete first).
+- [~] **Step 4 — Recompute all metrics consistently.** Compilation rate / acceptance coverage /
+      conditional MCC·VGR·FPR computed and corrected (compilation-vs-acceptance split: Finding 2;
+      MCC/VGR correction: Finding 1). NOT YET DONE: the explicit end-to-end hidden-positive
+      detection rate and end-to-end successful rule rate rows (ESR already approximates the
+      latter but hasn't been relabeled/presented as such in the paper draft itself yet).
 - [ ] **Step 5 — Verify workflow comparability.** One table documenting C2/C3/C4's actual shared
       settings and differences (generator input, review stages, acceptance gates, repair
       opportunities, enforced budgets). NOT STARTED.
-- [ ] **Step 6 — Recalculate statistics.** Paired comparisons on consistent cases, repository-aware
-      uncertainty throughout (including the 7 main comparisons, not just the subgroup analysis —
-      a real inconsistency already identified, see below), declared multiple-comparison correction.
-      NOT STARTED.
+- [x] **Step 6 — Recalculate statistics.** COMPLETE. Section 22's full battery rerun on corrected
+      data with repository-aware bootstrapping throughout (the case-level/repo-level inconsistency
+      is now fixed). See the dedicated entry below for the full before/after comparison.
 - [ ] **Step 7 — Rewrite the paper and assemble reproducibility artifacts.** Remove unsupported
       causal claims, reconcile contradictory records, provide reproduction materials. NOT STARTED.
 
@@ -281,3 +280,69 @@ project's existing pooling functions for a fast comparison, not yet run through 
 paired/bootstrap/Holm-corrected machinery. That is the next concrete piece of work, and given the
 ranking change above is substantial, it should happen before any other claim in
 `Paper_Draft_Notes.md` is treated as current.
+
+### 2026-10-06 — Step 6 (recalculate statistics): Section 22 rerun on corrected data
+
+Per the user's direction (finish any remaining Step 2 items, then proceed to the rerun), built
+`pipeline/analyze_section22_corrected.py` and `pipeline/analyze_section22_subgroups_corrected.py` —
+neither modifies the original `analyze_section22.py`/`analyze_section22_subgroups.py` (which stay
+reproducible against the ORIGINAL uncorrected data, per Step 1's preservation principle); both
+import the same stats machinery and only swap the sample-record source to `results_corrected/`
+(episode/generation logs still come from the original `results/`, since Finding 1 only affects
+hidden-variant sample scoring, not the visible-pair accept/reject decision those logs record).
+
+**Also fixed a real inconsistency flagged during the pre-Step-2 scan**: the original
+`analyze_section22.py`'s 7 main comparisons used a CASE-level paired bootstrap, while
+`analyze_section22_subgroups.py` correctly used a REPOSITORY-level bootstrap. Every comparison in
+the corrected rerun now resamples at the repository level, closing that inconsistency per the
+audit's explicit "repository-aware uncertainty estimates" instruction.
+
+**Full corrected results**: `results_corrected/comparisons_1_7_corrected_report.txt` and
+`results_corrected/subgroup_corrected_report.txt`. Headline changes versus the original run:
+
+1. **Comparisons 1-2 (scale, security fine-tuning)**: conclusion unchanged — no statistically
+   detectable difference either way, both before and after correction.
+2. **Comparison 3 (family effect)**: conclusion unchanged — omnibus significant (p=0.0083,
+   was 0.0140), zero pairwise comparisons survive Holm correction either before or after.
+3. **Comparison 4 (raw vs autogrep)**: conclusion unchanged and the effect remains essentially the
+   same large magnitude for every model. Still massively significant for all 8 models (p=0.0000
+   each), still the single most robust finding in the study. **This finding is robust to the
+   correction.**
+4. **Comparison 5 (C1 vs C2)**: same shape, conclusion unchanged.
+5. **Comparison 6 (C2 vs C3)**: `qwen2.5-coder:32b` C2-vs-C3-S — p moves from 0.0730 (case-level
+   bootstrap, uncorrected data) to 0.0814 (repo-level bootstrap, corrected data) — **conclusion
+   unchanged: no statistically detectable difference, both before and after.** `qwen2.5-coder:
+   7b-instruct` C2-vs-C3-E — point estimate direction flips (0.601 vs 0.593, roughly flat ->
+   0.504 vs 0.545, C3-E nominally ahead) but the CI is wide and crosses zero in both the original
+   and corrected analysis — **conclusion unchanged: no statistically detectable difference either
+   way.** Worth stating plainly: the point estimate moved, but neither the original nor the
+   corrected analysis supports treating that movement as a real, detected effect.
+6. **Comparison 7 (C3 vs C4)**: **the Friedman omnibus on ESR becomes significant after
+   correction** (p=0.0275, was 0.0981 — a real change, not noise, given the corrected ESR values
+   themselves shifted). However, of the 6 pairwise MCC repo-aware bootstraps, **none reach
+   significance after Holm correction** (closest: C3-S vs C4-A, raw p=0.1010, Holm-adjusted
+   0.6060) — same conclusion as before the correction: the point-estimate spread across the four
+   multi-agent configurations is NOT statistically distinguishable from chance at this sample size,
+   corrected data included.
+
+**Subgroup analysis, rerun on corrected data**: all CIs remain entirely positive; the qualitative
+pattern is essentially unchanged (python highest MCC, typescript lowest; patch-size shows the same
+visually monotonic decline from small to large; the same 6 CWEs clear the >=10-case threshold, with
+IDENTICAL point estimates for CWE-78/CWE-22/CWE-79 — those specific CWEs' cases happened not to be
+affected by any TP->FN flip in this model/condition combination).
+
+**Overall assessment of Finding 1's correction, now that the full statistical rerun is complete**:
+the correction materially changes the primary benchmark's headline MODEL RANKING (a real, reportable
+change — DeepHat moves from 5th to 1st) and every point estimate moves down by an uneven amount,
+but it does **NOT** change which comparisons are statistically significant versus not, anywhere in
+Section 22, with one exception (Comparison 7's omnibus test, which newly crosses the significance
+threshold but still shows zero surviving pairwise differences after correction — not a reversal of
+the qualitative story, "no detectable pairwise difference among the 4 multi-agent configs," just a
+stronger omnibus signal that something differs in aggregate). The single most important practical
+implication: **any claim in `Paper_Draft_Notes.md` that cites a specific MCC/VGR number or ranks
+models/conditions against each other needs updating to the corrected values** before the paper is
+finalized, even though the qualitative significance conclusions mostly carry over unchanged.
+
+Not yet done: updating `Paper_Draft_Notes.md` itself to replace every affected number and the
+headline ranking narrative with the corrected version — that is Step 7's job and is the next piece
+of work, after Steps 3 and 5 (dataset audit, workflow-comparability table) are addressed.

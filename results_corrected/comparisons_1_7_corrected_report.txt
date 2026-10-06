@@ -1,0 +1,149 @@
+Loaded 153 supported cases. Using CORRECTED sample data (results_corrected/) + REPOSITORY-AWARE bootstrap throughout (fixes the case-level/repo-level inconsistency flagged during the audit).
+
+====================================================================================================
+COMPARISON 1: Qwen2.5-Coder 7B vs 32B (scale effect) -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct  vs  qwen2.5-coder:32b   (n=153 common cases)
+    ESR: 0.046 vs 0.046  |  McNemar b=3 c=3  p=1.0000
+    MCC: 0.514 vs 0.536  |  diff=-0.022  95% CI=(-0.122, +0.077)  repo-aware bootstrap p=0.6666  [no statistically detectable difference]
+
+====================================================================================================
+COMPARISON 2: Qwen2.5-Coder 7B vs DeepHat 7B (security fine-tuning effect) -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct  vs  DeepHat-V1-7B   (n=153 common cases)
+    ESR: 0.046 vs 0.059  |  McNemar b=2 c=4  p=0.6875
+    MCC: 0.514 vs 0.543  |  diff=-0.028  95% CI=(-0.114, +0.052)  repo-aware bootstrap p=0.5088  [no statistically detectable difference]
+
+====================================================================================================
+COMPARISON 3: Small code-model family effect (Friedman omnibus on ESR) -- CORRECTED
+====================================================================================================
+  Friedman omnibus (n=153, k=6): stat=15.536  p=0.0083
+    qwen2.5-coder:7b-instruct: ESR=0.046
+    deepseek-coder:6.7b: ESR=0.013
+    codegemma:7b: ESR=0.020
+    magicoder:7b: ESR=0.007
+    yi-coder:9b: ESR=0.052
+    DeepHat-V1-7B: ESR=0.059
+    qwen2.5-coder:7b-instruct vs deepseek-coder:6.7b: raw p=0.1797  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs codegemma:7b: raw p=0.2891  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs magicoder:7b: raw p=0.0703  Holm-adj p=0.7852
+    qwen2.5-coder:7b-instruct vs yi-coder:9b: raw p=1.0000  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs DeepHat-V1-7B: raw p=0.6875  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs codegemma:7b: raw p=1.0000  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs magicoder:7b: raw p=1.0000  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs yi-coder:9b: raw p=0.1094  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs DeepHat-V1-7B: raw p=0.0654  Holm-adj p=0.7852
+    codegemma:7b vs magicoder:7b: raw p=0.6250  Holm-adj p=1.0000
+    codegemma:7b vs yi-coder:9b: raw p=0.1250  Holm-adj p=1.0000
+    codegemma:7b vs DeepHat-V1-7B: raw p=0.0312  Holm-adj p=0.4062
+    magicoder:7b vs yi-coder:9b: raw p=0.0156  Holm-adj p=0.2344
+    magicoder:7b vs DeepHat-V1-7B: raw p=0.0215  Holm-adj p=0.3008
+    yi-coder:9b vs DeepHat-V1-7B: raw p=1.0000  Holm-adj p=1.0000
+
+====================================================================================================
+COMPARISON 4: Raw vs Autogrep (pipeline effect), all 8 models -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (raw)  vs  qwen2.5-coder:7b-instruct (autogrep)   (n=153 common cases)
+    ESR: 0.039 vs 0.046  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.105 vs 0.514  |  diff=-0.409  95% CI=(-0.500, -0.328)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  qwen2.5-coder:32b (raw)  vs  qwen2.5-coder:32b (autogrep)   (n=153 common cases)
+    ESR: 0.046 vs 0.046  |  McNemar b=0 c=0  p=1.0000
+    MCC: 0.143 vs 0.536  |  diff=-0.394  95% CI=(-0.480, -0.316)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  DeepHat-V1-7B (raw)  vs  DeepHat-V1-7B (autogrep)   (n=153 common cases)
+    ESR: 0.052 vs 0.059  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.077 vs 0.543  |  diff=-0.466  95% CI=(-0.554, -0.384)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  deepseek-coder:6.7b (raw)  vs  deepseek-coder:6.7b (autogrep)   (n=153 common cases)
+    ESR: 0.007 vs 0.013  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.098 vs 0.373  |  diff=-0.471  95% CI=(-0.636, -0.306)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  codegemma:7b (raw)  vs  codegemma:7b (autogrep)   (n=153 common cases)
+    ESR: 0.020 vs 0.020  |  McNemar b=0 c=0  p=1.0000
+    MCC: -0.091 vs 0.521  |  diff=-0.611  95% CI=(-0.720, -0.511)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  magicoder:7b (raw)  vs  magicoder:7b (autogrep)   (n=153 common cases)
+    ESR: 0.007 vs 0.007  |  McNemar b=0 c=0  p=1.0000
+    MCC: -0.068 vs 0.374  |  diff=-0.442  95% CI=(-0.607, -0.269)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  yi-coder:9b (raw)  vs  yi-coder:9b (autogrep)   (n=153 common cases)
+    ESR: 0.033 vs 0.052  |  McNemar b=0 c=3  p=0.2500
+    MCC: 0.015 vs 0.529  |  diff=-0.514  95% CI=(-0.621, -0.417)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  codellama:7b-instruct-fp16 (raw)  vs  codellama:7b-instruct-fp16 (autogrep)   (n=153 common cases)
+    ESR: 0.000 vs 0.007  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.096 vs 0.508  |  diff=-0.604  95% CI=(-0.713, -0.503)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  Aggregate: 0/8 models show a significant raw-vs-autogrep ESR difference after Holm correction.
+
+====================================================================================================
+COMPARISON 5: C1 vs C2 (iterative feedback effect), all 8 models -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (C1/raw)  vs  qwen2.5-coder:7b-instruct (C2)   (n=153 common cases)
+    ESR: 0.039 vs 0.046  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.105 vs 0.504  |  diff=-0.399  95% CI=(-0.492, -0.318)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  qwen2.5-coder:32b (C1/raw)  vs  qwen2.5-coder:32b (C2)   (n=153 common cases)
+    ESR: 0.046 vs 0.046  |  McNemar b=0 c=0  p=1.0000
+    MCC: 0.143 vs 0.536  |  diff=-0.394  95% CI=(-0.480, -0.316)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  DeepHat-V1-7B (C1/raw)  vs  DeepHat-V1-7B (C2)   (n=153 common cases)
+    ESR: 0.052 vs 0.059  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.077 vs 0.543  |  diff=-0.466  95% CI=(-0.554, -0.384)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  deepseek-coder:6.7b (C1/raw)  vs  deepseek-coder:6.7b (C2)   (n=153 common cases)
+    ESR: 0.007 vs 0.013  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.098 vs 0.373  |  diff=-0.471  95% CI=(-0.636, -0.306)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  codegemma:7b (C1/raw)  vs  codegemma:7b (C2)   (n=153 common cases)
+    ESR: 0.020 vs 0.020  |  McNemar b=0 c=0  p=1.0000
+    MCC: -0.091 vs 0.521  |  diff=-0.611  95% CI=(-0.720, -0.511)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  magicoder:7b (C1/raw)  vs  magicoder:7b (C2)   (n=153 common cases)
+    ESR: 0.007 vs 0.007  |  McNemar b=0 c=0  p=1.0000
+    MCC: -0.068 vs 0.364  |  diff=-0.432  95% CI=(-0.571, -0.292)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  yi-coder:9b (C1/raw)  vs  yi-coder:9b (C2)   (n=153 common cases)
+    ESR: 0.033 vs 0.052  |  McNemar b=0 c=3  p=0.2500
+    MCC: 0.015 vs 0.511  |  diff=-0.496  95% CI=(-0.606, -0.398)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  codellama:7b-instruct-fp16 (C1/raw)  vs  codellama:7b-instruct-fp16 (C2)   (n=153 common cases)
+    ESR: 0.000 vs 0.007  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.096 vs 0.508  |  diff=-0.604  95% CI=(-0.713, -0.503)  repo-aware bootstrap p=0.0000  [SIGNIFICANT]
+
+  Aggregate: 0/8 models show a significant C1-vs-C2 ESR difference after Holm correction.
+
+====================================================================================================
+COMPARISON 6: C2 vs C3 (role-separation effect) -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:32b (C2)  vs  C3-S   (n=153 common cases)
+    ESR: 0.046 vs 0.052  |  McNemar b=6 c=7  p=1.0000
+    MCC: 0.536 vs 0.649  |  diff=-0.113  95% CI=(-0.238, +0.015)  repo-aware bootstrap p=0.0814  [no statistically detectable difference]
+
+  qwen2.5-coder:7b-instruct (C2)  vs  C3-E   (n=153 common cases)
+    ESR: 0.046 vs 0.013  |  McNemar b=7 c=2  p=0.1797
+    MCC: 0.504 vs 0.545  |  diff=-0.041  95% CI=(-0.227, +0.148)  repo-aware bootstrap p=0.6690  [no statistically detectable difference]
+
+====================================================================================================
+COMPARISON 7: C3 vs C4 (heterogeneous assignment effect) -- CORRECTED
+====================================================================================================
+  Friedman omnibus (n=153, k=4): stat=9.140  p=0.0275
+    C3-S: ESR=0.052
+    C3-E: ESR=0.013
+    C4-A: ESR=0.007
+    C4-B: ESR=0.039
+
+  Pairwise MCC repo-aware bootstrap for all 6 pairs (MCC is the metric the original
+  C4-A/C4-B narrative was built on):
+    C3-S vs C3-E: MCC diff=+0.104  95% CI=(-0.091, +0.306)  raw p=0.2956  Holm-adj p=0.8868
+    C3-S vs C4-A: MCC diff=+0.125  95% CI=(-0.024, +0.272)  raw p=0.1010  Holm-adj p=0.6060
+    C3-S vs C4-B: MCC diff=-0.018  95% CI=(-0.130, +0.086)  raw p=0.7530  Holm-adj p=1.0000
+    C3-E vs C4-A: MCC diff=+0.021  95% CI=(-0.198, +0.232)  raw p=0.8770  Holm-adj p=1.0000
+    C3-E vs C4-B: MCC diff=-0.123  95% CI=(-0.317, +0.050)  raw p=0.1776  Holm-adj p=0.7104
+    C4-A vs C4-B: MCC diff=-0.144  95% CI=(-0.315, +0.035)  raw p=0.1064  Holm-adj p=0.6060
