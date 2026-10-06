@@ -573,3 +573,43 @@ percent-agreement/kappa numbers, or disclosed as "prepared but not completed") o
 
 **Step 3 is now fully resolved** except for the second-rater item, which depends on action outside
 this session. Proceeding to Step 7 (the paper rewrite) next.
+
+### 2026-10-07 — The independent second-rater review: completed, real numbers, one important caveat
+
+The user completed all 45 rows of `benchmark/second_rater/sample_blinded.csv`. Computed percent
+agreement and Cohen's kappa against `answer_key_DO_NOT_OPEN_UNTIL_RATED.json` for all 3 fields
+(`sklearn.metrics.cohen_kappa_score`), replacing the long-standing "prepared but not completed"
+placeholder with real numbers:
+
+| Field | Percent agreement | Cohen's kappa | Interpretation (Landis-Koch bands) |
+|---|---:|---:|---|
+| `pattern_or_taint` | 88.9% (40/45) | 0.737 | substantial |
+| `structural_or_context_heavy` | 80.0% (36/45) | 0.531 | moderate |
+| `semgrep_representability` | 64.4% (29/45) | 0.448 | moderate |
+
+**Two honesty caveats, stated directly rather than smoothed over**:
+
+1. **This is not a fully blinded, fully independent check**, by the rater's own disclosure in the
+   `YOUR_notes` column: rating was done from the sheet's `mechanism_summary` text alone ("referenced
+   diffs unavailable"), not the full diff/source the original single-rater label had access to; and
+   5 of 45 cases (`CASE-0042`, `CASE-0056`, `CASE-0063`, `CASE-0078`, `CASE-0166`) had their case ID
+   or some detail surface during this very audit conversation before rating. Recomputed excluding
+   those 5 as a sensitivity check: `pattern_or_taint` 90.0%/κ=0.773, `structural_or_context_heavy`
+   80.0%/κ=0.529, `semgrep_representability` 65.0%/κ=0.448 — essentially unchanged, so the
+   contamination risk does not appear to have measurably inflated agreement, but the caveat is
+   reported regardless rather than assumed away.
+2. **Agreement is weakest on exactly the label this entire study's primary comparison scope depends
+   on.** `semgrep_representability` -- the field that defines which 153 of 300 cases count as
+   "supported" and therefore enter every headline multi-agent/primary-benchmark comparison in
+   `Paper_Draft_Notes.md` -- has the LOWEST agreement of the three fields (64.4%, "moderate" per
+   Landis-Koch, not "substantial" or "almost perfect"). Disagreements run in both directions (rater
+   sometimes rates MORE supported than the original label, sometimes less) and concentrate heavily
+   around the `partially_supported` boundary rather than confusing `supported` with `unsupported`
+   outright (checked the disagreement list directly, not assumed) -- consistent with a genuine,
+   hard-to-pin-down category boundary rather than a systematic labeling error in one direction.
+
+**This is now a real, quantified limitation for the manuscript** (replacing the old "not yet
+completed" placeholder in `Paper_Draft_Notes.md`'s limitations section, Step 7's job): the 153-case
+"supported" scope that anchors this entire study's primary comparisons rests on a single-rater label
+whose independent-agreement rate, now measured, is moderate rather than high -- stated as a genuine
+validity threat to the comparison's scope, not hidden behind an unresolved TODO.
