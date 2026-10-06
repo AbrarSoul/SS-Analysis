@@ -27,11 +27,13 @@ here explaining why, and the original (pre-correction) value remains readable at
       restrictions, Semgrep errors, skipped files, finding-location checks, original vs.
       transformed samples; separated compilation success from visible-pair acceptance. Findings
       1-5 below; Finding 1 (serious) is fixed and committed.
-- [~] **Step 3 — Audit questionable dataset cases.** IN PROGRESS. Benign-lookalike uncertain-negative
-      count now quantified (see below). "Kept and flagged" case compilation delegated to a
-      background search agent. Independent label review: the prepared second-rater sheet requires
-      a genuinely independent rater (explicitly not the original labeler, per its own rubric) —
-      flagged for the user's decision, not completed by this session.
+- [~] **Step 3 — Audit questionable dataset cases.** SUBSTANTIALLY COMPLETE. All 11 kept-and-flagged
+      cases documented with their specific concerns; benign-lookalike uncertain-negative count
+      corrected to 4 confirmed; bypassable-fix ground-truth concern quantified (negligible measured
+      impact, no rerun needed); 2 parsing-problem cases confirmed. THREE ITEMS LEFT OPEN FOR THE
+      USER, not resolved by this session: the CASE-0166/CASE-0063 precedent inconsistency, CASE-0084's
+      explicitly-reversible hand-curation decision, and the independent second-rater review (needs
+      a genuinely independent rater, not this session).
 - [~] **Step 4 — Recompute all metrics consistently.** Compilation rate / acceptance coverage /
       conditional MCC·VGR·FPR computed and corrected (compilation-vs-acceptance split: Finding 2;
       MCC/VGR correction: Finding 1). NOT YET DONE: the explicit end-to-end hidden-positive
@@ -416,3 +418,95 @@ rather than silently counted as confirmed or silently dropped).
 This replaces "a small number of cases" with a precise, checkable number: **1 confirmed, up to 4
 total if the moderate-similarity band is included**, out of 300 — a real but small effect, now
 stated as a number rather than an impression.
+
+**Correction after cross-checking against the log (see next entry)**: the log independently
+documents 3 MORE cases (`CASE-0078`, `CASE-0238`, `CASE-0342`) with this exact issue, verified by
+direct inspection at curation time rather than the automated similarity heuristic above. Re-checked
+all 3 against my own method and found why my heuristic missed them: in each, only a SHORT, specific
+construct (a single API call — `Papaparse.unparse({...})` for 0238, `new Yaml()` for 0342) is
+identical between the files, not the WHOLE vulnerable snippet (my sliding-window ratio compares the
+full snippet length, which washes out a short embedded match inside a much shorter/longer benign
+file). **Corrected total: 4 confirmed cases (`CASE-0069`, `CASE-0078`, `CASE-0238`, `CASE-0342`),
+plus the 3 unverified moderate-similarity cases from the automated check** (`CASE-0111`, `CASE-0136`,
+`CASE-0067`) — combining both detection methods rather than trusting either alone.
+
+### 2026-10-06 — Step 3 (dataset audit): the complete "kept and flagged" case review
+
+Delegated the search (300K-character free-text log, phrasing varies) to a background research
+agent, since this is a thorough-search task rather than a judgment task — the judgment (what each
+finding means for the dataset's correctness claims) is done here, not by the agent. The agent
+cross-checked every candidate case ID against live `metadata.json` to rule out stale/renumbered
+references (case IDs were reshuffled by early exclusions before ids were pinned — a real risk the
+agent correctly guarded against) and explicitly excluded every case that was EXCLUDED-and-replaced
+(not relevant here) and every PILOT-range case (CASE-0001-0040, a separate concern).
+
+**11 cases in the final 300 are explicitly KEPT with a disclosed upstream-fix/advisory concern**:
+
+| Case | Repo / CVE | Concern |
+|---|---|---|
+| CASE-0107 | apache/netbeans-html4j, CVE-2020-17534 | zip-slip present in BOTH vulnerable and upstream-patched code, not the labeled CWE — disclosed, not fixed in the safe variant (explicit "observed but not acted on" decision) |
+| CASE-0125 | axios, CVE-2024-57965 | disputed advisory — old/new logic identical on all 14 tested string URLs |
+| CASE-0140 | dataease, CVE-2022-39312 | upstream denylist bypassable via percent-encoding (`auto%44eserialize=true` → active `autoDeserialize=true`) |
+| CASE-0154 | eladmin, CVE-2025-22978 | xlsx export — the CWE-implied formula-injection risk doesn't actually manifest (strings never become formula cells) |
+| CASE-0156 | DB-GPT, CVE-2024-10901 | upstream denylist bypassed via relative-path scan + `glob` |
+| CASE-0166 | weixin4j, CVE-2026-24819 | upstream-patched file references an undefined constant (`MAXIMUM_CAPACITY`) and **does not compile** |
+| CASE-0170 | sentry, CVE-2024-32474 | upstream fix misses a sibling log call (`validated_data`) that leaks the same sensitive data |
+| CASE-0174 | transformers, CVE-2025-6051 | ReDoS fix is still quadratic (mitigated, not eliminated) |
+| CASE-0194 | sidebar-link-plugin, CVE-2023-32985 | path check uses `startsWith` without a separator — classic sibling-directory bypass |
+| CASE-0199 | docassemble, CVE-2024-27292 | filename gate doesn't guard against a bare `..` |
+| CASE-0211 | langchain, CVE-2024-27444 | denylist-based code validator bypassed via a `getattr` string |
+
+**A real inconsistency the agent surfaced, worth a decision rather than silent resolution**:
+`CASE-0166` was KEPT despite its patched file not compiling — the exact same defect class that got
+`CASE-0063` EXCLUDED earlier in the project. The log gives no stated rationale for the different
+treatment. Flagged for the user rather than silently resolved either way.
+
+**One decision explicitly left open by the log itself, not yet revisited**: `CASE-0084`
+(audiobookshelf, CVE-2025-25205) was hand-curated to its real fix commit, but the log's own words
+are "flagged here so it can be reversed if you would rather exclude it" — i.e., this was never
+actually finalized as a considered-and-kept decision the way the other 11 were; it's an open
+question.
+
+**Parsing problems** (Semgrep failing on the case's own fixture file, not a rule defect — already
+found independently during this session's §24 work, now cross-confirmed by the agent from the log):
+`CASE-0055`, `CASE-0298`.
+
+**Near-duplicate provenance** (not an open issue, included for completeness): `CASE-0276`/`CASE-0337`
+are kept; their byte-identical-patch-content duplicate siblings `CASE-0277`/`CASE-0338` were
+already excluded and replaced (`CASE-0341`, `CASE-0342`) — fully resolved prior to this audit.
+
+**The methodologically important implication, per the audit's own instruction** ("distinguish
+'upstream patched revision' from 'verified safe for the target weakness'. Keep partial or uncertain
+fixes outside the strongest binary correctness claims"): for AT LEAST 6 of the 11 cases above
+(`CASE-0140`, `CASE-0156`, `CASE-0174`, `CASE-0194`, `CASE-0199`, `CASE-0211`), the upstream "fix" is
+**bypassable or incomplete, not actually safe** — meaning the dataset's `original_patched` ground-truth
+label (expected TN) is questionable for these specific cases. **A model that correctly flags one of
+these "patched" samples as still-vulnerable is currently scored as a false positive, when it may be
+giving the MORE correct answer than the ground truth assumes.**
+
+**Quantified the actual impact rather than leaving this as a theoretical concern**: of these 6, only
+3 (`CASE-0140`, `CASE-0156`, `CASE-0194`) fall in the 153-case `supported` set used for every
+multi-agent and headline comparison (the other 3 are `partially_supported`/`unsupported`, already
+excluded from the primary ranking per §7.3's own convention). Checked every real `original_patched`
+sample record for these 3 cases across EVERY condition in the whole study (primary benchmark x8,
+C2 x8, C3-S/E, C4-A/B) — **33 total records, of which exactly 1 is an FP** (`DeepHat-V1-7B`,
+`CASE-0140`, autogrep condition — notably the one model explicitly screened for security
+fine-tuning, catching the one bypass another model might have missed). **A sensitivity re-analysis
+excluding these 3 cases would change at most 1 sample's classification out of several thousand
+pooled negative samples study-wide — a negligible effect on any reported FPR/MCC number.** Per the
+audit's own "rerun only what the audit shows is necessary": this does NOT need a metrics rerun. The
+methodological point (upstream-patched ≠ verified-safe) is real and worth stating in the manuscript
+as a limitation, but it has not, in fact, measurably distorted any number reported so far — checked,
+not assumed.
+
+**Step 3 summary / remaining open items for the user, not resolved by this session**:
+1. `CASE-0166` vs `CASE-0063` precedent inconsistency (same defect class — non-compiling patched
+   file — one excluded, one kept) — needs a decision, not silently resolved either way here.
+2. `CASE-0084`'s hand-curation was explicitly left reversible in the log ("flagged here so it can
+   be reversed if you would rather exclude it") — never actually revisited; needs a decision.
+3. The independent second-rater review — requires a genuinely independent rater per its own setup;
+   not completed by this session (see above).
+
+Everything else in Step 3 (the 11 kept-and-flagged cases' concerns, the corrected benign-lookalike
+count, the 2 parsing-problem cases, the bypassable-fix sensitivity check) is now documented,
+quantified, and — where checked — confirmed to have no further corrective action required.
