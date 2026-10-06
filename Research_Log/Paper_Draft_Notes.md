@@ -158,25 +158,28 @@ but their count is reported. The final distribution:
 | Unsupported | 48 |
 
 *This classification was made by a single rater during dataset construction.
-A second-rater agreement check (a blinded, stratified 45-case sample,
-`benchmark/second_rater/`) was completed during the 2026-10-06/07 audit.
-Scored against the original labels (percent agreement / Cohen's κ):
-`pattern_or_taint` 88.9% / κ=0.737 (substantial agreement);
-`structural_or_context_heavy` 80.0% / κ=0.531 (moderate);
-**`semgrep_representability` 64.4% / κ=0.448 (moderate) — the weakest of the
-three, on exactly the label that defines the 153-case "supported" scope this
-entire study's primary comparisons are built on.** Disagreements concentrated
+A second-rater agreement check was completed in two rounds during the
+2026-10-06/07 audit. **Round 1** (`benchmark/second_rater/`, 45 cases, rated
+from written summaries only) found moderate-to-substantial agreement but had
+two disclosed limitations (no full diff/source access; a handful of cases had
+some detail exposed during the audit conversation before rating). **Round 2**
+(`benchmark/second_rater_v2/`, a completely fresh, zero-overlap 45-case
+sample, rated with full access to each case's real diff and source, zero
+conversation exposure) is the methodologically stronger of the two and
+supersedes it. Scored against the original labels (percent agreement /
+Cohen's κ), Round 2: `pattern_or_taint` 91.1% / κ=0.802 (almost perfect);
+`structural_or_context_heavy` 93.3% / κ=0.860 (almost perfect);
+**`semgrep_representability` 77.8% / κ=0.662 (substantial) — still the
+weakest of the three, on exactly the label that defines the 153-case
+"supported" scope this entire study's primary comparisons are built on, but
+materially stronger than Round 1's 64.4%/κ=0.448.** Disagreements concentrated
 around the `partially_supported` boundary rather than confusing `supported`
-with `unsupported` outright, and ran in both directions (not a one-way bias).
-Two caveats on the check itself, stated rather than hidden: the second rater
-worked from written mechanism summaries rather than the full diff/source the
-original label had access to, and in a handful of cases some case-level detail
-had already surfaced during the audit conversation before rating — a
-sensitivity recomputation excluding those cases left the numbers essentially
-unchanged (see `Research_Log/Correction_Log.md`). **This moderate — not
-high — independent agreement on the scope-defining label is reported here as
-a genuine validity threat to the 153-case comparison, not a resolved
-footnote.*
+with `unsupported` outright, and ran in both directions (not a one-way bias)
+— consistent across both rounds, suggesting a genuine category-boundary
+difficulty rather than a systematic labeling error. **Reported as a real, if
+now smaller, validity consideration for the scope-defining label** — not a
+resolved footnote, but no longer the moderate-agreement concern Round 1
+suggested. Full numbers for both rounds: `Research_Log/Correction_Log.md`.*
 
 ## 3. Models evaluated
 
@@ -1288,19 +1291,22 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   study's own protocol calls for (§5) — the prescribed 3×3 sweep is
   mathematically unable to show sensitivity at this bundle size.
 - **Representability labeling is single-rater, with a completed independent
-  check showing only moderate agreement on the most consequential field.**
-  A second-rater check (45 blinded cases) was completed during the
-  2026-10-06/07 audit: `pattern_or_taint` 88.9%/κ=0.737 (substantial),
-  `structural_or_context_heavy` 80.0%/κ=0.531 (moderate), **and
+  check (two rounds) showing substantial-to-almost-perfect agreement.**
+  Round 1 (45 blinded cases, rated from summaries only, some conversation
+  exposure) found moderate agreement; Round 2 (a fresh, zero-overlap 45-case
+  sample, rated with full diff/source access, zero exposure — the
+  methodologically stronger round, and the one that supersedes Round 1)
+  found: `pattern_or_taint` 91.1%/κ=0.802 (almost perfect),
+  `structural_or_context_heavy` 93.3%/κ=0.860 (almost perfect), **and
   `semgrep_representability` — the field defining the 153-case "supported"
-  scope every headline comparison in this document uses — only 64.4%/κ=0.448
-  (moderate)**. Disagreements concentrated around the `partially_supported`
-  boundary, in both directions, not a one-way bias. Two caveats on the check
-  itself: it was rated from written summaries, not full diffs/source, and a
-  handful of cases had some detail exposed during the audit conversation
-  before rating (a sensitivity check excluding those left the numbers
-  essentially unchanged). This is reported as a genuine validity threat to
-  the 153-case comparison scope, not a resolved footnote.
+  scope every headline comparison in this document uses — 77.8%/κ=0.662
+  (substantial), up from Round 1's 64.4%/κ=0.448.** Disagreements
+  concentrated around the `partially_supported` boundary in both rounds, in
+  both directions, not a one-way bias — consistent with a genuine
+  category-boundary difficulty. This is reported as a real but now smaller
+  validity consideration for the 153-case comparison scope, not a resolved
+  footnote and not a confirmed non-issue either. Full numbers for both
+  rounds: `Research_Log/Correction_Log.md`.
 - **CodeLlama's inclusion is precision-confounded** by infrastructure
   availability (§3) and is reported separately rather than ranked.
 - **The "benign look-alike" sample is syntactically identical (or

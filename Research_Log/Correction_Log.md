@@ -667,3 +667,40 @@ validity as an independent check.
 individually-reviewable commit on top of it. `results_corrected/` holds every rescored sample log
 alongside the untouched originals under `results/` -- diffing any pair shows exactly what changed
 and why. `Paper_Draft_Notes.md` is the corrected manuscript; this file is its full audit trail.
+
+### 2026-10-07 — Second-rater review redone with a clean, zero-overlap sample: a stronger result
+
+The user asked to redo the second-rater review, since the first 45-case round had two disclosed
+limitations (rated from summaries only, not full diffs; a handful of cases had some detail exposed
+during the audit conversation before rating). Rather than reuse the same 45 cases, built a
+completely fresh sample: `pipeline/build_second_rater_sheet_v2.py` draws a new stratified 45-case
+sample (20 supported / 15 partial / 10 unsupported) with ZERO overlap with the first sample's case
+IDs (verified: 0 shared cases) and excludes the post-hoc-excluded `CASE-0166`. Mechanism summaries
+were extracted directly from each case's own Section 9 build-script docstring (real, pre-existing
+documentation, not freshly written for this check) rather than hand-curated. Delivered to the user
+as a self-contained folder (`~/Desktop/second_rater_redo/`) with the rubric, the blinded sheet, and
+the actual `patch.diff` + vulnerable/patched source for all 45 cases, so no path had to reach back
+into the project -- the answer key was deliberately NOT included in that folder, to remove any
+temptation/risk of accidental exposure (this session's own copy in the repo was used for scoring).
+
+**Result -- every field improved, confirmed by direct comparison, not assumed**:
+
+| Field | Round 1 (summaries only, 5/45 cases exposed) | Round 2 (full evidence, zero exposure) |
+|---|---:|---:|
+| `pattern_or_taint` | 88.9% / κ=0.737 (substantial) | **91.1% / κ=0.802 (almost perfect)** |
+| `structural_or_context_heavy` | 80.0% / κ=0.531 (moderate) | **93.3% / κ=0.860 (almost perfect)** |
+| `semgrep_representability` | 64.4% / κ=0.448 (moderate) | **77.8% / κ=0.662 (substantial)** |
+
+**This is the more trustworthy of the two rounds** -- a genuinely blind sample, real diff/source
+access, zero conversation exposure -- and it should supersede Round 1 as the manuscript's reported
+second-rater result, not be averaged with it or presented as a replication (the two rounds differ
+in exactly the methodological respects Round 1's own caveats named, so the improvement is
+interpretable, not a mystery). The scope-defining label
+(`semgrep_representability`) moves from "moderate" to "substantial" agreement -- still the weakest
+of the three fields, and still worth disclosing as the least-certain part of the 153-case
+comparison scope, but materially less concerning than Round 1 suggested. Disagreements again
+concentrate around the `partially_supported` boundary (10/45, both directions), consistent with a
+genuine category-boundary difficulty rather than a systematic labeling error.
+
+Both rounds' raw data are preserved: `benchmark/second_rater/` (round 1, now-rated) and
+`benchmark/second_rater_v2/` (round 2, now-rated), neither overwritten.
