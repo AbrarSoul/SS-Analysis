@@ -34,9 +34,13 @@ here explaining why, and the original (pre-correction) value remains readable at
       MCC/VGR correction: Finding 1). NOT YET DONE: the explicit end-to-end hidden-positive
       detection rate and end-to-end successful rule rate rows (ESR already approximates the
       latter but hasn't been relabeled/presented as such in the paper draft itself yet).
-- [ ] **Step 5 — Verify workflow comparability.** One table documenting C2/C3/C4's actual shared
-      settings and differences (generator input, review stages, acceptance gates, repair
-      opportunities, enforced budgets). NOT STARTED.
+- [x] **Step 5 — Verify workflow comparability.** COMPLETE. See
+      `Research_Log/Workflow_Comparability_C2_C3_C4.md`. Found 3 previously-unstated real
+      asymmetries beyond "role separation": C3/C4's Rule Generation never sees the raw diff (only
+      a Patch Analysis summary); C2 gets 3 repair rounds vs. C3/C4's 1; C3/C4's round-0 acceptance
+      gate is strictly stricter (requires an agent verdict AND the deterministic check, vs. C2's
+      deterministic-only gate). Also found C3/C4 never enforce the cumulative token/wall-clock
+      budget dimensions C2 does (only the call-count cap is shared).
 - [x] **Step 6 — Recalculate statistics.** COMPLETE. Section 22's full battery rerun on corrected
       data with repository-aware bootstrapping throughout (the case-level/repo-level inconsistency
       is now fixed). See the dedicated entry below for the full before/after comparison.
