@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0145",
+  "original_source_case_id": "github.com_dimtion_Shaarlier_3d1d9b239d9b3cd87e8bed45a0f02da583ad371e",
+  "selection_batch": "topup7",
+  "cve_id": "CVE-2015-10076",
+  "cve_ids_all": [
+    "CVE-2015-10076"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "dimtion/Shaarlier",
+  "repository_url": "https://github.com/dimtion/Shaarlier",
+  "vulnerable_commit": "7f0bcb70bc927aebbfceca9d72154b5989dd81c3",
+  "fixed_commit": "3d1d9b239d9b3cd87e8bed45a0f02da583ad371e",
+  "changed_file": "app/src/main/java/com/dimtion/shaarlier/TagsSource.java",
+  "changed_function": "public Tag createTag(ShaarliAccount masterAccount, String value) {",
+  "vulnerable_lines": [
+    54,
+    83
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0145/vulnerable_source.java": "db3c5a7ed1533d03b033f317b652ca0227431a26b52473ff7d056e57ade2c4cf",
+    "cases/CASE-0145/patched_source.java": "0b8526c60d0a8171507820cb3b496663cbe8562816242cea64077bcced3273a0",
+    "cases/CASE-0145/patch.diff": "0bd40f4c9ab54c40ca702cdf9a90e85be96500a557749023a2fffa2760ee9b68",
+    "cases/CASE-0145/metadata.json": "234c2b0a7dbc124397066c2adddf7bf1f6fa0bf178eb08548ecd04cb2dcb52fa",
+    "model_context/CASE-0145.json": "7b71ed13c4fd823ec548d2781e984fa8e4efddba74f053b66cc275181f750e7e",
+    "difficulty/CASE-0145.json": "c3110f4475600d5defcbccbcd5fed111f3d529e8915969f9621b48fb324804e7"
+  },
+  "case_level_hash": "e290e9f4ba6fd7cc1d1d12a4fa9e1b0e157c30aa6997c541c99677c9c808b53a"
+}

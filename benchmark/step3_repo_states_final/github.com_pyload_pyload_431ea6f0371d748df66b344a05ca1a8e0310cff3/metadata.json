@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pyload_pyload_431ea6f0371d748df66b344a05ca1a8e0310cff3",
+  "cve_ids": [
+    "CVE-2023-0435"
+  ],
+  "cwe_ids": [
+    "CWE-1125",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "a2b1eb1028f45ac58dea5f58593c1d3db2b4a104",
+  "fixed_commit": "431ea6f0371d748df66b344a05ca1a8e0310cff3",
+  "changed_file": "src/pyload/webui/app/static/vendor/MooTools/MooTools-More.min.js",
+  "max_score": "1337"
+}

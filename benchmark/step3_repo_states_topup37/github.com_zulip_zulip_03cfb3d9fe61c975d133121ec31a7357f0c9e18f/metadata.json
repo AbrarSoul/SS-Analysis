@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_zulip_zulip_03cfb3d9fe61c975d133121ec31a7357f0c9e18f",
+  "cve_ids": [
+    "CVE-2023-33186"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "zulip/zulip",
+  "repository_url": "https://github.com/zulip/zulip",
+  "vulnerable_commit": "e3598c80ecb23f1a0a03acf96c9d31ff0f952aa7",
+  "fixed_commit": "03cfb3d9fe61c975d133121ec31a7357f0c9e18f",
+  "changed_file": "web/src/tippyjs.js",
+  "max_score": "1337"
+}

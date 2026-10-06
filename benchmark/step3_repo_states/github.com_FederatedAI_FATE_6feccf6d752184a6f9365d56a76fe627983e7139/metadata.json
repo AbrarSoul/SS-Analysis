@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_FederatedAI_FATE_6feccf6d752184a6f9365d56a76fe627983e7139",
+  "cve_ids": [
+    "CVE-2020-25459"
+  ],
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "language": "python",
+  "repository": "FederatedAI/FATE",
+  "repository_url": "https://github.com/FederatedAI/FATE",
+  "vulnerable_commit": "67708d5d327e736d80e2f6726968cf02a926310e",
+  "fixed_commit": "6feccf6d752184a6f9365d56a76fe627983e7139",
+  "changed_file": "federatedml/tree/hetero/hetero_decision_tree_guest.py",
+  "max_score": "1337"
+}

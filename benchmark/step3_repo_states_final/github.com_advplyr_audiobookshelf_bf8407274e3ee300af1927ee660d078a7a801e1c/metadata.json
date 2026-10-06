@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_advplyr_audiobookshelf_bf8407274e3ee300af1927ee660d078a7a801e1c",
+  "cve_ids": [
+    "CVE-2025-25205"
+  ],
+  "cwe_ids": [
+    "CWE-202",
+    "CWE-287",
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "advplyr/audiobookshelf",
+  "repository_url": "https://github.com/advplyr/audiobookshelf",
+  "vulnerable_commit": "3bc29414456b60d0653d32b9a3fc72c88c3b2400",
+  "fixed_commit": "bf8407274e3ee300af1927ee660d078a7a801e1c",
+  "changed_file": "server/Auth.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0270",
+  "original_source_case_id": "github.com_py-pdf_pypdf_9b23ac3c9619492570011d551d521690de9a3e2d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-46250",
+  "cve_ids_all": [
+    "CVE-2023-46250"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "language": "python",
+  "repository": "py-pdf/pypdf",
+  "repository_url": "https://github.com/py-pdf/pypdf",
+  "vulnerable_commit": "56e191db4268f6ceb41401f5236e24c1ac4a2bdd",
+  "fixed_commit": "9b23ac3c9619492570011d551d521690de9a3e2d",
+  "changed_file": "pypdf/generic/_data_structures.py",
+  "changed_function": "def _clone(",
+  "vulnerable_lines": [
+    200,
+    301
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 19,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0270/vulnerable_source.py": "a7e74a7a5e1a0161ef24034a6ed913c5fbe1c0fc45d1585fc2a90c980ce01b24",
+    "cases/CASE-0270/patched_source.py": "6602074cc5ecabde528f7cd5676c04652c1d6fc6ac495ae1ed5d4d8ed266bbf0",
+    "cases/CASE-0270/patch.diff": "4042261f58f6bd68017d2ee5f1376d408c967ae1204e62ab230676a3367161b3",
+    "cases/CASE-0270/metadata.json": "1ddedc084d2fcd289286df5b17d9205c6c75792a3c453f69d231d81bae666b7e",
+    "model_context/CASE-0270.json": "6d0101f00b815fc7c6a59f0854ffb86bbcb625556e5e1c56fe36923a6e9adc17",
+    "difficulty/CASE-0270.json": "7cda079f3c236c65a8237993e6c4ee3256ef55452f0d5a6e37871a78e5240dca"
+  },
+  "case_level_hash": "25c434b0ceffcd4811991071f65d1b841e24e96e12ed3142b2672d9b65c8c839"
+}

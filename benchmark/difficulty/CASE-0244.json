@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0244",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-285",
+    "CWE-287"
+  ],
+  "changed_files": 1,
+  "lines_added": 10,
+  "lines_removed": 6,
+  "lines_changed_total": 16,
+  "function_size_chars": 2310,
+  "function_size_lines": 59,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Per-thread cached identity never cleared and reused across requests; thread-reuse state leak rather than a code shape."
+}

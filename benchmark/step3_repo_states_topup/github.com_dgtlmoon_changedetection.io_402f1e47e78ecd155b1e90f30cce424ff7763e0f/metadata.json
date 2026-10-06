@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dgtlmoon_changedetection.io_402f1e47e78ecd155b1e90f30cce424ff7763e0f",
+  "cve_ids": [
+    "CVE-2024-23329"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "python",
+  "repository": "dgtlmoon/changedetection.io",
+  "repository_url": "https://github.com/dgtlmoon/changedetection.io",
+  "vulnerable_commit": "9510345e01ea8e308c339163d8e8b030ce5ac7f1",
+  "fixed_commit": "402f1e47e78ecd155b1e90f30cce424ff7763e0f",
+  "changed_file": "changedetectionio/api/api_v1.py",
+  "max_score": "1337"
+}

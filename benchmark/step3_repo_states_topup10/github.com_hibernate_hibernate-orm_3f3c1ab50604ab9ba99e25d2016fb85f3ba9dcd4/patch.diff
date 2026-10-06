@@ -1,0 +1,27 @@
+diff --git a/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java b/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java
+index e7639a1dff..4c5a19a03d 100644
+--- a/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java
++++ b/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java
+@@ -110,6 +110,11 @@ public class LiteralExpression<T> extends ExpressionImpl<T> implements Serializa
+ 	}
+ 
+ 	private String renderProjection(RenderingContext renderingContext) {
++		if ( ValueHandlerFactory.isCharacter( literal ) ) {
++			// In case literal is a Character, pass literal.toString() as the argument.
++			return renderingContext.getDialect().inlineLiteral( literal.toString() );
++		}
++
+ 		// some drivers/servers do not like parameters in the select clause
+ 		final ValueHandlerFactory.ValueHandler handler =
+ 				ValueHandlerFactory.determineAppropriateHandler( literal.getClass() );
+@@ -117,10 +122,6 @@ public class LiteralExpression<T> extends ExpressionImpl<T> implements Serializa
+ 		if ( handler == null ) {
+ 			return normalRender( renderingContext, LiteralHandlingMode.BIND );
+ 		}
+-
+-		if ( ValueHandlerFactory.isCharacter( literal ) ) {
+-			return renderingContext.getDialect().inlineLiteral( handler.render( literal ) );
+-		}
+ 		else {
+ 			return handler.render( literal );
+ 		}

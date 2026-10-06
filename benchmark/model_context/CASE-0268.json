@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-0268",
+  "language": "javascript",
+  "cve_id": "CVE-2024-31453",
+  "cve_ids_all": [
+    "CVE-2024-31453"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-434",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const pug = require('pug');",
+    "const express = require('express');",
+    "const morgan = require('morgan');",
+    "const compression = require('compression');",
+    "const uuid = require('uuid').v4;",
+    "const path = require('path');",
+    "const fs = require(\"fs\");",
+    "const assert = require('assert');",
+    "const AES = require(\"crypto-js/aes\");",
+    "const MD5 = require(\"crypto-js/md5\");",
+    "const archiver = require('archiver');",
+    "const tar = require('tar-stream');",
+    "const config = require('../config');",
+    "const eventBus = require('./eventBus');",
+    "const tusboy = require('./tusboy');",
+    "const Store = require('./store');",
+    "const tusMeta = require('./tusboy/tus-metadata');",
+    "const debug = require('debug')('psitransfer:main');",
+    "const Db = require('./db');",
+    "const { createGzip } = require(\"zlib\");"
+  ],
+  "vulnerable_function": "app.use(`${ config.uploadAppPath }files`,\n  function(req, res, next) {\n    // Upload password protection\n    if (config.uploadPass) {\n      const bfTimeout = 500;\n      if (!req.get('x-passwd')) {\n        setTimeout(() => res.status(401).send('Unauthorized'), bfTimeout);\n        return;\n      }\n      if (req.get('x-passwd') !== config.uploadPass) {\n        setTimeout(() => res.status(403).send('Forbidden'), bfTimeout);\n        return;\n      }\n    }\n\n    if (req.method === 'GET') return res.status(405).end();\n\n    if (req.method === 'POST') {\n      // validate meta-data\n      // !! tusMeta.encode supports only strings !!\n      const meta = tusMeta.decode(req.get('Upload-Metadata'));\n\n      try {\n        assert(meta.name, 'tus meta prop missing: name');\n        assert(meta.sid, 'tus meta prop missing: sid');\n        assert(meta.retention, 'tus meta prop missing: retention');\n        assert(Object.keys(config.retentions).indexOf(meta.retention) >= 0,\n          `invalid tus meta prop retention. Value ${ meta.retention } not in [${ Object.keys(config.retentions).join(',') }]`);\n\n        const uploadLength = req.get('Upload-Length');\n        assert(uploadLength, 'missing Upload-Length header');\n\n        meta.uploadLength = uploadLength;\n        meta.key = uuid();\n        meta.createdAt = Date.now().toString();\n\n        // limit file and bucket size\n        if (config.maxFileSize && config.maxFileSize < +uploadLength) {\n          return res\n            .status(413)\n            .json({ message: `File exceeds maximum upload size ${ config.maxFileSize }.` });\n        } else if (config.maxBucketSize && db.bucketSize(meta.sid) + +uploadLength > config.maxBucketSize) {\n          return res\n            .status(413)\n            .json({ message: `Bucket exceeds maximum upload size ${ config.maxBucketSize }.` });\n        }\n\n        // store changed metadata for tusboy\n        req.headers['upload-metadata'] = tusMeta.encode(meta);\n        // for tusboy getKey()\n        req.FID = meta.sid + '++' + meta.key;\n\n        db.add(meta.sid, meta.key, {\n          \"isPartial\": true,\n          metadata: meta\n        });\n      }\n      catch (e) {\n        console.error(e);\n        return res.status(400).end(e.message);\n      }\n    }\n\n    next();\n  }",
+  "patched_function": "app.use(`${ config.uploadAppPath }files`,\n  async function(req, res, next) {\n    // Upload password protection\n    if (config.uploadPass) {\n      const bfTimeout = 500;\n      if (!req.get('x-passwd')) {\n        setTimeout(() => res.status(401).send('Unauthorized'), bfTimeout);\n        return;\n      }\n      if (req.get('x-passwd') !== config.uploadPass) {\n        setTimeout(() => res.status(403).send('Forbidden'), bfTimeout);\n        return;\n      }\n    }\n\n    if (req.method === 'GET') return res.status(405).end();\n\n    // Restrict upload to a file which upload completed already\n    if(['POST', 'PATCH'].includes(req.method)) {\n      try {\n        const fid = req.url.substring(1);\n        const info = await store.info(fid);\n        if(!info.isPartial) {\n          return res.status(400).end('Upload already completed');\n        }\n      } catch(e) {\n        if(! e instanceof httpErrors.NotFound) {\n          console.error(e);\n          return;\n        }\n      }\n    }\n\n    if (req.method === 'POST') {\n      // validate meta-data\n      // !! tusMeta.encode supports only strings !!\n      const meta = tusMeta.decode(req.get('Upload-Metadata'));\n\n      try {\n        assert(meta.name, 'tus meta prop missing: name');\n        assert(meta.sid, 'tus meta prop missing: sid');\n        assert(meta.retention, 'tus meta prop missing: retention');\n        assert(Object.keys(config.retentions).indexOf(meta.retention) >= 0,\n          `invalid tus meta prop retention. Value ${ meta.retention } not in [${ Object.keys(config.retentions).join(',') }]`);\n\n        const uploadLength = req.get('Upload-Length');\n        assert(uploadLength, 'missing Upload-Length header');\n\n        meta.uploadLength = uploadLength;\n        meta.key = uuid();\n        meta.createdAt = Date.now().toString();\n\n        // limit file and bucket size\n        if (config.maxFileSize && config.maxFileSize < +uploadLength) {\n          return res\n            .status(413)\n            .json({ message: `File exceeds maximum upload size ${ config.maxFileSize }.` });\n        } else if (config.maxBucketSize && db.bucketSize(meta.sid) + +uploadLength > config.maxBucketSize) {\n          return res\n            .status(413)\n            .json({ message: `Bucket exceeds maximum upload size ${ config.maxBucketSize }.` });\n        }\n\n        // store changed metadata for tusboy\n        req.headers['upload-metadata'] = tusMeta.encode(meta);\n        // for tusboy getKey()\n        req.FID = meta.sid + '++' + meta.key;\n\n        db.add(meta.sid, meta.key, {\n          \"isPartial\": true,\n          metadata: meta\n        });\n      }\n      catch (e) {\n        console.error(e);\n        return res.status(400).end(e.message);\n      }\n    }\n\n    next();\n  }",
+  "unified_diff": "diff --git a/lib/endpoints.js b/lib/endpoints.js\nindex 945cbc4..93fb921 100644\n--- a/lib/endpoints.js\n+++ b/lib/endpoints.js\n@@ -29,6 +29,7 @@ const downloadPage = pug.compileFile(path.join(__dirname, '../public/pug/downloa\n const store = new Store(config.uploadDir);\n const Db = require('./db');\n const { createGzip } = require(\"zlib\");\n+const httpErrors = require(\"http-errors\");\n const db = new Db(config.uploadDir, store);\n db.init();\n const app = express();\n@@ -315,7 +316,7 @@ app.get(`${ config.baseUrl }files/:fid`, async (req, res, next) => {\n \n // Upload file\n app.use(`${ config.uploadAppPath }files`,\n-  function(req, res, next) {\n+  async function(req, res, next) {\n     // Upload password protection\n     if (config.uploadPass) {\n       const bfTimeout = 500;\n@@ -331,6 +332,22 @@ app.use(`${ config.uploadAppPath }files`,\n \n     if (req.method === 'GET') return res.status(405).end();\n \n+    // Restrict upload to a file which upload completed already\n+    if(['POST', 'PATCH'].includes(req.method)) {\n+      try {\n+        const fid = req.url.substring(1);\n+        const info = await store.info(fid);\n+        if(!info.isPartial) {\n+          return res.status(400).end('Upload already completed');\n+        }\n+      } catch(e) {\n+        if(! e instanceof httpErrors.NotFound) {\n+          console.error(e);\n+          return;\n+        }\n+      }\n+    }\n+\n     if (req.method === 'POST') {\n       // validate meta-data\n       // !! tusMeta.encode supports only strings !!\n@@ -387,7 +404,6 @@ app.use(`${ config.uploadAppPath }files`,\n     afterComplete: (req, upload, fid) => {\n       db.add(upload.metadata.sid, upload.metadata.key, upload);\n       debug(`Completed upload ${ fid }, size=${ upload.size } name=${ upload.metadata.name }`);\n-\n       eventBus.emit('fileUploaded', upload);\n     },\n   })",
+  "auto_locate_confidence": "auto"
+}

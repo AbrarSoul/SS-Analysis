@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0065",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 7,
+  "lines_changed_total": 10,
+  "function_size_chars": 413,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Plain-object lookup with an attacker-chosen key falls through to Object.prototype; needs JS object semantics plus flow."
+}

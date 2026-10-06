@@ -1,0 +1,34 @@
+{
+  "case_id": "github.com_frappe_frappe_24dd2d9420a7c68ce09875cb18586d1bf071c857",
+  "language": "python",
+  "cve_id": "CVE-2025-55732",
+  "cve_ids_all": [
+    "CVE-2025-55732"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import datetime",
+    "import json",
+    "import frappe",
+    "from frappe import _",
+    "from frappe.boot import get_allowed_report_names",
+    "from frappe.config import get_modules_from_all_apps_for_user",
+    "from frappe.model.document import Document",
+    "from frappe.model.naming import append_number_if_name_exists",
+    "from frappe.modules.export_file import export_to_files",
+    "from frappe.utils import cint, get_datetime, getdate, has_common, now_datetime, nowdate",
+    "from frappe.utils.dashboard import cache_source",
+    "from frappe.utils.data import format_date",
+    "from frappe.utils.dateutils import get_dates_from_timegrain, get_from_date_from_timespan, get_period, get_period_beginning"
+  ],
+  "vulnerable_function": "def get_permission_query_conditions(user):\n\tif not user:\n\t\tuser = frappe.session.user\n\n\tif user == \"Administrator\":\n\t\treturn\n\n\troles = frappe.get_roles(user)\n\tif \"System Manager\" in roles:\n\t\treturn None\n\n\tdoctype_condition = False\n\treport_condition = False\n\tmodule_condition = False\n\n\tallowed_doctypes = [frappe.db.escape(doctype) for doctype in frappe.permissions.get_doctypes_with_read()]\n\tallowed_reports = [frappe.db.escape(report) for report in get_allowed_report_names()]\n\tallowed_modules = [\n\t\tfrappe.db.escape(module.get(\"module_name\")) for module in get_modules_from_all_apps_for_user()\n\t]\n\n\tif allowed_doctypes:\n\t\tdoctype_condition = \"`tabDashboard Chart`.`document_type` in ({allowed_doctypes})\".format(\n\t\t\tallowed_doctypes=\",\".join(allowed_doctypes)\n\t\t)\n\tif allowed_reports:\n\t\treport_condition = \"`tabDashboard Chart`.`report_name` in ({allowed_reports})\".format(\n\t\t\tallowed_reports=\",\".join(allowed_reports)\n\t\t)\n\tif allowed_modules:\n\t\tmodule_condition = \"\"\"`tabDashboard Chart`.`module` in ({allowed_modules})\n\t\t\tor `tabDashboard Chart`.`module` is NULL\"\"\".format(allowed_modules=\",\".join(allowed_modules))\n\n\treturn f\"\"\"\n\t\t((`tabDashboard Chart`.`chart_type` in ('Count', 'Sum', 'Average')\n\t\tand {doctype_condition})\n\t\tor\n\t\t(`tabDashboard Chart`.`chart_type` = 'Report'\n\t\tand {report_condition}))\n\t\tand\n\t\t({module_condition})\n\t\"\"\"\n",
+  "patched_function": "def get_permission_query_conditions(user):\n\tif not user:\n\t\tuser = frappe.session.user\n\n\tif user == \"Administrator\":\n\t\treturn\n\n\troles = frappe.get_roles(user)\n\tif \"System Manager\" in roles:\n\t\treturn None\n\n\tdoctype_condition = False\n\treport_condition = False\n\tmodule_condition = False\n\n\tallowed_doctypes = [frappe.db.escape(doctype) for doctype in frappe.permissions.get_doctypes_with_read()]\n\tallowed_reports = [frappe.db.escape(report) for report in get_allowed_report_names()]\n\tallowed_modules = [\n\t\tfrappe.db.escape(module.get(\"module_name\")) for module in get_modules_from_all_apps_for_user()\n\t]\n\n\tif allowed_doctypes:\n\t\tdoctype_condition = \"`tabDashboard Chart`.`document_type` in ({allowed_doctypes})\".format(\n\t\t\tallowed_doctypes=\",\".join(allowed_doctypes)\n\t\t)\n\tif allowed_reports:\n\t\treport_condition = \"`tabDashboard Chart`.`report_name` in ({allowed_reports})\".format(\n\t\t\tallowed_reports=\",\".join(allowed_reports)\n\t\t)\n\tif allowed_modules:\n\t\tmodule_condition = \"\"\"`tabDashboard Chart`.`module` in ({allowed_modules})\n\t\t\tor `tabDashboard Chart`.`module` is NULL\"\"\".format(allowed_modules=\",\".join(allowed_modules))\n\n\treturn f\"\"\"\n\t\t((`tabDashboard Chart`.`chart_type` in ('Count', 'Sum', 'Average', 'Group By')\n\t\tand {doctype_condition})\n\t\tor\n\t\t(`tabDashboard Chart`.`chart_type` = 'Report'\n\t\tand {report_condition}))\n\t\tand\n\t\t({module_condition})\n\t\"\"\"\n",
+  "unified_diff": "diff --git a/frappe/desk/doctype/dashboard_chart/dashboard_chart.py b/frappe/desk/doctype/dashboard_chart/dashboard_chart.py\nindex 83a16fe82d..e7d99c30f4 100644\n--- a/frappe/desk/doctype/dashboard_chart/dashboard_chart.py\n+++ b/frappe/desk/doctype/dashboard_chart/dashboard_chart.py\n@@ -56,7 +56,7 @@ def get_permission_query_conditions(user):\n \t\t\tor `tabDashboard Chart`.`module` is NULL\"\"\".format(allowed_modules=\",\".join(allowed_modules))\n \n \treturn f\"\"\"\n-\t\t((`tabDashboard Chart`.`chart_type` in ('Count', 'Sum', 'Average')\n+\t\t((`tabDashboard Chart`.`chart_type` in ('Count', 'Sum', 'Average', 'Group By')\n \t\tand {doctype_condition})\n \t\tor\n \t\t(`tabDashboard Chart`.`chart_type` = 'Report'",
+  "auto_locate_confidence": "auto"
+}

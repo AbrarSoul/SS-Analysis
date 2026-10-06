@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_ansible_ansible-modules-core_1182d1f0b76d56f3667e27987a10b9ec8f03357d",
+  "cve_ids": [
+    "CVE-2016-8614"
+  ],
+  "cwe_ids": [
+    "CWE-320",
+    "CWE-358"
+  ],
+  "language": "python",
+  "repository": "ansible/ansible-modules-core",
+  "repository_url": "https://github.com/ansible/ansible-modules-core",
+  "vulnerable_commit": "ac314a5e3db5fc7d8a6953775f9b00c3ed4f5451",
+  "fixed_commit": "1182d1f0b76d56f3667e27987a10b9ec8f03357d",
+  "changed_file": "packaging/os/apt_key.py",
+  "max_score": "1337"
+}

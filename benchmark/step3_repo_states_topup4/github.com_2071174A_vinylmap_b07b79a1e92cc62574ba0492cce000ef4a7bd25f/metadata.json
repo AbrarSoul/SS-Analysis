@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_2071174A_vinylmap_b07b79a1e92cc62574ba0492cce000ef4a7bd25f",
+  "cve_ids": [
+    "CVE-2015-10056"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "python",
+  "repository": "2071174A/vinylmap",
+  "repository_url": "https://github.com/2071174A/vinylmap",
+  "vulnerable_commit": "781d517b0d234d3fb51c9cb46584f0cf58e67675",
+  "fixed_commit": "b07b79a1e92cc62574ba0492cce000ef4a7bd25f",
+  "changed_file": "recordstoreapp/views.py",
+  "max_score": "1337"
+}

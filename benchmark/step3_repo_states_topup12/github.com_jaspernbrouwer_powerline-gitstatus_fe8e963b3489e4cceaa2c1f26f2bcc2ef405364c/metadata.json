@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jaspernbrouwer_powerline-gitstatus_fe8e963b3489e4cceaa2c1f26f2bcc2ef405364c",
+  "cve_ids": [
+    "CVE-2022-42906"
+  ],
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "jaspernbrouwer/powerline-gitstatus",
+  "repository_url": "https://github.com/jaspernbrouwer/powerline-gitstatus",
+  "vulnerable_commit": "8000c7f41305ddb421528dd00b6292ffd121c2c2",
+  "fixed_commit": "fe8e963b3489e4cceaa2c1f26f2bcc2ef405364c",
+  "changed_file": "powerline_gitstatus/segments.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ant-media_ant-media-server_4d4763bd4fd06e515c19544e5170ca0f34c9ce45",
+  "cve_ids": [
+    "CVE-2024-35371"
+  ],
+  "cwe_ids": [
+    "CWE-125"
+  ],
+  "language": "java",
+  "repository": "ant-media/ant-media-server",
+  "repository_url": "https://github.com/ant-media/ant-media-server",
+  "vulnerable_commit": "3dfaf9a9e3774c65cd396eec4d9b0f759e5085c4",
+  "fixed_commit": "4d4763bd4fd06e515c19544e5170ca0f34c9ce45",
+  "changed_file": "src/main/java/io/antmedia/rest/RestServiceBase.java",
+  "max_score": "1337"
+}

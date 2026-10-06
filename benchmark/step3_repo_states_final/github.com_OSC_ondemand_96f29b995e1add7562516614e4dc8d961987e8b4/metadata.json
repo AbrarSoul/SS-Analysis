@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_OSC_ondemand_96f29b995e1add7562516614e4dc8d961987e8b4",
+  "cve_ids": [
+    "CVE-2025-53636"
+  ],
+  "cwe_ids": [
+    "CWE-400",
+    "CWE-779"
+  ],
+  "language": "javascript",
+  "repository": "OSC/ondemand",
+  "repository_url": "https://github.com/OSC/ondemand",
+  "vulnerable_commit": "787206d094852fea7d7dfe2716759c026c66a158",
+  "fixed_commit": "96f29b995e1add7562516614e4dc8d961987e8b4",
+  "changed_file": "apps/shell/app.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Kozea_Radicale_059ba8dec1f22ccbeab837e288b3833a099cee2d",
+  "cve_ids": [
+    "CVE-2017-8342"
+  ],
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "language": "python",
+  "repository": "Kozea/Radicale",
+  "repository_url": "https://github.com/Kozea/Radicale",
+  "vulnerable_commit": "78e0bfd44957c253874c4a634089c76afa3e2576",
+  "fixed_commit": "059ba8dec1f22ccbeab837e288b3833a099cee2d",
+  "changed_file": "radicale/auth.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Phoenix616_InventoryGui_00e684bd689ebc60bcb5b83ce4ef3c5a01778494",
+  "cve_ids": [
+    "CVE-2025-62782"
+  ],
+  "cwe_ids": [
+    "CWE-837"
+  ],
+  "language": "java",
+  "repository": "Phoenix616/InventoryGui",
+  "repository_url": "https://github.com/Phoenix616/InventoryGui",
+  "vulnerable_commit": "89ed1800f08f9321af137baea6c94cb3dfa2b1a0",
+  "fixed_commit": "00e684bd689ebc60bcb5b83ce4ef3c5a01778494",
+  "changed_file": "src/main/java/de/themoep/inventorygui/GuiStorageElement.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,32 @@
+{
+  "case_id": "CASE-0019",
+  "language": "java",
+  "cve_id": "CVE-2024-49771",
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "extraction_kind": "method",
+  "class_name": "InputStreamHelper",
+  "containing_class_declaration": "public class InputStreamHelper",
+  "imports": [
+    "import java.io.File;",
+    "import java.io.FileOutputStream;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.nio.file.Files;",
+    "import java.util.zip.ZipEntry;",
+    "import java.util.zip.ZipException;",
+    "import java.util.zip.ZipInputStream;"
+  ],
+  "vulnerable_function": "   private static void processZipStream(File dir, InputStream inputStream) throws IOException\n   {\n      String canonicalDestinationDirPath = dir.getCanonicalPath();\n      ZipInputStream zip = new ZipInputStream(inputStream);\n      while (true)\n      {\n         ZipEntry entry = zip.getNextEntry();\n         if (entry == null)\n         {\n            break;\n         }\n\n         File file = new File(dir, entry.getName());\n\n         // https://snyk.io/research/zip-slip-vulnerability\n         String canonicalDestinationFile = file.getCanonicalPath();\n         if (!canonicalDestinationFile.startsWith(canonicalDestinationDirPath + File.separator))\n         {\n            throw new IOException(\"Entry is outside of the target dir: \" + entry.getName());\n         }\n\n         if (entry.isDirectory())\n         {\n            FileHelper.mkdirsQuietly(file);\n            continue;\n         }\n\n         File parent = file.getParentFile();\n         if (parent != null)\n         {\n            FileHelper.mkdirsQuietly(parent);\n         }\n\n         FileOutputStream fos = new FileOutputStream(file);\n         byte[] bytes = new byte[1024];\n         int length;\n         while ((length = zip.read(bytes)) >= 0)\n         {\n            fos.write(bytes, 0, length);\n         }\n         fos.close();\n      }\n   }\n",
+  "patched_function": "   private static void processZipStream(File dir, InputStream inputStream) throws IOException\n   {\n      ZipInputStream zip = new ZipInputStream(inputStream);\n      while (true)\n      {\n         ZipEntry entry = zip.getNextEntry();\n         if (entry == null)\n         {\n            break;\n         }\n\n         File file = new File(dir, entry.getName());\n\n         // https://snyk.io/research/zip-slip-vulnerability\n         if (!file.getCanonicalFile().toPath().startsWith(dir.getCanonicalFile().toPath()))\n         {\n            throw new IOException(\"Entry is outside of the target dir: \" + entry.getName());\n         }\n\n         if (entry.isDirectory())\n         {\n            FileHelper.mkdirsQuietly(file);\n            continue;\n         }\n\n         File parent = file.getParentFile();\n         if (parent != null)\n         {\n            FileHelper.mkdirsQuietly(parent);\n         }\n\n         FileOutputStream fos = new FileOutputStream(file);\n         byte[] bytes = new byte[1024];\n         int length;\n         while ((length = zip.read(bytes)) >= 0)\n         {\n            fos.write(bytes, 0, length);\n         }\n         fos.close();\n      }\n   }\n",
+  "unified_diff": "diff --git a/src/main/java/net/sf/mpxj/common/InputStreamHelper.java b/src/main/java/net/sf/mpxj/common/InputStreamHelper.java\nindex a9c4dcbea9..9dabc0745d 100644\n--- a/src/main/java/net/sf/mpxj/common/InputStreamHelper.java\n+++ b/src/main/java/net/sf/mpxj/common/InputStreamHelper.java\n@@ -174,7 +174,6 @@ public class InputStreamHelper\n     */\n    private static void processZipStream(File dir, InputStream inputStream) throws IOException\n    {\n-      String canonicalDestinationDirPath = dir.getCanonicalPath();\n       ZipInputStream zip = new ZipInputStream(inputStream);\n       while (true)\n       {\n@@ -187,8 +186,7 @@ public class InputStreamHelper\n          File file = new File(dir, entry.getName());\n \n          // https://snyk.io/research/zip-slip-vulnerability\n-         String canonicalDestinationFile = file.getCanonicalPath();\n-         if (!canonicalDestinationFile.startsWith(canonicalDestinationDirPath + File.separator))\n+         if (!file.getCanonicalFile().toPath().startsWith(dir.getCanonicalFile().toPath()))\n          {\n             throw new IOException(\"Entry is outside of the target dir: \" + entry.getName());\n          }",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 3869,
+  "context_size_chars_after_truncation": 3869
+}

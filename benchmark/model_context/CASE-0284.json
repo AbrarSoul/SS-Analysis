@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0284",
+  "language": "typescript",
+  "cve_id": "CVE-2026-27707",
+  "cve_ids_all": [
+    "CVE-2026-27707"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-288",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-807",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import JellyfinAPI from '@server/api/jellyfin';",
+    "import PlexTvAPI from '@server/api/plextv';",
+    "import { ApiErrorCode } from '@server/constants/error';",
+    "import { MediaServerType, ServerType } from '@server/constants/server';",
+    "import { UserType } from '@server/constants/user';",
+    "import { getRepository } from '@server/datasource';",
+    "import { User } from '@server/entity/User';",
+    "import { startJobs } from '@server/job/schedule';",
+    "import { Permission } from '@server/lib/permissions';",
+    "import { getSettings } from '@server/lib/settings';",
+    "import logger from '@server/logger';",
+    "import { isAuthenticated } from '@server/middleware/auth';",
+    "import { checkAvatarChanged } from '@server/routes/avatarproxy';",
+    "import { ApiError } from '@server/types/error';",
+    "import { getAppVersion } from '@server/utils/appVersion';",
+    "import { getHostname } from '@server/utils/getHostname';",
+    "import axios from 'axios';",
+    "import { Router } from 'express';",
+    "import net from 'net';",
+    "import validator from 'validator';"
+  ],
+  "vulnerable_function": "  if (\n    // media server not configured, allow login for setup\n    settings.main.mediaServerType != MediaServerType.NOT_CONFIGURED &&\n    (settings.main.mediaServerLogin === false ||\n      // media server is neither jellyfin or emby\n      (settings.main.mediaServerType !== MediaServerType.JELLYFIN &&\n        settings.main.mediaServerType !== MediaServerType.EMBY &&\n        settings.jellyfin.ip !== ''))\n  ) {\n    return res.status(500).json({ error: 'Jellyfin login is disabled' });\n  }",
+  "patched_function": "  if (\n    // media server not configured, allow login for setup\n    settings.main.mediaServerType != MediaServerType.NOT_CONFIGURED &&\n    (settings.main.mediaServerLogin === false ||\n      // media server is neither jellyfin or emby\n      (settings.main.mediaServerType !== MediaServerType.JELLYFIN &&\n        settings.main.mediaServerType !== MediaServerType.EMBY))\n  ) {\n    return res.status(500).json({ error: 'Jellyfin login is disabled' });\n  }",
+  "unified_diff": "diff --git a/server/routes/auth.ts b/server/routes/auth.ts\nindex b74befe5..d625d85e 100644\n--- a/server/routes/auth.ts\n+++ b/server/routes/auth.ts\n@@ -244,8 +244,7 @@ authRoutes.post('/jellyfin', async (req, res, next) => {\n     (settings.main.mediaServerLogin === false ||\n       // media server is neither jellyfin or emby\n       (settings.main.mediaServerType !== MediaServerType.JELLYFIN &&\n-        settings.main.mediaServerType !== MediaServerType.EMBY &&\n-        settings.jellyfin.ip !== ''))\n+        settings.main.mediaServerType !== MediaServerType.EMBY))\n   ) {\n     return res.status(500).json({ error: 'Jellyfin login is disabled' });\n   }",
+  "auto_locate_confidence": "auto"
+}

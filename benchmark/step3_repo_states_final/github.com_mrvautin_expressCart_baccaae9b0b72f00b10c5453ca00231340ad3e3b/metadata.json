@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mrvautin_expressCart_baccaae9b0b72f00b10c5453ca00231340ad3e3b",
+  "cve_ids": [
+    "CVE-2018-12457"
+  ],
+  "cwe_ids": [
+    "CWE-732"
+  ],
+  "language": "javascript",
+  "repository": "mrvautin/expressCart",
+  "repository_url": "https://github.com/mrvautin/expressCart",
+  "vulnerable_commit": "c674f8657685f06da5a6a9d68cfecf533e25945f",
+  "fixed_commit": "baccaae9b0b72f00b10c5453ca00231340ad3e3b",
+  "changed_file": "routes/user.js",
+  "max_score": "1337"
+}

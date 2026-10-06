@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0068",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-404"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 2,
+  "lines_changed_total": 6,
+  "function_size_chars": 484,
+  "function_size_lines": 11,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Callback dereferences the response without checking the error argument first; visible missing-guard shape."
+}

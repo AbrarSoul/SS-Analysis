@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_e3527b98fdd8dc8179c24dc55e662b2c55199434",
+  "cve_ids": [
+    "CVE-2023-27480"
+  ],
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "c68c0dffa863c30b5a6ce685feccd0f8cada461d",
+  "fixed_commit": "e3527b98fdd8dc8179c24dc55e662b2c55199434",
+  "changed_file": "xwiki-platform-core/xwiki-platform-xar/xwiki-platform-xar-model/src/main/java/org/xwiki/xar/XarPackage.java",
+  "max_score": "1337"
+}

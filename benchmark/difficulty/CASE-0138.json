@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0138",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-285"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 2,
+  "lines_changed_total": 7,
+  "function_size_chars": 79,
+  "function_size_lines": 3,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Routes lack the Depends(current_admin_user) dependency every sibling route carries; missing-dependency shape."
+}

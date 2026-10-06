@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_matrix-org_matrix-js-sdk_894c24880da0e1cc81818f51c0db80e3c9fb2be9",
+  "cve_ids": [
+    "CVE-2021-40823"
+  ],
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "language": "typescript",
+  "repository": "matrix-org/matrix-js-sdk",
+  "repository_url": "https://github.com/matrix-org/matrix-js-sdk",
+  "vulnerable_commit": "f8186add92dd5f0ca2f6a1cda10bc0ece3730f86",
+  "fixed_commit": "894c24880da0e1cc81818f51c0db80e3c9fb2be9",
+  "changed_file": "src/crypto/algorithms/megolm.ts",
+  "max_score": "1337"
+}

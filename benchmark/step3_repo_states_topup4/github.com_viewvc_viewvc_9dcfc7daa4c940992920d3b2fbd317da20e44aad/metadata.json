@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_viewvc_viewvc_9dcfc7daa4c940992920d3b2fbd317da20e44aad",
+  "cve_ids": [
+    "CVE-2017-5938"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "viewvc/viewvc",
+  "repository_url": "https://github.com/viewvc/viewvc",
+  "vulnerable_commit": "8507aa4e745e4cf5cac811ccb6d2fbf768bb9cba",
+  "fixed_commit": "9dcfc7daa4c940992920d3b2fbd317da20e44aad",
+  "changed_file": "lib/viewvc.py",
+  "max_score": "1337"
+}

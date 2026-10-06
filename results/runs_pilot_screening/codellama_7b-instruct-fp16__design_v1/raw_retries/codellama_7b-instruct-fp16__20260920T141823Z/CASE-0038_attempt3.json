@@ -1,0 +1,11 @@
+{
+  "run_id": "codellama_7b-instruct-fp16__20260920T141823Z",
+  "case_id": "CASE-0038",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "codellama:7b-instruct-fp16",
+  "temperature": 0.0,
+  "timestamp": 1789927225.8691719,
+  "raw_content": "```yaml\n---\nid: vuln-note-mark-a0997fac\nlanguages:\n  - typescript\npattern: |\n  (func.render = func.render or function(content)\n    content = DOMPurify.sanitize(content)\n    return markdown_to_html(content)\n  end)\nmessage: Vulnerable code detected\nseverity: ERROR\nmetadata:\n  cwe: CWE-79\n  cvss: 8.1\n```",
+  "prompt_text": "Generate one Semgrep rule from the verified vulnerability-fixing evidence.\n\nLanguage: typescript\nCVE: CVE-2024-41819\nCWE: CWE-79 (Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting'))\n\nRelevant imports:\nimport DOMPurify from 'dompurify';\nimport { markdown_to_html } from '../../renderer/pkg';\n\nVulnerable function or method:\nfunction render(content: string): string {\n  content = DOMPurify.sanitize(content)\n  return markdown_to_html(content)\n}\n\nPatched function or method:\nfunction render(content: string): string {\n  content = markdown_to_html(content)\n  return DOMPurify.sanitize(content)\n}\n\nUnified diff:\nFile: frontend/src/core/renderer.ts\n--- a/frontend/src/core/renderer.ts\n+++ b/frontend/src/core/renderer.ts\n-  content = DOMPurify.sanitize(content)\n-  return markdown_to_html(content)\n+  content = markdown_to_html(content)\n+  return DOMPurify.sanitize(content)\n\nThe rule must detect the vulnerable behavior and avoid matching the patched\nbehavior. Generalize the security mechanism without depending on unnecessary\nrepository-specific names.\n\nReturn exactly one Semgrep YAML rule. Do not include Markdown fences or prose.\nInclude id, languages, message, severity, metadata, and the required pattern\nor taint-mode fields. Use \"vuln-note-mark-a0997fac\" as the id.\nseverity must be one of: ERROR, WARNING, INFO.\n\nPREVIOUS ERROR TO FIX:\nRule failed to detect vulnerability in original version\nEnsure your next attempt addresses these issues."
+}

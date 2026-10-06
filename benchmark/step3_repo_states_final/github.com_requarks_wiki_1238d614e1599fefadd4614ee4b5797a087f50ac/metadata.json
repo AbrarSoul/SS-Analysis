@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_requarks_wiki_1238d614e1599fefadd4614ee4b5797a087f50ac",
+  "cve_ids": [
+    "CVE-2024-34710"
+  ],
+  "cwe_ids": [
+    "CWE-1336"
+  ],
+  "language": "javascript",
+  "repository": "requarks/wiki",
+  "repository_url": "https://github.com/requarks/wiki",
+  "vulnerable_commit": "98c04fe18e1a0bc98850c7c367adcf1c9981578e",
+  "fixed_commit": "1238d614e1599fefadd4614ee4b5797a087f50ac",
+  "changed_file": "server/modules/rendering/html-core/renderer.js",
+  "max_score": "1337"
+}

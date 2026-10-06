@@ -1,0 +1,47 @@
+diff --git a/knowage-core/src/main/java/it/eng/spagobi/api/v2/DataSourceResource.java b/knowage-core/src/main/java/it/eng/spagobi/api/v2/DataSourceResource.java
+index 83703366d1..df5bfeb870 100644
+--- a/knowage-core/src/main/java/it/eng/spagobi/api/v2/DataSourceResource.java
++++ b/knowage-core/src/main/java/it/eng/spagobi/api/v2/DataSourceResource.java
+@@ -140,6 +140,9 @@ public class DataSourceResource extends AbstractSpagoBIResource {
+ 	public String postDataSource(IDataSource dataSource) {
+ 		LOGGER.debug("IN");
+ 		try {
++
++			this.checkJNDIName(dataSource);
++
+ 			IDataSourceDAO dataSourceDAO = DAOFactory.getDataSourceDAO();
+ 			UserProfile userProfile = getUserProfile();
+ 
+@@ -179,6 +182,9 @@ public class DataSourceResource extends AbstractSpagoBIResource {
+ 	public List<IDataSource> putDataSource(IDataSource dataSource) {
+ 		LOGGER.debug("IN");
+ 		try {
++
++			this.checkJNDIName(dataSource);
++
+ 			checkAuthorizationToManageCacheDataSource(dataSource);
+ 
+ 			IDataSourceDAO dataSourceDAO = DAOFactory.getDataSourceDAO();
+@@ -196,6 +202,8 @@ public class DataSourceResource extends AbstractSpagoBIResource {
+ 			}
+ 			dataSourceDAO.modifyDataSource(dataSource);
+ 			return getDataSources();
++		} catch (SpagoBIRestServiceException e) {
++			throw e;
+ 		} catch (Exception e) {
+ 			LOGGER.error("Error while updating data source", e);
+ 			throw new SpagoBIRestServiceException("Error while updating data source", buildLocaleFromSession(), e);
+@@ -474,6 +482,13 @@ public class DataSourceResource extends AbstractSpagoBIResource {
+ 		}
+ 	}
+ 
++	private void checkJNDIName(IDataSource dataSource) {
++		if (dataSource.getJndi() != null && !dataSource.getJndi().startsWith("java:comp/env/jdbc/")) {
++			MessageBuilder msgBuilder = new MessageBuilder();
++			throw new SpagoBIRestServiceException(msgBuilder.getMessage("sbi.datasource.jndi"), buildLocaleFromSession(), new Throwable());
++		}
++	}
++
+ 	private IDataSource toOwnedOrNotOwned(IDataSource dataSource) {
+ 
+ 		if (!isOwnedByTheUser(dataSource)) {

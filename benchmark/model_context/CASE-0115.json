@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0115",
+  "language": "java",
+  "cve_id": "CVE-2016-4438",
+  "cve_ids_all": [
+    "CVE-2016-4438"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.opensymphony.xwork2.config.Configuration;",
+    "import com.opensymphony.xwork2.config.ConfigurationManager;",
+    "import com.opensymphony.xwork2.config.entities.PackageConfig;",
+    "import com.opensymphony.xwork2.inject.Inject;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import org.apache.logging.log4j.LogManager;",
+    "import org.apache.logging.log4j.Logger;",
+    "import org.apache.struts2.RequestUtils;",
+    "import org.apache.struts2.StrutsConstants;",
+    "import org.apache.struts2.dispatcher.mapper.ActionMapping;",
+    "import org.apache.struts2.dispatcher.mapper.DefaultActionMapper;",
+    "import javax.servlet.http.HttpServletRequest;",
+    "import java.util.HashMap;"
+  ],
+  "vulnerable_function": "    private void handleDynamicMethodInvocation(ActionMapping mapping, String name) {\n        int exclamation = name.lastIndexOf(\"!\");\n        if (exclamation != -1) {\n            String actionName = name.substring(0, exclamation);\n            String actionMethod = name.substring(exclamation + 1);\n\n            // WW-4585\n            // add any ; appendix to name, it will be handled later in getMapping method\n            int scPos = actionMethod.indexOf(';');\n            if (scPos != -1) {\n                actionName = actionName + actionMethod.substring(scPos);\n                actionMethod = actionMethod.substring(0, scPos);\n            }\n\n            mapping.setName(actionName);\n            if (allowDynamicMethodCalls) {\n                mapping.setMethod(actionMethod);\n            } else {\n                mapping.setMethod(null);\n            }\n        }\n    }",
+  "patched_function": "    private void handleDynamicMethodInvocation(ActionMapping mapping, String name) {\n        int exclamation = name.lastIndexOf(\"!\");\n        if (exclamation != -1) {\n            String actionName = name.substring(0, exclamation);\n            String actionMethod = name.substring(exclamation + 1);\n\n            // WW-4585\n            // add any ; appendix to name, it will be handled later in getMapping method\n            int scPos = actionMethod.indexOf(';');\n            if (scPos != -1) {\n                actionName = actionName + actionMethod.substring(scPos);\n                actionMethod = actionMethod.substring(0, scPos);\n            }\n\n            mapping.setName(actionName);\n            if (allowDynamicMethodCalls) {\n                mapping.setMethod(cleanupActionName(actionMethod));\n            } else {\n                mapping.setMethod(null);\n            }\n        }\n    }",
+  "unified_diff": "diff --git a/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java b/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java\nindex f1fc41a0f..678a6f30e 100644\n--- a/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java\n+++ b/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java\n@@ -320,7 +320,7 @@ public class RestActionMapper extends DefaultActionMapper {\n \n             mapping.setName(actionName);\n             if (allowDynamicMethodCalls) {\n-                mapping.setMethod(actionMethod);\n+                mapping.setMethod(cleanupActionName(actionMethod));\n             } else {\n                 mapping.setMethod(null);\n             }",
+  "auto_locate_confidence": "auto"
+}

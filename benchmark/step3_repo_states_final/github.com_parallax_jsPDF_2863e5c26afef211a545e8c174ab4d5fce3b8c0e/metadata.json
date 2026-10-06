@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_parallax_jsPDF_2863e5c26afef211a545e8c174ab4d5fce3b8c0e",
+  "cve_ids": [
+    "CVE-2026-24040"
+  ],
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "language": "javascript",
+  "repository": "parallax/jsPDF",
+  "repository_url": "https://github.com/parallax/jsPDF",
+  "vulnerable_commit": "efe54bf50f3f5e5416b2495e3c24624fc80b6cff",
+  "fixed_commit": "2863e5c26afef211a545e8c174ab4d5fce3b8c0e",
+  "changed_file": "src/modules/javascript.js",
+  "max_score": "1337"
+}

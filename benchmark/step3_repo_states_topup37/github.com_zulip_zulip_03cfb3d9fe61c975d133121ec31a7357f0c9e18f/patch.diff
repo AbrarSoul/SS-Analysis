@@ -1,0 +1,21 @@
+diff --git a/web/src/tippyjs.js b/web/src/tippyjs.js
+index f2c1bd7dfc..a06e44bca4 100644
+--- a/web/src/tippyjs.js
++++ b/web/src/tippyjs.js
+@@ -185,6 +185,16 @@ export function initialize() {
+         },
+     });
+ 
++    delegate("body", {
++        target: ".tippy-narrow-tooltip",
++        delay: LONG_HOVER_DELAY,
++        appendTo: () => document.body,
++        onCreate(instance) {
++            const content = instance.props.content + $("#narrow-hotkey-tooltip-template").html();
++            instance.setContent(parse_html(content));
++        },
++    });
++
+     delegate("body", {
+         target: ".toggle-subscription-tooltip",
+         delay: EXTRA_LONG_HOVER_DELAY,

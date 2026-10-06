@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_totaljs_cms_75205f93009db3cf8c0b0f4f1fc8ab82d70da8ad",
+  "cve_ids": [
+    "CVE-2019-10260",
+    "CVE-2019-8903"
+  ],
+  "cwe_ids": [
+    "CWE-22",
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "totaljs/cms",
+  "repository_url": "https://github.com/totaljs/cms",
+  "vulnerable_commit": "ff81eb74c1a15fab765a2127950d115bdbdd07dd",
+  "fixed_commit": "75205f93009db3cf8c0b0f4f1fc8ab82d70da8ad",
+  "changed_file": "themes/admin/public/ui.js",
+  "max_score": "1337"
+}

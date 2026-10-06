@@ -1,0 +1,39 @@
+diff --git a/services/src/main/java/org/keycloak/services/resources/AccountService.java b/services/src/main/java/org/keycloak/services/resources/AccountService.java
+index 5ba6cae103..ff22dc27f3 100755
+--- a/services/src/main/java/org/keycloak/services/resources/AccountService.java
++++ b/services/src/main/java/org/keycloak/services/resources/AccountService.java
+@@ -84,6 +84,7 @@ import javax.ws.rs.core.Response;
+ import javax.ws.rs.core.UriBuilder;
+ import javax.ws.rs.core.UriInfo;
+ import javax.ws.rs.core.Variant;
++import java.lang.reflect.Method;
+ import java.net.URI;
+ import java.util.HashSet;
+ import java.util.Iterator;
+@@ -99,6 +100,16 @@ public class AccountService {
+ 
+     private static final Logger logger = Logger.getLogger(AccountService.class);
+ 
++    private static Set<String> VALID_PATHS = new HashSet<String>();
++    static {
++        for (Method m : AccountService.class.getMethods()) {
++            Path p = m.getAnnotation(Path.class);
++            if (p != null) {
++                VALID_PATHS.add(p.value());
++            }
++        }
++    }
++
+     private static final EventType[] LOG_EVENTS = {EventType.LOGIN, EventType.LOGOUT, EventType.REGISTER, EventType.REMOVE_SOCIAL_LINK, EventType.REMOVE_TOTP, EventType.SEND_RESET_PASSWORD,
+             EventType.SEND_VERIFY_EMAIL, EventType.SOCIAL_LINK, EventType.UPDATE_EMAIL, EventType.UPDATE_PASSWORD, EventType.UPDATE_PROFILE, EventType.UPDATE_TOTP, EventType.VERIFY_EMAIL};
+ 
+@@ -715,6 +726,9 @@ public class AccountService {
+                 logger.debug("error from oauth");
+                 throw new ForbiddenException("error");
+             }
++            if (path != null && !VALID_PATHS.contains(path)) {
++                throw new BadRequestException("Invalid path");
++            }
+             if (!realm.isEnabled()) {
+                 logger.debug("realm not enabled");
+                 throw new ForbiddenException();

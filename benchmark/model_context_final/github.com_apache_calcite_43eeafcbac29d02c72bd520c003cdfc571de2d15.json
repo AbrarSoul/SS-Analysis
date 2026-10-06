@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_apache_calcite_43eeafcbac29d02c72bd520c003cdfc571de2d15",
+  "language": "java",
+  "cve_id": "CVE-2020-13955",
+  "cve_ids_all": [
+    "CVE-2020-13955"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-295",
+      "definition": "Improper Certificate Validation"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.io.OutputStreamWriter;",
+    "import java.io.UnsupportedEncodingException;",
+    "import java.io.Writer;",
+    "import java.net.HttpURLConnection;",
+    "import java.net.URL;",
+    "import java.net.URLConnection;",
+    "import java.net.URLEncoder;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.Map;",
+    "import javax.net.ssl.HttpsURLConnection;"
+  ],
+  "vulnerable_function": "  public static HttpURLConnection getURLConnection(String url)\n      throws IOException {\n    URLConnection conn = new URL(url).openConnection();\n    final HttpURLConnection httpConn = (HttpURLConnection) conn;\n\n    // take care of https stuff - most of the time it's only needed to\n    // secure client/server comm\n    // not to establish the identity of the server\n    if (httpConn instanceof HttpsURLConnection) {\n      HttpsURLConnection httpsConn = (HttpsURLConnection) httpConn;\n      httpsConn.setSSLSocketFactory(\n          TrustAllSslSocketFactory.createSSLSocketFactory());\n      httpsConn.setHostnameVerifier((arg0, arg1) -> true);\n    }\n\n    return httpConn;\n  }",
+  "patched_function": "  public static HttpURLConnection getURLConnection(String url)\n      throws IOException {\n    return (HttpURLConnection) new URL(url).openConnection();\n  }",
+  "unified_diff": "diff --git a/core/src/main/java/org/apache/calcite/runtime/HttpUtils.java b/core/src/main/java/org/apache/calcite/runtime/HttpUtils.java\nindex a3b140bee..d23b93805 100644\n--- a/core/src/main/java/org/apache/calcite/runtime/HttpUtils.java\n+++ b/core/src/main/java/org/apache/calcite/runtime/HttpUtils.java\n@@ -23,11 +23,9 @@\n import java.io.Writer;\n import java.net.HttpURLConnection;\n import java.net.URL;\n-import java.net.URLConnection;\n import java.net.URLEncoder;\n import java.nio.charset.StandardCharsets;\n import java.util.Map;\n-import javax.net.ssl.HttpsURLConnection;\n \n /**\n  * Utilities for connecting to REST services such as Splunk via HTTP.\n@@ -37,20 +35,7 @@ private HttpUtils() {}\n \n   public static HttpURLConnection getURLConnection(String url)\n       throws IOException {\n-    URLConnection conn = new URL(url).openConnection();\n-    final HttpURLConnection httpConn = (HttpURLConnection) conn;\n-\n-    // take care of https stuff - most of the time it's only needed to\n-    // secure client/server comm\n-    // not to establish the identity of the server\n-    if (httpConn instanceof HttpsURLConnection) {\n-      HttpsURLConnection httpsConn = (HttpsURLConnection) httpConn;\n-      httpsConn.setSSLSocketFactory(\n-          TrustAllSslSocketFactory.createSSLSocketFactory());\n-      httpsConn.setHostnameVerifier((arg0, arg1) -> true);\n-    }\n-\n-    return httpConn;\n+    return (HttpURLConnection) new URL(url).openConnection();\n   }\n \n   public static void appendURLEncodedArgs(",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0263",
+  "language": "javascript",
+  "cve_id": "CVE-2022-1803",
+  "cve_ids_all": [
+    "CVE-2022-1803"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1021",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const path = require('path')",
+    "const async = require('async')",
+    "const express = require('express')",
+    "const mongoose = require('mongoose')",
+    "const APC = require('@handlebars/allow-prototype-access')",
+    "const HandleBars = require('handlebars')",
+    "const hbs = require('express-hbs')",
+    "const hbsHelpers = require('../helpers/hbs/helpers')",
+    "const winston = require('../logger')",
+    "const flash = require('connect-flash')",
+    "const bodyParser = require('body-parser')",
+    "const cookieParser = require('cookie-parser')",
+    "const session = require('express-session')",
+    "const MongoStore = require('connect-mongo')",
+    "const passportConfig = require('../passport')()",
+    "const csrf = require('../dependencies/csrf-td')",
+    "var settings = require('../settings/settingsUtil')"
+  ],
+  "vulnerable_function": "  res.setHeader('Access-Control-Allow-Origin', '*')\n  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')\n  res.setHeader(\n    'Access-Control-Allow-Headers',\n    'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,accesstoken,X-RToken,X-Token'\n  )\n\n  if (req.method === 'OPTIONS') {\n    res.sendStatus(200)\n  }",
+  "patched_function": "  res.setHeader('Access-Control-Allow-Origin', '*')\n  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')\n  res.setHeader(\n    'Access-Control-Allow-Headers',\n    'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,accesstoken,X-RToken,X-Token'\n  )\n  res.setHeader('Content-Security-Policy', \"frame-ancestors 'none';\")\n\n  if (req.method === 'OPTIONS') {\n    res.sendStatus(200)\n  }",
+  "unified_diff": "diff --git a/src/middleware/index.js b/src/middleware/index.js\nindex 1cb07dff..132f84d8 100644\n--- a/src/middleware/index.js\n+++ b/src/middleware/index.js\n@@ -173,6 +173,7 @@ function allowCrossDomain (req, res, next) {\n     'Access-Control-Allow-Headers',\n     'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,accesstoken,X-RToken,X-Token'\n   )\n+  res.setHeader('Content-Security-Policy', \"frame-ancestors 'none';\")\n \n   if (req.method === 'OPTIONS') {\n     res.sendStatus(200)",
+  "auto_locate_confidence": "auto"
+}

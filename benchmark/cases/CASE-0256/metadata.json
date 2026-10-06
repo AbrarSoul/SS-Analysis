@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0256",
+  "original_source_case_id": "github.com_petl-developers_petl_07420ef8463cc387aea84e2d6241cf556574e2a5",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-29128",
+  "cve_ids_all": [
+    "CVE-2020-29128"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-91"
+  ],
+  "language": "python",
+  "repository": "petl-developers/petl",
+  "repository_url": "https://github.com/petl-developers/petl",
+  "vulnerable_commit": "defbc0527fe6e84c5b88a11893095adda4b8856a",
+  "fixed_commit": "07420ef8463cc387aea84e2d6241cf556574e2a5",
+  "changed_file": "petl/io/xml.py",
+  "changed_function": "def __iter__(self):",
+  "vulnerable_lines": [
+    166,
+    220
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 20,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0256/vulnerable_source.py": "a6ee90149bde772a6a09e3e21b293840671ed4cd2b2d1d8154eafc718cfc9e15",
+    "cases/CASE-0256/patched_source.py": "8d75ebd00fabffa70a28712e8bf7a68acf70d9dbd8b2e503c3bc54c40399af0b",
+    "cases/CASE-0256/patch.diff": "dc8f73baefef927d9bc9436b4766ee28ac6356b2bf8a693b1b7ff1b0bce11405",
+    "cases/CASE-0256/metadata.json": "5d89791718a7aae1cf2abf052da4cbdb43d4778828b8a8ac24cc66ed4f020f40",
+    "model_context/CASE-0256.json": "ec9d6e116106c5a183fc702f88352a6ec159d2b5191715b20c7f0440b1db0421",
+    "difficulty/CASE-0256.json": "1574d74e7cdce8c1dc9cc8777282327907917b409ca1e25683b65a44f6566d84"
+  },
+  "case_level_hash": "64c68e654fc81b46f1b5dd4e06ffdc14a4df828c39dcd777e2486c2ea2af4b63"
+}

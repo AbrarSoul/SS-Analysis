@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_fabric8io_kubernetes-client_445103004d1ed3153d5abb272473451d05891e39",
+  "cve_ids": [
+    "CVE-2021-4178"
+  ],
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "fabric8io/kubernetes-client",
+  "repository_url": "https://github.com/fabric8io/kubernetes-client",
+  "vulnerable_commit": "1d1b3d404836871c4d0fc0a35dafe5d40369b519",
+  "fixed_commit": "445103004d1ed3153d5abb272473451d05891e39",
+  "changed_file": "kubernetes-client/src/main/java/io/fabric8/kubernetes/client/utils/Serialization.java",
+  "max_score": "1337"
+}

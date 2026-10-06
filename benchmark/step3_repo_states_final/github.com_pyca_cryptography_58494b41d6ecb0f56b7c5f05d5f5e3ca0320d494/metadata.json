@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pyca_cryptography_58494b41d6ecb0f56b7c5f05d5f5e3ca0320d494",
+  "cve_ids": [
+    "CVE-2020-25659"
+  ],
+  "cwe_ids": [
+    "CWE-385",
+    "NVD-CWE-Other"
+  ],
+  "language": "python",
+  "repository": "pyca/cryptography",
+  "repository_url": "https://github.com/pyca/cryptography",
+  "vulnerable_commit": "cf9bd6a36bc7b05abca114b76e216598d9ad9b16",
+  "fixed_commit": "58494b41d6ecb0f56b7c5f05d5f5e3ca0320d494",
+  "changed_file": "src/cryptography/hazmat/backends/openssl/rsa.py",
+  "max_score": "1337"
+}

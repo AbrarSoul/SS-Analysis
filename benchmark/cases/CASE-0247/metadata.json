@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0247",
+  "original_source_case_id": "github.com_openstack_glance_7858d4d95154c8596720365e465cca7858cfec5c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2014-9684",
+  "cve_ids_all": [
+    "CVE-2014-9684"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "language": "python",
+  "repository": "openstack/glance",
+  "repository_url": "https://github.com/openstack/glance",
+  "vulnerable_commit": "d62c8f07e7030d0033cf63e0b17f64cbbac99c0c",
+  "fixed_commit": "7858d4d95154c8596720365e465cca7858cfec5c",
+  "changed_file": "glance/common/scripts/image_import/main.py",
+  "changed_function": "def import_image(image_repo, image_factory, task_input, task_id, uri):",
+  "vulnerable_lines": [
+    81,
+    110
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 25,
+  "patch_size_deleted": 15,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0247/vulnerable_source.py": "473a2df833c635aad608e9cd83929d1562f11fef08aa638fa0320706621cfedd",
+    "cases/CASE-0247/patched_source.py": "5b61d192573660c351950a2a3abc3176bb26f61cf13da122c4a9a5aa89a49f80",
+    "cases/CASE-0247/patch.diff": "83a2df33cef215c085a3e815fd2694efd0f957ff648142853ca8f39e1c6debf8",
+    "cases/CASE-0247/metadata.json": "4135295a5a80ae65c2621fad1bcf85c6f254a6f7652b4eebcd10cf2437c207bf",
+    "model_context/CASE-0247.json": "28de7f197a8c410afc7edb521144a1a029bebc7289e3fb2fde9b1b967a1e1074",
+    "difficulty/CASE-0247.json": "2c670be2bd9d0bcc6c44e2a75f1255f97414fd782c2b4676673b1b625a12c13d"
+  },
+  "case_level_hash": "99a7139667caa9ac3bc3f9f9e1fff83ab1bdd4933e13b5ec0be709155fed82c9"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0340",
+  "batch": "topup38",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "changed_files": 1,
+  "lines_added": 9,
+  "lines_removed": 6,
+  "lines_changed_total": 15,
+  "function_size_chars": 512,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Application id and adb path interpolated into execSync command strings; shell injection."
+}

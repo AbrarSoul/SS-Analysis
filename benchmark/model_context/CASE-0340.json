@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0340",
+  "language": "typescript",
+  "cve_id": "CVE-2020-8149",
+  "cve_ids_all": [
+    "CVE-2020-8149"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { spawn, execSync, ChildProcess } from 'child_process';",
+    "import path from 'path';",
+    "import {"
+  ],
+  "vulnerable_function": "export function getApplicationPid(\n  applicationId: string,\n  adbPath?: string\n): number {\n  let output: Buffer | undefined;\n  try {\n    output = execSync(\n      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n    );\n  } catch (error) {\n    throw new CodeError(\n      ERR_ANDROID_CANNOT_GET_APP_PID,\n      (error as Error).message\n    );\n  }\n\n  const pid = output ? parseInt(output.toString(), 10) : NaN;\n  if (isNaN(pid)) {\n    throw new CodeError(ERR_ANDROID_UNPROCESSABLE_PID);\n  }\n\n  return pid;\n}",
+  "patched_function": "export function getApplicationPid(\n  applicationId: string,\n  adbPath?: string\n): number {\n  let output: Buffer | String | undefined;\n  try {\n    output = execFileSync(getAdbPath(adbPath), [\n      'shell',\n      'pidof',\n      '-s',\n      applicationId,\n    ]);\n  } catch (error) {\n    throw new CodeError(\n      ERR_ANDROID_CANNOT_GET_APP_PID,\n      (error as Error).message\n    );\n  }\n\n  const pid = output ? parseInt(output.toString(), 10) : NaN;\n  if (isNaN(pid)) {\n    throw new CodeError(ERR_ANDROID_UNPROCESSABLE_PID);\n  }\n\n  return pid;\n}",
+  "unified_diff": "diff --git a/src/android/adb.ts b/src/android/adb.ts\nindex b5a0cc5..6339014 100644\n--- a/src/android/adb.ts\n+++ b/src/android/adb.ts\n@@ -1,4 +1,4 @@\n-import { spawn, execSync, ChildProcess } from 'child_process';\n+import { spawn, execFileSync, ChildProcess } from 'child_process';\n import path from 'path';\n import {\n   CodeError,\n@@ -25,7 +25,7 @@ export function getAdbPath(customPath?: string): string {\n \n export function spawnLogcatProcess(adbPath: string): ChildProcess {\n   try {\n-    execSync(`${adbPath} logcat -c`);\n+    execFileSync(adbPath, ['logcat', '-c']);\n   } catch (error) {\n     throw new CodeError(\n       ERR_ANDROID_CANNOT_CLEAN_LOGCAT_BUFFER,\n@@ -49,11 +49,14 @@ export function getApplicationPid(\n   applicationId: string,\n   adbPath?: string\n ): number {\n-  let output: Buffer | undefined;\n+  let output: Buffer | String | undefined;\n   try {\n-    output = execSync(\n-      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n-    );\n+    output = execFileSync(getAdbPath(adbPath), [\n+      'shell',\n+      'pidof',\n+      '-s',\n+      applicationId,\n+    ]);\n   } catch (error) {\n     throw new CodeError(\n       ERR_ANDROID_CANNOT_GET_APP_PID,",
+  "auto_locate_confidence": "auto"
+}

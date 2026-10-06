@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_keylime_keylime_ea5d0373fa2c050d5d95404eb779be7e8327b911",
+  "cve_ids": [
+    "CVE-2022-23950"
+  ],
+  "cwe_ids": [
+    "CWE-379",
+    "CWE-668"
+  ],
+  "language": "python",
+  "repository": "keylime/keylime",
+  "repository_url": "https://github.com/keylime/keylime",
+  "vulnerable_commit": "e019609c9b9b450e91eacfbd598eb75029f15031",
+  "fixed_commit": "ea5d0373fa2c050d5d95404eb779be7e8327b911",
+  "changed_file": "keylime/revocation_notifier.py",
+  "max_score": "1337"
+}

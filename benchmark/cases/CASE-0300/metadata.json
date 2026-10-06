@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0300",
+  "original_source_case_id": "github.com_theonedev_onedev_4440f0c57e440488d7e653417b2547eaae8ad19c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-32651",
+  "cve_ids_all": [
+    "CVE-2021-32651"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-90"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "a61e1a016c20f4f3eafb257640883edb19771578",
+  "fixed_commit": "4440f0c57e440488d7e653417b2547eaae8ad19c",
+  "changed_file": "server-plugin/server-plugin-authenticator-ldap/src/main/java/io/onedev/server/plugin/authenticator/ldap/LdapAuthenticator.java",
+  "changed_function": "public Authenticated authenticate(UsernamePasswordToken token) {",
+  "vulnerable_lines": [
+    172,
+    308
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 45,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0300/vulnerable_source.java": "b11acf45c93a8061c38947c62f9f72c7c7022f7e7fddd3c0cc7a71e257671f82",
+    "cases/CASE-0300/patched_source.java": "da7e31511e8ace26bdf103f1ca0499fe95f187824bdaeaff14032f030cc5abd2",
+    "cases/CASE-0300/patch.diff": "56cc782492ab16fedc4e57b568d8496c425580f41153a1e7b5b55199fd5c550a",
+    "cases/CASE-0300/metadata.json": "4b370151f337b4090a14ef398cf3ac4b9332f5f446fba948ce7def4d230a1bc7",
+    "model_context/CASE-0300.json": "3ff038c6bdd0d15a298da9cb55e1f500dbf83117d0f16f9eefd740752b9fdcfe",
+    "difficulty/CASE-0300.json": "2023297c8454e7504424c8fb8ee3f8f844fbd5bad66ec7b23475f0cb2cfd4112"
+  },
+  "case_level_hash": "8e5d52af686d24a223686404ab4a9a053ee8aa2ae922e568eb8aecb1efd04a8c"
+}

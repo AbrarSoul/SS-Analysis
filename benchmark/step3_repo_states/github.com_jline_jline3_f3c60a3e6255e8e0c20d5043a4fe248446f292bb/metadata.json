@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jline_jline3_f3c60a3e6255e8e0c20d5043a4fe248446f292bb",
+  "cve_ids": [
+    "CVE-2023-50572"
+  ],
+  "cwe_ids": [
+    "CWE-787"
+  ],
+  "language": "java",
+  "repository": "jline/jline3",
+  "repository_url": "https://github.com/jline/jline3",
+  "vulnerable_commit": "277dd8c34fd933b3c4ed8be3ab773342c14e3e43",
+  "fixed_commit": "f3c60a3e6255e8e0c20d5043a4fe248446f292bb",
+  "changed_file": "console/src/main/java/org/jline/console/impl/DefaultPrinter.java",
+  "max_score": "1337"
+}

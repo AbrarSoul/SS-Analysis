@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0240",
+  "original_source_case_id": "github.com_ome_omero-web_d41207cbb82afc56ea79e84db532608aa24ab4aa",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-35180",
+  "cve_ids_all": [
+    "CVE-2024-35180"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-830"
+  ],
+  "language": "python",
+  "repository": "ome/omero-web",
+  "repository_url": "https://github.com/ome/omero-web",
+  "vulnerable_commit": "e5f012bdfe16cc424f0f0effcda0a0af085add17",
+  "fixed_commit": "d41207cbb82afc56ea79e84db532608aa24ab4aa",
+  "changed_file": "omeroweb/webgateway/views.py",
+  "changed_function": "def wrap(request, *args, **kwargs):",
+  "vulnerable_lines": [
+    1432,
+    1473
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 10,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0240/vulnerable_source.py": "ff21d8875ea1f763601e8e4284033ea775c3bf493f0c814c4936924bb25690bf",
+    "cases/CASE-0240/patched_source.py": "8fd05258308502ee1901152e91b2e4389d1cfb2bdd98ba7376d215fb5c2296de",
+    "cases/CASE-0240/patch.diff": "e9e8618e94049881d3be12c0e2ee67acbb896eae0f914587ad2bb44d21fa6929",
+    "cases/CASE-0240/metadata.json": "78c8db31126349027df45dce87b4f64ed760326d5d37cef13d0dc87ec8189bc3",
+    "model_context/CASE-0240.json": "4bc23a03774f88c93a528709f84ebea620e6abd212472144f0f5f09e2181be34",
+    "difficulty/CASE-0240.json": "2920a48438c32e81681b092a95ae8009d7eccedb8deea4d6b607aa66a550ab8d"
+  },
+  "case_level_hash": "3f0b958a75345440277941cc60ca8d91d8e235ad72905e1ad50076836f3d0761"
+}

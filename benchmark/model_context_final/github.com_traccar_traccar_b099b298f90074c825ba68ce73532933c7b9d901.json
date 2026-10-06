@@ -1,0 +1,65 @@
+{
+  "case_id": "github.com_traccar_traccar_b099b298f90074c825ba68ce73532933c7b9d901",
+  "language": "java",
+  "cve_id": "CVE-2024-24809",
+  "cve_ids_all": [
+    "CVE-2024-24809"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-27",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-434",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import jakarta.ws.rs.FormParam;",
+    "import org.traccar.api.BaseObjectResource;",
+    "import org.traccar.api.signature.TokenManager;",
+    "import org.traccar.broadcast.BroadcastService;",
+    "import org.traccar.config.Config;",
+    "import org.traccar.config.Keys;",
+    "import org.traccar.database.MediaManager;",
+    "import org.traccar.helper.LogAction;",
+    "import org.traccar.model.Device;",
+    "import org.traccar.model.DeviceAccumulators;",
+    "import org.traccar.model.Permission;",
+    "import org.traccar.model.Position;",
+    "import org.traccar.model.User;",
+    "import org.traccar.session.ConnectionManager;",
+    "import org.traccar.session.cache.CacheManager;",
+    "import org.traccar.storage.StorageException;",
+    "import org.traccar.storage.query.Columns;",
+    "import org.traccar.storage.query.Condition;",
+    "import org.traccar.storage.query.Request;",
+    "import jakarta.inject.Inject;",
+    "import jakarta.ws.rs.Consumes;",
+    "import jakarta.ws.rs.GET;",
+    "import jakarta.ws.rs.HeaderParam;",
+    "import jakarta.ws.rs.POST;",
+    "import jakarta.ws.rs.PUT;",
+    "import jakarta.ws.rs.Path;",
+    "import jakarta.ws.rs.PathParam;",
+    "import jakarta.ws.rs.Produces;",
+    "import jakarta.ws.rs.QueryParam;",
+    "import jakarta.ws.rs.core.HttpHeaders;",
+    "import jakarta.ws.rs.core.MediaType;",
+    "import jakarta.ws.rs.core.Response;",
+    "import java.io.File;",
+    "import java.io.FileInputStream;",
+    "import java.io.IOException;",
+    "import java.security.GeneralSecurityException;",
+    "import java.util.Collection;",
+    "import java.util.Date;",
+    "import java.util.LinkedList;",
+    "import java.util.List;"
+  ],
+  "vulnerable_function": "    private String imageExtension(String type) {\n        switch (type) {\n            case \"image/jpeg\":\n                return \".jpg\";\n            case \"image/png\":\n                return \".png\";\n            case \"image/gif\":\n                return \".gif\";\n            case \"image/webp\":\n                return \".webp\";\n            case \"image/svg+xml\":\n                return \".svg\";\n            default:\n                throw new IllegalArgumentException(\"Unsupported image type\");\n        }\n    }",
+  "patched_function": "    private String imageExtension(String type) {\n        switch (type) {\n            case \"image/jpeg\":\n                return \"jpg\";\n            case \"image/png\":\n                return \"png\";\n            case \"image/gif\":\n                return \"gif\";\n            case \"image/webp\":\n                return \"webp\";\n            case \"image/svg+xml\":\n                return \"svg\";\n            default:\n                throw new IllegalArgumentException(\"Unsupported image type\");\n        }\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/traccar/api/resource/DeviceResource.java b/src/main/java/org/traccar/api/resource/DeviceResource.java\nindex d7236fe2a..2edb0d16d 100644\n--- a/src/main/java/org/traccar/api/resource/DeviceResource.java\n+++ b/src/main/java/org/traccar/api/resource/DeviceResource.java\n@@ -175,15 +175,15 @@ public class DeviceResource extends BaseObjectResource<Device> {\n     private String imageExtension(String type) {\n         switch (type) {\n             case \"image/jpeg\":\n-                return \".jpg\";\n+                return \"jpg\";\n             case \"image/png\":\n-                return \".png\";\n+                return \"png\";\n             case \"image/gif\":\n-                return \".gif\";\n+                return \"gif\";\n             case \"image/webp\":\n-                return \".webp\";\n+                return \"webp\";\n             case \"image/svg+xml\":\n-                return \".svg\";\n+                return \"svg\";\n             default:\n                 throw new IllegalArgumentException(\"Unsupported image type\");\n         }",
+  "auto_locate_confidence": "auto"
+}

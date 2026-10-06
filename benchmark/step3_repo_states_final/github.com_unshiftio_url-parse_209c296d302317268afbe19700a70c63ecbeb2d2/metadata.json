@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_unshiftio_url-parse_209c296d302317268afbe19700a70c63ecbeb2d2",
+  "cve_ids": [
+    "CVE-2018-3774"
+  ],
+  "cwe_ids": [
+    "CWE-425",
+    "CWE-601",
+    "CWE-918"
+  ],
+  "language": "javascript",
+  "repository": "unshiftio/url-parse",
+  "repository_url": "https://github.com/unshiftio/url-parse",
+  "vulnerable_commit": "46844570bba9c81af0eb696f221c39f828868d7a",
+  "fixed_commit": "209c296d302317268afbe19700a70c63ecbeb2d2",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

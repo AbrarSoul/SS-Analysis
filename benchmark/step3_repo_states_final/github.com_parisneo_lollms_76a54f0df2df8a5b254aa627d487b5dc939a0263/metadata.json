@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_parisneo_lollms_76a54f0df2df8a5b254aa627d487b5dc939a0263",
+  "cve_ids": [
+    "CVE-2026-0560"
+  ],
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "python",
+  "repository": "parisneo/lollms",
+  "repository_url": "https://github.com/parisneo/lollms",
+  "vulnerable_commit": "a6625dc83786ff21d109b0d545ca61b770607ef3",
+  "fixed_commit": "76a54f0df2df8a5b254aa627d487b5dc939a0263",
+  "changed_file": "backend/routers/files.py",
+  "max_score": "1337"
+}

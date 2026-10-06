@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0206",
+  "original_source_case_id": "github.com_kennethreitz_requests_3bd8afbff29e50b38f889b2f688785a669b9aafc",
+  "selection_batch": "final",
+  "cve_id": "CVE-2015-2296",
+  "cve_ids_all": [
+    "CVE-2015-2296"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-Other"
+  ],
+  "language": "python",
+  "repository": "kennethreitz/requests",
+  "repository_url": "https://github.com/kennethreitz/requests",
+  "vulnerable_commit": "bc746e158cebf034a5010c2d130a19be94702cf8",
+  "fixed_commit": "3bd8afbff29e50b38f889b2f688785a669b9aafc",
+  "changed_file": "requests/sessions.py",
+  "changed_function": "def resolve_redirects(self, resp, req, stream=False, timeout=None,",
+  "vulnerable_lines": [
+    92,
+    199
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0206/vulnerable_source.py": "e951ebf4c6c8dd5d7cf9e95aab1a4f4c517efceb34c4fcc177e2778a940351ed",
+    "cases/CASE-0206/patched_source.py": "d92fa54065e5ac826b696ae68103dab3991d258d04a98d105c4e1029801f624e",
+    "cases/CASE-0206/patch.diff": "fd6bf5a01d5766445932b1918b648b3b58fec0218da50a46a66a890f1761e9a6",
+    "cases/CASE-0206/metadata.json": "a4042d9cc090a4626e8c2c21adb43a3f478191eb1748a86c6ff8426c1aba4ec8",
+    "model_context/CASE-0206.json": "e82af576e888ba91e6453cc2418694e5365939daa9d0871c40b9ef0861adc061",
+    "difficulty/CASE-0206.json": "fcd8fd517f6dc28582713ecc26095dc5f590d0d5ede660c01949ad18c1b4347a"
+  },
+  "case_level_hash": "e032835bf5ad81db49507813cbc77a50ce9f29d79197f6017a8b00bf8a69da1c"
+}

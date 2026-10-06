@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_metersphere_metersphere_c59e381d368990214813085a1a4877c5ef865411",
+  "cve_ids": [
+    "CVE-2023-32699"
+  ],
+  "cwe_ids": [
+    "CWE-770"
+  ],
+  "language": "java",
+  "repository": "metersphere/metersphere",
+  "repository_url": "https://github.com/metersphere/metersphere",
+  "vulnerable_commit": "26a4cc505f9f398bc2793138aebb6b5d1775bca8",
+  "fixed_commit": "c59e381d368990214813085a1a4877c5ef865411",
+  "changed_file": "framework/gateway/src/main/java/io/metersphere/gateway/service/UserLoginService.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_opencast_opencast_8d5ec1614eed109b812bc27b0c6d3214e456d4e7",
+  "cve_ids": [
+    "CVE-2022-29237"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "opencast/opencast",
+  "repository_url": "https://github.com/opencast/opencast",
+  "vulnerable_commit": "eee0c26fe33afc0709373fcbd7c6870bee8e2bed",
+  "fixed_commit": "8d5ec1614eed109b812bc27b0c6d3214e456d4e7",
+  "changed_file": "modules/ingest-service-impl/src/main/java/org/opencastproject/ingest/impl/IngestServiceImpl.java",
+  "max_score": "1337"
+}

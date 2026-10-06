@@ -1,0 +1,15 @@
+diff --git a/src/xmlparser/OrderedObjParser.js b/src/xmlparser/OrderedObjParser.js
+index 78d3dfa..ecb2b85 100644
+--- a/src/xmlparser/OrderedObjParser.js
++++ b/src/xmlparser/OrderedObjParser.js
+@@ -77,8 +77,9 @@ function addExternalEntities(externalEntities){
+   const entKeys = Object.keys(externalEntities);
+   for (let i = 0; i < entKeys.length; i++) {
+     const ent = entKeys[i];
++    const escaped = ent.replace(/[.\-+*:]/g, '\\.');
+     this.lastEntities[ent] = {
+-       regex: new RegExp("&"+ent+";","g"),
++       regex: new RegExp("&"+escaped+";","g"),
+        val : externalEntities[ent]
+     }
+   }

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_todbot_Blink1Control2_74827462aba3a26d7bf157522f69eec999d7ba85",
+  "cve_ids": [
+    "CVE-2022-35513"
+  ],
+  "cwe_ids": [
+    "CWE-327",
+    "CWE-922"
+  ],
+  "language": "javascript",
+  "repository": "todbot/Blink1Control2",
+  "repository_url": "https://github.com/todbot/Blink1Control2",
+  "vulnerable_commit": "cd9229ef9131bc663f714150c9f8d5cbf818d620",
+  "fixed_commit": "74827462aba3a26d7bf157522f69eec999d7ba85",
+  "changed_file": "app/server/imapSearcher.js",
+  "max_score": "1337"
+}

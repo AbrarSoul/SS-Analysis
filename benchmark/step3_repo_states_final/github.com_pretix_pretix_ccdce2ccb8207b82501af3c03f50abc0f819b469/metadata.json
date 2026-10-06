@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pretix_pretix_ccdce2ccb8207b82501af3c03f50abc0f819b469",
+  "cve_ids": [
+    "CVE-2023-44463"
+  ],
+  "cwe_ids": [
+    "CWE-290",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "pretix/pretix",
+  "repository_url": "https://github.com/pretix/pretix",
+  "vulnerable_commit": "6d834762c43fbc72170266315f54a01d45e6151b",
+  "fixed_commit": "ccdce2ccb8207b82501af3c03f50abc0f819b469",
+  "changed_file": "src/pretix/settings.py",
+  "max_score": "1337"
+}

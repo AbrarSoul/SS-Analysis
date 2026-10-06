@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0011",
+  "original_patch_filename": "github.com_FasterXML_jackson-databind_3d97153944f7de9c19c1b3637b33d3cf1fbbe4d7.patch",
+  "cve_id": "CVE-2020-24616",
+  "cve_ids_all": [
+    "CVE-2020-24616"
+  ],
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "FasterXML/jackson-databind",
+  "repository_url": "https://github.com/FasterXML/jackson-databind",
+  "vulnerable_commit": "6cc9f1a1af323cd156f5668a47e43bab324ae16f",
+  "fixed_commit": "3d97153944f7de9c19c1b3637b33d3cf1fbbe4d7",
+  "changed_file": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java",
+  "patch_path": "cases/CASE-0011/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0011/vulnerable_source.java",
+  "patched_code_path": "cases/CASE-0011/patched_source.java",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.java",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.java",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.java",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.java",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.java",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.java",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

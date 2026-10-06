@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_spring-projects_spring-session_c98a7be0e2ced7f795018f05397dca4bd5ca8212",
+  "cve_ids": [
+    "CVE-2023-20866"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-session",
+  "repository_url": "https://github.com/spring-projects/spring-session",
+  "vulnerable_commit": "8f9c69ea02748a32188c3ea581d01dc5acebbd8e",
+  "fixed_commit": "c98a7be0e2ced7f795018f05397dca4bd5ca8212",
+  "changed_file": "spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java",
+  "max_score": "1337"
+}

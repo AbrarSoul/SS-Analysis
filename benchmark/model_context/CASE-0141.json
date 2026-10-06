@@ -1,0 +1,29 @@
+{
+  "case_id": "CASE-0141",
+  "language": "java",
+  "cve_id": "CVE-2026-40942",
+  "cve_ids_all": [
+    "CVE-2026-40942"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-670",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.time.Duration;",
+    "import java.time.ZoneId;",
+    "import java.time.ZonedDateTime;",
+    "import java.util.Objects;",
+    "import com.auth0.jwt.interfaces.DecodedJWT;",
+    "import dev.dsf.bpe.api.client.oidc.Configuration;",
+    "import dev.dsf.bpe.api.client.oidc.Jwks;",
+    "import dev.dsf.bpe.api.client.oidc.OidcClientException;"
+  ],
+  "vulnerable_function": "\tpublic DecodedJWT getAccessTokenDecoded(Configuration configuration, Jwks jwks) throws OidcClientException\n\t{\n\t\tif (accessTokenCache != null && accessTokenCache.timeout.isBefore(ZonedDateTime.now()))\n\t\t\treturn accessTokenCache.resource;\n\t\telse\n\t\t{\n\t\t\tDecodedJWT accessToken = delegate.getAccessTokenDecoded(configuration, jwks);\n\t\t\tZonedDateTime expiresAt = ZonedDateTime.ofInstant(accessToken.getExpiresAtAsInstant(), ZoneId.of(\"UTC\"));\n\n\t\t\taccessTokenCache = new CacheEntry<DecodedJWT>(expiresAt.minus(cacheTimeoutAccessTokenBeforeExpiration),\n\t\t\t\t\taccessToken);\n\n\t\t\treturn accessToken;\n\t\t}\n\t}",
+  "patched_function": "\tpublic DecodedJWT getAccessTokenDecoded(Configuration configuration, Jwks jwks) throws OidcClientException\n\t{\n\t\tif (accessTokenCache != null && accessTokenCache.timeout.isAfter(ZonedDateTime.now()))\n\t\t\treturn accessTokenCache.resource;\n\t\telse\n\t\t{\n\t\t\tDecodedJWT accessToken = delegate.getAccessTokenDecoded(configuration, jwks);\n\t\t\tZonedDateTime expiresAt = ZonedDateTime.ofInstant(accessToken.getExpiresAtAsInstant(), ZoneId.of(\"UTC\"));\n\n\t\t\taccessTokenCache = new CacheEntry<DecodedJWT>(expiresAt.minus(cacheTimeoutAccessTokenBeforeExpiration),\n\t\t\t\t\taccessToken);\n\n\t\t\treturn accessToken;\n\t\t}\n\t}",
+  "unified_diff": "diff --git a/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java b/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java\nindex d0c3dbd82..edb3a61f8 100644\n--- a/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java\n+++ b/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java\n@@ -115,7 +115,7 @@ public class OidcClientWithCache implements OidcClientWithDecodedJwt\n \t@Override\n \tpublic DecodedJWT getAccessTokenDecoded(Configuration configuration, Jwks jwks) throws OidcClientException\n \t{\n-\t\tif (accessTokenCache != null && accessTokenCache.timeout.isBefore(ZonedDateTime.now()))\n+\t\tif (accessTokenCache != null && accessTokenCache.timeout.isAfter(ZonedDateTime.now()))\n \t\t\treturn accessTokenCache.resource;\n \t\telse\n \t\t{",
+  "auto_locate_confidence": "auto"
+}

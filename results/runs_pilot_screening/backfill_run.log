@@ -1,0 +1,73 @@
+=== Starting design_v1 across all 8 primary models, 40 pilot cases ===
+2026-09-21 11:10:49,185 - INFO - Running across 3 host(s) concurrently: {'GPU-farmi-001': ['qwen2.5-coder:7b-instruct', 'magicoder:7b'], 'GPU-farmi-004': ['qwen2.5-coder:32b', 'deepseek-coder:6.7b', 'codegemma:7b', 'yi-coder:9b', 'DeepHat/DeepHat-V1-7B'], 'GPU-farmi-003': ['codellama:7b-instruct-fp16']}
+2026-09-21 11:10:52,337 - INFO - [codellama:7b-instruct-fp16] resuming: 36/40 case(s) already complete in results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/generation_log.jsonl, 4 remaining
+2026-09-21 11:10:52,337 - INFO - [codellama:7b-instruct-fp16] processing 4 curated case(s), run_id=codellama_7b-instruct-fp16__20260921T081049Z
+2026-09-21 11:10:52,337 - INFO - [qwen2.5-coder:7b-instruct] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_7b-instruct__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:52,337 - INFO - [qwen2.5-coder:7b-instruct] processing 0 curated case(s), run_id=qwen2.5-coder_7b-instruct__20260921T081049Z
+2026-09-21 11:10:52,337 - INFO - [qwen2.5-coder:7b-instruct] done -> results/runs_pilot_screening/qwen2.5-coder_7b-instruct__design_v1/generation_log.jsonl
+2026-09-21 11:10:52,337 - INFO - [qwen2.5-coder:32b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_32b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:52,337 - INFO - [qwen2.5-coder:32b] processing 0 curated case(s), run_id=qwen2.5-coder_32b__20260921T081049Z
+2026-09-21 11:10:52,337 - INFO - [qwen2.5-coder:32b] done -> results/runs_pilot_screening/qwen2.5-coder_32b__design_v1/generation_log.jsonl
+2026-09-21 11:10:52,341 - INFO - Skipping already processed patch: CASE-0005.patch
+2026-09-21 11:10:52,341 - WARNING - [CASE-0005] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:52,349 - INFO - Skipping already processed patch: CASE-0025.patch
+2026-09-21 11:10:52,349 - WARNING - [CASE-0025] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:52,353 - INFO - Skipping already processed patch: CASE-0030.patch
+2026-09-21 11:10:52,353 - WARNING - [CASE-0030] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:52,358 - INFO - Skipping already processed patch: CASE-0031.patch
+2026-09-21 11:10:52,358 - WARNING - [CASE-0031] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:52,360 - INFO - [codellama:7b-instruct-fp16] done -> results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/generation_log.jsonl
+2026-09-21 11:10:53,457 - INFO - [magicoder:7b] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/magicoder_7b__design_v1/generation_log.jsonl, 1 remaining
+2026-09-21 11:10:53,457 - INFO - [magicoder:7b] processing 1 curated case(s), run_id=magicoder_7b__20260921T081052Z
+2026-09-21 11:10:53,462 - INFO - Skipping already processed patch: CASE-0008.patch
+2026-09-21 11:10:53,462 - WARNING - [CASE-0008] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:53,462 - INFO - [deepseek-coder:6.7b] resuming: 38/40 case(s) already complete in results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/generation_log.jsonl, 2 remaining
+2026-09-21 11:10:53,462 - INFO - [deepseek-coder:6.7b] processing 2 curated case(s), run_id=deepseek-coder_6.7b__20260921T081052Z
+2026-09-21 11:10:53,467 - INFO - [magicoder:7b] done -> results/runs_pilot_screening/magicoder_7b__design_v1/generation_log.jsonl
+2026-09-21 11:10:53,468 - INFO - Skipping already processed patch: CASE-0007.patch
+2026-09-21 11:10:53,468 - WARNING - [CASE-0007] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:53,494 - INFO - Skipping already processed patch: CASE-0008.patch
+2026-09-21 11:10:53,501 - WARNING - [CASE-0008] no raw capture file found -- raw condition skipped
+2026-09-21 11:10:53,505 - INFO - [deepseek-coder:6.7b] done -> results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/generation_log.jsonl
+2026-09-21 11:10:54,700 - INFO - [codegemma:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codegemma_7b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:54,702 - INFO - [codegemma:7b] processing 0 curated case(s), run_id=codegemma_7b__20260921T081053Z
+2026-09-21 11:10:54,702 - INFO - [codegemma:7b] done -> results/runs_pilot_screening/codegemma_7b__design_v1/generation_log.jsonl
+2026-09-21 11:10:55,844 - INFO - [yi-coder:9b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/yi-coder_9b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:55,844 - INFO - [yi-coder:9b] processing 0 curated case(s), run_id=yi-coder_9b__20260921T081054Z
+2026-09-21 11:10:55,844 - INFO - [yi-coder:9b] done -> results/runs_pilot_screening/yi-coder_9b__design_v1/generation_log.jsonl
+2026-09-21 11:10:56,950 - INFO - [DeepHat/DeepHat-V1-7B] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:56,950 - INFO - [DeepHat/DeepHat-V1-7B] processing 0 curated case(s), run_id=DeepHat_DeepHat-V1-7B__20260921T081055Z
+2026-09-21 11:10:56,950 - INFO - [DeepHat/DeepHat-V1-7B] done -> results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__design_v1/generation_log.jsonl
+=== Starting autogrep_default across all 8 primary models, 40 pilot cases ===
+2026-09-21 11:10:57,722 - INFO - Running across 3 host(s) concurrently: {'GPU-farmi-001': ['qwen2.5-coder:7b-instruct', 'magicoder:7b'], 'GPU-farmi-004': ['qwen2.5-coder:32b', 'deepseek-coder:6.7b', 'codegemma:7b', 'yi-coder:9b', 'DeepHat/DeepHat-V1-7B'], 'GPU-farmi-003': ['codellama:7b-instruct-fp16']}
+2026-09-21 11:10:59,127 - INFO - [qwen2.5-coder:32b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_32b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:59,127 - INFO - [qwen2.5-coder:32b] processing 0 curated case(s), run_id=qwen2.5-coder_32b__20260921T081057Z
+2026-09-21 11:10:59,127 - INFO - [qwen2.5-coder:32b] done -> results/runs_pilot_screening/qwen2.5-coder_32b__autogrep_default/generation_log.jsonl
+2026-09-21 11:10:59,127 - INFO - [qwen2.5-coder:7b-instruct] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_7b-instruct__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:59,127 - INFO - [qwen2.5-coder:7b-instruct] processing 0 curated case(s), run_id=qwen2.5-coder_7b-instruct__20260921T081057Z
+2026-09-21 11:10:59,127 - INFO - [qwen2.5-coder:7b-instruct] done -> results/runs_pilot_screening/qwen2.5-coder_7b-instruct__autogrep_default/generation_log.jsonl
+2026-09-21 11:10:59,128 - INFO - [codellama:7b-instruct-fp16] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codellama_7b-instruct-fp16__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:10:59,128 - INFO - [codellama:7b-instruct-fp16] processing 0 curated case(s), run_id=codellama_7b-instruct-fp16__20260921T081057Z
+2026-09-21 11:10:59,128 - INFO - [codellama:7b-instruct-fp16] done -> results/runs_pilot_screening/codellama_7b-instruct-fp16__autogrep_default/generation_log.jsonl
+2026-09-21 11:11:00,233 - INFO - [magicoder:7b] resuming: 38/40 case(s) already complete in results/runs_pilot_screening/magicoder_7b__autogrep_default/generation_log.jsonl, 2 remaining
+2026-09-21 11:11:00,233 - INFO - [magicoder:7b] processing 2 curated case(s), run_id=magicoder_7b__20260921T081059Z
+2026-09-21 11:11:00,235 - INFO - Skipping already processed patch: CASE-0002.patch
+2026-09-21 11:11:00,235 - WARNING - [CASE-0002] no raw capture file found -- raw condition skipped
+2026-09-21 11:11:00,236 - INFO - [deepseek-coder:6.7b] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/generation_log.jsonl, 1 remaining
+2026-09-21 11:11:00,236 - INFO - [deepseek-coder:6.7b] processing 1 curated case(s), run_id=deepseek-coder_6.7b__20260921T081059Z
+2026-09-21 11:11:00,237 - INFO - Skipping already processed patch: CASE-0022.patch
+2026-09-21 11:11:00,237 - WARNING - [CASE-0022] no raw capture file found -- raw condition skipped
+2026-09-21 11:11:00,238 - INFO - Skipping already processed patch: CASE-0018.patch
+2026-09-21 11:11:00,238 - WARNING - [CASE-0018] no raw capture file found -- raw condition skipped
+2026-09-21 11:11:00,238 - INFO - [deepseek-coder:6.7b] done -> results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/generation_log.jsonl
+2026-09-21 11:11:00,240 - INFO - [magicoder:7b] done -> results/runs_pilot_screening/magicoder_7b__autogrep_default/generation_log.jsonl
+2026-09-21 11:11:01,461 - INFO - [codegemma:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codegemma_7b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:11:01,461 - INFO - [codegemma:7b] processing 0 curated case(s), run_id=codegemma_7b__20260921T081100Z
+2026-09-21 11:11:01,462 - INFO - [codegemma:7b] done -> results/runs_pilot_screening/codegemma_7b__autogrep_default/generation_log.jsonl
+2026-09-21 11:11:02,568 - INFO - [yi-coder:9b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/yi-coder_9b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:11:02,568 - INFO - [yi-coder:9b] processing 0 curated case(s), run_id=yi-coder_9b__20260921T081101Z
+2026-09-21 11:11:02,568 - INFO - [yi-coder:9b] done -> results/runs_pilot_screening/yi-coder_9b__autogrep_default/generation_log.jsonl
+2026-09-21 11:11:03,457 - INFO - [DeepHat/DeepHat-V1-7B] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:11:03,458 - INFO - [DeepHat/DeepHat-V1-7B] processing 0 curated case(s), run_id=DeepHat_DeepHat-V1-7B__20260921T081102Z
+2026-09-21 11:11:03,458 - INFO - [DeepHat/DeepHat-V1-7B] done -> results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__autogrep_default/generation_log.jsonl
+=== PILOT SCREENING RUN COMPLETE ===

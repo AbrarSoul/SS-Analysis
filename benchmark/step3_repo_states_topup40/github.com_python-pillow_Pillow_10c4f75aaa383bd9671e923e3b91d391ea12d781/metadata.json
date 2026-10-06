@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_python-pillow_Pillow_10c4f75aaa383bd9671e923e3b91d391ea12d781",
+  "cve_ids": [
+    "CVE-2022-24303"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "python-pillow/Pillow",
+  "repository_url": "https://github.com/python-pillow/Pillow",
+  "vulnerable_commit": "143032103c9f2d55a0a7960bd3e630cb72549e8a",
+  "fixed_commit": "10c4f75aaa383bd9671e923e3b91d391ea12d781",
+  "changed_file": "src/PIL/ImageShow.py",
+  "max_score": "1337"
+}

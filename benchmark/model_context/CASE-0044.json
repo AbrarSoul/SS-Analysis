@@ -1,0 +1,22 @@
+{
+  "case_id": "CASE-0044",
+  "language": "javascript",
+  "cve_id": "CVE-2025-67731",
+  "cve_ids_all": [
+    "CVE-2025-67731"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const express = require(\"express\");"
+  ],
+  "vulnerable_function": "    static listen(port) {\n        const app = express();\n\n        // Middleware (optional)\n        app.use(express.json());\n\n        // Default route (optional)\n        app.get(\"/\", (req, res) => {\n            res.send(\"Server is running!\");\n        });\n\n        // Start the server and log the default message\n        app.listen(port, () => {\n            console.log(`Server is running on port ${port}`);\n        });\n    }",
+  "patched_function": "    static listen(port, options = {}) {\n        const app = express();\n\n        if (options.rateLimit) {\n            const limiter = rateLimit({\n                windowMs: options.rateLimit.windowMs || 60000,\n                max: options.rateLimit.max || 100\n            });\n            app.use(limiter);\n        }\n\n        app.use(express.json());\n\n        app.get(\"/\", (req, res) => {\n            res.send(\"Server is running!\");\n        });\n\n        app.listen(port, () => {\n            console.log(`Server is running on port ${port}`);\n        });\n    }",
+  "unified_diff": "diff --git a/index.js b/index.js\nindex 9a86965..5bfdeba 100644\n--- a/index.js\n+++ b/index.js\n@@ -1,18 +1,24 @@\n const express = require(\"express\");\n+const rateLimit = require(\"express-rate-limit\");\n \n class StartServer {\n-    static listen(port) {\n+    static listen(port, options = {}) {\n         const app = express();\n \n-        // Middleware (optional)\n+        if (options.rateLimit) {\n+            const limiter = rateLimit({\n+                windowMs: options.rateLimit.windowMs || 60000,\n+                max: options.rateLimit.max || 100\n+            });\n+            app.use(limiter);\n+        }\n+\n         app.use(express.json());\n \n-        // Default route (optional)\n         app.get(\"/\", (req, res) => {\n             res.send(\"Server is running!\");\n         });\n \n-        // Start the server and log the default message\n         app.listen(port, () => {\n             console.log(`Server is running on port ${port}`);\n         });",
+  "auto_locate_confidence": "auto"
+}

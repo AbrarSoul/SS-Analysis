@@ -1,0 +1,16 @@
+diff --git a/lib/resolve-shims.js b/lib/resolve-shims.js
+index cb634fe..c6650eb 100644
+--- a/lib/resolve-shims.js
++++ b/lib/resolve-shims.js
+@@ -123,6 +123,11 @@ function separateExposeGlobals(shims) {
+     , exposeGlobals = {};
+ 
+   Object.keys(shims).forEach(function (k) {
++    // https://github.com/thlorenz/browserify-shim/issues/245
++    if (k === '__proto__' || k === 'constructor') {
++      return;
++    }
++
+     var val = shims[k]
+       , exp = val && val.exports;
+ 

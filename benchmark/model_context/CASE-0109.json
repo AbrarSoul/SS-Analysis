@@ -1,0 +1,35 @@
+{
+  "case_id": "CASE-0109",
+  "language": "java",
+  "cve_id": "CVE-2021-27906",
+  "cve_ids_all": [
+    "CVE-2021-27906"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-789",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-Other",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.util.Arrays;",
+    "import java.util.Iterator;",
+    "import org.apache.pdfbox.cos.COSArray;",
+    "import org.apache.pdfbox.cos.COSBase;",
+    "import org.apache.pdfbox.cos.COSDocument;",
+    "import org.apache.pdfbox.cos.COSInteger;",
+    "import org.apache.pdfbox.cos.COSName;",
+    "import org.apache.pdfbox.cos.COSStream;",
+    "import org.apache.pdfbox.cos.COSObjectKey;"
+  ],
+  "vulnerable_function": "        public Long next()\n        {\n            if (currentNumber < currentEnd)\n            {\n                return currentNumber++;\n            }\n            currentNumber = start[++currentRange];\n            currentEnd = end[currentRange];\n            return currentNumber++;\n        }",
+  "patched_function": "        public Long next()\n        {\n            if (currentNumber >= maxValue)\n            {\n                throw new NoSuchElementException();\n            }\n            if (currentNumber < currentEnd)\n            {\n                return currentNumber++;\n            }\n            currentNumber = start[++currentRange];\n            currentEnd = end[currentRange];\n            return currentNumber++;\n        }",
+  "unified_diff": "diff --git a/pdfbox/src/main/java/org/apache/pdfbox/pdfparser/PDFXrefStreamParser.java b/pdfbox/src/main/java/org/apache/pdfbox/pdfparser/PDFXrefStreamParser.java\nindex c4ab305e01..2aad117a2e 100755\n--- a/pdfbox/src/main/java/org/apache/pdfbox/pdfparser/PDFXrefStreamParser.java\n+++ b/pdfbox/src/main/java/org/apache/pdfbox/pdfparser/PDFXrefStreamParser.java\n@@ -19,6 +19,7 @@ package org.apache.pdfbox.pdfparser;\n import java.io.IOException;\n import java.util.Arrays;\n import java.util.Iterator;\n+import java.util.NoSuchElementException;\n \n import org.apache.pdfbox.cos.COSArray;\n import org.apache.pdfbox.cos.COSBase;\n@@ -212,6 +213,10 @@ public class PDFXrefStreamParser extends BaseParser\n         @Override\n         public Long next()\n         {\n+            if (currentNumber >= maxValue)\n+            {\n+                throw new NoSuchElementException();\n+            }\n             if (currentNumber < currentEnd)\n             {\n                 return currentNumber++;",
+  "auto_locate_confidence": "auto"
+}

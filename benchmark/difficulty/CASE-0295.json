@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0295",
+  "batch": "topup",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "changed_files": 1,
+  "lines_added": 37,
+  "lines_removed": 15,
+  "lines_changed_total": 52,
+  "function_size_chars": 238,
+  "function_size_lines": 4,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Data binder exposes class and classLoader through bean introspection; needs framework binding semantics."
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_digitalbazaar_forge_260425c6167a38aae038697132483b5517b26451",
+  "cve_ids": [
+    "CVE-2025-12816",
+    "CVE-2025-66031"
+  ],
+  "cwe_ids": [
+    "CWE-436",
+    "CWE-674"
+  ],
+  "language": "javascript",
+  "repository": "digitalbazaar/forge",
+  "repository_url": "https://github.com/digitalbazaar/forge",
+  "vulnerable_commit": "3e0c35ace169cfca529a3e547a7848dc7bf57fdb",
+  "fixed_commit": "260425c6167a38aae038697132483b5517b26451",
+  "changed_file": "lib/asn1.js",
+  "max_score": "1337"
+}

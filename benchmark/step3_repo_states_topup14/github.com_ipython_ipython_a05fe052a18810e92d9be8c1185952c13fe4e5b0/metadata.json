@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ipython_ipython_a05fe052a18810e92d9be8c1185952c13fe4e5b0",
+  "cve_ids": [
+    "CVE-2015-5607"
+  ],
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "language": "python",
+  "repository": "ipython/ipython",
+  "repository_url": "https://github.com/ipython/ipython",
+  "vulnerable_commit": "6884e8b36dc1e2d59e1d8ddb5e95788728d76e6f",
+  "fixed_commit": "a05fe052a18810e92d9be8c1185952c13fe4e5b0",
+  "changed_file": "IPython/html/base/handlers.py",
+  "max_score": "1337"
+}

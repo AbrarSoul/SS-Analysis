@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_wekan_wekan_7ed76c180ede46ab1dac6b8ad27e9128a272c2c8",
+  "language": "javascript",
+  "cve_id": "CVE-2026-25568",
+  "cve_ids_all": [
+    "CVE-2026-25568"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-863",
+      "definition": "Incorrect Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { ReactiveCache } from '/imports/reactiveCache';",
+    "import escapeForRegex from 'escape-string-regexp';",
+    "import { TAPi18n } from '/imports/i18n';",
+    "import {",
+    "import Users from \"./users\";"
+  ],
+  "vulnerable_function": "  JsonRoutes.add('POST', '/api/boards', function(req, res) {\n    try {\n      Authentication.checkLoggedIn(req.userId);\n      const id = Boards.insert({\n        title: req.body.title,\n        members: [\n          {\n            userId: req.body.owner,\n            isAdmin: req.body.isAdmin || true,\n            isActive: req.body.isActive || true,\n            isNoComments: req.body.isNoComments || false,\n            isCommentOnly: req.body.isCommentOnly || false,\n            isWorker: req.body.isWorker || false,\n          },\n        ],\n        permission: req.body.permission || 'private',\n        color: req.body.color || 'belize',\n        migrationVersion: 1, // Latest version - no migration needed\n      });\n      const swimlaneId = Swimlanes.insert({\n        title: TAPi18n && TAPi18n.i18n ? TAPi18n.__('default') : 'Default',\n        boardId: id,\n      });\n      JsonRoutes.sendResult(res, {\n        code: 200,\n        data: {\n          _id: id,\n          defaultSwimlaneId: swimlaneId,\n        },\n      });\n    } catch (error) {\n      JsonRoutes.sendResult(res, {\n        code: 200,\n        data: error,\n      });\n    }\n  }",
+  "patched_function": "    insert(userId, doc) {\n      // Check if user is logged in\n      if (!userId) return false;\n\n      // If allowPrivateOnly is enabled, only allow private boards\n      const allowPrivateOnly = TableVisibilityModeSettings.findOne('tableVisibilityMode-allowPrivateOnly')?.booleanValue;\n      if (allowPrivateOnly && doc.permission === 'public') {\n        return false;\n      }\n\n      return true;\n    }",
+  "unified_diff": "diff --git a/models/boards.js b/models/boards.js\nindex 5ccfbd085..c0a760ea6 100644\n--- a/models/boards.js\n+++ b/models/boards.js\n@@ -9,6 +9,7 @@ import {\n   TYPE_TEMPLATE_CONTAINER,\n } from '/config/const';\n import Users from \"./users\";\n+import TableVisibilityModeSettings from \"./tableVisibilityModeSettings\";\n \n // const escapeForRegex = require('escape-string-regexp');\n \n@@ -1780,7 +1781,18 @@ Boards.labelColors = () => {\n \n if (Meteor.isServer) {\n   Boards.allow({\n-    insert: Meteor.userId,\n+    insert(userId, doc) {\n+      // Check if user is logged in\n+      if (!userId) return false;\n+\n+      // If allowPrivateOnly is enabled, only allow private boards\n+      const allowPrivateOnly = TableVisibilityModeSettings.findOne('tableVisibilityMode-allowPrivateOnly')?.booleanValue;\n+      if (allowPrivateOnly && doc.permission === 'public') {\n+        return false;\n+      }\n+\n+      return true;\n+    },\n     update: allowIsBoardAdmin,\n     remove: allowIsBoardAdmin,\n     fetch: ['members'],\n@@ -1830,6 +1842,21 @@ if (Meteor.isServer) {\n     fetch: ['members'],\n   });\n \n+  // Deny changing permission to public if allowPrivateOnly is enabled\n+  Boards.deny({\n+    update(userId, doc, fieldNames, modifier) {\n+      if (!_.contains(fieldNames, 'permission')) return false;\n+\n+      const allowPrivateOnly = TableVisibilityModeSettings.findOne('tableVisibilityMode-allowPrivateOnly')?.booleanValue;\n+      if (allowPrivateOnly && modifier.$set && modifier.$set.permission === 'public') {\n+        return true;\n+      }\n+\n+      return false;\n+    },\n+    fetch: [],\n+  });\n+\n   Meteor.methods({\n     getBackgroundImageURL(boardId) {\n       check(boardId, String);\n@@ -2274,6 +2301,8 @@ if (Meteor.isServer) {\n   JsonRoutes.add('POST', '/api/boards', function(req, res) {\n     try {\n       Authentication.checkLoggedIn(req.userId);\n+      const allowPrivateOnly = TableVisibilityModeSettings.findOne('tableVisibilityMode-allowPrivateOnly')?.booleanValue;\n+      const permission = allowPrivateOnly ? 'private' : (req.body.permission || 'private');\n       const id = Boards.insert({\n         title: req.body.title,\n         members: [\n@@ -2286,7 +2315,7 @@ if (Meteor.isServer) {\n             isWorker: req.body.isWorker || false,\n           },\n         ],\n-        permission: req.body.permission || 'private',\n+        permission,\n         color: req.body.color || 'belize',\n         migrationVersion: 1, // Latest version - no migration needed\n       });",
+  "auto_locate_confidence": "auto"
+}

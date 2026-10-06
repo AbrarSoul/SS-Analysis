@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0287",
+  "original_source_case_id": "github.com_siemvk_OpenLearn_844b2a40a69d0c4911580fe501923f0b391313ab",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2026-41243",
+  "cve_ids_all": [
+    "CVE-2026-41243"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "language": "typescript",
+  "repository": "siemvk/OpenLearn",
+  "repository_url": "https://github.com/siemvk/OpenLearn",
+  "vulnerable_commit": "3f9efa6bc5e0e452abaafdba69c9749bcee0869a",
+  "fixed_commit": "844b2a40a69d0c4911580fe501923f0b391313ab",
+  "changed_file": "app/server/routers/forum.ts",
+  "changed_function": ")",
+  "vulnerable_lines": [
+    24,
+    45
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 38,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0287/vulnerable_source.ts": "cccbe746df2e9627e4e3c7c74c2c9a16f66d43572604fb58ee10048f566893ef",
+    "cases/CASE-0287/patched_source.ts": "81c1262756ef7e1ec657ff76a890614fd261c7fc413b5741db0650dd0818b44a",
+    "cases/CASE-0287/patch.diff": "165bf4a3f56757c186e5846c6823da5ef90007b14445861ec4f56203040c736e",
+    "cases/CASE-0287/metadata.json": "1fe05100072da8cb9490fd423694c3824e99106747fc9ca1be11ce1fa33ae8a9",
+    "model_context/CASE-0287.json": "0e70a37ee4986d2b6594d4dc35839a83a897547e3547670140130357a028dcf9",
+    "difficulty/CASE-0287.json": "d0a1eaa70beb2b724baa8239d7b708620ed4191efefaa47d1976698404c4ec94"
+  },
+  "case_level_hash": "525da71d8be3a44e3426d72ad7831a15660f845100d297f4652eeb0c5c894a9b"
+}

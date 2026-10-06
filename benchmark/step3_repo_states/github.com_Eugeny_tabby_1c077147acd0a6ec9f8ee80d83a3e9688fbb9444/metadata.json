@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Eugeny_tabby_1c077147acd0a6ec9f8ee80d83a3e9688fbb9444",
+  "cve_ids": [
+    "CVE-2024-48460"
+  ],
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "typescript",
+  "repository": "Eugeny/tabby",
+  "repository_url": "https://github.com/Eugeny/tabby",
+  "vulnerable_commit": "bc63068af54e83a8d8c59d93e0a08f271d4dfe79",
+  "fixed_commit": "1c077147acd0a6ec9f8ee80d83a3e9688fbb9444",
+  "changed_file": "tabby-ssh/src/session/ssh.ts",
+  "max_score": "1337"
+}

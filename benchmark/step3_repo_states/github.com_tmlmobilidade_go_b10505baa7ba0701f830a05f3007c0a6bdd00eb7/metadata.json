@@ -1,0 +1,14 @@
+{
+  "case_id": "github.com_tmlmobilidade_go_b10505baa7ba0701f830a05f3007c0a6bdd00eb7",
+  "cve_ids": [
+    "CVE-2026-45325"
+  ],
+  "cwe_ids": [],
+  "language": "typescript",
+  "repository": "tmlmobilidade/go",
+  "repository_url": "https://github.com/tmlmobilidade/go",
+  "vulnerable_commit": "5b5e6a9e2d3686d6179911caf381165bcdb84c5e",
+  "fixed_commit": "b10505baa7ba0701f830a05f3007c0a6bdd00eb7",
+  "changed_file": "packages/utils/src/generic/value-at-path.ts",
+  "max_score": "1337"
+}

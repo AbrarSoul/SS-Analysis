@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_foxinmy_weixin4j_d1c825835802cd3a0c04772be1220ff4476ea27c",
+  "cve_ids": [
+    "CVE-2026-24819"
+  ],
+  "cwe_ids": [
+    "CWE-1325"
+  ],
+  "language": "java",
+  "repository": "foxinmy/weixin4j",
+  "repository_url": "https://github.com/foxinmy/weixin4j",
+  "vulnerable_commit": "4b7ad14df6567064b468b4c9cb7a8bfeff48c8bd",
+  "fixed_commit": "d1c825835802cd3a0c04772be1220ff4476ea27c",
+  "changed_file": "weixin4j-base/src/main/java/com/foxinmy/weixin4j/util/CharArrayBuffer.java",
+  "max_score": "1337"
+}

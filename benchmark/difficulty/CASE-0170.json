@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0170",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-117",
+    "CWE-312"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 1,
+  "lines_changed_total": 1,
+  "function_size_chars": 1660,
+  "function_size_lines": 38,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Serializer holding the submitted password placed in log extras; needs knowing its repr contains the data."
+}

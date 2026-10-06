@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_misskey-dev_misskey_ba9f295ef2bf31cc90fa587e20b9a7655b7a1824",
+  "language": "typescript",
+  "cve_id": "CVE-2025-24896",
+  "cve_ids_all": [
+    "CVE-2025-24896"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-613",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { defineAsyncComponent, reactive, ref } from 'vue';",
+    "import * as Misskey from 'misskey-js';",
+    "import { apiUrl } from '@@/js/config.js';",
+    "import type { MenuItem, MenuButton } from '@/types/menu.js';",
+    "import { showSuspendedDialog } from '@/scripts/show-suspended-dialog.js';",
+    "import { i18n } from '@/i18n.js';",
+    "import { miLocalStorage } from '@/local-storage.js';",
+    "import { del, get, set } from '@/scripts/idb-proxy.js';",
+    "import { waiting, popup, popupMenu, success, alert } from '@/os.js';",
+    "import { misskeyApi } from '@/scripts/misskey-api.js';",
+    "import { unisonReload, reloadChannel } from '@/scripts/unison-reload.js';"
+  ],
+  "vulnerable_function": "export async function signout() {\n\tif (!$i) return;\n\n\twaiting();\n\tmiLocalStorage.removeItem('account');\n\tawait removeAccount($i.id);\n\tconst accounts = await getAccounts();\n\n\t//#region Remove service worker registration\n\ttry {\n\t\tif (navigator.serviceWorker.controller) {\n\t\t\tconst registration = await navigator.serviceWorker.ready;\n\t\t\tconst push = await registration.pushManager.getSubscription();\n\t\t\tif (push) {\n\t\t\t\tawait window.fetch(`${apiUrl}/sw/unregister`, {\n\t\t\t\t\tmethod: 'POST',\n\t\t\t\t\tbody: JSON.stringify({\n\t\t\t\t\t\ti: $i.token,\n\t\t\t\t\t\tendpoint: push.endpoint,\n\t\t\t\t\t}),\n\t\t\t\t\theaders: {\n\t\t\t\t\t\t'Content-Type': 'application/json',\n\t\t\t\t\t},\n\t\t\t\t});\n\t\t\t}\n\t\t}\n\n\t\tif (accounts.length === 0) {\n\t\t\tawait navigator.serviceWorker.getRegistrations()\n\t\t\t\t.then(registrations => {\n\t\t\t\t\treturn Promise.all(registrations.map(registration => registration.unregister()));\n\t\t\t\t});\n\t\t}\n\t} catch (err) {}\n\t//#endregion\n\n\tif (accounts.length > 0) login(accounts[0].token);\n\telse unisonReload('/');\n}",
+  "patched_function": "\tdocument.cookie.split(';').forEach((cookie) => {\n\t\tconst cookieName = cookie.split('=')[0].trim();\n\t\tif (cookieName === 'token') {\n\t\t\tdocument.cookie = `${cookieName}=; max-age=0; path=/`;\n\t\t}\n\t}",
+  "unified_diff": "diff --git a/packages/frontend/src/account.ts b/packages/frontend/src/account.ts\nindex 2f9a887720..9006150bc8 100644\n--- a/packages/frontend/src/account.ts\n+++ b/packages/frontend/src/account.ts\n@@ -41,6 +41,12 @@ export async function signout() {\n \tif (!$i) return;\n \n \twaiting();\n+\tdocument.cookie.split(';').forEach((cookie) => {\n+\t\tconst cookieName = cookie.split('=')[0].trim();\n+\t\tif (cookieName === 'token') {\n+\t\t\tdocument.cookie = `${cookieName}=; max-age=0; path=/`;\n+\t\t}\n+\t});\n \tmiLocalStorage.removeItem('account');\n \tawait removeAccount($i.id);\n \tconst accounts = await getAccounts();",
+  "auto_locate_confidence": "auto"
+}

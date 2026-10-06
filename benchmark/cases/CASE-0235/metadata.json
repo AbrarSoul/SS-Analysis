@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0235",
+  "original_source_case_id": "github.com_netristv_ws-scrcpy_e83cf65438bef83a3503b25358bba97bcc156fef",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-3845",
+  "cve_ids_all": [
+    "CVE-2021-3845"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-610",
+    "CWE-73"
+  ],
+  "language": "typescript",
+  "repository": "netristv/ws-scrcpy",
+  "repository_url": "https://github.com/netristv/ws-scrcpy",
+  "vulnerable_commit": "994d4c67394d63ecdf6cfbc51f48c8e71c686e6e",
+  "fixed_commit": "e83cf65438bef83a3503b25358bba97bcc156fef",
+  "changed_file": "src/server/services/HttpServer.ts",
+  "changed_function": "const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {",
+  "vulnerable_lines": [
+    40,
+    75
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0235/vulnerable_source.ts": "dc02c5db6957daba99442fda7ebadf78070809425350b081c5aad4f92b87ee9d",
+    "cases/CASE-0235/patched_source.ts": "cc34482e5d64ac51fd09e36a591890da08b8534401a74fbadeb6258e3b2d23bb",
+    "cases/CASE-0235/patch.diff": "24974d19f3b42650b4111472eb6293abe49de4d55dbc1076cd8d71b58712a476",
+    "cases/CASE-0235/metadata.json": "ffe758505f591a56e38b30f2ec008326765f6fb993fbd7ff0b10bd06819a9200",
+    "model_context/CASE-0235.json": "5ad432c17825071d81a833c5ba79a2fbe26b961a846cd5408d05652577b77ef2",
+    "difficulty/CASE-0235.json": "6f0b125c025a46dddee90d60a525aaa49cea89d2b4b43da86b7116a79a77a829"
+  },
+  "case_level_hash": "a40e9644df8bd4e1336657d5179f2f4717ab20ba3f417ac0d337a76ebbcf61e7"
+}

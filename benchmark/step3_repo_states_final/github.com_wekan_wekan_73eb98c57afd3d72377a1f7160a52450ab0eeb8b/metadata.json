@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wekan_wekan_73eb98c57afd3d72377a1f7160a52450ab0eeb8b",
+  "cve_ids": [
+    "CVE-2026-30843"
+  ],
+  "cwe_ids": [
+    "CWE-639"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "1ee9b2e917104f54c035f6426169a28fedecbdb6",
+  "fixed_commit": "73eb98c57afd3d72377a1f7160a52450ab0eeb8b",
+  "changed_file": "models/customFields.js",
+  "max_score": "1337"
+}

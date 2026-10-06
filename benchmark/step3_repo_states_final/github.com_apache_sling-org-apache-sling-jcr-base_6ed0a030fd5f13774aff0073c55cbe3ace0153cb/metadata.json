@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_sling-org-apache-sling-jcr-base_6ed0a030fd5f13774aff0073c55cbe3ace0153cb",
+  "cve_ids": [
+    "CVE-2023-25141"
+  ],
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "java",
+  "repository": "apache/sling-org-apache-sling-jcr-base",
+  "repository_url": "https://github.com/apache/sling-org-apache-sling-jcr-base",
+  "vulnerable_commit": "97ea7f527040b1bcb0f7f9888a4c599ca91f58cb",
+  "fixed_commit": "6ed0a030fd5f13774aff0073c55cbe3ace0153cb",
+  "changed_file": "src/main/java/org/apache/sling/jcr/base/util/RepositoryAccessor.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_yt-dlp_yt-dlp_959ac99e98c3215437e573c22d64be42d361e863",
+  "batch": "topup34",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 557,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

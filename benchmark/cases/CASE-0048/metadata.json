@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0048",
+  "original_source_case_id": "github.com_Dav-Git_Dav-Cogs_3d54ef9b52ce03f139b7d6c1cc38c375e65593fd",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2021-29501",
+  "cve_ids_all": [
+    "CVE-2021-29501"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "Dav-Git/Dav-Cogs",
+  "repository_url": "https://github.com/Dav-Git/Dav-Cogs",
+  "vulnerable_commit": "6f62a0a2a328a7a94f940d34055e085075962521",
+  "fixed_commit": "3d54ef9b52ce03f139b7d6c1cc38c375e65593fd",
+  "changed_file": "ticketer/ticketer.py",
+  "changed_function": "async def message(self, ctx, *, message: str):",
+  "vulnerable_lines": [
+    83,
+    93
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 19,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0048/vulnerable_source.py": "d14fe51dd865d751f80e54b0c9f5c5c601fe05da3616b530aaf9197eae629756",
+    "cases/CASE-0048/patched_source.py": "dcf3b264f635fd49d85bea76ef6fa6f19efddd2be000579a1011c14296981e50",
+    "cases/CASE-0048/patch.diff": "7ecbe08bf3de60607644d94d83115402a788b24205b43de2824a54430287c78f",
+    "cases/CASE-0048/metadata.json": "7036715f9f40e76e99e83a4b8ad60d0c45fced13a49f28551793d3115e661ce8",
+    "model_context/CASE-0048.json": "9457b897fe46c0567922aa9b2198af686a8773ce482a3ee0f6d53d0e071624b6",
+    "difficulty/CASE-0048.json": "567bdeaff993c07c10cbe3b319fd0aeb723c983bae0b9aded715ab9574d8f841"
+  },
+  "case_level_hash": "5b18eb10b4795ef5b7fc9d8e00594d9f13f8c9654f6af11332affd76e583771b"
+}

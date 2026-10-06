@@ -1,0 +1,20 @@
+rules:
+- id: gold-path-from-unsanitised-name
+  message: user-supplied name used unsanitised in a file path
+  severity: ERROR
+  languages: [python]
+  patterns:
+    - pattern-inside: |
+        def $F($N, ...):
+          ...
+    - pattern: os.path.join($D, f"{$T}_{$N}.json")
+    - pattern-not-inside: |
+        def $F($N, ...):
+          ...
+          $N = os.path.basename(...)
+          ...
+    - pattern-not-inside: |
+        def $F($N, ...):
+          ...
+          $N = re.sub(...)
+          ...

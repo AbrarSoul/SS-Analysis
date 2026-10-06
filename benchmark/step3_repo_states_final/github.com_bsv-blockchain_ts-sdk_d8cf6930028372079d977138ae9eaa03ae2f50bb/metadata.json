@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_bsv-blockchain_ts-sdk_d8cf6930028372079d977138ae9eaa03ae2f50bb",
+  "cve_ids": [
+    "CVE-2025-69287"
+  ],
+  "cwe_ids": [
+    "CWE-573"
+  ],
+  "language": "typescript",
+  "repository": "bsv-blockchain/ts-sdk",
+  "repository_url": "https://github.com/bsv-blockchain/ts-sdk",
+  "vulnerable_commit": "3688b75888a01ef1dcb236e5f8b0a83710849d1a",
+  "fixed_commit": "d8cf6930028372079d977138ae9eaa03ae2f50bb",
+  "changed_file": "src/auth/Peer.ts",
+  "max_score": "1337"
+}

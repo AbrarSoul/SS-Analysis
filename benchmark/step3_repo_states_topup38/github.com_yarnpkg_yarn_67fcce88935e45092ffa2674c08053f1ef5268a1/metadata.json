@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_yarnpkg_yarn_67fcce88935e45092ffa2674c08053f1ef5268a1",
+  "cve_ids": [
+    "CVE-2021-4435"
+  ],
+  "cwe_ids": [
+    "CWE-426"
+  ],
+  "language": "javascript",
+  "repository": "yarnpkg/yarn",
+  "repository_url": "https://github.com/yarnpkg/yarn",
+  "vulnerable_commit": "360b43a1b91fa2586d6104d195df62f1cc68e89b",
+  "fixed_commit": "67fcce88935e45092ffa2674c08053f1ef5268a1",
+  "changed_file": "src/util/child.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_openstack_glance_7858d4d95154c8596720365e465cca7858cfec5c",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "changed_files": 1,
+  "lines_added": 25,
+  "lines_removed": 15,
+  "lines_changed_total": 40,
+  "function_size_chars": 1406,
+  "function_size_lines": 30,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

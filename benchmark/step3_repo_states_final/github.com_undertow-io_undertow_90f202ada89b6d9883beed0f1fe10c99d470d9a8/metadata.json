@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_undertow-io_undertow_90f202ada89b6d9883beed0f1fe10c99d470d9a8",
+  "cve_ids": [
+    "CVE-2024-6162"
+  ],
+  "cwe_ids": [
+    "CWE-488"
+  ],
+  "language": "java",
+  "repository": "undertow-io/undertow",
+  "repository_url": "https://github.com/undertow-io/undertow",
+  "vulnerable_commit": "5ed2b4f05b54024792459a490cc84d32e37cfb66",
+  "fixed_commit": "90f202ada89b6d9883beed0f1fe10c99d470d9a8",
+  "changed_file": "core/src/main/java/io/undertow/server/protocol/ajp/AjpRequestParser.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,22 @@
+diff --git a/server/Auth.js b/server/Auth.js
+index da124b72..5b2d8bcd 100644
+--- a/server/Auth.js
++++ b/server/Auth.js
+@@ -18,7 +18,7 @@ class Auth {
+   constructor() {
+     // Map of openId sessions indexed by oauth2 state-variable
+     this.openIdAuthSession = new Map()
+-    this.ignorePattern = /\/api\/items\/[^/]+\/cover/
++    this.ignorePatterns = [/\/api\/items\/[^/]+\/cover/, /\/api\/authors\/[^/]+\/image/]
+   }
+ 
+   /**
+@@ -28,7 +28,7 @@ class Auth {
+    * @private
+    */
+   authNotNeeded(req) {
+-    return req.method === 'GET' && this.ignorePattern.test(req.originalUrl)
++    return req.method === 'GET' && this.ignorePatterns.some((pattern) => pattern.test(req.originalUrl))
+   }
+ 
+   ifAuthNeeded(middleware) {

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_vercel_ms_caae2988ba2a37765d055c4eee63d383320ee662",
+  "cve_ids": [
+    "CVE-2017-20162"
+  ],
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "javascript",
+  "repository": "vercel/ms",
+  "repository_url": "https://github.com/vercel/ms",
+  "vulnerable_commit": "b83b36d7266fb1bd779fd19a2f98bab17a04d999",
+  "fixed_commit": "caae2988ba2a37765d055c4eee63d383320ee662",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_dataease_dataease_956ee2d6c9e81349a60aef435efc046888e10a6d",
+  "language": "java",
+  "cve_id": "CVE-2022-39312",
+  "cve_ids_all": [
+    "CVE-2022-39312"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import io.dataease.plugins.datasource.entity.JdbcConfiguration;",
+    "import lombok.Getter;",
+    "import lombok.Setter;",
+    "import org.apache.commons.lang3.StringUtils;"
+  ],
+  "vulnerable_function": "    public String getJdbc() {\n        if(StringUtils.isEmpty(extraParams.trim())){\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE\"\n                    .replace(\"HOSTNAME\", getHost().trim())\n                    .replace(\"PORT\", getPort().toString().trim())\n                    .replace(\"DATABASE\", getDataBase().trim());\n        }else {\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE?EXTRA_PARAMS\"\n                    .replace(\"HOSTNAME\", getHost().trim())\n                    .replace(\"PORT\", getPort().toString().trim())\n                    .replace(\"DATABASE\", getDataBase().trim())\n                    .replace(\"EXTRA_PARAMS\", getExtraParams().trim());\n        }\n    }",
+  "patched_function": "    public String getJdbc() {\n        if (StringUtils.isEmpty(extraParams.trim())) {\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE\"\n                    .replace(\"HOSTNAME\", getHost().trim())\n                    .replace(\"PORT\", getPort().toString().trim())\n                    .replace(\"DATABASE\", getDataBase().trim());\n        } else {\n            for (String illegalParameter : illegalParameters) {\n                if (getExtraParams().contains(illegalParameter)) {\n                    throw new RuntimeException(\"Illegal parameter: \" + illegalParameter);\n                }\n            }\n\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE?EXTRA_PARAMS\"\n                    .replace(\"HOSTNAME\", getHost().trim())\n                    .replace(\"PORT\", getPort().toString().trim())\n                    .replace(\"DATABASE\", getDataBase().trim())\n                    .replace(\"EXTRA_PARAMS\", getExtraParams().trim());\n        }\n    }",
+  "unified_diff": "diff --git a/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java b/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java\nindex 7c0378ace3..6a22b778f0 100644\n--- a/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java\n+++ b/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java\n@@ -5,20 +5,30 @@ import lombok.Getter;\n import lombok.Setter;\n import org.apache.commons.lang3.StringUtils;\n \n+import java.util.Arrays;\n+import java.util.List;\n+\n @Getter\n @Setter\n public class MysqlConfiguration extends JdbcConfiguration {\n \n     private String driver = \"com.mysql.jdbc.Driver\";\n     private String extraParams = \"characterEncoding=UTF-8&connectTimeout=5000&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull\";\n+    private List<String> illegalParameters = Arrays.asList(\"autoDeserialize\", \"queryInterceptors\", \"statementInterceptors\", \"detectCustomCollations\");\n \n     public String getJdbc() {\n-        if(StringUtils.isEmpty(extraParams.trim())){\n+        if (StringUtils.isEmpty(extraParams.trim())) {\n             return \"jdbc:mysql://HOSTNAME:PORT/DATABASE\"\n                     .replace(\"HOSTNAME\", getHost().trim())\n                     .replace(\"PORT\", getPort().toString().trim())\n                     .replace(\"DATABASE\", getDataBase().trim());\n-        }else {\n+        } else {\n+            for (String illegalParameter : illegalParameters) {\n+                if (getExtraParams().contains(illegalParameter)) {\n+                    throw new RuntimeException(\"Illegal parameter: \" + illegalParameter);\n+                }\n+            }\n+\n             return \"jdbc:mysql://HOSTNAME:PORT/DATABASE?EXTRA_PARAMS\"\n                     .replace(\"HOSTNAME\", getHost().trim())\n                     .replace(\"PORT\", getPort().toString().trim())",
+  "auto_locate_confidence": "auto"
+}

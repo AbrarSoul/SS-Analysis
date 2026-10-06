@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_caronc_apprise_e20fce630d55e4ca9b0a1e325a5fea6997489831",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 830,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

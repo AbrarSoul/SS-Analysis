@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0039",
+  "original_patch_filename": "github.com_genieacs_genieacs_7f295beeecc1c1f14308a93c82413bb334045af6.patch",
+  "cve_id": "CVE-2021-46704",
+  "cve_ids_all": [
+    "CVE-2021-46704"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "typescript",
+  "repository": "genieacs/genieacs",
+  "repository_url": "https://github.com/genieacs/genieacs",
+  "vulnerable_commit": "2ac536bf8f2dd03c24b2eff35b69578b4efae94e",
+  "fixed_commit": "7f295beeecc1c1f14308a93c82413bb334045af6",
+  "changed_file": "lib/ping.ts",
+  "patch_path": "cases/CASE-0039/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0039/vulnerable_source.ts",
+  "patched_code_path": "cases/CASE-0039/patched_source.ts",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.ts",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.ts",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.ts",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.ts",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.ts",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.ts",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

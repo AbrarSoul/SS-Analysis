@@ -1,0 +1,164 @@
+Loaded manifest: 153 supported cases (restriction used throughout, per Section 7.3's established primary-ranking scope).
+
+====================================================================================================
+COMPARISON 1: Qwen2.5-Coder 7B vs 32B (scale effect)
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (autogrep)  vs  qwen2.5-coder:32b (autogrep)   (n=153 common cases)
+    ESR: 0.052 vs 0.052  |  McNemar b=3 c=3  p=1.0000
+    MCC: 0.613 vs 0.589  |  diff=+0.025  95% CI=(-0.057, +0.110)  bootstrap p=0.5458
+
+====================================================================================================
+COMPARISON 2: Qwen2.5-Coder 7B vs DeepHat 7B (security fine-tuning effect)
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (autogrep)  vs  DeepHat-V1-7B (autogrep)   (n=153 common cases)
+    ESR: 0.052 vs 0.065  |  McNemar b=2 c=4  p=0.6875
+    MCC: 0.613 vs 0.585  |  diff=+0.029  95% CI=(-0.036, +0.092)  bootstrap p=0.3620
+
+====================================================================================================
+COMPARISON 3: Small code-model family effect at similar scale (Friedman omnibus)
+====================================================================================================
+  Models (6, ~7-9B scale, codellama excluded per its existing precision-confound flag, 32b excluded as the scale outlier covered by comparison 1):
+    ['qwen2.5-coder:7b-instruct', 'deepseek-coder:6.7b', 'codegemma:7b', 'magicoder:7b', 'yi-coder:9b', 'DeepHat-V1-7B']
+  Friedman omnibus (n=153 cases, k=6 models): stat=14.262  p=0.0140
+    qwen2.5-coder:7b-instruct: ESR=0.052
+    deepseek-coder:6.7b: ESR=0.013
+    codegemma:7b: ESR=0.026
+    magicoder:7b: ESR=0.020
+    yi-coder:9b: ESR=0.059
+    DeepHat-V1-7B: ESR=0.065
+  Omnibus significant -- running Holm-corrected pairwise McNemar follow-ups:
+    qwen2.5-coder:7b-instruct vs deepseek-coder:6.7b: raw p=0.1094  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs codegemma:7b: raw p=0.2891  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs magicoder:7b: raw p=0.1797  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs yi-coder:9b: raw p=1.0000  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs DeepHat-V1-7B: raw p=0.6875  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs codegemma:7b: raw p=0.6875  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs magicoder:7b: raw p=1.0000  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs yi-coder:9b: raw p=0.0654  Holm-adj p=0.8506
+    deepseek-coder:6.7b vs DeepHat-V1-7B: raw p=0.0386  Holm-adj p=0.5400
+    codegemma:7b vs magicoder:7b: raw p=1.0000  Holm-adj p=1.0000
+    codegemma:7b vs yi-coder:9b: raw p=0.1250  Holm-adj p=1.0000
+    codegemma:7b vs DeepHat-V1-7B: raw p=0.0312  Holm-adj p=0.4688
+    magicoder:7b vs yi-coder:9b: raw p=0.0703  Holm-adj p=0.8506
+    magicoder:7b vs DeepHat-V1-7B: raw p=0.0654  Holm-adj p=0.8506
+    yi-coder:9b vs DeepHat-V1-7B: raw p=1.0000  Holm-adj p=1.0000
+
+====================================================================================================
+COMPARISON 4: Raw vs Autogrep (pipeline effect) -- per model, all 8
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (raw)  vs  qwen2.5-coder:7b-instruct (autogrep)   (n=153 common cases)
+    ESR: 0.046 vs 0.052  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.168 vs 0.613  |  diff=-0.446  95% CI=(-0.531, -0.368)  bootstrap p=0.0000
+
+  qwen2.5-coder:32b (raw)  vs  qwen2.5-coder:32b (autogrep)   (n=153 common cases)
+    ESR: 0.052 vs 0.052  |  McNemar b=0 c=0  p=1.0000
+    MCC: 0.177 vs 0.589  |  diff=-0.411  95% CI=(-0.494, -0.337)  bootstrap p=0.0000
+
+  DeepHat-V1-7B (raw)  vs  DeepHat-V1-7B (autogrep)   (n=153 common cases)
+    ESR: 0.059 vs 0.065  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.128 vs 0.585  |  diff=-0.457  95% CI=(-0.538, -0.382)  bootstrap p=0.0000
+
+  deepseek-coder:6.7b (raw)  vs  deepseek-coder:6.7b (autogrep)   (n=153 common cases)
+    ESR: 0.007 vs 0.013  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.034 vs 0.534  |  diff=-0.569  95% CI=(-0.694, -0.461)  bootstrap p=0.0000
+
+  codegemma:7b (raw)  vs  codegemma:7b (autogrep)   (n=153 common cases)
+    ESR: 0.026 vs 0.026  |  McNemar b=0 c=0  p=1.0000
+    MCC: -0.043 vs 0.591  |  diff=-0.634  95% CI=(-0.738, -0.537)  bootstrap p=0.0000
+
+  magicoder:7b (raw)  vs  magicoder:7b (autogrep)   (n=153 common cases)
+    ESR: 0.007 vs 0.020  |  McNemar b=0 c=2  p=0.5000
+    MCC: 0.000 vs 0.585  |  diff=-0.585  95% CI=(-0.745, -0.442)  bootstrap p=0.0000
+
+  yi-coder:9b (raw)  vs  yi-coder:9b (autogrep)   (n=153 common cases)
+    ESR: 0.039 vs 0.059  |  McNemar b=0 c=3  p=0.2500
+    MCC: 0.090 vs 0.607  |  diff=-0.517  95% CI=(-0.617, -0.428)  bootstrap p=0.0000
+
+  codellama:7b-instruct-fp16 (raw)  vs  codellama:7b-instruct-fp16 (autogrep)   (n=153 common cases)
+    ESR: 0.007 vs 0.013  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.068 vs 0.531  |  diff=-0.600  95% CI=(-0.707, -0.505)  bootstrap p=0.0000
+
+  Aggregate: 0/8 models show a significant raw-vs-autogrep ESR difference after Holm correction across the 8 per-model tests.
+
+====================================================================================================
+COMPARISON 5: C1 vs C2 (iterative feedback effect) -- per model, all 8
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (C1/raw)  vs  qwen2.5-coder:7b-instruct (C2)   (n=153 common cases)
+    ESR: 0.046 vs 0.052  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.168 vs 0.601  |  diff=-0.434  95% CI=(-0.520, -0.354)  bootstrap p=0.0000
+
+  qwen2.5-coder:32b (C1/raw)  vs  qwen2.5-coder:32b (C2)   (n=153 common cases)
+    ESR: 0.052 vs 0.052  |  McNemar b=0 c=0  p=1.0000
+    MCC: 0.177 vs 0.589  |  diff=-0.411  95% CI=(-0.494, -0.337)  bootstrap p=0.0000
+
+  DeepHat-V1-7B (C1/raw)  vs  DeepHat-V1-7B (C2)   (n=153 common cases)
+    ESR: 0.059 vs 0.065  |  McNemar b=0 c=1  p=1.0000
+    MCC: 0.128 vs 0.585  |  diff=-0.457  95% CI=(-0.538, -0.382)  bootstrap p=0.0000
+
+  deepseek-coder:6.7b (C1/raw)  vs  deepseek-coder:6.7b (C2)   (n=153 common cases)
+    ESR: 0.007 vs 0.013  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.034 vs 0.534  |  diff=-0.569  95% CI=(-0.694, -0.461)  bootstrap p=0.0000
+
+  codegemma:7b (C1/raw)  vs  codegemma:7b (C2)   (n=153 common cases)
+    ESR: 0.026 vs 0.026  |  McNemar b=0 c=0  p=1.0000
+    MCC: -0.043 vs 0.591  |  diff=-0.634  95% CI=(-0.738, -0.537)  bootstrap p=0.0000
+
+  magicoder:7b (C1/raw)  vs  magicoder:7b (C2)   (n=153 common cases)
+    ESR: 0.007 vs 0.020  |  McNemar b=0 c=2  p=0.5000
+    MCC: 0.000 vs 0.566  |  diff=-0.566  95% CI=(-0.697, -0.448)  bootstrap p=0.0000
+
+  yi-coder:9b (C1/raw)  vs  yi-coder:9b (C2)   (n=153 common cases)
+    ESR: 0.039 vs 0.059  |  McNemar b=0 c=3  p=0.2500
+    MCC: 0.090 vs 0.600  |  diff=-0.510  95% CI=(-0.610, -0.423)  bootstrap p=0.0000
+
+  codellama:7b-instruct-fp16 (C1/raw)  vs  codellama:7b-instruct-fp16 (C2)   (n=153 common cases)
+    ESR: 0.007 vs 0.013  |  McNemar b=0 c=1  p=1.0000
+    MCC: -0.068 vs 0.531  |  diff=-0.600  95% CI=(-0.707, -0.505)  bootstrap p=0.0000
+
+  Aggregate: 0/8 models show a significant C1-vs-C2 ESR difference after Holm correction across the 8 per-model tests.
+
+====================================================================================================
+COMPARISON 6: C2 vs C3 (role-separation effect) -- the 2 models where both exist
+====================================================================================================
+
+  qwen2.5-coder:32b (C2)  vs  C3-S   (n=153 common cases)
+    ESR: 0.052 vs 0.059  |  McNemar b=6 c=7  p=1.0000
+    MCC: 0.589 vs 0.686  |  diff=-0.097  95% CI=(-0.208, +0.009)  bootstrap p=0.0730
+
+  qwen2.5-coder:7b-instruct (C2)  vs  C3-E   (n=153 common cases)
+    ESR: 0.052 vs 0.026  |  McNemar b=7 c=3  p=0.3438
+    MCC: 0.601 vs 0.593  |  diff=+0.008  95% CI=(-0.184, +0.209)  bootstrap p=0.9312
+
+====================================================================================================
+COMPARISON 7: C3 vs C4 (heterogeneous assignment effect) -- Friedman omnibus, 4 configs
+====================================================================================================
+  Friedman omnibus (n=153 cases, k=4 configs): stat=6.294  p=0.0981
+    C3-S: ESR=0.059
+    C3-E: ESR=0.026
+    C4-A: ESR=0.013
+    C4-B: ESR=0.039
+  Omnibus not significant at alpha=0.05 on ESR -- no ESR-based pairwise follow-ups run.
+
+  ESR has very low power here (base rates 1.3%-5.9%, few discordant pairs) -- running
+  pairwise MCC case-level bootstrap directly as well, since MCC (not ESR) is the metric
+  this study's descriptive C4-A/C4-B findings were actually built on:
+    C3-S vs C3-E: MCC diff=+0.093  95% CI=(-0.108, +0.309)  raw p=0.3566  Holm-adj p=1.0000
+    C3-S vs C4-A: MCC diff=+0.134  95% CI=(-0.039, +0.293)  raw p=0.1248  Holm-adj p=0.7488
+    C3-S vs C4-B: MCC diff=+0.005  95% CI=(-0.089, +0.101)  raw p=0.9016  Holm-adj p=1.0000
+    C3-E vs C4-A: MCC diff=+0.041  95% CI=(-0.201, +0.265)  raw p=0.7414  Holm-adj p=1.0000
+    C3-E vs C4-B: MCC diff=-0.088  95% CI=(-0.311, +0.104)  raw p=0.3990  Holm-adj p=1.0000
+    C4-A vs C4-B: MCC diff=-0.129  95% CI=(-0.311, +0.070)  raw p=0.2046  Holm-adj p=1.0000
+
+====================================================================================================
+NOTE: token/latency Wilcoxon tests are skipped throughout wherever not printed above --
+the primary benchmark's generation_log never captured per-case tokens/latency for either
+raw or autogrep (both all-None, confirmed by direct inspection, not assumed), and C3/C4's
+episode logs don't track them either. Only C2 has real per-case token/latency data, but
+none of its comparison partners (raw, C3) do, so no Wilcoxon token/latency test is
+computable for ANY of the 7 predefined comparisons given what was actually collected.
+Flagged as a genuine dataset limitation, not a script bug.
+====================================================================================================

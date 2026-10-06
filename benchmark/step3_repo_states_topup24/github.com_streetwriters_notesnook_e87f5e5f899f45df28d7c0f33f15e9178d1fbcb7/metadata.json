@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_streetwriters_notesnook_e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7",
+  "cve_ids": [
+    "CVE-2026-31876"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "typescript",
+  "repository": "streetwriters/notesnook",
+  "repository_url": "https://github.com/streetwriters/notesnook",
+  "vulnerable_commit": "d44792d132ed60b93a98b41c527d729fee4aae67",
+  "fixed_commit": "e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7",
+  "changed_file": "packages/editor/src/extensions/embed/component.tsx",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_totaljs_framework_b3f901561d66ab799a4a99279893b94cad7ae4ff",
+  "cve_ids": [
+    "CVE-2020-28495"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "totaljs/framework",
+  "repository_url": "https://github.com/totaljs/framework",
+  "vulnerable_commit": "1e1faeb20d2291038e10b98f2046a4058135e767",
+  "fixed_commit": "b3f901561d66ab799a4a99279893b94cad7ae4ff",
+  "changed_file": "utils.js",
+  "max_score": "1337"
+}

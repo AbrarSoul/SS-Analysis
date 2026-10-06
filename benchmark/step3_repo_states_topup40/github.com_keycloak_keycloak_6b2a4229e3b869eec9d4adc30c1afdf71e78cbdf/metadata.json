@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_keycloak_keycloak_6b2a4229e3b869eec9d4adc30c1afdf71e78cbdf",
+  "cve_ids": [
+    "CVE-2014-3652"
+  ],
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "language": "java",
+  "repository": "keycloak/keycloak",
+  "repository_url": "https://github.com/keycloak/keycloak",
+  "vulnerable_commit": "63b41e2548cbc20bd3758e34a82d880e177bf24c",
+  "fixed_commit": "6b2a4229e3b869eec9d4adc30c1afdf71e78cbdf",
+  "changed_file": "services/src/main/java/org/keycloak/services/resources/AccountService.java",
+  "max_score": "1337"
+}

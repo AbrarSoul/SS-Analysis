@@ -1,0 +1,36 @@
+{
+  "case_id": "CASE-0059",
+  "language": "python",
+  "cve_id": "CVE-2021-3027",
+  "cve_ids_all": [
+    "CVE-2021-3027"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import os",
+    "import sys",
+    "import stat",
+    "import re",
+    "import config",
+    "from io import open",
+    "from ldap3 import Server, Connection, ALL",
+    "from ldap3.utils.dn import escape_rdn",
+    "from flask import request",
+    "from sqlalchemy import exc",
+    "from sqlalchemy.orm import sessionmaker",
+    "from app import app, db",
+    "from app.models_mod import user, target",
+    "from . import api",
+    "from .. import utilities as utils"
+  ],
+  "vulnerable_function": "def useruid(s, login):\n    \"\"\"Connect to a LDAP and check the uid matching the given field data\"\"\"\n    uid = False\n    c = Connection(s, config.LDAPACC, \n                   password=config.LDAPPASS, auto_bind=True)\n\n    if c.result[\"description\"] != \"success\":\n        app.logger.error(\"Error connecting to the LDAP with the service account\")\n        return False\n\n    # Look for the user entry.\n    if not c.search(config.LDAPBASE,\n                    \"(\" + config.LDAPFIELD + \"=\" + login + \")\") :\n        app.logger.error(\"Error: Connection to the LDAP with service account failed\")\n    else:\n        if len(c.entries) >= 1 :\n            if len(c.entries) > 1 :\n                app.logger.error(\"Error: multiple entries with this login. \"+ \\\n                          \"Trying first entry...\")\n            uid = c.entries[0].entry_dn\n        else:\n            app.logger.error(\"Error: Login not found\")\n        c.unbind()\n    \n    return uid\n",
+  "patched_function": "def useruid(s, login):\n    \"\"\"Connect to a LDAP and check the uid matching the given field data\"\"\"\n    uid = False\n    c = Connection(s, config.LDAPACC, \n                   password=config.LDAPPASS, auto_bind=True)\n\n    if c.result[\"description\"] != \"success\":\n        app.logger.error(\"Error connecting to the LDAP with the service account\")\n        return False\n\n    # Look for the user entry.\n    if not c.search(config.LDAPBASE,\n                    \"(\" + config.LDAPFIELD + \"=\" + escape_rdn(login) + \")\") :\n        app.logger.error(\"Error: Connection to the LDAP with service account failed\")\n    else:\n        if len(c.entries) >= 1 :\n            if len(c.entries) > 1 :\n                app.logger.error(\"Error: multiple entries with this login. \"+ \\\n                          \"Trying first entry...\")\n            uid = c.entries[0].entry_dn\n        else:\n            app.logger.error(\"Error: Login not found\")\n        c.unbind()\n    \n    return uid\n",
+  "unified_diff": "diff --git a/passhportd/app/views_mod/user/user.py b/passhportd/app/views_mod/user/user.py\nindex f082da5f..20d7d1cd 100755\n--- a/passhportd/app/views_mod/user/user.py\n+++ b/passhportd/app/views_mod/user/user.py\n@@ -28,7 +28,7 @@ def useruid(s, login):\n \n     # Look for the user entry.\n     if not c.search(config.LDAPBASE,\n-                    \"(\" + config.LDAPFIELD + \"=\" + login + \")\") :\n+                    \"(\" + config.LDAPFIELD + \"=\" + escape_rdn(login) + \")\") :\n         app.logger.error(\"Error: Connection to the LDAP with service account failed\")\n     else:\n         if len(c.entries) >= 1 :\n@@ -49,7 +49,7 @@ def try_ldap_login(login, password):\n     s = Server(config.LDAPURI, port=config.LDAPPORT,\n                use_ssl=False, get_info=ALL)\n     # 1. connection with service account to find the user uid\n-    uid = useruid(s, login)\n+    uid = useruid(s, escape_rdn(login))\n    \n     if uid: \n         # 2. Try to bind the user to the LDAP",
+  "auto_locate_confidence": "auto_low_confidence"
+}

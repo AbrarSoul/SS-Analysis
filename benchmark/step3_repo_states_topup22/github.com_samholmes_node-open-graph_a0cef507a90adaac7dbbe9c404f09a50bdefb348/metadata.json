@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_samholmes_node-open-graph_a0cef507a90adaac7dbbe9c404f09a50bdefb348",
+  "cve_ids": [
+    "CVE-2021-23419"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "javascript",
+  "repository": "samholmes/node-open-graph",
+  "repository_url": "https://github.com/samholmes/node-open-graph",
+  "vulnerable_commit": "ef532ed1c51be12155bc1f9baecad09a7c587e04",
+  "fixed_commit": "a0cef507a90adaac7dbbe9c404f09a50bdefb348",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

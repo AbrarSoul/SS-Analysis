@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0242",
+  "batch": "topup20",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 6,
+  "lines_changed_total": 13,
+  "function_size_chars": 1167,
+  "function_size_lines": 35,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Chat text interpolated unescaped into HTML given to write_html; that the PDF library fetches image URLs is library knowledge."
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0128",
+  "original_source_case_id": "github.com_bcgit_bc-java_cd98322b171b15b3f88c5ec871175147893c31e6",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-1000613",
+  "cve_ids_all": [
+    "CVE-2018-1000613"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-470"
+  ],
+  "language": "java",
+  "repository": "bcgit/bc-java",
+  "repository_url": "https://github.com/bcgit/bc-java",
+  "vulnerable_commit": "cb1e7101d36cccae2d4b8a012f6bdcbca1dca8dc",
+  "fixed_commit": "cd98322b171b15b3f88c5ec871175147893c31e6",
+  "changed_file": "core/src/main/java/org/bouncycastle/pqc/crypto/xmss/XMSSUtil.java",
+  "changed_function": "protected Class<?> resolveClass(ObjectStreamClass desc)",
+  "vulnerable_lines": [
+    396,
+    413
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 28,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0128/vulnerable_source.java": "ecec3bb5b4c0c388f60ed1a300482dfd558ff4b3bdcbe7153338ecef8313c317",
+    "cases/CASE-0128/patched_source.java": "e0b1cb4d33af6ae3debb1115c675f9f2816055a77f22e87eaae596574e6cc346",
+    "cases/CASE-0128/patch.diff": "6f4f0b4cc9dabc6b2b3c33f21b1c6b918c0e71da3ae02addf6cbd4ae72fdd86d",
+    "cases/CASE-0128/metadata.json": "1e836d9bca58172810a8ccf3fcc97be0b2e61a8e612e662643df82e76a7208ac",
+    "model_context/CASE-0128.json": "87c1fdd15487e0d92e6fc924d6f65bb0fa4f6e2b4a9396031d6fc3ccbfd60382",
+    "difficulty/CASE-0128.json": "7f1ffc630c0d356bfc94f64c870a7efa54862e8175d2dfb2fa0a93631ee3cff3"
+  },
+  "case_level_hash": "ccc5872d44e22e93ec133d1a1bb47048ea77c367621bb8e596a015dfd5366055"
+}

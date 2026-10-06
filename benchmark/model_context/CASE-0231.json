@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-0231",
+  "language": "python",
+  "cve_id": "CVE-2024-8537",
+  "cve_ids_all": [
+    "CVE-2024-8537"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-29",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import json",
+    "import os",
+    "import re",
+    "import subprocess",
+    "import tempfile",
+    "import threading",
+    "import traceback",
+    "from datetime import datetime",
+    "from typing import Tuple, Union, Any, Optional",
+    "from pathlib import Path",
+    "from random import choice",
+    "import argparse",
+    "from flask import Flask, request, jsonify, session, render_template, Response, abort, send_file",
+    "from flask_cors import CORS",
+    "from flask_sqlalchemy import SQLAlchemy",
+    "from flask_socketio import SocketIO, join_room, leave_room",
+    "from ..constants import _DEFAULT_CACHE_DIR, _DEFAULT_SUBDIR_CODE, _DEFAULT_SUBDIR_INVOKE, FILE_SIZE_LIMIT, FILE_COUNT_LIMIT",
+    "from ._studio_utils import _check_and_convert_id_type",
+    "from ..utils.common import _is_process_alive, _is_windows, _generate_new_runtime_id",
+    "from ..rpc.rpc_client import RpcClient"
+  ],
+  "vulnerable_function": "def _delete_workflow() -> Response:\n    \"\"\"\n    Deletes a workflow JSON file from the user folder.\n    \"\"\"\n    user_login = session.get(\"user_login\", \"local_user\")\n    user_dir = os.path.join(_cache_dir, user_login)\n    if not os.path.exists(user_dir):\n        os.makedirs(user_dir)\n\n    data = request.json\n    filename = data.get(\"filename\")\n    if not filename:\n        return jsonify({\"error\": \"Filename is required\"})\n\n    filepath = os.path.join(user_dir, filename)\n    if not os.path.exists(filepath):\n        return jsonify({\"error\": \"File not found\"})\n\n    try:\n        os.remove(filepath)\n        return jsonify({\"message\": \"Workflow file deleted successfully\"})\n    except Exception as e:\n        return jsonify({\"error\": str(e)})\n",
+  "patched_function": "def _delete_workflow() -> Response:\n    \"\"\"\n    Deletes a workflow JSON file from the user folder.\n    \"\"\"\n    user_login = session.get(\"user_login\", \"local_user\")\n    user_dir = os.path.join(_cache_dir, user_login)\n    if not os.path.exists(user_dir):\n        os.makedirs(user_dir)\n\n    data = request.json\n    filename = data.get(\"filename\")\n    if not filename:\n        return jsonify({\"error\": \"Filename is required\"})\n\n    if not filename.endswith(\".json\"):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"})\n\n    filename = os.path.basename(filename)\n\n    filepath = os.path.join(user_dir, filename)\n    if not os.path.exists(filepath):\n        return jsonify({\"error\": \"File not found\"})\n\n    try:\n        os.remove(filepath)\n        return jsonify({\"message\": \"Workflow file deleted successfully\"})\n    except Exception as e:\n        return jsonify({\"error\": str(e)})\n",
+  "unified_diff": "diff --git a/src/agentscope/studio/_app.py b/src/agentscope/studio/_app.py\nindex c474b805..c8cb1a6b 100644\n--- a/src/agentscope/studio/_app.py\n+++ b/src/agentscope/studio/_app.py\n@@ -764,6 +764,11 @@ def _delete_workflow() -> Response:\n     if not filename:\n         return jsonify({\"error\": \"Filename is required\"})\n \n+    if not filename.endswith(\".json\"):\n+        return jsonify({\"error\": \"Only JSON files can be deleted\"})\n+\n+    filename = os.path.basename(filename)\n+\n     filepath = os.path.join(user_dir, filename)\n     if not os.path.exists(filepath):\n         return jsonify({\"error\": \"File not found\"})",
+  "auto_locate_confidence": "auto"
+}

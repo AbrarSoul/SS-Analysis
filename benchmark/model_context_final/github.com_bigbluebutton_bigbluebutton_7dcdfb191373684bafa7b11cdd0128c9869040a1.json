@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_bigbluebutton_bigbluebutton_7dcdfb191373684bafa7b11cdd0128c9869040a1",
+  "language": "javascript",
+  "cve_id": "CVE-2020-27601",
+  "cve_ids_all": [
+    "CVE-2020-27601"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-668",
+      "definition": "Exposure of Resource to Wrong Sphere"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import Users from '/imports/api/users';",
+    "import Meetings from '/imports/api/meetings';",
+    "import { GroupChatMsg } from '/imports/api/group-chat-msg';",
+    "import GroupChat from '/imports/api/group-chat';",
+    "import Auth from '/imports/ui/services/auth';",
+    "import UnreadMessages from '/imports/ui/services/unread-messages';",
+    "import Storage from '/imports/ui/services/storage/session';",
+    "import { makeCall } from '/imports/ui/services/api';",
+    "import _ from 'lodash';"
+  ],
+  "vulnerable_function": "const isChatLocked = (receiverID) => {\n  const isPublic = receiverID === PUBLIC_CHAT_ID;\n\n  const meeting = Meetings.findOne({ meetingId: Auth.meetingID },\n    { fields: { 'lockSettingsProps.disablePublicChat': 1 } });\n  const user = Users.findOne({ meetingId: Auth.meetingID, userId: Auth.userID },\n    { fields: { locked: 1, role: 1 } });\n  const receiver = Users.findOne({ meetingId: Auth.meetingID, userId: receiverID },\n    { fields: { role: 1 } });\n  const isReceiverModerator = receiver && receiver.role === ROLE_MODERATOR;\n\n  if (meeting.lockSettingsProps !== undefined) {\n    if (user.locked && user.role !== ROLE_MODERATOR) {\n      if (isPublic) {\n        return meeting.lockSettingsProps.disablePublicChat;\n      }\n      return !isReceiverModerator\n        && meeting.lockSettingsProps.disablePrivateChat;\n    }\n  }\n\n  return false;\n}",
+  "patched_function": "const isChatLocked = (receiverID) => {\n  const isPublic = receiverID === PUBLIC_CHAT_ID;\n  const meeting = Meetings.findOne({ meetingId: Auth.meetingID },\n    { fields: { 'lockSettingsProps.disablePublicChat': 1, 'lockSettingsProps.disablePrivateChat': 1 } });\n  const user = Users.findOne({ meetingId: Auth.meetingID, userId: Auth.userID },\n    { fields: { locked: 1, role: 1 } });\n  const receiver = Users.findOne({ meetingId: Auth.meetingID, userId: receiverID },\n    { fields: { role: 1 } });\n  const isReceiverModerator = receiver && receiver.role === ROLE_MODERATOR;\n\n  if (meeting.lockSettingsProps !== undefined) {\n    if (user.locked && user.role !== ROLE_MODERATOR) {\n      if (isPublic) {\n        return meeting.lockSettingsProps.disablePublicChat;\n      }\n      return !isReceiverModerator\n        && meeting.lockSettingsProps.disablePrivateChat;\n    }\n  }\n\n  return false;\n}",
+  "unified_diff": "diff --git a/bigbluebutton-html5/imports/ui/components/chat/service.js b/bigbluebutton-html5/imports/ui/components/chat/service.js\nindex db41aeabda..7beccbe229 100755\n--- a/bigbluebutton-html5/imports/ui/components/chat/service.js\n+++ b/bigbluebutton-html5/imports/ui/components/chat/service.js\n@@ -133,9 +133,8 @@ const getPrivateGroupMessages = () => {\n \n const isChatLocked = (receiverID) => {\n   const isPublic = receiverID === PUBLIC_CHAT_ID;\n-\n   const meeting = Meetings.findOne({ meetingId: Auth.meetingID },\n-    { fields: { 'lockSettingsProps.disablePublicChat': 1 } });\n+    { fields: { 'lockSettingsProps.disablePublicChat': 1, 'lockSettingsProps.disablePrivateChat': 1 } });\n   const user = Users.findOne({ meetingId: Auth.meetingID, userId: Auth.userID },\n     { fields: { locked: 1, role: 1 } });\n   const receiver = Users.findOne({ meetingId: Auth.meetingID, userId: receiverID },",
+  "auto_locate_confidence": "auto"
+}

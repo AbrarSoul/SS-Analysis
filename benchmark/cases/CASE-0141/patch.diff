@@ -1,0 +1,13 @@
+diff --git a/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java b/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java
+index d0c3dbd82..edb3a61f8 100644
+--- a/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java
++++ b/dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java
+@@ -115,7 +115,7 @@ public class OidcClientWithCache implements OidcClientWithDecodedJwt
+ 	@Override
+ 	public DecodedJWT getAccessTokenDecoded(Configuration configuration, Jwks jwks) throws OidcClientException
+ 	{
+-		if (accessTokenCache != null && accessTokenCache.timeout.isBefore(ZonedDateTime.now()))
++		if (accessTokenCache != null && accessTokenCache.timeout.isAfter(ZonedDateTime.now()))
+ 			return accessTokenCache.resource;
+ 		else
+ 		{

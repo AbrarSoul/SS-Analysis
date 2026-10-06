@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0159",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-292"
+  ],
+  "changed_files": 1,
+  "lines_added": 38,
+  "lines_removed": 18,
+  "lines_changed_total": 56,
+  "function_size_chars": 5387,
+  "function_size_lines": 128,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Receive loop breaks on the first datagram from the right source before validating it; control-flow logic."
+}

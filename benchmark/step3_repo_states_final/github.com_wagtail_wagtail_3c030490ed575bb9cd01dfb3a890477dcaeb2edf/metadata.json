@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_wagtail_wagtail_3c030490ed575bb9cd01dfb3a890477dcaeb2edf",
+  "cve_ids": [
+    "CVE-2020-11037"
+  ],
+  "cwe_ids": [
+    "CWE-208",
+    "CWE-362"
+  ],
+  "language": "python",
+  "repository": "wagtail/wagtail",
+  "repository_url": "https://github.com/wagtail/wagtail",
+  "vulnerable_commit": "baa4accbd0c2c5bbeab38b9d30341f18e5b3a19a",
+  "fixed_commit": "3c030490ed575bb9cd01dfb3a890477dcaeb2edf",
+  "changed_file": "wagtail/core/forms.py",
+  "max_score": "1337"
+}

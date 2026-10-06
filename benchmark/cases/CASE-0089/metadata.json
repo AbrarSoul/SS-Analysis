@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0089",
+  "original_source_case_id": "github.com_aio-libs_aiosmtpd_b3a4a2c6ecfd228856a20d637dc383541fcdbfda",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-34083",
+  "cve_ids_all": [
+    "CVE-2024-34083"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-349"
+  ],
+  "language": "python",
+  "repository": "aio-libs/aiosmtpd",
+  "repository_url": "https://github.com/aio-libs/aiosmtpd",
+  "vulnerable_commit": "6e148d7f87428b38f527a0ac238771e2c5a0e09e",
+  "fixed_commit": "b3a4a2c6ecfd228856a20d637dc383541fcdbfda",
+  "changed_file": "aiosmtpd/smtp.py",
+  "changed_function": "def connection_made(self, transport: asyncio.BaseTransport) -> None:",
+  "vulnerable_lines": [
+    495,
+    524
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0089/vulnerable_source.py": "b907d38e633461934da7489595344fa9aa3d65ca108210b374b0aa9e2ae310b3",
+    "cases/CASE-0089/patched_source.py": "989628e6e5b740fef3ecc184e71294aee0a4218cc992ca2ad91d4397a20f254f",
+    "cases/CASE-0089/patch.diff": "56bfabfa314ed17c156ba85c0e61d9ae709a4eedcd9a6f4d983d6d4fc4c161b8",
+    "cases/CASE-0089/metadata.json": "4e837763fe35df18b23a728ec14be1bb977b4e3ac4efff2fd1119909c5315fd2",
+    "model_context/CASE-0089.json": "7a9cb3e7e6f918b5a830cc4668b34d6317171ebd0e7c7249721273d1378c137a",
+    "difficulty/CASE-0089.json": "e3231e223f014074597a251e745e12675b5ca33bd42d8487eb8927f291737135"
+  },
+  "case_level_hash": "63a53395a13cbbe9292dfea696746395f830c66c9befbe3bca096082fd99f204"
+}

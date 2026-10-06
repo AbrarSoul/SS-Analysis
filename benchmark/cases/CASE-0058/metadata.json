@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0058",
+  "original_source_case_id": "github.com_Legrandin_pycrypto_9f912f13df99ad3421eff360d6a62d7dbec755c2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2012-2417",
+  "cve_ids_all": [
+    "CVE-2012-2417"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "language": "python",
+  "repository": "Legrandin/pycrypto",
+  "repository_url": "https://github.com/Legrandin/pycrypto",
+  "vulnerable_commit": "c8e21380a6059a56bd88267a5e744ddd8badfe66",
+  "fixed_commit": "9f912f13df99ad3421eff360d6a62d7dbec755c2",
+  "changed_file": "lib/Crypto/PublicKey/ElGamal.py",
+  "changed_function": "def generate(bits, randfunc, progress_func=None):",
+  "vulnerable_lines": [
+    110,
+    169
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 40,
+  "patch_size_deleted": 24,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0058/vulnerable_source.py": "cc231df916d2f0c335b1885dbad35904d7ce8d8d83df71d509833baddb4baf02",
+    "cases/CASE-0058/patched_source.py": "31c9e2a12951c82c30799e61aa9394a1ca728271f06d963072414470ae9bef7a",
+    "cases/CASE-0058/patch.diff": "aad14615a8ca6dcedb1f7b8451fbb824fcaa653b02e5eeb9e54e38a8d2df69ee",
+    "cases/CASE-0058/metadata.json": "263f41b0e8286f0fbd6112c6e3f176219fa305a995a9a39c542a132eefce6cca",
+    "model_context/CASE-0058.json": "d9d348ae0de907cdf071269a8684169397ac71d85691adb4d6f1a2b50d39dd3d",
+    "difficulty/CASE-0058.json": "a7c27da8acd7b6b5a9806c272becde9647ff91a144e9aace80fb53a96a0b1ba1"
+  },
+  "case_level_hash": "640c9c29e48f404928c06c6fd64e6eea544912a0d0ef168ec63478e261bd28ca"
+}

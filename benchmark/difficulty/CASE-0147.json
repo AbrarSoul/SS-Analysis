@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0147",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-706"
+  ],
+  "changed_files": 1,
+  "lines_added": 9,
+  "lines_removed": 7,
+  "lines_changed_total": 16,
+  "function_size_chars": 1307,
+  "function_size_lines": 44,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Loose case/accent-insensitive email match plus token built from the supplied address; depends on database collation at runtime."
+}

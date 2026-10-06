@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spring-projects_spring-framework_ab2410c754b67902f002bfcc0c3895bd7772d39",
+  "cve_ids": [
+    "CVE-2018-1272"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "f6ea7407e6cd2f4da52187dfb8503143633002c8",
+  "fixed_commit": "ab2410c754b67902f002bfcc0c3895bd7772d39f",
+  "changed_file": "spring-core/src/main/java/org/springframework/util/MimeTypeUtils.java",
+  "max_score": "1337"
+}

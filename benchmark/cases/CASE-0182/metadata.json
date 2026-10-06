@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0182",
+  "original_source_case_id": "github.com_jenkinsci_aws-device-farm-plugin_2d8cfe3cdd299c152ca5d13aada51cb69d0fec88",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-1003064",
+  "cve_ids_all": [
+    "CVE-2019-1003064"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-311"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/aws-device-farm-plugin",
+  "repository_url": "https://github.com/jenkinsci/aws-device-farm-plugin",
+  "vulnerable_commit": "07a1afae063129d512eceb1b51fc0c32bce41d62",
+  "fixed_commit": "2d8cfe3cdd299c152ca5d13aada51cb69d0fec88",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/awsdevicefarm/AWSDeviceFarmRecorder.java",
+  "changed_function": "private boolean validateConfiguration(@Nonnull PrintStream log) {",
+  "vulnerable_lines": [
+    1130,
+    1162
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 17,
+  "patch_size_deleted": 16,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0182/vulnerable_source.java": "abfdd53c175f2f04fed4ba935378b87b67de34c272c6029414b5cc61c6d4bc86",
+    "cases/CASE-0182/patched_source.java": "cb33f169d05d7fab98edf6e3e97900c632be327a16d3c6d6d242d64fbdffb80a",
+    "cases/CASE-0182/patch.diff": "a4ab2a43ecf92356d52b0341355ee22f02b95fc49b10f7fd748bd8a6a280362f",
+    "cases/CASE-0182/metadata.json": "744ac358524dd117664ba9496463a7b400747c2f953d138a834e9e63103febf5",
+    "model_context/CASE-0182.json": "c84a06d44d54658224cb4cc7471079c6ab7f064efb20a863a0431a3645d92406",
+    "difficulty/CASE-0182.json": "410e24399401003d6be229eb09b1c54050281d574ec59a560539f881474de5ad"
+  },
+  "case_level_hash": "575e31a47d581314aef5104535bf2513ede739fddc2e58053545d646d6fb18a7"
+}

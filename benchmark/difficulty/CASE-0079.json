@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0079",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-665"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 3,
+  "lines_changed_total": 8,
+  "function_size_chars": 1811,
+  "function_size_lines": 50,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Deprecated new Buffer(value) applied to an unvalidated argument; matchable constructor pattern."
+}

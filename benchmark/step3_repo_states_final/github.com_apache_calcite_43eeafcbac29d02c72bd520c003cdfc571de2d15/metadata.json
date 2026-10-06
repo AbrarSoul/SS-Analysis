@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_calcite_43eeafcbac29d02c72bd520c003cdfc571de2d15",
+  "cve_ids": [
+    "CVE-2020-13955"
+  ],
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "java",
+  "repository": "apache/calcite",
+  "repository_url": "https://github.com/apache/calcite",
+  "vulnerable_commit": "ab19f98172848fe303a18173946c2def0b0d0312",
+  "fixed_commit": "43eeafcbac29d02c72bd520c003cdfc571de2d15",
+  "changed_file": "core/src/main/java/org/apache/calcite/runtime/HttpUtils.java",
+  "max_score": "1337"
+}

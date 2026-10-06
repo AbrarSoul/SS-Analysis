@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_1Panel-dev_MaxKB_4ae02c8d3eb65542c88ef58c0abd94c52c949d8f",
+  "cve_ids": [
+    "CVE-2025-32383"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "1Panel-dev/MaxKB",
+  "repository_url": "https://github.com/1Panel-dev/MaxKB",
+  "vulnerable_commit": "3557ea50fa444022c6fec206dec0864fd22e1952",
+  "fixed_commit": "4ae02c8d3eb65542c88ef58c0abd94c52c949d8f",
+  "changed_file": "apps/common/util/function_code.py",
+  "max_score": "1337"
+}

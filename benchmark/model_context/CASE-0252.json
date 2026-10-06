@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-0252",
+  "language": "python",
+  "cve_id": "CVE-2019-14806",
+  "cve_ids_all": [
+    "CVE-2019-14806"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-331",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import getpass",
+    "import hashlib",
+    "import json",
+    "import mimetypes",
+    "import os",
+    "import pkgutil",
+    "import re",
+    "import sys",
+    "import time",
+    "import uuid",
+    "from itertools import chain",
+    "from os.path import basename",
+    "from os.path import join",
+    "from .._compat import text_type",
+    "from .._internal import _log",
+    "from ..http import parse_cookie",
+    "from ..security import gen_salt",
+    "from ..wrappers import BaseRequest as Request",
+    "from ..wrappers import BaseResponse as Response",
+    "from .console import Console",
+    "from .repr import debug_repr as _debug_repr",
+    "from .tbtools import get_current_traceback",
+    "from .tbtools import render_console_html",
+    "import warnings",
+    "import winreg as wr",
+    "import _winreg as wr"
+  ],
+  "vulnerable_function": "    def _generate():\n        # Potential sources of secret information on linux.  The machine-id\n        # is stable across boots, the boot id is not\n        for filename in \"/etc/machine-id\", \"/proc/sys/kernel/random/boot_id\":\n            try:\n                with open(filename, \"rb\") as f:\n                    return f.readline().strip()\n            except IOError:\n                continue\n\n        # On OS X we can use the computer's serial number assuming that\n        # ioreg exists and can spit out that information.\n        try:\n            # Also catch import errors: subprocess may not be available, e.g.\n            # Google App Engine\n            # See https://github.com/pallets/werkzeug/issues/925\n            from subprocess import Popen, PIPE\n\n            dump = Popen(\n                [\"ioreg\", \"-c\", \"IOPlatformExpertDevice\", \"-d\", \"2\"], stdout=PIPE\n            ).communicate()[0]\n            match = re.search(b'\"serial-number\" = <([^>]+)', dump)\n            if match is not None:\n                return match.group(1)\n        except (OSError, ImportError):\n            pass\n\n        # On Windows we can use winreg to get the machine guid\n        wr = None\n        try:\n            import winreg as wr\n        except ImportError:\n            try:\n                import _winreg as wr\n            except ImportError:\n                pass\n        if wr is not None:\n            try:\n                with wr.OpenKey(\n                    wr.HKEY_LOCAL_MACHINE,\n                    \"SOFTWARE\\\\Microsoft\\\\Cryptography\",\n                    0,\n                    wr.KEY_READ | wr.KEY_WOW64_64KEY,\n                ) as rk:\n                    machineGuid, wrType = wr.QueryValueEx(rk, \"MachineGuid\")\n                    if wrType == wr.REG_SZ:\n                        return machineGuid.encode(\"utf-8\")\n                    else:\n                        return machineGuid\n            except WindowsError:\n                pass\n",
+  "patched_function": "    def _generate():\n        # docker containers share the same machine id, get the\n        # container id instead\n        try:\n            with open(\"/proc/self/cgroup\") as f:\n                value = f.readline()\n        except IOError:\n            pass\n        else:\n            value = value.strip().partition(\"/docker/\")[2]\n\n            if value:\n                return value\n\n        # Potential sources of secret information on linux.  The machine-id\n        # is stable across boots, the boot id is not\n        for filename in \"/etc/machine-id\", \"/proc/sys/kernel/random/boot_id\":\n            try:\n                with open(filename, \"rb\") as f:\n                    return f.readline().strip()\n            except IOError:\n                continue\n\n        # On OS X we can use the computer's serial number assuming that\n        # ioreg exists and can spit out that information.\n        try:\n            # Also catch import errors: subprocess may not be available, e.g.\n            # Google App Engine\n            # See https://github.com/pallets/werkzeug/issues/925\n            from subprocess import Popen, PIPE\n\n            dump = Popen(\n                [\"ioreg\", \"-c\", \"IOPlatformExpertDevice\", \"-d\", \"2\"], stdout=PIPE\n            ).communicate()[0]\n            match = re.search(b'\"serial-number\" = <([^>]+)', dump)\n            if match is not None:\n                return match.group(1)\n        except (OSError, ImportError):\n            pass\n\n        # On Windows we can use winreg to get the machine guid\n        wr = None\n        try:\n            import winreg as wr\n        except ImportError:\n            try:\n                import _winreg as wr\n            except ImportError:\n                pass\n        if wr is not None:\n            try:\n                with wr.OpenKey(\n                    wr.HKEY_LOCAL_MACHINE,\n                    \"SOFTWARE\\\\Microsoft\\\\Cryptography\",\n                    0,\n                    wr.KEY_READ | wr.KEY_WOW64_64KEY,\n                ) as rk:\n                    machineGuid, wrType = wr.QueryValueEx(rk, \"MachineGuid\")\n                    if wrType == wr.REG_SZ:\n                        return machineGuid.encode(\"utf-8\")\n                    else:\n                        return machineGuid\n            except WindowsError:\n                pass\n",
+  "unified_diff": "diff --git a/src/werkzeug/debug/__init__.py b/src/werkzeug/debug/__init__.py\nindex c5e4d2d5..9195c79a 100644\n--- a/src/werkzeug/debug/__init__.py\n+++ b/src/werkzeug/debug/__init__.py\n@@ -67,6 +67,19 @@ def get_machine_id():\n         return rv\n \n     def _generate():\n+        # docker containers share the same machine id, get the\n+        # container id instead\n+        try:\n+            with open(\"/proc/self/cgroup\") as f:\n+                value = f.readline()\n+        except IOError:\n+            pass\n+        else:\n+            value = value.strip().partition(\"/docker/\")[2]\n+\n+            if value:\n+                return value\n+\n         # Potential sources of secret information on linux.  The machine-id\n         # is stable across boots, the boot id is not\n         for filename in \"/etc/machine-id\", \"/proc/sys/kernel/random/boot_id\":",
+  "auto_locate_confidence": "auto"
+}

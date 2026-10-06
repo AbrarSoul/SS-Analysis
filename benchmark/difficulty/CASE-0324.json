@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0324",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-208",
+    "CWE-362"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 252,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Submitted password compared with != against the stored one; non-constant-time comparison pattern."
+}

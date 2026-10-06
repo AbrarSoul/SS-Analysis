@@ -1,0 +1,13 @@
+diff --git a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/DownloadAction.java b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/DownloadAction.java
+index 3d5f1b2a715..2d7d14f26ff 100644
+--- a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/DownloadAction.java
++++ b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/DownloadAction.java
+@@ -74,7 +74,7 @@ public class DownloadAction extends XWikiAction
+     public static final List<String> MIMETYPE_WHITELIST =
+         Arrays.asList("audio/basic", "audio/L24", "audio/mp4", "audio/mpeg", "audio/ogg", "audio/vorbis",
+             "audio/vnd.rn-realaudio", "audio/vnd.wave", "audio/webm", "image/gif", "image/jpeg", "image/pjpeg",
+-            "image/png", "image/svg+xml", "image/tiff", "text/csv", "text/plain", "text/xml", "text/rtf", "video/mpeg",
++            "image/png", "image/tiff", "text/csv", "text/plain", "text/xml", "text/rtf", "video/mpeg",
+             "video/ogg", "video/quicktime", "video/webm", "video/x-matroska", "video/x-ms-wmv", "video/x-flv");
+ 
+     /** Key of the whitelist in xwiki.properties. */

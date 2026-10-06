@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-0071",
+  "language": "java",
+  "cve_id": "CVE-2025-46822",
+  "cve_ids_all": [
+    "CVE-2025-46822"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-36",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import common.management.common.service.StorageService;",
+    "import jakarta.annotation.PostConstruct;",
+    "import lombok.extern.slf4j.Slf4j;",
+    "import org.apache.commons.io.FilenameUtils;",
+    "import org.apache.tika.Tika;",
+    "import org.imgscalr.Scalr;",
+    "import org.springframework.beans.factory.annotation.Value;",
+    "import org.springframework.core.io.Resource;",
+    "import org.springframework.core.io.UrlResource;",
+    "import org.springframework.stereotype.Service;",
+    "import org.springframework.web.multipart.MultipartFile;",
+    "import javax.imageio.ImageIO;",
+    "import java.awt.image.BufferedImage;",
+    "import java.io.*;",
+    "import java.net.MalformedURLException;",
+    "import java.nio.file.Files;",
+    "import java.nio.file.Path;",
+    "import java.nio.file.Paths;",
+    "import java.nio.file.StandardCopyOption;",
+    "import java.util.Base64;",
+    "import java.util.HashSet;",
+    "import java.util.List;",
+    "import java.util.UUID;",
+    "import java.util.stream.Stream;",
+    "import static common.management.common.util.DateTimeHelper.getCurrentDateTimeString;",
+    "import static common.management.common.util.OperationStatus.*;"
+  ],
+  "vulnerable_function": "    public Resource loadAsResource(String filename) {\n        try {\n            Path location = Paths.get(rootLocation+\"/\");\n            Path file = load(filename,location);\n            Resource resource = new UrlResource(file.toUri());\n            if (resource.exists() || resource.isReadable()) {\n                return resource;\n            }\n            else {\n              return null;\n            }\n        } catch (MalformedURLException e) {\n           log.error(\"[EXCEPTION] loadAsResource: {},{}\",e.getMessage(),e.getCause());\n           return null;\n        }\n    }",
+  "patched_function": "    public Resource loadAsResource(String filename) {\n        try {\n            if(!fileNamePattern.matcher(filename).matches()){\n                log.error(\"[ERROR] loadAsResource: invalid file name\");\n                return null;\n            }\n            Path location = Paths.get(rootLocation+\"/\");\n            Path file = load(filename,location);\n            Resource resource = new UrlResource(file.toUri());\n            if (resource.exists() || resource.isReadable()) {\n                return resource;\n            }\n            else {\n              return null;\n            }\n        } catch (MalformedURLException e) {\n           log.error(\"[EXCEPTION] loadAsResource: {},{}\",e.getMessage(),e.getCause());\n           return null;\n        }\n    }",
+  "unified_diff": "diff --git a/springboot/common-dynamic-management-services/src/main/java/common/management/common/service/impl/FileSystemStorageService.java b/springboot/common-dynamic-management-services/src/main/java/common/management/common/service/impl/FileSystemStorageService.java\nindex 913d4d8..96ec24e 100644\n--- a/springboot/common-dynamic-management-services/src/main/java/common/management/common/service/impl/FileSystemStorageService.java\n+++ b/springboot/common-dynamic-management-services/src/main/java/common/management/common/service/impl/FileSystemStorageService.java\n@@ -23,6 +23,7 @@ import java.util.Base64;\n import java.util.HashSet;\n import java.util.List;\n import java.util.UUID;\n+import java.util.regex.Pattern;\n import java.util.stream.Stream;\n \n import static common.management.common.util.DateTimeHelper.getCurrentDateTimeString;\n@@ -39,6 +40,8 @@ public class FileSystemStorageService implements StorageService {\n     @Value(\"${image.thumb.width:100}\")\n     private int thumbWidth;\n \n+    private final Pattern fileNamePattern = Pattern.compile(\"^[a-zA-Z0-9.-]+$\");\n+\n     private final HashSet<String> allowedFileType = new HashSet<>(List.of(\n             \"image/jpeg\",\"image/jpg\",\"image/png\"\n             ,\"video/mp4\"\n@@ -86,7 +89,7 @@ public class FileSystemStorageService implements StorageService {\n             if (file.isEmpty()) {\n                 return OP_STATUS_FILE_EMPTY;\n             }\n-            if (nameAndExt.contains(\"..\")) {\n+            if (nameAndExt.contains(\"..\") || !fileNamePattern.matcher(nameAndExt).matches()) {\n                 // This is a security check\n                return OP_STATUS_INVALID_FILE_NAME;\n             }\n@@ -126,6 +129,10 @@ public class FileSystemStorageService implements StorageService {\n     @Override\n     public Resource loadAsResource(String filename) {\n         try {\n+            if(!fileNamePattern.matcher(filename).matches()){\n+                log.error(\"[ERROR] loadAsResource: invalid file name\");\n+                return null;\n+            }\n             Path location = Paths.get(rootLocation+\"/\");\n             Path file = load(filename,location);\n             Resource resource = new UrlResource(file.toUri());",
+  "auto_locate_confidence": "auto"
+}

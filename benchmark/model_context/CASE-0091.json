@@ -1,0 +1,26 @@
+{
+  "case_id": "CASE-0091",
+  "language": "typescript",
+  "cve_id": "CVE-2025-57802",
+  "cve_ids_all": [
+    "CVE-2025-57802"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-61",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { Router, Request, Response } from 'express';",
+    "import afs from '../handlers/filesystem/fs';",
+    "import path from 'path';",
+    "import fs from 'fs/promises';",
+    "import { validateContainerId, validatePath, validateFileName } from '../utils/validation';"
+  ],
+  "vulnerable_function": "const sanitizePath = (base: string, relativePath: string): string => {\n    const fullPath = path.join(base, relativePath);\n    if (!fullPath.startsWith(base)) {\n        throw new Error('Invalid path: Directory traversal is not allowed.');\n    }\n    return fullPath;\n}",
+  "patched_function": "const sanitizePath = async (base: string, relativePath: string): Promise<string> => {\n    const fullPath = path.resolve(base, relativePath);\n\n    if (!fullPath.startsWith(base)) {\n        throw new Error('Invalid path: Directory traversal is not allowed.');\n    }\n\n    try {\n        const stats = await fs.lstat(fullPath);\n        if (stats.isSymbolicLink()) {\n            throw new Error('Invalid path: Symlinks are not allowed.');\n        }\n    } catch (err: any) {\n        if (err.code !== 'ENOENT') { // Ignore \"file not found\", because we're creating it later\n            throw err;\n        }\n    }\n\n    return fullPath;\n}",
+  "unified_diff": "diff --git a/src/routes/fileSystem.ts b/src/routes/fileSystem.ts\nindex 1b4af48..1841e8d 100644\n--- a/src/routes/fileSystem.ts\n+++ b/src/routes/fileSystem.ts\n@@ -6,11 +6,24 @@ import { validateContainerId, validatePath, validateFileName } from '../utils/va\n \n const router = Router();\n \n-const sanitizePath = (base: string, relativePath: string): string => {\n-    const fullPath = path.join(base, relativePath);\n+const sanitizePath = async (base: string, relativePath: string): Promise<string> => {\n+    const fullPath = path.resolve(base, relativePath);\n+\n     if (!fullPath.startsWith(base)) {\n         throw new Error('Invalid path: Directory traversal is not allowed.');\n     }\n+\n+    try {\n+        const stats = await fs.lstat(fullPath);\n+        if (stats.isSymbolicLink()) {\n+            throw new Error('Invalid path: Symlinks are not allowed.');\n+        }\n+    } catch (err: any) {\n+        if (err.code !== 'ENOENT') { // Ignore \"file not found\", because we're creating it later\n+            throw err;\n+        }\n+    }\n+\n     return fullPath;\n };\n \n@@ -350,7 +363,7 @@ router.post('/fs/upload', async (req: Request, res: Response) => {\n \n         // Create the base directory if it doesn't exist\n         const baseDirectory = path.resolve(`volumes/${id}`);\n-        const filePath = sanitizePath(baseDirectory, targetPath);\n+        const filePath = await sanitizePath(baseDirectory, targetPath);\n         const dir = path.dirname(filePath);\n \n         try {\n@@ -412,7 +425,7 @@ router.post('/fs/create-empty-file', async (req: Request, res: Response) => {\n         console.log(`Normalized target path: ${targetPath}`);\n \n         const baseDirectory = path.resolve(`volumes/${id}`);\n-        const filePath = sanitizePath(baseDirectory, targetPath);\n+        const filePath= await sanitizePath(baseDirectory, targetPath);\n         const dir = path.dirname(filePath);\n \n         try {\n@@ -513,7 +526,7 @@ router.post('/fs/append-file', async (req: Request, res: Response) => {\n         }\n \n         const baseDirectory = path.resolve(`volumes/${id}`);\n-        const filePath = sanitizePath(baseDirectory, targetPath);\n+        const filePath= await sanitizePath(baseDirectory, targetPath);\n \n         try {\n             if (typeof content === 'string') {",
+  "auto_locate_confidence": "auto"
+}

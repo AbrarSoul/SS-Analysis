@@ -1,0 +1,42 @@
+{
+  "case_id": "CASE-0260",
+  "language": "java",
+  "cve_id": "CVE-2026-0858",
+  "cve_ids_all": [
+    "CVE-2026-0858"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.OutputStream;",
+    "import java.util.Arrays;",
+    "import java.util.regex.Matcher;",
+    "import java.util.regex.Pattern;",
+    "import net.atmp.ImageBuilder;",
+    "import net.sourceforge.plantuml.AbstractPSystem;",
+    "import net.sourceforge.plantuml.FileFormatOption;",
+    "import net.sourceforge.plantuml.FileImageData;",
+    "import net.sourceforge.plantuml.StringUtils;",
+    "import net.sourceforge.plantuml.api.ImageDataSimple;",
+    "import net.sourceforge.plantuml.core.DiagramDescription;",
+    "import net.sourceforge.plantuml.core.ImageData;",
+    "import net.sourceforge.plantuml.core.UmlSource;",
+    "import net.sourceforge.plantuml.dot.ExeState;",
+    "import net.sourceforge.plantuml.dot.Graphviz;",
+    "import net.sourceforge.plantuml.dot.GraphvizRuntimeEnvironment;",
+    "import net.sourceforge.plantuml.dot.ProcessState;",
+    "import net.sourceforge.plantuml.klimt.shape.GraphicStrings;",
+    "import net.sourceforge.plantuml.klimt.shape.TextBlock;",
+    "import net.sourceforge.plantuml.preproc.PreprocessingArtifact;"
+  ],
+  "vulnerable_function": "\tfinal protected ImageData exportDiagramNow(OutputStream os, int num, FileFormatOption fileFormat)\n\t\t\tthrows IOException {\n\t\tfinal Graphviz graphviz = GraphvizRuntimeEnvironment.getInstance().createForSystemDot(null, filter(data),\n\t\t\t\tStringUtils.goLowerCase(fileFormat.getFileFormat().name()));\n\t\tif (graphviz.getExeState() != ExeState.OK) {\n\t\t\tfinal TextBlock result = GraphicStrings\n\t\t\t\t\t.createForError(Arrays.asList(\"There is an issue with your Dot/Graphviz installation\"), false);\n\t\t\treturn ImageBuilder.create(fileFormat, result).seed(seed()).status(FileImageData.CRASH).write(os);\n\t\t}\n\n\t\tfinal CounterOutputStream counter = new CounterOutputStream(os);\n\t\tfinal ProcessState state = graphviz.createFile3(counter);\n\t\t// if (state.differs(ProcessState.TERMINATED_OK())) {\n\t\t// throw new IllegalStateException(\"Timeout1 \" + state);\n\t\t// }\n\t\tif (counter.getLength() == 0 || state.differs(ProcessState.TERMINATED_OK())) {\n\t\t\tfinal TextBlock result = GraphicStrings.createForError(Arrays.asList(\"GraphViz has crashed\"), false);\n\t\t\treturn ImageBuilder.create(fileFormat, result).seed(seed()).status(FileImageData.CRASH).write(os);\n\t\t}\n\n\t\treturn ImageDataSimple.ok();\n\t}",
+  "patched_function": "\tfinal protected ImageData exportDiagramNow(OutputStream os, int num, FileFormatOption fileFormat)\n\t\t\tthrows IOException {\n\n\t\tif (fileFormat.getFileFormat() == FileFormat.SVG)\n\t\t\treturn ImageDataSimple.ok();\n\n\t\tfinal Graphviz graphviz = GraphvizRuntimeEnvironment.getInstance().createForSystemDot(null, data,\n\t\t\t\tStringUtils.goLowerCase(fileFormat.getFileFormat().name()));\n\t\tif (graphviz.getExeState() != ExeState.OK) {\n\t\t\tfinal TextBlock result = GraphicStrings\n\t\t\t\t\t.createForError(Arrays.asList(\"There is an issue with your Dot/Graphviz installation\"), false);\n\t\t\treturn ImageBuilder.create(fileFormat, result).seed(seed()).status(FileImageData.CRASH).write(os);\n\t\t}\n\n\t\tfinal CounterOutputStream counter = new CounterOutputStream(os);\n\t\tfinal ProcessState state = graphviz.createFile3(counter);\n\t\t// if (state.differs(ProcessState.TERMINATED_OK())) {\n\t\t// throw new IllegalStateException(\"Timeout1 \" + state);\n\t\t// }\n\t\tif (counter.getLength() == 0 || state.differs(ProcessState.TERMINATED_OK())) {\n\t\t\tfinal TextBlock result = GraphicStrings.createForError(Arrays.asList(\"GraphViz has crashed\"), false);\n\t\t\treturn ImageBuilder.create(fileFormat, result).seed(seed()).status(FileImageData.CRASH).write(os);\n\t\t}\n\n\t\treturn ImageDataSimple.ok();\n\t}",
+  "unified_diff": "diff --git a/src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java b/src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java\nindex dff70d12675..dba55092b28 100644\n--- a/src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java\n+++ b/src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java\n@@ -37,11 +37,10 @@ package net.sourceforge.plantuml.directdot;\n import java.io.IOException;\n import java.io.OutputStream;\n import java.util.Arrays;\n-import java.util.regex.Matcher;\n-import java.util.regex.Pattern;\n \n import net.atmp.ImageBuilder;\n import net.sourceforge.plantuml.AbstractPSystem;\n+import net.sourceforge.plantuml.FileFormat;\n import net.sourceforge.plantuml.FileFormatOption;\n import net.sourceforge.plantuml.FileImageData;\n import net.sourceforge.plantuml.StringUtils;\n@@ -74,7 +73,11 @@ public class PSystemDot extends AbstractPSystem {\n \t@Override\n \tfinal protected ImageData exportDiagramNow(OutputStream os, int num, FileFormatOption fileFormat)\n \t\t\tthrows IOException {\n-\t\tfinal Graphviz graphviz = GraphvizRuntimeEnvironment.getInstance().createForSystemDot(null, filter(data),\n+\n+\t\tif (fileFormat.getFileFormat() == FileFormat.SVG)\n+\t\t\treturn ImageDataSimple.ok();\n+\n+\t\tfinal Graphviz graphviz = GraphvizRuntimeEnvironment.getInstance().createForSystemDot(null, data,\n \t\t\t\tStringUtils.goLowerCase(fileFormat.getFileFormat().name()));\n \t\tif (graphviz.getExeState() != ExeState.OK) {\n \t\t\tfinal TextBlock result = GraphicStrings\n@@ -95,39 +98,4 @@ public class PSystemDot extends AbstractPSystem {\n \t\treturn ImageDataSimple.ok();\n \t}\n \n-\tprivate String filter(String data) {\n-\t\tdata = data.replaceAll(\"(?i)\\\\bjavascript:\", \"js:\");\n-\n-\t\tdata = data.replaceAll(\"(?i)<\\\\s*/?\\\\s*script[^>]*>\", \"\");\n-\n-\t\tdata = sanitizeDotAttribute(data, \"fontname\");\n-\t\tdata = sanitizeDotAttribute(data, \"label\");\n-\t\tdata = sanitizeDotAttribute(data, \"xlabel\");\n-\t\tdata = sanitizeDotAttribute(data, \"URL\");\n-\t\tdata = sanitizeDotAttribute(data, \"href\");\n-\t\tdata = sanitizeDotAttribute(data, \"tooltip\");\n-\n-\t\treturn data;\n-\t}\n-\n-\tprivate String sanitizeDotAttribute(String dot, String attrName) {\n-\t\tfinal Pattern p = Pattern.compile(\"(?i)(\" + attrName + \")\\\\s*=\\\\s*\\\"([^\\\"]*)\\\"\");\n-\t\tfinal Matcher m = p.matcher(dot);\n-\t\tfinal StringBuffer sb = new StringBuffer();\n-\t\twhile (m.find()) {\n-\t\t\tfinal String originalValue = m.group(2);\n-\t\t\tfinal String safeValue = sanitizeAttributeValue(originalValue);\n-\t\t\tm.appendReplacement(sb, m.group(1) + \"=\\\"\" + safeValue + \"\\\"\");\n-\t\t}\n-\t\tm.appendTail(sb);\n-\t\treturn sb.toString();\n-\t}\n-\n-\tprivate String sanitizeAttributeValue(String value) {\n-\t\tvalue = value.replace(\"<\", \"\").replace(\">\", \"\");\n-\t\tvalue = value.replace(\"\\\"\", \"\").replace(\"'\", \"\");\n-\t\tvalue = value.replaceAll(\"(?i)on[a-z]+\\\\s*=\", \"\");\n-\n-\t\treturn value;\n-\t}\n }",
+  "auto_locate_confidence": "hand_retargeted"
+}

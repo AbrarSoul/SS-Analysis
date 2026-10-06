@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0005",
+  "original_patch_filename": "github.com_inducer_relate_555f0efb1c5bd7531c07cd73724d7e566a81f620.patch",
+  "cve_id": "CVE-2026-42197",
+  "cve_ids_all": [
+    "CVE-2026-42197"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "inducer/relate",
+  "repository_url": "https://github.com/inducer/relate",
+  "vulnerable_commit": "032c6170b28fea2d9647c57605991c3c16796041",
+  "fixed_commit": "555f0efb1c5bd7531c07cd73724d7e566a81f620",
+  "changed_file": "course/admin.py",
+  "patch_path": "cases/CASE-0005/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0005/vulnerable_source.py",
+  "patched_code_path": "cases/CASE-0005/patched_source.py",
+  "semgrep_representability": "supported",
+  "advisory_source": "nvd",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.py",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.py",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.py",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.py",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.py",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.py",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

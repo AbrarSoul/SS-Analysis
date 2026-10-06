@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0232",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 2,
+  "lines_changed_total": 5,
+  "function_size_chars": 1421,
+  "function_size_lines": 41,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "deserialize=pickle.loads on frames from a network socket; unsafe-deserialization pattern."
+}

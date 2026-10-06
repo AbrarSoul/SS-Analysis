@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0036",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "changed_files": 1,
+  "lines_added": 24,
+  "lines_removed": 13,
+  "lines_changed_total": 37,
+  "function_size_chars": 423,
+  "function_size_lines": 10,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Attacker-controlled tool-call argument flows directly into a shell command string within a single case block.",
+  "supported_status": "supported"
+}

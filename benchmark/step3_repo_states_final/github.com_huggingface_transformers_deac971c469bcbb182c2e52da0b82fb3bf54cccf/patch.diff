@@ -1,0 +1,13 @@
+diff --git a/src/transformers/models/nougat/tokenization_nougat_fast.py b/src/transformers/models/nougat/tokenization_nougat_fast.py
+index 0a7eec4ad9..5d0a8934c0 100644
+--- a/src/transformers/models/nougat/tokenization_nougat_fast.py
++++ b/src/transformers/models/nougat/tokenization_nougat_fast.py
+@@ -514,7 +514,7 @@ class NougatTokenizerFast(PreTrainedTokenizerFast):
+         generation = generation.replace("\n* [leftmargin=*]\n", "\n")
+         # Remove lines with markdown headings starting with #, with numerals,
+         # and possibly roman numerals with trailing spaces and newlines
+-        generation = re.sub(r"^#+ (?:\.?(?:\d|[ixv])+)*\s*(?:$|\n\s*)", "", generation, flags=re.M)
++        generation = re.sub(r"^#+ (?:[\d+\.]+|[ixv\.]+)?\s*(?:$|\n\s*)", "", generation, flags=re.M)
+         # most likely hallucinated titles
+         lines = generation.split("\n")
+         if lines[-1].startswith("#") and lines[-1].lstrip("#").startswith(" ") and len(lines) > 1:

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_alexta69_metube_0072d3488ae5b8d922d3ee87458d829993742a32",
+  "cve_ids": [
+    "CVE-2026-7581"
+  ],
+  "cwe_ids": [
+    "CWE-346",
+    "CWE-942"
+  ],
+  "language": "python",
+  "repository": "alexta69/metube",
+  "repository_url": "https://github.com/alexta69/metube",
+  "vulnerable_commit": "0b3645aea1546f74fc6b26e7936e51863248079e",
+  "fixed_commit": "0072d3488ae5b8d922d3ee87458d829993742a32",
+  "changed_file": "app/main.py",
+  "max_score": "1337"
+}

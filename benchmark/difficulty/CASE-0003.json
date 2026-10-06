@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0003",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-943"
+  ],
+  "changed_files": 1,
+  "lines_added": 125,
+  "lines_removed": 13,
+  "lines_changed_total": 138,
+  "function_size_chars": 2597,
+  "function_size_lines": 83,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "eval() applied directly to log-derived text; self-contained sink.",
+  "supported_status": "supported"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_LibrIT_passhport_366b03f607729c4538e91b634ecc57c8398522a1",
+  "cve_ids": [
+    "CVE-2021-3027"
+  ],
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "python",
+  "repository": "LibrIT/passhport",
+  "repository_url": "https://github.com/LibrIT/passhport",
+  "vulnerable_commit": "ca8c1c248daa10e2d9ef6ee7919ac707c7a5b6bc",
+  "fixed_commit": "366b03f607729c4538e91b634ecc57c8398522a1",
+  "changed_file": "passhportd/app/views_mod/user/user.py",
+  "max_score": "1337"
+}

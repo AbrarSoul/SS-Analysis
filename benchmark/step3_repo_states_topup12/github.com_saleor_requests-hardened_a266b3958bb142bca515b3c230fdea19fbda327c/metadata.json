@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_saleor_requests-hardened_a266b3958bb142bca515b3c230fdea19fbda327c",
+  "cve_ids": [
+    "CVE-2026-42175"
+  ],
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "python",
+  "repository": "saleor/requests-hardened",
+  "repository_url": "https://github.com/saleor/requests-hardened",
+  "vulnerable_commit": "b7403f88d3b3689e57435b75b51691a160aaeef5",
+  "fixed_commit": "a266b3958bb142bca515b3c230fdea19fbda327c",
+  "changed_file": "requests_hardened/ip_filter.py",
+  "max_score": "1337"
+}

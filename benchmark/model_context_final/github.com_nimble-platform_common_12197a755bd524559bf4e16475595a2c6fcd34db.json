@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_nimble-platform_common_12197a755bd524559bf4e16475595a2c6fcd34db",
+  "language": "java",
+  "cve_id": "CVE-2021-32631",
+  "cve_ids_all": [
+    "CVE-2021-32631"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-290",
+      "definition": "Authentication Bypass by Spoofing"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.fasterxml.jackson.core.type.TypeReference;",
+    "import eu.nimble.utility.JsonSerializationUtility;",
+    "import eu.nimble.utility.exception.AuthenticationException;",
+    "import io.jsonwebtoken.Claims;",
+    "import io.jsonwebtoken.Jwts;",
+    "import org.apache.commons.codec.binary.Base64;",
+    "import org.jose4j.keys.RsaKeyUtil;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.springframework.beans.factory.annotation.Value;",
+    "import org.springframework.context.annotation.Profile;",
+    "import org.springframework.stereotype.Component;",
+    "import java.io.IOException;",
+    "import java.security.PublicKey;",
+    "import java.util.Arrays;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.stream.Collectors;"
+  ],
+  "vulnerable_function": "    public Claims validateToken(String token) throws AuthenticationException {\n        try {\n            RsaKeyUtil rsaKeyUtil = new RsaKeyUtil();\n            PublicKey publicKey = rsaKeyUtil.fromPemEncoded(keycloakPublicKey);\n\n            return (Claims) Jwts.parser().setSigningKey(publicKey).parse(token.replace(\"Bearer \", \"\")).getBody();\n        } catch (Exception e){\n            throw new AuthenticationException(String.format(\"Failed to check user authorization for token: %s\", token), e);\n        }\n    }",
+  "patched_function": "    public Claims validateToken(String token) throws AuthenticationException {\n        try {\n            RsaKeyUtil rsaKeyUtil = new RsaKeyUtil();\n            PublicKey publicKey = rsaKeyUtil.fromPemEncoded(keycloakPublicKey);\n\n            return Jwts.parser().setSigningKey(publicKey).parseJws(token.replace(\"Bearer \", \"\")).getBody();\n        } catch (Exception e){\n            throw new AuthenticationException(String.format(\"Failed to check user authorization for token: %s\", token), e);\n        }\n    }",
+  "unified_diff": "diff --git a/utility/src/main/java/eu/nimble/utility/validation/ValidationUtil.java b/utility/src/main/java/eu/nimble/utility/validation/ValidationUtil.java\nindex 60780c2..b235dd3 100644\n--- a/utility/src/main/java/eu/nimble/utility/validation/ValidationUtil.java\n+++ b/utility/src/main/java/eu/nimble/utility/validation/ValidationUtil.java\n@@ -36,7 +36,7 @@ public class ValidationUtil implements IValidationUtil {\n             RsaKeyUtil rsaKeyUtil = new RsaKeyUtil();\n             PublicKey publicKey = rsaKeyUtil.fromPemEncoded(keycloakPublicKey);\n \n-            return (Claims) Jwts.parser().setSigningKey(publicKey).parse(token.replace(\"Bearer \", \"\")).getBody();\n+            return Jwts.parser().setSigningKey(publicKey).parseJws(token.replace(\"Bearer \", \"\")).getBody();\n         } catch (Exception e){\n             throw new AuthenticationException(String.format(\"Failed to check user authorization for token: %s\", token), e);\n         }",
+  "auto_locate_confidence": "auto"
+}

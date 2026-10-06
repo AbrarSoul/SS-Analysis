@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_python_cpython_a51b1b512de1d56b3714b65628a2eae2b07e535e",
+  "batch": "topup31",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 333,
+  "function_size_lines": 9,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

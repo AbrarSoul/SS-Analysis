@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0131",
+  "original_source_case_id": "github.com_bitcoinj_bitcoinj_b575a682acf614b9ff95cacbdeb48f86c3ababe0",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-44714",
+  "cve_ids_all": [
+    "CVE-2026-44714"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "language": "java",
+  "repository": "bitcoinj/bitcoinj",
+  "repository_url": "https://github.com/bitcoinj/bitcoinj",
+  "vulnerable_commit": "2493eb544f6fbd99eb1e6758bb1a34789b6fa8e4",
+  "fixed_commit": "b575a682acf614b9ff95cacbdeb48f86c3ababe0",
+  "changed_file": "core/src/main/java/org/bitcoinj/script/ScriptExecution.java",
+  "changed_function": "public static void correctlySpends(Script script, Transaction txContainingThis, int scriptSigIndex,",
+  "vulnerable_lines": [
+    1019,
+    1077
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 11,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0131/vulnerable_source.java": "22efd1b567a2885400573366db0d69f83d4b28c2221a9769243cbd162cd6d7c3",
+    "cases/CASE-0131/patched_source.java": "b08cf0e38c34c8d9cb7959254df06b0c37c5fe74ead3558a73238e913b24a24d",
+    "cases/CASE-0131/patch.diff": "0d0ee3437b6f766d7d3cc041e8e9317af5e50b9b8fc913d9acd695328f2c2dfd",
+    "cases/CASE-0131/metadata.json": "737eed53aaa3789672e04e9d2769818b751532456dac5f34f82156a0a60c4033",
+    "model_context/CASE-0131.json": "f86e6af2dcdc2febab6e0aec30f60fbc67ada84610419091bfae75389110826f",
+    "difficulty/CASE-0131.json": "ad91b6a18ec006aa6085e2c1996111df82b497ae968a4214ac24e2da95348183"
+  },
+  "case_level_hash": "07f35ce625a803dad64fb030390ad07becadba53f37985118f46768c07b5b0ac"
+}

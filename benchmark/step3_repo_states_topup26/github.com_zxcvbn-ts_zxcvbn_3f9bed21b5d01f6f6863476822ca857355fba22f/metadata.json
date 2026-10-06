@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_zxcvbn-ts_zxcvbn_3f9bed21b5d01f6f6863476822ca857355fba22f",
+  "cve_ids": [
+    "CVE-2023-34109"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "typescript",
+  "repository": "zxcvbn-ts/zxcvbn",
+  "repository_url": "https://github.com/zxcvbn-ts/zxcvbn",
+  "vulnerable_commit": "d3a12a11f2b25976ba2180664ff3e86718cbb0b7",
+  "fixed_commit": "3f9bed21b5d01f6f6863476822ca857355fba22f",
+  "changed_file": "packages/libraries/main/src/Options.ts",
+  "max_score": "1337"
+}

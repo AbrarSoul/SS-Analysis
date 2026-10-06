@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_youngerheart_nodeserver_c4c0f0138ab5afbac58e03915d446680421bde28",
+  "batch": "topup24",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 2075,
+  "function_size_lines": 77,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

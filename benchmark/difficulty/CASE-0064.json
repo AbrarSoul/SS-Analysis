@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0064",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-185"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 290,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "RegExp built from an unescaped caller-supplied key; unescaped input into RegExp sink."
+}

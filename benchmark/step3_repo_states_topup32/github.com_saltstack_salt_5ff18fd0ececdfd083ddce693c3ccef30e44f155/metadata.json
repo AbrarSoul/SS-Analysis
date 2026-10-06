@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_saltstack_salt_5ff18fd0ececdfd083ddce693c3ccef30e44f155",
+  "cve_ids": [
+    "CVE-2024-38825"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "python",
+  "repository": "saltstack/salt",
+  "repository_url": "https://github.com/saltstack/salt",
+  "vulnerable_commit": "98e9663361a656e5ad08dcdabffd57b58247f78a",
+  "fixed_commit": "5ff18fd0ececdfd083ddce693c3ccef30e44f155",
+  "changed_file": "salt/auth/pki.py",
+  "max_score": "1337"
+}

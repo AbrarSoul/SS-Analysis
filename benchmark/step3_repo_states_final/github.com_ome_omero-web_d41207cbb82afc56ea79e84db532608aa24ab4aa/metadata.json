@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ome_omero-web_d41207cbb82afc56ea79e84db532608aa24ab4aa",
+  "cve_ids": [
+    "CVE-2024-35180"
+  ],
+  "cwe_ids": [
+    "CWE-830"
+  ],
+  "language": "python",
+  "repository": "ome/omero-web",
+  "repository_url": "https://github.com/ome/omero-web",
+  "vulnerable_commit": "e5f012bdfe16cc424f0f0effcda0a0af085add17",
+  "fixed_commit": "d41207cbb82afc56ea79e84db532608aa24ab4aa",
+  "changed_file": "omeroweb/webgateway/views.py",
+  "max_score": "1337"
+}

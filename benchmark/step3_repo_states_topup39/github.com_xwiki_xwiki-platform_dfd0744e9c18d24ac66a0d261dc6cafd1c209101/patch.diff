@@ -1,0 +1,13 @@
+diff --git a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java
+index 777e3880f60..e380784716c 100644
+--- a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java
++++ b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java
+@@ -117,7 +117,7 @@ public void checkOrderBySafe(List<String> allowedPrefixes, String orderByValue)
+             }
+ 
+             if (!valid) {
+-                throw new QueryException("Usafe ORDER BY value [" + orderByValue + "].", null);
++                throw new QueryException("Unsafe ORDER BY value [" + orderByValue + "].", null);
+             }
+         }
+     }

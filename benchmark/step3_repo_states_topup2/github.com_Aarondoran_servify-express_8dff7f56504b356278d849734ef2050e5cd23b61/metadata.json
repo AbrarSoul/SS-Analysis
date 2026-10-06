@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Aarondoran_servify-express_8dff7f56504b356278d849734ef2050e5cd23b61",
+  "cve_ids": [
+    "CVE-2025-67731"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "Aarondoran/servify-express",
+  "repository_url": "https://github.com/Aarondoran/servify-express",
+  "vulnerable_commit": "96462ae7cb3462c8178eb6cf1a1fdbc1bcdfd40d",
+  "fixed_commit": "8dff7f56504b356278d849734ef2050e5cd23b61",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

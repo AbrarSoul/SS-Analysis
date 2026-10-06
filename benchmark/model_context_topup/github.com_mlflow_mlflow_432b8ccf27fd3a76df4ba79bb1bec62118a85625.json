@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_mlflow_mlflow_432b8ccf27fd3a76df4ba79bb1bec62118a85625",
+  "language": "python",
+  "cve_id": "CVE-2023-6709",
+  "cve_ids_all": [
+    "CVE-2023-6709"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1336",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "CardTab",
+  "imports": [
+    "from __future__ import annotations",
+    "import base64",
+    "import html",
+    "import logging",
+    "import os",
+    "import pathlib",
+    "import pickle",
+    "import random",
+    "import re",
+    "import string",
+    "from io import StringIO",
+    "from typing import Optional, Union",
+    "from packaging.version import Version",
+    "from mlflow.exceptions import INVALID_PARAMETER_VALUE, MlflowException",
+    "import jinja2",
+    "import jinja2",
+    "import jinja2",
+    "import pandas as pd"
+  ],
+  "vulnerable_function": "    def to_html(self) -> str:\n        \"\"\"\n        Returns a rendered HTML representing the content of the tab.\n\n        :return: a HTML string\n        \"\"\"\n        import jinja2\n\n        j2_env = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(self.template)\n        return j2_env.render({**self._context})\n",
+  "patched_function": "    def to_html(self) -> str:\n        \"\"\"\n        Returns a rendered HTML representing the content of the tab.\n\n        :return: a HTML string\n        \"\"\"\n        from jinja2 import BaseLoader\n        from jinja2.sandbox import SandboxedEnvironment\n\n        j2_env = SandboxedEnvironment(loader=BaseLoader()).from_string(self.template)\n        return j2_env.render({**self._context})\n",
+  "unified_diff": "diff --git a/mlflow/recipes/cards/__init__.py b/mlflow/recipes/cards/__init__.py\nindex 24361b8ac..dafdaa89f 100644\n--- a/mlflow/recipes/cards/__init__.py\n+++ b/mlflow/recipes/cards/__init__.py\n@@ -120,9 +120,10 @@ class CardTab:\n \n         :return: a HTML string\n         \"\"\"\n-        import jinja2\n+        from jinja2 import BaseLoader\n+        from jinja2.sandbox import SandboxedEnvironment\n \n-        j2_env = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(self.template)\n+        j2_env = SandboxedEnvironment(loader=BaseLoader()).from_string(self.template)\n         return j2_env.render({**self._context})\n \n ",
+  "auto_locate_confidence": "auto"
+}

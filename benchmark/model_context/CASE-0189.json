@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0189",
+  "language": "java",
+  "cve_id": "CVE-2014-3678",
+  "cve_ids_all": [
+    "CVE-2014-3678",
+    "CVE-2014-3679"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import javax.servlet.FilterChain;",
+    "import javax.servlet.FilterConfig;",
+    "import javax.servlet.ServletException;",
+    "import javax.servlet.ServletRequest;",
+    "import javax.servlet.ServletResponse;",
+    "import javax.servlet.http.HttpServletRequest;",
+    "import javax.servlet.http.HttpServletResponse;",
+    "import jenkins.model.Jenkins;",
+    "import net.bull.javamelody.NodesCollector;",
+    "import net.bull.javamelody.NodesController;",
+    "import net.bull.javamelody.PluginMonitoringFilter;"
+  ],
+  "vulnerable_function": "\tpublic void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)\n\t\t\tthrows IOException, ServletException {\n\t\tif (!(request instanceof HttpServletRequest) || !(response instanceof HttpServletResponse)\n\t\t\t\t|| getNodesCollector().isMonitoringDisabled()) {\n\t\t\tsuper.doFilter(request, response, chain);\n\t\t\treturn;\n\t\t}\n\t\tfinal HttpServletRequest httpRequest = (HttpServletRequest) request;\n\n\t\tfinal String requestURI = httpRequest.getRequestURI();\n\t\tfinal String monitoringUrl = getMonitoringUrl(httpRequest);\n\t\tfinal String monitoringSlavesUrl = monitoringUrl + \"/nodes\";\n\t\tif (!PLUGIN_AUTHENTICATION_DISABLED\n\t\t\t\t&& (requestURI.equals(monitoringUrl) || requestURI.equals(monitoringSlavesUrl))) {\n\t\t\t// only the Hudson/Jenkins administrator can view the monitoring report\n\t\t\tJenkins.getInstance().checkPermission(Jenkins.ADMINISTER);\n\t\t}\n\n\t\tif (requestURI.startsWith(monitoringSlavesUrl)) {\n\t\t\tfinal String nodeName;\n\t\t\tif (requestURI.equals(monitoringSlavesUrl)) {\n\t\t\t\tnodeName = null;\n\t\t\t} else {\n\t\t\t\tnodeName = requestURI.substring(monitoringSlavesUrl.length()).replace(\"/\", \"\");\n\t\t\t}\n\t\t\tfinal HttpServletResponse httpResponse = (HttpServletResponse) response;\n\t\t\tdoMonitoring(httpRequest, httpResponse, nodeName);\n\t\t\treturn;\n\t\t}\n\n\t\tsuper.doFilter(request, response, chain);\n\t}",
+  "patched_function": "\tpublic void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)\n\t\t\tthrows IOException, ServletException {\n\t\tif (!(request instanceof HttpServletRequest) || !(response instanceof HttpServletResponse)\n\t\t\t\t|| getNodesCollector().isMonitoringDisabled()) {\n\t\t\tsuper.doFilter(request, response, chain);\n\t\t\treturn;\n\t\t}\n\t\tfinal HttpServletRequest httpRequest = (HttpServletRequest) request;\n\n\t\tfinal String requestURI = httpRequest.getRequestURI();\n\t\tfinal String monitoringUrl = getMonitoringUrl(httpRequest);\n\t\tfinal String monitoringSlavesUrl = monitoringUrl + \"/nodes\";\n\t\tif (!PLUGIN_AUTHENTICATION_DISABLED\n\t\t\t\t&& (requestURI.equals(monitoringUrl) || requestURI.startsWith(monitoringSlavesUrl))) {\n\t\t\t// only the Hudson/Jenkins administrator can view the monitoring report\n\t\t\tJenkins.getInstance().checkPermission(Jenkins.ADMINISTER);\n            Enumeration<?> parameterNames = request.getParameterNames();\n            while (parameterNames.hasMoreElements()) {\n                String parameterName = (String) parameterNames.nextElement();\n                for (String value : request.getParameterValues(parameterName)) {\n                    if (value.indexOf('\"') != -1 || value.indexOf('\\'') != -1 || value.indexOf('<') != -1 || value.indexOf('&') != -1) {\n                        ((HttpServletResponse) response).sendError(HttpServletResponse.SC_BAD_REQUEST);\n                        return;\n                    }\n                }\n            }\n\t\t}\n\n\t\tif (requestURI.startsWith(monitoringSlavesUrl)) {\n\t\t\tfinal String nodeName;\n\t\t\tif (requestURI.equals(monitoringSlavesUrl)) {\n\t\t\t\tnodeName = null;\n\t\t\t} else {\n\t\t\t\tnodeName = requestURI.substring(monitoringSlavesUrl.length()).replace(\"/\", \"\");\n\t\t\t}\n\t\t\tfinal HttpServletResponse httpResponse = (HttpServletResponse) response;\n\t\t\tdoMonitoring(httpRequest, httpResponse, nodeName);\n\t\t\treturn;\n\t\t}\n\n\t\tsuper.doFilter(request, response, chain);\n\t}",
+  "unified_diff": "diff --git a/src/main/java/org/jvnet/hudson/plugins/monitoring/HudsonMonitoringFilter.java b/src/main/java/org/jvnet/hudson/plugins/monitoring/HudsonMonitoringFilter.java\nindex 0eeee32..e75d248 100644\n--- a/src/main/java/org/jvnet/hudson/plugins/monitoring/HudsonMonitoringFilter.java\n+++ b/src/main/java/org/jvnet/hudson/plugins/monitoring/HudsonMonitoringFilter.java\n@@ -19,6 +19,7 @@\n package org.jvnet.hudson.plugins.monitoring;\n \n import java.io.IOException;\n+import java.util.Enumeration;\n \n import javax.servlet.FilterChain;\n import javax.servlet.FilterConfig;\n@@ -69,9 +70,19 @@ public class HudsonMonitoringFilter extends PluginMonitoringFilter {\n \t\tfinal String monitoringUrl = getMonitoringUrl(httpRequest);\n \t\tfinal String monitoringSlavesUrl = monitoringUrl + \"/nodes\";\n \t\tif (!PLUGIN_AUTHENTICATION_DISABLED\n-\t\t\t\t&& (requestURI.equals(monitoringUrl) || requestURI.equals(monitoringSlavesUrl))) {\n+\t\t\t\t&& (requestURI.equals(monitoringUrl) || requestURI.startsWith(monitoringSlavesUrl))) {\n \t\t\t// only the Hudson/Jenkins administrator can view the monitoring report\n \t\t\tJenkins.getInstance().checkPermission(Jenkins.ADMINISTER);\n+            Enumeration<?> parameterNames = request.getParameterNames();\n+            while (parameterNames.hasMoreElements()) {\n+                String parameterName = (String) parameterNames.nextElement();\n+                for (String value : request.getParameterValues(parameterName)) {\n+                    if (value.indexOf('\"') != -1 || value.indexOf('\\'') != -1 || value.indexOf('<') != -1 || value.indexOf('&') != -1) {\n+                        ((HttpServletResponse) response).sendError(HttpServletResponse.SC_BAD_REQUEST);\n+                        return;\n+                    }\n+                }\n+            }\n \t\t}\n \n \t\tif (requestURI.startsWith(monitoringSlavesUrl)) {",
+  "auto_locate_confidence": "auto"
+}

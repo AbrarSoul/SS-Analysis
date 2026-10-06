@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_9001_copyparty_e0a92ba72d46074209a9c304eb2a01ca0429e60c",
+  "cve_ids": [
+    "CVE-2025-58753"
+  ],
+  "cwe_ids": [
+    "CWE-552",
+    "CWE-862"
+  ],
+  "language": "python",
+  "repository": "9001/copyparty",
+  "repository_url": "https://github.com/9001/copyparty",
+  "vulnerable_commit": "98386f28f0789c86973a5c6829fddb4640ff33e2",
+  "fixed_commit": "e0a92ba72d46074209a9c304eb2a01ca0429e60c",
+  "changed_file": "copyparty/authsrv.py",
+  "max_score": "1337"
+}

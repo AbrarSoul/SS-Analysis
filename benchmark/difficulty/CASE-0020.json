@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0020",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "changed_files": 1,
+  "lines_added": 12,
+  "lines_removed": 3,
+  "lines_changed_total": 15,
+  "function_size_chars": 369,
+  "function_size_lines": 12,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Plain ant-pattern requestMatchers() vs MvcRequestMatcher is a Spring-MVC-specific idiom; recognizing the risk requires framework-specific knowledge of DispatcherServlet path-mapping semantics.",
+  "supported_status": "supported"
+}

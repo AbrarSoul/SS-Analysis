@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_neo4j-contrib_neo4j-apoc-procedures_d2f415c6f703bbc2cda4a753928821ff15d5c620",
+  "language": "java",
+  "cve_id": "CVE-2022-37423",
+  "cve_ids_all": [
+    "CVE-2022-37423"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import apoc.util.FileUtils;",
+    "import org.neo4j.procedure.*;",
+    "import org.neo4j.logging.Log;",
+    "import java.nio.file.NoSuchFileException;",
+    "import java.util.Collections;",
+    "import java.util.Map;",
+    "import java.util.concurrent.atomic.AtomicLong;",
+    "import java.io.File;",
+    "import java.io.IOException;",
+    "import java.nio.file.Files;",
+    "import java.nio.file.Paths;",
+    "import java.util.stream.Stream;"
+  ],
+  "vulnerable_function": "    @Description( \"apoc.log.stream('neo4j.log', { last: n }) - retrieve log file contents, optionally return only the last n lines\" )\n    public Stream<FileEntry> stream(\n            @Name(\"path\") String logName,\n            @Name(value = \"config\",defaultValue = \"{}\") Map<String, Object> config) {\n\n        File logDir = FileUtils.getLogDirectory();\n\n        if (logDir == null) {\n            throw new RuntimeException(\"Neo4j configured dbms.directories.logs points to a directory that \" +\n                    \"does not exist or is not readable.  Please ensure this configuration is correct.\");\n        }\n\n        // Prepend neo4jHome if it's a relative path, and use the user's path otherwise.\n        File f = new File(logDir, logName);\n\n        try {\n            String canonicalPath = f.getCanonicalPath();\n            if (!canonicalPath.startsWith(logDir.getAbsolutePath())) {\n                throw new RuntimeException(\"The path you are trying to access has a canonical path outside of the logs \" +\n                        \"directory, and this procedure is only permitted to access files in the log directory.  This may \" +\n                        \"occur if the path in question is a symlink or other link.\");\n            }\n        } catch (IOException ioe) {\n            throw new RuntimeException(\"Unable to resolve basic log file canonical path\", ioe);\n        }\n\n        try {\n            Stream<String> stream = Files.lines(Paths.get(f.toURI()));\n            final AtomicLong lineNumber = new AtomicLong(0);\n            final String p = f.getCanonicalPath();\n\n            Stream<FileEntry> entries = stream.map(line -> new FileEntry(lineNumber.getAndIncrement(), line, p));\n\n            // Useful for tailing logfiles.\n            if(config.containsKey(\"last\")) {\n                return entries.sorted(Collections.reverseOrder()).limit(new Double(config.get(\"last\").toString()).longValue());\n            }\n\n            return entries;\n        } catch(NoSuchFileException nsf) {\n            // This special case we want to throw a custom message and not let this error propagate, because the\n            // trace exposes the full path we were checking.\n            throw new RuntimeException(\"No log file exists by that name\");\n        } catch (IOException exc) {\n            throw new RuntimeException(exc);\n        }\n    }",
+  "patched_function": "    @Description( \"apoc.log.stream('neo4j.log', { last: n }) - retrieve log file contents, optionally return only the last n lines\" )\n    public Stream<FileEntry> stream(\n            @Name(\"path\") String logName,\n            @Name(value = \"config\",defaultValue = \"{}\") Map<String, Object> config) {\n\n        File logDir = FileUtils.getLogDirectory();\n\n        if (logDir == null) {\n            throw new RuntimeException(\"Neo4j configured dbms.directories.logs points to a directory that \" +\n                    \"does not exist or is not readable.  Please ensure this configuration is correct.\");\n        }\n\n        // Prepend neo4jHome if it's a relative path, and use the user's path otherwise.\n        File f = new File(logDir, logName);\n\n        try {\n            if (!f.getCanonicalFile().toPath().startsWith(logDir.getAbsolutePath())) {\n                throw new RuntimeException(\"The path you are trying to access has a canonical path outside of the logs \" +\n                        \"directory, and this procedure is only permitted to access files in the log directory.  This may \" +\n                        \"occur if the path in question is a symlink or other link.\");\n            }\n        } catch (IOException ioe) {\n            throw new RuntimeException(\"Unable to resolve basic log file canonical path\", ioe);\n        }\n\n        try {\n            Stream<String> stream = Files.lines(Paths.get(f.toURI()));\n            final AtomicLong lineNumber = new AtomicLong(0);\n            final String p = f.getCanonicalPath();\n\n            Stream<FileEntry> entries = stream.map(line -> new FileEntry(lineNumber.getAndIncrement(), line, p));\n\n            // Useful for tailing logfiles.\n            if(config.containsKey(\"last\")) {\n                return entries.sorted(Collections.reverseOrder()).limit(new Double(config.get(\"last\").toString()).longValue());\n            }\n\n            return entries;\n        } catch(NoSuchFileException nsf) {\n            // This special case we want to throw a custom message and not let this error propagate, because the\n            // trace exposes the full path we were checking.\n            throw new RuntimeException(\"No log file exists by that name\");\n        } catch (IOException exc) {\n            throw new RuntimeException(exc);\n        }\n    }",
+  "unified_diff": "diff --git a/core/src/main/java/apoc/log/Neo4jLogStream.java b/core/src/main/java/apoc/log/Neo4jLogStream.java\nindex 9b12b027d..aca90e44e 100644\n--- a/core/src/main/java/apoc/log/Neo4jLogStream.java\n+++ b/core/src/main/java/apoc/log/Neo4jLogStream.java\n@@ -56,8 +56,7 @@ public class Neo4jLogStream {\n         File f = new File(logDir, logName);\n \n         try {\n-            String canonicalPath = f.getCanonicalPath();\n-            if (!canonicalPath.startsWith(logDir.getAbsolutePath())) {\n+            if (!f.getCanonicalFile().toPath().startsWith(logDir.getAbsolutePath())) {\n                 throw new RuntimeException(\"The path you are trying to access has a canonical path outside of the logs \" +\n                         \"directory, and this procedure is only permitted to access files in the log directory.  This may \" +\n                         \"occur if the path in question is a symlink or other link.\");",
+  "auto_locate_confidence": "auto"
+}

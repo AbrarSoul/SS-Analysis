@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_sorlen008_DesktopCommanderMCP_53699bebba9950047bca16ac4dc8f0568f596aaa",
+  "cve_ids": [
+    "CVE-2026-10690"
+  ],
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "typescript",
+  "repository": "sorlen008/DesktopCommanderMCP",
+  "repository_url": "https://github.com/sorlen008/DesktopCommanderMCP",
+  "vulnerable_commit": "eb687ccccf5b40098d69a2b98cb69b8ff1361d94",
+  "fixed_commit": "53699bebba9950047bca16ac4dc8f0568f596aaa",
+  "changed_file": "src/tools/filesystem.ts",
+  "max_score": "1337"
+}

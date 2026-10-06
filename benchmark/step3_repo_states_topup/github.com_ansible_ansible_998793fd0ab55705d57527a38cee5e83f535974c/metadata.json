@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_ansible_ansible_998793fd0ab55705d57527a38cee5e83f535974c",
+  "cve_ids": [
+    "CVE-2014-2686",
+    "CVE-2014-4657"
+  ],
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-670"
+  ],
+  "language": "python",
+  "repository": "ansible/ansible",
+  "repository_url": "https://github.com/ansible/ansible",
+  "vulnerable_commit": "157b783521b52d9c3f357e811f6be0ec7600a89e",
+  "fixed_commit": "998793fd0ab55705d57527a38cee5e83f535974c",
+  "changed_file": "lib/ansible/utils/__init__.py",
+  "max_score": "1337"
+}

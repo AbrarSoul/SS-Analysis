@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_samholmes_node-open-graph_a0cef507a90adaac7dbbe9c404f09a50bdefb348",
+  "language": "javascript",
+  "cve_id": "CVE-2021-23419",
+  "cve_ids_all": [
+    "CVE-2021-23419"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1321",
+      "definition": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var\trequest = require('request'),",
+    "var purl = require('url').parse(url);"
+  ],
+  "vulnerable_function": "\tmetaTags.each(function() {\n\t\tvar element = $(this),\n\t\t\tpropertyAttr = element.attr('property');\n\n\t\t// If meta element isn't an \"og:\" property, skip it\n\t\tif (!propertyAttr || propertyAttr.substring(0, namespace.length) !== namespace)\n\t\t\treturn;\n\n\t\tvar property = propertyAttr.substring(namespace.length+1),\n\t\t\tcontent = element.attr('content');\n\n\t\t// If property is a shorthand for a longer property,\n\t\t// Use the full property\n\t\tproperty = shorthandProperties[property] || property;\n\n\n\t\tvar key, tmp,\n\t\t\tptr = meta,\n\t\t\tkeys = property.split(':', 4);\n\n\t\t// we want to leave one key to assign to so we always use references\n\t\t// as long as there's one key left, we're dealing with a sub-node and not a value\n\n\t\twhile (keys.length > 1) {\n\t\t\tkey = keys.shift();\n\n\t\t\tif (Array.isArray(ptr[key])) {\n\t\t\t\t// the last index of ptr[key] should become\n\t\t\t\t// the object we are examining.\n\t\t\t\ttmp = ptr[key].length-1;\n\t\t\t\tptr = ptr[key];\n\t\t\t\tkey = tmp;\n\t\t\t}\n\n\t\t\tif (typeof ptr[key] === 'string') {\n\t\t\t\t// if it's a string, convert it\n\t\t\t\tptr[key] = { '': ptr[key] };\n\t\t\t} else if (ptr[key] === undefined) {\n\t\t\t\t// create a new key\n\t\t\t\tptr[key] = {};\n\t\t\t}\n\n\t\t\t// move our pointer to the next subnode\n\t\t\tptr = ptr[key];\n\t\t}\n\n\t\t// deal with the last key\n\t\tkey = keys.shift();\n\n\t\tif (ptr[key] === undefined) {\n\t\t\tptr[key] = content;\n\t\t} else if (Array.isArray(ptr[key])) {\n\t\t\tptr[key].push(content);\n\t\t} else {\n\t\t\tptr[key] = [ ptr[key], content ];\n\t\t}\n\t}",
+  "patched_function": "var keyBlacklist = [\n\t'__proto__',\n\t'constructor',\n\t'prototype'\n]\n\nexports = module.exports = function(url, cb, options){\n  var userAgent = (options || {}).userAgent || 'NodeOpenGraphCrawler (https://github.com/samholmes/node-open-graph)'\n\texports.getHTML(url, userAgent, function(err, html){\n\t\tif (err) return cb(err);\n\n\t\ttry {\n\t\t\tvar parsedMeta = exports.parse(html, options);\n\t\t}\n\t\tcatch (parseErr) {\n\t\t\tcb(parseErr);\n\t\t}\n\n\t\tcb(null, parsedMeta);\n\t})\n}",
+  "unified_diff": "diff --git a/index.js b/index.js\nindex 50a6020..be75277 100644\n--- a/index.js\n+++ b/index.js\n@@ -10,6 +10,11 @@ var shorthandProperties = {\n \t\"audio\": \"audio:url\"\n }\n \n+var keyBlacklist = [\n+\t'__proto__',\n+\t'constructor',\n+\t'prototype'\n+]\n \n exports = module.exports = function(url, cb, options){\n   var userAgent = (options || {}).userAgent || 'NodeOpenGraphCrawler (https://github.com/samholmes/node-open-graph)'\n@@ -122,6 +127,8 @@ exports.parse = function($, options){\n \t\twhile (keys.length > 1) {\n \t\t\tkey = keys.shift();\n \n+\t\t\tif (keyBlacklist.includes(key)) continue\n+\n \t\t\tif (Array.isArray(ptr[key])) {\n \t\t\t\t// the last index of ptr[key] should become\n \t\t\t\t// the object we are examining.",
+  "auto_locate_confidence": "auto"
+}

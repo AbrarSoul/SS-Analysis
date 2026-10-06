@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0264",
+  "original_source_case_id": "github.com_polonel_trudesk_889876f66c9a5b28f019258e329310c31d72cbd2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-1770",
+  "cve_ids_all": [
+    "CVE-2022-1770"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-269"
+  ],
+  "language": "javascript",
+  "repository": "polonel/trudesk",
+  "repository_url": "https://github.com/polonel/trudesk",
+  "vulnerable_commit": "c78ae09aeae9e7ed30c568dd2b24078ca67622d6",
+  "fixed_commit": "889876f66c9a5b28f019258e329310c31d72cbd2",
+  "changed_file": "src/controllers/api/v2/routes.js",
+  "changed_function": "module.exports = function (middleware, router, controllers) {",
+  "vulnerable_lines": [
+    15,
+    74
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 21,
+  "patch_size_deleted": 21,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0264/vulnerable_source.js": "bd1c58a5334ea1d7251ce1bfa4accd3e69d7fc2d6ab2f751c2c6e4a9668d619a",
+    "cases/CASE-0264/patched_source.js": "794d9d4a1986b63d8aa001350f50b35d8f6650d281a08dcc3468d97db761d93f",
+    "cases/CASE-0264/patch.diff": "8a3d46a0b6bd3b93feb39592011dd33488199e2709369bd5c330098c27a9c5fa",
+    "cases/CASE-0264/metadata.json": "2f6fe80d37153b748be0995a3481592962d9020a4d426bebf4afc43acac9de42",
+    "model_context/CASE-0264.json": "586deb917166e4e7391ab4423a4cb09e5e48a3eddfa4f8e57c5a5dd596b2dd75",
+    "difficulty/CASE-0264.json": "71bdff8f7c7343b827f18c8be838904b3da01a2db0caf5c8b51b4d93991d799e"
+  },
+  "case_level_hash": "7672724f8b77a7a486133265ad88c9465ba539a7754eca1d7c3827ce12380c6d"
+}

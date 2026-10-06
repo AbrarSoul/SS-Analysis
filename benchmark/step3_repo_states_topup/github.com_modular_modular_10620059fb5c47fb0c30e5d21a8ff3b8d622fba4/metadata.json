@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_modular_modular_10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+  "cve_ids": [
+    "CVE-2025-60455"
+  ],
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "python",
+  "repository": "modular/modular",
+  "repository_url": "https://github.com/modular/modular",
+  "vulnerable_commit": "5bc48caa56fc2912fe5e360911bd414120b41a7b",
+  "fixed_commit": "10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+  "changed_file": "max/serve/kvcache_agent/kvcache_agent.py",
+  "max_score": "1337"
+}

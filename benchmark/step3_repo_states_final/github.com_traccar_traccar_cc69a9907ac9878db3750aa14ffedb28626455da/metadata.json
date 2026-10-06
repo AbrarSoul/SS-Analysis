@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_traccar_traccar_cc69a9907ac9878db3750aa14ffedb28626455da",
+  "cve_ids": [
+    "CVE-2021-21292"
+  ],
+  "cwe_ids": [
+    "CWE-428"
+  ],
+  "language": "java",
+  "repository": "traccar/traccar",
+  "repository_url": "https://github.com/traccar/traccar",
+  "vulnerable_commit": "5d0bacea7ebdd169d55c7da0f7d6f3ae1ecf372f",
+  "fixed_commit": "cc69a9907ac9878db3750aa14ffedb28626455da",
+  "changed_file": "src/main/java/org/traccar/WindowsService.java",
+  "max_score": "1337"
+}

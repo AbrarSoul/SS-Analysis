@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0150",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-798"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 0,
+  "lines_changed_total": 7,
+  "function_size_chars": 1597,
+  "function_size_lines": 42,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "JWT signing key defaults to a published constant; hard-coded secret used as a signing key."
+}

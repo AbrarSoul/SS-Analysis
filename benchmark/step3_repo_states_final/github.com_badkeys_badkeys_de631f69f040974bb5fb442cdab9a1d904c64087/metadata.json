@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_badkeys_badkeys_de631f69f040974bb5fb442cdab9a1d904c64087",
+  "cve_ids": [
+    "CVE-2026-21439"
+  ],
+  "cwe_ids": [
+    "CWE-150"
+  ],
+  "language": "python",
+  "repository": "badkeys/badkeys",
+  "repository_url": "https://github.com/badkeys/badkeys",
+  "vulnerable_commit": "75b7b58874e2c31c9e2e85508a94c354a609c254",
+  "fixed_commit": "de631f69f040974bb5fb442cdab9a1d904c64087",
+  "changed_file": "badkeys/dkim.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dromara_sureness_12987a72cbf1eabbca1e308ed1fe9445958aeca7",
+  "cve_ids": [
+    "CVE-2023-31581"
+  ],
+  "cwe_ids": [
+    "CWE-798"
+  ],
+  "language": "java",
+  "repository": "dromara/sureness",
+  "repository_url": "https://github.com/dromara/sureness",
+  "vulnerable_commit": "4e54fb20a927accca23f70aa5b547c00bc7843bf",
+  "fixed_commit": "12987a72cbf1eabbca1e308ed1fe9445958aeca7",
+  "changed_file": "core/src/main/java/com/usthe/sureness/util/JsonWebTokenUtil.java",
+  "max_score": "1337"
+}

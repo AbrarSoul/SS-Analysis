@@ -1,0 +1,37 @@
+{
+  "case_id": "github.com_pyload_pyload_70a44fe02c03bce92337b5d370d2a45caa4de3d4",
+  "language": "python",
+  "cve_id": "CVE-2025-54802",
+  "cve_ids_all": [
+    "CVE-2025-54802",
+    "CVE-2025-57751"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    },
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import os",
+    "from base64 import standard_b64decode",
+    "from functools import wraps",
+    "from urllib.parse import unquote",
+    "from cryptography.hazmat.backends import default_backend",
+    "from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes",
+    "import flask",
+    "from flask.json import jsonify",
+    "from pyload.core.api import Destination",
+    "from pyload.core.utils.convert import to_str",
+    "from pyload.core.utils.misc import eval_js"
+  ],
+  "vulnerable_function": "def addcrypted():\n    api = flask.current_app.config[\"PYLOAD_API\"]\n\n    package = flask.request.form.get(\n        \"package\", flask.request.form.get(\"source\", flask.request.form.get(\"referer\"))\n    )\n    dl_path = api.get_config_value(\"general\", \"storage_folder\")\n    dlc_path = os.path.join(\n        dl_path, package.replace(\"/\", \"\").replace(\"\\\\\", \"\").replace(\":\", \"\") + \".dlc\"\n    )\n    dlc = flask.request.form[\"crypted\"].replace(\" \", \"+\")\n    with open(dlc_path, mode=\"wb\") as fp:\n        fp.write(dlc)\n\n    pack_password = flask.request.form.get(\"passwords\")\n\n    try:\n        pack = api.add_package(package, [dlc_path], Destination.COLLECTOR)\n    except Exception as exc:\n        return \"failed \" + str(exc) + \"\\r\\n\", 500\n    else:\n        if pack_password:\n            api.set_package_data(pack, {\"password\": pack_password})\n\n        return \"success\\r\\n\"\n",
+  "patched_function": "def addcrypted():\n    api = flask.current_app.config[\"PYLOAD_API\"]\n\n    package = flask.request.form.get(\n        \"package\", flask.request.form.get(\"source\", flask.request.form.get(\"referer\"))\n    )\n    dl_path = api.get_config_value(\"general\", \"storage_folder\")\n    dlc_filename = package.replace(\"/\", \"\").replace(\"\\\\\", \"\").replace(\":\", \"\") + \".dlc\"\n    dlc_path = os.path.join(dl_path, dlc_filename)\n    dlc_path = os.path.normpath(dlc_path)\n    # Ensure dlc_path is within dl_path\n    if not os.path.abspath(dlc_path).startswith(os.path.abspath(dl_path) + os.sep):\n        return \"failed: invalid package name\\r\\n\", 400\n    dlc = flask.request.form[\"crypted\"].replace(\" \", \"+\")\n    with open(dlc_path, mode=\"wb\") as fp:\n        fp.write(dlc)\n\n    pack_password = flask.request.form.get(\"passwords\")\n\n    try:\n        pack = api.add_package(package, [dlc_path], Destination.COLLECTOR)\n    except Exception as exc:\n        return \"failed \" + str(exc) + \"\\r\\n\", 500\n    else:\n        if pack_password:\n            api.set_package_data(pack, {\"password\": pack_password})\n\n        return \"success\\r\\n\"\n",
+  "unified_diff": "diff --git a/src/pyload/webui/app/blueprints/cnl_blueprint.py b/src/pyload/webui/app/blueprints/cnl_blueprint.py\nindex b94f8f8b5..1613374b9 100644\n--- a/src/pyload/webui/app/blueprints/cnl_blueprint.py\n+++ b/src/pyload/webui/app/blueprints/cnl_blueprint.py\n@@ -86,9 +86,12 @@ def addcrypted():\n         \"package\", flask.request.form.get(\"source\", flask.request.form.get(\"referer\"))\n     )\n     dl_path = api.get_config_value(\"general\", \"storage_folder\")\n-    dlc_path = os.path.join(\n-        dl_path, package.replace(\"/\", \"\").replace(\"\\\\\", \"\").replace(\":\", \"\") + \".dlc\"\n-    )\n+    dlc_filename = package.replace(\"/\", \"\").replace(\"\\\\\", \"\").replace(\":\", \"\") + \".dlc\"\n+    dlc_path = os.path.join(dl_path, dlc_filename)\n+    dlc_path = os.path.normpath(dlc_path)\n+    # Ensure dlc_path is within dl_path\n+    if not os.path.abspath(dlc_path).startswith(os.path.abspath(dl_path) + os.sep):\n+        return \"failed: invalid package name\\r\\n\", 400\n     dlc = flask.request.form[\"crypted\"].replace(\" \", \"+\")\n     with open(dlc_path, mode=\"wb\") as fp:\n         fp.write(dlc)",
+  "auto_locate_confidence": "auto"
+}

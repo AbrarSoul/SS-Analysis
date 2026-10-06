@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_kindspells_astro-shield_5ae8b8ef4f681d3a81431ee7e79d5dec545c6e1f",
+  "cve_ids": [
+    "CVE-2024-30250"
+  ],
+  "cwe_ids": [
+    "CWE-345"
+  ],
+  "language": "javascript",
+  "repository": "kindspells/astro-shield",
+  "repository_url": "https://github.com/kindspells/astro-shield",
+  "vulnerable_commit": "1221019306f501bf5fa9bcfb5a23a2321d34ba0a",
+  "fixed_commit": "5ae8b8ef4f681d3a81431ee7e79d5dec545c6e1f",
+  "changed_file": "@kindspells/astro-shield/src/core.mjs",
+  "max_score": "1337"
+}

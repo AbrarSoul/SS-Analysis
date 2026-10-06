@@ -1,0 +1,36 @@
+{
+  "case_id": "CASE-0241",
+  "language": "python",
+  "cve_id": "CVE-2020-14019",
+  "cve_ids_all": [
+    "CVE-2020-14019"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-276",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "RTSRoot",
+  "imports": [
+    "import os",
+    "import stat",
+    "import json",
+    "import glob",
+    "import errno",
+    "import shutil",
+    "from .node import CFSNode",
+    "from .target import Target",
+    "from .fabric import FabricModule",
+    "from .tcm import so_mapping, bs_cache, StorageObject",
+    "from .utils import RTSLibError, RTSLibALUANotSupported, modprobe, mount_configfs",
+    "from .utils import dict_remove, set_attributes",
+    "from .utils import fread, fwrite",
+    "from .alua import ALUATargetPortGroup",
+    "import doctest"
+  ],
+  "vulnerable_function": "    def save_to_file(self, save_file=None, so_path=None):\n        '''\n        Write the configuration in json format to a file.\n        Save file defaults to '/etc/target/saveconfig.json'.\n        '''\n        if not save_file:\n            save_file = default_save_file\n\n        if so_path:\n            saveconf = self._get_saveconf(so_path, save_file)\n        else:\n            saveconf = self.dump()\n\n        tmp_file = save_file + \".temp\"\n\n        mode = stat.S_IRUSR | stat.S_IWUSR  # 0o600\n        umask = 0o777 ^ mode  # Prevents always downgrading umask to 0\n\n        # For security, remove file with potentially elevated mode\n        try:\n            os.remove(tmp_file)\n        except OSError:\n            pass\n\n        umask_original = os.umask(umask)\n        # Even though the old file is first deleted, a race condition is still\n        # possible. Including os.O_EXCL with os.O_CREAT in the flags will\n        # prevent the file from being created if it exists due to a race\n        try:\n            fdesc = os.open(tmp_file, os.O_WRONLY | os.O_CREAT | os.O_EXCL, mode)\n        finally:\n            os.umask(umask_original)\n\n        with os.fdopen(fdesc, 'w+') as f:\n            f.write(json.dumps(saveconf, sort_keys=True, indent=2))\n            f.write(\"\\n\")\n            f.flush()\n            os.fsync(f.fileno())\n            f.close()\n\n        shutil.copyfile(tmp_file, save_file)\n        os.remove(tmp_file)\n",
+  "patched_function": "    def save_to_file(self, save_file=None, so_path=None):\n        '''\n        Write the configuration in json format to a file.\n        Save file defaults to '/etc/target/saveconfig.json'.\n        '''\n        if not save_file:\n            save_file = default_save_file\n\n        if so_path:\n            saveconf = self._get_saveconf(so_path, save_file)\n        else:\n            saveconf = self.dump()\n\n        tmp_file = save_file + \".temp\"\n\n        mode = stat.S_IRUSR | stat.S_IWUSR  # 0o600\n        umask = 0o777 ^ mode  # Prevents always downgrading umask to 0\n\n        # For security, remove file with potentially elevated mode\n        try:\n            os.remove(tmp_file)\n        except OSError:\n            pass\n\n        umask_original = os.umask(umask)\n        # Even though the old file is first deleted, a race condition is still\n        # possible. Including os.O_EXCL with os.O_CREAT in the flags will\n        # prevent the file from being created if it exists due to a race\n        try:\n            fdesc = os.open(tmp_file, os.O_WRONLY | os.O_CREAT | os.O_EXCL, mode)\n        finally:\n            os.umask(umask_original)\n\n        with os.fdopen(fdesc, 'w+') as f:\n            f.write(json.dumps(saveconf, sort_keys=True, indent=2))\n            f.write(\"\\n\")\n            f.flush()\n            os.fsync(f.fileno())\n            f.close()\n\n        # copy along with permissions\n        shutil.copy(tmp_file, save_file)\n        os.remove(tmp_file)\n",
+  "unified_diff": "diff --git a/rtslib/root.py b/rtslib/root.py\nindex a101edd..7364154 100644\n--- a/rtslib/root.py\n+++ b/rtslib/root.py\n@@ -486,7 +486,8 @@ class RTSRoot(CFSNode):\n             os.fsync(f.fileno())\n             f.close()\n \n-        shutil.copyfile(tmp_file, save_file)\n+        # copy along with permissions\n+        shutil.copy(tmp_file, save_file)\n         os.remove(tmp_file)\n \n     def restore_from_file(self, restore_file=None, clear_existing=True,",
+  "auto_locate_confidence": "auto"
+}

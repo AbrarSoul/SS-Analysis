@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_rakibtg_docker-web-gui_79cdc41809f2030fce21a1109898bd79e4190661",
+  "cve_ids": [
+    "CVE-2021-27886"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "rakibtg/docker-web-gui",
+  "repository_url": "https://github.com/rakibtg/docker-web-gui",
+  "vulnerable_commit": "16779d0950a706b2fc905cc9b9514d3511142f4f",
+  "fixed_commit": "79cdc41809f2030fce21a1109898bd79e4190661",
+  "changed_file": "backend/utilities/terminal.js",
+  "max_score": "1337"
+}

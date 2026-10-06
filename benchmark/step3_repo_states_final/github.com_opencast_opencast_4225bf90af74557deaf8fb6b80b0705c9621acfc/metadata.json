@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_opencast_opencast_4225bf90af74557deaf8fb6b80b0705c9621acfc",
+  "cve_ids": [
+    "CVE-2020-26234"
+  ],
+  "cwe_ids": [
+    "CWE-346"
+  ],
+  "language": "java",
+  "repository": "opencast/opencast",
+  "repository_url": "https://github.com/opencast/opencast",
+  "vulnerable_commit": "4b905437e90bd19700a6a6688f227f9efb20e153",
+  "fixed_commit": "4225bf90af74557deaf8fb6b80b0705c9621acfc",
+  "changed_file": "modules/kernel/src/main/java/org/opencastproject/kernel/http/impl/HttpClientImpl.java",
+  "max_score": "1337"
+}

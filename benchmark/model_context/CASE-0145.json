@@ -1,0 +1,28 @@
+{
+  "case_id": "CASE-0145",
+  "language": "java",
+  "cve_id": "CVE-2015-10076",
+  "cve_ids_all": [
+    "CVE-2015-10076"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import android.content.ContentValues;",
+    "import android.content.Context;",
+    "import android.database.Cursor;",
+    "import android.database.SQLException;",
+    "import android.database.sqlite.SQLiteDatabase;",
+    "import java.util.ArrayList;",
+    "import java.util.List;"
+  ],
+  "vulnerable_function": "    public Tag createTag(ShaarliAccount masterAccount, String value) {\n        Tag tag = new Tag();\n        tag.setMasterAccount(masterAccount);\n        tag.setValue(value.trim());\n\n        ContentValues values = new ContentValues();\n        values.put(MySQLiteHelper.TAGS_COLUMN_ID_ACCOUNT, masterAccount.getId());\n        values.put(MySQLiteHelper.TAGS_COLUMN_TAG, tag.getValue());\n\n        // If existing, do nothing :\n        Cursor cursor = db.query(MySQLiteHelper.TABLE_TAGS, allColumns,\n                MySQLiteHelper.TAGS_COLUMN_ID_ACCOUNT + \" = \" + tag.getMasterAccountId() + \" AND \" +\n                        MySQLiteHelper.TAGS_COLUMN_TAG + \" = '\" + tag.getValue() + \"'\",\n                null, null, null, null);\n        try {\n            cursor.moveToFirst();\n            if (cursor.isAfterLast()) {\n                long insertId = db.insert(MySQLiteHelper.TABLE_TAGS, null, values);\n                tag.setId(insertId);\n                return tag;\n            } else {\n                tag = cursorToTag(cursor);\n            }\n        } catch (Exception e){\n            tag = null;\n        } finally {\n            cursor.close();\n        }\n        return tag;\n    }",
+  "patched_function": "    public Tag createTag(ShaarliAccount masterAccount, String value) {\n        Tag tag = new Tag();\n        tag.setMasterAccount(masterAccount);\n        tag.setValue(value.trim());\n\n        ContentValues values = new ContentValues();\n        values.put(MySQLiteHelper.TAGS_COLUMN_ID_ACCOUNT, masterAccount.getId());\n        values.put(MySQLiteHelper.TAGS_COLUMN_TAG, tag.getValue());\n\n        // If existing, do nothing :\n        String[] getTagArgs = {String.valueOf(tag.getMasterAccountId()), tag.getValue()};\n\n        Cursor cursor = db.query(MySQLiteHelper.TABLE_TAGS, allColumns,\n                MySQLiteHelper.TAGS_COLUMN_ID_ACCOUNT + \" = ? AND \" +\n                        MySQLiteHelper.TAGS_COLUMN_TAG + \" = ?\",\n                getTagArgs, null, null, null);\n        try {\n            cursor.moveToFirst();\n            if (cursor.isAfterLast()) {\n                long insertId = db.insert(MySQLiteHelper.TABLE_TAGS, null, values);\n                tag.setId(insertId);\n                return tag;\n            } else {\n                tag = cursorToTag(cursor);\n            }\n        } catch (Exception e){\n            tag = null;\n        } finally {\n            cursor.close();\n        }\n        return tag;\n    }",
+  "unified_diff": "diff --git a/app/src/main/java/com/dimtion/shaarlier/TagsSource.java b/app/src/main/java/com/dimtion/shaarlier/TagsSource.java\nindex 3e6cc01..464961c 100644\n--- a/app/src/main/java/com/dimtion/shaarlier/TagsSource.java\n+++ b/app/src/main/java/com/dimtion/shaarlier/TagsSource.java\n@@ -61,10 +61,12 @@ class TagsSource {\n         values.put(MySQLiteHelper.TAGS_COLUMN_TAG, tag.getValue());\n \n         // If existing, do nothing :\n+        String[] getTagArgs = {String.valueOf(tag.getMasterAccountId()), tag.getValue()};\n+\n         Cursor cursor = db.query(MySQLiteHelper.TABLE_TAGS, allColumns,\n-                MySQLiteHelper.TAGS_COLUMN_ID_ACCOUNT + \" = \" + tag.getMasterAccountId() + \" AND \" +\n-                        MySQLiteHelper.TAGS_COLUMN_TAG + \" = '\" + tag.getValue() + \"'\",\n-                null, null, null, null);\n+                MySQLiteHelper.TAGS_COLUMN_ID_ACCOUNT + \" = ? AND \" +\n+                        MySQLiteHelper.TAGS_COLUMN_TAG + \" = ?\",\n+                getTagArgs, null, null, null);\n         try {\n             cursor.moveToFirst();\n             if (cursor.isAfterLast()) {",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0016",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "changed_files": 1,
+  "lines_added": 51,
+  "lines_removed": 30,
+  "lines_changed_total": 81,
+  "function_size_chars": 855,
+  "function_size_lines": 13,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "String concatenation directly into a SQL string is a self-contained syntactic pattern.",
+  "supported_status": "supported"
+}

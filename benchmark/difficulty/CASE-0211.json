@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0211",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-749"
+  ],
+  "changed_files": 1,
+  "lines_added": 19,
+  "lines_removed": 0,
+  "lines_changed_total": 19,
+  "function_size_chars": 3930,
+  "function_size_lines": 90,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Code-validation gate checks call names but not attribute access; validator incompleteness is not expressible as a pattern."
+}

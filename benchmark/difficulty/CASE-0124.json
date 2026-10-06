@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0124",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 3,
+  "lines_changed_total": 7,
+  "function_size_chars": 1088,
+  "function_size_lines": 30,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Path interpolated into an f-string command run through os.system; shell injection."
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_eosphoros-ai_DB-GPT_295cdb8723663d5b0954d5d1dfb4f02b7223b8ff",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-434"
+  ],
+  "changed_files": 1,
+  "lines_added": 69,
+  "lines_removed": 7,
+  "lines_changed_total": 76,
+  "function_size_chars": 1391,
+  "function_size_lines": 36,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

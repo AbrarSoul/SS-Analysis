@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0111",
+  "original_source_case_id": "github.com_apache_santuario-java_25e0e11493b061749f778030036cb5c406b34590",
+  "selection_batch": "final",
+  "cve_id": "CVE-2013-2172",
+  "cve_ids_all": [
+    "CVE-2013-2172"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "language": "java",
+  "repository": "apache/santuario-java",
+  "repository_url": "https://github.com/apache/santuario-java",
+  "vulnerable_commit": "043ea0bf5536c6bd68cb5ab3bec47f31b1633989",
+  "fixed_commit": "25e0e11493b061749f778030036cb5c406b34590",
+  "changed_file": "src/org/jcp/xml/dsig/internal/dom/DOMCanonicalizationMethod.java",
+  "changed_function": "public DOMCanonicalizationMethod(TransformService spi)",
+  "vulnerable_lines": [
+    47,
+    50
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0111/vulnerable_source.java": "c5858775656f6d14ee4d1eb030a393ab88967a4b2260e23a5e9b451f2057ed69",
+    "cases/CASE-0111/patched_source.java": "332546f30a189b740d82f43f71f30b78794c12aff76bd1fc81340c1b61654456",
+    "cases/CASE-0111/patch.diff": "50242fa43d8fc4a83ab19d500e03f868203b606b17a0fd50a964276599f4a1ac",
+    "cases/CASE-0111/metadata.json": "ef427272316b535b70c21dba6dc4a38b0a8ac4263bb06783f1ebb8ea6ce226fc",
+    "model_context/CASE-0111.json": "b8fac9fc9441e2a5f0bcaa098258f61464b990ae50de1f8573f0785ac446aa4c",
+    "difficulty/CASE-0111.json": "d87c885ea99d084a72b4bf1f92de5565d08c12f02fe60065340ca54d704ab499"
+  },
+  "case_level_hash": "1e7ba2e3e1a1a2e1ad3ab22d9915538b33f4579a1bed39c3b556ca01cb15deeb"
+}

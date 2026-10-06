@@ -1,0 +1,29 @@
+{
+  "case_id": "CASE-0200",
+  "language": "java",
+  "cve_id": "CVE-2022-43550",
+  "cve_ids_all": [
+    "CVE-2022-43550"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    },
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import net.java.sip.communicator.service.browserlauncher.*;",
+    "import org.apache.commons.lang3.SystemUtils;",
+    "import org.jitsi.service.configuration.*;",
+    "import com.apple.eio.*;"
+  ],
+  "vulnerable_function": "    public void openURL(final String url)\n    {\n        Thread launchBrowserThread\n            = new Thread(getClass().getName())\n                    {\n                        @Override\n                        public void run()\n                        {\n                            try\n                            {\n                                launchBrowser(url);\n                            }\n                            catch (Exception e)\n                            {\n                                logger.error(\"Failed to launch browser\", e);\n                            }\n                        }\n                    };\n\n        launchBrowserThread.start();\n    }",
+  "patched_function": "    public void openURL(final String url)\n    {\n        if (url == null || !url.startsWith(\"http\"))\n        {\n            logger.warn(\"Not a valid URL to open:\" + url);\n            return;\n        }\n        Thread launchBrowserThread\n            = new Thread(getClass().getName())\n                    {\n                        @Override\n                        public void run()\n                        {\n                            try\n                            {\n                                launchBrowser(url);\n                            }\n                            catch (Exception e)\n                            {\n                                logger.error(\"Failed to launch browser\", e);\n                            }\n                        }\n                    };\n\n        launchBrowserThread.start();\n    }",
+  "unified_diff": "diff --git a/modules/service/browserlauncher/src/main/java/net/java/sip/communicator/impl/browserlauncher/BrowserLauncherImpl.java b/modules/service/browserlauncher/src/main/java/net/java/sip/communicator/impl/browserlauncher/BrowserLauncherImpl.java\nindex 1677398dd..815a51a58 100644\n--- a/modules/service/browserlauncher/src/main/java/net/java/sip/communicator/impl/browserlauncher/BrowserLauncherImpl.java\n+++ b/modules/service/browserlauncher/src/main/java/net/java/sip/communicator/impl/browserlauncher/BrowserLauncherImpl.java\n@@ -140,6 +140,11 @@ private String getLinuxBrowser()\n      */\n     public void openURL(final String url)\n     {\n+        if (url == null || !url.startsWith(\"http\"))\n+        {\n+            logger.warn(\"Not a valid URL to open:\" + url);\n+            return;\n+        }\n         Thread launchBrowserThread\n             = new Thread(getClass().getName())\n                     {",
+  "auto_locate_confidence": "auto"
+}

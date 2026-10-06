@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0009",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-209"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 537,
+  "function_size_lines": 18,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Raw bytes embedded directly in an exception constructor; self-contained.",
+  "supported_status": "supported"
+}

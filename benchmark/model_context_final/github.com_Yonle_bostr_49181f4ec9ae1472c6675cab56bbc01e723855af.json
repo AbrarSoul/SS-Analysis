@@ -1,0 +1,27 @@
+{
+  "case_id": "github.com_Yonle_bostr_49181f4ec9ae1472c6675cab56bbc01e723855af",
+  "language": "javascript",
+  "cve_id": "CVE-2024-41962",
+  "cve_ids_all": [
+    "CVE-2024-41962"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-285",
+      "definition": "Improper Authorization"
+    },
+    {
+      "id": "NVD-CWE-Other",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "let { validateEvent, verifyEvent, nip19 } = require(\"nostr-tools\");",
+    "let { authorized_keys, private_keys, noscraper } = require(process.env.BOSTR_CONFIG_PATH || \"./config\");"
+  ],
+  "vulnerable_function": "module.exports = (authKey, data, ws, req) => {\n  if (!authorized_keys?.length && !Object.keys(private_keys).length && !noscraper) return; // do nothing\n  if (!validateEvent(data) || !verifyEvent(data)) {\n    ws.send(JSON.stringify([\"NOTICE\", \"error: invalid challenge response.\"]));\n    return false;\n  }\n\n  if (!authorized_keys?.includes(data.pubkey) && !private_keys[data.pubkey] && !noscraper) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"unauthorized.\"]));\n    return false;\n  }\n\n  if (data.kind != 22242) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"not kind 22242.\"]));\n    return false;\n  }\n\n  const tags = Object.fromEntries(data.tags);\n\n  if (!tags.relay?.includes(req.headers.host)) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"unmatched relay url.\"]));\n    return false;\n  };\n\n  if (tags.challenge !== authKey) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"unmatched challenge string.\"]));\n    return false;\n  }\n\n  ws.send(JSON.stringify([\"OK\", data.id, true, `Hello ${data.pubkey}`]));\n  return true;\n}",
+  "patched_function": "module.exports = (authKey, data, ws, req) => {\n  if (!authorized_keys?.length && !Object.keys(private_keys).length && !noscraper) return; // do nothing\n  if (!validateEvent(data) || !verifyEvent(data)) {\n    ws.send(JSON.stringify([\"NOTICE\", \"error: invalid challenge response.\"]));\n    return false;\n  }\n\n  let pubkeyInConfig = authorized_keys?.includes(data.pubkey) || data.pubkey in private_keys;\n\n  if (authorized_keys?.length && !pubkeyInConfig) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"unauthorized.\"]));\n    return false;\n  }\n\n  if (data.kind != 22242) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"not kind 22242.\"]));\n    return false;\n  }\n\n  const tags = Object.fromEntries(data.tags);\n\n  if (!tags.relay?.includes(req.headers.host)) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"unmatched relay url.\"]));\n    return false;\n  };\n\n  if (tags.challenge !== authKey) {\n    ws.send(JSON.stringify([\"OK\", data.id, false, \"unmatched challenge string.\"]));\n    return false;\n  }\n\n  ws.send(JSON.stringify([\"OK\", data.id, true, `Hello ${data.pubkey}`]));\n  return true;\n}",
+  "unified_diff": "diff --git a/auth.js b/auth.js\nindex 1352e3a..6d66662 100644\n--- a/auth.js\n+++ b/auth.js\n@@ -18,7 +18,9 @@ module.exports = (authKey, data, ws, req) => {\n     return false;\n   }\n \n-  if (!authorized_keys?.includes(data.pubkey) && !private_keys[data.pubkey] && !noscraper) {\n+  let pubkeyInConfig = authorized_keys?.includes(data.pubkey) || data.pubkey in private_keys;\n+\n+  if (authorized_keys?.length && !pubkeyInConfig) {\n     ws.send(JSON.stringify([\"OK\", data.id, false, \"unauthorized.\"]));\n     return false;\n   }",
+  "auto_locate_confidence": "auto"
+}

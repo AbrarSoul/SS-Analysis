@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0228",
+  "original_source_case_id": "github.com_misskey-dev_misskey_77e421029cb564a97f42b6e41c9edce49f79cecd",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-24897",
+  "cve_ids_all": [
+    "CVE-2025-24897"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1275",
+    "CWE-352",
+    "CWE-614"
+  ],
+  "language": "typescript",
+  "repository": "misskey-dev/misskey",
+  "repository_url": "https://github.com/misskey-dev/misskey",
+  "vulnerable_commit": "f8f17a44d4113cf2e84418f7a1189c6884c5e134",
+  "fixed_commit": "77e421029cb564a97f42b6e41c9edce49f79cecd",
+  "changed_file": "packages/frontend/src/account.ts",
+  "changed_function": "function fetchAccount(token: string, id?: string, forceShowDialog?: boolean): Promise<Account> {",
+  "vulnerable_lines": [
+    103,
+    166
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0228/vulnerable_source.ts": "0fa3152cee3ba781e22ccf13d4227379676d144fe7c7b54187321cdd26a8b212",
+    "cases/CASE-0228/patched_source.ts": "ae072771776e114bbfee4ee0148ad81f22781fa2ef2ce39f73d90b6a43f7bec0",
+    "cases/CASE-0228/patch.diff": "e83f22538aa18973689514790e36b9cea04a902a7f89365adde91b8a110cfe7a",
+    "cases/CASE-0228/metadata.json": "8de787491c99cab3874947cf366cb7e2477b1b42ca767c3a133bfae393fce4e4",
+    "model_context/CASE-0228.json": "a0037ec1adbb084884fb6217c6a803cc8ce6d5618ccddbe8e53736bf35105ea0",
+    "difficulty/CASE-0228.json": "36a683cded5594b578e65d634c6aba88f66a802aa8377ad0c7b2403a32239792"
+  },
+  "case_level_hash": "cb0684b1b4e77b3eaddd79257510f720d5d8f1972fc384a213394a3cf0565b6f"
+}

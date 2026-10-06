@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0275",
+  "original_source_case_id": "github.com_pyload_pyload_f4e2d12416ba2dfac7b036d5c8d6dab5461b9840",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-7346",
+  "cve_ids_all": [
+    "CVE-2025-7346"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-281"
+  ],
+  "language": "python",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "9e3410ffb01e0fd8920d118d30b629661f31bbdf",
+  "fixed_commit": "f4e2d12416ba2dfac7b036d5c8d6dab5461b9840",
+  "changed_file": "src/pyload/webui/app/blueprints/cnl_blueprint.py",
+  "changed_function": "def wrapper(*args, **kwargs):",
+  "vulnerable_lines": [
+    24,
+    35
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 1,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0275/vulnerable_source.py": "6f940ada21e21627bf7c53780e71cc6f9a1cce481b395102f874316bb4f67192",
+    "cases/CASE-0275/patched_source.py": "fe909264898420bc8fe73563c23b00b0fdc5e179db7a97ac2bc03c8a6097fd66",
+    "cases/CASE-0275/patch.diff": "4baffd8bddb9d9634e474020dc7b8d96866d4ac254fce30386d2725c4b49fac6",
+    "cases/CASE-0275/metadata.json": "fd21a6b23be2aeb0a362bcc095ae44596f70a6943f5a7eb2fa2a2885181516c8",
+    "model_context/CASE-0275.json": "a8bb5f9f12ea7f7a9bd7ed248a6e99a047c62deb66370cb4ac377fb742153eff",
+    "difficulty/CASE-0275.json": "0b1fc5502b34cc2765b86d53dbe995f4279d1b0f41def19ff1f237a85e4a6e34"
+  },
+  "case_level_hash": "f1094535af2d09c4013a924bf365a56952b3b88536d440df2a60194ab18819d3"
+}

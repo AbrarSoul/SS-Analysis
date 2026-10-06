@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0243",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 12,
+  "lines_changed_total": 13,
+  "function_size_chars": 3006,
+  "function_size_lines": 65,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Deciding which server to trust by the organization of the requested URL; multi-tenant trust logic, not a code shape."
+}

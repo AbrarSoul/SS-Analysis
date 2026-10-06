@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0165",
+  "original_source_case_id": "github.com_formio_formio_1836bdd9f55f5888ff397c257b2108c09d3de478",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-67718",
+  "cve_ids_all": [
+    "CVE-2025-67718"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-178",
+    "CWE-200"
+  ],
+  "language": "javascript",
+  "repository": "formio/formio",
+  "repository_url": "https://github.com/formio/formio",
+  "vulnerable_commit": "91c7bb233774b32d0d616fb0727ef450567542b6",
+  "fixed_commit": "1836bdd9f55f5888ff397c257b2108c09d3de478",
+  "changed_file": "src/util/util.js",
+  "changed_function": ",",
+  "vulnerable_lines": [
+    387,
+    422
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0165/vulnerable_source.js": "bca20403cf3e33668b0444d43e5a7ac61d2f309e0159eee83116a02e7d3234fa",
+    "cases/CASE-0165/patched_source.js": "96ab18fc8c89dfc3d95807f50b8273856eeef53e3a5bddbf6e486de7608433ba",
+    "cases/CASE-0165/patch.diff": "13cb87e52089006cd41711af7a34397fed3d5f5cc8451c0701cb036aa14aca99",
+    "cases/CASE-0165/metadata.json": "1e41f5bc7a9ce7424ce1ce42c79a4e6d400b09987b95adf6925b0112c1dd9718",
+    "model_context/CASE-0165.json": "9673c21834962232dd19d19288fd18a52cd4de77352d597613d8aca2fa16982f",
+    "difficulty/CASE-0165.json": "f48aa8b6c1a995dcd0fd930d3067727a07de2fe158a4264408ed1352e0e6d27e"
+  },
+  "case_level_hash": "25e08e16cab1a58aff7df516626401c4746df0aca6c1b715941baa7e3af0c355"
+}

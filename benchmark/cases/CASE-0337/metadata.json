@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0337",
+  "original_source_case_id": "github.com_yugabyte_yugabyte-db_439c6286f1971f9ac6bff2c7215b454c2025c593",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2024-0006",
+  "cve_ids_all": [
+    "CVE-2024-0006"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "java",
+  "repository": "yugabyte/yugabyte-db",
+  "repository_url": "https://github.com/yugabyte/yugabyte-db",
+  "vulnerable_commit": "353d2ec7d562c3bf94f2ecd879641b3d35ce63ad",
+  "fixed_commit": "439c6286f1971f9ac6bff2c7215b454c2025c593",
+  "changed_file": "managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java",
+  "changed_function": "private ShellResponse executeNodeAction(",
+  "vulnerable_lines": [
+    510,
+    533
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0337/vulnerable_source.java": "79a9fd35f0b49db703d3190c2e191c75413b4d8c3ddd90c2f0ae3e265b42e2bb",
+    "cases/CASE-0337/patched_source.java": "951f17119630d59ba1668146af08068e5a1705f975842f672dc8ce13b6e08b1a",
+    "cases/CASE-0337/patch.diff": "212eff736b58332224eaa07c943226a07cf31195df1e16584978efde3ccb3f4f",
+    "cases/CASE-0337/metadata.json": "65fdc7e0a02c28bd996ab58a1cd36a601a8d1314c0c288d6daec444d519dc589",
+    "model_context/CASE-0337.json": "97eb304673e832533aca2e44c29cde26ed8352615e2bc8dde20fa412c1ce6fca",
+    "difficulty/CASE-0337.json": "5051fc1c3a663627c3d1dce45486736ab207d66accc5adddf763ae43992e285f"
+  },
+  "case_level_hash": "bd07fb13dad7b98e510e4529c951a036dd280184f352211a0f8ec49b115a82c8"
+}

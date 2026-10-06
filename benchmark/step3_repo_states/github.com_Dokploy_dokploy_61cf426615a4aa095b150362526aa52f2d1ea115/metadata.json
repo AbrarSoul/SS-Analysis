@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_Dokploy_dokploy_61cf426615a4aa095b150362526aa52f2d1ea115",
+  "cve_ids": [
+    "CVE-2025-53374"
+  ],
+  "cwe_ids": [
+    "CWE-359",
+    "CWE-862"
+  ],
+  "language": "typescript",
+  "repository": "Dokploy/dokploy",
+  "repository_url": "https://github.com/Dokploy/dokploy",
+  "vulnerable_commit": "2a89be6efce3bfc0793c9f6e136bb1c9288a8e19",
+  "fixed_commit": "61cf426615a4aa095b150362526aa52f2d1ea115",
+  "changed_file": "apps/dokploy/server/api/routers/user.ts",
+  "max_score": "1337"
+}

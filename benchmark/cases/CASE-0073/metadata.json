@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0073",
+  "original_source_case_id": "github.com_SignalK_set-system-time_75b11eae2de528bf89ede3fb1f7ed057ddbb4d24",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-23515",
+  "cve_ids_all": [
+    "CVE-2026-23515"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "SignalK/set-system-time",
+  "repository_url": "https://github.com/SignalK/set-system-time",
+  "vulnerable_commit": "7008d7fa0ba625b2a423746dcfb5299f93fe234c",
+  "fixed_commit": "75b11eae2de528bf89ede3fb1f7ed057ddbb4d24",
+  "changed_file": "index.js",
+  "changed_function": "plugin.unsubscribes.push(",
+  "vulnerable_lines": [
+    57,
+    111
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 6,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0073/vulnerable_source.js": "e26ffcf77be0bbc226e2904f8487d585c8a22fd91d5a2e7d5ef2478cf0508014",
+    "cases/CASE-0073/patched_source.js": "c89b4017be7ca3559b44799f886208dc8a4265bef71851c0b943b56bb5be1bca",
+    "cases/CASE-0073/patch.diff": "407c3ea9b72300444f2296ddb24c1ebd317cebea25615db3ac05d56d4fda35ac",
+    "cases/CASE-0073/metadata.json": "077f243ddf0cb8857b8975ba914c5649a834e618e63bfa1d2e7b0bc2ff73f758",
+    "model_context/CASE-0073.json": "5ecdd5a3bb06b91fafa5460dafa015331a644382631bfa9ca4e2471471154638",
+    "difficulty/CASE-0073.json": "e088afae77b155f94b7c6c78177ad89609bbb59a51d379ba51adc320dced5a31"
+  },
+  "case_level_hash": "93fe0c01bfc9fe2b1b6bcb6acce1e8760f6b70d8c193c501ee764a439d96eb76"
+}

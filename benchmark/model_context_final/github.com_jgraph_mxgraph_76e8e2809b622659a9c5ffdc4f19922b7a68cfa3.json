@@ -1,0 +1,24 @@
+{
+  "case_id": "github.com_jgraph_mxgraph_76e8e2809b622659a9c5ffdc4f19922b7a68cfa3",
+  "language": "javascript",
+  "cve_id": "CVE-2019-13127",
+  "cve_ids_all": [
+    "CVE-2019-13127"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "\tvar applyBtn = mxUtils.button(mxResources.get('apply'), function()\n\t{\n\t\tvar color = input.value;\n\t\tColorDialog.addRecentColor(color, 12);\n\t\t\n\t\tif (color != 'none' && color.charAt(0) != '#')\n\t\t{\n\t\t\tcolor = '#' + color;\n\t\t}\n\n\t\tapplyFunction(color);\n\t\teditorUi.hideDialog();\n\t}",
+  "patched_function": "\tvar applyBtn = mxUtils.button(mxResources.get('apply'), function()\n\t{\n\t\tvar color = input.value;\n\t\t// https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation/8027444\n\t\tvar colorValid  = /(^#?[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);\n\t\t\n\t\tif (colorValid)\n\t\t{\n\t\t\tColorDialog.addRecentColor(color, 12);\n\t\t\t\n\t\t\tif (color != 'none' && color.charAt(0) != '#')\n\t\t\t{\n\t\t\t\tcolor = '#' + color;\n\t\t\t}\n\n\t\t\tapplyFunction(color);\t\t\t\n\t\t}\n\n\t\teditorUi.hideDialog();\n\t}",
+  "unified_diff": "diff --git a/javascript/examples/grapheditor/www/js/Dialogs.js b/javascript/examples/grapheditor/www/js/Dialogs.js\nindex 2ac178a74..f168e69e9 100644\n--- a/javascript/examples/grapheditor/www/js/Dialogs.js\n+++ b/javascript/examples/grapheditor/www/js/Dialogs.js\n@@ -204,14 +204,21 @@ var ColorDialog = function(editorUi, color, apply, cancelFn)\n \tvar applyBtn = mxUtils.button(mxResources.get('apply'), function()\n \t{\n \t\tvar color = input.value;\n-\t\tColorDialog.addRecentColor(color, 12);\n+\t\t// https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation/8027444\n+\t\tvar colorValid  = /(^#?[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);\n \t\t\n-\t\tif (color != 'none' && color.charAt(0) != '#')\n+\t\tif (colorValid)\n \t\t{\n-\t\t\tcolor = '#' + color;\n+\t\t\tColorDialog.addRecentColor(color, 12);\n+\t\t\t\n+\t\t\tif (color != 'none' && color.charAt(0) != '#')\n+\t\t\t{\n+\t\t\t\tcolor = '#' + color;\n+\t\t\t}\n+\n+\t\t\tapplyFunction(color);\t\t\t\n \t\t}\n \n-\t\tapplyFunction(color);\n \t\teditorUi.hideDialog();\n \t});\n \tapplyBtn.className = 'geBtn gePrimaryBtn';",
+  "auto_locate_confidence": "auto"
+}

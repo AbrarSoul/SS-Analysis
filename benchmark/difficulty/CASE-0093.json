@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0093",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-335"
+  ],
+  "changed_files": 1,
+  "lines_added": 12,
+  "lines_removed": 2,
+  "lines_changed_total": 14,
+  "function_size_chars": 1918,
+  "function_size_lines": 44,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "RandomStringUtils.randomAlphanumeric used to generate a password; insecure-RNG call pattern."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_NodeBB_NodeBB_04dab1d550cdebf4c1567bca9a51f8b9ca48a500",
+  "cve_ids": [
+    "CVE-2021-43786"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "javascript",
+  "repository": "NodeBB/NodeBB",
+  "repository_url": "https://github.com/NodeBB/NodeBB",
+  "vulnerable_commit": "1783f918bc19568f421473824461ff2ed7755e4c",
+  "fixed_commit": "04dab1d550cdebf4c1567bca9a51f8b9ca48a500",
+  "changed_file": "src/routes/authentication.js",
+  "max_score": "1337"
+}

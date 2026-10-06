@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_honojs_hono_cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817",
+  "cve_ids": [
+    "CVE-2026-24473"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-284",
+    "CWE-668"
+  ],
+  "language": "typescript",
+  "repository": "honojs/hono",
+  "repository_url": "https://github.com/honojs/hono",
+  "vulnerable_commit": "edbf6eea8e6c26a3937518d4ed91d8666edeec37",
+  "fixed_commit": "cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817",
+  "changed_file": "src/adapter/cloudflare-workers/utils.ts",
+  "max_score": "1337"
+}

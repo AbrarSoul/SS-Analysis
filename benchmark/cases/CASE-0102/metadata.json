@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0102",
+  "original_source_case_id": "github.com_apache_camel_9fd8fc30dbd98511a1faa0cbcf39ef5aeec88a64",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-30177",
+  "cve_ids_all": [
+    "CVE-2025-30177"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-164"
+  ],
+  "language": "java",
+  "repository": "apache/camel",
+  "repository_url": "https://github.com/apache/camel",
+  "vulnerable_commit": "4ccb68b166c0d1210966f17d18b848cdd8b64fed",
+  "fixed_commit": "9fd8fc30dbd98511a1faa0cbcf39ef5aeec88a64",
+  "changed_file": "components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java",
+  "changed_function": "protected void initialize() {",
+  "vulnerable_lines": [
+    28,
+    36
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0102/vulnerable_source.java": "4fe5bf4119a9a01c22452f7e149a7384247b0bc63feebb70b5c4771ec72dfbed",
+    "cases/CASE-0102/patched_source.java": "9fd1b30b1fb84d9617c75db211b9a336097aa43a1d72c4ba919cbff69f68f533",
+    "cases/CASE-0102/patch.diff": "11d70b356f48222f192adf3ac8d3f976f7346c3823c4b0c79cdb8c7f500bf7a7",
+    "cases/CASE-0102/metadata.json": "8194ede5005bf22ecda255b71fc4c5cd6c14a853303ea53bbdcf8cae652de018",
+    "model_context/CASE-0102.json": "252528b458f4fd3dec7ed321b1544a2d46c39b960cca1003b9aec6f8dd6c6ae0",
+    "difficulty/CASE-0102.json": "a5388876db71e3f416a25f652a9dc03ae86a56618a2ad8a9e409a96ca06617bd"
+  },
+  "case_level_hash": "c7bc39b85cd71a5389b28b1cb8d23d348fc379a00968ff154b1149a1c558a4ef"
+}

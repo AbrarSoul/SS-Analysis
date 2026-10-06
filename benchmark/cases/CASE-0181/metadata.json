@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0181",
+  "original_source_case_id": "github.com_jazzband_tablib_69abfc3ada5d754cb152119c0b4777043657cb6e",
+  "selection_batch": "topup6",
+  "cve_id": "CVE-2017-2810",
+  "cve_ids_all": [
+    "CVE-2017-2810"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "jazzband/tablib",
+  "repository_url": "https://github.com/jazzband/tablib",
+  "vulnerable_commit": "05bd0d1d42e2a1aeb3b835a4ae96de7364735192",
+  "fixed_commit": "69abfc3ada5d754cb152119c0b4777043657cb6e",
+  "changed_file": "tablib/formats/_yaml.py",
+  "changed_function": "def import_book(dbook, in_stream):",
+  "vulnerable_lines": [
+    31,
+    41
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0181/vulnerable_source.py": "42b44c26f7a09350008f1ed9c3f365cc11eec0dbb547471826f57b4882085c82",
+    "cases/CASE-0181/patched_source.py": "f43bd192ea42c5ff5c5a5eb7f2dff8877cf5ffef2ba81d3fe95169cf4173ddf8",
+    "cases/CASE-0181/patch.diff": "47486d51e886d44e73aae61da90abd6b3b6abbb25df6d8427ae3eed8f0a06cfa",
+    "cases/CASE-0181/metadata.json": "a9846bb526f6fb97530d7e411ee631ecd97576bdc2b1ed56b0f1c490fc914eb7",
+    "model_context/CASE-0181.json": "47f7a27ebc9315ae083794975594952a7e34576c2a9afc75c639e2b060f2a325",
+    "difficulty/CASE-0181.json": "2522fc2485a3ccf8ca56e8fa8c88741010c24175fd3ac3ca54f894e8cf6a568b"
+  },
+  "case_level_hash": "d97c2249dd4e278b506b84fa5e1204cd18a9d050e7a5a465acb14cef06268b41"
+}

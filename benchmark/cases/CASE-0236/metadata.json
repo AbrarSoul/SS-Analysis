@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0236",
+  "original_source_case_id": "github.com_netty_netty_2fa9400a59d0563a66908aba55c41e7285a04994",
+  "selection_batch": "final",
+  "cve_id": "CVE-2014-3488",
+  "cve_ids_all": [
+    "CVE-2014-3488"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-119"
+  ],
+  "language": "java",
+  "repository": "netty/netty",
+  "repository_url": "https://github.com/netty/netty",
+  "vulnerable_commit": "129c17aaa4ac5c611519ef480c35a12e8282b807",
+  "fixed_commit": "2fa9400a59d0563a66908aba55c41e7285a04994",
+  "changed_file": "src/main/java/org/jboss/netty/handler/ssl/SslHandler.java",
+  "changed_function": "private ChannelBuffer unwrap(",
+  "vulnerable_lines": [
+    1237,
+    1369
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 15,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0236/vulnerable_source.java": "f103e19ef0177b5562ad20160cf49d1a488525a7fb7e3def075f35151ef79b4b",
+    "cases/CASE-0236/patched_source.java": "180a5ae62b47857cc9bb2457719bd3f5aab86fe37046a00b634a0c53226c92a1",
+    "cases/CASE-0236/patch.diff": "11951e241ae83de771f9783456abe0025a8721a8a85b9bd064d47e29a3a074a7",
+    "cases/CASE-0236/metadata.json": "a10159c0a55ebcd502f1109176b082da442aeb52da9b7f0b8e567838e4f7db32",
+    "model_context/CASE-0236.json": "307d191d7cceb706377c563a95084d707af2410784238863bab2e561e40759fe",
+    "difficulty/CASE-0236.json": "a38098a4e0f6b895a22f2dbe5312d4401b96ad3446d7235385430a4793749070"
+  },
+  "case_level_hash": "c9ac533e130b9c19b5d32e6528c8565ff36f5afe546077c0db220c88e51fa27b"
+}

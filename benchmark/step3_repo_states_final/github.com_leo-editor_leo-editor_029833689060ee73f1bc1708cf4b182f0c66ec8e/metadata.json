@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_leo-editor_leo-editor_029833689060ee73f1bc1708cf4b182f0c66ec8e",
+  "cve_ids": [
+    "CVE-2020-23478"
+  ],
+  "cwe_ids": [
+    "CWE-697"
+  ],
+  "language": "python",
+  "repository": "leo-editor/leo-editor",
+  "repository_url": "https://github.com/leo-editor/leo-editor",
+  "vulnerable_commit": "c9e92f5574cd38a83cbe0cf1cfc23c8354b5ce93",
+  "fixed_commit": "029833689060ee73f1bc1708cf4b182f0c66ec8e",
+  "changed_file": "leo/plugins/importers/dart.py",
+  "max_score": "1337"
+}

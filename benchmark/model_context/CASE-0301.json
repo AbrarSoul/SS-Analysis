@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0301",
+  "language": "java",
+  "cve_id": "CVE-2021-21250",
+  "cve_ids_all": [
+    "CVE-2021-21250"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-538",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.StringReader;",
+    "import java.io.StringWriter;",
+    "import java.util.ArrayList;",
+    "import java.util.List;",
+    "import org.dom4j.Document;",
+    "import org.dom4j.DocumentException;",
+    "import org.dom4j.Element;",
+    "import org.dom4j.io.SAXReader;",
+    "import org.yaml.snakeyaml.DumperOptions;",
+    "import org.yaml.snakeyaml.DumperOptions.FlowStyle;",
+    "import org.yaml.snakeyaml.emitter.Emitter;",
+    "import org.yaml.snakeyaml.nodes.MappingNode;",
+    "import org.yaml.snakeyaml.nodes.Node;",
+    "import org.yaml.snakeyaml.nodes.NodeTuple;",
+    "import org.yaml.snakeyaml.nodes.ScalarNode;",
+    "import org.yaml.snakeyaml.nodes.SequenceNode;",
+    "import org.yaml.snakeyaml.nodes.Tag;",
+    "import org.yaml.snakeyaml.resolver.Resolver;",
+    "import org.yaml.snakeyaml.serializer.Serializer;",
+    "import com.google.common.collect.Lists;",
+    "import io.onedev.commons.utils.StringUtils;"
+  ],
+  "vulnerable_function": "\tpublic static String migrate(String xml) {\n\t\tDocument xmlDoc;\n\t\ttry {\n\t\t\txmlDoc = new SAXReader().read(new StringReader(xml));\n\t\t} catch (DocumentException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\t\n\t\tList<NodeTuple> tuples = new ArrayList<>();\n\t\tNode keyNode = new ScalarNode(Tag.STR, \"version\");\n\t\tNode valueNode = new ScalarNode(Tag.INT, \"0\");\n\t\ttuples.add(new NodeTuple(keyNode, valueNode));\n\t\t\n\t\tList<Node> jobNodes = new ArrayList<>();\n\t\tfor (Element jobElement: xmlDoc.getRootElement().element(\"jobs\").elements()) \n\t\t\tjobNodes.add(migrateJob(jobElement));\n\t\t\n\t\tif (!jobNodes.isEmpty()) {\n\t\t\tkeyNode = new ScalarNode(Tag.STR, \"jobs\");\n\t\t\ttuples.add(new NodeTuple(keyNode, new SequenceNode(Tag.SEQ, jobNodes, FlowStyle.BLOCK)));\n\t\t}\n\t\t\n\t\tList<Node> propertyNodes = new ArrayList<>();\n\t\tElement propertiesElement = xmlDoc.getRootElement().element(\"properties\");\n\t\tif (propertiesElement != null) {\n\t\t\tfor (Element propertyElement: propertiesElement.elements()) {\n\t\t\t\tNode nameNode = new ScalarNode(Tag.STR, propertyElement.elementText(\"name\").trim());\n\t\t\t\tvalueNode = new ScalarNode(Tag.STR, propertyElement.elementText(\"value\").trim());\n\t\t\t\tList<NodeTuple> propertyTuples = Lists.newArrayList(\n\t\t\t\t\t\tnew NodeTuple(new ScalarNode(Tag.STR, \"name\"), nameNode), \n\t\t\t\t\t\tnew NodeTuple(new ScalarNode(Tag.STR, \"value\"), valueNode));\n\t\t\t\tpropertyNodes.add(new MappingNode(Tag.MAP, propertyTuples, FlowStyle.BLOCK));\n\t\t\t}\n\t\t}\n\t\tif(!propertyNodes.isEmpty()) {\n\t\t\tkeyNode = new ScalarNode(Tag.STR, \"properties\");\n\t\t\ttuples.add(new NodeTuple(keyNode, new SequenceNode(Tag.SEQ, propertyNodes, FlowStyle.BLOCK)));\n\t\t}\n\t\t\n\t\tMappingNode rootNode = new MappingNode(Tag.MAP, tuples, FlowStyle.BLOCK);\n\t\tStringWriter writer = new StringWriter();\n\t\tDumperOptions dumperOptions = new DumperOptions();\n\t\tSerializer serializer = new Serializer(new Emitter(writer, dumperOptions), \n\t\t\t\tnew Resolver(), dumperOptions, Tag.MAP);\n\t\ttry {\n\t\t\tserializer.open();\n\t\t\tserializer.serialize(rootNode);\n\t\t\tserializer.close();\n\t\t\treturn writer.toString();\n\t\t} catch (IOException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\t\n\t}",
+  "patched_function": "\tpublic static String migrate(String xml) {\n\t\tDocument xmlDoc;\n\t\ttry {\n\t\t\tSAXReader reader = new SAXReader();\n\t\t\t// Prevent XXE attack as the xml might be provided by malicious users\n\t\t\treader.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\n\t\t\txmlDoc = reader.read(new StringReader(xml));\n\t\t} catch (DocumentException | SAXException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\t\n\t\tList<NodeTuple> tuples = new ArrayList<>();\n\t\tNode keyNode = new ScalarNode(Tag.STR, \"version\");\n\t\tNode valueNode = new ScalarNode(Tag.INT, \"0\");\n\t\ttuples.add(new NodeTuple(keyNode, valueNode));\n\t\t\n\t\tList<Node> jobNodes = new ArrayList<>();\n\t\tfor (Element jobElement: xmlDoc.getRootElement().element(\"jobs\").elements()) \n\t\t\tjobNodes.add(migrateJob(jobElement));\n\t\t\n\t\tif (!jobNodes.isEmpty()) {\n\t\t\tkeyNode = new ScalarNode(Tag.STR, \"jobs\");\n\t\t\ttuples.add(new NodeTuple(keyNode, new SequenceNode(Tag.SEQ, jobNodes, FlowStyle.BLOCK)));\n\t\t}\n\t\t\n\t\tList<Node> propertyNodes = new ArrayList<>();\n\t\tElement propertiesElement = xmlDoc.getRootElement().element(\"properties\");\n\t\tif (propertiesElement != null) {\n\t\t\tfor (Element propertyElement: propertiesElement.elements()) {\n\t\t\t\tNode nameNode = new ScalarNode(Tag.STR, propertyElement.elementText(\"name\").trim());\n\t\t\t\tvalueNode = new ScalarNode(Tag.STR, propertyElement.elementText(\"value\").trim());\n\t\t\t\tList<NodeTuple> propertyTuples = Lists.newArrayList(\n\t\t\t\t\t\tnew NodeTuple(new ScalarNode(Tag.STR, \"name\"), nameNode), \n\t\t\t\t\t\tnew NodeTuple(new ScalarNode(Tag.STR, \"value\"), valueNode));\n\t\t\t\tpropertyNodes.add(new MappingNode(Tag.MAP, propertyTuples, FlowStyle.BLOCK));\n\t\t\t}\n\t\t}\n\t\tif(!propertyNodes.isEmpty()) {\n\t\t\tkeyNode = new ScalarNode(Tag.STR, \"properties\");\n\t\t\ttuples.add(new NodeTuple(keyNode, new SequenceNode(Tag.SEQ, propertyNodes, FlowStyle.BLOCK)));\n\t\t}\n\t\t\n\t\tMappingNode rootNode = new MappingNode(Tag.MAP, tuples, FlowStyle.BLOCK);\n\t\tStringWriter writer = new StringWriter();\n\t\tDumperOptions dumperOptions = new DumperOptions();\n\t\tSerializer serializer = new Serializer(new Emitter(writer, dumperOptions), \n\t\t\t\tnew Resolver(), dumperOptions, Tag.MAP);\n\t\ttry {\n\t\t\tserializer.open();\n\t\t\tserializer.serialize(rootNode);\n\t\t\tserializer.close();\n\t\t\treturn writer.toString();\n\t\t} catch (IOException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\t\n\t}",
+  "unified_diff": "diff --git a/server-core/src/main/java/io/onedev/server/migration/XmlBuildSpecMigrator.java b/server-core/src/main/java/io/onedev/server/migration/XmlBuildSpecMigrator.java\nindex 5fecc3ed5c..9d59206e0e 100644\n--- a/server-core/src/main/java/io/onedev/server/migration/XmlBuildSpecMigrator.java\n+++ b/server-core/src/main/java/io/onedev/server/migration/XmlBuildSpecMigrator.java\n@@ -10,6 +10,7 @@ import org.dom4j.Document;\n import org.dom4j.DocumentException;\n import org.dom4j.Element;\n import org.dom4j.io.SAXReader;\n+import org.xml.sax.SAXException;\n import org.yaml.snakeyaml.DumperOptions;\n import org.yaml.snakeyaml.DumperOptions.FlowStyle;\n import org.yaml.snakeyaml.emitter.Emitter;\n@@ -662,8 +663,11 @@ public class XmlBuildSpecMigrator {\n \tpublic static String migrate(String xml) {\n \t\tDocument xmlDoc;\n \t\ttry {\n-\t\t\txmlDoc = new SAXReader().read(new StringReader(xml));\n-\t\t} catch (DocumentException e) {\n+\t\t\tSAXReader reader = new SAXReader();\n+\t\t\t// Prevent XXE attack as the xml might be provided by malicious users\n+\t\t\treader.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\n+\t\t\txmlDoc = reader.read(new StringReader(xml));\n+\t\t} catch (DocumentException | SAXException e) {\n \t\t\tthrow new RuntimeException(e);\n \t\t}\n \t\t",
+  "auto_locate_confidence": "auto"
+}

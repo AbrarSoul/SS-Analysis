@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_cowtowncoder_java-merge-sort_450fdee70b5f181c2afc5d817f293efa1a543902",
+  "cve_ids": [
+    "CVE-2022-24913"
+  ],
+  "cwe_ids": [
+    "CWE-377",
+    "CWE-668"
+  ],
+  "language": "java",
+  "repository": "cowtowncoder/java-merge-sort",
+  "repository_url": "https://github.com/cowtowncoder/java-merge-sort",
+  "vulnerable_commit": "83b29a8ab784ff4c6cd05517371aa9893409d29b",
+  "fixed_commit": "450fdee70b5f181c2afc5d817f293efa1a543902",
+  "changed_file": "src/main/java/com/fasterxml/sort/std/StdTempFileProvider.java",
+  "max_score": "1337"
+}

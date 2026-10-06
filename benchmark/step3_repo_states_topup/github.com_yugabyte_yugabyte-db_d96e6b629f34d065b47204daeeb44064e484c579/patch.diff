@@ -1,0 +1,14 @@
+diff --git a/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java b/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java
+index b74bfe22882..58b1f814a1b 100644
+--- a/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java
++++ b/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java
+@@ -532,6 +532,9 @@ public class NodeUniverseManager extends DevopsBase {
+     commandArgs.addAll(actionArgs);
+     if (MapUtils.isNotEmpty(redactedVals)) {
+       // Create a new context as a context is immutable.
++      if (MapUtils.isNotEmpty(context.getRedactedVals())) {
++        redactedVals.putAll(context.getRedactedVals());
++      }
+       context = context.toBuilder().redactedVals(redactedVals).build();
+     }
+     return shellProcessHandler.run(commandArgs, context);

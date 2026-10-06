@@ -1,0 +1,42 @@
+{
+  "case_id": "github.com_electerm_electerm_9dd8295e37d53396b980cd45dfc5ed11ad79b937",
+  "language": "javascript",
+  "cve_id": "CVE-2026-45787",
+  "cve_ids_all": [
+    "CVE-2026-45787"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-326",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-329",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-353",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-759",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-916",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const crypto = require('crypto')",
+    "const crypto = require('crypto')",
+    "const crypto = require('crypto')",
+    "const crypto = require('crypto')",
+    "const crypto = require('crypto')"
+  ],
+  "vulnerable_function": "exports.decrypt = function (\n  encrypted = '',\n  password,\n  algorithm = algorithmDefault,\n  iv = Buffer.alloc(16, 0)\n) {\n  const crypto = require('crypto')\n  // Use the async `crypto.scrypt()` instead.\n  const key = crypto.scryptSync(password, 'salt', 24)\n  const decipher = crypto.createDecipheriv(algorithm, key, iv)\n  // Encrypted using same algorithm, key and iv.\n  let decrypted = decipher.update(encrypted, 'hex', 'utf8')\n  decrypted += decipher.final('utf8')\n  return decrypted\n}",
+  "patched_function": "  const crypto = require('crypto')\n  if (encrypted.startsWith('gcm:')) {\n    // New format: gcm:iv_hex:salt_hex:authtag_hex:ciphertext_hex\n    const parts = encrypted.split(':')\n    const iv = Buffer.from(parts[1], 'hex')\n    const salt = Buffer.from(parts[2], 'hex')\n    const authTag = Buffer.from(parts[3], 'hex')\n    const ciphertext = parts[4]\n    const key = crypto.scryptSync(password, salt, KEY_LENGTH)\n    const decipher = crypto.createDecipheriv(algorithm, key, iv)\n    decipher.setAuthTag(authTag)\n    let decrypted = decipher.update(ciphertext, 'hex', 'utf8')\n    decrypted += decipher.final('utf8')\n    return decrypted\n  }",
+  "unified_diff": "diff --git a/src/app/lib/enc.js b/src/app/lib/enc.js\nindex ce608ba9..b889766b 100644\n--- a/src/app/lib/enc.js\n+++ b/src/app/lib/enc.js\n@@ -1,8 +1,23 @@\n /**\n  * data encrypt/decrypt\n+ *\n+ * New format (GCM):  'gcm:<iv_hex>:<salt_hex>:<authtag_hex>:<ciphertext_hex>'\n+ * Legacy format:     '<ciphertext_hex>'  (pure hex, no colons \u2014 aes-192-cbc)\n+ *\n+ * decrypt/decryptAsync detect the format automatically via the 'gcm:' prefix,\n+ * so old data encrypted with the static IV/salt continues to work without migration.\n  */\n \n-const algorithmDefault = 'aes-192-cbc'\n+const algorithmDefault = 'aes-256-gcm'\n+\n+// Legacy constants \u2014 kept only for decrypting old data (aes-192-cbc)\n+const LEGACY_ALGORITHM = 'aes-192-cbc'\n+const LEGACY_IV = Buffer.alloc(16, 0)\n+const LEGACY_SALT = 'salt'\n+const LEGACY_KEY_LENGTH = 24\n+const IV_LENGTH = 12 // 12 bytes is recommended for GCM\n+const SALT_LENGTH = 16\n+const KEY_LENGTH = 32 // aes-256 requires a 32-byte key\n \n function scryptAsync (...args) {\n   const crypto = require('crypto')\n@@ -19,29 +34,42 @@ function scryptAsync (...args) {\n exports.encrypt = function (\n   str = '',\n   password,\n-  algorithm = algorithmDefault,\n-  iv = Buffer.alloc(16, 0)\n+  algorithm = algorithmDefault\n ) {\n   const crypto = require('crypto')\n-  const key = crypto.scryptSync(password, 'salt', 24)\n-  // Use `crypto.randomBytes` to generate a random iv instead of the static iv\n+  const iv = crypto.randomBytes(IV_LENGTH)\n+  const salt = crypto.randomBytes(SALT_LENGTH)\n+  const key = crypto.scryptSync(password, salt, KEY_LENGTH)\n   const cipher = crypto.createCipheriv(algorithm, key, iv)\n   let encrypted = cipher.update(str, 'utf8', 'hex')\n   encrypted += cipher.final('hex')\n-  return encrypted\n+  const authTag = cipher.getAuthTag()\n+  return 'gcm:' + iv.toString('hex') + ':' + salt.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted\n }\n \n exports.decrypt = function (\n   encrypted = '',\n   password,\n-  algorithm = algorithmDefault,\n-  iv = Buffer.alloc(16, 0)\n+  algorithm = algorithmDefault\n ) {\n   const crypto = require('crypto')\n-  // Use the async `crypto.scrypt()` instead.\n-  const key = crypto.scryptSync(password, 'salt', 24)\n-  const decipher = crypto.createDecipheriv(algorithm, key, iv)\n-  // Encrypted using same algorithm, key and iv.\n+  if (encrypted.startsWith('gcm:')) {\n+    // New format: gcm:iv_hex:salt_hex:authtag_hex:ciphertext_hex\n+    const parts = encrypted.split(':')\n+    const iv = Buffer.from(parts[1], 'hex')\n+    const salt = Buffer.from(parts[2], 'hex')\n+    const authTag = Buffer.from(parts[3], 'hex')\n+    const ciphertext = parts[4]\n+    const key = crypto.scryptSync(password, salt, KEY_LENGTH)\n+    const decipher = crypto.createDecipheriv(algorithm, key, iv)\n+    decipher.setAuthTag(authTag)\n+    let decrypted = decipher.update(ciphertext, 'hex', 'utf8')\n+    decrypted += decipher.final('utf8')\n+    return decrypted\n+  }\n+  // Legacy format: aes-192-cbc with static IV and salt\n+  const key = crypto.scryptSync(password, LEGACY_SALT, LEGACY_KEY_LENGTH)\n+  const decipher = crypto.createDecipheriv(LEGACY_ALGORITHM, key, LEGACY_IV)\n   let decrypted = decipher.update(encrypted, 'hex', 'utf8')\n   decrypted += decipher.final('utf8')\n   return decrypted\n@@ -50,29 +78,42 @@ exports.decrypt = function (\n exports.encryptAsync = async function (\n   str = '',\n   password,\n-  algorithm = algorithmDefault,\n-  iv = Buffer.alloc(16, 0)\n+  algorithm = algorithmDefault\n ) {\n   const crypto = require('crypto')\n-  const key = await scryptAsync(password, 'salt', 24)\n-  // Use `crypto.randomBytes` to generate a random iv instead of the static iv\n+  const iv = crypto.randomBytes(IV_LENGTH)\n+  const salt = crypto.randomBytes(SALT_LENGTH)\n+  const key = await scryptAsync(password, salt, KEY_LENGTH)\n   const cipher = crypto.createCipheriv(algorithm, key, iv)\n   let encrypted = cipher.update(str, 'utf8', 'hex')\n   encrypted += cipher.final('hex')\n-  return encrypted\n+  const authTag = cipher.getAuthTag()\n+  return 'gcm:' + iv.toString('hex') + ':' + salt.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted\n }\n \n exports.decryptAsync = async function (\n   encrypted = '',\n   password,\n-  algorithm = algorithmDefault,\n-  iv = Buffer.alloc(16, 0)\n+  algorithm = algorithmDefault\n ) {\n   const crypto = require('crypto')\n-  // Use the async `crypto.scrypt()` instead.\n-  const key = await scryptAsync(password, 'salt', 24)\n-  const decipher = crypto.createDecipheriv(algorithm, key, iv)\n-  // Encrypted using same algorithm, key and iv.\n+  if (encrypted.startsWith('gcm:')) {\n+    // New format: gcm:iv_hex:salt_hex:authtag_hex:ciphertext_hex\n+    const parts = encrypted.split(':')\n+    const iv = Buffer.from(parts[1], 'hex')\n+    const salt = Buffer.from(parts[2], 'hex')\n+    const authTag = Buffer.from(parts[3], 'hex')\n+    const ciphertext = parts[4]\n+    const key = await scryptAsync(password, salt, KEY_LENGTH)\n+    const decipher = crypto.createDecipheriv(algorithm, key, iv)\n+    decipher.setAuthTag(authTag)\n+    let decrypted = decipher.update(ciphertext, 'hex', 'utf8')\n+    decrypted += decipher.final('utf8')\n+    return decrypted\n+  }\n+  // Legacy format: aes-192-cbc with static IV and salt\n+  const key = await scryptAsync(password, LEGACY_SALT, LEGACY_KEY_LENGTH)\n+  const decipher = crypto.createDecipheriv(LEGACY_ALGORITHM, key, LEGACY_IV)\n   let decrypted = decipher.update(encrypted, 'hex', 'utf8')\n   decrypted += decipher.final('utf8')\n   return decrypted",
+  "auto_locate_confidence": "auto_low_confidence"
+}

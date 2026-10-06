@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_cryptpad_cryptpad_f624f9d457d36040f57c7598d98a8b9461b79837",
+  "cve_ids": [
+    "CVE-2025-49591"
+  ],
+  "cwe_ids": [
+    "CWE-284",
+    "CWE-287",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "cryptpad/cryptpad",
+  "repository_url": "https://github.com/cryptpad/cryptpad",
+  "vulnerable_commit": "0f8160e887120e14ed2a2823e44b1444381e225c",
+  "fixed_commit": "f624f9d457d36040f57c7598d98a8b9461b79837",
+  "changed_file": "lib/http-worker.js",
+  "max_score": "1337"
+}

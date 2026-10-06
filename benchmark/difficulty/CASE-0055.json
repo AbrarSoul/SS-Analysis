@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0055",
+  "batch": "topup4",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 3,
+  "lines_changed_total": 17,
+  "function_size_chars": 512,
+  "function_size_lines": 19,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "normpath(join(base, user_path)) with no realpath or containment check; visible path-traversal idiom."
+}

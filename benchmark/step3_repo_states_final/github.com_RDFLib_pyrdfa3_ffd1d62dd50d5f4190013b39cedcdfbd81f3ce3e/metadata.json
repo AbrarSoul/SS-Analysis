@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_RDFLib_pyrdfa3_ffd1d62dd50d5f4190013b39cedcdfbd81f3ce3e",
+  "cve_ids": [
+    "CVE-2022-4396"
+  ],
+  "cwe_ids": [
+    "CWE-707",
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "RDFLib/pyrdfa3",
+  "repository_url": "https://github.com/RDFLib/pyrdfa3",
+  "vulnerable_commit": "3c652c2e548a569f065313c20b73bd4415dbd47e",
+  "fixed_commit": "ffd1d62dd50d5f4190013b39cedcdfbd81f3ce3e",
+  "changed_file": "pyRdfa/__init__.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0098",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-125"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 2,
+  "lines_changed_total": 8,
+  "function_size_chars": 420,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "hand_retargeted",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Caller-supplied id logged verbatim with no CR/LF neutralisation; log-injection taint to logger."
+}

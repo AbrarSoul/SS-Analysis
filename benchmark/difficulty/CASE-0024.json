@@ -1,0 +1,15 @@
+{
+  "case_id": "CASE-0024",
+  "language": "javascript",
+  "cwe_ids": [],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 15,
+  "lines_changed_total": 23,
+  "function_size_chars": 1418,
+  "function_size_lines": 37,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "new Function() applied directly to parsed response data; self-contained sink, same shape as eval().",
+  "supported_status": "supported"
+}

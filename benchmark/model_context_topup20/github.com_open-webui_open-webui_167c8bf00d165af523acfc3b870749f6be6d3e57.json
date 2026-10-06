@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_open-webui_open-webui_167c8bf00d165af523acfc3b870749f6be6d3e57",
+  "language": "python",
+  "cve_id": "CVE-2026-45347",
+  "cve_ids_all": [
+    "CVE-2026-45347"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-918",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "PDFGenerator",
+  "imports": [
+    "from datetime import datetime",
+    "from io import BytesIO",
+    "from pathlib import Path",
+    "from typing import Dict, Any, List",
+    "from markdown import markdown",
+    "import site",
+    "from fpdf import FPDF",
+    "from open_webui.env import STATIC_DIR, FONTS_DIR",
+    "from open_webui.models.chats import ChatTitleMessagesForm"
+  ],
+  "vulnerable_function": "    def _build_html_message(self, message: Dict[str, Any]) -> str:\n        \"\"\"Build HTML for a single message.\"\"\"\n        role = message.get(\"role\", \"user\")\n        content = message.get(\"content\", \"\")\n        timestamp = message.get(\"timestamp\")\n\n        model = message.get(\"model\") if role == \"assistant\" else \"\"\n\n        date_str = self.format_timestamp(timestamp) if timestamp else \"\"\n\n        # extends pymdownx extension to convert markdown to html.\n        # - https://facelessuser.github.io/pymdown-extensions/usage_notes/\n        # html_content = markdown(content, extensions=[\"pymdownx.extra\"])\n\n        content = content.replace(\"\\n\", \"<br/>\")\n        html_message = f\"\"\"\n            <div>\n                <div>\n                    <h4>\n                        <strong>{role.title()}</strong>\n                        <span style=\"font-size: 12px;\">{model}</span>\n                    </h4>\n                    <div> {date_str} </div>\n                </div>\n                <br/>\n                <br/>\n\n                <div>\n                    {content}\n                </div>\n            </div>\n            <br/>\n          \"\"\"\n        return html_message\n",
+  "patched_function": "    def _build_html_message(self, message: Dict[str, Any]) -> str:\n        \"\"\"Build HTML for a single message.\"\"\"\n        role = escape(message.get(\"role\", \"user\"))\n        content = escape(message.get(\"content\", \"\"))\n        timestamp = message.get(\"timestamp\")\n\n        model = escape(message.get(\"model\") if role == \"assistant\" else \"\")\n\n        date_str = escape(self.format_timestamp(timestamp) if timestamp else \"\")\n\n        # extends pymdownx extension to convert markdown to html.\n        # - https://facelessuser.github.io/pymdown-extensions/usage_notes/\n        # html_content = markdown(content, extensions=[\"pymdownx.extra\"])\n\n        content = content.replace(\"\\n\", \"<br/>\")\n        html_message = f\"\"\"\n            <div>\n                <div>\n                    <h4>\n                        <strong>{role.title()}</strong>\n                        <span style=\"font-size: 12px;\">{model}</span>\n                    </h4>\n                    <div> {date_str} </div>\n                </div>\n                <br/>\n                <br/>\n\n                <div>\n                    {content}\n                </div>\n            </div>\n            <br/>\n          \"\"\"\n        return html_message\n",
+  "unified_diff": "diff --git a/backend/open_webui/utils/pdf_generator.py b/backend/open_webui/utils/pdf_generator.py\nindex 1bb9f76b3..6650fd9b5 100644\n--- a/backend/open_webui/utils/pdf_generator.py\n+++ b/backend/open_webui/utils/pdf_generator.py\n@@ -2,6 +2,7 @@ from datetime import datetime\n from io import BytesIO\n from pathlib import Path\n from typing import Dict, Any, List\n+from html import escape\n \n from markdown import markdown\n \n@@ -11,7 +12,6 @@ from fpdf import FPDF\n from open_webui.env import STATIC_DIR, FONTS_DIR\n from open_webui.models.chats import ChatTitleMessagesForm\n \n-\n class PDFGenerator:\n     \"\"\"\n     Description:\n@@ -41,13 +41,13 @@ class PDFGenerator:\n \n     def _build_html_message(self, message: Dict[str, Any]) -> str:\n         \"\"\"Build HTML for a single message.\"\"\"\n-        role = message.get(\"role\", \"user\")\n-        content = message.get(\"content\", \"\")\n+        role = escape(message.get(\"role\", \"user\"))\n+        content = escape(message.get(\"content\", \"\"))\n         timestamp = message.get(\"timestamp\")\n \n-        model = message.get(\"model\") if role == \"assistant\" else \"\"\n+        model = escape(message.get(\"model\") if role == \"assistant\" else \"\")\n \n-        date_str = self.format_timestamp(timestamp) if timestamp else \"\"\n+        date_str = escape(self.format_timestamp(timestamp) if timestamp else \"\")\n \n         # extends pymdownx extension to convert markdown to html.\n         # - https://facelessuser.github.io/pymdown-extensions/usage_notes/\n@@ -76,6 +76,7 @@ class PDFGenerator:\n \n     def _generate_html_body(self) -> str:\n         \"\"\"Generate the full HTML body for the PDF.\"\"\"\n+        escaped_title = escape(self.form_data.title)\n         return f\"\"\"\n         <html>\n             <head>\n@@ -84,7 +85,7 @@ class PDFGenerator:\n             <body>\n             <div>\n                 <div>\n-                    <h2>{self.form_data.title}</h2>\n+                    <h2>{escaped_title}</h2>\n                     {self.messages_html}\n                 </div>\n             </div>",
+  "auto_locate_confidence": "auto"
+}

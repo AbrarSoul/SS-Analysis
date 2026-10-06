@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_matrix-org_matrix-appservice-bridge_b69e745584a34fcfd858df33e4631e420da07b9f",
+  "cve_ids": [
+    "CVE-2021-32659"
+  ],
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "language": "typescript",
+  "repository": "matrix-org/matrix-appservice-bridge",
+  "repository_url": "https://github.com/matrix-org/matrix-appservice-bridge",
+  "vulnerable_commit": "1b587e2455cbd30779f5052d2d2d46d58463a3e2",
+  "fixed_commit": "b69e745584a34fcfd858df33e4631e420da07b9f",
+  "changed_file": "src/components/room-upgrade-handler.ts",
+  "max_score": "1337"
+}

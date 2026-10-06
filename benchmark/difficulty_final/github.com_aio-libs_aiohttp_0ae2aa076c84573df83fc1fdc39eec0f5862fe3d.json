@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_0ae2aa076c84573df83fc1fdc39eec0f5862fe3d",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-36",
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 0,
+  "lines_changed_total": 4,
+  "function_size_chars": 337,
+  "function_size_lines": 8,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

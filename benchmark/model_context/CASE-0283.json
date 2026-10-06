@@ -1,0 +1,31 @@
+{
+  "case_id": "CASE-0283",
+  "language": "javascript",
+  "cve_id": "CVE-2020-26300",
+  "cve_ids_all": [
+    "CVE-2020-26300"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    },
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const os = require('os');",
+    "const fs = require('fs');",
+    "const spawn = require('child_process').spawn;",
+    "const exec = require('child_process').exec;",
+    "const execSync = require('child_process').execSync;",
+    "const util = require('util');"
+  ],
+  "vulnerable_function": "function sanitizeShellString(str) {\n  let result = str;\n  result = result.replace(/>/g, \"\");\n  result = result.replace(/</g, \"\");\n  result = result.replace(/\\*/g, \"\");\n  result = result.replace(/\\?/g, \"\");\n  result = result.replace(/\\[/g, \"\");\n  result = result.replace(/\\]/g, \"\");\n  result = result.replace(/\\|/g, \"\");\n  result = result.replace(/\\`/g, \"\");\n  result = result.replace(/$/g, \"\");\n  result = result.replace(/;/g, \"\");\n  result = result.replace(/&/g, \"\");\n  result = result.replace(/\\)/g, \"\");\n  result = result.replace(/\\(/g, \"\");\n  result = result.replace(/\\$/g, \"\");\n  result = result.replace(/#/g, \"\");\n  result = result.replace(/\\\\/g, \"\");\n  return result\n}",
+  "patched_function": "function sanitizeShellString(str) {\n  let result = str;\n  result = result.replace(/>/g, \"\");\n  result = result.replace(/</g, \"\");\n  result = result.replace(/\\*/g, \"\");\n  result = result.replace(/\\?/g, \"\");\n  result = result.replace(/\\[/g, \"\");\n  result = result.replace(/\\]/g, \"\");\n  result = result.replace(/\\|/g, \"\");\n  result = result.replace(/\\`/g, \"\");\n  result = result.replace(/$/g, \"\");\n  result = result.replace(/;/g, \"\");\n  result = result.replace(/&/g, \"\");\n  result = result.replace(/\\)/g, \"\");\n  result = result.replace(/\\(/g, \"\");\n  result = result.replace(/\\$/g, \"\");\n  result = result.replace(/#/g, \"\");\n  result = result.replace(/\\\\/g, \"\");\n  result = result.replace(/\\t/g, \"\");\n  result = result.replace(/\\n/g, \"\");\n  result = result.replace(/\\\"/g, \"\");\n  return result\n}",
+  "unified_diff": "diff --git a/lib/util.js b/lib/util.js\nindex 19df5e7..e7a87dc 100644\n--- a/lib/util.js\n+++ b/lib/util.js\n@@ -503,6 +503,9 @@ function sanitizeShellString(str) {\n   result = result.replace(/\\$/g, \"\");\n   result = result.replace(/#/g, \"\");\n   result = result.replace(/\\\\/g, \"\");\n+  result = result.replace(/\\t/g, \"\");\n+  result = result.replace(/\\n/g, \"\");\n+  result = result.replace(/\\\"/g, \"\");\n   return result\n }\n ",
+  "auto_locate_confidence": "auto"
+}

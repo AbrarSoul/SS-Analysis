@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0010",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-552"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 1,
+  "lines_changed_total": 7,
+  "function_size_chars": 409,
+  "function_size_lines": 17,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "The flaw is an omission (missing removeShare() calls) rather than a bad line; detecting it requires reasoning about the whole script's absence of a hardening step, not a single matchable line.",
+  "supported_status": "supported"
+}

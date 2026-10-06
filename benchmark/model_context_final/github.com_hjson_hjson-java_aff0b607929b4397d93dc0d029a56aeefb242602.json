@@ -1,0 +1,22 @@
+{
+  "case_id": "github.com_hjson_hjson-java_aff0b607929b4397d93dc0d029a56aeefb242602",
+  "language": "java",
+  "cve_id": "CVE-2023-39685",
+  "cve_ids_all": [
+    "CVE-2023-39685"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.*;"
+  ],
+  "vulnerable_function": "      else if (current=='\\'') {\n        triple++;\n        read();\n        if (triple==3) {\n          if (sb.charAt(sb.length()-1)=='\\n') sb.deleteCharAt(sb.length()-1);\n\n          return sb.toString();\n        }\n        else continue;\n      }",
+  "patched_function": "      else if (current=='\\'') {\n        triple++;\n        read();\n        if (triple==3) {\n          if (sb.length() > 0 && sb.charAt(sb.length()-1)=='\\n') sb.deleteCharAt(sb.length()-1);\n\n          return sb.toString();\n        }\n        else continue;\n      }",
+  "unified_diff": "diff --git a/src/main/org/hjson/HjsonParser.java b/src/main/org/hjson/HjsonParser.java\nindex d80226d..c7b18fb 100644\n--- a/src/main/org/hjson/HjsonParser.java\n+++ b/src/main/org/hjson/HjsonParser.java\n@@ -263,7 +263,7 @@ class HjsonParser {\n         triple++;\n         read();\n         if (triple==3) {\n-          if (sb.charAt(sb.length()-1)=='\\n') sb.deleteCharAt(sb.length()-1);\n+          if (sb.length() > 0 && sb.charAt(sb.length()-1)=='\\n') sb.deleteCharAt(sb.length()-1);\n \n           return sb.toString();\n         }",
+  "auto_locate_confidence": "auto"
+}

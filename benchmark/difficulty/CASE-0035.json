@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0035",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 1257,
+  "function_size_lines": 23,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Missing explicit rejection when no password is set, combined with a dummy-password fallback; requires tracing the interaction between two branches to see the bypass.",
+  "supported_status": "supported"
+}

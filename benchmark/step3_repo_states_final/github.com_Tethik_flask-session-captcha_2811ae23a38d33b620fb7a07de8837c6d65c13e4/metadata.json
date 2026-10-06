@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_Tethik_flask-session-captcha_2811ae23a38d33b620fb7a07de8837c6d65c13e4",
+  "cve_ids": [
+    "CVE-2022-24880"
+  ],
+  "cwe_ids": [
+    "CWE-253",
+    "CWE-394",
+    "CWE-754"
+  ],
+  "language": "python",
+  "repository": "Tethik/flask-session-captcha",
+  "repository_url": "https://github.com/Tethik/flask-session-captcha",
+  "vulnerable_commit": "50b4053766b89e9322cfbd281c91cb4e8898d3f7",
+  "fixed_commit": "2811ae23a38d33b620fb7a07de8837c6d65c13e4",
+  "changed_file": "test_flask_session_captcha.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0252",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-331"
+  ],
+  "changed_files": 1,
+  "lines_added": 13,
+  "lines_removed": 0,
+  "lines_changed_total": 13,
+  "function_size_chars": 1939,
+  "function_size_lines": 52,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Debugger PIN derived from machine identifiers that are identical across containers; predictable-secret derivation, not a code shape."
+}

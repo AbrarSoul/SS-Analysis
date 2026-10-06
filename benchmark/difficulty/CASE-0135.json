@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0135",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-521"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 0,
+  "lines_changed_total": 7,
+  "function_size_chars": 778,
+  "function_size_lines": 18,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Password stored with no policy check; omission of complexity validation in a reset routine needs domain context."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_airsonic_airsonic_61c842923a6d60d4aedd126445a8437b53b752c8",
+  "cve_ids": [
+    "CVE-2019-10908"
+  ],
+  "cwe_ids": [
+    "CWE-335"
+  ],
+  "language": "java",
+  "repository": "airsonic/airsonic",
+  "repository_url": "https://github.com/airsonic/airsonic",
+  "vulnerable_commit": "e330eeb864e48813636295fd5b8e08d1f04a9236",
+  "fixed_commit": "61c842923a6d60d4aedd126445a8437b53b752c8",
+  "changed_file": "airsonic-main/src/main/java/org/airsonic/player/controller/RecoverController.java",
+  "max_score": "1337"
+}

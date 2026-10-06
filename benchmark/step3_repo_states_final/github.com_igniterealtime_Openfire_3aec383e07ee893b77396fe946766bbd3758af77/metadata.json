@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_igniterealtime_Openfire_3aec383e07ee893b77396fe946766bbd3758af77",
+  "cve_ids": [
+    "CVE-2014-2741"
+  ],
+  "cwe_ids": [
+    "CWE-264"
+  ],
+  "language": "java",
+  "repository": "igniterealtime/Openfire",
+  "repository_url": "https://github.com/igniterealtime/Openfire",
+  "vulnerable_commit": "b5e771e9ff0d9d226dd130c9db2200eda85355a8",
+  "fixed_commit": "3aec383e07ee893b77396fe946766bbd3758af77",
+  "changed_file": "src/java/org/jivesoftware/openfire/nio/XMLLightweightParser.java",
+  "max_score": "1337"
+}

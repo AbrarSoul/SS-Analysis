@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_parisneo_lollms-webui_6d07c8a0dd0a15cc060becc73fda9fe8e788eb23",
+  "cve_ids": [
+    "CVE-2024-8898"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "parisneo/lollms-webui",
+  "repository_url": "https://github.com/parisneo/lollms-webui",
+  "vulnerable_commit": "b734cf917a8a75398fd34365e0c6baf5cd174ab3",
+  "fixed_commit": "6d07c8a0dd0a15cc060becc73fda9fe8e788eb23",
+  "changed_file": "endpoints/lollms_apps.py",
+  "max_score": "1337"
+}

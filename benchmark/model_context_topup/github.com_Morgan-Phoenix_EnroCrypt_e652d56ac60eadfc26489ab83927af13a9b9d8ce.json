@@ -1,0 +1,38 @@
+{
+  "case_id": "github.com_Morgan-Phoenix_EnroCrypt_e652d56ac60eadfc26489ab83927af13a9b9d8ce",
+  "language": "python",
+  "cve_id": "CVE-2021-39182",
+  "cve_ids_all": [
+    "CVE-2021-39182"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-326",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-327",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-328",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-916",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "Hashing",
+  "imports": [
+    "import hashlib",
+    "import base64",
+    "import uuid",
+    "from cryptography.hazmat.primitives import hashes",
+    "from typing import Any, final"
+  ],
+  "vulnerable_function": "    def MD5(self,data:str):\n        sha = hashlib.md5(bytes(data.encode()))\n        hash = str(sha.digest())\n        return self.__Salt(hash,salt=self.salt)\n",
+  "patched_function": "    def SHA384(self,data:str):\n        sha = hashlib.sha384(bytes(data.encode()))\n        hash = str(sha.digest())\n        return self.__Salt(hash,salt=self.salt)\n",
+  "unified_diff": "diff --git a/enrocrypt/hashing.py b/enrocrypt/hashing.py\nindex 275d2e3..14328f0 100644\n--- a/enrocrypt/hashing.py\n+++ b/enrocrypt/hashing.py\n@@ -66,11 +66,6 @@ class Hashing():\n         hash = str(sha.digest())\n         return self.__Salt(hash,salt=self.salt)\n \n-    def MD5(self,data:str):\n-        sha = hashlib.md5(bytes(data.encode()))\n-        hash = str(sha.digest())\n-        return self.__Salt(hash,salt=self.salt)\n-\n     def SHA384(self,data:str):\n         sha = hashlib.sha384(bytes(data.encode()))\n         hash = str(sha.digest())",
+  "auto_locate_confidence": "auto"
+}

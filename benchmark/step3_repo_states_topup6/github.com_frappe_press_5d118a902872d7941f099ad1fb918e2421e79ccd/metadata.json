@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_frappe_press_5d118a902872d7941f099ad1fb918e2421e79ccd",
+  "cve_ids": [
+    "CVE-2024-49751"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "frappe/press",
+  "repository_url": "https://github.com/frappe/press",
+  "vulnerable_commit": "54ef1a30db4e1738a63f3bb0bc51c5bdb2b3113c",
+  "fixed_commit": "5d118a902872d7941f099ad1fb918e2421e79ccd",
+  "changed_file": "press/api/saas.py",
+  "max_score": "1337"
+}

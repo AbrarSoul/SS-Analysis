@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_821d43ec45e67d45a6735a0717b9b77fffc1cd9f",
+  "cve_ids": [
+    "CVE-2024-41947"
+  ],
+  "cwe_ids": [
+    "CWE-79",
+    "CWE-80"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "d9e3fad811a2b4ee26cadf9929e59269172ac4d1",
+  "fixed_commit": "821d43ec45e67d45a6735a0717b9b77fffc1cd9f",
+  "changed_file": "xwiki-platform-core/xwiki-platform-flamingo/xwiki-platform-flamingo-skin/xwiki-platform-flamingo-skin-test/xwiki-platform-flamingo-skin-test-docker/src/test/it/org/xwiki/flamingo/test/docker/EditIT.java",
+  "max_score": "1337"
+}

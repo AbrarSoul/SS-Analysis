@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0183",
+  "original_source_case_id": "github.com_jenkinsci_dynatrace-plugin_b6e55709476d9f6dfaf75a4cd744fe1798868168",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-10463",
+  "cve_ids_all": [
+    "CVE-2019-10463"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/dynatrace-plugin",
+  "repository_url": "https://github.com/jenkinsci/dynatrace-plugin",
+  "vulnerable_commit": "1e769d41d24a78b8ff5e681966274712aefdd3d3",
+  "fixed_commit": "b6e55709476d9f6dfaf75a4cd744fe1798868168",
+  "changed_file": "src/main/java/com/dynatrace/jenkins/dashboard/TAGlobalConfiguration.java",
+  "changed_function": "public FormValidation doTestDynatraceConnection(",
+  "vulnerable_lines": [
+    182,
+    219
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0183/vulnerable_source.java": "46fd1e7901cc702d85971450f1464c4e33aead26104427655bc9ee82658eb4de",
+    "cases/CASE-0183/patched_source.java": "b6b5be70893c0454691491a948d24c469f2a60730c12582d4ca0f0311ba911bd",
+    "cases/CASE-0183/patch.diff": "05c656d942cd964032546c549aa13d8ed07f2a8c0b6da1efe212f78ad4ecaded",
+    "cases/CASE-0183/metadata.json": "41d1ef249467301c2f162a9f85a340421971048acaab6841c7e67f5fdca25389",
+    "model_context/CASE-0183.json": "4f8618fc98036820cab4200d29970195a95b3d31b22fcb3c3cca1ef9d5de5103",
+    "difficulty/CASE-0183.json": "d5eba0ccabaf3424781ecbcc0d222f2eca1825e531b39f8cb5aca3b6cb148e4c"
+  },
+  "case_level_hash": "a5fd557379bc0e26e9c64949d11c554924d065bd5f472157b2f59789c0320985"
+}

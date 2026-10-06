@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_hibernate_hibernate-orm_3f3c1ab50604ab9ba99e25d2016fb85f3ba9dcd4",
+  "cve_ids": [
+    "CVE-2019-14900"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "hibernate/hibernate-orm",
+  "repository_url": "https://github.com/hibernate/hibernate-orm",
+  "vulnerable_commit": "c1771040c72de277a552d1340d61879ddb1d3f6a",
+  "fixed_commit": "3f3c1ab50604ab9ba99e25d2016fb85f3ba9dcd4",
+  "changed_file": "hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java",
+  "max_score": "1337"
+}

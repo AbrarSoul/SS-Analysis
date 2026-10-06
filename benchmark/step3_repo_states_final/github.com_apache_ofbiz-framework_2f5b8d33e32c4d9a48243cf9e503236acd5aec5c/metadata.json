@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_ofbiz-framework_2f5b8d33e32c4d9a48243cf9e503236acd5aec5c",
+  "cve_ids": [
+    "CVE-2021-25958"
+  ],
+  "cwe_ids": [
+    "CWE-209"
+  ],
+  "language": "java",
+  "repository": "apache/ofbiz-framework",
+  "repository_url": "https://github.com/apache/ofbiz-framework",
+  "vulnerable_commit": "326e0f12a48736f5c101724c7947c7ce4b907ca1",
+  "fixed_commit": "2f5b8d33e32c4d9a48243cf9e503236acd5aec5c",
+  "changed_file": "framework/common/src/main/java/org/apache/ofbiz/common/login/LoginServices.java",
+  "max_score": "1337"
+}

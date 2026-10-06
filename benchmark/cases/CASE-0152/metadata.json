@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0152",
+  "original_source_case_id": "github.com_electron_electron_519a02d8d4d28e8a467acb40fb26172a80c9454f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-15685",
+  "cve_ids_all": [
+    "CVE-2018-15685"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1188"
+  ],
+  "language": "javascript",
+  "repository": "electron/electron",
+  "repository_url": "https://github.com/electron/electron",
+  "vulnerable_commit": "8ebd0ce1b18435f90f5f2e64a1d982d396e0d278",
+  "fixed_commit": "519a02d8d4d28e8a467acb40fb26172a80c9454f",
+  "changed_file": "lib/browser/guest-window-manager.js",
+  "changed_function": ".hasOwnProperty",
+  "vulnerable_lines": [
+    7,
+    41
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0152/vulnerable_source.js": "db56a64702cd5c86f3a9c7641ebffe716e22884303862e850cbb6a4785f93e5a",
+    "cases/CASE-0152/patched_source.js": "87c78afa769faf34085bf7bba174982f2f57ba81635cec888b60986b451d81f1",
+    "cases/CASE-0152/patch.diff": "4bf310706006adfd4da364736129961d33635713f55626b80bd27c11e8cdd70f",
+    "cases/CASE-0152/metadata.json": "7ca559ded166310e4cd98ce6b98607a4ca5669bad99fc8d4addfaf9d072e7c8f",
+    "model_context/CASE-0152.json": "8ad27bb20e2c3c6f5147fb3a3546afa5cddb2aafa2f3b0a061bbd0233c808440",
+    "difficulty/CASE-0152.json": "0ea1a23f0b8c196df0cff43556670ac92fa90b637cf5cb92492970cb58de196a"
+  },
+  "case_level_hash": "3ab112350f2b8f13e2dc20aef2980ba701deb9d95acb063fdc3f28937e81f8d5"
+}

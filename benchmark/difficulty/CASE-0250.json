@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0250",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "changed_files": 1,
+  "lines_added": 47,
+  "lines_removed": 0,
+  "lines_changed_total": 47,
+  "function_size_chars": 198,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Logical volumes removed without overwriting leftover data; data remanence is not a code-shape property."
+}

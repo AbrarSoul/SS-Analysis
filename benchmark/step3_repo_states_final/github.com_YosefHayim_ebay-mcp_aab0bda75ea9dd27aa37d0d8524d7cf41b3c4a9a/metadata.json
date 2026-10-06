@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_YosefHayim_ebay-mcp_aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a",
+  "cve_ids": [
+    "CVE-2026-27203"
+  ],
+  "cwe_ids": [
+    "CWE-15",
+    "CWE-74"
+  ],
+  "language": "typescript",
+  "repository": "YosefHayim/ebay-mcp",
+  "repository_url": "https://github.com/YosefHayim/ebay-mcp",
+  "vulnerable_commit": "6018e4c61110f43d254fdc749dc6baf3dc997ce7",
+  "fixed_commit": "aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a",
+  "changed_file": "src/auth/oauth.ts",
+  "max_score": "1337"
+}

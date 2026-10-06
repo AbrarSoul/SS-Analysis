@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_lief-project_LIEF_81bd5d7ea0c390563f1c4c017c9019d154802978",
+  "cve_ids": [
+    "CVE-2025-15504"
+  ],
+  "cwe_ids": [
+    "CWE-404",
+    "CWE-476"
+  ],
+  "language": "python",
+  "repository": "lief-project/LIEF",
+  "repository_url": "https://github.com/lief-project/LIEF",
+  "vulnerable_commit": "cda7684767810370960003e4aa98b210f6fdf8b1",
+  "fixed_commit": "81bd5d7ea0c390563f1c4c017c9019d154802978",
+  "changed_file": "tests/elf/test_issues.py",
+  "max_score": "1337"
+}

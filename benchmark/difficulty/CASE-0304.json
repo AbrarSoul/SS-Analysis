@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0304",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-327",
+    "CWE-922"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 7,
+  "lines_changed_total": 9,
+  "function_size_chars": 4275,
+  "function_size_lines": 109,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Encryption salt and password given as string literals; hard-coded key-material pattern."
+}

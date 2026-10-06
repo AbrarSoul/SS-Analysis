@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ShashikantSingh09_python-progrrames_6ce60b1b2116a579a2e89de96d738a98f6ad4f27",
+  "cve_ids": [
+    "CVE-2025-46833"
+  ],
+  "cwe_ids": [
+    "CWE-326"
+  ],
+  "language": "python",
+  "repository": "ShashikantSingh09/python-progrrames",
+  "repository_url": "https://github.com/ShashikantSingh09/python-progrrames",
+  "vulnerable_commit": "9ec760b969bf3596253c6067a5d9b8c0f4792818",
+  "fixed_commit": "6ce60b1b2116a579a2e89de96d738a98f6ad4f27",
+  "changed_file": "Programs/P73_SimplePythonEncryption.py",
+  "max_score": "1337"
+}

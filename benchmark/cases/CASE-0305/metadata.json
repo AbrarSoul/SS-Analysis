@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0305",
+  "original_source_case_id": "github.com_tornadoweb_tornado_32ad07c54e607839273b4e1819c347f5c8976b2f",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2023-28370",
+  "cve_ids_all": [
+    "CVE-2023-28370"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "language": "python",
+  "repository": "tornadoweb/tornado",
+  "repository_url": "https://github.com/tornadoweb/tornado",
+  "vulnerable_commit": "e0fa53ee96db720dc7800d0248c39a4ffb8911e9",
+  "fixed_commit": "32ad07c54e607839273b4e1819c347f5c8976b2f",
+  "changed_file": "tornado/web.py",
+  "changed_function": "def validate_absolute_path(self, root: str, absolute_path: str) -> Optional[str]:",
+  "vulnerable_lines": [
+    2841,
+    2890
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 9,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0305/vulnerable_source.py": "dc16f2c4843c2e0a2e5efb0836e031c463f460e186a70f63a01fd26d9523743b",
+    "cases/CASE-0305/patched_source.py": "56a6130e6920b022bdd5735083d2be7509db2b9b203262ee18fb621a06e5c927",
+    "cases/CASE-0305/patch.diff": "5d0cd56b79d958b92e48ece6dd391c9d8a47e950b1073b7d416330d4fa5be32e",
+    "cases/CASE-0305/metadata.json": "82ee7e094ae6b08c5e5ed36246b9a0abe061f38931961a7051cad08e39ce067a",
+    "model_context/CASE-0305.json": "9c64c3ed64b1a00099a474b2c1c3fe79960fa255489f892a4d4535219f855b5e",
+    "difficulty/CASE-0305.json": "6f1c8e35d5f573e65b7d813a1345f97f96e116a3d6b303ee717cddf61aa7ec45"
+  },
+  "case_level_hash": "fc219c8463ec17f5437912128a19da42056f6ffdd3846ad0e9d041e48f33334c"
+}

@@ -1,0 +1,13 @@
+diff --git a/packages/volto/src/middleware/api.js b/packages/volto/src/middleware/api.js
+index da13c50f6..2202d7a1b 100644
+--- a/packages/volto/src/middleware/api.js
++++ b/packages/volto/src/middleware/api.js
+@@ -410,7 +410,7 @@ const apiMiddlewareFactory =
+                 ...rest,
+                 error,
+                 statusCode: error.response,
+-                message: error.response.body.message,
++                message: error.response?.body?.message,
+                 connectionRefused: false,
+                 type: SET_APIERROR,
+               });

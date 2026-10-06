@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0095",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-346",
+    "CWE-942"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 3,
+  "lines_changed_total": 9,
+  "function_size_chars": 235,
+  "function_size_lines": 5,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Request Origin header reflected into Access-Control-Allow-Origin (and wildcard Socket.IO origins)."
+}

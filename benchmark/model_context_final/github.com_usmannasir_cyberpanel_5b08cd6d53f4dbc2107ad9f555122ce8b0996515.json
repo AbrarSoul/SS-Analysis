@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_usmannasir_cyberpanel_5b08cd6d53f4dbc2107ad9f555122ce8b0996515",
+  "language": "python",
+  "cve_id": "CVE-2024-51567",
+  "cve_ids_all": [
+    "CVE-2024-51567"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-306",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import time",
+    "from random import randint",
+    "from django.shortcuts import redirect, HttpResponse",
+    "from django.views.decorators.csrf import csrf_exempt",
+    "from cloudAPI.cloudManager import CloudManager",
+    "from loginSystem.views import loadLoginPage",
+    "from .databaseManager import DatabaseManager",
+    "from .mysqlOptimizer import MySQLOptimizer",
+    "from .pluginManager import pluginManager",
+    "import json",
+    "from plogical.processUtilities import ProcessUtilities",
+    "from loginSystem.models import Administrator",
+    "from plogical.acl import ACLManager",
+    "from databases.models import GlobalUserDB",
+    "from plogical import randomPassword",
+    "from cryptography.fernet import Fernet",
+    "from plogical.mysqlUtilities import mysqlUtilities",
+    "from plogical.CyberCPLogFileWriter import CyberCPLogFileWriter as logging"
+  ],
+  "vulnerable_function": "def upgrademysqlstatus(request):\n    try:\n        data = json.loads(request.body)\n        statusfile = data['statusfile']\n        installStatus = ProcessUtilities.outputExecutioner(\"sudo cat \" + statusfile)\n\n        if installStatus.find(\"[200]\") > -1:\n\n            command = 'sudo rm -f ' + statusfile\n            ProcessUtilities.executioner(command)\n\n            final_json = json.dumps({\n                'error_message': \"None\",\n                'requestStatus': installStatus,\n                'abort': 1,\n                'installed': 1,\n            })\n            return HttpResponse(final_json)\n        elif installStatus.find(\"[404]\") > -1:\n            command = 'sudo rm -f ' + statusfile\n            ProcessUtilities.executioner(command)\n            final_json = json.dumps({\n                'abort': 1,\n                'installed': 0,\n                'error_message': \"None\",\n                'requestStatus': installStatus,\n            })\n            return HttpResponse(final_json)\n\n        else:\n            final_json = json.dumps({\n                'abort': 0,\n                'error_message': \"None\",\n                'requestStatus': installStatus,\n            })\n            return HttpResponse(final_json)\n    except KeyError:\n        return redirect(loadLoginPage)\n",
+  "patched_function": "def upgrademysqlstatus(request):\n    try:\n\n        userID = request.session['userID']\n\n        currentACL = ACLManager.loadedACL(userID)\n\n        if currentACL['admin'] == 1:\n            pass\n        else:\n            return ACLManager.loadErrorJson('FilemanagerAdmin', 0)\n\n        data = json.loads(request.body)\n        statusfile = data['statusfile']\n        installStatus = ProcessUtilities.outputExecutioner(\"sudo cat \" + statusfile)\n\n        if installStatus.find(\"[200]\") > -1:\n\n            command = 'sudo rm -f ' + statusfile\n            ProcessUtilities.executioner(command)\n\n            final_json = json.dumps({\n                'error_message': \"None\",\n                'requestStatus': installStatus,\n                'abort': 1,\n                'installed': 1,\n            })\n            return HttpResponse(final_json)\n        elif installStatus.find(\"[404]\") > -1:\n            command = 'sudo rm -f ' + statusfile\n            ProcessUtilities.executioner(command)\n            final_json = json.dumps({\n                'abort': 1,\n                'installed': 0,\n                'error_message': \"None\",\n                'requestStatus': installStatus,\n            })\n            return HttpResponse(final_json)\n\n        else:\n            final_json = json.dumps({\n                'abort': 0,\n                'error_message': \"None\",\n                'requestStatus': installStatus,\n            })\n            return HttpResponse(final_json)\n    except KeyError:\n        return redirect(loadLoginPage)\n",
+  "unified_diff": "diff --git a/databases/views.py b/databases/views.py\nindex b7a70760..b8d532f2 100755\n--- a/databases/views.py\n+++ b/databases/views.py\n@@ -503,6 +503,16 @@ def upgrademysqlnow(request):\n \n def upgrademysqlstatus(request):\n     try:\n+\n+        userID = request.session['userID']\n+\n+        currentACL = ACLManager.loadedACL(userID)\n+\n+        if currentACL['admin'] == 1:\n+            pass\n+        else:\n+            return ACLManager.loadErrorJson('FilemanagerAdmin', 0)\n+\n         data = json.loads(request.body)\n         statusfile = data['statusfile']\n         installStatus = ProcessUtilities.outputExecutioner(\"sudo cat \" + statusfile)",
+  "auto_locate_confidence": "auto"
+}

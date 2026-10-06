@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_bcgit_bc-java_cd98322b171b15b3f88c5ec871175147893c31e6",
+  "language": "java",
+  "cve_id": "CVE-2018-1000613",
+  "cve_ids_all": [
+    "CVE-2018-1000613"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-470",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.ByteArrayInputStream;",
+    "import java.io.ByteArrayOutputStream;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.io.InvalidClassException;",
+    "import java.io.ObjectInputStream;",
+    "import java.io.ObjectOutputStream;",
+    "import java.io.ObjectStreamClass;",
+    "import org.bouncycastle.crypto.Digest;",
+    "import org.bouncycastle.util.Arrays;",
+    "import org.bouncycastle.util.encoders.Hex;"
+  ],
+  "vulnerable_function": "        protected Class<?> resolveClass(ObjectStreamClass desc)\n            throws IOException,\n            ClassNotFoundException\n        {\n            if (!found)\n            {\n                if (!desc.getName().equals(mainClass.getName()))\n                {\n                    throw new InvalidClassException(\n                        \"unexpected class: \", desc.getName());\n                }\n                else\n                {\n                    found = true;\n                }\n            }\n            return super.resolveClass(desc);\n        }",
+  "patched_function": "        protected Class<?> resolveClass(ObjectStreamClass desc)\n            throws IOException,\n            ClassNotFoundException\n        {\n            if (!found)\n            {\n                if (!desc.getName().equals(mainClass.getName()))\n                {\n                    throw new InvalidClassException(\n                        \"unexpected class: \", desc.getName());\n                }\n                else\n                {\n                    found = true;\n                }\n            }\n            else\n            {\n                if (!components.contains(desc.getName()))\n                {\n                    throw new InvalidClassException(\n                          \"unexpected class: \", desc.getName());\n                }\n            }\n            return super.resolveClass(desc);\n        }",
+  "unified_diff": "diff --git a/core/src/main/java/org/bouncycastle/pqc/crypto/xmss/XMSSUtil.java b/core/src/main/java/org/bouncycastle/pqc/crypto/xmss/XMSSUtil.java\nindex ea8fa64aa3..79c63ac80a 100644\n--- a/core/src/main/java/org/bouncycastle/pqc/crypto/xmss/XMSSUtil.java\n+++ b/core/src/main/java/org/bouncycastle/pqc/crypto/xmss/XMSSUtil.java\n@@ -8,6 +8,8 @@\n import java.io.ObjectInputStream;\n import java.io.ObjectOutputStream;\n import java.io.ObjectStreamClass;\n+import java.util.HashSet;\n+import java.util.Set;\n \n import org.bouncycastle.crypto.Digest;\n import org.bouncycastle.util.Arrays;\n@@ -382,6 +384,24 @@ public static boolean isNewAuthenticationPathNeeded(long globalIndex, int xmssHe\n     private static class CheckingStream\n        extends ObjectInputStream\n     {\n+        private static final Set<String> components = new HashSet<>();\n+\n+        static\n+        {\n+            components.add(\"java.util.TreeMap\");\n+            components.add(\"java.lang.Integer\");\n+            components.add(\"java.lang.Number\");\n+            components.add(\"org.bouncycastle.pqc.crypto.xmss.BDS\");\n+            components.add(\"java.util.ArrayList\");\n+            components.add(\"org.bouncycastle.pqc.crypto.xmss.XMSSNode\");\n+            components.add(\"[B\");\n+            components.add(\"java.util.LinkedList\");\n+            components.add(\"java.util.Stack\");\n+            components.add(\"java.util.Vector\");\n+            components.add(\"[Ljava.lang.Object;\");\n+            components.add(\"org.bouncycastle.pqc.crypto.xmss.BDSTreeHash\");\n+        }\n+\n         private final Class mainClass;\n         private boolean found = false;\n \n@@ -409,6 +429,14 @@ protected Class<?> resolveClass(ObjectStreamClass desc)\n                     found = true;\n                 }\n             }\n+            else\n+            {\n+                if (!components.contains(desc.getName()))\n+                {\n+                    throw new InvalidClassException(\n+                          \"unexpected class: \", desc.getName());\n+                }\n+            }\n             return super.resolveClass(desc);\n         }\n     }",
+  "auto_locate_confidence": "auto"
+}

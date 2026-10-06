@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0011",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 1,
+  "lines_changed_total": 4,
+  "function_size_chars": 8590,
+  "function_size_lines": 175,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "The flaw is a missing string literal in a ~90-entry denylist; recognizing the omission requires the full list as context, not a local pattern.",
+  "supported_status": "supported"
+}

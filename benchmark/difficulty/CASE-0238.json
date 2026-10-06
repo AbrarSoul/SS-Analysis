@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0238",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-1236"
+  ],
+  "changed_files": 1,
+  "lines_added": 15,
+  "lines_removed": 10,
+  "lines_changed_total": 25,
+  "function_size_chars": 3555,
+  "function_size_lines": 122,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Papaparse.unparse called without the escapeFormulae option; missing-option pattern."
+}

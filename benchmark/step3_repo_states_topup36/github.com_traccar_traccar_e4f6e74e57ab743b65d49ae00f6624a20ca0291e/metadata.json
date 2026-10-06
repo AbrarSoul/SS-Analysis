@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_traccar_traccar_e4f6e74e57ab743b65d49ae00f6624a20ca0291e",
+  "cve_ids": [
+    "CVE-2020-5246"
+  ],
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-90"
+  ],
+  "language": "java",
+  "repository": "traccar/traccar",
+  "repository_url": "https://github.com/traccar/traccar",
+  "vulnerable_commit": "886a1ac0550c5aecb13222668f4ca35758ec92d1",
+  "fixed_commit": "e4f6e74e57ab743b65d49ae00f6624a20ca0291e",
+  "changed_file": "src/main/java/org/traccar/database/LdapProvider.java",
+  "max_score": "1337"
+}

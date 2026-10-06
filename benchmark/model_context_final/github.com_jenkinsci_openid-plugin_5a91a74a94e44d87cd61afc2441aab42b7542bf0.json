@@ -1,0 +1,61 @@
+{
+  "case_id": "github.com_jenkinsci_openid-plugin_5a91a74a94e44d87cd61afc2441aab42b7542bf0",
+  "language": "java",
+  "cve_id": "CVE-2019-1003098",
+  "cve_ids_all": [
+    "CVE-2019-1003098",
+    "CVE-2019-1003099"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-352",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-862",
+      "definition": "Missing Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.cloudbees.openid4java.team.TeamExtensionFactory;",
+    "import hudson.Extension;",
+    "import hudson.model.Descriptor;",
+    "import hudson.model.Failure;",
+    "import hudson.model.User;",
+    "import hudson.security.SecurityRealm;",
+    "import hudson.util.FormValidation;",
+    "import jenkins.security.SecurityListener;",
+    "import jenkins.model.Jenkins;",
+    "import org.acegisecurity.Authentication;",
+    "import org.acegisecurity.AuthenticationManager;",
+    "import org.acegisecurity.BadCredentialsException;",
+    "import org.acegisecurity.GrantedAuthority;",
+    "import org.acegisecurity.context.SecurityContextHolder;",
+    "import org.acegisecurity.providers.UsernamePasswordAuthenticationToken;",
+    "import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;",
+    "import org.acegisecurity.userdetails.UserDetails;",
+    "import org.kohsuke.stapler.DataBoundConstructor;",
+    "import org.kohsuke.stapler.HttpRedirect;",
+    "import org.kohsuke.stapler.HttpResponse;",
+    "import org.kohsuke.stapler.QueryParameter;",
+    "import org.kohsuke.stapler.Stapler;",
+    "import org.kohsuke.stapler.StaplerRequest;",
+    "import org.openid4java.OpenIDException;",
+    "import org.openid4java.consumer.ConsumerException;",
+    "import org.openid4java.consumer.ConsumerManager;",
+    "import org.openid4java.consumer.InMemoryConsumerAssociationStore;",
+    "import org.openid4java.consumer.InMemoryNonceVerifier;",
+    "import org.openid4java.discovery.Discovery;",
+    "import org.openid4java.discovery.DiscoveryException;",
+    "import org.openid4java.server.RealmVerifierFactory;",
+    "import org.openid4java.util.HttpClientFactory;",
+    "import org.openid4java.util.HttpFetcherFactory;",
+    "import org.openid4java.util.ProxyProperties;",
+    "import java.io.IOException;"
+  ],
+  "vulnerable_function": "        public FormValidation doValidate(@QueryParameter String endpoint) {\n            try {\n                new Discovery().discover(endpoint);\n                return FormValidation.ok(\"OK\");\n            } catch (DiscoveryException e) {\n                return FormValidation.error(e, \"Invalid provider URL: \" + endpoint);\n            }\n        }",
+  "patched_function": "        public FormValidation doValidate(@QueryParameter String endpoint) throws Exception {\n            if (!Jenkins.getActiveInstance().hasPermission(Jenkins.ADMINISTER)) {\n                // require admin to test\n                return FormValidation.ok();\n            }\n            try {\n                new Discovery().discover(endpoint);\n                return FormValidation.ok(\"OK\");\n            } catch (DiscoveryException e) {\n                return FormValidation.error(e, \"Invalid provider URL: \" + endpoint);\n            }\n        }",
+  "unified_diff": "diff --git a/src/main/java/hudson/plugins/openid/OpenIdSsoSecurityRealm.java b/src/main/java/hudson/plugins/openid/OpenIdSsoSecurityRealm.java\nindex 0dc2838..ac01840 100644\n--- a/src/main/java/hudson/plugins/openid/OpenIdSsoSecurityRealm.java\n+++ b/src/main/java/hudson/plugins/openid/OpenIdSsoSecurityRealm.java\n@@ -46,6 +46,7 @@ import org.kohsuke.stapler.HttpResponse;\n import org.kohsuke.stapler.QueryParameter;\n import org.kohsuke.stapler.Stapler;\n import org.kohsuke.stapler.StaplerRequest;\n+import org.kohsuke.stapler.interceptor.RequirePOST;\n import org.openid4java.OpenIDException;\n import org.openid4java.consumer.ConsumerException;\n import org.openid4java.consumer.ConsumerManager;\n@@ -219,7 +220,12 @@ public class OpenIdSsoSecurityRealm extends SecurityRealm {\n             return \"OpenID SSO\";\n         }\n         \n-        public FormValidation doValidate(@QueryParameter String endpoint) {\n+        @RequirePOST\n+        public FormValidation doValidate(@QueryParameter String endpoint) throws Exception {\n+            if (!Jenkins.getActiveInstance().hasPermission(Jenkins.ADMINISTER)) {\n+                // require admin to test\n+                return FormValidation.ok();\n+            }\n             try {\n                 new Discovery().discover(endpoint);\n                 return FormValidation.ok(\"OK\");",
+  "auto_locate_confidence": "auto"
+}

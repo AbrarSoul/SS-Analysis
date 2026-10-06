@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_MagicStack_asyncpg_69bcdf5bf7696b98ee708be5408fd7d854e910d0",
+  "cve_ids": [
+    "CVE-2020-17446"
+  ],
+  "cwe_ids": [
+    "CWE-824"
+  ],
+  "language": "python",
+  "repository": "MagicStack/asyncpg",
+  "repository_url": "https://github.com/MagicStack/asyncpg",
+  "vulnerable_commit": "39040b3cd022d69d7c4678738d2fe2abf902f3c5",
+  "fixed_commit": "69bcdf5bf7696b98ee708be5408fd7d854e910d0",
+  "changed_file": "asyncpg/protocol/codecs/array.pyx",
+  "max_score": "1337"
+}

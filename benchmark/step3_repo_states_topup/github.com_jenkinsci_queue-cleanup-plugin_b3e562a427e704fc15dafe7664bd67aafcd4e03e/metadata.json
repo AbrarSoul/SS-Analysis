@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_queue-cleanup-plugin_b3e562a427e704fc15dafe7664bd67aafcd4e03e",
+  "cve_ids": [
+    "CVE-2020-2169"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/queue-cleanup-plugin",
+  "repository_url": "https://github.com/jenkinsci/queue-cleanup-plugin",
+  "vulnerable_commit": "b54e362d1d804767b33744f00576cecffee0adf6",
+  "fixed_commit": "b3e562a427e704fc15dafe7664bd67aafcd4e03e",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/queuecleanup/QueueCleanup.java",
+  "max_score": "1337"
+}

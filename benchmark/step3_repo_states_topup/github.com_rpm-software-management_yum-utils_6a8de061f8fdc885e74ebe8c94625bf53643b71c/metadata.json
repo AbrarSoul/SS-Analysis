@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_rpm-software-management_yum-utils_6a8de061f8fdc885e74ebe8c94625bf53643b71c",
+  "cve_ids": [
+    "CVE-2018-10897"
+  ],
+  "cwe_ids": [
+    "CWE-22",
+    "CWE-59"
+  ],
+  "language": "python",
+  "repository": "rpm-software-management/yum-utils",
+  "repository_url": "https://github.com/rpm-software-management/yum-utils",
+  "vulnerable_commit": "7554c0133eb830a71dc01846037cc047d0acbc2c",
+  "fixed_commit": "6a8de061f8fdc885e74ebe8c94625bf53643b71c",
+  "changed_file": "reposync.py",
+  "max_score": "1337"
+}

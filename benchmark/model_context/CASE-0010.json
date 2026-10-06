@@ -1,0 +1,25 @@
+{
+  "case_id": "CASE-0010",
+  "language": "python",
+  "cve_id": "CVE-2024-5262",
+  "cwe": [
+    {
+      "id": "CWE-552",
+      "definition": "Files or Directories Accessible to External Parties"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import sys",
+    "from impacket import smbserver"
+  ],
+  "vulnerable_function": "import sys\nfrom impacket import smbserver\n\nlog_filename = \"log.txt\"\nif len(sys.argv) >= 2:\n    log_filename = sys.argv[1]\nport = 445\nif len(sys.argv) >= 3:\n    port = int(sys.argv[2])\n\nserver = smbserver.SimpleSMBServer(listenAddress=\"0.0.0.0\", listenPort=port)\nserver.setSMB2Support(True)\nserver.addShare(\"interactsh\", \"/interactsh\")\nserver.setSMBChallenge('')\nserver.setLogFile(log_filename)\nserver.start()\n",
+  "patched_function": "import sys\nfrom impacket import smbserver\n\ndef configure_shares(server):\n    shares = [\"IPC$\", \"ADMIN$\", \"C$\", \"PRINT$\", \"FAX$\", \"NETLOGON\", \"SYSVOL\"]\n    for share in shares:\n        server.removeShare(share)\n\nlog_filename = \"log.txt\"\nif len(sys.argv) >= 2:\n    log_filename = sys.argv[1]\nport = 445\nif len(sys.argv) >= 3:\n    port = int(sys.argv[2])\n\nserver = smbserver.SimpleSMBServer(listenAddress=\"0.0.0.0\", listenPort=port)\nserver.setSMB2Support(True)\nconfigure_shares(server)\nserver.setSMBChallenge('')\nserver.setLogFile(log_filename)\nserver.start()\n",
+  "unified_diff": "diff --git a/cmd/interactsh-server/smb_server.py b/cmd/interactsh-server/smb_server.py\nindex 63be50c..c3c3428 100755\n--- a/cmd/interactsh-server/smb_server.py\n+++ b/cmd/interactsh-server/smb_server.py\n@@ -1,6 +1,11 @@\n import sys\n from impacket import smbserver\n \n+def configure_shares(server):\n+    shares = [\"IPC$\", \"ADMIN$\", \"C$\", \"PRINT$\", \"FAX$\", \"NETLOGON\", \"SYSVOL\"]\n+    for share in shares:\n+        server.removeShare(share)\n+\n log_filename = \"log.txt\"\n if len(sys.argv) >= 2:\n     log_filename = sys.argv[1]\n@@ -10,7 +15,7 @@ if len(sys.argv) >= 3:\n \n server = smbserver.SimpleSMBServer(listenAddress=\"0.0.0.0\", listenPort=port)\n server.setSMB2Support(True)\n-server.addShare(\"interactsh\", \"/interactsh\")\n+configure_shares(server)\n server.setSMBChallenge('')\n server.setLogFile(log_filename)\n server.start()",
+  "extraction_notes": "Module-level script with no function/class definitions at all (16-line file) -- the whole file is the relevant unit; extracted verbatim.",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 1823,
+  "context_size_chars_after_truncation": 1823
+}

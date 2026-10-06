@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_web2py_web2py_936e2260b0c34c44e2f3674a893e96d2a7fad0a3",
+  "cve_ids": [
+    "CVE-2023-45158"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "web2py/web2py",
+  "repository_url": "https://github.com/web2py/web2py",
+  "vulnerable_commit": "38f44f7bd5d009f3905058d1c5f926b391aeccb9",
+  "fixed_commit": "936e2260b0c34c44e2f3674a893e96d2a7fad0a3",
+  "changed_file": "gluon/messageboxhandler.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,50 @@
+{
+  "case_id": "CASE-0334",
+  "language": "java",
+  "cve_id": "CVE-2022-23620",
+  "cve_ids_all": [
+    "CVE-2022-23620"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-116",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.File;",
+    "import java.io.IOException;",
+    "import java.net.URL;",
+    "import java.net.URLEncoder;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.HashMap;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import javax.inject.Inject;",
+    "import org.apache.commons.io.FileUtils;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import org.apache.http.NameValuePair;",
+    "import org.apache.http.client.utils.URLEncodedUtils;",
+    "import org.xwiki.model.reference.DocumentReference;",
+    "import org.xwiki.security.authorization.ContextualAuthorizationManager;",
+    "import org.xwiki.security.authorization.Right;",
+    "import org.xwiki.url.filesystem.FilesystemExportContext;",
+    "import com.xpn.xwiki.XWikiContext;",
+    "import com.xpn.xwiki.doc.XWikiDocument;",
+    "import com.xpn.xwiki.internal.model.LegacySpaceResolver;",
+    "import com.xpn.xwiki.web.ExportURLFactoryActionHandler;",
+    "import com.xpn.xwiki.web.sx.Extension;",
+    "import com.xpn.xwiki.web.sx.SxDocumentSource;",
+    "import com.xpn.xwiki.web.sx.SxResourceSource;",
+    "import com.xpn.xwiki.web.sx.SxSource;"
+  ],
+  "vulnerable_function": "    private URL processSx(List<String> spaceNames, String name, String queryString, XWikiContext context,\n        FilesystemExportContext exportContext) throws Exception\n    {\n        SxSource sxSource = null;\n\n        // Check if we have the JAR_RESOURCE_REQUEST_PARAMETER parameter in the query string\n        List<NameValuePair> params = URLEncodedUtils.parse(queryString, StandardCharsets.UTF_8);\n        for (NameValuePair param : params) {\n            if (param.getName().equals(JAR_RESOURCE_REQUEST_PARAMETER)) {\n                sxSource = new SxResourceSource(param.getValue());\n                break;\n            }\n        }\n\n        if (sxSource == null) {\n            sxSource = new SxDocumentSource(context, getExtensionType());\n        }\n\n        String content = getContent(sxSource, exportContext);\n\n        // Write the content to file\n        // We need a unique name for that SSX content\n        String targetPath = String.format(\"%s/%s/%s\", getSxPrefix(), StringUtils.join(spaceNames, '/'), name);\n        File targetDirectory = new File(exportContext.getExportDir(), targetPath);\n        if (!targetDirectory.exists()) {\n            targetDirectory.mkdirs();\n        }\n        File targetLocation = File.createTempFile(getSxPrefix(), \".\" + getFileSuffix(), targetDirectory);\n        FileUtils.writeStringToFile(targetLocation, content);\n\n        // Rewrite the URL\n        StringBuilder path = new StringBuilder(\"file://\");\n\n        // Adjust based on current document's location. We need to account for the fact that the current document\n        // is stored in subdirectories inside the top level \"pages\" directory. Since the SX files are also in top\n        // subdirectories, we need to compute the path to them.\n        path.append(StringUtils.repeat(\"../\", exportContext.getDocParentLevel()));\n\n        path.append(getSxPrefix());\n        path.append(URL_PATH_SEPARATOR);\n        for (String spaceName : spaceNames) {\n            path.append(encodeURLPart(spaceName));\n            path.append(URL_PATH_SEPARATOR);\n        }\n        path.append(encodeURLPart(name));\n        path.append(URL_PATH_SEPARATOR);\n        path.append(encodeURLPart(targetLocation.getName()));\n\n        return new URL(path.toString());\n    }",
+  "patched_function": "    private URL processSx(long id, String queryString, XWikiContext context,\n        FilesystemExportContext exportContext) throws Exception\n    {\n        SxSource sxSource = null;\n\n        // Check if we have the JAR_RESOURCE_REQUEST_PARAMETER parameter in the query string\n        List<NameValuePair> params = URLEncodedUtils.parse(queryString, StandardCharsets.UTF_8);\n        for (NameValuePair param : params) {\n            if (param.getName().equals(JAR_RESOURCE_REQUEST_PARAMETER)) {\n                sxSource = new SxResourceSource(param.getValue());\n                break;\n            }\n        }\n\n        if (sxSource == null) {\n            sxSource = new SxDocumentSource(context, getExtensionType());\n        }\n\n        String content = getContent(sxSource, exportContext);\n\n        // Write the content to file\n        // We need a unique name for that SSX content\n        String targetPath = String.format(\"%s/%s\", getSxPrefix(), id);\n        File targetDirectory = new File(exportContext.getExportDir(), targetPath);\n        if (!targetDirectory.exists()) {\n            targetDirectory.mkdirs();\n        }\n        File targetLocation = File.createTempFile(getSxPrefix(), \".\" + getFileSuffix(), targetDirectory);\n        FileUtils.writeStringToFile(targetLocation, content);\n\n        // Rewrite the URL\n        StringBuilder path = new StringBuilder(\"file://\");\n\n        // Adjust based on current document's location. We need to account for the fact that the current document\n        // is stored in subdirectories inside the top level \"pages\" directory. Since the SX files are also in top\n        // subdirectories, we need to compute the path to them.\n        path.append(StringUtils.repeat(\"../\", exportContext.getDocParentLevel()));\n\n        path.append(getSxPrefix());\n        path.append(URL_PATH_SEPARATOR);\n        path.append(id);\n        path.append(URL_PATH_SEPARATOR);\n        path.append(encodeURLPart(targetLocation.getName()));\n\n        return new URL(path.toString());\n    }",
+  "unified_diff": "diff --git a/xwiki-platform-core/xwiki-platform-skin/xwiki-platform-skin-skinx/src/main/java/org/xwiki/skinx/internal/AbstractSxExportURLFactoryActionHandler.java b/xwiki-platform-core/xwiki-platform-skin/xwiki-platform-skin-skinx/src/main/java/org/xwiki/skinx/internal/AbstractSxExportURLFactoryActionHandler.java\nindex 0b9af4e39b9..29ff0d1db61 100644\n--- a/xwiki-platform-core/xwiki-platform-skin/xwiki-platform-skin-skinx/src/main/java/org/xwiki/skinx/internal/AbstractSxExportURLFactoryActionHandler.java\n+++ b/xwiki-platform-core/xwiki-platform-skin/xwiki-platform-skin-skinx/src/main/java/org/xwiki/skinx/internal/AbstractSxExportURLFactoryActionHandler.java\n@@ -100,13 +100,13 @@ public URL createURL(String spaces, String name, String queryString, String anch\n         XWikiDocument.backupContext(backup, context);\n         try {\n             sxDocument.setAsContextDoc(context);\n-            return processSx(spaceNames, name, queryString, context, exportContext);\n+            return processSx(sxDocument.getId(), queryString, context, exportContext);\n         } finally {\n             XWikiDocument.restoreContext(backup, context);\n         }\n     }\n \n-    private URL processSx(List<String> spaceNames, String name, String queryString, XWikiContext context,\n+    private URL processSx(long id, String queryString, XWikiContext context,\n         FilesystemExportContext exportContext) throws Exception\n     {\n         SxSource sxSource = null;\n@@ -128,7 +128,7 @@ private URL processSx(List<String> spaceNames, String name, String queryString,\n \n         // Write the content to file\n         // We need a unique name for that SSX content\n-        String targetPath = String.format(\"%s/%s/%s\", getSxPrefix(), StringUtils.join(spaceNames, '/'), name);\n+        String targetPath = String.format(\"%s/%s\", getSxPrefix(), id);\n         File targetDirectory = new File(exportContext.getExportDir(), targetPath);\n         if (!targetDirectory.exists()) {\n             targetDirectory.mkdirs();\n@@ -146,11 +146,7 @@ private URL processSx(List<String> spaceNames, String name, String queryString,\n \n         path.append(getSxPrefix());\n         path.append(URL_PATH_SEPARATOR);\n-        for (String spaceName : spaceNames) {\n-            path.append(encodeURLPart(spaceName));\n-            path.append(URL_PATH_SEPARATOR);\n-        }\n-        path.append(encodeURLPart(name));\n+        path.append(id);\n         path.append(URL_PATH_SEPARATOR);\n         path.append(encodeURLPart(targetLocation.getName()));\n \n@@ -161,14 +157,14 @@ protected String getContent(SxSource sxSource, FilesystemExportContext exportCon\n     {\n         String content;\n \n-        // We know we're inside a SX file located at \"<S|J>sx/<Space>/<Page>/<s|j>sx<NNN>.<css|js>\". Inside this CSS\n+        // We know we're inside a SX file located at \"<S|J>sx/<id>/<s|j>sx<NNN>.<css|js>\". Inside this CSS\n         // there can be URLs and we need to ensure that the prefix for these URLs lead to the root of the path, i.e.\n-        // 3 levels up (\"../../../\").\n+        // 3 levels up (\"../../\").\n         // To make this happen we reuse the Doc Parent Level from FileSystemExportContext to a fixed value of 3.\n         // We also make sure to put back the original value\n         int originalDocParentLevel = exportContext.getDocParentLevel();\n         try {\n-            exportContext.setDocParentLevels(3);\n+            exportContext.setDocParentLevels(2);\n             content = sxSource.getContent();\n         } finally {\n             exportContext.setDocParentLevels(originalDocParentLevel);",
+  "auto_locate_confidence": "auto"
+}

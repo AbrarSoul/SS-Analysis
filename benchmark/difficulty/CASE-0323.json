@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0323",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-19"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 3,
+  "lines_changed_total": 3,
+  "function_size_chars": 31634,
+  "function_size_lines": 517,
+  "auto_locate_confidence": "hand_retargeted",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "CKEditor allowedContent rule permitting <script> elements with any attributes; matchable literal rule."
+}

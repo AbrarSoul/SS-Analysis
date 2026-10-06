@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0118",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-178"
+  ],
+  "changed_files": 1,
+  "lines_added": 22,
+  "lines_removed": 15,
+  "lines_changed_total": 37,
+  "function_size_chars": 4613,
+  "function_size_lines": 100,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Case-insensitive file-system resolution bypasses URL constraints; depends on runtime FS behaviour Semgrep cannot observe."
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0002",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-627",
+    "CWE-913"
+  ],
+  "changed_files": 1,
+  "lines_added": 85,
+  "lines_removed": 6,
+  "lines_changed_total": 91,
+  "function_size_chars": 206,
+  "function_size_lines": 4,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "eval() applied directly to a request field; self-contained one-line sink, no cross-variable tracing needed.",
+  "supported_status": "supported"
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "github.com_pyload_pyload_a2b1eb1028f45ac58dea5f58593c1d3db2b4a104",
+  "language": "python",
+  "cve_id": "CVE-2023-0434",
+  "cve_ids_all": [
+    "CVE-2023-0434"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "ConfigParser",
+  "imports": [
+    "import os",
+    "import re",
+    "import shutil",
+    "import time",
+    "from pyload import PKGDIR",
+    "from ... import exc_logger"
+  ],
+  "vulnerable_function": "    def cast(self, typ, value):\n        \"\"\"\n        cast value to given format.\n        \"\"\"\n        if typ == \"int\":\n            return int(value)\n\n        elif typ == \"float\":\n            return float(value)\n\n        elif typ == \"str\":\n            return \"\" if value is None else str(value)\n\n        elif typ == \"bytes\":\n            return b\"\" if value is None else bytes(value)\n\n        elif typ == \"bool\":\n            value = \"\" if value is None else str(value)\n            return value.lower() in (\"1\", \"true\", \"on\", \"yes\", \"y\")\n\n        elif typ == \"time\":\n            value = \"\" if value is None else str(value)\n            if not value:\n                value = \"0:00\"\n            if \":\" not in value:\n                value += \":00\"\n            return value\n\n        elif typ in (\"file\", \"folder\"):\n            return \"\" if value in (None, \"\") else os.path.realpath(os.path.expanduser(os.fsdecode(value)))\n\n        else:\n            return value\n",
+  "patched_function": "    def cast(self, typ, value):\n        \"\"\"\n        cast value to given format.\n        \"\"\"\n        if typ == \"int\":\n            return int(value)\n\n        elif typ == \"float\":\n            return float(value)\n\n        elif typ == \"str\":\n            return \"\" if value is None else str(value)\n\n        elif typ == \"bytes\":\n            return b\"\" if value is None else bytes(value)\n\n        elif typ == \"bool\":\n            value = \"\" if value is None else str(value)\n            return value.lower() in (\"1\", \"true\", \"on\", \"yes\", \"y\")\n\n        elif typ == \"time\":\n            default_value = \"0:00\"\n            value = \"\" if value is None else str(value)\n            if not value:\n                value = default_value\n            elif \":\" not in value:\n                value += \":00\"\n\n            hours, seconds = value.split(\":\", 1)\n            if (\n                hours.isnumeric()\n                and seconds.isnumeric()\n                and 0 <= int(hours) <= 23\n                and 0 <= int(seconds) <= 59\n            ):\n                pass\n            else:\n                value = default_value\n\n            return value\n\n        elif typ in (\"file\", \"folder\"):\n            return (\n                \"\"\n                if value in (None, \"\")\n                else os.path.realpath(os.path.expanduser(os.fsdecode(value)))\n            )\n\n        else:\n            return value\n",
+  "unified_diff": "diff --git a/src/pyload/core/config/parser.py b/src/pyload/core/config/parser.py\nindex ce31142d7..6410faa86 100644\n--- a/src/pyload/core/config/parser.py\n+++ b/src/pyload/core/config/parser.py\n@@ -279,15 +279,32 @@ class ConfigParser:\n             return value.lower() in (\"1\", \"true\", \"on\", \"yes\", \"y\")\n \n         elif typ == \"time\":\n+            default_value = \"0:00\"\n             value = \"\" if value is None else str(value)\n             if not value:\n-                value = \"0:00\"\n-            if \":\" not in value:\n+                value = default_value\n+            elif \":\" not in value:\n                 value += \":00\"\n+\n+            hours, seconds = value.split(\":\", 1)\n+            if (\n+                hours.isnumeric()\n+                and seconds.isnumeric()\n+                and 0 <= int(hours) <= 23\n+                and 0 <= int(seconds) <= 59\n+            ):\n+                pass\n+            else:\n+                value = default_value\n+\n             return value\n \n         elif typ in (\"file\", \"folder\"):\n-            return \"\" if value in (None, \"\") else os.path.realpath(os.path.expanduser(os.fsdecode(value)))\n+            return (\n+                \"\"\n+                if value in (None, \"\")\n+                else os.path.realpath(os.path.expanduser(os.fsdecode(value)))\n+            )\n \n         else:\n             return value",
+  "auto_locate_confidence": "auto"
+}

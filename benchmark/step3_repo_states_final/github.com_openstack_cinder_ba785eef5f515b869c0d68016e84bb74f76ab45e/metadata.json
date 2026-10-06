@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openstack_cinder_ba785eef5f515b869c0d68016e84bb74f76ab45e",
+  "cve_ids": [
+    "CVE-2020-10755"
+  ],
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "language": "python",
+  "repository": "openstack/cinder",
+  "repository_url": "https://github.com/openstack/cinder",
+  "vulnerable_commit": "3ebea9ed0dcb5cb974e045b41cf6de9395d89544",
+  "fixed_commit": "ba785eef5f515b869c0d68016e84bb74f76ab45e",
+  "changed_file": "cinder/volume/drivers/dell_emc/scaleio/driver.py",
+  "max_score": "1337"
+}

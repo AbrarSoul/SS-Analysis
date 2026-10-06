@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0040",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 2376,
+  "function_size_lines": 71,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "An unsanitized config-derived value is concatenated into a cache identifier; recognizing the risk requires tracing that identifier's later use as a filesystem path, not visible in this fragment alone.",
+  "supported_status": "supported"
+}

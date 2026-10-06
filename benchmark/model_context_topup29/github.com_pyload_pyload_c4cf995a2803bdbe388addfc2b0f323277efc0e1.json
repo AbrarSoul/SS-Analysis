@@ -1,0 +1,67 @@
+{
+  "case_id": "github.com_pyload_pyload_c4cf995a2803bdbe388addfc2b0f323277efc0e1",
+  "language": "python",
+  "cve_id": "CVE-2026-35463",
+  "cve_ids_all": [
+    "CVE-2026-35463",
+    "CVE-2026-35464",
+    "CVE-2026-42312",
+    "CVE-2026-42313"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-295",
+      "definition": "Improper Certificate Validation"
+    },
+    {
+      "id": "CWE-306",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-441",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    },
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    },
+    {
+      "id": "CWE-863",
+      "definition": "Incorrect Authorization"
+    },
+    {
+      "id": "CWE-918",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "Api",
+  "imports": [
+    "import os",
+    "import re",
+    "import secrets",
+    "import time",
+    "from enum import IntFlag",
+    "from typing import Any, Callable, Optional",
+    "from urllib.parse import urlparse",
+    "import flask",
+    "from werkzeug.utils import secure_filename",
+    "from pyload import PKGDIR",
+    "from pyload.core.utils.web.check import is_global_host",
+    "from ..datatypes.data import AccountInfo, CaptchaTask, ConfigItem, ConfigSection, DownloadInfo, EventInfo, FileData, OldUserData, OnlineCheck, OnlineStatus, PackageData, ServerStatus, ServiceCall, UserData",
+    "from ..datatypes.enums import Destination, ElementType",
+    "from ..datatypes.exceptions import FileDoesNotExists, PackageDoesNotExists, ServiceDoesNotExists, ServiceException",
+    "from ..datatypes.pyfile import PyFile",
+    "from ..log_factory import LogFactory",
+    "from ..network.request_factory import get_url",
+    "from ..utils import fs, seconds",
+    "from ..utils.old.packagetools import parse_names"
+  ],
+  "vulnerable_function": "    def set_config_value(self, category: str, option: str, value: Any, section: str = \"core\") -> None:\n        \"\"\"\n        Set new config value.\n\n        :param category:\n        :param option:\n        :param value: new config value\n        :param section: 'plugin' or 'core\n        \"\"\"\n\n        ADMIN_ONLY_OPTIONS = {\n            (\"reconnect\", \"script\"),\n            (\"webui\", \"host\"),\n            (\"webui\", \"use_ssl\"),\n            (\"webui\", \"ssl_cert\"),\n            (\"webui\", \"ssl_key\"),\n            (\"log\", \"syslog_host\"),\n            (\"log\", \"syslog_port\"),\n            (\"proxy\", \"username\"),\n            (\"proxy\", \"password\"),\n        }\n\n        if section == \"core\":\n            if category == \"general\" and option == \"storage_folder\":\n                # Forbid setting the download folder inside dangerous locations\n                correct_case = lambda x: x.lower() if os.name == \"nt\" else x\n                directories = [\n                    correct_case(os.path.join(os.path.realpath(d), \"\"))\n                    for d in [value, PKGDIR, self.pyload.userdir]\n                ]\n                if any(directories[0].startswith(d) for d in directories[1:]):\n                    return\n\n            # Require ADMIN role for security-critical settings\n            try:\n                try:\n                    user_info = flask.g.user_info\n                except AttributeError:\n                    user_info = flask.session\n\n                if (category, option) in ADMIN_ONLY_OPTIONS and user_info.get(\"role\") != Role.ADMIN:\n                    self.pyload.log.error(self._(\"Writing config value {}/{} requires Admin role\").format(category, option))\n                    return\n\n            # Attempt to access outside an active Flask request\n            except RuntimeError:\n                pass\n\n            self.pyload.config.set(category, option, value)\n\n            if category == \"download\" and option in (\n                \"limit_speed\",\n                \"max_speed\",\n            ):  #: not such a nice method to update the limit\n                self.pyload.request_factory.update_bucket()\n\n        elif section == \"plugin\":\n            self.pyload.config.set_plugin(category, option, value)\n\n        self.pyload.addon_manager.dispatch_event(\n            \"config_changed\", category, option, value, section\n        )\n",
+  "patched_function": "    def set_config_value(self, category: str, option: str, value: Any, section: str = \"core\") -> None:\n        \"\"\"\n        Set new config value.\n\n        :param category:\n        :param option:\n        :param value: new config value\n        :param section: 'plugin' or 'core\n        \"\"\"\n        try:\n            try:\n                user_info = flask.g.user_info\n            except AttributeError:\n                user_info = flask.session\n\n        # Attempt to access outside an active Flask request\n        except RuntimeError:\n            user_info = {\"role\": Role.ADMIN}\n        is_admin = user_info.get(\"role\") == Role.ADMIN\n\n        ADMIN_ONLY_CORE_OPTIONS = {\n            (\"general\", \"storage_folder\"),\n            (\"log\", \"syslog_host\"),\n            (\"log\", \"syslog_port\"),\n            (\"proxy\", \"password\"),\n            (\"proxy\", \"username\"),\n            (\"reconnect\", \"script\"),\n            (\"webui\", \"host\"),\n            (\"webui\", \"ssl_cert\"),\n            (\"webui\", \"ssl_key\"),\n            (\"webui\", \"use_ssl\"),\n        }\n\n        ADMIN_ONLY_PLUGIN_OPTIONS = {\n            (\"AntiVirus\", \"avfile\"),\n            (\"AntiVirus\", \"avargs\"),\n        }\n\n        if section == \"core\":\n            if category == \"general\" and option == \"storage_folder\":\n                # Forbid setting the download folder inside dangerous locations\n                correct_case = lambda x: x.lower() if os.name == \"nt\" else x\n                directories = [\n                    correct_case(os.path.join(os.path.realpath(d), \"\"))\n                    for d in [value, PKGDIR, self.pyload.userdir]\n                ]\n                if any(directories[0].startswith(d) for d in directories[1:]):\n                    return\n\n            # Require ADMIN role for security-critical settings\n            if (category, option) in ADMIN_ONLY_CORE_OPTIONS and not is_admin:\n                self.pyload.log.error(self._(\"Writing config value {}/{} requires Admin role\").format(category, option))\n                return\n\n            self.pyload.config.set(category, option, value)\n\n            if category == \"download\" and option in (\n                \"limit_speed\",\n                \"max_speed\",\n            ):  #: not such a nice method to update the limit\n                self.pyload.request_factory.update_bucket()\n\n        elif section == \"plugin\":\n            # Require ADMIN role for security-critical settings\n            if (category, option) in ADMIN_ONLY_PLUGIN_OPTIONS and not is_admin:\n                self.pyload.log.error(self._(\"Writing config value {}/{} requires Admin role\").format(category, option))\n                return\n\n            self.pyload.config.set_plugin(category, option, value)\n\n        self.pyload.addon_manager.dispatch_event(\n            \"config_changed\", category, option, value, section\n        )\n",
+  "unified_diff": "diff --git a/src/pyload/core/api/__init__.py b/src/pyload/core/api/__init__.py\nindex e37bbd0e7..b938103a2 100644\n--- a/src/pyload/core/api/__init__.py\n+++ b/src/pyload/core/api/__init__.py\n@@ -223,17 +223,33 @@ class Api:\n         :param value: new config value\n         :param section: 'plugin' or 'core\n         \"\"\"\n+        try:\n+            try:\n+                user_info = flask.g.user_info\n+            except AttributeError:\n+                user_info = flask.session\n+\n+        # Attempt to access outside an active Flask request\n+        except RuntimeError:\n+            user_info = {\"role\": Role.ADMIN}\n+        is_admin = user_info.get(\"role\") == Role.ADMIN\n \n-        ADMIN_ONLY_OPTIONS = {\n+        ADMIN_ONLY_CORE_OPTIONS = {\n+            (\"general\", \"storage_folder\"),\n+            (\"log\", \"syslog_host\"),\n+            (\"log\", \"syslog_port\"),\n+            (\"proxy\", \"password\"),\n+            (\"proxy\", \"username\"),\n             (\"reconnect\", \"script\"),\n             (\"webui\", \"host\"),\n-            (\"webui\", \"use_ssl\"),\n             (\"webui\", \"ssl_cert\"),\n             (\"webui\", \"ssl_key\"),\n-            (\"log\", \"syslog_host\"),\n-            (\"log\", \"syslog_port\"),\n-            (\"proxy\", \"username\"),\n-            (\"proxy\", \"password\"),\n+            (\"webui\", \"use_ssl\"),\n+        }\n+\n+        ADMIN_ONLY_PLUGIN_OPTIONS = {\n+            (\"AntiVirus\", \"avfile\"),\n+            (\"AntiVirus\", \"avargs\"),\n         }\n \n         if section == \"core\":\n@@ -248,19 +264,9 @@ class Api:\n                     return\n \n             # Require ADMIN role for security-critical settings\n-            try:\n-                try:\n-                    user_info = flask.g.user_info\n-                except AttributeError:\n-                    user_info = flask.session\n-\n-                if (category, option) in ADMIN_ONLY_OPTIONS and user_info.get(\"role\") != Role.ADMIN:\n-                    self.pyload.log.error(self._(\"Writing config value {}/{} requires Admin role\").format(category, option))\n-                    return\n-\n-            # Attempt to access outside an active Flask request\n-            except RuntimeError:\n-                pass\n+            if (category, option) in ADMIN_ONLY_CORE_OPTIONS and not is_admin:\n+                self.pyload.log.error(self._(\"Writing config value {}/{} requires Admin role\").format(category, option))\n+                return\n \n             self.pyload.config.set(category, option, value)\n \n@@ -271,6 +277,11 @@ class Api:\n                 self.pyload.request_factory.update_bucket()\n \n         elif section == \"plugin\":\n+            # Require ADMIN role for security-critical settings\n+            if (category, option) in ADMIN_ONLY_PLUGIN_OPTIONS and not is_admin:\n+                self.pyload.log.error(self._(\"Writing config value {}/{} requires Admin role\").format(category, option))\n+                return\n+\n             self.pyload.config.set_plugin(category, option, value)\n \n         self.pyload.addon_manager.dispatch_event(",
+  "auto_locate_confidence": "auto"
+}

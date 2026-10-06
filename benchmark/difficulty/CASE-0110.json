@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0110",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "changed_files": 1,
+  "lines_added": 18,
+  "lines_removed": 5,
+  "lines_changed_total": 23,
+  "function_size_chars": 441,
+  "function_size_lines": 11,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Array allocated from an attacker-controlled length before bounds checks; ordering of allocation vs check is hard to express."
+}

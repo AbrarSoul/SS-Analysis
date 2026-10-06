@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_aedart_ion_c3e2ee08710d4164d796ecb66ed291335dae9291",
+  "language": "typescript",
+  "cve_id": "CVE-2023-30857",
+  "cve_ids_all": [
+    "CVE-2023-30857"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1321",
+      "definition": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import type {Key} from \"@aedart/contracts/support\";",
+    "import type {",
+    "import { METADATA } from \"@aedart/contracts/support/meta\";",
+    "import { set, get } from \"@aedart/support/objects\";",
+    "import { cloneDeep } from \"lodash-es\";"
+  ],
+  "vulnerable_function": "function resolveMetadataRecord(owner: object, context: Context, useMetaFromContext: boolean): MetadataRecord\n{\n    // If registry is not to be used, it means that context.metadata is available \n    if (useMetaFromContext) {\n        return context.metadata as MetadataRecord;\n    }\n\n    // Obtain record from registry, or create new empty object.\n    let metadata: MetadataRecord = registry.get(owner) ?? {};\n\n    // In case that the owner has Symbol.metadata defined (e.g. from base class),\n    // then merge it current metadata. This ensures that inheritance works as\n    // intended, whilst a base class still keeping its original metadata.\n    if (Reflect.has(owner, METADATA)) {\n        // @ts-expect-error: Owner has Symbol.metadata!\n        metadata = Object.assign(metadata, owner[METADATA]);\n    }\n\n    return metadata;\n}",
+  "patched_function": "function resolveMetadataRecord(owner: object, context: Context, useMetaFromContext: boolean): MetadataRecord\n{\n    // If registry is not to be used, it means that context.metadata is available \n    if (useMetaFromContext) {\n        return context.metadata as MetadataRecord;\n    }\n\n    // Obtain record from registry, or create new empty object.\n    let metadata: MetadataRecord = registry.get(owner) ?? Object.create(null);\n\n    // In case that the owner has Symbol.metadata defined (e.g. from base class),\n    // then merge it current metadata. This ensures that inheritance works as\n    // intended, whilst a base class still keeping its original metadata.\n    if (Reflect.has(owner, METADATA)) {\n        // @ts-expect-error: Owner has Symbol.metadata!\n        metadata = Object.assign(metadata, owner[METADATA]);\n    }\n\n    return metadata;\n}",
+  "unified_diff": "diff --git a/packages/support/src/meta/meta.ts b/packages/support/src/meta/meta.ts\nindex a1c1bc62..31a1ba71 100644\n--- a/packages/support/src/meta/meta.ts\n+++ b/packages/support/src/meta/meta.ts\n@@ -217,7 +217,7 @@ function resolveMetadataRecord(owner: object, context: Context, useMetaFromConte\n     }\n \n     // Obtain record from registry, or create new empty object.\n-    let metadata: MetadataRecord = registry.get(owner) ?? {};\n+    let metadata: MetadataRecord = registry.get(owner) ?? Object.create(null);\n \n     // In case that the owner has Symbol.metadata defined (e.g. from base class),\n     // then merge it current metadata. This ensures that inheritance works as",
+  "auto_locate_confidence": "auto"
+}

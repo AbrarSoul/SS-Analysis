@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_tomcat_5badf94e79e5de206fc0ef3054fd536b1bb787cd",
+  "cve_ids": [
+    "CVE-2023-28709"
+  ],
+  "cwe_ids": [
+    "CWE-193"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "f00b3b95a0fbb343a3dce17986f4866c6b485570",
+  "fixed_commit": "5badf94e79e5de206fc0ef3054fd536b1bb787cd",
+  "changed_file": "java/org/apache/tomcat/util/http/Parameters.java",
+  "max_score": "1337"
+}

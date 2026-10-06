@@ -1,0 +1,16 @@
+diff --git a/emmett_core/http/wrappers/__init__.py b/emmett_core/http/wrappers/__init__.py
+index 4021f1b..8b1f317 100644
+--- a/emmett_core/http/wrappers/__init__.py
++++ b/emmett_core/http/wrappers/__init__.py
+@@ -61,7 +61,10 @@ class IngressWrapper(Wrapper, metaclass=ABCMeta):
+     def cookies(self) -> SimpleCookie:
+         cookies: SimpleCookie = SimpleCookie()
+         for cookie in self.headers.get("cookie", "").split(";"):
+-            cookies.load(cookie)
++            try:
++                cookies.load(cookie)
++            except Exception:
++                continue
+         return cookies
+ 
+     @property

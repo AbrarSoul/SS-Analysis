@@ -1,0 +1,6 @@
+rules:
+  - id: test-invalid-metavar
+    pattern: $path = $base.joinpath($name).resolve()
+    languages: [python]
+    message: invalid rule -- lowercase metavariables are not valid Semgrep syntax
+    severity: ERROR

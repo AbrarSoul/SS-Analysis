@@ -1,0 +1,27 @@
+{
+  "case_id": "CASE-0180",
+  "language": "python",
+  "cve_id": "CVE-2022-42906",
+  "cve_ids_all": [
+    "CVE-2022-42906"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "GitStatusSegment",
+  "imports": [
+    "from powerline.segments import Segment, with_docstring",
+    "from powerline.theme import requires_segment_info",
+    "from subprocess import PIPE, Popen",
+    "import os",
+    "import re",
+    "import string"
+  ],
+  "vulnerable_function": "    def get_base_command(self, cwd, use_dash_c):\n        if use_dash_c:\n            return ['git', '-C', cwd]\n\n        while cwd and cwd != os.sep:\n            gitdir = os.path.join(cwd, '.git')\n\n            if os.path.isdir(gitdir):\n                return ['git', '--git-dir=%s' % gitdir, '--work-tree=%s' % cwd]\n\n            cwd = os.path.dirname(cwd)\n\n        return None\n",
+  "patched_function": "    def get_base_command(self, cwd, use_dash_c):\n        if use_dash_c:\n            return ['git', '-c', 'core.fsmonitor=', '-C', cwd]\n\n        while cwd and cwd != os.sep:\n            gitdir = os.path.join(cwd, '.git')\n\n            if os.path.isdir(gitdir):\n                return ['git', '-c', 'core.fsmonitor=', '--git-dir=%s' % gitdir, '--work-tree=%s' % cwd]\n\n            cwd = os.path.dirname(cwd)\n\n        return None\n",
+  "unified_diff": "diff --git a/powerline_gitstatus/segments.py b/powerline_gitstatus/segments.py\nindex b4a51b3..cdd0a01 100644\n--- a/powerline_gitstatus/segments.py\n+++ b/powerline_gitstatus/segments.py\n@@ -27,13 +27,13 @@ class GitStatusSegment(Segment):\n \n     def get_base_command(self, cwd, use_dash_c):\n         if use_dash_c:\n-            return ['git', '-C', cwd]\n+            return ['git', '-c', 'core.fsmonitor=', '-C', cwd]\n \n         while cwd and cwd != os.sep:\n             gitdir = os.path.join(cwd, '.git')\n \n             if os.path.isdir(gitdir):\n-                return ['git', '--git-dir=%s' % gitdir, '--work-tree=%s' % cwd]\n+                return ['git', '-c', 'core.fsmonitor=', '--git-dir=%s' % gitdir, '--work-tree=%s' % cwd]\n \n             cwd = os.path.dirname(cwd)\n ",
+  "auto_locate_confidence": "auto"
+}

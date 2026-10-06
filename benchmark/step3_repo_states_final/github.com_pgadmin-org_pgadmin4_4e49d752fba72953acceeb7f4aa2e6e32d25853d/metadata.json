@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_pgadmin-org_pgadmin4_4e49d752fba72953acceeb7f4aa2e6e32d25853d",
+  "cve_ids": [
+    "CVE-2024-2044"
+  ],
+  "cwe_ids": [
+    "CWE-31"
+  ],
+  "language": "python",
+  "repository": "pgadmin-org/pgadmin4",
+  "repository_url": "https://github.com/pgadmin-org/pgadmin4",
+  "vulnerable_commit": "0cbb5324bf56aac66f58887fd67776b080082fda",
+  "fixed_commit": "4e49d752fba72953acceeb7f4aa2e6e32d25853d",
+  "changed_file": "web/pgadmin/utils/session.py",
+  "max_score": "1337"
+}

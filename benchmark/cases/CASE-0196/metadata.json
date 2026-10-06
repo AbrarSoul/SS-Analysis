@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0196",
+  "original_source_case_id": "github.com_jenkinsci_warnings-ng-plugin_17d18d2fae58f5658a40d03a03f927819eb6cf1a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-46651",
+  "cve_ids_all": [
+    "CVE-2023-46651"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/warnings-ng-plugin",
+  "repository_url": "https://github.com/jenkinsci/warnings-ng-plugin",
+  "vulnerable_commit": "5a937de780e6844d0ec58c1ab4e89677600b4b36",
+  "fixed_commit": "17d18d2fae58f5658a40d03a03f927819eb6cf1a",
+  "changed_file": "plugin/src/main/java/io/jenkins/plugins/analysis/warnings/axivion/AxivionSuite.java",
+  "changed_function": "private UsernamePasswordCredentials withValidCredentials() {",
+  "vulnerable_lines": [
+    210,
+    229
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0196/vulnerable_source.java": "4a0891f406925f87eab035d5614e6d8e391421379af7943a45f571520a220748",
+    "cases/CASE-0196/patched_source.java": "ff0a46b18365a0d670afc616d4c174fb831e250f836342a5c70e83faace57a8b",
+    "cases/CASE-0196/patch.diff": "b62b1d8ced2fbf542ae061dd7f3b4d11acf6b667b5dc6271f9bffc3b5b566703",
+    "cases/CASE-0196/metadata.json": "abeb367b8583d25019c83115121f88a3fea7cfc804345375c637196dbc5dbfab",
+    "model_context/CASE-0196.json": "0ccab01418b1ccbed19f32cb16669a90c9a8973d84d5065cb048065be25c8b85",
+    "difficulty/CASE-0196.json": "5d619958d2831219b144f7caed8b20bcb54aaeaf8278ee5f1f679f0b2405d99d"
+  },
+  "case_level_hash": "e323530cd84d117d854de36ebbdfc5df05b37a557b97136a6e81b9a803328d58"
+}

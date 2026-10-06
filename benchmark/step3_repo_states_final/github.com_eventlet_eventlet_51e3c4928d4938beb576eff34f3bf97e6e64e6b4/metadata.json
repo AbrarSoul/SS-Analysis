@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_eventlet_eventlet_51e3c4928d4938beb576eff34f3bf97e6e64e6b4",
+  "cve_ids": [
+    "CVE-2023-29483"
+  ],
+  "cwe_ids": [
+    "CWE-292"
+  ],
+  "language": "python",
+  "repository": "eventlet/eventlet",
+  "repository_url": "https://github.com/eventlet/eventlet",
+  "vulnerable_commit": "b6f6e7c3a81853c2bf380f48bc0da7b894a3a903",
+  "fixed_commit": "51e3c4928d4938beb576eff34f3bf97e6e64e6b4",
+  "changed_file": "eventlet/support/greendns.py",
+  "max_score": "1337"
+}

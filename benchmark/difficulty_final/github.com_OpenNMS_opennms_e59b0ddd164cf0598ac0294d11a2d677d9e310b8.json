@@ -1,0 +1,21 @@
+{
+  "case_id": "github.com_OpenNMS_opennms_e59b0ddd164cf0598ac0294d11a2d677d9e310b8",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-269",
+    "CWE-91",
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 288,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

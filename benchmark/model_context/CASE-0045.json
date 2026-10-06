@@ -1,0 +1,36 @@
+{
+  "case_id": "CASE-0045",
+  "language": "javascript",
+  "cve_id": "CVE-2025-9654",
+  "cve_ids_all": [
+    "CVE-2025-9654"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    },
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { homedir } from 'os';",
+    "import { readFile } from 'fs/promises';",
+    "import { join } from 'path';",
+    "import { fileURLToPath } from 'url';",
+    "import { createRequire } from 'module';",
+    "const { spawn, exec } = require('child_process');",
+    "const { promisify } = require('util');",
+    "const sshConfig = require('ssh-config');",
+    "const { Server } = require('@modelcontextprotocol/sdk/server/index.js');",
+    "const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio.js');",
+    "const { CallToolRequestSchema, ListToolsRequestSchema } = require('@modelcontextprotocol/sdk/types.js');"
+  ],
+  "vulnerable_function": "  async uploadFile(hostAlias, localPath, remotePath) {\n    try {\n      const scpCommand = `scp \"${localPath}\" \"${hostAlias}:${remotePath}\"`;\n      debugLog(`Executing: ${scpCommand}\\n`);\n      \n      await execAsync(scpCommand, { timeout: 60000 }); // 60 second timeout for file transfer\n      return true;\n    } catch (error) {\n      debugLog(`Error uploading file to ${hostAlias}: ${error.message}\\n`);\n      return false;\n    }\n  }",
+  "patched_function": "  async uploadFile(hostAlias, localPath, remotePath) {\n    try {\n      debugLog(`Executing: scp ${localPath} ${hostAlias}:${remotePath}\\n`);\n      \n      await execFileAsync('scp', [localPath, `${hostAlias}:${remotePath}`], { \n        timeout: 60000 // 60 second timeout for file transfer\n      });\n      return true;\n    } catch (error) {\n      debugLog(`Error uploading file to ${hostAlias}: ${error.message}\\n`);\n      return false;\n    }\n  }",
+  "unified_diff": "diff --git a/server-simple.mjs b/server-simple.mjs\nindex 773eb0b..d73e1c2 100755\n--- a/server-simple.mjs\n+++ b/server-simple.mjs\n@@ -18,11 +18,12 @@ import { createRequire } from 'module';\n const require = createRequire(import.meta.url);\n \n // Required libraries\n-const { spawn, exec } = require('child_process');\n+const { spawn, exec, execFile } = require('child_process');\n const { promisify } = require('util');\n const sshConfig = require('ssh-config');\n \n const execAsync = promisify(exec);\n+const execFileAsync = promisify(execFile);\n \n // Silent mode for MCP clients - disable debug output when used as MCP server\n const SILENT_MODE = process.env.MCP_SILENT === 'true' || process.argv.includes('--silent');\n@@ -167,11 +168,10 @@ class SSHClient {\n \n   async runRemoteCommand(hostAlias, command) {\n     try {\n-      // Use local ssh command - much simpler and more reliable\n-      const sshCommand = `ssh \"${hostAlias}\" \"${command.replace(/\"/g, '\\\\\"')}\"`;\n-      debugLog(`Executing: ${sshCommand}\\n`);\n+      // Use execFile for security - prevents command injection\n+      debugLog(`Executing: ssh ${hostAlias} ${command}\\n`);\n       \n-      const { stdout, stderr } = await execAsync(sshCommand, {\n+      const { stdout, stderr } = await execFileAsync('ssh', [hostAlias, command], {\n         timeout: 30000, // 30 second timeout\n         maxBuffer: 1024 * 1024 * 10 // 10MB buffer\n       });\n@@ -217,10 +217,11 @@ class SSHClient {\n \n   async uploadFile(hostAlias, localPath, remotePath) {\n     try {\n-      const scpCommand = `scp \"${localPath}\" \"${hostAlias}:${remotePath}\"`;\n-      debugLog(`Executing: ${scpCommand}\\n`);\n+      debugLog(`Executing: scp ${localPath} ${hostAlias}:${remotePath}\\n`);\n       \n-      await execAsync(scpCommand, { timeout: 60000 }); // 60 second timeout for file transfer\n+      await execFileAsync('scp', [localPath, `${hostAlias}:${remotePath}`], { \n+        timeout: 60000 // 60 second timeout for file transfer\n+      });\n       return true;\n     } catch (error) {\n       debugLog(`Error uploading file to ${hostAlias}: ${error.message}\\n`);\n@@ -230,10 +231,11 @@ class SSHClient {\n \n   async downloadFile(hostAlias, remotePath, localPath) {\n     try {\n-      const scpCommand = `scp \"${hostAlias}:${remotePath}\" \"${localPath}\"`;\n-      debugLog(`Executing: ${scpCommand}\\n`);\n+      debugLog(`Executing: scp ${hostAlias}:${remotePath} ${localPath}\\n`);\n       \n-      await execAsync(scpCommand, { timeout: 60000 }); // 60 second timeout for file transfer\n+      await execFileAsync('scp', [`${hostAlias}:${remotePath}`, localPath], { \n+        timeout: 60000 // 60 second timeout for file transfer\n+      });\n       return true;\n     } catch (error) {\n       debugLog(`Error downloading file from ${hostAlias}: ${error.message}\\n`);",
+  "auto_locate_confidence": "auto_low_confidence"
+}

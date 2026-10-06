@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0119",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-404"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 0,
+  "lines_changed_total": 5,
+  "function_size_chars": 258,
+  "function_size_lines": 8,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "close() never resets still-open HTTP/2 streams; connection-lifecycle bookkeeping, not a code shape."
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_OWASP_NodeGoat_4a4d1db74c63fb4ff8d366551c3af006c25ead12",
+  "language": "javascript",
+  "cve_id": "CVE-2021-4247",
+  "cve_ids_all": [
+    "CVE-2021-4247"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-404",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const ResearchDAO = require(\"../data/research-dao\").ResearchDAO;",
+    "const needle = require(\"needle\");"
+  ],
+  "vulnerable_function": "            return needle.get(url, (error, newResponse) => {\n                if (!error && newResponse.statusCode === 200) {\n                    res.writeHead(200, {\n                        \"Content-Type\": \"text/html\"\n                    });\n                }\n                res.write(\"<h1>The following is the stock information you requested.</h1>\\n\\n\");\n                res.write(\"\\n\\n\");\n                res.write(newResponse.body);\n                return res.end();\n            }",
+  "patched_function": "            return needle.get(url, (error, newResponse, body) => {\n                if (!error && newResponse.statusCode === 200) {\n                    res.writeHead(200, {\n                        \"Content-Type\": \"text/html\"\n                    });\n                }\n                res.write(\"<h1>The following is the stock information you requested.</h1>\\n\\n\");\n                res.write(\"\\n\\n\");\n                if (body) {\n                    res.write(body);\n                }\n                return res.end();\n            }",
+  "unified_diff": "diff --git a/app/routes/research.js b/app/routes/research.js\nindex 3e04cfe..c3ae59d 100644\n--- a/app/routes/research.js\n+++ b/app/routes/research.js\n@@ -13,7 +13,7 @@ function ResearchHandler(db) {\n \n         if (req.query.symbol) {\n             const url = req.query.url + req.query.symbol;\n-            return needle.get(url, (error, newResponse) => {\n+            return needle.get(url, (error, newResponse, body) => {\n                 if (!error && newResponse.statusCode === 200) {\n                     res.writeHead(200, {\n                         \"Content-Type\": \"text/html\"\n@@ -21,7 +21,9 @@ function ResearchHandler(db) {\n                 }\n                 res.write(\"<h1>The following is the stock information you requested.</h1>\\n\\n\");\n                 res.write(\"\\n\\n\");\n-                res.write(newResponse.body);\n+                if (body) {\n+                    res.write(body);\n+                }\n                 return res.end();\n             });\n         }",
+  "auto_locate_confidence": "auto"
+}

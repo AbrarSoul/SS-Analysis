@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_hibernate_hibernate-orm_3f3c1ab50604ab9ba99e25d2016fb85f3ba9dcd4",
+  "batch": "topup10",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 4,
+  "lines_changed_total": 9,
+  "function_size_chars": 563,
+  "function_size_lines": 16,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

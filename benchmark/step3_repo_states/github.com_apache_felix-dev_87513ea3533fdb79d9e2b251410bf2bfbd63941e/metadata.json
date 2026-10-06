@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_felix-dev_87513ea3533fdb79d9e2b251410bf2bfbd63941e",
+  "cve_ids": [
+    "CVE-2025-25247"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "apache/felix-dev",
+  "repository_url": "https://github.com/apache/felix-dev",
+  "vulnerable_commit": "c9df37190eddd3a8af4262956436880a3acb8c90",
+  "fixed_commit": "87513ea3533fdb79d9e2b251410bf2bfbd63941e",
+  "changed_file": "webconsole/src/main/java/org/apache/felix/webconsole/internal/core/ServicesServlet.java",
+  "max_score": "1337"
+}

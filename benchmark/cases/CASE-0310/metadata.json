@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0310",
+  "original_source_case_id": "github.com_trailofbits_fickling_eb299b453342f1931c787bcb3bc33f3a03a173f9",
+  "selection_batch": "topup35",
+  "cve_id": "CVE-2026-22609",
+  "cve_ids_all": [
+    "CVE-2026-22609"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-184",
+    "CWE-502"
+  ],
+  "language": "python",
+  "repository": "trailofbits/fickling",
+  "repository_url": "https://github.com/trailofbits/fickling",
+  "vulnerable_commit": "6b400e1a2525e6a4a076c97ccc0d4d9581317101",
+  "fixed_commit": "eb299b453342f1931c787bcb3bc33f3a03a173f9",
+  "changed_file": "fickling/fickle.py",
+  "changed_function": "def unsafe_imports(self) -> Iterator[ast.Import | ast.ImportFrom]:",
+  "vulnerable_lines": [
+    865,
+    889
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0310/vulnerable_source.py": "124a2ecb06e7cdd74376a909fbac68bca91f0e92e5e17df345db763d0436cd6f",
+    "cases/CASE-0310/patched_source.py": "cfad8c81112fff570a1e5ecff96f99105e349e66d8b18563a2b7de9df88d988d",
+    "cases/CASE-0310/patch.diff": "ebb7e6c3faba5af6a4062fbcaf4ff65733c7fdf2fb5b5b0c65bde052bf62b205",
+    "cases/CASE-0310/metadata.json": "93edaca26a997450d17cf4bcd500ac1d318f05592cf4f0cf9b0d54e313c434ab",
+    "model_context/CASE-0310.json": "85e51879cbd3213bc99e0939d09337722a8cd0fb7b2435616adf1a8766efa85d",
+    "difficulty/CASE-0310.json": "8c14a4909c12f3ea3e543b9c1c5c13933fc9b55b0a7f7d65832d2fba3e744300"
+  },
+  "case_level_hash": "46d112ddea0c18ae9b78678ea6d47c351e1d7e41b9e835cef6afd7f4949be835"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "github.com_apache_ws-wss4j_970b3e3756e2c75bf2379ce198365e1a7168c3c3",
+  "language": "java",
+  "cve_id": "CVE-2015-0226",
+  "cve_ids_all": [
+    "CVE-2015-0226"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-327",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.security.PrivateKey;",
+    "import java.security.cert.X509Certificate;",
+    "import java.security.spec.MGF1ParameterSpec;",
+    "import java.util.ArrayList;",
+    "import java.util.LinkedList;",
+    "import java.util.List;",
+    "import javax.crypto.Cipher;",
+    "import javax.crypto.KeyGenerator;",
+    "import javax.crypto.SecretKey;",
+    "import javax.crypto.spec.OAEPParameterSpec;",
+    "import javax.crypto.spec.PSource;",
+    "import org.apache.ws.security.WSConstants;",
+    "import org.apache.ws.security.WSDataRef;",
+    "import org.apache.ws.security.WSDocInfo;",
+    "import org.apache.ws.security.WSSecurityEngineResult;",
+    "import org.apache.ws.security.WSSecurityException;",
+    "import org.apache.ws.security.components.crypto.AlgorithmSuite;",
+    "import org.apache.ws.security.components.crypto.AlgorithmSuiteValidator;",
+    "import org.apache.ws.security.components.crypto.Crypto;",
+    "import org.apache.ws.security.components.crypto.CryptoType;",
+    "import org.apache.ws.security.handler.RequestData;",
+    "import org.apache.ws.security.message.token.SecurityTokenReference;",
+    "import org.apache.ws.security.str.EncryptedKeySTRParser;",
+    "import org.apache.ws.security.str.STRParser;",
+    "import org.apache.ws.security.util.Base64;",
+    "import org.apache.ws.security.util.WSSecurityUtil;",
+    "import org.apache.xml.security.algorithms.JCEMapper;",
+    "import org.w3c.dom.Document;",
+    "import org.w3c.dom.Element;",
+    "import org.w3c.dom.Node;",
+    "import org.w3c.dom.Text;"
+  ],
+  "vulnerable_function": "    private static byte[] getRandomKey(List<String> dataRefURIs, Document doc, WSDocInfo wsDocInfo) throws WSSecurityException {\n        try {\n            String alg = \"AES\";\n            int size = 128;\n            if (!dataRefURIs.isEmpty()) {\n                String uri = dataRefURIs.iterator().next();\n                Element ee = ReferenceListProcessor.findEncryptedDataElement(doc, wsDocInfo, uri);\n                String algorithmURI = X509Util.getEncAlgo(ee);\n                alg = JCEMapper.getJCEKeyAlgorithmFromURI(algorithmURI);\n                size = WSSecurityUtil.getKeyLength(algorithmURI);\n            }\n            KeyGenerator kgen = KeyGenerator.getInstance(alg);\n            kgen.init(size * 8);\n            SecretKey k = kgen.generateKey();\n            return k.getEncoded();\n        } catch (Exception ex) {\n            throw new WSSecurityException(WSSecurityException.FAILED_CHECK, null, null, ex);\n        }\n    }",
+  "patched_function": "    private static byte[] getRandomKey(List<String> dataRefURIs, Document doc, WSDocInfo wsDocInfo) throws WSSecurityException {\n        try {\n            String alg = \"AES\";\n            int size = 16;\n            if (!dataRefURIs.isEmpty()) {\n                String uri = dataRefURIs.iterator().next();\n                Element ee = ReferenceListProcessor.findEncryptedDataElement(doc, wsDocInfo, uri);\n                String algorithmURI = X509Util.getEncAlgo(ee);\n                alg = JCEMapper.getJCEKeyAlgorithmFromURI(algorithmURI);\n                size = WSSecurityUtil.getKeyLength(algorithmURI);\n            }\n            KeyGenerator kgen = KeyGenerator.getInstance(alg);\n            kgen.init(size * 8);\n            SecretKey k = kgen.generateKey();\n            return k.getEncoded();\n        } catch (Throwable ex) {\n            // Fallback to just using AES to avoid attacks on EncryptedData algorithms\n            try {\n                KeyGenerator kgen = KeyGenerator.getInstance(\"AES\");\n                kgen.init(128);\n                SecretKey k = kgen.generateKey();\n                return k.getEncoded();\n            } catch (NoSuchAlgorithmException e) {\n                throw new WSSecurityException(WSSecurityException.FAILED_CHECK, null, null, e);\n            }\n        }\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/apache/ws/security/processor/EncryptedKeyProcessor.java b/src/main/java/org/apache/ws/security/processor/EncryptedKeyProcessor.java\nindex 5c696dd7b..ac4202861 100644\n--- a/src/main/java/org/apache/ws/security/processor/EncryptedKeyProcessor.java\n+++ b/src/main/java/org/apache/ws/security/processor/EncryptedKeyProcessor.java\n@@ -19,6 +19,7 @@\n \n package org.apache.ws.security.processor;\n \n+import java.security.NoSuchAlgorithmException;\n import java.security.PrivateKey;\n import java.security.cert.X509Certificate;\n import java.security.spec.MGF1ParameterSpec;\n@@ -212,7 +213,7 @@ public class EncryptedKeyProcessor implements Processor {\n     private static byte[] getRandomKey(List<String> dataRefURIs, Document doc, WSDocInfo wsDocInfo) throws WSSecurityException {\n         try {\n             String alg = \"AES\";\n-            int size = 128;\n+            int size = 16;\n             if (!dataRefURIs.isEmpty()) {\n                 String uri = dataRefURIs.iterator().next();\n                 Element ee = ReferenceListProcessor.findEncryptedDataElement(doc, wsDocInfo, uri);\n@@ -224,8 +225,16 @@ public class EncryptedKeyProcessor implements Processor {\n             kgen.init(size * 8);\n             SecretKey k = kgen.generateKey();\n             return k.getEncoded();\n-        } catch (Exception ex) {\n-            throw new WSSecurityException(WSSecurityException.FAILED_CHECK, null, null, ex);\n+        } catch (Throwable ex) {\n+            // Fallback to just using AES to avoid attacks on EncryptedData algorithms\n+            try {\n+                KeyGenerator kgen = KeyGenerator.getInstance(\"AES\");\n+                kgen.init(128);\n+                SecretKey k = kgen.generateKey();\n+                return k.getEncoded();\n+            } catch (NoSuchAlgorithmException e) {\n+                throw new WSSecurityException(WSSecurityException.FAILED_CHECK, null, null, e);\n+            }\n         }\n     }\n     ",
+  "auto_locate_confidence": "auto"
+}

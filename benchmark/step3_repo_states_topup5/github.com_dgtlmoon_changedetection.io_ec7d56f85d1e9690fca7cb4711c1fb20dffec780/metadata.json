@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dgtlmoon_changedetection.io_ec7d56f85d1e9690fca7cb4711c1fb20dffec780",
+  "cve_ids": [
+    "CVE-2026-29038"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "dgtlmoon/changedetection.io",
+  "repository_url": "https://github.com/dgtlmoon/changedetection.io",
+  "vulnerable_commit": "417d57e5749441e4be9acc4010369bded805d66f",
+  "fixed_commit": "ec7d56f85d1e9690fca7cb4711c1fb20dffec780",
+  "changed_file": "changedetectionio/blueprint/rss/tag.py",
+  "max_score": "1337"
+}

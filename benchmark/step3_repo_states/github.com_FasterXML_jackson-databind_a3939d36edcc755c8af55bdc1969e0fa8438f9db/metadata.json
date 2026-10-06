@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_FasterXML_jackson-databind_a3939d36edcc755c8af55bdc1969e0fa8438f9db",
+  "cve_ids": [
+    "CVE-2017-15095"
+  ],
+  "cwe_ids": [
+    "CWE-184",
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "FasterXML/jackson-databind",
+  "repository_url": "https://github.com/FasterXML/jackson-databind",
+  "vulnerable_commit": "baa7a0c27d0bc29cac924b52bf3d53b4b1e0a657",
+  "fixed_commit": "a3939d36edcc755c8af55bdc1969e0fa8438f9db",
+  "changed_file": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0265",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-480",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 1,
+  "lines_changed_total": 12,
+  "function_size_chars": 1118,
+  "function_size_lines": 35,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Conversation fetched by id alone with no participant check (IDOR); what authorizes access is domain knowledge."
+}

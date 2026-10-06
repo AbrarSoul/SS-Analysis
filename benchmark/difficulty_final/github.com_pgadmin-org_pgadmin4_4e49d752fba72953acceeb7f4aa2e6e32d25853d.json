@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_pgadmin-org_pgadmin4_4e49d752fba72953acceeb7f4aa2e6e32d25853d",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-31"
+  ],
+  "changed_files": 1,
+  "lines_added": 19,
+  "lines_removed": 10,
+  "lines_changed_total": 29,
+  "function_size_chars": 534,
+  "function_size_lines": 19,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

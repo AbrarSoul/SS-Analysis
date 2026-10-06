@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_ether_etherpad-lite_53f126082a8b3d094e48b159f0f0bc8a5db4b2f4",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-312",
+    "CWE-89"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 0,
+  "lines_changed_total": 5,
+  "function_size_chars": 177,
+  "function_size_lines": 8,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

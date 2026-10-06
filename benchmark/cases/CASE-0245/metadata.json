@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0245",
+  "original_source_case_id": "github.com_opendns_OpenResolve_c680170d5583cd9342fe1af43001fe8b2b8004dd",
+  "selection_batch": "final",
+  "cve_id": "CVE-2015-10010",
+  "cve_ids_all": [
+    "CVE-2015-10010"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "opendns/OpenResolve",
+  "repository_url": "https://github.com/opendns/OpenResolve",
+  "vulnerable_commit": "9eba6ba5abd89d0e36a008921eb307fcef8c5311",
+  "fixed_commit": "c680170d5583cd9342fe1af43001fe8b2b8004dd",
+  "changed_file": "resolverapi/endpoints.py",
+  "changed_function": "def valid_args(self, rdtype, domain):",
+  "vulnerable_lines": [
+    51,
+    56
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 4,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0245/vulnerable_source.py": "389338a092ff1cfc5f67d87604f1944213da5472508daec61347fdfeac155b69",
+    "cases/CASE-0245/patched_source.py": "ade1c158ccd293b451c3776a949bc271be27a4bb45a5408033cb163e1262a9b6",
+    "cases/CASE-0245/patch.diff": "3060d3ae5f48135d3164d807c6c2f257e467ee0eba724379ca80ad8dc1c2af53",
+    "cases/CASE-0245/metadata.json": "0e360975155e0221913bc36d568de7a9937d6c26352d5d6b47f53925fa659175",
+    "model_context/CASE-0245.json": "9fbbae1304a27d5c6c161b35394d9ed03f578a26cdce4c1cc31a44a4e0b0d1f0",
+    "difficulty/CASE-0245.json": "6858d988429e12fe1a24e7b59f61dc6b4c8b7c4a04a59585f59c36671979fa26"
+  },
+  "case_level_hash": "10fce7bc42920562f04aa2da83eccfa532ab9fe0ae5f197a0d82e01a105e9696"
+}

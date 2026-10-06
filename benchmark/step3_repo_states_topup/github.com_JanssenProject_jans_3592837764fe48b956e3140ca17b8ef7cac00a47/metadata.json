@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_JanssenProject_jans_3592837764fe48b956e3140ca17b8ef7cac00a47",
+  "cve_ids": [
+    "CVE-2025-54876"
+  ],
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "language": "python",
+  "repository": "JanssenProject/jans",
+  "repository_url": "https://github.com/JanssenProject/jans",
+  "vulnerable_commit": "b13de197d0e63ca4372c5270a3f61e1124453d3a",
+  "fixed_commit": "3592837764fe48b956e3140ca17b8ef7cac00a47",
+  "changed_file": "jans-cli-tui/cli_tui/cli/config_cli.py",
+  "max_score": "1337"
+}

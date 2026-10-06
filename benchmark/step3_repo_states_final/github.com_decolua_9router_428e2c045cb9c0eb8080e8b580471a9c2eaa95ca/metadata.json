@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_decolua_9router_428e2c045cb9c0eb8080e8b580471a9c2eaa95ca",
+  "cve_ids": [
+    "CVE-2026-10269"
+  ],
+  "cwe_ids": [
+    "CWE-266",
+    "CWE-285"
+  ],
+  "language": "javascript",
+  "repository": "decolua/9router",
+  "repository_url": "https://github.com/decolua/9router",
+  "vulnerable_commit": "368f4c3e7fad00e64caf57843c9230ae53af226e",
+  "fixed_commit": "428e2c045cb9c0eb8080e8b580471a9c2eaa95ca",
+  "changed_file": "src/dashboardGuard.js",
+  "max_score": "1337"
+}

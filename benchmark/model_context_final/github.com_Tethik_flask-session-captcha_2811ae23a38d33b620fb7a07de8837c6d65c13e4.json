@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_Tethik_flask-session-captcha_2811ae23a38d33b620fb7a07de8837c6d65c13e4",
+  "language": "python",
+  "cve_id": "CVE-2022-24880",
+  "cve_ids_all": [
+    "CVE-2022-24880"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-253",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-394",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-754",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "FlaskSessionCaptchaTestCase",
+  "imports": [
+    "import unittest",
+    "from flask_session_captcha import FlaskSessionCaptcha",
+    "from flask import Flask, request",
+    "from flask_sessionstore import Session"
+  ],
+  "vulnerable_function": "    def test_captcha_validate_value(self):\n        captcha = FlaskSessionCaptcha(self.app)\n        _default_routes(captcha, self.app)\n\n        with self.app.test_request_context('/'):\n            captcha.generate()\n            answer = captcha.get_answer()\n            assert not captcha.validate(value=\"wrong\")\n            captcha.generate()\n            answer = captcha.get_answer()\n            assert captcha.validate(value=answer)\n",
+  "patched_function": "    def test_captcha_validate_value(self):\n        captcha = FlaskSessionCaptcha(self.app)\n        _default_routes(captcha, self.app)\n\n        with self.app.test_request_context('/'):\n            captcha.generate()\n            answer = captcha.get_answer()\n            assert captcha.validate(value=None) == False\n            captcha.generate()\n            answer = captcha.get_answer()\n            assert captcha.validate(value=\"\") == False\n            captcha.generate()\n            answer = captcha.get_answer()\n            assert captcha.validate(value=\"wrong\") == False\n            captcha.generate()\n            answer = captcha.get_answer()\n            assert captcha.validate(value=answer)\n",
+  "unified_diff": "diff --git a/test_flask_session_captcha.py b/test_flask_session_captcha.py\nindex edf5332..0e74412 100644\n--- a/test_flask_session_captcha.py\n+++ b/test_flask_session_captcha.py\n@@ -98,7 +98,13 @@ class FlaskSessionCaptchaTestCase(unittest.TestCase):\n         with self.app.test_request_context('/'):\n             captcha.generate()\n             answer = captcha.get_answer()\n-            assert not captcha.validate(value=\"wrong\")\n+            assert captcha.validate(value=None) == False\n+            captcha.generate()\n+            answer = captcha.get_answer()\n+            assert captcha.validate(value=\"\") == False\n+            captcha.generate()\n+            answer = captcha.get_answer()\n+            assert captcha.validate(value=\"wrong\") == False\n             captcha.generate()\n             answer = captcha.get_answer()\n             assert captcha.validate(value=answer)",
+  "auto_locate_confidence": "auto"
+}

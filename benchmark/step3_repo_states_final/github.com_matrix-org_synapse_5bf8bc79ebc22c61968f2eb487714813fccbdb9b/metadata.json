@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_matrix-org_synapse_5bf8bc79ebc22c61968f2eb487714813fccbdb9b",
+  "cve_ids": [
+    "CVE-2018-16515"
+  ],
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "language": "python",
+  "repository": "matrix-org/synapse",
+  "repository_url": "https://github.com/matrix-org/synapse",
+  "vulnerable_commit": "67dbe4c89944cf5957f806ad63f60880e2242b23",
+  "fixed_commit": "5bf8bc79ebc22c61968f2eb487714813fccbdb9b",
+  "changed_file": "synapse/federation/federation_base.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_tryton_trytond_d059ebb792401ded3129cd9402d7392dc34b81e3",
+  "cve_ids": [
+    "CVE-2012-0215"
+  ],
+  "cwe_ids": [
+    "CWE-264"
+  ],
+  "language": "python",
+  "repository": "tryton/trytond",
+  "repository_url": "https://github.com/tryton/trytond",
+  "vulnerable_commit": "e7b1f97390980475746332e8bd3e8e1c339825b8",
+  "fixed_commit": "d059ebb792401ded3129cd9402d7392dc34b81e3",
+  "changed_file": "trytond/model/modelstorage.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0311",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-119"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 0,
+  "lines_changed_total": 6,
+  "function_size_chars": 3560,
+  "function_size_lines": 82,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "b[-1] on a buffer that can be empty after IV removal; unguarded-index shape needs data-length knowledge."
+}

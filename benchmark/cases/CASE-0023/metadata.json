@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0023",
+  "original_patch_filename": "github.com_InternalError503_forget-it_adf0c7fd59b9c935b4fd675c556265620124999c.patch",
+  "cve_id": "CVE-2015-10103",
+  "cve_ids_all": [
+    "CVE-2015-10103"
+  ],
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "language": "javascript",
+  "repository": "InternalError503/forget-it",
+  "repository_url": "https://github.com/InternalError503/forget-it",
+  "vulnerable_commit": "cbc240cea8b1770971372dcd054733f0596ed49a",
+  "fixed_commit": "adf0c7fd59b9c935b4fd675c556265620124999c",
+  "changed_file": "js/settings.js",
+  "patch_path": "cases/CASE-0023/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0023/vulnerable_source.js",
+  "patched_code_path": "cases/CASE-0023/patched_source.js",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.js",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.js",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.js",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.js",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.js",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.js",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

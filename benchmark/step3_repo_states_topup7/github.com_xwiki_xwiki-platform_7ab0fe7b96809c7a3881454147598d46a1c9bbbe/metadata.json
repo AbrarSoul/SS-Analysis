@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_7ab0fe7b96809c7a3881454147598d46a1c9bbbe",
+  "cve_ids": [
+    "CVE-2021-3137",
+    "CVE-2022-23615"
+  ],
+  "cwe_ids": [
+    "CWE-79",
+    "CWE-863"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "bd7becdb060d77265c1f4aacb2ad15a212304ebf",
+  "fixed_commit": "7ab0fe7b96809c7a3881454147598d46a1c9bbbe",
+  "changed_file": "xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/api/Document.java",
+  "max_score": "1337"
+}

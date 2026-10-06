@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0179",
+  "language": "javascript",
+  "cve_id": "CVE-2022-25896",
+  "cve_ids_all": [
+    "CVE-2022-25896"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-384",
+      "definition": "Session Fixation"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "  this._serializeUser(user, req, function(err, obj) {\n    if (err) {\n      return cb(err);\n    }\n    // TODO: Error if session isn't available here.\n    if (!req.session) {\n      req.session = {};\n    }\n    if (!req.session[self._key]) {\n      req.session[self._key] = {};\n    }\n    req.session[self._key].user = obj;\n    cb();\n  }",
+  "patched_function": "  req.session.regenerate(function(err) {\n    if (err) {\n      return cb(err);\n    }\n    \n    self._serializeUser(user, req, function(err, obj) {\n      if (err) {\n        return cb(err);\n      }\n      // TODO: Error if session isn't available here.\n      if (!req.session) {\n        req.session = {};\n      }\n      if (!req.session[self._key]) {\n        req.session[self._key] = {};\n      }\n      req.session[self._key].user = obj;\n      cb();\n    });\n  }",
+  "unified_diff": "diff --git a/lib/sessionmanager.js b/lib/sessionmanager.js\nindex 3d5c51c..8647b9c 100644\n--- a/lib/sessionmanager.js\n+++ b/lib/sessionmanager.js\n@@ -10,24 +10,34 @@ function SessionManager(options, serializeUser) {\n }\n \n SessionManager.prototype.logIn = function(req, user, cb) {\n+  console.log('SM: logIn');\n+  \n   var self = this;\n-  this._serializeUser(user, req, function(err, obj) {\n+  req.session.regenerate(function(err) {\n     if (err) {\n       return cb(err);\n     }\n-    // TODO: Error if session isn't available here.\n-    if (!req.session) {\n-      req.session = {};\n-    }\n-    if (!req.session[self._key]) {\n-      req.session[self._key] = {};\n-    }\n-    req.session[self._key].user = obj;\n-    cb();\n+    \n+    self._serializeUser(user, req, function(err, obj) {\n+      if (err) {\n+        return cb(err);\n+      }\n+      // TODO: Error if session isn't available here.\n+      if (!req.session) {\n+        req.session = {};\n+      }\n+      if (!req.session[self._key]) {\n+        req.session[self._key] = {};\n+      }\n+      req.session[self._key].user = obj;\n+      cb();\n+    });\n   });\n }\n \n SessionManager.prototype.logOut = function(req, cb) {\n+  console.log('SM: logOut');\n+  \n   if (req.session && req.session[this._key]) {\n     delete req.session[this._key].user;\n   }",
+  "auto_locate_confidence": "auto"
+}

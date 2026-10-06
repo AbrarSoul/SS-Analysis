@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0313",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-264"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 12,
+  "lines_changed_total": 26,
+  "function_size_chars": 439,
+  "function_size_lines": 16,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "RPC methods registered for every storage model, not only view models; registration-scope logic."
+}

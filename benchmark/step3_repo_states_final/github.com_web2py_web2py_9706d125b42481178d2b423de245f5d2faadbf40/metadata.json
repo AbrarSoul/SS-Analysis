@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_web2py_web2py_9706d125b42481178d2b423de245f5d2faadbf40",
+  "cve_ids": [
+    "CVE-2016-3952",
+    "CVE-2016-3953"
+  ],
+  "cwe_ids": [
+    "CWE-255",
+    "CWE-798"
+  ],
+  "language": "python",
+  "repository": "web2py/web2py",
+  "repository_url": "https://github.com/web2py/web2py",
+  "vulnerable_commit": "7c299936e48136d14918c2736748ac1eac665722",
+  "fixed_commit": "9706d125b42481178d2b423de245f5d2faadbf40",
+  "changed_file": "gluon/globals.py",
+  "max_score": "1337"
+}

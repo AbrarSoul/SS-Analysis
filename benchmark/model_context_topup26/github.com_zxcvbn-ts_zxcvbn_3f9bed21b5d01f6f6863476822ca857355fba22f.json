@@ -1,0 +1,27 @@
+{
+  "case_id": "github.com_zxcvbn-ts_zxcvbn_3f9bed21b5d01f6f6863476822ca857355fba22f",
+  "language": "typescript",
+  "cve_id": "CVE-2023-34109",
+  "cve_ids_all": [
+    "CVE-2023-34109"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { buildRankedDictionary } from './helper'",
+    "import {",
+    "import l33tTable from './data/l33tTable'",
+    "import translationKeys from './data/translationKeys'",
+    "import TrieNode from './matcher/dictionary/variants/matching/unmunger/TrieNode'",
+    "import l33tTableToTrieNode from './matcher/dictionary/variants/matching/unmunger/l33tTableToTrieNode'"
+  ],
+  "vulnerable_function": "  getRankedDictionary(name: string) {\n    const list = this.dictionary[name]\n    if (name === 'userInputs') {\n      const sanitizedInputs: string[] = []\n\n      list.forEach((input: string | number | boolean) => {\n        const inputType = typeof input\n        if (\n          inputType === 'string' ||\n          inputType === 'number' ||\n          inputType === 'boolean'\n        ) {\n          sanitizedInputs.push(input.toString().toLowerCase())\n        }\n      })\n\n      return buildRankedDictionary(sanitizedInputs)\n    }\n    return buildRankedDictionary(list)\n  }",
+  "patched_function": "  buildSanitizedRankedDictionary(list: (string | number)[]) {\n    const sanitizedInputs: string[] = []\n\n    list.forEach((input: string | number | boolean) => {\n      const inputType = typeof input\n      if (\n        inputType === 'string' ||\n        inputType === 'number' ||\n        inputType === 'boolean'\n      ) {\n        sanitizedInputs.push(input.toString().toLowerCase())\n      }\n    })\n\n    return buildRankedDictionary(sanitizedInputs)\n  }",
+  "unified_diff": "diff --git a/packages/libraries/main/src/Options.ts b/packages/libraries/main/src/Options.ts\nindex a27e9e2..76feb14 100644\n--- a/packages/libraries/main/src/Options.ts\n+++ b/packages/libraries/main/src/Options.ts\n@@ -112,16 +112,16 @@ export class Options {\n     const rankedDictionaries: RankedDictionaries = {}\n     const rankedDictionariesMaxWorkSize: Record<string, number> = {}\n     Object.keys(this.dictionary).forEach((name) => {\n-      rankedDictionaries[name] = this.getRankedDictionary(name)\n+      rankedDictionaries[name] = buildRankedDictionary(this.dictionary[name])\n       rankedDictionariesMaxWorkSize[name] =\n-        this.getRankedDictionariesMaxWordSize(name)\n+        this.getRankedDictionariesMaxWordSize(this.dictionary[name])\n     })\n     this.rankedDictionaries = rankedDictionaries\n     this.rankedDictionariesMaxWordSize = rankedDictionariesMaxWorkSize\n   }\n \n-  getRankedDictionariesMaxWordSize(name: string) {\n-    const data = this.dictionary[name].map((el) => {\n+  getRankedDictionariesMaxWordSize(list: (string | number)[]) {\n+    const data = list.map((el) => {\n       if (typeof el !== 'string') {\n         return el.toString().length\n       }\n@@ -135,40 +135,33 @@ export class Options {\n     return data.reduce((a, b) => Math.max(a, b), -Infinity)\n   }\n \n-  getRankedDictionary(name: string) {\n-    const list = this.dictionary[name]\n-    if (name === 'userInputs') {\n-      const sanitizedInputs: string[] = []\n-\n-      list.forEach((input: string | number | boolean) => {\n-        const inputType = typeof input\n-        if (\n-          inputType === 'string' ||\n-          inputType === 'number' ||\n-          inputType === 'boolean'\n-        ) {\n-          sanitizedInputs.push(input.toString().toLowerCase())\n-        }\n-      })\n-\n-      return buildRankedDictionary(sanitizedInputs)\n-    }\n-    return buildRankedDictionary(list)\n+  buildSanitizedRankedDictionary(list: (string | number)[]) {\n+    const sanitizedInputs: string[] = []\n+\n+    list.forEach((input: string | number | boolean) => {\n+      const inputType = typeof input\n+      if (\n+        inputType === 'string' ||\n+        inputType === 'number' ||\n+        inputType === 'boolean'\n+      ) {\n+        sanitizedInputs.push(input.toString().toLowerCase())\n+      }\n+    })\n+\n+    return buildRankedDictionary(sanitizedInputs)\n   }\n \n   extendUserInputsDictionary(dictionary: (string | number)[]) {\n-    if (this.dictionary.userInputs) {\n-      this.dictionary.userInputs = [\n-        ...this.dictionary.userInputs,\n-        ...dictionary,\n-      ]\n-    } else {\n-      this.dictionary.userInputs = dictionary\n+    if (!this.dictionary.userInputs) {\n+      this.dictionary.userInputs = []\n     }\n \n-    this.rankedDictionaries.userInputs = this.getRankedDictionary('userInputs')\n+    const newList = [...this.dictionary.userInputs, ...dictionary]\n+    this.rankedDictionaries.userInputs =\n+      this.buildSanitizedRankedDictionary(newList)\n     this.rankedDictionariesMaxWordSize.userInputs =\n-      this.getRankedDictionariesMaxWordSize('userInputs')\n+      this.getRankedDictionariesMaxWordSize(newList)\n   }\n \n   public addMatcher(name: string, matcher: Matcher) {",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,32 @@
+{
+  "case_id": "CASE-0081",
+  "language": "typescript",
+  "cve_id": "CVE-2026-27203",
+  "cve_ids_all": [
+    "CVE-2026-27203"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-15",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import axios from 'axios';",
+    "import { getBaseUrl, getDefaultScopes } from '@/config/environment.js';",
+    "import type {",
+    "import { LocaleEnum } from '@/types/ebay-enums.js';",
+    "import { existsSync, readFileSync, writeFileSync } from 'fs';",
+    "import { join } from 'path';",
+    "import { authLogger } from '@/utils/logger.js';"
+  ],
+  "vulnerable_function": "function updateEnvFile(updates: Record<string, string>): void {\n  try {\n    const envPath = join(process.cwd(), '.env');\n    let envContent = existsSync(envPath) ? readFileSync(envPath, 'utf-8') : '';\n\n    // Update each key-value pair\n    for (const [key, value] of Object.entries(updates)) {\n      // Match the key with or without value, handling comments\n      const regex = new RegExp(`^(#\\\\s*)?${key}=.*$`, 'gm');\n      const newLine = `${key}=\"${value}\"`;\n\n      if (regex.test(envContent)) {\n        // Update existing key (uncomment if needed)\n        envContent = envContent.replace(regex, newLine);\n      } else {\n        // Add new key at the end\n        envContent += `\\n${newLine}`;\n      }\n    }\n\n    writeFileSync(envPath, envContent, 'utf-8');\n    // Tokens updated silently - console output interferes with MCP JSON protocol\n  } catch (_error) {\n    // Silent failure - error logging interferes with MCP JSON protocol\n    // If needed, check .env file manually\n  }\n}",
+  "patched_function": "function updateEnvFile(updates: Record<string, string>): void {\n  try {\n    const envPath = join(process.cwd(), '.env');\n    const existingEnv = existsSync(envPath) ? dotenv.parse(readFileSync(envPath, 'utf-8')) : {};\n\n    // Merge new updates into existing environment object\n    const mergedEnv = { ...existingEnv, ...updates };\n\n    // Securely stringify the merged environment object\n    const safeEnvContent = stringify(mergedEnv);\n\n    // Write the updated content back to the .env file\n    writeFileSync(envPath, safeEnvContent, 'utf-8');\n  } catch (_error) {\n    // Silent failure - error logging interferes with MCP JSON protocol\n    // If needed, check .env file manually\n  }\n}",
+  "unified_diff": "diff --git a/src/auth/oauth.ts b/src/auth/oauth.ts\nindex ab31c37..7faf75c 100644\n--- a/src/auth/oauth.ts\n+++ b/src/auth/oauth.ts\n@@ -7,6 +7,8 @@ import type {\n   StoredTokenData,\n } from '@/types/ebay.js';\n import { LocaleEnum } from '@/types/ebay-enums.js';\n+import dotenv from 'dotenv';\n+import stringify from 'dotenv-stringify';\n import { existsSync, readFileSync, writeFileSync } from 'fs';\n import { join } from 'path';\n import { authLogger } from '@/utils/logger.js';\n@@ -17,31 +19,23 @@ import { authLogger } from '@/utils/logger.js';\n function updateEnvFile(updates: Record<string, string>): void {\n   try {\n     const envPath = join(process.cwd(), '.env');\n-    let envContent = existsSync(envPath) ? readFileSync(envPath, 'utf-8') : '';\n+    const existingEnv = existsSync(envPath) ? dotenv.parse(readFileSync(envPath, 'utf-8')) : {};\n \n-    // Update each key-value pair\n-    for (const [key, value] of Object.entries(updates)) {\n-      // Match the key with or without value, handling comments\n-      const regex = new RegExp(`^(#\\\\s*)?${key}=.*$`, 'gm');\n-      const newLine = `${key}=\"${value}\"`;\n+    // Merge new updates into existing environment object\n+    const mergedEnv = { ...existingEnv, ...updates };\n \n-      if (regex.test(envContent)) {\n-        // Update existing key (uncomment if needed)\n-        envContent = envContent.replace(regex, newLine);\n-      } else {\n-        // Add new key at the end\n-        envContent += `\\n${newLine}`;\n-      }\n-    }\n+    // Securely stringify the merged environment object\n+    const safeEnvContent = stringify(mergedEnv);\n \n-    writeFileSync(envPath, envContent, 'utf-8');\n-    // Tokens updated silently - console output interferes with MCP JSON protocol\n+    // Write the updated content back to the .env file\n+    writeFileSync(envPath, safeEnvContent, 'utf-8');\n   } catch (_error) {\n     // Silent failure - error logging interferes with MCP JSON protocol\n     // If needed, check .env file manually\n   }\n }\n \n+\n /**\n  * Manages eBay OAuth 2.0 authentication\n  * Loads tokens exclusively from environment variables (.env file)",
+  "auto_locate_confidence": "auto"
+}

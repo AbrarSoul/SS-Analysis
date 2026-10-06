@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mintplex-labs_anything-llm_bfedfebfab032e6f4d5a369c8a2f947c5d0c5286",
+  "cve_ids": [
+    "CVE-2024-3104"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "mintplex-labs/anything-llm",
+  "repository_url": "https://github.com/mintplex-labs/anything-llm",
+  "vulnerable_commit": "2374939ffb551ab2929d7f9d5827fe6597fa8caa",
+  "fixed_commit": "bfedfebfab032e6f4d5a369c8a2f947c5d0c5286",
+  "changed_file": "server/utils/helpers/updateENV.js",
+  "max_score": "1337"
+}

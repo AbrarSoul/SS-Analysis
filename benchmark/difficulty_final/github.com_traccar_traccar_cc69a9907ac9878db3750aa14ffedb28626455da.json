@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_traccar_traccar_cc69a9907ac9878db3750aa14ffedb28626455da",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-428"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 1761,
+  "function_size_lines": 42,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

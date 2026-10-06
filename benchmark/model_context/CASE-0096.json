@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0096",
+  "language": "java",
+  "cve_id": "CVE-2023-2258",
+  "cve_ids_all": [
+    "CVE-2023-2258",
+    "CVE-2023-2259"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1236",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-1336",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import ch.digitalfondue.basicxlsx.Cell;",
+    "import ch.digitalfondue.basicxlsx.StreamingWorkbook;",
+    "import ch.digitalfondue.basicxlsx.Style;",
+    "import com.opencsv.CSVWriter;",
+    "import javax.servlet.ServletOutputStream;",
+    "import javax.servlet.http.HttpServletResponse;",
+    "import java.io.IOException;",
+    "import java.io.OutputStreamWriter;",
+    "import java.util.Arrays;",
+    "import java.util.function.Consumer;",
+    "import java.util.stream.Collectors;",
+    "import java.util.stream.Stream;",
+    "import static java.nio.charset.StandardCharsets.UTF_8;"
+  ],
+  "vulnerable_function": "    public static void exportCsv(String fileName, String[] header, Stream<String[]> data, HttpServletResponse response) throws IOException {\n        response.setContentType(\"text/csv;charset=UTF-8\");\n        response.setHeader(\"Content-Disposition\", \"attachment; filename=\" + fileName);\n\n        try (ServletOutputStream out = response.getOutputStream(); CSVWriter writer = new CSVWriter(new OutputStreamWriter(out, UTF_8))) {\n            for (int marker : ExportUtils.BOM_MARKERS) {\n                out.write(marker);\n            }\n            writer.writeNext(header);\n            data.forEachOrdered(writer::writeNext);\n            writer.flush();\n            out.flush();\n        }\n    }",
+  "patched_function": "    public static void exportCsv(String fileName, String[] header, Stream<String[]> data, HttpServletResponse response) throws IOException {\n        response.setContentType(\"text/csv;charset=UTF-8\");\n        response.setHeader(\"Content-Disposition\", \"attachment; filename=\" + fileName);\n\n        try (ServletOutputStream out = response.getOutputStream(); CSVWriter writer = new CSVWriter(new OutputStreamWriter(out, UTF_8))) {\n            for (int marker : ExportUtils.BOM_MARKERS) {\n                out.write(marker);\n            }\n            writer.writeNext(header);\n            data.forEachOrdered(d -> {\n                var copy = Arrays.copyOf(d, d.length);\n                for (var i = 0; i < copy.length; i++) {\n                    var res = copy[i];\n                    copy[i] = escapeFormulaChar(res);\n                }\n                writer.writeNext(copy);\n            });\n            writer.flush();\n            out.flush();\n        }\n    }",
+  "unified_diff": "diff --git a/src/main/java/alfio/util/ExportUtils.java b/src/main/java/alfio/util/ExportUtils.java\nindex 2cbd66ffb..244a0790d 100644\n--- a/src/main/java/alfio/util/ExportUtils.java\n+++ b/src/main/java/alfio/util/ExportUtils.java\n@@ -20,6 +20,7 @@ import ch.digitalfondue.basicxlsx.Cell;\n import ch.digitalfondue.basicxlsx.StreamingWorkbook;\n import ch.digitalfondue.basicxlsx.Style;\n import com.opencsv.CSVWriter;\n+import org.apache.commons.lang3.StringUtils;\n \n import javax.servlet.ServletOutputStream;\n import javax.servlet.http.HttpServletResponse;\n@@ -74,6 +75,17 @@ public class ExportUtils {\n         }\n     }\n \n+    // https://owasp.org/www-community/attacks/CSV_Injection\n+    private static String escapeFormulaChar(String s) {\n+        var trimmed = StringUtils.trimToEmpty(s);\n+        // tab and carriage return are removed by the trimming\n+        var res = trimmed;\n+        if (StringUtils.startsWithAny(trimmed, \"=\", \"+\", \"-\", \"@\")) {\n+            res = \"\\t\" + trimmed; // http://georgemauer.net/2017/10/07/csv-injection.html starting with a tab seems to be enough?\n+        }\n+        return res;\n+    }\n+\n     public static void exportCsv(String fileName, String[] header, Stream<String[]> data, HttpServletResponse response) throws IOException {\n         response.setContentType(\"text/csv;charset=UTF-8\");\n         response.setHeader(\"Content-Disposition\", \"attachment; filename=\" + fileName);\n@@ -83,7 +95,14 @@ public class ExportUtils {\n                 out.write(marker);\n             }\n             writer.writeNext(header);\n-            data.forEachOrdered(writer::writeNext);\n+            data.forEachOrdered(d -> {\n+                var copy = Arrays.copyOf(d, d.length);\n+                for (var i = 0; i < copy.length; i++) {\n+                    var res = copy[i];\n+                    copy[i] = escapeFormulaChar(res);\n+                }\n+                writer.writeNext(copy);\n+            });\n             writer.flush();\n             out.flush();\n         }",
+  "auto_locate_confidence": "auto"
+}

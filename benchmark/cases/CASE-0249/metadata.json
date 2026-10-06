@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0249",
+  "original_source_case_id": "github.com_openstack_magnum_272fd686d8c8bf5954e9e7d3bc991ff27e46184d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-28718",
+  "cve_ids_all": [
+    "CVE-2024-28718"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-367"
+  ],
+  "language": "python",
+  "repository": "openstack/magnum",
+  "repository_url": "https://github.com/openstack/magnum",
+  "vulnerable_commit": "156f6f52d38a670e6fe10725966aeea4ddf65146",
+  "fixed_commit": "272fd686d8c8bf5954e9e7d3bc991ff27e46184d",
+  "changed_file": "magnum/conductor/handlers/common/cert_manager.py",
+  "changed_function": "def create_client_files(cluster, context=None):",
+  "vulnerable_lines": [
+    158,
+    215
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0249/vulnerable_source.py": "40397e716aaf9b1e22edf3e2b31b6d938de380590c3d2bebad6b209c189ead58",
+    "cases/CASE-0249/patched_source.py": "c4a47b05fe20fc09f11c915595f9d99676e295fd4d93ba8d3035d45f840af53e",
+    "cases/CASE-0249/patch.diff": "37f5b6ead5438aeaac634fab6e48090e2130a74a1cdce7c3d785b69e82cb5b2c",
+    "cases/CASE-0249/metadata.json": "38564aa17ded5c934640b0e1e3320db27e3bb82803c4553fe0cf21c38b160b42",
+    "model_context/CASE-0249.json": "b6ee8101a49fcea324d15df3d66afe15634f8f6f38758794c7a14daed0400de4",
+    "difficulty/CASE-0249.json": "6fb9f7b703d157f0f06c9b0e54888cf1862bda49d7ad4fe262d445dc9eccd5b8"
+  },
+  "case_level_hash": "fe3f2d05eddf73a12b521dc4552c0a1fe51b6ad1e494f157aa10739932a3b68e"
+}

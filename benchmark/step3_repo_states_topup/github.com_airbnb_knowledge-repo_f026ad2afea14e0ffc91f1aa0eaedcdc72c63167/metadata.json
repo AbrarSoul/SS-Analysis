@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_airbnb_knowledge-repo_f026ad2afea14e0ffc91f1aa0eaedcdc72c63167",
+  "cve_ids": [
+    "CVE-2018-12104"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "airbnb/knowledge-repo",
+  "repository_url": "https://github.com/airbnb/knowledge-repo",
+  "vulnerable_commit": "d1874d3e71994cd9bb769d60133c046b6d2b8bb5",
+  "fixed_commit": "f026ad2afea14e0ffc91f1aa0eaedcdc72c63167",
+  "changed_file": "knowledge_repo/app/routes/comment.py",
+  "max_score": "1337"
+}

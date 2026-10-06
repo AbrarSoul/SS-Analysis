@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0021",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-640"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 1072,
+  "function_size_lines": 23,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Hash-based token generation from semi-public fields is a self-contained, locally-recognizable idiom.",
+  "supported_status": "supported"
+}

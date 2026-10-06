@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_mitreid-connect_OpenID-Connect-Java-Spring-Server_7eba3c12fed82388f917e8dd9b73e86e3a311e4c",
+  "cve_ids": [
+    "CVE-2021-26715",
+    "CVE-2021-27582"
+  ],
+  "cwe_ids": [
+    "CWE-1321",
+    "CWE-918"
+  ],
+  "language": "java",
+  "repository": "mitreid-connect/OpenID-Connect-Java-Spring-Server",
+  "repository_url": "https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server",
+  "vulnerable_commit": "0d4ef2cb4f77bea5df9e2d4f1cfff4dffb7045c0",
+  "fixed_commit": "7eba3c12fed82388f917e8dd9b73e86e3a311e4c",
+  "changed_file": "openid-connect-server/src/main/java/org/mitre/oauth2/web/OAuthConfirmationController.java",
+  "max_score": "1337"
+}

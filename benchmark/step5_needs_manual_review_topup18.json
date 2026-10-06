@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_labring_FastGPT_bb810a43a1c70683fab7f5fe993771e930a94426",
+    "language": "typescript",
+    "repository": "labring/FastGPT",
+    "error": "no method-like block contains line 25; no method-like block contains line 27; no method-like block contains line 127; no method-like block contains line 129"
+  }
+]

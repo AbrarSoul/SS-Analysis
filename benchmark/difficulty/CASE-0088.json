@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0088",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-36",
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 0,
+  "lines_changed_total": 4,
+  "function_size_chars": 337,
+  "function_size_lines": 8,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Request filename passed to Path.joinpath with no absolute-path rejection; taint to path join."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wekan_wekan_6dfa3beb2b6ab23438d0f4395b84bf0749eb4820",
+  "cve_ids": [
+    "CVE-2026-25562"
+  ],
+  "cwe_ids": [
+    "CWE-203"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "5cd875813fdec5a3c40a0358b30a347967c85c14",
+  "fixed_commit": "6dfa3beb2b6ab23438d0f4395b84bf0749eb4820",
+  "changed_file": "server/publications/attachments.js",
+  "max_score": "1337"
+}

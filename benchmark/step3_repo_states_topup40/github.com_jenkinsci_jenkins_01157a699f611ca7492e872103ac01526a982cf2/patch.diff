@@ -1,0 +1,15 @@
+diff --git a/core/src/main/java/hudson/security/HudsonPrivateSecurityRealm.java b/core/src/main/java/hudson/security/HudsonPrivateSecurityRealm.java
+index 01b3233108..e877ee6291 100644
+--- a/core/src/main/java/hudson/security/HudsonPrivateSecurityRealm.java
++++ b/core/src/main/java/hudson/security/HudsonPrivateSecurityRealm.java
+@@ -475,8 +475,9 @@ public class HudsonPrivateSecurityRealm extends AbstractPasswordBasedSecurityRea
+      * This is to map users under the security realm URL.
+      * This in turn helps us set up the right navigation breadcrumb.
+      */
++    @Restricted(NoExternalUse.class)
+     public User getUser(String id) {
+-        return User.getById(id, true);
++        return User.getById(id, User.ALLOW_USER_CREATION_VIA_URL && hasPermission(Jenkins.ADMINISTER));
+     }
+ 
+     // TODO

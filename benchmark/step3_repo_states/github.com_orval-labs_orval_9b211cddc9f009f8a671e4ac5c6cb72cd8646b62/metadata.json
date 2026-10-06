@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_orval-labs_orval_9b211cddc9f009f8a671e4ac5c6cb72cd8646b62",
+  "cve_ids": [
+    "CVE-2026-24132"
+  ],
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-94"
+  ],
+  "language": "typescript",
+  "repository": "orval-labs/orval",
+  "repository_url": "https://github.com/orval-labs/orval",
+  "vulnerable_commit": "44ca8c1f5f930a3e4cefb6b79b38bcde7f8532a5",
+  "fixed_commit": "9b211cddc9f009f8a671e4ac5c6cb72cd8646b62",
+  "changed_file": "packages/mock/src/faker/getters/scalar.ts",
+  "max_score": "1337"
+}

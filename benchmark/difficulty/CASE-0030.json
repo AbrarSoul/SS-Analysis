@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0030",
+  "language": "javascript",
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 0,
+  "lines_changed_total": 7,
+  "function_size_chars": 10835,
+  "function_size_lines": 380,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Missing length guard before a regex match call; self-contained within the function.",
+  "supported_status": "supported"
+}

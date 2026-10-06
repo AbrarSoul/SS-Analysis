@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_trpc_trpc_78629d524968ef8db5a7adf68d8b95a44369d77e",
+  "cve_ids": [
+    "CVE-2025-68130"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "typescript",
+  "repository": "trpc/trpc",
+  "repository_url": "https://github.com/trpc/trpc",
+  "vulnerable_commit": "f476d39932b12801fa7dd51620d458a48171dc69",
+  "fixed_commit": "78629d524968ef8db5a7adf68d8b95a44369d77e",
+  "changed_file": "packages/server/src/unstable-core-do-not-import/http/formDataToObject.ts",
+  "max_score": "1337"
+}

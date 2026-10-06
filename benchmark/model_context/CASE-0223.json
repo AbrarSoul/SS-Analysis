@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0223",
+  "language": "javascript",
+  "cve_id": "CVE-2024-0551",
+  "cve_ids_all": [
+    "CVE-2024-0551"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-284",
+      "definition": "Improper Access Control"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const { viewLocalFiles, normalizePath } = require(\"../utils/files\");",
+    "const { exportData, unpackAndOverwriteImport } = require(\"../utils/files/data\");",
+    "const { purgeDocument, purgeFolder } = require(\"../utils/files/purgeDocument\");",
+    "const { getVectorDbClass } = require(\"../utils/helpers\");",
+    "const { updateENV, dumpENV } = require(\"../utils/helpers/updateENV\");",
+    "const { v4 } = require(\"uuid\");",
+    "const { SystemSettings } = require(\"../models/systemSettings\");",
+    "const { User } = require(\"../models/user\");",
+    "const { validatedRequest } = require(\"../utils/middleware/validatedRequest\");",
+    "const fs = require(\"fs\");",
+    "const path = require(\"path\");",
+    "const { Telemetry } = require(\"../models/telemetry\");",
+    "const { WelcomeMessages } = require(\"../models/welcomeMessages\");",
+    "const { ApiKey } = require(\"../models/apiKeys\");",
+    "const { getCustomModels } = require(\"../utils/helpers/customModels\");",
+    "const { WorkspaceChats } = require(\"../models/workspaceChats\");",
+    "const { Workspace } = require(\"../models/workspace\");",
+    "const { flexUserRoleValid } = require(\"../utils/middleware/multiUserProtected\");",
+    "const { fetchPfp, determinePfpFilepath } = require(\"../utils/files/pfp\");",
+    "const execSync = require(\"child_process\").execSync;",
+    "const bcrypt = require(\"bcrypt\");"
+  ],
+  "vulnerable_function": "  app.get(\"/system/data-export\", [validatedRequest], async (_, response) => {\n    try {\n      const { filename, error } = await exportData();\n      response.status(200).json({ filename, error });\n    } catch (e) {\n      console.log(e.message, e);\n      response.sendStatus(500).end();\n    }\n  }",
+  "patched_function": "  app.get(\n    \"/system/data-export\",\n    [validatedRequest, flexUserRoleValid],\n    async (_, response) => {\n      try {\n        const { filename, error } = await exportData();\n        response.status(200).json({ filename, error });\n      } catch (e) {\n        console.log(e.message, e);\n        response.sendStatus(500).end();\n      }\n    }",
+  "unified_diff": "diff --git a/server/endpoints/system.js b/server/endpoints/system.js\nindex 39b77a6a..15db895a 100644\n--- a/server/endpoints/system.js\n+++ b/server/endpoints/system.js\n@@ -389,15 +389,19 @@ function systemEndpoints(app) {\n     }\n   });\n \n-  app.get(\"/system/data-export\", [validatedRequest], async (_, response) => {\n-    try {\n-      const { filename, error } = await exportData();\n-      response.status(200).json({ filename, error });\n-    } catch (e) {\n-      console.log(e.message, e);\n-      response.sendStatus(500).end();\n+  app.get(\n+    \"/system/data-export\",\n+    [validatedRequest, flexUserRoleValid],\n+    async (_, response) => {\n+      try {\n+        const { filename, error } = await exportData();\n+        response.status(200).json({ filename, error });\n+      } catch (e) {\n+        console.log(e.message, e);\n+        response.sendStatus(500).end();\n+      }\n     }\n-  });\n+  );\n \n   app.get(\"/system/data-exports/:filename\", (request, response) => {\n     const exportLocation = __dirname + \"/../storage/exports/\";",
+  "auto_locate_confidence": "auto"
+}

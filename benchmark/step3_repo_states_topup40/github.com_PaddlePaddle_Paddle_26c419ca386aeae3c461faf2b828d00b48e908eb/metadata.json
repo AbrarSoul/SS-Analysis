@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_PaddlePaddle_Paddle_26c419ca386aeae3c461faf2b828d00b48e908eb",
+  "cve_ids": [
+    "CVE-2022-45908",
+    "CVE-2022-46742"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "PaddlePaddle/Paddle",
+  "repository_url": "https://github.com/PaddlePaddle/Paddle",
+  "vulnerable_commit": "0f649b32397dcd043e51b414904ccfa730b52603",
+  "fixed_commit": "26c419ca386aeae3c461faf2b828d00b48e908eb",
+  "changed_file": "python/paddle/audio/functional/window.py",
+  "max_score": "1337"
+}

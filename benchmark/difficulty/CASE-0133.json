@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0133",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-573"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 1,
+  "lines_changed_total": 5,
+  "function_size_chars": 2589,
+  "function_size_lines": 72,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Two base64 strings concatenated then decoded once; encoding-semantics flaw with no distinguishing code shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_spark_cf59b1f51c16301f689b4e0f17ba4dbd140e1b19",
+  "cve_ids": [
+    "CVE-2024-23945"
+  ],
+  "cwe_ids": [
+    "CWE-209"
+  ],
+  "language": "java",
+  "repository": "apache/spark",
+  "repository_url": "https://github.com/apache/spark",
+  "vulnerable_commit": "4a0ed9cd7253e42c35e6e95587ba0f005df0c856",
+  "fixed_commit": "cf59b1f51c16301f689b4e0f17ba4dbd140e1b19",
+  "changed_file": "sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java",
+  "max_score": "1337"
+}

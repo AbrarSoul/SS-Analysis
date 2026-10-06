@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_indutny_elliptic_856fe4d99fe7b6200556e6400b3bf585b1721bec",
+  "cve_ids": [
+    "CVE-2020-13822"
+  ],
+  "cwe_ids": [
+    "CWE-190"
+  ],
+  "language": "javascript",
+  "repository": "indutny/elliptic",
+  "repository_url": "https://github.com/indutny/elliptic",
+  "vulnerable_commit": "60489415e545efdfd3010ae74b9726facbf08ca8",
+  "fixed_commit": "856fe4d99fe7b6200556e6400b3bf585b1721bec",
+  "changed_file": "lib/elliptic/ec/signature.js",
+  "max_score": "1337"
+}

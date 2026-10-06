@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_jenkins_01157a699f611ca7492e872103ac01526a982cf2",
+  "cve_ids": [
+    "CVE-2018-1000408"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/jenkins",
+  "repository_url": "https://github.com/jenkinsci/jenkins",
+  "vulnerable_commit": "df87e12ddcfeafdba6e0de0e07b3e21f8473ece6",
+  "fixed_commit": "01157a699f611ca7492e872103ac01526a982cf2",
+  "changed_file": "core/src/main/java/hudson/security/HudsonPrivateSecurityRealm.java",
+  "max_score": "1337"
+}

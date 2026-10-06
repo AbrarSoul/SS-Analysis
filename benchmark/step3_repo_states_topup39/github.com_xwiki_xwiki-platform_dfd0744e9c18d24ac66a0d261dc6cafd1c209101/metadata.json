@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_dfd0744e9c18d24ac66a0d261dc6cafd1c209101",
+  "cve_ids": [
+    "CVE-2025-32429"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "6e70aa181e07aa9522171b479cf4786ca03ec209",
+  "fixed_commit": "dfd0744e9c18d24ac66a0d261dc6cafd1c209101",
+  "changed_file": "xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java",
+  "max_score": "1337"
+}

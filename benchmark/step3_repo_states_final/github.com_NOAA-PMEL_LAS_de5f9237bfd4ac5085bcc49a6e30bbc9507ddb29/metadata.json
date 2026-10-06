@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_NOAA-PMEL_LAS_de5f9237bfd4ac5085bcc49a6e30bbc9507ddb29",
+  "cve_ids": [
+    "CVE-2025-62193"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "java",
+  "repository": "NOAA-PMEL/LAS",
+  "repository_url": "https://github.com/NOAA-PMEL/LAS",
+  "vulnerable_commit": "3e6aa6969e3ce9c1afad88273e33f5a4568fb6f8",
+  "fixed_commit": "de5f9237bfd4ac5085bcc49a6e30bbc9507ddb29",
+  "changed_file": "JavaSource/gov/noaa/pmel/tmap/las/filter/RequestInputFilter.java",
+  "max_score": "1337"
+}

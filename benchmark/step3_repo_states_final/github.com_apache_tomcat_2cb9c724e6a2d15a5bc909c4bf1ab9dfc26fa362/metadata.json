@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_tomcat_2cb9c724e6a2d15a5bc909c4bf1ab9dfc26fa362",
+  "cve_ids": [
+    "CVE-2017-5650"
+  ],
+  "cwe_ids": [
+    "CWE-404"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "2c84783ac9a7a5f7d9cf56a58792c609016ce87a",
+  "fixed_commit": "2cb9c724e6a2d15a5bc909c4bf1ab9dfc26fa362",
+  "changed_file": "java/org/apache/coyote/http2/Http2UpgradeHandler.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-0089",
+  "language": "python",
+  "cve_id": "CVE-2024-34083",
+  "cve_ids_all": [
+    "CVE-2024-34083"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-349",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "SMTP",
+  "imports": [
+    "import asyncio",
+    "import asyncio.sslproto as sslproto",
+    "import binascii",
+    "import collections",
+    "import enum",
+    "import inspect",
+    "import logging",
+    "import re",
+    "import socket",
+    "import ssl",
+    "from base64 import b64decode, b64encode",
+    "from email._header_value_parser import get_addr_spec, get_angle_addr",
+    "from email.errors import HeaderParseError",
+    "from typing import Any, AnyStr, Awaitable, Callable, Dict, Iterable, List, MutableMapping, NamedTuple, Optional, Protocol, Sequence, Tuple, TypeVar, Union",
+    "from warnings import warn",
+    "import attr",
+    "from public import public",
+    "from aiosmtpd import __version__, _get_or_new_eventloop",
+    "from aiosmtpd.proxy_protocol import ProxyData, get_proxy"
+  ],
+  "vulnerable_function": "    def connection_made(self, transport: asyncio.BaseTransport) -> None:\n        # Reset state due to rfc3207 part 4.2.\n        self._set_rset_state()\n        self.session = self._create_session()\n        self.session.peer = transport.get_extra_info('peername')\n        self._reset_timeout()\n        seen_starttls = (self._original_transport is not None)\n        if self.transport is not None and seen_starttls:\n            # It is STARTTLS connection over normal connection.\n            self._reader._transport = transport  # type: ignore[attr-defined]\n            self._writer._transport = transport  # type: ignore[attr-defined]\n            self.transport = transport\n            # Do SSL certificate checking as rfc3207 part 4.1 says.  Why is\n            # _extra a protected attribute?\n            assert self._tls_protocol is not None\n            self.session.ssl = self._tls_protocol._extra\n            hook = self._handle_hooks.get(\"STARTTLS\")\n            if hook is None:\n                self._tls_handshake_okay = True\n            else:\n                self._tls_handshake_okay = hook(\n                    self, self.session, self.envelope)\n        else:\n            super().connection_made(transport)\n            self.transport = transport\n            log.info('Peer: %r', self.session.peer)\n            # Process the client's requests.\n            self._handler_coroutine = self.loop.create_task(\n                self._handle_client())\n",
+  "patched_function": "    def connection_made(self, transport: asyncio.BaseTransport) -> None:\n        # Reset state due to rfc3207 part 4.2.\n        self._set_rset_state()\n        self.session = self._create_session()\n        self.session.peer = transport.get_extra_info('peername')\n        self._reset_timeout()\n        seen_starttls = (self._original_transport is not None)\n        if self.transport is not None and seen_starttls:\n            # It is STARTTLS connection over normal connection.\n            self._reader._transport = transport  # type: ignore[attr-defined]\n            self._writer._transport = transport  # type: ignore[attr-defined]\n            self.transport = transport\n            # Discard any leftover unencrypted data\n            # See https://tools.ietf.org/html/rfc3207#page-7\n            self._reader._buffer.clear()  # type: ignore[attr-defined]\n            # Do SSL certificate checking as rfc3207 part 4.1 says.  Why is\n            # _extra a protected attribute?\n            assert self._tls_protocol is not None\n            self.session.ssl = self._tls_protocol._extra\n            hook = self._handle_hooks.get(\"STARTTLS\")\n            if hook is None:\n                self._tls_handshake_okay = True\n            else:\n                self._tls_handshake_okay = hook(\n                    self, self.session, self.envelope)\n        else:\n            super().connection_made(transport)\n            self.transport = transport\n            log.info('Peer: %r', self.session.peer)\n            # Process the client's requests.\n            self._handler_coroutine = self.loop.create_task(\n                self._handle_client())\n",
+  "unified_diff": "diff --git a/aiosmtpd/smtp.py b/aiosmtpd/smtp.py\nindex c6605a5..3b85fcf 100644\n--- a/aiosmtpd/smtp.py\n+++ b/aiosmtpd/smtp.py\n@@ -504,6 +504,9 @@ class SMTP(asyncio.StreamReaderProtocol):\n             self._reader._transport = transport  # type: ignore[attr-defined]\n             self._writer._transport = transport  # type: ignore[attr-defined]\n             self.transport = transport\n+            # Discard any leftover unencrypted data\n+            # See https://tools.ietf.org/html/rfc3207#page-7\n+            self._reader._buffer.clear()  # type: ignore[attr-defined]\n             # Do SSL certificate checking as rfc3207 part 4.1 says.  Why is\n             # _extra a protected attribute?\n             assert self._tls_protocol is not None",
+  "auto_locate_confidence": "auto"
+}

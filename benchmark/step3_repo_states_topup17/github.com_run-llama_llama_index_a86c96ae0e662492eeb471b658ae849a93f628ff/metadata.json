@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_run-llama_llama_index_a86c96ae0e662492eeb471b658ae849a93f628ff",
+  "cve_ids": [
+    "CVE-2025-6210"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "run-llama/llama_index",
+  "repository_url": "https://github.com/run-llama/llama_index",
+  "vulnerable_commit": "1359a5300b15216766aa0ac0db0173d2016e03bf",
+  "fixed_commit": "a86c96ae0e662492eeb471b658ae849a93f628ff",
+  "changed_file": "llama-index-integrations/readers/llama-index-readers-obsidian/llama_index/readers/obsidian/base.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pgadmin-org_pgadmin4_fa29ba91632634d961f937ce3ed2c3b5a9d78f59",
+  "cve_ids": [
+    "CVE-2023-1907"
+  ],
+  "cwe_ids": [
+    "CWE-276",
+    "CWE-488"
+  ],
+  "language": "python",
+  "repository": "pgadmin-org/pgadmin4",
+  "repository_url": "https://github.com/pgadmin-org/pgadmin4",
+  "vulnerable_commit": "c1a022c40cbd8d39d8782a722c0190df06fa282b",
+  "fixed_commit": "fa29ba91632634d961f937ce3ed2c3b5a9d78f59",
+  "changed_file": "web/pgadmin/authenticate/__init__.py",
+  "max_score": "1337"
+}

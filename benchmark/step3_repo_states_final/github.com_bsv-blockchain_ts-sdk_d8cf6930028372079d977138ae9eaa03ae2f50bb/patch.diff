@@ -1,0 +1,16 @@
+diff --git a/src/auth/Peer.ts b/src/auth/Peer.ts
+index 90121544..751d666b 100644
+--- a/src/auth/Peer.ts
++++ b/src/auth/Peer.ts
+@@ -525,7 +525,10 @@ export class Peer {
+ 
+     // Create signature
+     const { signature } = await this.wallet.createSignature({
+-      data: Peer.base64ToBytes(message.initialNonce + sessionNonce),
++      data: [
++        ...Peer.base64ToBytes(message.initialNonce),
++        ...Peer.base64ToBytes(sessionNonce)
++      ],
+       protocolID: [2, 'auth message signature'],
+       keyID: `${message.initialNonce} ${sessionNonce}`,
+       counterparty: message.identityKey

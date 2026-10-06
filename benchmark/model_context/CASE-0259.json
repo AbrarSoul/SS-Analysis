@@ -1,0 +1,26 @@
+{
+  "case_id": "CASE-0259",
+  "language": "javascript",
+  "cve_id": "CVE-2019-15598",
+  "cve_ids_all": [
+    "CVE-2019-15598"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    },
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var childProcess = require('child_process');"
+  ],
+  "vulnerable_function": "module.exports = function (pid, signal, callback) {\n    var tree = {};\n    var pidsToProcess = {};\n    tree[pid] = [];\n    pidsToProcess[pid] = 1;\n    \n    if (typeof signal === 'function' && callback === undefined) {\n      callback = signal;\n      signal = undefined;\n    }\n\n    switch (process.platform) {\n    case 'win32':\n        exec('taskkill /pid ' + pid + ' /T /F', callback);\n        break;\n    case 'darwin':\n        buildProcessTree(pid, tree, pidsToProcess, function (parentPid) {\n          return spawn('pgrep', ['-P', parentPid]);\n        }, function () {\n            killAll(tree, signal, callback);\n        });\n        break;\n    // case 'sunos':\n    //     buildProcessTreeSunOS(pid, tree, pidsToProcess, function () {\n    //         killAll(tree, signal, callback);\n    //     });\n    //     break;\n    default: // Linux\n        buildProcessTree(pid, tree, pidsToProcess, function (parentPid) {\n          return spawn('ps', ['-o', 'pid', '--no-headers', '--ppid', parentPid]);\n        }, function () {\n            killAll(tree, signal, callback);\n        });\n        break;\n    }\n}",
+  "patched_function": "module.exports = function (pid, signal, callback) {\n    if (typeof pid !== \"number\") {\n        throw new Error(\"pid must be a number\");\n    }\n\n    var tree = {};\n    var pidsToProcess = {};\n    tree[pid] = [];\n    pidsToProcess[pid] = 1;\n    \n    if (typeof signal === 'function' && callback === undefined) {\n      callback = signal;\n      signal = undefined;\n    }\n\n    switch (process.platform) {\n    case 'win32':\n        exec('taskkill /pid ' + pid + ' /T /F', callback);\n        break;\n    case 'darwin':\n        buildProcessTree(pid, tree, pidsToProcess, function (parentPid) {\n          return spawn('pgrep', ['-P', parentPid]);\n        }, function () {\n            killAll(tree, signal, callback);\n        });\n        break;\n    // case 'sunos':\n    //     buildProcessTreeSunOS(pid, tree, pidsToProcess, function () {\n    //         killAll(tree, signal, callback);\n    //     });\n    //     break;\n    default: // Linux\n        buildProcessTree(pid, tree, pidsToProcess, function (parentPid) {\n          return spawn('ps', ['-o', 'pid', '--no-headers', '--ppid', parentPid]);\n        }, function () {\n            killAll(tree, signal, callback);\n        });\n        break;\n    }\n}",
+  "unified_diff": "diff --git a/index.js b/index.js\nindex 125afdc..8348b4b 100755\n--- a/index.js\n+++ b/index.js\n@@ -5,6 +5,10 @@ var spawn = childProcess.spawn;\n var exec = childProcess.exec;\n \n module.exports = function (pid, signal, callback) {\n+    if (typeof pid !== \"number\") {\n+        throw new Error(\"pid must be a number\");\n+    }\n+\n     var tree = {};\n     var pidsToProcess = {};\n     tree[pid] = [];",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_avwo_whistle_d1b8ca275dc4e453bd2efed392c0fd4b92f73cdf",
+  "cve_ids": [
+    "CVE-2024-55500"
+  ],
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "language": "javascript",
+  "repository": "avwo/whistle",
+  "repository_url": "https://github.com/avwo/whistle",
+  "vulnerable_commit": "ed8002e8265bfbaaf9dbc0c83f7c22d4b775e42d",
+  "fixed_commit": "d1b8ca275dc4e453bd2efed392c0fd4b92f73cdf",
+  "changed_file": "biz/webui/lib/index.js",
+  "max_score": "1337"
+}

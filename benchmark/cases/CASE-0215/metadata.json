@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0215",
+  "original_source_case_id": "github.com_matrix-org_matrix-appservice-irc_1835e047f269001054be4c68867797aa12372a0f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-39691",
+  "cve_ids_all": [
+    "CVE-2024-39691"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-280",
+    "CWE-755"
+  ],
+  "language": "typescript",
+  "repository": "matrix-org/matrix-appservice-irc",
+  "repository_url": "https://github.com/matrix-org/matrix-appservice-irc",
+  "vulnerable_commit": "faadd07f90f4c588a1196ebaa837427e20d48461",
+  "fixed_commit": "1835e047f269001054be4c68867797aa12372a0f",
+  "changed_file": "src/bridge/MatrixHandler.ts",
+  "changed_function": "private _onMemberEvent(req: BridgeRequest, event: OnMemberEventData) {",
+  "vulnerable_lines": [
+    415,
+    423
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0215/vulnerable_source.ts": "2ff37fc94992ca676e4ef9c7d93ebaf675815ea895f50a12aa28e7e13350d030",
+    "cases/CASE-0215/patched_source.ts": "ec4b24096cd5b65f56614bb04e9f35a320ec49193d1c05d9c3607a6d4a14d5e2",
+    "cases/CASE-0215/patch.diff": "de7949692637c6df8b1328e1af946f6e0b7c5ebe1c7fe5e018c06c6fe0e38eb8",
+    "cases/CASE-0215/metadata.json": "3321cce12480959f1a822ff3ed242bee6ae103dae6b726aac51e6e5c1582d5b6",
+    "model_context/CASE-0215.json": "e6fa0e12c0a5d067791841763d494cd3b371a9311b5c6aba67e9e496db796178",
+    "difficulty/CASE-0215.json": "20e342835975bf811bebe0ee22d3d6d2c4238e498059268fdda87ee862a0fe4c"
+  },
+  "case_level_hash": "067df78336fdc46c6ab5d7b16e82fd8e3fe9a091de53ad93601cc893f2e21f15"
+}

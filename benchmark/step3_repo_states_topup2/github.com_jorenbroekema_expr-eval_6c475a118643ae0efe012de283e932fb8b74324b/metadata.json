@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jorenbroekema_expr-eval_6c475a118643ae0efe012de283e932fb8b74324b",
+  "cve_ids": [
+    "CVE-2025-13204"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "javascript",
+  "repository": "jorenbroekema/expr-eval",
+  "repository_url": "https://github.com/jorenbroekema/expr-eval",
+  "vulnerable_commit": "a556e27b93e467559f5ef6e1001b559f208f7fa0",
+  "fixed_commit": "6c475a118643ae0efe012de283e932fb8b74324b",
+  "changed_file": "src/evaluate.js",
+  "max_score": "1337"
+}

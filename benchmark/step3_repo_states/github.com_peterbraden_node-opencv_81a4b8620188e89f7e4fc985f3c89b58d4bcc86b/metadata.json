@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_peterbraden_node-opencv_81a4b8620188e89f7e4fc985f3c89b58d4bcc86b",
+  "cve_ids": [
+    "CVE-2019-10061"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "peterbraden/node-opencv",
+  "repository_url": "https://github.com/peterbraden/node-opencv",
+  "vulnerable_commit": "cfc96ba0af8c13d017d9c72f2c61ec968f1c15fb",
+  "fixed_commit": "81a4b8620188e89f7e4fc985f3c89b58d4bcc86b",
+  "changed_file": "utils/find-opencv.js",
+  "max_score": "1337"
+}

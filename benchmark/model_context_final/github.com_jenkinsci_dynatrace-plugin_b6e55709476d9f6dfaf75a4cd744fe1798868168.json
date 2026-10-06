@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_jenkinsci_dynatrace-plugin_b6e55709476d9f6dfaf75a4cd744fe1798868168",
+  "language": "java",
+  "cve_id": "CVE-2019-10463",
+  "cve_ids_all": [
+    "CVE-2019-10463"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-276",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.dynatrace.sdk.server.BasicServerConfiguration;",
+    "import com.dynatrace.sdk.server.DynatraceClient;",
+    "import com.dynatrace.sdk.server.exceptions.ServerConnectionException;",
+    "import com.dynatrace.sdk.server.exceptions.ServerResponseException;",
+    "import com.dynatrace.sdk.server.systemprofiles.SystemProfiles;",
+    "import hudson.Extension;",
+    "import hudson.util.FormValidation;",
+    "import hudson.util.ListBoxModel;",
+    "import hudson.util.Secret;",
+    "import jenkins.model.GlobalConfiguration;",
+    "import net.sf.json.JSONObject;",
+    "import org.apache.commons.lang.StringUtils;",
+    "import org.apache.commons.lang.exception.ExceptionUtils;",
+    "import org.kohsuke.stapler.QueryParameter;",
+    "import org.kohsuke.stapler.StaplerRequest;",
+    "import org.kohsuke.stapler.interceptor.RequirePOST;",
+    "import javax.net.ssl.SSLHandshakeException;",
+    "import static java.net.HttpURLConnection.*;"
+  ],
+  "vulnerable_function": "\tpublic FormValidation doTestDynatraceConnection(\n\t\t\t@QueryParameter(\"protocol\") final String protocol,\n\t\t\t@QueryParameter(\"host\") final String host,\n\t\t\t@QueryParameter(\"port\") final String port,\n\t\t\t@QueryParameter(\"username\") final String username,\n\t\t\t@QueryParameter(\"validateCerts\") final boolean validateCerts,\n\t\t\t@QueryParameter(\"password\") final String password) {\n\n\t\ttry {\n\t\t\tfinal SystemProfiles connection = new SystemProfiles(new DynatraceClient(new BasicServerConfiguration(username, password, protocol.startsWith(\"https\"), host, Integer.parseInt(port), validateCerts, 10000)));\n\t\t\ttry {\n\t\t\t\tconnection.getSystemProfiles();\n\t\t\t} catch (ServerConnectionException e) {\n\t\t\t\tif (e.getCause() instanceof SSLHandshakeException) {\n\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_CERT_EXCEPTION(e.getCause().getMessage()));\n\t\t\t\t}\n\t\t\t\tthrow e;\n\t\t\t} catch (ServerResponseException e) {\n\t\t\t\tswitch (e.getStatusCode()) {\n\t\t\t\t\tcase HTTP_UNAUTHORIZED:\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_UNAUTHORIZED());\n\t\t\t\t\tcase HTTP_FORBIDDEN:\n\t\t\t\t\t\tif (protocol.equals(\"http\")) {\n\t\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_FORBIDDEN_HTTP_USED(ExceptionUtils.getRootCauseMessage(e)));\n\t\t\t\t\t\t}\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_FORBIDDEN_HTTPS_USED(ExceptionUtils.getRootCauseMessage(e)));\n\t\t\t\t\tcase HTTP_NOT_FOUND:\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_NOT_FOUND());\n\t\t\t\t\tdefault:\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_OTHER_CODE(e.getStatusCode()));\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn FormValidation.ok(Messages.RECORDER_VALIDATION_CONNECTION_OK());\n\t\t} catch (Exception e) {\n\t\t\te.printStackTrace();\n\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_UNKNOWN(e.toString()));\n\t\t}\n\t}",
+  "patched_function": "\tpublic FormValidation doTestDynatraceConnection(\n\t\t\t@QueryParameter(\"protocol\") final String protocol,\n\t\t\t@QueryParameter(\"host\") final String host,\n\t\t\t@QueryParameter(\"port\") final String port,\n\t\t\t@QueryParameter(\"username\") final String username,\n\t\t\t@QueryParameter(\"validateCerts\") final boolean validateCerts,\n\t\t\t@QueryParameter(\"password\") final String password) {\n\t\tfinal Jenkins instance = Jenkins.getInstance();\n\t\tif (instance == null) {\n\t\t\tthrow new IllegalStateException(\"Jenkins instance not available. Could not handle test connection request.\");\n\t\t}\n\t\tinstance.checkPermission(Jenkins.ADMINISTER);\n\t\ttry {\n\t\t\tfinal SystemProfiles connection = new SystemProfiles(new DynatraceClient(new BasicServerConfiguration(username, password, protocol.startsWith(\"https\"), host, Integer.parseInt(port), validateCerts, 10000)));\n\t\t\ttry {\n\t\t\t\tconnection.getSystemProfiles();\n\t\t\t} catch (ServerConnectionException e) {\n\t\t\t\tif (e.getCause() instanceof SSLHandshakeException) {\n\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_CERT_EXCEPTION(e.getCause().getMessage()));\n\t\t\t\t}\n\t\t\t\tthrow e;\n\t\t\t} catch (ServerResponseException e) {\n\t\t\t\tswitch (e.getStatusCode()) {\n\t\t\t\t\tcase HTTP_UNAUTHORIZED:\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_UNAUTHORIZED());\n\t\t\t\t\tcase HTTP_FORBIDDEN:\n\t\t\t\t\t\tif (protocol.equals(\"http\")) {\n\t\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_FORBIDDEN_HTTP_USED(ExceptionUtils.getRootCauseMessage(e)));\n\t\t\t\t\t\t}\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_FORBIDDEN_HTTPS_USED(ExceptionUtils.getRootCauseMessage(e)));\n\t\t\t\t\tcase HTTP_NOT_FOUND:\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_NOT_FOUND());\n\t\t\t\t\tdefault:\n\t\t\t\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_OTHER_CODE(e.getStatusCode()));\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn FormValidation.ok(Messages.RECORDER_VALIDATION_CONNECTION_OK());\n\t\t} catch (Exception e) {\n\t\t\te.printStackTrace();\n\t\t\treturn FormValidation.warning(Messages.RECORDER_VALIDATION_CONNECTION_UNKNOWN(e.toString()));\n\t\t}\n\t}",
+  "unified_diff": "diff --git a/src/main/java/com/dynatrace/jenkins/dashboard/TAGlobalConfiguration.java b/src/main/java/com/dynatrace/jenkins/dashboard/TAGlobalConfiguration.java\nindex 745296c..960ce0e 100644\n--- a/src/main/java/com/dynatrace/jenkins/dashboard/TAGlobalConfiguration.java\n+++ b/src/main/java/com/dynatrace/jenkins/dashboard/TAGlobalConfiguration.java\n@@ -39,6 +39,7 @@ import hudson.util.FormValidation;\n import hudson.util.ListBoxModel;\n import hudson.util.Secret;\n import jenkins.model.GlobalConfiguration;\n+import jenkins.model.Jenkins;\n import net.sf.json.JSONObject;\n import org.apache.commons.lang.StringUtils;\n import org.apache.commons.lang.exception.ExceptionUtils;\n@@ -186,7 +187,11 @@ public class TAGlobalConfiguration extends GlobalConfiguration {\n \t\t\t@QueryParameter(\"username\") final String username,\n \t\t\t@QueryParameter(\"validateCerts\") final boolean validateCerts,\n \t\t\t@QueryParameter(\"password\") final String password) {\n-\n+\t\tfinal Jenkins instance = Jenkins.getInstance();\n+\t\tif (instance == null) {\n+\t\t\tthrow new IllegalStateException(\"Jenkins instance not available. Could not handle test connection request.\");\n+\t\t}\n+\t\tinstance.checkPermission(Jenkins.ADMINISTER);\n \t\ttry {\n \t\t\tfinal SystemProfiles connection = new SystemProfiles(new DynatraceClient(new BasicServerConfiguration(username, password, protocol.startsWith(\"https\"), host, Integer.parseInt(port), validateCerts, 10000)));\n \t\t\ttry {",
+  "auto_locate_confidence": "auto"
+}

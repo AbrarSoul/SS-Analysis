@@ -1,0 +1,51 @@
+{
+  "case_id": "github.com_openstack_cinder_ba785eef5f515b869c0d68016e84bb74f76ab45e",
+  "language": "python",
+  "cve_id": "CVE-2020-10755",
+  "cve_ids_all": [
+    "CVE-2020-10755"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-522",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "ScaleIODriver",
+  "imports": [
+    "import base64",
+    "import binascii",
+    "from distutils import version",
+    "import json",
+    "import math",
+    "import re",
+    "from os_brick.initiator import connector",
+    "from oslo_config import cfg",
+    "from oslo_log import log as logging",
+    "from oslo_log import versionutils",
+    "from oslo_utils import units",
+    "import requests",
+    "import six",
+    "from six.moves import http_client",
+    "from six.moves import urllib",
+    "from cinder import context",
+    "from cinder import exception",
+    "from cinder.i18n import _",
+    "from cinder.image import image_utils",
+    "from cinder import interface",
+    "from cinder import objects",
+    "from cinder.objects import fields",
+    "from cinder import utils",
+    "from cinder.volume import configuration",
+    "from cinder.volume import driver",
+    "from cinder.volume.drivers.dell_emc.scaleio import simplecache",
+    "from cinder.volume.drivers.san import san",
+    "from cinder.volume import qos_specs",
+    "from cinder.volume import utils as volume_utils",
+    "from cinder.volume import volume_types"
+  ],
+  "vulnerable_function": "    def __init__(self, *args, **kwargs):\n        super(ScaleIODriver, self).__init__(*args, **kwargs)\n\n        # simple caches for PD and SP properties\n        self.spCache = simplecache.SimpleCache(\"Storage Pool\",\n                                               age_minutes=5)\n        self.pdCache = simplecache.SimpleCache(\"Protection Domain\",\n                                               age_minutes=5)\n\n        self.configuration.append_config_values(san.san_opts)\n        self.configuration.append_config_values(scaleio_opts)\n        self.server_ip = self.configuration.san_ip\n        self.server_port = self.configuration.sio_rest_server_port\n        self.server_username = self.configuration.san_login\n        self.server_password = self.configuration.san_password\n        self.server_token = None\n        self.server_api_version = self.configuration.sio_server_api_version\n        # list of statistics/properties to query from SIO\n        self.statisticProperties = None\n        self.verify_server_certificate = (\n            self.configuration.sio_verify_server_certificate)\n        self.server_certificate_path = None\n        if self.verify_server_certificate:\n            self.server_certificate_path = (\n                self.configuration.sio_server_certificate_path)\n        LOG.info(\"REST server IP: %(ip)s, port: %(port)s, username: %(\"\n                 \"user)s. Verify server's certificate: %(verify_cert)s.\",\n                 {'ip': self.server_ip,\n                  'port': self.server_port,\n                  'user': self.server_username,\n                  'verify_cert': self.verify_server_certificate})\n\n        # starting in Pike, prefer the sio_storage_pools option\n        self.storage_pools = None\n        if self.configuration.sio_storage_pools:\n            self.storage_pools = [\n                e.strip() for e in\n                self.configuration.sio_storage_pools.split(',')]\n        LOG.info(\"Storage pools names: %(pools)s.\",\n                 {'pools': self.storage_pools})\n\n        LOG.info(\"Storage pool name: %(pool)s, pool id: %(pool_id)s.\",\n                 {'pool': self.configuration.sio_storage_pool_name,\n                  'pool_id': self.configuration.sio_storage_pool_id})\n\n        LOG.info(\"Protection domain name: %(domain)s, \"\n                 \"domain id: %(domain_id)s.\",\n                 {'domain': self.configuration.sio_protection_domain_name,\n                  'domain_id': self.configuration.sio_protection_domain_id})\n\n        self.provisioning_type = (\n            'thin' if self.configuration.san_thin_provision else 'thick')\n        LOG.info(\"Default provisioning type: %(provisioning_type)s.\",\n                 {'provisioning_type': self.provisioning_type})\n        self.configuration.max_over_subscription_ratio = (\n            self.configuration.sio_max_over_subscription_ratio)\n        self.connector = connector.InitiatorConnector.factory(\n            connector.SCALEIO, utils.get_root_helper(),\n            self.configuration.num_volume_device_scan_tries\n        )\n\n        self.connection_properties = {\n            'scaleIO_volname': None,\n            'hostIP': None,\n            'serverIP': self.server_ip,\n            'serverPort': self.server_port,\n            'serverUsername': self.server_username,\n            'serverPassword': self.server_password,\n            'serverToken': self.server_token,\n            'iopsLimit': None,\n            'bandwidthLimit': None,\n        }\n",
+  "patched_function": "    def __init__(self, *args, **kwargs):\n        super(ScaleIODriver, self).__init__(*args, **kwargs)\n\n        # simple caches for PD and SP properties\n        self.spCache = simplecache.SimpleCache(\"Storage Pool\",\n                                               age_minutes=5)\n        self.pdCache = simplecache.SimpleCache(\"Protection Domain\",\n                                               age_minutes=5)\n\n        self.configuration.append_config_values(san.san_opts)\n        self.configuration.append_config_values(scaleio_opts)\n        self.server_ip = self.configuration.san_ip\n        self.server_port = self.configuration.sio_rest_server_port\n        self.server_username = self.configuration.san_login\n        self.server_password = self.configuration.san_password\n        self.server_token = None\n        self.server_api_version = self.configuration.sio_server_api_version\n        # list of statistics/properties to query from SIO\n        self.statisticProperties = None\n        self.verify_server_certificate = (\n            self.configuration.sio_verify_server_certificate)\n        self.server_certificate_path = None\n        if self.verify_server_certificate:\n            self.server_certificate_path = (\n                self.configuration.sio_server_certificate_path)\n        LOG.info(\"REST server IP: %(ip)s, port: %(port)s, username: %(\"\n                 \"user)s. Verify server's certificate: %(verify_cert)s.\",\n                 {'ip': self.server_ip,\n                  'port': self.server_port,\n                  'user': self.server_username,\n                  'verify_cert': self.verify_server_certificate})\n\n        # starting in Pike, prefer the sio_storage_pools option\n        self.storage_pools = None\n        if self.configuration.sio_storage_pools:\n            self.storage_pools = [\n                e.strip() for e in\n                self.configuration.sio_storage_pools.split(',')]\n        LOG.info(\"Storage pools names: %(pools)s.\",\n                 {'pools': self.storage_pools})\n\n        LOG.info(\"Storage pool name: %(pool)s, pool id: %(pool_id)s.\",\n                 {'pool': self.configuration.sio_storage_pool_name,\n                  'pool_id': self.configuration.sio_storage_pool_id})\n\n        LOG.info(\"Protection domain name: %(domain)s, \"\n                 \"domain id: %(domain_id)s.\",\n                 {'domain': self.configuration.sio_protection_domain_name,\n                  'domain_id': self.configuration.sio_protection_domain_id})\n\n        self.provisioning_type = (\n            'thin' if self.configuration.san_thin_provision else 'thick')\n        LOG.info(\"Default provisioning type: %(provisioning_type)s.\",\n                 {'provisioning_type': self.provisioning_type})\n        self.configuration.max_over_subscription_ratio = (\n            self.configuration.sio_max_over_subscription_ratio)\n        self.connector = connector.InitiatorConnector.factory(\n            connector.SCALEIO, utils.get_root_helper(),\n            self.configuration.num_volume_device_scan_tries\n        )\n\n        self.connection_properties = {\n            'scaleIO_volname': None,\n            'hostIP': None,\n            'serverIP': self.server_ip,\n            'serverPort': self.server_port,\n            'serverUsername': self.server_username,\n            'config_group': self.configuration.config_group,\n            'iopsLimit': None,\n            'bandwidthLimit': None,\n        }\n",
+  "unified_diff": "diff --git a/cinder/volume/drivers/dell_emc/scaleio/driver.py b/cinder/volume/drivers/dell_emc/scaleio/driver.py\nindex 783085623..035b3daf3 100644\n--- a/cinder/volume/drivers/dell_emc/scaleio/driver.py\n+++ b/cinder/volume/drivers/dell_emc/scaleio/driver.py\n@@ -144,9 +144,10 @@ class ScaleIODriver(driver.VolumeDriver):\n         2.0.1: Added support for SIO 1.3x in addition to 2.0.x\n         2.0.2: Added consistency group support to generic volume groups\n         2.0.3: Added cache for storage pool and protection domains info\n+        2.0.3.1: Fix for Bug #1823200. See OSSN-0086 for details.\n     \"\"\"\n \n-    VERSION = \"2.0.3\"\n+    VERSION = \"2.0.3.1\"\n     # ThirdPartySystems wiki\n     CI_WIKI_NAME = \"EMC_ScaleIO_CI\"\n \n@@ -220,8 +221,7 @@ class ScaleIODriver(driver.VolumeDriver):\n             'serverIP': self.server_ip,\n             'serverPort': self.server_port,\n             'serverUsername': self.server_username,\n-            'serverPassword': self.server_password,\n-            'serverToken': self.server_token,\n+            'config_group': self.configuration.config_group,\n             'iopsLimit': None,\n             'bandwidthLimit': None,\n         }",
+  "auto_locate_confidence": "auto"
+}

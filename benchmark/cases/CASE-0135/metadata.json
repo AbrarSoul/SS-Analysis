@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0135",
+  "original_source_case_id": "github.com_cloudexplorer-dev_cloudexplorer-lite_7d4dab60352079953b7be120afe9bd14983ae3bc",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-3423",
+  "cve_ids_all": [
+    "CVE-2023-3423"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-521"
+  ],
+  "language": "java",
+  "repository": "cloudexplorer-dev/cloudexplorer-lite",
+  "repository_url": "https://github.com/cloudexplorer-dev/cloudexplorer-lite",
+  "vulnerable_commit": "deb80ffd17ef2e2cbc2c7229140f683561c16820",
+  "fixed_commit": "7d4dab60352079953b7be120afe9bd14983ae3bc",
+  "changed_file": "framework/sdk/backend/src/main/java/com/fit2cloud/base/service/impl/BaseUserServiceImpl.java",
+  "changed_function": "public boolean resetPwd(ResetPwdRequest request, UserDto currentUser) {",
+  "vulnerable_lines": [
+    147,
+    164
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 7,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0135/vulnerable_source.java": "905aa9eb3761be04565a9825662621023856fc23bf8905fc55536cdc0813e681",
+    "cases/CASE-0135/patched_source.java": "b1341884c6e9377826884fe8baee75513a2e40df2958ae61cdf9fb47b5f85a3f",
+    "cases/CASE-0135/patch.diff": "3f6162f14509580f88902924a26a1fb0d0d747cfcec574daf850c943270a258a",
+    "cases/CASE-0135/metadata.json": "044f706eb16ceaf8ddccbde6868554a9e301cca88e9132b91edaded1c73d2da7",
+    "model_context/CASE-0135.json": "37b7c42e11d235cd4f32da7bdf85a59478822712b46598d95de186387e967c32",
+    "difficulty/CASE-0135.json": "5cda8fba85112dff911137bb1232c37bf7932954245464aa954c7537630b6e5b"
+  },
+  "case_level_hash": "498e81b9c99c898e3e0346504557719b218e2624ecc586f022cab10dfab4d48a"
+}

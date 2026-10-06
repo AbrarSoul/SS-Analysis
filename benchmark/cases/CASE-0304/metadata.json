@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0304",
+  "original_source_case_id": "github.com_todbot_Blink1Control2_74827462aba3a26d7bf157522f69eec999d7ba85",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-35513",
+  "cve_ids_all": [
+    "CVE-2022-35513"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-327",
+    "CWE-922"
+  ],
+  "language": "javascript",
+  "repository": "todbot/Blink1Control2",
+  "repository_url": "https://github.com/todbot/Blink1Control2",
+  "vulnerable_commit": "cd9229ef9131bc663f714150c9f8d5cbf818d620",
+  "fixed_commit": "74827462aba3a26d7bf157522f69eec999d7ba85",
+  "changed_file": "app/server/imapSearcher.js",
+  "changed_function": "ImapSearcher.prototype.start = function() {",
+  "vulnerable_lines": [
+    94,
+    202
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0304/vulnerable_source.js": "65207fa4d813d9bf0efea338227ce7ddf5988edde0bf7927aa7165c2a3bee326",
+    "cases/CASE-0304/patched_source.js": "0540709ff6a6a1579f7027ef61091ae444b0e9275b83cbaa7f78ff32ab2c45b6",
+    "cases/CASE-0304/patch.diff": "24b4ac56092924df6ba4ed50f3bd8ce323e47aff3b246659a58206bda528d737",
+    "cases/CASE-0304/metadata.json": "bbbc3f53c6e7f312389c8bcf866a9d535cd2d15811ac9a2c6bf63dead6aab149",
+    "model_context/CASE-0304.json": "b8de2c51bbdcb3d1f74a906b4af1cb230555fcf7ccd4640d91cad3ab8431d6c2",
+    "difficulty/CASE-0304.json": "43ba8e4a20dfbaf6e960e0f2e05c3f5b6ce27ad7c41370620a020bd53ecd6eaf"
+  },
+  "case_level_hash": "55f35866bb62dcb40fbe9818aec1d07587e9578ef9e2d4060e2e57c3e0cfc5f8"
+}

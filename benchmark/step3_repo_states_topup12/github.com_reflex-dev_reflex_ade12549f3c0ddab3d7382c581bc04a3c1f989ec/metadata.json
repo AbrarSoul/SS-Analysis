@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_reflex-dev_reflex_ade12549f3c0ddab3d7382c581bc04a3c1f989ec",
+  "cve_ids": [
+    "CVE-2025-62379"
+  ],
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "language": "python",
+  "repository": "reflex-dev/reflex",
+  "repository_url": "https://github.com/reflex-dev/reflex",
+  "vulnerable_commit": "b7958c95813550d2126fccd8e142da6e6efe6df7",
+  "fixed_commit": "ade12549f3c0ddab3d7382c581bc04a3c1f989ec",
+  "changed_file": "reflex/utils/codespaces.py",
+  "max_score": "1337"
+}

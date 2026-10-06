@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_kujirahand_nadesiko3_124871c064cfc65cdcd83205637e84fc246c76df",
+  "cve_ids": [
+    "CVE-2022-41642",
+    "CVE-2022-41777",
+    "CVE-2022-42496"
+  ],
+  "cwe_ids": [
+    "CWE-703",
+    "CWE-78",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "kujirahand/nadesiko3",
+  "repository_url": "https://github.com/kujirahand/nadesiko3",
+  "vulnerable_commit": "62f5728cae8f0fda2dd6a5ccd3349af54c2daa88",
+  "fixed_commit": "124871c064cfc65cdcd83205637e84fc246c76df",
+  "changed_file": "test/node/plugin_node_test.mjs",
+  "max_score": "1337"
+}

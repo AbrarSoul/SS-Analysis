@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0004",
+  "original_patch_filename": "github.com_FederatedAI_FATE_6feccf6d752184a6f9365d56a76fe627983e7139.patch",
+  "cve_id": "CVE-2020-25459",
+  "cve_ids_all": [
+    "CVE-2020-25459"
+  ],
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "language": "python",
+  "repository": "FederatedAI/FATE",
+  "repository_url": "https://github.com/FederatedAI/FATE",
+  "vulnerable_commit": "67708d5d327e736d80e2f6726968cf02a926310e",
+  "fixed_commit": "6feccf6d752184a6f9365d56a76fe627983e7139",
+  "changed_file": "federatedml/tree/hetero/hetero_decision_tree_guest.py",
+  "patch_path": "cases/CASE-0004/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0004/vulnerable_source.py",
+  "patched_code_path": "cases/CASE-0004/patched_source.py",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.py",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.py",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.py",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.py",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.py",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.py",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_f502b5d5fd36284a50890ad26d168b7d8dc80bd3",
+  "language": "java",
+  "cve_id": "CVE-2025-32429",
+  "cve_ids_all": [
+    "CVE-2025-32429",
+    "CVE-2025-32968"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.util.List;",
+    "import java.util.Optional;",
+    "import java.util.StringTokenizer;",
+    "import java.util.regex.Pattern;",
+    "import javax.inject.Inject;",
+    "import javax.inject.Named;",
+    "import javax.inject.Provider;",
+    "import javax.inject.Singleton;",
+    "import org.apache.commons.collections.CollectionUtils;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import org.xwiki.component.annotation.Component;",
+    "import org.xwiki.component.manager.ComponentLookupException;",
+    "import org.xwiki.component.manager.ComponentManager;",
+    "import org.xwiki.query.Query;",
+    "import org.xwiki.query.QueryException;",
+    "import org.xwiki.query.internal.DefaultQuery;",
+    "import com.xpn.xwiki.internal.store.hibernate.query.HqlQueryUtils;"
+  ],
+  "vulnerable_function": "    public void checkOrderBySafe(List<String> allowedPrefixes, String orderByValue) throws QueryException\n    {\n        if (StringUtils.isBlank(orderByValue)) {\n            return;\n        }\n\n        StringTokenizer tokenizer = new StringTokenizer(orderByValue, \",\");\n        while (tokenizer.hasMoreTokens()) {\n            String orderByColumn = tokenizer.nextToken().trim();\n\n            boolean valid = false;\n            if (SAFE_ORDERBY_ELEMENT.matcher(orderByColumn).matches()) {\n                valid = isValidOrderBy(allowedPrefixes, orderByColumn);\n            }\n\n            if (!valid) {\n                throw new QueryException(\"Usafe ORDER BY value [\" + orderByValue + \"].\", null);\n            }\n        }\n    }",
+  "patched_function": "    public void checkOrderBySafe(List<String> allowedPrefixes, String orderByValue) throws QueryException\n    {\n        if (StringUtils.isBlank(orderByValue)) {\n            return;\n        }\n\n        StringTokenizer tokenizer = new StringTokenizer(orderByValue, \",\");\n        while (tokenizer.hasMoreTokens()) {\n            String orderByColumn = tokenizer.nextToken().trim();\n\n            boolean valid = false;\n            if (SAFE_ORDERBY_ELEMENT.matcher(orderByColumn).matches()) {\n                valid = isValidOrderBy(allowedPrefixes, orderByColumn);\n            }\n\n            if (!valid) {\n                throw new QueryException(\"Unsafe ORDER BY value [\" + orderByValue + \"].\", null);\n            }\n        }\n    }",
+  "unified_diff": "diff --git a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java\nindex 777e3880f60..e380784716c 100644\n--- a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java\n+++ b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/org/xwiki/query/hql/internal/DefaultHQLStatementValidator.java\n@@ -117,7 +117,7 @@ public void checkOrderBySafe(List<String> allowedPrefixes, String orderByValue)\n             }\n \n             if (!valid) {\n-                throw new QueryException(\"Usafe ORDER BY value [\" + orderByValue + \"].\", null);\n+                throw new QueryException(\"Unsafe ORDER BY value [\" + orderByValue + \"].\", null);\n             }\n         }\n     }",
+  "auto_locate_confidence": "auto"
+}

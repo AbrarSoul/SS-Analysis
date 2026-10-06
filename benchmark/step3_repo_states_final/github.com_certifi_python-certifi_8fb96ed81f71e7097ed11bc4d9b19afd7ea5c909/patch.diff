@@ -1,0 +1,10 @@
+diff --git a/certifi/__init__.py b/certifi/__init__.py
+index 705f416..8ce89ce 100644
+--- a/certifi/__init__.py
++++ b/certifi/__init__.py
+@@ -1,4 +1,4 @@
+ from .core import contents, where
+ 
+ __all__ = ["contents", "where"]
+-__version__ = "2023.05.07"
++__version__ = "2023.07.22"

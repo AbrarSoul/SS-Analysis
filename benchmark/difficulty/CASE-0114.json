@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0114",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-459"
+  ],
+  "changed_files": 1,
+  "lines_added": 41,
+  "lines_removed": 38,
+  "lines_changed_total": 79,
+  "function_size_chars": 1375,
+  "function_size_lines": 35,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Temp-file delete skipped on an early return and on exceptions; path-sensitive resource cleanup is only partly expressible."
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0184",
+  "original_source_case_id": "github.com_jenkinsci_git-client-plugin_75ea3fe05650fc6ca09046a72493e2b3f066fb98",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2017-1000242",
+  "cve_ids_all": [
+    "CVE-2017-1000242"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/git-client-plugin",
+  "repository_url": "https://github.com/jenkinsci/git-client-plugin",
+  "vulnerable_commit": "716e3ff56074c018c76cb35826269b976540e7e7",
+  "fixed_commit": "75ea3fe05650fc6ca09046a72493e2b3f066fb98",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/gitclient/CliGitAPIImpl.java",
+  "changed_function": "private void createNote(String note, String namespace, String command ) throws GitException, InterruptedException {",
+  "vulnerable_lines": [
+    1420,
+    1431
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 42,
+  "patch_size_deleted": 9,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0184/vulnerable_source.java": "c21fb47a26cb910ee1c02a9211615273cad92481a68deb5bf207380170c05eca",
+    "cases/CASE-0184/patched_source.java": "15e3206c98ffa7939dbbdde7cedc0527b1d2a4f163e248b86376f0a694c41a7c",
+    "cases/CASE-0184/patch.diff": "e7b051d557ff2b18f4322984bfd95018c9dc0260192540d3009b293a03ed0256",
+    "cases/CASE-0184/metadata.json": "39fa83e6cdeceb3e1ecc01c5b9c82ae05a31758b45c383e5dd11f7a8dd852c2b",
+    "model_context/CASE-0184.json": "f9f4b262f384fe7a84630fb8ad5dba0c4853df5dcc3700a8751fd03a42e86afd",
+    "difficulty/CASE-0184.json": "8f83a89f9112a6579ffd8e8f647d4e4fd8d503e9e3040a398162cbbafe0205cc"
+  },
+  "case_level_hash": "bae0d41b88e2315c8bd5c0acb62e70804eb394e7c1e56d547d8dda0a3d887ed2"
+}

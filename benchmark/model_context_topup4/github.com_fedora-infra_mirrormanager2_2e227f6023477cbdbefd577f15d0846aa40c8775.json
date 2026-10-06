@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_fedora-infra_mirrormanager2_2e227f6023477cbdbefd577f15d0846aa40c8775",
+  "language": "python",
+  "cve_id": "CVE-2016-1000003",
+  "cve_ids_all": [
+    "CVE-2016-1000003"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import base64",
+    "import pickle",
+    "import bz2",
+    "import flask",
+    "from flaskext.xmlrpc import XMLRPCHandler, Fault",
+    "from mirrormanager2.app import APP, ADMIN, SESSION",
+    "from mirrormanager2.lib import model",
+    "from mirrormanager2.lib.hostconfig import read_host_config"
+  ],
+  "vulnerable_function": "def checkin(pickledata):\n    config = pickle.loads(bz2.decompress(base64.urlsafe_b64decode(pickledata)))\n    r, message = read_host_config(SESSION, config)\n    if r is not None:\n        return message + 'checked in successful'\n    else:\n        return message + 'error checking in'\n",
+  "patched_function": "def checkin(pickledata):\n    uncompressed = bz2.decompress(base64.urlsafe_b64decode(pickledata))\n    try:\n        config = json.loads(uncompressed)\n    except ValueError:\n        config = pickle.loads(uncompressed)\n    r, message = read_host_config(SESSION, config)\n    if r is not None:\n        return message + 'checked in successful'\n    else:\n        return message + 'error checking in'\n",
+  "unified_diff": "diff --git a/mirrormanager2/xmlrpc.py b/mirrormanager2/xmlrpc.py\nindex 804f43af..82a90e3a 100644\n--- a/mirrormanager2/xmlrpc.py\n+++ b/mirrormanager2/xmlrpc.py\n@@ -25,6 +25,7 @@ MirrorManager2 xmlrpc controller.\n \n import base64\n import pickle\n+import json\n import bz2\n \n import flask\n@@ -41,7 +42,11 @@ XMLRPC.connect(APP, '/xmlrpc')\n \n @XMLRPC.register\n def checkin(pickledata):\n-    config = pickle.loads(bz2.decompress(base64.urlsafe_b64decode(pickledata)))\n+    uncompressed = bz2.decompress(base64.urlsafe_b64decode(pickledata))\n+    try:\n+        config = json.loads(uncompressed)\n+    except ValueError:\n+        config = pickle.loads(uncompressed)\n     r, message = read_host_config(SESSION, config)\n     if r is not None:\n         return message + 'checked in successful'",
+  "auto_locate_confidence": "auto"
+}

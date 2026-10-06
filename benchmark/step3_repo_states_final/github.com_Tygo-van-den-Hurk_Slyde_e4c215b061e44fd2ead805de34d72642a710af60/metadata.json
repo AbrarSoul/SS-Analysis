@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Tygo-van-den-Hurk_Slyde_e4c215b061e44fd2ead805de34d72642a710af60",
+  "cve_ids": [
+    "CVE-2026-26974"
+  ],
+  "cwe_ids": [
+    "CWE-829"
+  ],
+  "language": "typescript",
+  "repository": "Tygo-van-den-Hurk/Slyde",
+  "repository_url": "https://github.com/Tygo-van-den-Hurk/Slyde",
+  "vulnerable_commit": "ede420852d370eecd68e9ffb743f7696445ab544",
+  "fixed_commit": "e4c215b061e44fd2ead805de34d72642a710af60",
+  "changed_file": "src/commands/base.ts",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0273",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-1021"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 1,
+  "lines_changed_total": 7,
+  "function_size_chars": 193,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Handler registration adds no frame-restriction header; an absent header whose need is app-wide."
+}

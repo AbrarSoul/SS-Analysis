@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0263",
+  "original_source_case_id": "github.com_polonel_trudesk_6ea9db7a5cf300e3cbf0eab7e1d6da1155a2f7f8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-1803",
+  "cve_ids_all": [
+    "CVE-2022-1803"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1021"
+  ],
+  "language": "javascript",
+  "repository": "polonel/trudesk",
+  "repository_url": "https://github.com/polonel/trudesk",
+  "vulnerable_commit": "b6f465f4e35a57899a25dbeaea96e4f4bab39394",
+  "fixed_commit": "6ea9db7a5cf300e3cbf0eab7e1d6da1155a2f7f8",
+  "changed_file": "src/middleware/index.js",
+  "changed_function": "res.setHeader('Access-Control-Allow-Origin', '*')",
+  "vulnerable_lines": [
+    170,
+    179
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0263/vulnerable_source.js": "509fd1c15c505d86cf4de96e3614b4d7c646dab2d56be8e350f9a64022a01fa6",
+    "cases/CASE-0263/patched_source.js": "1ad9e3a84f2e59fca5ebc31102ccd2f0ee9a8be597d2e5384f621429c8146dd3",
+    "cases/CASE-0263/patch.diff": "6bf25c50133e87ecd9d7225b0db79d667ceb907597344187289a1b08891ba73b",
+    "cases/CASE-0263/metadata.json": "76e22d9033f664d919cabbc0a4764937b5596bcca3607a6c0a78b4deda258fb1",
+    "model_context/CASE-0263.json": "ebbfbb43cf255db3d37f1ae62a792480334b07086a49d87097d5b64f6260af04",
+    "difficulty/CASE-0263.json": "193aec3a5565d7a3c8bb478cdc42705680bbc40c6d07671523f4642fe50aa4c3"
+  },
+  "case_level_hash": "7b72dc6afea28752f6d8ccc8af8ec568122261a76fe23efc24f3c175bac6e74e"
+}

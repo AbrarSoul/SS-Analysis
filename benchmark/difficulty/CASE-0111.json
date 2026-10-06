@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0111",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "changed_files": 1,
+  "lines_added": 18,
+  "lines_removed": 2,
+  "lines_changed_total": 20,
+  "function_size_chars": 122,
+  "function_size_lines": 4,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Constructors accept any TransformService with no algorithm check; needs XML-signature semantics to know what is required."
+}

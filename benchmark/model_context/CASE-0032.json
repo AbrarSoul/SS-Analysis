@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0032",
+  "language": "typescript",
+  "cve_id": "CVE-2024-48460",
+  "cwe": [
+    {
+      "id": "CWE-295",
+      "definition": "Improper Certificate Validation"
+    }
+  ],
+  "unified_diff": "diff --git a/tabby-ssh/src/session/ssh.ts b/tabby-ssh/src/session/ssh.ts\nindex 2ad99325..4b446239 100644\n--- a/tabby-ssh/src/session/ssh.ts\n+++ b/tabby-ssh/src/session/ssh.ts\n@@ -333,6 +333,7 @@ export class SSHSession {\n                 algorithms,\n                 authHandler: (methodsLeft, partialSuccess, callback) => {\n                     this.zone.run(async () => {\n+                        await hostVerifiedPromise\n                         callback(await this.handleAuth(methodsLeft))\n                     })\n                 },",
+  "containing_class_declaration": "export class SSHSession",
+  "imports": [
+    "import * as fs from 'mz/fs'",
+    "import * as crypto from 'crypto'",
+    "import * as sshpk from 'sshpk'",
+    "import colors from 'ansi-colors'",
+    "import stripAnsi from 'strip-ansi'",
+    "import { Injector, NgZone } from '@angular/core'",
+    "import { NgbModal } from '@ng-bootstrap/ng-bootstrap'",
+    "import { ConfigService, FileProvidersService, HostAppService, NotificationsService, Platform, PlatformService, wrapPromise, PromptModalComponent, LogService, Logger, TranslateService } from 'tabby-core'",
+    "import { Socket } from 'net'",
+    "import { Client, ClientChannel, SFTPWrapper } from 'ssh2'",
+    "import { Subject, Observable } from 'rxjs'",
+    "import { HostKeyPromptModalComponent } from '../components/hostKeyPromptModal.component'",
+    "import { HTTPProxyStream, ProxyCommandStream, SocksProxyStream } from '../services/ssh.service'",
+    "import { PasswordStorageService } from '../services/passwordStorage.service'",
+    "import { SSHKnownHostsService } from '../services/sshKnownHosts.service'",
+    "import { promisify } from 'util'",
+    "import { SFTPSession } from './sftp'",
+    "import { SSHAlgorithmType, PortForwardType, SSHProfile, SSHProxyStream, AutoPrivateKeyLocator } from '../api'",
+    "import { ForwardedPort } from './forwards'",
+    "import { X11Socket } from './x11'",
+    "import { supportedAlgorithms } from '../algorithms'"
+  ],
+  "vulnerable_function": "authHandler: (methodsLeft, partialSuccess, callback) => {\n                    this.zone.run(async () => {\n                        callback(await this.handleAuth(methodsLeft))\n                    })\n                }",
+  "patched_function": "authHandler: (methodsLeft, partialSuccess, callback) => {\n                    this.zone.run(async () => {\n                        await hostVerifiedPromise\n                        callback(await this.handleAuth(methodsLeft))\n                    })\n                }",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 2260,
+  "context_size_chars_after_truncation": 2260
+}

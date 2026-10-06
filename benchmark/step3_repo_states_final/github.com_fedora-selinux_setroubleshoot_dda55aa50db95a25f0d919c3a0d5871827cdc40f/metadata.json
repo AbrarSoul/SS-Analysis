@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_fedora-selinux_setroubleshoot_dda55aa50db95a25f0d919c3a0d5871827cdc40f",
+  "cve_ids": [
+    "CVE-2016-4989"
+  ],
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "fedora-selinux/setroubleshoot",
+  "repository_url": "https://github.com/fedora-selinux/setroubleshoot",
+  "vulnerable_commit": "e69378d7e82a503534d29c5939fa219341e8f2ad",
+  "fixed_commit": "dda55aa50db95a25f0d919c3a0d5871827cdc40f",
+  "changed_file": "framework/src/SetroubleshootFixit.py",
+  "max_score": "1337"
+}

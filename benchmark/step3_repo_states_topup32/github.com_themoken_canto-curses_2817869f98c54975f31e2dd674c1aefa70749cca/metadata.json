@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_themoken_canto-curses_2817869f98c54975f31e2dd674c1aefa70749cca",
+  "cve_ids": [
+    "CVE-2013-7416"
+  ],
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "themoken/canto-curses",
+  "repository_url": "https://github.com/themoken/canto-curses",
+  "vulnerable_commit": "2d87b4a369fc0a9bd6e812c436bda9e66e781c60",
+  "fixed_commit": "2817869f98c54975f31e2dd674c1aefa70749cca",
+  "changed_file": "canto_curses/guibase.py",
+  "max_score": "1337"
+}

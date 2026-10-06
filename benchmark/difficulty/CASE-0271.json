@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0271",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-385",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 15,
+  "lines_changed_total": 26,
+  "function_size_chars": 2176,
+  "function_size_lines": 50,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Failure path does different work from the success path, leaking a timing oracle; timing behaviour is not observable."
+}

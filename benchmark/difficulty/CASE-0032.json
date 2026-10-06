@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0032",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 0,
+  "lines_changed_total": 1,
+  "function_size_chars": 215,
+  "function_size_lines": 5,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Missing await of a verification promise before submitting credentials; a concurrency/ordering issue that requires understanding the two-phase TLS handshake, not a local pattern.",
+  "supported_status": "supported"
+}

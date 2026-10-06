@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0208",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-694"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 1,
+  "lines_changed_total": 7,
+  "function_size_chars": 1860,
+  "function_size_lines": 36,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Database query in a notifier with no exception handling; unguarded call is visible but its harm depends on the incident-time context."
+}

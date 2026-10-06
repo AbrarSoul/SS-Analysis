@@ -1,0 +1,58 @@
+{
+  "case_id": "github.com_jenkinsci_mercurial-plugin_54b4f82e80c89d51b12bc64258f6b59e98b0c16a",
+  "language": "java",
+  "cve_id": "CVE-2018-1000112",
+  "cve_ids_all": [
+    "CVE-2018-1000112"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-863",
+      "definition": "Incorrect Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.google.common.base.Objects;",
+    "import com.google.common.collect.Lists;",
+    "import hudson.Extension;",
+    "import hudson.model.AbstractModelObject;",
+    "import hudson.model.Item;",
+    "import hudson.model.UnprotectedRootAction;",
+    "import hudson.scm.SCM;",
+    "import hudson.security.ACL;",
+    "import hudson.triggers.SCMTrigger;",
+    "import java.io.IOException;",
+    "import java.io.PrintWriter;",
+    "import java.net.URI;",
+    "import java.net.URISyntaxException;",
+    "import java.util.List;",
+    "import java.util.logging.Level;",
+    "import java.util.logging.Logger;",
+    "import javax.servlet.ServletException;",
+    "import jenkins.model.Jenkins;",
+    "import jenkins.scm.api.SCMEvent;",
+    "import jenkins.scm.api.SCMHeadEvent;",
+    "import jenkins.scm.api.SCMSource;",
+    "import jenkins.scm.api.SCMSourceOwner;",
+    "import jenkins.scm.api.SCMSourceOwners;",
+    "import jenkins.triggers.SCMTriggerItem;",
+    "import org.acegisecurity.context.SecurityContext;",
+    "import org.acegisecurity.context.SecurityContextHolder;",
+    "import org.apache.commons.lang.StringUtils;",
+    "import org.kohsuke.accmod.Restricted;",
+    "import org.kohsuke.accmod.restrictions.NoExternalUse;",
+    "import org.kohsuke.stapler.HttpResponse;",
+    "import org.kohsuke.stapler.HttpResponses;",
+    "import org.kohsuke.stapler.QueryParameter;",
+    "import org.kohsuke.stapler.Stapler;",
+    "import org.kohsuke.stapler.StaplerRequest;",
+    "import org.kohsuke.stapler.StaplerResponse;",
+    "import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;",
+    "import static javax.servlet.http.HttpServletResponse.SC_OK;"
+  ],
+  "vulnerable_function": "    public String getSearchUrl() {\n        return getUrlName();\n    }",
+  "patched_function": "    public String getIconFileName() {\n        return null;\n    }",
+  "unified_diff": "diff --git a/src/main/java/hudson/plugins/mercurial/MercurialStatus.java b/src/main/java/hudson/plugins/mercurial/MercurialStatus.java\nindex 6dd75cb..de8aed0 100644\n--- a/src/main/java/hudson/plugins/mercurial/MercurialStatus.java\n+++ b/src/main/java/hudson/plugins/mercurial/MercurialStatus.java\n@@ -3,7 +3,6 @@ package hudson.plugins.mercurial;\n import com.google.common.base.Objects;\n import com.google.common.collect.Lists;\n import hudson.Extension;\n-import hudson.model.AbstractModelObject;\n import hudson.model.Item;\n import hudson.model.UnprotectedRootAction;\n import hudson.scm.SCM;\n@@ -42,7 +41,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;\n  * Information screen for the use of Mercurial in Jenkins.\n  */\n @Extension\n-public class MercurialStatus extends AbstractModelObject implements UnprotectedRootAction {\n+public class MercurialStatus implements UnprotectedRootAction {\n \n     public static final String URL_NAME = \"mercurial\";\n \n@@ -50,10 +49,6 @@ public class MercurialStatus extends AbstractModelObject implements UnprotectedR\n         return Messages.MercurialStatus_mercurial();\n     }\n \n-    public String getSearchUrl() {\n-        return getUrlName();\n-    }\n-\n     public String getIconFileName() {\n         return null;\n     }",
+  "auto_locate_confidence": "auto"
+}

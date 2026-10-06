@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_bcgit_bc-java_cd98322b171b15b3f88c5ec871175147893c31e6",
+  "cve_ids": [
+    "CVE-2018-1000613"
+  ],
+  "cwe_ids": [
+    "CWE-470"
+  ],
+  "language": "java",
+  "repository": "bcgit/bc-java",
+  "repository_url": "https://github.com/bcgit/bc-java",
+  "vulnerable_commit": "cb1e7101d36cccae2d4b8a012f6bdcbca1dca8dc",
+  "fixed_commit": "cd98322b171b15b3f88c5ec871175147893c31e6",
+  "changed_file": "core/src/main/java/org/bouncycastle/pqc/crypto/xmss/XMSSUtil.java",
+  "max_score": "1337"
+}

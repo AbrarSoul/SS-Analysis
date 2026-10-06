@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_SignalK_set-system-time_75b11eae2de528bf89ede3fb1f7ed057ddbb4d24",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 0,
+  "lines_changed_total": 6,
+  "function_size_chars": 2596,
+  "function_size_lines": 55,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

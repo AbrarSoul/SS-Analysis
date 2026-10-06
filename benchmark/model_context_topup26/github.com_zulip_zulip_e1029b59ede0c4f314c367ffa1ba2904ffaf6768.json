@@ -1,0 +1,28 @@
+{
+  "case_id": "github.com_zulip_zulip_e1029b59ede0c4f314c367ffa1ba2904ffaf6768",
+  "language": "javascript",
+  "cve_id": "CVE-2024-36624",
+  "cve_ids_all": [
+    "CVE-2024-36624"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import isUrl from \"is-url\";",
+    "import $ from \"jquery\";",
+    "import _ from \"lodash\";",
+    "import TurndownService from \"turndown\";",
+    "import * as compose_ui from \"./compose_ui\";",
+    "import * as message_lists from \"./message_lists\";",
+    "import * as rows from \"./rows\";"
+  ],
+  "vulnerable_function": "function construct_copy_div($div, start_id, end_id) {\n    if (message_lists.current === undefined) {\n        return;\n    }\n    const copy_rows = rows.visible_range(start_id, end_id);\n\n    const $start_row = copy_rows[0];\n    const $start_recipient_row = rows.get_message_recipient_row($start_row);\n    const start_recipient_row_id = rows.id_for_recipient_row($start_recipient_row);\n    let should_include_start_recipient_header = false;\n    let last_recipient_row_id = start_recipient_row_id;\n\n    for (const $row of copy_rows) {\n        const recipient_row_id = rows.id_for_recipient_row(rows.get_message_recipient_row($row));\n        // if we found a message from another recipient,\n        // it means that we have messages from several recipients,\n        // so we have to add new recipient's bar to final copied message\n        // and wouldn't forget to add start_recipient's bar at the beginning of final message\n        if (recipient_row_id !== last_recipient_row_id) {\n            $div.append(construct_recipient_header($row));\n            last_recipient_row_id = recipient_row_id;\n            should_include_start_recipient_header = true;\n        }\n        const message = message_lists.current.get(rows.id($row));\n        const $content = $(message.content);\n        $content.first().prepend(message.sender_full_name + \": \");\n        $div.append($content);\n    }\n\n    if (should_include_start_recipient_header) {\n        $div.prepend(construct_recipient_header($start_row));\n    }\n}",
+  "patched_function": "function construct_copy_div($div, start_id, end_id) {\n    if (message_lists.current === undefined) {\n        return;\n    }\n    const copy_rows = rows.visible_range(start_id, end_id);\n\n    const $start_row = copy_rows[0];\n    const $start_recipient_row = rows.get_message_recipient_row($start_row);\n    const start_recipient_row_id = rows.id_for_recipient_row($start_recipient_row);\n    let should_include_start_recipient_header = false;\n    let last_recipient_row_id = start_recipient_row_id;\n\n    for (const $row of copy_rows) {\n        const recipient_row_id = rows.id_for_recipient_row(rows.get_message_recipient_row($row));\n        // if we found a message from another recipient,\n        // it means that we have messages from several recipients,\n        // so we have to add new recipient's bar to final copied message\n        // and wouldn't forget to add start_recipient's bar at the beginning of final message\n        if (recipient_row_id !== last_recipient_row_id) {\n            $div.append(construct_recipient_header($row));\n            last_recipient_row_id = recipient_row_id;\n            should_include_start_recipient_header = true;\n        }\n        const message = message_lists.current.get(rows.id($row));\n        const $content = $(message.content);\n        $content.first().prepend(\n            $(\"<span>\")\n                .text(message.sender_full_name + \": \")\n                .contents(),\n        );\n        $div.append($content);\n    }\n\n    if (should_include_start_recipient_header) {\n        $div.prepend(construct_recipient_header($start_row));\n    }\n}",
+  "unified_diff": "diff --git a/web/src/copy_and_paste.js b/web/src/copy_and_paste.js\nindex 70eae07c5a..e67cb8ba72 100644\n--- a/web/src/copy_and_paste.js\n+++ b/web/src/copy_and_paste.js\n@@ -90,7 +90,11 @@ function construct_copy_div($div, start_id, end_id) {\n         }\n         const message = message_lists.current.get(rows.id($row));\n         const $content = $(message.content);\n-        $content.first().prepend(message.sender_full_name + \": \");\n+        $content.first().prepend(\n+            $(\"<span>\")\n+                .text(message.sender_full_name + \": \")\n+                .contents(),\n+        );\n         $div.append($content);\n     }\n ",
+  "auto_locate_confidence": "auto"
+}

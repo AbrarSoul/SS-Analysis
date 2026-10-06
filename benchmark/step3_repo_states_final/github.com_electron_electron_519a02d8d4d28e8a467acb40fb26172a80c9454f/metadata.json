@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_electron_electron_519a02d8d4d28e8a467acb40fb26172a80c9454f",
+  "cve_ids": [
+    "CVE-2018-15685"
+  ],
+  "cwe_ids": [
+    "CWE-1188"
+  ],
+  "language": "javascript",
+  "repository": "electron/electron",
+  "repository_url": "https://github.com/electron/electron",
+  "vulnerable_commit": "8ebd0ce1b18435f90f5f2e64a1d982d396e0d278",
+  "fixed_commit": "519a02d8d4d28e8a467acb40fb26172a80c9454f",
+  "changed_file": "lib/browser/guest-window-manager.js",
+  "max_score": "1337"
+}

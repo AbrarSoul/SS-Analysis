@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_Dav-Git_Dav-Cogs_3d54ef9b52ce03f139b7d6c1cc38c375e65593fd",
+  "language": "python",
+  "cve_id": "CVE-2021-29501",
+  "cve_ids_all": [
+    "CVE-2021-29501"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    },
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "Ticketer",
+  "imports": [
+    "import discord",
+    "from typing import Optional",
+    "from datetime import datetime",
+    "from redbot.core import commands, checks, Config, modlog"
+  ],
+  "vulnerable_function": "    async def message(self, ctx, *, message: str):\n        \"\"\"Set the message that is shown at the start of each ticket channel.\\n\\nUse ``{user.mention}`` to mention the person who created the ticket.\"\"\"\n        try:\n            message.format(user=ctx.author)\n            await self.config.guild(ctx.guild).message.set(message)\n            await ctx.send(f\"The message has been set to `{message}`.\")\n        except KeyError:\n            await ctx.send(\n                \"Setting the message failed. Please make sure to only use supported variables in  `\\{\\}`\"\n            )\n",
+  "patched_function": "    async def message(self, ctx, *, message: str):\n        \"\"\"Set the message that is shown at the start of each ticket channel.\\n\\nUse ``{user.mention}`` to mention the person who created the ticket.\"\"\"\n        try:\n            message.format(user=SafeMember(ctx.author))\n            await self.config.guild(ctx.guild).message.set(message)\n            await ctx.send(f\"The message has been set to `{message}`.\")\n        except KeyError:\n            await ctx.send(\n                \"Setting the message failed. Please make sure to only use supported variables in  `\\{\\}`\"\n            )\n",
+  "unified_diff": "diff --git a/ticketer/ticketer.py b/ticketer/ticketer.py\nindex f6463c5..d0b7d50 100644\n--- a/ticketer/ticketer.py\n+++ b/ticketer/ticketer.py\n@@ -6,14 +6,15 @@ from redbot.core import commands, checks, Config, modlog\n \n class Ticketer(commands.Cog):\n     \"\"\"Ticketer\"\"\"\n-    __version__=\"1.0.0\"\n+\n+    __version__ = \"1.0.1\"\n \n     async def red_delete_data_for_user(self, *, requester, user_id):\n         # This cog stores no EUD\n         return\n \n     def format_help_for_context(self, ctx: commands.Context) -> str:\n-        #Thanks Sinbad! And Trusty in whose cogs I found this.\n+        # Thanks Sinbad! And Trusty in whose cogs I found this.\n         pre_processed = super().format_help_for_context(ctx)\n         return f\"{pre_processed}\\n\\nVersion: {self.__version__}\"\n \n@@ -83,7 +84,7 @@ class Ticketer(commands.Cog):\n     async def message(self, ctx, *, message: str):\n         \"\"\"Set the message that is shown at the start of each ticket channel.\\n\\nUse ``{user.mention}`` to mention the person who created the ticket.\"\"\"\n         try:\n-            message.format(user=ctx.author)\n+            message.format(user=SafeMember(ctx.author))\n             await self.config.guild(ctx.guild).message.set(message)\n             await ctx.send(f\"The message has been set to `{message}`.\")\n         except KeyError:\n@@ -244,7 +245,7 @@ class Ticketer(commands.Cog):\n                     category=ctx.guild.get_channel(settings[\"open_category\"]),\n                     topic=reason,\n                 )\n-                await ticketchannel.send(settings[\"message\"].format(user=ctx.author))\n+                await ticketchannel.send(settings[\"message\"].format(user=SafeMember(ctx.author)))\n                 embed = discord.Embed(\n                     title=name,\n                     description=reason,\n@@ -368,3 +369,17 @@ class Ticketer(commands.Cog):\n             return True\n         else:\n             return False\n+\n+\n+class SafeMember:\n+    \"\"\"Thank you kenny https://github.com/kennnyshiwa/kennnyshiwa-cogs\"\"\"\n+\n+    def __init__(self, member: discord.Member):\n+        self.name = member.name\n+        self.mention = member.mention\n+\n+    def __str__(self):\n+        return self.name\n+\n+    def __getattr__(self, name):\n+        return \"\"\n\\ No newline at end of file",
+  "auto_locate_confidence": "auto_low_confidence"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_usmannasir_cyberpanel_5b08cd6d53f4dbc2107ad9f555122ce8b0996515",
+  "cve_ids": [
+    "CVE-2024-51567"
+  ],
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "language": "python",
+  "repository": "usmannasir/cyberpanel",
+  "repository_url": "https://github.com/usmannasir/cyberpanel",
+  "vulnerable_commit": "fd05ec40262497ca30603b81c535ee8b063b948c",
+  "fixed_commit": "5b08cd6d53f4dbc2107ad9f555122ce8b0996515",
+  "changed_file": "databases/views.py",
+  "max_score": "1337"
+}

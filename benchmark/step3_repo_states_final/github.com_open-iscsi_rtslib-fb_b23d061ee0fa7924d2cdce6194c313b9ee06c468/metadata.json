@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_open-iscsi_rtslib-fb_b23d061ee0fa7924d2cdce6194c313b9ee06c468",
+  "cve_ids": [
+    "CVE-2020-14019"
+  ],
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "language": "python",
+  "repository": "open-iscsi/rtslib-fb",
+  "repository_url": "https://github.com/open-iscsi/rtslib-fb",
+  "vulnerable_commit": "dffcf83bead64e959505d64ad587768647caab3a",
+  "fixed_commit": "b23d061ee0fa7924d2cdce6194c313b9ee06c468",
+  "changed_file": "rtslib/root.py",
+  "max_score": "1337"
+}

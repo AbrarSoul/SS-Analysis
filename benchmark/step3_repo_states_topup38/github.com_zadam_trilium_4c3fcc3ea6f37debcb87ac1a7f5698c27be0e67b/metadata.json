@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_zadam_trilium_4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b",
+  "cve_ids": [
+    "CVE-2023-3067"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "zadam/trilium",
+  "repository_url": "https://github.com/zadam/trilium",
+  "vulnerable_commit": "5ad47d38665fbb78847cc01514607047dd3fa341",
+  "fixed_commit": "4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b",
+  "changed_file": "src/services/search/services/search.js",
+  "max_score": "1337"
+}

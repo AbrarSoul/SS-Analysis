@@ -1,0 +1,46 @@
+{
+  "case_id": "github.com_deeplook_svglib_35686a130ed260c71a382a8f83d41fd31a46704d",
+  "language": "python",
+  "cve_id": "CVE-2020-10799",
+  "cve_ids_all": [
+    "CVE-2020-10799"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-611",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import copy",
+    "import gzip",
+    "import itertools",
+    "import logging",
+    "import os",
+    "import re",
+    "import base64",
+    "import tempfile",
+    "import shlex",
+    "import shutil",
+    "import subprocess",
+    "import sys",
+    "from collections import defaultdict, namedtuple",
+    "from reportlab.pdfbase.pdfmetrics import registerFont, stringWidth",
+    "from reportlab.pdfbase.ttfonts import TTFError, TTFont",
+    "from reportlab.pdfgen.canvas import FILL_EVEN_ODD, FILL_NON_ZERO",
+    "from reportlab.pdfgen.pdfimages import PDFImage",
+    "from reportlab.graphics.shapes import _CLOSEPATH, Circle, Drawing, Ellipse, Group, Image, Line, Path, PolyLine, Polygon, Rect, SolidShape, String",
+    "from reportlab.lib import colors",
+    "from reportlab.lib.units import pica, toLength",
+    "from reportlab.lib.utils import haveImages",
+    "from lxml import etree",
+    "import cssselect2",
+    "import tinycss2",
+    "from .utils import bezier_arc_from_end_points, convert_quadratic_to_cubic_path, normalise_svg_path"
+  ],
+  "vulnerable_function": "def load_svg_file(path):\n    parser = etree.XMLParser(remove_comments=True, recover=True)\n    try:\n        doc = etree.parse(path, parser=parser)\n        svg_root = doc.getroot()\n    except Exception as exc:\n        logger.error(\"Failed to load input file! (%s)\" % exc)\n    else:\n        return svg_root\n",
+  "patched_function": "def load_svg_file(path, resolve_entities=False):\n    parser = etree.XMLParser(\n        remove_comments=True, recover=True, resolve_entities=resolve_entities\n    )\n    try:\n        doc = etree.parse(path, parser=parser)\n        svg_root = doc.getroot()\n    except Exception as exc:\n        logger.error(\"Failed to load input file! (%s)\" % exc)\n    else:\n        return svg_root\n",
+  "unified_diff": "diff --git a/svglib/svglib.py b/svglib/svglib.py\nindex 66b2fa6..aa50fab 100755\n--- a/svglib/svglib.py\n+++ b/svglib/svglib.py\n@@ -1403,7 +1403,7 @@ class Svg2RlgShapeConverter(SvgShapeConverter):\n             shape.fillColor.alpha = shape.fillOpacity\n \n \n-def svg2rlg(path, **kwargs):\n+def svg2rlg(path, resolve_entities=False, **kwargs):\n     \"Convert an SVG file to an RLG Drawing object.\"\n \n     # unzip .svgz file into .svg\n@@ -1414,7 +1414,7 @@ def svg2rlg(path, **kwargs):\n         path = path[:-1]\n         unzipped = True\n \n-    svg_root = load_svg_file(path)\n+    svg_root = load_svg_file(path, resolve_entities=resolve_entities)\n     if svg_root is None:\n         return\n \n@@ -1429,8 +1429,10 @@ def svg2rlg(path, **kwargs):\n     return drawing\n \n \n-def load_svg_file(path):\n-    parser = etree.XMLParser(remove_comments=True, recover=True)\n+def load_svg_file(path, resolve_entities=False):\n+    parser = etree.XMLParser(\n+        remove_comments=True, recover=True, resolve_entities=resolve_entities\n+    )\n     try:\n         doc = etree.parse(path, parser=parser)\n         svg_root = doc.getroot()",
+  "auto_locate_confidence": "auto_low_confidence"
+}

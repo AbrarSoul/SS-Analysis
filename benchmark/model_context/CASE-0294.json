@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0294",
+  "language": "java",
+  "cve_id": "CVE-2024-22259",
+  "cve_ids_all": [
+    "CVE-2024-22259"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-601",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.net.InetSocketAddress;",
+    "import java.net.URI;",
+    "import java.nio.charset.Charset;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.ArrayDeque;",
+    "import java.util.ArrayList;",
+    "import java.util.Collection;",
+    "import java.util.Deque;",
+    "import java.util.HashMap;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.Optional;",
+    "import java.util.regex.Matcher;",
+    "import java.util.regex.Pattern;",
+    "import org.springframework.http.HttpHeaders;",
+    "import org.springframework.http.HttpRequest;",
+    "import org.springframework.lang.Nullable;",
+    "import org.springframework.util.Assert;",
+    "import org.springframework.util.CollectionUtils;",
+    "import org.springframework.util.LinkedMultiValueMap;",
+    "import org.springframework.util.MultiValueMap;",
+    "import org.springframework.util.ObjectUtils;",
+    "import org.springframework.util.StringUtils;",
+    "import org.springframework.web.util.HierarchicalUriComponents.PathComponent;",
+    "import org.springframework.web.util.UriComponents.UriTemplateVariables;"
+  ],
+  "vulnerable_function": "\tpublic static UriComponentsBuilder fromUriString(String uri) {\n\t\tAssert.notNull(uri, \"URI must not be null\");\n\t\tMatcher matcher = URI_PATTERN.matcher(uri);\n\t\tif (matcher.matches()) {\n\t\t\tUriComponentsBuilder builder = new UriComponentsBuilder();\n\t\t\tString scheme = matcher.group(2);\n\t\t\tString userInfo = matcher.group(5);\n\t\t\tString host = matcher.group(6);\n\t\t\tString port = matcher.group(8);\n\t\t\tString path = matcher.group(9);\n\t\t\tString query = matcher.group(11);\n\t\t\tString fragment = matcher.group(13);\n\t\t\tboolean opaque = false;\n\t\t\tif (StringUtils.hasLength(scheme)) {\n\t\t\t\tString rest = uri.substring(scheme.length());\n\t\t\t\tif (!rest.startsWith(\":/\")) {\n\t\t\t\t\topaque = true;\n\t\t\t\t}\n\t\t\t}\n\t\t\tbuilder.scheme(scheme);\n\t\t\tif (opaque) {\n\t\t\t\tString ssp = uri.substring(scheme.length() + 1);\n\t\t\t\tif (StringUtils.hasLength(fragment)) {\n\t\t\t\t\tssp = ssp.substring(0, ssp.length() - (fragment.length() + 1));\n\t\t\t\t}\n\t\t\t\tbuilder.schemeSpecificPart(ssp);\n\t\t\t}\n\t\t\telse {\n\t\t\t\tif (StringUtils.hasLength(scheme) && scheme.startsWith(\"http\") && !StringUtils.hasLength(host)) {\n\t\t\t\t\tthrow new IllegalArgumentException(\"[\" + uri + \"] is not a valid HTTP URL\");\n\t\t\t\t}\n\t\t\t\tbuilder.userInfo(userInfo);\n\t\t\t\tbuilder.host(host);\n\t\t\t\tif (StringUtils.hasLength(port)) {\n\t\t\t\t\tbuilder.port(port);\n\t\t\t\t}\n\t\t\t\tbuilder.path(path);\n\t\t\t\tbuilder.query(query);\n\t\t\t}\n\t\t\tif (StringUtils.hasText(fragment)) {\n\t\t\t\tbuilder.fragment(fragment);\n\t\t\t}\n\t\t\treturn builder;\n\t\t}\n\t\telse {\n\t\t\tthrow new IllegalArgumentException(\"[\" + uri + \"] is not a valid URI\");\n\t\t}\n\t}",
+  "patched_function": "\tprivate static void checkSchemeAndHost(String uri, @Nullable String scheme, @Nullable String host) {\n\t\tif (StringUtils.hasLength(scheme) && scheme.startsWith(\"http\") && !StringUtils.hasLength(host)) {\n\t\t\tthrow new IllegalArgumentException(\"[\" + uri + \"] is not a valid HTTP URL\");\n\t\t}\n\t\tif (StringUtils.hasLength(host) && host.startsWith(\"[\") && !host.endsWith(\"]\")) {\n\t\t\tthrow new IllegalArgumentException(\"Invalid IPV6 host in [\" + uri + \"]\");\n\t\t}\n\t}",
+  "unified_diff": "diff --git a/spring-web/src/main/java/org/springframework/web/util/UriComponentsBuilder.java b/spring-web/src/main/java/org/springframework/web/util/UriComponentsBuilder.java\nindex 7e9567ec8d..99a134e9bf 100644\n--- a/spring-web/src/main/java/org/springframework/web/util/UriComponentsBuilder.java\n+++ b/spring-web/src/main/java/org/springframework/web/util/UriComponentsBuilder.java\n@@ -77,9 +77,9 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {\n \n \tprivate static final String HTTP_PATTERN = \"(?i)(http|https):\";\n \n-\tprivate static final String USERINFO_PATTERN = \"([^@/?#]*)\";\n+\tprivate static final String USERINFO_PATTERN = \"([^/?#]*)\";\n \n-\tprivate static final String HOST_IPV4_PATTERN = \"[^\\\\[/?#:]*\";\n+\tprivate static final String HOST_IPV4_PATTERN = \"[^/?#:]*\";\n \n \tprivate static final String HOST_IPV6_PATTERN = \"\\\\[[\\\\p{XDigit}:.]*[%\\\\p{Alnum}]*]\";\n \n@@ -252,9 +252,7 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {\n \t\t\t\tbuilder.schemeSpecificPart(ssp);\n \t\t\t}\n \t\t\telse {\n-\t\t\t\tif (StringUtils.hasLength(scheme) && scheme.startsWith(\"http\") && !StringUtils.hasLength(host)) {\n-\t\t\t\t\tthrow new IllegalArgumentException(\"[\" + uri + \"] is not a valid HTTP URL\");\n-\t\t\t\t}\n+\t\t\t\tcheckSchemeAndHost(uri, scheme, host);\n \t\t\t\tbuilder.userInfo(userInfo);\n \t\t\t\tbuilder.host(host);\n \t\t\t\tif (StringUtils.hasLength(port)) {\n@@ -296,9 +294,7 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {\n \t\t\tbuilder.scheme(scheme != null ? scheme.toLowerCase() : null);\n \t\t\tbuilder.userInfo(matcher.group(4));\n \t\t\tString host = matcher.group(5);\n-\t\t\tif (StringUtils.hasLength(scheme) && !StringUtils.hasLength(host)) {\n-\t\t\t\tthrow new IllegalArgumentException(\"[\" + httpUrl + \"] is not a valid HTTP URL\");\n-\t\t\t}\n+\t\t\tcheckSchemeAndHost(httpUrl, scheme, host);\n \t\t\tbuilder.host(host);\n \t\t\tString port = matcher.group(7);\n \t\t\tif (StringUtils.hasLength(port)) {\n@@ -317,6 +313,15 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {\n \t\t}\n \t}\n \n+\tprivate static void checkSchemeAndHost(String uri, @Nullable String scheme, @Nullable String host) {\n+\t\tif (StringUtils.hasLength(scheme) && scheme.startsWith(\"http\") && !StringUtils.hasLength(host)) {\n+\t\t\tthrow new IllegalArgumentException(\"[\" + uri + \"] is not a valid HTTP URL\");\n+\t\t}\n+\t\tif (StringUtils.hasLength(host) && host.startsWith(\"[\") && !host.endsWith(\"]\")) {\n+\t\t\tthrow new IllegalArgumentException(\"Invalid IPV6 host in [\" + uri + \"]\");\n+\t\t}\n+\t}\n+\n \t/**\n \t * Create a new {@code UriComponents} object from the URI associated with\n \t * the given HttpRequest while also overlaying with values from the headers\n@@ -402,6 +407,7 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {\n \t\t\tif (StringUtils.hasLength(port)) {\n \t\t\t\tbuilder.port(port);\n \t\t\t}\n+\t\t\tcheckSchemeAndHost(origin, scheme, host);\n \t\t\treturn builder;\n \t\t}\n \t\telse {",
+  "auto_locate_confidence": "auto_low_confidence"
+}

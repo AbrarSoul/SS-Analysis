@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_flitto_express-param_db94f7391ad0a16dcfcba8b9be1af385b25c42db",
+  "cve_ids": [
+    "CVE-2017-20160"
+  ],
+  "cwe_ids": [
+    "CWE-235",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "flitto/express-param",
+  "repository_url": "https://github.com/flitto/express-param",
+  "vulnerable_commit": "4ea89e59c8fb917c9a63a19b37c04840136d0d55",
+  "fixed_commit": "db94f7391ad0a16dcfcba8b9be1af385b25c42db",
+  "changed_file": "lib/fetchParams.js",
+  "max_score": "1337"
+}

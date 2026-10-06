@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0199",
+  "original_source_case_id": "github.com_jhpyle_docassemble_97f77dc486a26a22ba804765bfd7058aabd600c9",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-27292",
+  "cve_ids_all": [
+    "CVE-2024-27292"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-706"
+  ],
+  "language": "python",
+  "repository": "jhpyle/docassemble",
+  "repository_url": "https://github.com/jhpyle/docassemble",
+  "vulnerable_commit": "08c984bb0b6c1c0418a6e1469dbe3ae2118e24e8",
+  "fixed_commit": "97f77dc486a26a22ba804765bfd7058aabd600c9",
+  "changed_file": "docassemble_base/docassemble/base/functions.py",
+  "changed_function": "def filename_invalid(filename):",
+  "vulnerable_lines": [
+    123,
+    131
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0199/vulnerable_source.py": "64f11ab032a86ce6490e1b384f3518d030d98861fc721d9fa7b8d373b311452c",
+    "cases/CASE-0199/patched_source.py": "79fdb7e4fbf84b6b189ad812ab55bb38fd74c6d2cb3caf8ebcb2a60a90beffb4",
+    "cases/CASE-0199/patch.diff": "ddfb8179cd100d6ce42c0504933d8c2b010b4609cc486bc852d70dc4618d8bac",
+    "cases/CASE-0199/metadata.json": "8c5ae4b78fccfc700b23ead5730ea7fc3d66edf034fdbcc7ef7e07d78e9c834a",
+    "model_context/CASE-0199.json": "d5ad731a23549d6cd91e647af05a88584080f89cf2cc2d869e177b6fb292bd02",
+    "difficulty/CASE-0199.json": "cd522b0e694e2bef82c36c73b3299f14b04c6636e21505a6850da9af40ce4127"
+  },
+  "case_level_hash": "e314d6c94f5f2b8727de8a90745dba7a44fc42999b8efd5cf8fbf82217d6a851"
+}

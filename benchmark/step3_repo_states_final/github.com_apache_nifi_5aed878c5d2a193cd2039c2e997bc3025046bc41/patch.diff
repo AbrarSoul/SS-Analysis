@@ -1,0 +1,25 @@
+diff --git a/nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-framework-core/src/main/java/org/apache/nifi/controller/serialization/VersionedFlowSynchronizer.java b/nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-framework-core/src/main/java/org/apache/nifi/controller/serialization/VersionedFlowSynchronizer.java
+index cf005441bd..f39ccd401c 100644
+--- a/nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-framework-core/src/main/java/org/apache/nifi/controller/serialization/VersionedFlowSynchronizer.java
++++ b/nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-framework-core/src/main/java/org/apache/nifi/controller/serialization/VersionedFlowSynchronizer.java
+@@ -116,7 +116,6 @@ import java.util.HashSet;
+ import java.util.LinkedHashSet;
+ import java.util.List;
+ import java.util.Map;
+-import java.util.Map.Entry;
+ import java.util.Objects;
+ import java.util.Optional;
+ import java.util.Set;
+@@ -803,12 +802,6 @@ public class VersionedFlowSynchronizer implements FlowSynchronizer {
+         final Map<String, String> currentValues = new HashMap<>();
+         parameterContext.getParameters().values().forEach(param -> currentValues.put(param.getDescriptor().getName(), param.getValue()));
+ 
+-        if (logger.isDebugEnabled()) {
+-            final Map<String, String> proposedValues = parameters.entrySet().stream()
+-                    .collect(Collectors.toMap(Entry::getKey, entry -> entry.getValue().getValue()));
+-            logger.debug("For Parameter Context {}, current parameters = {}, proposed = {}", parameterContext.getName(), currentValues, proposedValues);
+-        }
+-
+         final Map<String, Parameter> updatedParameters = new HashMap<>();
+         final Set<String> proposedParameterNames = new HashSet<>();
+         for (final VersionedParameter parameter : versionedParameterContext.getParameters()) {

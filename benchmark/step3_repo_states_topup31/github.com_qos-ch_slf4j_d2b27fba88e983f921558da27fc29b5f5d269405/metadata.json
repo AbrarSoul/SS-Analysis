@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_qos-ch_slf4j_d2b27fba88e983f921558da27fc29b5f5d269405",
+  "cve_ids": [
+    "CVE-2018-8088"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "qos-ch/slf4j",
+  "repository_url": "https://github.com/qos-ch/slf4j",
+  "vulnerable_commit": "0ec1f6aac8648e87a7dda2f5730fef6db3b4fa33",
+  "fixed_commit": "d2b27fba88e983f921558da27fc29b5f5d269405",
+  "changed_file": "slf4j-ext/src/main/java/org/slf4j/ext/EventData.java",
+  "max_score": "1337"
+}

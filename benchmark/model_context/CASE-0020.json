@@ -1,0 +1,33 @@
+{
+  "case_id": "CASE-0020",
+  "language": "java",
+  "cve_id": "CVE-2023-34035",
+  "cwe": [
+    {
+      "id": "CWE-863",
+      "definition": "Incorrect Authorization"
+    }
+  ],
+  "extraction_kind": "method",
+  "class_name": "SecurityConfiguration",
+  "containing_class_declaration": "public class SecurityConfiguration {",
+  "imports": [
+    "import org.springframework.context.annotation.Bean;",
+    "import org.springframework.context.annotation.Configuration;",
+    "import org.springframework.security.config.annotation.web.builders.HttpSecurity;",
+    "import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;",
+    "import org.springframework.security.core.userdetails.User;",
+    "import org.springframework.security.core.userdetails.UserDetails;",
+    "import org.springframework.security.core.userdetails.UserDetailsService;",
+    "import org.springframework.security.provisioning.InMemoryUserDetailsManager;",
+    "import org.springframework.security.web.SecurityFilterChain;"
+  ],
+  "vulnerable_function": "\tpublic SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n\t\t// @formatter:off\n\t\thttp\n\t\t\t\t.authorizeHttpRequests((authorize) -> authorize\n\t\t\t\t\t\t.requestMatchers(\"/login\", \"/resources/**\").permitAll()\n\t\t\t\t\t\t.anyRequest().authenticated()\n\t\t\t\t)\n\t\t\t\t.jee((jee) -> jee.mappableRoles(\"USER\", \"ADMIN\"));\n\t\t// @formatter:on\n\t\treturn http.build();\n\t}\n",
+  "patched_function": "\tpublic SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {\n\t\t// @formatter:off\n\t\thttp\n\t\t\t\t.authorizeHttpRequests((authorize) -> authorize\n\t\t\t\t\t\t.requestMatchers(mvc.pattern(\"/login\"), mvc.pattern(\"/resources/**\")).permitAll()\n\t\t\t\t\t\t.anyRequest().authenticated()\n\t\t\t\t)\n\t\t\t\t.jee((jee) -> jee.mappableRoles(\"USER\", \"ADMIN\"));\n\t\t// @formatter:on\n\t\treturn http.build();\n\t}\n",
+  "unified_diff": "diff --git a/servlet/java-configuration/authentication/preauth/src/main/java/example/SecurityConfiguration.java b/servlet/java-configuration/authentication/preauth/src/main/java/example/SecurityConfiguration.java\nindex a481d2c3..820b0dc0 100644\n--- a/servlet/java-configuration/authentication/preauth/src/main/java/example/SecurityConfiguration.java\n+++ b/servlet/java-configuration/authentication/preauth/src/main/java/example/SecurityConfiguration.java\n@@ -1,5 +1,5 @@\n /*\n- * Copyright 2002-2016 the original author or authors.\n+ * Copyright 2002-2023 the original author or authors.\n  *\n  * Licensed under the Apache License, Version 2.0 (the \"License\");\n  * you may not use this file except in compliance with the License.\n@@ -17,6 +17,7 @@ package example;\n \n import org.springframework.context.annotation.Bean;\n import org.springframework.context.annotation.Configuration;\n+import org.springframework.context.annotation.Scope;\n import org.springframework.security.config.annotation.web.builders.HttpSecurity;\n import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\n import org.springframework.security.core.userdetails.User;\n@@ -24,17 +25,19 @@ import org.springframework.security.core.userdetails.UserDetails;\n import org.springframework.security.core.userdetails.UserDetailsService;\n import org.springframework.security.provisioning.InMemoryUserDetailsManager;\n import org.springframework.security.web.SecurityFilterChain;\n+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;\n+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;\n \n @Configuration\n @EnableWebSecurity\n public class SecurityConfiguration {\n \n \t@Bean\n-\tpublic SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n+\tpublic SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {\n \t\t// @formatter:off\n \t\thttp\n \t\t\t\t.authorizeHttpRequests((authorize) -> authorize\n-\t\t\t\t\t\t.requestMatchers(\"/login\", \"/resources/**\").permitAll()\n+\t\t\t\t\t\t.requestMatchers(mvc.pattern(\"/login\"), mvc.pattern(\"/resources/**\")).permitAll()\n \t\t\t\t\t\t.anyRequest().authenticated()\n \t\t\t\t)\n \t\t\t\t.jee((jee) -> jee.mappableRoles(\"USER\", \"ADMIN\"));\n@@ -42,6 +45,12 @@ public class SecurityConfiguration {\n \t\treturn http.build();\n \t}\n \n+\t@Scope(\"prototype\")\n+\t@Bean\n+\tMvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {\n+\t\treturn new MvcRequestMatcher.Builder(introspector);\n+\t}\n+\n \t// @formatter:off\n \t@Bean\n \tpublic UserDetailsService userDetailsService() {",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 4023,
+  "context_size_chars_after_truncation": 4023
+}

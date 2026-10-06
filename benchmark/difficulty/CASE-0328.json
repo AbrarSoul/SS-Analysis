@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0328",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-203"
+  ],
+  "changed_files": 1,
+  "lines_added": 28,
+  "lines_removed": 1,
+  "lines_changed_total": 29,
+  "function_size_chars": 361,
+  "function_size_lines": 22,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Publication queries attachments with an empty selector so every user sees all; needs authorization semantics."
+}

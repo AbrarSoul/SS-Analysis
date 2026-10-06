@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openstack_swift_6659382c4fa348e1ebbce2424968dd7267ea1db1",
+  "cve_ids": [
+    "CVE-2013-2161"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "openstack/swift",
+  "repository_url": "https://github.com/openstack/swift",
+  "vulnerable_commit": "4704151f70cca6581ce17f1517890b6fe5c45e75",
+  "fixed_commit": "6659382c4fa348e1ebbce2424968dd7267ea1db1",
+  "changed_file": "swift/account/server.py",
+  "max_score": "1337"
+}

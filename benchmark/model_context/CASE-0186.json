@@ -1,0 +1,28 @@
+{
+  "case_id": "CASE-0186",
+  "language": "java",
+  "cve_id": "CVE-2014-2059",
+  "cve_ids_all": [
+    "CVE-2014-2059"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import hudson.model.ModifiableItemGroup;",
+    "import hudson.model.TopLevelItem;",
+    "import jenkins.model.Jenkins;",
+    "import hudson.Extension;",
+    "import hudson.model.Item;",
+    "import jenkins.model.ModifiableTopLevelItemGroup;",
+    "import org.kohsuke.args4j.Argument;"
+  ],
+  "vulnerable_function": "    protected int run() throws Exception {\n        Jenkins h = Jenkins.getInstance();\n        h.checkPermission(Item.CREATE);\n\n        if (h.getItemByFullName(name)!=null) {\n            stderr.println(\"Job '\"+name+\"' already exists\");\n            return -1;\n        }\n\n        ModifiableTopLevelItemGroup ig = h;\n        int i = name.lastIndexOf('/');\n        if (i > 0) {\n            String group = name.substring(0, i);\n            Item item = h.getItemByFullName(group);\n            if (item == null) {\n                throw new IllegalArgumentException(\"Unknown ItemGroup \" + group);\n            }\n\n            if (item instanceof ModifiableTopLevelItemGroup) {\n                ig = (ModifiableTopLevelItemGroup) item;\n            } else {\n                throw new IllegalArgumentException(\"Can't create job from CLI in \" + group);\n            }\n            name = name.substring(i + 1);\n        }\n\n        ig.createProjectFromXML(name, stdin);\n        return 0;\n    }",
+  "patched_function": "    protected int run() throws Exception {\n        Jenkins h = Jenkins.getInstance();\n        h.checkPermission(Item.CREATE);\n\n        if (h.getItemByFullName(name)!=null) {\n            stderr.println(\"Job '\"+name+\"' already exists\");\n            return -1;\n        }\n\n        ModifiableTopLevelItemGroup ig = h;\n        int i = name.lastIndexOf('/');\n        if (i > 0) {\n            String group = name.substring(0, i);\n            Item item = h.getItemByFullName(group);\n            if (item == null) {\n                throw new IllegalArgumentException(\"Unknown ItemGroup \" + group);\n            }\n\n            if (item instanceof ModifiableTopLevelItemGroup) {\n                ig = (ModifiableTopLevelItemGroup) item;\n            } else {\n                throw new IllegalArgumentException(\"Can't create job from CLI in \" + group);\n            }\n            name = name.substring(i + 1);\n        }\n\n        Jenkins.checkGoodName(name);\n        ig.createProjectFromXML(name, stdin);\n        return 0;\n    }",
+  "unified_diff": "diff --git a/core/src/main/java/hudson/cli/CreateJobCommand.java b/core/src/main/java/hudson/cli/CreateJobCommand.java\nindex db73c30b51..02dd6ae55e 100644\n--- a/core/src/main/java/hudson/cli/CreateJobCommand.java\n+++ b/core/src/main/java/hudson/cli/CreateJobCommand.java\n@@ -72,6 +72,7 @@ public class CreateJobCommand extends CLICommand {\n             name = name.substring(i + 1);\n         }\n \n+        Jenkins.checkGoodName(name);\n         ig.createProjectFromXML(name, stdin);\n         return 0;\n     }",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0130",
+  "original_source_case_id": "github.com_bit-team_backintime_cef81d0da93ff601252607df3db1a48f7f6f01b3",
+  "selection_batch": "final",
+  "cve_id": "CVE-2017-16667",
+  "cve_ids_all": [
+    "CVE-2017-16667"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "bit-team/backintime",
+  "repository_url": "https://github.com/bit-team/backintime",
+  "vulnerable_commit": "c36d3682c40cf29713bee9a1a8735574d4e032e2",
+  "fixed_commit": "cef81d0da93ff601252607df3db1a48f7f6f01b3",
+  "changed_file": "qt4/plugins/notifyplugin.py",
+  "changed_function": "def on_message( self, profile_id, profile_name, level, message, timeout ):",
+  "vulnerable_lines": [
+    65,
+    79
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 6,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0130/vulnerable_source.py": "113d6cb3a141a155d7d9b4eee205463070c92169f03fccee1e02a837e8cc15de",
+    "cases/CASE-0130/patched_source.py": "f4e2b563a5601582bc5202bfe91de8b8d8f81a7f98fa4bbe27766fdcca6d0395",
+    "cases/CASE-0130/patch.diff": "7f173ad3f06a08bf6fc1a78c97de75cf1124f688384f86619055ba63d4eaffc2",
+    "cases/CASE-0130/metadata.json": "b28604ad856d65f0de3fb51820eb18626b5ebfd29db1963f3b53ca744e0d1a7a",
+    "model_context/CASE-0130.json": "d70d65b69354d79af8f5fd69841d8d1858c70f6bc2887c4395c1d531f91b1fd7",
+    "difficulty/CASE-0130.json": "7f63f79c9aadb64370157001fa1d65fe1f94bd4f60025b990367724461460c96"
+  },
+  "case_level_hash": "ac6d1661933113f2304a12899129dea5e606570e28841700f6e9252d00fa8e20"
+}

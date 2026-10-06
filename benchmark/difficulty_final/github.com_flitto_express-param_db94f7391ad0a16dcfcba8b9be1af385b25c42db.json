@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_flitto_express-param_db94f7391ad0a16dcfcba8b9be1af385b25c42db",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-235",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 40,
+  "lines_removed": 8,
+  "lines_changed_total": 48,
+  "function_size_chars": 981,
+  "function_size_lines": 48,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

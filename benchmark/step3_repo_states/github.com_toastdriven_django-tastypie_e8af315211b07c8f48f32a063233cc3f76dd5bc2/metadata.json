@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_toastdriven_django-tastypie_e8af315211b07c8f48f32a063233cc3f76dd5bc2",
+  "cve_ids": [
+    "CVE-2011-4104"
+  ],
+  "cwe_ids": [
+    "CWE-20"
+  ],
+  "language": "python",
+  "repository": "toastdriven/django-tastypie",
+  "repository_url": "https://github.com/toastdriven/django-tastypie",
+  "vulnerable_commit": "bc39633ebdc99cb78f3657b2c94112efff05698b",
+  "fixed_commit": "e8af315211b07c8f48f32a063233cc3f76dd5bc2",
+  "changed_file": "tastypie/serializers.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_frappe_lms_8749e21744547ae32f729bde05c854113e126750",
+  "cve_ids": [
+    "CVE-2025-62778"
+  ],
+  "cwe_ids": [
+    "CWE-425"
+  ],
+  "language": "python",
+  "repository": "frappe/lms",
+  "repository_url": "https://github.com/frappe/lms",
+  "vulnerable_commit": "982ac98e271ba38d6548db4e96654a6152d20ba7",
+  "fixed_commit": "8749e21744547ae32f729bde05c854113e126750",
+  "changed_file": "lms/lms/doctype/course_chapter/course_chapter.py",
+  "max_score": "1337"
+}

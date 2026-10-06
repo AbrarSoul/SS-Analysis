@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0123",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "changed_files": 1,
+  "lines_added": 32,
+  "lines_removed": 39,
+  "lines_changed_total": 71,
+  "function_size_chars": 1061,
+  "function_size_lines": 46,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Request Origin reflected with allow-credentials in cgiHandler; CORS reflection shape though the gate logic spans two functions."
+}

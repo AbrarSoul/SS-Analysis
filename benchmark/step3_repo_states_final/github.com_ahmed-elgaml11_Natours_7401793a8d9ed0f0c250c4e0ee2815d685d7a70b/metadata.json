@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ahmed-elgaml11_Natours_7401793a8d9ed0f0c250c4e0ee2815d685d7a70b",
+  "cve_ids": [
+    "CVE-2025-53373"
+  ],
+  "cwe_ids": [
+    "CWE-640"
+  ],
+  "language": "typescript",
+  "repository": "ahmed-elgaml11/Natours",
+  "repository_url": "https://github.com/ahmed-elgaml11/Natours",
+  "vulnerable_commit": "ddf4b5db56818087e21423d17f91544eb10fc571",
+  "fixed_commit": "7401793a8d9ed0f0c250c4e0ee2815d685d7a70b",
+  "changed_file": "src/api/users/auth.controller.ts",
+  "max_score": "1337"
+}

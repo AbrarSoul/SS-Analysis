@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0214",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "changed_files": 1,
+  "lines_added": 26,
+  "lines_removed": 5,
+  "lines_changed_total": 31,
+  "function_size_chars": 270,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Blocked-scheme regex omits `data:`; missing entry in a denylist literal, matching the pilot's denylist precedent."
+}

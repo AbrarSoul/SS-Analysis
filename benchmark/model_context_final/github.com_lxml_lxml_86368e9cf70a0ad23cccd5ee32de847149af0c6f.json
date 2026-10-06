@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_lxml_lxml_86368e9cf70a0ad23cccd5ee32de847149af0c6f",
+  "language": "python",
+  "cve_id": "CVE-2022-2309",
+  "cve_ids_all": [
+    "CVE-2022-2309"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-476",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "ETreeOnlyTestCase",
+  "imports": [
+    "from __future__ import absolute_import",
+    "from collections import OrderedDict",
+    "import os.path",
+    "import unittest",
+    "import copy",
+    "import sys",
+    "import re",
+    "import gc",
+    "import operator",
+    "import textwrap",
+    "import zlib",
+    "import gzip",
+    "from .common_imports import etree, StringIO, BytesIO, HelperTestCase",
+    "from .common_imports import fileInTestDir, fileUrlInTestDir, read_file, path2url, tmpfile",
+    "from .common_imports import SillyFileLike, LargeFileLikeUnicode, doctest, make_doctest",
+    "from .common_imports import canonicalize, _str, _bytes",
+    "from .common_imports import SimpleFSPath",
+    "import lxml"
+  ],
+  "vulnerable_function": "    def test_itertext_comment_pi(self):\n        # https://bugs.launchpad.net/lxml/+bug/1844674\n        XML = self.etree.XML\n        root = XML(_bytes(\n            \"<root>RTEXT<a></a>ATAIL<b/><!-- COMMENT -->CTAIL<?PI PITEXT?> PITAIL </root>\"\n        ))\n\n        text = list(root.itertext())\n        self.assertEqual([\"RTEXT\", \"ATAIL\", \"CTAIL\", \" PITAIL \"],\n                          text)\n",
+  "patched_function": "    def test_walk_after_parse_failure(self):\n        # This used to be an issue because libxml2 can leak empty namespaces\n        # between failed parser runs.  iterwalk() failed to handle such a tree.\n        try:\n            etree.XML('''<anot xmlns=\"1\">''')\n        except etree.XMLSyntaxError:\n            pass\n        else:\n            assert False, \"invalid input did not fail to parse\"\n\n        et = etree.XML('''<root>  </root>''')\n        try:\n            ns = next(etree.iterwalk(et, events=('start-ns',)))\n        except StopIteration:\n            # This would be the expected result, because there was no namespace\n            pass\n        else:\n            # This is a bug in libxml2\n            assert not ns, repr(ns)\n",
+  "unified_diff": "diff --git a/src/lxml/tests/test_etree.py b/src/lxml/tests/test_etree.py\nindex e5f08469..285313f6 100644\n--- a/src/lxml/tests/test_etree.py\n+++ b/src/lxml/tests/test_etree.py\n@@ -1460,6 +1460,26 @@ class ETreeOnlyTestCase(HelperTestCase):\n             [1,2,1,4],\n             counts)\n \n+    def test_walk_after_parse_failure(self):\n+        # This used to be an issue because libxml2 can leak empty namespaces\n+        # between failed parser runs.  iterwalk() failed to handle such a tree.\n+        try:\n+            etree.XML('''<anot xmlns=\"1\">''')\n+        except etree.XMLSyntaxError:\n+            pass\n+        else:\n+            assert False, \"invalid input did not fail to parse\"\n+\n+        et = etree.XML('''<root>  </root>''')\n+        try:\n+            ns = next(etree.iterwalk(et, events=('start-ns',)))\n+        except StopIteration:\n+            # This would be the expected result, because there was no namespace\n+            pass\n+        else:\n+            # This is a bug in libxml2\n+            assert not ns, repr(ns)\n+\n     def test_itertext_comment_pi(self):\n         # https://bugs.launchpad.net/lxml/+bug/1844674\n         XML = self.etree.XML",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wireapp_wire-webapp_281f2a9d795f68abe423c116d5da4e1e73a60062",
+  "cve_ids": [
+    "CVE-2021-21400"
+  ],
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "typescript",
+  "repository": "wireapp/wire-webapp",
+  "repository_url": "https://github.com/wireapp/wire-webapp",
+  "vulnerable_commit": "9c101998a8cd803d8118874db84b27aa37e90c5c",
+  "fixed_commit": "281f2a9d795f68abe423c116d5da4e1e73a60062",
+  "changed_file": "src/script/page/AppLock.tsx",
+  "max_score": "1337"
+}

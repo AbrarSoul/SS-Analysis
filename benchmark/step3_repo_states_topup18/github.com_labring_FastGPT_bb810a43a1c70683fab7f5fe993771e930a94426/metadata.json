@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_labring_FastGPT_bb810a43a1c70683fab7f5fe993771e930a94426",
+  "cve_ids": [
+    "CVE-2025-49131"
+  ],
+  "cwe_ids": [
+    "CWE-732"
+  ],
+  "language": "typescript",
+  "repository": "labring/FastGPT",
+  "repository_url": "https://github.com/labring/FastGPT",
+  "vulnerable_commit": "f74e8f2ba950ecdfa2d8acfb057167283a5b688e",
+  "fixed_commit": "bb810a43a1c70683fab7f5fe993771e930a94426",
+  "changed_file": "projects/sandbox/src/sandbox/constants.ts",
+  "max_score": "1337"
+}

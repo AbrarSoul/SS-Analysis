@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_struts_d7804297e319c7a12245e1b536e565fcea6d650",
+  "cve_ids": [
+    "CVE-2013-2115"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "apache/struts",
+  "repository_url": "https://github.com/apache/struts",
+  "vulnerable_commit": "486b1479aefab350dc339518698494793a5278a1",
+  "fixed_commit": "d7804297e319c7a12245e1b536e565fcea6d6503",
+  "changed_file": "xwork-core/src/main/java/com/opensymphony/xwork2/ognl/SecurityMemberAccess.java",
+  "max_score": "1337"
+}

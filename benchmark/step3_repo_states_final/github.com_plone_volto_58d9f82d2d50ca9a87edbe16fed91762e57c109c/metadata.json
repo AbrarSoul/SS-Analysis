@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_plone_volto_58d9f82d2d50ca9a87edbe16fed91762e57c109c",
+  "cve_ids": [
+    "CVE-2025-61668"
+  ],
+  "cwe_ids": [
+    "CWE-476",
+    "CWE-754"
+  ],
+  "language": "javascript",
+  "repository": "plone/volto",
+  "repository_url": "https://github.com/plone/volto",
+  "vulnerable_commit": "c4f9477a3ee0aa22d569834e0dc7e9c8deeca15b",
+  "fixed_commit": "58d9f82d2d50ca9a87edbe16fed91762e57c109c",
+  "changed_file": "packages/volto/src/middleware/api.js",
+  "max_score": "1337"
+}

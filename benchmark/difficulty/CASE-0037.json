@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0037",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "changed_files": 1,
+  "lines_added": 16,
+  "lines_removed": 2,
+  "lines_changed_total": 18,
+  "function_size_chars": 477,
+  "function_size_lines": 20,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Missing filter for specific dangerous string literals (__proto__/constructor/prototype) in a segment-building loop; self-contained.",
+  "supported_status": "supported"
+}

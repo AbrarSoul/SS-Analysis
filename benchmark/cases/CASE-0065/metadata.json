@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0065",
+  "original_source_case_id": "github.com_NodeBB_NodeBB_04dab1d550cdebf4c1567bca9a51f8b9ca48a500",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-43786",
+  "cve_ids_all": [
+    "CVE-2021-43786"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "javascript",
+  "repository": "NodeBB/NodeBB",
+  "repository_url": "https://github.com/NodeBB/NodeBB",
+  "vulnerable_commit": "1783f918bc19568f421473824461ff2ed7755e4c",
+  "fixed_commit": "04dab1d550cdebf4c1567bca9a51f8b9ca48a500",
+  "changed_file": "src/routes/authentication.js",
+  "changed_function": "Auth.verifyToken = async function (token, done) {",
+  "vulnerable_lines": [
+    46,
+    68
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0065/vulnerable_source.js": "9faddedcab22857f8aeb18002278d128d9e3878537eedb0df42a165838dc9540",
+    "cases/CASE-0065/patched_source.js": "0443c07ce89b87186e707c2439f892bcbb965ea3c10102bde4e04a71ad8c8207",
+    "cases/CASE-0065/patch.diff": "e7beef8b8f19340198ba198debaae0995c748ad693dca311502fcd6d50db6bca",
+    "cases/CASE-0065/metadata.json": "207e5e84e2a220fcc5cd451ff87bfd963dcb8e27eb6c238c4c49aac6b376c3e9",
+    "model_context/CASE-0065.json": "e97efb89b58502661839fb42ed66ebf82e0e5e565abb3383734713155b3dc975",
+    "difficulty/CASE-0065.json": "635eb36877689b358ec0ab5b6a8f74db2266b947f31b486e2d4786f1eca45ead"
+  },
+  "case_level_hash": "86247cfd712d166d1ab6fc45058cbf441dee1cabdc7d49a72e8a3a3697179ac3"
+}

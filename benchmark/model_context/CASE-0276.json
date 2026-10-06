@@ -1,0 +1,30 @@
+{
+  "case_id": "CASE-0276",
+  "language": "python",
+  "cve_id": "CVE-2026-2297",
+  "cve_ids_all": [
+    "CVE-2026-2297"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-668",
+      "definition": "Exposure of Resource to Wrong Sphere"
+    }
+  ],
+  "containing_class_declaration": "FileLoader",
+  "imports": [
+    "import _imp",
+    "import _io",
+    "import sys",
+    "import _warnings",
+    "import marshal",
+    "import nt as _os",
+    "import winreg",
+    "import posix as _os",
+    "import tokenize"
+  ],
+  "vulnerable_function": "    def get_data(self, path):\n        \"\"\"Return the data from path as raw bytes.\"\"\"\n        if isinstance(self, (SourceLoader, ExtensionFileLoader)):\n            with _io.open_code(str(path)) as file:\n                return file.read()\n        else:\n            with _io.FileIO(path, 'r') as file:\n                return file.read()\n",
+  "patched_function": "    def get_data(self, path):\n        \"\"\"Return the data from path as raw bytes.\"\"\"\n        if isinstance(self, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader)):\n            with _io.open_code(str(path)) as file:\n                return file.read()\n        else:\n            with _io.FileIO(path, 'r') as file:\n                return file.read()\n",
+  "unified_diff": "diff --git a/Lib/importlib/_bootstrap_external.py b/Lib/importlib/_bootstrap_external.py\nindex 41f538acb03..0741f62ee83 100644\n--- a/Lib/importlib/_bootstrap_external.py\n+++ b/Lib/importlib/_bootstrap_external.py\n@@ -1210,7 +1210,7 @@ def get_filename(self, fullname):\n \n     def get_data(self, path):\n         \"\"\"Return the data from path as raw bytes.\"\"\"\n-        if isinstance(self, (SourceLoader, ExtensionFileLoader)):\n+        if isinstance(self, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader)):\n             with _io.open_code(str(path)) as file:\n                 return file.read()\n         else:",
+  "auto_locate_confidence": "auto"
+}

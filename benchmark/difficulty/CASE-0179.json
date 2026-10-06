@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0179",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "changed_files": 1,
+  "lines_added": 20,
+  "lines_removed": 10,
+  "lines_changed_total": 30,
+  "function_size_chars": 331,
+  "function_size_lines": 14,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Login stores the user in the existing session without regenerate(); missing-call session-fixation shape."
+}

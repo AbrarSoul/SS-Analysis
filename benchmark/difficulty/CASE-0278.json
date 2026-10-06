@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0278",
+  "batch": "topup31",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 4302,
+  "function_size_lines": 77,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Raw git remote URL, possibly with embedded credentials, written into a manifest annotation; needs knowing remotes carry secrets."
+}

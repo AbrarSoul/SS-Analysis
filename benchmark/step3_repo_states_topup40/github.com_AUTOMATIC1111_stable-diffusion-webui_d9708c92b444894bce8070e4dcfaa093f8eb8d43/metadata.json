@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_AUTOMATIC1111_stable-diffusion-webui_d9708c92b444894bce8070e4dcfaa093f8eb8d43",
+  "cve_ids": [
+    "CVE-2024-31462"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "AUTOMATIC1111/stable-diffusion-webui",
+  "repository_url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+  "vulnerable_commit": "e1640314df34b4cc8ed0422ab04a2886a3d9beb3",
+  "fixed_commit": "d9708c92b444894bce8070e4dcfaa093f8eb8d43",
+  "changed_file": "modules/ui_extensions.py",
+  "max_score": "1337"
+}

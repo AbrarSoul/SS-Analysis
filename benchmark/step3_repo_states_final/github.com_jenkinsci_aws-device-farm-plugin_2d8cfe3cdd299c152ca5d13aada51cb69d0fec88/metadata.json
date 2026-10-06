@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_aws-device-farm-plugin_2d8cfe3cdd299c152ca5d13aada51cb69d0fec88",
+  "cve_ids": [
+    "CVE-2019-1003064"
+  ],
+  "cwe_ids": [
+    "CWE-311"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/aws-device-farm-plugin",
+  "repository_url": "https://github.com/jenkinsci/aws-device-farm-plugin",
+  "vulnerable_commit": "07a1afae063129d512eceb1b51fc0c32bce41d62",
+  "fixed_commit": "2d8cfe3cdd299c152ca5d13aada51cb69d0fec88",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/awsdevicefarm/AWSDeviceFarmRecorder.java",
+  "max_score": "1337"
+}

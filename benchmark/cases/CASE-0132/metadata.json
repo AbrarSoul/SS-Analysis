@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0132",
+  "original_source_case_id": "github.com_bluewave-labs_Checkmate_36d78a9aa4ed607ca1bd2b5fdaca5a3927b2d287",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-48024",
+  "cve_ids_all": [
+    "CVE-2025-48024"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-497"
+  ],
+  "language": "javascript",
+  "repository": "bluewave-labs/Checkmate",
+  "repository_url": "https://github.com/bluewave-labs/Checkmate",
+  "vulnerable_commit": "fcd6af259eb873b12fe1c1e3b75d746f6da695a8",
+  "fixed_commit": "36d78a9aa4ed607ca1bd2b5fdaca5a3927b2d287",
+  "changed_file": "server/controllers/settingsController.js",
+  "changed_function": "getAppSettings = async (req, res, next) => {",
+  "vulnerable_lines": [
+    13,
+    23
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 15,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0132/vulnerable_source.js": "57a8b2ea8a22eaa729b1886f7977c91a8e303dc8eb2dcd308d1fd9300c3e7c42",
+    "cases/CASE-0132/patched_source.js": "c8c0cee443f7fa7e0a700fc158a7c0d4dbb2c78736b516ac3f234a97dbc10835",
+    "cases/CASE-0132/patch.diff": "5fccf428773110c9716eb52df00eb9bf0c5f6b7b98f6f98fa438da407d4da633",
+    "cases/CASE-0132/metadata.json": "ae3f52b4070042b738a748976dbf22bcc833a88308f7bd2cb8713b96e3e9c66b",
+    "model_context/CASE-0132.json": "957d103f9558ca87c8052005bbdcebfec063ff390a58dc4219d96346450a8492",
+    "difficulty/CASE-0132.json": "aaedb7bc0e2b53f95ff47b4891fea2b33485d9a7e5c73bf112555144cb8d117b"
+  },
+  "case_level_hash": "23e90dadf8cf5deb9fc5868c71ed7598b43291e79940a5f6312c4faf18c731ca"
+}

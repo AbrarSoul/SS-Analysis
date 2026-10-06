@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_droolsjbpm_jbpm_713e8073ecf45623cfc5c918c5cbf700203f46e5",
+  "cve_ids": [
+    "CVE-2014-8125"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-Other"
+  ],
+  "language": "java",
+  "repository": "droolsjbpm/jbpm",
+  "repository_url": "https://github.com/droolsjbpm/jbpm",
+  "vulnerable_commit": "34a28a3c84504e21efbccb748612a13715006cee",
+  "fixed_commit": "713e8073ecf45623cfc5c918c5cbf700203f46e5",
+  "changed_file": "jbpm-bpmn2/src/test/java/org/jbpm/bpmn2/StandaloneBPMNProcessTest.java",
+  "max_score": "1337"
+}

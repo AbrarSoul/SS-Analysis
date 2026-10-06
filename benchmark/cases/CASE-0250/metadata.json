@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0250",
+  "original_source_case_id": "github.com_openstack_nova_9d2ea970422591f8cdc394001be9a2deca499a5f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2012-5625",
+  "cve_ids_all": [
+    "CVE-2012-5625"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "python",
+  "repository": "openstack/nova",
+  "repository_url": "https://github.com/openstack/nova",
+  "vulnerable_commit": "ec6550f2d9636635683f0fd50a0d4e51849765df",
+  "fixed_commit": "9d2ea970422591f8cdc394001be9a2deca499a5f",
+  "changed_file": "nova/virt/libvirt/utils.py",
+  "changed_function": "def remove_logical_volumes(*paths):",
+  "vulnerable_lines": [
+    175,
+    180
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 47,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0250/vulnerable_source.py": "e042c9c41c932993ee5657ccd1fed77d2018dfef22cf239e80c82b3bf501c7f2",
+    "cases/CASE-0250/patched_source.py": "6174fd05ba8267aeadf5b077a6d4555c556d75850b29244ccd0da1d0df2b9b68",
+    "cases/CASE-0250/patch.diff": "70744a9035c35d782238722de80ab516fa5ac981a8afa3f191879f60f4efd7fc",
+    "cases/CASE-0250/metadata.json": "ab842cb997d160d0cc7f9138235e10d5d39e2093b1f59f00123c609035385ba7",
+    "model_context/CASE-0250.json": "79f6e7322e96c1228086341535a78bfe6f727a37ef1746d8cd5833f7394ae1e1",
+    "difficulty/CASE-0250.json": "3f12459cbc3c0a54ac127e27cb676296139e9563b360b8ba4349d3de312435ef"
+  },
+  "case_level_hash": "533ab93f97383bdab3d7d0cf1823ee421dd449d3d268404d219a185f0003737f"
+}

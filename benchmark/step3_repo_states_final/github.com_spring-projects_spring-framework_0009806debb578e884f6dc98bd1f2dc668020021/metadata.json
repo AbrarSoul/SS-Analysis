@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_spring-projects_spring-framework_0009806debb578e884f6dc98bd1f2dc668020021",
+  "cve_ids": [
+    "CVE-2018-1270",
+    "CVE-2018-1275"
+  ],
+  "cwe_ids": [
+    "CWE-358",
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "6deee3e8180e3b4f0c775ff27b81ee6b5728ac90",
+  "fixed_commit": "0009806debb578e884f6dc98bd1f2dc668020021",
+  "changed_file": "spring-messaging/src/main/java/org/springframework/messaging/simp/broker/DefaultSubscriptionRegistry.java",
+  "max_score": "1337"
+}

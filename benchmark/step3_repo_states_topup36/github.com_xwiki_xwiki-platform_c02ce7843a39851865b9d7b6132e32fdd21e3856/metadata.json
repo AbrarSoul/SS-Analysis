@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_c02ce7843a39851865b9d7b6132e32fdd21e3856",
+  "cve_ids": [
+    "CVE-2025-46554"
+  ],
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "3447bac26faadf5d4f93b60e9ab283fed1927fbd",
+  "fixed_commit": "c02ce7843a39851865b9d7b6132e32fdd21e3856",
+  "changed_file": "xwiki-platform-core/xwiki-platform-rest/xwiki-platform-rest-server/src/main/java/org/xwiki/rest/internal/resources/attachments/AttachmentResourceImpl.java",
+  "max_score": "1337"
+}

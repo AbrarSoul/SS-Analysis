@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_dom4j_dom4j_1707bf3d898a8ada3b213acb0e3b38f16eaae73d",
+  "language": "java",
+  "cve_id": "CVE-2020-10683",
+  "cve_ids_all": [
+    "CVE-2020-10683"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-611",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.StringReader;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.StringTokenizer;",
+    "import org.dom4j.io.SAXReader;",
+    "import org.dom4j.rule.Pattern;",
+    "import org.jaxen.VariableContext;",
+    "import org.xml.sax.InputSource;",
+    "import org.xml.sax.SAXException;"
+  ],
+  "vulnerable_function": "    public static Document parseText(String text) throws DocumentException {\n        SAXReader reader = new SAXReader();\n        String encoding = getEncoding(text);\n\n        InputSource source = new InputSource(new StringReader(text));\n        source.setEncoding(encoding);\n\n        Document result = reader.read(source);\n\n        // if the XML parser doesn't provide a way to retrieve the encoding,\n        // specify it manually\n        if (result.getXMLEncoding() == null) {\n            result.setXMLEncoding(encoding);\n        }\n\n        return result;\n    }",
+  "patched_function": "    public static Document parseText(String text) throws DocumentException {\n        SAXReader reader = new SAXReader();\n        try {\n            reader.setFeature(\"http://apache.org/xml/features/nonvalidating/load-external-dtd\", false);\n            reader.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\n            reader.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\n        } catch (SAXException e) {\n            //Parse with external resources downloading allowed.\n        }\n\n        String encoding = getEncoding(text);\n\n        InputSource source = new InputSource(new StringReader(text));\n        source.setEncoding(encoding);\n\n        Document result = reader.read(source);\n\n        // if the XML parser doesn't provide a way to retrieve the encoding,\n        // specify it manually\n        if (result.getXMLEncoding() == null) {\n            result.setXMLEncoding(encoding);\n        }\n\n        return result;\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/dom4j/DocumentHelper.java b/src/main/java/org/dom4j/DocumentHelper.java\nindex a3a69dc..6ceed9a 100644\n--- a/src/main/java/org/dom4j/DocumentHelper.java\n+++ b/src/main/java/org/dom4j/DocumentHelper.java\n@@ -270,6 +270,14 @@ public final class DocumentHelper {\n      */\n     public static Document parseText(String text) throws DocumentException {\n         SAXReader reader = new SAXReader();\n+        try {\n+            reader.setFeature(\"http://apache.org/xml/features/nonvalidating/load-external-dtd\", false);\n+            reader.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\n+            reader.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\n+        } catch (SAXException e) {\n+            //Parse with external resources downloading allowed.\n+        }\n+\n         String encoding = getEncoding(text);\n \n         InputSource source = new InputSource(new StringReader(text));",
+  "auto_locate_confidence": "auto"
+}

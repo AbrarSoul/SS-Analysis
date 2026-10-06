@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_undertow-io_undertow_1443a1a2bbb8e32e56788109d8285db250d55c8b",
+  "cve_ids": [
+    "CVE-2022-1319"
+  ],
+  "cwe_ids": [
+    "CWE-252"
+  ],
+  "language": "java",
+  "repository": "undertow-io/undertow",
+  "repository_url": "https://github.com/undertow-io/undertow",
+  "vulnerable_commit": "5261e015fd7af133dd3ae2dc351e99240b1fa6a5",
+  "fixed_commit": "1443a1a2bbb8e32e56788109d8285db250d55c8b",
+  "changed_file": "core/src/main/java/io/undertow/server/protocol/ajp/AjpReadListener.java",
+  "max_score": "1337"
+}

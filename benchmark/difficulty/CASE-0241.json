@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0241",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 1424,
+  "function_size_lines": 43,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "shutil.copyfile used to publish a file created with restrictive mode; copyfile copies content only, a known API-semantics pattern."
+}

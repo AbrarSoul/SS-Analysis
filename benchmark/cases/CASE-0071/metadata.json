@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0071",
+  "original_source_case_id": "github.com_OsamaTaher_Java-springboot-codebase_c835c6f7799eacada4c0fc77e0816f250af01ad2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-46822",
+  "cve_ids_all": [
+    "CVE-2025-46822"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-36"
+  ],
+  "language": "java",
+  "repository": "OsamaTaher/Java-springboot-codebase",
+  "repository_url": "https://github.com/OsamaTaher/Java-springboot-codebase",
+  "vulnerable_commit": "7621930b9067e3037c7d465df770a3092247e5c6",
+  "fixed_commit": "c835c6f7799eacada4c0fc77e0816f250af01ad2",
+  "changed_file": "springboot/common-dynamic-management-services/src/main/java/common/management/common/service/impl/FileSystemStorageService.java",
+  "changed_function": "public Resource loadAsResource(String filename) {",
+  "vulnerable_lines": [
+    127,
+    142
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 8,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0071/vulnerable_source.java": "c123d4723e11ef323541f61b5dbab2c5512fa4c19e4732ca531de95002401232",
+    "cases/CASE-0071/patched_source.java": "864a826e06458e362a8c2cd6a30b50fa15cab9cfd26a3cee91e03b1bbd4ff726",
+    "cases/CASE-0071/patch.diff": "1972d8a560c6997c26d91bdeae38bd9753296a4c6fe44400de022dc4703dfe80",
+    "cases/CASE-0071/metadata.json": "4c41aff1baf3757648cc38f4d2413025897b40e21884f60503ab231a01d6720b",
+    "model_context/CASE-0071.json": "2dd04947544c8cf6b9ff88474fc30c54de34f6e90bb3e8df769d029408016609",
+    "difficulty/CASE-0071.json": "472ed24ca11a656d04eeba6f86847c78881d63c64a787ed8b9a2ee01f0b89c8b"
+  },
+  "case_level_hash": "6049f736d2abdf1609a8a385e7047156005a48aed7f28cdc8e980da4c3adcedb"
+}

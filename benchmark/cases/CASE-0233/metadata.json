@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0233",
+  "original_source_case_id": "github.com_mrvautin_expressCart_baccaae9b0b72f00b10c5453ca00231340ad3e3b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-12457",
+  "cve_ids_all": [
+    "CVE-2018-12457"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-732"
+  ],
+  "language": "javascript",
+  "repository": "mrvautin/expressCart",
+  "repository_url": "https://github.com/mrvautin/expressCart",
+  "vulnerable_commit": "c674f8657685f06da5a6a9d68cfecf533e25945f",
+  "fixed_commit": "baccaae9b0b72f00b10c5453ca00231340ad3e3b",
+  "changed_file": "routes/user.js",
+  "changed_function": "db.users.insert(doc, (err, doc) => {",
+  "vulnerable_lines": [
+    172,
+    199
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 49,
+  "patch_size_deleted": 44,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0233/vulnerable_source.js": "5fc262a17514f978c511d469eee4a7d875a4bb31c72fbb63e4559204fd5c7c49",
+    "cases/CASE-0233/patched_source.js": "5a0a2802b5d5d09eda960474f798d8eb4b133da7314d4138a621ac417990e38f",
+    "cases/CASE-0233/patch.diff": "dde1803b6b4a6a89da5084c3136eaaba6019069a58df0c2388ff6c8907c8c71a",
+    "cases/CASE-0233/metadata.json": "47f3d75991ed665d4871122dc151ab833f367b6e85ce2762a3bd4ee11612aaf9",
+    "model_context/CASE-0233.json": "5a39bf77d4383bf9fb9c103699732950209133ea509d1de5ab3491ca56cecf94",
+    "difficulty/CASE-0233.json": "8b0db61e0ad644696201e42faaaf1bd52c347ac5114af367fbb69d0833cb1b0a"
+  },
+  "case_level_hash": "5bd4e6c3a13c2adce57a323baf53f4b4306574e1dd6a7a5142390974c2ba6860"
+}

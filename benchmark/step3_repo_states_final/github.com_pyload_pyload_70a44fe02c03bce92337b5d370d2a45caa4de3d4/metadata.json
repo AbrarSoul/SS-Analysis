@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_pyload_pyload_70a44fe02c03bce92337b5d370d2a45caa4de3d4",
+  "cve_ids": [
+    "CVE-2025-54802",
+    "CVE-2025-57751"
+  ],
+  "cwe_ids": [
+    "CWE-22",
+    "CWE-400"
+  ],
+  "language": "python",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "f34052df70a193948c1a19332a1f02c7b9bc362d",
+  "fixed_commit": "70a44fe02c03bce92337b5d370d2a45caa4de3d4",
+  "changed_file": "src/pyload/webui/app/blueprints/cnl_blueprint.py",
+  "max_score": "1337"
+}

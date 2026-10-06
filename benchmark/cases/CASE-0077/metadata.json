@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0077",
+  "original_source_case_id": "github.com_Tencent_NeuralNLP-NeuralClassifier_8dea5ffdb45cf0a33b3d116de38507afaee87594",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-13708",
+  "cve_ids_all": [
+    "CVE-2025-13708"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "python",
+  "repository": "Tencent/NeuralNLP-NeuralClassifier",
+  "repository_url": "https://github.com/Tencent/NeuralNLP-NeuralClassifier",
+  "vulnerable_commit": "3d4ddffa6304da32c25f74001c0c056922c4ba22",
+  "fixed_commit": "8dea5ffdb45cf0a33b3d116de38507afaee87594",
+  "changed_file": "predict.py",
+  "changed_function": "def _load_checkpoint(file_name, model, use_cuda):",
+  "vulnerable_lines": [
+    65,
+    71
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0077/vulnerable_source.py": "605362bb5631a7723ee97e21f14020bf849e0953723bed997314d5b0ae645fd6",
+    "cases/CASE-0077/patched_source.py": "e1ebbb85c968cd69722da038ab1e7b69443a46721b024ebd3b32ac1e519dd00f",
+    "cases/CASE-0077/patch.diff": "ed7affdf5c564f8d054071882b2a4ed484ad24a3f3fd080935c972832a5a902d",
+    "cases/CASE-0077/metadata.json": "012cc3316cdb7ac94996d43df248a25b0ab5cbd454892273c83d7db6d01de883",
+    "model_context/CASE-0077.json": "6042941b0834bb735885287ca4a58760496fadf51867cd39cdd46ec550309117",
+    "difficulty/CASE-0077.json": "7847251b9f2beef3b9baaa1ccf158efb856e7de1ec572e1136d2afb97d15550b"
+  },
+  "case_level_hash": "8ade6342b0cf9ef683192c8dad821f185f1b4d0ed722073ce4e35b8b7288a54f"
+}

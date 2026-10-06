@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0331",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-284"
+  ],
+  "changed_files": 1,
+  "lines_added": 24,
+  "lines_removed": 23,
+  "lines_changed_total": 47,
+  "function_size_chars": 1547,
+  "function_size_lines": 61,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Publication adds linked boards without checking the subscriber's access; authorization logic across steps."
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0267",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-377"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 6,
+  "lines_changed_total": 13,
+  "function_size_chars": 1607,
+  "function_size_lines": 36,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Zip member extracted to gettempdir()/<name> when it does not already exist; predictable shared-temp-path pattern."
+}

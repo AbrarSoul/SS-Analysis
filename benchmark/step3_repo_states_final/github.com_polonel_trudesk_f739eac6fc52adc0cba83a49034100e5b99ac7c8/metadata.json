@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_polonel_trudesk_f739eac6fc52adc0cba83a49034100e5b99ac7c8",
+  "cve_ids": [
+    "CVE-2022-1808"
+  ],
+  "cwe_ids": [
+    "CWE-250",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "polonel/trudesk",
+  "repository_url": "https://github.com/polonel/trudesk",
+  "vulnerable_commit": "ae904d37eaa38bffebfbfe8e949c0385c63e3263",
+  "fixed_commit": "f739eac6fc52adc0cba83a49034100e5b99ac7c8",
+  "changed_file": "src/controllers/api/v1/tickets.js",
+  "max_score": "1337"
+}

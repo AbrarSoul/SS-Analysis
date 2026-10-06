@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0214",
+  "original_source_case_id": "github.com_markdown-it_markdown-it_f76d3beb46abd121892a2e2e5c78376354c214e3",
+  "selection_batch": "final",
+  "cve_id": "CVE-2015-3295",
+  "cve_ids_all": [
+    "CVE-2015-3295"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "language": "javascript",
+  "repository": "markdown-it/markdown-it",
+  "repository_url": "https://github.com/markdown-it/markdown-it",
+  "vulnerable_commit": "f7976b25f79df1599c98787e16873d52bd0b7d05",
+  "fixed_commit": "f76d3beb46abd121892a2e2e5c78376354c214e3",
+  "changed_file": "lib/index.js",
+  "changed_function": "function validateLink(url) {",
+  "vulnerable_lines": [
+    26,
+    35
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 26,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0214/vulnerable_source.js": "b8a21861565978a6b5ba7dd806a50515bf5b08519431d94c2afc0359623efc4a",
+    "cases/CASE-0214/patched_source.js": "fb57170a386945455fd2b4742516e36a1c395c39b2ca8cb0c9b4bdd608945314",
+    "cases/CASE-0214/patch.diff": "e7428843330a5d69c25483601b7868cecf725e44d35f4d8dabc6344cd14e2bfb",
+    "cases/CASE-0214/metadata.json": "f91609cfad26c764567ff106e580853759514163b28b52a356052064518b8cb7",
+    "model_context/CASE-0214.json": "60a2c5994a3637587ec92211f1e1c2713df091a05046794c82d80a77ecaea1e5",
+    "difficulty/CASE-0214.json": "322cc02fc9f8aaceabc4d43500abeed118399f08b0dcd739261f4b8f18b0db49"
+  },
+  "case_level_hash": "fdd3a28c9dcdb10952395d9eadcde15dcd53d549c46f42a01008d184c2c95feb"
+}

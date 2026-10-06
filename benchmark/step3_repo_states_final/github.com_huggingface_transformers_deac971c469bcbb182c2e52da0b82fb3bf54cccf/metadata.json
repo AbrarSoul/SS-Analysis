@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_huggingface_transformers_deac971c469bcbb182c2e52da0b82fb3bf54cccf",
+  "cve_ids": [
+    "CVE-2024-12720"
+  ],
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "python",
+  "repository": "huggingface/transformers",
+  "repository_url": "https://github.com/huggingface/transformers",
+  "vulnerable_commit": "d29a06e39aa907aad37d3b7ad535320c0be8549f",
+  "fixed_commit": "deac971c469bcbb182c2e52da0b82fb3bf54cccf",
+  "changed_file": "src/transformers/models/nougat/tokenization_nougat_fast.py",
+  "max_score": "1337"
+}

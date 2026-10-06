@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mkalioby_django-mfa2_54db5a513bcafa97a36e9f6dfa31d3c61fa8217b",
+  "cve_ids": [
+    "CVE-2022-42731"
+  ],
+  "cwe_ids": [
+    "CWE-294"
+  ],
+  "language": "python",
+  "repository": "mkalioby/django-mfa2",
+  "repository_url": "https://github.com/mkalioby/django-mfa2",
+  "vulnerable_commit": "0936ea253354dd95cb127f09d0efa31324caef27",
+  "fixed_commit": "54db5a513bcafa97a36e9f6dfa31d3c61fa8217b",
+  "changed_file": "mfa/FIDO2.py",
+  "max_score": "1337"
+}

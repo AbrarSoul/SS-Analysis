@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0014",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-377",
+    "CWE-668"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 3,
+  "lines_changed_total": 5,
+  "function_size_chars": 258,
+  "function_size_lines": 8,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "createTempFile() + delete() + mkdir() is a well-known, locally-recognizable insecure idiom.",
+  "supported_status": "supported"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0246",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 3,
+  "lines_changed_total": 6,
+  "function_size_chars": 3445,
+  "function_size_lines": 73,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Storage credentials placed in a dict later returned as connection info; needs knowing the dict is handed to API callers."
+}

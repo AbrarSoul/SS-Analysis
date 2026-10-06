@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0129",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 2,
+  "lines_changed_total": 3,
+  "function_size_chars": 845,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "MongoDB projection omits a field that is read later; cross-statement data-shape reasoning, not a code-shape defect."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nicotsx_zerobyte_13e080a18967705bd2b4e110e5f7693fdca1c692",
+  "cve_ids": [
+    "CVE-2025-68435"
+  ],
+  "cwe_ids": [
+    "CWE-305"
+  ],
+  "language": "typescript",
+  "repository": "nicotsx/zerobyte",
+  "repository_url": "https://github.com/nicotsx/zerobyte",
+  "vulnerable_commit": "d8cfe29f22c6c4c65ad2c3504aaa069550c60dbe",
+  "fixed_commit": "13e080a18967705bd2b4e110e5f7693fdca1c692",
+  "changed_file": "app/server/index.ts",
+  "max_score": "1337"
+}

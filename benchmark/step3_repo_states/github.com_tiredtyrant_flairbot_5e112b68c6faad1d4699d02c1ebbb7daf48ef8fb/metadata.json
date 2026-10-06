@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_tiredtyrant_flairbot_5e112b68c6faad1d4699d02c1ebbb7daf48ef8fb",
+  "cve_ids": [
+    "CVE-2015-10026"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "python",
+  "repository": "tiredtyrant/flairbot",
+  "repository_url": "https://github.com/tiredtyrant/flairbot",
+  "vulnerable_commit": "47206a3d331f1d61fc77832e50bac12e7ba96faf",
+  "fixed_commit": "5e112b68c6faad1d4699d02c1ebbb7daf48ef8fb",
+  "changed_file": "flair.py",
+  "max_score": "1337"
+}

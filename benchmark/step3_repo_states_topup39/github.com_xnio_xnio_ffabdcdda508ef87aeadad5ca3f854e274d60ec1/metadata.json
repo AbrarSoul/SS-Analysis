@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xnio_xnio_ffabdcdda508ef87aeadad5ca3f854e274d60ec1",
+  "cve_ids": [
+    "CVE-2023-5685"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "java",
+  "repository": "xnio/xnio",
+  "repository_url": "https://github.com/xnio/xnio",
+  "vulnerable_commit": "de55d0acfbcf922f56daf135a45ff74a763bf267",
+  "fixed_commit": "ffabdcdda508ef87aeadad5ca3f854e274d60ec1",
+  "changed_file": "api/src/main/java/org/xnio/AbstractIoFuture.java",
+  "max_score": "1337"
+}

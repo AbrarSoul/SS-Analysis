@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-0188",
+  "language": "java",
+  "cve_id": "CVE-2020-2306",
+  "cve_ids_all": [
+    "CVE-2020-2306"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import hudson.Extension;",
+    "import hudson.Util;",
+    "import hudson.plugins.mercurial.MercurialInstallation;",
+    "import hudson.plugins.mercurial.MercurialSCM;",
+    "import hudson.plugins.mercurial.MercurialSCMBuilder;",
+    "import hudson.plugins.mercurial.MercurialSCMSource;",
+    "import hudson.plugins.mercurial.MercurialSCMSourceContext;",
+    "import hudson.scm.SCM;",
+    "import hudson.util.ListBoxModel;",
+    "import javax.annotation.CheckForNull;",
+    "import javax.annotation.Nonnull;",
+    "import jenkins.scm.api.SCMSource;",
+    "import jenkins.scm.api.trait.SCMBuilder;",
+    "import jenkins.scm.api.trait.SCMSourceContext;",
+    "import jenkins.scm.api.trait.SCMSourceTrait;",
+    "import jenkins.scm.api.trait.SCMSourceTraitDescriptor;",
+    "import org.kohsuke.accmod.Restricted;",
+    "import org.kohsuke.accmod.restrictions.NoExternalUse;",
+    "import org.kohsuke.stapler.DataBoundConstructor;"
+  ],
+  "vulnerable_function": "        @Restricted(NoExternalUse.class) // stapler\n        public ListBoxModel doFillInstallationItems() {\n            ListBoxModel result = new ListBoxModel();\n            for (MercurialInstallation i: MercurialInstallation.allInstallations()) {\n                if (i.isUseCaches()) {\n                    result.add(i.getName());\n                }\n            }\n            return result;\n        }",
+  "patched_function": "        @Restricted(NoExternalUse.class) // stapler\n        public ListBoxModel doFillInstallationItems(@AncestorInPath Item context) {\n            ListBoxModel result = new ListBoxModel();\n            if (context == null ?\n                    !Jenkins.get().hasPermission(Jenkins.ADMINISTER) :\n                    !context.hasPermission(Item.EXTENDED_READ)) {\n                return result;\n            }\n            for (MercurialInstallation i: MercurialInstallation.allInstallations()) {\n                if (i.isUseCaches()) {\n                    result.add(i.getName());\n                }\n            }\n            return result;\n        }",
+  "unified_diff": "diff --git a/src/main/java/hudson/plugins/mercurial/traits/MercurialInstallationSCMSourceTrait.java b/src/main/java/hudson/plugins/mercurial/traits/MercurialInstallationSCMSourceTrait.java\nindex c2e8c70..211e927 100644\n--- a/src/main/java/hudson/plugins/mercurial/traits/MercurialInstallationSCMSourceTrait.java\n+++ b/src/main/java/hudson/plugins/mercurial/traits/MercurialInstallationSCMSourceTrait.java\n@@ -27,6 +27,7 @@ package hudson.plugins.mercurial.traits;\n \n import hudson.Extension;\n import hudson.Util;\n+import hudson.model.Item;\n import hudson.plugins.mercurial.MercurialInstallation;\n import hudson.plugins.mercurial.MercurialSCM;\n import hudson.plugins.mercurial.MercurialSCMBuilder;\n@@ -36,6 +37,7 @@ import hudson.scm.SCM;\n import hudson.util.ListBoxModel;\n import javax.annotation.CheckForNull;\n import javax.annotation.Nonnull;\n+import jenkins.model.Jenkins;\n import jenkins.scm.api.SCMSource;\n import jenkins.scm.api.trait.SCMBuilder;\n import jenkins.scm.api.trait.SCMSourceContext;\n@@ -43,6 +45,7 @@ import jenkins.scm.api.trait.SCMSourceTrait;\n import jenkins.scm.api.trait.SCMSourceTraitDescriptor;\n import org.kohsuke.accmod.Restricted;\n import org.kohsuke.accmod.restrictions.NoExternalUse;\n+import org.kohsuke.stapler.AncestorInPath;\n import org.kohsuke.stapler.DataBoundConstructor;\n \n /**\n@@ -177,8 +180,13 @@ public class MercurialInstallationSCMSourceTrait extends SCMSourceTrait {\n          * @return the list of {@link MercurialInstallation} items.\n          */\n         @Restricted(NoExternalUse.class) // stapler\n-        public ListBoxModel doFillInstallationItems() {\n+        public ListBoxModel doFillInstallationItems(@AncestorInPath Item context) {\n             ListBoxModel result = new ListBoxModel();\n+            if (context == null ?\n+                    !Jenkins.get().hasPermission(Jenkins.ADMINISTER) :\n+                    !context.hasPermission(Item.EXTENDED_READ)) {\n+                return result;\n+            }\n             for (MercurialInstallation i: MercurialInstallation.allInstallations()) {\n                 if (i.isUseCaches()) {\n                     result.add(i.getName());",
+  "auto_locate_confidence": "auto"
+}

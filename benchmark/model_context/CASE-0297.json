@@ -1,0 +1,29 @@
+{
+  "case_id": "CASE-0297",
+  "language": "java",
+  "cve_id": "CVE-2023-20866",
+  "cve_ids_all": [
+    "CVE-2023-20866"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.util.Collections;",
+    "import java.util.List;",
+    "import jakarta.servlet.http.HttpServletRequest;",
+    "import jakarta.servlet.http.HttpServletResponse;"
+  ],
+  "vulnerable_function": "\tpublic List<String> resolveSessionIds(HttpServletRequest request) {\n\t\tString headerValue = request.getHeader(this.headerName);\n\t\tSystem.out.println(headerValue);\n\t\treturn (headerValue != null) ? Collections.singletonList(headerValue) : Collections.emptyList();\n\t}",
+  "patched_function": "\tpublic List<String> resolveSessionIds(HttpServletRequest request) {\n\t\tString headerValue = request.getHeader(this.headerName);\n\t\treturn (headerValue != null) ? Collections.singletonList(headerValue) : Collections.emptyList();\n\t}",
+  "unified_diff": "diff --git a/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java b/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java\nindex c510559b..f0c3100f 100644\n--- a/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java\n+++ b/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java\n@@ -1,5 +1,5 @@\n /*\n- * Copyright 2014-2019 the original author or authors.\n+ * Copyright 2014-2022 the original author or authors.\n  *\n  * Licensed under the Apache License, Version 2.0 (the \"License\");\n  * you may not use this file except in compliance with the License.\n@@ -98,7 +98,6 @@ public class HeaderHttpSessionIdResolver implements HttpSessionIdResolver {\n \t@Override\n \tpublic List<String> resolveSessionIds(HttpServletRequest request) {\n \t\tString headerValue = request.getHeader(this.headerName);\n-\t\tSystem.out.println(headerValue);\n \t\treturn (headerValue != null) ? Collections.singletonList(headerValue) : Collections.emptyList();\n \t}\n ",
+  "auto_locate_confidence": "auto"
+}

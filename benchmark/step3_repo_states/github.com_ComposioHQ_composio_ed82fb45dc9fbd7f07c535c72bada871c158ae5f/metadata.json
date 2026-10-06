@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_ComposioHQ_composio_ed82fb45dc9fbd7f07c535c72bada871c158ae5f",
+  "cve_ids": [
+    "CVE-2024-8953"
+  ],
+  "cwe_ids": [
+    "CWE-627",
+    "CWE-913"
+  ],
+  "language": "python",
+  "repository": "ComposioHQ/composio",
+  "repository_url": "https://github.com/ComposioHQ/composio",
+  "vulnerable_commit": "20d44d3588454d90bf7c3ad290e014db4903b672",
+  "fixed_commit": "ed82fb45dc9fbd7f07c535c72bada871c158ae5f",
+  "changed_file": "python/composio/tools/local/mathematical/actions/calculator.py",
+  "max_score": "1337"
+}

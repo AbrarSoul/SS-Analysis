@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_theonedev_onedev_9196fd795e87dab069b4260a3590a0ea886e770f",
+  "cve_ids": [
+    "CVE-2021-21250"
+  ],
+  "cwe_ids": [
+    "CWE-538"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "d6fc4212b1ac1e9bbe3ce444e95f9af1e3ab8b66",
+  "fixed_commit": "9196fd795e87dab069b4260a3590a0ea886e770f",
+  "changed_file": "server-core/src/main/java/io/onedev/server/migration/XmlBuildSpecMigrator.java",
+  "max_score": "1337"
+}

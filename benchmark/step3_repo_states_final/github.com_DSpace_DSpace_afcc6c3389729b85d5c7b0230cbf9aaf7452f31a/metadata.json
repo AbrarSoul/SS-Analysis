@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_DSpace_DSpace_afcc6c3389729b85d5c7b0230cbf9aaf7452f31a",
+  "cve_ids": [
+    "CVE-2022-31189"
+  ],
+  "cwe_ids": [
+    "CWE-209"
+  ],
+  "language": "java",
+  "repository": "DSpace/DSpace",
+  "repository_url": "https://github.com/DSpace/DSpace",
+  "vulnerable_commit": "ebb83a75234d3de9be129464013e998dc929b68d",
+  "fixed_commit": "afcc6c3389729b85d5c7b0230cbf9aaf7452f31a",
+  "changed_file": "dspace-jspui/src/main/java/org/dspace/app/webui/servlet/InternalErrorServlet.java",
+  "max_score": "1337"
+}

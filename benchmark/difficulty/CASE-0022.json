@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0022",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "changed_files": 1,
+  "lines_added": 21,
+  "lines_removed": 4,
+  "lines_changed_total": 25,
+  "function_size_chars": 2099,
+  "function_size_lines": 51,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Missing validation of a re-exchanged identity against the pre-TLS identity; recognizing the gap requires understanding the two-phase handshake protocol, not a single line.",
+  "supported_status": "supported"
+}

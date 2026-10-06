@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0175",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-273"
+  ],
+  "changed_files": 1,
+  "lines_added": 16,
+  "lines_removed": 1,
+  "lines_changed_total": 17,
+  "function_size_chars": 118,
+  "function_size_lines": 4,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Admin list not updated when an account is deleted; missing lifecycle listener registration, not a code shape."
+}

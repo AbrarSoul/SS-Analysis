@@ -1,0 +1,22 @@
+diff --git a/src/security-kit.js b/src/security-kit.js
+index 43a65ee..e5bcb6a 100644
+--- a/src/security-kit.js
++++ b/src/security-kit.js
+@@ -6,7 +6,7 @@
+ // Author ORCID: 0009-0005-2713-9242
+ // Author VIAF: 139173726847611590332
+ // Author Wikidata: Q130604188
+-// Version: 3.0.0
++// Version: 3.4.0
+ 
+ /**
+  * Secure, performant, and modern cryptographic utilities.
+@@ -14,7 +14,7 @@
+  * It requires a modern environment with the Web Crypto API and will not
+  * fall back to insecure methods.
+  * @module security-kit
+- * @version 3.0.0
++ * @version 3.4.0
+  */
+ 
+ // --- Custom Error Classes for Robust Handling ---

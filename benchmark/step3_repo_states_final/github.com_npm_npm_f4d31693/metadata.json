@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_npm_npm_f4d31693",
+  "cve_ids": [
+    "CVE-2013-4116"
+  ],
+  "cwe_ids": [
+    "CWE-59"
+  ],
+  "language": "javascript",
+  "repository": "npm/npm",
+  "repository_url": "https://github.com/npm/npm",
+  "vulnerable_commit": "e3007309aa93e94b69b5094fa1b11070b2ef993c",
+  "fixed_commit": "f4d31693e73a963574a88000580db1a716fe66f1",
+  "changed_file": "lib/npm.js",
+  "max_score": "1337"
+}

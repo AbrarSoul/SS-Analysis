@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_yarnpkg_yarn_67fcce88935e45092ffa2674c08053f1ef5268a1",
+  "language": "javascript",
+  "cve_id": "CVE-2021-4435",
+  "cve_ids_all": [
+    "CVE-2021-4435"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-426",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import * as constants from '../constants.js';",
+    "import BlockingQueue from './blocking-queue.js';",
+    "import {ProcessSpawnError, ProcessTermError} from '../errors.js';",
+    "import {promisify} from './promise.js';",
+    "const child = require('child_process');"
+  ],
+  "vulnerable_function": "  return queue.push(\n    key,\n    (): Promise<string> =>\n      new Promise((resolve, reject) => {\n        const proc = child.spawn(program, args, opts);\n        spawnedProcesses[key] = proc;\n\n        let processingDone = false;\n        let processClosed = false;\n        let err = null;\n\n        let stdout = '';\n\n        proc.on('error', err => {\n          if (err.code === 'ENOENT') {\n            reject(new ProcessSpawnError(`Couldn't find the binary ${program}`, err.code, program));\n          } else {\n            reject(err);\n          }\n        });\n\n        function updateStdout(chunk: string) {\n          stdout += chunk;\n          if (onData) {\n            onData(chunk);\n          }\n        }\n\n        function finish() {\n          delete spawnedProcesses[key];\n          if (err) {\n            reject(err);\n          } else {\n            resolve(stdout.trim());\n          }\n        }\n\n        if (typeof opts.process === 'function') {\n          opts.process(proc, updateStdout, reject, function() {\n            if (processClosed) {\n              finish();\n            } else {\n              processingDone = true;\n            }\n          });\n        } else {\n          if (proc.stderr) {\n            proc.stderr.on('data', updateStdout);\n          }\n\n          if (proc.stdout) {\n            proc.stdout.on('data', updateStdout);\n          }\n\n          processingDone = true;\n        }\n\n        proc.on('close', (code: number, signal: string) => {\n          if (signal || code >= 1) {\n            err = new ProcessTermError(\n              [\n                'Command failed.',\n                signal ? `Exit signal: ${signal}` : `Exit code: ${code}`,\n                `Command: ${program}`,\n                `Arguments: ${args.join(' ')}`,\n                `Directory: ${opts.cwd || process.cwd()}`,\n                `Output:\\n${stdout.trim()}`,\n              ].join('\\n'),\n            );\n            err.EXIT_SIGNAL = signal;\n            err.EXIT_CODE = code;\n          }\n\n          if (processingDone || err) {\n            finish();\n          } else {\n            processClosed = true;\n          }\n        });\n      }",
+  "patched_function": "function validate(program: string, opts?: Object = {}) {\n  if (program.includes('/')) {\n    return true;\n  }\n\n  const cwd = opts.cwd || process.cwd();\n  const pathext = process.env.PATHEXT || '';\n\n  for (const ext of pathext.split(';')) {\n    const candidate = path.join(cwd, `${program}${ext}`);\n    if (fs.existsSync(candidate)) {\n      throw new Error(`Potentially dangerous call to \"${program}\" in ${cwd}`);\n    }\n  }\n}",
+  "unified_diff": "diff --git a/src/util/child.js b/src/util/child.js\nindex a0538e89..f0238de7 100644\n--- a/src/util/child.js\n+++ b/src/util/child.js\n@@ -7,6 +7,8 @@ import {ProcessSpawnError, ProcessTermError} from '../errors.js';\n import {promisify} from './promise.js';\n \n const child = require('child_process');\n+const fs = require('fs');\n+const path = require('path');\n \n export const queue = new BlockingQueue('child', constants.CHILD_CONCURRENCY);\n \n@@ -15,7 +17,24 @@ let uid = 0;\n \n export const exec = promisify(child.exec);\n \n+function validate(program: string, opts?: Object = {}) {\n+  if (program.includes('/')) {\n+    return true;\n+  }\n+\n+  const cwd = opts.cwd || process.cwd();\n+  const pathext = process.env.PATHEXT || '';\n+\n+  for (const ext of pathext.split(';')) {\n+    const candidate = path.join(cwd, `${program}${ext}`);\n+    if (fs.existsSync(candidate)) {\n+      throw new Error(`Potentially dangerous call to \"${program}\" in ${cwd}`);\n+    }\n+  }\n+}\n+\n export function forkp(program: string, args: Array<string>, opts?: Object): Promise<number> {\n+  validate(program, opts);\n   const key = String(++uid);\n   return new Promise((resolve, reject) => {\n     const proc = child.fork(program, args, opts);\n@@ -32,6 +51,7 @@ export function forkp(program: string, args: Array<string>, opts?: Object): Prom\n }\n \n export function spawnp(program: string, args: Array<string>, opts?: Object): Promise<number> {\n+  validate(program, opts);\n   const key = String(++uid);\n   return new Promise((resolve, reject) => {\n     const proc = child.spawn(program, args, opts);\n@@ -73,6 +93,8 @@ export function spawn(\n     key,\n     (): Promise<string> =>\n       new Promise((resolve, reject) => {\n+        validate(program, opts);\n+\n         const proc = child.spawn(program, args, opts);\n         spawnedProcesses[key] = proc;\n ",
+  "auto_locate_confidence": "auto"
+}

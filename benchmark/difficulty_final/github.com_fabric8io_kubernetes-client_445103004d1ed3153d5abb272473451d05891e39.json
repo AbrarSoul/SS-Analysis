@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_fabric8io_kubernetes-client_445103004d1ed3153d5abb272473451d05891e39",
+  "batch": "topup40",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 303,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

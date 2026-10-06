@@ -1,0 +1,34 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_d87d7bfd8db18c20d3264f98c6deefeae93b99f7",
+  "language": "java",
+  "cve_id": "CVE-2023-26475",
+  "cve_ids_all": [
+    "CVE-2023-26475"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-269",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-270",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import javax.inject.Named;",
+    "import javax.inject.Singleton;",
+    "import org.xwiki.component.annotation.Component;",
+    "import org.xwiki.model.reference.LocalDocumentReference;",
+    "import org.xwiki.model.reference.RegexEntityReference;",
+    "import com.xpn.xwiki.XWiki;",
+    "import com.xpn.xwiki.objects.BaseObjectReference;",
+    "import com.xpn.xwiki.objects.classes.BaseClass;",
+    "import com.xpn.xwiki.objects.classes.TextAreaClass;"
+  ],
+  "vulnerable_function": "    protected void createClass(BaseClass xclass)\n    {\n        super.createClass(xclass);\n\n        xclass.addTextAreaField(\"highlight\", \"Highlighted Text\", 40, 2);\n        xclass.addNumberField(\"replyto\", \"Reply To\", 5, \"integer\");\n\n        String commentPropertyName = \"comment\";\n        xclass.addTextAreaField(commentPropertyName, \"Comment\", 40, 5);\n\n        // FIXME: Ensure that the comment text editor is set to its default value after an upgrade. This should be\n        // handled in a cleaner way in BaseClass#addTextAreaField. See: https://jira.xwiki.org/browse/XWIKI-17605\n        TextAreaClass comment =  (TextAreaClass) xclass.getField(commentPropertyName);\n        comment.setEditor((String) null);\n    }",
+  "patched_function": "    protected void createClass(BaseClass xclass)\n    {\n        super.createClass(xclass);\n\n        xclass.addTextAreaField(\"highlight\", \"Highlighted Text\", 40, 2);\n        xclass.addNumberField(\"replyto\", \"Reply To\", 5, \"integer\");\n\n        String commentPropertyName = \"comment\";\n        xclass.addTextAreaField(commentPropertyName, \"Comment\", 40, 5, true);\n\n        // FIXME: Ensure that the comment text editor is set to its default value after an upgrade. This should be\n        // handled in a cleaner way in BaseClass#addTextAreaField. See: https://jira.xwiki.org/browse/XWIKI-17605\n        TextAreaClass comment =  (TextAreaClass) xclass.getField(commentPropertyName);\n        comment.setEditor((String) null);\n    }",
+  "unified_diff": "diff --git a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/internal/mandatory/XWikiCommentsDocumentInitializer.java b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/internal/mandatory/XWikiCommentsDocumentInitializer.java\nindex a9c0e86612a..986f54734d0 100644\n--- a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/internal/mandatory/XWikiCommentsDocumentInitializer.java\n+++ b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/internal/mandatory/XWikiCommentsDocumentInitializer.java\n@@ -87,7 +87,7 @@ protected void createClass(BaseClass xclass)\n         xclass.addNumberField(\"replyto\", \"Reply To\", 5, \"integer\");\n \n         String commentPropertyName = \"comment\";\n-        xclass.addTextAreaField(commentPropertyName, \"Comment\", 40, 5);\n+        xclass.addTextAreaField(commentPropertyName, \"Comment\", 40, 5, true);\n \n         // FIXME: Ensure that the comment text editor is set to its default value after an upgrade. This should be\n         // handled in a cleaner way in BaseClass#addTextAreaField. See: https://jira.xwiki.org/browse/XWIKI-17605",
+  "auto_locate_confidence": "auto"
+}

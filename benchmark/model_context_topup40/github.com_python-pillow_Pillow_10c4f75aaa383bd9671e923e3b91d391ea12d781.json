@@ -1,0 +1,28 @@
+{
+  "case_id": "github.com_python-pillow_Pillow_10c4f75aaa383bd9671e923e3b91d391ea12d781",
+  "language": "python",
+  "cve_id": "CVE-2022-24303",
+  "cve_ids_all": [
+    "CVE-2022-24303"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": "MacViewer",
+  "imports": [
+    "import os",
+    "import shutil",
+    "import subprocess",
+    "import sys",
+    "import warnings",
+    "from shlex import quote",
+    "from PIL import Image"
+  ],
+  "vulnerable_function": "    def show_file(self, path=None, **options):\n        \"\"\"\n        Display given file.\n\n        Before Pillow 9.1.0, the first argument was ``file``. This is now deprecated,\n        and will be removed in Pillow 10.0.0 (2023-07-01). ``path`` should be used\n        instead.\n        \"\"\"\n        if path is None:\n            if \"file\" in options:\n                warnings.warn(\n                    \"The 'file' argument is deprecated and will be removed in Pillow \"\n                    \"10 (2023-07-01). Use 'path' instead.\",\n                    DeprecationWarning,\n                )\n                path = options.pop(\"file\")\n            else:\n                raise TypeError(\"Missing required argument: 'path'\")\n        subprocess.call([\"open\", \"-a\", \"Preview.app\", path])\n        subprocess.Popen(\n            [\n                sys.executable,\n                \"-c\",\n                \"import os, sys, time; time.sleep(20); os.remove(sys.argv[1])\",\n                path,\n            ]\n        )\n        return 1\n",
+  "patched_function": "    def _remove_path_after_delay(self, path):\n        subprocess.Popen(\n            [\n                sys.executable,\n                \"-c\",\n                \"import os, sys, time; time.sleep(20); os.remove(sys.argv[1])\",\n                path,\n            ]\n        )\n",
+  "unified_diff": "diff --git a/src/PIL/ImageShow.py b/src/PIL/ImageShow.py\nindex ccdb0b2a0..f8829fc21 100644\n--- a/src/PIL/ImageShow.py\n+++ b/src/PIL/ImageShow.py\n@@ -126,6 +126,16 @@ class Viewer:\n         os.system(self.get_command(path, **options))\n         return 1\n \n+    def _remove_path_after_delay(self, path):\n+        subprocess.Popen(\n+            [\n+                sys.executable,\n+                \"-c\",\n+                \"import os, sys, time; time.sleep(20); os.remove(sys.argv[1])\",\n+                path,\n+            ]\n+        )\n+\n \n # --------------------------------------------------------------------\n \n@@ -180,14 +190,7 @@ class MacViewer(Viewer):\n             else:\n                 raise TypeError(\"Missing required argument: 'path'\")\n         subprocess.call([\"open\", \"-a\", \"Preview.app\", path])\n-        subprocess.Popen(\n-            [\n-                sys.executable,\n-                \"-c\",\n-                \"import os, sys, time; time.sleep(20); os.remove(sys.argv[1])\",\n-                path,\n-            ]\n-        )\n+        self._remove_path_after_delay(path)\n         return 1\n \n \n@@ -232,7 +235,7 @@ class XDGViewer(UnixViewer):\n             else:\n                 raise TypeError(\"Missing required argument: 'path'\")\n         subprocess.Popen([\"xdg-open\", path])\n-        os.remove(path)\n+        self._remove_path_after_delay(path)\n         return 1\n \n ",
+  "auto_locate_confidence": "auto_low_confidence"
+}

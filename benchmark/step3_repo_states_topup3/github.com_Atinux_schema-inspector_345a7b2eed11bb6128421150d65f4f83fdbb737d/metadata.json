@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Atinux_schema-inspector_345a7b2eed11bb6128421150d65f4f83fdbb737d",
+  "cve_ids": [
+    "CVE-2019-10781"
+  ],
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "language": "javascript",
+  "repository": "Atinux/schema-inspector",
+  "repository_url": "https://github.com/Atinux/schema-inspector",
+  "vulnerable_commit": "7f67b2a95f85ecb76d0dc5326d76d082a2b99e1f",
+  "fixed_commit": "345a7b2eed11bb6128421150d65f4f83fdbb737d",
+  "changed_file": "lib/schema-inspector.js",
+  "max_score": "1337"
+}

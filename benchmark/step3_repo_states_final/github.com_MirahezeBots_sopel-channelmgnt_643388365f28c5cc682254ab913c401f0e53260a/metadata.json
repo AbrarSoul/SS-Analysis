@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_MirahezeBots_sopel-channelmgnt_643388365f28c5cc682254ab913c401f0e53260a",
+  "cve_ids": [
+    "CVE-2021-21431"
+  ],
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-284",
+    "NVD-CWE-Other"
+  ],
+  "language": "python",
+  "repository": "MirahezeBots/sopel-channelmgnt",
+  "repository_url": "https://github.com/MirahezeBots/sopel-channelmgnt",
+  "vulnerable_commit": "cd25b767600d15d2a4bcbfb78529b5bb1b44af4a",
+  "fixed_commit": "643388365f28c5cc682254ab913c401f0e53260a",
+  "changed_file": "sopel_channelmgnt/channelmgnt/__init__.py",
+  "max_score": "1337"
+}

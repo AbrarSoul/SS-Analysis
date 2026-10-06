@@ -1,0 +1,41 @@
+{
+  "case_id": "github.com_dataease_dataease_3c52cc26c4cca1000294346cf99a84b25d38bfb2",
+  "language": "java",
+  "cve_id": "CVE-2025-62422",
+  "cve_ids_all": [
+    "CVE-2025-62422"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.google.gson.Gson;",
+    "import com.google.gson.JsonParser;",
+    "import io.dataease.dataset.utils.FieldUtils;",
+    "import io.dataease.datasource.dto.es.EsResponse;",
+    "import io.dataease.datasource.dto.es.Request;",
+    "import io.dataease.datasource.type.Es;",
+    "import io.dataease.exception.DEException;",
+    "import io.dataease.extensions.datasource.dto.*;",
+    "import io.dataease.extensions.datasource.provider.Provider;",
+    "import io.dataease.i18n.Translator;",
+    "import io.dataease.utils.HttpClientConfig;",
+    "import io.dataease.utils.HttpClientUtil;",
+    "import io.dataease.utils.JsonUtil;",
+    "import org.apache.commons.codec.binary.Base64;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import org.apache.http.HttpHeaders;",
+    "import org.springframework.stereotype.Service;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.*;",
+    "import java.util.stream.Collectors;"
+  ],
+  "vulnerable_function": "    public List<TableField> fetchTableField(DatasourceRequest datasourceRequest) {\n        List<TableField> tableFields = new ArrayList<>();\n        try {\n            String sql;\n            if (datasourceRequest.getTable() != null) {\n                sql = \"select * from \\\"\" + datasourceRequest.getTable() + \"\\\" limit 0\";\n            } else {\n                sql = datasourceRequest.getQuery();\n            }\n            String response = execQuery(datasourceRequest, sql, \"?format=json\");\n            tableFields = fetchResultField4Sql(response);\n        } catch (Exception e) {\n            DEException.throwException(e);\n        }\n        return tableFields;\n    }",
+  "patched_function": "    public List<TableField> fetchTableField(DatasourceRequest datasourceRequest) {\n        List<TableField> tableFields = new ArrayList<>();\n        try {\n            String sql;\n            if (datasourceRequest.getTable() != null) {\n                if (!getTables(datasourceRequest).stream().map(DatasetTableDTO::getTableName).collect(Collectors.toList()).contains(datasourceRequest.getTable())) {\n                    DEException.throwException(\"\u65e0\u6548\u7684\u8868\u540d\uff01\");\n                }\n                sql = \"select * from \\\"\" + datasourceRequest.getTable() + \"\\\" limit 0\";\n            } else {\n                sql = datasourceRequest.getQuery();\n            }\n            String response = execQuery(datasourceRequest, sql, \"?format=json\");\n            tableFields = fetchResultField4Sql(response);\n        } catch (Exception e) {\n            DEException.throwException(e);\n        }\n        return tableFields;\n    }",
+  "unified_diff": "diff --git a/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java b/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java\nindex baf6e6fcc0..2421e874ba 100644\n--- a/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java\n+++ b/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java\n@@ -95,6 +95,9 @@ public class EsProvider extends Provider {\n         try {\n             String sql;\n             if (datasourceRequest.getTable() != null) {\n+                if (!getTables(datasourceRequest).stream().map(DatasetTableDTO::getTableName).collect(Collectors.toList()).contains(datasourceRequest.getTable())) {\n+                    DEException.throwException(\"\u65e0\u6548\u7684\u8868\u540d\uff01\");\n+                }\n                 sql = \"select * from \\\"\" + datasourceRequest.getTable() + \"\\\" limit 0\";\n             } else {\n                 sql = datasourceRequest.getQuery();",
+  "auto_locate_confidence": "auto"
+}

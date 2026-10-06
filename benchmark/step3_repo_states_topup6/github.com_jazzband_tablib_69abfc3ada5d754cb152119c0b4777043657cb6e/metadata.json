@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jazzband_tablib_69abfc3ada5d754cb152119c0b4777043657cb6e",
+  "cve_ids": [
+    "CVE-2017-2810"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "jazzband/tablib",
+  "repository_url": "https://github.com/jazzband/tablib",
+  "vulnerable_commit": "05bd0d1d42e2a1aeb3b835a4ae96de7364735192",
+  "fixed_commit": "69abfc3ada5d754cb152119c0b4777043657cb6e",
+  "changed_file": "tablib/formats/_yaml.py",
+  "max_score": "1337"
+}

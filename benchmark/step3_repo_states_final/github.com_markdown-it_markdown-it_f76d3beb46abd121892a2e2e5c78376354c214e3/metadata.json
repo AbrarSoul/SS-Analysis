@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_markdown-it_markdown-it_f76d3beb46abd121892a2e2e5c78376354c214e3",
+  "cve_ids": [
+    "CVE-2015-3295"
+  ],
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "language": "javascript",
+  "repository": "markdown-it/markdown-it",
+  "repository_url": "https://github.com/markdown-it/markdown-it",
+  "vulnerable_commit": "f7976b25f79df1599c98787e16873d52bd0b7d05",
+  "fixed_commit": "f76d3beb46abd121892a2e2e5c78376354c214e3",
+  "changed_file": "lib/index.js",
+  "max_score": "1337"
+}

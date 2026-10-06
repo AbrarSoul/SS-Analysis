@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_WeblateOrg_weblate_d9e136ff228e3760fd6dd7572869ac38e9a81809",
+  "cve_ids": [
+    "CVE-2022-28481"
+  ],
+  "cwe_ids": [
+    "CWE-1236"
+  ],
+  "language": "python",
+  "repository": "WeblateOrg/weblate",
+  "repository_url": "https://github.com/WeblateOrg/weblate",
+  "vulnerable_commit": "66f55341916de8a9e9125bb4af661373fb5c525b",
+  "fixed_commit": "d9e136ff228e3760fd6dd7572869ac38e9a81809",
+  "changed_file": "weblate/trans/exporters.py",
+  "max_score": "1337"
+}

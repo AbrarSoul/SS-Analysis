@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0199",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-706"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 217,
+  "function_size_lines": 9,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "File-name validator lacks an absolute-path rejection; an absent condition in a validator, not a code-shape defect."
+}

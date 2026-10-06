@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0184",
+  "batch": "topup",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "changed_files": 1,
+  "lines_added": 42,
+  "lines_removed": 9,
+  "lines_changed_total": 51,
+  "function_size_chars": 563,
+  "function_size_lines": 12,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "File.createTempFile used for private keys and askpass scripts; default-permission temp-file API."
+}

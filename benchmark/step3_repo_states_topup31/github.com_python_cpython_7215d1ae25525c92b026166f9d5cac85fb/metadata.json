@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_python_cpython_7215d1ae25525c92b026166f9d5cac85fb",
+  "cve_ids": [
+    "CVE-2021-3733"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "python",
+  "repository": "python/cpython",
+  "repository_url": "https://github.com/python/cpython",
+  "vulnerable_commit": "d36d6a9c1808e87628ebaa855d4bec80130189f4",
+  "fixed_commit": "7215d1ae25525c92b026166f9d5cac85fb1defe1",
+  "changed_file": "Lib/urllib/request.py",
+  "max_score": "1337"
+}

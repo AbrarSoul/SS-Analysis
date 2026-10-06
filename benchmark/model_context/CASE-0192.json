@@ -1,0 +1,50 @@
+{
+  "case_id": "CASE-0192",
+  "language": "java",
+  "cve_id": "CVE-2022-36892",
+  "cve_ids_all": [
+    "CVE-2022-36892"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-862",
+      "definition": "Missing Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import hudson.Extension;",
+    "import hudson.FilePath;",
+    "import hudson.Launcher;",
+    "import hudson.Proc;",
+    "import hudson.model.AbstractBuild;",
+    "import hudson.model.AbstractProject;",
+    "import hudson.model.BuildListener;",
+    "import hudson.model.Result;",
+    "import hudson.tasks.BuildStepDescriptor;",
+    "import hudson.tasks.BuildStepMonitor;",
+    "import hudson.tasks.Publisher;",
+    "import hudson.tasks.Recorder;",
+    "import hudson.util.ArgumentListBuilder;",
+    "import hudson.util.FormValidation;",
+    "import hudson.util.ListBoxModel;",
+    "import hudson.util.Secret;",
+    "import jenkins.model.Jenkins;",
+    "import net.sf.json.JSONObject;",
+    "import org.apache.commons.lang.ArrayUtils;",
+    "import org.apache.commons.lang.StringUtils;",
+    "import org.kohsuke.stapler.AncestorInPath;",
+    "import org.kohsuke.stapler.DataBoundConstructor;",
+    "import org.kohsuke.stapler.QueryParameter;",
+    "import org.kohsuke.stapler.StaplerRequest;",
+    "import java.io.IOException;",
+    "import java.util.ArrayList;",
+    "import java.util.Collections;",
+    "import java.util.List;",
+    "import java.util.StringTokenizer;"
+  ],
+  "vulnerable_function": "    public FormValidation doCheckIncludes(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException, InterruptedException {\n      FilePath workspace = project.getWorkspace();\n      if (workspace == null) {\n        throw new IllegalStateException(\"Could not get a workspace.\");\n      }\n      String msg = workspace.validateAntFileMask(value);\n      if (msg != null) {\n        return FormValidation.error(msg);\n      }\n      return FormValidation.ok();\n    }",
+  "patched_function": "    public FormValidation doCheckIncludes(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException, InterruptedException {\n      FilePath workspace = project.getWorkspace();\n      project.checkPermission(Item.WORKSPACE);\n      if (workspace == null) {\n        throw new IllegalStateException(\"Could not get a workspace.\");\n      }\n      String msg = workspace.validateAntFileMask(value);\n      if (msg != null) {\n        return FormValidation.error(msg);\n      }\n      return FormValidation.ok();\n    }",
+  "unified_diff": "diff --git a/src/main/java/jenkins/plugins/rhnpush/RhnPush.java b/src/main/java/jenkins/plugins/rhnpush/RhnPush.java\nindex be70f9a..8014281 100644\n--- a/src/main/java/jenkins/plugins/rhnpush/RhnPush.java\n+++ b/src/main/java/jenkins/plugins/rhnpush/RhnPush.java\n@@ -7,6 +7,7 @@ import hudson.Proc;\n import hudson.model.AbstractBuild;\n import hudson.model.AbstractProject;\n import hudson.model.BuildListener;\n+import hudson.model.Item;\n import hudson.model.Result;\n import hudson.tasks.BuildStepDescriptor;\n import hudson.tasks.BuildStepMonitor;\n@@ -297,6 +298,7 @@ public class RhnPush extends Recorder {\n \n     public FormValidation doCheckIncludes(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException, InterruptedException {\n       FilePath workspace = project.getWorkspace();\n+      project.checkPermission(Item.WORKSPACE);\n       if (workspace == null) {\n         throw new IllegalStateException(\"Could not get a workspace.\");\n       }",
+  "auto_locate_confidence": "auto"
+}

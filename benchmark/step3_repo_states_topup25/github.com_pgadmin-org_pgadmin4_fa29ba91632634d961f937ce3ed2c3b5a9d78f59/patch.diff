@@ -1,0 +1,47 @@
+diff --git a/web/pgadmin/authenticate/__init__.py b/web/pgadmin/authenticate/__init__.py
+index bda9dadbf..0d5b429c0 100644
+--- a/web/pgadmin/authenticate/__init__.py
++++ b/web/pgadmin/authenticate/__init__.py
+@@ -12,6 +12,7 @@
+ import config
+ import copy
+ import functools
++from threading import Lock
+ 
+ from flask import current_app, flash, Response, request, url_for, \
+     session, redirect, render_template
+@@ -35,6 +36,19 @@ auth_obj = None
+ _URL_WITH_NEXT_PARAM = "{0}?next={1}"
+ 
+ 
++class AuthLocker:
++    """Implementing lock while authentication."""
++    lock = Lock()
++
++    def __enter__(self):
++        self.lock.acquire()
++        return self
++
++    def __exit__(self, type, value, traceback):
++        if self.lock.locked():
++            self.lock.release()
++
++
+ def get_logout_url() -> str:
+     """
+     Returns the logout url based on the current authentication method.
+@@ -83,6 +97,14 @@ def login():
+     Entry point for all the authentication sources.
+     The user input will be validated and authenticated.
+     """
++    with AuthLocker():
++        return _login()
++
++
++def _login():
++    """
++    Internal authentication process locked by a mutex.
++    """
+     form = _security.forms.get('login_form').cls(request.form)
+     if OAUTH2 in config.AUTHENTICATION_SOURCES \
+             and 'oauth2_button' in request.form:

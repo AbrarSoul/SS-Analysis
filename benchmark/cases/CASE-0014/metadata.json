@@ -1,0 +1,62 @@
+{
+  "case_id": "CASE-0014",
+  "original_patch_filename": "github.com_ManyDesigns_Portofino_94653cb357806c9cf24d8d294e6afea33f8f0775.patch",
+  "cve_id": "CVE-2022-3952",
+  "cve_ids_all": [
+    "CVE-2022-3952"
+  ],
+  "cwe_ids": [
+    "CWE-377",
+    "CWE-668"
+  ],
+  "language": "java",
+  "repository": "ManyDesigns/Portofino",
+  "repository_url": "https://github.com/ManyDesigns/Portofino",
+  "vulnerable_commit": "280bc9cd7e71f996067604505e928fad84caf251",
+  "fixed_commit": "94653cb357806c9cf24d8d294e6afea33f8f0775",
+  "changed_file": "microservices/launcher/src/main/java/com/manydesigns/portofino/microservices/launcher/WarFileLauncher.java",
+  "patch_path": "cases/CASE-0014/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0014/vulnerable_source.java",
+  "patched_code_path": "cases/CASE-0014/patched_source.java",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.java",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.java",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.java",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.java",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.java",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.java",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

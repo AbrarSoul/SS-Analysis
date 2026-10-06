@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0163",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-88"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 351,
+  "function_size_lines": 12,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "git clone argv lacks the `--` end-of-options marker before url and path; option-injection shape."
+}

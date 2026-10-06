@@ -1,0 +1,54 @@
+{
+  "case_id": "github.com_wildfly-security_jboss-negotiation_0dc9d191b6eb1d13b8f0189c5b02ba6576f4722e",
+  "language": "java",
+  "cve_id": "CVE-2015-1849",
+  "cve_ids_all": [
+    "CVE-2015-1849"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.net.URI;",
+    "import java.net.URISyntaxException;",
+    "import java.security.Principal;",
+    "import java.security.PrivilegedAction;",
+    "import java.security.acl.Group;",
+    "import java.util.ArrayList;",
+    "import java.util.HashSet;",
+    "import java.util.Iterator;",
+    "import java.util.Map;",
+    "import java.util.Properties;",
+    "import java.util.Set;",
+    "import java.util.Map.Entry;",
+    "import javax.management.ObjectName;",
+    "import javax.naming.Context;",
+    "import javax.naming.NamingEnumeration;",
+    "import javax.naming.NamingException;",
+    "import javax.naming.ReferralException;",
+    "import javax.naming.directory.Attribute;",
+    "import javax.naming.directory.Attributes;",
+    "import javax.naming.directory.SearchControls;",
+    "import javax.naming.directory.SearchResult;",
+    "import javax.naming.ldap.InitialLdapContext;",
+    "import javax.naming.ldap.LdapContext;",
+    "import javax.naming.CompositeName;",
+    "import javax.security.auth.Subject;",
+    "import javax.security.auth.callback.CallbackHandler;",
+    "import javax.security.auth.login.LoginContext;",
+    "import javax.security.auth.login.LoginException;",
+    "import org.jboss.security.SimpleGroup;",
+    "import org.jboss.security.negotiation.common.CommonLoginModule;",
+    "import org.jboss.security.negotiation.prototype.DecodeAction;",
+    "import org.jboss.security.vault.SecurityVaultUtil;",
+    "import org.jboss.security.vault.SecurityVaultException;"
+  ],
+  "vulnerable_function": "   protected void traceLdapEnv(Properties env)\n   {\n      if (trace)\n      {\n         Properties tmp = new Properties();\n         tmp.putAll(env);\n         String credentials = tmp.getProperty(Context.SECURITY_CREDENTIALS);\n         String bindCredential = tmp.getProperty(BIND_CREDENTIAL);\n         if (credentials != null && credentials.length() > 0)\n            tmp.setProperty(Context.SECURITY_CREDENTIALS, \"***\");\n         \n         if (bindCredential != null && bindCredential.length() > 0)\n             tmp.setProperty(BIND_CREDENTIAL, \"***\");\n         \n         log.trace(\"Logging into LDAP server, env=\" + tmp.toString());\n      }\n   }",
+  "patched_function": "   protected void traceLdapEnv(Properties env)\n   {\n      if (trace)\n      {\n         Properties tmp = new Properties();\n         tmp.putAll(env);\n         String credentials = tmp.getProperty(Context.SECURITY_CREDENTIALS);\n         String bindCredential = tmp.getProperty(BIND_CREDENTIAL);\n         \n         if (credentials != null && credentials.length() > 0) {\n        \t tmp.setProperty(Context.SECURITY_CREDENTIALS, \"***\");\n         }\n            \n         if (bindCredential != null && bindCredential.length() > 0) {\n        \t tmp.setProperty(BIND_CREDENTIAL, \"***\");\n         }\n         \n         log.trace(\"Logging into LDAP server, env=\" + tmp.toString());\n      }\n   }",
+  "unified_diff": "diff --git a/jboss-negotiation-extras/src/main/java/org/jboss/security/negotiation/AdvancedLdapLoginModule.java b/jboss-negotiation-extras/src/main/java/org/jboss/security/negotiation/AdvancedLdapLoginModule.java\nindex fa173e2..74d6174 100644\n--- a/jboss-negotiation-extras/src/main/java/org/jboss/security/negotiation/AdvancedLdapLoginModule.java\n+++ b/jboss-negotiation-extras/src/main/java/org/jboss/security/negotiation/AdvancedLdapLoginModule.java\n@@ -908,11 +908,14 @@ public class AdvancedLdapLoginModule extends CommonLoginModule\n          tmp.putAll(env);\n          String credentials = tmp.getProperty(Context.SECURITY_CREDENTIALS);\n          String bindCredential = tmp.getProperty(BIND_CREDENTIAL);\n-         if (credentials != null && credentials.length() > 0)\n-            tmp.setProperty(Context.SECURITY_CREDENTIALS, \"***\");\n          \n-         if (bindCredential != null && bindCredential.length() > 0)\n-             tmp.setProperty(BIND_CREDENTIAL, \"***\");\n+         if (credentials != null && credentials.length() > 0) {\n+        \t tmp.setProperty(Context.SECURITY_CREDENTIALS, \"***\");\n+         }\n+            \n+         if (bindCredential != null && bindCredential.length() > 0) {\n+        \t tmp.setProperty(BIND_CREDENTIAL, \"***\");\n+         }\n          \n          log.trace(\"Logging into LDAP server, env=\" + tmp.toString());\n       }",
+  "auto_locate_confidence": "auto"
+}

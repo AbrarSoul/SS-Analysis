@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0166",
+  "language": "java",
+  "cve_id": "CVE-2026-24819",
+  "cve_ids_all": [
+    "CVE-2026-24819"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1325",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.Serializable;",
+    "import java.nio.CharBuffer;",
+    "import com.foxinmy.weixin4j.http.HTTP;"
+  ],
+  "vulnerable_function": "    public void ensureCapacity(final int required) {\n        if (required <= 0) {\n            return;\n        }\n        final int available = this.buffer.length - this.len;\n        if (required > available) {\n            expand(this.len + required);\n        }\n    }",
+  "patched_function": "    public void ensureCapacity(final int required) {\n        if (required <= 0) {\n            return;\n        }\n        final int available = this.buffer.length - this.len;\n        if (required > available) {\n          // Use long arithmetic to prevent integer overflow\n          final long newCapacity = (long)this.len + required;\n          \n          // Check against maximum capacity\n          if (newCapacity > MAXIMUM_CAPACITY) {\n            throw new IllegalStateException(\"Required capacity exceeds maximum: \" + \n                newCapacity + \" > \" + MAXIMUM_CAPACITY);\n        }  \n          expand(this.len + required);\n        }\n    }",
+  "unified_diff": "diff --git a/weixin4j-base/src/main/java/com/foxinmy/weixin4j/util/CharArrayBuffer.java b/weixin4j-base/src/main/java/com/foxinmy/weixin4j/util/CharArrayBuffer.java\nindex 508feea6..6a03bc35 100644\n--- a/weixin4j-base/src/main/java/com/foxinmy/weixin4j/util/CharArrayBuffer.java\n+++ b/weixin4j-base/src/main/java/com/foxinmy/weixin4j/util/CharArrayBuffer.java\n@@ -306,7 +306,15 @@ public final class CharArrayBuffer implements CharSequence, Serializable {\n         }\n         final int available = this.buffer.length - this.len;\n         if (required > available) {\n-            expand(this.len + required);\n+          // Use long arithmetic to prevent integer overflow\n+          final long newCapacity = (long)this.len + required;\n+          \n+          // Check against maximum capacity\n+          if (newCapacity > MAXIMUM_CAPACITY) {\n+            throw new IllegalStateException(\"Required capacity exceeds maximum: \" + \n+                newCapacity + \" > \" + MAXIMUM_CAPACITY);\n+        }  \n+          expand(this.len + required);\n         }\n     }\n ",
+  "auto_locate_confidence": "auto"
+}

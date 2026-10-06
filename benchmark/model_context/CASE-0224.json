@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0224",
+  "language": "javascript",
+  "cve_id": "CVE-2024-3029",
+  "cve_ids_all": [
+    "CVE-2024-3029"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const { viewLocalFiles, normalizePath } = require(\"../utils/files\");",
+    "const { purgeDocument, purgeFolder } = require(\"../utils/files/purgeDocument\");",
+    "const { getVectorDbClass } = require(\"../utils/helpers\");",
+    "const { updateENV, dumpENV } = require(\"../utils/helpers/updateENV\");",
+    "const { setupLogoUploads, setupPfpUploads } = require(\"../utils/files/multer\");",
+    "const { v4 } = require(\"uuid\");",
+    "const { SystemSettings } = require(\"../models/systemSettings\");",
+    "const { User } = require(\"../models/user\");",
+    "const { validatedRequest } = require(\"../utils/middleware/validatedRequest\");",
+    "const fs = require(\"fs\");",
+    "const path = require(\"path\");",
+    "const { Telemetry } = require(\"../models/telemetry\");",
+    "const { WelcomeMessages } = require(\"../models/welcomeMessages\");",
+    "const { ApiKey } = require(\"../models/apiKeys\");",
+    "const { getCustomModels } = require(\"../utils/helpers/customModels\");",
+    "const { WorkspaceChats } = require(\"../models/workspaceChats\");",
+    "const { fetchPfp, determinePfpFilepath } = require(\"../utils/files/pfp\");",
+    "const { EventLogs } = require(\"../models/eventLogs\");",
+    "const { CollectorApi } = require(\"../utils/collectorApi\");",
+    "const bcrypt = require(\"bcrypt\");"
+  ],
+  "vulnerable_function": "  app.post(\n    \"/system/enable-multi-user\",\n    [validatedRequest],\n    async (request, response) => {\n      try {\n        const { username, password } = reqBody(request);\n        const multiUserModeEnabled = await SystemSettings.isMultiUserMode();\n        if (multiUserModeEnabled) {\n          response.status(200).json({\n            success: false,\n            error: \"Multi-user mode is already enabled.\",\n          });\n          return;\n        }\n\n        const { user, error } = await User.create({\n          username,\n          password,\n          role: ROLES.admin,\n        });\n        await SystemSettings.updateSettings({\n          multi_user_mode: true,\n          users_can_delete_workspaces: false,\n          limit_user_messages: false,\n          message_limit: 25,\n        });\n\n        await updateENV(\n          {\n            AuthToken: \"\",\n            JWTSecret: process.env.JWT_SECRET || v4(),\n          },\n          true\n        );\n        if (process.env.NODE_ENV === \"production\") await dumpENV();\n        await Telemetry.sendTelemetry(\"enabled_multi_user_mode\", {\n          multiUserMode: true,\n        });\n        await EventLogs.logEvent(\"multi_user_mode_enabled\", {}, user?.id);\n        response.status(200).json({ success: !!user, error });\n      } catch (e) {\n        await User.delete({});\n        await SystemSettings.updateSettings({\n          multi_user_mode: false,\n        });\n\n        console.log(e.message, e);\n        response.sendStatus(500).end();\n      }\n    }",
+  "patched_function": "  app.post(\n    \"/system/enable-multi-user\",\n    [validatedRequest],\n    async (request, response) => {\n      try {\n        if (response.locals.multiUserMode) {\n          response.status(200).json({\n            success: false,\n            error: \"Multi-user mode is already enabled.\",\n          });\n          return;\n        }\n\n        const { username, password } = reqBody(request);\n        const { user, error } = await User.create({\n          username,\n          password,\n          role: ROLES.admin,\n        });\n        await SystemSettings.updateSettings({\n          multi_user_mode: true,\n          users_can_delete_workspaces: false,\n          limit_user_messages: false,\n          message_limit: 25,\n        });\n\n        await updateENV(\n          {\n            AuthToken: \"\",\n            JWTSecret: process.env.JWT_SECRET || v4(),\n          },\n          true\n        );\n        if (process.env.NODE_ENV === \"production\") await dumpENV();\n        await Telemetry.sendTelemetry(\"enabled_multi_user_mode\", {\n          multiUserMode: true,\n        });\n        await EventLogs.logEvent(\"multi_user_mode_enabled\", {}, user?.id);\n        response.status(200).json({ success: !!user, error });\n      } catch (e) {\n        await User.delete({});\n        await SystemSettings.updateSettings({\n          multi_user_mode: false,\n        });\n\n        console.log(e.message, e);\n        response.sendStatus(500).end();\n      }\n    }",
+  "unified_diff": "diff --git a/server/endpoints/system.js b/server/endpoints/system.js\nindex 84ffac64..3c8cf6bc 100644\n--- a/server/endpoints/system.js\n+++ b/server/endpoints/system.js\n@@ -386,9 +386,7 @@ function systemEndpoints(app) {\n     [validatedRequest],\n     async (request, response) => {\n       try {\n-        const { username, password } = reqBody(request);\n-        const multiUserModeEnabled = await SystemSettings.isMultiUserMode();\n-        if (multiUserModeEnabled) {\n+        if (response.locals.multiUserMode) {\n           response.status(200).json({\n             success: false,\n             error: \"Multi-user mode is already enabled.\",\n@@ -396,6 +394,7 @@ function systemEndpoints(app) {\n           return;\n         }\n \n+        const { username, password } = reqBody(request);\n         const { user, error } = await User.create({\n           username,\n           password,",
+  "auto_locate_confidence": "auto"
+}

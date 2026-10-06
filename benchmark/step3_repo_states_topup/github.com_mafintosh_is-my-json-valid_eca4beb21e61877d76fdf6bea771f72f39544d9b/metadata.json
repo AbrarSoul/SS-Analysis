@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mafintosh_is-my-json-valid_eca4beb21e61877d76fdf6bea771f72f39544d9b",
+  "cve_ids": [
+    "CVE-2016-2537"
+  ],
+  "cwe_ids": [
+    "CWE-20"
+  ],
+  "language": "javascript",
+  "repository": "mafintosh/is-my-json-valid",
+  "repository_url": "https://github.com/mafintosh/is-my-json-valid",
+  "vulnerable_commit": "822c5815f7ae4c50ed0c71451cb4dc3ea177be14",
+  "fixed_commit": "eca4beb21e61877d76fdf6bea771f72f39544d9b",
+  "changed_file": "formats.js",
+  "max_score": "1337"
+}

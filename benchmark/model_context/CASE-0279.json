@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-0279",
+  "language": "java",
+  "cve_id": "CVE-2025-1634",
+  "cve_ids_all": [
+    "CVE-2025-1634"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-401",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.OutputStream;",
+    "import java.util.List;",
+    "import java.util.concurrent.CompletableFuture;",
+    "import java.util.concurrent.CompletionStage;",
+    "import jakarta.ws.rs.core.MultivaluedHashMap;",
+    "import jakarta.ws.rs.core.MultivaluedMap;",
+    "import jakarta.ws.rs.core.NewCookie;",
+    "import jakarta.ws.rs.ext.RuntimeDelegate;",
+    "import org.jboss.resteasy.spi.HttpResponse;",
+    "import org.jboss.resteasy.spi.ResteasyProviderFactory;",
+    "import io.netty.buffer.ByteBuf;",
+    "import io.vertx.core.MultiMap;",
+    "import io.vertx.core.http.HttpHeaders;",
+    "import io.vertx.core.http.HttpMethod;",
+    "import io.vertx.core.http.HttpServerRequest;",
+    "import io.vertx.core.http.HttpServerResponse;",
+    "import io.vertx.ext.web.RoutingContext;"
+  ],
+  "vulnerable_function": "    public void finish() throws IOException {\n        checkException();\n        if (finished || response.ended() || response.closed())\n            return;\n        try {\n            if (os != null) {\n                os.close(); // this will end() vertx response\n            } else {\n                committed = true;\n                response.setStatusCode(getStatus());\n                transformHeaders();\n                routingContext.addHeadersEndHandler(h -> {\n                    response.headers().remove(HttpHeaders.CONTENT_LENGTH);\n                    response.headers().set(HttpHeaders.CONNECTION, HttpHeaders.KEEP_ALIVE);\n                });\n                response.end();\n            }\n        } finally {\n            finished = true;\n        }\n    }",
+  "patched_function": "    public void finish() throws IOException {\n        checkException();\n\n        if (finished || response.ended() || response.closed()) {\n            if (os != null) {\n                try {\n                    os.close();\n                    os = null;\n                } catch (Exception ignored) {\n\n                }\n            }\n            return;\n        }\n        try {\n            if (os != null) {\n                os.close(); // this will end() vertx response\n            } else {\n                committed = true;\n                response.setStatusCode(getStatus());\n                transformHeaders();\n                routingContext.addHeadersEndHandler(h -> {\n                    response.headers().remove(HttpHeaders.CONTENT_LENGTH);\n                    response.headers().set(HttpHeaders.CONNECTION, HttpHeaders.KEEP_ALIVE);\n                });\n                response.end();\n            }\n        } finally {\n            finished = true;\n        }\n    }",
+  "unified_diff": "diff --git a/extensions/resteasy-classic/resteasy/runtime/src/main/java/io/quarkus/resteasy/runtime/standalone/VertxHttpResponse.java b/extensions/resteasy-classic/resteasy/runtime/src/main/java/io/quarkus/resteasy/runtime/standalone/VertxHttpResponse.java\nindex 2d7d75d821b..11a5c00148c 100644\n--- a/extensions/resteasy-classic/resteasy/runtime/src/main/java/io/quarkus/resteasy/runtime/standalone/VertxHttpResponse.java\n+++ b/extensions/resteasy-classic/resteasy/runtime/src/main/java/io/quarkus/resteasy/runtime/standalone/VertxHttpResponse.java\n@@ -138,8 +138,18 @@ private void transformHeadersList(final String key, final List<Object> valueList\n \n     public void finish() throws IOException {\n         checkException();\n-        if (finished || response.ended() || response.closed())\n+\n+        if (finished || response.ended() || response.closed()) {\n+            if (os != null) {\n+                try {\n+                    os.close();\n+                    os = null;\n+                } catch (Exception ignored) {\n+\n+                }\n+            }\n             return;\n+        }\n         try {\n             if (os != null) {\n                 os.close(); // this will end() vertx response",
+  "auto_locate_confidence": "auto"
+}

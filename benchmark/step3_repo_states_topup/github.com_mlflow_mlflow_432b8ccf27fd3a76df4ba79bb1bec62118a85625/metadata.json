@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mlflow_mlflow_432b8ccf27fd3a76df4ba79bb1bec62118a85625",
+  "cve_ids": [
+    "CVE-2023-6709"
+  ],
+  "cwe_ids": [
+    "CWE-1336"
+  ],
+  "language": "python",
+  "repository": "mlflow/mlflow",
+  "repository_url": "https://github.com/mlflow/mlflow",
+  "vulnerable_commit": "42f57ff7be3a22e072f48b011ed2c5e15efd71b6",
+  "fixed_commit": "432b8ccf27fd3a76df4ba79bb1bec62118a85625",
+  "changed_file": "mlflow/recipes/cards/__init__.py",
+  "max_score": "1337"
+}

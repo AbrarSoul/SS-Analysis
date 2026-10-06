@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_zulip_zulip_e1029b59ede0c4f314c367ffa1ba2904ffaf6768",
+  "cve_ids": [
+    "CVE-2024-36624"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "zulip/zulip",
+  "repository_url": "https://github.com/zulip/zulip",
+  "vulnerable_commit": "25ff0d441858aa5c8f0bf51b47ad2a872141c262",
+  "fixed_commit": "e1029b59ede0c4f314c367ffa1ba2904ffaf6768",
+  "changed_file": "web/src/copy_and_paste.js",
+  "max_score": "1337"
+}

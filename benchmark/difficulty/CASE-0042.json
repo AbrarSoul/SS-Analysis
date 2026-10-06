@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0042",
+  "batch": "topup5",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 549,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Interpolated id embedded in the string passed to `su -c` inside a subprocess argument list; local syntactic pattern."
+}

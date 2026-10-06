@@ -1,0 +1,12 @@
+diff --git a/src/lxml/__init__.py b/src/lxml/__init__.py
+index ed50c4bb..c569544b 100644
+--- a/src/lxml/__init__.py
++++ b/src/lxml/__init__.py
+@@ -1,6 +1,6 @@
+ # this is a package
+ 
+-__version__ = "4.6.2"
++__version__ = "4.6.3"
+ 
+ 
+ def get_include():

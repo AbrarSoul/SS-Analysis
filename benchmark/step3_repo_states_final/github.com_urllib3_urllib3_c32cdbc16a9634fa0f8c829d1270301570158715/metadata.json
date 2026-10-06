@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_urllib3_urllib3_c32cdbc16a9634fa0f8c829d1270301570158715",
+  "cve_ids": [
+    "CVE-2016-9015"
+  ],
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "python",
+  "repository": "urllib3/urllib3",
+  "repository_url": "https://github.com/urllib3/urllib3",
+  "vulnerable_commit": "7d01b990cf77b33659e562189e6962862b292170",
+  "fixed_commit": "c32cdbc16a9634fa0f8c829d1270301570158715",
+  "changed_file": "urllib3/contrib/pyopenssl.py",
+  "max_score": "1337"
+}

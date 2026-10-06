@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_HKUDS_LightRAG_60777d535b719631680bcf5d0969bdef79ca4eaf",
+  "cve_ids": [
+    "CVE-2025-6773"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "HKUDS/LightRAG",
+  "repository_url": "https://github.com/HKUDS/LightRAG",
+  "vulnerable_commit": "44daf515016d30824179ef07b68bf0ad758c3e88",
+  "fixed_commit": "60777d535b719631680bcf5d0969bdef79ca4eaf",
+  "changed_file": "lightrag/api/routers/document_routes.py",
+  "max_score": "1337"
+}

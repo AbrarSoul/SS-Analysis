@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0078",
+  "language": "python",
+  "cve_id": "CVE-2022-24880",
+  "cve_ids_all": [
+    "CVE-2022-24880"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-253",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-394",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-754",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "FlaskSessionCaptcha",
+  "imports": [
+    "import base64",
+    "from random import SystemRandom",
+    "import logging",
+    "from captcha.image import ImageCaptcha",
+    "from flask import session, request, Markup"
+  ],
+  "vulnerable_function": "    def validate(self, form_key=\"captcha\", value=None):\n        \"\"\"\n        Validate a captcha answer (taken from request.form) against the answer saved in the session.\n        Returns always true if CAPTCHA_ENABLE is set to False. Otherwise return true only if it is the correct answer.\n        \"\"\"\n        if not self.enabled:\n            return True\n\n        session_value = session.get('captcha_answer')\n        if not session_value:\n            return False\n        \n        if not value and form_key in request.form:\n            value = request.form[form_key].strip()\n\n        # invalidate the answer to stop new tries on the same challenge.\n        session['captcha_answer'] = None\n        return value and value == session_value\n",
+  "patched_function": "    def validate(self, form_key=\"captcha\", value=None):\n        \"\"\"\n        Validate a captcha answer (taken from request.form) against the answer saved in the session.\n        Returns always true if CAPTCHA_ENABLE is set to False. Otherwise return true only if it is the correct answer.\n        \"\"\"\n        if not self.enabled:\n            return True\n\n        session_value = session.get('captcha_answer')\n        if not session_value:\n            return False\n        \n        if not value and form_key in request.form:\n            value = request.form[form_key].strip()\n\n        # invalidate the answer to stop new tries on the same challenge.\n        session['captcha_answer'] = None\n        return value is not None and value == session_value\n",
+  "unified_diff": "diff --git a/flask_session_captcha/__init__.py b/flask_session_captcha/__init__.py\nindex 0000000..0000000 100644\n--- a/flask_session_captcha/__init__.py\n+++ b/flask_session_captcha/__init__.py\n@@ -84,7 +84,7 @@\n \n         # invalidate the answer to stop new tries on the same challenge.\n         session['captcha_answer'] = None\n-        return value and value == session_value\n+        return value is not None and value == session_value\n \n     def get_answer(self):\n         \"\"\"\n",
+  "auto_locate_confidence": "auto"
+}

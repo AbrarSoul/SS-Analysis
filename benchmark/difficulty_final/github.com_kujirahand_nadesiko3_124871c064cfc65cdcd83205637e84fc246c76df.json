@@ -1,0 +1,21 @@
+{
+  "case_id": "github.com_kujirahand_nadesiko3_124871c064cfc65cdcd83205637e84fc246c76df",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-703",
+    "CWE-78",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 2,
+  "lines_changed_total": 3,
+  "function_size_chars": 99,
+  "function_size_lines": 4,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

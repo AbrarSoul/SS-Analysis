@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mhuertos_phpLDAPadmin_dd6e9583a2eb2ca085583765e8a63df5904cb036",
+  "cve_ids": [
+    "CVE-2016-15039"
+  ],
+  "cwe_ids": [
+    "CWE-444"
+  ],
+  "language": "javascript",
+  "repository": "mhuertos/phpLDAPadmin",
+  "repository_url": "https://github.com/mhuertos/phpLDAPadmin",
+  "vulnerable_commit": "665dbc2690ebeb5392d38f1fece0a654225a0b38",
+  "fixed_commit": "dd6e9583a2eb2ca085583765e8a63df5904cb036",
+  "changed_file": "htdocs/js/ajax_functions.js",
+  "max_score": "1337"
+}

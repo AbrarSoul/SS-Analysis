@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_MCPJam_inspector_e6b9cf9d9e6c9cbec31493b1bdca3a1255fe3e7a",
+  "cve_ids": [
+    "CVE-2026-23744"
+  ],
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "language": "typescript",
+  "repository": "MCPJam/inspector",
+  "repository_url": "https://github.com/MCPJam/inspector",
+  "vulnerable_commit": "0896edbafda8af3f7993dde2c5fd445b4802a635",
+  "fixed_commit": "e6b9cf9d9e6c9cbec31493b1bdca3a1255fe3e7a",
+  "changed_file": "server/index.ts",
+  "max_score": "1337"
+}

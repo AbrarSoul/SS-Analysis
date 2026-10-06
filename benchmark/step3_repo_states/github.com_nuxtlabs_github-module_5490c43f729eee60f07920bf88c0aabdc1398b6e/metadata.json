@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nuxtlabs_github-module_5490c43f729eee60f07920bf88c0aabdc1398b6e",
+  "cve_ids": [
+    "CVE-2023-2138"
+  ],
+  "cwe_ids": [
+    "CWE-798"
+  ],
+  "language": "typescript",
+  "repository": "nuxtlabs/github-module",
+  "repository_url": "https://github.com/nuxtlabs/github-module",
+  "vulnerable_commit": "140314ff47a72ee5a7c73d0c2d4573ef1cdb06f1",
+  "fixed_commit": "5490c43f729eee60f07920bf88c0aabdc1398b6e",
+  "changed_file": "src/module.ts",
+  "max_score": "1337"
+}

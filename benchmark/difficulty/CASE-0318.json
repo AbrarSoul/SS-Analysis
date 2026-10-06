@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0318",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "changed_files": 1,
+  "lines_added": 10,
+  "lines_removed": 0,
+  "lines_changed_total": 10,
+  "function_size_chars": 1281,
+  "function_size_lines": 39,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Django view runs sudo commands with no session or ACL check unlike siblings; missing-authorization-check shape."
+}

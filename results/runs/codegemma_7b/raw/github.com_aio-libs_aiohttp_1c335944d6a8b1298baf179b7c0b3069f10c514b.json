@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "codegemma:7b",
+  "temperature": 0.0,
+  "timestamp": 1789302690.691652,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    unresolved_path = self._directory.joinpath($FILENAME)\n    if self._follow_symlinks:\n      normalized_path = Path(os.path.normpath(unresolved_path))\n      normalized_path.relative_to(self._directory)\n      filepath = normalized_path.resolve()\n    else:\n      filepath = unresolved_path.resolve()\n  pattern-not: |\n    unresolved_path = self._directory.joinpath($FILENAME)\n    filepath = self._directory.joinpath(filename).resolve()\n  languages: [\"python\"]\n  message: \"Detected directory traversal vulnerability in aiohttp. This allows attackers to access unauthorized files by manipulating filenames in the request path. Implement proper validation and sanitization of user input to prevent this vulnerability.\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n    category: security\n    cwe: CWE-22\n    owasp: A7:2017-Cross-Site Request Forgery (CSRF)\n    references:\n      - https://owasp.org/www-community/attacks/Directory_Traversal\n```"
+}

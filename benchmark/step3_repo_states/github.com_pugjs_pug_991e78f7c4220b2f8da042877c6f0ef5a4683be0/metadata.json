@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pugjs_pug_991e78f7c4220b2f8da042877c6f0ef5a4683be0",
+  "cve_ids": [
+    "CVE-2021-21353"
+  ],
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "pugjs/pug",
+  "repository_url": "https://github.com/pugjs/pug",
+  "vulnerable_commit": "06baa525a23049756de9587461d389a12bc12537",
+  "fixed_commit": "991e78f7c4220b2f8da042877c6f0ef5a4683be0",
+  "changed_file": "packages/pug-code-gen/index.js",
+  "max_score": "1337"
+}

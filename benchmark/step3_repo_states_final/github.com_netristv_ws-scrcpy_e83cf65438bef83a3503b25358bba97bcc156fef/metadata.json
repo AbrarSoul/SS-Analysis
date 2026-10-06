@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_netristv_ws-scrcpy_e83cf65438bef83a3503b25358bba97bcc156fef",
+  "cve_ids": [
+    "CVE-2021-3845"
+  ],
+  "cwe_ids": [
+    "CWE-610",
+    "CWE-73"
+  ],
+  "language": "typescript",
+  "repository": "netristv/ws-scrcpy",
+  "repository_url": "https://github.com/netristv/ws-scrcpy",
+  "vulnerable_commit": "994d4c67394d63ecdf6cfbc51f48c8e71c686e6e",
+  "fixed_commit": "e83cf65438bef83a3503b25358bba97bcc156fef",
+  "changed_file": "src/server/services/HttpServer.ts",
+  "max_score": "1337"
+}

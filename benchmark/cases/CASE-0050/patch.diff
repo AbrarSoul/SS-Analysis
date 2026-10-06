@@ -1,0 +1,14 @@
+diff --git a/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java
+index 8117f11ad..4fad2d012 100644
+--- a/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java
++++ b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java
+@@ -111,6 +111,9 @@ public class SubTypeValidator
+         s.add("org.apache.commons.configuration.JNDIConfiguration");
+         s.add("org.apache.commons.configuration2.JNDIConfiguration");
+ 
++        // [databind#2469]: xalan2
++        s.add("org.apache.xalan.lib.sql.JNDIConnectionPool");
++
+         DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);
+     }
+ 

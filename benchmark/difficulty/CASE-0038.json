@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0038",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 119,
+  "function_size_lines": 4,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "A sanitize-then-transform ordering bug across two statements within one short function.",
+  "supported_status": "supported"
+}

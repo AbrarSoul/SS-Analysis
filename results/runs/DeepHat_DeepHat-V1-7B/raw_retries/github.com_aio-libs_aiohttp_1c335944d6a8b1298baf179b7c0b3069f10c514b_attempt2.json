@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 2,
+  "condition": "retry",
+  "model": "DeepHat/DeepHat-V1-7B",
+  "temperature": 0.0,
+  "timestamp": 1789302937.687339,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    if $CONDITION:\n        $PATH = $DIRECTORY.joinpath($FILENAME).resolve()\n        if not $FOLLOW_SYMLINKS:\n            $PATH = $DIRECTORY.joinpath($FILENAME).resolve()\n  pattern-not: |\n    if $CONDITION:\n        $PATH = $DIRECTORY.joinpath($FILENAME)\n        if $FOLLOW_SYMLINKS:\n            $NORMALIZED = Path(os.path.normpath($PATH))\n            $NORMALIZED.relative_to($DIRECTORY)\n            $PATH = $NORMALIZED.resolve()\n        else:\n            $PATH = $PATH.resolve()\n  languages: [\"python\"]\n  message: |\n    Detected vulnerability in aiohttp static file handling.\n    When follow_symlinks=True, directory traversal attacks are possible.\n    Fix by normalizing paths before resolution.\n  severity: ERROR\n  metadata:\n    source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n    category: security\n    cwe: CWE-22\n    owasp: A1:2021-Broken Access Control\n    references:\n      - https://owasp.org/www-project-top-ten/2021/A1_2021-Broken_Access_Control\n      - https://www.owasp.org/index.php/Path_Traversal\n    technology: [python]\n```"
+}

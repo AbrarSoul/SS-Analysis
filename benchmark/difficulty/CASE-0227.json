@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0227",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-29"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 238,
+  "function_size_lines": 8,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Traversal sanitiser defeated by whitespace between `..` groups; sanitiser correctness is not a code shape."
+}

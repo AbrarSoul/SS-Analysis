@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_sequelize_sequelize_c876192aa6ce1f67e22b26a4d175b8478615f42d",
+  "cve_ids": [
+    "CVE-2016-10554"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "javascript",
+  "repository": "sequelize/sequelize",
+  "repository_url": "https://github.com/sequelize/sequelize",
+  "vulnerable_commit": "7dc35e3889e3fa0859b96be41092717444cc2a38",
+  "fixed_commit": "c876192aa6ce1f67e22b26a4d175b8478615f42d",
+  "changed_file": "lib/sql-string.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "github.com_keylime_keylime_ea5d0373fa2c050d5d95404eb779be7e8327b911",
+  "language": "python",
+  "cve_id": "CVE-2022-23950",
+  "cve_ids_all": [
+    "CVE-2022-23950"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-379",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-668",
+      "definition": "Exposure of Resource to Wrong Sphere"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from multiprocessing import Process",
+    "import threading",
+    "import functools",
+    "import time",
+    "import os",
+    "import sys",
+    "import requests",
+    "import zmq",
+    "from keylime import config",
+    "from keylime import crypto",
+    "from keylime import json",
+    "from keylime import keylime_logging",
+    "from keylime import secure_mount"
+  ],
+  "vulnerable_function": "    def worker():\n        context = zmq.Context(1)\n        frontend = context.socket(zmq.SUB)\n        frontend.bind(\"ipc:///tmp/keylime.verifier.ipc\")\n\n        frontend.setsockopt(zmq.SUBSCRIBE, b'')\n\n        # Socket facing services\n        backend = context.socket(zmq.PUB)\n        backend.bind(\n            f\"tcp://{config.get('cloud_verifier', 'revocation_notifier_ip')}:\"\n            f\"{config.getint('cloud_verifier', 'revocation_notifier_port')}\"\n        )\n        try:\n            zmq.device(zmq.FORWARDER, frontend, backend)\n        except (KeyboardInterrupt, SystemExit):\n            context.destroy()\n",
+  "patched_function": "    def worker():\n        dir_name = os.path.dirname(_SOCKET_PATH)\n        if not os.path.exists(dir_name):\n            os.makedirs(dir_name, 0o700)\n        else:\n            if os.stat(_SOCKET_PATH).st_mode & 0o777 != 0o700:\n                msg = f\"{_SOCKET_PATH} present with wrong permissions\"\n                logger.error(msg)\n                raise Exception(msg)\n\n        context = zmq.Context(1)\n        frontend = context.socket(zmq.SUB)\n        frontend.bind(f\"ipc://{_SOCKET_PATH}\")\n\n        frontend.setsockopt(zmq.SUBSCRIBE, b'')\n\n        # Socket facing services\n        backend = context.socket(zmq.PUB)\n        backend.bind(\n            f\"tcp://{config.get('cloud_verifier', 'revocation_notifier_ip')}:\"\n            f\"{config.getint('cloud_verifier', 'revocation_notifier_port')}\"\n        )\n        try:\n            zmq.device(zmq.FORWARDER, frontend, backend)\n        except (KeyboardInterrupt, SystemExit):\n            context.destroy()\n",
+  "unified_diff": "diff --git a/keylime/revocation_notifier.py b/keylime/revocation_notifier.py\nindex eabbf1a..e9e3b3f 100644\n--- a/keylime/revocation_notifier.py\n+++ b/keylime/revocation_notifier.py\n@@ -23,12 +23,23 @@ from keylime import secure_mount\n logger = keylime_logging.init_logging('revocation_notifier')\n broker_proc = None\n \n+_SOCKET_PATH = \"/var/run/keylime/keylime.verifier.ipc\"\n+\n \n def start_broker():\n     def worker():\n+        dir_name = os.path.dirname(_SOCKET_PATH)\n+        if not os.path.exists(dir_name):\n+            os.makedirs(dir_name, 0o700)\n+        else:\n+            if os.stat(_SOCKET_PATH).st_mode & 0o777 != 0o700:\n+                msg = f\"{_SOCKET_PATH} present with wrong permissions\"\n+                logger.error(msg)\n+                raise Exception(msg)\n+\n         context = zmq.Context(1)\n         frontend = context.socket(zmq.SUB)\n-        frontend.bind(\"ipc:///tmp/keylime.verifier.ipc\")\n+        frontend.bind(f\"ipc://{_SOCKET_PATH}\")\n \n         frontend.setsockopt(zmq.SUBSCRIBE, b'')\n \n@@ -52,8 +63,8 @@ def stop_broker():\n     global broker_proc\n     if broker_proc is not None:\n         # Remove the socket file before  we kill the process\n-        if os.path.exists(\"/tmp/keylime.verifier.ipc\"):\n-            os.remove(\"/tmp/keylime.verifier.ipc\")\n+        if os.path.exists(f\"ipc://{_SOCKET_PATH}\"):\n+            os.remove(f\"ipc://{_SOCKET_PATH}\")\n         logger.info(\"Stopping revocation notifier...\")\n         broker_proc.terminate()\n         broker_proc.join()\n@@ -63,7 +74,7 @@ def notify(tosend):\n     def worker(tosend):\n         context = zmq.Context()\n         mysock = context.socket(zmq.PUB)\n-        mysock.connect(\"ipc:///tmp/keylime.verifier.ipc\")\n+        mysock.connect(f\"ipc://{_SOCKET_PATH}\")\n         # wait 100ms for connect to happen\n         time.sleep(0.2)\n         # now send it out via 0mq",
+  "auto_locate_confidence": "auto"
+}

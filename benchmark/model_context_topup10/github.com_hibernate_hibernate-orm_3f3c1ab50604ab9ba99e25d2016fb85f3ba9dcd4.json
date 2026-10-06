@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_hibernate_hibernate-orm_3f3c1ab50604ab9ba99e25d2016fb85f3ba9dcd4",
+  "language": "java",
+  "cve_id": "CVE-2019-14900",
+  "cve_ids_all": [
+    "CVE-2019-14900"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.Serializable;",
+    "import org.hibernate.internal.util.StringHelper;",
+    "import org.hibernate.query.criteria.LiteralHandlingMode;",
+    "import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;",
+    "import org.hibernate.query.criteria.internal.ParameterRegistry;",
+    "import org.hibernate.query.criteria.internal.ValueHandlerFactory;",
+    "import org.hibernate.query.criteria.internal.ValueHandlerFactory.ValueHandler;",
+    "import org.hibernate.query.criteria.internal.compile.RenderingContext;"
+  ],
+  "vulnerable_function": "\tprivate String renderProjection(RenderingContext renderingContext) {\n\t\t// some drivers/servers do not like parameters in the select clause\n\t\tfinal ValueHandlerFactory.ValueHandler handler =\n\t\t\t\tValueHandlerFactory.determineAppropriateHandler( literal.getClass() );\n\n\t\tif ( handler == null ) {\n\t\t\treturn normalRender( renderingContext, LiteralHandlingMode.BIND );\n\t\t}\n\n\t\tif ( ValueHandlerFactory.isCharacter( literal ) ) {\n\t\t\treturn renderingContext.getDialect().inlineLiteral( handler.render( literal ) );\n\t\t}\n\t\telse {\n\t\t\treturn handler.render( literal );\n\t\t}\n\t}",
+  "patched_function": "\tprivate String renderProjection(RenderingContext renderingContext) {\n\t\tif ( ValueHandlerFactory.isCharacter( literal ) ) {\n\t\t\t// In case literal is a Character, pass literal.toString() as the argument.\n\t\t\treturn renderingContext.getDialect().inlineLiteral( literal.toString() );\n\t\t}\n\n\t\t// some drivers/servers do not like parameters in the select clause\n\t\tfinal ValueHandlerFactory.ValueHandler handler =\n\t\t\t\tValueHandlerFactory.determineAppropriateHandler( literal.getClass() );\n\n\t\tif ( handler == null ) {\n\t\t\treturn normalRender( renderingContext, LiteralHandlingMode.BIND );\n\t\t}\n\t\telse {\n\t\t\treturn handler.render( literal );\n\t\t}\n\t}",
+  "unified_diff": "diff --git a/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java b/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java\nindex e7639a1dff..4c5a19a03d 100644\n--- a/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java\n+++ b/hibernate-core/src/main/java/org/hibernate/query/criteria/internal/expression/LiteralExpression.java\n@@ -110,6 +110,11 @@ public class LiteralExpression<T> extends ExpressionImpl<T> implements Serializa\n \t}\n \n \tprivate String renderProjection(RenderingContext renderingContext) {\n+\t\tif ( ValueHandlerFactory.isCharacter( literal ) ) {\n+\t\t\t// In case literal is a Character, pass literal.toString() as the argument.\n+\t\t\treturn renderingContext.getDialect().inlineLiteral( literal.toString() );\n+\t\t}\n+\n \t\t// some drivers/servers do not like parameters in the select clause\n \t\tfinal ValueHandlerFactory.ValueHandler handler =\n \t\t\t\tValueHandlerFactory.determineAppropriateHandler( literal.getClass() );\n@@ -117,10 +122,6 @@ public class LiteralExpression<T> extends ExpressionImpl<T> implements Serializa\n \t\tif ( handler == null ) {\n \t\t\treturn normalRender( renderingContext, LiteralHandlingMode.BIND );\n \t\t}\n-\n-\t\tif ( ValueHandlerFactory.isCharacter( literal ) ) {\n-\t\t\treturn renderingContext.getDialect().inlineLiteral( handler.render( literal ) );\n-\t\t}\n \t\telse {\n \t\t\treturn handler.render( literal );\n \t\t}",
+  "auto_locate_confidence": "auto"
+}

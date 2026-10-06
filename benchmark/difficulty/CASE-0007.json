@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0007",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 1,
+  "lines_changed_total": 4,
+  "function_size_chars": 2153,
+  "function_size_lines": 48,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "log.info() called directly on the config object; self-contained sink.",
+  "supported_status": "supported"
+}

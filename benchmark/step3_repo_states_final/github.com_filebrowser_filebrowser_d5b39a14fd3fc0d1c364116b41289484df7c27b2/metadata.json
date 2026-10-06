@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_filebrowser_filebrowser_d5b39a14fd3fc0d1c364116b41289484df7c27b2",
+  "cve_ids": [
+    "CVE-2025-52901"
+  ],
+  "cwe_ids": [
+    "CWE-598"
+  ],
+  "language": "typescript",
+  "repository": "filebrowser/filebrowser",
+  "repository_url": "https://github.com/filebrowser/filebrowser",
+  "vulnerable_commit": "e2e1e4913085cca8917e0f69171dc28d3c6af1b6",
+  "fixed_commit": "d5b39a14fd3fc0d1c364116b41289484df7c27b2",
+  "changed_file": "frontend/src/api/commands.ts",
+  "max_score": "1337"
+}

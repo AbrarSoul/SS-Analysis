@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_RooCodeInc_Roo-Code_1be6fce1a6864ae63e8160b0666db2c647f2dbba",
+  "cve_ids": [
+    "CVE-2025-53536"
+  ],
+  "cwe_ids": [
+    "CWE-552"
+  ],
+  "language": "typescript",
+  "repository": "RooCodeInc/Roo-Code",
+  "repository_url": "https://github.com/RooCodeInc/Roo-Code",
+  "vulnerable_commit": "3993406ebdc0553a32ef391a799a4fb124930a1c",
+  "fixed_commit": "1be6fce1a6864ae63e8160b0666db2c647f2dbba",
+  "changed_file": "src/core/tools/applyDiffTool.ts",
+  "max_score": "1337"
+}

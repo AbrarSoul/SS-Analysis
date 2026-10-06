@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-0215",
+  "language": "typescript",
+  "cve_id": "CVE-2024-39691",
+  "cve_ids_all": [
+    "CVE-2024-39691"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-280",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-755",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { IrcBridge } from \"./IrcBridge\";",
+    "import { BridgeRequest, BridgeRequestErr } from \"../models/BridgeRequest\";",
+    "import {",
+    "import { IrcUser } from \"../models/IrcUser\";",
+    "import { ActionType, MatrixAction, MatrixMessageEvent } from \"../models/MatrixAction\";",
+    "import { IrcRoom } from \"../models/IrcRoom\";",
+    "import { BridgedClient } from \"../irc/BridgedClient\";",
+    "import { IrcServer } from \"../irc/IrcServer\";",
+    "import { IrcAction } from \"../models/IrcAction\";",
+    "import { toIrcLowerCase } from \"../irc/formatting\";",
+    "import { AdminRoomHandler, parseCommandFromEvent } from \"./AdminRoomHandler\";",
+    "import { trackChannelAndCreateRoom } from \"./RoomCreation\";",
+    "import { renderTemplate } from \"../util/Template\";",
+    "import { trimString } from \"../util/TrimString\";",
+    "import { messageDiff } from \"../util/MessageDiff\";",
+    "import QuickLRU = require(\"quick-lru\");"
+  ],
+  "vulnerable_function": "    private _onMemberEvent(req: BridgeRequest, event: OnMemberEventData) {\n        if (event.content.membership === 'join') {\n            this.memberJoinTs.set(`${event.room_id}/${event.state_key}`, event.origin_server_ts ?? Date.now());\n        }\n        else {\n            this.memberJoinTs.delete(`${event.room_id}/${event.state_key}`);\n        }\n        this.memberTracker?.onEvent(event);\n    }",
+  "patched_function": "    private _onMemberEvent(req: BridgeRequest, event: OnMemberEventData) {\n        if (event.content.membership === 'join') {\n            this.memberJoinTs.set(`${event.room_id}/${event.state_key}`, Date.now());\n        }\n        else {\n            this.memberJoinTs.delete(`${event.room_id}/${event.state_key}`);\n        }\n        this.memberTracker?.onEvent(event);\n    }",
+  "unified_diff": "diff --git a/src/bridge/MatrixHandler.ts b/src/bridge/MatrixHandler.ts\nindex 94e03ac7..89a0885b 100644\n--- a/src/bridge/MatrixHandler.ts\n+++ b/src/bridge/MatrixHandler.ts\n@@ -414,7 +414,7 @@ export class MatrixHandler {\n      */\n     private _onMemberEvent(req: BridgeRequest, event: OnMemberEventData) {\n         if (event.content.membership === 'join') {\n-            this.memberJoinTs.set(`${event.room_id}/${event.state_key}`, event.origin_server_ts ?? Date.now());\n+            this.memberJoinTs.set(`${event.room_id}/${event.state_key}`, Date.now());\n         }\n         else {\n             this.memberJoinTs.delete(`${event.room_id}/${event.state_key}`);",
+  "auto_locate_confidence": "auto"
+}

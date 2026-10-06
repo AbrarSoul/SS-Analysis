@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_OpenSlides_openslides-auth-service_70c1aa9f5e1db59ec120ecce98d1c1169350a4ee",
+  "cve_ids": [
+    "CVE-2026-25519"
+  ],
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "language": "typescript",
+  "repository": "OpenSlides/openslides-auth-service",
+  "repository_url": "https://github.com/OpenSlides/openslides-auth-service",
+  "vulnerable_commit": "5308c9d2795a7cafc0bb2ce9ac023818c799c214",
+  "fixed_commit": "70c1aa9f5e1db59ec120ecce98d1c1169350a4ee",
+  "changed_file": "auth/src/api/services/user-service.ts",
+  "max_score": "1337"
+}

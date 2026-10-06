@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_projectdiscovery_interactsh_6a0cb98b16636a98712729f3d23e34d8bf7260e7",
+  "cve_ids": [
+    "CVE-2024-5262"
+  ],
+  "cwe_ids": [
+    "CWE-552"
+  ],
+  "language": "python",
+  "repository": "projectdiscovery/interactsh",
+  "repository_url": "https://github.com/projectdiscovery/interactsh",
+  "vulnerable_commit": "bb8f1dbfca3994b36c7a64878a2e3d072de3e437",
+  "fixed_commit": "6a0cb98b16636a98712729f3d23e34d8bf7260e7",
+  "changed_file": "cmd/interactsh-server/smb_server.py",
+  "max_score": "1337"
+}

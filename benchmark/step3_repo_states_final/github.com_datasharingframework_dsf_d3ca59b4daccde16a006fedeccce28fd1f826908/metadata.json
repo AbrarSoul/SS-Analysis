@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_datasharingframework_dsf_d3ca59b4daccde16a006fedeccce28fd1f826908",
+  "cve_ids": [
+    "CVE-2026-40942"
+  ],
+  "cwe_ids": [
+    "CWE-670"
+  ],
+  "language": "java",
+  "repository": "datasharingframework/dsf",
+  "repository_url": "https://github.com/datasharingframework/dsf",
+  "vulnerable_commit": "c43c3b8079ac7786156c20f9423137859669f10a",
+  "fixed_commit": "d3ca59b4daccde16a006fedeccce28fd1f826908",
+  "changed_file": "dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_jenkinsci_dynatrace-plugin_b6e55709476d9f6dfaf75a4cd744fe1798868168",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 1,
+  "lines_changed_total": 7,
+  "function_size_chars": 1893,
+  "function_size_lines": 38,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

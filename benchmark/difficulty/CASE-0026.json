@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0026",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-665"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 22,
+  "function_size_lines": 1,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "{} vs Object.create(null) is a one-line idiom, but recognizing it as security-relevant requires knowing the object is later indexed with a dynamic, externally-controlled key elsewhere in the file.",
+  "supported_status": "supported"
+}

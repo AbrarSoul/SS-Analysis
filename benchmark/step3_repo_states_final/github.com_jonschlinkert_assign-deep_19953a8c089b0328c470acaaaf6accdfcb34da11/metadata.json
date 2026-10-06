@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_jonschlinkert_assign-deep_19953a8c089b0328c470acaaaf6accdfcb34da11",
+  "cve_ids": [
+    "CVE-2018-3720"
+  ],
+  "cwe_ids": [
+    "CWE-471",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "jonschlinkert/assign-deep",
+  "repository_url": "https://github.com/jonschlinkert/assign-deep",
+  "vulnerable_commit": "f6cba02d11a1d293593be0e942aff60bfd5a5711",
+  "fixed_commit": "19953a8c089b0328c470acaaaf6accdfcb34da11",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

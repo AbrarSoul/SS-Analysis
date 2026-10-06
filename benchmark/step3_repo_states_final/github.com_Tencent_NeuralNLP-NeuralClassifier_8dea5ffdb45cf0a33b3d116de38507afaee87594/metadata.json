@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Tencent_NeuralNLP-NeuralClassifier_8dea5ffdb45cf0a33b3d116de38507afaee87594",
+  "cve_ids": [
+    "CVE-2025-13708"
+  ],
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "python",
+  "repository": "Tencent/NeuralNLP-NeuralClassifier",
+  "repository_url": "https://github.com/Tencent/NeuralNLP-NeuralClassifier",
+  "vulnerable_commit": "3d4ddffa6304da32c25f74001c0c056922c4ba22",
+  "fixed_commit": "8dea5ffdb45cf0a33b3d116de38507afaee87594",
+  "changed_file": "predict.py",
+  "max_score": "1337"
+}

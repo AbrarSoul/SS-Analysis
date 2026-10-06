@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_dynatrace-plugin_b6e55709476d9f6dfaf75a4cd744fe1798868168",
+  "cve_ids": [
+    "CVE-2019-10463"
+  ],
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/dynatrace-plugin",
+  "repository_url": "https://github.com/jenkinsci/dynatrace-plugin",
+  "vulnerable_commit": "1e769d41d24a78b8ff5e681966274712aefdd3d3",
+  "fixed_commit": "b6e55709476d9f6dfaf75a4cd744fe1798868168",
+  "changed_file": "src/main/java/com/dynatrace/jenkins/dashboard/TAGlobalConfiguration.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_langchain-ai_langchain_de9a6cdf163ed00adaf2e559203ed0a9ca2f1de7",
+  "cve_ids": [
+    "CVE-2024-27444"
+  ],
+  "cwe_ids": [
+    "CWE-749"
+  ],
+  "language": "python",
+  "repository": "langchain-ai/langchain",
+  "repository_url": "https://github.com/langchain-ai/langchain",
+  "vulnerable_commit": "8562a1e7d44c3e9d9eed7f99288851b5d372e4ad",
+  "fixed_commit": "de9a6cdf163ed00adaf2e559203ed0a9ca2f1de7",
+  "changed_file": "libs/experimental/langchain_experimental/pal_chain/base.py",
+  "max_score": "1337"
+}

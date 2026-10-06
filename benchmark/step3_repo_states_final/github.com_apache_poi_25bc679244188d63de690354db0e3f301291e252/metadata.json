@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_poi_25bc679244188d63de690354db0e3f301291e252",
+  "cve_ids": [
+    "CVE-2012-0213"
+  ],
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "language": "java",
+  "repository": "apache/poi",
+  "repository_url": "https://github.com/apache/poi",
+  "vulnerable_commit": "d9cd6b276c1b41faf1acdb81b9a4c6cfa5512ceb",
+  "fixed_commit": "25bc679244188d63de690354db0e3f301291e252",
+  "changed_file": "src/scratchpad/src/org/apache/poi/hwpf/model/UnhandledDataStructure.java",
+  "max_score": "1337"
+}

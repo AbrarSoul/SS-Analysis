@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_LiuWoodsCode_LiuOS_c658b4f3e57258acf5f6207a90c2f2169698ae22",
+  "cve_ids": [
+    "CVE-2022-46179"
+  ],
+  "cwe_ids": [
+    "CWE-639"
+  ],
+  "language": "python",
+  "repository": "LiuWoodsCode/LiuOS",
+  "repository_url": "https://github.com/LiuWoodsCode/LiuOS",
+  "vulnerable_commit": "a37744679569399f7d383bf4706c28fae9246fac",
+  "fixed_commit": "c658b4f3e57258acf5f6207a90c2f2169698ae22",
+  "changed_file": "core.py",
+  "max_score": "1337"
+}

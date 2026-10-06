@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0327",
+  "batch": "topup37",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-285"
+  ],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 1,
+  "lines_changed_total": 9,
+  "function_size_chars": 265,
+  "function_size_lines": 14,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Publication returns user documents with an empty projection; which fields are private is schema knowledge."
+}

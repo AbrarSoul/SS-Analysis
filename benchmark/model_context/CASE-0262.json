@@ -1,0 +1,33 @@
+{
+  "case_id": "CASE-0262",
+  "language": "python",
+  "cve_id": "CVE-2017-5591",
+  "cve_ids_all": [
+    "CVE-2017-5591"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-346",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "XEP_0280",
+  "imports": [
+    "import logging",
+    "import slixmpp",
+    "from slixmpp.stanza import Message, Iq",
+    "from slixmpp.xmlstream.handler import Callback",
+    "from slixmpp.xmlstream.matcher import StanzaPath",
+    "from slixmpp.xmlstream import register_stanza_plugin",
+    "from slixmpp.plugins import BasePlugin",
+    "from slixmpp.plugins.xep_0280 import stanza"
+  ],
+  "vulnerable_function": "    def _handle_carbon_received(self, msg):\n        self.xmpp.event('carbon_received', msg)\n",
+  "patched_function": "    def _handle_carbon_received(self, msg):\n        if msg['from'].bare == self.xmpp.boundjid.bare:\n            self.xmpp.event('carbon_received', msg)\n",
+  "unified_diff": "diff --git a/slixmpp/plugins/xep_0280/carbons.py b/slixmpp/plugins/xep_0280/carbons.py\nindex 261238b7..aa71f7f1 100644\n--- a/slixmpp/plugins/xep_0280/carbons.py\n+++ b/slixmpp/plugins/xep_0280/carbons.py\n@@ -61,10 +61,12 @@ class XEP_0280(BasePlugin):\n         self.xmpp.plugin['xep_0030'].add_feature('urn:xmpp:carbons:2')\n \n     def _handle_carbon_received(self, msg):\n-        self.xmpp.event('carbon_received', msg)\n+        if msg['from'].bare == self.xmpp.boundjid.bare:\n+            self.xmpp.event('carbon_received', msg)\n \n     def _handle_carbon_sent(self, msg):\n-        self.xmpp.event('carbon_sent', msg)\n+        if msg['from'].bare == self.xmpp.boundjid.bare:\n+            self.xmpp.event('carbon_sent', msg)\n \n     def enable(self, ifrom=None, timeout=None, callback=None,\n                timeout_callback=None):",
+  "auto_locate_confidence": "auto_low_confidence"
+}

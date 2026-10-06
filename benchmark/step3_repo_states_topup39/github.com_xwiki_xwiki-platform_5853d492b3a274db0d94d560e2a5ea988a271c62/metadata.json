@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_5853d492b3a274db0d94d560e2a5ea988a271c62",
+  "cve_ids": [
+    "CVE-2021-43841"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "6cf8bc10c789f1d5b229e83a3a2b498a2f616129",
+  "fixed_commit": "5853d492b3a274db0d94d560e2a5ea988a271c62",
+  "changed_file": "xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/DownloadAction.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,13 @@
+diff --git a/weblate/trans/exporters.py b/weblate/trans/exporters.py
+index 56aef00c52..36396f4d81 100644
+--- a/weblate/trans/exporters.py
++++ b/weblate/trans/exporters.py
+@@ -279,6 +279,6 @@ class CSVExporter(BaseExporter):
+         used at first position of translatable strings, so the harm is not
+         that big.
+         """
+-        if text and text[0] in ('=', '+', '-', '@'):
+-            return "'" + text
++        if text and text[0] in ('=', '+', '-', '@', '|', '%'):
++            return "'{0}'".format(text.replace('|', '\|'))
+         return text

@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0007",
+  "original_patch_filename": "github.com_llamastack_llama-stack_b709bd77b6c1fad68a30a4888baa6f2337eaef6f.patch",
+  "cve_id": "CVE-2026-25211",
+  "cve_ids_all": [
+    "CVE-2026-25211"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "python",
+  "repository": "llamastack/llama-stack",
+  "repository_url": "https://github.com/llamastack/llama-stack",
+  "vulnerable_commit": "752a6836a02e5c23303ce6781e7698e35b52eae7",
+  "fixed_commit": "b709bd77b6c1fad68a30a4888baa6f2337eaef6f",
+  "changed_file": "src/llama_stack/providers/remote/vector_io/pgvector/pgvector.py",
+  "patch_path": "cases/CASE-0007/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0007/vulnerable_source.py",
+  "patched_code_path": "cases/CASE-0007/patched_source.py",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.py",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.py",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.py",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.py",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.py",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.py",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

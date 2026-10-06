@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0138",
+  "language": "python",
+  "cve_id": "CVE-2024-32881",
+  "cve_ids_all": [
+    "CVE-2024-32881"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-285",
+      "definition": "Improper Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from fastapi import APIRouter",
+    "from fastapi import Depends",
+    "from fastapi import HTTPException",
+    "from sqlalchemy.orm import Session",
+    "from danswer.auth.users import current_admin_user",
+    "from danswer.danswerbot.slack.config import validate_channel_names",
+    "from danswer.danswerbot.slack.tokens import fetch_tokens",
+    "from danswer.danswerbot.slack.tokens import save_tokens",
+    "from danswer.db.chat import get_persona_by_id",
+    "from danswer.db.constants import SLACK_BOT_PERSONA_PREFIX",
+    "from danswer.db.engine import get_session",
+    "from danswer.db.models import ChannelConfig",
+    "from danswer.db.models import User",
+    "from danswer.db.slack_bot_config import create_slack_bot_persona",
+    "from danswer.db.slack_bot_config import fetch_slack_bot_config",
+    "from danswer.db.slack_bot_config import fetch_slack_bot_configs",
+    "from danswer.db.slack_bot_config import insert_slack_bot_config",
+    "from danswer.db.slack_bot_config import remove_slack_bot_config",
+    "from danswer.db.slack_bot_config import update_slack_bot_config",
+    "from danswer.dynamic_configs.interface import ConfigNotFoundError",
+    "from danswer.server.manage.models import SlackBotConfig",
+    "from danswer.server.manage.models import SlackBotConfigCreationRequest",
+    "from danswer.server.manage.models import SlackBotTokens"
+  ],
+  "vulnerable_function": "def put_tokens(tokens: SlackBotTokens) -> None:\n    save_tokens(tokens=tokens)\n",
+  "patched_function": "def put_tokens(\n    tokens: SlackBotTokens,\n    _: User | None = Depends(current_admin_user),\n) -> None:\n    save_tokens(tokens=tokens)\n",
+  "unified_diff": "diff --git a/backend/danswer/server/manage/slack_bot.py b/backend/danswer/server/manage/slack_bot.py\nindex 2ea59a6316..19003f09d6 100644\n--- a/backend/danswer/server/manage/slack_bot.py\n+++ b/backend/danswer/server/manage/slack_bot.py\n@@ -192,12 +192,15 @@ def list_slack_bot_configs(\n \n \n @router.put(\"/admin/slack-bot/tokens\")\n-def put_tokens(tokens: SlackBotTokens) -> None:\n+def put_tokens(\n+    tokens: SlackBotTokens,\n+    _: User | None = Depends(current_admin_user),\n+) -> None:\n     save_tokens(tokens=tokens)\n \n \n @router.get(\"/admin/slack-bot/tokens\")\n-def get_tokens() -> SlackBotTokens:\n+def get_tokens(_: User | None = Depends(current_admin_user)) -> SlackBotTokens:\n     try:\n         return fetch_tokens()\n     except ConfigNotFoundError:",
+  "auto_locate_confidence": "auto"
+}

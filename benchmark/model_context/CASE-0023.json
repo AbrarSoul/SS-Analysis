@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-0023",
+  "language": "javascript",
+  "cve_id": "CVE-2015-10103",
+  "cwe": [
+    {
+      "id": "CWE-835",
+      "definition": "Loop with Unreachable Exit Condition ('Infinite Loop')"
+    }
+  ],
+  "unified_diff": "diff --git a/js/settings.js b/js/settings.js\nindex c75abb4..854a672 100644\n--- a/js/settings.js\n+++ b/js/settings.js\n@@ -87,7 +87,16 @@\n                     text: \"\"\n                 });\n \t        });\n-\n+\t\t\t\n+\t\t\t//Important: setForgetTime can't be less then 1 minute (denial of service loop)\n+\t\t\t$('#setForgetTime').change(function() {\n+\t\t\t\tif(document.getElementById('setForgetTime').value > 0){\n+\t\t\t\t\tforgetitoptions.forget_save_options();\n+\t\t\t\t}else{\n+\t\t\t\t\tdocument.getElementById('setForgetTime').value = 1;\n+\t\t\t\t}\t\n+\t\t\t});\n+\t\t\t\n \t        //Save settings as they are changed.\t\n \t        $(\"#enableConfirmData, \\\n \t\t\t#clearDataFrom, \\\n@@ -98,8 +107,7 @@\n \t\t\t#dataLocalStorage, #dataPluginData, \\\n \t\t\t#dataPasswords, #dataWebSQL, \\\n \t\t\t#enableTimedForget, #timedForgetHour, \\\n-\t\t\t#timedForgetMinute, #timedForgetTime, \\\n-\t\t\t#setForgetTime\").change(function() {\n+\t\t\t#timedForgetMinute, #timedForgetTime\").change(function() {\n \t            forgetitoptions.forget_save_options();\n \t        });\n \t\t\t",
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "$(\"#enableConfirmData, \\\n\t\t\t#clearDataFrom, \\\n\t\t\t#dataAppCache, #dataCache, \\\n\t\t\t#dataCookies, #dataDownloads, \\\n\t\t\t#dataFileSystems, #dataFormData, \\\n\t\t\t#dataHistory, #dataIndexedDB, \\\n\t\t\t#dataLocalStorage, #dataPluginData, \\\n\t\t\t#dataPasswords, #dataWebSQL, \\\n\t\t\t#enableTimedForget, #timedForgetHour, \\\n\t\t\t#timedForgetMinute, #timedForgetTime, \\\n\t\t\t#setForgetTime\").change(function() {\n\t            forgetitoptions.forget_save_options();\n\t        }",
+  "patched_function": "$('#setForgetTime').change(function() {\n\t\t\t\tif(document.getElementById('setForgetTime').value > 0){\n\t\t\t\t\tforgetitoptions.forget_save_options();\n\t\t\t\t}else{\n\t\t\t\t\tdocument.getElementById('setForgetTime').value = 1;\n\t\t\t\t}\t\n\t\t\t}",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 1669,
+  "context_size_chars_after_truncation": 1669
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_theonedev_onedev_4440f0c57e440488d7e653417b2547eaae8ad19c",
+  "cve_ids": [
+    "CVE-2021-32651"
+  ],
+  "cwe_ids": [
+    "CWE-90"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "a61e1a016c20f4f3eafb257640883edb19771578",
+  "fixed_commit": "4440f0c57e440488d7e653417b2547eaae8ad19c",
+  "changed_file": "server-plugin/server-plugin-authenticator-ldap/src/main/java/io/onedev/server/plugin/authenticator/ldap/LdapAuthenticator.java",
+  "max_score": "1337"
+}

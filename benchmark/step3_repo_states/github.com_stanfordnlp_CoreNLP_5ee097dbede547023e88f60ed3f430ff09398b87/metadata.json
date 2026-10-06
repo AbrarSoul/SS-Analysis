@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_stanfordnlp_CoreNLP_5ee097dbede547023e88f60ed3f430ff09398b87",
+  "cve_ids": [
+    "CVE-2021-44550"
+  ],
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "java",
+  "repository": "stanfordnlp/CoreNLP",
+  "repository_url": "https://github.com/stanfordnlp/CoreNLP",
+  "vulnerable_commit": "85e305bf63b3954e6266801175579a8b81769709",
+  "fixed_commit": "5ee097dbede547023e88f60ed3f430ff09398b87",
+  "changed_file": "src/edu/stanford/nlp/ie/ner/webapp/NERServlet.java",
+  "max_score": "1337"
+}

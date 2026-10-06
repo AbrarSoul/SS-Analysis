@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0339",
+  "original_source_case_id": "github.com_zadam_trilium_4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b",
+  "selection_batch": "topup38",
+  "cve_id": "CVE-2023-3067",
+  "cve_ids_all": [
+    "CVE-2023-3067"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "zadam/trilium",
+  "repository_url": "https://github.com/zadam/trilium",
+  "vulnerable_commit": "5ad47d38665fbb78847cc01514607047dd3fa341",
+  "fixed_commit": "4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b",
+  "changed_file": "src/services/search/services/search.js",
+  "changed_function": "function highlightSearchResults(searchResults, highlightedTokens) {",
+  "vulnerable_lines": [
+    295,
+    356
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0339/vulnerable_source.js": "53faa686f95dcd0fdc5eeec8368a710854d42d94416b4be3193733ab2e15809a",
+    "cases/CASE-0339/patched_source.js": "7bd19828db7b06dd55011bd79340e8e4a42873543f35d0bd84756ab0b1581f82",
+    "cases/CASE-0339/patch.diff": "01b7cf64ec701eca13a6838fada10f6edf8170175cd52e894688e9f7a87a94e6",
+    "cases/CASE-0339/metadata.json": "897eea3e834e8960453dc3908e0d9845a3f19df221dd861500e6425c43d99ea5",
+    "model_context/CASE-0339.json": "93543b21a8214acce67f39fa09575030ca9df75f9154faaaacbd822a8a4d4246",
+    "difficulty/CASE-0339.json": "390ef35324d73fb9c415c6160accd4f56488ac5d206f2ec1459bf16df06badf2"
+  },
+  "case_level_hash": "53cec6feecee22fa9c14836ca60f9744a1ad2017a50e0980f3d194f89ff7576b"
+}

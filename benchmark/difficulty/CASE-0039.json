@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0039",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 13,
+  "lines_removed": 0,
+  "lines_changed_total": 13,
+  "function_size_chars": 1868,
+  "function_size_lines": 62,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Unsanitized host parameter flows directly into a shell command string within a single function.",
+  "supported_status": "supported"
+}

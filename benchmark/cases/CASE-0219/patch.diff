@@ -1,0 +1,25 @@
+diff --git a/framework/gateway/src/main/java/io/metersphere/gateway/service/UserLoginService.java b/framework/gateway/src/main/java/io/metersphere/gateway/service/UserLoginService.java
+index c7a1628e49..167e63a432 100644
+--- a/framework/gateway/src/main/java/io/metersphere/gateway/service/UserLoginService.java
++++ b/framework/gateway/src/main/java/io/metersphere/gateway/service/UserLoginService.java
+@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
+ import org.springframework.web.server.WebSession;
+ 
+ import jakarta.annotation.Resource;
++
+ import java.util.*;
+ import java.util.stream.Collectors;
+ 
+@@ -354,6 +355,12 @@ public class UserLoginService {
+         if (StringUtils.isBlank(password)) {
+             MSException.throwException(Translator.get("password_is_null"));
+         }
++        if (userId.length() > 64) {
++            MSException.throwException(Translator.get("user_id_length_too_long"));
++        }
++        if (password.length() > 30) {
++            MSException.throwException(Translator.get("password_length_too_long"));
++        }
+         UserExample example = new UserExample();
+         example.createCriteria().andIdEqualTo(userId).andPasswordEqualTo(CodingUtil.md5(password));
+         return userMapper.countByExample(example) > 0;

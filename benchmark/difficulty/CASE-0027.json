@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0027",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 1,
+  "lines_changed_total": 1,
+  "function_size_chars": 3486,
+  "function_size_lines": 103,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "A validate-then-transform ordering bug across two statements; requires understanding platform-specific path.normalize() semantics to see why the order matters.",
+  "supported_status": "supported"
+}

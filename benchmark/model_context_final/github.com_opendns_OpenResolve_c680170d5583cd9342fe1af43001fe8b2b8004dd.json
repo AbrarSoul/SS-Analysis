@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_opendns_OpenResolve_c680170d5583cd9342fe1af43001fe8b2b8004dd",
+  "language": "python",
+  "cve_id": "CVE-2015-10010",
+  "cve_ids_all": [
+    "CVE-2015-10010"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": "LookupRecordType",
+  "imports": [
+    "from flask import current_app, request",
+    "from flask_restful import Resource, abort",
+    "from dns import reversename, rdatatype",
+    "from dns.resolver import NXDOMAIN, NoNameservers",
+    "from resolverapi.util import is_valid_hostname, is_valid_rdtype, is_valid_ip",
+    "from resolverapi.util.dns_query import parse_query",
+    "from resolverapi import dns_resolver",
+    "import time",
+    "from dns.exception import Timeout"
+  ],
+  "vulnerable_function": "    def valid_args(self, rdtype, domain):\n        if not is_valid_rdtype(rdtype):\n            abort(400, message=\"%s type is not supported\" % rdtype)\n        if not is_valid_hostname(domain):\n            abort(400, message=\"%s is not a valid domain name\" % domain)\n",
+  "patched_function": "    def valid_args(self, rdtype, domain):\n        if not is_valid_rdtype(rdtype):\n            abort(400, message=\"The provided record type is not supported\")\n        if not is_valid_hostname(domain):\n            abort(400, message=\"The provided domain name is invalid\")\n",
+  "unified_diff": "diff --git a/resolverapi/endpoints.py b/resolverapi/endpoints.py\nindex aa80958..e8b4b0c 100644\n--- a/resolverapi/endpoints.py\n+++ b/resolverapi/endpoints.py\n@@ -50,9 +50,9 @@ class LookupRecordType(Resource):\n \n     def valid_args(self, rdtype, domain):\n         if not is_valid_rdtype(rdtype):\n-            abort(400, message=\"%s type is not supported\" % rdtype)\n+            abort(400, message=\"The provided record type is not supported\")\n         if not is_valid_hostname(domain):\n-            abort(400, message=\"%s is not a valid domain name\" % domain)\n+            abort(400, message=\"The provided domain name is invalid\")\n \n \n class ReverseLookup(Resource):\n@@ -79,7 +79,7 @@ class ReverseLookup(Resource):\n                     return {'message': 'All nameservers timed out.'}, 503\n                 continue\n             except NXDOMAIN:\n-                return {'message': 'No nameserver found for %s' % ip}, 404\n+                return {'message': 'No nameserver found for the provided IP'}, 404\n             except Exception as e:\n                 current_app.logger.error(e)\n                 return {'message': 'An unexpected error occured.'}, 500\n@@ -93,4 +93,4 @@ class ReverseLookup(Resource):\n \n     def valid_args(self, ip):\n         if not is_valid_ip(ip):\n-            abort(400, message=\"%s is not a valid ip address\" % ip)\n+            abort(400, message=\"The provided ip address is invalid\")",
+  "auto_locate_confidence": "auto"
+}

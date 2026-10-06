@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0332",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-693"
+  ],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 1,
+  "lines_changed_total": 9,
+  "function_size_chars": 614,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Setup guard recognises only the /api spelling while an /open alias reaches the same handlers; routing-alias logic."
+}

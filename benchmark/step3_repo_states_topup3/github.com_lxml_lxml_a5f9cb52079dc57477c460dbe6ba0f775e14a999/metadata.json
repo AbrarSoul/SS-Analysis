@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_lxml_lxml_a5f9cb52079dc57477c460dbe6ba0f775e14a999",
+  "cve_ids": [
+    "CVE-2021-28957"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "lxml/lxml",
+  "repository_url": "https://github.com/lxml/lxml",
+  "vulnerable_commit": "2d01a1ba8984e0483ce6619b972832377f208a0d",
+  "fixed_commit": "a5f9cb52079dc57477c460dbe6ba0f775e14a999",
+  "changed_file": "src/lxml/__init__.py",
+  "max_score": "1337"
+}

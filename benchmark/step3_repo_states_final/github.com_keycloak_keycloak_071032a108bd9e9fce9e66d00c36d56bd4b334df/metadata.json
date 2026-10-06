@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_keycloak_keycloak_071032a108bd9e9fce9e66d00c36d56bd4b334df",
+  "cve_ids": [
+    "CVE-2024-10973"
+  ],
+  "cwe_ids": [
+    "CWE-319"
+  ],
+  "language": "java",
+  "repository": "keycloak/keycloak",
+  "repository_url": "https://github.com/keycloak/keycloak",
+  "vulnerable_commit": "9d0b1ecee4d5527ace9f0130e06024e5a1cfaa5d",
+  "fixed_commit": "071032a108bd9e9fce9e66d00c36d56bd4b334df",
+  "changed_file": "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/legacy/infinispan/CacheManagerFactory.java",
+  "max_score": "1337"
+}

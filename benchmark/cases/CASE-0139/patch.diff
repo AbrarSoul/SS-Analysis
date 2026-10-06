@@ -1,0 +1,14 @@
+diff --git a/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java b/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java
+index baf6e6fcc0..2421e874ba 100644
+--- a/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java
++++ b/core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java
+@@ -95,6 +95,9 @@ public class EsProvider extends Provider {
+         try {
+             String sql;
+             if (datasourceRequest.getTable() != null) {
++                if (!getTables(datasourceRequest).stream().map(DatasetTableDTO::getTableName).collect(Collectors.toList()).contains(datasourceRequest.getTable())) {
++                    DEException.throwException("无效的表名！");
++                }
+                 sql = "select * from \"" + datasourceRequest.getTable() + "\" limit 0";
+             } else {
+                 sql = datasourceRequest.getQuery();

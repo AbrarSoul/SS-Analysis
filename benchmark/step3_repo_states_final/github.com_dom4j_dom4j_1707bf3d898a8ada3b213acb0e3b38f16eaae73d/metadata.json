@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dom4j_dom4j_1707bf3d898a8ada3b213acb0e3b38f16eaae73d",
+  "cve_ids": [
+    "CVE-2020-10683"
+  ],
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "dom4j/dom4j",
+  "repository_url": "https://github.com/dom4j/dom4j",
+  "vulnerable_commit": "223ae0639d5d73a5a25fddec8b16c7071ee10e3d",
+  "fixed_commit": "1707bf3d898a8ada3b213acb0e3b38f16eaae73d",
+  "changed_file": "src/main/java/org/dom4j/DocumentHelper.java",
+  "max_score": "1337"
+}

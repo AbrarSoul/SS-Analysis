@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "codellama:7b-instruct-fp16",
+  "temperature": 0.0,
+  "timestamp": 1789302647.27213,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    unresolved_path = self._directory.joinpath(filename)\n    filepath = self._directory.joinpath(filename).resolve()\n    if not self._follow_symlinks:\n      normalized_path = Path(os.path.normpath(unresolved_path))\n      normalized_path.relative_to(self._directory)\n      filepath = normalized_path.resolve()\n    else:\n      filepath = unresolved_path.resolve()\n  languages: [\"python\"]\n  message: \"Detected potential directory traversal vulnerability in aiohttp's WebUrlDispatcher. The `follow_symlinks` parameter was not properly validated, allowing an attacker to access files outside of the expected directory.\"\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-22\n```"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_microweber-dev_whmcs_plugin_2e7a11d332db79cc52ccda00455a15f4dc6147ff",
+  "cve_ids": [
+    "CVE-2022-0855"
+  ],
+  "cwe_ids": [
+    "CWE-41",
+    "CWE-706"
+  ],
+  "language": "javascript",
+  "repository": "microweber-dev/whmcs_plugin",
+  "repository_url": "https://github.com/microweber-dev/whmcs_plugin",
+  "vulnerable_commit": "e6f19892b071f14d5eeb4e85f17720c00485442b",
+  "fixed_commit": "2e7a11d332db79cc52ccda00455a15f4dc6147ff",
+  "changed_file": "modules/addons/microweber_addon/order/embed.js",
+  "max_score": "1337"
+}

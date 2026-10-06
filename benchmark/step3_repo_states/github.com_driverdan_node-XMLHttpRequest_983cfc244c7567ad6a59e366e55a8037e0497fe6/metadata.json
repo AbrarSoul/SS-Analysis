@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_driverdan_node-XMLHttpRequest_983cfc244c7567ad6a59e366e55a8037e0497fe6",
+  "cve_ids": [
+    "CVE-2020-28502"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "driverdan/node-XMLHttpRequest",
+  "repository_url": "https://github.com/driverdan/node-XMLHttpRequest",
+  "vulnerable_commit": "9f926dedd60b5ec7bbed3fb77ac92b67bfa8b899",
+  "fixed_commit": "983cfc244c7567ad6a59e366e55a8037e0497fe6",
+  "changed_file": "lib/XMLHttpRequest.js",
+  "max_score": "1337"
+}

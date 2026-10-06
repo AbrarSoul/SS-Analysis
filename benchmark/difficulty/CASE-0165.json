@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0165",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-178",
+    "CWE-200"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 817,
+  "function_size_lines": 36,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "URL parameter keys stored in original case while routes are case-insensitive; needs framework routing semantics."
+}

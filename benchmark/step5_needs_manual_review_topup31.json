@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "github.com_python_cpython_7215d1ae25525c92b026166f9d5cac85fb",
+    "language": "python",
+    "repository": "python/cpython",
+    "error": "no function contains line 947; no function contains line 949"
+  },
+  {
+    "case_id": "github.com_qos-ch_slf4j_d2b27fba88e983f921558da27fc29b5f5d269405",
+    "language": "java",
+    "repository": "qos-ch/slf4j",
+    "error": "no method-like block contains line 42; no method-like block contains line 44"
+  },
+  {
+    "case_id": "github.com_wildfirechat_im-server_2f9c4e028c01c64913cab32e7248bcca183a5230",
+    "language": "java",
+    "repository": "wildfirechat/im-server",
+    "error": "extracted function too large to be useful context (vuln=167 lines, patched=8 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  }
+]

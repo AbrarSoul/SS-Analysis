@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_jazzband_tablib_69abfc3ada5d754cb152119c0b4777043657cb6e",
+  "language": "python",
+  "cve_id": "CVE-2017-2810",
+  "cve_ids_all": [
+    "CVE-2017-2810"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import tablib",
+    "import yaml"
+  ],
+  "vulnerable_function": "def import_book(dbook, in_stream):\n    \"\"\"Returns databook from YAML stream.\"\"\"\n\n    dbook.wipe()\n\n    for sheet in yaml.load(in_stream):\n        data = tablib.Dataset()\n        data.title = sheet['title']\n        data.dict = sheet['data']\n        dbook.add_sheet(data)\n",
+  "patched_function": "def import_book(dbook, in_stream):\n    \"\"\"Returns databook from YAML stream.\"\"\"\n\n    dbook.wipe()\n\n    for sheet in yaml.safe_load(in_stream):\n        data = tablib.Dataset()\n        data.title = sheet['title']\n        data.dict = sheet['data']\n        dbook.add_sheet(data)\n",
+  "unified_diff": "diff --git a/tablib/formats/_yaml.py b/tablib/formats/_yaml.py\nindex 5aecb42..3d17baf 100644\n--- a/tablib/formats/_yaml.py\n+++ b/tablib/formats/_yaml.py\n@@ -33,7 +33,7 @@ def import_book(dbook, in_stream):\n \n     dbook.wipe()\n \n-    for sheet in yaml.load(in_stream):\n+    for sheet in yaml.safe_load(in_stream):\n         data = tablib.Dataset()\n         data.title = sheet['title']\n         data.dict = sheet['data']",
+  "auto_locate_confidence": "auto"
+}

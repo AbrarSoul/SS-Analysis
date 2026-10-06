@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "github.com_Automattic_mongoose_f3eca5b94d822225c04e96cbeed9f095afb3c31c",
+    "language": "javascript",
+    "repository": "Automattic/mongoose",
+    "error": "extracted function too large to be useful context (vuln=292 lines, patched=298 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_Graylog2_graylog2-server_1596b749db86368ba476662f23a0f0c5ec2b5097",
+    "language": "java",
+    "repository": "Graylog2/graylog2-server",
+    "error": "no method-like block contains line 123; no method-like block contains line 125; no method-like block contains line 136; no method-like block contains line 138; no method-like block contains line 141; no method-like block contains line 143"
+  },
+  {
+    "case_id": "github.com_lxml_lxml_a5f9cb52079dc57477c460dbe6ba0f775e14a999",
+    "language": "python",
+    "repository": "lxml/lxml",
+    "error": "no function contains line 2; no function contains line 4"
+  }
+]

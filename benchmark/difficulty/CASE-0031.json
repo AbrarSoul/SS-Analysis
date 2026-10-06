@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0031",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-359",
+    "CWE-862"
+  ],
+  "changed_files": 1,
+  "lines_added": 18,
+  "lines_removed": 0,
+  "lines_changed_total": 18,
+  "function_size_chars": 298,
+  "function_size_lines": 13,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Missing authorization check before returning a fetched record; recognizing the gap requires understanding the procedure's intended access-control semantics, not just the query itself.",
+  "supported_status": "supported"
+}

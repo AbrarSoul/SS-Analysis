@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0038",
+  "original_patch_filename": "github.com_enchant97_note-mark_a0997facb82f85bfb8c0d497606d89e7d150e182.patch",
+  "cve_id": "CVE-2024-41819",
+  "cve_ids_all": [
+    "CVE-2024-41819"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "typescript",
+  "repository": "enchant97/note-mark",
+  "repository_url": "https://github.com/enchant97/note-mark",
+  "vulnerable_commit": "f3d3a2f7c0b987235c38cdb14040da24d8d3d02f",
+  "fixed_commit": "a0997facb82f85bfb8c0d497606d89e7d150e182",
+  "changed_file": "frontend/src/core/renderer.ts",
+  "patch_path": "cases/CASE-0038/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0038/vulnerable_source.ts",
+  "patched_code_path": "cases/CASE-0038/patched_source.ts",
+  "semgrep_representability": "supported",
+  "advisory_source": "nvd",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.ts",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.ts",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.ts",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.ts",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.ts",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.ts",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

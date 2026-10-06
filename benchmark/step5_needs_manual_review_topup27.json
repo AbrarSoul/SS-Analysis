@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_theonedev_onedev_5b6a19c1f7fe9c271acc4268bcd261a9a1cbb3ea",
+    "language": "java",
+    "repository": "theonedev/onedev",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  }
+]

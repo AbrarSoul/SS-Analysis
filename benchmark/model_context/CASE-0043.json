@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0043",
+  "language": "python",
+  "cve_id": "CVE-2025-58753",
+  "cve_ids_all": [
+    "CVE-2025-58753"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-552",
+      "definition": "Files or Directories Accessible to External Parties"
+    },
+    {
+      "id": "CWE-862",
+      "definition": "Missing Authorization"
+    }
+  ],
+  "containing_class_declaration": "VFS",
+  "imports": [
+    "from __future__ import print_function, unicode_literals",
+    "import argparse",
+    "import base64",
+    "import hashlib",
+    "import json",
+    "import os",
+    "import re",
+    "import stat",
+    "import sys",
+    "import threading",
+    "import time",
+    "from datetime import datetime",
+    "from .__init__ import ANYWIN, PY2, TYPE_CHECKING, WINDOWS, E",
+    "from .bos import bos",
+    "from .cfg import flagdescs, permdescs, vf_bmap, vf_cmap, vf_vmap",
+    "from .pwhash import PWHash",
+    "from .util import DEF_MTE, DEF_MTH, EXTS, HAVE_SQLITE3, IMPLICATIONS, MIMES, SQLITE_VER, UNPLICATIONS, UTC, ODict, Pebkac, absreal, afsenc, get_df, humansize, json_hesc, min_ex, odfusion, read_utf8, relchk, statdir, ub64enc, uncyg, undot, unhumanize, vjoin, vsplit",
+    "import sqlite3"
+  ],
+  "vulnerable_function": "    def canonical(self, rem: str, resolve: bool = True) -> str:\n        \"\"\"returns the canonical path (fully-resolved absolute fs path)\"\"\"\n        ap = self.realpath\n        if rem:\n            ap += \"/\" + rem\n\n        return absreal(ap) if resolve else ap\n",
+  "patched_function": "    def _canonical_shr(self, rem: str, resolve: bool = True) -> str:\n        \"\"\"returns the canonical path (fully-resolved absolute fs path)\"\"\"\n        ap = self.realpath\n        if rem:\n            ap += \"/\" + rem\n\n        rap = absreal(ap)\n        if self.shr_files:\n            assert self.shr_src  # !rm\n            vn, rem = self.shr_src\n            chk = absreal(os.path.join(vn.realpath, rem))\n            if chk != rap:\n                # not the dir itself; assert file allowed\n                ad, fn = os.path.split(rap)\n                if chk != ad or fn not in self.shr_files:\n                    return \"\\n\\n\"\n\n        return rap if resolve else ap\n",
+  "unified_diff": "diff --git a/copyparty/authsrv.py b/copyparty/authsrv.py\nindex 69973ec5..88aa7314 100644\n--- a/copyparty/authsrv.py\n+++ b/copyparty/authsrv.py\n@@ -431,6 +431,8 @@ class VFS(object):\n \n         self.get_dbv = self._get_dbv\n         self.ls = self._ls\n+        self.canonical = self._canonical\n+        self.dcanonical = self._dcanonical\n \n     def __repr__(self) -> str:\n         return \"VFS(%s)\" % (\n@@ -624,7 +626,7 @@ class VFS(object):\n         vrem = vjoin(self.vpath[len(dbv.vpath) :].lstrip(\"/\"), vrem)\n         return dbv, vrem\n \n-    def canonical(self, rem: str, resolve: bool = True) -> str:\n+    def _canonical(self, rem: str, resolve: bool = True) -> str:\n         \"\"\"returns the canonical path (fully-resolved absolute fs path)\"\"\"\n         ap = self.realpath\n         if rem:\n@@ -632,7 +634,7 @@ class VFS(object):\n \n         return absreal(ap) if resolve else ap\n \n-    def dcanonical(self, rem: str) -> str:\n+    def _dcanonical(self, rem: str) -> str:\n         \"\"\"resolves until the final component (filename)\"\"\"\n         ap = self.realpath\n         if rem:\n@@ -641,6 +643,44 @@ class VFS(object):\n         ad, fn = os.path.split(ap)\n         return os.path.join(absreal(ad), fn)\n \n+    def _canonical_shr(self, rem: str, resolve: bool = True) -> str:\n+        \"\"\"returns the canonical path (fully-resolved absolute fs path)\"\"\"\n+        ap = self.realpath\n+        if rem:\n+            ap += \"/\" + rem\n+\n+        rap = absreal(ap)\n+        if self.shr_files:\n+            assert self.shr_src  # !rm\n+            vn, rem = self.shr_src\n+            chk = absreal(os.path.join(vn.realpath, rem))\n+            if chk != rap:\n+                # not the dir itself; assert file allowed\n+                ad, fn = os.path.split(rap)\n+                if chk != ad or fn not in self.shr_files:\n+                    return \"\\n\\n\"\n+\n+        return rap if resolve else ap\n+\n+    def _dcanonical_shr(self, rem: str) -> str:\n+        \"\"\"resolves until the final component (filename)\"\"\"\n+        ap = self.realpath\n+        if rem:\n+            ap += \"/\" + rem\n+\n+        ad, fn = os.path.split(ap)\n+        ad = absreal(ad)\n+        if self.shr_files:\n+            assert self.shr_src  # !rm\n+            vn, rem = self.shr_src\n+            chk = absreal(os.path.join(vn.realpath, rem))\n+            if chk != absreal(ap):\n+                # not the dir itself; assert file allowed\n+                if ad != chk or fn not in self.shr_files:\n+                    return \"\\n\\n\"\n+\n+        return os.path.join(ad, fn)\n+\n     def _ls_nope(\n         self, *a, **ka\n     ) -> tuple[str, list[tuple[str, os.stat_result]], dict[str, \"VFS\"]]:\n@@ -2751,6 +2791,8 @@ class AuthSrv(object):\n \n                     shn.shr_files = set(fns)\n                     shn.ls = shn._ls_shr\n+                    shn.canonical = shn._canonical_shr\n+                    shn.dcanonical = shn._dcanonical_shr\n                 else:\n                     shn.ls = shn._ls\n ",
+  "auto_locate_confidence": "auto_low_confidence"
+}

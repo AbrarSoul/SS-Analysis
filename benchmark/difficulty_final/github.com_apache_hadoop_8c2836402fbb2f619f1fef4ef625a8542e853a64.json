@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_apache_hadoop_8c2836402fbb2f619f1fef4ef625a8542e853a64",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-378"
+  ],
+  "changed_files": 1,
+  "lines_added": 9,
+  "lines_removed": 7,
+  "lines_changed_total": 16,
+  "function_size_chars": 2670,
+  "function_size_lines": 89,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

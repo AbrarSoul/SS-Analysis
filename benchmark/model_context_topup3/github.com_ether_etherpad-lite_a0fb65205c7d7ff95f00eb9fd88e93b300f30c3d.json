@@ -1,0 +1,24 @@
+{
+  "case_id": "github.com_ether_etherpad-lite_a0fb65205c7d7ff95f00eb9fd88e93b300f30c3d",
+  "language": "javascript",
+  "cve_id": "CVE-2015-2298",
+  "cve_ids_all": [
+    "CVE-2015-2298"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var async = require(\"async\");",
+    "var db = require(\"../db/DB\").db;",
+    "var ERR = require(\"async-stacktrace\");"
+  ],
+  "vulnerable_function": "  async.waterfall([\n  function(cb){\n\n    // Get the Pad available content keys\n    db.findKeys(\"pad:\"+padId+\"*\", null, function(err,records){\n      if(!err){\n        cb(err, records);\n      }\n    })\n  }",
+  "patched_function": "  async.waterfall([\n  function(cb){\n\n    // Get the Pad\n    db.findKeys(\"pad:\"+padId, null, function(err,padcontent){\n      if(!err){\n        cb(err, padcontent);\n      }\n    })\n  }",
+  "unified_diff": "diff --git a/src/node/utils/ExportEtherpad.js b/src/node/utils/ExportEtherpad.js\nindex b7d438523..46ae0d7af 100644\n--- a/src/node/utils/ExportEtherpad.js\n+++ b/src/node/utils/ExportEtherpad.js\n@@ -23,9 +23,19 @@ exports.getPadRaw = function(padId, callback){\n   async.waterfall([\n   function(cb){\n \n+    // Get the Pad\n+    db.findKeys(\"pad:\"+padId, null, function(err,padcontent){\n+      if(!err){\n+        cb(err, padcontent);\n+      }\n+    })\n+  },\n+  function(padcontent,cb){\n+\n     // Get the Pad available content keys\n-    db.findKeys(\"pad:\"+padId+\"*\", null, function(err,records){\n+    db.findKeys(\"pad:\"+padId+\":*\", null, function(err,records){\n       if(!err){\n+        for (var key in padcontent) { records.push(padcontent[key]);}\n         cb(err, records);\n       }\n     })",
+  "auto_locate_confidence": "auto"
+}

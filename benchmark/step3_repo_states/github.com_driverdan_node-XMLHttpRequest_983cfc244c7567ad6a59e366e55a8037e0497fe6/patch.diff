@@ -1,0 +1,13 @@
+diff --git a/lib/XMLHttpRequest.js b/lib/XMLHttpRequest.js
+index 5c99b24..ab5727e 100644
+--- a/lib/XMLHttpRequest.js
++++ b/lib/XMLHttpRequest.js
+@@ -477,7 +477,7 @@ exports.XMLHttpRequest = function() {
+         + "fs.writeFileSync('" + contentFile + "', 'NODE-XMLHTTPREQUEST-ERROR:' + JSON.stringify(error), 'utf8');"
+         + "fs.unlinkSync('" + syncFile + "');"
+         + "});"
+-        + (data ? "req.write('" + data.replace(/'/g, "\\'") + "');":"")
++        + (data ? "req.write('" + JSON.stringify(data).slice(1,-1).replace(/'/g, "\\'") + "');":"")
+         + "req.end();";
+       // Start the other Node Process, executing this string
+       var syncProc = spawn(process.argv[0], ["-e", execString]);

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_CanonicalLtd_subiquity_7db70650feaf513d7fb6f1ca07f2d670a0890613",
+  "cve_ids": [
+    "CVE-2020-11932"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "python",
+  "repository": "CanonicalLtd/subiquity",
+  "repository_url": "https://github.com/CanonicalLtd/subiquity",
+  "vulnerable_commit": "936e3877bb8a63a7ce95fcc23179bc1dfe86fc1d",
+  "fixed_commit": "7db70650feaf513d7fb6f1ca07f2d670a0890613",
+  "changed_file": "subiquity/models/filesystem.py",
+  "max_score": "1337"
+}

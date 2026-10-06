@@ -1,0 +1,28 @@
+{
+  "case_id": "github.com_dataease_dataease_bb540e6dc83df106ac3253f331066129a7487d1a",
+  "language": "java",
+  "cve_id": "CVE-2024-23328",
+  "cve_ids_all": [
+    "CVE-2024-23328"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import io.dataease.plugins.datasource.entity.JdbcConfiguration;",
+    "import lombok.Getter;",
+    "import lombok.Setter;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import java.util.ArrayList;",
+    "import java.util.Arrays;",
+    "import java.util.List;"
+  ],
+  "vulnerable_function": "    public String getJdbc() {\n        if (StringUtils.isEmpty(extraParams.trim())) {\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE\".replace(\"HOSTNAME\", getHost().trim()).replace(\"PORT\", getPort().toString().trim()).replace(\"DATABASE\", getDataBase().trim());\n        } else {\n            for (String illegalParameter : getIllegalParameters()) {\n                if (getExtraParams().toLowerCase().contains(illegalParameter.toLowerCase())) {\n                    throw new RuntimeException(\"Illegal parameter: \" + illegalParameter);\n                }\n            }\n\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE?EXTRA_PARAMS\".replace(\"HOSTNAME\", getHost().trim()).replace(\"PORT\", getPort().toString().trim()).replace(\"DATABASE\", getDataBase().trim()).replace(\"EXTRA_PARAMS\", getExtraParams().trim());\n        }\n    }",
+  "patched_function": "    public String getJdbc() {\n        if (StringUtils.isEmpty(extraParams.trim())) {\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE\".replace(\"HOSTNAME\", getHost().trim()).replace(\"PORT\", getPort().toString().trim()).replace(\"DATABASE\", getDataBase().trim());\n        } else {\n            for (String illegalParameter : getIllegalParameters()) {\n                if (getExtraParams().toLowerCase().contains(illegalParameter.toLowerCase()) || URLDecoder.decode(getExtraParams()).contains(illegalParameter.toLowerCase())) {\n                    throw new RuntimeException(\"Illegal parameter: \" + illegalParameter);\n                }\n            }\n\n            return \"jdbc:mysql://HOSTNAME:PORT/DATABASE?EXTRA_PARAMS\".replace(\"HOSTNAME\", getHost().trim()).replace(\"PORT\", getPort().toString().trim()).replace(\"DATABASE\", getDataBase().trim()).replace(\"EXTRA_PARAMS\", getExtraParams().trim());\n        }\n    }",
+  "unified_diff": "diff --git a/core/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java b/core/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java\nindex f30a5ac15f..75bdc07f55 100644\n--- a/core/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java\n+++ b/core/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java\n@@ -5,6 +5,7 @@ import lombok.Getter;\n import lombok.Setter;\n import org.apache.commons.lang3.StringUtils;\n \n+import java.net.URLDecoder;\n import java.util.ArrayList;\n import java.util.Arrays;\n import java.util.List;\n@@ -22,7 +23,7 @@ public class MysqlConfiguration extends JdbcConfiguration {\n             return \"jdbc:mysql://HOSTNAME:PORT/DATABASE\".replace(\"HOSTNAME\", getHost().trim()).replace(\"PORT\", getPort().toString().trim()).replace(\"DATABASE\", getDataBase().trim());\n         } else {\n             for (String illegalParameter : getIllegalParameters()) {\n-                if (getExtraParams().toLowerCase().contains(illegalParameter.toLowerCase())) {\n+                if (getExtraParams().toLowerCase().contains(illegalParameter.toLowerCase()) || URLDecoder.decode(getExtraParams()).contains(illegalParameter.toLowerCase())) {\n                     throw new RuntimeException(\"Illegal parameter: \" + illegalParameter);\n                 }\n             }",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_joblib_joblib_b90f10efeb670a2cc877fb88ebb3f2019189e059",
+  "cve_ids": [
+    "CVE-2022-21797"
+  ],
+  "cwe_ids": [
+    "CWE-94",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "joblib/joblib",
+  "repository_url": "https://github.com/joblib/joblib",
+  "vulnerable_commit": "1fdf3086674d7b1be27688e8c7aebd3159d89997",
+  "fixed_commit": "b90f10efeb670a2cc877fb88ebb3f2019189e059",
+  "changed_file": "joblib/parallel.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,24 @@
+{
+  "case_id": "github.com_gulpjs_glob-parent_4a80667c69355c76a572a5892b0f133c8e1f457e",
+  "language": "javascript",
+  "cve_id": "CVE-2020-28469",
+  "cve_ids_all": [
+    "CVE-2020-28469"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var isglob = require('is-glob');",
+    "var pathDirname = require('path-dirname');",
+    "var isWin32 = require('os').platform() === 'win32';"
+  ],
+  "vulnerable_function": "module.exports = function globParent(str) {\n  // flip windows path separators\n  if (isWin32 && str.indexOf('/') < 0) {\n    str = str.split('\\\\').join('/');\n  }\n\n  // special case for strings ending in enclosure containing path separator\n  if (/[\\{\\[].*[\\/]*.*[\\}\\]]$/.test(str)) {\n    str += '/';\n  }\n\n  // preserves full path in case of trailing path separator\n  str += 'a';\n\n  // remove path parts that are globby\n  do {\n    str = pathDirname.posix(str);\n  } while (isglob(str) || /(^|[^\\\\])([\\{\\[]|\\([^\\)]+$)/.test(str));\n\n  // remove escape chars and return result\n  return str.replace(/\\\\([\\*\\?\\|\\[\\]\\(\\)\\{\\}])/g, '$1');\n}",
+  "patched_function": "module.exports = function globParent(str) {\n  // flip windows path separators\n  if (isWin32 && str.indexOf(slash) < 0) {\n    str = str.replace(backslash, slash);\n  }\n\n  // special case for strings ending in enclosure containing path separator\n  if (enclosure.test(str)) {\n    str += slash;\n  }\n\n  // preserves full path in case of trailing path separator\n  str += 'a';\n\n  // remove path parts that are globby\n  do {\n    str = pathDirname.posix(str);\n  } while (isGlob(str) || globby.test(str));\n\n  // remove escape chars and return result\n  return str.replace(escaped, '$1');\n}",
+  "unified_diff": "diff --git a/index.js b/index.js\nindex 9af5b98..cb4d2fb 100644\n--- a/index.js\n+++ b/index.js\n@@ -1,18 +1,24 @@\n 'use strict';\n \n-var isglob = require('is-glob');\n+var isGlob = require('is-glob');\n var pathDirname = require('path-dirname');\n var isWin32 = require('os').platform() === 'win32';\n \n+var slash = '/';\n+var backslash = /\\\\/g;\n+var enclosure = /[\\{\\[].*[\\/]*.*[\\}\\]]$/;\n+var globby = /(^|[^\\\\])([\\{\\[]|\\([^\\)]+$)/;\n+var escaped = /\\\\([\\*\\?\\|\\[\\]\\(\\)\\{\\}])/g;\n+\n module.exports = function globParent(str) {\n   // flip windows path separators\n-  if (isWin32 && str.indexOf('/') < 0) {\n-    str = str.split('\\\\').join('/');\n+  if (isWin32 && str.indexOf(slash) < 0) {\n+    str = str.replace(backslash, slash);\n   }\n \n   // special case for strings ending in enclosure containing path separator\n-  if (/[\\{\\[].*[\\/]*.*[\\}\\]]$/.test(str)) {\n-    str += '/';\n+  if (enclosure.test(str)) {\n+    str += slash;\n   }\n \n   // preserves full path in case of trailing path separator\n@@ -21,8 +27,8 @@ module.exports = function globParent(str) {\n   // remove path parts that are globby\n   do {\n     str = pathDirname.posix(str);\n-  } while (isglob(str) || /(^|[^\\\\])([\\{\\[]|\\([^\\)]+$)/.test(str));\n+  } while (isGlob(str) || globby.test(str));\n \n   // remove escape chars and return result\n-  return str.replace(/\\\\([\\*\\?\\|\\[\\]\\(\\)\\{\\}])/g, '$1');\n+  return str.replace(escaped, '$1');\n };",
+  "auto_locate_confidence": "auto"
+}

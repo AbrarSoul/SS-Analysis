@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_9b7057d57a941592d763992d4299456300918208",
+  "cve_ids": [
+    "CVE-2022-36092"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "71a6d0bb6f8ab718fcfaae0e9b8c16c2d69cd4bb",
+  "fixed_commit": "9b7057d57a941592d763992d4299456300918208",
+  "changed_file": "xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/RegisterAction.java",
+  "max_score": "1337"
+}

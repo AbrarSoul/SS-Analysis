@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0072",
+  "language": "java",
+  "cve_id": "CVE-2025-60319",
+  "cve_ids_all": [
+    "CVE-2025-60319"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-918",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.perfree.commons.common.CommonResult;",
+    "import com.perfree.commons.common.PageResult;",
+    "import com.perfree.controller.auth.attach.vo.*;",
+    "import com.perfree.convert.attach.AttachConvert;",
+    "import com.perfree.demoModel.DemoMode;",
+    "import com.perfree.model.Attach;",
+    "import com.perfree.service.attach.AttachService;",
+    "import io.swagger.v3.oas.annotations.Operation;",
+    "import io.swagger.v3.oas.annotations.tags.Tag;",
+    "import jakarta.annotation.Resource;",
+    "import jakarta.validation.Valid;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.springframework.security.access.prepost.PreAuthorize;",
+    "import org.springframework.web.bind.annotation.*;",
+    "import java.util.List;",
+    "import static com.perfree.commons.common.CommonResult.success;"
+  ],
+  "vulnerable_function": "    public CommonResult<AttachByUrlRespVO> uploadAttachByUrl(@Valid @RequestBody AttachUploadByUrlVO attachUploadByUrlVO) {\n        Attach attach = attachService.uploadAttachByUrl(attachUploadByUrlVO.getUrl());\n        AttachByUrlRespVO attachByUrlRespVO = AttachConvert.INSTANCE.convertByUrlRespVO(attach);\n        attachByUrlRespVO.setOriginalURL(attachUploadByUrlVO.getUrl());\n        return success(attachByUrlRespVO);\n    }",
+  "patched_function": "    @PreAuthorize(\"@ss.hasPermission('admin:attach:update')\")\n    public CommonResult<AttachByUrlRespVO> uploadAttachByUrl(@Valid @RequestBody AttachUploadByUrlVO attachUploadByUrlVO) {\n        Attach attach = attachService.uploadAttachByUrl(attachUploadByUrlVO.getUrl());\n        AttachByUrlRespVO attachByUrlRespVO = AttachConvert.INSTANCE.convertByUrlRespVO(attach);\n        attachByUrlRespVO.setOriginalURL(attachUploadByUrlVO.getUrl());\n        return success(attachByUrlRespVO);\n    }",
+  "unified_diff": "diff --git a/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java b/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java\nindex b1ba58fd..7764dd4a 100644\n--- a/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java\n+++ b/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java\n@@ -87,6 +87,7 @@ public class AttachController {\n     @PostMapping(\"/uploadAttachByUrl\")\n     @Operation(summary = \"\u901a\u8fc7url\u4e0b\u8f7d\u5e76\u4e0a\u4f20\u9644\u4ef6\")\n     @DemoMode\n+    @PreAuthorize(\"@ss.hasPermission('admin:attach:update')\")\n     public CommonResult<AttachByUrlRespVO> uploadAttachByUrl(@Valid @RequestBody AttachUploadByUrlVO attachUploadByUrlVO) {\n         Attach attach = attachService.uploadAttachByUrl(attachUploadByUrlVO.getUrl());\n         AttachByUrlRespVO attachByUrlRespVO = AttachConvert.INSTANCE.convertByUrlRespVO(attach);",
+  "auto_locate_confidence": "auto"
+}

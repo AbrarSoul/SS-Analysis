@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ether_etherpad-lite_a0fb65205c7d7ff95f00eb9fd88e93b300f30c3d",
+  "cve_ids": [
+    "CVE-2015-2298"
+  ],
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "javascript",
+  "repository": "ether/etherpad-lite",
+  "repository_url": "https://github.com/ether/etherpad-lite",
+  "vulnerable_commit": "ec7ff3a0cac87b9319c714f792f5d39d68716c6f",
+  "fixed_commit": "a0fb65205c7d7ff95f00eb9fd88e93b300f30c3d",
+  "changed_file": "src/node/utils/ExportEtherpad.js",
+  "max_score": "1337"
+}

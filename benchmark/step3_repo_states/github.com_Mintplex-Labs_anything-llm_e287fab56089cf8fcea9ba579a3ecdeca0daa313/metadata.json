@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_Mintplex-Labs_anything-llm_e287fab56089cf8fcea9ba579a3ecdeca0daa313",
+  "cve_ids": [
+    "CVE-2026-21484"
+  ],
+  "cwe_ids": [
+    "CWE-203",
+    "CWE-204"
+  ],
+  "language": "javascript",
+  "repository": "Mintplex-Labs/anything-llm",
+  "repository_url": "https://github.com/Mintplex-Labs/anything-llm",
+  "vulnerable_commit": "092b1b45f80d65471dcde923d62185dbc9e86bee",
+  "fixed_commit": "e287fab56089cf8fcea9ba579a3ecdeca0daa313",
+  "changed_file": "server/utils/PasswordRecovery/index.js",
+  "max_score": "1337"
+}

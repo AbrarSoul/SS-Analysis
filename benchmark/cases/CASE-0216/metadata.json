@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0216",
+  "original_source_case_id": "github.com_matrix-org_matrix-js-sdk_894c24880da0e1cc81818f51c0db80e3c9fb2be9",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-40823",
+  "cve_ids_all": [
+    "CVE-2021-40823"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "language": "typescript",
+  "repository": "matrix-org/matrix-js-sdk",
+  "repository_url": "https://github.com/matrix-org/matrix-js-sdk",
+  "vulnerable_commit": "f8186add92dd5f0ca2f6a1cda10bc0ece3730f86",
+  "fixed_commit": "894c24880da0e1cc81818f51c0db80e3c9fb2be9",
+  "changed_file": "src/crypto/algorithms/megolm.ts",
+  "changed_function": "public async reshareKeyWithDevice(",
+  "vulnerable_lines": [
+    705,
+    786
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 29,
+  "patch_size_deleted": 9,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0216/vulnerable_source.ts": "11d13aa47b7a12a0eaccd5274d5b6e65b2075b9162daa83739705f01edfc41bb",
+    "cases/CASE-0216/patched_source.ts": "4d4c272dc1e5b602c260277a2c0ac534afb591f104c9c93167441f1a85af3e88",
+    "cases/CASE-0216/patch.diff": "8137c003645aa9e593bc64e7e5ba17c987510a824b5f19e8814e171f4426ca1d",
+    "cases/CASE-0216/metadata.json": "bb0fdd7e8a105fe8aa3699f91076ff1e8ca5d514d89001af39e5bd6ecad1f4e0",
+    "model_context/CASE-0216.json": "93caa08b0f3b40c763645e50b2447c332fc9e41b7a7ad8e7347ea3d43103c0a4",
+    "difficulty/CASE-0216.json": "4c514ffe17d0c42b6ad85caf83f085d4c17fa24448c71a6f910d89233589e48f"
+  },
+  "case_level_hash": "2df7ecdeb25da0884b7e225b0a1711ef10493769a8c5aec2a4620c551b65dcf6"
+}

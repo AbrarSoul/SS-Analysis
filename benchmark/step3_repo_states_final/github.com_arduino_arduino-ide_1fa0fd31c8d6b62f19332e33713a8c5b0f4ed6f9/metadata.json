@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_arduino_arduino-ide_1fa0fd31c8d6b62f19332e33713a8c5b0f4ed6f9",
+  "cve_ids": [
+    "CVE-2025-64723",
+    "CVE-2025-64724"
+  ],
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "language": "javascript",
+  "repository": "arduino/arduino-ide",
+  "repository_url": "https://github.com/arduino/arduino-ide",
+  "vulnerable_commit": "086f4b825acee333f7e16c32d109fe058e95e4e1",
+  "fixed_commit": "1fa0fd31c8d6b62f19332e33713a8c5b0f4ed6f9",
+  "changed_file": "electron-app/webpack.config.js",
+  "max_score": "1337"
+}

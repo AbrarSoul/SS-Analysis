@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_karsany_obridge_52eca4ad05f3c292aed3178b2f58977686ffa376",
+  "cve_ids": [
+    "CVE-2018-25075"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "karsany/obridge",
+  "repository_url": "https://github.com/karsany/obridge",
+  "vulnerable_commit": "b0673c1a9eebf8792c1accab432e76109b91badf",
+  "fixed_commit": "52eca4ad05f3c292aed3178b2f58977686ffa376",
+  "changed_file": "obridge-main/src/main/java/org/obridge/dao/ProcedureDao.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_neo4j-contrib_neo4j-apoc-procedures_d2f415c6f703bbc2cda4a753928821ff15d5c620",
+  "cve_ids": [
+    "CVE-2022-37423"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "neo4j-contrib/neo4j-apoc-procedures",
+  "repository_url": "https://github.com/neo4j-contrib/neo4j-apoc-procedures",
+  "vulnerable_commit": "b069e2bfd51b3015d29452aeddda6059cff6bc0f",
+  "fixed_commit": "d2f415c6f703bbc2cda4a753928821ff15d5c620",
+  "changed_file": "core/src/main/java/apoc/log/Neo4jLogStream.java",
+  "max_score": "1337"
+}

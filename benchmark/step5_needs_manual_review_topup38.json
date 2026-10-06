@@ -1,0 +1,14 @@
+[
+  {
+    "case_id": "github.com_xmldom_xmldom_17678a2a73ecbd1a2da90f3d47dc23da9cef81aa",
+    "language": "javascript",
+    "repository": "xmldom/xmldom",
+    "error": "extracted function too large to be useful context (vuln=11 lines, patched=257 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_yhatt_jsx-slack_46bc88391d89d5fda4ce689e18ca080bcdd29ecc",
+    "language": "typescript",
+    "repository": "yhatt/jsx-slack",
+    "error": "no method-like block contains line 2; no method-like block contains line 4; no method-like block contains line 10; no method-like block contains line 12; no method-like block contains line 14; no method-like block contains line 16"
+  }
+]

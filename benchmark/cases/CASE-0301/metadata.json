@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0301",
+  "original_source_case_id": "github.com_theonedev_onedev_9196fd795e87dab069b4260a3590a0ea886e770f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-21250",
+  "cve_ids_all": [
+    "CVE-2021-21250"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-538"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "d6fc4212b1ac1e9bbe3ce444e95f9af1e3ab8b66",
+  "fixed_commit": "9196fd795e87dab069b4260a3590a0ea886e770f",
+  "changed_file": "server-core/src/main/java/io/onedev/server/migration/XmlBuildSpecMigrator.java",
+  "changed_function": "public static String migrate(String xml) {",
+  "vulnerable_lines": [
+    662,
+    715
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0301/vulnerable_source.java": "61999da389c338e8271ecaac0c404e096dba46670c8b78274c4efc5aa6ce29b0",
+    "cases/CASE-0301/patched_source.java": "5fc1d16e701ab18b83253db20bd7891eaa938f9c0665ad66dfacc6a51ad382ee",
+    "cases/CASE-0301/patch.diff": "e39874d96551b9fa461b4af3c5ee39057c34d85b2dde12527e8529e50909fba6",
+    "cases/CASE-0301/metadata.json": "faeb2118630e19591fb1e56c5ac9fd00e9371f292621c1831b3e85210c972d43",
+    "model_context/CASE-0301.json": "4c08fd32c168e7c61cc8842416257504b4b3c6f96fa34fa7ce101190f7eca1bd",
+    "difficulty/CASE-0301.json": "308ad5b8fd2d33418b0515cb27a6bb911cc04764a52d4afcc0c721d78e088cee"
+  },
+  "case_level_hash": "ce09b7614acb83e0144e6134ceb2ad210e699bcbc2008a25a84384011d8d1d11"
+}

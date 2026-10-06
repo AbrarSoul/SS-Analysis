@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0126",
+  "language": "python",
+  "cve_id": "CVE-2026-21439",
+  "cve_ids_all": [
+    "CVE-2026-21439"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-150",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import base64",
+    "import binascii",
+    "from .utils import _warnmsg"
+  ],
+  "vulnerable_function": "def parsedkim(line):\n    if '\"' in line:\n        add = 0\n        dk = \"\"\n        for x in line.split('\"'):\n            add ^= 1\n            if add == 0:\n                dk += x\n    else:\n        dk = line\n\n    dkim = {}\n    for x in dk.split(\";\"):\n        s = x.split(\"=\", 1)\n        if len(s) != 2:\n            continue\n        key = s[0].strip()\n        value = s[1].strip()\n        dkim[key] = value\n    if \"p\" not in dkim:\n        return False\n    if dkim[\"p\"] == \"\":\n        return False\n    if \"k\" not in dkim:\n        dkim[\"k\"] = \"rsa\"\n\n    if dkim[\"k\"] == \"rsa\":\n        return PUBPRE + dkim[\"p\"] + PUBPOST\n    if dkim[\"k\"] == \"ed25519\":\n        try:\n            rawed = base64.b64decode(dkim[\"p\"].encode(\"ascii\"))\n        except (binascii.Error, UnicodeEncodeError):\n            return False\n        if len(rawed) != 32:\n            return False\n        der = EDASN1 + rawed\n        return PUBPRE + base64.b64encode(der).decode() + PUBPOST\n    _warnmsg(f\"Unknown DKIM key type {dkim['k']}\")\n    return False\n",
+  "patched_function": "def parsedkim(line):\n    if '\"' in line:\n        add = 0\n        dk = \"\"\n        for x in line.split('\"'):\n            add ^= 1\n            if add == 0:\n                dk += x\n    else:\n        dk = line\n\n    dkim = {}\n    for x in dk.split(\";\"):\n        s = x.split(\"=\", 1)\n        if len(s) != 2:\n            continue\n        key = s[0].strip()\n        value = s[1].strip()\n        dkim[key] = value\n    if \"p\" not in dkim:\n        return False\n    if dkim[\"p\"] == \"\":\n        return False\n    if \"k\" not in dkim:\n        dkim[\"k\"] = \"rsa\"\n\n    if dkim[\"k\"] == \"rsa\":\n        return PUBPRE + dkim[\"p\"] + PUBPOST\n    if dkim[\"k\"] == \"ed25519\":\n        try:\n            rawed = base64.b64decode(dkim[\"p\"].encode(\"ascii\"))\n        except (binascii.Error, UnicodeEncodeError):\n            return False\n        if len(rawed) != 32:\n            return False\n        der = EDASN1 + rawed\n        return PUBPRE + base64.b64encode(der).decode() + PUBPOST\n    _warnmsg(\"Unknown DKIM key type\")\n    return False\n",
+  "unified_diff": "diff --git a/badkeys/dkim.py b/badkeys/dkim.py\nindex 0e42534..0859c8a 100644\n--- a/badkeys/dkim.py\n+++ b/badkeys/dkim.py\n@@ -45,5 +45,5 @@ def parsedkim(line):\n             return False\n         der = EDASN1 + rawed\n         return PUBPRE + base64.b64encode(der).decode() + PUBPOST\n-    _warnmsg(f\"Unknown DKIM key type {dkim['k']}\")\n+    _warnmsg(\"Unknown DKIM key type\")\n     return False",
+  "auto_locate_confidence": "auto"
+}

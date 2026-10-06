@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0291",
+  "batch": "topup13",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 82,
+  "lines_removed": 3,
+  "lines_changed_total": 85,
+  "function_size_chars": 2536,
+  "function_size_lines": 67,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Agent-supplied URL passed straight to fetch with no host validation; SSRF taint."
+}

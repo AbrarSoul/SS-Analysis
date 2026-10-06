@@ -1,0 +1,25 @@
+{
+  "case_id": "github.com_sasstools_scss-tokenizer_a53b6f233e648cc01acbdd89c58786cf8ba56e35",
+  "language": "javascript",
+  "cve_id": "CVE-2022-25758",
+  "cve_ids_all": [
+    "CVE-2022-25758"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1333",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { Base64 } from 'js-base64';",
+    "import   mozilla  from 'source-map';",
+    "import   path     from 'path';",
+    "import   fs       from 'fs';"
+  ],
+  "vulnerable_function": "    loadAnnotation(css) {\n        let match = css.match(/\\/\\*\\s*# sourceMappingURL=(.*)\\s*\\*\\//);\n        if ( match ) this.annotation = match[1].trim();\n    }",
+  "patched_function": "    loadAnnotation(css) {\n        let match = css.match(/\\/\\*\\s*# sourceMappingURL=((?:(?!sourceMappingURL=).)*)\\s*\\*\\//);\n        if ( match ) this.annotation = match[1].trim();\n    }",
+  "unified_diff": "diff --git a/src/previous-map.js b/src/previous-map.js\nindex ffc1f79..2e41f8d 100644\n--- a/src/previous-map.js\n+++ b/src/previous-map.js\n@@ -31,7 +31,7 @@ export default class PreviousMap {\n     }\n \n     loadAnnotation(css) {\n-        let match = css.match(/\\/\\*\\s*# sourceMappingURL=(.*)\\s*\\*\\//);\n+        let match = css.match(/\\/\\*\\s*# sourceMappingURL=((?:(?!sourceMappingURL=).)*)\\s*\\*\\//);\n         if ( match ) this.annotation = match[1].trim();\n     }\n ",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,23 @@
+diff --git a/solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java b/solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java
+index fba2870063c..47eb8198e82 100644
+--- a/solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java
++++ b/solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java
+@@ -468,18 +468,6 @@ public class CoreContainerProvider implements ServletContextListener {
+           ResolutionStrategy.IGNORE,
+           "properties",
+           "system");
+-      MetricsMap sysenv =
+-          new MetricsMap(
+-              map ->
+-                  System.getenv()
+-                      .forEach(
+-                          (k, v) -> {
+-                            if (!hiddenSysProps.contains(k)) {
+-                              map.putNoEx(String.valueOf(k), v);
+-                            }
+-                          }));
+-      metricManager.registerGauge(
+-          null, registryName, sysenv, metricTag, ResolutionStrategy.IGNORE, "env", "system");
+     } catch (Exception e) {
+       log.warn("Error registering JVM metrics", e);
+     }

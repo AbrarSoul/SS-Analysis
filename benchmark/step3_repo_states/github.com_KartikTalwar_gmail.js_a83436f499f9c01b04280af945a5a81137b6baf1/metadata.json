@@ -1,0 +1,14 @@
+{
+  "case_id": "github.com_KartikTalwar_gmail.js_a83436f499f9c01b04280af945a5a81137b6baf1",
+  "cve_ids": [
+    "CVE-2016-1000228"
+  ],
+  "cwe_ids": [],
+  "language": "javascript",
+  "repository": "KartikTalwar/gmail.js",
+  "repository_url": "https://github.com/KartikTalwar/gmail.js",
+  "vulnerable_commit": "0e4732cb6c6c447d7f0487580ad7ada33184be92",
+  "fixed_commit": "a83436f499f9c01b04280af945a5a81137b6baf1",
+  "changed_file": "src/gmail.js",
+  "max_score": "1337"
+}

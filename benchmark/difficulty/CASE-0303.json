@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0303",
+  "batch": "topup",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 0,
+  "lines_changed_total": 5,
+  "function_size_chars": 220,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Config keys from JSON assigned into a table with no `__proto__` guard; prototype-pollution assignment pattern."
+}

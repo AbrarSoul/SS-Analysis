@@ -1,0 +1,24 @@
+{
+  "case_id": "github.com_bit-team_backintime_cef81d0da93ff601252607df3db1a48f7f6f01b3",
+  "language": "python",
+  "cve_id": "CVE-2017-16667",
+  "cve_ids_all": [
+    "CVE-2017-16667"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "NotifyPlugin",
+  "imports": [
+    "import os",
+    "import pluginmanager",
+    "import gettext"
+  ],
+  "vulnerable_function": "    def on_message( self, profile_id, profile_name, level, message, timeout ):\n        if 1 == level:\n            cmd = \"notify-send \"\n            if timeout > 0:\n                cmd = cmd + \" -t %s\" % (1000 * timeout)\n\n            title = \"Back In Time (%s) : %s\" % (self.user, profile_name)\n            message = message.replace(\"\\n\", ' ')\n            message = message.replace(\"\\r\", '')\n\n            cmd = cmd + \" \\\"%s\\\" \\\"%s\\\"\" % (title, message)\n            print(cmd)\n            os.system(cmd)\n        return\n",
+  "patched_function": "    def on_message( self, profile_id, profile_name, level, message, timeout ):\n        if 1 == level:\n            cmd = ['notify-send']\n            if timeout > 0:\n                cmd.extend(['-t', str(1000 * timeout)])\n\n            title = \"Back In Time (%s) : %s\" % (self.user, profile_name)\n            message = message.replace(\"\\n\", ' ')\n            message = message.replace(\"\\r\", '')\n\n            cmd.append(title)\n            cmd.append(message)\n            subprocess.Popen(cmd).communicate()\n        return\n",
+  "unified_diff": "diff --git a/qt4/plugins/notifyplugin.py b/qt4/plugins/notifyplugin.py\nindex 1ab063ec..ae019221 100644\n--- a/qt4/plugins/notifyplugin.py\n+++ b/qt4/plugins/notifyplugin.py\n@@ -19,6 +19,7 @@\n import os\n import pluginmanager\n import gettext\n+import subprocess\n \n _=gettext.gettext\n \n@@ -64,15 +65,15 @@ class NotifyPlugin( pluginmanager.Plugin ):\n \n     def on_message( self, profile_id, profile_name, level, message, timeout ):\n         if 1 == level:\n-            cmd = \"notify-send \"\n+            cmd = ['notify-send']\n             if timeout > 0:\n-                cmd = cmd + \" -t %s\" % (1000 * timeout)\n+                cmd.extend(['-t', str(1000 * timeout)])\n \n             title = \"Back In Time (%s) : %s\" % (self.user, profile_name)\n             message = message.replace(\"\\n\", ' ')\n             message = message.replace(\"\\r\", '')\n \n-            cmd = cmd + \" \\\"%s\\\" \\\"%s\\\"\" % (title, message)\n-            print(cmd)\n-            os.system(cmd)\n+            cmd.append(title)\n+            cmd.append(message)\n+            subprocess.Popen(cmd).communicate()\n         return",
+  "auto_locate_confidence": "auto"
+}

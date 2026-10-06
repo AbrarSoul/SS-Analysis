@@ -1,0 +1,13 @@
+diff --git a/Common/Models/DatabaseModels/User.ts b/Common/Models/DatabaseModels/User.ts
+index ac75a449bf..b4ec4d1f48 100644
+--- a/Common/Models/DatabaseModels/User.ts
++++ b/Common/Models/DatabaseModels/User.ts
+@@ -30,7 +30,7 @@ import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+ })
+ @AllowAccessIfSubscriptionIsUnpaid()
+ @TableAccessControl({
+-  create: [Permission.Public],
++  create: [],
+   read: [Permission.CurrentUser],
+   delete: [Permission.CurrentUser],
+   update: [Permission.CurrentUser],

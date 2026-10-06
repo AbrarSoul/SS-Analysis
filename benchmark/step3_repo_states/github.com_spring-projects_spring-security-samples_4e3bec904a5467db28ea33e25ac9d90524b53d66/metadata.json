@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spring-projects_spring-security-samples_4e3bec904a5467db28ea33e25ac9d90524b53d66",
+  "cve_ids": [
+    "CVE-2023-34035"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-security-samples",
+  "repository_url": "https://github.com/spring-projects/spring-security-samples",
+  "vulnerable_commit": "2d2ffb5d7bdcae0c0d32edf3cf4bc3b98d6f2ed7",
+  "fixed_commit": "4e3bec904a5467db28ea33e25ac9d90524b53d66",
+  "changed_file": "servlet/java-configuration/authentication/preauth/src/main/java/example/SecurityConfiguration.java",
+  "max_score": "1337"
+}

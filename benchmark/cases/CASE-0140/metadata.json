@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0140",
+  "original_source_case_id": "github.com_dataease_dataease_956ee2d6c9e81349a60aef435efc046888e10a6d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-39312",
+  "cve_ids_all": [
+    "CVE-2022-39312"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "dataease/dataease",
+  "repository_url": "https://github.com/dataease/dataease",
+  "vulnerable_commit": "176f854bbe188ab55fd270c465e4c893c786a777",
+  "fixed_commit": "956ee2d6c9e81349a60aef435efc046888e10a6d",
+  "changed_file": "backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java",
+  "changed_function": "public String getJdbc() {",
+  "vulnerable_lines": [
+    15,
+    28
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 12,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0140/vulnerable_source.java": "830a9a0efcf63d8be1366c7508c0079c47167c6ace2fce9e22d5d776aaad493f",
+    "cases/CASE-0140/patched_source.java": "18d4d3dab814b567c90f9385b21b33f12a3ae149f32043d7ecd7676ca7f77665",
+    "cases/CASE-0140/patch.diff": "70b68c94fffd0f202c935d1c8c0a13728f3fe20d9e94bf2a11e3b944d3f29d46",
+    "cases/CASE-0140/metadata.json": "b2f108ca306c70cf991c9f7d0acc8d299789d414db04aed0ee9965c533c2e04a",
+    "model_context/CASE-0140.json": "82d2eee7596bb6be6241607456933ec34f48d3a4ec33e08254d2d5f9a6e88298",
+    "difficulty/CASE-0140.json": "9c1cb72b6f88b908f216e24db20cc720f2fcc7f0810f4c002d535a6086d1e961"
+  },
+  "case_level_hash": "18eb697c5bbd1c0c9e3e43bb226b7849eff440a1d2e690f4a6f2b9c2ca741aaa"
+}

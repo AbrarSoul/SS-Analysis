@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jhpyle_docassemble_97f77dc486a26a22ba804765bfd7058aabd600c9",
+  "cve_ids": [
+    "CVE-2024-27292"
+  ],
+  "cwe_ids": [
+    "CWE-706"
+  ],
+  "language": "python",
+  "repository": "jhpyle/docassemble",
+  "repository_url": "https://github.com/jhpyle/docassemble",
+  "vulnerable_commit": "08c984bb0b6c1c0418a6e1469dbe3ae2118e24e8",
+  "fixed_commit": "97f77dc486a26a22ba804765bfd7058aabd600c9",
+  "changed_file": "docassemble_base/docassemble/base/functions.py",
+  "max_score": "1337"
+}

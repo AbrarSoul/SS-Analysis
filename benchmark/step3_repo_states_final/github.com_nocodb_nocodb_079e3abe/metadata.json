@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nocodb_nocodb_079e3abe",
+  "cve_ids": [
+    "CVE-2022-22121"
+  ],
+  "cwe_ids": [
+    "CWE-1236"
+  ],
+  "language": "typescript",
+  "repository": "nocodb/nocodb",
+  "repository_url": "https://github.com/nocodb/nocodb",
+  "vulnerable_commit": "f46e89b07912464b89ac876db0971104e82e0e44",
+  "fixed_commit": "079e3abe98a054f5304592def7a0e8fdb9b06eee",
+  "changed_file": "packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts",
+  "max_score": "1337"
+}

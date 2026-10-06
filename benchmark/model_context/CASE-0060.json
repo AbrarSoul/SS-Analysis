@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0060",
+  "language": "javascript",
+  "cve_id": "CVE-2026-45403",
+  "cve_ids_all": [
+    "CVE-2026-45403"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-59",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const fs = require(\"fs/promises\");",
+    "const path = require(\"path\");",
+    "const filesystem = require(\"./lib.js\");"
+  ],
+  "vulnerable_function": "async function copyRecursive(source, destination) {\n  const stats = await fs.stat(source);\n\n  if (stats.isDirectory()) {\n    await fs.mkdir(destination, { recursive: true });\n    const entries = await fs.readdir(source);\n    for (const entry of entries) {\n      await copyRecursive(\n        path.join(source, entry),\n        path.join(destination, entry)\n      );\n    }\n  } else {\n    await fs.copyFile(source, destination);\n  }\n}",
+  "patched_function": "async function copyRecursive(source, destination) {\n  const lstat = await fs.lstat(source);\n\n  if (lstat.isSymbolicLink()) {\n    throw new Error(\n      `Cannot copy symbolic link: ${source}. Symlinks are not allowed during copy operations.`\n    );\n  }\n\n  if (lstat.isDirectory()) {\n    await fs.mkdir(destination, { recursive: true });\n    const entries = await fs.readdir(source);\n    for (const entry of entries) {\n      await copyRecursive(\n        path.join(source, entry),\n        path.join(destination, entry)\n      );\n    }\n  } else {\n    await fs.copyFile(source, destination);\n  }\n}",
+  "unified_diff": "diff --git a/server/utils/agents/aibitat/plugins/filesystem/copy-file.js b/server/utils/agents/aibitat/plugins/filesystem/copy-file.js\nindex fd22cb27..ab18559e 100644\n--- a/server/utils/agents/aibitat/plugins/filesystem/copy-file.js\n+++ b/server/utils/agents/aibitat/plugins/filesystem/copy-file.js\n@@ -3,9 +3,15 @@ const path = require(\"path\");\n const filesystem = require(\"./lib.js\");\n \n async function copyRecursive(source, destination) {\n-  const stats = await fs.stat(source);\n+  const lstat = await fs.lstat(source);\n \n-  if (stats.isDirectory()) {\n+  if (lstat.isSymbolicLink()) {\n+    throw new Error(\n+      `Cannot copy symbolic link: ${source}. Symlinks are not allowed during copy operations.`\n+    );\n+  }\n+\n+  if (lstat.isDirectory()) {\n     await fs.mkdir(destination, { recursive: true });\n     const entries = await fs.readdir(source);\n     for (const entry of entries) {",
+  "auto_locate_confidence": "auto"
+}

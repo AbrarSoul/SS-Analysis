@@ -1,0 +1,60 @@
+{
+  "case_id": "CASE-0069",
+  "language": "java",
+  "cve_id": "CVE-2023-0872",
+  "cve_ids_all": [
+    "CVE-2023-0872",
+    "CVE-2023-40612"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-269",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-91",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.security.Principal;",
+    "import java.util.Collections;",
+    "import java.util.Comparator;",
+    "import javax.ws.rs.Consumes;",
+    "import javax.ws.rs.DELETE;",
+    "import javax.ws.rs.GET;",
+    "import javax.ws.rs.POST;",
+    "import javax.ws.rs.PUT;",
+    "import javax.ws.rs.Path;",
+    "import javax.ws.rs.PathParam;",
+    "import javax.ws.rs.Produces;",
+    "import javax.ws.rs.QueryParam;",
+    "import javax.ws.rs.core.Context;",
+    "import javax.ws.rs.core.MediaType;",
+    "import javax.ws.rs.core.Response;",
+    "import javax.ws.rs.core.Response.Status;",
+    "import javax.ws.rs.core.SecurityContext;",
+    "import javax.ws.rs.core.UriInfo;",
+    "import org.opennms.netmgt.config.UserManager;",
+    "import org.opennms.netmgt.model.OnmsUser;",
+    "import org.opennms.netmgt.model.OnmsUserList;",
+    "import org.opennms.web.api.Authentication;",
+    "import org.opennms.web.rest.support.MultivaluedMapImpl;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.springframework.beans.BeanWrapper;",
+    "import org.springframework.beans.PropertyAccessorFactory;",
+    "import org.springframework.beans.factory.annotation.Autowired;",
+    "import org.springframework.stereotype.Component;",
+    "import org.springframework.transaction.annotation.Transactional;"
+  ],
+  "vulnerable_function": "    private static boolean hasEditRights(SecurityContext securityContext) {\n        if (securityContext.isUserInRole(Authentication.ROLE_ADMIN) || securityContext.isUserInRole(Authentication.ROLE_REST)) {\n            return true;\n        } else {\n            return false;\n        }\n    }",
+  "patched_function": "    private static boolean hasEditRights(SecurityContext securityContext) {\n        if (securityContext.isUserInRole(Authentication.ROLE_ADMIN)) {\n            return true;\n        } else {\n            return false;\n        }\n    }",
+  "unified_diff": "diff --git a/opennms-webapp-rest/src/main/java/org/opennms/web/rest/v1/UserRestService.java b/opennms-webapp-rest/src/main/java/org/opennms/web/rest/v1/UserRestService.java\nindex 6121e90c1fc..eb15a3a34eb 100644\n--- a/opennms-webapp-rest/src/main/java/org/opennms/web/rest/v1/UserRestService.java\n+++ b/opennms-webapp-rest/src/main/java/org/opennms/web/rest/v1/UserRestService.java\n@@ -283,7 +283,7 @@ public class UserRestService extends OnmsRestService {\n     }\n \n     private static boolean hasEditRights(SecurityContext securityContext) {\n-        if (securityContext.isUserInRole(Authentication.ROLE_ADMIN) || securityContext.isUserInRole(Authentication.ROLE_REST)) {\n+        if (securityContext.isUserInRole(Authentication.ROLE_ADMIN)) {\n             return true;\n         } else {\n             return false;",
+  "auto_locate_confidence": "auto"
+}

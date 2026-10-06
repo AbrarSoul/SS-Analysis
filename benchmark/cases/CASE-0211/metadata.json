@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0211",
+  "original_source_case_id": "github.com_langchain-ai_langchain_de9a6cdf163ed00adaf2e559203ed0a9ca2f1de7",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-27444",
+  "cve_ids_all": [
+    "CVE-2024-27444"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-749"
+  ],
+  "language": "python",
+  "repository": "langchain-ai/langchain",
+  "repository_url": "https://github.com/langchain-ai/langchain",
+  "vulnerable_commit": "8562a1e7d44c3e9d9eed7f99288851b5d372e4ad",
+  "fixed_commit": "de9a6cdf163ed00adaf2e559203ed0a9ca2f1de7",
+  "changed_file": "libs/experimental/langchain_experimental/pal_chain/base.py",
+  "changed_function": "def validate_code(cls, code: str, code_validations: PALValidation) -> None:",
+  "vulnerable_lines": [
+    171,
+    260
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 19,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0211/vulnerable_source.py": "74f820646f8a77a77a18c4d943cecbe1360ee69210673d3f4ac1341ce17bf8de",
+    "cases/CASE-0211/patched_source.py": "f32117d2c6e05fae872720d5972ff7d1f91ed8a6c4ca7ddbebe3a7e254ca5019",
+    "cases/CASE-0211/patch.diff": "a7ede090cb490a2aa794ea7a8b72e0b0170a137463d1d413a3e1842582405e66",
+    "cases/CASE-0211/metadata.json": "5cdeec46327a2eaf1b58e7c96492cac2c3e729cf92a4561d4b831a8b3b4e7aa1",
+    "model_context/CASE-0211.json": "49eb0a0d6330e3af27baefba7ef04378e5975b71a72318247dc0a38338e2b3ea",
+    "difficulty/CASE-0211.json": "41af0a488d7bc0604dea0fcdddb051c021a67f0ee3922f9b6c59b15e806db56e"
+  },
+  "case_level_hash": "1e3d87ff3105a218577bceae1a67ccc41e38f7c489e73853ce58e6256abceafb"
+}

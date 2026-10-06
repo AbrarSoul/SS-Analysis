@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_google-login-plugin_2273af025ad06ee13ab73a5a070b10689c2db61e",
+  "cve_ids": [
+    "CVE-2023-41936"
+  ],
+  "cwe_ids": [
+    "CWE-697"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/google-login-plugin",
+  "repository_url": "https://github.com/jenkinsci/google-login-plugin",
+  "vulnerable_commit": "af1b61fbafd8612db70b3a8dd23c7be8d2d29f96",
+  "fixed_commit": "2273af025ad06ee13ab73a5a070b10689c2db61e",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/googlelogin/OAuthSession.java",
+  "max_score": "1337"
+}

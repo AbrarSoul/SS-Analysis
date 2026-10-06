@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_openedx_openedx-translations_3c4093705dec99590577c4d8270ce263f7fffc5a",
+  "language": "python",
+  "cve_id": "CVE-2024-43782",
+  "cve_ids_all": [
+    "CVE-2024-43782"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import argparse",
+    "import os",
+    "import os.path",
+    "import subprocess",
+    "import sys"
+  ],
+  "vulnerable_function": "def validate_translation_file(po_file):\n    \"\"\"\n    Validate a translation file and return errors if any.\n\n    This function combines both stderr and stdout output of the `msgfmt` in a\n    single variable.\n    \"\"\"\n    completed_process = subprocess.run(\n        ['msgfmt', '-v', '--strict', '--check', po_file],\n        stdout=subprocess.PIPE,\n        stderr=subprocess.PIPE,\n    )\n\n    stdout = completed_process.stdout.decode(encoding='utf-8', errors='replace')\n    stderr = completed_process.stderr.decode(encoding='utf-8', errors='replace')\n\n    return {\n        'valid': completed_process.returncode == 0,\n        'output': f'{stdout}\\n{stderr}',\n    }\n",
+  "patched_function": "def validate_translation_file(po_file):\n    \"\"\"\n    Validate a translation file and return errors if any.\n\n    This function combines both stderr and stdout output of the `msgfmt` in a\n    single variable.\n    \"\"\"\n    valid = True\n    output = \"\"\n\n    completed_process = subprocess.run(\n        ['msgfmt', '-v', '--strict', '--check', po_file],\n        stdout=subprocess.PIPE,\n        stderr=subprocess.PIPE,\n    )\n\n    if completed_process.returncode != 0:\n        valid = False\n\n    msgfmt_stdout = completed_process.stdout.decode(encoding='utf-8', errors='replace')\n    msgfmt_stderr = completed_process.stderr.decode(encoding='utf-8', errors='replace')\n    output += f'{msgfmt_stdout}\\n{msgfmt_stderr}\\n'\n\n    try:\n      problems = i18n.validate.check_messages(po_file)\n    except Exception as e:\n      output += f'{e} {traceback.format_exc()}'\n      valid = False\n      problems = []\n    if problems:\n        valid = False\n\n    id_filler = textwrap.TextWrapper(width=79, initial_indent=\"  msgid: \", subsequent_indent=\" \" * 9)\n    tx_filler = textwrap.TextWrapper(width=79, initial_indent=\"  -----> \", subsequent_indent=\" \" * 9)\n    for problem in problems:\n        desc, msgid = problem[:2]\n        output += f\"{desc}\\n{id_filler.fill(msgid)}\\n\"\n        for translation in problem[2:]:\n            output += f\"{tx_filler.fill(translation)}\\n\"\n        output += \"\\n\"\n\n    return {\n        'valid': valid,\n        'output': output,\n    }\n",
+  "unified_diff": "diff --git a/scripts/validate_translation_files.py b/scripts/validate_translation_files.py\nindex e9d98e4f66..da7c9120a0 100644\n--- a/scripts/validate_translation_files.py\n+++ b/scripts/validate_translation_files.py\n@@ -7,7 +7,9 @@ import os\n import os.path\n import subprocess\n import sys\n+import textwrap\n \n+import i18n.validate\n \n def get_translation_files(translation_directory):\n     \"\"\"\n@@ -29,18 +31,43 @@ def validate_translation_file(po_file):\n     This function combines both stderr and stdout output of the `msgfmt` in a\n     single variable.\n     \"\"\"\n+    valid = True\n+    output = \"\"\n+\n     completed_process = subprocess.run(\n         ['msgfmt', '-v', '--strict', '--check', po_file],\n         stdout=subprocess.PIPE,\n         stderr=subprocess.PIPE,\n     )\n \n-    stdout = completed_process.stdout.decode(encoding='utf-8', errors='replace')\n-    stderr = completed_process.stderr.decode(encoding='utf-8', errors='replace')\n+    if completed_process.returncode != 0:\n+        valid = False\n+\n+    msgfmt_stdout = completed_process.stdout.decode(encoding='utf-8', errors='replace')\n+    msgfmt_stderr = completed_process.stderr.decode(encoding='utf-8', errors='replace')\n+    output += f'{msgfmt_stdout}\\n{msgfmt_stderr}\\n'\n+\n+    try:\n+      problems = i18n.validate.check_messages(po_file)\n+    except Exception as e:\n+      output += f'{e} {traceback.format_exc()}'\n+      valid = False\n+      problems = []\n+    if problems:\n+        valid = False\n+\n+    id_filler = textwrap.TextWrapper(width=79, initial_indent=\"  msgid: \", subsequent_indent=\" \" * 9)\n+    tx_filler = textwrap.TextWrapper(width=79, initial_indent=\"  -----> \", subsequent_indent=\" \" * 9)\n+    for problem in problems:\n+        desc, msgid = problem[:2]\n+        output += f\"{desc}\\n{id_filler.fill(msgid)}\\n\"\n+        for translation in problem[2:]:\n+            output += f\"{tx_filler.fill(translation)}\\n\"\n+        output += \"\\n\"\n \n     return {\n-        'valid': completed_process.returncode == 0,\n-        'output': f'{stdout}\\n{stderr}',\n+        'valid': valid,\n+        'output': output,\n     }\n \n ",
+  "auto_locate_confidence": "auto"
+}

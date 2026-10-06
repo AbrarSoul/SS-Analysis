@@ -1,0 +1,22 @@
+{
+  "case_id": "github.com_apache_poi_25bc679244188d63de690354db0e3f301291e252",
+  "language": "java",
+  "cve_id": "CVE-2012-0213",
+  "cve_ids_all": [
+    "CVE-2012-0213"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-399",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import org.apache.poi.util.Internal;"
+  ],
+  "vulnerable_function": "  public UnhandledDataStructure(byte[] buf, int offset, int length)\n  {\n//    System.out.println(\"Yes, using my code\");\n    _buf = new byte[length];\n    if (offset + length > buf.length)\n    {\n      throw new IndexOutOfBoundsException(\"buffer length is \" + buf.length +\n                                          \"but code is trying to read \" + length + \" from offset \" + offset);\n    }\n    System.arraycopy(buf, offset, _buf, 0, length);\n  }",
+  "patched_function": "  public UnhandledDataStructure(byte[] buf, int offset, int length)\n  {\n    // Sanity check the size they've asked for\n    if (offset + length > buf.length)\n    {\n      throw new IndexOutOfBoundsException(\"Buffer Length is \" + buf.length + \" \" +\n                                          \"but code is tried to read \" + length + \" from offset \" + offset);\n    }\n    if (offset < 0 || length < 0)\n    {\n       throw new IndexOutOfBoundsException(\"Offset and Length must both be >= 0, negative \" +\n       \t\t\"indicies are not permitted - code is tried to read \" + length + \" from offset \" + offset);\n    }\n    \n    // Save that requested portion of the data \n    _buf = Arrays.copyOfRange(buf, offset, offset + length);\n  }",
+  "unified_diff": "diff --git a/src/scratchpad/src/org/apache/poi/hwpf/model/UnhandledDataStructure.java b/src/scratchpad/src/org/apache/poi/hwpf/model/UnhandledDataStructure.java\nindex 441ec0310b..6cf53f7460 100644\n--- a/src/scratchpad/src/org/apache/poi/hwpf/model/UnhandledDataStructure.java\n+++ b/src/scratchpad/src/org/apache/poi/hwpf/model/UnhandledDataStructure.java\n@@ -17,8 +17,15 @@\n \n package org.apache.poi.hwpf.model;\n \n+import java.util.Arrays;\n+\n import org.apache.poi.util.Internal;\n \n+/**\n+ * A data structure used to hold some data we don't\n+ *  understand / can't handle, so we have it available\n+ *  for when we come to write back out again \n+ */\n @Internal\n public final class UnhandledDataStructure\n {\n@@ -26,14 +33,20 @@ public final class UnhandledDataStructure\n \n   public UnhandledDataStructure(byte[] buf, int offset, int length)\n   {\n-//    System.out.println(\"Yes, using my code\");\n-    _buf = new byte[length];\n+    // Sanity check the size they've asked for\n     if (offset + length > buf.length)\n     {\n-      throw new IndexOutOfBoundsException(\"buffer length is \" + buf.length +\n-                                          \"but code is trying to read \" + length + \" from offset \" + offset);\n+      throw new IndexOutOfBoundsException(\"Buffer Length is \" + buf.length + \" \" +\n+                                          \"but code is tried to read \" + length + \" from offset \" + offset);\n+    }\n+    if (offset < 0 || length < 0)\n+    {\n+       throw new IndexOutOfBoundsException(\"Offset and Length must both be >= 0, negative \" +\n+       \t\t\"indicies are not permitted - code is tried to read \" + length + \" from offset \" + offset);\n     }\n-    System.arraycopy(buf, offset, _buf, 0, length);\n+    \n+    // Save that requested portion of the data \n+    _buf = Arrays.copyOfRange(buf, offset, offset + length);\n   }\n \n   byte[] getBuf()",
+  "auto_locate_confidence": "auto"
+}

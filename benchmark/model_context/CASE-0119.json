@@ -1,0 +1,60 @@
+{
+  "case_id": "CASE-0119",
+  "language": "java",
+  "cve_id": "CVE-2017-5650",
+  "cve_ids_all": [
+    "CVE-2017-5650"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-404",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.EOFException;",
+    "import java.io.IOException;",
+    "import java.nio.ByteBuffer;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.Collections;",
+    "import java.util.HashMap;",
+    "import java.util.HashSet;",
+    "import java.util.Iterator;",
+    "import java.util.Map;",
+    "import java.util.Map.Entry;",
+    "import java.util.Queue;",
+    "import java.util.Set;",
+    "import java.util.TreeSet;",
+    "import java.util.concurrent.ConcurrentHashMap;",
+    "import java.util.concurrent.ConcurrentLinkedQueue;",
+    "import java.util.concurrent.ConcurrentMap;",
+    "import java.util.concurrent.atomic.AtomicInteger;",
+    "import java.util.concurrent.atomic.AtomicReference;",
+    "import javax.servlet.http.WebConnection;",
+    "import org.apache.coyote.Adapter;",
+    "import org.apache.coyote.CloseNowException;",
+    "import org.apache.coyote.ProtocolException;",
+    "import org.apache.coyote.Request;",
+    "import org.apache.coyote.Response;",
+    "import org.apache.coyote.http11.upgrade.InternalHttpUpgradeHandler;",
+    "import org.apache.coyote.http2.HpackDecoder.HeaderEmitter;",
+    "import org.apache.coyote.http2.HpackEncoder.State;",
+    "import org.apache.coyote.http2.Http2Parser.Input;",
+    "import org.apache.coyote.http2.Http2Parser.Output;",
+    "import org.apache.juli.logging.Log;",
+    "import org.apache.juli.logging.LogFactory;",
+    "import org.apache.tomcat.util.codec.binary.Base64;",
+    "import org.apache.tomcat.util.http.FastHttpDateFormat;",
+    "import org.apache.tomcat.util.http.MimeHeaders;",
+    "import org.apache.tomcat.util.net.AbstractEndpoint.Handler.SocketState;",
+    "import org.apache.tomcat.util.net.SSLSupport;",
+    "import org.apache.tomcat.util.net.SocketEvent;",
+    "import org.apache.tomcat.util.net.SocketWrapperBase;",
+    "import org.apache.tomcat.util.res.StringManager;"
+  ],
+  "vulnerable_function": "    private void close() {\n        connectionState.set(ConnectionState.CLOSED);\n        try {\n            socketWrapper.close();\n        } catch (IOException ioe) {\n            log.debug(sm.getString(\"upgradeHandler.socketCloseFailed\"), ioe);\n        }\n    }",
+  "patched_function": "    private void close() {\n        connectionState.set(ConnectionState.CLOSED);\n        for (Stream stream : streams.values()) {\n            // The connection is closing. Close the associated streams as no\n            // longer required.\n            stream.receiveReset(Http2Error.CANCEL.getCode());\n        }\n        try {\n            socketWrapper.close();\n        } catch (IOException ioe) {\n            log.debug(sm.getString(\"upgradeHandler.socketCloseFailed\"), ioe);\n        }\n    }",
+  "unified_diff": "diff --git a/java/org/apache/coyote/http2/Http2UpgradeHandler.java b/java/org/apache/coyote/http2/Http2UpgradeHandler.java\nindex 15c444436b..e065f100a1 100644\n--- a/java/org/apache/coyote/http2/Http2UpgradeHandler.java\n+++ b/java/org/apache/coyote/http2/Http2UpgradeHandler.java\n@@ -983,6 +983,11 @@ public class Http2UpgradeHandler extends AbstractStream implements InternalHttpU\n \n     private void close() {\n         connectionState.set(ConnectionState.CLOSED);\n+        for (Stream stream : streams.values()) {\n+            // The connection is closing. Close the associated streams as no\n+            // longer required.\n+            stream.receiveReset(Http2Error.CANCEL.getCode());\n+        }\n         try {\n             socketWrapper.close();\n         } catch (IOException ioe) {",
+  "auto_locate_confidence": "auto"
+}

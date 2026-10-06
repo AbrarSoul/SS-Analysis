@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_electron_electron_519a02d8d4d28e8a467acb40fb26172a80c9454f",
+  "language": "javascript",
+  "cve_id": "CVE-2018-15685",
+  "cve_ids_all": [
+    "CVE-2018-15685"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1188",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const {BrowserWindow, ipcMain, webContents} = require('electron')",
+    "const parseFeaturesString = require('../common/parse-features-string')"
+  ],
+  "vulnerable_function": ".hasOwnProperty\nconst frameToGuest = new Map()\n\n// Security options that child windows will always inherit from parent windows\nconst inheritedWebPreferences = new Map([\n  ['contextIsolation', true],\n  ['javascript', false],\n  ['nativeWindowOpen', true],\n  ['nodeIntegration', false],\n  ['sandbox', true],\n  ['webviewTag', false]\n])\n\n// Copy attribute of |parent| to |child| if it is not defined in |child|.\nconst mergeOptions = function (child, parent, visited) {\n  // Check for circular reference.\n  if (visited == null) visited = new Set()\n  if (visited.has(parent)) return\n\n  visited.add(parent)\n  for (const key in parent) {\n    if (!hasProp.call(parent, key)) continue\n    if (key in child) continue\n\n    const value = parent[key]\n    if (typeof value === 'object') {\n      child[key] = mergeOptions({}, value, visited)\n    } else {\n      child[key] = value\n    }\n  }\n  visited.delete(parent)\n\n  return child\n}",
+  "patched_function": ".hasOwnProperty\nconst frameToGuest = new Map()\n\n// Security options that child windows will always inherit from parent windows\nconst inheritedWebPreferences = new Map([\n  ['contextIsolation', true],\n  ['javascript', false],\n  ['nativeWindowOpen', true],\n  ['nodeIntegration', false],\n  ['sandbox', true],\n  ['webviewTag', false]\n])\n\n// Copy attribute of |parent| to |child| if it is not defined in |child|.\nconst mergeOptions = function (child, parent, visited) {\n  // Check for circular reference.\n  if (visited == null) visited = new Set()\n  if (visited.has(parent)) return\n\n  visited.add(parent)\n  for (const key in parent) {\n    if (!hasProp.call(parent, key)) continue\n    if (key in child && key !== 'webPreferences') continue\n\n    const value = parent[key]\n    if (typeof value === 'object') {\n      child[key] = mergeOptions(child[key] || {}, value, visited)\n    } else {\n      child[key] = value\n    }\n  }\n  visited.delete(parent)\n\n  return child\n}",
+  "unified_diff": "diff --git a/lib/browser/guest-window-manager.js b/lib/browser/guest-window-manager.js\nindex 272d29f961..6ff9e5f530 100644\n--- a/lib/browser/guest-window-manager.js\n+++ b/lib/browser/guest-window-manager.js\n@@ -26,11 +26,11 @@ const mergeOptions = function (child, parent, visited) {\n   visited.add(parent)\n   for (const key in parent) {\n     if (!hasProp.call(parent, key)) continue\n-    if (key in child) continue\n+    if (key in child && key !== 'webPreferences') continue\n \n     const value = parent[key]\n     if (typeof value === 'object') {\n-      child[key] = mergeOptions({}, value, visited)\n+      child[key] = mergeOptions(child[key] || {}, value, visited)\n     } else {\n       child[key] = value\n     }",
+  "auto_locate_confidence": "auto"
+}

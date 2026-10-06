@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_c44172a3556d12b62c0d793ab18475e5e13d7120",
+  "cve_ids": [
+    "CVE-2006-7223"
+  ],
+  "cwe_ids": [
+    "CWE-264"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "29ecaa4c5a2cb16617f91138083c876d93fe822c",
+  "fixed_commit": "c44172a3556d12b62c0d793ab18475e5e13d7120",
+  "changed_file": "src/main/java/com/xpn/xwiki/web/PreviewAction.java",
+  "max_score": "1337"
+}

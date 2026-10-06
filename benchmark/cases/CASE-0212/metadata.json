@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0212",
+  "original_source_case_id": "github.com_linuxmint_warpinator_f4907ef6a17a189d56ab0a9da4b53190b061ad75",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-42725",
+  "cve_ids_all": [
+    "CVE-2022-42725"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-59"
+  ],
+  "language": "python",
+  "repository": "linuxmint/warpinator",
+  "repository_url": "https://github.com/linuxmint/warpinator",
+  "vulnerable_commit": "5244c33d4c109ede9607b9d94461650410e2cddc",
+  "fixed_commit": "f4907ef6a17a189d56ab0a9da4b53190b061ad75",
+  "changed_file": "src/util.py",
+  "changed_function": "def files_exist(base_names):",
+  "vulnerable_lines": [
+    262,
+    270
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0212/vulnerable_source.py": "3e1cf64f089c238e71945b4abde6d1f1ee595813e01cdb55100031f897d1c5ad",
+    "cases/CASE-0212/patched_source.py": "82f1272b40ffc9f42a579e5e008ce755bccde516b11dea3c96aba1cab73710ed",
+    "cases/CASE-0212/patch.diff": "17ef3609df024d65b3600e4a5cb7d7abe7647757fd38036df3de2be653cec872",
+    "cases/CASE-0212/metadata.json": "967d2940786ee5f972e1a01e3c69e97d08e14ba948e64c23e9d9246d6ad1dba5",
+    "model_context/CASE-0212.json": "f34e939dc96387727165430a0b041dd2979838a405fbdfcfb03afc0b7a73ab99",
+    "difficulty/CASE-0212.json": "77d298432fa3e649eb102cbda9c269f1c0c592779036cab22cea7a3b16b67864"
+  },
+  "case_level_hash": "571d7596b4835978db10799145a3c4f359e16142176fa7d619a48fa44e6cfe91"
+}

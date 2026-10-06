@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0283",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 0,
+  "lines_changed_total": 3,
+  "function_size_chars": 675,
+  "function_size_lines": 20,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Shell-character denylist omits newline, tab and double quote; missing entries in a matchable literal list."
+}

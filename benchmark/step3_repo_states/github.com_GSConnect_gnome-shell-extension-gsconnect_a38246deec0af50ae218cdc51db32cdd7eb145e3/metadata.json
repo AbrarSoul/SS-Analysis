@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_GSConnect_gnome-shell-extension-gsconnect_a38246deec0af50ae218cdc51db32cdd7eb145e3",
+  "cve_ids": [
+    "CVE-2025-66270"
+  ],
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "language": "javascript",
+  "repository": "GSConnect/gnome-shell-extension-gsconnect",
+  "repository_url": "https://github.com/GSConnect/gnome-shell-extension-gsconnect",
+  "vulnerable_commit": "3fd175bc600d5ecce5c6a129b3b51d22ca40a43b",
+  "fixed_commit": "a38246deec0af50ae218cdc51db32cdd7eb145e3",
+  "changed_file": "src/service/backends/lan.js",
+  "max_score": "1337"
+}

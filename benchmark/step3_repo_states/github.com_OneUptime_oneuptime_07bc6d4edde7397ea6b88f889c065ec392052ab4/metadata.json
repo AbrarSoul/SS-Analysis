@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_OneUptime_oneuptime_07bc6d4edde7397ea6b88f889c065ec392052ab4",
+  "cve_ids": [
+    "CVE-2025-65966"
+  ],
+  "cwe_ids": [
+    "CWE-285"
+  ],
+  "language": "typescript",
+  "repository": "OneUptime/oneuptime",
+  "repository_url": "https://github.com/OneUptime/oneuptime",
+  "vulnerable_commit": "8642a54fec5e976258f4f95a4dac4b4c8d5ba7de",
+  "fixed_commit": "07bc6d4edde7397ea6b88f889c065ec392052ab4",
+  "changed_file": "Common/Models/DatabaseModels/User.ts",
+  "max_score": "1337"
+}

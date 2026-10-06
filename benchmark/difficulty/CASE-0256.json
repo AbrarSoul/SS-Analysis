@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0256",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-91"
+  ],
+  "changed_files": 1,
+  "lines_added": 20,
+  "lines_removed": 2,
+  "lines_changed_total": 22,
+  "function_size_chars": 2200,
+  "function_size_lines": 55,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "etree.parse called with no explicit parser on untrusted XML; known lxml XXE pattern."
+}

@@ -1,0 +1,49 @@
+{
+  "case_id": "github.com_gaizhenbiao_chuanhuchatgpt_e46ec4ecd896bc3c88eb9a2f44e8593f3c6761b4",
+  "language": "python",
+  "cve_id": "CVE-2024-5124",
+  "cve_ids_all": [
+    "CVE-2024-5124"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-203",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from __future__ import annotations",
+    "from typing import TYPE_CHECKING, Any, Callable, Dict, List, Tuple, Type",
+    "from enum import Enum",
+    "import logging",
+    "import commentjson as json",
+    "import os",
+    "import datetime",
+    "import csv",
+    "import threading",
+    "import requests",
+    "import re",
+    "import html",
+    "import hashlib",
+    "import gradio as gr",
+    "import getpass",
+    "from pypinyin import lazy_pinyin",
+    "import tiktoken",
+    "from markdown import markdown",
+    "from pygments import highlight",
+    "from pygments.lexers import get_lexer_by_name",
+    "from pygments.formatters import HtmlFormatter",
+    "import pandas as pd",
+    "import colorama",
+    "from modules.presets import *",
+    "from . import shared",
+    "from modules.config import retrieve_proxy, hide_history_when_not_logged_in",
+    "from .models.base_model import BaseLLMModel",
+    "import sys"
+  ],
+  "vulnerable_function": "def auth_from_conf(username, password):\n    try:\n        with open(\"config.json\", encoding=\"utf-8\") as f:\n            conf = json.load(f)\n        usernames, passwords = [i[0] for i in conf[\"users\"]], [\n            i[1] for i in conf[\"users\"]\n        ]\n        if username in usernames:\n            if passwords[usernames.index(username)] == password:\n                return True\n        return False\n    except:\n        return False\n",
+  "patched_function": "def auth_from_conf(username, password):\n    try:\n        with open(\"config.json\", \"r\", encoding=\"utf-8\") as f:\n            conf = json.load(f)\n        # Create a dictionary with usernames as keys and passwords as values\n        user_dict = {user[0]: user[1] for user in conf[\"users\"]}\n\n        # Constant-time check if the username exists and the password matches\n        user_password = user_dict.get(username)\n        if user_password is not None:\n            return hmac.compare_digest(user_password, password)\n        return False\n    except FileNotFoundError:\n        print(\"Configuration file not found.\")\n        return False\n    except json.JSONDecodeError:\n        print(\"Error decoding JSON.\")\n        return False\n    except Exception as e:\n        # General exception handling; consider logging this properly\n        print(f\"An unexpected error occurred: {str(e)}\")\n        return False\n",
+  "unified_diff": "diff --git a/modules/utils.py b/modules/utils.py\nindex de6c58e..74c0e3c 100644\n--- a/modules/utils.py\n+++ b/modules/utils.py\n@@ -10,6 +10,7 @@ import csv\n import threading\n import requests\n import re\n+import hmac\n import html\n import hashlib\n \n@@ -835,16 +836,25 @@ def beautify_err_msg(err_msg):\n \n def auth_from_conf(username, password):\n     try:\n-        with open(\"config.json\", encoding=\"utf-8\") as f:\n+        with open(\"config.json\", \"r\", encoding=\"utf-8\") as f:\n             conf = json.load(f)\n-        usernames, passwords = [i[0] for i in conf[\"users\"]], [\n-            i[1] for i in conf[\"users\"]\n-        ]\n-        if username in usernames:\n-            if passwords[usernames.index(username)] == password:\n-                return True\n+        # Create a dictionary with usernames as keys and passwords as values\n+        user_dict = {user[0]: user[1] for user in conf[\"users\"]}\n+\n+        # Constant-time check if the username exists and the password matches\n+        user_password = user_dict.get(username)\n+        if user_password is not None:\n+            return hmac.compare_digest(user_password, password)\n         return False\n-    except:\n+    except FileNotFoundError:\n+        print(\"Configuration file not found.\")\n+        return False\n+    except json.JSONDecodeError:\n+        print(\"Error decoding JSON.\")\n+        return False\n+    except Exception as e:\n+        # General exception handling; consider logging this properly\n+        print(f\"An unexpected error occurred: {str(e)}\")\n         return False\n \n \n@@ -1483,4 +1493,3 @@ def setPlaceholder(model_name: str | None = \"\", model: BaseLLMModel | None = Non\n             chatbot_ph_slogan_class = slogan_class,\n             chatbot_ph_question_class = question_class\n         )\n-",
+  "auto_locate_confidence": "auto"
+}

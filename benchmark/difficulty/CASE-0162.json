@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0162",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 3,
+  "lines_changed_total": 6,
+  "function_size_chars": 180,
+  "function_size_lines": 5,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Ids %-formatted into a command string passed to commands.getoutput; shell injection."
+}

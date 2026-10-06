@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0204",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 19,
+  "lines_removed": 0,
+  "lines_changed_total": 19,
+  "function_size_chars": 305,
+  "function_size_lines": 11,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Chrome page loads user HTML with only a request logger and no setRequestInterception; missing-call shape."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_sidebar-link-plugin_1bfd878ee107cdf349bc6a6bf3e9e6e25ef95ad5",
+  "cve_ids": [
+    "CVE-2023-32985"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/sidebar-link-plugin",
+  "repository_url": "https://github.com/jenkinsci/sidebar-link-plugin",
+  "vulnerable_commit": "0f93746cf7236a8997e461cac12f518325354580",
+  "fixed_commit": "1bfd878ee107cdf349bc6a6bf3e9e6e25ef95ad5",
+  "changed_file": "src/main/java/hudson/plugins/sidebar_link/SidebarLinkPlugin.java",
+  "max_score": "1337"
+}

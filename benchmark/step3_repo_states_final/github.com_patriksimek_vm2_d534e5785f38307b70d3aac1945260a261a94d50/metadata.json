@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_patriksimek_vm2_d534e5785f38307b70d3aac1945260a261a94d50",
+  "cve_ids": [
+    "CVE-2023-29017"
+  ],
+  "cwe_ids": [
+    "CWE-913"
+  ],
+  "language": "javascript",
+  "repository": "patriksimek/vm2",
+  "repository_url": "https://github.com/patriksimek/vm2",
+  "vulnerable_commit": "e541782b7ff709c07676d07d982517d0591e5774",
+  "fixed_commit": "d534e5785f38307b70d3aac1945260a261a94d50",
+  "changed_file": "lib/setup-sandbox.js",
+  "max_score": "1337"
+}

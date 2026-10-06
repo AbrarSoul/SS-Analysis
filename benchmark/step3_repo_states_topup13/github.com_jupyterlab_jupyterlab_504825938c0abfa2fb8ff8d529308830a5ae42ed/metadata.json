@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jupyterlab_jupyterlab_504825938c0abfa2fb8ff8d529308830a5ae42ed",
+  "cve_ids": [
+    "CVE-2021-32797"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "typescript",
+  "repository": "jupyterlab/jupyterlab",
+  "repository_url": "https://github.com/jupyterlab/jupyterlab",
+  "vulnerable_commit": "ccb65656e3ed9c47d3e6fedbcff2405885d0bcaa",
+  "fixed_commit": "504825938c0abfa2fb8ff8d529308830a5ae42ed",
+  "changed_file": "packages/apputils/src/sanitizer.ts",
+  "max_score": "1337"
+}

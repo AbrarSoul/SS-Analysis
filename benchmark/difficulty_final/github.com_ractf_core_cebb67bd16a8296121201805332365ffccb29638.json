@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_ractf_core_cebb67bd16a8296121201805332365ffccb29638",
+  "batch": "topup33",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 968,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0166",
+  "original_source_case_id": "github.com_foxinmy_weixin4j_d1c825835802cd3a0c04772be1220ff4476ea27c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-24819",
+  "cve_ids_all": [
+    "CVE-2026-24819"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1325"
+  ],
+  "language": "java",
+  "repository": "foxinmy/weixin4j",
+  "repository_url": "https://github.com/foxinmy/weixin4j",
+  "vulnerable_commit": "4b7ad14df6567064b468b4c9cb7a8bfeff48c8bd",
+  "fixed_commit": "d1c825835802cd3a0c04772be1220ff4476ea27c",
+  "changed_file": "weixin4j-base/src/main/java/com/foxinmy/weixin4j/util/CharArrayBuffer.java",
+  "changed_function": "public void ensureCapacity(final int required) {",
+  "vulnerable_lines": [
+    303,
+    311
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0166/vulnerable_source.java": "707dc0f54e6d86f18e96e49e1fed7f02afee8f652ca035dc9bc3ebe6e531a310",
+    "cases/CASE-0166/patched_source.java": "df0762d3c58f8df6e067cadad134b828d90a0a76f5a25e31bf130646d17e995e",
+    "cases/CASE-0166/patch.diff": "6a3b9b19ad62c85a805b85e3ac1c314d94f3a8397fc74277ef46673f4a3ab1b1",
+    "cases/CASE-0166/metadata.json": "19f6a9202ee511d35e6339261b905fa5e7b0bae93704ef7b991a831c7a9b0c81",
+    "model_context/CASE-0166.json": "5e5a429a1d2e45f256fa43fba8dfa0069f3f3c50cac47b514e5c8df866a887ca",
+    "difficulty/CASE-0166.json": "bf28c200bf40a4f93ecb2b5f7a4f9ba86209b66a1ec106c820626a4004dd1bd6"
+  },
+  "case_level_hash": "3d0fec98f608261be1676c04e02e7e1d186e77fa1759aeb045198153597327f2"
+}

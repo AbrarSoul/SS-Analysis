@@ -1,0 +1,33 @@
+{
+  "case_id": "CASE-0075",
+  "language": "java",
+  "cve_id": "CVE-2024-24043",
+  "cve_ids_all": [
+    "CVE-2024-24043"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import cz.speedy11.mcrpx.common.extraction.ExtractTaskListener;",
+    "import java.io.*;",
+    "import java.util.Enumeration;",
+    "import java.util.concurrent.Executors;",
+    "import java.util.concurrent.Future;",
+    "import java.util.concurrent.ScheduledExecutorService;",
+    "import java.util.jar.JarEntry;",
+    "import java.util.jar.JarException;",
+    "import java.util.jar.JarFile;",
+    "import java.util.zip.ZipEntry;",
+    "import java.util.zip.ZipException;",
+    "import java.util.zip.ZipFile;"
+  ],
+  "vulnerable_function": "    public static void extractZip(File file, File destDirectory, ExtractTaskListener listener) throws IOException {\n        if (!destDirectory.exists()) {\n            destDirectory.mkdir();\n        }\n\n        try (ZipFile zipFile = new ZipFile(file)) {\n            Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();\n            listener.onMessage(\"Extracting resource pack \" + file.getName() + \" to directory \" + destDirectory.getName());\n            int elementCount = 0;\n            while (zipEntries.hasMoreElements()) {\n                ZipEntry zipEntry = zipEntries.nextElement();\n                try {\n                    listener.onMessage(\"Extracting \" + zipEntry.getName());\n                    try (InputStream entryInputStream = zipFile.getInputStream(zipEntry)) {\n                        String filePath = destDirectory + File.separator + zipEntry.getName();\n                        File zipEntryFile = new File(filePath);\n                        zipEntryFile.getParentFile().mkdirs();\n                        listener.fileProcessed(entryInputStream.available());\n                        extractFile(entryInputStream, zipEntryFile);\n                        elementCount++;\n                    }\n                } catch (IOException e) {\n                    if (!zipEntry.isDirectory()) {\n                        listener.onMessage(\"Skipping \" + zipEntry.getName() + \": \" + e.getMessage());\n                    }\n                }\n            }\n\n            listener.onMessage(\"Successfully extracted \" + elementCount + \" elements\");\n            listener.taskCompleted();\n        }\n    }",
+  "patched_function": "    public static void extractZip(File file, File destDirectory, ExtractTaskListener listener) throws IOException {\n        if (!destDirectory.exists()) {\n            destDirectory.mkdir();\n        }\n\n        try (ZipFile zipFile = new ZipFile(file)) {\n            Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();\n            listener.onMessage(\"Extracting resource pack \" + file.getName() + \" to directory \" + destDirectory.getName());\n            int elementCount = 0;\n            while (zipEntries.hasMoreElements()) {\n                ZipEntry zipEntry = zipEntries.nextElement();\n                if (zipEntry.getName().contains(\"..\")) {\n                    listener.onMessage(\"Skipping \" + zipEntry.getName() + \": Invalid path\");\n                    continue;\n                }\n\n                try {\n                    listener.onMessage(\"Extracting \" + zipEntry.getName());\n                    try (InputStream entryInputStream = zipFile.getInputStream(zipEntry)) {\n                        String filePath = destDirectory + File.separator + zipEntry.getName();\n                        File zipEntryFile = new File(filePath);\n                        zipEntryFile.getParentFile().mkdirs();\n                        listener.fileProcessed(entryInputStream.available());\n                        extractFile(entryInputStream, zipEntryFile);\n                        elementCount++;\n                    }\n                } catch (IOException e) {\n                    if (!zipEntry.isDirectory()) {\n                        listener.onMessage(\"Skipping \" + zipEntry.getName() + \": \" + e.getMessage());\n                    }\n                }\n            }\n\n            listener.onMessage(\"Successfully extracted \" + elementCount + \" elements\");\n            listener.taskCompleted();\n        }\n    }",
+  "unified_diff": "diff --git a/common/src/main/java/cz/speedy11/mcrpx/common/util/ZipUtil.java b/common/src/main/java/cz/speedy11/mcrpx/common/util/ZipUtil.java\nindex 057ed1e..2c0cb52 100644\n--- a/common/src/main/java/cz/speedy11/mcrpx/common/util/ZipUtil.java\n+++ b/common/src/main/java/cz/speedy11/mcrpx/common/util/ZipUtil.java\n@@ -99,6 +99,11 @@ public class ZipUtil {\n             int elementCount = 0;\n             while (zipEntries.hasMoreElements()) {\n                 ZipEntry zipEntry = zipEntries.nextElement();\n+                if (zipEntry.getName().contains(\"..\")) {\n+                    listener.onMessage(\"Skipping \" + zipEntry.getName() + \": Invalid path\");\n+                    continue;\n+                }\n+\n                 try {\n                     listener.onMessage(\"Extracting \" + zipEntry.getName());\n                     try (InputStream entryInputStream = zipFile.getInputStream(zipEntry)) {\n@@ -141,6 +146,11 @@ public class ZipUtil {\n             int elementCount = 0;\n             while (jarEntries.hasMoreElements()) {\n                 JarEntry jarEntry = jarEntries.nextElement();\n+                if (jarEntry.getName().contains(\"..\")) {\n+                    listener.onMessage(\"Skipping \" + jarEntry.getName() + \": Invalid path\");\n+                    continue;\n+                }\n+\n                 if (jarEntry.getName().startsWith(\"assets/\") && !jarEntry.isDirectory()) {\n                     listener.onMessage(\"Extracting \" + jarEntry.getName());\n                     try (InputStream entryInputStream = jarFile.getInputStream(jarEntry)) {",
+  "auto_locate_confidence": "auto_low_confidence"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_zamotany_logkitty_ef2f673e25c629544dd3de6429999318447dd6bf",
+  "cve_ids": [
+    "CVE-2020-8149"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "typescript",
+  "repository": "zamotany/logkitty",
+  "repository_url": "https://github.com/zamotany/logkitty",
+  "vulnerable_commit": "e1e229687472d8c9266d17f2969ff7431a78db86",
+  "fixed_commit": "ef2f673e25c629544dd3de6429999318447dd6bf",
+  "changed_file": "src/android/adb.ts",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0220",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-444"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 2,
+  "lines_changed_total": 2,
+  "function_size_chars": 1182,
+  "function_size_lines": 39,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "setRequestHeader used for Content-length and Connection; forbidden-header pattern in XHR code."
+}

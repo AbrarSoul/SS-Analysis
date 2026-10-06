@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dataease_dataease_bb540e6dc83df106ac3253f331066129a7487d1a",
+  "cve_ids": [
+    "CVE-2024-23328"
+  ],
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "dataease/dataease",
+  "repository_url": "https://github.com/dataease/dataease",
+  "vulnerable_commit": "e5a5d3d580571e90b2a931838c26bb8a430d9421",
+  "fixed_commit": "bb540e6dc83df106ac3253f331066129a7487d1a",
+  "changed_file": "core/backend/src/main/java/io/dataease/dto/datasource/MysqlConfiguration.java",
+  "max_score": "1337"
+}

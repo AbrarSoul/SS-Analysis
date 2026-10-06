@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_psf_requests_66d21cb07bd6255b1280291c4fafb71803cdb3b7",
+  "cve_ids": [
+    "CVE-2026-25645"
+  ],
+  "cwe_ids": [
+    "CWE-377"
+  ],
+  "language": "python",
+  "repository": "psf/requests",
+  "repository_url": "https://github.com/psf/requests",
+  "vulnerable_commit": "8b9bc8fc0f63be84602387913c4b689f19efd028",
+  "fixed_commit": "66d21cb07bd6255b1280291c4fafb71803cdb3b7",
+  "changed_file": "src/requests/utils.py",
+  "max_score": "1337"
+}

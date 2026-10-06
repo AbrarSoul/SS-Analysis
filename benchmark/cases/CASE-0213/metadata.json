@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0213",
+  "original_source_case_id": "github.com_mafintosh_dns-packet_0d0d593f8df4e2712c43957a6c62e95047f12b2d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-23386",
+  "cve_ids_all": [
+    "CVE-2021-23386"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-909"
+  ],
+  "language": "javascript",
+  "repository": "mafintosh/dns-packet",
+  "repository_url": "https://github.com/mafintosh/dns-packet",
+  "vulnerable_commit": "7f35bac5b4680d7bfbb34fbc475ecfdbf9d25092",
+  "fixed_commit": "0d0d593f8df4e2712c43957a6c62e95047f12b2d",
+  "changed_file": "index.js",
+  "changed_function": "name.decode.bytes = 0",
+  "vulnerable_lines": [
+    74,
+    78
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0213/vulnerable_source.js": "57574f5121bd3f9b3fb1f6cf2c6a55886434fcfca4902d30840f50f0f0f636e7",
+    "cases/CASE-0213/patched_source.js": "af7fc07364f3e745f04a7c902eadbb030837d85f81449d3c81cdb8a4c1888518",
+    "cases/CASE-0213/patch.diff": "589d830fe0c48ebe89fc2e69711cc43e598cea959230967d8db4813abbaacca2",
+    "cases/CASE-0213/metadata.json": "07dfb34fd0811ccf89ca39b62a13906c95eb94cd0a62107ee57645d06bcae5aa",
+    "model_context/CASE-0213.json": "9e98da15683d42de2286e7050ea22938c2a3fc7f7f51c238b9e15dce8345d0ba",
+    "difficulty/CASE-0213.json": "17260eb3f77d7ad8f6476c72e804c134f988d14abfe283c642c71c28676c95aa"
+  },
+  "case_level_hash": "bf8dbaf154e0a52d7f588159a29bf9e7dce8771ed589f90ec453ec2080945119"
+}

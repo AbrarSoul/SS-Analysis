@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0321",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 3,
+  "lines_changed_total": 5,
+  "function_size_chars": 459,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Card number %-formatted into a SQL string; SQL injection."
+}

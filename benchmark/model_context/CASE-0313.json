@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0313",
+  "language": "python",
+  "cve_id": "CVE-2012-0215",
+  "cve_ids_all": [
+    "CVE-2012-0215"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-264",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "ModelStorage",
+  "imports": [
+    "import datetime",
+    "import time",
+    "from decimal import Decimal",
+    "import logging",
+    "from itertools import chain",
+    "import csv",
+    "from functools import reduce",
+    "import traceback",
+    "import sys",
+    "from trytond.model import Model",
+    "from trytond.model import fields",
+    "from trytond.model.browse import BrowseRecordList, BrowseRecord, BrowseRecordNull",
+    "from trytond.model.browse import EvalEnvironment",
+    "from trytond.tools import safe_eval, reduce_domain",
+    "from trytond.pyson import PYSONEncoder, PYSONDecoder, PYSON",
+    "from trytond.const import OPERATORS, RECORD_CACHE_SIZE",
+    "from trytond.transaction import Transaction",
+    "from trytond.pool import Pool",
+    "from trytond.cache import LRUDict",
+    "from trytond.config import CONFIG",
+    "import cStringIO as StringIO",
+    "import StringIO"
+  ],
+  "vulnerable_function": "    def __init__(self):\n        super(ModelStorage, self).__init__()\n        self._rpc.update({\n            'create': True,\n            'read': False,\n            'write': True,\n            'delete': True,\n            'copy': True,\n            'search': False,\n            'search_count': False,\n            'search_read': False,\n            'export_data': False,\n            'import_data': True,\n        })\n        self._constraints = []\n",
+  "patched_function": "    def __init__(self):\n        super(ModelStorage, self).__init__()\n        if isinstance(self, ModelView):\n            self._rpc.update({\n                'create': True,\n                'read': False,\n                'write': True,\n                'delete': True,\n                'copy': True,\n                'search': False,\n                'search_count': False,\n                'search_read': False,\n                'export_data': False,\n                'import_data': True,\n            })\n        self._constraints = []\n",
+  "unified_diff": "diff --git a/trytond/model/modelstorage.py b/trytond/model/modelstorage.py\nindex 9b2fd911..312afa3b 100644\n--- a/trytond/model/modelstorage.py\n+++ b/trytond/model/modelstorage.py\n@@ -26,6 +26,7 @@ from trytond.transaction import Transaction\n from trytond.pool import Pool\n from trytond.cache import LRUDict\n from trytond.config import CONFIG\n+from .modelview import ModelView\n \n \n class ModelStorage(Model):\n@@ -42,18 +43,19 @@ class ModelStorage(Model):\n \n     def __init__(self):\n         super(ModelStorage, self).__init__()\n-        self._rpc.update({\n-            'create': True,\n-            'read': False,\n-            'write': True,\n-            'delete': True,\n-            'copy': True,\n-            'search': False,\n-            'search_count': False,\n-            'search_read': False,\n-            'export_data': False,\n-            'import_data': True,\n-        })\n+        if isinstance(self, ModelView):\n+            self._rpc.update({\n+                'create': True,\n+                'read': False,\n+                'write': True,\n+                'delete': True,\n+                'copy': True,\n+                'search': False,\n+                'search_count': False,\n+                'search_read': False,\n+                'export_data': False,\n+                'import_data': True,\n+            })\n         self._constraints = []\n \n     def default_create_uid(self):",
+  "auto_locate_confidence": "auto"
+}

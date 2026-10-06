@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0018",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-384",
+    "CWE-863"
+  ],
+  "changed_files": 1,
+  "lines_added": 10,
+  "lines_removed": 1,
+  "lines_changed_total": 11,
+  "function_size_chars": 2885,
+  "function_size_lines": 66,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "The flaw is a missing session-invalidation step before an unrelated setAuthentication() call; recognizing the gap requires understanding the login-flow ordering, not a single bad line.",
+  "supported_status": "supported"
+}

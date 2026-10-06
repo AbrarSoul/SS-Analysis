@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_aws_amazon-redshift-jdbc-driver_bc93694201a291493778ce5369a72befeca5ba7d",
+  "cve_ids": [
+    "CVE-2024-32888"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "aws/amazon-redshift-jdbc-driver",
+  "repository_url": "https://github.com/aws/amazon-redshift-jdbc-driver",
+  "vulnerable_commit": "2e36f69046b8553516d6bf02401c2928c35e8aa2",
+  "fixed_commit": "bc93694201a291493778ce5369a72befeca5ba7d",
+  "changed_file": "src/main/java/com/amazon/redshift/core/v3/SimpleParameterList.java",
+  "max_score": "1337"
+}

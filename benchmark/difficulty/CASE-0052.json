@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0052",
+  "batch": "topup5",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 50,
+  "lines_removed": 4,
+  "lines_changed_total": 54,
+  "function_size_chars": 2185,
+  "function_size_lines": 51,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Client-supplied upload filename joined directly onto the input directory; taint from request file name to path join."
+}

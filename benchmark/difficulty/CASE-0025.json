@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0025",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-88"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 3,
+  "lines_changed_total": 14,
+  "function_size_chars": 1501,
+  "function_size_lines": 59,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Missing '--' separator and dash-prefix rejection before spawnSync(); self-contained within the function.",
+  "supported_status": "supported"
+}

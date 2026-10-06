@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0080",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-285",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 1,
+  "lines_changed_total": 4,
+  "function_size_chars": 1045,
+  "function_size_lines": 32,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Authorization condition has an extra `&& !noscraper` operand; the wrong condition shape is matchable in the function. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+}

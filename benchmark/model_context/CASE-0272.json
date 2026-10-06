@@ -1,0 +1,37 @@
+{
+  "case_id": "CASE-0272",
+  "language": "python",
+  "cve_id": "CVE-2023-0055",
+  "cve_ids_all": [
+    "CVE-2023-0055"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-319",
+      "definition": "Cleartext Transmission of Sensitive Information"
+    },
+    {
+      "id": "CWE-614",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "App",
+  "imports": [
+    "import os",
+    "import flask",
+    "import jinja2",
+    "from werkzeug.serving import WSGIRequestHandler",
+    "from .blueprints import BLUEPRINTS",
+    "from .config import get_default_config",
+    "from .extensions import EXTENSIONS, THEMES",
+    "from .filters import TEMPLATE_FILTERS",
+    "from .globals import TEMPLATE_GLOBALS",
+    "from .handlers import ERROR_HANDLERS",
+    "from .helpers import JSONEncoder",
+    "from .processors import CONTEXT_PROCESSORS"
+  ],
+  "vulnerable_function": "    def _configure_session(cls, app):\n        tempdir = app.config[\"PYLOAD_API\"].get_cachedir()\n        cache_path = os.path.join(tempdir, \"flask\")\n        os.makedirs(cache_path, exist_ok=True)\n\n        app.config[\"SESSION_FILE_DIR\"] = cache_path\n        app.config[\"SESSION_TYPE\"] = \"filesystem\"\n        app.config[\"SESSION_COOKIE_NAME\"] = \"pyload_session\"\n        app.config[\"SESSION_PERMANENT\"] = False\n\n        session_lifetime = max(app.config[\"PYLOAD_API\"].get_config_value(\"webui\", \"session_lifetime\"), 1) * 60\n        app.config[\"PERMANENT_SESSION_LIFETIME\"] = session_lifetime\n",
+  "patched_function": "    def _configure_session(cls, app):\n        tempdir = app.config[\"PYLOAD_API\"].get_cachedir()\n        cache_path = os.path.join(tempdir, \"flask\")\n        os.makedirs(cache_path, exist_ok=True)\n\n        app.config[\"SESSION_FILE_DIR\"] = cache_path\n        app.config[\"SESSION_TYPE\"] = \"filesystem\"\n        app.config[\"SESSION_COOKIE_NAME\"] = \"pyload_session\"\n        app.config[\"SESSION_COOKIE_SECURE\"] = app.config[\"PYLOAD_API\"].get_config_value(\"webui\", \"use_ssl\")\n        app.config[\"SESSION_PERMANENT\"] = False\n\n        session_lifetime = max(app.config[\"PYLOAD_API\"].get_config_value(\"webui\", \"session_lifetime\"), 1) * 60\n        app.config[\"PERMANENT_SESSION_LIFETIME\"] = session_lifetime\n",
+  "unified_diff": "diff --git a/src/pyload/webui/app/__init__.py b/src/pyload/webui/app/__init__.py\nindex 5fa4bf085..3441f5bab 100644\n--- a/src/pyload/webui/app/__init__.py\n+++ b/src/pyload/webui/app/__init__.py\n@@ -78,7 +78,7 @@ class App:\n \n         app.create_jinja_environment()\n \n-        # NOTE: enable autoescape for all file extensions (included .js)\n+        # NOTE: enable auto escape for all file extensions (including .js)\n         #       maybe this will break .txt rendering, but we don't render this kind of files actually\n         #       that does not change 'default_for_string=False' (by default)\n         app.jinja_env.autoescape = jinja2.select_autoescape(default=True)\n@@ -102,6 +102,7 @@ class App:\n         app.config[\"SESSION_FILE_DIR\"] = cache_path\n         app.config[\"SESSION_TYPE\"] = \"filesystem\"\n         app.config[\"SESSION_COOKIE_NAME\"] = \"pyload_session\"\n+        app.config[\"SESSION_COOKIE_SECURE\"] = app.config[\"PYLOAD_API\"].get_config_value(\"webui\", \"use_ssl\")\n         app.config[\"SESSION_PERMANENT\"] = False\n \n         session_lifetime = max(app.config[\"PYLOAD_API\"].get_config_value(\"webui\", \"session_lifetime\"), 1) * 60",
+  "auto_locate_confidence": "auto"
+}

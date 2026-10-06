@@ -1,0 +1,692 @@
+[
+  {
+    "case_id": "CASE-0001",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-290",
+      "CWE-693",
+      "CWE-74"
+    ],
+    "changed_files": 1,
+    "lines_added": 19,
+    "lines_removed": 14,
+    "lines_changed_total": 33,
+    "function_size_chars": 2370,
+    "function_size_lines": 47,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Predictable uuid7 value must be traced from generation through to the subprocess-output trust check; the same uuid.uuid7() API is used benignly elsewhere in the file (FastMCP naming), so distinguishing requires the surrounding usage context.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0002",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-627",
+      "CWE-913"
+    ],
+    "changed_files": 1,
+    "lines_added": 85,
+    "lines_removed": 6,
+    "lines_changed_total": 91,
+    "function_size_chars": 206,
+    "function_size_lines": 4,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "eval() applied directly to a request field; self-contained one-line sink, no cross-variable tracing needed.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0003",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-943"
+    ],
+    "changed_files": 1,
+    "lines_added": 125,
+    "lines_removed": 13,
+    "lines_changed_total": 138,
+    "function_size_chars": 2597,
+    "function_size_lines": 83,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "eval() applied directly to log-derived text; self-contained sink.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0004",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-668"
+    ],
+    "changed_files": 1,
+    "lines_added": 14,
+    "lines_removed": 1,
+    "lines_changed_total": 15,
+    "function_size_chars": 517,
+    "function_size_lines": 13,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Unredacted tree data must be traced to the cross-role remote() call; requires knowing which fields are sensitive and the GUEST/HOST trust boundary, not visible from the line alone.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0005",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-79"
+    ],
+    "changed_files": 1,
+    "lines_added": 11,
+    "lines_removed": 14,
+    "lines_changed_total": 25,
+    "function_size_chars": 648,
+    "function_size_lines": 16,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "mark_safe() wrapping an unescaped %-interpolated value is a self-contained syntactic idiom.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0006",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-863"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 1492,
+    "function_size_lines": 50,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "The flaw is a wrong dependency choice (get_current_user vs get_current_active_superuser); recognizing it as wrong requires comparing against sibling endpoints' correct usage in the same file.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0007",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-532"
+    ],
+    "changed_files": 1,
+    "lines_added": 3,
+    "lines_removed": 1,
+    "lines_changed_total": 4,
+    "function_size_chars": 2153,
+    "function_size_lines": 48,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "log.info() called directly on the config object; self-contained sink.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0008",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-22"
+    ],
+    "changed_files": 1,
+    "lines_added": 5,
+    "lines_removed": 0,
+    "lines_changed_total": 5,
+    "function_size_chars": 3462,
+    "function_size_lines": 70,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Unsanitized app_name flows from the route parameter directly into a path join within a single short function.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0009",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-209"
+    ],
+    "changed_files": 1,
+    "lines_added": 2,
+    "lines_removed": 1,
+    "lines_changed_total": 3,
+    "function_size_chars": 537,
+    "function_size_lines": 18,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Raw bytes embedded directly in an exception constructor; self-contained.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0010",
+    "language": "python",
+    "cwe_ids": [
+      "CWE-552"
+    ],
+    "changed_files": 1,
+    "lines_added": 6,
+    "lines_removed": 1,
+    "lines_changed_total": 7,
+    "function_size_chars": 409,
+    "function_size_lines": 17,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "The flaw is an omission (missing removeShare() calls) rather than a bad line; detecting it requires reasoning about the whole script's absence of a hardening step, not a single matchable line.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0011",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-502"
+    ],
+    "changed_files": 1,
+    "lines_added": 3,
+    "lines_removed": 1,
+    "lines_changed_total": 4,
+    "function_size_chars": 8590,
+    "function_size_lines": 175,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "The flaw is a missing string literal in a ~90-entry denylist; recognizing the omission requires the full list as context, not a local pattern.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0012",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-400",
+      "CWE-787"
+    ],
+    "changed_files": 1,
+    "lines_added": 14,
+    "lines_removed": 12,
+    "lines_changed_total": 26,
+    "function_size_chars": 638,
+    "function_size_lines": 18,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Self-recursive call with no depth bound is a locally-recognizable structural idiom.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0013",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-99"
+    ],
+    "changed_files": 1,
+    "lines_added": 15,
+    "lines_removed": 0,
+    "lines_changed_total": 15,
+    "function_size_chars": 1203,
+    "function_size_lines": 34,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Missing JNDI validation before use; recognizing the gap requires comparing against the sibling endpoint pattern and knowing what a validation call should look like.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0014",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-377",
+      "CWE-668"
+    ],
+    "changed_files": 1,
+    "lines_added": 2,
+    "lines_removed": 3,
+    "lines_changed_total": 5,
+    "function_size_chars": 258,
+    "function_size_lines": 8,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "createTempFile() + delete() + mkdir() is a well-known, locally-recognizable insecure idiom.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0015",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-79"
+    ],
+    "changed_files": 1,
+    "lines_added": 3,
+    "lines_removed": 3,
+    "lines_changed_total": 6,
+    "function_size_chars": 951,
+    "function_size_lines": 19,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "The flaw is using the wrong encoder function for the rendering context (HTML vs JS); the template's actual rendering context isn't visible in this file, so recognizing the mismatch needs external/contextual knowledge.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0016",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-89"
+    ],
+    "changed_files": 1,
+    "lines_added": 51,
+    "lines_removed": 30,
+    "lines_changed_total": 81,
+    "function_size_chars": 855,
+    "function_size_lines": 13,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "String concatenation directly into a SQL string is a self-contained syntactic pattern.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0017",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-209"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 2,
+    "lines_changed_total": 3,
+    "function_size_chars": 792,
+    "function_size_lines": 19,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Both compared values embedded directly in one exception constructor call.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0018",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-384",
+      "CWE-863"
+    ],
+    "changed_files": 1,
+    "lines_added": 10,
+    "lines_removed": 1,
+    "lines_changed_total": 11,
+    "function_size_chars": 2885,
+    "function_size_lines": 66,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "The flaw is a missing session-invalidation step before an unrelated setAuthentication() call; recognizing the gap requires understanding the login-flow ordering, not a single bad line.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0019",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-22"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 3,
+    "lines_changed_total": 4,
+    "function_size_chars": 1298,
+    "function_size_lines": 44,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "String-based canonical-path prefix containment vs. NIO Path-based containment is a subtle semantic distinction that requires understanding path-traversal semantics, not just spotting an API name.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0020",
+    "language": "java",
+    "cwe_ids": [
+      "CWE-863"
+    ],
+    "changed_files": 1,
+    "lines_added": 12,
+    "lines_removed": 3,
+    "lines_changed_total": 15,
+    "function_size_chars": 369,
+    "function_size_lines": 12,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Plain ant-pattern requestMatchers() vs MvcRequestMatcher is a Spring-MVC-specific idiom; recognizing the risk requires framework-specific knowledge of DispatcherServlet path-mapping semantics.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0021",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-640"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 1072,
+    "function_size_lines": 23,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Hash-based token generation from semi-public fields is a self-contained, locally-recognizable idiom.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0022",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-290"
+    ],
+    "changed_files": 1,
+    "lines_added": 21,
+    "lines_removed": 4,
+    "lines_changed_total": 25,
+    "function_size_chars": 2099,
+    "function_size_lines": 51,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Missing validation of a re-exchanged identity against the pre-TLS identity; recognizing the gap requires understanding the two-phase handshake protocol, not a single line.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0023",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-835"
+    ],
+    "changed_files": 1,
+    "lines_added": 11,
+    "lines_removed": 3,
+    "lines_changed_total": 14,
+    "function_size_chars": 449,
+    "function_size_lines": 13,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "The flaw is a field's inclusion in an unvalidated bulk-save selector list; recognizing it requires reading the whole selector list as context.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0024",
+    "language": "javascript",
+    "cwe_ids": [],
+    "changed_files": 1,
+    "lines_added": 8,
+    "lines_removed": 15,
+    "lines_changed_total": 23,
+    "function_size_chars": 1418,
+    "function_size_lines": 37,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "new Function() applied directly to parsed response data; self-contained sink, same shape as eval().",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0025",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-77",
+      "CWE-88"
+    ],
+    "changed_files": 1,
+    "lines_added": 11,
+    "lines_removed": 3,
+    "lines_changed_total": 14,
+    "function_size_chars": 1501,
+    "function_size_lines": 59,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Missing '--' separator and dash-prefix rejection before spawnSync(); self-contained within the function.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0026",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-665"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 22,
+    "function_size_lines": 1,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "{} vs Object.create(null) is a one-line idiom, but recognizing it as security-relevant requires knowing the object is later indexed with a dynamic, externally-controlled key elsewhere in the file.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0027",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-22"
+    ],
+    "changed_files": 1,
+    "lines_added": 0,
+    "lines_removed": 1,
+    "lines_changed_total": 1,
+    "function_size_chars": 3486,
+    "function_size_lines": 103,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "A validate-then-transform ordering bug across two statements; requires understanding platform-specific path.normalize() semantics to see why the order matters.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0028",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-310"
+    ],
+    "changed_files": 1,
+    "lines_added": 9,
+    "lines_removed": 4,
+    "lines_changed_total": 13,
+    "function_size_chars": 330,
+    "function_size_lines": 12,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Missing Secure attribute on a cookie-string assignment; self-contained.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0029",
+    "language": "javascript",
+    "cwe_ids": [
+      "CWE-185",
+      "CWE-400"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 599,
+    "function_size_lines": 24,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "The vulnerable regex literal itself is the defect; identifiable without tracing any data flow.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0030",
+    "language": "javascript",
+    "cwe_ids": [
+      "NVD-CWE-noinfo"
+    ],
+    "changed_files": 1,
+    "lines_added": 7,
+    "lines_removed": 0,
+    "lines_changed_total": 7,
+    "function_size_chars": 10835,
+    "function_size_lines": 380,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Missing length guard before a regex match call; self-contained within the function.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0031",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-359",
+      "CWE-862"
+    ],
+    "changed_files": 1,
+    "lines_added": 18,
+    "lines_removed": 0,
+    "lines_changed_total": 18,
+    "function_size_chars": 298,
+    "function_size_lines": 13,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Missing authorization check before returning a fetched record; recognizing the gap requires understanding the procedure's intended access-control semantics, not just the query itself.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0032",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-295"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 0,
+    "lines_changed_total": 1,
+    "function_size_chars": 215,
+    "function_size_lines": 5,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Missing await of a verification promise before submitting credentials; a concurrency/ordering issue that requires understanding the two-phase TLS handshake, not a local pattern.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0033",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-300",
+      "CWE-319",
+      "CWE-598"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 771,
+    "function_size_lines": 24,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "http:// vs https:// literal in a URL constructor call; self-contained.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0034",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-285"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 160,
+    "function_size_lines": 6,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Permission.Public vs [] in a decorator's create: field; recognizing the risk requires domain knowledge of what public creation of a User entity implies.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0035",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-284"
+    ],
+    "changed_files": 1,
+    "lines_added": 2,
+    "lines_removed": 2,
+    "lines_changed_total": 4,
+    "function_size_chars": 1257,
+    "function_size_lines": 23,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "Missing explicit rejection when no password is set, combined with a dummy-password fallback; requires tracing the interaction between two branches to see the bypass.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0036",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-74",
+      "CWE-77"
+    ],
+    "changed_files": 1,
+    "lines_added": 24,
+    "lines_removed": 13,
+    "lines_changed_total": 37,
+    "function_size_chars": 423,
+    "function_size_lines": 10,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Attacker-controlled tool-call argument flows directly into a shell command string within a single case block.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0037",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-1321"
+    ],
+    "changed_files": 1,
+    "lines_added": 16,
+    "lines_removed": 2,
+    "lines_changed_total": 18,
+    "function_size_chars": 477,
+    "function_size_lines": 20,
+    "pattern_or_taint": "pattern",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Missing filter for specific dangerous string literals (__proto__/constructor/prototype) in a segment-building loop; self-contained.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0038",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-79"
+    ],
+    "changed_files": 1,
+    "lines_added": 2,
+    "lines_removed": 2,
+    "lines_changed_total": 4,
+    "function_size_chars": 119,
+    "function_size_lines": 4,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "A sanitize-then-transform ordering bug across two statements within one short function.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0039",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-78"
+    ],
+    "changed_files": 1,
+    "lines_added": 13,
+    "lines_removed": 0,
+    "lines_changed_total": 13,
+    "function_size_chars": 1868,
+    "function_size_lines": 62,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "structural",
+    "classification_rationale": "Unsanitized host parameter flows directly into a shell command string within a single function.",
+    "supported_status": "supported"
+  },
+  {
+    "case_id": "CASE-0040",
+    "language": "typescript",
+    "cwe_ids": [
+      "CWE-22"
+    ],
+    "changed_files": 1,
+    "lines_added": 1,
+    "lines_removed": 1,
+    "lines_changed_total": 2,
+    "function_size_chars": 2376,
+    "function_size_lines": 71,
+    "pattern_or_taint": "taint",
+    "structural_or_context_heavy": "context_heavy",
+    "classification_rationale": "An unsanitized config-derived value is concatenated into a cache identifier; recognizing the risk requires tracing that identifier's later use as a filesystem path, not visible in this fragment alone.",
+    "supported_status": "supported"
+  }
+]

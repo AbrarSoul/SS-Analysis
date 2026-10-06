@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_FasterXML_jackson-databind_ad418eeb974e357f2797aef64aa0e3ffaaa6125b",
+  "cve_ids": [
+    "CVE-2019-14379",
+    "CVE-2019-14439"
+  ],
+  "cwe_ids": [
+    "CWE-1321",
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "FasterXML/jackson-databind",
+  "repository_url": "https://github.com/FasterXML/jackson-databind",
+  "vulnerable_commit": "322ae225cbcd07178a634e548d991b0aec6b47bf",
+  "fixed_commit": "ad418eeb974e357f2797aef64aa0e3ffaaa6125b",
+  "changed_file": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java",
+  "max_score": "1337"
+}

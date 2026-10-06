@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_bluewave-labs_Checkmate_36d78a9aa4ed607ca1bd2b5fdaca5a3927b2d287",
+  "cve_ids": [
+    "CVE-2025-48024"
+  ],
+  "cwe_ids": [
+    "CWE-497"
+  ],
+  "language": "javascript",
+  "repository": "bluewave-labs/Checkmate",
+  "repository_url": "https://github.com/bluewave-labs/Checkmate",
+  "vulnerable_commit": "fcd6af259eb873b12fe1c1e3b75d746f6da695a8",
+  "fixed_commit": "36d78a9aa4ed607ca1bd2b5fdaca5a3927b2d287",
+  "changed_file": "server/controllers/settingsController.js",
+  "max_score": "1337"
+}

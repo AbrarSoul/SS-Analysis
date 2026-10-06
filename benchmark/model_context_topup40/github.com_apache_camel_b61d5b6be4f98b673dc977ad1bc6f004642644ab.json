@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_apache_camel_b61d5b6be4f98b673dc977ad1bc6f004642644ab",
+  "language": "java",
+  "cve_id": "CVE-2023-34442",
+  "cve_ids_all": [
+    "CVE-2023-34442"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.File;",
+    "import java.io.IOException;",
+    "import java.nio.file.Files;",
+    "import java.nio.file.StandardOpenOption;",
+    "import org.apache.camel.Converter;",
+    "import org.apache.camel.Exchange;",
+    "import org.apache.camel.component.file.GenericFile;"
+  ],
+  "vulnerable_function": "    public static File genericToFile(GenericFile<File> genericFile, Exchange exchange) throws IOException {\n        Object body = genericFile.getBody();\n        File file;\n        if (body instanceof byte[]) {\n            byte[] bos = (byte[]) body;\n            String destDir = System.getProperty(\"java.io.tmpdir\");\n            if (destDir != null && !destDir.endsWith(File.separator)) {\n                destDir += File.separator;\n            }\n            file = new File(destDir, genericFile.getFileName());\n            if (!file.getCanonicalPath().startsWith(destDir)) {\n                throw new IOException(\"File is not jailed to the destination directory\");\n            }\n            Files.write(file.toPath(), bos, StandardOpenOption.CREATE);\n            // delete the temporary file on exit, as other routing may need the file for post processing\n            file.deleteOnExit();\n        } else {\n            file = (File) body;\n        }\n        return file;\n    }",
+  "patched_function": "    public static File genericToFile(GenericFile<File> genericFile, Exchange exchange) throws IOException {\n        Object body = genericFile.getBody();\n        File file = null;\n        Path path;\n        if (body instanceof byte[]) {\n            byte[] bos = (byte[]) body;\n            path = Files.createTempFile(genericFile.getFileName(), null, null);\n            Files.write(path, bos, StandardOpenOption.CREATE);\n            path.toFile().deleteOnExit();\n        } else {\n            file = (File) body;\n        }\n        return file;\n    }",
+  "unified_diff": "diff --git a/components/camel-jira/src/main/java/org/apache/camel/component/jira/FileConverter.java b/components/camel-jira/src/main/java/org/apache/camel/component/jira/FileConverter.java\nindex d7d2f3642d7c..e19d85e4ef94 100644\n--- a/components/camel-jira/src/main/java/org/apache/camel/component/jira/FileConverter.java\n+++ b/components/camel-jira/src/main/java/org/apache/camel/component/jira/FileConverter.java\n@@ -19,6 +19,7 @@ package org.apache.camel.component.jira;\n import java.io.File;\n import java.io.IOException;\n import java.nio.file.Files;\n+import java.nio.file.Path;\n import java.nio.file.StandardOpenOption;\n \n import org.apache.camel.Converter;\n@@ -34,20 +35,13 @@ public final class FileConverter {\n     @Converter\n     public static File genericToFile(GenericFile<File> genericFile, Exchange exchange) throws IOException {\n         Object body = genericFile.getBody();\n-        File file;\n+        File file = null;\n+        Path path;\n         if (body instanceof byte[]) {\n             byte[] bos = (byte[]) body;\n-            String destDir = System.getProperty(\"java.io.tmpdir\");\n-            if (destDir != null && !destDir.endsWith(File.separator)) {\n-                destDir += File.separator;\n-            }\n-            file = new File(destDir, genericFile.getFileName());\n-            if (!file.getCanonicalPath().startsWith(destDir)) {\n-                throw new IOException(\"File is not jailed to the destination directory\");\n-            }\n-            Files.write(file.toPath(), bos, StandardOpenOption.CREATE);\n-            // delete the temporary file on exit, as other routing may need the file for post processing\n-            file.deleteOnExit();\n+            path = Files.createTempFile(genericFile.getFileName(), null, null);\n+            Files.write(path, bos, StandardOpenOption.CREATE);\n+            path.toFile().deleteOnExit();\n         } else {\n             file = (File) body;\n         }",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_software-mansion_react-native-reanimated_8a927904366fa2d02df7a11553f8b0aa93471279",
+    "language": "typescript",
+    "repository": "software-mansion/react-native-reanimated",
+    "error": "no method-like block contains line 25; no method-like block contains line 27"
+  }
+]

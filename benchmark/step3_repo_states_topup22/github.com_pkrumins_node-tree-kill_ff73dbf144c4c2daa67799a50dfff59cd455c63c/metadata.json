@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pkrumins_node-tree-kill_ff73dbf144c4c2daa67799a50dfff59cd455c63c",
+  "cve_ids": [
+    "CVE-2019-15598"
+  ],
+  "cwe_ids": [
+    "CWE-78",
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "pkrumins/node-tree-kill",
+  "repository_url": "https://github.com/pkrumins/node-tree-kill",
+  "vulnerable_commit": "3b5b8feeb3175a3e16ea7e0e09fdf5b8d2b87b08",
+  "fixed_commit": "ff73dbf144c4c2daa67799a50dfff59cd455c63c",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

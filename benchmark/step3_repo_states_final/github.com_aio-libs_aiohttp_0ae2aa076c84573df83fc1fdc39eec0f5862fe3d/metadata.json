@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_0ae2aa076c84573df83fc1fdc39eec0f5862fe3d",
+  "cve_ids": [
+    "CVE-2026-34515"
+  ],
+  "cwe_ids": [
+    "CWE-36",
+    "CWE-918"
+  ],
+  "language": "python",
+  "repository": "aio-libs/aiohttp",
+  "repository_url": "https://github.com/aio-libs/aiohttp",
+  "vulnerable_commit": "7438e8d4eaf94c95615695f527cc029e3e7987b0",
+  "fixed_commit": "0ae2aa076c84573df83fc1fdc39eec0f5862fe3d",
+  "changed_file": "aiohttp/web_urldispatcher.py",
+  "max_score": "1337"
+}

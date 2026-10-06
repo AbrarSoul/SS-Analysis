@@ -1,0 +1,42 @@
+{
+  "case_id": "CASE-0194",
+  "language": "java",
+  "cve_id": "CVE-2023-32985",
+  "cve_ids_all": [
+    "CVE-2023-32985"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.util.ArrayList;",
+    "import java.util.List;",
+    "import java.util.logging.Logger;",
+    "import javax.servlet.ServletException;",
+    "import org.apache.commons.fileupload.FileItem;",
+    "import org.apache.commons.lang.StringUtils;",
+    "import org.jenkinsci.Symbol;",
+    "import org.kohsuke.accmod.Restricted;",
+    "import org.kohsuke.accmod.restrictions.NoExternalUse;",
+    "import org.kohsuke.stapler.DataBoundSetter;",
+    "import org.kohsuke.stapler.QueryParameter;",
+    "import org.kohsuke.stapler.StaplerRequest;",
+    "import org.kohsuke.stapler.StaplerResponse;",
+    "import org.kohsuke.stapler.interceptor.RequirePOST;",
+    "import hudson.Extension;",
+    "import hudson.FilePath;",
+    "import hudson.model.Hudson;",
+    "import hudson.util.FormValidation;",
+    "import jenkins.model.GlobalConfiguration;",
+    "import jenkins.model.Jenkins;"
+  ],
+  "vulnerable_function": "    public FormValidation doCheckLinkIcon(@QueryParameter String value) {\n        if (StringUtils.isBlank(value)) {\n            return FormValidation.warning(\"The provided icon is blank or empty. Default will be used.\");\n        } else\n            // do not validate if default icon is used\n            if (!value.equals(LinkAction.DEFAULT_ICON_NAME)) {\n            FilePath imageFile = Jenkins.get().getRootPath().child(value);\n            try {\n                if (!imageFile.exists()) {\n                    return FormValidation.error(\"Image does not exist:  \" + imageFile);\n                }\n            } catch (Exception e) {\n                return FormValidation.error(e, \"Problem with link icon:  \" + value);\n            }\n        }\n        return FormValidation.ok();\n    }",
+  "patched_function": "    public FormValidation doCheckLinkIcon(@QueryParameter String value) {\n        // use default icon when value is not provided\n        if (StringUtils.isBlank(value)) {\n            return FormValidation.warning(\"The provided icon is blank or empty. \"\n                    + \"Default will be used: \" + LinkAction.DEFAULT_ICON_NAME);\n        }\n\n        // do not validate if default icon is used\n        if (value.equals(LinkAction.DEFAULT_ICON_NAME)) {\n            return FormValidation.ok();\n        }\n\n        // icons supported out of the box by Jenkins\n        if (isAcceptedIconName(value)) {\n            return FormValidation.ok();\n        }\n\n        try {\n            File jenkinsHomeDirectory = Jenkins.get().getRootDir();\n            String userContentDirectory = jenkinsHomeDirectory.getCanonicalPath() + File.separatorChar + \"userContent\";\n            File imageFile = new File(jenkinsHomeDirectory, value);\n\n            String canonicalPath = imageFile.getCanonicalPath();\n            if (!canonicalPath.startsWith(userContentDirectory)) {\n                return FormValidation.error(\"Use path to JENKINS_HOME/userContent directory, eg. userContent/myIcon.png\");\n            }\n\n            if (!imageFile.exists()) {\n                return FormValidation.error(\"Image does not exist. \"\n                        + \"Open browser with /userContent to check available images\");\n            }\n        } catch (IOException e) {\n            return FormValidation.error(e, \"Problem with link icon:  \" + value);\n        }\n        return FormValidation.ok();\n    }",
+  "unified_diff": "diff --git a/src/main/java/hudson/plugins/sidebar_link/SidebarLinkPlugin.java b/src/main/java/hudson/plugins/sidebar_link/SidebarLinkPlugin.java\nindex b9ab54f..50b3750 100644\n--- a/src/main/java/hudson/plugins/sidebar_link/SidebarLinkPlugin.java\n+++ b/src/main/java/hudson/plugins/sidebar_link/SidebarLinkPlugin.java\n@@ -23,10 +23,10 @@\n  */\n package hudson.plugins.sidebar_link;\n \n+import java.io.File;\n import java.io.IOException;\n import java.util.ArrayList;\n import java.util.List;\n-import java.util.logging.Logger;\n \n import javax.servlet.ServletException;\n \n@@ -57,8 +57,6 @@ import jenkins.model.Jenkins;\n @Extension\n @Symbol(\"sidebarGlobalLink\")\n public class SidebarLinkPlugin extends GlobalConfiguration {\n-    @SuppressWarnings(\"unused\")\n-    private static final Logger LOGGER = Logger.getLogger(SidebarLinkPlugin.class.getName());\n \n     private List<LinkAction> links = new ArrayList<>();\n \n@@ -116,7 +114,7 @@ public class SidebarLinkPlugin extends GlobalConfiguration {\n         }\n         rsp.setContentType(\"text/html\");\n         rsp.getWriter().println(\n-                (error != null ? error : Messages.Uploaded(\"<tt>/\" + filename + \"</tt>\"))\n+                (error != null ? error : Messages.Uploaded(\"<code>/\" + filename + \"</code>\"))\n                         + \" <a href=\\\"javascript:history.back()\\\">\" + Messages.Back() + \"</a>\");\n     }\n \n@@ -135,20 +133,49 @@ public class SidebarLinkPlugin extends GlobalConfiguration {\n \n     @Restricted(NoExternalUse.class)\n     public FormValidation doCheckLinkIcon(@QueryParameter String value) {\n+        // use default icon when value is not provided\n         if (StringUtils.isBlank(value)) {\n-            return FormValidation.warning(\"The provided icon is blank or empty. Default will be used.\");\n-        } else\n-            // do not validate if default icon is used\n-            if (!value.equals(LinkAction.DEFAULT_ICON_NAME)) {\n-            FilePath imageFile = Jenkins.get().getRootPath().child(value);\n-            try {\n-                if (!imageFile.exists()) {\n-                    return FormValidation.error(\"Image does not exist:  \" + imageFile);\n-                }\n-            } catch (Exception e) {\n-                return FormValidation.error(e, \"Problem with link icon:  \" + value);\n+            return FormValidation.warning(\"The provided icon is blank or empty. \"\n+                    + \"Default will be used: \" + LinkAction.DEFAULT_ICON_NAME);\n+        }\n+\n+        // do not validate if default icon is used\n+        if (value.equals(LinkAction.DEFAULT_ICON_NAME)) {\n+            return FormValidation.ok();\n+        }\n+\n+        // icons supported out of the box by Jenkins\n+        if (isAcceptedIconName(value)) {\n+            return FormValidation.ok();\n+        }\n+\n+        try {\n+            File jenkinsHomeDirectory = Jenkins.get().getRootDir();\n+            String userContentDirectory = jenkinsHomeDirectory.getCanonicalPath() + File.separatorChar + \"userContent\";\n+            File imageFile = new File(jenkinsHomeDirectory, value);\n+\n+            String canonicalPath = imageFile.getCanonicalPath();\n+            if (!canonicalPath.startsWith(userContentDirectory)) {\n+                return FormValidation.error(\"Use path to JENKINS_HOME/userContent directory, eg. userContent/myIcon.png\");\n             }\n+\n+            if (!imageFile.exists()) {\n+                return FormValidation.error(\"Image does not exist. \"\n+                        + \"Open browser with /userContent to check available images\");\n+            }\n+        } catch (IOException e) {\n+            return FormValidation.error(e, \"Problem with link icon:  \" + value);\n         }\n         return FormValidation.ok();\n     }\n+\n+    /**\n+     * Validates if passed icon may be supported by Jenkins.\n+     * It accepts values like <code>document</code>, <code>disabled.gif</code> or <code>document-properties.svg</code>.\n+     * List of supported icons located in JENKINS_HOME/var/images directory.\n+     */\n+    public boolean isAcceptedIconName(String iconName) {\n+        // accepts .gif extension as a compatibility with older version of the plugin\n+        return iconName.matches((\"^[\\\\w-]+(\\\\.gif)?$\"));\n+    }\n }",
+  "auto_locate_confidence": "auto"
+}

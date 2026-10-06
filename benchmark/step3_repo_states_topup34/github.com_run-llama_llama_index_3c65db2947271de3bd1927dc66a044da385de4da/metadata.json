@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_run-llama_llama_index_3c65db2947271de3bd1927dc66a044da385de4da",
+  "cve_ids": [
+    "CVE-2025-1752"
+  ],
+  "cwe_ids": [
+    "CWE-674"
+  ],
+  "language": "python",
+  "repository": "run-llama/llama_index",
+  "repository_url": "https://github.com/run-llama/llama_index",
+  "vulnerable_commit": "1da818853f3e45221f76f4b63d1457b726b2bbf6",
+  "fixed_commit": "3c65db2947271de3bd1927dc66a044da385de4da",
+  "changed_file": "llama-index-integrations/readers/llama-index-readers-web/llama_index/readers/web/knowledge_base/base.py",
+  "max_score": "1337"
+}

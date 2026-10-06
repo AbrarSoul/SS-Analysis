@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_containerbuildsystem_cachi2_d6638e5e14474061a1ab1ba5d0ee72f58b9a11a9",
+  "cve_ids": [
+    "CVE-2024-52582"
+  ],
+  "cwe_ids": [
+    "CWE-497"
+  ],
+  "language": "python",
+  "repository": "containerbuildsystem/cachi2",
+  "repository_url": "https://github.com/containerbuildsystem/cachi2",
+  "vulnerable_commit": "6ee35b9a542a84cd4a9c27f7f6dc3317ec724a63",
+  "fixed_commit": "d6638e5e14474061a1ab1ba5d0ee72f58b9a11a9",
+  "changed_file": "cachi2/interface/cli.py",
+  "max_score": "1337"
+}

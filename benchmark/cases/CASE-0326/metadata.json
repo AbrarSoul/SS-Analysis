@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0326",
+  "original_source_case_id": "github.com_web2py_web2py_9706d125b42481178d2b423de245f5d2faadbf40",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-3952",
+  "cve_ids_all": [
+    "CVE-2016-3952",
+    "CVE-2016-3953"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-255",
+    "CWE-798"
+  ],
+  "language": "python",
+  "repository": "web2py/web2py",
+  "repository_url": "https://github.com/web2py/web2py",
+  "vulnerable_commit": "7c299936e48136d14918c2736748ac1eac665722",
+  "fixed_commit": "9706d125b42481178d2b423de245f5d2faadbf40",
+  "changed_file": "gluon/globals.py",
+  "changed_function": "def __init__(self, env):",
+  "vulnerable_lines": [
+    185,
+    207
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 0,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0326/vulnerable_source.py": "c45d846404cf69cbc0967d45eb8d139ab77448d830fd3a09c581c6d9197ba31f",
+    "cases/CASE-0326/patched_source.py": "087f6f7a4bd9655ea517670f94e0721051850d93635dbcfaf858b2ff3533fb26",
+    "cases/CASE-0326/patch.diff": "dcbe54645c46a0fb958de4fc15de6711b1d484ff187bbb6b7f8a9e258083ebd7",
+    "cases/CASE-0326/metadata.json": "1f6c3418625354cbb819c3d2a83cfd3d63fd70be780d56ef0fc565ee012499f3",
+    "model_context/CASE-0326.json": "0edd56874a374aaa8c6709a176ab69efb885f5df2593a9fbbb05a8939807d5cf",
+    "difficulty/CASE-0326.json": "ec4ea1e481fd4fb8de17961029b1c66e8665c0b3638263ac2096e0843990a655"
+  },
+  "case_level_hash": "59ccee36a3e9ee39d2fdbed2294aff98ba4745b2926d31b994d605b80d6da9d6"
+}

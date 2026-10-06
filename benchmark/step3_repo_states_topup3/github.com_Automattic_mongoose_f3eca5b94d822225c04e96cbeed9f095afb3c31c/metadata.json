@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Automattic_mongoose_f3eca5b94d822225c04e96cbeed9f095afb3c31c",
+  "cve_ids": [
+    "CVE-2019-17426"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "Automattic/mongoose",
+  "repository_url": "https://github.com/Automattic/mongoose",
+  "vulnerable_commit": "cc10e0dc441f469330c1af2822d171fcd6fa8f89",
+  "fixed_commit": "f3eca5b94d822225c04e96cbeed9f095afb3c31c",
+  "changed_file": "lib/cast.js",
+  "max_score": "1337"
+}

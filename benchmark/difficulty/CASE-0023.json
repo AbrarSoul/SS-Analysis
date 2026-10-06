@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0023",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 3,
+  "lines_changed_total": 14,
+  "function_size_chars": 449,
+  "function_size_lines": 13,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "The flaw is a field's inclusion in an unvalidated bulk-save selector list; recognizing it requires reading the whole selector list as context.",
+  "supported_status": "supported"
+}

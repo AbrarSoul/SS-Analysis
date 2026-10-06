@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_DavidOsipov_Vision-ui_74802cd688b661a35e638fc96938d65ca7c05ff5",
+  "cve_ids": [
+    "CVE-2025-54884"
+  ],
+  "cwe_ids": [
+    "CWE-400",
+    "CWE-770"
+  ],
+  "language": "javascript",
+  "repository": "DavidOsipov/Vision-ui",
+  "repository_url": "https://github.com/DavidOsipov/Vision-ui",
+  "vulnerable_commit": "fd61e7858c7d788ba76c08726ceea34daaa52568",
+  "fixed_commit": "74802cd688b661a35e638fc96938d65ca7c05ff5",
+  "changed_file": "src/security-kit.js",
+  "max_score": "1337"
+}

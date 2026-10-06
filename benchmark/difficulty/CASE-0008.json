@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0008",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 0,
+  "lines_changed_total": 5,
+  "function_size_chars": 3462,
+  "function_size_lines": 70,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Unsanitized app_name flows from the route parameter directly into a path join within a single short function.",
+  "supported_status": "supported"
+}

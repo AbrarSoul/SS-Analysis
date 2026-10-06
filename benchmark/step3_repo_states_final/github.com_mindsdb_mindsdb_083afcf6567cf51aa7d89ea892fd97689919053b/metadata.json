@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mindsdb_mindsdb_083afcf6567cf51aa7d89ea892fd97689919053b",
+  "cve_ids": [
+    "CVE-2023-38699"
+  ],
+  "cwe_ids": [
+    "CWE-311"
+  ],
+  "language": "python",
+  "repository": "mindsdb/mindsdb",
+  "repository_url": "https://github.com/mindsdb/mindsdb",
+  "vulnerable_commit": "bc5d275345028a952a78b2a0b6e27957feec6b93",
+  "fixed_commit": "083afcf6567cf51aa7d89ea892fd97689919053b",
+  "changed_file": "mindsdb/integrations/handlers/dremio_handler/dremio_handler.py",
+  "max_score": "1337"
+}

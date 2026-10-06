@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0098",
+  "original_source_case_id": "github.com_ant-media_ant-media-server_4d4763bd4fd06e515c19544e5170ca0f34c9ce45",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-35371",
+  "cve_ids_all": [
+    "CVE-2024-35371"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-125"
+  ],
+  "language": "java",
+  "repository": "ant-media/ant-media-server",
+  "repository_url": "https://github.com/ant-media/ant-media-server",
+  "vulnerable_commit": "3dfaf9a9e3774c65cd396eec4d9b0f759e5085c4",
+  "fixed_commit": "4d4763bd4fd06e515c19544e5170ca0f34c9ce45",
+  "changed_file": "src/main/java/io/antmedia/rest/RestServiceBase.java",
+  "changed_function": "protected Result deleteBroadcasts(String[] streamIds) {",
+  "vulnerable_lines": [
+    357,
+    379
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 6,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "hand_retargeted",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0098/vulnerable_source.java": "3016f55dd49ff27705b7b8a07fc76d98191dd5bc84f1bb6d752c035b63055877",
+    "cases/CASE-0098/patched_source.java": "9e6763e0f4cc68da6fd4e0c783c6fccfd83bc27d680de56579afb755a1d4fcca",
+    "cases/CASE-0098/patch.diff": "cc9958abe7a446f73212aa8070316d241d668b4c44d9ca58361c2f2c10e21571",
+    "model_context/CASE-0098.json": "22ed5d0143a26afc060825bf9be9d3982c61bf41e7e3585c8ccaad280cafa6d7",
+    "difficulty/CASE-0098.json": "59e8921c416f04cbfd9a071ff0a46211a7e9eb2352517a2910549e1dd975fc0f",
+    "cases/CASE-0098/metadata.json": "f51a2e6d61299916fab22e837a70923d28bd56c91a782671b65692b5ea08e318"
+  },
+  "case_level_hash": "4f30af1e27d0bff6b91aceb68dfd715c64c505cdab39aa65da453bc82a20178f"
+}

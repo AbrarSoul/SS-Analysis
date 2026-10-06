@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_igniterealtime_Openfire_2ac00a1ff42f5d3547ef58e21f8cdec992bfcf97",
+  "cve_ids": [
+    "CVE-2023-32315"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "igniterealtime/Openfire",
+  "repository_url": "https://github.com/igniterealtime/Openfire",
+  "vulnerable_commit": "9559afb27fe6257eb75bd6743a9e457d50fad2f1",
+  "fixed_commit": "2ac00a1ff42f5d3547ef58e21f8cdec992bfcf97",
+  "changed_file": "xmppserver/src/main/java/org/jivesoftware/util/JiveGlobals.java",
+  "max_score": "1337"
+}

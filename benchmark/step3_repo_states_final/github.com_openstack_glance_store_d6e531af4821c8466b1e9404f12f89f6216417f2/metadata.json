@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_openstack_glance_store_d6e531af4821c8466b1e9404f12f89f6216417f2",
+  "cve_ids": [
+    "CVE-2024-1141"
+  ],
+  "cwe_ids": [
+    "CWE-779",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "openstack/glance_store",
+  "repository_url": "https://github.com/openstack/glance_store",
+  "vulnerable_commit": "e823a3caa000ee72c8115f4e455fff840eec0df4",
+  "fixed_commit": "d6e531af4821c8466b1e9404f12f89f6216417f2",
+  "changed_file": "glance_store/_drivers/s3.py",
+  "max_score": "1337"
+}

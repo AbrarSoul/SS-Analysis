@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0332",
+  "language": "typescript",
+  "cve_id": "CVE-2026-3965",
+  "cve_ids_all": [
+    "CVE-2026-3965"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-693",
+      "definition": "Protection Mechanism Failure"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import express, { Request, Response, NextFunction, Application } from 'express';",
+    "import bodyParser from 'body-parser';",
+    "import cors from 'cors';",
+    "import routes from '../api';",
+    "import config from '../config';",
+    "import { UnauthorizedError, expressjwt } from 'express-jwt';",
+    "import { getPlatform, getToken } from '../config/util';",
+    "import rewrite from 'express-urlrewrite';",
+    "import { errors } from 'celebrate';",
+    "import { serveEnv } from '../config/serverEnv';",
+    "import { IKeyvStore, shareStore } from '../shared/store';",
+    "import { isValidToken } from '../shared/auth';",
+    "import path from 'path';"
+  ],
+  "vulnerable_function": "  app.use(async (req, res, next) => {\n    const pathLower = req.path.toLowerCase();\n    if (!['/api/user/init', '/api/user/notification/init'].includes(pathLower)) {\n      return next();\n    }\n    const authInfo =\n      (await shareStore.getAuthInfo()) || ({} as IKeyvStore['authInfo']);\n\n    let isInitialized = true;\n    if (\n      Object.keys(authInfo).length === 2 &&\n      authInfo.username === 'admin' &&\n      authInfo.password === 'admin'\n    ) {\n      isInitialized = false;\n    }\n\n    if (isInitialized) {\n      return res.send({ code: 450, message: '\u672a\u77e5\u9519\u8bef' });\n    } else {\n      return next();\n    }\n  }",
+  "patched_function": "  app.use(async (req, res, next) => {\n    const pathLower = req.path.toLowerCase();\n    if (\n      ![\n        '/api/user/init',\n        '/api/user/notification/init',\n        '/open/user/init',\n        '/open/user/notification/init',\n      ].includes(req.path)\n    ) {\n      return next();\n    }\n    const authInfo =\n      (await shareStore.getAuthInfo()) || ({} as IKeyvStore['authInfo']);\n\n    let isInitialized = true;\n    if (\n      Object.keys(authInfo).length === 2 &&\n      authInfo.username === 'admin' &&\n      authInfo.password === 'admin'\n    ) {\n      isInitialized = false;\n    }\n\n    if (isInitialized) {\n      return res.send({ code: 450, message: '\u672a\u77e5\u9519\u8bef' });\n    } else {\n      return next();\n    }\n  }",
+  "unified_diff": "diff --git a/back/loaders/express.ts b/back/loaders/express.ts\nindex 2807ece0..b5bf221b 100644\n--- a/back/loaders/express.ts\n+++ b/back/loaders/express.ts\n@@ -120,7 +120,14 @@ export default ({ app }: { app: Application }) => {\n \n   app.use(async (req, res, next) => {\n     const pathLower = req.path.toLowerCase();\n-    if (!['/api/user/init', '/api/user/notification/init'].includes(pathLower)) {\n+    if (\n+      ![\n+        '/api/user/init',\n+        '/api/user/notification/init',\n+        '/open/user/init',\n+        '/open/user/notification/init',\n+      ].includes(req.path)\n+    ) {\n       return next();\n     }\n     const authInfo =",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,13 @@
+diff --git a/install.js b/install.js
+index d70aed1..7a46b74 100644
+--- a/install.js
++++ b/install.js
+@@ -37,7 +37,7 @@ if (process.platform === 'linux' && process.arch === 'x64') {
+ 
+ 
+ var downloadUrl = util.format(
+-  'http://downloads.mongodb.org/osx/mongodb-%s-%s.%s',
++  'https://fastdl.mongodb.org/osx/mongodb-%s-%s.%s',
+   platformPart,
+   versionPart,
+   extension

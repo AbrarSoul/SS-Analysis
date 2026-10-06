@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_emmett-framework_core_9557ea23a27cbadf7774d8bca6bbe4b54fa8a3ec",
+  "language": "python",
+  "cve_id": "CVE-2026-25577",
+  "cve_ids_all": [
+    "CVE-2026-25577"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-248",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-307",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "IngressWrapper",
+  "imports": [
+    "from __future__ import annotations",
+    "import re",
+    "from abc import ABCMeta, abstractmethod",
+    "from http.cookies import SimpleCookie",
+    "from typing import Any, List, Mapping, Type, TypeVar, Union",
+    "from ...datastructures import sdict",
+    "from ...utils import cachedprop",
+    "from ..headers import Accept, LanguageAccept"
+  ],
+  "vulnerable_function": "    def cookies(self) -> SimpleCookie:\n        cookies: SimpleCookie = SimpleCookie()\n        for cookie in self.headers.get(\"cookie\", \"\").split(\";\"):\n            cookies.load(cookie)\n        return cookies\n",
+  "patched_function": "    def cookies(self) -> SimpleCookie:\n        cookies: SimpleCookie = SimpleCookie()\n        for cookie in self.headers.get(\"cookie\", \"\").split(\";\"):\n            try:\n                cookies.load(cookie)\n            except Exception:\n                continue\n        return cookies\n",
+  "unified_diff": "diff --git a/emmett_core/http/wrappers/__init__.py b/emmett_core/http/wrappers/__init__.py\nindex 4021f1b..8b1f317 100644\n--- a/emmett_core/http/wrappers/__init__.py\n+++ b/emmett_core/http/wrappers/__init__.py\n@@ -61,7 +61,10 @@ class IngressWrapper(Wrapper, metaclass=ABCMeta):\n     def cookies(self) -> SimpleCookie:\n         cookies: SimpleCookie = SimpleCookie()\n         for cookie in self.headers.get(\"cookie\", \"\").split(\";\"):\n-            cookies.load(cookie)\n+            try:\n+                cookies.load(cookie)\n+            except Exception:\n+                continue\n         return cookies\n \n     @property",
+  "auto_locate_confidence": "auto"
+}

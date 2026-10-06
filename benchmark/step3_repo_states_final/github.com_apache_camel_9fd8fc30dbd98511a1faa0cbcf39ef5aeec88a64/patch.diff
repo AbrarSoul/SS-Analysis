@@ -1,0 +1,11 @@
+diff --git a/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java b/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java
+index 5805cb626b3c..95307d455923 100644
+--- a/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java
++++ b/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java
+@@ -33,5 +33,6 @@ public class UndertowHeaderFilterStrategy extends DefaultHeaderFilterStrategy {
+         // filter headers begin with "Camel" or "org.apache.camel"
+         // must ignore case for Http based transports
+         setOutFilterStartsWith(CAMEL_FILTER_STARTS_WITH);
++        setInFilterStartsWith(CAMEL_FILTER_STARTS_WITH);
+     }
+ }

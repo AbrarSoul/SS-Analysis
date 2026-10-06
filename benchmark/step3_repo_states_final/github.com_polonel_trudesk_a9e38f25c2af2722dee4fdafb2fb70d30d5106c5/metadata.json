@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_polonel_trudesk_a9e38f25c2af2722dee4fdafb2fb70d30d5106c5",
+  "cve_ids": [
+    "CVE-2022-1947"
+  ],
+  "cwe_ids": [
+    "CWE-480",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "polonel/trudesk",
+  "repository_url": "https://github.com/polonel/trudesk",
+  "vulnerable_commit": "314540864dbf2c0eaa99aa42c3d317de9501eb67",
+  "fixed_commit": "a9e38f25c2af2722dee4fdafb2fb70d30d5106c5",
+  "changed_file": "src/controllers/messages.js",
+  "max_score": "1337"
+}

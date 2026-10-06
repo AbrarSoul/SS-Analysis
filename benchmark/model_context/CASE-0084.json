@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-0084",
+  "language": "javascript",
+  "cve_id": "CVE-2025-25205",
+  "cve_ids_all": [
+    "CVE-2025-25205"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-202",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-287",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const axios = require('axios')",
+    "const passport = require('passport')",
+    "const { Request, Response, NextFunction } = require('express')",
+    "const bcrypt = require('./libs/bcryptjs')",
+    "const jwt = require('./libs/jsonwebtoken')",
+    "const requestIp = require('./libs/requestIp')",
+    "const LocalStrategy = require('./libs/passportLocal')",
+    "const JwtStrategy = require('passport-jwt').Strategy",
+    "const ExtractJwt = require('passport-jwt').ExtractJwt",
+    "const OpenIDClient = require('openid-client')",
+    "const Database = require('./Database')",
+    "const Logger = require('./Logger')"
+  ],
+  "vulnerable_function": "  constructor() {\n    // Map of openId sessions indexed by oauth2 state-variable\n    this.openIdAuthSession = new Map()\n    this.ignorePatterns = [/\\/api\\/items\\/[^/]+\\/cover/, /\\/api\\/authors\\/[^/]+\\/image/]\n  }",
+  "patched_function": "  constructor() {\n    // Map of openId sessions indexed by oauth2 state-variable\n    this.openIdAuthSession = new Map()\n    const escapedRouterBasePath = escapeRegExp(global.RouterBasePath)\n    this.ignorePatterns = [\n      new RegExp(`^(${escapedRouterBasePath}/api)?/items/[^/]+/cover$`), \n      new RegExp(`^(${escapedRouterBasePath}/api)?/authors/[^/]+/image$`)\n    ]\n  }",
+  "unified_diff": "diff --git a/server/Auth.js b/server/Auth.js\nindex 0000000..0000000 100644\n--- a/server/Auth.js\n+++ b/server/Auth.js\n@@ -10,6 +10,7 @@\n const OpenIDClient = require('openid-client')\n const Database = require('./Database')\n const Logger = require('./Logger')\n+const { escapeRegExp } = require('./utils')\n \n /**\n  * @class Class for handling all the authentication related functionality.\n@@ -18,7 +19,11 @@\n   constructor() {\n     // Map of openId sessions indexed by oauth2 state-variable\n     this.openIdAuthSession = new Map()\n-    this.ignorePatterns = [/\\/api\\/items\\/[^/]+\\/cover/, /\\/api\\/authors\\/[^/]+\\/image/]\n+    const escapedRouterBasePath = escapeRegExp(global.RouterBasePath)\n+    this.ignorePatterns = [\n+      new RegExp(`^(${escapedRouterBasePath}/api)?/items/[^/]+/cover$`), \n+      new RegExp(`^(${escapedRouterBasePath}/api)?/authors/[^/]+/image$`)\n+    ]\n   }\n \n   /**\n@@ -28,7 +33,7 @@\n    * @private\n    */\n   authNotNeeded(req) {\n-    return req.method === 'GET' && this.ignorePatterns.some((pattern) => pattern.test(req.originalUrl))\n+    return req.method === 'GET' && this.ignorePatterns.some((pattern) => pattern.test(req.path))\n   }\n \n   ifAuthNeeded(middleware) {\n",
+  "auto_locate_confidence": "auto"
+}

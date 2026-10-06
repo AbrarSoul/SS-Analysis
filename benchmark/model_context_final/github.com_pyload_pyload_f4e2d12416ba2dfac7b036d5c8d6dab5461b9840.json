@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_pyload_pyload_f4e2d12416ba2dfac7b036d5c8d6dab5461b9840",
+  "language": "python",
+  "cve_id": "CVE-2025-7346",
+  "cve_ids_all": [
+    "CVE-2025-7346"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-281",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import os",
+    "from base64 import standard_b64decode",
+    "from functools import wraps",
+    "from urllib.parse import unquote",
+    "from cryptography.hazmat.backends import default_backend",
+    "from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes",
+    "import flask",
+    "from flask.json import jsonify",
+    "from pyload.core.api import Destination",
+    "from pyload.core.utils.convert import to_str",
+    "from pyload.core.utils.misc import eval_js"
+  ],
+  "vulnerable_function": "    def wrapper(*args, **kwargs):\n        remote_addr = flask.request.environ.get(\"REMOTE_ADDR\", \"0\")\n        http_host = flask.request.environ.get(\"HTTP_HOST\", \"0\")\n\n        if remote_addr in (\"127.0.0.1\", \"::ffff:127.0.0.1\", \"::1\", \"localhost\") or http_host in (\n            \"127.0.0.1:9666\",\n            \"[::1]:9666\",\n        ):\n            return func(*args, **kwargs)\n        else:\n            return \"Forbidden\", 403\n",
+  "patched_function": "    def wrapper(*args, **kwargs):\n        remote_addr = flask.request.environ.get(\"REMOTE_ADDR\", \"0\")\n\n        if remote_addr in (\"127.0.0.1\", \"::ffff:127.0.0.1\", \"::1\", \"localhost\"):\n            return func(*args, **kwargs)\n        else:\n            return \"Forbidden\", 403\n",
+  "unified_diff": "diff --git a/src/pyload/webui/app/blueprints/cnl_blueprint.py b/src/pyload/webui/app/blueprints/cnl_blueprint.py\nindex 84105a608..b94f8f8b5 100644\n--- a/src/pyload/webui/app/blueprints/cnl_blueprint.py\n+++ b/src/pyload/webui/app/blueprints/cnl_blueprint.py\n@@ -23,12 +23,8 @@ def local_check(func):\n     @wraps(func)\n     def wrapper(*args, **kwargs):\n         remote_addr = flask.request.environ.get(\"REMOTE_ADDR\", \"0\")\n-        http_host = flask.request.environ.get(\"HTTP_HOST\", \"0\")\n \n-        if remote_addr in (\"127.0.0.1\", \"::ffff:127.0.0.1\", \"::1\", \"localhost\") or http_host in (\n-            \"127.0.0.1:9666\",\n-            \"[::1]:9666\",\n-        ):\n+        if remote_addr in (\"127.0.0.1\", \"::ffff:127.0.0.1\", \"::1\", \"localhost\"):\n             return func(*args, **kwargs)\n         else:\n             return \"Forbidden\", 403",
+  "auto_locate_confidence": "auto"
+}

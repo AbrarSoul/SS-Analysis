@@ -1,0 +1,12 @@
+diff --git a/tabby-ssh/src/session/ssh.ts b/tabby-ssh/src/session/ssh.ts
+index 2ad99325..4b446239 100644
+--- a/tabby-ssh/src/session/ssh.ts
++++ b/tabby-ssh/src/session/ssh.ts
+@@ -333,6 +333,7 @@ export class SSHSession {
+                 algorithms,
+                 authHandler: (methodsLeft, partialSuccess, callback) => {
+                     this.zone.run(async () => {
++                        await hostVerifiedPromise
+                         callback(await this.handleAuth(methodsLeft))
+                     })
+                 },

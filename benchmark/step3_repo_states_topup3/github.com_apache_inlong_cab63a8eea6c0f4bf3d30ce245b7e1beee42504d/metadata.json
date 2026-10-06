@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_inlong_cab63a8eea6c0f4bf3d30ce245b7e1beee42504d",
+  "cve_ids": [
+    "CVE-2023-35088"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "apache/inlong",
+  "repository_url": "https://github.com/apache/inlong",
+  "vulnerable_commit": "77b66925708e00bee8f8442e8c7e22c0a8209aa4",
+  "fixed_commit": "cab63a8eea6c0f4bf3d30ce245b7e1beee42504d",
+  "changed_file": "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/core/impl/AuditServiceImpl.java",
+  "max_score": "1337"
+}

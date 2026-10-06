@@ -1,0 +1,38 @@
+{
+  "case_id": "github.com_themoken_canto-curses_2817869f98c54975f31e2dd674c1aefa70749cca",
+  "language": "python",
+  "cve_id": "CVE-2013-7416",
+  "cve_ids_all": [
+    "CVE-2013-7416"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "GuiBase",
+  "imports": [
+    "from canto_next.hooks import on_hook",
+    "from canto_next.plugins import Plugin",
+    "from canto_next.remote import assign_to_dict, access_dict",
+    "from .command import CommandHandler, register_commands, register_arg_types, unregister_all, _string, register_aliases, commands, command_help",
+    "from .tagcore import tag_updater",
+    "from .parser import prep_for_display",
+    "from .config import needs_eval",
+    "import logging",
+    "import subprocess",
+    "import tempfile",
+    "import urllib.request",
+    "import urllib.error",
+    "import urllib.parse",
+    "import shlex",
+    "import sys",
+    "import os",
+    "import os.path"
+  ],
+  "vulnerable_function": "    def _fork(self, path, href, text, fetch=False):\n\n        # Prepare temporary files, if fetch.\n\n        if fetch:\n            # Get a path (sans query strings, etc.) for the URL\n            tmppath = urllib.parse.urlparse(href).path\n\n            # Return just the basename of the path (no directories)\n            fname = os.path.basename(tmppath)\n\n            # Grab a temporary directory. This allows us to create a file with\n            # an unperturbed filename so scripts can freely use regex /\n            # extension matching in addition to mimetype detection.\n\n            tmpdir = tempfile.mkdtemp(prefix=\"canto-\")\n            tmpnam = tmpdir + '/' + fname\n\n            on_hook(\"curses_exit\", lambda : (os.unlink(tmpnam)))\n            on_hook(\"curses_exit\", lambda : (os.rmdir(tmpdir)))\n\n        pid = os.fork()\n\n        # Parents can now bail.\n        if pid:\n            return pid\n\n        if fetch:\n            tmp = open(tmpnam, 'w+b')\n\n            # Grab the HTTP info / prepare to read.\n            response = urllib.request.urlopen(href)\n\n            # Grab in kilobyte chunks to avoid wasting memory on something\n            # that's going to be immediately written to disk.\n\n            while True:\n                r = response.read(1024)\n                if not r:\n                    break\n                tmp.write(r)\n\n            response.close()\n            tmp.close()\n\n            href = tmpnam\n\n        # A lot of programs don't appreciate\n        # having their fds closed, so instead\n        # we dup them to /dev/null.\n\n        fd = os.open(\"/dev/null\", os.O_RDWR)\n        os.dup2(fd, sys.stderr.fileno())\n\n        if not text:\n            os.setpgid(os.getpid(), os.getpid())\n            os.dup2(fd, sys.stdout.fileno())\n\n        if \"%u\" in path:\n            path = path.replace(\"%u\", href)\n        elif href:\n            path = path + \" \" + href\n\n        os.execv(\"/bin/sh\", [\"/bin/sh\", \"-c\", path])\n\n        # Just in case.\n        sys.exit(0)\n",
+  "patched_function": "    def _fork(self, path, href, text, fetch=False):\n\n        # Prepare temporary files, if fetch.\n\n        if fetch:\n            # Get a path (sans query strings, etc.) for the URL\n            tmppath = urllib.parse.urlparse(href).path\n\n            # Return just the basename of the path (no directories)\n            fname = os.path.basename(tmppath)\n\n            # Grab a temporary directory. This allows us to create a file with\n            # an unperturbed filename so scripts can freely use regex /\n            # extension matching in addition to mimetype detection.\n\n            tmpdir = tempfile.mkdtemp(prefix=\"canto-\")\n            tmpnam = tmpdir + '/' + fname\n\n            on_hook(\"curses_exit\", lambda : (os.unlink(tmpnam)))\n            on_hook(\"curses_exit\", lambda : (os.rmdir(tmpdir)))\n\n        pid = os.fork()\n\n        # Parents can now bail.\n        if pid:\n            return pid\n\n        if fetch:\n            tmp = open(tmpnam, 'w+b')\n\n            # Grab the HTTP info / prepare to read.\n            response = urllib.request.urlopen(href)\n\n            # Grab in kilobyte chunks to avoid wasting memory on something\n            # that's going to be immediately written to disk.\n\n            while True:\n                r = response.read(1024)\n                if not r:\n                    break\n                tmp.write(r)\n\n            response.close()\n            tmp.close()\n\n            href = tmpnam\n\n        # Make sure that we quote href such that malicious URLs like\n        # \"http://example.com & rm -rf ~/\" won't be interpreted by the shell.\n\n        href = shlex.quote(href)\n\n        # A lot of programs don't appreciate\n        # having their fds closed, so instead\n        # we dup them to /dev/null.\n\n        fd = os.open(\"/dev/null\", os.O_RDWR)\n        os.dup2(fd, sys.stderr.fileno())\n\n        if not text:\n            os.setpgid(os.getpid(), os.getpid())\n            os.dup2(fd, sys.stdout.fileno())\n\n        if \"%u\" in path:\n            path = path.replace(\"%u\", href)\n        elif href:\n            path = path + \" \" + href\n\n        os.execv(\"/bin/sh\", [\"/bin/sh\", \"-c\", path])\n\n        # Just in case.\n        sys.exit(0)\n",
+  "unified_diff": "diff --git a/canto_curses/guibase.py b/canto_curses/guibase.py\nindex c23a2ec..a67fc7d 100644\n--- a/canto_curses/guibase.py\n+++ b/canto_curses/guibase.py\n@@ -156,6 +156,11 @@ class GuiBase(CommandHandler):\n \n             href = tmpnam\n \n+        # Make sure that we quote href such that malicious URLs like\n+        # \"http://example.com & rm -rf ~/\" won't be interpreted by the shell.\n+\n+        href = shlex.quote(href)\n+\n         # A lot of programs don't appreciate\n         # having their fds closed, so instead\n         # we dup them to /dev/null.",
+  "auto_locate_confidence": "auto"
+}

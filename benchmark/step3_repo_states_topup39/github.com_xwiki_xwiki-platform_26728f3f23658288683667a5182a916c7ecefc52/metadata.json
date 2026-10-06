@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_26728f3f23658288683667a5182a916c7ecefc52",
+  "cve_ids": [
+    "CVE-2022-29161"
+  ],
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-327"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "3b871d906e664fa1875fbeb088404cf31e9f0094",
+  "fixed_commit": "26728f3f23658288683667a5182a916c7ecefc52",
+  "changed_file": "xwiki-platform-core/xwiki-platform-crypto/xwiki-platform-crypto-script/src/main/java/org/xwiki/crypto/script/RSACryptoScriptService.java",
+  "max_score": "1337"
+}

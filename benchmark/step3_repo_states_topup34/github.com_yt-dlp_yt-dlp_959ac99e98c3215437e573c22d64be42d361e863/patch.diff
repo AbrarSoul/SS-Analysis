@@ -1,0 +1,13 @@
+diff --git a/yt_dlp/postprocessor/exec.py b/yt_dlp/postprocessor/exec.py
+index 1f0a0015e..243487dd2 100644
+--- a/yt_dlp/postprocessor/exec.py
++++ b/yt_dlp/postprocessor/exec.py
+@@ -18,7 +18,7 @@ def parse_cmd(self, cmd, info):
+         if filepath:
+             if '{}' not in cmd:
+                 cmd += ' {}'
+-            cmd = cmd.replace('{}', shell_quote(filepath))
++            cmd = cmd.replace('{}', shell_quote(filepath, shell=True))
+         return cmd
+ 
+     def run(self, info):

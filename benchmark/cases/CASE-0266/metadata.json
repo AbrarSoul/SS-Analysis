@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0266",
+  "original_source_case_id": "github.com_protobufjs_protobuf.js_535df444ac060243722ac5d672db205e5c531d75",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-41242",
+  "cve_ids_all": [
+    "CVE-2026-41242"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "protobufjs/protobuf.js",
+  "repository_url": "https://github.com/protobufjs/protobuf.js",
+  "vulnerable_commit": "f05e3c3bdd0b3c2cddbf8540bb5bd4d394a693ad",
+  "fixed_commit": "535df444ac060243722ac5d672db205e5c531d75",
+  "changed_file": "src/type.js",
+  "changed_function": "function Type(name, options) {",
+  "vulnerable_lines": [
+    31,
+    91
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 1,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0266/vulnerable_source.js": "2343d98bb7136e401673aae4dc8de404b8ca69476613036bf19c1415511b9d2a",
+    "cases/CASE-0266/patched_source.js": "8098d89fc31f7a31eab7bcc32e983dc98ca4072580bd822a0f00d2aedf6a5779",
+    "cases/CASE-0266/patch.diff": "efb0383fe7ca50a618ac74ec2cd1b7df7cdf175cecddee1b34ceae43e3d62bef",
+    "cases/CASE-0266/metadata.json": "8b7a8f68c6f46b8887dcfd22df7433c9ce1890569edf29b3a1dec0ed6479aa62",
+    "model_context/CASE-0266.json": "daf94b59526dcd36fe999b0acba5035b22a80faa91b7e16c77c65f412a7487e1",
+    "difficulty/CASE-0266.json": "8c0af41bcb1253832e786596626f5ad4f41c2f0904731f7f8c5a6a8a8cab9444"
+  },
+  "case_level_hash": "702f8e4303d45fc6065a68b8c07bec7addf08ceef1b588af9128f0626e86e53e"
+}

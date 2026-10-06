@@ -1,0 +1,62 @@
+[
+  {
+    "case_id": "github.com_AntonKueltz_fastecdsa_7b64e3efaa806b4daaf73bb5172af3581812f8de",
+    "language": "python",
+    "repository": "AntonKueltz/fastecdsa",
+    "error": "no function contains line 66; no function contains line 68"
+  },
+  {
+    "case_id": "github.com_DavidOsipov_Vision-ui_74802cd688b661a35e638fc96938d65ca7c05ff5",
+    "language": "javascript",
+    "repository": "DavidOsipov/Vision-ui",
+    "error": "no method-like block contains line 8; no method-like block contains line 10; no method-like block contains line 16; no method-like block contains line 18"
+  },
+  {
+    "case_id": "github.com_Janpot_mongodb-instance_c8fea750f8020ace8410c442b2684b33a9fddd3b",
+    "language": "javascript",
+    "repository": "Janpot/mongodb-instance",
+    "error": "no method-like block contains line 39; no method-like block contains line 41"
+  },
+  {
+    "case_id": "github.com_ansible_ansible_998793fd0ab55705d57527a38cee5e83f535974c",
+    "language": "python",
+    "repository": "ansible/ansible",
+    "error": "SyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<unknown>, line 95)"
+  },
+  {
+    "case_id": "github.com_cryptpad_cryptpad_f624f9d457d36040f57c7598d98a8b9461b79837",
+    "language": "javascript",
+    "repository": "cryptpad/cryptpad",
+    "error": "extracted function too large to be useful context (vuln=152 lines, patched=154 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_dgtlmoon_changedetection.io_402f1e47e78ecd155b1e90f30cce424ff7763e0f",
+    "language": "python",
+    "repository": "dgtlmoon/changedetection.io",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_mafintosh_is-my-json-valid_eca4beb21e61877d76fdf6bea771f72f39544d9b",
+    "language": "javascript",
+    "repository": "mafintosh/is-my-json-valid",
+    "error": "no method-like block contains line 13; no method-like block contains line 15"
+  },
+  {
+    "case_id": "github.com_rakibtg_docker-web-gui_79cdc41809f2030fce21a1109898bd79e4190661",
+    "language": "javascript",
+    "repository": "rakibtg/docker-web-gui",
+    "error": "no method-like block contains line 0; no method-like block contains line 2; no method-like block contains line 2; no method-like block contains line 4; no method-like block contains line 3; no method-like block contains line 5"
+  },
+  {
+    "case_id": "github.com_rpm-software-management_yum-utils_6a8de061f8fdc885e74ebe8c94625bf53643b71c",
+    "language": "python",
+    "repository": "rpm-software-management/yum-utils",
+    "error": "SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)? (<unknown>, line 285)"
+  },
+  {
+    "case_id": "github.com_scottcwang_openssh_key_parser_d5b53b4b7e76c5b666fc657019dbf864fb04076c",
+    "language": "python",
+    "repository": "scottcwang/openssh_key_parser",
+    "error": "extracted function too large to be useful context (vuln=143 lines, patched=152 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  }
+]

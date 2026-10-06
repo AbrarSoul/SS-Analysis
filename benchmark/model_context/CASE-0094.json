@@ -1,0 +1,36 @@
+{
+  "case_id": "CASE-0094",
+  "language": "python",
+  "cve_id": "CVE-2019-25066",
+  "cve_ids_all": [
+    "CVE-2019-25066"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-269",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "OSAuthenticationProvider",
+  "imports": [
+    "import json",
+    "import logging",
+    "import pexpect",
+    "import pwd",
+    "import subprocess",
+    "import syslog",
+    "from jadi import component, service, interface",
+    "import aj",
+    "from aj.api.http import BaseHttpHandler",
+    "from aj.security.verifier import ClientCertificateVerificator",
+    "from aj.util import public"
+  ],
+  "vulnerable_function": "    def authenticate(self, username, password):\n        child = None\n        try:\n            child = pexpect.spawn('/bin/sh', ['-c', '/bin/su -c \"/bin/echo SUCCESS\" - %s' % username], timeout=5)\n            child.expect('.*:')\n            child.sendline(password)\n            result = child.expect(['su: .*', 'SUCCESS'])\n        except Exception as err:\n            if child and child.isalive():\n                child.close()\n            logging.error('Error checking password: %s', err)\n            return False\n        if result == 0:\n            return False\n        else:\n            return True\n",
+  "patched_function": "    def authenticate(self, username, password):\n        child = None\n\n        if PY3:\n            from shlex import quote\n        else:\n            from pipes import quote\n\n        try:\n            child = pexpect.spawn('/bin/sh', ['-c', '/bin/su -c \"/bin/echo SUCCESS\" - %s' % quote(username)], timeout=5)\n            child.expect('.*:')\n            child.sendline(password)\n            result = child.expect(['su: .*', 'SUCCESS'])\n        except Exception as err:\n            if child and child.isalive():\n                child.close()\n            logging.error('Error checking password: %s', err)\n            return False\n        if result == 0:\n            return False\n        else:\n            return True\n",
+  "unified_diff": "diff --git a/ajenti-core/aj/auth.py b/ajenti-core/aj/auth.py\nindex 9b3c832e2..8429ac966 100644\n--- a/ajenti-core/aj/auth.py\n+++ b/ajenti-core/aj/auth.py\n@@ -5,6 +5,7 @@ import pwd\n import subprocess\n import syslog\n from jadi import component, service, interface\n+from six import PY3\n \n import aj\n from aj.api.http import BaseHttpHandler\n@@ -99,8 +100,14 @@ class OSAuthenticationProvider(AuthenticationProvider):\n \n     def authenticate(self, username, password):\n         child = None\n+\n+        if PY3:\n+            from shlex import quote\n+        else:\n+            from pipes import quote\n+\n         try:\n-            child = pexpect.spawn('/bin/sh', ['-c', '/bin/su -c \"/bin/echo SUCCESS\" - %s' % username], timeout=5)\n+            child = pexpect.spawn('/bin/sh', ['-c', '/bin/su -c \"/bin/echo SUCCESS\" - %s' % quote(username)], timeout=5)\n             child.expect('.*:')\n             child.sendline(password)\n             result = child.expect(['su: .*', 'SUCCESS'])",
+  "auto_locate_confidence": "auto"
+}

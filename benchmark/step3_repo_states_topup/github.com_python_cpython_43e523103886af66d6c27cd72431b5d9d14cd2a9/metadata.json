@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_python_cpython_43e523103886af66d6c27cd72431b5d9d14cd2a9",
+  "cve_ids": [
+    "CVE-2020-27619"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "python/cpython",
+  "repository_url": "https://github.com/python/cpython",
+  "vulnerable_commit": "e512bc799e3864fe3b1351757261762d63471efc",
+  "fixed_commit": "43e523103886af66d6c27cd72431b5d9d14cd2a9",
+  "changed_file": "Lib/test/multibytecodec_support.py",
+  "max_score": "1337"
+}

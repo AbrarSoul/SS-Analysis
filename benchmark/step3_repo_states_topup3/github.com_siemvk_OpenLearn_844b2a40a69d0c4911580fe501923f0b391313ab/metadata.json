@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_siemvk_OpenLearn_844b2a40a69d0c4911580fe501923f0b391313ab",
+  "cve_ids": [
+    "CVE-2026-41243"
+  ],
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "language": "typescript",
+  "repository": "siemvk/OpenLearn",
+  "repository_url": "https://github.com/siemvk/OpenLearn",
+  "vulnerable_commit": "3f9efa6bc5e0e452abaafdba69c9749bcee0869a",
+  "fixed_commit": "844b2a40a69d0c4911580fe501923f0b391313ab",
+  "changed_file": "app/server/routers/forum.ts",
+  "max_score": "1337"
+}

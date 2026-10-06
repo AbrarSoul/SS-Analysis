@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0091",
+  "original_source_case_id": "github.com_airlinklabs_daemon_5e6222dd9eec6d7cb0876b12507e3d6011797693",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-57802",
+  "cve_ids_all": [
+    "CVE-2025-57802"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-61"
+  ],
+  "language": "typescript",
+  "repository": "airlinklabs/daemon",
+  "repository_url": "https://github.com/airlinklabs/daemon",
+  "vulnerable_commit": "32989a50b7bdf9652b9681cd79025679571b4306",
+  "fixed_commit": "5e6222dd9eec6d7cb0876b12507e3d6011797693",
+  "changed_file": "src/routes/fileSystem.ts",
+  "changed_function": "const sanitizePath = (base: string, relativePath: string): string => {",
+  "vulnerable_lines": [
+    9,
+    15
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0091/vulnerable_source.ts": "7063528ba856e902656a676adcf386574beffbe2374acb7e114f12752acbd6c7",
+    "cases/CASE-0091/patched_source.ts": "91024c4583acf2120fb2dad9e38e811006d4feecc9a4f2a600a4b46353a740bc",
+    "cases/CASE-0091/patch.diff": "9559bfe5c432e3de294b21ae606cecb9c696427e48bd3e9cb9f9f98ec10a10bb",
+    "cases/CASE-0091/metadata.json": "a3226646e818527db62030accdb93b3b33d8fcf7ed7d330cbe230aa671aed88d",
+    "model_context/CASE-0091.json": "657fb80c6b5f908770e0e697bd4b9f1aab22e6637ff1db082e0f8a1f3b296cb1",
+    "difficulty/CASE-0091.json": "8ca91fa2dd3712df4f16d888817d3bd535f9f76d6632ccc383c6f124b20ff5c7"
+  },
+  "case_level_hash": "1d33d9790a532360d66ee1df4793d499098a1e5699a592c3bcba4abd5706dac3"
+}

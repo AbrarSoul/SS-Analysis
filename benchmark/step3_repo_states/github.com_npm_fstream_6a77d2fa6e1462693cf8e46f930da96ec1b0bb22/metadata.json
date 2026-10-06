@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_npm_fstream_6a77d2fa6e1462693cf8e46f930da96ec1b0bb22",
+  "cve_ids": [
+    "CVE-2019-13173"
+  ],
+  "cwe_ids": [
+    "CWE-59"
+  ],
+  "language": "javascript",
+  "repository": "npm/fstream",
+  "repository_url": "https://github.com/npm/fstream",
+  "vulnerable_commit": "1e4527ffe8688d4f5325283d7cf2cf2d61f14c6b",
+  "fixed_commit": "6a77d2fa6e1462693cf8e46f930da96ec1b0bb22",
+  "changed_file": "lib/writer.js",
+  "max_score": "1337"
+}

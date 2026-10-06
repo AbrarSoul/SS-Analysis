@@ -1,0 +1,25 @@
+{
+  "case_id": "CASE-0306",
+  "language": "javascript",
+  "cve_id": "CVE-2019-10260",
+  "cve_ids_all": [
+    "CVE-2019-10260",
+    "CVE-2019-8903"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    },
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "\tself.redraw = function() {\n\n\t\tvar items = options.items;\n\t\tvar columns = options.columns;\n\t\tvar builder = [];\n\t\tvar m = {};\n\n\t\tfor (var i = 0, length = items.length; i < length; i++) {\n\t\t\tbuilder.push('<tr class=\"ui-grid-row\" data-index=\"' + i + '\">');\n\t\t\tfor (var j = 0, jl = columns.length; j < jl; j++) {\n\t\t\t\tvar column = columns[j];\n\t\t\t\tvar val = items[i][column.name];\n\t\t\t\tm.value = column.template ? column.template(items[i], column) : column.render ? column.render(val, column, items[i]) : val == null ? '' : (column.format ? val.format(column.format) : val);\n\t\t\t\tm.index = j;\n\t\t\t\tm.align = column.align;\n\t\t\t\tm.background = column.background;\n\t\t\t\tbuilder.push(self.template(m, column));\n\t\t\t}\n\t\t\tbuilder.push('</tr>');\n\t\t}\n\n\t\ttbody.find('.ui-grid-row').remove();\n\t\ttbody.prepend(builder.join(''));\n\t\tcontainer.rclass('noscroll');\n\t\tscroll && container.prop('scrollTop', 0);\n\t\tscroll = false;\n\t\teheight = 0;\n\t\tself.resize(0);\n\t}",
+  "patched_function": "\tself.redraw = function() {\n\n\t\tvar items = options.items;\n\t\tvar columns = options.columns;\n\t\tvar builder = [];\n\t\tvar m = {};\n\n\t\tfor (var i = 0, length = items.length; i < length; i++) {\n\t\t\tbuilder.push('<tr class=\"ui-grid-row\" data-index=\"' + i + '\">');\n\t\t\tfor (var j = 0, jl = columns.length; j < jl; j++) {\n\t\t\t\tvar column = columns[j];\n\t\t\t\tvar val = items[i][column.name];\n\t\t\t\tm.value = column.template ? column.template(items[i], column) : column.render ? column.render(val, column, items[i]) : val == null ? '' : Thelpers.encode((column.format ? val.format(column.format) : val));\n\t\t\t\tm.index = j;\n\t\t\t\tm.align = column.align;\n\t\t\t\tm.background = column.background;\n\t\t\t\tbuilder.push(self.template(m, column));\n\t\t\t}\n\t\t\tbuilder.push('</tr>');\n\t\t}\n\n\t\ttbody.find('.ui-grid-row').remove();\n\t\ttbody.prepend(builder.join(''));\n\t\tcontainer.rclass('noscroll');\n\t\tscroll && container.prop('scrollTop', 0);\n\t\tscroll = false;\n\t\teheight = 0;\n\t\tself.resize(0);\n\t}",
+  "unified_diff": "diff --git a/themes/admin/public/ui.js b/themes/admin/public/ui.js\nindex 2667788..a893966 100755\n--- a/themes/admin/public/ui.js\n+++ b/themes/admin/public/ui.js\n@@ -559,7 +559,7 @@ COMPONENT('grid', 'filter:true;external:false;fillcount:50;filterlabel:Filtering\n \t\t\tfor (var j = 0, jl = columns.length; j < jl; j++) {\n \t\t\t\tvar column = columns[j];\n \t\t\t\tvar val = items[i][column.name];\n-\t\t\t\tm.value = column.template ? column.template(items[i], column) : column.render ? column.render(val, column, items[i]) : val == null ? '' : (column.format ? val.format(column.format) : val);\n+\t\t\t\tm.value = column.template ? column.template(items[i], column) : column.render ? column.render(val, column, items[i]) : val == null ? '' : Thelpers.encode((column.format ? val.format(column.format) : val));\n \t\t\t\tm.index = j;\n \t\t\t\tm.align = column.align;\n \t\t\t\tm.background = column.background;",
+  "auto_locate_confidence": "auto"
+}

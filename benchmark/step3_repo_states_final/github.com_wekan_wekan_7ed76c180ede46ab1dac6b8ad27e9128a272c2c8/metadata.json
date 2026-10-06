@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wekan_wekan_7ed76c180ede46ab1dac6b8ad27e9128a272c2c8",
+  "cve_ids": [
+    "CVE-2026-25568"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "f244a43771f6ebf40218b83b9f46dba6b940d7de",
+  "fixed_commit": "7ed76c180ede46ab1dac6b8ad27e9128a272c2c8",
+  "changed_file": "models/boards.js",
+  "max_score": "1337"
+}

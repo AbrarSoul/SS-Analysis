@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_a45eca2af772abb7324e56d7fd2df1ac937bc445",
+  "cve_ids": [
+    "CVE-2025-52472"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "f0fba965faeba42ddc90d6ddbcd078cd1c5abc53",
+  "fixed_commit": "a45eca2af772abb7324e56d7fd2df1ac937bc445",
+  "changed_file": "xwiki-platform-core/xwiki-platform-rest/xwiki-platform-rest-server/src/main/java/org/xwiki/rest/internal/resources/DatabaseKeywordSearchSource.java",
+  "max_score": "1337"
+}

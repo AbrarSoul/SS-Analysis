@@ -1,0 +1,35 @@
+{
+  "case_id": "CASE-0222",
+  "language": "python",
+  "cve_id": "CVE-2023-38699",
+  "cve_ids_all": [
+    "CVE-2023-38699"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-311",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "DremioHandler",
+  "imports": [
+    "from typing import Optional",
+    "from collections import OrderedDict",
+    "import json",
+    "import time",
+    "import requests",
+    "import pandas as pd",
+    "from mindsdb_sql import parse_sql",
+    "from mindsdb_sql.render.sqlalchemy_render import SqlalchemyRender",
+    "from mindsdb.integrations.libs.base import DatabaseHandler",
+    "from sqlalchemy_dremio.base import DremioDialect",
+    "from mindsdb_sql.parser.ast.base import ASTNode",
+    "from mindsdb.utilities import log",
+    "from mindsdb.integrations.libs.response import HandlerStatusResponse as StatusResponse, HandlerResponse as Response, RESPONSE_TYPE",
+    "from mindsdb.integrations.libs.const import HANDLER_CONNECTION_ARG_TYPE as ARG_TYPE"
+  ],
+  "vulnerable_function": "    def connect(self) -> dict:\n        \"\"\"\n        Set up the connection required by the handler.\n        Returns:\n            HandlerStatusResponse\n        \"\"\"\n\n        headers = {\n            'Content-Type': 'application/json',\n        }\n\n        data = '{' + f'\"userName\": \"{self.connection_data[\"username\"]}\",\"password\": \"{self.connection_data[\"password\"]}\"' + '}'\n\n        response = requests.post(self.base_url + '/apiv2/login', headers=headers, data=data, verify=False)\n\n        return {\n            'Authorization': '_dremio' + response.json()['token'],\n            'Content-Type': 'application/json',\n        }\n",
+  "patched_function": "    def connect(self) -> dict:\n        \"\"\"\n        Set up the connection required by the handler.\n        Returns:\n            HandlerStatusResponse\n        \"\"\"\n\n        headers = {\n            'Content-Type': 'application/json',\n        }\n\n        data = '{' + f'\"userName\": \"{self.connection_data[\"username\"]}\",\"password\": \"{self.connection_data[\"password\"]}\"' + '}'\n\n        response = requests.post(self.base_url + '/apiv2/login', headers=headers, data=data)\n\n        return {\n            'Authorization': '_dremio' + response.json()['token'],\n            'Content-Type': 'application/json',\n        }\n",
+  "unified_diff": "diff --git a/mindsdb/integrations/handlers/dremio_handler/dremio_handler.py b/mindsdb/integrations/handlers/dremio_handler/dremio_handler.py\nindex 737d6be1b..eca933a35 100644\n--- a/mindsdb/integrations/handlers/dremio_handler/dremio_handler.py\n+++ b/mindsdb/integrations/handlers/dremio_handler/dremio_handler.py\n@@ -66,7 +66,7 @@ class DremioHandler(DatabaseHandler):\n \n         data = '{' + f'\"userName\": \"{self.connection_data[\"username\"]}\",\"password\": \"{self.connection_data[\"password\"]}\"' + '}'\n \n-        response = requests.post(self.base_url + '/apiv2/login', headers=headers, data=data, verify=False)\n+        response = requests.post(self.base_url + '/apiv2/login', headers=headers, data=data)\n \n         return {\n             'Authorization': '_dremio' + response.json()['token'],\n@@ -235,4 +235,4 @@ connection_args_example = OrderedDict(\n     database=9047,\n     username='admin',\n     password='password'\n-)\n\\ No newline at end of file\n+)",
+  "auto_locate_confidence": "auto"
+}

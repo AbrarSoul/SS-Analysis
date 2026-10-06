@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_software-mansion_react-native-reanimated_8a927904366fa2d02df7a11553f8b0aa93471279",
+  "cve_ids": [
+    "CVE-2022-24373"
+  ],
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "typescript",
+  "repository": "software-mansion/react-native-reanimated",
+  "repository_url": "https://github.com/software-mansion/react-native-reanimated",
+  "vulnerable_commit": "5be222319a061db37ce37d4cfa5afec94bdcf597",
+  "fixed_commit": "8a927904366fa2d02df7a11553f8b0aa93471279",
+  "changed_file": "src/reanimated2/Colors.ts",
+  "max_score": "1337"
+}

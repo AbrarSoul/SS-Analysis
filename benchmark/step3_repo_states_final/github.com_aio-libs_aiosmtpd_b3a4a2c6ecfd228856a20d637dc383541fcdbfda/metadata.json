@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_aio-libs_aiosmtpd_b3a4a2c6ecfd228856a20d637dc383541fcdbfda",
+  "cve_ids": [
+    "CVE-2024-34083"
+  ],
+  "cwe_ids": [
+    "CWE-349"
+  ],
+  "language": "python",
+  "repository": "aio-libs/aiosmtpd",
+  "repository_url": "https://github.com/aio-libs/aiosmtpd",
+  "vulnerable_commit": "6e148d7f87428b38f527a0ac238771e2c5a0e09e",
+  "fixed_commit": "b3a4a2c6ecfd228856a20d637dc383541fcdbfda",
+  "changed_file": "aiosmtpd/smtp.py",
+  "max_score": "1337"
+}

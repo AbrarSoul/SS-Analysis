@@ -1,0 +1,16 @@
+diff --git a/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java b/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java
+index 867bb842..1c7cc3c6 100644
+--- a/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java
++++ b/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java
+@@ -129,9 +129,8 @@ public enum HealthUtils implements InitializeListener, Runnable {
+ 				try {
+ 					confString = loadConfigFile(confFile);
+ 				} catch (IOException e) {
+-					logger.info("Initialized root app with access key '{}' and secret '{}', "
+-							+ "but could not write these to {}.",
+-							rootAppCredentials.get("accessKey"), rootAppCredentials.get("secretKey"), confFile);
++					logger.info("Initialized root app with access key '{}', "
++							+ "but could not write to {}.", rootAppCredentials.get("accessKey"), confFile);
+ 				}
+ 				String accessKey = "para.root_access_key = \"" + rootAppCredentials.get("accessKey") + "\"";
+ 				String secretKey = "para.root_secret_key = \"" + rootAppCredentials.get("secretKey") + "\"";

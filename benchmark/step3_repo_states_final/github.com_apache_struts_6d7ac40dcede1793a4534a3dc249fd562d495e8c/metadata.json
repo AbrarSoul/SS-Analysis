@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_struts_6d7ac40dcede1793a4534a3dc249fd562d495e8c",
+  "cve_ids": [
+    "CVE-2016-4438"
+  ],
+  "cwe_ids": [
+    "CWE-20"
+  ],
+  "language": "java",
+  "repository": "apache/struts",
+  "repository_url": "https://github.com/apache/struts",
+  "vulnerable_commit": "9ac863b339a3513dabd417f4be8a802418a997ba",
+  "fixed_commit": "6d7ac40dcede1793a4534a3dc249fd562d495e8c",
+  "changed_file": "plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_man-group_dtale_32bd6fb4a63de779ff1e51823a456865ea3cbd13",
+  "cve_ids": [
+    "CVE-2024-3408"
+  ],
+  "cwe_ids": [
+    "CWE-798",
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "man-group/dtale",
+  "repository_url": "https://github.com/man-group/dtale",
+  "vulnerable_commit": "81578f4a256eef0bc9bde8bf1ca703d1e8d325de",
+  "fixed_commit": "32bd6fb4a63de779ff1e51823a456865ea3cbd13",
+  "changed_file": "dtale/app.py",
+  "max_score": "1337"
+}

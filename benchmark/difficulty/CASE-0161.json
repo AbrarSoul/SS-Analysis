@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0161",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 15,
+  "lines_removed": 3,
+  "lines_changed_total": 18,
+  "function_size_chars": 232,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Attacker-influenced log text substituted into an action command later run by a shell; the sink is in another function."
+}

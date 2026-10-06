@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_bitbucket-oauth-plugin_b73ac285f8cfcc9727f089c6b2c7f13412285e7c",
+  "cve_ids": [
+    "CVE-2023-24427"
+  ],
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/bitbucket-oauth-plugin",
+  "repository_url": "https://github.com/jenkinsci/bitbucket-oauth-plugin",
+  "vulnerable_commit": "a927a8ff2e069afebb97f33f6798033ef4451e4f",
+  "fixed_commit": "b73ac285f8cfcc9727f089c6b2c7f13412285e7c",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/BitbucketSecurityRealm.java",
+  "max_score": "1337"
+}

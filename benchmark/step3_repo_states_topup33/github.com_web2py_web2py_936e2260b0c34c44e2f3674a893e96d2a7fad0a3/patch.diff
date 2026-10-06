@@ -1,0 +1,18 @@
+diff --git a/gluon/messageboxhandler.py b/gluon/messageboxhandler.py
+index 70079cdf..7ca08274 100644
+--- a/gluon/messageboxhandler.py
++++ b/gluon/messageboxhandler.py
+@@ -1,6 +1,6 @@
+ import logging
+-import os
+ import sys
++import subprocess
+ 
+ try:
+     if sys.version_info[0] == 2:
+@@ -36,4 +36,4 @@ class NotifySendHandler(logging.Handler):
+     def emit(self, record):
+         if tkinter:
+             msg = self.format(record)
+-            os.system("notify-send '%s'" % msg)
++            subprocess.run(["notify-send", msg], check=False, timeout=2)

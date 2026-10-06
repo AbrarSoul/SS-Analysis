@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0342",
+  "original_source_case_id": "github.com_fabric8io_kubernetes-client_445103004d1ed3153d5abb272473451d05891e39",
+  "selection_batch": "topup40",
+  "cve_id": "CVE-2021-4178",
+  "cve_ids_all": [
+    "CVE-2021-4178"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "fabric8io/kubernetes-client",
+  "repository_url": "https://github.com/fabric8io/kubernetes-client",
+  "vulnerable_commit": "1d1b3d404836871c4d0fc0a35dafe5d40369b519",
+  "fixed_commit": "445103004d1ed3153d5abb272473451d05891e39",
+  "changed_file": "kubernetes-client/src/main/java/io/fabric8/kubernetes/client/utils/Serialization.java",
+  "changed_function": "private static <T> T unmarshalYaml(InputStream is, TypeReference<T> type) throws JsonProcessingException {",
+  "vulnerable_lines": [
+    298,
+    303
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0342/vulnerable_source.java": "d08fc64419a569b965c755839c0b1a3988609fc7c2b10e2aedf24d440bef9bf1",
+    "cases/CASE-0342/patched_source.java": "886b982bdcf912c518a177ca9cde4350486e99065a9c0b4cafda20d125d07da0",
+    "cases/CASE-0342/patch.diff": "a44c69933e45dfffc4f1551370bd8bca9dbee1bee6512ac779380dbf31afc9c4",
+    "cases/CASE-0342/metadata.json": "332efe68f246fe5bfcdc94a80069964b498e4bd4ba1ee3f2ac6d576a3998f34a",
+    "model_context/CASE-0342.json": "52e3315d9cae273415cb37213272c07bdd2d7001c0becaf69431ea9689c8e29a",
+    "difficulty/CASE-0342.json": "b861f7649a03e6f3983d78e16555fb77c0dfe02841ffa1a5bbd16cafd5fa6c0a"
+  },
+  "case_level_hash": "0c575143509e2d3fee6b2100a9e85265ba59cfe192b23ebfb1ac0508827fe526"
+}

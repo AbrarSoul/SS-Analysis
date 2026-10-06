@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0229",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-1321",
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 4271,
+  "function_size_lines": 122,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "@ModelAttribute parameter bound to request parameters via session attributes; depends on Spring binding semantics."
+}

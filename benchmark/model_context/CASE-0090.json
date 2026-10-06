@@ -1,0 +1,27 @@
+{
+  "case_id": "CASE-0090",
+  "language": "python",
+  "cve_id": "CVE-2018-12104",
+  "cve_ids_all": [
+    "CVE-2018-12104"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import logging",
+    "from flask import request, Blueprint, g",
+    "from .. import permissions",
+    "from ..proxies import db_session, current_user",
+    "from ..models import Comment, Post, PageView",
+    "from ..utils.emails import send_comment_email"
+  ],
+  "vulnerable_function": "def post_comment():\n    \"\"\" Post a comment underneath a post \"\"\"\n\n    path = request.args.get('path', '')\n    comment_id = request.args.get('comment_id')\n    data = request.get_json()\n\n    post = (db_session.query(Post)\n                      .filter(Post.path == path)\n                      .first())\n\n    if not post:\n        raise Exception('Unable to find post')\n\n    if comment_id:\n        comment = (db_session.query(Comment)\n                             .filter(Comment.id == comment_id)\n                             .first())\n    else:\n        comment = Comment(post_id=post.id)\n\n    comment.text = data['text']\n    comment.user_id = current_user.id\n    db_session.add(comment)\n    db_session.commit()\n\n    send_comment_email(path=path,\n                       commenter=current_user.format_name,\n                       comment_text=data['text'])\n    return \"OK\"\n",
+  "patched_function": "def post_comment():\n    \"\"\" Post a comment underneath a post \"\"\"\n\n    path = request.args.get('path', '')\n    comment_id = request.args.get('comment_id')\n    data = request.get_json()\n\n    post = (db_session.query(Post)\n                      .filter(Post.path == path)\n                      .first())\n\n    if not post:\n        raise Exception('Unable to find post')\n\n    if comment_id:\n        comment = (db_session.query(Comment)\n                             .filter(Comment.id == comment_id)\n                             .first())\n    else:\n        comment = Comment(post_id=post.id)\n    comment.text = escape(data['text'])\n    comment.user_id = current_user.id\n    db_session.add(comment)\n    db_session.commit()\n\n    send_comment_email(path=path,\n                       commenter=current_user.format_name,\n                       comment_text=data['text'])\n    return \"OK\"\n",
+  "unified_diff": "diff --git a/knowledge_repo/app/routes/comment.py b/knowledge_repo/app/routes/comment.py\nindex 988d828..5fe02bc 100644\n--- a/knowledge_repo/app/routes/comment.py\n+++ b/knowledge_repo/app/routes/comment.py\n@@ -6,7 +6,7 @@ This includes:\n   - /delete_comment\n \"\"\"\n import logging\n-from flask import request, Blueprint, g\n+from flask import request, Blueprint, g, escape\n \n from .. import permissions\n from ..proxies import db_session, current_user\n@@ -43,8 +43,7 @@ def post_comment():\n                              .first())\n     else:\n         comment = Comment(post_id=post.id)\n-\n-    comment.text = data['text']\n+    comment.text = escape(data['text'])\n     comment.user_id = current_user.id\n     db_session.add(comment)\n     db_session.commit()",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "CASE-0061",
+  "language": "python",
+  "cve_id": "CVE-2021-21431",
+  "cve_ids_all": [
+    "CVE-2021-21431"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-284",
+      "definition": "Improper Access Control"
+    },
+    {
+      "id": "NVD-CWE-Other",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import re",
+    "import time",
+    "from MirahezeBots_jsonparser import jsonparser as jp",
+    "from sopel import formatting",
+    "from sopel.config.types import StaticSection, ValidatedAttribute",
+    "from sopel.module import OP, commands, event, example, priority, require_admin, require_chanmsg",
+    "from sopel.tools import Identifier",
+    "from sopel.tools import SopelMemory"
+  ],
+  "vulnerable_function": "def kick(bot, trigger):\n    \"\"\"Kick a user from the channel.\"\"\"\n    chanops = get_chanops(str(trigger.sender), bot.memory['channelmgnt']['jdcache'])\n    dodeop = False\n    if chanops:\n        if bot.channels[trigger.sender].privileges[bot.nick] < OP and trigger.account in chanops:\n            bot.say('Please wait...')\n            bot.say('op ' + trigger.sender, 'ChanServ')\n            time.sleep(1)\n            dodeop = True\n        text = trigger.group().split()\n        argc = len(text)\n        if argc < 2:\n            return\n        nick = Identifier(text[1])\n        reason = ' '.join(text[2:])\n        if nick != bot.config.core.nick and trigger.account in chanops:\n            bot.write(['KICK', trigger.sender, nick, ':' + reason])\n            if dodeop:\n                deopbot(trigger.sender, bot)\n        else:\n            bot.reply('Access Denied. If in error, please contact the channel founder.')\n    else:\n        bot.reply(f'No ChanOps Found. Please ask for assistance in {bot.settings.channelmgnt.support_channel}')\n",
+  "patched_function": "def kick(bot, trigger):\n    \"\"\"Kick a user from the channel.\"\"\"\n    chanops = get_chanops(str(trigger.sender), bot.memory['channelmgnt']['jdcache'])\n    dodeop = False\n    if chanops:\n        if bot.channels[trigger.sender].privileges[bot.nick] < OP and trigger.account in chanops:\n            bot.say('Please wait...')\n            bot.say('op ' + trigger.sender, 'ChanServ')\n            time.sleep(1)\n            dodeop = True\n        text = trigger.group().split()\n        argc = len(text)\n        if argc < 2:\n            return\n        nick = Identifier(text[1])\n        reason = ' '.join(text[2:])\n        if ',' in str(nick):\n            return bot.reply('Unable to kick. Kicking multiple users is not allowed.') \n        if '#' in str(nick):\n            return bot.reply('Unable to kick. Use of # when kicking is not expected.')\n        if nick != bot.config.core.nick and trigger.account in chanops:\n            bot.write(['KICK', trigger.sender, nick, ':' + reason])\n            if dodeop:\n                deopbot(trigger.sender, bot)\n        else:\n            bot.reply('Access Denied. If in error, please contact the channel founder.')\n    else:\n        bot.reply(f'No ChanOps Found. Please ask for assistance in {bot.settings.channelmgnt.support_channel}')\n",
+  "unified_diff": "diff --git a/sopel_channelmgnt/channelmgnt/__init__.py b/sopel_channelmgnt/channelmgnt/__init__.py\nindex 4c8a3f0..9705bd5 100644\n--- a/sopel_channelmgnt/channelmgnt/__init__.py\n+++ b/sopel_channelmgnt/channelmgnt/__init__.py\n@@ -216,6 +216,10 @@ def kick(bot, trigger):\n             return\n         nick = Identifier(text[1])\n         reason = ' '.join(text[2:])\n+        if ',' in str(nick):\n+            return bot.reply('Unable to kick. Kicking multiple users is not allowed.') \n+        if '#' in str(nick):\n+            return bot.reply('Unable to kick. Use of # when kicking is not expected.')\n         if nick != bot.config.core.nick and trigger.account in chanops:\n             bot.write(['KICK', trigger.sender, nick, ':' + reason])\n             if dodeop:\n@@ -263,6 +267,10 @@ def parse_host_mask(text):\n @example('.ban nick')\n def ban(bot, trigger):\n     \"\"\"Ban a user from the channel. The bot must be a channel operator for this command to work.\"\"\"\n+    if ',' in str(nick):\n+        return bot.reply('Unable to ban. Banning multiple users is not allowed.') \n+    if '#' in str(nick):\n+        return bot.reply('Unable to ban. Use of # when banning is not expected.')\n     makemodechange(bot, trigger, '+b', isbqmode=True)\n \n \n@@ -312,6 +320,10 @@ def kickban(bot, trigger):\n                 deopbot(trigger.sender, bot)\n             return\n         nick = Identifier(text[1])\n+        if ',' in str(nick):\n+            return bot.reply('Unable to kickban. Kickbanning multiple users is not allowed.') \n+        if '#' in str(nick):\n+            return bot.reply('Unable to kickban. Use of # when kickbanning is not expected.')\n         mask = text[2] if any(s in text[2] for s in '!@*') else ''\n         reasonidx = 3 if mask != '' else 2\n         reason = ' '.join(text[reasonidx:])",
+  "auto_locate_confidence": "auto_low_confidence"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_MrRio_jsPDF_d8bb3b39efcd129994f7a3b01b632164144ec43e",
+  "cve_ids": [
+    "CVE-2021-23353"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "MrRio/jsPDF",
+  "repository_url": "https://github.com/MrRio/jsPDF",
+  "vulnerable_commit": "c91995de97c598deaf6fda7109ea886a50f50109",
+  "fixed_commit": "d8bb3b39efcd129994f7a3b01b632164144ec43e",
+  "changed_file": "src/modules/addimage.js",
+  "max_score": "1337"
+}

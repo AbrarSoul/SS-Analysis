@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0276",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 333,
+  "function_size_lines": 9,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "isinstance tuple that selects the audited open_code path omits SourcelessFileLoader; missing entry in a matchable literal list. NEAR-DUPLICATE of CASE-0277 (same CVE-2026-2297 on another branch)."
+}

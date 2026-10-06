@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0001",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-290",
+    "CWE-693",
+    "CWE-74"
+  ],
+  "changed_files": 1,
+  "lines_added": 19,
+  "lines_removed": 14,
+  "lines_changed_total": 33,
+  "function_size_chars": 2370,
+  "function_size_lines": 47,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Predictable uuid7 value must be traced from generation through to the subprocess-output trust check; the same uuid.uuid7() API is used benignly elsewhere in the file (FastMCP naming), so distinguishing requires the surrounding usage context.",
+  "supported_status": "supported"
+}

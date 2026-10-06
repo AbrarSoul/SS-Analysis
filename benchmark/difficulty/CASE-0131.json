@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0131",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 1,
+  "lines_changed_total": 12,
+  "function_size_chars": 3806,
+  "function_size_lines": 59,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Signature verified against the spender's key but the key hash is never compared with the scriptPubKey hash; a semantic omission Semgrep cannot identify."
+}

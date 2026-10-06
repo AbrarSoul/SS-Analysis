@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_modular_modular_10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+  "language": "python",
+  "cve_id": "CVE-2025-60455",
+  "cve_ids_all": [
+    "CVE-2025-60455"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    }
+  ],
+  "containing_class_declaration": "KVCacheAgentServer",
+  "imports": [
+    "import concurrent.futures",
+    "import logging",
+    "import pickle",
+    "import queue",
+    "import threading",
+    "from collections.abc import Iterator",
+    "from dataclasses import dataclass",
+    "from typing import Any",
+    "import grpc",
+    "from max.serve.kvcache_agent.kvcache_agent_service_v1_pb2 import KVCacheStateUpdate, MemoryTier, SubscriptionRequest, UpdateType",
+    "from max.serve.kvcache_agent.kvcache_agent_service_v1_pb2_grpc import KVCacheAgentServiceServicer, add_KVCacheAgentServiceServicer_to_server",
+    "from max.serve.queue.zmq_queue import ZmqPullSocket"
+  ],
+  "vulnerable_function": "    def __init__(\n        self,\n        config: KVCacheAgentServerConfig,\n        kv_cache_events_zmq_endpoint: str,\n    ) -> None:\n        \"\"\"\n        Initialize the KVCacheAgentServer.\n\n        Args:\n            config: Configuration for the server.\n        \"\"\"\n        self.config = config\n        # This remains the only use of pickle in the current codebase.\n        # As the KVCacheChangeMessage contains Protobuf Enum's it cannot be\n        # serialized by msgspec/msgpack.\n        self._kv_cache_events_pull_socket = ZmqPullSocket[KVCacheChangeMessage](\n            zmq_endpoint=kv_cache_events_zmq_endpoint,\n            deserialize=pickle.loads,\n        )\n        self.server = grpc.server(\n            concurrent.futures.ThreadPoolExecutor(\n                max_workers=self.config.num_workers\n            )\n        )\n        self.servicer = KVCacheAgentServicer()\n\n        # Register the servicer\n        add_KVCacheAgentServiceServicer_to_server(self.servicer, self.server)\n\n        # Add a listening port\n        self.server.add_insecure_port(self.config.address)\n\n        # Start a background thread to process kv cache events\n        self._kv_cache_events_stop_event = threading.Event()\n        self._kv_cache_events_thread = threading.Thread(\n            target=self._process_kv_cache_events,\n            daemon=True,\n            name=\"KVCacheAgentEventsProcessor\",\n        )\n        self._started = False\n",
+  "patched_function": "    def __init__(\n        self,\n        config: KVCacheAgentServerConfig,\n        kv_cache_events_zmq_endpoint: str,\n    ) -> None:\n        \"\"\"\n        Initialize the KVCacheAgentServer.\n\n        Args:\n            config: Configuration for the server.\n        \"\"\"\n        self.config = config\n        # This remains the only use of pickle in the current codebase.\n        # As the KVCacheChangeMessage contains Protobuf Enum's it cannot be\n        # serialized by msgspec/msgpack.\n        self._kv_cache_events_pull_socket = ZmqPullSocket[KVCacheChangeMessage](\n            zmq_endpoint=kv_cache_events_zmq_endpoint,\n            # GENAI-233: This is currently non-functional.\n            deserialize=msgpack_numpy_decoder(KVCacheChangeMessage),\n        )\n        self.server = grpc.server(\n            concurrent.futures.ThreadPoolExecutor(\n                max_workers=self.config.num_workers\n            )\n        )\n        self.servicer = KVCacheAgentServicer()\n\n        # Register the servicer\n        add_KVCacheAgentServiceServicer_to_server(self.servicer, self.server)\n\n        # Add a listening port\n        self.server.add_insecure_port(self.config.address)\n\n        # Start a background thread to process kv cache events\n        self._kv_cache_events_stop_event = threading.Event()\n        self._kv_cache_events_thread = threading.Thread(\n            target=self._process_kv_cache_events,\n            daemon=True,\n            name=\"KVCacheAgentEventsProcessor\",\n        )\n        self._started = False\n",
+  "unified_diff": "diff --git a/max/serve/kvcache_agent/kvcache_agent.py b/max/serve/kvcache_agent/kvcache_agent.py\nindex 6f3097b931..7850dbcb5b 100644\n--- a/max/serve/kvcache_agent/kvcache_agent.py\n+++ b/max/serve/kvcache_agent/kvcache_agent.py\n@@ -13,7 +13,6 @@\n \n import concurrent.futures\n import logging\n-import pickle\n import queue\n import threading\n from collections.abc import Iterator\n@@ -21,6 +20,7 @@ from dataclasses import dataclass\n from typing import Any\n \n import grpc\n+from max.interfaces import msgpack_numpy_decoder\n from max.serve.kvcache_agent.kvcache_agent_service_v1_pb2 import (  # type: ignore\n     KVCacheStateUpdate,\n     MemoryTier,\n@@ -219,7 +219,8 @@ class KVCacheAgentServer:\n         # serialized by msgspec/msgpack.\n         self._kv_cache_events_pull_socket = ZmqPullSocket[KVCacheChangeMessage](\n             zmq_endpoint=kv_cache_events_zmq_endpoint,\n-            deserialize=pickle.loads,\n+            # GENAI-233: This is currently non-functional.\n+            deserialize=msgpack_numpy_decoder(KVCacheChangeMessage),\n         )\n         self.server = grpc.server(\n             concurrent.futures.ThreadPoolExecutor(",
+  "auto_locate_confidence": "auto"
+}

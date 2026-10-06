@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mlflow_mlflow_1d7c8d4cf0a67d407499a8a4ffac387ea4f8194a",
+  "cve_ids": [
+    "CVE-2025-10279"
+  ],
+  "cwe_ids": [
+    "CWE-379"
+  ],
+  "language": "python",
+  "repository": "mlflow/mlflow",
+  "repository_url": "https://github.com/mlflow/mlflow",
+  "vulnerable_commit": "ba41980d604d7fd7964b038945989a5077d1a645",
+  "fixed_commit": "1d7c8d4cf0a67d407499a8a4ffac387ea4f8194a",
+  "changed_file": "mlflow/utils/file_utils.py",
+  "max_score": "1337"
+}

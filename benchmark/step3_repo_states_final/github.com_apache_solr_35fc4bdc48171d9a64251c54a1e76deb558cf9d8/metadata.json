@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_apache_solr_35fc4bdc48171d9a64251c54a1e76deb558cf9d8",
+  "cve_ids": [
+    "CVE-2023-50290"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "apache/solr",
+  "repository_url": "https://github.com/apache/solr",
+  "vulnerable_commit": "0a6a114319cbc2fcda1e36bbcb157e1841555884",
+  "fixed_commit": "35fc4bdc48171d9a64251c54a1e76deb558cf9d8",
+  "changed_file": "solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_simplerisk_code_591405b4ed160fbefc1dca1e55c5745079a7bb48",
+  "cve_ids": [
+    "CVE-2021-4269"
+  ],
+  "cwe_ids": [
+    "CWE-707",
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "simplerisk/code",
+  "repository_url": "https://github.com/simplerisk/code",
+  "vulnerable_commit": "267f37d99dd2ea87ac5ca612d605048ee52877af",
+  "fixed_commit": "591405b4ed160fbefc1dca1e55c5745079a7bb48",
+  "changed_file": "simplerisk/js/common.js",
+  "max_score": "1337"
+}

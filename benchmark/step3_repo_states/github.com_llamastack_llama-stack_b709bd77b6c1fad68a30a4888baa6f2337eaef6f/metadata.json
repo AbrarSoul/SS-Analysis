@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_llamastack_llama-stack_b709bd77b6c1fad68a30a4888baa6f2337eaef6f",
+  "cve_ids": [
+    "CVE-2026-25211"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "python",
+  "repository": "llamastack/llama-stack",
+  "repository_url": "https://github.com/llamastack/llama-stack",
+  "vulnerable_commit": "752a6836a02e5c23303ce6781e7698e35b52eae7",
+  "fixed_commit": "b709bd77b6c1fad68a30a4888baa6f2337eaef6f",
+  "changed_file": "src/llama_stack/providers/remote/vector_io/pgvector/pgvector.py",
+  "max_score": "1337"
+}

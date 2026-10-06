@@ -1,0 +1,29 @@
+{
+  "case_id": "CASE-0042",
+  "language": "python",
+  "cve_id": "CVE-2025-32383",
+  "cve_ids_all": [
+    "CVE-2025-32383"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "FunctionExecutor",
+  "imports": [
+    "import os",
+    "import subprocess",
+    "import sys",
+    "import uuid",
+    "from textwrap import dedent",
+    "from diskcache import Cache",
+    "from smartdoc.const import BASE_DIR",
+    "from smartdoc.const import PROJECT_DIR"
+  ],
+  "vulnerable_function": "    def _exec_sandbox(self, _code, _id):\n        exec_python_file = f'{self.sandbox_path}/{_id}.py'\n        with open(exec_python_file, 'w') as file:\n            file.write(_code)\n            os.system(f\"chown {self.user}:{self.user} {exec_python_file}\")\n        kwargs = {'cwd': BASE_DIR}\n        subprocess_result = subprocess.run(\n            ['su', '-c', python_directory + ' ' + exec_python_file, self.user],\n            text=True,\n            capture_output=True, **kwargs)\n        os.remove(exec_python_file)\n        return subprocess_result\n",
+  "patched_function": "    def _exec_sandbox(self, _code, _id):\n        exec_python_file = f'{self.sandbox_path}/{_id}.py'\n        with open(exec_python_file, 'w') as file:\n            file.write(_code)\n            os.system(f\"chown {self.user}:{self.user} {exec_python_file}\")\n        kwargs = {'cwd': BASE_DIR}\n        subprocess_result = subprocess.run(\n            ['su', '-s', python_directory, '-c', \"exec(open('\" + exec_python_file + \"').read())\", self.user],\n            text=True,\n            capture_output=True, **kwargs)\n        os.remove(exec_python_file)\n        return subprocess_result\n",
+  "unified_diff": "diff --git a/apps/common/util/function_code.py b/apps/common/util/function_code.py\nindex 31797a9f4..30ce3a33d 100644\n--- a/apps/common/util/function_code.py\n+++ b/apps/common/util/function_code.py\n@@ -88,7 +88,7 @@ except Exception as e:\n             os.system(f\"chown {self.user}:{self.user} {exec_python_file}\")\n         kwargs = {'cwd': BASE_DIR}\n         subprocess_result = subprocess.run(\n-            ['su', '-c', python_directory + ' ' + exec_python_file, self.user],\n+            ['su', '-s', python_directory, '-c', \"exec(open('\" + exec_python_file + \"').read())\", self.user],\n             text=True,\n             capture_output=True, **kwargs)\n         os.remove(exec_python_file)",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_opendns_OpenResolve_c680170d5583cd9342fe1af43001fe8b2b8004dd",
+  "cve_ids": [
+    "CVE-2015-10010"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "opendns/OpenResolve",
+  "repository_url": "https://github.com/opendns/OpenResolve",
+  "vulnerable_commit": "9eba6ba5abd89d0e36a008921eb307fcef8c5311",
+  "fixed_commit": "c680170d5583cd9342fe1af43001fe8b2b8004dd",
+  "changed_file": "resolverapi/endpoints.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_kylin_e373c64c96a54a7abfe4bccb82e8feb60db04749",
+  "cve_ids": [
+    "CVE-2020-1937"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "apache/kylin",
+  "repository_url": "https://github.com/apache/kylin",
+  "vulnerable_commit": "ebfc745dd681d7e0c129ded50bd50ff509d2a393",
+  "fixed_commit": "e373c64c96a54a7abfe4bccb82e8feb60db04749",
+  "changed_file": "server-base/src/main/java/org/apache/kylin/rest/service/CubeService.java",
+  "max_score": "1337"
+}

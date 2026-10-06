@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0268",
+  "original_source_case_id": "github.com_psi-4ward_psitransfer_b9853c97e6911e1c1c5341245ca1eb363fda5269",
+  "selection_batch": "topup28",
+  "cve_id": "CVE-2024-31453",
+  "cve_ids_all": [
+    "CVE-2024-31453"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-434"
+  ],
+  "language": "javascript",
+  "repository": "psi-4ward/psitransfer",
+  "repository_url": "https://github.com/psi-4ward/psitransfer",
+  "vulnerable_commit": "707b72f421bb99145fcf02b5096a9adda57d88f9",
+  "fixed_commit": "b9853c97e6911e1c1c5341245ca1eb363fda5269",
+  "changed_file": "lib/endpoints.js",
+  "changed_function": "app.use(`${ config.uploadAppPath }files`,",
+  "vulnerable_lines": [
+    317,
+    381
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0268/vulnerable_source.js": "fb063ea139434afec39bb586fbda2f1036e6fd23ea3932a4f4001f0b5ce4bb6f",
+    "cases/CASE-0268/patched_source.js": "368f3592bc6de7113edf977e4e7757e0a869379ad56a27c077703351f1246ba9",
+    "cases/CASE-0268/patch.diff": "b2f039603ca9cc78f85f51ec83de26c18f4131fec6cdc8394b01f456980299ba",
+    "cases/CASE-0268/metadata.json": "704eea58d1152edcfbc64c967a457b33d1b6612b70a505d45ffa4e90270381ab",
+    "model_context/CASE-0268.json": "e452ba83fa463ee8f2eee9732975dd4d88fecc6718ebfa770986a469746dbfca",
+    "difficulty/CASE-0268.json": "5427ad6674336b262bf6a554ede2b9e0d02fd7d9701dcfdafd56f39e4d78e44c"
+  },
+  "case_level_hash": "69ab64c506399fcff88ad7b0b153c6037973629439ab27b559064b4477797843"
+}

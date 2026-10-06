@@ -1,0 +1,48 @@
+{
+  "case_id": "github.com_apache_hadoop_8c2836402fbb2f619f1fef4ef625a8542e853a64",
+  "language": "java",
+  "cve_id": "CVE-2024-23454",
+  "cve_ids_all": [
+    "CVE-2024-23454"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-378",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.File;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.io.OutputStream;",
+    "import java.lang.reflect.InvocationTargetException;",
+    "import java.lang.reflect.Method;",
+    "import java.net.MalformedURLException;",
+    "import java.net.URL;",
+    "import java.net.URLClassLoader;",
+    "import java.nio.file.Files;",
+    "import java.util.ArrayList;",
+    "import java.util.Arrays;",
+    "import java.util.Enumeration;",
+    "import java.util.List;",
+    "import java.util.jar.JarEntry;",
+    "import java.util.jar.JarFile;",
+    "import java.util.jar.JarInputStream;",
+    "import java.util.jar.Manifest;",
+    "import java.util.regex.Pattern;",
+    "import org.apache.commons.io.input.TeeInputStream;",
+    "import org.apache.hadoop.classification.InterfaceAudience;",
+    "import org.apache.hadoop.classification.InterfaceStability;",
+    "import org.apache.hadoop.fs.FileUtil;",
+    "import org.apache.hadoop.io.IOUtils;",
+    "import org.apache.hadoop.io.IOUtils.NullOutputStream;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;"
+  ],
+  "vulnerable_function": "  public void run(String[] args) throws Throwable {\n    String usage = \"RunJar jarFile [mainClass] args...\";\n\n    if (args.length < 1) {\n      System.err.println(usage);\n      System.exit(-1);\n    }\n\n    int firstArg = 0;\n    String fileName = args[firstArg++];\n    File file = new File(fileName);\n    if (!file.exists() || !file.isFile()) {\n      System.err.println(\"JAR does not exist or is not a normal file: \" +\n          file.getCanonicalPath());\n      System.exit(-1);\n    }\n    String mainClassName = null;\n\n    JarFile jarFile;\n    try {\n      jarFile = new JarFile(fileName);\n    } catch (IOException io) {\n      throw new IOException(\"Error opening job jar: \" + fileName)\n        .initCause(io);\n    }\n\n    Manifest manifest = jarFile.getManifest();\n    if (manifest != null) {\n      mainClassName = manifest.getMainAttributes().getValue(\"Main-Class\");\n    }\n    jarFile.close();\n\n    if (mainClassName == null) {\n      if (args.length < 2) {\n        System.err.println(usage);\n        System.exit(-1);\n      }\n      mainClassName = args[firstArg++];\n    }\n    mainClassName = mainClassName.replaceAll(\"/\", \".\");\n\n    File tmpDir = new File(System.getProperty(\"java.io.tmpdir\"));\n    ensureDirectory(tmpDir);\n\n    final File workDir;\n    try {\n      workDir = File.createTempFile(\"hadoop-unjar\", \"\", tmpDir);\n    } catch (IOException ioe) {\n      // If user has insufficient perms to write to tmpDir, default\n      // \"Permission denied\" message doesn't specify a filename.\n      System.err.println(\"Error creating temp dir in java.io.tmpdir \"\n                         + tmpDir + \" due to \" + ioe.getMessage());\n      System.exit(-1);\n      return;\n    }\n\n    if (!workDir.delete()) {\n      System.err.println(\"Delete failed for \" + workDir);\n      System.exit(-1);\n    }\n    ensureDirectory(workDir);\n\n    ShutdownHookManager.get().addShutdownHook(\n        new Runnable() {\n          @Override\n          public void run() {\n            FileUtil.fullyDelete(workDir);\n          }\n        }, SHUTDOWN_HOOK_PRIORITY);\n\n    if (!skipUnjar()) {\n      unJar(file, workDir);\n    }\n\n    ClassLoader loader = createClassLoader(file, workDir);\n\n    Thread.currentThread().setContextClassLoader(loader);\n    Class<?> mainClass = Class.forName(mainClassName, true, loader);\n    Method main = mainClass.getMethod(\"main\", String[].class);\n    List<String> newArgsSubList = Arrays.asList(args)\n        .subList(firstArg, args.length);\n    String[] newArgs = newArgsSubList\n        .toArray(new String[newArgsSubList.size()]);\n    try {\n      main.invoke(null, new Object[] {newArgs});\n    } catch (InvocationTargetException e) {\n      throw e.getTargetException();\n    }\n  }",
+  "patched_function": "  public void run(String[] args) throws Throwable {\n    String usage = \"RunJar jarFile [mainClass] args...\";\n\n    if (args.length < 1) {\n      System.err.println(usage);\n      System.exit(-1);\n    }\n\n    int firstArg = 0;\n    String fileName = args[firstArg++];\n    File file = new File(fileName);\n    if (!file.exists() || !file.isFile()) {\n      System.err.println(\"JAR does not exist or is not a normal file: \" +\n          file.getCanonicalPath());\n      System.exit(-1);\n    }\n    String mainClassName = null;\n\n    JarFile jarFile;\n    try {\n      jarFile = new JarFile(fileName);\n    } catch (IOException io) {\n      throw new IOException(\"Error opening job jar: \" + fileName)\n        .initCause(io);\n    }\n\n    Manifest manifest = jarFile.getManifest();\n    if (manifest != null) {\n      mainClassName = manifest.getMainAttributes().getValue(\"Main-Class\");\n    }\n    jarFile.close();\n\n    if (mainClassName == null) {\n      if (args.length < 2) {\n        System.err.println(usage);\n        System.exit(-1);\n      }\n      mainClassName = args[firstArg++];\n    }\n    mainClassName = mainClassName.replaceAll(\"/\", \".\");\n\n    File tmpDir = new File(System.getProperty(\"java.io.tmpdir\"));\n    ensureDirectory(tmpDir);\n\n    final File workDir;\n    try {\n      FileAttribute<Set<PosixFilePermission>> perms = PosixFilePermissions\n          .asFileAttribute(PosixFilePermissions.fromString(\"rwx------\"));\n      workDir = Files.createTempDirectory(tmpDir.toPath(), \"hadoop-unjar\", perms).toFile();\n    } catch (IOException | SecurityException e) {\n      // If user has insufficient perms to write to tmpDir, default\n      // \"Permission denied\" message doesn't specify a filename.\n      System.err.println(\"Error creating temp dir in java.io.tmpdir \"\n                         + tmpDir + \" due to \" + e.getMessage());\n      System.exit(-1);\n      return;\n    }\n\n    ensureDirectory(workDir);\n\n    ShutdownHookManager.get().addShutdownHook(\n        new Runnable() {\n          @Override\n          public void run() {\n            FileUtil.fullyDelete(workDir);\n          }\n        }, SHUTDOWN_HOOK_PRIORITY);\n\n    if (!skipUnjar()) {\n      unJar(file, workDir);\n    }\n\n    ClassLoader loader = createClassLoader(file, workDir);\n\n    Thread.currentThread().setContextClassLoader(loader);\n    Class<?> mainClass = Class.forName(mainClassName, true, loader);\n    Method main = mainClass.getMethod(\"main\", String[].class);\n    List<String> newArgsSubList = Arrays.asList(args)\n        .subList(firstArg, args.length);\n    String[] newArgs = newArgsSubList\n        .toArray(new String[newArgsSubList.size()]);\n    try {\n      main.invoke(null, new Object[] {newArgs});\n    } catch (InvocationTargetException e) {\n      throw e.getTargetException();\n    }\n  }",
+  "unified_diff": "diff --git a/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/RunJar.java b/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/RunJar.java\nindex c28e69f5461..e527f602cdd 100644\n--- a/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/RunJar.java\n+++ b/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/RunJar.java\n@@ -28,10 +28,14 @@\n import java.net.URL;\n import java.net.URLClassLoader;\n import java.nio.file.Files;\n+import java.nio.file.attribute.FileAttribute;\n+import java.nio.file.attribute.PosixFilePermission;\n+import java.nio.file.attribute.PosixFilePermissions;\n import java.util.ArrayList;\n import java.util.Arrays;\n import java.util.Enumeration;\n import java.util.List;\n+import java.util.Set;\n import java.util.jar.JarEntry;\n import java.util.jar.JarFile;\n import java.util.jar.JarInputStream;\n@@ -287,20 +291,18 @@ public void run(String[] args) throws Throwable {\n \n     final File workDir;\n     try {\n-      workDir = File.createTempFile(\"hadoop-unjar\", \"\", tmpDir);\n-    } catch (IOException ioe) {\n+      FileAttribute<Set<PosixFilePermission>> perms = PosixFilePermissions\n+          .asFileAttribute(PosixFilePermissions.fromString(\"rwx------\"));\n+      workDir = Files.createTempDirectory(tmpDir.toPath(), \"hadoop-unjar\", perms).toFile();\n+    } catch (IOException | SecurityException e) {\n       // If user has insufficient perms to write to tmpDir, default\n       // \"Permission denied\" message doesn't specify a filename.\n       System.err.println(\"Error creating temp dir in java.io.tmpdir \"\n-                         + tmpDir + \" due to \" + ioe.getMessage());\n+                         + tmpDir + \" due to \" + e.getMessage());\n       System.exit(-1);\n       return;\n     }\n \n-    if (!workDir.delete()) {\n-      System.err.println(\"Delete failed for \" + workDir);\n-      System.exit(-1);\n-    }\n     ensureDirectory(workDir);\n \n     ShutdownHookManager.get().addShutdownHook(",
+  "auto_locate_confidence": "auto"
+}

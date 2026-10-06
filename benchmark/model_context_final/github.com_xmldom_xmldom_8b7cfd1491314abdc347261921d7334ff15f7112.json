@@ -1,0 +1,24 @@
+{
+  "case_id": "github.com_xmldom_xmldom_8b7cfd1491314abdc347261921d7334ff15f7112",
+  "language": "javascript",
+  "cve_id": "CVE-2026-41673",
+  "cve_ids_all": [
+    "CVE-2026-41673"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-674",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var conventions = require('./conventions');",
+    "var errors = require('./errors');",
+    "var g = require('./grammar');"
+  ],
+  "vulnerable_function": "function _visitNode(node, callback) {\n\tif (callback(node)) {\n\t\treturn true;\n\t}\n\tif ((node = node.firstChild)) {\n\t\tdo {\n\t\t\tif (_visitNode(node, callback)) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t} while ((node = node.nextSibling));\n\t}\n}",
+  "patched_function": "function _visitNode(node, callback) {\n\twalkDOM(node, null, {\n\t\tenter: function (n) {\n\t\t\treturn callback(n) ? walkDOM.STOP : true;\n\t\t},\n\t});\n}",
+  "unified_diff": "diff --git a/lib/dom.js b/lib/dom.js\nindex cd196dc..ab8b138 100644\n--- a/lib/dom.js\n+++ b/lib/dom.js\n@@ -1548,22 +1548,22 @@ copy(DocumentPosition, Node);\n copy(DocumentPosition, Node.prototype);\n \n /**\n- * @param callback\n- * Return true for continue,false for break.\n- * @returns\n- * boolean true: break visit;\n+ * Visits every node in the subtree rooted at `node` in depth-first pre-order.\n+ *\n+ * Delegates to {@link walkDOM} for traversal. The `callback` is called on each node;\n+ * if it returns a truthy value, traversal stops immediately.\n+ *\n+ * @param {Node} node\n+ * Root of the subtree to visit.\n+ * @param {function(Node): *} callback\n+ * Called for each node. A truthy return value stops traversal early.\n  */\n function _visitNode(node, callback) {\n-\tif (callback(node)) {\n-\t\treturn true;\n-\t}\n-\tif ((node = node.firstChild)) {\n-\t\tdo {\n-\t\t\tif (_visitNode(node, callback)) {\n-\t\t\t\treturn true;\n-\t\t\t}\n-\t\t} while ((node = node.nextSibling));\n-\t}\n+\twalkDOM(node, null, {\n+\t\tenter: function (n) {\n+\t\t\treturn callback(n) ? walkDOM.STOP : true;\n+\t\t},\n+\t});\n }\n \n /**",
+  "auto_locate_confidence": "auto"
+}

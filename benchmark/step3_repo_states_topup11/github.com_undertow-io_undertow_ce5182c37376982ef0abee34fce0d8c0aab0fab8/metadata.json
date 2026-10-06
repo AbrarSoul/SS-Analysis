@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_undertow-io_undertow_ce5182c37376982ef0abee34fce0d8c0aab0fab8",
+  "cve_ids": [
+    "CVE-2024-7885"
+  ],
+  "cwe_ids": [
+    "CWE-362",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "undertow-io/undertow",
+  "repository_url": "https://github.com/undertow-io/undertow",
+  "vulnerable_commit": "a94fa0eba6a3992c26834887575842fa2e3c2763",
+  "fixed_commit": "ce5182c37376982ef0abee34fce0d8c0aab0fab8",
+  "changed_file": "core/src/main/java/io/undertow/server/protocol/proxy/ProxyProtocolReadListener.java",
+  "max_score": "1337"
+}

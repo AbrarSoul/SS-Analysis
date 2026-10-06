@@ -1,0 +1,16 @@
+Recorded at Phase 1 infrastructure setup (2026-09-13).
+Virtual environment: /Users/nkabmo/Desktop/Tools/SS/.venv
+
+semgrep==1.177.0
+openai==3.13.0
+GitPython==3.1.62
+PyYAML==6.0.3
+requests==2.34.2
+sentence-transformers==6.0.1
+torch==2.14.0
+python==3.14.4
+
+Note: system-wide semgrep (outside this venv) is 1.140.0 — a different version.
+All pipeline runs MUST activate .venv so the pinned 1.177.0 is the one
+rule_validator.py's subprocess call actually invokes. Do not rely on
+whichever semgrep happens to be first on PATH.

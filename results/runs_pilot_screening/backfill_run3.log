@@ -1,0 +1,103 @@
+=== Starting design_v1 across all 8 primary models, 40 pilot cases ===
+2026-09-21 11:35:50,576 - INFO - Running across 3 host(s) concurrently: {'GPU-farmi-001': ['qwen2.5-coder:7b-instruct', 'magicoder:7b'], 'GPU-farmi-004': ['qwen2.5-coder:32b', 'deepseek-coder:6.7b', 'codegemma:7b', 'yi-coder:9b', 'DeepHat/DeepHat-V1-7B'], 'GPU-farmi-003': ['codellama:7b-instruct-fp16']}
+2026-09-21 11:35:52,120 - INFO - [qwen2.5-coder:7b-instruct] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_7b-instruct__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:35:52,120 - INFO - [qwen2.5-coder:7b-instruct] processing 0 curated case(s), run_id=qwen2.5-coder_7b-instruct__20260921T083550Z
+2026-09-21 11:35:52,120 - INFO - [qwen2.5-coder:7b-instruct] done -> results/runs_pilot_screening/qwen2.5-coder_7b-instruct__design_v1/generation_log.jsonl
+2026-09-21 11:35:52,120 - INFO - [codellama:7b-instruct-fp16] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/generation_log.jsonl, 1 remaining
+2026-09-21 11:35:52,120 - INFO - [codellama:7b-instruct-fp16] processing 1 curated case(s), run_id=codellama_7b-instruct-fp16__20260921T083550Z
+2026-09-21 11:35:52,120 - INFO - [qwen2.5-coder:32b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_32b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:35:52,121 - INFO - [qwen2.5-coder:32b] processing 0 curated case(s), run_id=qwen2.5-coder_32b__20260921T083550Z
+2026-09-21 11:35:52,121 - INFO - [qwen2.5-coder:32b] done -> results/runs_pilot_screening/qwen2.5-coder_32b__design_v1/generation_log.jsonl
+2026-09-21 11:35:52,122 - INFO - Using cached repository at results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/cache/repos/mongodb_js-bson
+2026-09-21 11:35:52,728 - INFO - Found commit: bd61c45157c53a1698ff23770160cf4783e9ea4a
+2026-09-21 11:35:53,232 - INFO - [deepseek-coder:6.7b] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/generation_log.jsonl, 1 remaining
+2026-09-21 11:35:53,232 - INFO - [deepseek-coder:6.7b] processing 1 curated case(s), run_id=deepseek-coder_6.7b__20260921T083552Z
+2026-09-21 11:35:53,233 - INFO - Using cached repository at results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/cache/repos/llamastack_llama-stack
+2026-09-21 11:35:53,245 - INFO - [magicoder:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/magicoder_7b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:35:53,245 - INFO - [magicoder:7b] processing 0 curated case(s), run_id=magicoder_7b__20260921T083552Z
+2026-09-21 11:35:53,245 - INFO - [magicoder:7b] done -> results/runs_pilot_screening/magicoder_7b__design_v1/generation_log.jsonl
+2026-09-21 11:35:53,840 - INFO - Found commit: b709bd77b6c1fad68a30a4888baa6f2337eaef6f
+2026-09-21 11:35:54,222 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0030.patch
+2026-09-21 11:35:55,246 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0007.patch
+2026-09-21 11:36:02,115 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:36:03,580 - WARNING - Attempt 1 failed: [{'id': 'potential-buffer-overflow', 'metadata': {'description': 'Potential buffer overflow in Decimal128.fromString', 'remediation': 'Upgrade to a version of the library that addresses this vulnerability'}, 'name': 'Potential buffer overflow in Decimal128.fromString', 'pattern': [{'fromString': {'arguments': ['string'], 'callee': {'object': 'Decimal128', 'property': 'fromString'}, 'type': 'CallExpression'}}], 'severity': 'ERROR', 'tags': ['vulnerability', 'security', 'bug', 'error']}] is not of type 'string'
+2026-09-21 11:36:03,580 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0030.patch
+2026-09-21 11:36:07,001 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:36:07,002 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 2, column 3:
+    id: vuln-js-bson-bd61c451
+      ^
+2026-09-21 11:36:08,354 - WARNING - Attempt 2 failed: [{'fromString': {'arguments': ['string'], 'callee': {'object': 'Decimal128', 'property': 'fromString'}, 'type': 'CallExpression'}}] is not of type 'string'
+2026-09-21 11:36:08,354 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0030.patch
+2026-09-21 11:36:10,553 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:36:11,858 - WARNING - Attempt 3 failed: [{'fromString': {'arguments': ['string'], 'callee': {'object': 'Decimal128', 'property': 'fromString'}, 'type': 'CallExpression'}}] is not of type 'string'
+2026-09-21 11:36:21,071 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 2, column 3:
+    id: vuln-js-bson-bd61c451
+      ^
+2026-09-21 11:36:23,707 - INFO - [codellama:7b-instruct-fp16] done -> results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/generation_log.jsonl
+2026-09-21 11:37:55,282 - INFO - Retrying request in 0.473676 seconds
+2026-09-21 11:39:55,827 - INFO - Retrying request in 0.846473 seconds
+2026-09-21 11:41:56,710 - ERROR - Error generating rule: Request timed out.
+2026-09-21 11:41:56,710 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0007.patch
+2026-09-21 11:43:56,737 - INFO - Retrying request in 0.450749 seconds
+2026-09-21 11:52:28,875 - INFO - Retrying request in 0.822246 seconds
+2026-09-21 11:52:29,710 - ERROR - Error generating rule: Connection error.
+2026-09-21 11:52:29,711 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0007.patch
+2026-09-21 11:52:29,713 - INFO - Retrying request in 0.423357 seconds
+2026-09-21 11:52:30,149 - INFO - Retrying request in 0.964381 seconds
+2026-09-21 11:52:31,126 - ERROR - Error generating rule: Connection error.
+2026-09-21 11:52:31,278 - WARNING - [CASE-0007] no raw capture file found -- raw condition skipped
+2026-09-21 11:52:31,303 - INFO - [deepseek-coder:6.7b] done -> results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/generation_log.jsonl
+2026-09-21 11:52:34,382 - INFO - [codegemma:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codegemma_7b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:52:34,382 - INFO - [codegemma:7b] processing 0 curated case(s), run_id=codegemma_7b__20260921T085231Z
+2026-09-21 11:52:34,382 - INFO - [codegemma:7b] done -> results/runs_pilot_screening/codegemma_7b__design_v1/generation_log.jsonl
+2026-09-21 11:52:36,568 - INFO - [yi-coder:9b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/yi-coder_9b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:52:36,568 - INFO - [yi-coder:9b] processing 0 curated case(s), run_id=yi-coder_9b__20260921T085234Z
+2026-09-21 11:52:36,568 - INFO - [yi-coder:9b] done -> results/runs_pilot_screening/yi-coder_9b__design_v1/generation_log.jsonl
+2026-09-21 11:52:38,661 - INFO - [DeepHat/DeepHat-V1-7B] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:52:38,661 - INFO - [DeepHat/DeepHat-V1-7B] processing 0 curated case(s), run_id=DeepHat_DeepHat-V1-7B__20260921T085236Z
+2026-09-21 11:52:38,661 - INFO - [DeepHat/DeepHat-V1-7B] done -> results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__design_v1/generation_log.jsonl
+=== Starting autogrep_default across all 8 primary models, 40 pilot cases ===
+2026-09-21 12:01:13,329 - INFO - Running across 3 host(s) concurrently: {'GPU-farmi-001': ['qwen2.5-coder:7b-instruct', 'magicoder:7b'], 'GPU-farmi-004': ['qwen2.5-coder:32b', 'deepseek-coder:6.7b', 'codegemma:7b', 'yi-coder:9b', 'DeepHat/DeepHat-V1-7B'], 'GPU-farmi-003': ['codellama:7b-instruct-fp16']}
+2026-09-21 12:01:16,335 - INFO - [codellama:7b-instruct-fp16] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codellama_7b-instruct-fp16__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:01:16,335 - INFO - [codellama:7b-instruct-fp16] processing 0 curated case(s), run_id=codellama_7b-instruct-fp16__20260921T090113Z
+2026-09-21 12:01:16,335 - INFO - [codellama:7b-instruct-fp16] done -> results/runs_pilot_screening/codellama_7b-instruct-fp16__autogrep_default/generation_log.jsonl
+2026-09-21 12:01:16,336 - INFO - [qwen2.5-coder:32b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_32b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:01:16,336 - INFO - [qwen2.5-coder:32b] processing 0 curated case(s), run_id=qwen2.5-coder_32b__20260921T090113Z
+2026-09-21 12:01:16,337 - INFO - [qwen2.5-coder:32b] done -> results/runs_pilot_screening/qwen2.5-coder_32b__autogrep_default/generation_log.jsonl
+2026-09-21 12:01:16,337 - INFO - [qwen2.5-coder:7b-instruct] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_7b-instruct__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:01:16,337 - INFO - [qwen2.5-coder:7b-instruct] processing 0 curated case(s), run_id=qwen2.5-coder_7b-instruct__20260921T090113Z
+2026-09-21 12:01:16,337 - INFO - [qwen2.5-coder:7b-instruct] done -> results/runs_pilot_screening/qwen2.5-coder_7b-instruct__autogrep_default/generation_log.jsonl
+2026-09-21 12:01:18,410 - INFO - [magicoder:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/magicoder_7b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:01:18,411 - INFO - [magicoder:7b] processing 0 curated case(s), run_id=magicoder_7b__20260921T090116Z
+2026-09-21 12:01:18,411 - INFO - [magicoder:7b] done -> results/runs_pilot_screening/magicoder_7b__autogrep_default/generation_log.jsonl
+2026-09-21 12:01:18,415 - INFO - [deepseek-coder:6.7b] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/generation_log.jsonl, 1 remaining
+2026-09-21 12:01:18,416 - INFO - [deepseek-coder:6.7b] processing 1 curated case(s), run_id=deepseek-coder_6.7b__20260921T090116Z
+2026-09-21 12:01:18,453 - INFO - Using cached repository at results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/cache/repos/jenkinsci_gitlab-oauth-plugin
+2026-09-21 12:01:18,540 - WARNING - Failed to fetch updates: Cmd('git') failed due to: exit code(128)
+  cmdline: git fetch -v -- origin
+  stderr: 'fatal: unable to access 'https://github.com/jenkinsci/gitlab-oauth-plugin/': Could not resolve host: github.com'
+2026-09-21 12:01:18,580 - INFO - Found commit: 695ce63fddb3567cf8d87339ddc1fa3b67ae2db8
+2026-09-21 12:01:23,819 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/synthetic_patch_names/CASE-0018.patch
+2026-09-21 12:03:34,769 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 12:03:34,775 - ERROR - Invalid rule schema: Missing required fields: pattern, message
+2026-09-21 12:03:34,775 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/synthetic_patch_names/CASE-0018.patch
+2026-09-21 12:03:38,766 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 12:03:40,181 - WARNING - Attempt 2 failed: {'code': 2, 'level': 'error', 'type': 'Rule parse error', 'rule_id': 'var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-gitlab-oauth-plugin-695ce63f', 'message': 'Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-gitlab-oauth-plugin-695ce63f:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$SESSION = HttpServletRequest.getSession(false)\n...\nif $SESSION != null\n\n----- end pattern -----\n'}
+2026-09-21 12:03:40,181 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/synthetic_patch_names/CASE-0018.patch
+2026-09-21 12:03:44,060 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 12:03:47,077 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version
+2026-09-21 12:03:47,124 - ERROR - Invalid rule schema: Missing required fields: pattern, message
+2026-09-21 12:03:47,125 - ERROR - Invalid rule schema: Missing required fields: pattern, message
+2026-09-21 12:03:51,431 - INFO - [deepseek-coder:6.7b] done -> results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/generation_log.jsonl
+2026-09-21 12:03:52,455 - INFO - [codegemma:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codegemma_7b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:03:52,455 - INFO - [codegemma:7b] processing 0 curated case(s), run_id=codegemma_7b__20260921T090351Z
+2026-09-21 12:03:52,455 - INFO - [codegemma:7b] done -> results/runs_pilot_screening/codegemma_7b__autogrep_default/generation_log.jsonl
+2026-09-21 12:03:53,456 - INFO - [yi-coder:9b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/yi-coder_9b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:03:53,456 - INFO - [yi-coder:9b] processing 0 curated case(s), run_id=yi-coder_9b__20260921T090352Z
+2026-09-21 12:03:53,456 - INFO - [yi-coder:9b] done -> results/runs_pilot_screening/yi-coder_9b__autogrep_default/generation_log.jsonl
+2026-09-21 12:03:54,496 - INFO - [DeepHat/DeepHat-V1-7B] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 12:03:54,496 - INFO - [DeepHat/DeepHat-V1-7B] processing 0 curated case(s), run_id=DeepHat_DeepHat-V1-7B__20260921T090353Z
+2026-09-21 12:03:54,496 - INFO - [DeepHat/DeepHat-V1-7B] done -> results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__autogrep_default/generation_log.jsonl
+=== PILOT SCREENING RUN COMPLETE ===

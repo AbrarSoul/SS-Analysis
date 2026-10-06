@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen2.5-coder:7b-instruct",
+  "temperature": 0.0,
+  "timestamp": 1789300978.844613,
+  "raw_content": "```yaml\nrules:\n  - id: \"vuln-aiohttp-1c335944\"\n    pattern: |\n      $DIRECTORY.joinpath($FILENAME).resolve()\n    pattern-not: |\n      if $FOLLOW_SYMLINKS:\n        normalized_path = Path(os.path.normpath($UNRESOLVED_PATH))\n        normalized_path.relative_to($DIRECTORY)\n        $FILEPATH = normalized_path.resolve()\n      else:\n        $FILEPATH = $UNRESOLVED_PATH.resolve()\n    languages: [\"python\"]\n    message: |\n      Potential directory traversal vulnerability detected. The code resolves a file path without proper symlink protection, which can lead to unauthorized access.\n      \n      To fix this issue, ensure that the `follow_symlinks` parameter is properly checked and handled. If symlinks should be followed, normalize the path before resolving it. If not, avoid following symlinks to prevent directory traversal attacks.\n    severity: ERROR\n    metadata:\n      source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n      category: security\n      cwe: CWE-22\n      owasp: A1:2021-Broken Access Control\n      references:\n        - https://owasp.org/www-community/vulnerabilities/Path_Traversal\n```"
+}

@@ -1,0 +1,34 @@
+{
+  "case_id": "github.com_totaljs_framework_b3f901561d66ab799a4a99279893b94cad7ae4ff",
+  "language": "javascript",
+  "cve_id": "CVE-2020-28495",
+  "cve_ids_all": [
+    "CVE-2020-28495"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-Other",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const Dns = require('dns');",
+    "const Url = require('url');",
+    "const Qs = require('querystring');",
+    "const Http = require('http');",
+    "const Https = require('https');",
+    "const Path = require('path');",
+    "const Fs = require('fs');",
+    "const Events = require('events');",
+    "const Crypto = require('crypto');",
+    "const Zlib = require('zlib');",
+    "const Tls = require('tls');",
+    "const Internal = require('./internal');",
+    "const isWindows = require('os').platform().substring(0, 3).toLowerCase() === 'win';"
+  ],
+  "vulnerable_function": "exports.set = function(obj, path, value) {\n\tvar cachekey = 'S+' + path;\n\n\tif (F.temporary.other[cachekey])\n\t\treturn F.temporary.other[cachekey](obj, value);\n\n\tvar arr = parsepath(path);\n\tvar builder = [];\n\n\tfor (var i = 0; i < arr.length - 1; i++) {\n\t\tvar type = arr[i + 1] ? (REGISARR.test(arr[i + 1]) ? '[]' : '{}') : '{}';\n\t\tvar p = 'w' + (arr[i][0] === '[' ? '' : '.') + arr[i];\n\t\tbuilder.push('if(typeof(' + p + ')!==\\'object\\'||' + p + '==null)' + p + '=' + type + ';');\n\t}\n\n\tvar v = arr[arr.length - 1];\n\tvar ispush = v.lastIndexOf('[]') !== -1;\n\tvar a = builder.join(';') + ';var v=typeof(a)===\\'function\\'?a(U.get(b)):a;w' + (v[0] === '[' ? '' : '.') + (ispush ? v.replace(REGREPLACEARR, '.push(v)') : (v + '=v')) + ';return v';\n\tvar fn = new Function('w', 'a', 'b', a);\n\tF.temporary.other[cachekey] = fn;\n\tfn(obj, value, path);\n}",
+  "patched_function": "exports.set = function(obj, path, value) {\n\tvar cachekey = 'S+' + path;\n\n\tif (F.temporary.other[cachekey])\n\t\treturn F.temporary.other[cachekey](obj, value);\n\n\tvar arr = parsepath(path);\n\tvar builder = [];\n\n\tfor (var i = 0; i < arr.length - 1; i++) {\n\t\tvar type = arr[i + 1] ? (REGISARR.test(arr[i + 1]) ? '[]' : '{}') : '{}';\n\t\tvar p = 'w' + (arr[i][0] === '[' ? '' : '.') + arr[i];\n\t\tbuilder.push('if(typeof(' + p + ')!==\\'object\\'||' + p + '==null)' + p + '=' + type + ';');\n\t}\n\n\tvar v = arr[arr.length - 1];\n\tvar ispush = v.lastIndexOf('[]') !== -1;\n\tvar a = builder.join(';') + ';var v=typeof(a)===\\'function\\'?a(U.get(b)):a;w' + (v[0] === '[' ? '' : '.') + (ispush ? v.replace(REGREPLACEARR, '.push(v)') : (v + '=v')) + ';return v';\n\n\tif ((/__proto__|constructor|prototype/).test(a))\n\t\tthrow new Error('Prototype pollution');\n\n\tvar fn = new Function('w', 'a', 'b', a);\n\tF.temporary.other[cachekey] = fn;\n\tfn(obj, value, path);\n}",
+  "unified_diff": "diff --git a/utils.js b/utils.js\nindex 2b2959dd..91695434 100755\n--- a/utils.js\n+++ b/utils.js\n@@ -6621,6 +6621,10 @@ exports.set = function(obj, path, value) {\n \tvar v = arr[arr.length - 1];\n \tvar ispush = v.lastIndexOf('[]') !== -1;\n \tvar a = builder.join(';') + ';var v=typeof(a)===\\'function\\'?a(U.get(b)):a;w' + (v[0] === '[' ? '' : '.') + (ispush ? v.replace(REGREPLACEARR, '.push(v)') : (v + '=v')) + ';return v';\n+\n+\tif ((/__proto__|constructor|prototype/).test(a))\n+\t\tthrow new Error('Prototype pollution');\n+\n \tvar fn = new Function('w', 'a', 'b', a);\n \tF.temporary.other[cachekey] = fn;\n \tfn(obj, value, path);",
+  "auto_locate_confidence": "auto"
+}

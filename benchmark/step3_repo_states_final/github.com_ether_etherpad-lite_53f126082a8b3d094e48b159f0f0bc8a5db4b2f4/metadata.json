@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_ether_etherpad-lite_53f126082a8b3d094e48b159f0f0bc8a5db4b2f4",
+  "cve_ids": [
+    "CVE-2020-22781",
+    "CVE-2020-22783"
+  ],
+  "cwe_ids": [
+    "CWE-312",
+    "CWE-89"
+  ],
+  "language": "javascript",
+  "repository": "ether/etherpad-lite",
+  "repository_url": "https://github.com/ether/etherpad-lite",
+  "vulnerable_commit": "3e8b4268471d7f5d0356c593c636b496ffac4cc5",
+  "fixed_commit": "53f126082a8b3d094e48b159f0f0bc8a5db4b2f4",
+  "changed_file": "src/node/db/SessionStore.js",
+  "max_score": "1337"
+}

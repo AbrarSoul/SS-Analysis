@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mafintosh_dns-packet_0d0d593f8df4e2712c43957a6c62e95047f12b2d",
+  "cve_ids": [
+    "CVE-2021-23386"
+  ],
+  "cwe_ids": [
+    "CWE-909"
+  ],
+  "language": "javascript",
+  "repository": "mafintosh/dns-packet",
+  "repository_url": "https://github.com/mafintosh/dns-packet",
+  "vulnerable_commit": "7f35bac5b4680d7bfbb34fbc475ecfdbf9d25092",
+  "fixed_commit": "0d0d593f8df4e2712c43957a6c62e95047f12b2d",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

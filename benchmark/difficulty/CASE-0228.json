@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-0228",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-1275",
+    "CWE-352",
+    "CWE-614"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 1,
+  "lines_changed_total": 4,
+  "function_size_chars": 1883,
+  "function_size_lines": 64,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "document.cookie assigned with path=/ and no SameSite or Secure; missing-cookie-attribute pattern."
+}

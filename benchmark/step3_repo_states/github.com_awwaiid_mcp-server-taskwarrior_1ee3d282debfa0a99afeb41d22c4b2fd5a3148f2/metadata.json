@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_awwaiid_mcp-server-taskwarrior_1ee3d282debfa0a99afeb41d22c4b2fd5a3148f2",
+  "cve_ids": [
+    "CVE-2026-5833"
+  ],
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "language": "typescript",
+  "repository": "awwaiid/mcp-server-taskwarrior",
+  "repository_url": "https://github.com/awwaiid/mcp-server-taskwarrior",
+  "vulnerable_commit": "d502ad2799d00ac2d879c6f279b0795fc3fdf02c",
+  "fixed_commit": "1ee3d282debfa0a99afeb41d22c4b2fd5a3148f2",
+  "changed_file": "index.ts",
+  "max_score": "1337"
+}

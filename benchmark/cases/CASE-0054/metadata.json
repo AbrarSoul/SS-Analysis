@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0054",
+  "original_source_case_id": "github.com_JanssenProject_jans_3592837764fe48b956e3140ca17b8ef7cac00a47",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2025-54876",
+  "cve_ids_all": [
+    "CVE-2025-54876"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "language": "python",
+  "repository": "JanssenProject/jans",
+  "repository_url": "https://github.com/JanssenProject/jans",
+  "vulnerable_commit": "b13de197d0e63ca4372c5270a3f61e1124453d3a",
+  "fixed_commit": "3592837764fe48b956e3140ca17b8ef7cac00a47",
+  "changed_file": "jans-cli-tui/cli_tui/cli/config_cli.py",
+  "changed_function": "def print_to_log(*args):",
+  "vulnerable_lines": [
+    353,
+    355
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 20,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0054/vulnerable_source.py": "9817b75210f0f8f6227ee47133004a015f4e1c426b80df8a60952ab27754d1f4",
+    "cases/CASE-0054/patched_source.py": "bd04ee3bcfba929742a54fc7ce9d554dbb01d11269abfae6f34415e4e5e490f2",
+    "cases/CASE-0054/patch.diff": "e2130babe62fd7750f4dcb6057178862fe3f1a145aec5c7f6240b78f422dd703",
+    "cases/CASE-0054/metadata.json": "6ac1dfd7427e47d72799fee6bb8efc3c95e7dee6698161d8c701e3464af0bad3",
+    "model_context/CASE-0054.json": "598de7c797ba35d6383d08daffea281c4c287e88fc1f3331ac09cae47511a860",
+    "difficulty/CASE-0054.json": "6dcbc0693fc84dc57f8f237a0b681bc494dd97c2764ab067796a38b4be124a22"
+  },
+  "case_level_hash": "330f6bcbad6d37309890ebd4819fa857fe5b1707352ab73a828e3eef0f41e33b"
+}

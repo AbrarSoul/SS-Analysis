@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_kennethreitz_requests_3bd8afbff29e50b38f889b2f688785a669b9aafc",
+  "cve_ids": [
+    "CVE-2015-2296"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-Other"
+  ],
+  "language": "python",
+  "repository": "kennethreitz/requests",
+  "repository_url": "https://github.com/kennethreitz/requests",
+  "vulnerable_commit": "bc746e158cebf034a5010c2d130a19be94702cf8",
+  "fixed_commit": "3bd8afbff29e50b38f889b2f688785a669b9aafc",
+  "changed_file": "requests/sessions.py",
+  "max_score": "1337"
+}

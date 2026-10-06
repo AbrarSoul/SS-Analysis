@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ractf_core_cebb67bd16a8296121201805332365ffccb29638",
+  "cve_ids": [
+    "CVE-2021-21329"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "python",
+  "repository": "ractf/core",
+  "repository_url": "https://github.com/ractf/core",
+  "vulnerable_commit": "dc06fb425cda8e3bec271cfe98620fab493c4992",
+  "fixed_commit": "cebb67bd16a8296121201805332365ffccb29638",
+  "changed_file": "src/authentication/views.py",
+  "max_score": "1337"
+}

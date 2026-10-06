@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_OsamaTaher_Java-springboot-codebase_c835c6f7799eacada4c0fc77e0816f250af01ad2",
+  "cve_ids": [
+    "CVE-2025-46822"
+  ],
+  "cwe_ids": [
+    "CWE-36"
+  ],
+  "language": "java",
+  "repository": "OsamaTaher/Java-springboot-codebase",
+  "repository_url": "https://github.com/OsamaTaher/Java-springboot-codebase",
+  "vulnerable_commit": "7621930b9067e3037c7d465df770a3092247e5c6",
+  "fixed_commit": "c835c6f7799eacada4c0fc77e0816f250af01ad2",
+  "changed_file": "springboot/common-dynamic-management-services/src/main/java/common/management/common/service/impl/FileSystemStorageService.java",
+  "max_score": "1337"
+}

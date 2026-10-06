@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0071",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-36"
+  ],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 1,
+  "lines_changed_total": 9,
+  "function_size_chars": 576,
+  "function_size_lines": 16,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Caller filename passed to load() unvalidated; needs to know load() reads files and that sibling save validates."
+}

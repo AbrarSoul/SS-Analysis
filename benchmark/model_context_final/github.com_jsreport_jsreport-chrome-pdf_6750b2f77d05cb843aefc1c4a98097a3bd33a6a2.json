@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_jsreport_jsreport-chrome-pdf_6750b2f77d05cb843aefc1c4a98097a3bd33a6a2",
+  "language": "javascript",
+  "cve_id": "CVE-2020-7762",
+  "cve_ids_all": [
+    "CVE-2020-7762"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": ")\n\n    page.on('request', (r) => {\n      let detail = ''\n\n      if (r.redirectChain().length > 0) {\n        detail = ` (redirect from: ${trimUrl(r.redirectChain().slice(-1)[0].url())})`\n      }\n\n      pageLog('debug', `Page request: ${r.method()} (${r.resourceType()}) ${trimUrl(r.url())}${detail}`)\n    }",
+  "patched_function": "      pageLog('debug', `Page request: ${r.method()} (${r.resourceType()}) ${trimUrl(r.url())}${detail}`)\n\n      const isRelativeToHtmlUrl = r.url().lastIndexOf(htmlUrl, 0) === 0\n\n      if (\n        !isRelativeToHtmlUrl &&\n        // potentially dangerous request to local file\n        r.url().lastIndexOf('file:///', 0) === 0\n      ) {\n        r.abort('accessdenied')\n        return\n      }",
+  "unified_diff": "diff --git a/lib/conversion.js b/lib/conversion.js\nindex 3a76d3b..747256d 100644\n--- a/lib/conversion.js\n+++ b/lib/conversion.js\n@@ -38,6 +38,12 @@ module.exports = async ({ reporter, getBrowser, htmlUrl, strategy, timeout, req,\n       return\n     }\n \n+    await page.setRequestInterception(true)\n+\n+    if (executionInfo.error) {\n+      return\n+    }\n+\n     page.on('pageerror', (err) => {\n       pageLog('warn', `Page error: ${err.message}${err.stack ? ` , stack: ${err.stack}` : ''}`)\n     })\n@@ -64,6 +70,19 @@ module.exports = async ({ reporter, getBrowser, htmlUrl, strategy, timeout, req,\n       }\n \n       pageLog('debug', `Page request: ${r.method()} (${r.resourceType()}) ${trimUrl(r.url())}${detail}`)\n+\n+      const isRelativeToHtmlUrl = r.url().lastIndexOf(htmlUrl, 0) === 0\n+\n+      if (\n+        !isRelativeToHtmlUrl &&\n+        // potentially dangerous request to local file\n+        r.url().lastIndexOf('file:///', 0) === 0\n+      ) {\n+        r.abort('accessdenied')\n+        return\n+      }\n+\n+      r.continue()\n     })\n \n     page.on('requestfinished', (r) => {",
+  "auto_locate_confidence": "auto"
+}

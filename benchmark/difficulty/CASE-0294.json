@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0294",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 8,
+  "lines_changed_total": 22,
+  "function_size_chars": 1514,
+  "function_size_lines": 48,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "URL-parsing regexes disagree with real parsers about userinfo and host; a parser differential, not a code shape."
+}

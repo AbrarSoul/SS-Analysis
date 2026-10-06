@@ -1,0 +1,32 @@
+{
+  "case_id": "CASE-0033",
+  "language": "typescript",
+  "cve_id": "CVE-2024-31206",
+  "cwe": [
+    {
+      "id": "CWE-300",
+      "definition": "Channel Accessible by Non-Endpoint"
+    },
+    {
+      "id": "CWE-319",
+      "definition": "Cleartext Transmission of Sensitive Information"
+    },
+    {
+      "id": "CWE-598",
+      "definition": "Use of HTTP Request With Sensitive Query String"
+    }
+  ],
+  "unified_diff": "diff --git a/src/index.ts b/src/index.ts\nindex 45ebcba..56accb1 100644\n--- a/src/index.ts\n+++ b/src/index.ts\n@@ -15,7 +15,7 @@ export default async function dectalk(text: string): Promise<Buffer> {\n \t}\n \n \t// Format request URL\n-\tconst url = new URL('http://tts.cyzon.us/tts');\n+\tconst url = new URL('https://tts.cyzon.us/tts');\n \turl.search = new URLSearchParams({ text }).toString();\n \n \t// Send request",
+  "containing_class_declaration": null,
+  "imports": [
+    "import { Buffer } from 'node:buffer';",
+    "import { URL, URLSearchParams } from 'node:url';"
+  ],
+  "vulnerable_function": "export default async function dectalk(text: string): Promise<Buffer> {\n\t// The API does not like empty prompts\n\ttext = text.trim();\n\tif (text.length === 0) {\n\t\tthrow new TypeError('Text cannot be empty or only whitespace');\n\t}\n\n\t// Format request URL\n\tconst url = new URL('http://tts.cyzon.us/tts');\n\turl.search = new URLSearchParams({ text }).toString();\n\n\t// Send request\n\tconst response = await fetch(url);\n\n\t// TODO look into custom behavior for aeiou's error codes\n\t// https://github.com/calzoneman/aeiou/blob/master/docs/usage-guidelines.md\n\tif (!response.ok) {\n\t\tthrow new Error(`${response.status} ${response.statusText}`, { cause: response });\n\t}\n\n\t// Parse and return response\n\tconst binaryData = await response.arrayBuffer();\n\treturn Buffer.from(binaryData);\n}",
+  "patched_function": "export default async function dectalk(text: string): Promise<Buffer> {\n\t// The API does not like empty prompts\n\ttext = text.trim();\n\tif (text.length === 0) {\n\t\tthrow new TypeError('Text cannot be empty or only whitespace');\n\t}\n\n\t// Format request URL\n\tconst url = new URL('https://tts.cyzon.us/tts');\n\turl.search = new URLSearchParams({ text }).toString();\n\n\t// Send request\n\tconst response = await fetch(url);\n\n\t// TODO look into custom behavior for aeiou's error codes\n\t// https://github.com/calzoneman/aeiou/blob/master/docs/usage-guidelines.md\n\tif (!response.ok) {\n\t\tthrow new Error(`${response.status} ${response.statusText}`, { cause: response });\n\t}\n\n\t// Parse and return response\n\tconst binaryData = await response.arrayBuffer();\n\treturn Buffer.from(binaryData);\n}",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 2033,
+  "context_size_chars_after_truncation": 2033
+}

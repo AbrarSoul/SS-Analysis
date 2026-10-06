@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_PerfreeBlog_PerfreeBlog_103c79165e3a41a1729188fdc8a1e90c97c0a06d",
+  "cve_ids": [
+    "CVE-2025-60319"
+  ],
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "java",
+  "repository": "PerfreeBlog/PerfreeBlog",
+  "repository_url": "https://github.com/PerfreeBlog/PerfreeBlog",
+  "vulnerable_commit": "33ed859c7ad887eeb3a33bf18ec213b5001dc9e3",
+  "fixed_commit": "103c79165e3a41a1729188fdc8a1e90c97c0a06d",
+  "changed_file": "perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_getsentry_sentry_d5b34568d9f1c41362ccb62141532a0a2169512f",
+  "cve_ids": [
+    "CVE-2024-32474"
+  ],
+  "cwe_ids": [
+    "CWE-117",
+    "CWE-312"
+  ],
+  "language": "python",
+  "repository": "getsentry/sentry",
+  "repository_url": "https://github.com/getsentry/sentry",
+  "vulnerable_commit": "a837111ea0fddc0da93f5d0aed793070c0a4101c",
+  "fixed_commit": "d5b34568d9f1c41362ccb62141532a0a2169512f",
+  "changed_file": "src/sentry/api/endpoints/auth_index.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_whyour_qinglong_6bec52dca158481258315ba0fc2f11206df7b719",
+  "cve_ids": [
+    "CVE-2026-3965"
+  ],
+  "cwe_ids": [
+    "CWE-693"
+  ],
+  "language": "typescript",
+  "repository": "whyour/qinglong",
+  "repository_url": "https://github.com/whyour/qinglong",
+  "vulnerable_commit": "ce599d306f81e3ebb0f6eaa5b540d701a6d4085d",
+  "fixed_commit": "6bec52dca158481258315ba0fc2f11206df7b719",
+  "changed_file": "back/loaders/express.ts",
+  "max_score": "1337"
+}

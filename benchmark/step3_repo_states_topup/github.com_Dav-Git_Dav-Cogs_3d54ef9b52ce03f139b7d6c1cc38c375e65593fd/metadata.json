@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_Dav-Git_Dav-Cogs_3d54ef9b52ce03f139b7d6c1cc38c375e65593fd",
+  "cve_ids": [
+    "CVE-2021-29501"
+  ],
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "Dav-Git/Dav-Cogs",
+  "repository_url": "https://github.com/Dav-Git/Dav-Cogs",
+  "vulnerable_commit": "6f62a0a2a328a7a94f940d34055e085075962521",
+  "fixed_commit": "3d54ef9b52ce03f139b7d6c1cc38c375e65593fd",
+  "changed_file": "ticketer/ticketer.py",
+  "max_score": "1337"
+}

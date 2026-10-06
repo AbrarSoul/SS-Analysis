@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_lxml_lxml_86368e9cf70a0ad23cccd5ee32de847149af0c6f",
+  "cve_ids": [
+    "CVE-2022-2309"
+  ],
+  "cwe_ids": [
+    "CWE-476"
+  ],
+  "language": "python",
+  "repository": "lxml/lxml",
+  "repository_url": "https://github.com/lxml/lxml",
+  "vulnerable_commit": "50c276412880c1a3dde8a6d6c909e3ed8ef47e43",
+  "fixed_commit": "86368e9cf70a0ad23cccd5ee32de847149af0c6f",
+  "changed_file": "src/lxml/tests/test_etree.py",
+  "max_score": "1337"
+}

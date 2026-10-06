@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_seerr-team_seerr_4ae20684092b5b28527b23dfbc1a3417858fee8e",
+  "cve_ids": [
+    "CVE-2026-27707"
+  ],
+  "cwe_ids": [
+    "CWE-288",
+    "CWE-807"
+  ],
+  "language": "typescript",
+  "repository": "seerr-team/seerr",
+  "repository_url": "https://github.com/seerr-team/seerr",
+  "vulnerable_commit": "0d40a42de708913e4328f871f9c57de5c88767de",
+  "fixed_commit": "4ae20684092b5b28527b23dfbc1a3417858fee8e",
+  "changed_file": "server/routes/auth.ts",
+  "max_score": "1337"
+}

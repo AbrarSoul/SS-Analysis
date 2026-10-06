@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_polonel_trudesk_889876f66c9a5b28f019258e329310c31d72cbd2",
+  "cve_ids": [
+    "CVE-2022-1770"
+  ],
+  "cwe_ids": [
+    "CWE-269"
+  ],
+  "language": "javascript",
+  "repository": "polonel/trudesk",
+  "repository_url": "https://github.com/polonel/trudesk",
+  "vulnerable_commit": "c78ae09aeae9e7ed30c568dd2b24078ca67622d6",
+  "fixed_commit": "889876f66c9a5b28f019258e329310c31d72cbd2",
+  "changed_file": "src/controllers/api/v2/routes.js",
+  "max_score": "1337"
+}

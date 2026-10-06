@@ -1,0 +1,270 @@
+=== Starting design_v1 across all 8 primary models, 40 pilot cases ===
+2026-09-21 11:12:25,804 - INFO - Running across 3 host(s) concurrently: {'GPU-farmi-001': ['qwen2.5-coder:7b-instruct', 'magicoder:7b'], 'GPU-farmi-004': ['qwen2.5-coder:32b', 'deepseek-coder:6.7b', 'codegemma:7b', 'yi-coder:9b', 'DeepHat/DeepHat-V1-7B'], 'GPU-farmi-003': ['codellama:7b-instruct-fp16']}
+2026-09-21 11:12:27,358 - INFO - [codellama:7b-instruct-fp16] resuming: 36/40 case(s) already complete in results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/generation_log.jsonl, 4 remaining
+2026-09-21 11:12:27,358 - INFO - [codellama:7b-instruct-fp16] processing 4 curated case(s), run_id=codellama_7b-instruct-fp16__20260921T081225Z
+2026-09-21 11:12:27,358 - INFO - [qwen2.5-coder:7b-instruct] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_7b-instruct__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:12:27,358 - INFO - [qwen2.5-coder:7b-instruct] processing 0 curated case(s), run_id=qwen2.5-coder_7b-instruct__20260921T081225Z
+2026-09-21 11:12:27,359 - INFO - [qwen2.5-coder:7b-instruct] done -> results/runs_pilot_screening/qwen2.5-coder_7b-instruct__design_v1/generation_log.jsonl
+2026-09-21 11:12:27,358 - INFO - [qwen2.5-coder:32b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_32b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:12:27,359 - INFO - [qwen2.5-coder:32b] processing 0 curated case(s), run_id=qwen2.5-coder_32b__20260921T081225Z
+2026-09-21 11:12:27,359 - INFO - [qwen2.5-coder:32b] done -> results/runs_pilot_screening/qwen2.5-coder_32b__design_v1/generation_log.jsonl
+2026-09-21 11:12:27,361 - INFO - Using cached repository at results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/cache/repos/inducer_relate
+2026-09-21 11:12:27,977 - INFO - Found commit: 555f0efb1c5bd7531c07cd73724d7e566a81f620
+2026-09-21 11:12:28,508 - INFO - [magicoder:7b] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/magicoder_7b__design_v1/generation_log.jsonl, 1 remaining
+2026-09-21 11:12:28,508 - INFO - [magicoder:7b] processing 1 curated case(s), run_id=magicoder_7b__20260921T081227Z
+2026-09-21 11:12:28,510 - INFO - Using cached repository at results/runs_pilot_screening/magicoder_7b__design_v1/cache/repos/parisneo_lollms-webui
+2026-09-21 11:12:28,511 - INFO - [deepseek-coder:6.7b] resuming: 38/40 case(s) already complete in results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/generation_log.jsonl, 2 remaining
+2026-09-21 11:12:28,511 - INFO - [deepseek-coder:6.7b] processing 2 curated case(s), run_id=deepseek-coder_6.7b__20260921T081227Z
+2026-09-21 11:12:28,512 - INFO - Using cached repository at results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/cache/repos/llamastack_llama-stack
+2026-09-21 11:12:29,086 - INFO - Found commit: 6d07c8a0dd0a15cc060becc73fda9fe8e788eb23
+2026-09-21 11:12:29,239 - INFO - Found commit: b709bd77b6c1fad68a30a4888baa6f2337eaef6f
+2026-09-21 11:12:29,423 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0005.patch
+2026-09-21 11:12:30,707 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/magicoder_7b__design_v1/synthetic_patch_names/CASE-0008.patch
+2026-09-21 11:12:30,716 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0007.patch
+2026-09-21 11:12:36,755 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:12:36,760 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 16, column 17:
+              "link": reverse(
+                    ^
+2026-09-21 11:12:36,760 - ERROR - Failed to clean YAML text
+2026-09-21 11:12:36,760 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0005.patch
+2026-09-21 11:12:40,748 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:12:40,750 - ERROR - Invalid rule schema: Missing required fields: message
+2026-09-21 11:12:40,750 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/magicoder_7b__design_v1/synthetic_patch_names/CASE-0008.patch
+2026-09-21 11:12:40,783 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:12:43,872 - INFO - Successfully generated valid rule for results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0005.patch
+2026-09-21 11:12:43,921 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 16, column 17:
+              "link": reverse(
+                    ^
+2026-09-21 11:12:43,921 - ERROR - Failed to clean YAML text
+2026-09-21 11:12:43,922 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 16, column 17:
+              "link": reverse(
+                    ^
+2026-09-21 11:12:43,922 - ERROR - Failed to clean YAML text
+2026-09-21 11:12:47,550 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:12:47,553 - ERROR - Invalid rule schema: Missing required fields: pattern, message
+2026-09-21 11:12:47,553 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/magicoder_7b__design_v1/synthetic_patch_names/CASE-0008.patch
+2026-09-21 11:12:54,386 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:12:54,390 - ERROR - YAML parsing error: while parsing a block mapping
+  in "<unicode string>", line 2, column 1:
+    id: vun-lollms-webui-6d07c8a0
+    ^
+expected <block end>, but found '-'
+  in "<unicode string>", line 14, column 1:
+    - !Import "file_operations"
+    ^
+2026-09-21 11:12:54,390 - ERROR - Failed to clean YAML text
+2026-09-21 11:12:54,446 - ERROR - Invalid rule schema: Missing required fields: message
+2026-09-21 11:12:54,448 - ERROR - Invalid rule schema: Missing required fields: message
+2026-09-21 11:12:54,449 - ERROR - Invalid rule schema: Missing required fields: pattern, message
+2026-09-21 11:12:54,449 - ERROR - YAML parsing error: while parsing a block mapping
+  in "<unicode string>", line 2, column 1:
+    id: vun-lollms-webui-6d07c8a0
+    ^
+expected <block end>, but found '-'
+  in "<unicode string>", line 14, column 1:
+    - !Import "file_operations"
+    ^
+2026-09-21 11:12:54,450 - ERROR - Failed to clean YAML text
+2026-09-21 11:12:54,451 - INFO - [magicoder:7b] done -> results/runs_pilot_screening/magicoder_7b__design_v1/generation_log.jsonl
+2026-09-21 11:12:55,938 - INFO - Using cached repository at results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/cache/repos/Mintplex-Labs_anything-llm
+2026-09-21 11:12:56,580 - INFO - Found commit: 94ed62d320df1a06c229e4bc3ee09c2cb5111b33
+2026-09-21 11:12:58,203 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0025.patch
+2026-09-21 11:13:00,459 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:13:02,660 - WARNING - Attempt 1 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:13:02,660 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0025.patch
+2026-09-21 11:13:08,942 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:13:08,943 - ERROR - YAML parsing error: while parsing a block mapping
+  in "<unicode string>", line 4, column 5:
+      - from: server/utils/agents/aibita ... 
+        ^
+expected <block end>, but found '-'
+  in "<unicode string>", line 6, column 5:
+        - args.push("--", searchPath);
+        ^
+2026-09-21 11:13:08,943 - ERROR - Failed to clean YAML text
+2026-09-21 11:13:08,943 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0025.patch
+2026-09-21 11:13:15,676 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:13:18,776 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:13:27,786 - ERROR - YAML parsing error: while parsing a block mapping
+  in "<unicode string>", line 4, column 5:
+      - from: server/utils/agents/aibita ... 
+        ^
+expected <block end>, but found '-'
+  in "<unicode string>", line 6, column 5:
+        - args.push("--", searchPath);
+        ^
+2026-09-21 11:13:27,787 - ERROR - Failed to clean YAML text
+2026-09-21 11:13:30,829 - INFO - Using cached repository at results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/cache/repos/mongodb_js-bson
+2026-09-21 11:13:31,458 - INFO - Found commit: bd61c45157c53a1698ff23770160cf4783e9ea4a
+2026-09-21 11:13:32,991 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0030.patch
+2026-09-21 11:13:37,580 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:13:39,007 - WARNING - Attempt 1 failed: [{'id': 'potential-buffer-overflow', 'metadata': {'description': 'Potential buffer overflow in Decimal128.fromString', 'remediation': 'Upgrade to a version of the library that addresses this vulnerability'}, 'name': 'Potential buffer overflow in Decimal128.fromString', 'pattern': [{'fromString': {'arguments': ['string'], 'callee': {'object': 'Decimal128', 'property': 'fromString'}, 'type': 'CallExpression'}}], 'severity': 'ERROR', 'tags': ['vulnerability', 'security', 'bug', 'error']}] is not of type 'string'
+2026-09-21 11:13:39,007 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0030.patch
+2026-09-21 11:13:42,417 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:13:42,418 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 2, column 3:
+    id: vuln-js-bson-bd61c451
+      ^
+2026-09-21 11:13:42,419 - ERROR - Error generating rule: 'str' object does not support item assignment
+2026-09-21 11:13:42,419 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0030.patch
+2026-09-21 11:14:30,739 - INFO - Retrying request in 0.375934 seconds
+2026-09-21 11:15:13,641 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:15:13,644 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 83, column 85:
+     ... sNegative ? INF_NEGATIVE_BUFFER : INF_POSITIVE_BUFFER));
+                                         ^
+2026-09-21 11:15:13,645 - ERROR - Failed to clean YAML text
+2026-09-21 11:15:23,240 - ERROR - YAML parsing error: mapping values are not allowed here
+  in "<unicode string>", line 2, column 3:
+    id: vuln-js-bson-bd61c451
+      ^
+2026-09-21 11:15:23,241 - ERROR - [CASE-0030] unexpected error: 'str' object does not support item assignment
+Traceback (most recent call last):
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/run_generation.py", line 378, in run_model_on_cases
+    gen_records, sample_records = evaluate_case_from_curated(
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        autogen, case_id, recorder, run_id, model_tag, host, config, frozen_manifest
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/run_generation.py", line 273, in evaluate_case_from_curated
+    attempt_trail = reconstruct_attempt_trail(
+        autogen, recorder, case_id, patch_info, repo_path, config.max_retries
+    )
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/run_generation.py", line 98, in reconstruct_attempt_trail
+    rule = autogen.llm_client.parse_and_sanitize_response(raw_payload["raw_content"], patch_info)
+  File "/Users/nkabmo/Desktop/Tools/SS/autogrep/llm_client.py", line 205, in parse_and_sanitize_response
+    rule = self._sanitize_rule(rule_data, patch_info)
+  File "/Users/nkabmo/Desktop/Tools/SS/autogrep/llm_client.py", line 147, in _sanitize_rule
+    rule['id'] = _make_suggested_id(patch_info)
+    ~~~~^^^^^^
+TypeError: 'str' object does not support item assignment
+2026-09-21 11:15:23,285 - INFO - Using cached repository at results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/cache/repos/Dokploy_dokploy
+2026-09-21 11:15:24,108 - INFO - Found commit: 61cf426615a4aa095b150362526aa52f2d1ea115
+2026-09-21 11:15:25,596 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0031.patch
+2026-09-21 11:15:29,209 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:15:30,750 - WARNING - Attempt 1 failed: {'code': 2, 'level': 'error', 'type': 'Rule parse error', 'rule_id': 'var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-dokploy-61cf4266', 'message': 'Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-dokploy-61cf4266:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n(\n  memberResult = await db.query.member.findFirst({\n    where: and(\n      eq(member.userId, input.userId),\n      eq(member.organizationId, ctx.session?.activeOrganizationId || ""),\n    ),\n    with: {\n      user: true,\n    },\n  });\n)\n\n----- end pattern -----\n'}
+2026-09-21 11:15:30,750 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0031.patch
+2026-09-21 11:15:37,321 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:15:38,714 - WARNING - Attempt 2 failed: ['memberResult = await db.query.member.findFirst({\n  where: and(\n    eq(member.userId, input.userId),\n    eq(member.organizationId, ctx.session?.activeOrganizationId || ""),\n  ),\n  with: {\n    user: true,\n  },\n});\n', 'if (!memberResult) {\n  throw new TRPCError({\n    code: "NOT_FOUND",\n    message: "User not found in this organization",\n  });\n}\n', '// Allow access if:\n// 1. User is requesting their own information\n// 2. User has owner role (admin permissions) AND user is in the same organization\nif (memberResult.userId !== ctx.user.id && ctx.user.role !== "owner") {\n  throw new TRPCError({\n    code: "UNAUTHORIZED",\n    message: "You are not authorized to access this user",\n  });\n}\n'] is not of type 'string'
+2026-09-21 11:15:38,714 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/synthetic_patch_names/CASE-0031.patch
+2026-09-21 11:15:44,456 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:15:45,931 - WARNING - Attempt 3 failed: ['memberResult = await db.query.member.findFirst({\n  where: and(\n    eq(member.userId, input.userId),\n    eq(member.organizationId, ctx.session?.activeOrganizationId || ""),\n  ),\n  with: {\n    user: true,\n  },\n});\n', 'if (!memberResult) {\n  throw new TRPCError({\n    code: "NOT_FOUND",\n    message: "User not found in this organization",\n  });\n}\n', '// Allow access if:\n// 1. User is requesting their own information\n// 2. User has owner role (admin permissions) AND user is in the same organization\nif (memberResult.userId !== ctx.user.id && ctx.user.role !== "owner") {\n  throw new TRPCError({\n    code: "UNAUTHORIZED",\n    message: "You are not authorized to access this user",\n  });\n}\n'] is not of type 'string'
+2026-09-21 11:15:59,643 - INFO - [codellama:7b-instruct-fp16] done -> results/runs_pilot_screening/codellama_7b-instruct-fp16__design_v1/generation_log.jsonl
+2026-09-21 11:16:31,153 - INFO - Retrying request in 0.931863 seconds
+2026-09-21 11:18:32,116 - ERROR - Error generating rule: Request timed out.
+2026-09-21 11:18:32,116 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0007.patch
+2026-09-21 11:20:32,146 - INFO - Retrying request in 0.481957 seconds
+2026-09-21 11:22:32,660 - INFO - Retrying request in 0.867579 seconds
+2026-09-21 11:24:33,567 - ERROR - Error generating rule: Request timed out.
+2026-09-21 11:24:33,568 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0007.patch
+2026-09-21 11:26:33,595 - INFO - Retrying request in 0.492988 seconds
+2026-09-21 11:28:34,122 - INFO - Retrying request in 0.857949 seconds
+2026-09-21 11:30:35,016 - ERROR - Error generating rule: Request timed out.
+2026-09-21 11:30:35,105 - WARNING - [CASE-0007] no raw capture file found -- raw condition skipped
+2026-09-21 11:30:35,119 - INFO - Using cached repository at results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/cache/repos/parisneo_lollms-webui
+2026-09-21 11:30:35,774 - INFO - Found commit: 6d07c8a0dd0a15cc060becc73fda9fe8e788eb23
+2026-09-21 11:30:37,232 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0008.patch
+2026-09-21 11:31:23,687 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:31:23,724 - ERROR - YAML parsing error: maximum recursion depth exceeded
+2026-09-21 11:31:23,740 - ERROR - Failed to clean YAML text
+2026-09-21 11:31:23,740 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0008.patch
+2026-09-21 11:31:30,277 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:31:31,619 - WARNING - Attempt 2 failed: [{'languages': ['python'], 'message': 'Potential path traversal vulnerability in install_app function', 'pattern-not': 'async def install_app(app_name: str, auth: AuthRequest):\n  ...\n  app_name=sanitize_path(app_name)\n  ...\n'}] is not of type 'string'
+2026-09-21 11:31:31,619 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/synthetic_patch_names/CASE-0008.patch
+2026-09-21 11:31:33,004 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:31:35,948 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:31:36,031 - ERROR - YAML parsing error: maximum recursion depth exceeded
+2026-09-21 11:31:36,047 - ERROR - Failed to clean YAML text
+2026-09-21 11:31:36,077 - ERROR - YAML parsing error: maximum recursion depth exceeded
+2026-09-21 11:31:36,091 - ERROR - Failed to clean YAML text
+2026-09-21 11:31:40,407 - INFO - [deepseek-coder:6.7b] done -> results/runs_pilot_screening/deepseek-coder_6.7b__design_v1/generation_log.jsonl
+2026-09-21 11:31:41,474 - INFO - [codegemma:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codegemma_7b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:31:41,474 - INFO - [codegemma:7b] processing 0 curated case(s), run_id=codegemma_7b__20260921T083140Z
+2026-09-21 11:31:41,474 - INFO - [codegemma:7b] done -> results/runs_pilot_screening/codegemma_7b__design_v1/generation_log.jsonl
+2026-09-21 11:31:42,567 - INFO - [yi-coder:9b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/yi-coder_9b__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:31:42,567 - INFO - [yi-coder:9b] processing 0 curated case(s), run_id=yi-coder_9b__20260921T083141Z
+2026-09-21 11:31:42,567 - INFO - [yi-coder:9b] done -> results/runs_pilot_screening/yi-coder_9b__design_v1/generation_log.jsonl
+2026-09-21 11:31:43,733 - INFO - [DeepHat/DeepHat-V1-7B] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__design_v1/generation_log.jsonl, 0 remaining
+2026-09-21 11:31:43,734 - INFO - [DeepHat/DeepHat-V1-7B] processing 0 curated case(s), run_id=DeepHat_DeepHat-V1-7B__20260921T083142Z
+2026-09-21 11:31:43,734 - INFO - [DeepHat/DeepHat-V1-7B] done -> results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__design_v1/generation_log.jsonl
+=== Starting autogrep_default across all 8 primary models, 40 pilot cases ===
+2026-09-21 11:31:46,609 - INFO - Running across 3 host(s) concurrently: {'GPU-farmi-001': ['qwen2.5-coder:7b-instruct', 'magicoder:7b'], 'GPU-farmi-004': ['qwen2.5-coder:32b', 'deepseek-coder:6.7b', 'codegemma:7b', 'yi-coder:9b', 'DeepHat/DeepHat-V1-7B'], 'GPU-farmi-003': ['codellama:7b-instruct-fp16']}
+2026-09-21 11:31:49,526 - INFO - [codellama:7b-instruct-fp16] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codellama_7b-instruct-fp16__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:31:49,527 - INFO - [codellama:7b-instruct-fp16] processing 0 curated case(s), run_id=codellama_7b-instruct-fp16__20260921T083146Z
+2026-09-21 11:31:49,527 - INFO - [codellama:7b-instruct-fp16] done -> results/runs_pilot_screening/codellama_7b-instruct-fp16__autogrep_default/generation_log.jsonl
+2026-09-21 11:31:49,527 - INFO - [qwen2.5-coder:32b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_32b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:31:49,527 - INFO - [qwen2.5-coder:32b] processing 0 curated case(s), run_id=qwen2.5-coder_32b__20260921T083146Z
+2026-09-21 11:31:49,527 - INFO - [qwen2.5-coder:32b] done -> results/runs_pilot_screening/qwen2.5-coder_32b__autogrep_default/generation_log.jsonl
+2026-09-21 11:31:49,528 - INFO - [qwen2.5-coder:7b-instruct] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/qwen2.5-coder_7b-instruct__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:31:49,528 - INFO - [qwen2.5-coder:7b-instruct] processing 0 curated case(s), run_id=qwen2.5-coder_7b-instruct__20260921T083146Z
+2026-09-21 11:31:49,528 - INFO - [qwen2.5-coder:7b-instruct] done -> results/runs_pilot_screening/qwen2.5-coder_7b-instruct__autogrep_default/generation_log.jsonl
+2026-09-21 11:31:50,712 - INFO - [magicoder:7b] resuming: 38/40 case(s) already complete in results/runs_pilot_screening/magicoder_7b__autogrep_default/generation_log.jsonl, 2 remaining
+2026-09-21 11:31:50,713 - INFO - [magicoder:7b] processing 2 curated case(s), run_id=magicoder_7b__20260921T083149Z
+2026-09-21 11:31:50,714 - INFO - [deepseek-coder:6.7b] resuming: 39/40 case(s) already complete in results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/generation_log.jsonl, 1 remaining
+2026-09-21 11:31:50,714 - INFO - [deepseek-coder:6.7b] processing 1 curated case(s), run_id=deepseek-coder_6.7b__20260921T083149Z
+2026-09-21 11:31:50,720 - INFO - Using cached repository at results/runs_pilot_screening/magicoder_7b__autogrep_default/cache/repos/ComposioHQ_composio
+2026-09-21 11:31:50,720 - INFO - Using cached repository at results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/cache/repos/jenkinsci_gitlab-oauth-plugin
+2026-09-21 11:31:51,535 - INFO - Found commit: 695ce63fddb3567cf8d87339ddc1fa3b67ae2db8
+2026-09-21 11:31:51,777 - INFO - Found commit: ed82fb45dc9fbd7f07c535c72bada871c158ae5f
+2026-09-21 11:31:53,005 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/synthetic_patch_names/CASE-0018.patch
+2026-09-21 11:31:53,250 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/magicoder_7b__autogrep_default/synthetic_patch_names/CASE-0002.patch
+2026-09-21 11:31:55,840 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:31:55,845 - ERROR - Error generating rule: 'str' object does not support item assignment
+2026-09-21 11:31:55,845 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/synthetic_patch_names/CASE-0018.patch
+2026-09-21 11:31:58,913 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:00,448 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:00,479 - WARNING - Attempt 2 failed: {'code': 2, 'level': 'error', 'type': 'Rule parse error', 'rule_id': 'var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-gitlab-oauth-plugin-695ce63f', 'message': 'Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-gitlab-oauth-plugin-695ce63f:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$SESSION = HttpServletRequest.getSession(...)\nHttpSession.invalidate()\n\n----- end pattern -----\n'}
+2026-09-21 11:32:00,479 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/synthetic_patch_names/CASE-0018.patch
+2026-09-21 11:32:02,039 - WARNING - Attempt 1 failed: {'code': 2, 'level': 'error', 'type': 'Rule parse error', 'rule_id': 'var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-composio-ed82fb45', 'message': 'Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-composio-ed82fb45:\n Invalid pattern for Python: Stdlib.Parsing.Parse_error\n----- pattern -----\nImport[ImportName="ast"]\nImport[ImportName="operator"]\nCall[func.name.text="eval"]\n\n----- end pattern -----\n'}
+2026-09-21 11:32:02,039 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/magicoder_7b__autogrep_default/synthetic_patch_names/CASE-0002.patch
+2026-09-21 11:32:04,545 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-004/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:06,387 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:07,445 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:32:07,493 - ERROR - [CASE-0018] unexpected error: 'str' object does not support item assignment
+Traceback (most recent call last):
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/run_generation.py", line 378, in run_model_on_cases
+    gen_records, sample_records = evaluate_case_from_curated(
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        autogen, case_id, recorder, run_id, model_tag, host, config, frozen_manifest
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/run_generation.py", line 241, in evaluate_case_from_curated
+    raw_rule = autogen.llm_client.parse_and_sanitize_response(raw_payload["raw_content"], patch_info)
+  File "/Users/nkabmo/Desktop/Tools/SS/autogrep/llm_client.py", line 205, in parse_and_sanitize_response
+    rule = self._sanitize_rule(rule_data, patch_info)
+  File "/Users/nkabmo/Desktop/Tools/SS/autogrep/llm_client.py", line 151, in _sanitize_rule
+    rule['languages'] = [patch_info.file_changes[0].language]
+    ~~~~^^^^^^^^^^^^^
+TypeError: 'str' object does not support item assignment
+2026-09-21 11:32:07,495 - INFO - [deepseek-coder:6.7b] done -> results/runs_pilot_screening/deepseek-coder_6.7b__autogrep_default/generation_log.jsonl
+2026-09-21 11:32:08,010 - WARNING - Attempt 2 failed: {'code': 2, 'level': 'error', 'type': 'Rule parse error', 'rule_id': 'var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.unsafe-eval', 'message': 'Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.unsafe-eval:\n Invalid pattern for Python: Stdlib.Parsing.Parse_error\n----- pattern -----\nCall[func.name.text="eval"]\n\n----- end pattern -----\n'}
+2026-09-21 11:32:08,010 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/magicoder_7b__autogrep_default/synthetic_patch_names/CASE-0002.patch
+2026-09-21 11:32:08,710 - INFO - [codegemma:7b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/codegemma_7b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:32:08,710 - INFO - [codegemma:7b] processing 0 curated case(s), run_id=codegemma_7b__20260921T083207Z
+2026-09-21 11:32:08,710 - INFO - [codegemma:7b] done -> results/runs_pilot_screening/codegemma_7b__autogrep_default/generation_log.jsonl
+2026-09-21 11:32:09,812 - INFO - [yi-coder:9b] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/yi-coder_9b__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:32:09,812 - INFO - [yi-coder:9b] processing 0 curated case(s), run_id=yi-coder_9b__20260921T083208Z
+2026-09-21 11:32:09,812 - INFO - [yi-coder:9b] done -> results/runs_pilot_screening/yi-coder_9b__autogrep_default/generation_log.jsonl
+2026-09-21 11:32:10,937 - INFO - [DeepHat/DeepHat-V1-7B] resuming: 40/40 case(s) already complete in results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__autogrep_default/generation_log.jsonl, 0 remaining
+2026-09-21 11:32:10,937 - INFO - [DeepHat/DeepHat-V1-7B] processing 0 curated case(s), run_id=DeepHat_DeepHat-V1-7B__20260921T083209Z
+2026-09-21 11:32:10,937 - INFO - [DeepHat/DeepHat-V1-7B] done -> results/runs_pilot_screening/DeepHat_DeepHat-V1-7B__autogrep_default/generation_log.jsonl
+2026-09-21 11:32:14,170 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:15,607 - WARNING - Attempt 3 failed: {'code': 2, 'level': 'error', 'type': 'Rule parse error', 'rule_id': 'var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-composio-ed82fb45', 'message': 'Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-composio-ed82fb45:\n Invalid pattern for Python: Stdlib.Parsing.Parse_error\n----- pattern -----\nast.Call[func.name.text="eval"]\n\n----- end pattern -----\n'}
+2026-09-21 11:32:29,004 - INFO - Using cached repository at results/runs_pilot_screening/magicoder_7b__autogrep_default/cache/repos/GSConnect_gnome-shell-extension-gsconnect
+2026-09-21 11:32:29,636 - INFO - Found commit: a38246deec0af50ae218cdc51db32cdd7eb145e3
+2026-09-21 11:32:31,131 - INFO - Attempt 1/3 for patch results/runs_pilot_screening/magicoder_7b__autogrep_default/synthetic_patch_names/CASE-0022.patch
+2026-09-21 11:32:40,696 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:43,698 - WARNING - Attempt 1 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:32:43,699 - INFO - Attempt 2/3 for patch results/runs_pilot_screening/magicoder_7b__autogrep_default/synthetic_patch_names/CASE-0022.patch
+2026-09-21 11:32:49,805 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:32:52,793 - WARNING - Attempt 2 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:32:52,794 - INFO - Attempt 3/3 for patch results/runs_pilot_screening/magicoder_7b__autogrep_default/synthetic_patch_names/CASE-0022.patch
+2026-09-21 11:32:58,480 - INFO - HTTP Request: POST https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-21 11:33:01,099 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version
+2026-09-21 11:33:18,438 - INFO - [magicoder:7b] done -> results/runs_pilot_screening/magicoder_7b__autogrep_default/generation_log.jsonl
+=== PILOT SCREENING RUN COMPLETE ===

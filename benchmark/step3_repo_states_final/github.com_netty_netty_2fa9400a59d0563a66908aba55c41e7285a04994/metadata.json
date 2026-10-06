@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_netty_netty_2fa9400a59d0563a66908aba55c41e7285a04994",
+  "cve_ids": [
+    "CVE-2014-3488"
+  ],
+  "cwe_ids": [
+    "CWE-119"
+  ],
+  "language": "java",
+  "repository": "netty/netty",
+  "repository_url": "https://github.com/netty/netty",
+  "vulnerable_commit": "129c17aaa4ac5c611519ef480c35a12e8282b807",
+  "fixed_commit": "2fa9400a59d0563a66908aba55c41e7285a04994",
+  "changed_file": "src/main/java/org/jboss/netty/handler/ssl/SslHandler.java",
+  "max_score": "1337"
+}

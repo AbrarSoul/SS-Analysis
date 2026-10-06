@@ -1,0 +1,42 @@
+{
+  "case_id": "github.com_graphhopper_graphhopper_eb189be1fa7443ebf4ae881e737a18f818c95f41",
+  "language": "java",
+  "cve_id": "CVE-2021-29506",
+  "cve_ids_all": [
+    "CVE-2021-29506"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.graphhopper.GHRequest;",
+    "import com.graphhopper.GHResponse;",
+    "import com.graphhopper.GraphHopperAPI;",
+    "import com.graphhopper.GraphHopperConfig;",
+    "import com.graphhopper.util.Helper;",
+    "import com.graphhopper.util.Parameters;",
+    "import com.graphhopper.util.StopWatch;",
+    "import com.graphhopper.util.TranslationMap;",
+    "import com.graphhopper.util.shapes.GHPoint;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import javax.inject.Inject;",
+    "import javax.servlet.http.HttpServletRequest;",
+    "import javax.ws.rs.*;",
+    "import javax.ws.rs.container.ContainerRequestContext;",
+    "import javax.ws.rs.core.Context;",
+    "import javax.ws.rs.core.MediaType;",
+    "import javax.ws.rs.core.Response;",
+    "import javax.ws.rs.core.UriInfo;",
+    "import java.util.*;",
+    "import static com.graphhopper.util.Parameters.Routing.*;"
+  ],
+  "vulnerable_function": "    private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {\n\n        String url = httpServletRequest.getRequestURI();\n        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n        url = url.replaceAll(\"\\\\?[*]\", \"\");\n\n        String[] pointStrings = url.split(\";\");\n\n        List<GHPoint> points = new ArrayList<>(pointStrings.length);\n        for (int i = 0; i < pointStrings.length; i++) {\n            points.add(GHPoint.fromStringLonLat(pointStrings[i]));\n        }\n\n        return points;\n    }",
+  "patched_function": "    private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {\n        String url = httpServletRequest.getRequestURI();\n        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n        if (!url.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url);\n        url = url.substring(urlStart.length());\n        String[] pointStrings = url.split(\";\");\n        List<GHPoint> points = new ArrayList<>(pointStrings.length);\n        for (int i = 0; i < pointStrings.length; i++) {\n            points.add(GHPoint.fromStringLonLat(pointStrings[i]));\n        }\n\n        return points;\n    }",
+  "unified_diff": "diff --git a/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java b/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\nindex 75c61c5f3..66880307c 100644\n--- a/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n+++ b/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n@@ -188,13 +188,11 @@ public class NavigateResource {\n      * The url looks like: \".../{profile}/1.522438,42.504606;1.527209,42.504776;1.526113,42.505144;1.527218,42.50529?..\"\n      */\n     private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {\n-\n         String url = httpServletRequest.getRequestURI();\n-        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n-        url = url.replaceAll(\"\\\\?[*]\", \"\");\n-\n+        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n+        if (!url.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url);\n+        url = url.substring(urlStart.length());\n         String[] pointStrings = url.split(\";\");\n-\n         List<GHPoint> points = new ArrayList<>(pointStrings.length);\n         for (int i = 0; i < pointStrings.length; i++) {\n             points.add(GHPoint.fromStringLonLat(pointStrings[i]));",
+  "auto_locate_confidence": "auto"
+}

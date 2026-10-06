@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_protobufjs_protobuf.js_ff7b2afef8754837cc6dc64c864cd111ab477956",
+  "cve_ids": [
+    "CVE-2026-41242"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "protobufjs/protobuf.js",
+  "repository_url": "https://github.com/protobufjs/protobuf.js",
+  "vulnerable_commit": "086b19d00d1d01e801d6ccc2ae3f207bb1b06482",
+  "fixed_commit": "ff7b2afef8754837cc6dc64c864cd111ab477956",
+  "changed_file": "src/type.js",
+  "max_score": "1337"
+}

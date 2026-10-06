@@ -1,0 +1,43 @@
+{
+  "case_id": "github.com_gitpod-io_gitpod_8ca431f86ae3a6f9a17afcfed51cdd065fcff1a5",
+  "language": "typescript",
+  "cve_id": "CVE-2021-35206",
+  "cve_ids_all": [
+    "CVE-2021-35206"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-601",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { inject, injectable } from \"inversify\";",
+    "import { UserDB } from '@gitpod/gitpod-db/lib/user-db';",
+    "import * as express from 'express';",
+    "import { Authenticator } from \"../auth/authenticator\";",
+    "import { Env } from \"../env\";",
+    "import { WorkspaceDB } from \"@gitpod/gitpod-db/lib/workspace-db\";",
+    "import { log, LogContext } from '@gitpod/gitpod-protocol/lib/util/logging';",
+    "import { GitpodCookie } from \"../auth/gitpod-cookie\";",
+    "import { AuthorizationService } from \"./authorization-service\";",
+    "import { Permission } from \"@gitpod/gitpod-protocol/lib/permission\";",
+    "import { UserService } from \"./user-service\";",
+    "import { WorkspacePortAuthorizationService } from \"./workspace-port-auth-service\";",
+    "import { parseWorkspaceIdFromHostname } from \"@gitpod/gitpod-protocol/lib/util/parse-workspace-id\";",
+    "import { SessionHandlerProvider } from \"../session-handler\";",
+    "import { URL } from 'url';",
+    "import { saveSession, getRequestingClientInfo, destroySession } from \"../express-util\";",
+    "import { User } from \"@gitpod/gitpod-protocol\";",
+    "import { HostContextProvider } from \"../auth/host-context-provider\";",
+    "import { AuthFlow } from \"../auth/auth-provider\";",
+    "import { LoginCompletionHandler } from \"../auth/login-completion-handler\";",
+    "import { TosCookie } from \"./tos-cookie\";",
+    "import { TosFlow } from \"../terms/tos-flow\";"
+  ],
+  "vulnerable_function": "        router.get(\"/login\", async (req: express.Request, res: express.Response, next: express.NextFunction) => {\n            // Clean up\n            this.tosCookie.unset(res);\n\n            if (req.isAuthenticated()) {\n                log.info({ sessionId: req.sessionID }, \"(Auth) User is already authenticated.\", { 'login-flow': true });\n                // redirect immediately\n                const redirectTo = this.getSafeReturnToParam(req) || this.env.hostUrl.asDashboard().toString();\n                res.redirect(redirectTo);\n                return;\n            }\n            const clientInfo = getRequestingClientInfo(req);\n            log.info({ sessionId: req.sessionID }, \"(Auth) User started the login process\", { 'login-flow': true, clientInfo });\n\n            // Try to guess auth host from request\n            await this.augmentLoginRequest(req);\n\n            // If there is no known auth host, we need to ask the user\n            const redirectToLoginPage = !req.query.host;\n            if (redirectToLoginPage) {\n                const returnTo = this.getSafeReturnToParam(req);\n                const search = returnTo ? `returnTo=${returnTo}` : '';\n                const loginPageUrl = this.env.hostUrl.asLogin().with({ search }).toString();\n                res.redirect(loginPageUrl);\n                return;\n            }\n\n            // Make sure, the session is stored before we initialize the OAuth flow\n            try {\n                await saveSession(req);\n            } catch (error) {\n                log.error(`Login failed due to session save error; redirecting to /sorry`, { req, error, clientInfo });\n                res.redirect(this.getSorryUrl(\"Login failed \ud83e\udd84 Please try again\"));\n            }\n\n            // Proceed with login\n            await this.authenticator.authenticate(req, res, next);\n        }",
+  "patched_function": "    protected ensureSafeReturnToParam(req: express.Request) {\n        req.query.returnTo = this.getSafeReturnToParam(req);\n    }",
+  "unified_diff": "diff --git a/components/server/src/user/user-controller.ts b/components/server/src/user/user-controller.ts\nindex c62964420..bd3b68596 100644\n--- a/components/server/src/user/user-controller.ts\n+++ b/components/server/src/user/user-controller.ts\n@@ -81,6 +81,7 @@ export class UserController {\n             }\n \n             // Proceed with login\n+            this.ensureSafeReturnToParam(req);\n             await this.authenticator.authenticate(req, res, next);\n         });\n         router.get(\"/authorize\", (req: express.Request, res: express.Response, next: express.NextFunction) => {\n@@ -88,6 +89,7 @@ export class UserController {\n                 res.sendStatus(401);\n                 return;\n             }\n+            this.ensureSafeReturnToParam(req);\n             this.authenticator.authorize(req, res, next);\n         });\n         const branding = this.env.brandingConfig;\n@@ -483,6 +485,10 @@ export class UserController {\n         }\n     }\n \n+    protected ensureSafeReturnToParam(req: express.Request) {\n+        req.query.returnTo = this.getSafeReturnToParam(req);\n+    }\n+\n     protected getSafeReturnToParam(req: express.Request) {\n         const returnToURL: string | undefined = req.query.redirect || req.query.returnTo;\n         if (returnToURL) {",
+  "auto_locate_confidence": "auto"
+}

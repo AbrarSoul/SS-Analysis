@@ -1,0 +1,53 @@
+{
+  "case_id": "CASE-0293",
+  "language": "java",
+  "cve_id": "CVE-2018-1270",
+  "cve_ids_all": [
+    "CVE-2018-1270",
+    "CVE-2018-1275"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-358",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.util.Collection;",
+    "import java.util.HashSet;",
+    "import java.util.LinkedHashMap;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.Set;",
+    "import java.util.concurrent.ConcurrentHashMap;",
+    "import java.util.concurrent.ConcurrentMap;",
+    "import java.util.concurrent.CopyOnWriteArraySet;",
+    "import org.springframework.expression.AccessException;",
+    "import org.springframework.expression.EvaluationContext;",
+    "import org.springframework.expression.Expression;",
+    "import org.springframework.expression.ExpressionParser;",
+    "import org.springframework.expression.PropertyAccessor;",
+    "import org.springframework.expression.TypedValue;",
+    "import org.springframework.expression.spel.SpelEvaluationException;",
+    "import org.springframework.expression.spel.standard.SpelExpressionParser;",
+    "import org.springframework.expression.spel.support.StandardEvaluationContext;",
+    "import org.springframework.messaging.Message;",
+    "import org.springframework.messaging.MessageHeaders;",
+    "import org.springframework.messaging.simp.SimpMessageHeaderAccessor;",
+    "import org.springframework.messaging.support.MessageHeaderAccessor;",
+    "import org.springframework.util.AntPathMatcher;",
+    "import org.springframework.util.Assert;",
+    "import org.springframework.util.LinkedMultiValueMap;",
+    "import org.springframework.util.MultiValueMap;",
+    "import org.springframework.util.PathMatcher;"
+  ],
+  "vulnerable_function": "\t\tpublic TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {\n\t\t\tMessageHeaders headers = (MessageHeaders) target;\n\t\t\tSimpMessageHeaderAccessor accessor =\n\t\t\t\t\tMessageHeaderAccessor.getAccessor(headers, SimpMessageHeaderAccessor.class);\n\t\t\tObject value;\n\t\t\tif (\"destination\".equalsIgnoreCase(name)) {\n\t\t\t\tvalue = accessor.getDestination();\n\t\t\t}\n\t\t\telse {\n\t\t\t\tvalue = accessor.getFirstNativeHeader(name);\n\t\t\t\tif (value == null) {\n\t\t\t\t\tvalue = headers.get(name);\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn new TypedValue(value);\n\t\t}",
+  "patched_function": "\t\t\telse if (target instanceof MessageHeaders) {\n\t\t\t\tMessageHeaders headers = (MessageHeaders) target;\n\t\t\t\tSimpMessageHeaderAccessor accessor =\n\t\t\t\t\t\tMessageHeaderAccessor.getAccessor(headers, SimpMessageHeaderAccessor.class);\n\t\t\t\tAssert.state(accessor != null, \"No SimpMessageHeaderAccessor\");\n\t\t\t\tif (\"destination\".equalsIgnoreCase(name)) {\n\t\t\t\t\tvalue = accessor.getDestination();\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tvalue = accessor.getFirstNativeHeader(name);\n\t\t\t\t\tif (value == null) {\n\t\t\t\t\t\tvalue = headers.get(name);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}",
+  "unified_diff": "diff --git a/spring-messaging/src/main/java/org/springframework/messaging/simp/broker/DefaultSubscriptionRegistry.java b/spring-messaging/src/main/java/org/springframework/messaging/simp/broker/DefaultSubscriptionRegistry.java\nindex fbd46ec9c6..a1b39bd48f 100644\n--- a/spring-messaging/src/main/java/org/springframework/messaging/simp/broker/DefaultSubscriptionRegistry.java\n+++ b/spring-messaging/src/main/java/org/springframework/messaging/simp/broker/DefaultSubscriptionRegistry.java\n@@ -26,7 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;\n import java.util.concurrent.ConcurrentMap;\n import java.util.concurrent.CopyOnWriteArraySet;\n \n-import org.springframework.expression.AccessException;\n import org.springframework.expression.EvaluationContext;\n import org.springframework.expression.Expression;\n import org.springframework.expression.ExpressionParser;\n@@ -34,7 +33,7 @@ import org.springframework.expression.PropertyAccessor;\n import org.springframework.expression.TypedValue;\n import org.springframework.expression.spel.SpelEvaluationException;\n import org.springframework.expression.spel.standard.SpelExpressionParser;\n-import org.springframework.expression.spel.support.StandardEvaluationContext;\n+import org.springframework.expression.spel.support.SimpleEvaluationContext;\n import org.springframework.messaging.Message;\n import org.springframework.messaging.MessageHeaders;\n import org.springframework.messaging.simp.SimpMessageHeaderAccessor;\n@@ -64,6 +63,10 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {\n \t/** Default maximum number of entries for the destination cache: 1024 */\n \tpublic static final int DEFAULT_CACHE_LIMIT = 1024;\n \n+\t/** Static evaluation context to reuse */\n+\tprivate static EvaluationContext messageEvalContext =\n+\t\t\tSimpleEvaluationContext.forPropertyAccessors(new SimpMessageHeaderPropertyAccessor()).build();\n+\n \n \tprivate PathMatcher pathMatcher = new AntPathMatcher();\n \n@@ -191,7 +194,6 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {\n \t\tif (!this.selectorHeaderInUse) {\n \t\t\treturn allMatches;\n \t\t}\n-\t\tEvaluationContext context = null;\n \t\tMultiValueMap<String, String> result = new LinkedMultiValueMap<String, String>(allMatches.size());\n \t\tfor (String sessionId : allMatches.keySet()) {\n \t\t\tfor (String subId : allMatches.get(sessionId)) {\n@@ -208,12 +210,8 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {\n \t\t\t\t\tresult.add(sessionId, subId);\n \t\t\t\t\tcontinue;\n \t\t\t\t}\n-\t\t\t\tif (context == null) {\n-\t\t\t\t\tcontext = new StandardEvaluationContext(message);\n-\t\t\t\t\tcontext.getPropertyAccessors().add(new SimpMessageHeaderPropertyAccessor());\n-\t\t\t\t}\n \t\t\t\ttry {\n-\t\t\t\t\tif (expression.getValue(context, boolean.class)) {\n+\t\t\t\t\tif (Boolean.TRUE.equals(expression.getValue(messageEvalContext, message, Boolean.class))) {\n \t\t\t\t\t\tresult.add(sessionId, subId);\n \t\t\t\t\t}\n \t\t\t\t}\n@@ -525,7 +523,7 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {\n \n \t\t@Override\n \t\tpublic Class<?>[] getSpecificTargetClasses() {\n-\t\t\treturn new Class<?>[] {MessageHeaders.class};\n+\t\t\treturn new Class<?>[] {Message.class, MessageHeaders.class};\n \t\t}\n \n \t\t@Override\n@@ -534,19 +532,29 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {\n \t\t}\n \n \t\t@Override\n-\t\tpublic TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {\n-\t\t\tMessageHeaders headers = (MessageHeaders) target;\n-\t\t\tSimpMessageHeaderAccessor accessor =\n-\t\t\t\t\tMessageHeaderAccessor.getAccessor(headers, SimpMessageHeaderAccessor.class);\n+\t\tpublic TypedValue read(EvaluationContext context, Object target, String name) {\n \t\t\tObject value;\n-\t\t\tif (\"destination\".equalsIgnoreCase(name)) {\n-\t\t\t\tvalue = accessor.getDestination();\n+\t\t\tif (target instanceof Message) {\n+\t\t\t\tvalue = name.equals(\"headers\") ? ((Message) target).getHeaders() : null;\n \t\t\t}\n-\t\t\telse {\n-\t\t\t\tvalue = accessor.getFirstNativeHeader(name);\n-\t\t\t\tif (value == null) {\n-\t\t\t\t\tvalue = headers.get(name);\n+\t\t\telse if (target instanceof MessageHeaders) {\n+\t\t\t\tMessageHeaders headers = (MessageHeaders) target;\n+\t\t\t\tSimpMessageHeaderAccessor accessor =\n+\t\t\t\t\t\tMessageHeaderAccessor.getAccessor(headers, SimpMessageHeaderAccessor.class);\n+\t\t\t\tAssert.state(accessor != null, \"No SimpMessageHeaderAccessor\");\n+\t\t\t\tif (\"destination\".equalsIgnoreCase(name)) {\n+\t\t\t\t\tvalue = accessor.getDestination();\n \t\t\t\t}\n+\t\t\t\telse {\n+\t\t\t\t\tvalue = accessor.getFirstNativeHeader(name);\n+\t\t\t\t\tif (value == null) {\n+\t\t\t\t\t\tvalue = headers.get(name);\n+\t\t\t\t\t}\n+\t\t\t\t}\n+\t\t\t}\n+\t\t\telse {\n+\t\t\t\t// Should never happen...\n+\t\t\t\tthrow new IllegalStateException(\"Expected Message or MessageHeaders.\");\n \t\t\t}\n \t\t\treturn new TypedValue(value);\n \t\t}",
+  "auto_locate_confidence": "auto"
+}

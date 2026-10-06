@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-0116",
+  "language": "java",
+  "cve_id": "CVE-2026-43869",
+  "cve_ids_all": [
+    "CVE-2026-43869"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-297",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.FileInputStream;",
+    "import java.io.FileNotFoundException;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.net.InetAddress;",
+    "import java.net.MalformedURLException;",
+    "import java.net.URL;",
+    "import java.security.KeyStore;",
+    "import java.util.Arrays;",
+    "import javax.net.ssl.KeyManagerFactory;",
+    "import javax.net.ssl.SSLContext;",
+    "import javax.net.ssl.SSLServerSocket;",
+    "import javax.net.ssl.SSLServerSocketFactory;",
+    "import javax.net.ssl.SSLSocket;",
+    "import javax.net.ssl.SSLSocketFactory;",
+    "import javax.net.ssl.TrustManagerFactory;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;"
+  ],
+  "vulnerable_function": "  private static TSocket createClient(SSLSocketFactory factory, String host, int port, int timeout)\n      throws TTransportException {\n    try {\n      SSLSocket socket = (SSLSocket) factory.createSocket(host, port);\n      socket.setSoTimeout(timeout);\n      return new TSocket(socket);\n    } catch (TTransportException tte) {\n      throw tte;\n    } catch (Exception e) {\n      throw new TTransportException(\n          TTransportException.NOT_OPEN, \"Could not connect to \" + host + \" on port \" + port, e);\n    }\n  }",
+  "patched_function": "  private static TSocket createClient(SSLSocketFactory factory, String host, int port, int timeout)\n      throws TTransportException {\n    try {\n      SSLSocket socket = (SSLSocket) factory.createSocket(host, port);\n      socket.setSoTimeout(timeout);\n      SSLParameters sslParams = socket.getSSLParameters();\n      sslParams.setEndpointIdentificationAlgorithm(\"HTTPS\");\n      socket.setSSLParameters(sslParams);\n      return new TSocket(socket);\n    } catch (TTransportException tte) {\n      throw tte;\n    } catch (Exception e) {\n      throw new TTransportException(\n          TTransportException.NOT_OPEN, \"Could not connect to \" + host + \" on port \" + port, e);\n    }\n  }",
+  "unified_diff": "diff --git a/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java b/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\nindex 6b0499979..9a08b19b7 100644\n--- a/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n+++ b/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n@@ -30,6 +30,7 @@ import java.security.KeyStore;\n import java.util.Arrays;\n import javax.net.ssl.KeyManagerFactory;\n import javax.net.ssl.SSLContext;\n+import javax.net.ssl.SSLParameters;\n import javax.net.ssl.SSLServerSocket;\n import javax.net.ssl.SSLServerSocketFactory;\n import javax.net.ssl.SSLSocket;\n@@ -343,6 +344,9 @@ public class TSSLTransportFactory {\n     try {\n       SSLSocket socket = (SSLSocket) factory.createSocket(host, port);\n       socket.setSoTimeout(timeout);\n+      SSLParameters sslParams = socket.getSSLParameters();\n+      sslParams.setEndpointIdentificationAlgorithm(\"HTTPS\");\n+      socket.setSSLParameters(sslParams);\n       return new TSocket(socket);\n     } catch (TTransportException tte) {\n       throw tte;",
+  "auto_locate_confidence": "auto"
+}

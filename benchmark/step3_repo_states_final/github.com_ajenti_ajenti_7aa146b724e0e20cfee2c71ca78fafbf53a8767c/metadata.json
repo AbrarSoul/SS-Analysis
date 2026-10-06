@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_ajenti_ajenti_7aa146b724e0e20cfee2c71ca78fafbf53a8767c",
+  "cve_ids": [
+    "CVE-2019-25066"
+  ],
+  "cwe_ids": [
+    "CWE-269",
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "ajenti/ajenti",
+  "repository_url": "https://github.com/ajenti/ajenti",
+  "vulnerable_commit": "ef385f96d7e9e09b81ca5e48dc4e04042d5a74a4",
+  "fixed_commit": "7aa146b724e0e20cfee2c71ca78fafbf53a8767c",
+  "changed_file": "ajenti-core/aj/auth.py",
+  "max_score": "1337"
+}

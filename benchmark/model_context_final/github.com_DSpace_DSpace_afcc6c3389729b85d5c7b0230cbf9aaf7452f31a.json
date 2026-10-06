@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_DSpace_DSpace_afcc6c3389729b85d5c7b0230cbf9aaf7452f31a",
+  "language": "java",
+  "cve_id": "CVE-2022-31189",
+  "cve_ids_all": [
+    "CVE-2022-31189"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-209",
+      "definition": "Generation of Error Message Containing Sensitive Information"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import javax.servlet.ServletException;",
+    "import javax.servlet.http.HttpServlet;",
+    "import javax.servlet.http.HttpServletRequest;",
+    "import javax.servlet.http.HttpServletResponse;",
+    "import org.apache.log4j.Logger;",
+    "import org.dspace.app.webui.util.JSPManager;",
+    "import org.dspace.app.webui.util.UIUtil;"
+  ],
+  "vulnerable_function": "    protected void doGet(HttpServletRequest request,\n            HttpServletResponse response) throws ServletException, IOException\n    {\n        // Get the exception that occurred, if any\n        Throwable t = (Throwable) request\n                .getAttribute(\"javax.servlet.error.exception\");\n\n        String logInfo = UIUtil.getRequestLogInfo(request);\n\n        // Log the error. Since we don't have a context, we need to\n        // build the info \"by hand\"\n        String logMessage = \":session_id=\" + request.getSession().getId()\n                + \":internal_error:\" + logInfo;\n\n        log.warn(logMessage, t);\n\n        // Now we try and mail the designated user, if any\n        UIUtil.sendAlert(request, (Exception) t);\n\n        JSPManager.showJSP(request, response, \"/error/internal.jsp\");\n    }",
+  "patched_function": "    protected void doGet(HttpServletRequest request,\n            HttpServletResponse response) throws ServletException, IOException\n    {\n\n    \tUUID errorCode = UUID.randomUUID();\n        // Get the exception that occurred, if any\n        Throwable t = (Throwable) request\n                .getAttribute(\"javax.servlet.error.exception\");\n\n        String logInfo = UIUtil.getRequestLogInfo(request);\n\n        // Log the error. Since we don't have a context, we need to\n        // build the info \"by hand\"\n        String logMessage = \":error_code=\" + errorCode + \":session_id=\" + request.getSession().getId()\n                + \":internal_error:\" + logInfo;\n\n        log.warn(logMessage, t);\n\n        // Now we try and mail the designated user, if any\n        UIUtil.sendAlert(request, (Exception) t);\n\n        request.setAttribute(\"javax.servlet.error.code\", errorCode.toString());\n        JSPManager.showJSP(request, response, \"/error/internal.jsp\");\n    }",
+  "unified_diff": "diff --git a/dspace-jspui/src/main/java/org/dspace/app/webui/servlet/InternalErrorServlet.java b/dspace-jspui/src/main/java/org/dspace/app/webui/servlet/InternalErrorServlet.java\nindex 683f5fa80e..91a06a0090 100644\n--- a/dspace-jspui/src/main/java/org/dspace/app/webui/servlet/InternalErrorServlet.java\n+++ b/dspace-jspui/src/main/java/org/dspace/app/webui/servlet/InternalErrorServlet.java\n@@ -8,6 +8,7 @@\n package org.dspace.app.webui.servlet;\n \n import java.io.IOException;\n+import java.util.UUID;\n \n import javax.servlet.ServletException;\n import javax.servlet.http.HttpServlet;\n@@ -37,6 +38,8 @@ public class InternalErrorServlet extends HttpServlet\n     protected void doGet(HttpServletRequest request,\n             HttpServletResponse response) throws ServletException, IOException\n     {\n+\n+    \tUUID errorCode = UUID.randomUUID();\n         // Get the exception that occurred, if any\n         Throwable t = (Throwable) request\n                 .getAttribute(\"javax.servlet.error.exception\");\n@@ -45,7 +48,7 @@ public class InternalErrorServlet extends HttpServlet\n \n         // Log the error. Since we don't have a context, we need to\n         // build the info \"by hand\"\n-        String logMessage = \":session_id=\" + request.getSession().getId()\n+        String logMessage = \":error_code=\" + errorCode + \":session_id=\" + request.getSession().getId()\n                 + \":internal_error:\" + logInfo;\n \n         log.warn(logMessage, t);\n@@ -53,6 +56,7 @@ public class InternalErrorServlet extends HttpServlet\n         // Now we try and mail the designated user, if any\n         UIUtil.sendAlert(request, (Exception) t);\n \n+        request.setAttribute(\"javax.servlet.error.code\", errorCode.toString());\n         JSPManager.showJSP(request, response, \"/error/internal.jsp\");\n     }\n ",
+  "auto_locate_confidence": "auto"
+}

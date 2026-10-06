@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0099",
+  "original_source_case_id": "github.com_apache_airflow_18386026c28939fa6d91d198c5489c295a05dcd2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-40604",
+  "cve_ids_all": [
+    "CVE-2022-40604"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-134"
+  ],
+  "language": "python",
+  "repository": "apache/airflow",
+  "repository_url": "https://github.com/apache/airflow",
+  "vulnerable_commit": "23ad7e292a29e43436170078ae132569f8fbf1e4",
+  "fixed_commit": "18386026c28939fa6d91d198c5489c295a05dcd2",
+  "changed_file": "airflow/utils/log/file_task_handler.py",
+  "changed_function": "def _read(self, ti, try_number, metadata=None):",
+  "vulnerable_lines": [
+    129,
+    242
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0099/vulnerable_source.py": "56686ec1a28edbd32aada31a3368ff9e75fbc22f5bdee08573dfc86fa5db4b12",
+    "cases/CASE-0099/patched_source.py": "c4f91e61f6ea8ee7beb95ab60c1ad91396e63a5d13cfc9cc134dd07a6102cf10",
+    "cases/CASE-0099/patch.diff": "9d91a15b6d0693544bb4012d500e22d488dfdf9c84cf684cc9747dc98523da9c",
+    "cases/CASE-0099/metadata.json": "1788ddfa7ebda33ee51bf55cbd1f69194a079eb9be7ac11c105f0257c06e290d",
+    "model_context/CASE-0099.json": "f73507409b1e6bd7462b9f89de18bb4d2aa12daf4a362ac746bcdc65ad951763",
+    "difficulty/CASE-0099.json": "224297fe5b48b631a787189a590bd26e76e0b24d88da92cec854e5d4c872d74a"
+  },
+  "case_level_hash": "caff28e71abdaf641f08eb8b0cefa4427deac967229c339a00fd0c81a3a9f8b0"
+}

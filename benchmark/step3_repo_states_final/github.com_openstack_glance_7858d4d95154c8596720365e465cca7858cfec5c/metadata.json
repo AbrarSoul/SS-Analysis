@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openstack_glance_7858d4d95154c8596720365e465cca7858cfec5c",
+  "cve_ids": [
+    "CVE-2014-9684"
+  ],
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "language": "python",
+  "repository": "openstack/glance",
+  "repository_url": "https://github.com/openstack/glance",
+  "vulnerable_commit": "d62c8f07e7030d0033cf63e0b17f64cbbac99c0c",
+  "fixed_commit": "7858d4d95154c8596720365e465cca7858cfec5c",
+  "changed_file": "glance/common/scripts/image_import/main.py",
+  "max_score": "1337"
+}

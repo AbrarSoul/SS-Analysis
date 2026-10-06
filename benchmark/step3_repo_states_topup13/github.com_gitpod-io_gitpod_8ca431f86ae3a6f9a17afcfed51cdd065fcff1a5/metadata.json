@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_gitpod-io_gitpod_8ca431f86ae3a6f9a17afcfed51cdd065fcff1a5",
+  "cve_ids": [
+    "CVE-2021-35206"
+  ],
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "language": "typescript",
+  "repository": "gitpod-io/gitpod",
+  "repository_url": "https://github.com/gitpod-io/gitpod",
+  "vulnerable_commit": "aced836ae7cdeb9005c8c1954d20a8e17649fcea",
+  "fixed_commit": "8ca431f86ae3a6f9a17afcfed51cdd065fcff1a5",
+  "changed_file": "components/server/src/user/user-controller.ts",
+  "max_score": "1337"
+}

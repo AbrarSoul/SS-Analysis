@@ -1,0 +1,24 @@
+{
+  "case_id": "github.com_frappe_lms_8749e21744547ae32f729bde05c854113e126750",
+  "language": "python",
+  "cve_id": "CVE-2025-62778",
+  "cve_ids_all": [
+    "CVE-2025-62778"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-425",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "CourseChapter",
+  "imports": [
+    "import frappe",
+    "from frappe.model.document import Document",
+    "from lms.lms.utils import get_course_progress, get_lesson_count"
+  ],
+  "vulnerable_function": "\tdef on_update(self):\n\t\tself.recalculate_course_progress()\n\t\tself.update_lesson_count()\n",
+  "patched_function": "\tdef on_update(self):\n\t\tself.recalculate_course_progress()\n\t\tself.update_lesson_count()\n\t\tfrappe.enqueue(method=self.recalculate_course_progress, queue=\"short\", timeout=300, is_async=True)\n",
+  "unified_diff": "diff --git a/lms/lms/doctype/course_chapter/course_chapter.py b/lms/lms/doctype/course_chapter/course_chapter.py\nindex 2fe3e615..04c89587 100644\n--- a/lms/lms/doctype/course_chapter/course_chapter.py\n+++ b/lms/lms/doctype/course_chapter/course_chapter.py\n@@ -11,6 +11,7 @@ class CourseChapter(Document):\n \tdef on_update(self):\n \t\tself.recalculate_course_progress()\n \t\tself.update_lesson_count()\n+\t\tfrappe.enqueue(method=self.recalculate_course_progress, queue=\"short\", timeout=300, is_async=True)\n \n \tdef recalculate_course_progress(self):\n \t\t\"\"\"Recalculate course progress if a new lesson is added or removed\"\"\"",
+  "auto_locate_confidence": "auto"
+}

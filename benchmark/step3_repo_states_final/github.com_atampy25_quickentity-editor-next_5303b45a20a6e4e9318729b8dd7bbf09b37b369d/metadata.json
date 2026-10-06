@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_atampy25_quickentity-editor-next_5303b45a20a6e4e9318729b8dd7bbf09b37b369d",
+  "cve_ids": [
+    "CVE-2023-27472"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "typescript",
+  "repository": "atampy25/quickentity-editor-next",
+  "repository_url": "https://github.com/atampy25/quickentity-editor-next",
+  "vulnerable_commit": "d56dbe2f464fbd2388bf2d10460e8b3d308a319b",
+  "fixed_commit": "5303b45a20a6e4e9318729b8dd7bbf09b37b369d",
+  "changed_file": "src/lib/utils.ts",
+  "max_score": "1337"
+}

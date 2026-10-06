@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_jenkinsci_openid-plugin_5a91a74a94e44d87cd61afc2441aab42b7542bf0",
+  "cve_ids": [
+    "CVE-2019-1003098",
+    "CVE-2019-1003099"
+  ],
+  "cwe_ids": [
+    "CWE-352",
+    "CWE-862"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/openid-plugin",
+  "repository_url": "https://github.com/jenkinsci/openid-plugin",
+  "vulnerable_commit": "c86cbb4dd57d40749a9ba398b8fbb9bf657af9e0",
+  "fixed_commit": "5a91a74a94e44d87cd61afc2441aab42b7542bf0",
+  "changed_file": "src/main/java/hudson/plugins/openid/OpenIdSsoSecurityRealm.java",
+  "max_score": "1337"
+}

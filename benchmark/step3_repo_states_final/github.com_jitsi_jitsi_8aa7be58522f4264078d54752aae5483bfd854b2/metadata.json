@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_jitsi_jitsi_8aa7be58522f4264078d54752aae5483bfd854b2",
+  "cve_ids": [
+    "CVE-2022-43550"
+  ],
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-78"
+  ],
+  "language": "java",
+  "repository": "jitsi/jitsi",
+  "repository_url": "https://github.com/jitsi/jitsi",
+  "vulnerable_commit": "08fd0a8ee531c07cab3526405d69d79659a1b087",
+  "fixed_commit": "8aa7be58522f4264078d54752aae5483bfd854b2",
+  "changed_file": "modules/service/browserlauncher/src/main/java/net/java/sip/communicator/impl/browserlauncher/BrowserLauncherImpl.java",
+  "max_score": "1337"
+}

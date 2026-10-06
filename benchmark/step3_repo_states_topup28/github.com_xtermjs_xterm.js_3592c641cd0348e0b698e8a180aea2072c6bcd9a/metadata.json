@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xtermjs_xterm.js_3592c641cd0348e0b698e8a180aea2072c6bcd9a",
+  "cve_ids": [
+    "CVE-2019-0542"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "typescript",
+  "repository": "xtermjs/xterm.js",
+  "repository_url": "https://github.com/xtermjs/xterm.js",
+  "vulnerable_commit": "ae61292b102ef458d0637a945c96f704ee2bd10d",
+  "fixed_commit": "3592c641cd0348e0b698e8a180aea2072c6bcd9a",
+  "changed_file": "src/InputHandler.ts",
+  "max_score": "1337"
+}

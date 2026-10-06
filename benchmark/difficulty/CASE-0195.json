@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0195",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-255"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 10,
+  "lines_changed_total": 24,
+  "function_size_chars": 381,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Password kept only Base64-scrambled in a persisted credential object; needs knowledge that the field is persisted."
+}

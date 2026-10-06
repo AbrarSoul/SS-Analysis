@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_bit-team_backintime_cef81d0da93ff601252607df3db1a48f7f6f01b3",
+  "cve_ids": [
+    "CVE-2017-16667"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "bit-team/backintime",
+  "repository_url": "https://github.com/bit-team/backintime",
+  "vulnerable_commit": "c36d3682c40cf29713bee9a1a8735574d4e032e2",
+  "fixed_commit": "cef81d0da93ff601252607df3db1a48f7f6f01b3",
+  "changed_file": "qt4/plugins/notifyplugin.py",
+  "max_score": "1337"
+}

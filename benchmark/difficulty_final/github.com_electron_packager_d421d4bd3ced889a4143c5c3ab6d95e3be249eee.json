@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_electron_packager_d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-402",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 3,
+  "lines_changed_total": 11,
+  "function_size_chars": 4067,
+  "function_size_lines": 92,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

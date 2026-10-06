@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_deeplook_svglib_35686a130ed260c71a382a8f83d41fd31a46704d",
+  "cve_ids": [
+    "CVE-2020-10799"
+  ],
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "python",
+  "repository": "deeplook/svglib",
+  "repository_url": "https://github.com/deeplook/svglib",
+  "vulnerable_commit": "c20d0ea234b734a1f1b04658c9cd6a45b47756ae",
+  "fixed_commit": "35686a130ed260c71a382a8f83d41fd31a46704d",
+  "changed_file": "svglib/svglib.py",
+  "max_score": "1337"
+}

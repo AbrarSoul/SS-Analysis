@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0043",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-552",
+    "CWE-862"
+  ],
+  "changed_files": 1,
+  "lines_added": 44,
+  "lines_removed": 2,
+  "lines_changed_total": 46,
+  "function_size_chars": 257,
+  "function_size_lines": 8,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Cross-cutting share-restriction logic spread over several path-resolution methods; not expressible as a code-shape difference."
+}

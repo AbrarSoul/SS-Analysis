@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dimtion_Shaarlier_3d1d9b239d9b3cd87e8bed45a0f02da583ad371e",
+  "cve_ids": [
+    "CVE-2015-10076"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "dimtion/Shaarlier",
+  "repository_url": "https://github.com/dimtion/Shaarlier",
+  "vulnerable_commit": "7f0bcb70bc927aebbfceca9d72154b5989dd81c3",
+  "fixed_commit": "3d1d9b239d9b3cd87e8bed45a0f02da583ad371e",
+  "changed_file": "app/src/main/java/com/dimtion/shaarlier/TagsSource.java",
+  "max_score": "1337"
+}

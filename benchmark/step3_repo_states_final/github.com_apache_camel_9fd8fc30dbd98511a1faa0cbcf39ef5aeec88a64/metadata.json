@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_camel_9fd8fc30dbd98511a1faa0cbcf39ef5aeec88a64",
+  "cve_ids": [
+    "CVE-2025-30177"
+  ],
+  "cwe_ids": [
+    "CWE-164"
+  ],
+  "language": "java",
+  "repository": "apache/camel",
+  "repository_url": "https://github.com/apache/camel",
+  "vulnerable_commit": "4ccb68b166c0d1210966f17d18b848cdd8b64fed",
+  "fixed_commit": "9fd8fc30dbd98511a1faa0cbcf39ef5aeec88a64",
+  "changed_file": "components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "CASE-0062",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-327",
+    "CWE-328",
+    "CWE-916"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 5,
+  "lines_changed_total": 5,
+  "function_size_chars": 157,
+  "function_size_lines": 5,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "hashlib.md5 used for hashing; a well-known insecure-hash call pattern."
+}

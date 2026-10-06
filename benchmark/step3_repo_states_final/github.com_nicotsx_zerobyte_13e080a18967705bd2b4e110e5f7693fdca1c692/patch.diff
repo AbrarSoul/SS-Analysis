@@ -1,0 +1,29 @@
+diff --git a/app/server/index.ts b/app/server/index.ts
+index a9a1d647..a8cc045c 100644
+--- a/app/server/index.ts
++++ b/app/server/index.ts
+@@ -43,12 +43,18 @@ const app = new Hono()
+ 	.use(honoLogger())
+ 	.get("healthcheck", (c) => c.json({ status: "ok" }))
+ 	.route("/api/v1/auth", authController.basePath("/api/v1"))
+-	.route("/api/v1/volumes", volumeController.use(requireAuth))
+-	.route("/api/v1/repositories", repositoriesController.use(requireAuth))
+-	.route("/api/v1/backups", backupScheduleController.use(requireAuth))
+-	.route("/api/v1/notifications", notificationsController.use(requireAuth))
+-	.route("/api/v1/system", systemController.use(requireAuth))
+-	.route("/api/v1/events", eventsController.use(requireAuth));
++	.use("/api/v1/volumes/*", requireAuth)
++	.use("/api/v1/repositories/*", requireAuth)
++	.use("/api/v1/backups/*", requireAuth)
++	.use("/api/v1/notifications/*", requireAuth)
++	.use("/api/v1/system/*", requireAuth)
++	.use("/api/v1/events/*", requireAuth)
++	.route("/api/v1/volumes", volumeController)
++	.route("/api/v1/repositories", repositoriesController)
++	.route("/api/v1/backups", backupScheduleController)
++	.route("/api/v1/notifications", notificationsController)
++	.route("/api/v1/system", systemController)
++	.route("/api/v1/events", eventsController);
+ 
+ app.get("/api/v1/openapi.json", generalDescriptor(app));
+ app.get("/api/v1/docs", scalarDescriptor);

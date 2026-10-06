@@ -1,0 +1,62 @@
+{
+  "case_id": "CASE-0029",
+  "original_patch_filename": "github.com_micromatch_braces_abdafb0cae1e0c00f184abbadc692f4eaa98f451.patch",
+  "cve_id": "CVE-2018-1109",
+  "cve_ids_all": [
+    "CVE-2018-1109"
+  ],
+  "cwe_ids": [
+    "CWE-185",
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "micromatch/braces",
+  "repository_url": "https://github.com/micromatch/braces",
+  "vulnerable_commit": "37934142c1aeea48b6fb03edbdcf90e45b5cb4a1",
+  "fixed_commit": "abdafb0cae1e0c00f184abbadc692f4eaa98f451",
+  "changed_file": "lib/parsers.js",
+  "patch_path": "cases/CASE-0029/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0029/vulnerable_source.js",
+  "patched_code_path": "cases/CASE-0029/patched_source.js",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.js",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.js",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.js",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.js",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.js",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.js",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

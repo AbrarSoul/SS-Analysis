@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_airlinklabs_daemon_5e6222dd9eec6d7cb0876b12507e3d6011797693",
+  "cve_ids": [
+    "CVE-2025-57802"
+  ],
+  "cwe_ids": [
+    "CWE-61"
+  ],
+  "language": "typescript",
+  "repository": "airlinklabs/daemon",
+  "repository_url": "https://github.com/airlinklabs/daemon",
+  "vulnerable_commit": "32989a50b7bdf9652b9681cd79025679571b4306",
+  "fixed_commit": "5e6222dd9eec6d7cb0876b12507e3d6011797693",
+  "changed_file": "src/routes/fileSystem.ts",
+  "max_score": "1337"
+}

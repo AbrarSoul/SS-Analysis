@@ -1,0 +1,53 @@
+{
+  "case_id": "CASE-0168",
+  "language": "python",
+  "cve_id": "CVE-2024-6037",
+  "cve_ids_all": [
+    "CVE-2024-6037"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-770",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from __future__ import annotations",
+    "from typing import TYPE_CHECKING, Any, Callable, Dict, List, Tuple, Type",
+    "from enum import Enum",
+    "import logging",
+    "import commentjson as json",
+    "import os",
+    "import datetime",
+    "import csv",
+    "import threading",
+    "import requests",
+    "import hmac",
+    "import html",
+    "import hashlib",
+    "import gradio as gr",
+    "import regex as re",
+    "import getpass",
+    "from pypinyin import lazy_pinyin",
+    "import tiktoken",
+    "from markdown import markdown",
+    "from pygments import highlight",
+    "from pygments.lexers import get_lexer_by_name",
+    "from pygments.formatters import HtmlFormatter",
+    "import pandas as pd",
+    "import colorama",
+    "from modules.presets import *",
+    "from . import shared",
+    "from modules.config import retrieve_proxy, hide_history_when_not_logged_in",
+    "import sys"
+  ],
+  "vulnerable_function": "def get_history_names(user_name=\"\"):\n    logging.debug(f\"\u4ece\u7528\u6237 {user_name} \u4e2d\u83b7\u53d6\u5386\u53f2\u8bb0\u5f55\u6587\u4ef6\u540d\u5217\u8868\")\n    if user_name == \"\" and hide_history_when_not_logged_in:\n        return []\n    else:\n        history_files = get_file_names_by_last_modified_time(\n            os.path.join(HISTORY_DIR, user_name)\n        )\n        history_files = [f[: f.rfind(\".\")] for f in history_files]\n        return history_files\n",
+  "patched_function": "def get_history_names(user_name=\"\"):\n    logging.debug(f\"\u4ece\u7528\u6237 {user_name} \u4e2d\u83b7\u53d6\u5386\u53f2\u8bb0\u5f55\u6587\u4ef6\u540d\u5217\u8868\")\n    if user_name == \"\" and hide_history_when_not_logged_in:\n        return []\n    else:\n        user_history_dir = os.path.join(HISTORY_DIR, user_name)\n        # ensure the user history directory is inside the HISTORY_DIR\n        assert os.path.realpath(user_history_dir).startswith(os.path.realpath(HISTORY_DIR))\n        history_files = get_file_names_by_last_modified_time(\n            os.path.join(HISTORY_DIR, user_name)\n        )\n        history_files = [f[: f.rfind(\".\")] for f in history_files]\n        return history_files\n",
+  "unified_diff": "diff --git a/modules/utils.py b/modules/utils.py\nindex 37dd71b..77c69e0 100644\n--- a/modules/utils.py\n+++ b/modules/utils.py\n@@ -482,6 +482,9 @@ def get_history_names(user_name=\"\"):\n     if user_name == \"\" and hide_history_when_not_logged_in:\n         return []\n     else:\n+        user_history_dir = os.path.join(HISTORY_DIR, user_name)\n+        # ensure the user history directory is inside the HISTORY_DIR\n+        assert os.path.realpath(user_history_dir).startswith(os.path.realpath(HISTORY_DIR))\n         history_files = get_file_names_by_last_modified_time(\n             os.path.join(HISTORY_DIR, user_name)\n         )",
+  "auto_locate_confidence": "auto"
+}

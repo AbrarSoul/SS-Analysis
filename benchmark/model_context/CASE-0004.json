@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-0004",
+  "language": "python",
+  "cve_id": "CVE-2020-25459",
+  "cwe": [
+    {
+      "id": "CWE-668",
+      "definition": "Exposure of Resource to Wrong Sphere"
+    }
+  ],
+  "function_name": "sync_tree",
+  "class_name": "HeteroDecisionTreeGuest",
+  "containing_class_declaration": "class HeteroDecisionTreeGuest(DecisionTree):",
+  "imports": [
+    "import copy",
+    "import functools",
+    "from arch.api import session",
+    "from arch.api.utils import log_utils",
+    "from federatedml.feature.fate_element_type import NoneType",
+    "from federatedml.protobuf.generated.boosting_tree_model_meta_pb2 import CriterionMeta",
+    "from federatedml.protobuf.generated.boosting_tree_model_meta_pb2 import DecisionTreeModelMeta",
+    "from federatedml.protobuf.generated.boosting_tree_model_param_pb2 import DecisionTreeModelParam",
+    "from federatedml.transfer_variable.transfer_class.hetero_decision_tree_transfer_variable import HeteroDecisionTreeTransferVariable",
+    "from federatedml.tree import DecisionTree",
+    "from federatedml.tree import FeatureHistogram",
+    "from federatedml.tree import Node",
+    "from federatedml.tree import Splitter",
+    "from federatedml.util import consts",
+    "from federatedml.util.io_check import assert_io_num_rows_equal"
+  ],
+  "vulnerable_function": "def sync_tree(self):\n        LOGGER.info(\"sync tree to host\")\n\n        self.transfer_inst.tree.remote(self.tree_,\n                                       role=consts.HOST,\n                                       idx=-1)\n        \"\"\"\n        federation.remote(obj=self.tree_,\n                          name=self.transfer_inst.tree.name,\n                          tag=self.transfer_inst.generate_transferid(self.transfer_inst.tree),\n                          role=consts.HOST,\n                          idx=-1)\n        \"\"\"",
+  "patched_function": "def sync_tree(self):\n        LOGGER.info(\"sync tree to host\")\n\n        tree_nodes = self.remove_sensitive_info()\n        self.transfer_inst.tree.remote(tree_nodes,\n                                       role=consts.HOST,\n                                       idx=-1)\n        \"\"\"\n        federation.remote(obj=self.tree_,\n                          name=self.transfer_inst.tree.name,\n                          tag=self.transfer_inst.generate_transferid(self.transfer_inst.tree),\n                          role=consts.HOST,\n                          idx=-1)\n        \"\"\"",
+  "unified_diff": "diff --git a/federatedml/tree/hetero/hetero_decision_tree_guest.py b/federatedml/tree/hetero/hetero_decision_tree_guest.py\nindex 1f23ddc53..028c74c00 100644\n--- a/federatedml/tree/hetero/hetero_decision_tree_guest.py\n+++ b/federatedml/tree/hetero/hetero_decision_tree_guest.py\n@@ -529,10 +529,23 @@ class HeteroDecisionTreeGuest(DecisionTree):\n                                                                      unleaf_state_nodeid1) == 2 else unleaf_state_nodeid2)\n         self.node_dispatch = self.node_dispatch.union(dispatch_guest_result)\n \n+    def remove_sensitive_info(self):\n+        \"\"\"\n+        host is not allowed to get weights/g/h\n+        \"\"\"\n+        new_tree_ = copy.deepcopy(self.tree_)\n+        for node in new_tree_:\n+            node.weight = None\n+            node.sum_grad = None\n+            node.sum_hess = None\n+\n+        return new_tree_\n+\n     def sync_tree(self):\n         LOGGER.info(\"sync tree to host\")\n \n-        self.transfer_inst.tree.remote(self.tree_,\n+        tree_nodes = self.remove_sensitive_info()\n+        self.transfer_inst.tree.remote(tree_nodes,\n                                        role=consts.HOST,\n                                        idx=-1)\n         \"\"\"",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 3145,
+  "context_size_chars_after_truncation": 3145
+}

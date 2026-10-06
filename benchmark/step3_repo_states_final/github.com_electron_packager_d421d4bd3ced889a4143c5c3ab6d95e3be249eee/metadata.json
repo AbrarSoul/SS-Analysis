@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_electron_packager_d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+  "cve_ids": [
+    "CVE-2024-29900"
+  ],
+  "cwe_ids": [
+    "CWE-402",
+    "NVD-CWE-Other"
+  ],
+  "language": "typescript",
+  "repository": "electron/packager",
+  "repository_url": "https://github.com/electron/packager",
+  "vulnerable_commit": "224cc6a28ddfcf4d1a184a25d10833cf153e3bda",
+  "fixed_commit": "d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+  "changed_file": "src/resedit.ts",
+  "max_score": "1337"
+}

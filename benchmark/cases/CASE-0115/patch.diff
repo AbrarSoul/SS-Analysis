@@ -1,0 +1,13 @@
+diff --git a/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java b/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java
+index f1fc41a0f..678a6f30e 100644
+--- a/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java
++++ b/plugins/rest/src/main/java/org/apache/struts2/rest/RestActionMapper.java
+@@ -320,7 +320,7 @@ public class RestActionMapper extends DefaultActionMapper {
+ 
+             mapping.setName(actionName);
+             if (allowDynamicMethodCalls) {
+-                mapping.setMethod(actionMethod);
++                mapping.setMethod(cleanupActionName(actionMethod));
+             } else {
+                 mapping.setMethod(null);
+             }

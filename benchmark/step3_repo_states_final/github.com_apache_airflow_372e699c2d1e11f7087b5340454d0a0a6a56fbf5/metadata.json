@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_airflow_372e699c2d1e11f7087b5340454d0a0a6a56fbf5",
+  "cve_ids": [
+    "CVE-2022-40127"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "apache/airflow",
+  "repository_url": "https://github.com/apache/airflow",
+  "vulnerable_commit": "f94176bc7b28b496c34974b6e2a21781a9afa221",
+  "fixed_commit": "372e699c2d1e11f7087b5340454d0a0a6a56fbf5",
+  "changed_file": "airflow/example_dags/example_bash_operator.py",
+  "max_score": "1337"
+}

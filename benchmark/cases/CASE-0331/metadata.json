@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0331",
+  "original_source_case_id": "github.com_wekan_wekan_91a936e07d2976d4246dfe834281c3aaa87f9503",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-2207",
+  "cve_ids_all": [
+    "CVE-2026-2207"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-284"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "4ce181d17249778094f73d21515f7f863f554743",
+  "fixed_commit": "91a936e07d2976d4246dfe834281c3aaa87f9503",
+  "changed_file": "server/publications/activities.js",
+  "changed_function": "Meteor.publish('activities', function(kind, id, limit, showActivities) {",
+  "vulnerable_lines": [
+    8,
+    68
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 24,
+  "patch_size_deleted": 23,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0331/vulnerable_source.js": "2bee022af42cc6181f6f796c1d983b52157c31d7e9f1cdf56b2a7c2bd005a627",
+    "cases/CASE-0331/patched_source.js": "beb8c01c63c67362c1b5ea5799439e0b8b9466649db1182db8c3bbded5c13504",
+    "cases/CASE-0331/patch.diff": "87b0ef3a51fb8d028cd698d3c01c2f1c834fbd117f689297fc11d60444b41ed7",
+    "cases/CASE-0331/metadata.json": "262888c959d6835f65d801f9c1695eaa96be6a38dc9a21e24ea3be303d7f4d37",
+    "model_context/CASE-0331.json": "9918b9f94d608a7736d2674a3f006c1aeb483e44d10bcc9a6a764578dd1d3998",
+    "difficulty/CASE-0331.json": "b423ec3e497d695d922ba3a18661dc44bb90382bcb512d36c6b2e9a78e33bd28"
+  },
+  "case_level_hash": "1360df24468c8264b8d5f99df0013269b304499e87b6581baa7afe8a9d57e0e4"
+}

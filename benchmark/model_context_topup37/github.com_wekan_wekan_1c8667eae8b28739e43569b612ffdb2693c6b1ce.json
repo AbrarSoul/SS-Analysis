@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_wekan_wekan_1c8667eae8b28739e43569b612ffdb2693c6b1ce",
+  "language": "javascript",
+  "cve_id": "CVE-2026-30847",
+  "cve_ids_all": [
+    "CVE-2026-30847"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-285",
+      "definition": "Improper Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { ReactiveCache } from '/imports/reactiveCache';"
+  ],
+  "vulnerable_function": "Meteor.publish('notificationUsers', async function() {\n  const ret = await ReactiveCache.getUsers(\n    {\n      _id: {\n        $in: (await activities())\n          .map(v => v.userId)\n          .filter(v => !!v),\n      },\n    },\n    {},\n    true,\n  );\n  return ret;\n}",
+  "patched_function": "Meteor.publish('notificationUsers', async function() {\n  const ret = await ReactiveCache.getUsers(\n    {\n      _id: {\n        $in: (await activities())\n          .map(v => v.userId)\n          .filter(v => !!v),\n      },\n    },\n    {\n      fields: {\n        username: 1,\n        'profile.fullname': 1,\n        'profile.avatarUrl': 1,\n        'profile.initials': 1,\n      },\n    },\n    true,\n  );\n  return ret;\n}",
+  "unified_diff": "diff --git a/server/publications/notifications.js b/server/publications/notifications.js\nindex bc6998a4c..556f5948d 100644\n--- a/server/publications/notifications.js\n+++ b/server/publications/notifications.js\n@@ -130,7 +130,14 @@ Meteor.publish('notificationUsers', async function() {\n           .filter(v => !!v),\n       },\n     },\n-    {},\n+    {\n+      fields: {\n+        username: 1,\n+        'profile.fullname': 1,\n+        'profile.avatarUrl': 1,\n+        'profile.initials': 1,\n+      },\n+    },\n     true,\n   );\n   return ret;",
+  "auto_locate_confidence": "auto"
+}

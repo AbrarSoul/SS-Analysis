@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0077",
+  "language": "python",
+  "cve_id": "CVE-2025-13708",
+  "cve_ids_all": [
+    "CVE-2025-13708"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    }
+  ],
+  "containing_class_declaration": "Predictor",
+  "imports": [
+    "import codecs",
+    "import math",
+    "import numpy as np",
+    "import os",
+    "import sys",
+    "import json",
+    "import torch",
+    "from torch.utils.data import DataLoader",
+    "from config import Config",
+    "from dataset.classification_dataset import ClassificationDataset",
+    "from dataset.collator import ClassificationCollator",
+    "from dataset.collator import ClassificationType",
+    "from dataset.collator import FastTextCollator",
+    "from model.classification.drnn import DRNN",
+    "from model.classification.fasttext import FastText",
+    "from model.classification.textcnn import TextCNN",
+    "from model.classification.textvdcnn import TextVDCNN",
+    "from model.classification.textrnn import TextRNN",
+    "from model.classification.textrcnn import TextRCNN",
+    "from model.classification.transformer import Transformer",
+    "from model.classification.dpcnn import DPCNN",
+    "from model.classification.attentive_convolution import AttentiveConvNet",
+    "from model.classification.region_embedding import RegionEmbedding",
+    "from model.model_util import get_optimizer, get_hierar_relations"
+  ],
+  "vulnerable_function": "    def _load_checkpoint(file_name, model, use_cuda):\n        if use_cuda:\n            checkpoint = torch.load(file_name)\n        else:\n            checkpoint = torch.load(file_name, map_location=lambda storage, loc: storage)\n        model.load_state_dict(checkpoint[\"state_dict\"])\n",
+  "patched_function": "    def _load_checkpoint(file_name, model, use_cuda):\n        if use_cuda:\n            checkpoint = torch.load(file_name, weights_only=True)\n        else:\n            checkpoint = torch.load(file_name, weights_only=True, map_location=lambda storage, loc: storage)\n        model.load_state_dict(checkpoint[\"state_dict\"])\n",
+  "unified_diff": "diff --git a/predict.py b/predict.py\nindex d80f5ab..66adda1 100644\n--- a/predict.py\n+++ b/predict.py\n@@ -64,9 +64,9 @@ class Predictor(object):\n     @staticmethod\n     def _load_checkpoint(file_name, model, use_cuda):\n         if use_cuda:\n-            checkpoint = torch.load(file_name)\n+            checkpoint = torch.load(file_name, weights_only=True)\n         else:\n-            checkpoint = torch.load(file_name, map_location=lambda storage, loc: storage)\n+            checkpoint = torch.load(file_name, weights_only=True, map_location=lambda storage, loc: storage)\n         model.load_state_dict(checkpoint[\"state_dict\"])\n     \n     def predict(self, texts):",
+  "auto_locate_confidence": "auto"
+}

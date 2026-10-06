@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_keycloak_keycloak_6b2a4229e3b869eec9d4adc30c1afdf71e78cbdf",
+  "batch": "topup40",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 0,
+  "lines_changed_total": 14,
+  "function_size_chars": 1661,
+  "function_size_lines": 38,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_apache_hive_b418e3c9f479ba8e7d31e6470306111002ffa809",
+  "language": "java",
+  "cve_id": "CVE-2024-23953",
+  "cve_ids_all": [
+    "CVE-2024-23953"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-208",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.util.Arrays;",
+    "import org.apache.hadoop.conf.Configuration;",
+    "import org.apache.hadoop.security.UserGroupInformation;",
+    "import org.apache.hadoop.security.token.delegation.DelegationKey;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import com.google.common.annotations.VisibleForTesting;"
+  ],
+  "vulnerable_function": "  public void checkSignature(byte[] message, byte[] signature, int keyId)\n      throws SecurityException {\n    byte[] expectedSignature = secretManager.signWithKey(message, keyId);\n    if (Arrays.equals(signature, expectedSignature)) return;\n    throw new SecurityException(\"Message signature does not match\");\n  }",
+  "patched_function": "  public void checkSignature(byte[] message, byte[] signature, int keyId)\n      throws SecurityException {\n    byte[] expectedSignature = secretManager.signWithKey(message, keyId);\n    if (MessageDigest.isEqual(signature, expectedSignature)) {\n      return;\n    }\n    throw new SecurityException(\"Message signature does not match\");\n  }",
+  "unified_diff": "diff --git a/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java b/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java\nindex a7fc398892..047e17686b 100644\n--- a/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java\n+++ b/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java\n@@ -18,7 +18,7 @@\n package org.apache.hadoop.hive.llap.security;\n \n import java.io.IOException;\n-import java.util.Arrays;\n+import java.security.MessageDigest;\n \n import org.apache.hadoop.conf.Configuration;\n import org.apache.hadoop.security.UserGroupInformation;\n@@ -58,7 +58,9 @@ public SignedMessage serializeAndSign(Signable message) throws IOException {\n   public void checkSignature(byte[] message, byte[] signature, int keyId)\n       throws SecurityException {\n     byte[] expectedSignature = secretManager.signWithKey(message, keyId);\n-    if (Arrays.equals(signature, expectedSignature)) return;\n+    if (MessageDigest.isEqual(signature, expectedSignature)) {\n+      return;\n+    }\n     throw new SecurityException(\"Message signature does not match\");\n   }\n ",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0321",
+  "original_source_case_id": "github.com_viakondratiuk_cash-machine_62a6e24efdfa195b70d7df140d8287fdc38eb66d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2015-10069",
+  "cve_ids_all": [
+    "CVE-2015-10069"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "python",
+  "repository": "viakondratiuk/cash-machine",
+  "repository_url": "https://github.com/viakondratiuk/cash-machine",
+  "vulnerable_commit": "e3496978a07aa6f53aa76c7223df311dd8424f20",
+  "fixed_commit": "62a6e24efdfa195b70d7df140d8287fdc38eb66d",
+  "changed_file": "machine.py",
+  "changed_function": "def get_card(request, cc_number):",
+  "vulnerable_lines": [
+    153,
+    167
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0321/vulnerable_source.py": "7556941f08f748121fffbf2f5c29fe4d6d6e203f232cf0015d90ed0043c35234",
+    "cases/CASE-0321/patched_source.py": "7a99b17a2c6b0cac2c7ba14a4df1ec22c5f0e91ac1cc4a994f81d519edbafdd9",
+    "cases/CASE-0321/patch.diff": "1eef775572e790f21c251adfd8c5117e4981dae4888a364396e81152ec873667",
+    "cases/CASE-0321/metadata.json": "e692cc3526613cf2949e966b72934b576a846db2ae9546afa1798e4e719ca07c",
+    "model_context/CASE-0321.json": "76d3e707afa208e44c0fb6b4b0fbbf121f4c31f5a5d5d369a649e3fab265b9f2",
+    "difficulty/CASE-0321.json": "b4d2e3b6e65b4a9216e03b9dc2ce1e8252b5d78092a6dadee83b24752c4eb248"
+  },
+  "case_level_hash": "d83f3b6cebde96a17bff9147a1d2c597af07409f39e9f789d54013734c8f7d25"
+}

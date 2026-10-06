@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0027",
+  "original_patch_filename": "github.com_ether_etherpad-lite_9d4e5f6e35153129377206ef545d4965afae627d.patch",
+  "cve_id": "CVE-2015-3297",
+  "cve_ids_all": [
+    "CVE-2015-3297"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "javascript",
+  "repository": "ether/etherpad-lite",
+  "repository_url": "https://github.com/ether/etherpad-lite",
+  "vulnerable_commit": "7b86eb09bc2235dd2683fb72601934dbcea3a9eb",
+  "fixed_commit": "9d4e5f6e35153129377206ef545d4965afae627d",
+  "changed_file": "src/node/utils/Minify.js",
+  "patch_path": "cases/CASE-0027/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0027/vulnerable_source.js",
+  "patched_code_path": "cases/CASE-0027/patched_source.js",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.js",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.js",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.js",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.js",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.js",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.js",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0163",
+  "original_source_case_id": "github.com_feross_git-pull-or-clone_f9ce092be13cc32e685dfa26e7705e9c6e3108a3",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-24437",
+  "cve_ids_all": [
+    "CVE-2022-24437"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-88"
+  ],
+  "language": "javascript",
+  "repository": "feross/git-pull-or-clone",
+  "repository_url": "https://github.com/feross/git-pull-or-clone",
+  "vulnerable_commit": "4f8b9baf295e6d2e5dd987abca820987afb7643c",
+  "fixed_commit": "f9ce092be13cc32e685dfa26e7705e9c6e3108a3",
+  "changed_file": "index.js",
+  "changed_function": ")",
+  "vulnerable_lines": [
+    26,
+    37
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0163/vulnerable_source.js": "40e55a2ebf02415fb31b111fe7c10f6d3b184b8416eb6b1026254ea7a0efa9a5",
+    "cases/CASE-0163/patched_source.js": "af2341ab0803fcf565e07b591ee53eb7703fab8821c7a84fdee5c78b7a5a499a",
+    "cases/CASE-0163/patch.diff": "86273803e506b33c74b7ff438552914f4b3e96172887c3bcf69f0b95c4ccd24d",
+    "cases/CASE-0163/metadata.json": "cf6c1ec3dee847d7619c236ad4e9ef41e4a1c0f3d025641a401f6f2291a3e678",
+    "model_context/CASE-0163.json": "cf38666233a3973b24c933e8a7be50882a24e84989216a325a4b5130d7de1c1e",
+    "difficulty/CASE-0163.json": "46e604165b318e09e47a11bfc3807bd094814fea36e858131af08105211a02f1"
+  },
+  "case_level_hash": "7904d40b27d7ab6f70db1d51372bac880b31d42e616db12287ff39b9d9e2d16e"
+}

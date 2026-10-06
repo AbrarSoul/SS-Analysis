@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0059",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 943,
+  "function_size_lines": 26,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Login string concatenated directly into an LDAP filter; LDAP injection sink."
+}

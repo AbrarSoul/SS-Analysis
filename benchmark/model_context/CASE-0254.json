@@ -1,0 +1,57 @@
+{
+  "case_id": "CASE-0254",
+  "language": "python",
+  "cve_id": "CVE-2026-0560",
+  "cve_ids_all": [
+    "CVE-2026-0560"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-918",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import base64",
+    "import io",
+    "import re",
+    "import shutil",
+    "import uuid",
+    "import os",
+    "import tempfile",
+    "import requests",
+    "from pathlib import Path",
+    "from typing import List, Dict, Any, Tuple, Optional",
+    "from fastapi import APIRouter, Depends, File, UploadFile, HTTPException, Form",
+    "from fastapi.responses import FileResponse, Response",
+    "from werkzeug.utils import secure_filename",
+    "import markdown2",
+    "from bs4 import BeautifulSoup",
+    "from docx import Document as DocxDocument",
+    "from docx.shared import Pt, Inches",
+    "from openpyxl import Workbook",
+    "from openpyxl.utils import get_column_letter",
+    "from pptx import Presentation",
+    "from pptx.util import Inches as PptxInches, Pt as PptxPt",
+    "from markdown_pdf import MarkdownPdf, Section",
+    "from docx.oxml import parse_xml",
+    "from docx.oxml.ns import qn",
+    "from latex2mathml.converter import convert as latex2mathml",
+    "from PIL import Image",
+    "from backend.session import get_current_active_user, get_user_temp_uploads_path",
+    "from backend.models import UserAuthDetails",
+    "from backend.models.files import ContentExportRequest, ExtractionAndEmbeddingResponse",
+    "from backend.discussion import get_user_discussion",
+    "from ascii_colors import trace_exception",
+    "from backend.config import TEMP_UPLOADS_DIR_NAME",
+    "from backend.settings import settings",
+    "import pandas as pd",
+    "import extract_msg",
+    "import fitz"
+  ],
+  "vulnerable_function": "def _download_image_to_temp(src: str) -> str:\n    if src.startswith(\"data:\"):\n        head, b64data = src.split(\",\", 1)\n        suffix = \".png\"\n        if \";base64\" in head and \"image/\" in head:\n            mime = head.split(\":\")[1].split(\";\")[0]\n            ext = \".\" + mime.split(\"/\")[1]\n            suffix = ext\n        data = base64.b64decode(b64data)\n        tf = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)\n        tf.write(data)\n        tf.flush(); tf.close()\n        return tf.name\n    r = requests.get(src, timeout=10)\n    r.raise_for_status()\n    ext = os.path.splitext(src)[1] or \".png\"\n    tf = tempfile.NamedTemporaryFile(delete=False, suffix=ext)\n    tf.write(r.content)\n    tf.flush(); tf.close()\n    return tf.name\n",
+  "patched_function": "def _validate_url(url: str):\n    \"\"\"\n    Validates a URL to prevent SSRF attacks.\n    Ensures the scheme is http/https and the host is not a private/local IP.\n    \"\"\"\n    try:\n        parsed = urlparse(url)\n        if parsed.scheme not in ('http', 'https'):\n            raise ValueError(f\"Invalid scheme: {parsed.scheme}\")\n            \n        hostname = parsed.hostname\n        if not hostname:\n             raise ValueError(\"Invalid hostname\")\n\n        # 1. Check if hostname is an IP address\n        try:\n            ip = ipaddress.ip_address(hostname)\n            if ip.is_private or ip.is_loopback or ip.is_link_local or str(ip) == \"169.254.169.254\":\n                raise ValueError(f\"Access to local/private IP {hostname} is forbidden.\")\n            if ip.is_multicast or ip.is_reserved:\n                 raise ValueError(f\"Access to restricted IP {hostname} is forbidden.\")\n        except ValueError:\n            # 2. Not an IP, resolve domain to check IP\n            try:\n                addr_info = socket.getaddrinfo(hostname, None)\n                for family, _, _, _, sockaddr in addr_info:\n                    ip_str = sockaddr[0]\n                    ip = ipaddress.ip_address(ip_str)\n                    if ip.is_private or ip.is_loopback or ip.is_link_local or str(ip) == \"169.254.169.254\":\n                         raise ValueError(f\"Domain {hostname} resolves to private IP {ip_str}.\")\n            except socket.gaierror:\n                pass # DNS resolution failed, requests will likely fail too\n                \n    except Exception as e:\n        raise ValueError(f\"URL validation failed: {str(e)}\")\n",
+  "unified_diff": "diff --git a/backend/routers/files.py b/backend/routers/files.py\nindex 1b562b0cd..fef9f2deb 100644\n--- a/backend/routers/files.py\n+++ b/backend/routers/files.py\n@@ -7,6 +7,9 @@ import uuid\n import os\n import tempfile\n import requests\n+import socket\n+import ipaddress\n+from urllib.parse import urlparse\n from pathlib import Path\n from typing import List, Dict, Any, Tuple, Optional\n \n@@ -281,6 +284,42 @@ def md2_to_html(md_text: str) -> str:\n     ]\n     return markdown2.markdown(md_text, extras=extras)\n \n+def _validate_url(url: str):\n+    \"\"\"\n+    Validates a URL to prevent SSRF attacks.\n+    Ensures the scheme is http/https and the host is not a private/local IP.\n+    \"\"\"\n+    try:\n+        parsed = urlparse(url)\n+        if parsed.scheme not in ('http', 'https'):\n+            raise ValueError(f\"Invalid scheme: {parsed.scheme}\")\n+            \n+        hostname = parsed.hostname\n+        if not hostname:\n+             raise ValueError(\"Invalid hostname\")\n+\n+        # 1. Check if hostname is an IP address\n+        try:\n+            ip = ipaddress.ip_address(hostname)\n+            if ip.is_private or ip.is_loopback or ip.is_link_local or str(ip) == \"169.254.169.254\":\n+                raise ValueError(f\"Access to local/private IP {hostname} is forbidden.\")\n+            if ip.is_multicast or ip.is_reserved:\n+                 raise ValueError(f\"Access to restricted IP {hostname} is forbidden.\")\n+        except ValueError:\n+            # 2. Not an IP, resolve domain to check IP\n+            try:\n+                addr_info = socket.getaddrinfo(hostname, None)\n+                for family, _, _, _, sockaddr in addr_info:\n+                    ip_str = sockaddr[0]\n+                    ip = ipaddress.ip_address(ip_str)\n+                    if ip.is_private or ip.is_loopback or ip.is_link_local or str(ip) == \"169.254.169.254\":\n+                         raise ValueError(f\"Domain {hostname} resolves to private IP {ip_str}.\")\n+            except socket.gaierror:\n+                pass # DNS resolution failed, requests will likely fail too\n+                \n+    except Exception as e:\n+        raise ValueError(f\"URL validation failed: {str(e)}\")\n+\n def _download_image_to_temp(src: str) -> str:\n     if src.startswith(\"data:\"):\n         head, b64data = src.split(\",\", 1)\n@@ -294,6 +333,16 @@ def _download_image_to_temp(src: str) -> str:\n         tf.write(data)\n         tf.flush(); tf.close()\n         return tf.name\n+    \n+    # SECURITY: Validate URL before making request\n+    try:\n+        _validate_url(src)\n+    except ValueError as e:\n+        print(f\"SSRF Protection prevented access to: {src}. Reason: {e}\")\n+        # Return a placeholder or fail gracefully?\n+        # Creating a dummy text file or raising exception is safer\n+        raise e\n+\n     r = requests.get(src, timeout=10)\n     r.raise_for_status()\n     ext = os.path.splitext(src)[1] or \".png\"\n@@ -390,8 +439,10 @@ def html_to_docx_bytes(html: str) -> bytes:\n             try:\n                 tmp = _download_image_to_temp(src)\n                 doc.add_picture(tmp, width=Inches(5.5))\n-            except Exception:\n-                doc.add_paragraph(alt)\n+            except Exception as e:\n+                # Add text placeholder if image fails (e.g. blocked by SSRF check)\n+                print(f\"Failed to add image to DOCX: {e}\")\n+                doc.add_paragraph(f\"[Image: {alt} - Could not be loaded]\")\n             finally:\n                 try:\n                     if tmp and os.path.exists(tmp): os.unlink(tmp)",
+  "auto_locate_confidence": "auto_low_confidence"
+}

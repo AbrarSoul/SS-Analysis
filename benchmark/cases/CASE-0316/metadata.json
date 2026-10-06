@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0316",
+  "original_source_case_id": "github.com_unshiftio_url-parse_209c296d302317268afbe19700a70c63ecbeb2d2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-3774",
+  "cve_ids_all": [
+    "CVE-2018-3774"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-425",
+    "CWE-601",
+    "CWE-918"
+  ],
+  "language": "javascript",
+  "repository": "unshiftio/url-parse",
+  "repository_url": "https://github.com/unshiftio/url-parse",
+  "vulnerable_commit": "f60fa4e20d72d1b7d11252868f93d7aa5f4cb202",
+  "fixed_commit": "53b1794e54d0711ceb52505e0f74145270570d5a",
+  "changed_file": "index.js",
+  "changed_function": "function Url(address, location, parser) {",
+  "vulnerable_lines": [
+    149,
+    275
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 21,
+  "patch_size_deleted": 9,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0316/vulnerable_source.js": "112544c45d48c4e76682d58941990f9c144c460c1b101d0a45e0241a4fb311ba",
+    "cases/CASE-0316/patched_source.js": "355977115c7512fd4f6df09851c60aaa49dfa45664a60bc177eeb769d114c16e",
+    "cases/CASE-0316/patch.diff": "a358584fbf5d96607b9cd3a0916075d24ef8a2326e588686409b674302f87e46",
+    "model_context/CASE-0316.json": "a417af4263c2dd04d065b4c1e5147860fd519479b34c1900506bce0f47df51e6",
+    "difficulty/CASE-0316.json": "58d36a2e0fdd4009fe9b7822b466687ffdc99643bfec43b0c12701897094fd26",
+    "cases/CASE-0316/metadata.json": "fe49b2ebac5d83eeb1bfb676d2f92a5adfae8dcb7782d4ccb0e91f62d1060553"
+  },
+  "case_level_hash": "10ec3aec481875d151feaf4f079f71b4479d746e6ebbfa0564e1b528a066cb98"
+}

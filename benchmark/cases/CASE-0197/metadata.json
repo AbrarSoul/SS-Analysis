@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0197",
+  "original_source_case_id": "github.com_jenkinsci_xcode-plugin_01335f1f4734e4a7eda69b28e182ecd4c34a1a4b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-21656",
+  "cve_ids_all": [
+    "CVE-2021-21656"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/xcode-plugin",
+  "repository_url": "https://github.com/jenkinsci/xcode-plugin",
+  "vulnerable_commit": "e57051344470d0336bc077eb5ec10371544c5009",
+  "fixed_commit": "01335f1f4734e4a7eda69b28e182ecd4c34a1a4b",
+  "changed_file": "src/main/java/au/com/rayh/XcodeProjectParser.java",
+  "changed_function": "public static ProjectScheme parseXcodeScheme(FilePath schemeFile) {",
+  "vulnerable_lines": [
+    95,
+    171
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 26,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0197/vulnerable_source.java": "50aa45170eb8221eb769e3140506cee3cb9343c7798f518d18adc49b65f16fd0",
+    "cases/CASE-0197/patched_source.java": "5285912a098afc2f2aa69a5916e90332631426b862bf9efff7fec1cbc3fa3727",
+    "cases/CASE-0197/patch.diff": "c84def16127054553f9a78f886879704a3a623d9e50b432ac0f1070453f0ea9c",
+    "cases/CASE-0197/metadata.json": "acd0ea2c0e2389bcb4b1ac20bc9be9c28cb286cb25e1d017f50e93afdc1650c8",
+    "model_context/CASE-0197.json": "8c98928a8226207f0d1eb0ebfbb74d1df31fcbf4c07651198ad7143b8c73e667",
+    "difficulty/CASE-0197.json": "44a16108a1d03d6a1e6de9ba765c6d0f192d723ecee9bd97f491f1d154331fc7"
+  },
+  "case_level_hash": "05036eb641aec51681153fbb2296491a234a59a5dd54c7ee69958914154dfcd6"
+}

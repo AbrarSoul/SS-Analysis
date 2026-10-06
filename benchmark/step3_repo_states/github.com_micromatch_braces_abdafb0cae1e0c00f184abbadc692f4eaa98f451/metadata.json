@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_micromatch_braces_abdafb0cae1e0c00f184abbadc692f4eaa98f451",
+  "cve_ids": [
+    "CVE-2018-1109"
+  ],
+  "cwe_ids": [
+    "CWE-185",
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "micromatch/braces",
+  "repository_url": "https://github.com/micromatch/braces",
+  "vulnerable_commit": "37934142c1aeea48b6fb03edbdcf90e45b5cb4a1",
+  "fixed_commit": "abdafb0cae1e0c00f184abbadc692f4eaa98f451",
+  "changed_file": "lib/parsers.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wekan_wekan_0b0e16c3eae28bbf453d33a81a9c58ce7db6d5bb",
+  "cve_ids": [
+    "CVE-2026-25560"
+  ],
+  "cwe_ids": [
+    "CWE-90"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "1d16955b6d4f0a0282e89c2c1b0415c7597019b8",
+  "fixed_commit": "0b0e16c3eae28bbf453d33a81a9c58ce7db6d5bb",
+  "changed_file": "packages/wekan-ldap/server/ldap.js",
+  "max_score": "1337"
+}

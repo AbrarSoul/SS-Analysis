@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_certifi_python-certifi_8fb96ed81f71e7097ed11bc4d9b19afd7ea5c909",
+  "cve_ids": [
+    "CVE-2023-37920"
+  ],
+  "cwe_ids": [
+    "CWE-345"
+  ],
+  "language": "python",
+  "repository": "certifi/python-certifi",
+  "repository_url": "https://github.com/certifi/python-certifi",
+  "vulnerable_commit": "afe77220e0eaa722593fc5d294213ff5275d1b40",
+  "fixed_commit": "8fb96ed81f71e7097ed11bc4d9b19afd7ea5c909",
+  "changed_file": "certifi/__init__.py",
+  "max_score": "1337"
+}

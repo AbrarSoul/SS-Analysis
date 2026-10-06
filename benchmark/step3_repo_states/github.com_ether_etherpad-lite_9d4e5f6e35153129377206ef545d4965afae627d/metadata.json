@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_ether_etherpad-lite_9d4e5f6e35153129377206ef545d4965afae627d",
+  "cve_ids": [
+    "CVE-2015-3297"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "javascript",
+  "repository": "ether/etherpad-lite",
+  "repository_url": "https://github.com/ether/etherpad-lite",
+  "vulnerable_commit": "7b86eb09bc2235dd2683fb72601934dbcea3a9eb",
+  "fixed_commit": "9d4e5f6e35153129377206ef545d4965afae627d",
+  "changed_file": "src/node/utils/Minify.js",
+  "max_score": "1337"
+}

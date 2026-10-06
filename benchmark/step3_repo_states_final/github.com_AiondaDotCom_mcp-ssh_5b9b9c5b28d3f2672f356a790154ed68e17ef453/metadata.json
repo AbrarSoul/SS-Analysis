@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_AiondaDotCom_mcp-ssh_5b9b9c5b28d3f2672f356a790154ed68e17ef453",
+  "cve_ids": [
+    "CVE-2025-9654"
+  ],
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "language": "javascript",
+  "repository": "AiondaDotCom/mcp-ssh",
+  "repository_url": "https://github.com/AiondaDotCom/mcp-ssh",
+  "vulnerable_commit": "e1cb8234dfd47a02775cae2b4bf2abf981fa3412",
+  "fixed_commit": "5b9b9c5b28d3f2672f356a790154ed68e17ef453",
+  "changed_file": "server-simple.mjs",
+  "max_score": "1337"
+}

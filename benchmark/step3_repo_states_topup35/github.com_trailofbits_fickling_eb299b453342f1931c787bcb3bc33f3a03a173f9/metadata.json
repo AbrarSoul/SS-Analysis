@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_trailofbits_fickling_eb299b453342f1931c787bcb3bc33f3a03a173f9",
+  "cve_ids": [
+    "CVE-2026-22609"
+  ],
+  "cwe_ids": [
+    "CWE-184",
+    "CWE-502"
+  ],
+  "language": "python",
+  "repository": "trailofbits/fickling",
+  "repository_url": "https://github.com/trailofbits/fickling",
+  "vulnerable_commit": "6b400e1a2525e6a4a076c97ccc0d4d9581317101",
+  "fixed_commit": "eb299b453342f1931c787bcb3bc33f3a03a173f9",
+  "changed_file": "fickling/fickle.py",
+  "max_score": "1337"
+}

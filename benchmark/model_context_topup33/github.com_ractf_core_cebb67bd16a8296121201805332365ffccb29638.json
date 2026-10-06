@@ -1,0 +1,47 @@
+{
+  "case_id": "github.com_ractf_core_cebb67bd16a8296121201805332365ffccb29638",
+  "language": "python",
+  "cve_id": "CVE-2021-21329",
+  "cve_ids_all": [
+    "CVE-2021-21329"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-287",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "LoginTwoFactorView",
+  "imports": [
+    "import random",
+    "import secrets",
+    "import string",
+    "from django.contrib.auth import get_user_model",
+    "from django.core.validators import EmailValidator",
+    "from django.conf import settings",
+    "from django.db import transaction",
+    "from django.utils.decorators import method_decorator",
+    "from django.views.decorators.debug import sensitive_post_parameters",
+    "from django_filters.rest_framework import DjangoFilterBackend",
+    "from rest_framework import permissions",
+    "from rest_framework.generics import CreateAPIView, GenericAPIView, get_object_or_404",
+    "from rest_framework.permissions import IsAuthenticated",
+    "from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED",
+    "from rest_framework.views import APIView",
+    "from authentication import serializers",
+    "from authentication.models import InviteCode, PasswordResetToken, TOTPDevice, BackupCode",
+    "from authentication.permissions import HasTwoFactor, VerifyingTwoFactor",
+    "from authentication.serializers import RegistrationSerializer, EmailVerificationSerializer, ChangePasswordSerializer, GenerateInvitesSerializer, InviteCodeSerializer, EmailSerializer, CreateBotSerializer",
+    "from backend.mail import send_email",
+    "from backend.permissions import IsBot, IsSudo",
+    "from backend.response import FormattedResponse",
+    "from backend.signals import logout, add_2fa, verify_2fa, password_reset_start, password_reset_start_reject, email_verified, change_password, password_reset, remove_2fa",
+    "from backend.viewsets import AdminListModelViewSet",
+    "from plugins import providers",
+    "from team.models import Team"
+  ],
+  "vulnerable_function": "    def post(self, request, *args, **kwargs):\n        serializer = self.serializer_class(data=request.data, context={'request': request})\n        serializer.is_valid(raise_exception=True)\n        user = serializer.validated_data['user']\n        if user is None:\n            return FormattedResponse(status=HTTP_401_UNAUTHORIZED, d={'reason': 'login_failed'}, m='login_failed')\n\n        if not user.has_2fa():\n            return FormattedResponse(status=HTTP_401_UNAUTHORIZED, d={'reason': '2fa_not_enabled'}, m='2fa_not_enabled')\n\n        token = serializer.data['tfa']\n\n        if len(token) == 6:\n            if user.totp_device is not None and user.totp_device.validate_token(token):\n                return self.issue_token(user)\n        elif len(token) == 8:\n            for code in user.backup_codes:\n                if token == code.code:\n                    code.delete()\n                    return self.issue_token(user)\n\n        return self.issue_token(user)\n",
+  "patched_function": "    def post(self, request, *args, **kwargs):\n        serializer = self.serializer_class(data=request.data, context={'request': request})\n        serializer.is_valid(raise_exception=True)\n        user = serializer.validated_data['user']\n        if user is None:\n            return FormattedResponse(status=HTTP_401_UNAUTHORIZED, d={'reason': 'login_failed'}, m='login_failed')\n\n        if not user.has_2fa():\n            return FormattedResponse(status=HTTP_401_UNAUTHORIZED, d={'reason': '2fa_not_enabled'}, m='2fa_not_enabled')\n\n        token = serializer.data['tfa']\n\n        if len(token) == 6:\n            if user.totp_device is not None and user.totp_device.validate_token(token):\n                return self.issue_token(user)\n        elif len(token) == 8:\n            for code in user.backup_codes:\n                if token == code.code:\n                    code.delete()\n                    return self.issue_token(user)\n\n        return FormattedResponse(status=HTTP_401_UNAUTHORIZED, d={'reason': 'login_failed'}, m='login_failed')\n",
+  "unified_diff": "diff --git a/src/authentication/views.py b/src/authentication/views.py\nindex 5dcb942..b0cfb32 100644\n--- a/src/authentication/views.py\n+++ b/src/authentication/views.py\n@@ -150,7 +150,7 @@ class LoginTwoFactorView(APIView):\n                     code.delete()\n                     return self.issue_token(user)\n \n-        return self.issue_token(user)\n+        return FormattedResponse(status=HTTP_401_UNAUTHORIZED, d={'reason': 'login_failed'}, m='login_failed')\n \n \n class RegenerateBackupCodesView(APIView):",
+  "auto_locate_confidence": "auto"
+}

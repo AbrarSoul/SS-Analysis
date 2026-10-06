@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0207",
+  "original_source_case_id": "github.com_keycloak_keycloak_071032a108bd9e9fce9e66d00c36d56bd4b334df",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-10973",
+  "cve_ids_all": [
+    "CVE-2024-10973"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-319"
+  ],
+  "language": "java",
+  "repository": "keycloak/keycloak",
+  "repository_url": "https://github.com/keycloak/keycloak",
+  "vulnerable_commit": "9d0b1ecee4d5527ace9f0130e06024e5a1cfaa5d",
+  "fixed_commit": "071032a108bd9e9fce9e66d00c36d56bd4b334df",
+  "changed_file": "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/legacy/infinispan/CacheManagerFactory.java",
+  "changed_function": "private void configureTransportStack(ConfigurationBuilderHolder builder) {",
+  "vulnerable_lines": [
+    174,
+    197
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0207/vulnerable_source.java": "fb3e833db49fda26a5eacc7026059959d4f6ca04f4adcee6ccfda98a4553cf13",
+    "cases/CASE-0207/patched_source.java": "afc2be69b7006acbf467d05b00072d55b017feac1f67b3c3691ef96610d84ae3",
+    "cases/CASE-0207/patch.diff": "b4350022d247320d70233a4034dc53f4d4a1581ad10957256f5a17881ee23142",
+    "cases/CASE-0207/metadata.json": "9dc4a32a04a6c22339b78f035f94fdaf9656fd859252e50fda46440b6a110578",
+    "model_context/CASE-0207.json": "8828b6f2d7fe31246722388c225f45a141b17ccd7c060de703cd88b37f6d24aa",
+    "difficulty/CASE-0207.json": "e9962b3af29660b3f6c48b6a593c29794ed7d26891f47b447109a483c1424c89"
+  },
+  "case_level_hash": "4ff07f81066a0609bff4ee11f7f620a6707ec01b79d79beb802c700f6e11a49b"
+}

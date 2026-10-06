@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_matrix-org_matrix-appservice-irc_1835e047f269001054be4c68867797aa12372a0f",
+  "cve_ids": [
+    "CVE-2024-39691"
+  ],
+  "cwe_ids": [
+    "CWE-280",
+    "CWE-755"
+  ],
+  "language": "typescript",
+  "repository": "matrix-org/matrix-appservice-irc",
+  "repository_url": "https://github.com/matrix-org/matrix-appservice-irc",
+  "vulnerable_commit": "faadd07f90f4c588a1196ebaa837427e20d48461",
+  "fixed_commit": "1835e047f269001054be4c68867797aa12372a0f",
+  "changed_file": "src/bridge/MatrixHandler.ts",
+  "max_score": "1337"
+}

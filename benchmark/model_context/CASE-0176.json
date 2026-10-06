@@ -1,0 +1,23 @@
+{
+  "case_id": "CASE-0176",
+  "language": "javascript",
+  "cve_id": "CVE-2020-13822",
+  "cve_ids_all": [
+    "CVE-2020-13822"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-190",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var BN = require('bn.js');",
+    "var utils = require('../utils');"
+  ],
+  "vulnerable_function": "Signature.prototype._importDER = function _importDER(data, enc) {\n  data = utils.toArray(data, enc);\n  var p = new Position();\n  if (data[p.place++] !== 0x30) {\n    return false;\n  }\n  var len = getLength(data, p);\n  if ((len + p.place) !== data.length) {\n    return false;\n  }\n  if (data[p.place++] !== 0x02) {\n    return false;\n  }\n  var rlen = getLength(data, p);\n  var r = data.slice(p.place, rlen + p.place);\n  p.place += rlen;\n  if (data[p.place++] !== 0x02) {\n    return false;\n  }\n  var slen = getLength(data, p);\n  if (data.length !== slen + p.place) {\n    return false;\n  }\n  var s = data.slice(p.place, slen + p.place);\n  if (r[0] === 0 && (r[1] & 0x80)) {\n    r = r.slice(1);\n  }\n  if (s[0] === 0 && (s[1] & 0x80)) {\n    s = s.slice(1);\n  }\n\n  this.r = new BN(r);\n  this.s = new BN(s);\n  this.recoveryParam = null;\n\n  return true;\n}",
+  "patched_function": "Signature.prototype._importDER = function _importDER(data, enc) {\n  data = utils.toArray(data, enc);\n  var p = new Position();\n  if (data[p.place++] !== 0x30) {\n    return false;\n  }\n  var len = getLength(data, p);\n  if (len === false) {\n    return false;\n  }\n  if ((len + p.place) !== data.length) {\n    return false;\n  }\n  if (data[p.place++] !== 0x02) {\n    return false;\n  }\n  var rlen = getLength(data, p);\n  if (rlen === false) {\n    return false;\n  }\n  var r = data.slice(p.place, rlen + p.place);\n  p.place += rlen;\n  if (data[p.place++] !== 0x02) {\n    return false;\n  }\n  var slen = getLength(data, p);\n  if (slen === false) {\n    return false;\n  }\n  if (data.length !== slen + p.place) {\n    return false;\n  }\n  var s = data.slice(p.place, slen + p.place);\n  if (r[0] === 0) {\n    if (r[1] & 0x80) {\n      r = r.slice(1);\n    } else {\n      // Leading zeroes\n      return false;\n    }\n  }\n  if (s[0] === 0) {\n    if (s[1] & 0x80) {\n      s = s.slice(1);\n    } else {\n      // Leading zeroes\n      return false;\n    }\n  }\n\n  this.r = new BN(r);\n  this.s = new BN(s);\n  this.recoveryParam = null;\n\n  return true;\n}",
+  "unified_diff": "diff --git a/lib/elliptic/ec/signature.js b/lib/elliptic/ec/signature.js\nindex 2cb6b49..539df6a 100644\n--- a/lib/elliptic/ec/signature.js\n+++ b/lib/elliptic/ec/signature.js\n@@ -32,11 +32,24 @@ function getLength(buf, p) {\n     return initial;\n   }\n   var octetLen = initial & 0xf;\n+\n+  // Indefinite length or overflow\n+  if (octetLen === 0 || octetLen > 4) {\n+    return false;\n+  }\n+\n   var val = 0;\n   for (var i = 0, off = p.place; i < octetLen; i++, off++) {\n     val <<= 8;\n     val |= buf[off];\n+    val >>>= 0;\n   }\n+\n+  // Leading zeroes\n+  if (val <= 0x7f) {\n+    return false;\n+  }\n+\n   p.place = off;\n   return val;\n }\n@@ -60,6 +73,9 @@ Signature.prototype._importDER = function _importDER(data, enc) {\n     return false;\n   }\n   var len = getLength(data, p);\n+  if (len === false) {\n+    return false;\n+  }\n   if ((len + p.place) !== data.length) {\n     return false;\n   }\n@@ -67,21 +83,37 @@ Signature.prototype._importDER = function _importDER(data, enc) {\n     return false;\n   }\n   var rlen = getLength(data, p);\n+  if (rlen === false) {\n+    return false;\n+  }\n   var r = data.slice(p.place, rlen + p.place);\n   p.place += rlen;\n   if (data[p.place++] !== 0x02) {\n     return false;\n   }\n   var slen = getLength(data, p);\n+  if (slen === false) {\n+    return false;\n+  }\n   if (data.length !== slen + p.place) {\n     return false;\n   }\n   var s = data.slice(p.place, slen + p.place);\n-  if (r[0] === 0 && (r[1] & 0x80)) {\n-    r = r.slice(1);\n+  if (r[0] === 0) {\n+    if (r[1] & 0x80) {\n+      r = r.slice(1);\n+    } else {\n+      // Leading zeroes\n+      return false;\n+    }\n   }\n-  if (s[0] === 0 && (s[1] & 0x80)) {\n-    s = s.slice(1);\n+  if (s[0] === 0) {\n+    if (s[1] & 0x80) {\n+      s = s.slice(1);\n+    } else {\n+      // Leading zeroes\n+      return false;\n+    }\n   }\n \n   this.r = new BN(r);",
+  "auto_locate_confidence": "auto"
+}

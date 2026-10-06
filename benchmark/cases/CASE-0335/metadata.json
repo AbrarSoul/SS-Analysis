@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0335",
+  "original_source_case_id": "github.com_xwiki_xwiki-platform_e3527b98fdd8dc8179c24dc55e662b2c55199434",
+  "selection_batch": "topup11",
+  "cve_id": "CVE-2023-27480",
+  "cve_ids_all": [
+    "CVE-2023-27480"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "c68c0dffa863c30b5a6ce685feccd0f8cada461d",
+  "fixed_commit": "e3527b98fdd8dc8179c24dc55e662b2c55199434",
+  "changed_file": "xwiki-platform-core/xwiki-platform-xar/xwiki-platform-xar-model/src/main/java/org/xwiki/xar/XarPackage.java",
+  "changed_function": "public void readDescriptor(InputStream stream) throws XarException, IOException",
+  "vulnerable_lines": [
+    512,
+    546
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0335/vulnerable_source.java": "883cebcc3c09c0b5f2d9b3a4f40bc92549e20837fff3676623b851590d137652",
+    "cases/CASE-0335/patched_source.java": "737252a07991ec161c86d86f451e95a297bf263e22a89bbf1f5257a1ff267537",
+    "cases/CASE-0335/patch.diff": "cca6c382f84097ca90163690798aa47e10efbefa5b4a30515909bfb2d15d75a1",
+    "cases/CASE-0335/metadata.json": "63e9ae8b428430ca89edc72408c56746ae8bcfb80b063ea2ef0b37a31f0284ae",
+    "model_context/CASE-0335.json": "f2b1a8713b3bb7da2564f7987aed4a2d269f1f368026253d39cb82e253b12596",
+    "difficulty/CASE-0335.json": "ec148993562248f5a3bccd9c71d5b91dd538b0c307f8b13c72125a40bf60b081"
+  },
+  "case_level_hash": "ee41f140265fa9362d74bdad10099bbdc5f1c337eb0ef812e46d3178f5c61cdb"
+}

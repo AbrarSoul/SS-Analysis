@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0246",
+  "original_source_case_id": "github.com_openstack_cinder_ba785eef5f515b869c0d68016e84bb74f76ab45e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-10755",
+  "cve_ids_all": [
+    "CVE-2020-10755"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "language": "python",
+  "repository": "openstack/cinder",
+  "repository_url": "https://github.com/openstack/cinder",
+  "vulnerable_commit": "3ebea9ed0dcb5cb974e045b41cf6de9395d89544",
+  "fixed_commit": "ba785eef5f515b869c0d68016e84bb74f76ab45e",
+  "changed_file": "cinder/volume/drivers/dell_emc/scaleio/driver.py",
+  "changed_function": "def __init__(self, *args, **kwargs):",
+  "vulnerable_lines": [
+    156,
+    228
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0246/vulnerable_source.py": "4bbca7957ea11870cf66b123cf65d4581332a6d55ecdd7fd898de7d472f11cbc",
+    "cases/CASE-0246/patched_source.py": "79d3673cc3ed361a856ebb16733867fae4a8f4db2e2305a577aa260d60d51bd2",
+    "cases/CASE-0246/patch.diff": "d71670e894ff587e80c598d2491fc9825ce9e2dbb8cdb3c7ddfca14c9ab0920c",
+    "cases/CASE-0246/metadata.json": "d070c26fee1a51c90c516bf5996e4a5c31c9036ae85f5f27d6e316e452dd4f48",
+    "model_context/CASE-0246.json": "704a4ba5843a38dcb8e264773d8ee6f7a77b2381f34f16d8a4025cf4539d1c36",
+    "difficulty/CASE-0246.json": "11520e61cb64611fb593d09ed709d993773b1ff2eb7805259d33bf73b182383e"
+  },
+  "case_level_hash": "434a3371efb8ca94bdd04aee5c2b279f89d40307bde68cd61a0e4d6e028e2ed8"
+}

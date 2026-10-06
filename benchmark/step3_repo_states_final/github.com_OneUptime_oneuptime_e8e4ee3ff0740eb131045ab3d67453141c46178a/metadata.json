@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_OneUptime_oneuptime_e8e4ee3ff0740eb131045ab3d67453141c46178a",
+  "cve_ids": [
+    "CVE-2026-33396"
+  ],
+  "cwe_ids": [
+    "CWE-184",
+    "CWE-693",
+    "CWE-78"
+  ],
+  "language": "typescript",
+  "repository": "OneUptime/oneuptime",
+  "repository_url": "https://github.com/OneUptime/oneuptime",
+  "vulnerable_commit": "3efacce00266b061ca60e3917fe733c3cbe24f2d",
+  "fixed_commit": "e8e4ee3ff0740eb131045ab3d67453141c46178a",
+  "changed_file": "Common/Server/Utils/VM/VMRunner.ts",
+  "max_score": "1337"
+}

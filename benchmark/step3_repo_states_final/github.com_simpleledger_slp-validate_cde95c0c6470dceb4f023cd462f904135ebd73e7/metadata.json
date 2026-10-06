@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_simpleledger_slp-validate_cde95c0c6470dceb4f023cd462f904135ebd73e7",
+  "cve_ids": [
+    "CVE-2020-11072"
+  ],
+  "cwe_ids": [
+    "CWE-697"
+  ],
+  "language": "typescript",
+  "repository": "simpleledger/slp-validate",
+  "repository_url": "https://github.com/simpleledger/slp-validate",
+  "vulnerable_commit": "4ca5ea8556bfacdaa6c81f0c3151a23e728cb8b6",
+  "fixed_commit": "cde95c0c6470dceb4f023cd462f904135ebd73e7",
+  "changed_file": "lib/validation.ts",
+  "max_score": "1337"
+}

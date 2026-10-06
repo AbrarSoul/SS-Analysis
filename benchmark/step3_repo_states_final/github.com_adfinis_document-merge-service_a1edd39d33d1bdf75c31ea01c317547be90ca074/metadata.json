@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_adfinis_document-merge-service_a1edd39d33d1bdf75c31ea01c317547be90ca074",
+  "cve_ids": [
+    "CVE-2024-37301"
+  ],
+  "cwe_ids": [
+    "CWE-1336"
+  ],
+  "language": "python",
+  "repository": "adfinis/document-merge-service",
+  "repository_url": "https://github.com/adfinis/document-merge-service",
+  "vulnerable_commit": "696f920a66c7c9d45638f97c62f6480506d87fdb",
+  "fixed_commit": "a1edd39d33d1bdf75c31ea01c317547be90ca074",
+  "changed_file": "document_merge_service/api/jinja.py",
+  "max_score": "1337"
+}

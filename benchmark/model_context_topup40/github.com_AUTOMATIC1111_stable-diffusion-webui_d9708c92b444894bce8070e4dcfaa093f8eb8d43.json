@@ -1,0 +1,37 @@
+{
+  "case_id": "github.com_AUTOMATIC1111_stable-diffusion-webui_d9708c92b444894bce8070e4dcfaa093f8eb8d43",
+  "language": "python",
+  "cve_id": "CVE-2024-31462",
+  "cve_ids_all": [
+    "CVE-2024-31462"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import json",
+    "import os",
+    "import threading",
+    "import time",
+    "from datetime import datetime, timezone",
+    "import git",
+    "import gradio as gr",
+    "import html",
+    "import shutil",
+    "import errno",
+    "from modules import extensions, shared, paths, config_states, errors, restart",
+    "from modules.paths_internal import config_states_dir",
+    "from modules.call_queue import wrap_gradio_gpu_call",
+    "import urllib.request",
+    "import modules.ui",
+    "import launch"
+  ],
+  "vulnerable_function": "def save_config_state(name):\n    current_config_state = config_states.get_config()\n    if not name:\n        name = \"Config\"\n    current_config_state[\"name\"] = name\n    timestamp = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')\n    filename = os.path.join(config_states_dir, f\"{timestamp}_{name}.json\")\n    print(f\"Saving backup of webui/extension state to {filename}.\")\n    with open(filename, \"w\", encoding=\"utf-8\") as f:\n        json.dump(current_config_state, f, indent=4, ensure_ascii=False)\n    config_states.list_config_states()\n    new_value = next(iter(config_states.all_config_states.keys()), \"Current\")\n    new_choices = [\"Current\"] + list(config_states.all_config_states.keys())\n    return gr.Dropdown.update(value=new_value, choices=new_choices), f\"<span>Saved current webui/extension state to \\\"{filename}\\\"</span>\"\n",
+  "patched_function": "def save_config_state(name):\n    current_config_state = config_states.get_config()\n\n    name = os.path.basename(name or \"Config\")\n\n    current_config_state[\"name\"] = name\n    timestamp = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')\n    filename = os.path.join(config_states_dir, f\"{timestamp}_{name}.json\")\n    print(f\"Saving backup of webui/extension state to {filename}.\")\n    with open(filename, \"w\", encoding=\"utf-8\") as f:\n        json.dump(current_config_state, f, indent=4, ensure_ascii=False)\n    config_states.list_config_states()\n    new_value = next(iter(config_states.all_config_states.keys()), \"Current\")\n    new_choices = [\"Current\"] + list(config_states.all_config_states.keys())\n    return gr.Dropdown.update(value=new_value, choices=new_choices), f\"<span>Saved current webui/extension state to \\\"{filename}\\\"</span>\"\n",
+  "unified_diff": "diff --git a/modules/ui_extensions.py b/modules/ui_extensions.py\nindex 913e1444..d822c0b8 100644\n--- a/modules/ui_extensions.py\n+++ b/modules/ui_extensions.py\n@@ -58,8 +58,9 @@ def apply_and_restart(disable_list, update_list, disable_all):\n \n def save_config_state(name):\n     current_config_state = config_states.get_config()\n-    if not name:\n-        name = \"Config\"\n+\n+    name = os.path.basename(name or \"Config\")\n+\n     current_config_state[\"name\"] = name\n     timestamp = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')\n     filename = os.path.join(config_states_dir, f\"{timestamp}_{name}.json\")\n",
+  "auto_locate_confidence": "auto"
+}

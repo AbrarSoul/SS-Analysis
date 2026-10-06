@@ -1,0 +1,23 @@
+{
+  "case_id": "CASE-0151",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-329",
+    "CWE-353",
+    "CWE-759",
+    "CWE-916"
+  ],
+  "changed_files": 1,
+  "lines_added": 64,
+  "lines_removed": 23,
+  "lines_changed_total": 87,
+  "function_size_chars": 487,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "scrypt with a constant salt plus AES-CBC with a constant zero IV; literal weak-crypto parameters."
+}

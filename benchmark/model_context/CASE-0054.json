@@ -1,0 +1,55 @@
+{
+  "case_id": "CASE-0054",
+  "language": "python",
+  "cve_id": "CVE-2025-54876",
+  "cve_ids_all": [
+    "CVE-2025-54876"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-522",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "JCA_CLI",
+  "imports": [
+    "import os",
+    "import sys",
+    "import copy",
+    "import json",
+    "import re",
+    "import urllib3",
+    "import configparser",
+    "import readline",
+    "import argparse",
+    "import random",
+    "import datetime",
+    "import code",
+    "import traceback",
+    "import ast",
+    "import base64",
+    "import requests",
+    "import html",
+    "import glob",
+    "import logging",
+    "import http.client",
+    "import jwt",
+    "import pyDes",
+    "import stat",
+    "import ruamel.yaml",
+    "import urllib.parse",
+    "from requests_toolbelt.multipart.encoder import MultipartEncoder",
+    "from pathlib import Path",
+    "from types import SimpleNamespace",
+    "from urllib.parse import urlencode",
+    "from collections import OrderedDict",
+    "from urllib.parse import urljoin",
+    "from http.client import HTTPConnection",
+    "from logging.handlers import RotatingFileHandler",
+    "from pygments import highlight, lexers, formatters"
+  ],
+  "vulnerable_function": "            def print_to_log(*args):\n                self.cli_logger.debug(\" \".join(args))\n",
+  "patched_function": "            def print_to_log(*args):\n                log_args = list(args)\n                # don't log passwords\n                if log_args and log_args[0].startswith('send:'):\n                    try:\n                        log_data = json.loads(log_args[1].strip(\"b\").strip(\"'\"))\n                        for prop in log_data:\n                            if prop in ('userPassword', 'clientSecret'):\n                                log_data[prop] = '*****'\n                        log_args[1] = str(log_data)\n                    except Exception as e:\n                        pass\n\n                self.cli_logger.debug(\" \".join(log_args))\n",
+  "unified_diff": "diff --git a/jans-cli-tui/cli_tui/cli/config_cli.py b/jans-cli-tui/cli_tui/cli/config_cli.py\nindex 381c308c648..9f0aff71c6f 100755\n--- a/jans-cli-tui/cli_tui/cli/config_cli.py\n+++ b/jans-cli-tui/cli_tui/cli/config_cli.py\n@@ -351,7 +351,19 @@ class JCA_CLI:\n             file_handler.setFormatter(logging.Formatter(\"%(asctime)s [%(levelname)-5.5s]  %(message)s\"))\n             self.cli_logger.addHandler(file_handler)\n             def print_to_log(*args):\n-                self.cli_logger.debug(\" \".join(args))\n+                log_args = list(args)\n+                # don't log passwords\n+                if log_args and log_args[0].startswith('send:'):\n+                    try:\n+                        log_data = json.loads(log_args[1].strip(\"b\").strip(\"'\"))\n+                        for prop in log_data:\n+                            if prop in ('userPassword', 'clientSecret'):\n+                                log_data[prop] = '*****'\n+                        log_args[1] = str(log_data)\n+                    except Exception as e:\n+                        pass\n+\n+                self.cli_logger.debug(\" \".join(log_args))\n             http.client.print = print_to_log\n \n \n@@ -363,13 +375,19 @@ class JCA_CLI:\n \n     def log_cmd(self, operation_id, url_suffix, endpoint_args, data):\n \n+        log_data = copy.deepcopy(data)\n+        # don't log passwords\n+        for prop in log_data:\n+            if prop in ('userPassword', 'clientSecret'):\n+                log_data[prop] = '*****'\n+\n         cmdl = [sys.executable, __file__, '--operation-id', operation_id]\n         if url_suffix:\n             cmdl += ['--url-suffix', '\"{}\"'.format(url_suffix)]\n         if endpoint_args:\n             cmdl += ['--endpoint-args', '\"{}\"'.format(endpoint_args)]\n         if data:\n-            cmdl += ['--data', \"'{}'\".format(json.dumps(data))]\n+            cmdl += ['--data', \"'{}'\".format(json.dumps(log_data))]\n \n         with open(os.path.join(log_dir, 'cli_cmd.log'), 'a') as w:\n             w.write(' '.join(cmdl) + '\\n')",
+  "auto_locate_confidence": "auto_low_confidence"
+}

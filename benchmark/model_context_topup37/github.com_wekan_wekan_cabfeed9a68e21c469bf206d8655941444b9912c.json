@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_wekan_wekan_cabfeed9a68e21c469bf206d8655941444b9912c",
+  "language": "javascript",
+  "cve_id": "CVE-2026-1892",
+  "cve_ids_all": [
+    "CVE-2026-1892"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-266",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-285",
+      "definition": "Improper Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { ReactiveCache } from '/imports/reactiveCache';",
+    "import escapeForRegex from 'escape-string-regexp';",
+    "import { TAPi18n } from '/imports/i18n';",
+    "import { CustomFields } from './customFields';",
+    "import {",
+    "import Users from \"./users\";",
+    "import { FlowRouter } from 'meteor/ostrio:flow-router-extra';",
+    "import TableVisibilityModeSettings from \"./tableVisibilityModeSettings\";"
+  ],
+  "vulnerable_function": ",\n    setBoardTeams(boardTeamsArray, membersArray, currBoardId){\n      check(boardTeamsArray, Array);\n      check(membersArray, Array);\n      check(currBoardId, String);\n      Boards.update(currBoardId, {\n        $set: {\n          members: membersArray,\n          teams: boardTeamsArray,\n        },\n      });\n    }",
+  "patched_function": ",\n    setBoardTeams(boardTeamsArray, membersArray, currBoardId){\n      check(boardTeamsArray, Array);\n      check(membersArray, Array);\n      check(currBoardId, String);\n      const userId = Meteor.userId();\n      if (!userId) {\n        throw new Meteor.Error('not-authorized', 'You must be logged in to perform this action.');\n      }\n      const board = ReactiveCache.getBoard(currBoardId);\n      if (!board) {\n        throw new Meteor.Error('board-not-found', 'Board not found.');\n      }\n      if (!allowIsBoardAdmin(userId, board)) {\n        throw new Meteor.Error('not-authorized', 'You must be a board admin to perform this action.');\n      }\n      // Validate boardTeamsArray\n      for (const team of boardTeamsArray) {\n        check(team.teamId, String);\n        check(team.teamDisplayName, String);\n        check(team.isActive, Boolean);\n      }\n      // Validate membersArray\n      for (const member of membersArray) {\n        check(member.userId, String);\n        check(member.isAdmin, Boolean);\n        check(member.isActive, Boolean);\n        if (member.isNoComments !== undefined) check(member.isNoComments, Boolean);\n        if (member.isCommentOnly !== undefined) check(member.isCommentOnly, Boolean);\n        if (member.isWorker !== undefined) check(member.isWorker, Boolean);\n        if (member.isNormalAssignedOnly !== undefined) check(member.isNormalAssignedOnly, Boolean);\n        if (member.isCommentAssignedOnly !== undefined) check(member.isCommentAssignedOnly, Boolean);\n        if (member.isReadOnly !== undefined) check(member.isReadOnly, Boolean);\n        if (member.isReadAssignedOnly !== undefined) check(member.isReadAssignedOnly, Boolean);\n      }\n      Boards.update(currBoardId, {\n        $set: {\n          members: membersArray,\n          teams: boardTeamsArray,\n        },\n      });\n    }",
+  "unified_diff": "diff --git a/models/boards.js b/models/boards.js\nindex f00ee08b8..323966752 100644\n--- a/models/boards.js\n+++ b/models/boards.js\n@@ -1964,6 +1964,23 @@ if (Meteor.isServer) {\n     setBoardOrgs(boardOrgsArray, currBoardId){\n       check(boardOrgsArray, Array);\n       check(currBoardId, String);\n+      const userId = Meteor.userId();\n+      if (!userId) {\n+        throw new Meteor.Error('not-authorized', 'You must be logged in to perform this action.');\n+      }\n+      const board = ReactiveCache.getBoard(currBoardId);\n+      if (!board) {\n+        throw new Meteor.Error('board-not-found', 'Board not found.');\n+      }\n+      if (!allowIsBoardAdmin(userId, board)) {\n+        throw new Meteor.Error('not-authorized', 'You must be a board admin to perform this action.');\n+      }\n+      // Validate boardOrgsArray\n+      for (const org of boardOrgsArray) {\n+        check(org.orgId, String);\n+        check(org.orgDisplayName, String);\n+        check(org.isActive, Boolean);\n+      }\n       Boards.update(currBoardId, {\n         $set: {\n           orgs: boardOrgsArray,\n@@ -1974,6 +1991,36 @@ if (Meteor.isServer) {\n       check(boardTeamsArray, Array);\n       check(membersArray, Array);\n       check(currBoardId, String);\n+      const userId = Meteor.userId();\n+      if (!userId) {\n+        throw new Meteor.Error('not-authorized', 'You must be logged in to perform this action.');\n+      }\n+      const board = ReactiveCache.getBoard(currBoardId);\n+      if (!board) {\n+        throw new Meteor.Error('board-not-found', 'Board not found.');\n+      }\n+      if (!allowIsBoardAdmin(userId, board)) {\n+        throw new Meteor.Error('not-authorized', 'You must be a board admin to perform this action.');\n+      }\n+      // Validate boardTeamsArray\n+      for (const team of boardTeamsArray) {\n+        check(team.teamId, String);\n+        check(team.teamDisplayName, String);\n+        check(team.isActive, Boolean);\n+      }\n+      // Validate membersArray\n+      for (const member of membersArray) {\n+        check(member.userId, String);\n+        check(member.isAdmin, Boolean);\n+        check(member.isActive, Boolean);\n+        if (member.isNoComments !== undefined) check(member.isNoComments, Boolean);\n+        if (member.isCommentOnly !== undefined) check(member.isCommentOnly, Boolean);\n+        if (member.isWorker !== undefined) check(member.isWorker, Boolean);\n+        if (member.isNormalAssignedOnly !== undefined) check(member.isNormalAssignedOnly, Boolean);\n+        if (member.isCommentAssignedOnly !== undefined) check(member.isCommentAssignedOnly, Boolean);\n+        if (member.isReadOnly !== undefined) check(member.isReadOnly, Boolean);\n+        if (member.isReadAssignedOnly !== undefined) check(member.isReadAssignedOnly, Boolean);\n+      }\n       Boards.update(currBoardId, {\n         $set: {\n           members: membersArray,",
+  "auto_locate_confidence": "auto_low_confidence"
+}

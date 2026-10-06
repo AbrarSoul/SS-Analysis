@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_misskey-dev_misskey_ee74df68233adcd5b167258c621565f97c3b2306",
+  "cve_ids": [
+    "CVE-2023-24812"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "typescript",
+  "repository": "misskey-dev/misskey",
+  "repository_url": "https://github.com/misskey-dev/misskey",
+  "vulnerable_commit": "a12f07c42bfbebb2b72317d16e42188066e0c65f",
+  "fixed_commit": "ee74df68233adcd5b167258c621565f97c3b2306",
+  "changed_file": "packages/backend/src/server/api/endpoints/notes/search-by-tag.ts",
+  "max_score": "1337"
+}

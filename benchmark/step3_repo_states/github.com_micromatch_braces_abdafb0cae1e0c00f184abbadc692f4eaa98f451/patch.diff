@@ -1,0 +1,13 @@
+diff --git a/lib/parsers.js b/lib/parsers.js
+index 42730fe..b14bc83 100644
+--- a/lib/parsers.js
++++ b/lib/parsers.js
+@@ -127,7 +127,7 @@ module.exports = function(braces, options) {
+     .set('multiplier', function() {
+       var isInside = this.isInside('brace');
+       var pos = this.position();
+-      var m = this.match(/^\{(,+(?:(\{,+\})*),*|,*(?:(\{,+\})*),+)\}/);
++      var m = this.match(/^\{((?:,|\{,+\})+)\}/);
+       if (!m) return;
+ 
+       this.multiplier = true;

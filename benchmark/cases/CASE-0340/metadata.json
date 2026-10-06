@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0340",
+  "original_source_case_id": "github.com_zamotany_logkitty_ef2f673e25c629544dd3de6429999318447dd6bf",
+  "selection_batch": "topup38",
+  "cve_id": "CVE-2020-8149",
+  "cve_ids_all": [
+    "CVE-2020-8149"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "typescript",
+  "repository": "zamotany/logkitty",
+  "repository_url": "https://github.com/zamotany/logkitty",
+  "vulnerable_commit": "e1e229687472d8c9266d17f2969ff7431a78db86",
+  "fixed_commit": "ef2f673e25c629544dd3de6429999318447dd6bf",
+  "changed_file": "src/android/adb.ts",
+  "changed_function": "export function getApplicationPid(",
+  "vulnerable_lines": [
+    48,
+    70
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 9,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0340/vulnerable_source.ts": "7287e65bab1cc21fdc37449313762403211f6425916c01c00220c68af261e8c4",
+    "cases/CASE-0340/patched_source.ts": "5ad89e44af65c7308c5c40460744f8a9a5ce84febc49809c822c5def8efd8381",
+    "cases/CASE-0340/patch.diff": "118ad75be30af20a408e8068d0e8148043c5b28fc9886a34a26f38ef92035f1d",
+    "cases/CASE-0340/metadata.json": "c1376842de59c3a2c43ca0253d527251513edd5b8c3c8880fcc4686dafc33aa8",
+    "model_context/CASE-0340.json": "fae119ec749c8bf162f39233e9e8cb914b6c62ee8a0de9b298a394873915bdc1",
+    "difficulty/CASE-0340.json": "18947e8ac8cd6a30b6ec4069b5d952403a5f0da6893525e7a231a14b55e7c9c7"
+  },
+  "case_level_hash": "1f6a0a91acf4e78451e43ae2e0597d5f25063bb5bdc353fda18337fd8accaeb6"
+}

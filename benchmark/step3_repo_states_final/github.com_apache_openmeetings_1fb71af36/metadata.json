@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_openmeetings_1fb71af36",
+  "cve_ids": [
+    "CVE-2023-28326"
+  ],
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "language": "java",
+  "repository": "apache/openmeetings",
+  "repository_url": "https://github.com/apache/openmeetings",
+  "vulnerable_commit": "2b088f4357b03fa09c4ed64651789183e7f3c343",
+  "fixed_commit": "1fb71af36b660b12031628bf237c04940ebc5cd0",
+  "changed_file": "openmeetings-web/src/main/java/org/apache/openmeetings/web/common/InvitationForm.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "DeepHat/DeepHat-V1-7B",
+  "temperature": 0.0,
+  "timestamp": 1789302925.19813,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    if $CONDITION:\n        $VULNERABLE_CODE\n  pattern-not: |\n    if $CONDITION:\n        $FIXED_CODE\n  languages: [\"python\"]\n  message: |\n    Detected vulnerability in aiohttp static file handling.\n    When follow_symlinks=True, directory traversal attacks are possible.\n    To fix, use proper path validation or disable symlink following.\n  severity: ERROR\n  metadata:\n    source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n    category: security\n    cwe: CWE-22\n    owasp: A1:2021-Broken Access Control\n    references:\n      - https://owasp.org/www-project-top-ten/2021/A1_2021-Broken_Access_Control\n      - https://www.owasp.org/index.php/Path_Traversal\n    technology: [python]\n```"
+}

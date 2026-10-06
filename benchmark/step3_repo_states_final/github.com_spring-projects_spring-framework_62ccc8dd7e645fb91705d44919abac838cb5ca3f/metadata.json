@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spring-projects_spring-framework_62ccc8dd7e645fb91705d44919abac838cb5ca3f",
+  "cve_ids": [
+    "CVE-2011-2730"
+  ],
+  "cwe_ids": [
+    "CWE-16"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "5af1c84b6dec2758df5ddb0401b245c2c347fb0d",
+  "fixed_commit": "62ccc8dd7e645fb91705d44919abac838cb5ca3f",
+  "changed_file": "spring-web/src/test/java/org/springframework/web/util/ExpressionEvaluationUtilsTests.java",
+  "max_score": "1337"
+}

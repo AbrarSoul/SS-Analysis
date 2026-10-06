@@ -1,0 +1,38 @@
+{
+  "case_id": "github.com_jenkinsci_semantic-versioning-plugin_8df2fabd7d7396ae29c374914d1357744d3e454f",
+  "language": "java",
+  "cve_id": "CVE-2023-24430",
+  "cve_ids_all": [
+    "CVE-2023-24430"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-611",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import hudson.Extension;",
+    "import hudson.FilePath;",
+    "import hudson.model.Descriptor;",
+    "import hudson.remoting.VirtualChannel;",
+    "import jenkins.MasterToSlaveFileCallable;",
+    "import org.jenkinsci.plugins.SemanticVersioning.AppVersion;",
+    "import org.jenkinsci.plugins.SemanticVersioning.InvalidBuildFileFormatException;",
+    "import org.jenkinsci.plugins.SemanticVersioning.Messages;",
+    "import org.w3c.dom.Document;",
+    "import org.xml.sax.SAXException;",
+    "import javax.xml.parsers.DocumentBuilder;",
+    "import javax.xml.parsers.DocumentBuilderFactory;",
+    "import javax.xml.parsers.ParserConfigurationException;",
+    "import javax.xml.xpath.*;",
+    "import java.io.File;",
+    "import java.io.IOException;",
+    "import java.io.PrintStream;"
+  ],
+  "vulnerable_function": "\t\t\t\tpublic Document invoke(File pom, VirtualChannel channel)\n\t\t\t\t\t\tthrows IOException, InterruptedException {\n\n\t\t\t\t\ttry {\n\t\t\t\t\t\tDocumentBuilder documentBuilder;\n\t\t\t\t\t\tdocumentBuilder = DocumentBuilderFactory.newInstance()\n\t\t\t\t\t\t\t\t.newDocumentBuilder();\n\t\t\t\t\t\treturn documentBuilder.parse(pom);\n\n\t\t\t\t\t} catch (SAXException | ParserConfigurationException e) {\n\t\t\t\t\t\tthrow new InterruptedException(pom\n\t\t\t\t\t\t\t\t.getAbsolutePath()\n\t\t\t\t\t\t\t\t+ \" is not a valid POM file.\");\n\t\t\t\t\t}\n\t\t\t\t}",
+  "patched_function": "\t\t\t\tpublic Document invoke(File pom, VirtualChannel channel)\n\t\t\t\t\t\tthrows IOException, InterruptedException {\n\n\t\t\t\t\ttry {\n\t\t\t\t\t\tDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n\t\t\t\t\t\tDocumentBuilder documentBuilder = df.newDocumentBuilder();\n\t\t\t\t\t\treturn documentBuilder.parse(pom);\n\n\t\t\t\t\t} catch (SAXException | ParserConfigurationException e) {\n\t\t\t\t\t\tthrow new InterruptedException(pom\n\t\t\t\t\t\t\t\t.getAbsolutePath()\n\t\t\t\t\t\t\t\t+ \" is not a valid POM file.\");\n\t\t\t\t\t}\n\t\t\t\t}",
+  "unified_diff": "diff --git a/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java b/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\nindex fdcea76..64b844a 100644\n--- a/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n+++ b/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n@@ -36,10 +36,14 @@ import org.jenkinsci.plugins.SemanticVersioning.Messages;\n import org.w3c.dom.Document;\n import org.xml.sax.SAXException;\n \n+import javax.xml.XMLConstants;\n import javax.xml.parsers.DocumentBuilder;\n import javax.xml.parsers.DocumentBuilderFactory;\n import javax.xml.parsers.ParserConfigurationException;\n-import javax.xml.xpath.*;\n+import javax.xml.xpath.XPath;\n+import javax.xml.xpath.XPathExpression;\n+import javax.xml.xpath.XPathExpressionException;\n+import javax.xml.xpath.XPathFactory;\n \n import java.io.File;\n import java.io.IOException;\n@@ -93,9 +97,10 @@ public class PomParser extends AbstractBuildDefinitionParser {\n \t\t\t\t\t\tthrows IOException, InterruptedException {\n \n \t\t\t\t\ttry {\n-\t\t\t\t\t\tDocumentBuilder documentBuilder;\n-\t\t\t\t\t\tdocumentBuilder = DocumentBuilderFactory.newInstance()\n-\t\t\t\t\t\t\t\t.newDocumentBuilder();\n+\t\t\t\t\t\tDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n+\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n+\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n+\t\t\t\t\t\tDocumentBuilder documentBuilder = df.newDocumentBuilder();\n \t\t\t\t\t\treturn documentBuilder.parse(pom);\n \n \t\t\t\t\t} catch (SAXException | ParserConfigurationException e) {",
+  "auto_locate_confidence": "auto"
+}

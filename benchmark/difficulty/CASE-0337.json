@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0337",
+  "batch": "topup3",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 0,
+  "lines_changed_total": 3,
+  "function_size_chars": 930,
+  "function_size_lines": 24,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Rebuilt context replaces the caller's redaction map instead of merging it; data-merge semantics with no distinguishing code shape. NEAR-DUPLICATE of CASE-0338 (same CVE-2024-0006)."
+}

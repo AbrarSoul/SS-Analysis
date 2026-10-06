@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_airflow_18386026c28939fa6d91d198c5489c295a05dcd2",
+  "cve_ids": [
+    "CVE-2022-40604"
+  ],
+  "cwe_ids": [
+    "CWE-134"
+  ],
+  "language": "python",
+  "repository": "apache/airflow",
+  "repository_url": "https://github.com/apache/airflow",
+  "vulnerable_commit": "23ad7e292a29e43436170078ae132569f8fbf1e4",
+  "fixed_commit": "18386026c28939fa6d91d198c5489c295a05dcd2",
+  "changed_file": "airflow/utils/log/file_task_handler.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_bitcoinj_bitcoinj_b575a682acf614b9ff95cacbdeb48f86c3ababe0",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 1,
+  "lines_changed_total": 12,
+  "function_size_chars": 3806,
+  "function_size_lines": 59,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

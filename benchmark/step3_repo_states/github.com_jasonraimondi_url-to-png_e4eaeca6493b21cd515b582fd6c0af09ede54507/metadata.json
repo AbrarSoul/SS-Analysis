@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jasonraimondi_url-to-png_e4eaeca6493b21cd515b582fd6c0af09ede54507",
+  "cve_ids": [
+    "CVE-2024-39918"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "typescript",
+  "repository": "jasonraimondi/url-to-png",
+  "repository_url": "https://github.com/jasonraimondi/url-to-png",
+  "vulnerable_commit": "ef8391480c25332fc74d6cf841eab2969e18db27",
+  "fixed_commit": "e4eaeca6493b21cd515b582fd6c0af09ede54507",
+  "changed_file": "src/middlewares/extract_query_params.ts",
+  "max_score": "1337"
+}

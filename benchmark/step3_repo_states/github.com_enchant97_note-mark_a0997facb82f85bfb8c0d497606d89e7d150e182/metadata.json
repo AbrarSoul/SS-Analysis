@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_enchant97_note-mark_a0997facb82f85bfb8c0d497606d89e7d150e182",
+  "cve_ids": [
+    "CVE-2024-41819"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "typescript",
+  "repository": "enchant97/note-mark",
+  "repository_url": "https://github.com/enchant97/note-mark",
+  "vulnerable_commit": "f3d3a2f7c0b987235c38cdb14040da24d8d3d02f",
+  "fixed_commit": "a0997facb82f85bfb8c0d497606d89e7d150e182",
+  "changed_file": "frontend/src/core/renderer.ts",
+  "max_score": "1337"
+}

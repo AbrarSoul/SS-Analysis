@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_open-webui_open-webui_8af6a4cf21b756a66cd58378a01c60f74c39b7ca",
+  "cve_ids": [
+    "CVE-2025-64496"
+  ],
+  "cwe_ids": [
+    "CWE-501",
+    "CWE-829",
+    "CWE-830",
+    "CWE-95"
+  ],
+  "language": "python",
+  "repository": "open-webui/open-webui",
+  "repository_url": "https://github.com/open-webui/open-webui",
+  "vulnerable_commit": "9762ef3ef6f230bfed8d550dde69df6187f6267d",
+  "fixed_commit": "8af6a4cf21b756a66cd58378a01c60f74c39b7ca",
+  "changed_file": "backend/open_webui/utils/middleware.py",
+  "max_score": "1337"
+}

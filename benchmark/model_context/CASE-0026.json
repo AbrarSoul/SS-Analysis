@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0026",
+  "language": "javascript",
+  "cve_id": "CVE-2022-46164",
+  "cwe": [
+    {
+      "id": "CWE-665",
+      "definition": "Improper Initialization"
+    }
+  ],
+  "unified_diff": "diff --git a/src/socket.io/index.js b/src/socket.io/index.js\nindex 58134ae2e2..b77edbb57d 100644\n--- a/src/socket.io/index.js\n+++ b/src/socket.io/index.js\n@@ -13,7 +13,7 @@ const logger = require('../logger');\n const plugins = require('../plugins');\n const ratelimit = require('../middleware/ratelimit');\n \n-const Namespaces = {};\n+const Namespaces = Object.create(null);\n \n const Sockets = module.exports;\n ",
+  "containing_class_declaration": null,
+  "imports": [
+    "const os = require('os');",
+    "const nconf = require('nconf');",
+    "const winston = require('winston');",
+    "const util = require('util');",
+    "const validator = require('validator');",
+    "const cookieParser = require('cookie-parser')(nconf.get('secret'));",
+    "const db = require('../database');",
+    "const user = require('../user');",
+    "const logger = require('../logger');",
+    "const plugins = require('../plugins');",
+    "const ratelimit = require('../middleware/ratelimit');",
+    "const SocketIO = require('socket.io').Server;",
+    "const als = require('../als');",
+    "const meta = require('../meta');",
+    "const validator = require('validator');"
+  ],
+  "vulnerable_function": "const Namespaces = {};",
+  "patched_function": "const Namespaces = Object.create(null);",
+  "extraction_notes": "Module-level statement, not inside any function; extracted verbatim.",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 1034,
+  "context_size_chars_after_truncation": 1034
+}

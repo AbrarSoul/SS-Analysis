@@ -1,0 +1,44 @@
+{
+  "case_id": "github.com_jenkinsci_sonar-gerrit-plugin_f4646d4df0870bd06b76de86309bb38fbd929d54",
+  "language": "java",
+  "cve_id": "CVE-2022-46688",
+  "cve_ids_all": [
+    "CVE-2022-46688"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-352",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import static org.jenkinsci.plugins.sonargerrit.util.Localization.getLocalized;",
+    "import com.cloudbees.plugins.credentials.common.PasswordCredentials;",
+    "import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials;",
+    "import com.cloudbees.plugins.credentials.common.UsernameCredentials;",
+    "import com.sonyericsson.hudson.plugins.gerrit.trigger.GerritManagement;",
+    "import com.sonyericsson.hudson.plugins.gerrit.trigger.GerritServer;",
+    "import com.sonyericsson.hudson.plugins.gerrit.trigger.PluginImpl;",
+    "import com.sonyericsson.hudson.plugins.gerrit.trigger.config.IGerritHudsonTriggerConfig;",
+    "import edu.umd.cs.findbugs.annotations.Nullable;",
+    "import hudson.Extension;",
+    "import hudson.Util;",
+    "import hudson.model.AbstractDescribableImpl;",
+    "import hudson.model.Descriptor;",
+    "import hudson.model.Item;",
+    "import hudson.util.FormValidation;",
+    "import hudson.util.ListBoxModel;",
+    "import hudson.util.Secret;",
+    "import java.util.List;",
+    "import java.util.Optional;",
+    "import org.kohsuke.stapler.AncestorInPath;",
+    "import org.kohsuke.stapler.DataBoundConstructor;",
+    "import org.kohsuke.stapler.DataBoundSetter;",
+    "import org.kohsuke.stapler.QueryParameter;"
+  ],
+  "vulnerable_function": "    public FormValidation doTestConnection(\n        @AncestorInPath Item item,\n        @QueryParameter(\"httpCredentialsId\") final String httpCredentialsId,\n        @QueryParameter(\"serverName\") final String serverName) {\n      FormValidation credentialsIdRequiredValidation =\n          FormValidation.validateRequired(httpCredentialsId);\n      if (credentialsIdRequiredValidation.kind == FormValidation.Kind.ERROR) {\n        return credentialsIdRequiredValidation;\n      }\n\n      StandardUsernamePasswordCredentials credentials =\n          GerritHttpCredentials.get().findById(item, httpCredentialsId).orElse(null);\n      if (credentials == null) {\n        return FormValidation.error(\n            getLocalized(\"jenkins.plugin.error.gerrit.http.credentials.id.not-found\"));\n      }\n\n      IGerritHudsonTriggerConfig gerritConfig = GerritManagement.getConfig(serverName);\n      if (gerritConfig == null) {\n        return FormValidation.error(getLocalized(\"jenkins.plugin.error.gerrit.config.empty\"));\n      }\n\n      if (!gerritConfig.isUseRestApi()) {\n        return FormValidation.error(getLocalized(\"jenkins.plugin.error.gerrit.restapi.off\"));\n      }\n\n      GerritServer server = PluginImpl.getServer_(serverName);\n      if (server == null) {\n        return FormValidation.error(getLocalized(\"jenkins.plugin.error.gerrit.server.empty\"));\n      }\n\n      return server\n          .getDescriptor()\n          .doTestRestConnection(\n              gerritConfig.getGerritFrontEndUrl(),\n              credentials.getUsername(),\n              credentials.getPassword().getPlainText());\n    }",
+  "patched_function": "    public FormValidation doTestConnection(\n        @AncestorInPath Item item,\n        @QueryParameter(\"httpCredentialsId\") final String httpCredentialsId,\n        @QueryParameter(\"serverName\") final String serverName)\n        throws ServletException, IOException {\n      checkPermission(item, Item.CONFIGURE);\n\n      FormValidation credentialsIdRequiredValidation =\n          FormValidation.validateRequired(httpCredentialsId);\n      if (credentialsIdRequiredValidation.kind == FormValidation.Kind.ERROR) {\n        return credentialsIdRequiredValidation;\n      }\n\n      StandardUsernamePasswordCredentials credentials =\n          GerritHttpCredentials.get().findById(item, httpCredentialsId).orElse(null);\n      if (credentials == null) {\n        return FormValidation.error(\n            getLocalized(\"jenkins.plugin.error.gerrit.http.credentials.id.not-found\"));\n      }\n\n      IGerritHudsonTriggerConfig gerritConfig = GerritManagement.getConfig(serverName);\n      if (gerritConfig == null) {\n        return FormValidation.error(getLocalized(\"jenkins.plugin.error.gerrit.config.empty\"));\n      }\n\n      if (!gerritConfig.isUseRestApi()) {\n        return FormValidation.error(getLocalized(\"jenkins.plugin.error.gerrit.restapi.off\"));\n      }\n\n      GerritServer server = PluginImpl.getServer_(serverName);\n      if (server == null) {\n        return FormValidation.error(getLocalized(\"jenkins.plugin.error.gerrit.server.empty\"));\n      }\n\n      return server\n          .getDescriptor()\n          .doTestRestConnection(\n              gerritConfig.getGerritFrontEndUrl(),\n              credentials.getUsername(),\n              credentials.getPassword().getPlainText());\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/jenkinsci/plugins/sonargerrit/gerrit/GerritAuthenticationConfig.java b/src/main/java/org/jenkinsci/plugins/sonargerrit/gerrit/GerritAuthenticationConfig.java\nindex e257e52..fe250e5 100644\n--- a/src/main/java/org/jenkinsci/plugins/sonargerrit/gerrit/GerritAuthenticationConfig.java\n+++ b/src/main/java/org/jenkinsci/plugins/sonargerrit/gerrit/GerritAuthenticationConfig.java\n@@ -1,5 +1,6 @@\n package org.jenkinsci.plugins.sonargerrit.gerrit;\n \n+import static hudson.Functions.checkPermission;\n import static org.jenkinsci.plugins.sonargerrit.util.Localization.getLocalized;\n \n import com.cloudbees.plugins.credentials.common.PasswordCredentials;\n@@ -18,12 +19,15 @@ import hudson.model.Item;\n import hudson.util.FormValidation;\n import hudson.util.ListBoxModel;\n import hudson.util.Secret;\n+import java.io.IOException;\n import java.util.List;\n import java.util.Optional;\n+import javax.servlet.ServletException;\n import org.kohsuke.stapler.AncestorInPath;\n import org.kohsuke.stapler.DataBoundConstructor;\n import org.kohsuke.stapler.DataBoundSetter;\n import org.kohsuke.stapler.QueryParameter;\n+import org.kohsuke.stapler.interceptor.RequirePOST;\n \n /** Project: Sonar-Gerrit Plugin Author: Tatiana Didik Created: 12.11.2017 21:43 $Id$ */\n public class GerritAuthenticationConfig\n@@ -123,10 +127,14 @@ public class GerritAuthenticationConfig\n     }\n \n     @SuppressWarnings(value = \"unused\")\n+    @RequirePOST\n     public FormValidation doTestConnection(\n         @AncestorInPath Item item,\n         @QueryParameter(\"httpCredentialsId\") final String httpCredentialsId,\n-        @QueryParameter(\"serverName\") final String serverName) {\n+        @QueryParameter(\"serverName\") final String serverName)\n+        throws ServletException, IOException {\n+      checkPermission(item, Item.CONFIGURE);\n+\n       FormValidation credentialsIdRequiredValidation =\n           FormValidation.validateRequired(httpCredentialsId);\n       if (credentialsIdRequiredValidation.kind == FormValidation.Kind.ERROR) {",
+  "auto_locate_confidence": "auto"
+}

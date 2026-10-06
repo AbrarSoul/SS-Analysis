@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_NodeBB_NodeBB_4d2d76897a02e7068ab74c81d17a2febfae8bfb9",
+  "cve_ids": [
+    "CVE-2023-30591"
+  ],
+  "cwe_ids": [
+    "CWE-241",
+    "CWE-754"
+  ],
+  "language": "javascript",
+  "repository": "NodeBB/NodeBB",
+  "repository_url": "https://github.com/NodeBB/NodeBB",
+  "vulnerable_commit": "7397873db355d5449e9de3e6ca39b47b4cb34813",
+  "fixed_commit": "4d2d76897a02e7068ab74c81d17a2febfae8bfb9",
+  "changed_file": "src/socket.io/index.js",
+  "max_score": "1337"
+}

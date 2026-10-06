@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_jupyterhub_binderhub_195caac172690456dcdc8cc7a6ca50e05abf8182",
+  "cve_ids": [
+    "CVE-2021-39159"
+  ],
+  "cwe_ids": [
+    "CWE-78",
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "jupyterhub/binderhub",
+  "repository_url": "https://github.com/jupyterhub/binderhub",
+  "vulnerable_commit": "034430adc8ed379135f3ef46ee6ca650781ef67c",
+  "fixed_commit": "195caac172690456dcdc8cc7a6ca50e05abf8182",
+  "changed_file": "binderhub/repoproviders.py",
+  "max_score": "1337"
+}

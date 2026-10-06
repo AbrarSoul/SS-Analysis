@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0161",
+  "language": "python",
+  "cve_id": "CVE-2012-5642",
+  "cve_ids_all": [
+    "CVE-2012-5642"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": "Action",
+  "imports": [
+    "import logging",
+    "import os",
+    "import threading"
+  ],
+  "vulnerable_function": "\tdef replaceTag(query, aInfo):\n\t\t\"\"\" Replace tags in query\n\t\t\"\"\"\n\t\tstring = query\n\t\tfor tag in aInfo:\n\t\t\tstring = string.replace('<' + tag + '>', str(aInfo[tag]))\n\t\t# New line\n\t\tstring = string.replace(\"<br>\", '\\n')\n\t\treturn string\n",
+  "patched_function": "\tdef replaceTag(query, aInfo):\n\t\t\"\"\" Replace tags in query\n\t\t\"\"\"\n\t\tstring = query\n\t\tfor tag, value in aInfo.iteritems():\n\t\t\tvalue = str(value)\t\t\t  # assure string\n\t\t\tif tag == 'matches':\n\t\t\t\t# That one needs to be escaped since its content is\n\t\t\t\t# out of our control\n\t\t\t\tvalue = escapeTag(value)\n\t\t\tstring = string.replace('<' + tag + '>', value)\n\t\t# New line\n\t\tstring = string.replace(\"<br>\", '\\n')\n\t\treturn string\n",
+  "unified_diff": "diff --git a/server/action.py b/server/action.py\nindex faf50653..387c115c 100644\n--- a/server/action.py\n+++ b/server/action.py\n@@ -230,7 +230,14 @@ class Action:\n \tdef execActionStop(self):\n \t\tstopCmd = Action.replaceTag(self.__actionStop, self.__cInfo)\n \t\treturn Action.executeCmd(stopCmd)\n-\t\n+\n+\tdef escapeTag(tag):\n+\t\tfor c in '\\\\#&;`|*?~<>^()[]{}$\\n':\n+\t\t\tif c in tag:\n+\t\t\t\ttag = tag.replace(c, '\\\\' + c)\n+\t\treturn tag\n+\tescapeTag = staticmethod(escapeTag)\n+\n \t##\n \t# Replaces tags in query with property values in aInfo.\n \t#\n@@ -243,8 +250,13 @@ class Action:\n \t\t\"\"\" Replace tags in query\n \t\t\"\"\"\n \t\tstring = query\n-\t\tfor tag in aInfo:\n-\t\t\tstring = string.replace('<' + tag + '>', str(aInfo[tag]))\n+\t\tfor tag, value in aInfo.iteritems():\n+\t\t\tvalue = str(value)\t\t\t  # assure string\n+\t\t\tif tag == 'matches':\n+\t\t\t\t# That one needs to be escaped since its content is\n+\t\t\t\t# out of our control\n+\t\t\t\tvalue = escapeTag(value)\n+\t\t\tstring = string.replace('<' + tag + '>', value)\n \t\t# New line\n \t\tstring = string.replace(\"<br>\", '\\n')\n \t\treturn string",
+  "auto_locate_confidence": "auto"
+}

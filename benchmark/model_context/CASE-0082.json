@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0082",
+  "language": "javascript",
+  "cve_id": "CVE-2020-7761",
+  "cve_ids_all": [
+    "CVE-2020-7761"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "\tvalidate.isEmail = function(str) {\n\t\tstr = str.replace(/^\\s*|\\s*$/g, '');\n\t\tstr = str.replace(/^\\t*|\\t*$/g, '');\n\t\treturn (/^\\w+([\\.\\+-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/.test(str));\n\t}",
+  "patched_function": "\tvalidate.isEmail = function(str) {\n\t\tstr = str.replace(/^\\s*|\\s*$/g, '');\n\t\tstr = str.replace(/^\\t*|\\t*$/g, '');\n\n\t\t// Practical implementation of RFC 5322\n\t\t// https://www.regular-expressions.info/email.html\n\t\treturn (/^[a-z0-9!#$%&'*+/=?^_\u2018{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_\u2018{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(str));\n\t}",
+  "unified_diff": "diff --git a/src/kafe/string-validate.js b/src/kafe/string-validate.js\nindex 4bb7bc3..5c527f9 100644\n--- a/src/kafe/string-validate.js\n+++ b/src/kafe/string-validate.js\n@@ -46,7 +46,10 @@\n \tvalidate.isEmail = function(str) {\n \t\tstr = str.replace(/^\\s*|\\s*$/g, '');\n \t\tstr = str.replace(/^\\t*|\\t*$/g, '');\n-\t\treturn (/^\\w+([\\.\\+-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/.test(str));\n+\n+\t\t// Practical implementation of RFC 5322\n+\t\t// https://www.regular-expressions.info/email.html\n+\t\treturn (/^[a-z0-9!#$%&'*+/=?^_\u2018{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_\u2018{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(str));\n \t};\n \n ",
+  "auto_locate_confidence": "auto"
+}

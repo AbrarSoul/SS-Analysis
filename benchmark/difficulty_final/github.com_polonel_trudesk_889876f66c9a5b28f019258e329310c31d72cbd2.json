@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_polonel_trudesk_889876f66c9a5b28f019258e329310c31d72cbd2",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-269"
+  ],
+  "changed_files": 1,
+  "lines_added": 21,
+  "lines_removed": 21,
+  "lines_changed_total": 42,
+  "function_size_chars": 2988,
+  "function_size_lines": 60,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

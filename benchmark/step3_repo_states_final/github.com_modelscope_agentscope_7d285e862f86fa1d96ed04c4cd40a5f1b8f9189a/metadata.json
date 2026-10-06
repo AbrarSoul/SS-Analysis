@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_modelscope_agentscope_7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a",
+  "cve_ids": [
+    "CVE-2024-8537"
+  ],
+  "cwe_ids": [
+    "CWE-29"
+  ],
+  "language": "python",
+  "repository": "modelscope/agentscope",
+  "repository_url": "https://github.com/modelscope/agentscope",
+  "vulnerable_commit": "6178c29bcbff044c5bab788c0eb364c0fe84baec",
+  "fixed_commit": "7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a",
+  "changed_file": "src/agentscope/studio/_app.py",
+  "max_score": "1337"
+}

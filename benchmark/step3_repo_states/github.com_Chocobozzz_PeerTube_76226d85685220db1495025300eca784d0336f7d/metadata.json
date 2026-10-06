@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Chocobozzz_PeerTube_76226d85685220db1495025300eca784d0336f7d",
+  "cve_ids": [
+    "CVE-2025-32947"
+  ],
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "language": "typescript",
+  "repository": "Chocobozzz/PeerTube",
+  "repository_url": "https://github.com/Chocobozzz/PeerTube",
+  "vulnerable_commit": "fd6b6b5931f2bbb95601509bc92a90a94711b73e",
+  "fixed_commit": "76226d85685220db1495025300eca784d0336f7d",
+  "changed_file": "server/core/lib/activitypub/crawl.ts",
+  "max_score": "1337"
+}

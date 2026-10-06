@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Graylog2_graylog2-server_1596b749db86368ba476662f23a0f0c5ec2b5097",
+  "cve_ids": [
+    "CVE-2024-24823"
+  ],
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "language": "java",
+  "repository": "Graylog2/graylog2-server",
+  "repository_url": "https://github.com/Graylog2/graylog2-server",
+  "vulnerable_commit": "b9d6c67bad2b3835f6dd4313dedf024af1f8aa67",
+  "fixed_commit": "1596b749db86368ba476662f23a0f0c5ec2b5097",
+  "changed_file": "graylog2-server/src/main/java/org/graylog2/rest/resources/system/SessionsResource.java",
+  "max_score": "1337"
+}

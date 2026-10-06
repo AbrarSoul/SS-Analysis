@@ -1,0 +1,14 @@
+diff --git a/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java b/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java
+index 782e47a6cd9..4b8d2cb1536 100644
+--- a/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java
++++ b/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java
+@@ -81,8 +81,7 @@ public class CookieSigner {
+       LOG.debug("Signature generated for " + rawValue + " inside verify is " + currentSignature);
+     }
+     if (!MessageDigest.isEqual(originalSignature.getBytes(), currentSignature.getBytes())) {
+-      throw new IllegalArgumentException("Invalid sign, original = " + originalSignature +
+-        " current = " + currentSignature);
++      throw new IllegalArgumentException("Invalid sign");
+     }
+     return rawValue;
+   }

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0319",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 555,
+  "function_size_lines": 21,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Privileged restart executed before the admin check; a statement-order shape that needs to know which check matters."
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "qwen2.5-coder_32b__20260920T130947Z",
+  "case_id": "CASE-0026",
+  "attempt_index": 2,
+  "condition": "retry",
+  "model": "qwen2.5-coder:32b",
+  "temperature": 0.0,
+  "timestamp": 1789913234.3335721,
+  "raw_content": "id: vuln-nodebb-48d14392\npattern: |\n  const $VAR = {};\nmessage: \"Improper initialization of object can lead to prototype pollution. Use Object.create(null) instead.\"\nseverity: ERROR\nlanguages: [javascript]\nmetadata:\n  cve: CVE-2022-46164\n  cwe: CWE-665\n  source: verified-vulnerability-fixing-evidence",
+  "prompt_text": "Generate one Semgrep rule from the verified vulnerability-fixing evidence.\n\nLanguage: javascript\nCVE: CVE-2022-46164\nCWE: CWE-665 (Improper Initialization)\n\nRelevant imports:\nconst os = require('os');\nconst nconf = require('nconf');\nconst winston = require('winston');\nconst util = require('util');\nconst validator = require('validator');\nconst cookieParser = require('cookie-parser')(nconf.get('secret'));\nconst db = require('../database');\nconst user = require('../user');\nconst logger = require('../logger');\nconst plugins = require('../plugins');\nconst ratelimit = require('../middleware/ratelimit');\nconst SocketIO = require('socket.io').Server;\nconst als = require('../als');\nconst meta = require('../meta');\nconst validator = require('validator');\n\nVulnerable function or method:\nconst Namespaces = {};\n\nPatched function or method:\nconst Namespaces = Object.create(null);\n\nUnified diff:\nFile: src/socket.io/index.js\n--- a/src/socket.io/index.js\n+++ b/src/socket.io/index.js\n-const Namespaces = {};\n+const Namespaces = Object.create(null);\n\nThe rule must detect the vulnerable behavior and avoid matching the patched\nbehavior. Generalize the security mechanism without depending on unnecessary\nrepository-specific names.\n\nReturn exactly one Semgrep YAML rule. Do not include Markdown fences or prose.\nInclude id, languages, message, severity, metadata, and the required pattern\nor taint-mode fields. Use \"vuln-nodebb-48d14392\" as the id.\nseverity must be one of: ERROR, WARNING, INFO.\n\nPREVIOUS ERROR TO FIX:\nRule incorrectly detected vulnerability in fixed version\nEnsure your next attempt addresses these issues."
+}

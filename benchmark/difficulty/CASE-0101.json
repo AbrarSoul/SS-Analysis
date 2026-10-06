@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0101",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 16,
+  "lines_changed_total": 17,
+  "function_size_chars": 674,
+  "function_size_lines": 17,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Trust-all SSL socket factory plus an always-true hostname verifier; classic insecure-TLS pattern."
+}

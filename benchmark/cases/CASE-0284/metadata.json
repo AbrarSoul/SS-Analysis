@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0284",
+  "original_source_case_id": "github.com_seerr-team_seerr_4ae20684092b5b28527b23dfbc1a3417858fee8e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-27707",
+  "cve_ids_all": [
+    "CVE-2026-27707"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-288",
+    "CWE-807"
+  ],
+  "language": "typescript",
+  "repository": "seerr-team/seerr",
+  "repository_url": "https://github.com/seerr-team/seerr",
+  "vulnerable_commit": "0d40a42de708913e4328f871f9c57de5c88767de",
+  "fixed_commit": "4ae20684092b5b28527b23dfbc1a3417858fee8e",
+  "changed_file": "server/routes/auth.ts",
+  "changed_function": "if (",
+  "vulnerable_lines": [
+    241,
+    251
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0284/vulnerable_source.ts": "d565f5c16d13af0d4ccaee9bb1968e0509ca3cc7cdeea280b7a9492b99001d5b",
+    "cases/CASE-0284/patched_source.ts": "d6aafbe69d0ef8313faf1654093580c044591a15af82dd929e03812aaa8a36cf",
+    "cases/CASE-0284/patch.diff": "452ec1d651bc785a93c66210184e7f0d724f527dc1ac0f6f66a5bc069e6fc960",
+    "cases/CASE-0284/metadata.json": "fbeb09e4eebe9187a8f14be9ef9195fd545dcc962a2486ed59959080b638bbab",
+    "model_context/CASE-0284.json": "04d6c9143956be71c9a9f9a7f9cb5d473d6b7280baadf71bf280a90c0f43d2be",
+    "difficulty/CASE-0284.json": "f4d9afb44fe16a8960069c1077a3cce4ce5d90329caa7cdb6b0ad3df65b4a5d5"
+  },
+  "case_level_hash": "43a8a4ce624fc0f89f6a4c01966bef979b597e7ae0750cc093a37f2e239a02ed"
+}

@@ -1,0 +1,28 @@
+{
+  "case_id": "CASE-0256",
+  "language": "python",
+  "cve_id": "CVE-2020-29128",
+  "cve_ids_all": [
+    "CVE-2020-29128"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-91",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "XmlView",
+  "imports": [
+    "from __future__ import absolute_import, print_function, division",
+    "from operator import attrgetter",
+    "import itertools",
+    "from petl.compat import string_types, text_type",
+    "from petl.util.base import Table",
+    "from petl.io.sources import read_source_from_arg",
+    "import xml.etree.ElementTree as etree"
+  ],
+  "vulnerable_function": "    def __iter__(self):\n        vmatch = self.vmatch\n        vdict = self.vdict\n\n        with self.source.open('rb') as xmlf:\n\n            tree = etree.parse(xmlf)\n            if not hasattr(tree, 'iterfind'):\n                # Python 2.6 compatibility\n                tree.iterfind = tree.findall\n\n            if vmatch is not None:\n                # simple case, all value paths are the same\n                for rowelm in tree.iterfind(self.rmatch):\n                    if self.attr is None:\n                        getv = attrgetter('text')\n                    else:\n                        getv = lambda e: e.get(self.attr)\n                    if isinstance(vmatch, string_types):\n                        # match only one path\n                        velms = rowelm.findall(vmatch)\n                    else:\n                        # match multiple paths\n                        velms = itertools.chain(*[rowelm.findall(enm)\n                                                  for enm in vmatch])\n                    yield tuple(getv(velm)\n                                for velm in velms)\n\n            else:\n                # difficult case, deal with different paths for each field\n\n                # determine output header\n                flds = tuple(sorted(map(text_type, vdict.keys())))\n                yield flds\n\n                # setup value getters\n                vmatches = dict()\n                vgetters = dict()\n                for f in flds:\n                    vmatch = self.vdict[f]\n                    if isinstance(vmatch, string_types):\n                        # match element path\n                        vmatches[f] = vmatch\n                        vgetters[f] = element_text_getter(self.missing)\n                    else:\n                        # match element path and attribute name\n                        vmatches[f] = vmatch[0]\n                        attr = vmatch[1]\n                        vgetters[f] = attribute_text_getter(attr, self.missing)\n\n                # determine data rows\n                for rowelm in tree.iterfind(self.rmatch):\n                    yield tuple(vgetters[f](rowelm.findall(vmatches[f]))\n                                for f in flds)\n",
+  "patched_function": "def _create_xml_parser(user_parser):\n    if user_parser is not None:\n        return user_parser\n    try:\n        # Default lxml parser.\n        # This will throw an error if parser is not set and lxml could not be imported\n        # because Python's built XML parser doesn't like the `resolve_entities` kwarg.\n        # return etree.XMLParser(resolve_entities=False)\n        return etree.XMLParser(resolve_entities=False)\n    except TypeError:\n        # lxml not available\n        return None\n",
+  "unified_diff": "diff --git a/petl/io/xml.py b/petl/io/xml.py\nindex 983d9f6..b63287c 100644\n--- a/petl/io/xml.py\n+++ b/petl/io/xml.py\n@@ -133,6 +133,9 @@ def fromxml(source, *args, **kwargs):\n     or list of paths can be provided, e.g.,\n     ``fromxml('example.html', './/tr', ('th', 'td'))``.\n \n+    Optionally a custom parser can be provided, e.g.,\n+    ``etl.fromxml('example1.xml', 'tr', 'td', parser=my_parser)``.\n+\n     \"\"\"\n \n     source = read_source_from_arg(source)\n@@ -162,14 +165,15 @@ class XmlView(Table):\n         else:\n             assert False, 'bad parameters'\n         self.missing = kwargs.get('missing', None)\n+        self.user_parser = kwargs.get('parser', None)\n \n     def __iter__(self):\n         vmatch = self.vmatch\n         vdict = self.vdict\n \n         with self.source.open('rb') as xmlf:\n-\n-            tree = etree.parse(xmlf)\n+            parser2 = _create_xml_parser(self.user_parser)\n+            tree = etree.parse(xmlf, parser=parser2)\n             if not hasattr(tree, 'iterfind'):\n                 # Python 2.6 compatibility\n                 tree.iterfind = tree.findall\n@@ -219,6 +223,20 @@ class XmlView(Table):\n                                 for f in flds)\n \n \n+def _create_xml_parser(user_parser):\n+    if user_parser is not None:\n+        return user_parser\n+    try:\n+        # Default lxml parser.\n+        # This will throw an error if parser is not set and lxml could not be imported\n+        # because Python's built XML parser doesn't like the `resolve_entities` kwarg.\n+        # return etree.XMLParser(resolve_entities=False)\n+        return etree.XMLParser(resolve_entities=False)\n+    except TypeError:\n+        # lxml not available\n+        return None\n+\n+\n def element_text_getter(missing):\n     def _get(v):\n         if len(v) > 1:",
+  "auto_locate_confidence": "auto_low_confidence"
+}

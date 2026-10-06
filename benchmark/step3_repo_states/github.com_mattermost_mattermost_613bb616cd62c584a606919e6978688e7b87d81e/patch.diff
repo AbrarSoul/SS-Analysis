@@ -1,0 +1,17 @@
+diff --git a/webapp/channels/src/components/user_profile/user_profile.tsx b/webapp/channels/src/components/user_profile/user_profile.tsx
+index f501c3712c..a5dfb5dc20 100644
+--- a/webapp/channels/src/components/user_profile/user_profile.tsx
++++ b/webapp/channels/src/components/user_profile/user_profile.tsx
+@@ -36,10 +36,10 @@ export default function UserProfile({
+ }: Props) {
+     // Fetch remote info when component mounts for remote users
+     useEffect(() => {
+-        if (user?.remote_id && (!remoteNames || remoteNames.length === 0)) {
++        if (user?.remote_id) {
+             actions.fetchRemoteClusterInfo(user.remote_id);
+         }
+-    }, [user?.remote_id, remoteNames, actions]);
++    }, [user?.remote_id]);
+     let name: ReactNode;
+     if (user && displayUsername) {
+         name = `@${(getUsername(user))}`;

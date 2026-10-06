@@ -1,0 +1,17 @@
+diff --git a/web/src/copy_and_paste.js b/web/src/copy_and_paste.js
+index 70eae07c5a..e67cb8ba72 100644
+--- a/web/src/copy_and_paste.js
++++ b/web/src/copy_and_paste.js
+@@ -90,7 +90,11 @@ function construct_copy_div($div, start_id, end_id) {
+         }
+         const message = message_lists.current.get(rows.id($row));
+         const $content = $(message.content);
+-        $content.first().prepend(message.sender_full_name + ": ");
++        $content.first().prepend(
++            $("<span>")
++                .text(message.sender_full_name + ": ")
++                .contents(),
++        );
+         $div.append($content);
+     }
+ 

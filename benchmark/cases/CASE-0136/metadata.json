@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0136",
+  "original_source_case_id": "github.com_cowtowncoder_java-merge-sort_450fdee70b5f181c2afc5d817f293efa1a543902",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-24913",
+  "cve_ids_all": [
+    "CVE-2022-24913"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-377",
+    "CWE-668"
+  ],
+  "language": "java",
+  "repository": "cowtowncoder/java-merge-sort",
+  "repository_url": "https://github.com/cowtowncoder/java-merge-sort",
+  "vulnerable_commit": "83b29a8ab784ff4c6cd05517371aa9893409d29b",
+  "fixed_commit": "450fdee70b5f181c2afc5d817f293efa1a543902",
+  "changed_file": "src/main/java/com/fasterxml/sort/std/StdTempFileProvider.java",
+  "changed_function": "public File provide() throws IOException",
+  "vulnerable_lines": [
+    36,
+    41
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0136/vulnerable_source.java": "2861ce68fae7747477b67017b0bfd34b74d460abbf4f383d9e7ba42f7a4d9b01",
+    "cases/CASE-0136/patched_source.java": "ee3624ba0bedf3b5c9b6edf7af638fea5e9b7f5707bbdbd00f013765f2ea2207",
+    "cases/CASE-0136/patch.diff": "7a5c3366e838254abfd5dcf854714ee671c925193d00be4cad6d52e23ccda51d",
+    "cases/CASE-0136/metadata.json": "2769c74b60c6ef4a210e39acf40c52c1deb7eac6c06aaafa71cd840357e64c35",
+    "model_context/CASE-0136.json": "db43e7c364b128ae082e93d302ed78538ac90752a38cf6e557fc306454f6a335",
+    "difficulty/CASE-0136.json": "7505eeb3fb59a75505162b27248914fef1891ea6c59393ed4d9aca389913875c"
+  },
+  "case_level_hash": "9bb8f8532afa7bb79ea0fbf0e5a003a55d725b956c6e13230d87f6326f7e1386"
+}

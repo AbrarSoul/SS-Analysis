@@ -1,0 +1,344 @@
+[
+  {
+    "case_id": "github.com_CanonicalLtd_subiquity_7db70650feaf513d7fb6f1ca07f2d670a0890613",
+    "language": "python",
+    "repository": "CanonicalLtd/subiquity",
+    "error": "no function contains line 26; no function contains line 28; no function contains line 1181; no function contains line 1183"
+  },
+  {
+    "case_id": "github.com_FasterXML_jackson-databind_3e8fa3beea49ea62109df9e643c9cb678dabdde1",
+    "language": "java",
+    "repository": "FasterXML/jackson-databind",
+    "error": "extracted function too large to be useful context (vuln=190 lines, patched=195 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_FasterXML_jackson-databind_f6d9c664f6d481703138319f6a0f1fdbddb3a259",
+    "language": "java",
+    "repository": "FasterXML/jackson-databind",
+    "error": "extracted function too large to be useful context (vuln=168 lines, patched=171 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_Graylog2_graylog2-server_b93a66353f35a94a4e8f3f75ac4f5cdc5a2d4a6a",
+    "language": "java",
+    "repository": "Graylog2/graylog2-server",
+    "error": "no method-like block contains line 123; no method-like block contains line 125; no method-like block contains line 136; no method-like block contains line 138; no method-like block contains line 141; no method-like block contains line 143"
+  },
+  {
+    "case_id": "github.com_LiuWoodsCode_LiuOS_c658b4f3e57258acf5f6207a90c2f2169698ae22",
+    "language": "python",
+    "repository": "LiuWoodsCode/LiuOS",
+    "error": "no function contains line 114; no function contains line 116"
+  },
+  {
+    "case_id": "github.com_MCPJam_inspector_e6b9cf9d9e6c9cbec31493b1bdca3a1255fe3e7a",
+    "language": "typescript",
+    "repository": "MCPJam/inspector",
+    "error": "no method-like block contains line 0; no method-like block contains line 2; no method-like block contains line 285; no method-like block contains line 287"
+  },
+  {
+    "case_id": "github.com_MagicStack_asyncpg_69bcdf5bf7696b98ee708be5408fd7d854e910d0",
+    "language": "python",
+    "repository": "MagicStack/asyncpg",
+    "error": "SyntaxError: invalid syntax (<unknown>, line 15)"
+  },
+  {
+    "case_id": "github.com_OneUptime_oneuptime_e8e4ee3ff0740eb131045ab3d67453141c46178a",
+    "language": "typescript",
+    "repository": "OneUptime/oneuptime",
+    "error": "no method-like block contains line 30; no method-like block contains line 32; no method-like block contains line 31; no method-like block contains line 33; no method-like block contains line 33; no method-like block contains line 35"
+  },
+  {
+    "case_id": "github.com_ParzivalHack_PySpector_4e279e078c53d760fd321ff9b698d683c65ccb8e",
+    "language": "python",
+    "repository": "ParzivalHack/PySpector",
+    "error": "extracted function too large to be useful context (vuln=112 lines, patched=201 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_Phoenix616_InventoryGui_00e684bd689ebc60bcb5b83ce4ef3c5a01778494",
+    "language": "java",
+    "repository": "Phoenix616/InventoryGui",
+    "error": "extracted function too large to be useful context (vuln=159 lines, patched=168 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_RDFLib_pyrdfa3_ffd1d62dd50d5f4190013b39cedcdfbd81f3ce3e",
+    "language": "python",
+    "repository": "RDFLib/pyrdfa3",
+    "error": "extracted function too large to be useful context (vuln=221 lines, patched=222 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_RooCodeInc_Roo-Code_1be6fce1a6864ae63e8160b0666db2c647f2dbba",
+    "language": "typescript",
+    "repository": "RooCodeInc/Roo-Code",
+    "error": "extracted function too large to be useful context (vuln=190 lines, patched=194 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_ShashikantSingh09_python-progrrames_6ce60b1b2116a579a2e89de96d738a98f6ad4f27",
+    "language": "python",
+    "repository": "ShashikantSingh09/python-progrrames",
+    "error": "no function contains line 15; no function contains line 17"
+  },
+  {
+    "case_id": "github.com_Tygo-van-den-Hurk_Slyde_e4c215b061e44fd2ead805de34d72642a710af60",
+    "language": "typescript",
+    "repository": "Tygo-van-den-Hurk/Slyde",
+    "error": "no method-like block contains line 40; no method-like block contains line 42"
+  },
+  {
+    "case_id": "github.com_ahmed-elgaml11_Natours_7401793a8d9ed0f0c250c4e0ee2815d685d7a70b",
+    "language": "typescript",
+    "repository": "ahmed-elgaml11/Natours",
+    "error": "no method-like block contains line 97; no method-like block contains line 99"
+  },
+  {
+    "case_id": "github.com_apache_airflow_372e699c2d1e11f7087b5340454d0a0a6a56fbf5",
+    "language": "python",
+    "repository": "apache/airflow",
+    "error": "no function contains line 60; no function contains line 62"
+  },
+  {
+    "case_id": "github.com_apache_nifi_5aed878c5d2a193cd2039c2e997bc3025046bc41",
+    "language": "java",
+    "repository": "apache/nifi",
+    "error": "no method-like block contains line 118; no method-like block contains line 120; no method-like block contains line 805; no method-like block contains line 807"
+  },
+  {
+    "case_id": "github.com_apache_ofbiz-framework_2f5b8d33e32c4d9a48243cf9e503236acd5aec5c",
+    "language": "java",
+    "repository": "apache/ofbiz-framework",
+    "error": "extracted function too large to be useful context (vuln=361 lines, patched=364 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_apache_tomcat_70dc3b279f7c99136c2c51bce8812508b4893c8b",
+    "language": "java",
+    "repository": "apache/tomcat",
+    "error": "no method-like block contains line 130; no method-like block contains line 132"
+  },
+  {
+    "case_id": "github.com_arduino_arduino-ide_1fa0fd31c8d6b62f19332e33713a8c5b0f4ed6f9",
+    "language": "javascript",
+    "repository": "arduino/arduino-ide",
+    "error": "no method-like block contains line 1; no method-like block contains line 3; no method-like block contains line 2; no method-like block contains line 4; no method-like block contains line 41; no method-like block contains line 43"
+  },
+  {
+    "case_id": "github.com_atampy25_quickentity-editor-next_5303b45a20a6e4e9318729b8dd7bbf09b37b369d",
+    "language": "typescript",
+    "repository": "atampy25/quickentity-editor-next",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_bottlepy_bottle_a2b0ee6bb4ce88895429ec4aca856616244c4c4c",
+    "language": "python",
+    "repository": "bottlepy/bottle",
+    "error": "no function contains line 18; no function contains line 20"
+  },
+  {
+    "case_id": "github.com_brix_crypto-js_b405ff597fb3ac76a7bdfbc72dca10ba1079b1d5",
+    "language": "javascript",
+    "repository": "brix/crypto-js",
+    "error": "extracted function too large to be useful context (vuln=739 lines, patched=749 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_certifi_python-certifi_8fb96ed81f71e7097ed11bc4d9b19afd7ea5c909",
+    "language": "python",
+    "repository": "certifi/python-certifi",
+    "error": "no function contains line 3; no function contains line 5"
+  },
+  {
+    "case_id": "github.com_cobbler_cobbler_1b91a3d3ac87c31d9dac2307513feb2aa49620a6",
+    "language": "python",
+    "repository": "cobbler/cobbler",
+    "error": "SyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<unknown>, line 1380)"
+  },
+  {
+    "case_id": "github.com_coder_code-server_47d6d3ada5aadef6d221f3d612401eb3dad9299e",
+    "language": "typescript",
+    "repository": "coder/code-server",
+    "error": "no method-like block contains line 15; no method-like block contains line 17"
+  },
+  {
+    "case_id": "github.com_conda-forge_conda-forge-ci-setup-feedstock_fd91cb271c01f0e7928ebdc1feaac96fe385f959",
+    "language": "python",
+    "repository": "conda-forge/conda-forge-ci-setup-feedstock",
+    "error": "no function contains line 1; no function contains line 3; no function contains line 14; no function contains line 16"
+  },
+  {
+    "case_id": "github.com_conda_conda-build_f5a6aeef0d5d6940b8c2a88796910dc7476a62bb",
+    "language": "python",
+    "repository": "conda/conda-build",
+    "error": "no function contains line 13; no function contains line 15; no function contains line 23; no function contains line 25"
+  },
+  {
+    "case_id": "github.com_containerbuildsystem_cachi2_d6638e5e14474061a1ab1ba5d0ee72f58b9a11a9",
+    "language": "python",
+    "repository": "containerbuildsystem/cachi2",
+    "error": "no function contains line 24; no function contains line 26"
+  },
+  {
+    "case_id": "github.com_digitalbazaar_forge_260425c6167a38aae038697132483b5517b26451",
+    "language": "javascript",
+    "repository": "digitalbazaar/forge",
+    "error": "extracted function too large to be useful context (vuln=168 lines, patched=174 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_directus_directus_d84dcc36f75fc5c858d43746b8f9c426c38d696b",
+    "language": "typescript",
+    "repository": "directus/directus",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_factionsecurity_faction_0a6848d388d6dba1c81918cce2772b1e805cd3d6",
+    "language": "java",
+    "repository": "factionsecurity/faction",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_felixrieseberg_windows-build-tools_9835d33e68f2cb5e4d148e954bb3ed0221d98e90",
+    "language": "javascript",
+    "repository": "felixrieseberg/windows-build-tools",
+    "error": "no method-like block contains line 4; no method-like block contains line 6"
+  },
+  {
+    "case_id": "github.com_filebrowser_filebrowser_d5b39a14fd3fc0d1c364116b41289484df7c27b2",
+    "language": "typescript",
+    "repository": "filebrowser/filebrowser",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_gwozai_ruoyi-ai_c0daf641fb25b244591b7a6c3affa35c69d321fe",
+    "language": "java",
+    "repository": "gwozai/ruoyi-ai",
+    "error": "no method-like block contains line 99; no method-like block contains line 101; no method-like block contains line 121; no method-like block contains line 123; no method-like block contains line 130; no method-like block contains line 132"
+  },
+  {
+    "case_id": "github.com_haxtheweb_haxcms-nodejs_6dc2441c876350ca6fe9fbaecb058d92ef442869",
+    "language": "javascript",
+    "repository": "haxtheweb/haxcms-nodejs",
+    "error": "extracted function too large to be useful context (vuln=155 lines, patched=188 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_huggingface_transformers_deac971c469bcbb182c2e52da0b82fb3bf54cccf",
+    "language": "python",
+    "repository": "huggingface/transformers",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_igniterealtime_Openfire_3aec383e07ee893b77396fe946766bbd3758af77",
+    "language": "java",
+    "repository": "igniterealtime/Openfire",
+    "error": "extracted function too large to be useful context (vuln=206 lines, patched=208 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_leo-editor_leo-editor_029833689060ee73f1bc1708cf4b182f0c66ec8e",
+    "language": "python",
+    "repository": "leo-editor/leo-editor",
+    "error": "no function contains line 22; no function contains line 24"
+  },
+  {
+    "case_id": "github.com_lief-project_LIEF_81bd5d7ea0c390563f1c4c017c9019d154802978",
+    "language": "python",
+    "repository": "lief-project/LIEF",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_m0ver_bible-online_6ef0aabfb2d4ccd53fcaa9707781303af357410e",
+    "language": "java",
+    "repository": "m0ver/bible-online",
+    "error": "extracted function too large to be useful context (vuln=220 lines, patched=212 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_nicotsx_zerobyte_13e080a18967705bd2b4e110e5f7693fdca1c692",
+    "language": "typescript",
+    "repository": "nicotsx/zerobyte",
+    "error": "no method-like block contains line 45; no method-like block contains line 47"
+  },
+  {
+    "case_id": "github.com_npm_npm_f4d31693",
+    "language": "javascript",
+    "repository": "npm/npm",
+    "error": "extracted function too large to be useful context (vuln=513 lines, patched=518 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_nsupdate-info_nsupdate.info_60a3fe559c453bc36b0ec3e5dd39c1303640a59a",
+    "language": "python",
+    "repository": "nsupdate-info/nsupdate.info",
+    "error": "no function contains line 285; no function contains line 287"
+  },
+  {
+    "case_id": "github.com_nwjs_npm-installer_adb4df1e012d38a3872578d484291b9af07aad5b",
+    "language": "javascript",
+    "repository": "nwjs/npm-installer",
+    "error": "no method-like block contains line 35; no method-like block contains line 37"
+  },
+  {
+    "case_id": "github.com_open-webui_open-webui_8af6a4cf21b756a66cd58378a01c60f74c39b7ca",
+    "language": "python",
+    "repository": "open-webui/open-webui",
+    "error": "extracted function too large to be useful context (vuln=344 lines, patched=346 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_opencast_opencast_4225bf90af74557deaf8fb6b80b0705c9621acfc",
+    "language": "java",
+    "repository": "opencast/opencast",
+    "error": "no method-like block contains line 29; no method-like block contains line 31; no method-like block contains line 39; no method-like block contains line 41; no method-like block contains line 59; no method-like block contains line 61; no method-like block contains line 85; no method-like block contains line 87"
+  },
+  {
+    "case_id": "github.com_outray-tunnel_outray_08c61495761349e7fd2965229c3faa8d7b1c1581",
+    "language": "typescript",
+    "repository": "outray-tunnel/outray",
+    "error": "no method-like block contains line 2; no method-like block contains line 4; no method-like block contains line 75; no method-like block contains line 77; no method-like block contains line 81; no method-like block contains line 83; no method-like block contains line 85; no method-like block contains line 87; no method-like block contains line 87; no method-like block contains line 89; no method-like block contains line 90; no method-like block contains line 92; no method-like block contains line 113; no method-like block contains line 115; no method-like block contains line 116; no method-like block contains line 118; no method-like block contains line 120; no method-like block contains line 122; no method-like block contains line 122; no method-like block contains line 124; no method-like block contains line 125; no method-like block contains line 127; no method-like block contains line 128; no method-like block contains line 130; no method-like block contains line 129; no method-like block contains line 131; no method-like block contains line 136; no method-like block contains line 138; no method-like block contains line 149; no method-like block contains line 151; no method-like block contains line 163; no method-like block contains line 165; no method-like block contains line 165; no method-like block contains line 167"
+  },
+  {
+    "case_id": "github.com_pretix_pretix_ccdce2ccb8207b82501af3c03f50abc0f819b469",
+    "language": "python",
+    "repository": "pretix/pretix",
+    "error": "no function contains line 190; no function contains line 192; no function contains line 196; no function contains line 198"
+  },
+  {
+    "case_id": "github.com_pyload_pyload_431ea6f0371d748df66b344a05ca1a8e0310cff3",
+    "language": "javascript",
+    "repository": "pyload/pyload",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_requarks_wiki_1238d614e1599fefadd4614ee4b5797a087f50ac",
+    "language": "javascript",
+    "repository": "requarks/wiki",
+    "error": "extracted function too large to be useful context (vuln=19 lines, patched=287 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_simpleledger_slp-validate_cde95c0c6470dceb4f023cd462f904135ebd73e7",
+    "language": "typescript",
+    "repository": "simpleledger/slp-validate",
+    "error": "extracted function too large to be useful context (vuln=255 lines, patched=259 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_spring-projects_spring-framework_ab2410c754b67902f002bfcc0c3895bd7772d39",
+    "language": "java",
+    "repository": "spring-projects/spring-framework",
+    "error": "no method-like block contains line 20; no method-like block contains line 22; no method-like block contains line 47; no method-like block contains line 49"
+  },
+  {
+    "case_id": "github.com_undertow-io_undertow_1443a1a2bbb8e32e56788109d8285db250d55c8b",
+    "language": "java",
+    "repository": "undertow-io/undertow",
+    "error": "extracted function too large to be useful context (vuln=152 lines, patched=151 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_xmlunit_xmlunit_b81d48b71dfd2868bdfc30a3e17ff973f32bc15b",
+    "language": "java",
+    "repository": "xmlunit/xmlunit",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  },
+  {
+    "case_id": "github.com_xwiki_xwiki-platform_821d43ec45e67d45a6735a0717b9b77fffc1cd9f",
+    "language": "java",
+    "repository": "xwiki/xwiki-platform",
+    "error": "extracted function too large to be useful context (vuln=341 lines, patched=341 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_xwiki_xwiki-platform_a45eca2af772abb7324e56d7fd2df1ac937bc445",
+    "language": "java",
+    "repository": "xwiki/xwiki-platform",
+    "error": "extracted function too large to be useful context (vuln=153 lines, patched=87 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  }
+]

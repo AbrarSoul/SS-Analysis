@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_fedora-selinux_setroubleshoot_dda55aa50db95a25f0d919c3a0d5871827cdc40f",
+  "language": "python",
+  "cve_id": "CVE-2016-4989",
+  "cve_ids_all": [
+    "CVE-2016-4989"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "RunFix",
+  "imports": [
+    "import dbus",
+    "import dbus.service",
+    "import dbus.mainloop.glib",
+    "import gobject",
+    "import slip.dbus.service",
+    "from slip.dbus import polkit",
+    "import os",
+    "import commands"
+  ],
+  "vulnerable_function": "    def run_fix(self, local_id, analysis_id):\n        import commands\n        command = \"sealert -f %s -P %s\" % ( local_id, analysis_id)\n        return commands.getoutput(command)\n",
+  "patched_function": "    def run_fix(self, local_id, analysis_id):\n        import subprocess\n        command = [\"sealert\", \"-f\", local_id, \"-P\", analysis_id]\n        return subprocess.check_output(command, universal_newlines=True)\n",
+  "unified_diff": "diff --git a/framework/src/SetroubleshootFixit.py b/framework/src/SetroubleshootFixit.py\nindex a810151..aef1dd0 100644\n--- a/framework/src/SetroubleshootFixit.py\n+++ b/framework/src/SetroubleshootFixit.py\n@@ -14,9 +14,9 @@ class RunFix(slip.dbus.service.Object):\n         \n     @dbus.service.method (\"org.fedoraproject.SetroubleshootFixit\", in_signature='ss', out_signature='s')\n     def run_fix(self, local_id, analysis_id):\n-        import commands\n-        command = \"sealert -f %s -P %s\" % ( local_id, analysis_id)\n-        return commands.getoutput(command)\n+        import subprocess\n+        command = [\"sealert\", \"-f\", local_id, \"-P\", analysis_id]\n+        return subprocess.check_output(command, universal_newlines=True)\n \n if __name__ == \"__main__\":\n     mainloop = gobject.MainLoop ()",
+  "auto_locate_confidence": "auto"
+}

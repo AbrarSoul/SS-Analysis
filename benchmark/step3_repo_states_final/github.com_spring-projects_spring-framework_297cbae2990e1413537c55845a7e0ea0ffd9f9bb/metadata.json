@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spring-projects_spring-framework_297cbae2990e1413537c55845a7e0ea0ffd9f9bb",
+  "cve_ids": [
+    "CVE-2024-22259"
+  ],
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "274fba47f3b15bc12c8d81571c68987989f812e8",
+  "fixed_commit": "297cbae2990e1413537c55845a7e0ea0ffd9f9bb",
+  "changed_file": "spring-web/src/main/java/org/springframework/web/util/UriComponentsBuilder.java",
+  "max_score": "1337"
+}

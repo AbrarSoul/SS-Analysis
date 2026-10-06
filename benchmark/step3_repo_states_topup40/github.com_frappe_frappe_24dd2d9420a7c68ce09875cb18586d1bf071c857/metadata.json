@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_frappe_frappe_24dd2d9420a7c68ce09875cb18586d1bf071c857",
+  "cve_ids": [
+    "CVE-2025-55732"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "python",
+  "repository": "frappe/frappe",
+  "repository_url": "https://github.com/frappe/frappe",
+  "vulnerable_commit": "94523b9451c279ac1c519582009feac121b845ff",
+  "fixed_commit": "24dd2d9420a7c68ce09875cb18586d1bf071c857",
+  "changed_file": "frappe/desk/doctype/dashboard_chart/dashboard_chart.py",
+  "max_score": "1337"
+}

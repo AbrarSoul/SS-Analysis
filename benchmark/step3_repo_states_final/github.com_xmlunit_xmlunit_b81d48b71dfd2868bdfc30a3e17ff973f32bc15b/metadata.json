@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xmlunit_xmlunit_b81d48b71dfd2868bdfc30a3e17ff973f32bc15b",
+  "cve_ids": [
+    "CVE-2024-31573"
+  ],
+  "cwe_ids": [
+    "CWE-669"
+  ],
+  "language": "java",
+  "repository": "xmlunit/xmlunit",
+  "repository_url": "https://github.com/xmlunit/xmlunit",
+  "vulnerable_commit": "ba149098c97c9c845a0877c905d6b9d84e6568d0",
+  "fixed_commit": "b81d48b71dfd2868bdfc30a3e17ff973f32bc15b",
+  "changed_file": "xmlunit-core/src/main/java/org/xmlunit/util/TransformerFactoryConfigurer.java",
+  "max_score": "1337"
+}

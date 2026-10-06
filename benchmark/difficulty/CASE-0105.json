@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0105",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-208"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 2,
+  "lines_changed_total": 6,
+  "function_size_chars": 314,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Arrays.equals used to compare a MAC signature; non-constant-time comparison pattern."
+}

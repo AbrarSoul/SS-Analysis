@@ -1,0 +1,49 @@
+{
+  "case_id": "CASE-0034",
+  "language": "typescript",
+  "cve_id": "CVE-2025-65966",
+  "cwe": [
+    {
+      "id": "CWE-285",
+      "definition": "Improper Authorization"
+    }
+  ],
+  "unified_diff": "diff --git a/Common/Models/DatabaseModels/User.ts b/Common/Models/DatabaseModels/User.ts\nindex ac75a449bf..b4ec4d1f48 100644\n--- a/Common/Models/DatabaseModels/User.ts\n+++ b/Common/Models/DatabaseModels/User.ts\n@@ -30,7 +30,7 @@ import { Column, Entity, Index, JoinColumn, ManyToOne } from \"typeorm\";\n })\n @AllowAccessIfSubscriptionIsUnpaid()\n @TableAccessControl({\n-  create: [Permission.Public],\n+  create: [],\n   read: [Permission.CurrentUser],\n   delete: [Permission.CurrentUser],\n   update: [Permission.CurrentUser],",
+  "containing_class_declaration": "class User extends UserModel",
+  "imports": [
+    "import File from \"./File\";",
+    "import UserModel from \"../../Models/DatabaseModels/DatabaseBaseModel/UserModel\";",
+    "import Route from \"../../Types/API/Route\";",
+    "import CompanySize from \"../../Types/Company/CompanySize\";",
+    "import JobRole from \"../../Types/Company/JobRole\";",
+    "import AllowAccessIfSubscriptionIsUnpaid from \"../../Types/Database/AccessControl/AllowAccessIfSubscriptionIsUnpaid\";",
+    "import ColumnAccessControl from \"../../Types/Database/AccessControl/ColumnAccessControl\";",
+    "import TableAccessControl from \"../../Types/Database/AccessControl/TableAccessControl\";",
+    "import ColumnLength from \"../../Types/Database/ColumnLength\";",
+    "import ColumnType from \"../../Types/Database/ColumnType\";",
+    "import CrudApiEndpoint from \"../../Types/Database/CrudApiEndpoint\";",
+    "import CurrentUserCanAccessRecordBy from \"../../Types/Database/CurrentUserCanAccessRecordBy\";",
+    "import EnableDocumentation from \"../../Types/Database/EnableDocumentation\";",
+    "import SlugifyColumn from \"../../Types/Database/SlugifyColumn\";",
+    "import TableColumn from \"../../Types/Database/TableColumn\";",
+    "import TableColumnType from \"../../Types/Database/TableColumnType\";",
+    "import TableMetadata from \"../../Types/Database/TableMetadata\";",
+    "import Email from \"../../Types/Email\";",
+    "import HashedString from \"../../Types/HashedString\";",
+    "import IconProp from \"../../Types/Icon/IconProp\";",
+    "import Name from \"../../Types/Name\";",
+    "import ObjectID from \"../../Types/ObjectID\";",
+    "import Permission from \"../../Types/Permission\";",
+    "import Phone from \"../../Types/Phone\";",
+    "import Timezone from \"../../Types/Timezone\";",
+    "import { Column, Entity, Index, JoinColumn, ManyToOne } from \"typeorm\";"
+  ],
+  "vulnerable_function": "@TableAccessControl({\n  create: [Permission.Public],\n  read: [Permission.CurrentUser],\n  delete: [Permission.CurrentUser],\n  update: [Permission.CurrentUser],\n}",
+  "patched_function": "@TableAccessControl({\n  create: [],\n  read: [Permission.CurrentUser],\n  delete: [Permission.CurrentUser],\n  update: [Permission.CurrentUser],\n}",
+  "extraction_notes": "Class-level decorator configuration, not a function/method.",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 2426,
+  "context_size_chars_after_truncation": 2426
+}

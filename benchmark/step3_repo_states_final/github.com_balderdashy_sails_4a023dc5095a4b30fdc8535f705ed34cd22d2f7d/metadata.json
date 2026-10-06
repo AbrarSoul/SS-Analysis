@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_balderdashy_sails_4a023dc5095a4b30fdc8535f705ed34cd22d2f7d",
+  "cve_ids": [
+    "CVE-2023-38504"
+  ],
+  "cwe_ids": [
+    "CWE-248",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "balderdashy/sails",
+  "repository_url": "https://github.com/balderdashy/sails",
+  "vulnerable_commit": "406a12095bc7708fc20c2f9056782a6084dd412f",
+  "fixed_commit": "4a023dc5095a4b30fdc8535f705ed34cd22d2f7d",
+  "changed_file": "lib/router/req.js",
+  "max_score": "1337"
+}

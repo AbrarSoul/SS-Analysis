@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0028",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "changed_files": 1,
+  "lines_added": 9,
+  "lines_removed": 4,
+  "lines_changed_total": 13,
+  "function_size_chars": 330,
+  "function_size_lines": 12,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Missing Secure attribute on a cookie-string assignment; self-contained.",
+  "supported_status": "supported"
+}

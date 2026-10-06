@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_firecrawl_firecrawl_b15fae51a760e9810a66bbfde5d5693d0df3fbeb",
+  "cve_ids": [
+    "CVE-2025-57818"
+  ],
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "typescript",
+  "repository": "firecrawl/firecrawl",
+  "repository_url": "https://github.com/firecrawl/firecrawl",
+  "vulnerable_commit": "44c1d44a5caf6016aed334730a42738a39633082",
+  "fixed_commit": "b15fae51a760e9810a66bbfde5d5693d0df3fbeb",
+  "changed_file": "apps/api/src/services/webhook.ts",
+  "max_score": "1337"
+}

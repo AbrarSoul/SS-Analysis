@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_polonel_trudesk_a9e38f25c2af2722dee4fdafb2fb70d30d5106c5",
+  "language": "javascript",
+  "cve_id": "CVE-2022-1947",
+  "cve_ids_all": [
+    "CVE-2022-1947"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-480",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-Other",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const _ = require('lodash')",
+    "const async = require('async')",
+    "const winston = require('../logger')",
+    "const conversationSchema = require('../models/chat/conversation')",
+    "const messageSchema = require('../models/chat/message')"
+  ],
+  "vulnerable_function": "        content.data.page = 2\n\n        conversationSchema.getConversation(cid, function (err, convo) {\n          if (err) return next(err)\n\n          if (convo === null || convo === undefined) {\n            return res.redirect('/messages')\n          }\n\n          const c = convo.toObject()\n          messageSchema.getConversationWithObject(\n            { cid: c._id, userMeta: convo.userMeta, requestingUser: req.user },\n            function (err, messages) {\n              if (err) return next(err)\n\n              _.each(c.participants, function (p) {\n                if (p._id.toString() !== req.user._id.toString()) {\n                  c.partner = p\n                }\n              })\n\n              c.requestingUserMeta =\n                convo.userMeta[\n                  _.findIndex(convo.userMeta, function (item) {\n                    return item.userId.toString() === req.user._id.toString()\n                  })\n                ]\n\n              content.data.conversation = c\n              content.data.conversation.messages = messages.reverse()\n\n              return next()\n            }\n          )\n        }",
+  "patched_function": "          const c = convo.toObject()\n\n          let isPart = false\n          _.each(c.participants, function (p) {\n            if (p._id.toString() === req.user._id.toString()) isPart = true\n          }",
+  "unified_diff": "diff --git a/src/controllers/messages.js b/src/controllers/messages.js\nindex f4e091ba..7c8d3640 100644\n--- a/src/controllers/messages.js\n+++ b/src/controllers/messages.js\n@@ -90,7 +90,7 @@ messagesController.get = function (req, res) {\n   })\n }\n \n-messagesController.getConversation = function (req, res) {\n+messagesController.getConversation = async (req, res) => {\n   const cid = req.params.convoid\n   if (_.isUndefined(cid)) return handleError(res, 'Invalid Conversation ID!')\n \n@@ -181,6 +181,16 @@ messagesController.getConversation = function (req, res) {\n           }\n \n           const c = convo.toObject()\n+\n+          let isPart = false\n+          _.each(c.participants, function (p) {\n+            if (p._id.toString() === req.user._id.toString()) isPart = true\n+          })\n+\n+          if (!isPart) {\n+            return res.redirect('/messages')\n+          }\n+\n           messageSchema.getConversationWithObject(\n             { cid: c._id, userMeta: convo.userMeta, requestingUser: req.user },\n             function (err, messages) {",
+  "auto_locate_confidence": "auto"
+}

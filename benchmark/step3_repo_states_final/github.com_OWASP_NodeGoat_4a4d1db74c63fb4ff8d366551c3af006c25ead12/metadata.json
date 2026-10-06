@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_OWASP_NodeGoat_4a4d1db74c63fb4ff8d366551c3af006c25ead12",
+  "cve_ids": [
+    "CVE-2021-4247"
+  ],
+  "cwe_ids": [
+    "CWE-404"
+  ],
+  "language": "javascript",
+  "repository": "OWASP/NodeGoat",
+  "repository_url": "https://github.com/OWASP/NodeGoat",
+  "vulnerable_commit": "b9e2c49cc951c7c3e8625bcdaa69a18be8ced45d",
+  "fixed_commit": "4a4d1db74c63fb4ff8d366551c3af006c25ead12",
+  "changed_file": "app/routes/research.js",
+  "max_score": "1337"
+}

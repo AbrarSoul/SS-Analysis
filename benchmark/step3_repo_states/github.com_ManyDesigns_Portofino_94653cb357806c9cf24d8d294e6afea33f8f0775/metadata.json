@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_ManyDesigns_Portofino_94653cb357806c9cf24d8d294e6afea33f8f0775",
+  "cve_ids": [
+    "CVE-2022-3952"
+  ],
+  "cwe_ids": [
+    "CWE-377",
+    "CWE-668"
+  ],
+  "language": "java",
+  "repository": "ManyDesigns/Portofino",
+  "repository_url": "https://github.com/ManyDesigns/Portofino",
+  "vulnerable_commit": "280bc9cd7e71f996067604505e928fad84caf251",
+  "fixed_commit": "94653cb357806c9cf24d8d294e6afea33f8f0775",
+  "changed_file": "microservices/launcher/src/main/java/com/manydesigns/portofino/microservices/launcher/WarFileLauncher.java",
+  "max_score": "1337"
+}

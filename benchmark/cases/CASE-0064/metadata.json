@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0064",
+  "original_source_case_id": "github.com_NaturalIntelligence_fast-xml-parser_943ef0eb1b2d3284e72dd74f44a042ee9f07026e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-25896",
+  "cve_ids_all": [
+    "CVE-2026-25896"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-185"
+  ],
+  "language": "javascript",
+  "repository": "NaturalIntelligence/fast-xml-parser",
+  "repository_url": "https://github.com/NaturalIntelligence/fast-xml-parser",
+  "vulnerable_commit": "ddcd0acf26ddd682cb0dc15a2bd6aa3b96bb1e69",
+  "fixed_commit": "943ef0eb1b2d3284e72dd74f44a042ee9f07026e",
+  "changed_file": "src/xmlparser/OrderedObjParser.js",
+  "changed_function": "function addExternalEntities(externalEntities){",
+  "vulnerable_lines": [
+    76,
+    85
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0064/vulnerable_source.js": "98a7286e7ae9da5cf49a6b4d4e5fbf39360efb3ca5a17bd13cb41a8af0eb28e7",
+    "cases/CASE-0064/patched_source.js": "14b7b7b4675d287c03a8267b2a51fd6dfd37e6bf0073caf694f98f3ae57c71f8",
+    "cases/CASE-0064/patch.diff": "ac4cad9bc792079a688a559dd7e067ed35645dd51ea3b77b51625a53bfef1736",
+    "cases/CASE-0064/metadata.json": "e664dd615ac35104209f44b553c45ea5f44691bd040d2d69e25c33983e07f7a2",
+    "model_context/CASE-0064.json": "f5412d5d5fc1b90d3a503661d0e5a9ab89a288e437601c8d4bfbbb44536daabb",
+    "difficulty/CASE-0064.json": "566e8224cf1f3fe36e846ec3f899cf98e8316067646747d3bf90e80f1f9a16ba"
+  },
+  "case_level_hash": "a5e8f455dae6b5231b9d0cef7dd818203c4b77aa576ccc4446ef24e39090e18d"
+}

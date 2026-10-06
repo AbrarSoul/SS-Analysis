@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0261",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-476",
+    "CWE-754"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 336,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Dereference of error.response.body.message that can be undefined; null-dereference shape needs data-shape knowledge."
+}

@@ -1,0 +1,14 @@
+{
+  "model_tag": "qwen2.5-coder:7b-instruct",
+  "base_url": "https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1",
+  "temperature": 0.0,
+  "max_retries": 3,
+  "max_files_changed_configured": 1,
+  "max_files_changed_note": "NOT enforced by Autogrep itself -- see PINNED_CONFIG.md",
+  "prompt_variant": "design_v1",
+  "python_version": "3.14.4",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "recorded_at": 1789308750.425638,
+  "semgrep_version": "1.177.0",
+  "autogrep_commit": "ace3c87a707a5b02632906b76195b6f97d411b8d"
+}

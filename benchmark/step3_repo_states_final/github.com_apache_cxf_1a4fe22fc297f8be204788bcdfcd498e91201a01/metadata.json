@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_cxf_1a4fe22fc297f8be204788bcdfcd498e91201a01",
+  "cve_ids": [
+    "CVE-2017-5656"
+  ],
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "language": "java",
+  "repository": "apache/cxf",
+  "repository_url": "https://github.com/apache/cxf",
+  "vulnerable_commit": "22a58c399ccdb94f5969ab3be9dfad46cf222af2",
+  "fixed_commit": "1a4fe22fc297f8be204788bcdfcd498e91201a01",
+  "changed_file": "rt/ws/security/src/main/java/org/apache/cxf/ws/security/trust/DefaultSTSTokenCacher.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "github.com_apache_axis-axis1-java_7e66753427466590d6def0125e448d2791723210",
+  "language": "java",
+  "cve_id": "CVE-2023-40743",
+  "cve_ids_all": [
+    "CVE-2023-40743"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-75",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import org.apache.axis.EngineConfiguration;",
+    "import org.apache.axis.configuration.EngineConfigurationFactoryFinder;",
+    "import org.apache.axis.utils.ClassUtils;",
+    "import org.apache.axis.utils.Messages;",
+    "import javax.naming.Context;",
+    "import javax.naming.InitialContext;",
+    "import javax.naming.Name;",
+    "import javax.naming.NamingException;",
+    "import javax.naming.RefAddr;",
+    "import javax.naming.Reference;",
+    "import javax.naming.spi.ObjectFactory;",
+    "import javax.xml.namespace.QName;",
+    "import javax.xml.rpc.ServiceException;",
+    "import java.lang.reflect.Constructor;",
+    "import java.net.URL;",
+    "import java.util.Hashtable;",
+    "import java.util.Map;",
+    "import java.util.Properties;"
+  ],
+  "vulnerable_function": "    public static Service getService(Map environment)\n    {\n        Service service = null;\n        InitialContext context = null;\n\n        EngineConfiguration configProvider =\n            (EngineConfiguration)environment.get(EngineConfiguration.PROPERTY_NAME);\n\n        if (configProvider == null)\n            configProvider = (EngineConfiguration)threadDefaultConfig.get();\n\n        if (configProvider == null)\n            configProvider = getDefaultEngineConfig();\n\n        // First check to see if JNDI works\n        // !!! Might we need to set up context parameters here?\n        try {\n            context = new InitialContext();\n        } catch (NamingException e) {\n        }\n        \n        if (context != null) {\n            String name = (String)environment.get(\"jndiName\");\n            if (name == null) {\n                name = \"axisServiceName\";\n            }\n\n            // We've got JNDI, so try to find an AxisClient at the\n            // specified name.\n            try {\n                service = (Service)context.lookup(name);\n            } catch (NamingException e) {\n                service = new Service(configProvider);\n                try {\n                    context.bind(name, service);\n                } catch (NamingException e1) {\n                    // !!! Couldn't do it, what should we do here?\n                }\n            }\n        } else {\n            service = new Service(configProvider);\n        }\n\n        return service;\n    }",
+  "patched_function": "    public static Service getService(Map environment)\n    {\n        Service service = null;\n        InitialContext context = null;\n\n        EngineConfiguration configProvider =\n            (EngineConfiguration)environment.get(EngineConfiguration.PROPERTY_NAME);\n\n        if (configProvider == null)\n            configProvider = (EngineConfiguration)threadDefaultConfig.get();\n\n        if (configProvider == null)\n            configProvider = getDefaultEngineConfig();\n\n        // First check to see if JNDI works\n        // !!! Might we need to set up context parameters here?\n        try {\n            context = new InitialContext();\n        } catch (NamingException e) {\n        }\n        \n        if (context != null) {\n            String name = (String)environment.get(\"jndiName\");\n\n\t    if(name!=null && (name.toUpperCase().indexOf(\"LDAP\")!=-1 || name.toUpperCase().indexOf(\"RMI\")!=-1 || name.toUpperCase().indexOf(\"JMS\")!=-1 || name.toUpperCase().indexOf(\"JMX\")!=-1) || name.toUpperCase().indexOf(\"JRMP\")!=-1 || name.toUpperCase().indexOf(\"JAVA\")!=-1 || name.toUpperCase().indexOf(\"DNS\")!=-1)  {\n\t        return null;\n            }\n            if (name == null) {\n                name = \"axisServiceName\";\n            }\n\n            // We've got JNDI, so try to find an AxisClient at the\n            // specified name.\n            try {\n                service = (Service)context.lookup(name);\n            } catch (NamingException e) {\n                service = new Service(configProvider);\n                try {\n                    context.bind(name, service);\n                } catch (NamingException e1) {\n                    // !!! Couldn't do it, what should we do here?\n\t            return null;\n                }\n            }\n        } else {\n            service = new Service(configProvider);\n        }\n\n        return service;\n    }",
+  "unified_diff": "diff --git a/axis-rt-core/src/main/java/org/apache/axis/client/ServiceFactory.java b/axis-rt-core/src/main/java/org/apache/axis/client/ServiceFactory.java\nindex 33054a557..73e89ee1b 100644\n--- a/axis-rt-core/src/main/java/org/apache/axis/client/ServiceFactory.java\n+++ b/axis-rt-core/src/main/java/org/apache/axis/client/ServiceFactory.java\n@@ -106,6 +106,10 @@ public class ServiceFactory extends javax.xml.rpc.ServiceFactory\n         \n         if (context != null) {\n             String name = (String)environment.get(\"jndiName\");\n+\n+\t    if(name!=null && (name.toUpperCase().indexOf(\"LDAP\")!=-1 || name.toUpperCase().indexOf(\"RMI\")!=-1 || name.toUpperCase().indexOf(\"JMS\")!=-1 || name.toUpperCase().indexOf(\"JMX\")!=-1) || name.toUpperCase().indexOf(\"JRMP\")!=-1 || name.toUpperCase().indexOf(\"JAVA\")!=-1 || name.toUpperCase().indexOf(\"DNS\")!=-1)  {\n+\t        return null;\n+            }\n             if (name == null) {\n                 name = \"axisServiceName\";\n             }\n@@ -120,6 +124,7 @@ public class ServiceFactory extends javax.xml.rpc.ServiceFactory\n                     context.bind(name, service);\n                 } catch (NamingException e1) {\n                     // !!! Couldn't do it, what should we do here?\n+\t            return null;\n                 }\n             }\n         } else {",
+  "auto_locate_confidence": "auto"
+}

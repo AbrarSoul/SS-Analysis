@@ -1,0 +1,28 @@
+{
+  "case_id": "CASE-0173",
+  "language": "typescript",
+  "cve_id": "CVE-2026-24473",
+  "cve_ids_all": [
+    "CVE-2026-24473"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-284",
+      "definition": "Improper Access Control"
+    },
+    {
+      "id": "CWE-668",
+      "definition": "Exposure of Resource to Wrong Sphere"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "  const key = ASSET_MANIFEST[path] || path\n  if (!key) {\n    return null\n  }",
+  "patched_function": "  const key = ASSET_MANIFEST[path]\n  if (!key) {\n    return null\n  }",
+  "unified_diff": "diff --git a/src/adapter/cloudflare-workers/utils.ts b/src/adapter/cloudflare-workers/utils.ts\nindex af7cf92a..74f7114c 100644\n--- a/src/adapter/cloudflare-workers/utils.ts\n+++ b/src/adapter/cloudflare-workers/utils.ts\n@@ -36,7 +36,7 @@ export const getContentFromKVAsset = async (\n     ASSET_NAMESPACE = __STATIC_CONTENT\n   }\n \n-  const key = ASSET_MANIFEST[path] || path\n+  const key = ASSET_MANIFEST[path]\n   if (!key) {\n     return null\n   }",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,28 @@
+{
+  "case_id": "CASE-0029",
+  "language": "javascript",
+  "cve_id": "CVE-2018-1109",
+  "cwe": [
+    {
+      "id": "CWE-185",
+      "definition": "Incorrect Regular Expression"
+    },
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "unified_diff": "diff --git a/lib/parsers.js b/lib/parsers.js\nindex 42730fe..b14bc83 100644\n--- a/lib/parsers.js\n+++ b/lib/parsers.js\n@@ -127,7 +127,7 @@ module.exports = function(braces, options) {\n     .set('multiplier', function() {\n       var isInside = this.isInside('brace');\n       var pos = this.position();\n-      var m = this.match(/^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}/);\n+      var m = this.match(/^\\{((?:,|\\{,+\\})+)\\}/);\n       if (!m) return;\n \n       this.multiplier = true;",
+  "containing_class_declaration": null,
+  "imports": [
+    "var Node = require('snapdragon-node');",
+    "var utils = require('./utils');"
+  ],
+  "vulnerable_function": ".set('multiplier', function() {\n      var isInside = this.isInside('brace');\n      var pos = this.position();\n      var m = this.match(/^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}/);\n      if (!m) return;\n\n      this.multiplier = true;\n      var prev = this.prev();\n      var val = m[0];\n\n      if (isInside && prev.type === 'brace') {\n        prev.text = prev.text || '';\n        prev.text += val;\n      }\n\n      var node = pos(new Node({\n        type: 'text',\n        multiplier: 1,\n        match: m,\n        val: val\n      }));\n\n      return concatNodes.call(this, pos, node, prev, options);\n    }",
+  "patched_function": ".set('multiplier', function() {\n      var isInside = this.isInside('brace');\n      var pos = this.position();\n      var m = this.match(/^\\{((?:,|\\{,+\\})+)\\}/);\n      if (!m) return;\n\n      this.multiplier = true;\n      var prev = this.prev();\n      var val = m[0];\n\n      if (isInside && prev.type === 'brace') {\n        prev.text = prev.text || '';\n        prev.text += val;\n      }\n\n      var node = pos(new Node({\n        type: 'text',\n        multiplier: 1,\n        match: m,\n        val: val\n      }));\n\n      return concatNodes.call(this, pos, node, prev, options);\n    }",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 1723,
+  "context_size_chars_after_truncation": 1723
+}

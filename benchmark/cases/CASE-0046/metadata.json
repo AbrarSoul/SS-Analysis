@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0046",
+  "original_source_case_id": "github.com_Cp0204_quark-auto-save_ea8377a596446291953dbe36e2d119d85bcd865b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-45229",
+  "cve_ids_all": [
+    "CVE-2026-45229"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-915"
+  ],
+  "language": "python",
+  "repository": "Cp0204/quark-auto-save",
+  "repository_url": "https://github.com/Cp0204/quark-auto-save",
+  "vulnerable_commit": "7f6ad600c2d89958923a4b377730c6be29afe4bc",
+  "fixed_commit": "ea8377a596446291953dbe36e2d119d85bcd865b",
+  "changed_file": "app/run.py",
+  "changed_function": "def update():",
+  "vulnerable_lines": [
+    188,
+    204
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 4,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0046/vulnerable_source.py": "bc5483b0b4890b44db85e238154d20050332ee18d2c06bca5fa476e0803a92f9",
+    "cases/CASE-0046/patched_source.py": "295215d6a6ec9f5b7197217ca2b8d397df8a501f1560bd6bc9e39df02a4978e7",
+    "cases/CASE-0046/patch.diff": "e5feb038b41877f7091be1ee9e77fd15270df6576bac4f73b34a7a90e90445c3",
+    "cases/CASE-0046/metadata.json": "36069253392e186c27b0f6ff36732d1bec451cc909e5e086e30c9929451d59d3",
+    "model_context/CASE-0046.json": "1d9fad9455176eb4539337cd4deb246ad1655d8e47190a04b057702b3d8a7bbd",
+    "difficulty/CASE-0046.json": "a9372aef21a8954009560e9ae960746b7d286228e1fa16f61938fca76e8e7160"
+  },
+  "case_level_hash": "e5ca1f77ce1a24bc37c355bea1feb78da75c211b0d1eb14628684cfab13fbbe0"
+}

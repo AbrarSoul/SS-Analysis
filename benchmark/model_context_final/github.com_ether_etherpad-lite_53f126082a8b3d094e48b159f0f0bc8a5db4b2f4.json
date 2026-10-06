@@ -1,0 +1,27 @@
+{
+  "case_id": "github.com_ether_etherpad-lite_53f126082a8b3d094e48b159f0f0bc8a5db4b2f4",
+  "language": "javascript",
+  "cve_id": "CVE-2020-22781",
+  "cve_ids_all": [
+    "CVE-2020-22781",
+    "CVE-2020-22783"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-312",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var Store = require('ep_etherpad-lite/node_modules/express-session').Store,"
+  ],
+  "vulnerable_function": "SessionStore.prototype.set = function(sid, sess, fn) {\n  messageLogger.debug('SET ' + sid);\n\n  db.set(\"sessionstorage:\" + sid, sess);\n  if (fn) {\n    process.nextTick(fn);\n  }\n}",
+  "patched_function": "SessionStore.prototype.set = function(sid, sess, fn) {\n  messageLogger.debug('SET ' + sid);\n\n  // don't store passwords in DB\n  if (sess.user && sess.user.password) {\n    sess.user.password = \"PASSWORD_HIDDEN\";\n  }\n\n  db.set(\"sessionstorage:\" + sid, sess);\n  if (fn) {\n    process.nextTick(fn);\n  }\n}",
+  "unified_diff": "diff --git a/src/node/db/SessionStore.js b/src/node/db/SessionStore.js\nindex 647cbbc8d..263c7d6ee 100644\n--- a/src/node/db/SessionStore.js\n+++ b/src/node/db/SessionStore.js\n@@ -38,6 +38,11 @@ SessionStore.prototype.get = function(sid, fn) {\n SessionStore.prototype.set = function(sid, sess, fn) {\n   messageLogger.debug('SET ' + sid);\n \n+  // don't store passwords in DB\n+  if (sess.user && sess.user.password) {\n+    sess.user.password = \"PASSWORD_HIDDEN\";\n+  }\n+\n   db.set(\"sessionstorage:\" + sid, sess);\n   if (fn) {\n     process.nextTick(fn);",
+  "auto_locate_confidence": "auto"
+}

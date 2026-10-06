@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_Janpot_mongodb-instance_c8fea750f8020ace8410c442b2684b33a9fddd3b",
+  "cve_ids": [
+    "CVE-2016-10572"
+  ],
+  "cwe_ids": [
+    "CWE-310",
+    "CWE-311"
+  ],
+  "language": "javascript",
+  "repository": "Janpot/mongodb-instance",
+  "repository_url": "https://github.com/Janpot/mongodb-instance",
+  "vulnerable_commit": "02ce5a3c48d7ac1f6c33819b0c79afecbacace70",
+  "fixed_commit": "c8fea750f8020ace8410c442b2684b33a9fddd3b",
+  "changed_file": "install.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-0074",
+  "language": "javascript",
+  "cve_id": "CVE-2026-25228",
+  "cve_ids_all": [
+    "CVE-2026-25228",
+    "CVE-2026-35038"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-125",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-20",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const _ = require('lodash')",
+    "import { createDebug } from '../debug'",
+    "const fs = require('fs')",
+    "const path = require('path')",
+    "const jsonpatch = require('json-patch')",
+    "const semver = require('semver')"
+  ],
+  "vulnerable_function": "  function pathForApplicationData(req, appid, version, isUser) {\n    return path.join(\n      dirForApplicationData(req, appid, isUser),\n      `${version}.json`\n    )\n  }",
+  "patched_function": "    const filePath = path.normalize(\n      path.join(dirForApplicationData(req, appid, isUser), `${version}.json`)\n    )\n    const configPath = path.resolve(app.config.configPath)\n    const resolvedPath = path.resolve(filePath)\n\n    if (!resolvedPath.startsWith(configPath)) {\n      throw new Error('Invalid path: outside configuration directory')\n    }",
+  "unified_diff": "diff --git a/src/interfaces/applicationData.js b/src/interfaces/applicationData.js\nindex ea59db81..69b71d07 100644\n--- a/src/interfaces/applicationData.js\n+++ b/src/interfaces/applicationData.js\n@@ -218,7 +218,11 @@ module.exports = function (app) {\n   }\n \n   function validateAppId(appid) {\n-    return appid.length < 30 && appid.indexOf('/') === -1 ? appid : null\n+    return appid.length < 30 &&\n+      appid.indexOf('/') === -1 &&\n+      appid.indexOf('\\\\') === -1\n+      ? appid\n+      : null\n   }\n \n   function validateVersion(version) {\n@@ -236,10 +240,17 @@ module.exports = function (app) {\n   }\n \n   function pathForApplicationData(req, appid, version, isUser) {\n-    return path.join(\n-      dirForApplicationData(req, appid, isUser),\n-      `${version}.json`\n+    const filePath = path.normalize(\n+      path.join(dirForApplicationData(req, appid, isUser), `${version}.json`)\n     )\n+    const configPath = path.resolve(app.config.configPath)\n+    const resolvedPath = path.resolve(filePath)\n+\n+    if (!resolvedPath.startsWith(configPath)) {\n+      throw new Error('Invalid path: outside configuration directory')\n+    }\n+\n+    return filePath\n   }\n \n   function saveApplicationData(req, appid, version, isUser, data, callback) {",
+  "auto_locate_confidence": "auto"
+}

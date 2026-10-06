@@ -1,0 +1,41 @@
+{
+  "case_id": "github.com_yogeshojha_rengine_8277cec0f008a0451371a92e7e0bf082ab3f0c34",
+  "language": "python",
+  "cve_id": "CVE-2022-1813",
+  "cve_ids_all": [
+    "CVE-2022-1813"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import os",
+    "import re",
+    "import json",
+    "import random",
+    "import requests",
+    "import tldextract",
+    "import logging",
+    "import shutil",
+    "from threading import Thread",
+    "from urllib.parse import urlparse",
+    "from bs4 import BeautifulSoup",
+    "from lxml import html",
+    "from discord_webhook import DiscordWebhook",
+    "from django.db.models import Q",
+    "from functools import reduce",
+    "from scanEngine.models import *",
+    "from startScan.models import *",
+    "from targetApp.models import *",
+    "from reNgine.definitions import *",
+    "from rest_framework import serializers"
+  ],
+  "vulnerable_function": "def get_cms_details(url):\n    # this function will fetch cms details using cms_detector\n    response = {}\n    cms_detector_command = 'python3 /usr/src/github/CMSeeK/cmseek.py -u {} --random-agent --batch --follow-redirect'.format(url)\n    os.system(cms_detector_command)\n\n    response['status'] = False\n    response['message'] = 'Could not detect CMS!'\n\n    parsed_url = urlparse(url)\n\n    domain_name = parsed_url.hostname\n    port = parsed_url.port\n\n    find_dir = domain_name\n\n    if port:\n        find_dir += '_{}'.format(port)\n\n\n    print(url)\n    print(find_dir)\n\n    # subdomain may also have port number, and is stored in dir as _port\n\n    cms_dir_path =  '/usr/src/github/CMSeeK/Result/{}'.format(find_dir)\n    cms_json_path =  cms_dir_path + '/cms.json'\n\n    if os.path.isfile(cms_json_path):\n        cms_file_content = json.loads(open(cms_json_path, 'r').read())\n        if not cms_file_content.get('cms_id'):\n            return response\n        response = {}\n        response = cms_file_content\n        response['status'] = True\n        # remove cms dir path\n        try:\n            shutil.rmtree(cms_dir_path)\n        except Exception as e:\n            print(e)\n\n    return response\n",
+  "patched_function": "def get_cms_details(url):\n    # this function will fetch cms details using cms_detector\n    response = {}\n    cms_detector_command = 'python3 /usr/src/github/CMSeeK/cmseek.py --random-agent --batch --follow-redirect'\n    subprocess_splitted_command = cms_detector_command.split()\n    subprocess_splitted_command.append('-u')\n    subprocess_splitted_command.append(url)\n    process = subprocess.Popen(subprocess_splitted_command)\n    process.wait()\n\n    response['status'] = False\n    response['message'] = 'Could not detect CMS!'\n\n    parsed_url = urlparse(url)\n\n    domain_name = parsed_url.hostname\n    port = parsed_url.port\n\n    find_dir = domain_name\n\n    if port:\n        find_dir += '_{}'.format(port)\n\n\n    print(url)\n    print(find_dir)\n\n    # subdomain may also have port number, and is stored in dir as _port\n\n    cms_dir_path =  '/usr/src/github/CMSeeK/Result/{}'.format(find_dir)\n    cms_json_path =  cms_dir_path + '/cms.json'\n\n    if os.path.isfile(cms_json_path):\n        cms_file_content = json.loads(open(cms_json_path, 'r').read())\n        if not cms_file_content.get('cms_id'):\n            return response\n        response = {}\n        response = cms_file_content\n        response['status'] = True\n        # remove cms dir path\n        try:\n            shutil.rmtree(cms_dir_path)\n        except Exception as e:\n            print(e)\n\n    return response\n",
+  "unified_diff": "diff --git a/web/reNgine/common_func.py b/web/reNgine/common_func.py\nindex 27580467..10c108cf 100644\n--- a/web/reNgine/common_func.py\n+++ b/web/reNgine/common_func.py\n@@ -6,6 +6,7 @@ import requests\n import tldextract\n import logging\n import shutil\n+import subprocess\n \n from threading import Thread\n \n@@ -668,8 +669,12 @@ def get_whois(ip_domain, save_db=False, fetch_from_db=True):\n def get_cms_details(url):\n     # this function will fetch cms details using cms_detector\n     response = {}\n-    cms_detector_command = 'python3 /usr/src/github/CMSeeK/cmseek.py -u {} --random-agent --batch --follow-redirect'.format(url)\n-    os.system(cms_detector_command)\n+    cms_detector_command = 'python3 /usr/src/github/CMSeeK/cmseek.py --random-agent --batch --follow-redirect'\n+    subprocess_splitted_command = cms_detector_command.split()\n+    subprocess_splitted_command.append('-u')\n+    subprocess_splitted_command.append(url)\n+    process = subprocess.Popen(subprocess_splitted_command)\n+    process.wait()\n \n     response['status'] = False\n     response['message'] = 'Could not detect CMS!'",
+  "auto_locate_confidence": "auto"
+}

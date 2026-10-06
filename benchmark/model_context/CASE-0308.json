@@ -1,0 +1,36 @@
+{
+  "case_id": "CASE-0308",
+  "language": "java",
+  "cve_id": "CVE-2021-21292",
+  "cve_ids_all": [
+    "CVE-2021-21292"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-428",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.sun.jna.Pointer;",
+    "import com.sun.jna.platform.win32.Advapi32;",
+    "import com.sun.jna.platform.win32.WinError;",
+    "import com.sun.jna.platform.win32.WinNT;",
+    "import com.sun.jna.platform.win32.Winsvc;",
+    "import com.sun.jna.platform.win32.Winsvc.HandlerEx;",
+    "import com.sun.jna.platform.win32.Winsvc.SC_HANDLE;",
+    "import com.sun.jna.platform.win32.Winsvc.SERVICE_DESCRIPTION;",
+    "import com.sun.jna.platform.win32.Winsvc.SERVICE_MAIN_FUNCTION;",
+    "import com.sun.jna.platform.win32.Winsvc.SERVICE_STATUS;",
+    "import com.sun.jna.platform.win32.Winsvc.SERVICE_STATUS_HANDLE;",
+    "import com.sun.jna.platform.win32.Winsvc.SERVICE_TABLE_ENTRY;",
+    "import jnr.posix.POSIXFactory;",
+    "import java.io.File;",
+    "import java.net.URISyntaxException;"
+  ],
+  "vulnerable_function": "    public void install(\n            String displayName, String description, String[] dependencies,\n            String account, String password, String config) throws URISyntaxException {\n\n        String javaHome = System.getProperty(\"java.home\");\n        String javaBinary = javaHome + \"\\\\bin\\\\java.exe\";\n\n        File jar = new File(WindowsService.class.getProtectionDomain().getCodeSource().getLocation().toURI());\n        String command = javaBinary\n                + \" -Duser.dir=\\\"\" + jar.getParentFile().getAbsolutePath() + \"\\\"\"\n                + \" -jar \\\"\" + jar.getAbsolutePath() + \"\\\"\"\n                + \" --service \\\"\" + config + \"\\\"\";\n\n        StringBuilder dep = new StringBuilder();\n\n        if (dependencies != null) {\n            for (String s : dependencies) {\n                dep.append(s);\n                dep.append(\"\\0\");\n            }\n        }\n        dep.append(\"\\0\");\n\n        SERVICE_DESCRIPTION desc = new SERVICE_DESCRIPTION();\n        desc.lpDescription = description;\n\n        SC_HANDLE serviceManager = openServiceControlManager(null, Winsvc.SC_MANAGER_ALL_ACCESS);\n\n        if (serviceManager != null) {\n            SC_HANDLE service = ADVAPI_32.CreateService(serviceManager, serviceName, displayName,\n                    Winsvc.SERVICE_ALL_ACCESS, WinNT.SERVICE_WIN32_OWN_PROCESS, WinNT.SERVICE_AUTO_START,\n                    WinNT.SERVICE_ERROR_NORMAL,\n                    command,\n                    null, null, dep.toString(), account, password);\n\n            if (service != null) {\n                ADVAPI_32.ChangeServiceConfig2(service, Winsvc.SERVICE_CONFIG_DESCRIPTION, desc);\n                ADVAPI_32.CloseServiceHandle(service);\n            }\n            ADVAPI_32.CloseServiceHandle(serviceManager);\n        }\n    }",
+  "patched_function": "    public void install(\n            String displayName, String description, String[] dependencies,\n            String account, String password, String config) throws URISyntaxException {\n\n        String javaHome = System.getProperty(\"java.home\");\n        String javaBinary = \"\\\"\" + javaHome + \"\\\\bin\\\\java.exe\\\"\";\n\n        File jar = new File(WindowsService.class.getProtectionDomain().getCodeSource().getLocation().toURI());\n        String command = javaBinary\n                + \" -Duser.dir=\\\"\" + jar.getParentFile().getAbsolutePath() + \"\\\"\"\n                + \" -jar \\\"\" + jar.getAbsolutePath() + \"\\\"\"\n                + \" --service \\\"\" + config + \"\\\"\";\n\n        StringBuilder dep = new StringBuilder();\n\n        if (dependencies != null) {\n            for (String s : dependencies) {\n                dep.append(s);\n                dep.append(\"\\0\");\n            }\n        }\n        dep.append(\"\\0\");\n\n        SERVICE_DESCRIPTION desc = new SERVICE_DESCRIPTION();\n        desc.lpDescription = description;\n\n        SC_HANDLE serviceManager = openServiceControlManager(null, Winsvc.SC_MANAGER_ALL_ACCESS);\n\n        if (serviceManager != null) {\n            SC_HANDLE service = ADVAPI_32.CreateService(serviceManager, serviceName, displayName,\n                    Winsvc.SERVICE_ALL_ACCESS, WinNT.SERVICE_WIN32_OWN_PROCESS, WinNT.SERVICE_AUTO_START,\n                    WinNT.SERVICE_ERROR_NORMAL,\n                    command,\n                    null, null, dep.toString(), account, password);\n\n            if (service != null) {\n                ADVAPI_32.ChangeServiceConfig2(service, Winsvc.SERVICE_CONFIG_DESCRIPTION, desc);\n                ADVAPI_32.CloseServiceHandle(service);\n            }\n            ADVAPI_32.CloseServiceHandle(serviceManager);\n        }\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/traccar/WindowsService.java b/src/main/java/org/traccar/WindowsService.java\nindex 831cd3ebc..f233337a7 100644\n--- a/src/main/java/org/traccar/WindowsService.java\n+++ b/src/main/java/org/traccar/WindowsService.java\n@@ -1,5 +1,5 @@\n /*\n- * Copyright 2018 Anton Tananaev (anton@traccar.org)\n+ * Copyright 2018 - 2020 Anton Tananaev (anton@traccar.org)\n  *\n  * Licensed under the Apache License, Version 2.0 (the \"License\");\n  * you may not use this file except in compliance with the License.\n@@ -50,7 +50,7 @@ public abstract class WindowsService {\n             String account, String password, String config) throws URISyntaxException {\n \n         String javaHome = System.getProperty(\"java.home\");\n-        String javaBinary = javaHome + \"\\\\bin\\\\java.exe\";\n+        String javaBinary = \"\\\"\" + javaHome + \"\\\\bin\\\\java.exe\\\"\";\n \n         File jar = new File(WindowsService.class.getProtectionDomain().getCodeSource().getLocation().toURI());\n         String command = javaBinary",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_plantuml_plantuml_6826315db092d2e432aeab1a0894e08017c6e4bd",
+  "batch": "topup19",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 38,
+  "lines_changed_total": 44,
+  "function_size_chars": 453,
+  "function_size_lines": 14,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

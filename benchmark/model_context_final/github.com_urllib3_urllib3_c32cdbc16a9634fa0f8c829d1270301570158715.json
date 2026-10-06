@@ -1,0 +1,35 @@
+{
+  "case_id": "github.com_urllib3_urllib3_c32cdbc16a9634fa0f8c829d1270301570158715",
+  "language": "python",
+  "cve_id": "CVE-2016-9015",
+  "cve_ids_all": [
+    "CVE-2016-9015"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-295",
+      "definition": "Improper Certificate Validation"
+    }
+  ],
+  "containing_class_declaration": "PyOpenSSLContext",
+  "imports": [
+    "from __future__ import absolute_import",
+    "import idna",
+    "import OpenSSL.SSL",
+    "from cryptography import x509",
+    "from cryptography.hazmat.backends.openssl import backend as openssl_backend",
+    "from cryptography.hazmat.backends.openssl.x509 import _Certificate",
+    "from socket import timeout, error as SocketError",
+    "from io import BytesIO",
+    "import logging",
+    "import ssl",
+    "import select",
+    "import six",
+    "import sys",
+    "from .. import util"
+  ],
+  "vulnerable_function": "    def verify_mode(self, value):\n        self._ctx.set_verify(value, _verify_callback)\n",
+  "patched_function": "    def verify_mode(self, value):\n        self._ctx.set_verify(\n            _stdlib_to_openssl_verify[value], _verify_callback\n        )\n",
+  "unified_diff": "diff --git a/urllib3/contrib/pyopenssl.py b/urllib3/contrib/pyopenssl.py\nindex 9cb1000b..0a3a5e55 100644\n--- a/urllib3/contrib/pyopenssl.py\n+++ b/urllib3/contrib/pyopenssl.py\n@@ -88,12 +88,15 @@ try:\n except AttributeError:\n     pass\n \n-_openssl_verify = {\n+_stdlib_to_openssl_verify = {\n     ssl.CERT_NONE: OpenSSL.SSL.VERIFY_NONE,\n     ssl.CERT_OPTIONAL: OpenSSL.SSL.VERIFY_PEER,\n     ssl.CERT_REQUIRED:\n         OpenSSL.SSL.VERIFY_PEER + OpenSSL.SSL.VERIFY_FAIL_IF_NO_PEER_CERT,\n }\n+_openssl_to_stdlib_verify = dict(\n+    (v, k) for k, v in _stdlib_to_openssl_verify.items()\n+)\n \n #: The list of supported SSL/TLS cipher suites.\n DEFAULT_SSL_CIPHER_LIST = util.ssl_.DEFAULT_CIPHERS.encode('ascii')\n@@ -367,11 +370,13 @@ class PyOpenSSLContext(object):\n \n     @property\n     def verify_mode(self):\n-        return self._ctx.get_verify_mode()\n+        return _openssl_to_stdlib_verify[self._ctx.get_verify_mode()]\n \n     @verify_mode.setter\n     def verify_mode(self, value):\n-        self._ctx.set_verify(value, _verify_callback)\n+        self._ctx.set_verify(\n+            _stdlib_to_openssl_verify[value], _verify_callback\n+        )\n \n     def set_default_verify_paths(self):\n         self._ctx.set_default_verify_paths()\n@@ -440,7 +445,7 @@ def ssl_wrap_socket(sock, keyfile=None, certfile=None, cert_reqs=None,\n     if keyfile:\n         ctx.use_privatekey_file(keyfile)\n     if cert_reqs != ssl.CERT_NONE:\n-        ctx.set_verify(_openssl_verify[cert_reqs], _verify_callback)\n+        ctx.set_verify(_stdlib_to_openssl_verify[cert_reqs], _verify_callback)\n     if ca_certs or ca_cert_dir:\n         try:\n             ctx.load_verify_locations(ca_certs, ca_cert_dir)",
+  "auto_locate_confidence": "auto"
+}

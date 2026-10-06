@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_caronc_apprise_e20fce630d55e4ca9b0a1e325a5fea6997489831",
+  "language": "python",
+  "cve_id": "CVE-2021-39229",
+  "cve_ids_all": [
+    "CVE-2021-39229"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    }
+  ],
+  "containing_class_declaration": "NotifyIFTTT",
+  "imports": [
+    "import re",
+    "import requests",
+    "from json import dumps",
+    "from .NotifyBase import NotifyBase",
+    "from ..common import NotifyType",
+    "from ..utils import parse_list",
+    "from ..utils import validate_regex",
+    "from ..AppriseLocale import gettext_lazy as _"
+  ],
+  "vulnerable_function": "    def parse_native_url(url):\n        \"\"\"\n        Support https://maker.ifttt.com/use/WEBHOOK_ID/EVENT_ID\n        \"\"\"\n\n        result = re.match(\n            r'^https?://maker\\.ifttt\\.com/use/'\n            r'(?P<webhook_id>[A-Z0-9_-]+)'\n            r'/?(?P<events>([A-Z0-9_-]+/?)+)?'\n            r'/?(?P<params>\\?.+)?$', url, re.I)\n\n        if result:\n            return NotifyIFTTT.parse_url(\n                '{schema}://{webhook_id}{events}{params}'.format(\n                    schema=NotifyIFTTT.secure_protocol,\n                    webhook_id=result.group('webhook_id'),\n                    events='' if not result.group('events')\n                    else '@{}'.format(result.group('events')),\n                    params='' if not result.group('params')\n                    else result.group('params')))\n\n        return None\n",
+  "patched_function": "    def parse_native_url(url):\n        \"\"\"\n        Support https://maker.ifttt.com/use/WEBHOOK_ID/EVENT_ID\n        \"\"\"\n\n        result = re.match(\n            r'^https?://maker\\.ifttt\\.com/use/'\n            r'(?P<webhook_id>[A-Z0-9_-]+)'\n            r'((?P<events>(/[A-Z0-9_-]+)+))?'\n            r'/?(?P<params>\\?.+)?$', url, re.I)\n\n        if result:\n            return NotifyIFTTT.parse_url(\n                '{schema}://{webhook_id}{events}{params}'.format(\n                    schema=NotifyIFTTT.secure_protocol,\n                    webhook_id=result.group('webhook_id'),\n                    events='' if not result.group('events')\n                    else '@{}'.format(result.group('events')),\n                    params='' if not result.group('params')\n                    else result.group('params')))\n\n        return None\n",
+  "unified_diff": "diff --git a/apprise/plugins/NotifyIFTTT.py b/apprise/plugins/NotifyIFTTT.py\nindex c038a9e..b735a4d 100644\n--- a/apprise/plugins/NotifyIFTTT.py\n+++ b/apprise/plugins/NotifyIFTTT.py\n@@ -355,7 +355,7 @@ class NotifyIFTTT(NotifyBase):\n         result = re.match(\n             r'^https?://maker\\.ifttt\\.com/use/'\n             r'(?P<webhook_id>[A-Z0-9_-]+)'\n-            r'/?(?P<events>([A-Z0-9_-]+/?)+)?'\n+            r'((?P<events>(/[A-Z0-9_-]+)+))?'\n             r'/?(?P<params>\\?.+)?$', url, re.I)\n \n         if result:",
+  "auto_locate_confidence": "auto"
+}

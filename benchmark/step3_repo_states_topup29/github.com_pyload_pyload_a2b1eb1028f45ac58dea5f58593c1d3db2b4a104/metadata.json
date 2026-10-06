@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_pyload_pyload_a2b1eb1028f45ac58dea5f58593c1d3db2b4a104",
+  "cve_ids": [
+    "CVE-2023-0434"
+  ],
+  "cwe_ids": [
+    "CWE-20"
+  ],
+  "language": "python",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "c602df58d05f4ea5e815b8e0565f85f41b1a445e",
+  "fixed_commit": "a2b1eb1028f45ac58dea5f58593c1d3db2b4a104",
+  "changed_file": "src/pyload/core/config/parser.py",
+  "max_score": "1337"
+}

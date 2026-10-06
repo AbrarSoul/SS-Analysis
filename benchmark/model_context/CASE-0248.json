@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-0248",
+  "language": "python",
+  "cve_id": "CVE-2024-1141",
+  "cve_ids_all": [
+    "CVE-2024-1141"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-779",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": "Store",
+  "imports": [
+    "import io",
+    "import logging",
+    "import math",
+    "import re",
+    "import urllib",
+    "import eventlet",
+    "from oslo_config import cfg",
+    "from oslo_utils import encodeutils",
+    "from oslo_utils import units",
+    "import glance_store",
+    "from glance_store import capabilities",
+    "from glance_store.common import utils",
+    "import glance_store.driver",
+    "from glance_store import exceptions",
+    "from glance_store.i18n import _",
+    "import glance_store.location"
+  ],
+  "vulnerable_function": "    def get(self, location, offset=0, chunk_size=None, context=None):\n        \"\"\"\n        Takes a `glance_store.location.Location` object that indicates\n        where to find the image file, and returns a tuple of generator\n        (for reading the image file) and image_size\n\n        :param location: `glance_store.location.Location` object, supplied\n                         from glance_store.location.get_location_from_uri()\n        :raises: `glance_store.exceptions.NotFound` if image does not exist\n        \"\"\"\n        loc = location.store_location\n        s3_client, bucket, key = self._operation_set(loc)\n\n        if not self._object_exists(s3_client, bucket, key):\n            LOG.warning(\"Could not find key %(key)s in \"\n                        \"bucket %(bucket)s\", {'key': key, 'bucket': bucket})\n            raise exceptions.NotFound(image=key)\n\n        key = s3_client.get_object(Bucket=bucket, Key=key)\n\n        LOG.debug(\"Retrieved image object from S3 using s3_host=%(s3_host)s, \"\n                  \"access_key=%(accesskey)s, bucket=%(bucket)s, \"\n                  \"key=%(key)s)\",\n                  {'s3_host': loc.s3serviceurl, 'accesskey': loc.accesskey,\n                   'bucket': bucket, 'key': key})\n\n        cs = self.READ_CHUNKSIZE\n\n        class ResponseIndexable(glance_store.Indexable):\n            def another(self):\n                try:\n                    return next(self.wrapped)\n                except StopIteration:\n                    return b''\n\n        return (ResponseIndexable(utils.chunkiter(key['Body'], cs),\n                                  key['ContentLength']), key['ContentLength'])\n",
+  "patched_function": "    def get(self, location, offset=0, chunk_size=None, context=None):\n        \"\"\"\n        Takes a `glance_store.location.Location` object that indicates\n        where to find the image file, and returns a tuple of generator\n        (for reading the image file) and image_size\n\n        :param location: `glance_store.location.Location` object, supplied\n                         from glance_store.location.get_location_from_uri()\n        :raises: `glance_store.exceptions.NotFound` if image does not exist\n        \"\"\"\n        loc = location.store_location\n        s3_client, bucket, key = self._operation_set(loc)\n\n        if not self._object_exists(s3_client, bucket, key):\n            LOG.warning(\"Could not find key %(key)s in \"\n                        \"bucket %(bucket)s\", {'key': key, 'bucket': bucket})\n            raise exceptions.NotFound(image=key)\n\n        key = s3_client.get_object(Bucket=bucket, Key=key)\n\n        LOG.debug(\"Retrieved image object from S3 using s3_host=%(s3_host)s, \"\n                  \"bucket=%(bucket)s key=%(key)s)\",\n                  {'s3_host': loc.s3serviceurl, 'bucket': bucket, 'key': key})\n\n        cs = self.READ_CHUNKSIZE\n\n        class ResponseIndexable(glance_store.Indexable):\n            def another(self):\n                try:\n                    return next(self.wrapped)\n                except StopIteration:\n                    return b''\n\n        return (ResponseIndexable(utils.chunkiter(key['Body'], cs),\n                                  key['ContentLength']), key['ContentLength'])\n",
+  "unified_diff": "diff --git a/glance_store/_drivers/s3.py b/glance_store/_drivers/s3.py\nindex a75e16b..8aff8f1 100644\n--- a/glance_store/_drivers/s3.py\n+++ b/glance_store/_drivers/s3.py\n@@ -539,10 +539,8 @@ class Store(glance_store.driver.Store):\n         key = s3_client.get_object(Bucket=bucket, Key=key)\n \n         LOG.debug(\"Retrieved image object from S3 using s3_host=%(s3_host)s, \"\n-                  \"access_key=%(accesskey)s, bucket=%(bucket)s, \"\n-                  \"key=%(key)s)\",\n-                  {'s3_host': loc.s3serviceurl, 'accesskey': loc.accesskey,\n-                   'bucket': bucket, 'key': key})\n+                  \"bucket=%(bucket)s key=%(key)s)\",\n+                  {'s3_host': loc.s3serviceurl, 'bucket': bucket, 'key': key})\n \n         cs = self.READ_CHUNKSIZE\n \n@@ -828,9 +826,8 @@ class Store(glance_store.driver.Store):\n             raise exceptions.NotFound(image=key)\n \n         LOG.debug(\"Deleting image object from S3 using s3_host=%(s3_host)s, \"\n-                  \"accesskey=%(accesskey)s, bucket=%(bucket)s, key=%(key)s)\",\n-                  {'s3_host': loc.s3serviceurl, 'accesskey': loc.accesskey,\n-                   'bucket': bucket, 'key': key})\n+                  \"bucket=%(bucket)s, key=%(key)s)\",\n+                  {'s3_host': loc.s3serviceurl, 'bucket': bucket, 'key': key})\n \n         return s3_client.delete_object(Bucket=bucket, Key=key)\n ",
+  "auto_locate_confidence": "auto_low_confidence"
+}

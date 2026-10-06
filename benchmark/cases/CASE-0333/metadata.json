@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0333",
+  "original_source_case_id": "github.com_xwiki_xwiki-platform_0b732f2ef0224e2aaf10e2e1ef48dbd3fb6e10cd",
+  "selection_batch": "topup39",
+  "cve_id": "CVE-2022-41929",
+  "cve_ids_all": [
+    "CVE-2022-41929"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "5be1cc0adf917bf10899c47723fa451e950271fa",
+  "fixed_commit": "0b732f2ef0224e2aaf10e2e1ef48dbd3fb6e10cd",
+  "changed_file": "xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/api/User.java",
+  "changed_function": "public void setDisabledStatus(boolean disabledStatus)",
+  "vulnerable_lines": [
+    93,
+    96
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0333/vulnerable_source.java": "bf69223d61a3f8a6f9f63e15bd129459adf40b2886a62919c44feb906f23a45f",
+    "cases/CASE-0333/patched_source.java": "a9545a99aff6980187aedb207a9fb3cd63cdc83256e8d40d86e9255053febdf7",
+    "cases/CASE-0333/patch.diff": "7b7974876eee71afbff8b305e41e4f485fb8a77827109251dea6e5f11fcfd20d",
+    "cases/CASE-0333/metadata.json": "55b9ab16978d83246cdad2dfdd580a8805570d3c881b48974734dd0055773b32",
+    "model_context/CASE-0333.json": "8f75164ebafee7c9021cf6ad6d7e90577c94344ed0a8469b109234740eda2680",
+    "difficulty/CASE-0333.json": "3f84ef9c6046ee8327c914cc5619ce9820055dd186e8a3fc13e2c7d73bd025ba"
+  },
+  "case_level_hash": "a0ffefdc5e6612f527cd5b60c359a02700b2698df13dcd5985ea060558ad4009"
+}

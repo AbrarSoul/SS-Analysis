@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_softwarepub_hermes_7f64f102e916c76dc44404b77ab2a80f5a4e59b1",
+  "batch": "topup33",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "changed_files": 1,
+  "lines_added": 19,
+  "lines_removed": 3,
+  "lines_changed_total": 22,
+  "function_size_chars": 1603,
+  "function_size_lines": 47,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

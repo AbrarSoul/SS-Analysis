@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_python_cpython_e58e9802b9bec5cdbf48fc9bf1da5f4fda482e86",
+  "cve_ids": [
+    "CVE-2026-2297"
+  ],
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "language": "python",
+  "repository": "python/cpython",
+  "repository_url": "https://github.com/python/cpython",
+  "vulnerable_commit": "bcc2dd8d30eb20995186c756bdcd10a56a1bad1c",
+  "fixed_commit": "e58e9802b9bec5cdbf48fc9bf1da5f4fda482e86",
+  "changed_file": "Lib/importlib/_bootstrap_external.py",
+  "max_score": "1337"
+}

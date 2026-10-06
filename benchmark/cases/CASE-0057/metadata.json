@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0057",
+  "original_source_case_id": "github.com_LEMS_jLEMS_8c224637d7d561076364a9e3c2c375daeaf463dc",
+  "selection_batch": "topup8",
+  "cve_id": "CVE-2022-4583",
+  "cve_ids_all": [
+    "CVE-2022-4583"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "LEMS/jLEMS",
+  "repository_url": "https://github.com/LEMS/jLEMS",
+  "vulnerable_commit": "a1c2c5a37f7687da38ef71cc81c1ef9f0eebb67c",
+  "fixed_commit": "8c224637d7d561076364a9e3c2c375daeaf463dc",
+  "changed_file": "src/main/java/org/lemsml/jlems/io/util/JUtil.java",
+  "changed_function": "public static void unpackJar(File fjar, File fout) throws IOException {",
+  "vulnerable_lines": [
+    200,
+    235
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0057/vulnerable_source.java": "b240bb0a418df0dd439826f0ecd0d704e0c916d816a511677a0bd6e25885e8ee",
+    "cases/CASE-0057/patched_source.java": "91714bbdee2e42b8ff0fffe63823fdb2c957d401bdb66785b6febd9534844dbc",
+    "cases/CASE-0057/patch.diff": "77da77840c93ab731692ab427fd51803ec989cfc0feb1cdf3af470064aca723b",
+    "cases/CASE-0057/metadata.json": "bc4de5cb5fbdad3e5b2dffe3a3b68c2ef3e314f30cf71b989aacd6aee28a9523",
+    "model_context/CASE-0057.json": "68fcd97de602f267928c25f0b646cfcb948dd3d20983be76b1f63e51b06b3603",
+    "difficulty/CASE-0057.json": "6119063b6cae2be60a248625d6077e96d9ce1010daf5f1c372c81da7a6370413"
+  },
+  "case_level_hash": "4dec3b5569ce25e40d480b043f3e82c61fbf69bedb5e424ebccbcbc66157ea96"
+}

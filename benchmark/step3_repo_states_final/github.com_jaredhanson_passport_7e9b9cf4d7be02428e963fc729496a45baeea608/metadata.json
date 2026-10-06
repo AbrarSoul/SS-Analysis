@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jaredhanson_passport_7e9b9cf4d7be02428e963fc729496a45baeea608",
+  "cve_ids": [
+    "CVE-2022-25896"
+  ],
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "language": "javascript",
+  "repository": "jaredhanson/passport",
+  "repository_url": "https://github.com/jaredhanson/passport",
+  "vulnerable_commit": "5e6d92f1ef2adf21b54492cc86a7c066ef3f1e98",
+  "fixed_commit": "7e9b9cf4d7be02428e963fc729496a45baeea608",
+  "changed_file": "lib/sessionmanager.js",
+  "max_score": "1337"
+}

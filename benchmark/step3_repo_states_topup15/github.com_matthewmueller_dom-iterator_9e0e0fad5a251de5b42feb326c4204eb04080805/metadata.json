@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_matthewmueller_dom-iterator_9e0e0fad5a251de5b42feb326c4204eb04080805",
+  "cve_ids": [
+    "CVE-2024-21541"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "matthewmueller/dom-iterator",
+  "repository_url": "https://github.com/matthewmueller/dom-iterator",
+  "vulnerable_commit": "91121a41d04a09d28bcd4d0e8cd535b8582d2c08",
+  "fixed_commit": "9e0e0fad5a251de5b42feb326c4204eb04080805",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

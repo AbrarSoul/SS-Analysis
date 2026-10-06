@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0073",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 0,
+  "lines_changed_total": 6,
+  "function_size_chars": 2596,
+  "function_size_lines": 55,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Network-supplied datetime interpolated into an sh -c command string."
+}

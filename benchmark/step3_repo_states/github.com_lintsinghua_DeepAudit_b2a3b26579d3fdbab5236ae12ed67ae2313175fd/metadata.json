@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_lintsinghua_DeepAudit_b2a3b26579d3fdbab5236ae12ed67ae2313175fd",
+  "cve_ids": [
+    "CVE-2026-25729"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "python",
+  "repository": "lintsinghua/DeepAudit",
+  "repository_url": "https://github.com/lintsinghua/DeepAudit",
+  "vulnerable_commit": "8fc1cd5f91b60db50b698770c5616cf9cadf11fe",
+  "fixed_commit": "b2a3b26579d3fdbab5236ae12ed67ae2313175fd",
+  "changed_file": "backend/app/api/v1/endpoints/users.py",
+  "max_score": "1337"
+}

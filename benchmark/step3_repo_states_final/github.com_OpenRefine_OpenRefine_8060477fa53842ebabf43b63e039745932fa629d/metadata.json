@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_OpenRefine_OpenRefine_8060477fa53842ebabf43b63e039745932fa629d",
+  "cve_ids": [
+    "CVE-2024-47880"
+  ],
+  "cwe_ids": [
+    "CWE-348",
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "OpenRefine/OpenRefine",
+  "repository_url": "https://github.com/OpenRefine/OpenRefine",
+  "vulnerable_commit": "10bf0874d67f1018a58b3732332d76b840192fea",
+  "fixed_commit": "8060477fa53842ebabf43b63e039745932fa629d",
+  "changed_file": "main/src/com/google/refine/commands/project/ExportRowsCommand.java",
+  "max_score": "1337"
+}

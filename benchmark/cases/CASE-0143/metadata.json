@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0143",
+  "original_source_case_id": "github.com_deeplook_svglib_35686a130ed260c71a382a8f83d41fd31a46704d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-10799",
+  "cve_ids_all": [
+    "CVE-2020-10799"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "python",
+  "repository": "deeplook/svglib",
+  "repository_url": "https://github.com/deeplook/svglib",
+  "vulnerable_commit": "c20d0ea234b734a1f1b04658c9cd6a45b47756ae",
+  "fixed_commit": "35686a130ed260c71a382a8f83d41fd31a46704d",
+  "changed_file": "svglib/svglib.py",
+  "changed_function": "def load_svg_file(path):",
+  "vulnerable_lines": [
+    1432,
+    1441
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0143/vulnerable_source.py": "01dd611e4a64d195a668549a7d8203a9ac7285f69264b1cbdb49f8e5086b1711",
+    "cases/CASE-0143/patched_source.py": "85d41c97e243858ea69267bb8486e91c726ff94dd510dfc201c7c4e45c641b7e",
+    "cases/CASE-0143/patch.diff": "8cd0fc82e43297c1b618cdd9f044c1edc7bcc8736519497feb89208ab011a991",
+    "cases/CASE-0143/metadata.json": "f78c5786a252faac48b5eee40a3736f1e655768d0c4fe6e48c0fb92bc8aa6415",
+    "model_context/CASE-0143.json": "3906f40d5404418c061b7a5171545e1768497cede371a4b942de9e32332a2b29",
+    "difficulty/CASE-0143.json": "12378b51b57499abb569bcb4082bff2ef6c4e831aa953df7a6bfc8d005085357"
+  },
+  "case_level_hash": "ce26ceb650d5af5df4b7efd958f36b6c1171e7afeda49f28e77dadedb190d720"
+}

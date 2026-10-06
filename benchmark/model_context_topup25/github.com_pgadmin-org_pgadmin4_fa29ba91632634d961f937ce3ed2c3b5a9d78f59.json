@@ -1,0 +1,38 @@
+{
+  "case_id": "github.com_pgadmin-org_pgadmin4_fa29ba91632634d961f937ce3ed2c3b5a9d78f59",
+  "language": "python",
+  "cve_id": "CVE-2023-1907",
+  "cve_ids_all": [
+    "CVE-2023-1907"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-276",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-488",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import config",
+    "import copy",
+    "import functools",
+    "from flask import current_app, flash, Response, request, url_for, session, redirect, render_template",
+    "from flask_babel import gettext",
+    "from flask_security.views import _security, _ctx",
+    "from flask_security.utils import get_post_logout_redirect, logout_user, config_value",
+    "from flask_login import current_user",
+    "from flask_socketio import disconnect, ConnectionRefusedError",
+    "from pgadmin.model import db, User",
+    "from pgadmin.utils import PgAdminModule, get_safe_post_login_redirect",
+    "from pgadmin.utils.constants import KERBEROS, INTERNAL, OAUTH2, LDAP",
+    "from pgadmin.authenticate.registry import AuthSourceRegistry"
+  ],
+  "vulnerable_function": "def login():\n    \"\"\"\n    Entry point for all the authentication sources.\n    The user input will be validated and authenticated.\n    \"\"\"\n    form = _security.forms.get('login_form').cls(request.form)\n    if OAUTH2 in config.AUTHENTICATION_SOURCES \\\n            and 'oauth2_button' in request.form:\n        # Sending empty form as oauth2 does not require form attribute\n        auth_obj = AuthSourceManager({}, copy.deepcopy(\n            config.AUTHENTICATION_SOURCES))\n        session['auth_obj'] = auth_obj\n    else:\n        auth_obj = AuthSourceManager(form, copy.deepcopy(\n            config.AUTHENTICATION_SOURCES))\n\n    session['auth_source_manager'] = None\n\n    username = form.data['email']\n    user = User.query.filter_by(username=username,\n                                auth_source=INTERNAL).first()\n\n    if user:\n        if user.login_attempts >= config.MAX_LOGIN_ATTEMPTS > 0:\n            user.locked = True\n        else:\n            user.locked = False\n        db.session.commit()\n\n        if user.login_attempts >= config.MAX_LOGIN_ATTEMPTS > 0:\n            flash(gettext('Your account is locked. Please contact the '\n                          'Administrator.'),\n                  'warning')\n            logout_user()\n            return redirect(get_post_logout_redirect())\n\n    # Validate the user\n    if not auth_obj.validate():\n        for field in form.errors:\n            flash_login_attempt_error = None\n            if user and field in config.LOGIN_ATTEMPT_FIELDS:\n                if config.MAX_LOGIN_ATTEMPTS > 0:\n                    user.login_attempts += 1\n                    left_attempts = \\\n                        config.MAX_LOGIN_ATTEMPTS - user.login_attempts\n                    if left_attempts > 1:\n                        flash_login_attempt_error = \\\n                            gettext('{0} more attempts remaining.'.\n                                    format(left_attempts))\n                    else:\n                        flash_login_attempt_error = \\\n                            gettext('{0} more attempt remaining.'.\n                                    format(left_attempts))\n                db.session.commit()\n            for error in form.errors[field]:\n                if flash_login_attempt_error:\n                    error = error + flash_login_attempt_error\n                    flash_login_attempt_error = None\n                flash(error, 'warning')\n\n        return redirect(get_post_logout_redirect())\n\n    # Authenticate the user\n    status, msg = auth_obj.authenticate()\n    if status:\n        # Login the user\n        status, msg = auth_obj.login()\n        current_auth_obj = auth_obj.as_dict()\n\n        if not status:\n            if current_auth_obj['current_source'] == \\\n                    KERBEROS:\n                return redirect('{0}?next={1}'.format(url_for(\n                    'authenticate.kerberos_login'), url_for('browser.index')))\n\n            flash(msg, 'danger')\n            return redirect(get_post_logout_redirect())\n\n        session['auth_source_manager'] = current_auth_obj\n\n        if user:\n            user.login_attempts = 0\n        db.session.commit()\n\n        if 'auth_obj' in session:\n            session.pop('auth_obj')\n        return redirect(get_safe_post_login_redirect())\n\n    elif isinstance(msg, Response):\n        return msg\n    elif 'oauth2_button' in request.form and not isinstance(msg, str):\n        return msg\n    if 'auth_obj' in session:\n        session.pop('auth_obj')\n    flash(msg, 'danger')\n    form_class = _security.forms.get('login_form').cls\n    form = form_class()\n\n    return _security.render_template(\n        config_value('LOGIN_USER_TEMPLATE'),\n        login_user_form=form, **_ctx('login'))\n",
+  "patched_function": "def login():\n    \"\"\"\n    Entry point for all the authentication sources.\n    The user input will be validated and authenticated.\n    \"\"\"\n    with AuthLocker():\n        return _login()\n",
+  "unified_diff": "diff --git a/web/pgadmin/authenticate/__init__.py b/web/pgadmin/authenticate/__init__.py\nindex bda9dadbf..0d5b429c0 100644\n--- a/web/pgadmin/authenticate/__init__.py\n+++ b/web/pgadmin/authenticate/__init__.py\n@@ -12,6 +12,7 @@\n import config\n import copy\n import functools\n+from threading import Lock\n \n from flask import current_app, flash, Response, request, url_for, \\\n     session, redirect, render_template\n@@ -35,6 +36,19 @@ auth_obj = None\n _URL_WITH_NEXT_PARAM = \"{0}?next={1}\"\n \n \n+class AuthLocker:\n+    \"\"\"Implementing lock while authentication.\"\"\"\n+    lock = Lock()\n+\n+    def __enter__(self):\n+        self.lock.acquire()\n+        return self\n+\n+    def __exit__(self, type, value, traceback):\n+        if self.lock.locked():\n+            self.lock.release()\n+\n+\n def get_logout_url() -> str:\n     \"\"\"\n     Returns the logout url based on the current authentication method.\n@@ -83,6 +97,14 @@ def login():\n     Entry point for all the authentication sources.\n     The user input will be validated and authenticated.\n     \"\"\"\n+    with AuthLocker():\n+        return _login()\n+\n+\n+def _login():\n+    \"\"\"\n+    Internal authentication process locked by a mutex.\n+    \"\"\"\n     form = _security.forms.get('login_form').cls(request.form)\n     if OAUTH2 in config.AUTHENTICATION_SOURCES \\\n             and 'oauth2_button' in request.form:",
+  "auto_locate_confidence": "auto_low_confidence"
+}

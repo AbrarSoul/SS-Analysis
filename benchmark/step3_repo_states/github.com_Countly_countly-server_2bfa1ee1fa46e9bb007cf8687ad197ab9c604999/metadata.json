@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Countly_countly-server_2bfa1ee1fa46e9bb007cf8687ad197ab9c604999",
+  "cve_ids": [
+    "CVE-2022-29174"
+  ],
+  "cwe_ids": [
+    "CWE-640"
+  ],
+  "language": "javascript",
+  "repository": "Countly/countly-server",
+  "repository_url": "https://github.com/Countly/countly-server",
+  "vulnerable_commit": "bc5e4b0aa7e4eecde72ac679f5816205e3d095a3",
+  "fixed_commit": "2bfa1ee1fa46e9bb007cf8687ad197ab9c604999",
+  "changed_file": "frontend/express/libs/members.js",
+  "max_score": "1337"
+}

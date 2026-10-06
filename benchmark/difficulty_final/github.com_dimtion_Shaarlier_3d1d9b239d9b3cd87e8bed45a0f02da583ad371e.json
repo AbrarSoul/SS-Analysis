@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_dimtion_Shaarlier_3d1d9b239d9b3cd87e8bed45a0f02da583ad371e",
+  "batch": "topup7",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 3,
+  "lines_changed_total": 8,
+  "function_size_chars": 1177,
+  "function_size_lines": 30,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

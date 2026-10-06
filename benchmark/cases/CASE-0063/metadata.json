@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0063",
+  "original_source_case_id": "github.com_MrRio_jsPDF_d8bb3b39efcd129994f7a3b01b632164144ec43e",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2021-23353",
+  "cve_ids_all": [
+    "CVE-2021-23353"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "MrRio/jsPDF",
+  "repository_url": "https://github.com/MrRio/jsPDF",
+  "vulnerable_commit": "c91995de97c598deaf6fda7109ea886a50f50109",
+  "fixed_commit": "d8bb3b39efcd129994f7a3b01b632164144ec43e",
+  "changed_file": "src/modules/addimage.js",
+  "changed_function": "var extractImageFromDataUrl = (jsPDFAPI.__addimage__.extractImageFromDataUrl = function(",
+  "vulnerable_lines": [
+    625,
+    645
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0063/vulnerable_source.js": "d03310d0a5d5a8b6bf3190bcd5dab344a64ecb48aa23d1b861c16c8ce8b53292",
+    "cases/CASE-0063/patched_source.js": "1d9ee5c9ed66d7f39a86f38c2df3b9b976127ff9fc4b080cc2f609742f454746",
+    "cases/CASE-0063/patch.diff": "3d494d7d2cdbce1c057b9072031e57c94a7e912f127de9d654088ca5fe00008a",
+    "cases/CASE-0063/metadata.json": "6fd9f69c5061879b2ada81fa1d3aa30f49757e12b627c55939f448c37293ee12",
+    "model_context/CASE-0063.json": "86ca4ea8930282f6555539dd18fa4d8195692f4ec49af279636b15d04c3ccd52",
+    "difficulty/CASE-0063.json": "0c146ca92a5fa93bdd33ed47d32048ee2ea4072377135016c0ab373bffa40ddd"
+  },
+  "case_level_hash": "4452b30d051b2cdba1d04fa7ffe66d2fd7e6c976bc66c1641e2738e332ec17f2"
+}

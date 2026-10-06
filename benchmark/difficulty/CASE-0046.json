@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0046",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-915"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 2,
+  "lines_changed_total": 6,
+  "function_size_chars": 607,
+  "function_size_lines": 17,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Every request-JSON key copied into config with only a small denylist; loop over request items into config is visible locally."
+}

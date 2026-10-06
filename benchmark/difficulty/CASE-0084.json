@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-0084",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-202",
+    "CWE-287",
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 2,
+  "lines_changed_total": 9,
+  "function_size_chars": 212,
+  "function_size_lines": 5,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Unanchored allow-list regexes tested against originalUrl; unanchored-regex auth-skip shape is visible in the function."
+}

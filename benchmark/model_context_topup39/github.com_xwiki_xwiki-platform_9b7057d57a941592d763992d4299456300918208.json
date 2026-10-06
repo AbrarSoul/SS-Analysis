@@ -1,0 +1,35 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_9b7057d57a941592d763992d4299456300918208",
+  "language": "java",
+  "cve_id": "CVE-2022-36092",
+  "cve_ids_all": [
+    "CVE-2022-36092"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-287",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import javax.inject.Named;",
+    "import javax.inject.Singleton;",
+    "import javax.script.ScriptContext;",
+    "import org.apache.commons.lang3.exception.ExceptionUtils;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.xwiki.captcha.Captcha;",
+    "import org.xwiki.captcha.CaptchaConfiguration;",
+    "import org.xwiki.component.annotation.Component;",
+    "import org.xwiki.model.reference.DocumentReference;",
+    "import com.xpn.xwiki.XWiki;",
+    "import com.xpn.xwiki.XWikiContext;",
+    "import com.xpn.xwiki.XWikiException;",
+    "import com.xpn.xwiki.doc.XWikiDocument;"
+  ],
+  "vulnerable_function": "    public boolean action(XWikiContext context) throws XWikiException\n    {\n        XWiki xwiki = context.getWiki();\n        XWikiRequest request = context.getRequest();\n        XWikiResponse response = context.getResponse();\n\n        // Disallow template override with xpage parameter.\n        if (!REGISTER.equals(Utils.getPage(context.getRequest(), REGISTER))) {\n            throw new XWikiException(XWikiException.MODULE_XWIKI, XWikiException.ERROR_XWIKI_ACCESS_DENIED,\n                String.format(\"Template may not be overriden with 'xpage' in [%s] action.\", REGISTER));\n        }\n\n        String register = request.getParameter(REGISTER);\n        if (register != null && register.equals(\"1\")) {\n            // CSRF prevention\n            if (!csrfTokenCheck(context)) {\n                return false;\n            }\n            // Let's verify that the user submitted the right CAPTCHA (if required).\n            if (!verifyCaptcha(context, xwiki)) {\n                return false;\n            }\n\n            int useemail = xwiki.getXWikiPreferenceAsInt(\"use_email_verification\", 0, context);\n            int result;\n            if (useemail == 1) {\n                result = xwiki.createUser(true, \"edit\", context);\n            } else {\n                result = xwiki.createUser(context);\n            }\n            getCurrentScriptContext().setAttribute(\"reg\", Integer.valueOf(result), ScriptContext.ENGINE_SCOPE);\n\n            // Redirect if a redirection parameter is passed.\n            String redirect = Utils.getRedirect(request, null);\n            if (redirect == null) {\n                return true;\n            } else {\n                sendRedirect(response, redirect);\n                return false;\n            }\n        }\n\n        return true;\n    }",
+  "patched_function": "    public boolean action(XWikiContext context) throws XWikiException\n    {\n        XWiki xwiki = context.getWiki();\n        XWikiRequest request = context.getRequest();\n        XWikiResponse response = context.getResponse();\n\n        // Limit template overrides with xpage to allowed templates.\n        if (!ALLOWED_TEMPLATES.contains(Utils.getPage(context.getRequest(), REGISTER))) {\n            throw new XWikiException(XWikiException.MODULE_XWIKI, XWikiException.ERROR_XWIKI_ACCESS_DENIED,\n                String.format(\"Forbidden template override with 'xpage' in [%s] action.\", REGISTER));\n        }\n\n        String register = request.getParameter(REGISTER);\n        if (register != null && register.equals(\"1\")) {\n            // CSRF prevention\n            if (!csrfTokenCheck(context)) {\n                return false;\n            }\n            // Let's verify that the user submitted the right CAPTCHA (if required).\n            if (!verifyCaptcha(context, xwiki)) {\n                return false;\n            }\n\n            int useemail = xwiki.getXWikiPreferenceAsInt(\"use_email_verification\", 0, context);\n            int result;\n            if (useemail == 1) {\n                result = xwiki.createUser(true, \"edit\", context);\n            } else {\n                result = xwiki.createUser(context);\n            }\n            getCurrentScriptContext().setAttribute(\"reg\", Integer.valueOf(result), ScriptContext.ENGINE_SCOPE);\n\n            // Redirect if a redirection parameter is passed.\n            String redirect = Utils.getRedirect(request, null);\n            if (redirect == null) {\n                return true;\n            } else {\n                sendRedirect(response, redirect);\n                return false;\n            }\n        }\n\n        return true;\n    }",
+  "unified_diff": "diff --git a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/RegisterAction.java b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/RegisterAction.java\nindex 907df84aad1..c3a61e9010d 100644\n--- a/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/RegisterAction.java\n+++ b/xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/web/RegisterAction.java\n@@ -19,6 +19,9 @@\n  */\n package com.xpn.xwiki.web;\n \n+import java.util.Arrays;\n+import java.util.List;\n+\n import javax.inject.Named;\n import javax.inject.Singleton;\n import javax.script.ScriptContext;\n@@ -55,6 +58,9 @@ public class RegisterAction extends XWikiAction\n     /** Space where the registration config and class are stored. */\n     private static final String WIKI_SPACE = \"XWiki\";\n \n+    /** Allowed templates for this action. */\n+    private static final List<String> ALLOWED_TEMPLATES = Arrays.asList(REGISTER, \"registerinline\");\n+\n     @Override\n     public boolean action(XWikiContext context) throws XWikiException\n     {\n@@ -62,10 +68,10 @@ public boolean action(XWikiContext context) throws XWikiException\n         XWikiRequest request = context.getRequest();\n         XWikiResponse response = context.getResponse();\n \n-        // Disallow template override with xpage parameter.\n-        if (!REGISTER.equals(Utils.getPage(context.getRequest(), REGISTER))) {\n+        // Limit template overrides with xpage to allowed templates.\n+        if (!ALLOWED_TEMPLATES.contains(Utils.getPage(context.getRequest(), REGISTER))) {\n             throw new XWikiException(XWikiException.MODULE_XWIKI, XWikiException.ERROR_XWIKI_ACCESS_DENIED,\n-                String.format(\"Template may not be overriden with 'xpage' in [%s] action.\", REGISTER));\n+                String.format(\"Forbidden template override with 'xpage' in [%s] action.\", REGISTER));\n         }\n \n         String register = request.getParameter(REGISTER);",
+  "auto_locate_confidence": "auto"
+}

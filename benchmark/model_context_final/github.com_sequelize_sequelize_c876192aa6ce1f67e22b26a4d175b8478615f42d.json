@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_sequelize_sequelize_c876192aa6ce1f67e22b26a4d175b8478615f42d",
+  "language": "javascript",
+  "cve_id": "CVE-2016-10554",
+  "cve_ids_all": [
+    "CVE-2016-10554"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-89",
+      "definition": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "SqlString.escape = function(val, stringifyObjects, timeZone, dialect) {\n  if (val === undefined || val === null) {\n    return 'NULL';\n  }\n\n  switch (typeof val) {\n    case 'boolean': return (val) ? 'true' : 'false';\n    case 'number': return val+'';\n  }\n\n  if (val instanceof Date) {\n    val = SqlString.dateToString(val, timeZone || \"Z\");\n  }\n\n  if (Buffer.isBuffer(val)) {\n    return SqlString.bufferToString(val);\n  }\n\n  if (Array.isArray(val)) {\n    return SqlString.arrayToList(val, timeZone);\n  }\n\n  if (typeof val === 'object') {\n    if (stringifyObjects) {\n      val = val.toString();\n    } else {\n      return SqlString.objectToValues(val, timeZone);\n    }\n  }\n\n  if (dialect == \"postgres\") {\n    // http://www.postgresql.org/docs/8.2/static/sql-syntax-lexical.html#SQL-SYNTAX-STRINGS\n    val = val.replace(/'/g, \"''\");\n  } else {\n    val = val.replace(/[\\0\\n\\r\\b\\t\\\\\\'\\\"\\x1a]/g, function(s) {\n      switch(s) {\n        case \"\\0\": return \"\\\\0\";\n        case \"\\n\": return \"\\\\n\";\n        case \"\\r\": return \"\\\\r\";\n        case \"\\b\": return \"\\\\b\";\n        case \"\\t\": return \"\\\\t\";\n        case \"\\x1a\": return \"\\\\Z\";\n        default: return \"\\\\\"+s;\n      }\n    });\n  }\n  return \"'\"+val+\"'\";\n}",
+  "patched_function": "SqlString.escape = function(val, stringifyObjects, timeZone, dialect) {\n  if (val === undefined || val === null) {\n    return 'NULL';\n  }\n\n  switch (typeof val) {\n    case 'boolean': return (val) ? 'true' : 'false';\n    case 'number': return val+'';\n  }\n\n  if (val instanceof Date) {\n    val = SqlString.dateToString(val, timeZone || \"Z\");\n  }\n\n  if (Buffer.isBuffer(val)) {\n    return SqlString.bufferToString(val);\n  }\n\n  if (Array.isArray(val)) {\n    return SqlString.arrayToList(val, timeZone);\n  }\n\n  if (typeof val === 'object') {\n    if (stringifyObjects) {\n      val = val.toString();\n    } else {\n      return SqlString.objectToValues(val, timeZone);\n    }\n  }\n\n  if (dialect === \"postgres\" || dialect === \"sqlite\") {\n    // http://www.postgresql.org/docs/8.2/static/sql-syntax-lexical.html#SQL-SYNTAX-STRINGS\n    // http://stackoverflow.com/q/603572/130598\n    val = val.replace(/'/g, \"''\");\n  } else {\n    val = val.replace(/[\\0\\n\\r\\b\\t\\\\\\'\\\"\\x1a]/g, function(s) {\n      switch(s) {\n        case \"\\0\": return \"\\\\0\";\n        case \"\\n\": return \"\\\\n\";\n        case \"\\r\": return \"\\\\r\";\n        case \"\\b\": return \"\\\\b\";\n        case \"\\t\": return \"\\\\t\";\n        case \"\\x1a\": return \"\\\\Z\";\n        default: return \"\\\\\"+s;\n      }\n    });\n  }\n  return \"'\"+val+\"'\";\n}",
+  "unified_diff": "diff --git a/lib/sql-string.js b/lib/sql-string.js\nindex 96be2c7e6..160dfa428 100644\n--- a/lib/sql-string.js\n+++ b/lib/sql-string.js\n@@ -37,8 +37,9 @@ SqlString.escape = function(val, stringifyObjects, timeZone, dialect) {\n     }\n   }\n \n-  if (dialect == \"postgres\") {\n+  if (dialect === \"postgres\" || dialect === \"sqlite\") {\n     // http://www.postgresql.org/docs/8.2/static/sql-syntax-lexical.html#SQL-SYNTAX-STRINGS\n+    // http://stackoverflow.com/q/603572/130598\n     val = val.replace(/'/g, \"''\");\n   } else {\n     val = val.replace(/[\\0\\n\\r\\b\\t\\\\\\'\\\"\\x1a]/g, function(s) {",
+  "auto_locate_confidence": "auto"
+}

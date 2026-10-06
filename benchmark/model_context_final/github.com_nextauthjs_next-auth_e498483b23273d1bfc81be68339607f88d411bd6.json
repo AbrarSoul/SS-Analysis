@@ -1,0 +1,22 @@
+{
+  "case_id": "github.com_nextauthjs_next-auth_e498483b23273d1bfc81be68339607f88d411bd6",
+  "language": "typescript",
+  "cve_id": "CVE-2022-31093",
+  "cve_ids_all": [
+    "CVE-2022-31093"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-754",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { handler } from \"./lib\""
+  ],
+  "vulnerable_function": ")\n\nit(\"Allow relative `callbackUrl`\", async () => {\n  const { res, log } = await handler(\n    { providers: [] },\n    { prod: true, params: { callbackUrl: \"/callback\" } }\n  )\n\n  expect(res.status).not.toBe(500)\n  expect(log.error).not.toBeCalledWith(\n    \"INVALID_CALLBACK_URL_ERROR\",\n    expect.anything()\n  )\n}",
+  "patched_function": ")\n\nit(\"Should show configuration error page on invalid `callbackUrl`\", async () => {\n  const { res, log } = await handler(\n    { providers: [] },\n    { prod: true, params: { callbackUrl: \"invalid-callback\" } }\n  )\n\n  expect(res.status).toBe(500)\n  expect(res.html).toMatch(/there is a problem with the server configuration./i)\n  expect(res.html).toMatch(/check the server logs for more information./i)\n\n  expect(log.error).toBeCalledWith(\n    \"INVALID_CALLBACK_URL_ERROR\",\n    expect.anything()\n  )\n}",
+  "unified_diff": "diff --git a/packages/next-auth/tests/assert.test.ts b/packages/next-auth/tests/assert.test.ts\nindex 75454165..13cd2454 100644\n--- a/packages/next-auth/tests/assert.test.ts\n+++ b/packages/next-auth/tests/assert.test.ts\n@@ -13,6 +13,22 @@ it(\"Show error page if secret is not defined\", async () => {\n   expect(log.error).toBeCalledWith(\"NO_SECRET\", expect.anything())\n })\n \n+it(\"Should show configuration error page on invalid `callbackUrl`\", async () => {\n+  const { res, log } = await handler(\n+    { providers: [] },\n+    { prod: true, params: { callbackUrl: \"invalid-callback\" } }\n+  )\n+\n+  expect(res.status).toBe(500)\n+  expect(res.html).toMatch(/there is a problem with the server configuration./i)\n+  expect(res.html).toMatch(/check the server logs for more information./i)\n+\n+  expect(log.error).toBeCalledWith(\n+    \"INVALID_CALLBACK_URL_ERROR\",\n+    expect.anything()\n+  )\n+})\n+\n it(\"Allow relative `callbackUrl`\", async () => {\n   const { res, log } = await handler(\n     { providers: [] },",
+  "auto_locate_confidence": "auto"
+}

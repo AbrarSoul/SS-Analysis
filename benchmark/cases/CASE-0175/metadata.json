@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0175",
+  "original_source_case_id": "github.com_igniterealtime_Openfire_5c022bfa82d71d1710381ab395b100cdbcb8f310",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-25420",
+  "cve_ids_all": [
+    "CVE-2024-25420"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-273"
+  ],
+  "language": "java",
+  "repository": "igniterealtime/Openfire",
+  "repository_url": "https://github.com/igniterealtime/Openfire",
+  "vulnerable_commit": "709bdb9e45e93ef8d83a483da44d149a443dfb88",
+  "fixed_commit": "5c022bfa82d71d1710381ab395b100cdbcb8f310",
+  "changed_file": "xmppserver/src/main/java/org/jivesoftware/openfire/admin/AdminManager.java",
+  "changed_function": "private AdminManager() {",
+  "vulnerable_lines": [
+    85,
+    88
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 16,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0175/vulnerable_source.java": "32394773a98c859091bcbcdb94491ccd33517a0149d3a88803d23e1931f1defd",
+    "cases/CASE-0175/patched_source.java": "5a3e657114cc5fdb38bdc79d1f5905f455261680ccdbe56229c974e344461605",
+    "cases/CASE-0175/patch.diff": "04cc3ac9c9137242a2474469f00872fb44da28abc962cb5ae417b851a86f28d1",
+    "cases/CASE-0175/metadata.json": "79c0958e99940ca3e1f6dcdd8f0b45a8b0a59d6f7a48645456358511a0d5384e",
+    "model_context/CASE-0175.json": "0c73b65070f3f38e47716516d8ea760fac3ce2c3881b22ac1c0277baade8dfd5",
+    "difficulty/CASE-0175.json": "13e7539a1197aa01e47fa3370c3b45fa3c62017d8e0c17fac8b5c1a870ae95b6"
+  },
+  "case_level_hash": "f2c7402bd95c3156a1f95bb25602c715c9ec67d44c55baf5fc4e587e4ffc02ce"
+}

@@ -1,0 +1,14 @@
+{
+  "model_tag": "magicoder:7b",
+  "base_url": "https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-001/v1",
+  "temperature": 0.2,
+  "max_retries": 3,
+  "max_files_changed_configured": 1,
+  "max_files_changed_note": "NOT enforced by Autogrep itself -- see PINNED_CONFIG.md",
+  "prompt_variant": "autogrep_default",
+  "python_version": "3.12.3",
+  "platform": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+  "recorded_at": 1790742993.5378675,
+  "semgrep_version": "1.177.0",
+  "autogrep_commit": "ace3c87a707a5b02632906b76195b6f97d411b8d"
+}

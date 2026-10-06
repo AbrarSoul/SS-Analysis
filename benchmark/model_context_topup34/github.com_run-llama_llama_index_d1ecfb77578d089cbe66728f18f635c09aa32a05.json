@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_run-llama_llama_index_d1ecfb77578d089cbe66728f18f635c09aa32a05",
+  "language": "python",
+  "cve_id": "CVE-2024-12704",
+  "cve_ids_all": [
+    "CVE-2024-12704"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-835",
+      "definition": "Loop with Unreachable Exit Condition ('Infinite Loop')"
+    }
+  ],
+  "containing_class_declaration": "StreamingGeneratorCallbackHandler",
+  "imports": [
+    "from queue import Queue",
+    "from threading import Event",
+    "from typing import Any, Generator, List, Optional",
+    "from uuid import UUID",
+    "from llama_index.core.bridge.langchain import BaseCallbackHandler, LLMResult"
+  ],
+  "vulnerable_function": "    def get_response_gen(self) -> Generator:\n        while True:\n            if not self._token_queue.empty():\n                token = self._token_queue.get_nowait()\n                yield token\n            elif self._done.is_set():\n                break\n",
+  "patched_function": "    def get_response_gen(self, timeout: float = 120.0) -> Generator:\n        \"\"\"Get response generator with timeout.\n\n        Args:\n            timeout (float): Maximum time in seconds to wait for the complete response.\n                            Defaults to 120 seconds.\n        \"\"\"\n        start_time = time.time()\n        while True:\n            if time.time() - start_time > timeout:\n                raise TimeoutError(\n                    f\"Response generation timed out after {timeout} seconds\"\n                )\n\n            if not self._token_queue.empty():\n                token = self._token_queue.get_nowait()\n                yield token\n            elif self._done.is_set():\n                break\n            else:\n                # Small sleep to prevent CPU spinning\n                time.sleep(0.01)\n",
+  "unified_diff": "diff --git a/llama-index-core/llama_index/core/langchain_helpers/streaming.py b/llama-index-core/llama_index/core/langchain_helpers/streaming.py\nindex 45aedd34d..7b1f90c4e 100644\n--- a/llama-index-core/llama_index/core/langchain_helpers/streaming.py\n+++ b/llama-index-core/llama_index/core/langchain_helpers/streaming.py\n@@ -1,3 +1,4 @@\n+import time\n from queue import Queue\n from threading import Event\n from typing import Any, Generator, List, Optional\n@@ -35,10 +36,25 @@ class StreamingGeneratorCallbackHandler(BaseCallbackHandler):\n     ) -> None:\n         self._done.set()\n \n-    def get_response_gen(self) -> Generator:\n+    def get_response_gen(self, timeout: float = 120.0) -> Generator:\n+        \"\"\"Get response generator with timeout.\n+\n+        Args:\n+            timeout (float): Maximum time in seconds to wait for the complete response.\n+                            Defaults to 120 seconds.\n+        \"\"\"\n+        start_time = time.time()\n         while True:\n+            if time.time() - start_time > timeout:\n+                raise TimeoutError(\n+                    f\"Response generation timed out after {timeout} seconds\"\n+                )\n+\n             if not self._token_queue.empty():\n                 token = self._token_queue.get_nowait()\n                 yield token\n             elif self._done.is_set():\n                 break\n+            else:\n+                # Small sleep to prevent CPU spinning\n+                time.sleep(0.01)",
+  "auto_locate_confidence": "auto"
+}

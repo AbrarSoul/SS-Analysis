@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_man-group_dtale_32bd6fb4a63de779ff1e51823a456865ea3cbd13",
+    "language": "python",
+    "repository": "man-group/dtale",
+    "error": "extracted function too large to be useful context (vuln=233 lines, patched=7 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  }
+]

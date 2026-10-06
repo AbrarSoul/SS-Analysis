@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Legrandin_pycrypto_9f912f13df99ad3421eff360d6a62d7dbec755c2",
+  "cve_ids": [
+    "CVE-2012-2417"
+  ],
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "language": "python",
+  "repository": "Legrandin/pycrypto",
+  "repository_url": "https://github.com/Legrandin/pycrypto",
+  "vulnerable_commit": "c8e21380a6059a56bd88267a5e744ddd8badfe66",
+  "fixed_commit": "9f912f13df99ad3421eff360d6a62d7dbec755c2",
+  "changed_file": "lib/Crypto/PublicKey/ElGamal.py",
+  "max_score": "1337"
+}

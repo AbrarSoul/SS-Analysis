@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0262",
+  "batch": "topup21",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-346"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 2,
+  "lines_changed_total": 6,
+  "function_size_chars": 92,
+  "function_size_lines": 3,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Carbon handlers accept the stanza without checking the sender; needs XMPP trust semantics."
+}

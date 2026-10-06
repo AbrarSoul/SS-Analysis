@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_Tautulli_Tautulli_ec77a70aafc555e1aad0d9981f719d1200c117f1",
+  "cve_ids": [
+    "CVE-2025-58761",
+    "CVE-2025-58763"
+  ],
+  "cwe_ids": [
+    "CWE-27",
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "Tautulli/Tautulli",
+  "repository_url": "https://github.com/Tautulli/Tautulli",
+  "vulnerable_commit": "47566128e2e5dde98980d59b7a51b98173bc0b40",
+  "fixed_commit": "ec77a70aafc555e1aad0d9981f719d1200c117f1",
+  "changed_file": "plexpy/webserve.py",
+  "max_score": "1337"
+}

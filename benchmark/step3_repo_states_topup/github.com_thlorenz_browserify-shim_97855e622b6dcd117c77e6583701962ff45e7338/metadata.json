@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_thlorenz_browserify-shim_97855e622b6dcd117c77e6583701962ff45e7338",
+  "cve_ids": [
+    "CVE-2022-37617",
+    "CVE-2022-37621",
+    "CVE-2022-37623"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "javascript",
+  "repository": "thlorenz/browserify-shim",
+  "repository_url": "https://github.com/thlorenz/browserify-shim",
+  "vulnerable_commit": "bae7ece76cf76a5c0382468db324d61c1f533929",
+  "fixed_commit": "97855e622b6dcd117c77e6583701962ff45e7338",
+  "changed_file": "lib/resolve-shims.js",
+  "max_score": "1337"
+}

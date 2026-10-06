@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0015",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 3,
+  "lines_changed_total": 6,
+  "function_size_chars": 951,
+  "function_size_lines": 19,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "The flaw is using the wrong encoder function for the rendering context (HTML vs JS); the template's actual rendering context isn't visible in this file, so recognizing the mismatch needs external/contextual knowledge.",
+  "supported_status": "supported"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0320",
+  "original_source_case_id": "github.com_vercel_ms_caae2988ba2a37765d055c4eee63d383320ee662",
+  "selection_batch": "topup26",
+  "cve_id": "CVE-2017-20162",
+  "cve_ids_all": [
+    "CVE-2017-20162"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "javascript",
+  "repository": "vercel/ms",
+  "repository_url": "https://github.com/vercel/ms",
+  "vulnerable_commit": "b83b36d7266fb1bd779fd19a2f98bab17a04d999",
+  "fixed_commit": "caae2988ba2a37765d055c4eee63d383320ee662",
+  "changed_file": "index.js",
+  "changed_function": "function parse(str) {",
+  "vulnerable_lines": [
+    47,
+    98
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0320/vulnerable_source.js": "59860e79b1b10e8f9c5adddc48ba1a641e526ff630b9aece71bfec2314169d2b",
+    "cases/CASE-0320/patched_source.js": "4bd92209cb9dacf3e3773e725acb7aaec43ea9e78540324e4d0f73e5ce9adef7",
+    "cases/CASE-0320/patch.diff": "81931e2f4ab014331c932a8eab6ea3f89eca8ae7343cd3c16d2c19c4d408ab5b",
+    "cases/CASE-0320/metadata.json": "ec97f1048b915a371a579d6bd7475b02602bb88cfac0c4a0cd498a1f1af3d7ad",
+    "model_context/CASE-0320.json": "112013b791392fa8c028acce2d281bfce6c77b102dd566856d66bc5f18512ba2",
+    "difficulty/CASE-0320.json": "0cf111f941931b79b2f7eb6da8c718bbf35b166f3075a3fd2d8a499175754923"
+  },
+  "case_level_hash": "1db278e802539d5f43049f8a8932a5356aa7ea8310a435c0871da2be6a0dadd6"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_tomcat_0f01966eb60015d975525019e12a087f05ebf01a",
+  "cve_ids": [
+    "CVE-2025-46701"
+  ],
+  "cwe_ids": [
+    "CWE-178"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "708c683fa3fe4f5dff22d0abcf78ab3817d85822",
+  "fixed_commit": "0f01966eb60015d975525019e12a087f05ebf01a",
+  "changed_file": "java/org/apache/catalina/servlets/CGIServlet.java",
+  "max_score": "1337"
+}

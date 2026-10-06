@@ -1,0 +1,38 @@
+{
+  "case_id": "github.com_kujirahand_nadesiko3_124871c064cfc65cdcd83205637e84fc246c76df",
+  "language": "javascript",
+  "cve_id": "CVE-2022-41642",
+  "cve_ids_all": [
+    "CVE-2022-41642",
+    "CVE-2022-41777",
+    "CVE-2022-42496"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-703",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    },
+    {
+      "id": "NVD-CWE-Other",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import assert from 'assert'",
+    "import { NakoCompiler } from '../../core/src/nako3.mjs'",
+    "import path from 'path'",
+    "import PluginNode from '../../src/plugin_node.mjs'",
+    "import PluginCSV from '../../core/src/plugin_csv.mjs'",
+    "import { execSync } from 'child_process'",
+    "import url from 'url'"
+  ],
+  "vulnerable_function": ")\n  it('\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0', () => {\n    cmd('F=\u300c{\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0}/test.txt\u300d;\u300cabc\u300d\u3092F\u306b\u4fdd\u5b58\u3002F\u3092\u8aad\u3093\u3067\u30c8\u30ea\u30e0\u3057\u3066\u8868\u793a\u3002', 'abc')\n  }",
+  "patched_function": ")\n  it('\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0', () => {\n    cmp('F=\u300c{\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0}/test.txt\u300d;\u300cabc\u300d\u3092F\u306b\u4fdd\u5b58\u3002F\u3092\u8aad\u3093\u3067\u30c8\u30ea\u30e0\u3057\u3066\u8868\u793a\u3002', 'abc')\n  }",
+  "unified_diff": "diff --git a/test/node/plugin_node_test.mjs b/test/node/plugin_node_test.mjs\nindex cc2dda21..1b65a7c8 100644\n--- a/test/node/plugin_node_test.mjs\n+++ b/test/node/plugin_node_test.mjs\n@@ -80,7 +80,7 @@ describe('plugin_node_test', () => {\n     cmp('\u300csome data to hash\u300d\u3092\u300csha256\u300d\u306e\u300chex\u300d\u3067\u30cf\u30c3\u30b7\u30e5\u5024\u8a08\u7b97\u3057\u3066\u8868\u793a\u3002', '6a2da20943931e9834fc12cfe5bb47bbd9ae43489a30726962b576f4e3993e50')\n   })\n   it('\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0', () => {\n-    cmd('F=\u300c{\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0}/test.txt\u300d;\u300cabc\u300d\u3092F\u306b\u4fdd\u5b58\u3002F\u3092\u8aad\u3093\u3067\u30c8\u30ea\u30e0\u3057\u3066\u8868\u793a\u3002', 'abc')\n+    cmp('F=\u300c{\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0}/test.txt\u300d;\u300cabc\u300d\u3092F\u306b\u4fdd\u5b58\u3002F\u3092\u8aad\u3093\u3067\u30c8\u30ea\u30e0\u3057\u3066\u8868\u793a\u3002', 'abc')\n   })\n   it('\u5727\u7e2e\u89e3\u51cd', () => {\n     let path7z = '7z'\n@@ -125,4 +125,3 @@ describe('plugin_node_test', () => {\n     cmp(`${pathSrc2}FILE\u3092\u30d5\u30a1\u30a4\u30eb\u524a\u9664\u3002ZIP\u3092\u30c6\u30f3\u30dd\u30e9\u30ea\u30d5\u30a9\u30eb\u30c0\u306b\u89e3\u51cd\u3002FILE\u3092\u8aad\u3080\u3002\u30c8\u30ea\u30e0\u3002\u305d\u308c\u3092\u8868\u793a\u3002`, 'abc')\n   })\n })\n-",
+  "auto_locate_confidence": "auto"
+}

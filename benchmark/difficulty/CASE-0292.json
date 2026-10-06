@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0292",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 211,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Person lookup filtered on Project.id, a predicate on the wrong table; needs ORM model knowledge to see why it is wrong."
+}

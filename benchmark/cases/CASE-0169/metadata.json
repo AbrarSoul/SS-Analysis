@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0169",
+  "original_source_case_id": "github.com_gaizhenbiao_chuanhuchatgpt_e46ec4ecd896bc3c88eb9a2f44e8593f3c6761b4",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-5124",
+  "cve_ids_all": [
+    "CVE-2024-5124"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-203"
+  ],
+  "language": "python",
+  "repository": "gaizhenbiao/chuanhuchatgpt",
+  "repository_url": "https://github.com/gaizhenbiao/chuanhuchatgpt",
+  "vulnerable_commit": "9546107ddccfb91237fd931593c134532e0c160f",
+  "fixed_commit": "e46ec4ecd896bc3c88eb9a2f44e8593f3c6761b4",
+  "changed_file": "modules/utils.py",
+  "changed_function": "def auth_from_conf(username, password):",
+  "vulnerable_lines": [
+    836,
+    849
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 9,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0169/vulnerable_source.py": "37281fa53ad0f2c05185840bc6467a761c090fa99beb4f69200be0981fdf5812",
+    "cases/CASE-0169/patched_source.py": "25717ac8586c281931a235f6024ed819658573515abe1ab2eda24f90eaceb375",
+    "cases/CASE-0169/patch.diff": "3589f6b6dbf51c83e8bb64b8cffc8fcd8ef10724cc26173bffefea003f45a0e3",
+    "cases/CASE-0169/metadata.json": "90a9b0e09af644a4eac1f7e7465dc1fca0bb9b1ad019d820ce55089906a76709",
+    "model_context/CASE-0169.json": "7c39b452358b58facb437f7e58612957cb429016b03d67cd930958aa6ded9bee",
+    "difficulty/CASE-0169.json": "22749f0d198217e5c95d8778d6922ea65bfe6831d9917a0d0f310269f951f36c"
+  },
+  "case_level_hash": "b6b8197df753973f4f9b6d83742780839a0399c734c924c13939f8fc3f89771b"
+}

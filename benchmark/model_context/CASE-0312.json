@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0312",
+  "language": "typescript",
+  "cve_id": "CVE-2025-68130",
+  "cve_ids_all": [
+    "CVE-2025-68130"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1321",
+      "definition": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "function set(\n  obj: Record<string, any>,\n  path: readonly string[],\n  value: unknown,\n): void {\n  if (path.length > 1) {\n    const newPath = [...path];\n    const key = newPath.shift()!;\n    const nextKey = newPath[0]!;\n\n    if (!obj[key]) {\n      obj[key] = isNumberString(nextKey) ? [] : {};\n    } else if (Array.isArray(obj[key]) && !isNumberString(nextKey)) {\n      obj[key] = Object.fromEntries(Object.entries(obj[key]));\n    }\n\n    set(obj[key], newPath, value);\n\n    return;\n  }\n  const p = path[0]!;\n  if (obj[p] === undefined) {\n    obj[p] = value;\n  } else if (Array.isArray(obj[p])) {\n    obj[p].push(value);\n  } else {\n    obj[p] = [obj[p], value];\n  }\n}",
+  "patched_function": "function set(\n  obj: Record<string, any>,\n  path: readonly string[],\n  value: unknown,\n): void {\n  if (path.length > 1) {\n    const newPath = [...path];\n    const key = newPath.shift()!;\n    const nextKey = newPath[0]!;\n\n    // Skip unsafe keys to prevent prototype pollution\n    if (isUnsafeKey(key)) {\n      return;\n    }\n\n    if (!Object.hasOwn(obj, key)) {\n      obj[key] = isNumberString(nextKey) ? [] : Object.create(null);\n    } else if (Array.isArray(obj[key]) && !isNumberString(nextKey)) {\n      obj[key] = Object.fromEntries(Object.entries(obj[key]));\n    }\n\n    set(obj[key], newPath, value);\n\n    return;\n  }\n  const p = path[0]!;\n\n  // Skip unsafe keys to prevent prototype pollution\n  if (isUnsafeKey(p)) {\n    return;\n  }\n\n  if (obj[p] === undefined) {\n    obj[p] = value;\n  } else if (Array.isArray(obj[p])) {\n    obj[p].push(value);\n  } else {\n    obj[p] = [obj[p], value];\n  }\n}",
+  "unified_diff": "diff --git a/packages/server/src/unstable-core-do-not-import/http/formDataToObject.ts b/packages/server/src/unstable-core-do-not-import/http/formDataToObject.ts\nindex a723cc2f8..e8ac3825a 100644\n--- a/packages/server/src/unstable-core-do-not-import/http/formDataToObject.ts\n+++ b/packages/server/src/unstable-core-do-not-import/http/formDataToObject.ts\n@@ -2,6 +2,10 @@\n \n const isNumberString = (str: string) => /^\\d+$/.test(str);\n \n+// Prototype pollution guard\n+const isUnsafeKey = (key: string) =>\n+  key === '__proto__' || key === 'constructor' || key === 'prototype';\n+\n function set(\n   obj: Record<string, any>,\n   path: readonly string[],\n@@ -12,8 +16,13 @@ function set(\n     const key = newPath.shift()!;\n     const nextKey = newPath[0]!;\n \n-    if (!obj[key]) {\n-      obj[key] = isNumberString(nextKey) ? [] : {};\n+    // Skip unsafe keys to prevent prototype pollution\n+    if (isUnsafeKey(key)) {\n+      return;\n+    }\n+\n+    if (!Object.hasOwn(obj, key)) {\n+      obj[key] = isNumberString(nextKey) ? [] : Object.create(null);\n     } else if (Array.isArray(obj[key]) && !isNumberString(nextKey)) {\n       obj[key] = Object.fromEntries(Object.entries(obj[key]));\n     }\n@@ -23,6 +32,12 @@ function set(\n     return;\n   }\n   const p = path[0]!;\n+\n+  // Skip unsafe keys to prevent prototype pollution\n+  if (isUnsafeKey(p)) {\n+    return;\n+  }\n+\n   if (obj[p] === undefined) {\n     obj[p] = value;\n   } else if (Array.isArray(obj[p])) {\n@@ -33,7 +48,7 @@ function set(\n }\n \n export function formDataToObject(formData: FormData) {\n-  const obj: Record<string, unknown> = {};\n+  const obj: Record<string, unknown> = Object.create(null);\n \n   for (const [key, value] of formData.entries()) {\n     const parts = key.split(/[\\.\\[\\]]/).filter(Boolean);",
+  "auto_locate_confidence": "auto"
+}

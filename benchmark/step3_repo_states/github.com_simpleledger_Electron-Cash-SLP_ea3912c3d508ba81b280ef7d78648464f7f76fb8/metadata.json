@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_simpleledger_Electron-Cash-SLP_ea3912c3d508ba81b280ef7d78648464f7f76fb8",
+  "cve_ids": [
+    "CVE-2020-11014"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "simpleledger/Electron-Cash-SLP",
+  "repository_url": "https://github.com/simpleledger/Electron-Cash-SLP",
+  "vulnerable_commit": "e7c81b92de3041d332500d8b0cd47a1966e108c1",
+  "fixed_commit": "ea3912c3d508ba81b280ef7d78648464f7f76fb8",
+  "changed_file": "gui/qt/slp_create_token_mint_dialog.py",
+  "max_score": "1337"
+}

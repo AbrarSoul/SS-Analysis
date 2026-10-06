@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_firebase_firebase-tools_068a2b08dc308c7ab4b569617f5fc8821237e3a0",
+  "cve_ids": [
+    "CVE-2024-4128"
+  ],
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "language": "typescript",
+  "repository": "firebase/firebase-tools",
+  "repository_url": "https://github.com/firebase/firebase-tools",
+  "vulnerable_commit": "dbb8573c047ad249341d568e665efdba47403128",
+  "fixed_commit": "068a2b08dc308c7ab4b569617f5fc8821237e3a0",
+  "changed_file": "src/emulator/hub.ts",
+  "max_score": "1337"
+}

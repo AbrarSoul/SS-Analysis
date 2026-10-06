@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_ab778254fb8f71c774e1c1239368c44fe3b6bba5",
+  "cve_ids": [
+    "CVE-2022-23620"
+  ],
+  "cwe_ids": [
+    "CWE-116",
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "9e4d40d03960b20233f6887bc142fe4474f620c4",
+  "fixed_commit": "ab778254fb8f71c774e1c1239368c44fe3b6bba5",
+  "changed_file": "xwiki-platform-core/xwiki-platform-skin/xwiki-platform-skin-skinx/src/main/java/org/xwiki/skinx/internal/AbstractSxExportURLFactoryActionHandler.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_nextauthjs_next-auth_e498483b23273d1bfc81be68339607f88d411bd6",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-754"
+  ],
+  "changed_files": 1,
+  "lines_added": 16,
+  "lines_removed": 0,
+  "lines_changed_total": 16,
+  "function_size_chars": 311,
+  "function_size_lines": 14,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

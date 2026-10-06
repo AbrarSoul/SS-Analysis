@@ -1,0 +1,25 @@
+{
+  "case_id": "CASE-0303",
+  "language": "javascript",
+  "cve_id": "CVE-2022-37617",
+  "cve_ids_all": [
+    "CVE-2022-37617",
+    "CVE-2022-37621",
+    "CVE-2022-37623"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1321",
+      "definition": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var path             = require('path')",
+    "var allShims = require(shimFile);"
+  ],
+  "vulnerable_function": "  Object.keys(shims).forEach(function (k) {\n    var val = shims[k]\n      , exp = val && val.exports;\n\n    if (exp && /^global\\:/.test(exp)) {\n      exposeGlobals[k] = exp;\n    } else {\n      onlyShims[k] = val;\n    }\n  }",
+  "patched_function": "  Object.keys(shims).forEach(function (k) {\n    // https://github.com/thlorenz/browserify-shim/issues/245\n    if (k === '__proto__' || k === 'constructor') {\n      return;\n    }\n\n    var val = shims[k]\n      , exp = val && val.exports;\n\n    if (exp && /^global\\:/.test(exp)) {\n      exposeGlobals[k] = exp;\n    } else {\n      onlyShims[k] = val;\n    }\n  }",
+  "unified_diff": "diff --git a/lib/resolve-shims.js b/lib/resolve-shims.js\nindex cb634fe..c6650eb 100644\n--- a/lib/resolve-shims.js\n+++ b/lib/resolve-shims.js\n@@ -123,6 +123,11 @@ function separateExposeGlobals(shims) {\n     , exposeGlobals = {};\n \n   Object.keys(shims).forEach(function (k) {\n+    // https://github.com/thlorenz/browserify-shim/issues/245\n+    if (k === '__proto__' || k === 'constructor') {\n+      return;\n+    }\n+\n     var val = shims[k]\n       , exp = val && val.exports;\n ",
+  "auto_locate_confidence": "auto"
+}

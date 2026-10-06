@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_hive_b418e3c9f479ba8e7d31e6470306111002ffa809",
+  "cve_ids": [
+    "CVE-2024-23953"
+  ],
+  "cwe_ids": [
+    "CWE-208"
+  ],
+  "language": "java",
+  "repository": "apache/hive",
+  "repository_url": "https://github.com/apache/hive",
+  "vulnerable_commit": "564d7e54d2360488611da39d0e5f027a2d574fc1",
+  "fixed_commit": "b418e3c9f479ba8e7d31e6470306111002ffa809",
+  "changed_file": "llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java",
+  "max_score": "1337"
+}

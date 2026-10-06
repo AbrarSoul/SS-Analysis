@@ -1,0 +1,68 @@
+[
+  {
+    "old_original_source_case_id": "github.com_Tethik_flask-session-captcha_2811ae23a38d33b620fb7a07de8837c6d65c13e4",
+    "repository": "Tethik/flask-session-captcha",
+    "vulnerable_commit": "0c6e2eccc970939d7d48012d7f91011c73ae8274",
+    "fixed_commit": "ab36ee2208993ca7907d1c1b8cef5778a28a3e0e",
+    "changed_file": "flask_session_captcha/__init__.py",
+    "reason": "CVE-2022-24880: originally captured commit was a test-only follow-up; real fix is ab36ee2 ('Fix validate returned value'). User chose hand-curation (Section 9 review).",
+    "new_original_source_case_id": "github.com_Tethik_flask-session-captcha_ab36ee2208993ca7907d1c1b8cef5778a28a3e0e"
+  },
+  {
+    "old_original_source_case_id": "github.com_advplyr_audiobookshelf_bf8407274e3ee300af1927ee660d078a7a801e1c",
+    "repository": "advplyr/audiobookshelf",
+    "vulnerable_commit": "068ba84a8c5e9f4630df4d0c7f013dddbdbd5d1f",
+    "fixed_commit": "ec6537656925a43871b07cfee12c9f383844d224",
+    "changed_file": "server/Auth.js",
+    "reason": "CVE-2025-25205: originally captured commit bf84072 ('No auth for author images') is the commit that INTRODUCED the unanchored-regex auth bypass per the advisory; real fix is ec65376 ('Security fix for GHSA-pg8v-5jcv-wrvw'), a single-file +7/-2 change. Same small-clean-real-fix situation as CASE-0078, so hand-curated per that precedent.",
+    "new_original_source_case_id": "github.com_advplyr_audiobookshelf_ec6537656925a43871b07cfee12c9f383844d224"
+  },
+  {
+    "kind": "retarget",
+    "original_source_case_id": "github.com_ant-media_ant-media-server_4d4763bd4fd06e515c19544e5170ca0f34c9ce45",
+    "repository": "ant-media/ant-media-server",
+    "changed_file": "src/main/java/io/antmedia/rest/RestServiceBase.java",
+    "target_old_line": 368,
+    "reason": "CVE-2024-35371: the frozen capture's auto-located target (startRecord) was already sanitized in the vulnerable revision -- its hunk is only a literal-to-constant refactor (pure-insertion hunks weigh 1 vs 2 for changed lines, so the locator preferred it). The real unsanitized log-injection sites are deleteBroadcasts (hunk at old line 368) and deleteVoDs (old line 1171); retargeted to deleteBroadcasts, the first. Note the advisory's CWE-125 label is a mismatch for what is really CWE-117 log injection; kept as-published for traceability."
+  },
+  {
+    "kind": "retarget",
+    "original_source_case_id": "github.com_apache_solr_35fc4bdc48171d9a64251c54a1e76deb558cf9d8",
+    "repository": "apache/solr",
+    "changed_file": "solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java",
+    "target_function_header": "  private void setupJvmMetrics(CoreContainer coresInit, MetricsConfig config) {",
+    "reason": "CVE-2023-50290: deletion-only patch (removes the `sysenv` gauge that published ALL environment variables through the metrics API). The diff-driven locator resolved the old side to a truncated 10-line fragment starting at `MetricsMap sysenv =` (a lambda region) while the new side resolved to the whole setupJvmMetrics method, so the model context was inconsistent. Pinned to the enclosing method setupJvmMetrics on both sides."
+  },
+  {
+    "kind": "retarget",
+    "original_source_case_id": "github.com_balderdashy_sails_4a023dc5095a4b30fdc8535f705ed34cd22d2f7d",
+    "repository": "balderdashy/sails",
+    "changed_file": "lib/router/req.js",
+    "target_function_header": "module.exports = function buildRequest (_req) {",
+    "reason": "CVE-2023-38504: the crash is in the `''+headerVal` string coercion inside the _.mapValues callback (throws for objects without toString / Symbols), but the diff-driven locator resolved the old side to only the earlier 5-line `_.each(_req.headers, ...)` 'strip undefined headers' callback (truncated, missing its closing `);`) while the new side resolved to the whole buildRequest function, so the model context was inconsistent and did not contain the vulnerable coercion. Pinned to the enclosing function buildRequest on both sides."
+  },
+  {
+    "kind": "retarget",
+    "original_source_case_id": "github.com_plantuml_plantuml_6826315db092d2e432aeab1a0894e08017c6e4bd",
+    "repository": "plantuml/plantuml",
+    "changed_file": "src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java",
+    "target_function_header": "\tfinal protected ImageData exportDiagramNow(OutputStream os, int num, FileFormatOption fileFormat)",
+    "reason": "CVE-2026-0858: the upstream fix deletes the regex sanitizer filter()/sanitizeDotAttribute() and instead makes exportDiagramNow refuse SVG output (`if (fileFormat.getFileFormat() == FileFormat.SVG) return ImageDataSimple.ok();`), while also passing raw `data` instead of filter(data) to Graphviz. The diff-driven locator picked the deleted filter() helper, which is the removed (bypassable) defence, not the code that hands attacker-controlled DOT to Graphviz for SVG generation. Retargeted to exportDiagramNow, the method that both versions run and that the fix actually changes behaviour in."
+  },
+  {
+    "old_original_source_case_id": "github.com_unshiftio_url-parse_209c296d302317268afbe19700a70c63ecbeb2d2",
+    "repository": "unshiftio/url-parse",
+    "vulnerable_commit": "f60fa4e20d72d1b7d11252868f93d7aa5f4cb202",
+    "fixed_commit": "53b1794e54d0711ceb52505e0f74145270570d5a",
+    "changed_file": "index.js",
+    "reason": "CVE-2018-3774: originally captured commit was the 2015 '[major] Instruction based parsing' refactor (its vulnerable side does not even run: references undefined bits). Real fix is 53b1794 ('[security] Sanitize paths, hosts before parsing', v1.4.3), a small single-file change. Hand-curated during Section 9 without asking (precedent CASE-0078/0084)."
+  },
+  {
+    "kind": "retarget",
+    "original_source_case_id": "github.com_w8tcha_CKEditor-oEmbed-Plugin_10f6169e39510bbf5af913886037044458b9dc9b",
+    "repository": "w8tcha/CKEditor-oEmbed-Plugin",
+    "changed_file": "oembed/plugin.js",
+    "target_function_header": "                init: function(editor) {",
+    "reason": "CVE-2019-9870: the fix deletes one `script` rule from the widget's allowedContent object literal; the diff-driven locator landed on a 4-line object-literal fragment (`,\\n 'div(...) script': {...}`). Retargeted (without asking, precedent CASE-0098/0113/0127/0260) to the enclosing plugin init function, which contains the widget definition."
+  }
+]

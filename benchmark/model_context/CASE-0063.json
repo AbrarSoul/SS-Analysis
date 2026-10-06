@@ -1,0 +1,23 @@
+{
+  "case_id": "CASE-0063",
+  "language": "javascript",
+  "cve_id": "CVE-2021-23353",
+  "cve_ids_all": [
+    "CVE-2021-23353"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { jsPDF } from \"../jspdf.js\";",
+    "import { atob, btoa } from \"../libs/AtobBtoa.js\";"
+  ],
+  "vulnerable_function": "  var extractImageFromDataUrl = (jsPDFAPI.__addimage__.extractImageFromDataUrl = function(\n    dataUrl\n  ) {\n    dataUrl = dataUrl || \"\";\n    var dataUrlParts = dataUrl.split(\"base64,\");\n    var result = null;\n\n    if (dataUrlParts.length === 2) {\n      var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n        dataUrlParts[0]\n      );\n      if (Array.isArray(extractedInfo)) {\n        result = {\n          mimeType: extractedInfo[1],\n          charset: extractedInfo[2],\n          data: dataUrlParts[1]\n        };\n      }\n    }\n    return result;\n  }",
+  "patched_function": "  var extractImageFromDataUrl = (jsPDFAPI.__addimage__.extractImageFromDataUrl = function(\n    dataUrl\n  ) {\n    dataUrl = dataUrl || \"\";\n    var dataUrlParts = dataUrl.split(\"base64,\");\n    var result = null;\n\n    if (dataUrlParts.length === 2) {\n      var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=(?!charset=)[\\w=-]*)*;*$/.exec(\n        dataUrlParts[0]\n      );\n      if (Array.isArray(extractedInfo)) {\n        result = {\n          mimeType: extractedInfo[1],\n          charset: extractedInfo[2],\n          data: dataUrlParts[1]\n        };\n      }\n    }\n    return result;\n  }",
+  "unified_diff": "diff --git a/src/modules/addimage.js b/src/modules/addimage.js\nindex 5d206606..d0295d0c 100644\n--- a/src/modules/addimage.js\n+++ b/src/modules/addimage.js\n@@ -630,7 +630,7 @@ import { atob, btoa } from \"../libs/AtobBtoa.js\";\n     var result = null;\n \n     if (dataUrlParts.length === 2) {\n-      var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n+      var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=(?!charset=)[\\w=-]*)*;*$/.exec(\n         dataUrlParts[0]\n       );\n       if (Array.isArray(extractedInfo)) {",
+  "auto_locate_confidence": "auto"
+}

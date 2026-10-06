@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_igniterealtime_Openfire_5c022bfa82d71d1710381ab395b100cdbcb8f310",
+  "cve_ids": [
+    "CVE-2024-25420"
+  ],
+  "cwe_ids": [
+    "CWE-273"
+  ],
+  "language": "java",
+  "repository": "igniterealtime/Openfire",
+  "repository_url": "https://github.com/igniterealtime/Openfire",
+  "vulnerable_commit": "709bdb9e45e93ef8d83a483da44d149a443dfb88",
+  "fixed_commit": "5c022bfa82d71d1710381ab395b100cdbcb8f310",
+  "changed_file": "xmppserver/src/main/java/org/jivesoftware/openfire/admin/AdminManager.java",
+  "max_score": "1337"
+}

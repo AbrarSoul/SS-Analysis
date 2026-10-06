@@ -1,0 +1,37 @@
+{
+  "case_id": "github.com_tox-dev_filelock_41b42dd2c72aecf7da83dbda5903b8087dddc4d5",
+  "language": "python",
+  "cve_id": "CVE-2026-22701",
+  "cve_ids_all": [
+    "CVE-2026-22701"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-362",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-367",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-59",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "SoftFileLock",
+  "imports": [
+    "from __future__ import annotations",
+    "import os",
+    "import sys",
+    "from contextlib import suppress",
+    "from errno import EACCES, EEXIST",
+    "from pathlib import Path",
+    "from ._api import BaseFileLock",
+    "from ._util import ensure_directory_exists, raise_on_not_writable_file"
+  ],
+  "vulnerable_function": "    def _acquire(self) -> None:\n        raise_on_not_writable_file(self.lock_file)\n        ensure_directory_exists(self.lock_file)\n        # first check for exists and read-only mode as the open will mask this case as EEXIST\n        flags = (\n            os.O_WRONLY  # open for writing only\n            | os.O_CREAT\n            | os.O_EXCL  # together with above raise EEXIST if the file specified by filename exists\n            | os.O_TRUNC  # truncate the file to zero byte\n        )\n        try:\n            file_handler = os.open(self.lock_file, flags, self._context.mode)\n        except OSError as exception:  # re-raise unless expected exception\n            if not (\n                exception.errno == EEXIST  # lock already exist\n                or (exception.errno == EACCES and sys.platform == \"win32\")  # has no access to this lock\n            ):  # pragma: win32 no cover\n                raise\n        else:\n            self._context.lock_file_fd = file_handler\n",
+  "patched_function": "    def _acquire(self) -> None:\n        raise_on_not_writable_file(self.lock_file)\n        ensure_directory_exists(self.lock_file)\n        flags = (\n            os.O_WRONLY  # open for writing only\n            | os.O_CREAT\n            | os.O_EXCL  # together with above raise EEXIST if the file specified by filename exists\n            | os.O_TRUNC  # truncate the file to zero byte\n        )\n        o_nofollow = getattr(os, \"O_NOFOLLOW\", None)\n        if o_nofollow is not None:\n            flags |= o_nofollow\n        try:\n            file_handler = os.open(self.lock_file, flags, self._context.mode)\n        except OSError as exception:  # re-raise unless expected exception\n            if not (\n                exception.errno == EEXIST  # lock already exist\n                or (exception.errno == EACCES and sys.platform == \"win32\")  # has no access to this lock\n            ):  # pragma: win32 no cover\n                raise\n        else:\n            self._context.lock_file_fd = file_handler\n",
+  "unified_diff": "diff --git a/src/filelock/_soft.py b/src/filelock/_soft.py\nindex 28c67f7..93709c5 100644\n--- a/src/filelock/_soft.py\n+++ b/src/filelock/_soft.py\n@@ -16,13 +16,15 @@ class SoftFileLock(BaseFileLock):\n     def _acquire(self) -> None:\n         raise_on_not_writable_file(self.lock_file)\n         ensure_directory_exists(self.lock_file)\n-        # first check for exists and read-only mode as the open will mask this case as EEXIST\n         flags = (\n             os.O_WRONLY  # open for writing only\n             | os.O_CREAT\n             | os.O_EXCL  # together with above raise EEXIST if the file specified by filename exists\n             | os.O_TRUNC  # truncate the file to zero byte\n         )\n+        o_nofollow = getattr(os, \"O_NOFOLLOW\", None)\n+        if o_nofollow is not None:\n+            flags |= o_nofollow\n         try:\n             file_handler = os.open(self.lock_file, flags, self._context.mode)\n         except OSError as exception:  # re-raise unless expected exception",
+  "auto_locate_confidence": "auto"
+}

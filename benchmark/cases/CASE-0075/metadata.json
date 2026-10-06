@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0075",
+  "original_source_case_id": "github.com_Speedy11CZ_mcrpx_02ca6d1fd851567560046766ac9d04d20db35b8e",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2024-24043",
+  "cve_ids_all": [
+    "CVE-2024-24043"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "Speedy11CZ/mcrpx",
+  "repository_url": "https://github.com/Speedy11CZ/mcrpx",
+  "vulnerable_commit": "020a6ad9444a39ccfc2e62afdce1bd21d439c85b",
+  "fixed_commit": "02ca6d1fd851567560046766ac9d04d20db35b8e",
+  "changed_file": "common/src/main/java/cz/speedy11/mcrpx/common/util/ZipUtil.java",
+  "changed_function": "public static void extractZip(File file, File destDirectory, ExtractTaskListener listener) throws IOException {",
+  "vulnerable_lines": [
+    91,
+    122
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 10,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0075/vulnerable_source.java": "86392abea66d43607d95b3d95998b6b3cc18e4fa385201ee005b8bb7be08f89d",
+    "cases/CASE-0075/patched_source.java": "816a1b0b64478ea60d83e8eb40e572157072d80e1577ba06ca80c60a737fbca6",
+    "cases/CASE-0075/patch.diff": "04b15a12deb7ba3e4737a659d62242fcb53411b462d49e9057102e795a8b21ae",
+    "cases/CASE-0075/metadata.json": "da9a2f0b19ce887a6e384d44aa4f33ab597719aae0169c6922a22ceba490373b",
+    "model_context/CASE-0075.json": "e379615bc07c6ee6ef1f23d04451faeaad7be3839002a267c723b13ffe5c0425",
+    "difficulty/CASE-0075.json": "dde12a423ef032e07278a9daaabbecb9daab7fdf95e44ead7ee84202323d4453"
+  },
+  "case_level_hash": "c966639918acb38654f0111b9227f6a1bc1876aea9258762eb119be5ad57b394"
+}

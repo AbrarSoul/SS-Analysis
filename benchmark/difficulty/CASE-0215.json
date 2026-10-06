@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0215",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-280",
+    "CWE-755"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 399,
+  "function_size_lines": 9,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Join time taken from the sender-supplied origin_server_ts; the trust decision on that timestamp is semantic."
+}

@@ -1,0 +1,11 @@
+diff --git a/badkeys/dkim.py b/badkeys/dkim.py
+index 0e42534..0859c8a 100644
+--- a/badkeys/dkim.py
++++ b/badkeys/dkim.py
+@@ -45,5 +45,5 @@ def parsedkim(line):
+             return False
+         der = EDASN1 + rawed
+         return PUBPRE + base64.b64encode(der).decode() + PUBPOST
+-    _warnmsg(f"Unknown DKIM key type {dkim['k']}")
++    _warnmsg("Unknown DKIM key type")
+     return False

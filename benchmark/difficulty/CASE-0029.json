@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0029",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-185",
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 599,
+  "function_size_lines": 24,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "The vulnerable regex literal itself is the defect; identifiable without tracing any data flow.",
+  "supported_status": "supported"
+}

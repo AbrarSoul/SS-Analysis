@@ -1,0 +1,22 @@
+{
+  "case_id": "github.com_huggingface_transformers_54a02160eb030da9be18231c77791f2eb3a52216",
+  "language": "python",
+  "cve_id": "CVE-2025-6051",
+  "cve_ids_all": [
+    "CVE-2025-6051"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1333",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "EnglishNormalizer",
+  "imports": [
+    "import re"
+  ],
+  "vulnerable_function": "    def normalize_numbers(self, text: str) -> str:\n        \"\"\"\n        This method is used to normalize numbers within a text such as converting the numbers to words, removing\n        commas, etc.\n        \"\"\"\n        text = re.sub(re.compile(r\"([0-9][0-9\\,]+[0-9])\"), self._remove_commas, text)\n        text = re.sub(re.compile(r\"\u00a3([0-9\\,]*[0-9]+)\"), r\"\\1 pounds\", text)\n        text = re.sub(re.compile(r\"\\$([0-9\\.\\,]*[0-9]+)\"), self._expand_dollars, text)\n        text = re.sub(re.compile(r\"([0-9]+\\.[0-9]+)\"), self._expand_decimal_point, text)\n        text = re.sub(re.compile(r\"[0-9]+(st|nd|rd|th)\"), self._expand_ordinal, text)\n        text = re.sub(re.compile(r\"[0-9]+\"), self._expand_number, text)\n        return text\n",
+  "patched_function": "    def normalize_numbers(self, text: str) -> str:\n        \"\"\"\n        This method is used to normalize numbers within a text such as converting the numbers to words, removing\n        commas, etc.\n        \"\"\"\n        text = re.sub(r\"([0-9][0-9,]+[0-9])\", self._remove_commas, text)\n        text = re.sub(r\"\u00a3([0-9,]*[0-9])\", r\"\\1 pounds\", text)\n        text = re.sub(r\"\\$([0-9.,]*[0-9])\", self._expand_dollars, text)\n        text = re.sub(r\"([0-9]++\\.[0-9]+)\", self._expand_decimal_point, text)\n        text = re.sub(r\"[0-9]++(st|nd|rd|th)\", self._expand_ordinal, text)\n        text = re.sub(r\"[0-9]+\", self._expand_number, text)\n        return text\n",
+  "unified_diff": "diff --git a/src/transformers/models/clvp/number_normalizer.py b/src/transformers/models/clvp/number_normalizer.py\nindex 7824009727..b8dc085b8b 100644\n--- a/src/transformers/models/clvp/number_normalizer.py\n+++ b/src/transformers/models/clvp/number_normalizer.py\n@@ -15,7 +15,14 @@\n \n \"\"\"English Normalizer class for CLVP.\"\"\"\n \n-import re\n+import sys\n+\n+\n+if sys.version_info >= (3, 11):\n+    # Atomic grouping support was only added to the core RE in Python 3.11\n+    import re\n+else:\n+    import regex as re\n \n \n class EnglishNormalizer:\n@@ -199,12 +206,12 @@ class EnglishNormalizer:\n         This method is used to normalize numbers within a text such as converting the numbers to words, removing\n         commas, etc.\n         \"\"\"\n-        text = re.sub(re.compile(r\"([0-9][0-9\\,]+[0-9])\"), self._remove_commas, text)\n-        text = re.sub(re.compile(r\"\u00a3([0-9\\,]*[0-9]+)\"), r\"\\1 pounds\", text)\n-        text = re.sub(re.compile(r\"\\$([0-9\\.\\,]*[0-9]+)\"), self._expand_dollars, text)\n-        text = re.sub(re.compile(r\"([0-9]+\\.[0-9]+)\"), self._expand_decimal_point, text)\n-        text = re.sub(re.compile(r\"[0-9]+(st|nd|rd|th)\"), self._expand_ordinal, text)\n-        text = re.sub(re.compile(r\"[0-9]+\"), self._expand_number, text)\n+        text = re.sub(r\"([0-9][0-9,]+[0-9])\", self._remove_commas, text)\n+        text = re.sub(r\"\u00a3([0-9,]*[0-9])\", r\"\\1 pounds\", text)\n+        text = re.sub(r\"\\$([0-9.,]*[0-9])\", self._expand_dollars, text)\n+        text = re.sub(r\"([0-9]++\\.[0-9]+)\", self._expand_decimal_point, text)\n+        text = re.sub(r\"[0-9]++(st|nd|rd|th)\", self._expand_ordinal, text)\n+        text = re.sub(r\"[0-9]+\", self._expand_number, text)\n         return text\n \n     def expand_abbreviations(self, text: str) -> str:",
+  "auto_locate_confidence": "auto"
+}

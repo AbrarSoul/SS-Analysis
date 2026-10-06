@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0204",
+  "original_source_case_id": "github.com_jsreport_jsreport-chrome-pdf_6750b2f77d05cb843aefc1c4a98097a3bd33a6a2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-7762",
+  "cve_ids_all": [
+    "CVE-2020-7762"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "javascript",
+  "repository": "jsreport/jsreport-chrome-pdf",
+  "repository_url": "https://github.com/jsreport/jsreport-chrome-pdf",
+  "vulnerable_commit": "ba51764dae68403893f9f0e0ce7d060b78ee26c4",
+  "fixed_commit": "6750b2f77d05cb843aefc1c4a98097a3bd33a6a2",
+  "changed_file": "lib/conversion.js",
+  "changed_function": ")",
+  "vulnerable_lines": [
+    57,
+    67
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 19,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0204/vulnerable_source.js": "ce44d7379b8cf174a2956ab35cb65e0a0277bebd5191117f0ce3982b1c2f4005",
+    "cases/CASE-0204/patched_source.js": "d24691b91e13b495288d1b8bc305f5fd657312201b5a70b3584a3825f15d7110",
+    "cases/CASE-0204/patch.diff": "bc5130b2215b7ceed1a14525cf9a253a09995ce39822c83c571aa87c0a58fa77",
+    "cases/CASE-0204/metadata.json": "8c1a37a07194fb915ed954ba90b8447c6d90155c910f4607fec6e4606e5c895a",
+    "model_context/CASE-0204.json": "6a2d7cb931aa827a95d1d560f4ee0b4d2128b6a31fa33b56415af88cfc40e85f",
+    "difficulty/CASE-0204.json": "86cfbcd89e535b070df0a843518bcc23f335e188753b91a77704969da5aa4680"
+  },
+  "case_level_hash": "37e1eba9b08dd16db418983aa9eefd4e77feb264af1bdebc7bf4613f54206726"
+}

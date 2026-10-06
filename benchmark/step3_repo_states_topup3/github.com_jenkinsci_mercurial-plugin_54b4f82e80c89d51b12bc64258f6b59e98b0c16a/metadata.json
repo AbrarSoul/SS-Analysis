@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_mercurial-plugin_54b4f82e80c89d51b12bc64258f6b59e98b0c16a",
+  "cve_ids": [
+    "CVE-2018-1000112"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/mercurial-plugin",
+  "repository_url": "https://github.com/jenkinsci/mercurial-plugin",
+  "vulnerable_commit": "f6e5f0bff2d8678c0e7cb13d0db031b45c7a0437",
+  "fixed_commit": "54b4f82e80c89d51b12bc64258f6b59e98b0c16a",
+  "changed_file": "src/main/java/hudson/plugins/mercurial/MercurialStatus.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_mcdope_pam_usb_52a1fd6413b7ffcc1a5b58ce432be42e7bf0dbd0",
+  "cve_ids": [
+    "CVE-2026-44712",
+    "CVE-2026-47274"
+  ],
+  "cwe_ids": [
+    "CWE-427",
+    "CWE-78",
+    "CWE-88"
+  ],
+  "language": "python",
+  "repository": "mcdope/pam_usb",
+  "repository_url": "https://github.com/mcdope/pam_usb",
+  "vulnerable_commit": "c1e998f12d525339c2982564e404cb6a2290b1bc",
+  "fixed_commit": "52a1fd6413b7ffcc1a5b58ce432be42e7bf0dbd0",
+  "changed_file": "tests/unit/python/test_pamusb_conf.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,85 @@
+diff --git a/copyparty/authsrv.py b/copyparty/authsrv.py
+index 69973ec5..88aa7314 100644
+--- a/copyparty/authsrv.py
++++ b/copyparty/authsrv.py
+@@ -431,6 +431,8 @@ class VFS(object):
+ 
+         self.get_dbv = self._get_dbv
+         self.ls = self._ls
++        self.canonical = self._canonical
++        self.dcanonical = self._dcanonical
+ 
+     def __repr__(self) -> str:
+         return "VFS(%s)" % (
+@@ -624,7 +626,7 @@ class VFS(object):
+         vrem = vjoin(self.vpath[len(dbv.vpath) :].lstrip("/"), vrem)
+         return dbv, vrem
+ 
+-    def canonical(self, rem: str, resolve: bool = True) -> str:
++    def _canonical(self, rem: str, resolve: bool = True) -> str:
+         """returns the canonical path (fully-resolved absolute fs path)"""
+         ap = self.realpath
+         if rem:
+@@ -632,7 +634,7 @@ class VFS(object):
+ 
+         return absreal(ap) if resolve else ap
+ 
+-    def dcanonical(self, rem: str) -> str:
++    def _dcanonical(self, rem: str) -> str:
+         """resolves until the final component (filename)"""
+         ap = self.realpath
+         if rem:
+@@ -641,6 +643,44 @@ class VFS(object):
+         ad, fn = os.path.split(ap)
+         return os.path.join(absreal(ad), fn)
+ 
++    def _canonical_shr(self, rem: str, resolve: bool = True) -> str:
++        """returns the canonical path (fully-resolved absolute fs path)"""
++        ap = self.realpath
++        if rem:
++            ap += "/" + rem
++
++        rap = absreal(ap)
++        if self.shr_files:
++            assert self.shr_src  # !rm
++            vn, rem = self.shr_src
++            chk = absreal(os.path.join(vn.realpath, rem))
++            if chk != rap:
++                # not the dir itself; assert file allowed
++                ad, fn = os.path.split(rap)
++                if chk != ad or fn not in self.shr_files:
++                    return "\n\n"
++
++        return rap if resolve else ap
++
++    def _dcanonical_shr(self, rem: str) -> str:
++        """resolves until the final component (filename)"""
++        ap = self.realpath
++        if rem:
++            ap += "/" + rem
++
++        ad, fn = os.path.split(ap)
++        ad = absreal(ad)
++        if self.shr_files:
++            assert self.shr_src  # !rm
++            vn, rem = self.shr_src
++            chk = absreal(os.path.join(vn.realpath, rem))
++            if chk != absreal(ap):
++                # not the dir itself; assert file allowed
++                if ad != chk or fn not in self.shr_files:
++                    return "\n\n"
++
++        return os.path.join(ad, fn)
++
+     def _ls_nope(
+         self, *a, **ka
+     ) -> tuple[str, list[tuple[str, os.stat_result]], dict[str, "VFS"]]:
+@@ -2751,6 +2791,8 @@ class AuthSrv(object):
+ 
+                     shn.shr_files = set(fns)
+                     shn.ls = shn._ls_shr
++                    shn.canonical = shn._canonical_shr
++                    shn.dcanonical = shn._dcanonical_shr
+                 else:
+                     shn.ls = shn._ls
+ 

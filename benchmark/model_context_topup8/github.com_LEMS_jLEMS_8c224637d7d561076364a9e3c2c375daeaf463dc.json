@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_LEMS_jLEMS_8c224637d7d561076364a9e3c2c375daeaf463dc",
+  "language": "java",
+  "cve_id": "CVE-2022-4583",
+  "cve_ids_all": [
+    "CVE-2022-4583"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-22",
+      "definition": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.BufferedReader;",
+    "import java.io.File;",
+    "import java.io.FileNotFoundException;",
+    "import java.io.FileOutputStream;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.io.InputStreamReader;",
+    "import java.io.OutputStream;",
+    "import java.net.JarURLConnection;",
+    "import java.net.URL;",
+    "import java.util.ArrayList;",
+    "import java.util.Enumeration;",
+    "import java.util.jar.JarEntry;",
+    "import java.util.jar.JarFile;",
+    "import java.util.zip.ZipEntry;",
+    "import org.lemsml.jlems.ResourceRoot;",
+    "import org.lemsml.jlems.core.logging.E;",
+    "import org.lemsml.jlems.core.sim.ContentError;"
+  ],
+  "vulnerable_function": "   public static void unpackJar(File fjar, File fout) throws IOException {\n    \n      JarFile jf = new JarFile(fjar);\n      Enumeration<JarEntry> en = jf.entries();\n\n      while (en.hasMoreElements()) {\n         JarEntry je = en.nextElement();\n         java.io.File f = new File(fout,  je.getName());\n         if (je.isDirectory()) {\n            f.mkdirs();\n            continue;\n\n         } else {\n            // f.getParentFile().mkdirs();\n\n            if (f.getPath().indexOf(\"META-INF\") >= 0) {\n               // skip it\n            } else {\n            f.getParentFile().mkdirs();\n            java.io.InputStream is = jf.getInputStream(je);\n            java.io.FileOutputStream fos = new FileOutputStream(f);\n\n            // EFF - buffering, file channels??\n            while (is.available() > 0) {\n               fos.write(is.read());\n            }\n            fos.close();\n            is.close();\n         }\n         }\n      }\n\n    //  E.info(\"unpacked jar to \" + fout);\n\n       \n   }",
+  "patched_function": "   public static void unpackJar(File fjar, File fout) throws IOException {\n    \n      JarFile jf = new JarFile(fjar);\n      Enumeration<JarEntry> en = jf.entries();\n\n      while (en.hasMoreElements()) {\n         JarEntry je = en.nextElement();\n         java.io.File f = new File(fout,  je.getName());\n\t\t\t\t\t\t\tif (!f.toPath().normalize().startsWith(fout.toPath().normalize())) {\n\t\t\t\t\t\t\t\tthrow new RuntimeException(\"Bad zip entry\");\n\t\t\t\t\t\t\t}\n         if (je.isDirectory()) {\n            f.mkdirs();\n            continue;\n\n         } else {\n            // f.getParentFile().mkdirs();\n\n            if (f.getPath().indexOf(\"META-INF\") >= 0) {\n               // skip it\n            } else {\n            f.getParentFile().mkdirs();\n            java.io.InputStream is = jf.getInputStream(je);\n            java.io.FileOutputStream fos = new FileOutputStream(f);\n\n            // EFF - buffering, file channels??\n            while (is.available() > 0) {\n               fos.write(is.read());\n            }\n            fos.close();\n            is.close();\n         }\n         }\n      }\n\n    //  E.info(\"unpacked jar to \" + fout);\n\n       \n   }",
+  "unified_diff": "diff --git a/src/main/java/org/lemsml/jlems/io/util/JUtil.java b/src/main/java/org/lemsml/jlems/io/util/JUtil.java\nindex 8cff03f..44eceff 100644\n--- a/src/main/java/org/lemsml/jlems/io/util/JUtil.java\n+++ b/src/main/java/org/lemsml/jlems/io/util/JUtil.java\n@@ -205,6 +205,9 @@ public final class JUtil {\n       while (en.hasMoreElements()) {\n          JarEntry je = en.nextElement();\n          java.io.File f = new File(fout,  je.getName());\n+\t\t\t\t\t\t\tif (!f.toPath().normalize().startsWith(fout.toPath().normalize())) {\n+\t\t\t\t\t\t\t\tthrow new RuntimeException(\"Bad zip entry\");\n+\t\t\t\t\t\t\t}\n          if (je.isDirectory()) {\n             f.mkdirs();\n             continue;",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0015",
+  "language": "java",
+  "cve_id": "CVE-2025-25247",
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "extraction_kind": "method",
+  "class_name": "ServicesServlet",
+  "containing_class_declaration": "public class ServicesServlet extends AbstractOsgiManagerPlugin",
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.PrintWriter;",
+    "import java.io.StringWriter;",
+    "import java.io.Writer;",
+    "import java.lang.reflect.Array;",
+    "import java.util.Locale;",
+    "import org.apache.felix.utils.json.JSONWriter;",
+    "import org.apache.felix.webconsole.bundleinfo.BundleInfoProvider;",
+    "import org.apache.felix.webconsole.internal.Util;",
+    "import org.apache.felix.webconsole.internal.servlet.AbstractOsgiManagerPlugin;",
+    "import org.apache.felix.webconsole.servlet.RequestVariableResolver;",
+    "import org.apache.felix.webconsole.servlet.ServletConstants;",
+    "import org.osgi.framework.Bundle;",
+    "import org.osgi.framework.BundleContext;",
+    "import org.osgi.framework.Constants;",
+    "import org.osgi.framework.InvalidSyntaxException;",
+    "import org.osgi.framework.ServiceReference;",
+    "import org.osgi.framework.ServiceRegistration;",
+    "import org.owasp.encoder.Encode;",
+    "import jakarta.servlet.ServletException;",
+    "import jakarta.servlet.http.HttpServletRequest;",
+    "import jakarta.servlet.http.HttpServletResponse;"
+  ],
+  "vulnerable_function": "    public void renderContent( HttpServletRequest request, HttpServletResponse response ) throws IOException {\n        // get request info from request attribute\n        final RequestInfo reqInfo = getRequestInfo( request );\n\n        final String appRoot = ( String ) request.getAttribute( ServletConstants.ATTR_APP_ROOT );\n        StringWriter w = new StringWriter();\n        final String filter = request.getParameter(FILTER_PARAM);\n        writeJSON(w, reqInfo.service, request.getLocale(), filter);\n\n        // prepare variables\n        final RequestVariableResolver vars = this.getVariableResolver(request);\n        vars.put( \"bundlePath\", appRoot +  \"/\" + BundlesServlet.NAME + \"/\" );\n        vars.put( \"drawDetails\", String.valueOf(reqInfo.serviceRequested));\n        vars.put( \"__data__\", w.toString() );\n        vars.put( \"filter\", filter == null ? \"\" : Encode.forHtmlContent(filter) );\n\n        response.getWriter().print( TEMPLATE );\n    }\n",
+  "patched_function": "    public void renderContent( HttpServletRequest request, HttpServletResponse response ) throws IOException {\n        // get request info from request attribute\n        final RequestInfo reqInfo = getRequestInfo( request );\n\n        final String appRoot = ( String ) request.getAttribute( ServletConstants.ATTR_APP_ROOT );\n        StringWriter w = new StringWriter();\n        final String filter = request.getParameter(FILTER_PARAM);\n        writeJSON(w, reqInfo.service, request.getLocale(), filter);\n\n        // prepare variables\n        final RequestVariableResolver vars = this.getVariableResolver(request);\n        vars.put( \"bundlePath\", appRoot +  \"/\" + BundlesServlet.NAME + \"/\" );\n        vars.put( \"drawDetails\", String.valueOf(reqInfo.serviceRequested));\n        vars.put( \"__data__\", w.toString() );\n        vars.put( \"filter\", filter == null ? \"\" : Encode.forJavaScript(filter));\n\n        response.getWriter().print( TEMPLATE );\n    }\n",
+  "unified_diff": "diff --git a/webconsole/src/main/java/org/apache/felix/webconsole/internal/core/ServicesServlet.java b/webconsole/src/main/java/org/apache/felix/webconsole/internal/core/ServicesServlet.java\nindex 3b8a89b5a6..e2b8d7d241 100644\n--- a/webconsole/src/main/java/org/apache/felix/webconsole/internal/core/ServicesServlet.java\n+++ b/webconsole/src/main/java/org/apache/felix/webconsole/internal/core/ServicesServlet.java\n@@ -114,7 +114,7 @@ public class ServicesServlet extends AbstractOsgiManagerPlugin\n \n     private final String TEMPLATE;\n \n-    /** \n+    /**\n      * Default constructor\n      * @throws IOException If template can't be read\n      */\n@@ -122,7 +122,7 @@ public class ServicesServlet extends AbstractOsgiManagerPlugin\n         // load templates\n         TEMPLATE = readTemplateFile( \"/templates/services.html\" );\n     }\n-    \n+\n     @Override\n     protected String getCategory() {\n         return CATEGORY_OSGI;\n@@ -466,7 +466,7 @@ public class ServicesServlet extends AbstractOsgiManagerPlugin\n         vars.put( \"bundlePath\", appRoot +  \"/\" + BundlesServlet.NAME + \"/\" );\n         vars.put( \"drawDetails\", String.valueOf(reqInfo.serviceRequested));\n         vars.put( \"__data__\", w.toString() );\n-        vars.put( \"filter\", filter == null ? \"\" : Encode.forHtmlContent(filter) );\n+        vars.put( \"filter\", filter == null ? \"\" : Encode.forJavaScript(filter));\n \n         response.getWriter().print( TEMPLATE );\n     }",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 4334,
+  "context_size_chars_after_truncation": 4334
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_quarkusio_quarkus_3a3b0d739222a2e476e085a955cfa090739f5924",
+  "cve_ids": [
+    "CVE-2024-1979"
+  ],
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "java",
+  "repository": "quarkusio/quarkus",
+  "repository_url": "https://github.com/quarkusio/quarkus",
+  "vulnerable_commit": "1a6f4cbb196eec44277b900451ad2aee9710cac1",
+  "fixed_commit": "3a3b0d739222a2e476e085a955cfa090739f5924",
+  "changed_file": "extensions/kubernetes/vanilla/deployment/src/main/java/io/quarkus/kubernetes/deployment/KubernetesCommonHelper.java",
+  "max_score": "1337"
+}

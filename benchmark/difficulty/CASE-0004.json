@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0004",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 1,
+  "lines_changed_total": 15,
+  "function_size_chars": 517,
+  "function_size_lines": 13,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Unredacted tree data must be traced to the cross-role remote() call; requires knowing which fields are sensitive and the GUEST/HOST trust boundary, not visible from the line alone.",
+  "supported_status": "supported"
+}

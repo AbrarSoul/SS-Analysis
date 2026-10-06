@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_esphome_esphome_d814ed1d4adc71fde47c4df41215bee449884513",
+  "cve_ids": [
+    "CVE-2024-27081"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "esphome/esphome",
+  "repository_url": "https://github.com/esphome/esphome",
+  "vulnerable_commit": "84c6e52be21daf775572d692bffee2f91fd8d1e6",
+  "fixed_commit": "d814ed1d4adc71fde47c4df41215bee449884513",
+  "changed_file": "esphome/dashboard/web_server.py",
+  "max_score": "1337"
+}

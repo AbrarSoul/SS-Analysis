@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0312",
+  "batch": "topup3",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "changed_files": 1,
+  "lines_added": 18,
+  "lines_removed": 3,
+  "lines_changed_total": 21,
+  "function_size_chars": 666,
+  "function_size_lines": 29,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Recursive set walking user-controlled form keys with no `__proto__` guard; prototype-pollution pattern."
+}

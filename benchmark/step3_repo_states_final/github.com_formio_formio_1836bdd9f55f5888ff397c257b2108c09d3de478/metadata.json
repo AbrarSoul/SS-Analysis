@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_formio_formio_1836bdd9f55f5888ff397c257b2108c09d3de478",
+  "cve_ids": [
+    "CVE-2025-67718"
+  ],
+  "cwe_ids": [
+    "CWE-178",
+    "CWE-200"
+  ],
+  "language": "javascript",
+  "repository": "formio/formio",
+  "repository_url": "https://github.com/formio/formio",
+  "vulnerable_commit": "91c7bb233774b32d0d616fb0727ef450567542b6",
+  "fixed_commit": "1836bdd9f55f5888ff397c257b2108c09d3de478",
+  "changed_file": "src/util/util.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_wildfirechat_im-server_2f9c4e028c01c64913cab32e7248bcca183a5230",
+  "cve_ids": [
+    "CVE-2025-66480"
+  ],
+  "cwe_ids": [
+    "CWE-22",
+    "CWE-434"
+  ],
+  "language": "java",
+  "repository": "wildfirechat/im-server",
+  "repository_url": "https://github.com/wildfirechat/im-server",
+  "vulnerable_commit": "a9b83a14eda4835ca2d34e6bb493a2de977e1618",
+  "fixed_commit": "2f9c4e028c01c64913cab32e7248bcca183a5230",
+  "changed_file": "broker/src/main/java/com/xiaoleilu/loServer/action/UploadFileAction.java",
+  "max_score": "1337"
+}

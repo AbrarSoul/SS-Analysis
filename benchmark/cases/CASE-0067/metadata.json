@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0067",
+  "original_source_case_id": "github.com_OSC_ondemand_96f29b995e1add7562516614e4dc8d961987e8b4",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-53636",
+  "cve_ids_all": [
+    "CVE-2025-53636"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-400",
+    "CWE-779"
+  ],
+  "language": "javascript",
+  "repository": "OSC/ondemand",
+  "repository_url": "https://github.com/OSC/ondemand",
+  "vulnerable_commit": "787206d094852fea7d7dfe2716759c026c66a158",
+  "fixed_commit": "96f29b995e1add7562516614e4dc8d961987e8b4",
+  "changed_file": "apps/shell/app.js",
+  "changed_function": "ws.send(data, function (error) {",
+  "vulnerable_lines": [
+    181,
+    183
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 50,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0067/vulnerable_source.js": "0f3c2a040abfffef2247b44173d337dba6a7d1ee53b43794e79986330f84de18",
+    "cases/CASE-0067/patched_source.js": "1774b18c9d6c9ad7021a7f0bbb7c209d2bc5532ab12da726ef27e0b52ab51333",
+    "cases/CASE-0067/patch.diff": "cb7abf0d45bd3c01eccacc5da717a0324e5236108205d9085cc73e0a8c50b521",
+    "cases/CASE-0067/metadata.json": "25b9439f0b602df3392d1ca3bf5dd403233f2136478244047426a4260fa8795c",
+    "model_context/CASE-0067.json": "1697550d2876edfe5d57c126c64e880ce477de3899eba0321d744a627bdbfa45",
+    "difficulty/CASE-0067.json": "bc9154ef26c8b724b704568a511c76aac9d6627196daab6c0f97cb34960ec585"
+  },
+  "case_level_hash": "f8b2ffda628f97710be40e0ab83499f5eeff05922541fd4411ddad1975795830"
+}

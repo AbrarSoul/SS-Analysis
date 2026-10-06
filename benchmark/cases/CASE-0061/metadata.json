@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0061",
+  "original_source_case_id": "github.com_MirahezeBots_sopel-channelmgnt_643388365f28c5cc682254ab913c401f0e53260a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-21431",
+  "cve_ids_all": [
+    "CVE-2021-21431"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-284",
+    "NVD-CWE-Other"
+  ],
+  "language": "python",
+  "repository": "MirahezeBots/sopel-channelmgnt",
+  "repository_url": "https://github.com/MirahezeBots/sopel-channelmgnt",
+  "vulnerable_commit": "cd25b767600d15d2a4bcbfb78529b5bb1b44af4a",
+  "fixed_commit": "643388365f28c5cc682254ab913c401f0e53260a",
+  "changed_file": "sopel_channelmgnt/channelmgnt/__init__.py",
+  "changed_function": "def kick(bot, trigger):",
+  "vulnerable_lines": [
+    203,
+    227
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0061/vulnerable_source.py": "07b48dab35fe2e22cc1d709b65942d5eeccf7c525eee297f52c9a3d09b9d28b1",
+    "cases/CASE-0061/patched_source.py": "6d815e9d4ffbefee5dc66c266d818110d7433be9e7e8f88e8bb6b1aab1ec3a43",
+    "cases/CASE-0061/patch.diff": "2115220ef5618d04abb88aa2be7d580c58d8f7c0110c3fbd5238dd3aed00f304",
+    "cases/CASE-0061/metadata.json": "cc88c5cab0f81de1a15437fe2244ca7f799db78ea4dec3976ead5be3b199d952",
+    "model_context/CASE-0061.json": "ef48d2398a656b37f16339ac5da625e80f8863949c8408d1a7c7eca252663cd5",
+    "difficulty/CASE-0061.json": "e768930ba7c43e7f5456c814ea69f786383e206c601c7afded6fcf3064fec070"
+  },
+  "case_level_hash": "1bc9d179f5a5b3eb606987ee8cfd40170f2c7fb3cb6273e31e4c71a45e30a901"
+}

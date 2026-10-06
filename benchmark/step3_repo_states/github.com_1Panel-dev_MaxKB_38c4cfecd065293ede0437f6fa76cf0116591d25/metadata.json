@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_1Panel-dev_MaxKB_38c4cfecd065293ede0437f6fa76cf0116591d25",
+  "cve_ids": [
+    "CVE-2026-39419"
+  ],
+  "cwe_ids": [
+    "CWE-290",
+    "CWE-693",
+    "CWE-74"
+  ],
+  "language": "python",
+  "repository": "1Panel-dev/MaxKB",
+  "repository_url": "https://github.com/1Panel-dev/MaxKB",
+  "vulnerable_commit": "158d41786b04d4ab76b6f23a3417a57b5f464721",
+  "fixed_commit": "38c4cfecd065293ede0437f6fa76cf0116591d25",
+  "changed_file": "apps/common/utils/tool_code.py",
+  "max_score": "1337"
+}

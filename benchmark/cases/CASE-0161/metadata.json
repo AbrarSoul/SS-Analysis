@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0161",
+  "original_source_case_id": "github.com_fail2ban_fail2ban_83109bce144f443a48ef31165a5389b7b83f4e0e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2012-5642",
+  "cve_ids_all": [
+    "CVE-2012-5642"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "fail2ban/fail2ban",
+  "repository_url": "https://github.com/fail2ban/fail2ban",
+  "vulnerable_commit": "6ee2c0a01436daa2c95773b26852ba9d5dc52871",
+  "fixed_commit": "83109bce144f443a48ef31165a5389b7b83f4e0e",
+  "changed_file": "server/action.py",
+  "changed_function": "def replaceTag(query, aInfo):",
+  "vulnerable_lines": [
+    242,
+    251
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 15,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0161/vulnerable_source.py": "456ac9e5ca9c46192b98b1cdb84ea1be4fe4140c6a444e107d676779af98c2af",
+    "cases/CASE-0161/patched_source.py": "51a4997cf65348dd2f8255110d87d615aebc42cd57e93f8a0c8a7fb95ad4f340",
+    "cases/CASE-0161/patch.diff": "780d4127f4a3c4d4140e2b53960539638202f097d7123e3896d09d1e4d5d1a60",
+    "cases/CASE-0161/metadata.json": "b574d8ee0937878984682d4723468a3b652a22f26b1570fc328e97c9911fdd6b",
+    "model_context/CASE-0161.json": "c183f46cc5cc200bb86562d0f1813309bad9e785e2af1e76c63edf0d407b2b4a",
+    "difficulty/CASE-0161.json": "f278c0b0c6a3c7d5e90c616a0871d60c031e26d9812d5ef74bd72161d58cfb33"
+  },
+  "case_level_hash": "ded12c56991c326ff547b2f787b75ca40da794f2285330287cdff2a62b58bf14"
+}

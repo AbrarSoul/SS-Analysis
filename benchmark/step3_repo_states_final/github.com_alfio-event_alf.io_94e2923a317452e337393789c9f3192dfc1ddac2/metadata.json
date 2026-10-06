@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_alfio-event_alf.io_94e2923a317452e337393789c9f3192dfc1ddac2",
+  "cve_ids": [
+    "CVE-2023-2258",
+    "CVE-2023-2259"
+  ],
+  "cwe_ids": [
+    "CWE-1236",
+    "CWE-1336",
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "alfio-event/alf.io",
+  "repository_url": "https://github.com/alfio-event/alf.io",
+  "vulnerable_commit": "a00c7248b49a0afda0ab009078ce7c2be2d12fbf",
+  "fixed_commit": "94e2923a317452e337393789c9f3192dfc1ddac2",
+  "changed_file": "src/main/java/alfio/util/ExportUtils.java",
+  "max_score": "1337"
+}

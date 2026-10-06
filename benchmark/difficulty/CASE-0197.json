@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0197",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 26,
+  "lines_removed": 0,
+  "lines_changed_total": 26,
+  "function_size_chars": 3328,
+  "function_size_lines": 77,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "DocumentBuilderFactory used with JAXP defaults on workspace files at two sites; known XXE parser pattern."
+}

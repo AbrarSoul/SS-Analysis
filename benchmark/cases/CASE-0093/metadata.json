@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0093",
+  "original_source_case_id": "github.com_airsonic_airsonic_61c842923a6d60d4aedd126445a8437b53b752c8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-10908",
+  "cve_ids_all": [
+    "CVE-2019-10908"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-335"
+  ],
+  "language": "java",
+  "repository": "airsonic/airsonic",
+  "repository_url": "https://github.com/airsonic/airsonic",
+  "vulnerable_commit": "e330eeb864e48813636295fd5b8e08d1f04a9236",
+  "fixed_commit": "61c842923a6d60d4aedd126445a8437b53b752c8",
+  "changed_file": "airsonic-main/src/main/java/org/airsonic/player/controller/RecoverController.java",
+  "changed_function": "public ModelAndView recover(HttpServletRequest request, HttpServletResponse response) throws Exception {",
+  "vulnerable_lines": [
+    46,
+    89
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0093/vulnerable_source.java": "3f9628b64ffa132f3c0d78f6c72b79469ca49b77a1c4f9ce6d47d7b157da6547",
+    "cases/CASE-0093/patched_source.java": "8d00ab5f13614a1db3d28e69489b2325217fab43efaf286e2d6fcef82f86302f",
+    "cases/CASE-0093/patch.diff": "50230524f1c0c2b3b6ec506a28b417551b1000950dbb90f480c92d754786cdf2",
+    "cases/CASE-0093/metadata.json": "e508f72e4fb2ab2541340b375b7c12de49408c7225c1cff8f618ca710942b0c8",
+    "model_context/CASE-0093.json": "793790ad0e36dbd1db654c4a395b56a0683b31a9e021819ce50d66961baaaa7d",
+    "difficulty/CASE-0093.json": "7a7e3840b2032dc660d728f3692fa2529b25bd98de57a1d8a5f7c71c87f4b324"
+  },
+  "case_level_hash": "f4ac5de1ef6fa4fec49453dfd0256425026cb4a3037597ceb3d113dfa0dbcdf0"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_AkshuDev_PheonixAppAPI_0937419e323f5ea9013d43dc1b82fef9d7e05044",
+  "cve_ids": [
+    "CVE-2024-41951"
+  ],
+  "cwe_ids": [
+    "CWE-323"
+  ],
+  "language": "python",
+  "repository": "AkshuDev/PheonixAppAPI",
+  "repository_url": "https://github.com/AkshuDev/PheonixAppAPI",
+  "vulnerable_commit": "542d3eb6d42e3357d03a73cc50072e65b82092d6",
+  "fixed_commit": "0937419e323f5ea9013d43dc1b82fef9d7e05044",
+  "changed_file": "PheonixAppAPI/apis/FileManager.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0086",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [],
+  "changed_files": 1,
+  "lines_added": 34,
+  "lines_removed": 1,
+  "lines_changed_total": 35,
+  "function_size_chars": 279,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Incomplete regex-based table extraction misses comma-joins; parser completeness is not a code-shape property."
+}

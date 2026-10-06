@@ -1,0 +1,25 @@
+{
+  "case_id": "github.com_run-llama_llama_index_bd827c30484fa085ec769fa55dc7f2add8006ac8",
+  "language": "python",
+  "cve_id": "CVE-2024-45201",
+  "cve_ids_all": [
+    "CVE-2024-45201"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import importlib",
+    "import subprocess",
+    "import sys",
+    "from typing import Any"
+  ],
+  "vulnerable_function": "def download_integration(module_str: str, module_import_str: str, cls_name: str) -> Any:\n    \"\"\"Returns an integration class by first pip installing its parent module.\"\"\"\n    try:\n        pip_install(module_str)  # this works for any integration not just packs\n    except Exception as e:\n        raise Exception(f\"Failed to pip install `{module_str}`\") from e\n\n    try:\n        exec(f\"from {module_import_str} import {cls_name}\")\n        module_spec = importlib.util.find_spec(module_import_str)\n        module = importlib.util.module_from_spec(module_spec)\n        module_spec.loader.exec_module(module)\n        pack_cls = getattr(module, cls_name)\n    except ImportError as e:\n        raise ImportError(f\"Unable to import {cls_name}\") from e\n    return pack_cls\n",
+  "patched_function": "def download_integration(module_str: str, module_import_str: str, cls_name: str) -> Any:\n    \"\"\"Returns an integration class by first pip installing its parent module.\"\"\"\n    try:\n        pip_install(module_str)  # this works for any integration not just packs\n    except Exception as e:\n        raise Exception(f\"Failed to pip install `{module_str}`\") from e\n\n    try:\n        module_spec = importlib.util.find_spec(module_import_str)\n        module = importlib.util.module_from_spec(module_spec)\n        module_spec.loader.exec_module(module)\n        pack_cls = getattr(module, cls_name)\n    except ImportError as e:\n        raise ImportError(f\"Unable to import {cls_name}\") from e\n    return pack_cls\n",
+  "unified_diff": "diff --git a/llama-index-core/llama_index/core/download/integration.py b/llama-index-core/llama_index/core/download/integration.py\nindex d9023762f..df7180bb6 100644\n--- a/llama-index-core/llama_index/core/download/integration.py\n+++ b/llama-index-core/llama_index/core/download/integration.py\n@@ -18,7 +18,6 @@ def download_integration(module_str: str, module_import_str: str, cls_name: str)\n         raise Exception(f\"Failed to pip install `{module_str}`\") from e\n \n     try:\n-        exec(f\"from {module_import_str} import {cls_name}\")\n         module_spec = importlib.util.find_spec(module_import_str)\n         module = importlib.util.module_from_spec(module_spec)\n         module_spec.loader.exec_module(module)",
+  "auto_locate_confidence": "auto"
+}

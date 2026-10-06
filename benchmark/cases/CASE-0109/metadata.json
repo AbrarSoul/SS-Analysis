@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0109",
+  "original_source_case_id": "github.com_apache_pdfbox_8c47be1011c11dc47300faecffd8ab32fba3646f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-27906",
+  "cve_ids_all": [
+    "CVE-2021-27906"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-789",
+    "NVD-CWE-Other"
+  ],
+  "language": "java",
+  "repository": "apache/pdfbox",
+  "repository_url": "https://github.com/apache/pdfbox",
+  "vulnerable_commit": "ef53b45f111c4e391faf1c331c4e81a21e24c0b8",
+  "fixed_commit": "8c47be1011c11dc47300faecffd8ab32fba3646f",
+  "changed_file": "pdfbox/src/main/java/org/apache/pdfbox/pdfparser/PDFXrefStreamParser.java",
+  "changed_function": "public Long next()",
+  "vulnerable_lines": [
+    213,
+    222
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0109/vulnerable_source.java": "825cab4a44afaf53e8d08d237bcc5c94d03bae84d1d8c3098a641204d52334c1",
+    "cases/CASE-0109/patched_source.java": "c36daa67b0da10a468ded0e4741aa6c9808237305f75b7389fd0d86b2896087a",
+    "cases/CASE-0109/patch.diff": "027612d17a2d8f169ff6be012e636183d87e6cecef2eeb6771bc2d7d67a346de",
+    "cases/CASE-0109/metadata.json": "ac14d7a5ab6c8906e46b3ecbe81b3d822875b9fae34a63106a6282fb7acacf91",
+    "model_context/CASE-0109.json": "62bd700f0e97b1c92ee2e265ea3a567e9edac41dc362e9cabd604d1ba7331174",
+    "difficulty/CASE-0109.json": "acc1e7bb180d0ce8ef2bc6e4f99aebded26497243a2e2dccd824c6c064130fdb"
+  },
+  "case_level_hash": "e7f4ab13591c18f32c6591cb7b07c3dcf8f2f625e1c9f80d1c17e59aebe5f37d"
+}

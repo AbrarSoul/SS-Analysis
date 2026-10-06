@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0149",
+  "original_source_case_id": "github.com_drogatkin_TJWS2_1bac15c496ec54efe21ad7fab4e17633778582fc",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2022-4594",
+  "cve_ids_all": [
+    "CVE-2022-4594"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "drogatkin/TJWS2",
+  "repository_url": "https://github.com/drogatkin/TJWS2",
+  "vulnerable_commit": "6974a7ce78ec1491c35e3e8601384af24d6c3256",
+  "fixed_commit": "1bac15c496ec54efe21ad7fab4e17633778582fc",
+  "changed_file": "1.x/src/rogatkin/web/WarRoller.java",
+  "changed_function": "public boolean deployWar(File warFile, File deployTarDir) {",
+  "vulnerable_lines": [
+    107,
+    195
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0149/vulnerable_source.java": "9afb5e927098b205045c2fd46c863376a934fe43efd979044c158d8ed0270ca2",
+    "cases/CASE-0149/patched_source.java": "a93b1ee4fbf356813fee92174ff6109a8ef433cef8b31f88e8e6f8f9fbe1a3b0",
+    "cases/CASE-0149/patch.diff": "c7ebcb005387eb86afa8db96cd871a5ac53d7c0b9ca4c1b7ffe47b5b8175d67d",
+    "cases/CASE-0149/metadata.json": "573f0ec4bd59ef38f5040b29bcab228af6ea6685ca42fd8a6537f40d24eaf44d",
+    "model_context/CASE-0149.json": "a8cf860649b408f38c69c3110cedd329093a146c52c44cc7a18d451ee6fc8ff0",
+    "difficulty/CASE-0149.json": "d9a189d9e9d2ed0a4080c4d5c9ad428b8ce8d7687d1e57edd3265fe39a1e7b8d"
+  },
+  "case_level_hash": "2ad65bb784ea8a67c1726948c47aa9d2ae2c8410e23231506293aa91caebc29e"
+}

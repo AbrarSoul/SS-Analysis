@@ -1,0 +1,19 @@
+# Large, re-downloadable source data (MoreFixes dump, cloned repo caches)
+data/
+
+# Python / tooling
+.venv/
+.pytest_cache/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Secrets and local config -- never commit
+.env
+.env.*
+.claude/
+
+# Upstream autogrep history moved aside (restore with: mv autogrep_upstream.git.bak autogrep/.git)
+autogrep_upstream.git.bak/
+results/runs_final_realsmoke_20260928_212325/
+results/runs_final_realsmoke_FAILED_401_bad_key/

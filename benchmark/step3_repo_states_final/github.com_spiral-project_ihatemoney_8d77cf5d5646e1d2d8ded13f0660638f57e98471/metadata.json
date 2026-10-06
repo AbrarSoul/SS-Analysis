@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spiral-project_ihatemoney_8d77cf5d5646e1d2d8ded13f0660638f57e98471",
+  "cve_ids": [
+    "CVE-2020-15120"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "python",
+  "repository": "spiral-project/ihatemoney",
+  "repository_url": "https://github.com/spiral-project/ihatemoney",
+  "vulnerable_commit": "040d76af83411fb58ab400dc4eac909191a3e5fa",
+  "fixed_commit": "8d77cf5d5646e1d2d8ded13f0660638f57e98471",
+  "changed_file": "ihatemoney/models.py",
+  "max_score": "1337"
+}

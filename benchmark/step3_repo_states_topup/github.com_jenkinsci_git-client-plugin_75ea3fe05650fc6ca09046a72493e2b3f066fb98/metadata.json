@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_git-client-plugin_75ea3fe05650fc6ca09046a72493e2b3f066fb98",
+  "cve_ids": [
+    "CVE-2017-1000242"
+  ],
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/git-client-plugin",
+  "repository_url": "https://github.com/jenkinsci/git-client-plugin",
+  "vulnerable_commit": "716e3ff56074c018c76cb35826269b976540e7e7",
+  "fixed_commit": "75ea3fe05650fc6ca09046a72493e2b3f066fb98",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/gitclient/CliGitAPIImpl.java",
+  "max_score": "1337"
+}

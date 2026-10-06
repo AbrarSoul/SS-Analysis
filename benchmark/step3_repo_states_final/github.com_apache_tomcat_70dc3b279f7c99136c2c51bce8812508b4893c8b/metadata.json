@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_apache_tomcat_70dc3b279f7c99136c2c51bce8812508b4893c8b",
+  "cve_ids": [
+    "CVE-2013-4322",
+    "CVE-2014-0075",
+    "CVE-2014-0227"
+  ],
+  "cwe_ids": [
+    "CWE-189",
+    "CWE-19",
+    "CWE-20"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "c1be72fde7b8f4b0ab4059a72bda422e288a3337",
+  "fixed_commit": "70dc3b279f7c99136c2c51bce8812508b4893c8b",
+  "changed_file": "java/org/apache/coyote/http11/filters/ChunkedInputFilter.java",
+  "max_score": "1337"
+}

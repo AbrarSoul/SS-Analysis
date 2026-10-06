@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_caronc_apprise_e20fce630d55e4ca9b0a1e325a5fea6997489831",
+  "cve_ids": [
+    "CVE-2021-39229"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "python",
+  "repository": "caronc/apprise",
+  "repository_url": "https://github.com/caronc/apprise",
+  "vulnerable_commit": "81d1ea72bcee4441278a809a95fc0f91dc916402",
+  "fixed_commit": "e20fce630d55e4ca9b0a1e325a5fea6997489831",
+  "changed_file": "apprise/plugins/NotifyIFTTT.py",
+  "max_score": "1337"
+}

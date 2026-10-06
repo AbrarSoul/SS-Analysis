@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_aryan6673_project-ai_8db90e3d9777850741804533ebde5824b4a5795c",
+  "cve_ids": [
+    "CVE-2025-48491"
+  ],
+  "cwe_ids": [
+    "CWE-798"
+  ],
+  "language": "python",
+  "repository": "aryan6673/project-ai",
+  "repository_url": "https://github.com/aryan6673/project-ai",
+  "vulnerable_commit": "c1fb156418d98a1e6c60bb680db57e9558785093",
+  "fixed_commit": "8db90e3d9777850741804533ebde5824b4a5795c",
+  "changed_file": "backup/kvs.py",
+  "max_score": "1337"
+}

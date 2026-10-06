@@ -1,0 +1,46 @@
+{
+  "case_id": "github.com_jenkinsci_script-security-plugin_99e6ac0df5fe0f0cc6c2a695f7c1f845279bedbd",
+  "language": "java",
+  "cve_id": "CVE-2020-2190",
+  "cve_ids_all": [
+    "CVE-2020-2190"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.gargoylesoftware.htmlunit.html.HtmlPage;",
+    "import com.gargoylesoftware.htmlunit.html.HtmlTextArea;",
+    "import hudson.model.FreeStyleProject;",
+    "import hudson.model.Result;",
+    "import hudson.util.VersionNumber;",
+    "import jenkins.model.Jenkins;",
+    "import org.hamcrest.Matchers;",
+    "import org.jenkinsci.plugins.scriptsecurity.sandbox.Whitelist;",
+    "import org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SecureGroovyScript;",
+    "import org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.TestGroovyRecorder;",
+    "import org.jenkinsci.plugins.scriptsecurity.scripts.languages.GroovyLanguage;",
+    "import org.junit.Rule;",
+    "import org.junit.Test;",
+    "import org.jvnet.hudson.test.Issue;",
+    "import org.jvnet.hudson.test.JenkinsRule;",
+    "import org.jvnet.hudson.test.LoggerRule;",
+    "import org.jvnet.hudson.test.recipes.LocalData;",
+    "import org.xml.sax.SAXException;",
+    "import java.io.IOException;",
+    "import java.util.List;",
+    "import java.util.concurrent.atomic.AtomicLong;",
+    "import java.util.logging.Level;",
+    "import static org.junit.Assert.assertThat;",
+    "import static org.junit.Assert.assertEquals;",
+    "import static org.junit.Assert.fail;"
+  ],
+  "vulnerable_function": "    @Test public void clearMethodsLifeCycle() throws Exception {\n        ScriptApproval sa = ScriptApproval.get();\n        assertEquals(0, sa.getApprovedSignatures().length);\n\n        sa.approveSignature(WHITELISTED_SIGNATURE);\n        assertEquals(1, sa.getApprovedSignatures().length);\n        assertEquals(0, sa.getDangerousApprovedSignatures().length);\n\n        sa.approveSignature(DANGEROUS_SIGNATURE);\n        assertEquals(2, sa.getApprovedSignatures().length);\n        assertEquals(1, sa.getDangerousApprovedSignatures().length);\n\n        sa.clearApprovedSignatures();\n        assertEquals(0, sa.getApprovedSignatures().length);\n        assertEquals(0, sa.getDangerousApprovedSignatures().length);\n\n        sa.approveSignature(WHITELISTED_SIGNATURE);\n        sa.approveSignature(DANGEROUS_SIGNATURE);\n        assertEquals(2, sa.getApprovedSignatures().length);\n        assertEquals(1, sa.getDangerousApprovedSignatures().length);\n\n        sa.clearDangerousApprovedSignatures();\n        assertEquals(1, sa.getApprovedSignatures().length);\n        assertEquals(0, sa.getDangerousApprovedSignatures().length);\n    }",
+  "patched_function": "    @Test public void classpathEntriesEscaped() throws Exception {\n        // Add pending classpath entry.\n        String hash = null;\n        try {\n            ScriptApproval.get().using(new ClasspathEntry(\"https://www.example.com/#value=Hack<img id='xss' src=x onerror=alert(123)>Hack\"));\n            fail(\"Classpath should not already be approved\");\n        } catch (UnapprovedClasspathException e) {\n            hash = e.getHash();\n        }\n        // Check for XSS in pending approvals.\n        JenkinsRule.WebClient wc = r.createWebClient();\n        HtmlPage approvalPage = wc.goTo(\"scriptApproval\");\n        assertThat(approvalPage.getElementById(\"xss\"), nullValue());\n        // Approve classpath entry.\n        ScriptApproval.get().approveClasspathEntry(hash);\n        // Check for XSS in approved classpath entries.\n        HtmlPage approvedPage = wc.goTo(\"scriptApproval\");\n        assertThat(approvedPage.getElementById(\"xss\"), nullValue());\n    }",
+  "unified_diff": "diff --git a/src/test/java/org/jenkinsci/plugins/scriptsecurity/scripts/ScriptApprovalTest.java b/src/test/java/org/jenkinsci/plugins/scriptsecurity/scripts/ScriptApprovalTest.java\nindex 99f8bb5..e92afda 100644\n--- a/src/test/java/org/jenkinsci/plugins/scriptsecurity/scripts/ScriptApprovalTest.java\n+++ b/src/test/java/org/jenkinsci/plugins/scriptsecurity/scripts/ScriptApprovalTest.java\n@@ -48,6 +48,7 @@ import java.util.List;\n import java.util.concurrent.atomic.AtomicLong;\n import java.util.logging.Level;\n \n+import static org.hamcrest.Matchers.nullValue;\n import static org.junit.Assert.assertThat;\n import static org.junit.Assert.assertEquals;\n import static org.junit.Assert.fail;\n@@ -114,6 +115,27 @@ public class ScriptApprovalTest extends AbstractApprovalTest<ScriptApprovalTest.\n         assertThat(r.createWebClient().goTo(\"manage\").getByXPath(\"//a[@href='scriptApproval']\"), Matchers.empty());\n     }\n \n+    @Issue(\"SECURITY-1866\")\n+    @Test public void classpathEntriesEscaped() throws Exception {\n+        // Add pending classpath entry.\n+        String hash = null;\n+        try {\n+            ScriptApproval.get().using(new ClasspathEntry(\"https://www.example.com/#value=Hack<img id='xss' src=x onerror=alert(123)>Hack\"));\n+            fail(\"Classpath should not already be approved\");\n+        } catch (UnapprovedClasspathException e) {\n+            hash = e.getHash();\n+        }\n+        // Check for XSS in pending approvals.\n+        JenkinsRule.WebClient wc = r.createWebClient();\n+        HtmlPage approvalPage = wc.goTo(\"scriptApproval\");\n+        assertThat(approvalPage.getElementById(\"xss\"), nullValue());\n+        // Approve classpath entry.\n+        ScriptApproval.get().approveClasspathEntry(hash);\n+        // Check for XSS in approved classpath entries.\n+        HtmlPage approvedPage = wc.goTo(\"scriptApproval\");\n+        assertThat(approvedPage.getElementById(\"xss\"), nullValue());\n+    }\n+\n     @Test public void clearMethodsLifeCycle() throws Exception {\n         ScriptApproval sa = ScriptApproval.get();\n         assertEquals(0, sa.getApprovedSignatures().length);",
+  "auto_locate_confidence": "auto"
+}

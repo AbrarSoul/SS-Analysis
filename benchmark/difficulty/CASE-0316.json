@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-0316",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-425",
+    "CWE-601",
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 21,
+  "lines_removed": 9,
+  "lines_changed_total": 30,
+  "function_size_chars": 3714,
+  "function_size_lines": 127,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "URL parser treats only forward slash as a separator while clients accept backslash; a parser differential."
+}

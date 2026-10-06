@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_subversion-plugin_7d4562d6f7e40de04bbe29577b51c79f07d05ba6",
+  "cve_ids": [
+    "CVE-2013-6372"
+  ],
+  "cwe_ids": [
+    "CWE-255"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/subversion-plugin",
+  "repository_url": "https://github.com/jenkinsci/subversion-plugin",
+  "vulnerable_commit": "b5cd30370ef40439c37b7350810d3469b9a17fc1",
+  "fixed_commit": "7d4562d6f7e40de04bbe29577b51c79f07d05ba6",
+  "changed_file": "src/main/java/hudson/scm/SubversionSCM.java",
+  "max_score": "1337"
+}

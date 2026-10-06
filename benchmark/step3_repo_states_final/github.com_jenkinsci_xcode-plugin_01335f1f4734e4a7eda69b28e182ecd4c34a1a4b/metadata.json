@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_xcode-plugin_01335f1f4734e4a7eda69b28e182ecd4c34a1a4b",
+  "cve_ids": [
+    "CVE-2021-21656"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/xcode-plugin",
+  "repository_url": "https://github.com/jenkinsci/xcode-plugin",
+  "vulnerable_commit": "e57051344470d0336bc077eb5ec10371544c5009",
+  "fixed_commit": "01335f1f4734e4a7eda69b28e182ecd4c34a1a4b",
+  "changed_file": "src/main/java/au/com/rayh/XcodeProjectParser.java",
+  "max_score": "1337"
+}

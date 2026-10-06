@@ -1,0 +1,35 @@
+{
+  "case_id": "github.com_spiral-project_ihatemoney_8d77cf5d5646e1d2d8ded13f0660638f57e98471",
+  "language": "python",
+  "cve_id": "CVE-2020-15120",
+  "cve_ids_all": [
+    "CVE-2020-15120"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-863",
+      "definition": "Incorrect Authorization"
+    }
+  ],
+  "containing_class_declaration": "PersonQuery",
+  "imports": [
+    "from collections import defaultdict",
+    "from datetime import datetime",
+    "from debts import settle",
+    "from flask import current_app, g",
+    "from flask_sqlalchemy import BaseQuery, SQLAlchemy",
+    "from itsdangerous import BadSignature, SignatureExpired, TimedJSONWebSignatureSerializer, URLSafeSerializer",
+    "import sqlalchemy",
+    "from sqlalchemy import orm",
+    "from sqlalchemy.sql import func",
+    "from sqlalchemy_continuum import make_versioned, version_class",
+    "from sqlalchemy_continuum.plugins import FlaskPlugin",
+    "from werkzeug.security import generate_password_hash",
+    "from ihatemoney.patch_sqlalchemy_continuum import PatchedBuilder",
+    "from ihatemoney.versioning import ConditionalVersioningManager, LoggingMode, get_ip_if_allowed, version_privacy_predicate"
+  ],
+  "vulnerable_function": "        def get_by_name(self, name, project):\n            return (\n                Person.query.filter(Person.name == name)\n                .filter(Project.id == project.id)\n                .one()\n            )\n",
+  "patched_function": "        def get_by_name(self, name, project):\n            return (\n                Person.query.filter(Person.name == name)\n                .filter(Person.project_id == project.id)\n                .one()\n            )\n",
+  "unified_diff": "diff --git a/ihatemoney/models.py b/ihatemoney/models.py\nindex fe7b519..5691c75 100644\n--- a/ihatemoney/models.py\n+++ b/ihatemoney/models.py\n@@ -380,7 +380,7 @@ class Person(db.Model):\n         def get_by_name(self, name, project):\n             return (\n                 Person.query.filter(Person.name == name)\n-                .filter(Project.id == project.id)\n+                .filter(Person.project_id == project.id)\n                 .one()\n             )\n \n@@ -389,7 +389,7 @@ class Person(db.Model):\n                 project = g.project\n             return (\n                 Person.query.filter(Person.id == id)\n-                .filter(Project.id == project.id)\n+                .filter(Person.project_id == project.id)\n                 .one()\n             )\n ",
+  "auto_locate_confidence": "auto_low_confidence"
+}

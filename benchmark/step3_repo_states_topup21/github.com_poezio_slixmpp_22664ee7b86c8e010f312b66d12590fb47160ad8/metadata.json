@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_poezio_slixmpp_22664ee7b86c8e010f312b66d12590fb47160ad8",
+  "cve_ids": [
+    "CVE-2017-5591"
+  ],
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-346"
+  ],
+  "language": "python",
+  "repository": "poezio/slixmpp",
+  "repository_url": "https://github.com/poezio/slixmpp",
+  "vulnerable_commit": "6476cfcde58ed9b3e2abcf6eac70b1998ae1ec08",
+  "fixed_commit": "22664ee7b86c8e010f312b66d12590fb47160ad8",
+  "changed_file": "slixmpp/plugins/xep_0280/carbons.py",
+  "max_score": "1337"
+}

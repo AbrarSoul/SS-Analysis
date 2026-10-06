@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_theonedev_onedev_adb6e31476621f824fc3227a695232df830d83ab",
+  "cve_ids": [
+    "CVE-2022-39207"
+  ],
+  "cwe_ids": [
+    "CWE-732",
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "f2334ba7e41a543d128f6085f34514fd4f122a17",
+  "fixed_commit": "adb6e31476621f824fc3227a695232df830d83ab",
+  "changed_file": "server-core/src/main/java/io/onedev/server/web/resource/ArtifactResource.java",
+  "max_score": "1337"
+}

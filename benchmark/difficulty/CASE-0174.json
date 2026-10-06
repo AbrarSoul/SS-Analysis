@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0174",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 7,
+  "lines_changed_total": 21,
+  "function_size_chars": 725,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Unanchored digit-run regexes with quadratic backtracking; slow-regex detection is over-broad and shape-only."
+}

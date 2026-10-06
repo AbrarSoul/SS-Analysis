@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_JstnMcBrd_dectalk-tts_3600d8ac156f27da553ac4ead46d16989a350105",
+  "cve_ids": [
+    "CVE-2024-31206"
+  ],
+  "cwe_ids": [
+    "CWE-300",
+    "CWE-319",
+    "CWE-598"
+  ],
+  "language": "typescript",
+  "repository": "JstnMcBrd/dectalk-tts",
+  "repository_url": "https://github.com/JstnMcBrd/dectalk-tts",
+  "vulnerable_commit": "dc27f1ae3bf4f04c1e7081b488a6c388b8c64604",
+  "fixed_commit": "3600d8ac156f27da553ac4ead46d16989a350105",
+  "changed_file": "src/index.ts",
+  "max_score": "1337"
+}

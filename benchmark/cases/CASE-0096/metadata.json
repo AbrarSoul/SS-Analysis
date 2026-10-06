@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0096",
+  "original_source_case_id": "github.com_alfio-event_alf.io_94e2923a317452e337393789c9f3192dfc1ddac2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-2258",
+  "cve_ids_all": [
+    "CVE-2023-2258",
+    "CVE-2023-2259"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1236",
+    "CWE-1336",
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "alfio-event/alf.io",
+  "repository_url": "https://github.com/alfio-event/alf.io",
+  "vulnerable_commit": "a00c7248b49a0afda0ab009078ce7c2be2d12fbf",
+  "fixed_commit": "94e2923a317452e337393789c9f3192dfc1ddac2",
+  "changed_file": "src/main/java/alfio/util/ExportUtils.java",
+  "changed_function": "public static void exportCsv(String fileName, String[] header, Stream<String[]> data, HttpServletResponse response) throws IOException {",
+  "vulnerable_lines": [
+    77,
+    90
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 20,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0096/vulnerable_source.java": "77bf87fb03b3d7433b63235cca8e7ff7f972b9b40c8d3781013e2b9f8a86cfa8",
+    "cases/CASE-0096/patched_source.java": "1dc57335b64e92c66fa0229417c0e560883e55c49ab3ceb8cceca09f1a5a58f9",
+    "cases/CASE-0096/patch.diff": "624e49636cab110d8d66dbf2525cc4da805837ae0144121dd3e4f5d71436c622",
+    "cases/CASE-0096/metadata.json": "a8140a8a01211053d53cce824fdd2f0c6202936af57a05262f57e5a71b77f78f",
+    "model_context/CASE-0096.json": "1d4bb8d05dcbfb1de6420080e379e9582180392591cb24c5ba9b40aa010a6d02",
+    "difficulty/CASE-0096.json": "87fcc9fc5a4462b5706b2d21a416610719a2aee2972169695aa726724c7c030f"
+  },
+  "case_level_hash": "6feaf740a72214e12619b31f2abd519dd3e4568c2a85e4175312ae8e37b3eb98"
+}

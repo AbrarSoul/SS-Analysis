@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0274",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-613"
+  ],
+  "changed_files": 1,
+  "lines_added": 16,
+  "lines_removed": 4,
+  "lines_changed_total": 20,
+  "function_size_chars": 1237,
+  "function_size_lines": 42,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Role or password changes never invalidate existing sessions; session-lifecycle logic, not a code shape."
+}

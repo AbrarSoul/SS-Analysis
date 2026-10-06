@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_unjs_unhead_961ea781e091853812ffe17f8cda17105d2d2299",
+  "cve_ids": [
+    "CVE-2026-39315"
+  ],
+  "cwe_ids": [
+    "CWE-184"
+  ],
+  "language": "typescript",
+  "repository": "unjs/unhead",
+  "repository_url": "https://github.com/unjs/unhead",
+  "vulnerable_commit": "4c9e1b268be55ebca3fe616104978f608f4a9153",
+  "fixed_commit": "961ea781e091853812ffe17f8cda17105d2d2299",
+  "changed_file": "packages/unhead/src/plugins/safe.ts",
+  "max_score": "1337"
+}

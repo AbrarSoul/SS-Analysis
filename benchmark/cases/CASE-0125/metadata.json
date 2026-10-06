@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0125",
+  "original_source_case_id": "github.com_axios_axios_0a8d6e19da5b9899a2abafaaa06a75ee548597db",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-57965",
+  "cve_ids_all": [
+    "CVE-2024-57965"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-346"
+  ],
+  "language": "javascript",
+  "repository": "axios/axios",
+  "repository_url": "https://github.com/axios/axios",
+  "vulnerable_commit": "c71811b00f2fcff558e4382ba913bdac4ad7200e",
+  "fixed_commit": "0a8d6e19da5b9899a2abafaaa06a75ee548597db",
+  "changed_file": "lib/helpers/isURLSameOrigin.js",
+  "changed_function": "export default platform.hasStandardBrowserEnv ?",
+  "vulnerable_lines": [
+    6,
+    60
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 65,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0125/vulnerable_source.js": "70f53d18ef7b1ea98271f8bb93542b164b4d8899095909ade4d7b0967a66f7ef",
+    "cases/CASE-0125/patched_source.js": "4715745e9a9f334c2201afc3433678eebb58e61f419b80bed5d79ec047987fde",
+    "cases/CASE-0125/patch.diff": "5839fe1a76b323a8b2f54c0daaac0701b30ac14677e94adf669e1ccaa5f483b7",
+    "cases/CASE-0125/metadata.json": "f7173fa25738b146a274d34ef0d1136fec7af98433df8fb5d7b2e69223af8f79",
+    "model_context/CASE-0125.json": "a53785997d072f71ab886d14a968fd0ef32a6bdc54464e752657680fb0fa8a87",
+    "difficulty/CASE-0125.json": "e005fbc5799875dd7079abd7b7e910b40021ff7da63a53366bba0a3da3d28bc5"
+  },
+  "case_level_hash": "585ca9e8331882d56ccff68c526bd81d990aeaa7d1b9f0ce8fd7a2f76f7acaf2"
+}

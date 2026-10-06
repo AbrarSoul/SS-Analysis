@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0052",
+  "original_source_case_id": "github.com_HKUDS_LightRAG_60777d535b719631680bcf5d0969bdef79ca4eaf",
+  "selection_batch": "topup5",
+  "cve_id": "CVE-2025-6773",
+  "cve_ids_all": [
+    "CVE-2025-6773"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "HKUDS/LightRAG",
+  "repository_url": "https://github.com/HKUDS/LightRAG",
+  "vulnerable_commit": "44daf515016d30824179ef07b68bf0ad758c3e88",
+  "fixed_commit": "60777d535b719631680bcf5d0969bdef79ca4eaf",
+  "changed_file": "lightrag/api/routers/document_routes.py",
+  "changed_function": "async def upload_to_input_dir(",
+  "vulnerable_lines": [
+    967,
+    1017
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 50,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0052/vulnerable_source.py": "466bbf559cb1b7320e91229b03086cfe447aec0b227b48ac150b48020be34afe",
+    "cases/CASE-0052/patched_source.py": "ab281137000ce31e3a5ce89aeb30c766f323782ff7ce91aab953f15ecac62283",
+    "cases/CASE-0052/patch.diff": "d0949400d3121d7cf4cb98db8fa0b161f89786f87e73eb375a562fedf8928b2a",
+    "cases/CASE-0052/metadata.json": "50fb377973add781ea8f8a9ef5c8ec6c499d0e93aea154fa284543bf5504c759",
+    "model_context/CASE-0052.json": "3c5160eb0acd4d21f2f5b5e26abc9438de525dfbae21f2f8b46f1f053807cc78",
+    "difficulty/CASE-0052.json": "a5724452fc64f1d98fd42e273b7d95bc94e43578b02bd81e29c56a6dda89a793"
+  },
+  "case_level_hash": "c2524df3d596860ae29dde64bc28d4e5288c1587b34da30b10dc511854e20bd4"
+}

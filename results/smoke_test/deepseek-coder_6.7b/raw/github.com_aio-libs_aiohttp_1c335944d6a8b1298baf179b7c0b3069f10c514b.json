@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "deepseek-coder:6.7b",
+  "temperature": 0.0,
+  "timestamp": 1789301033.276814,
+  "raw_content": "Based on the provided information, here is a Semgrep rule that matches the vulnerable code structure:\n\n```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: $PATH.resolve()\n  pattern-not: Path(os.path.normpath($PATH)).resolve()\n  pattern-inside: |\n    def $FUNC(...):\n        ...\n  languages: [\"python\"]\n  message: \"Potential path traversal vulnerability detected. Using absolute paths instead of relative paths can prevent directory traversal attacks.\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n    category: security\n    cwe: CWE-22\n    owasp: A5:2017-Path Traversal\n    references:\n      - https://owasp.org/www-community/vulnerabilities/Path_Traversal\n    technology: python\n```\n\nThis rule will match any usage of `resolve()` method on a path, but it will not match the fixed version where `Path(os.path.normpath($PATH)).resolve()` is used. The `pattern-inside` field is used to specify that the rule should match inside a function definition. The `message` field provides a clear description of the vulnerability and how to fix it. The `metadata` field provides additional context like the source URL, category, CWE number, OWASP category, references, and technology.\n\nPlease note that this rule is a general pattern and might not cover all the variations of the same issue. You might need to adjust it based on the specific vulnerability in the patch.\n"
+}

@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0227",
+  "language": "javascript",
+  "cve_id": "CVE-2024-5211",
+  "cve_ids_all": [
+    "CVE-2024-5211"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-29",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const fs = require(\"fs\");",
+    "const path = require(\"path\");",
+    "const { MimeDetector } = require(\"./mime\");"
+  ],
+  "vulnerable_function": "function normalizePath(filepath = \"\") {\n  const result = path\n    .normalize(filepath.trim())\n    .replace(/^(\\.\\.(\\/|\\\\|$))+/, \"\")\n    .trim();\n  if ([\"..\", \".\", \"/\"].includes(result)) throw new Error(\"Invalid path.\");\n  return result;\n}",
+  "patched_function": "function normalizePath(filepath = \"\") {\n  const result = path\n    .normalize(filepath.replace(/\\s/g, \"-\").trim())\n    .replace(/^(\\.\\.(\\/|\\\\|$))+/, \"\")\n    .trim();\n  if ([\"..\", \".\", \"/\"].includes(result)) throw new Error(\"Invalid path.\");\n  return result;\n}",
+  "unified_diff": "diff --git a/collector/utils/files/index.js b/collector/utils/files/index.js\nindex 9b56bb5b..51d0a682 100644\n--- a/collector/utils/files/index.js\n+++ b/collector/utils/files/index.js\n@@ -122,7 +122,7 @@ function isWithin(outer, inner) {\n \n function normalizePath(filepath = \"\") {\n   const result = path\n-    .normalize(filepath.trim())\n+    .normalize(filepath.replace(/\\s/g, \"-\").trim())\n     .replace(/^(\\.\\.(\\/|\\\\|$))+/, \"\")\n     .trim();\n   if ([\"..\", \".\", \"/\"].includes(result)) throw new Error(\"Invalid path.\");",
+  "auto_locate_confidence": "auto"
+}

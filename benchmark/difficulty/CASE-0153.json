@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0153",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-402",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 3,
+  "lines_changed_total": 11,
+  "function_size_chars": 4067,
+  "function_size_lines": 92,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Wrong resource names and Buffer.from(...).buffer pool misuse when embedding integrity data; encoding semantics, not a code shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+}

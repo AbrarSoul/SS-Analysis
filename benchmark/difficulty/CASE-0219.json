@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0219",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-770"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 0,
+  "lines_changed_total": 7,
+  "function_size_chars": 541,
+  "function_size_lines": 11,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "No maximum length on login credentials before hashing and querying; a missing length check whose need is contextual."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_axios_axios_0a8d6e19da5b9899a2abafaaa06a75ee548597db",
+  "cve_ids": [
+    "CVE-2024-57965"
+  ],
+  "cwe_ids": [
+    "CWE-346"
+  ],
+  "language": "javascript",
+  "repository": "axios/axios",
+  "repository_url": "https://github.com/axios/axios",
+  "vulnerable_commit": "c71811b00f2fcff558e4382ba913bdac4ad7200e",
+  "fixed_commit": "0a8d6e19da5b9899a2abafaaa06a75ee548597db",
+  "changed_file": "lib/helpers/isURLSameOrigin.js",
+  "max_score": "1337"
+}

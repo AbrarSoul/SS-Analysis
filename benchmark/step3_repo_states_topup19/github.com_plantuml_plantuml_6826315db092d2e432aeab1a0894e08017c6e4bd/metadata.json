@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_plantuml_plantuml_6826315db092d2e432aeab1a0894e08017c6e4bd",
+  "cve_ids": [
+    "CVE-2026-0858"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "plantuml/plantuml",
+  "repository_url": "https://github.com/plantuml/plantuml",
+  "vulnerable_commit": "6eb58928bbdce2572cbc660fbdbb500c261cd7d7",
+  "fixed_commit": "6826315db092d2e432aeab1a0894e08017c6e4bd",
+  "changed_file": "src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java",
+  "max_score": "1337"
+}

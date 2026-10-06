@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0077",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 282,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "torch.load(...) without weights_only; well-known unsafe-deserialization call."
+}

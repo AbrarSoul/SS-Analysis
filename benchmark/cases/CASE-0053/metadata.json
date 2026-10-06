@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0053",
+  "original_source_case_id": "github.com_HtmlUnit_htmlunit_940dc7fd",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2023-2798",
+  "cve_ids_all": [
+    "CVE-2023-2798"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-400",
+    "CWE-787"
+  ],
+  "language": "java",
+  "repository": "HtmlUnit/htmlunit",
+  "repository_url": "https://github.com/HtmlUnit/htmlunit",
+  "vulnerable_commit": "4ee1862a24ae6ff27ae1348ac929f935c69557ec",
+  "fixed_commit": "940dc7fd8af9f46ca448c1e548b8f6d064a64290",
+  "changed_file": "src/main/java/com/gargoylesoftware/htmlunit/html/DomNode.java",
+  "changed_function": "private DomNode getNextElementUpwards(final DomNode startingNode) {",
+  "vulnerable_lines": [
+    1452,
+    1468
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 12,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0053/vulnerable_source.java": "cf91798c1dda70be260a38a8969ed49420e9d5dd1e6b043b18b86e71848f87b4",
+    "cases/CASE-0053/patched_source.java": "8efefc7cf9de291797b7c142192e6ab356a1326bbfe7cafbe23da43f338894b2",
+    "cases/CASE-0053/patch.diff": "79007c1ba5641dca937679399a735584a255f6b98238af7edb40619fef21dd7c",
+    "cases/CASE-0053/metadata.json": "789578f6f49905cf39b6ccfc6a760e56cd897fa48ae8598d9977778c46698d01",
+    "model_context/CASE-0053.json": "ee8e9a8e0adc2fe0730535f760b00c32eab85779bc0b7bea1437248b84b59627",
+    "difficulty/CASE-0053.json": "9b43c0d8bc8a9b32d80ed53a5854ca979f7583d5673d66c0c7fccdc9e6fd6d71"
+  },
+  "case_level_hash": "f4d7fed0dbeaabde33a7f0cf908e4c7871628426fab65948ff3fe46bd3fb8e9f"
+}

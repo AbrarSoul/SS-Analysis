@@ -1,0 +1,22 @@
+{
+  "case_id": "github.com_wekan_wekan_08a6f084eba09487743a7c807fb4a9000fcfa9ac",
+  "language": "javascript",
+  "cve_id": "CVE-2026-25564",
+  "cve_ids_all": [
+    "CVE-2026-25564"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-639",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { ReactiveCache, ReactiveMiniMongoIndex } from '/imports/reactiveCache';"
+  ],
+  "vulnerable_function": "  JsonRoutes.add(\n    'DELETE',\n    '/api/boards/:boardId/cards/:cardId/checklists/:checklistId',\n    function(req, res) {\n      const paramBoardId = req.params.boardId;\n      const paramChecklistId = req.params.checklistId;\n      Authentication.checkBoardAccess(req.userId, paramBoardId);\n      Checklists.remove({ _id: paramChecklistId });\n      JsonRoutes.sendResult(res, {\n        code: 200,\n        data: {\n          _id: paramChecklistId,\n        },\n      });\n    }",
+  "patched_function": "  JsonRoutes.add(\n    'DELETE',\n    '/api/boards/:boardId/cards/:cardId/checklists/:checklistId',\n    function(req, res) {\n      const paramBoardId = req.params.boardId;\n      const paramCardId = req.params.cardId;\n      const paramChecklistId = req.params.checklistId;\n      Authentication.checkBoardAccess(req.userId, paramBoardId);\n\n      // Verify the card belongs to the board\n      const card = ReactiveCache.getCard({\n        _id: paramCardId,\n        boardId: paramBoardId,\n      });\n      if (!card) {\n        JsonRoutes.sendResult(res, {\n          code: 404,\n          data: { error: 'Card not found or does not belong to the specified board' },\n        });\n        return;\n      }\n\n      // Verify the checklist exists and belongs to the card\n      const checklist = ReactiveCache.getChecklist({\n        _id: paramChecklistId,\n        cardId: paramCardId,\n      });\n      if (!checklist) {\n        JsonRoutes.sendResult(res, {\n          code: 404,\n          data: { error: 'Checklist not found or does not belong to the specified card' },\n        });\n        return;\n      }\n\n      Checklists.remove({ _id: paramChecklistId });\n      JsonRoutes.sendResult(res, {\n        code: 200,\n        data: {\n          _id: paramChecklistId,\n        },\n      });\n    }",
+  "unified_diff": "diff --git a/models/checklists.js b/models/checklists.js\nindex d30dcc1be..8d95b6f17 100644\n--- a/models/checklists.js\n+++ b/models/checklists.js\n@@ -436,8 +436,36 @@ if (Meteor.isServer) {\n     '/api/boards/:boardId/cards/:cardId/checklists/:checklistId',\n     function(req, res) {\n       const paramBoardId = req.params.boardId;\n+      const paramCardId = req.params.cardId;\n       const paramChecklistId = req.params.checklistId;\n       Authentication.checkBoardAccess(req.userId, paramBoardId);\n+\n+      // Verify the card belongs to the board\n+      const card = ReactiveCache.getCard({\n+        _id: paramCardId,\n+        boardId: paramBoardId,\n+      });\n+      if (!card) {\n+        JsonRoutes.sendResult(res, {\n+          code: 404,\n+          data: { error: 'Card not found or does not belong to the specified board' },\n+        });\n+        return;\n+      }\n+\n+      // Verify the checklist exists and belongs to the card\n+      const checklist = ReactiveCache.getChecklist({\n+        _id: paramChecklistId,\n+        cardId: paramCardId,\n+      });\n+      if (!checklist) {\n+        JsonRoutes.sendResult(res, {\n+          code: 404,\n+          data: { error: 'Checklist not found or does not belong to the specified card' },\n+        });\n+        return;\n+      }\n+\n       Checklists.remove({ _id: paramChecklistId });\n       JsonRoutes.sendResult(res, {\n         code: 200,",
+  "auto_locate_confidence": "auto"
+}

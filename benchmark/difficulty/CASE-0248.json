@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0248",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-779",
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 4,
+  "lines_removed": 7,
+  "lines_changed_total": 11,
+  "function_size_chars": 1629,
+  "function_size_lines": 38,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Debug log statements that include the storage access key; secret-in-log pattern."
+}

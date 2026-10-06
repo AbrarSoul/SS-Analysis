@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_airsonic_airsonic_3e07ea52885f88d3fbec444dfd592f27bfb65647",
+  "cve_ids": [
+    "CVE-2019-10907"
+  ],
+  "cwe_ids": [
+    "CWE-326"
+  ],
+  "language": "java",
+  "repository": "airsonic/airsonic",
+  "repository_url": "https://github.com/airsonic/airsonic",
+  "vulnerable_commit": "83882b18d9bd84189181e7f617cf868dcb05b6d7",
+  "fixed_commit": "3e07ea52885f88d3fbec444dfd592f27bfb65647",
+  "changed_file": "airsonic-main/src/main/java/org/airsonic/player/security/GlobalSecurityConfig.java",
+  "max_score": "1337"
+}

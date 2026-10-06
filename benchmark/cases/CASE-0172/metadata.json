@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0172",
+  "original_source_case_id": "github.com_hjson_hjson-java_aff0b607929b4397d93dc0d029a56aeefb242602",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-39685",
+  "cve_ids_all": [
+    "CVE-2023-39685"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "hjson/hjson-java",
+  "repository_url": "https://github.com/hjson/hjson-java",
+  "vulnerable_commit": "8cce3b8e9dae9a195b056eb73ef28b78f0bc02e2",
+  "fixed_commit": "aff0b607929b4397d93dc0d029a56aeefb242602",
+  "changed_file": "src/main/org/hjson/HjsonParser.java",
+  "changed_function": "else if (current=='\\'') {",
+  "vulnerable_lines": [
+    262,
+    271
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0172/vulnerable_source.java": "2abe789098ab7ae33dee701b2ba37aedfe074ac94928726f0fefcb22c3d5957d",
+    "cases/CASE-0172/patched_source.java": "282773b9f6af9f14b05884188d02dfe65fe208e4405f9e62f052d7a5f3c1e323",
+    "cases/CASE-0172/patch.diff": "2b483460493c918cc7d1bac4033fae4333ab3502fe13e0cd386f54d418bb569e",
+    "cases/CASE-0172/metadata.json": "1002346ec53ff72184a3fef692b4fb5210a73da8b0b02f7bdab0ab75fa82d29e",
+    "model_context/CASE-0172.json": "964ccbaf9452ea1f7df52262970ea5f21ab98298e48a4be071284bf3934985f5",
+    "difficulty/CASE-0172.json": "c38bdd19b082b917bc286b5aa59e7c47084dc229a0eb5373df0613a3e09e754e"
+  },
+  "case_level_hash": "92eb3d716c210701995362ce8686f4f15b8efc19c7fdf5df1cbb4a7ea9395b6d"
+}

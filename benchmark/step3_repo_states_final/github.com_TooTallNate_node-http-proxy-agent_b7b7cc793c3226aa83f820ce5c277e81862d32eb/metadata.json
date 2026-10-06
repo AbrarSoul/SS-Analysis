@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_TooTallNate_node-http-proxy-agent_b7b7cc793c3226aa83f820ce5c277e81862d32eb",
+  "cve_ids": [
+    "CVE-2019-10196"
+  ],
+  "cwe_ids": [
+    "CWE-665"
+  ],
+  "language": "javascript",
+  "repository": "TooTallNate/node-http-proxy-agent",
+  "repository_url": "https://github.com/TooTallNate/node-http-proxy-agent",
+  "vulnerable_commit": "687da671c075cde76be2d3e907d5384c970efadc",
+  "fixed_commit": "b7b7cc793c3226aa83f820ce5c277e81862d32eb",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0102",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-164"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 0,
+  "lines_changed_total": 1,
+  "function_size_chars": 299,
+  "function_size_lines": 9,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "initialize() sets only the outbound filter, never the inbound one; missing-call shape inside one method."
+}

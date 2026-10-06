@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nimble-platform_common_12197a755bd524559bf4e16475595a2c6fcd34db",
+  "cve_ids": [
+    "CVE-2021-32631"
+  ],
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "language": "java",
+  "repository": "nimble-platform/common",
+  "repository_url": "https://github.com/nimble-platform/common",
+  "vulnerable_commit": "ad119be367ffe3ee625bbcff4e15fbe96a1fa52c",
+  "fixed_commit": "12197a755bd524559bf4e16475595a2c6fcd34db",
+  "changed_file": "utility/src/main/java/eu/nimble/utility/validation/ValidationUtil.java",
+  "max_score": "1337"
+}

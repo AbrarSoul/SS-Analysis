@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_jenkins_ad38d8480f20ce3cbf8fec3e2003bc83efda4f7d",
+  "cve_ids": [
+    "CVE-2014-2059"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/jenkins",
+  "repository_url": "https://github.com/jenkinsci/jenkins",
+  "vulnerable_commit": "622e39f8b4c4764a0768bf58645767405ba9ccaa",
+  "fixed_commit": "ad38d8480f20ce3cbf8fec3e2003bc83efda4f7d",
+  "changed_file": "core/src/main/java/hudson/cli/CreateJobCommand.java",
+  "max_score": "1337"
+}

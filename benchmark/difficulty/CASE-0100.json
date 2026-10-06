@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0100",
+  "batch": "topup",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-75"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 0,
+  "lines_changed_total": 5,
+  "function_size_chars": 1470,
+  "function_size_lines": 45,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Map-supplied jndiName passed straight to InitialContext.lookup/bind; JNDI injection sink."
+}

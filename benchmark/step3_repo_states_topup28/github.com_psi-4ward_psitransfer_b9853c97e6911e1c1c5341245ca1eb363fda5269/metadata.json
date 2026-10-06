@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_psi-4ward_psitransfer_b9853c97e6911e1c1c5341245ca1eb363fda5269",
+  "cve_ids": [
+    "CVE-2024-31453"
+  ],
+  "cwe_ids": [
+    "CWE-434"
+  ],
+  "language": "javascript",
+  "repository": "psi-4ward/psitransfer",
+  "repository_url": "https://github.com/psi-4ward/psitransfer",
+  "vulnerable_commit": "707b72f421bb99145fcf02b5096a9adda57d88f9",
+  "fixed_commit": "b9853c97e6911e1c1c5341245ca1eb363fda5269",
+  "changed_file": "lib/endpoints.js",
+  "max_score": "1337"
+}

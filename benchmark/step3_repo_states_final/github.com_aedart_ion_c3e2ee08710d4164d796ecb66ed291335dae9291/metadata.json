@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_aedart_ion_c3e2ee08710d4164d796ecb66ed291335dae9291",
+  "cve_ids": [
+    "CVE-2023-30857"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "typescript",
+  "repository": "aedart/ion",
+  "repository_url": "https://github.com/aedart/ion",
+  "vulnerable_commit": "300421f269959af1198b3757c4bd5f24df699f98",
+  "fixed_commit": "c3e2ee08710d4164d796ecb66ed291335dae9291",
+  "changed_file": "packages/support/src/meta/meta.ts",
+  "max_score": "1337"
+}

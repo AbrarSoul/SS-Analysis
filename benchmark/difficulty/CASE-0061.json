@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-0061",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-284",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 12,
+  "lines_removed": 0,
+  "lines_changed_total": 12,
+  "function_size_chars": 1036,
+  "function_size_lines": 25,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "IRC KICK argument accepts comma lists; depends on protocol semantics, not visible as a code shape."
+}

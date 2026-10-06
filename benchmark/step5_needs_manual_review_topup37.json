@@ -1,0 +1,14 @@
+[
+  {
+    "case_id": "github.com_wekan_wekan_198509e7600981400353aec6259247b3c04e043e",
+    "language": "javascript",
+    "repository": "wekan/wekan",
+    "error": "extracted function too large to be useful context (vuln=432 lines, patched=463 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  },
+  {
+    "case_id": "github.com_zulip_zulip_03cfb3d9fe61c975d133121ec31a7357f0c9e18f",
+    "language": "javascript",
+    "repository": "zulip/zulip",
+    "error": "extracted function too large to be useful context (vuln=488 lines, patched=498 lines, limit=150) -- likely a brace-depth parsing error, or a genuinely huge single function/IIFE either way"
+  }
+]

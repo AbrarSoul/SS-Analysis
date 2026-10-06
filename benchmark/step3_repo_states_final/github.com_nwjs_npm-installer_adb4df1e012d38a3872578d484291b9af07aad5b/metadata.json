@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_nwjs_npm-installer_adb4df1e012d38a3872578d484291b9af07aad5b",
+  "cve_ids": [
+    "CVE-2016-10588"
+  ],
+  "cwe_ids": [
+    "CWE-310",
+    "CWE-311"
+  ],
+  "language": "javascript",
+  "repository": "nwjs/npm-installer",
+  "repository_url": "https://github.com/nwjs/npm-installer",
+  "vulnerable_commit": "0fe9b728586885f7ab185dc27e60e696381d1b6f",
+  "fixed_commit": "adb4df1e012d38a3872578d484291b9af07aad5b",
+  "changed_file": "scripts/install.js",
+  "max_score": "1337"
+}

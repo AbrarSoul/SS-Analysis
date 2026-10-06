@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_DataDog_guarddog_c3fb07b4838945f42497e78b7a02bcfb1e63969b",
+  "cve_ids": [
+    "CVE-2026-22870"
+  ],
+  "cwe_ids": [
+    "CWE-409"
+  ],
+  "language": "python",
+  "repository": "DataDog/guarddog",
+  "repository_url": "https://github.com/DataDog/guarddog",
+  "vulnerable_commit": "b2e10d2f5a0e1e0f2a14ade76cbec17d5cf4df35",
+  "fixed_commit": "c3fb07b4838945f42497e78b7a02bcfb1e63969b",
+  "changed_file": "guarddog/utils/archives.py",
+  "max_score": "1337"
+}

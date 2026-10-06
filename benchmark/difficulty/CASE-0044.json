@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0044",
+  "batch": "topup2",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 10,
+  "lines_removed": 4,
+  "lines_changed_total": 14,
+  "function_size_chars": 423,
+  "function_size_lines": 16,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Express app started with no rate-limit middleware; absence is app-wide and needs whole-app context."
+}

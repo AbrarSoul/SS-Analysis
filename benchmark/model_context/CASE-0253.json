@@ -1,0 +1,22 @@
+{
+  "case_id": "CASE-0253",
+  "language": "javascript",
+  "cve_id": "CVE-2026-24040",
+  "cve_ids_all": [
+    "CVE-2026-24040"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-362",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { jsPDF } from \"../jspdf.js\";"
+  ],
+  "vulnerable_function": "  jsPDFAPI.addJS = function(javascript) {\n    text = javascript;\n    this.internal.events.subscribe(\"postPutResources\", function() {\n      jsNamesObj = this.internal.newObject();\n      this.internal.out(\"<<\");\n      this.internal.out(\"/Names [(EmbeddedJS) \" + (jsNamesObj + 1) + \" 0 R]\");\n      this.internal.out(\">>\");\n      this.internal.out(\"endobj\");\n\n      jsJsObj = this.internal.newObject();\n      this.internal.out(\"<<\");\n      this.internal.out(\"/S /JavaScript\");\n      this.internal.out(\"/JS (\" + text + \")\");\n      this.internal.out(\">>\");\n      this.internal.out(\"endobj\");\n    });\n    this.internal.events.subscribe(\"putCatalog\", function() {\n      if (jsNamesObj !== undefined && jsJsObj !== undefined) {\n        this.internal.out(\"/Names <</JavaScript \" + jsNamesObj + \" 0 R>>\");\n      }\n    });\n    return this;\n  }",
+  "patched_function": "  jsPDFAPI.addJS = function(javascript) {\n    // FIX: Move variables inside function scope to prevent shared state\n    // between multiple jsPDF instances\n    var jsNamesObj;\n    var jsJsObj;\n    var text = javascript;\n    \n    this.internal.events.subscribe(\"postPutResources\", function() {\n      jsNamesObj = this.internal.newObject();\n      this.internal.out(\"<<\");\n      this.internal.out(\"/Names [(EmbeddedJS) \" + (jsNamesObj + 1) + \" 0 R]\");\n      this.internal.out(\">>\");\n      this.internal.out(\"endobj\");\n\n      jsJsObj = this.internal.newObject();\n      this.internal.out(\"<<\");\n      this.internal.out(\"/S /JavaScript\");\n      this.internal.out(\"/JS (\" + text + \")\");\n      this.internal.out(\">>\");\n      this.internal.out(\"endobj\");\n    });\n    this.internal.events.subscribe(\"putCatalog\", function() {\n      if (jsNamesObj !== undefined && jsJsObj !== undefined) {\n        this.internal.out(\"/Names <</JavaScript \" + jsNamesObj + \" 0 R>>\");\n      }\n    });\n    return this;\n  }",
+  "unified_diff": "diff --git a/src/modules/javascript.js b/src/modules/javascript.js\nindex 2276732f..13e309d9 100644\n--- a/src/modules/javascript.js\n+++ b/src/modules/javascript.js\n@@ -34,7 +34,6 @@ import { jsPDF } from \"../jspdf.js\";\n  */\n (function(jsPDFAPI) {\n   \"use strict\";\n-  var jsNamesObj, jsJsObj, text;\n   /**\n    * @name addJS\n    * @function\n@@ -42,7 +41,12 @@ import { jsPDF } from \"../jspdf.js\";\n    * @returns {jsPDF}\n    */\n   jsPDFAPI.addJS = function(javascript) {\n-    text = javascript;\n+    // FIX: Move variables inside function scope to prevent shared state\n+    // between multiple jsPDF instances\n+    var jsNamesObj;\n+    var jsJsObj;\n+    var text = javascript;\n+    \n     this.internal.events.subscribe(\"postPutResources\", function() {\n       jsNamesObj = this.internal.newObject();\n       this.internal.out(\"<<\");",
+  "auto_locate_confidence": "auto"
+}

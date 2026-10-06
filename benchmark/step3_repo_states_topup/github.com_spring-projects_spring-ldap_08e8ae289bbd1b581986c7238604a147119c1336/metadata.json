@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spring-projects_spring-ldap_08e8ae289bbd1b581986c7238604a147119c1336",
+  "cve_ids": [
+    "CVE-2017-8028"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-ldap",
+  "repository_url": "https://github.com/spring-projects/spring-ldap",
+  "vulnerable_commit": "9d8f9fb1882b99a71d510097bb9c32cd1b2331cb",
+  "fixed_commit": "08e8ae289bbd1b581986c7238604a147119c1336",
+  "changed_file": "core/src/main/java/org/springframework/ldap/core/support/DefaultTlsDirContextAuthenticationStrategy.java",
+  "max_score": "1337"
+}

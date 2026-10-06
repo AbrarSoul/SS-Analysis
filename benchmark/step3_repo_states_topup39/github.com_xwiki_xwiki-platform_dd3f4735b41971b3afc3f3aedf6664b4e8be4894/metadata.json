@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_dd3f4735b41971b3afc3f3aedf6664b4e8be4894",
+  "cve_ids": [
+    "CVE-2023-26056"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "bd34ad6710ed72304304a3d5fec38b7cc050ef3b",
+  "fixed_commit": "dd3f4735b41971b3afc3f3aedf6664b4e8be4894",
+  "changed_file": "xwiki-platform-core/xwiki-platform-rendering/xwiki-platform-rendering-macros/xwiki-platform-rendering-macro-context/src/main/java/org/xwiki/rendering/internal/macro/context/ContextMacro.java",
+  "max_score": "1337"
+}

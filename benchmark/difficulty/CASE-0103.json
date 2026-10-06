@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0103",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "changed_files": 1,
+  "lines_added": 35,
+  "lines_removed": 5,
+  "lines_changed_total": 40,
+  "function_size_chars": 572,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Cache key taken from an id attribute of the token itself; collision semantics need STS cache context."
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_zxcvbn-ts_zxcvbn_3f9bed21b5d01f6f6863476822ca857355fba22f",
+  "batch": "topup26",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 25,
+  "lines_removed": 32,
+  "lines_changed_total": 57,
+  "function_size_chars": 566,
+  "function_size_lines": 20,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

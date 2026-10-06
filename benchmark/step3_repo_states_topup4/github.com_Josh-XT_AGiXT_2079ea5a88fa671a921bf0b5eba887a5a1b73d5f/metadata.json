@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Josh-XT_AGiXT_2079ea5a88fa671a921bf0b5eba887a5a1b73d5f",
+  "cve_ids": [
+    "CVE-2026-39981"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "Josh-XT/AGiXT",
+  "repository_url": "https://github.com/Josh-XT/AGiXT",
+  "vulnerable_commit": "872f519fcc75eb574d717ea10ca91fc089718ffe",
+  "fixed_commit": "2079ea5a88fa671a921bf0b5eba887a5a1b73d5f",
+  "changed_file": "agixt/extensions/essential_abilities.py",
+  "max_score": "1337"
+}

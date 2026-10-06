@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0046",
+  "language": "python",
+  "cve_id": "CVE-2026-45229",
+  "cve_ids_all": [
+    "CVE-2026-45229"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-915",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from flask import json, Flask, url_for, session, jsonify, request, redirect, Response, render_template, send_from_directory, stream_with_context",
+    "from apscheduler.schedulers.background import BackgroundScheduler",
+    "from apscheduler.triggers.cron import CronTrigger",
+    "from concurrent.futures import ThreadPoolExecutor, as_completed",
+    "from sdk.cloudsaver import CloudSaver",
+    "from sdk.pansou import PanSou",
+    "from datetime import timedelta",
+    "import subprocess",
+    "import requests",
+    "import hashlib",
+    "import logging",
+    "import traceback",
+    "import base64",
+    "import sys",
+    "import os",
+    "import re",
+    "from quark_auto_save import Quark, Config, MagicRename"
+  ],
+  "vulnerable_function": "def update():\n    global config_data\n    if not is_login():\n        return jsonify({\"success\": False, \"message\": \"\u672a\u767b\u5f55\"})\n    dont_save_keys = [\"task_plugins_config_default\", \"api_token\"]\n    for key, value in request.json.items():\n        if key not in dont_save_keys:\n            config_data.update({key: value})\n    Config.write_json(CONFIG_PATH, config_data)\n    # \u91cd\u65b0\u52a0\u8f7d\u4efb\u52a1\n    if reload_tasks():\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u6210\u529f\")\n        return jsonify({\"success\": True, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u6210\u529f\"})\n    else:\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u5931\u8d25\")\n        return jsonify({\"success\": False, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u5931\u8d25\"})\n",
+  "patched_function": "def update():\n    global config_data\n    if not is_login():\n        return jsonify({\"success\": False, \"message\": \"\u672a\u767b\u5f55\"})\n    # \u4f7f\u7528\u5141\u8bb8\u5217\u8868\u9632\u6b62\u6279\u91cf\u8d4b\u503c\u653b\u51fb\n    allowed_keys = [\"cookie\", \"crontab\", \"push_config\", \"tasklist\",\n                    \"magic_regex\", \"plugins\", \"source\"]\n    for key, value in request.json.items():\n        if key in allowed_keys:\n            config_data.update({key: value})\n    Config.write_json(CONFIG_PATH, config_data)\n    # \u91cd\u65b0\u52a0\u8f7d\u4efb\u52a1\n    if reload_tasks():\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u6210\u529f\")\n        return jsonify({\"success\": True, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u6210\u529f\"})\n    else:\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u5931\u8d25\")\n        return jsonify({\"success\": False, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u5931\u8d25\"})\n",
+  "unified_diff": "diff --git a/app/run.py b/app/run.py\nindex b5baa5b..6ebcde5 100644\n--- a/app/run.py\n+++ b/app/run.py\n@@ -189,9 +189,11 @@ def update():\n     global config_data\n     if not is_login():\n         return jsonify({\"success\": False, \"message\": \"\u672a\u767b\u5f55\"})\n-    dont_save_keys = [\"task_plugins_config_default\", \"api_token\"]\n+    # \u4f7f\u7528\u5141\u8bb8\u5217\u8868\u9632\u6b62\u6279\u91cf\u8d4b\u503c\u653b\u51fb\n+    allowed_keys = [\"cookie\", \"crontab\", \"push_config\", \"tasklist\",\n+                    \"magic_regex\", \"plugins\", \"source\"]\n     for key, value in request.json.items():\n-        if key not in dont_save_keys:\n+        if key in allowed_keys:\n             config_data.update({key: value})\n     Config.write_json(CONFIG_PATH, config_data)\n     # \u91cd\u65b0\u52a0\u8f7d\u4efb\u52a1",
+  "auto_locate_confidence": "auto"
+}

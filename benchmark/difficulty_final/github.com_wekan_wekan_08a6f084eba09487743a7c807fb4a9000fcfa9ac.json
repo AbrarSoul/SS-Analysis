@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_wekan_wekan_08a6f084eba09487743a7c807fb4a9000fcfa9ac",
+  "batch": "topup26",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-639"
+  ],
+  "changed_files": 1,
+  "lines_added": 28,
+  "lines_removed": 0,
+  "lines_changed_total": 28,
+  "function_size_chars": 471,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

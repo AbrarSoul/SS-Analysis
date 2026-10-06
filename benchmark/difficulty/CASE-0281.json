@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0281",
+  "batch": "topup17",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 17,
+  "lines_removed": 0,
+  "lines_changed_total": 17,
+  "function_size_chars": 3620,
+  "function_size_lines": 65,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "resolve()-based containment check is defeated by hard links; file-system semantics not observable."
+}

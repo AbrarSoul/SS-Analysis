@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0174",
+  "original_source_case_id": "github.com_huggingface_transformers_54a02160eb030da9be18231c77791f2eb3a52216",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2025-6051",
+  "cve_ids_all": [
+    "CVE-2025-6051"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "python",
+  "repository": "huggingface/transformers",
+  "repository_url": "https://github.com/huggingface/transformers",
+  "vulnerable_commit": "af6120b3eb2470b994c21421bb6eaa76576128b0",
+  "fixed_commit": "54a02160eb030da9be18231c77791f2eb3a52216",
+  "changed_file": "src/transformers/models/clvp/number_normalizer.py",
+  "changed_function": "def normalize_numbers(self, text: str) -> str:",
+  "vulnerable_lines": [
+    197,
+    209
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0174/vulnerable_source.py": "956d4c8d163c3c30168d62c0f92d8593e2d559aaa4981542002985dbbeb9569b",
+    "cases/CASE-0174/patched_source.py": "d33348d5358908c2788bd571ae2ac20de5ffc23115d361b4fc883cc5d983f8b6",
+    "cases/CASE-0174/patch.diff": "c4fd4136f7b88604b84b3bf4cfa9a17505361a28c290c399f25ea6a87aaf7992",
+    "cases/CASE-0174/metadata.json": "4c6c4f5d5fc7a8ad7cda9541c5db0f2f42ced8bb304251eba93c9ddadf9b22ab",
+    "model_context/CASE-0174.json": "af51b4c3552dfd9dc74ef837e4ce2a94005a2f6381e74a4e374c7618e3bf868b",
+    "difficulty/CASE-0174.json": "639833bc70fbf1df9e4e2dc1496f3942281084417a562cda05b7fd3f1477c1c8"
+  },
+  "case_level_hash": "c6a103279fa6be23fb5a68809b484644c5afc13cd8f06d49a45c6e6226f433a1"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0269",
+  "batch": "topup3",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "changed_files": 1,
+  "lines_added": 22,
+  "lines_removed": 0,
+  "lines_changed_total": 22,
+  "function_size_chars": 922,
+  "function_size_lines": 29,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Compiler options concatenated into generated function source with no validation; string-concatenated code-generation sink."
+}

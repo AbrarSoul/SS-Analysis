@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nsupdate-info_nsupdate.info_60a3fe559c453bc36b0ec3e5dd39c1303640a59a",
+  "cve_ids": [
+    "CVE-2019-25091"
+  ],
+  "cwe_ids": [
+    "CWE-1004"
+  ],
+  "language": "python",
+  "repository": "nsupdate-info/nsupdate.info",
+  "repository_url": "https://github.com/nsupdate-info/nsupdate.info",
+  "vulnerable_commit": "1732ace5a055fd77b01226165b79783026edc142",
+  "fixed_commit": "60a3fe559c453bc36b0ec3e5dd39c1303640a59a",
+  "changed_file": "src/nsupdate/settings/base.py",
+  "max_score": "1337"
+}

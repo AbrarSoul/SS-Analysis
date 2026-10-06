@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_xwiki_xwiki-platform_c02ce7843a39851865b9d7b6132e32fdd21e3856",
+    "language": "java",
+    "repository": "xwiki/xwiki-platform",
+    "error": "no method-like block contains line 24; no method-like block contains line 26; no method-like block contains line 36; no method-like block contains line 38; no method-like block contains line 51; no method-like block contains line 53"
+  }
+]

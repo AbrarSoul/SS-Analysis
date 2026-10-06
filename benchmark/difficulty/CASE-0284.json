@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0284",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-288",
+    "CWE-807"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 2,
+  "lines_changed_total": 3,
+  "function_size_chars": 491,
+  "function_size_lines": 11,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Login guard's second branch also requires a configured Jellyfin IP; wrong condition operand is matchable but intent is semantic."
+}

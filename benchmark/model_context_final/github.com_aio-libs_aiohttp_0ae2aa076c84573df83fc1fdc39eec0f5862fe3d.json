@@ -1,0 +1,53 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_0ae2aa076c84573df83fc1fdc39eec0f5862fe3d",
+  "language": "python",
+  "cve_id": "CVE-2026-34515",
+  "cve_ids_all": [
+    "CVE-2026-34515"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-36",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-918",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "StaticResource",
+  "imports": [
+    "import abc",
+    "import asyncio",
+    "import base64",
+    "import functools",
+    "import hashlib",
+    "import html",
+    "import inspect",
+    "import keyword",
+    "import os",
+    "import platform",
+    "import re",
+    "import sys",
+    "import warnings",
+    "from functools import wraps",
+    "from pathlib import Path",
+    "from types import MappingProxyType",
+    "from typing import TYPE_CHECKING, Any, Awaitable, Callable, Container, Dict, Final, Generator, Iterable, Iterator, List, Mapping, NoReturn, Optional, Pattern, Set, Sized, Tuple, Type, TypedDict, Union, cast",
+    "from yarl import URL, __version__ as yarl_version",
+    "from . import hdrs",
+    "from .abc import AbstractMatchInfo, AbstractRouter, AbstractView",
+    "from .helpers import DEBUG",
+    "from .http import HttpVersion11",
+    "from .typedefs import Handler, PathLike",
+    "from .web_exceptions import HTTPException, HTTPExpectationFailed, HTTPForbidden, HTTPMethodNotAllowed, HTTPNotFound",
+    "from .web_fileresponse import FileResponse",
+    "from .web_request import Request",
+    "from .web_response import Response, StreamResponse",
+    "from .web_routedef import AbstractRouteDef"
+  ],
+  "vulnerable_function": "    async def _handle(self, request: Request) -> StreamResponse:\n        filename = request.match_info[\"filename\"]\n        unresolved_path = self._directory.joinpath(filename)\n        loop = asyncio.get_running_loop()\n        return await loop.run_in_executor(\n            None, self._resolve_path_to_response, unresolved_path\n        )\n",
+  "patched_function": "    async def _handle(self, request: Request) -> StreamResponse:\n        filename = request.match_info[\"filename\"]\n        if Path(filename).is_absolute():\n            # filename is an absolute path e.g. //network/share or D:\\path\n            # which could be a UNC path leading to NTLM credential theft\n            raise HTTPNotFound()\n        unresolved_path = self._directory.joinpath(filename)\n        loop = asyncio.get_running_loop()\n        return await loop.run_in_executor(\n            None, self._resolve_path_to_response, unresolved_path\n        )\n",
+  "unified_diff": "diff --git a/aiohttp/web_urldispatcher.py b/aiohttp/web_urldispatcher.py\nindex cfa57a310..48465b5ee 100644\n--- a/aiohttp/web_urldispatcher.py\n+++ b/aiohttp/web_urldispatcher.py\n@@ -676,6 +676,10 @@ class StaticResource(PrefixResource):\n \n     async def _handle(self, request: Request) -> StreamResponse:\n         filename = request.match_info[\"filename\"]\n+        if Path(filename).is_absolute():\n+            # filename is an absolute path e.g. //network/share or D:\\path\n+            # which could be a UNC path leading to NTLM credential theft\n+            raise HTTPNotFound()\n         unresolved_path = self._directory.joinpath(filename)\n         loop = asyncio.get_running_loop()\n         return await loop.run_in_executor(",
+  "auto_locate_confidence": "auto"
+}

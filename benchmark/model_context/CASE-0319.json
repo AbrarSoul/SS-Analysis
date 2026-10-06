@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-0319",
+  "language": "python",
+  "cve_id": "CVE-2024-54679",
+  "cve_ids_all": [
+    "CVE-2024-54679"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-862",
+      "definition": "Missing Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import time",
+    "from random import randint",
+    "from django.shortcuts import redirect, HttpResponse",
+    "from django.views.decorators.csrf import csrf_exempt",
+    "from cloudAPI.cloudManager import CloudManager",
+    "from loginSystem.views import loadLoginPage",
+    "from .databaseManager import DatabaseManager",
+    "from .mysqlOptimizer import MySQLOptimizer",
+    "from .pluginManager import pluginManager",
+    "import json",
+    "from plogical.processUtilities import ProcessUtilities",
+    "from loginSystem.models import Administrator",
+    "from plogical.acl import ACLManager",
+    "from databases.models import GlobalUserDB",
+    "from plogical import randomPassword",
+    "from cryptography.fernet import Fernet",
+    "from plogical.mysqlUtilities import mysqlUtilities",
+    "from plogical.CyberCPLogFileWriter import CyberCPLogFileWriter as logging"
+  ],
+  "vulnerable_function": "def restartMySQL(request):\n    try:\n        userID = request.session['userID']\n        finalData = mysqlUtilities.restartMySQL()\n        currentACL = ACLManager.loadedACL(userID)\n\n        if currentACL['admin'] == 1:\n            pass\n        else:\n            return ACLManager.loadErrorJson('FilemanagerAdmin', 0)\n\n        data = {}\n\n        data['status'] = finalData[0]\n        data['error_message'] = finalData[1]\n        json_data = json.dumps(data)\n        return HttpResponse(json_data)\n\n    except KeyError:\n        return redirect(loadLoginPage)\n",
+  "patched_function": "def restartMySQL(request):\n    try:\n        userID = request.session['userID']\n        currentACL = ACLManager.loadedACL(userID)\n\n        if currentACL['admin'] == 1:\n            pass\n        else:\n            return ACLManager.loadErrorJson('FilemanagerAdmin', 0)\n\n        data = {}\n\n        finalData = mysqlUtilities.restartMySQL()\n\n        data['status'] = finalData[0]\n        data['error_message'] = finalData[1]\n        json_data = json.dumps(data)\n        return HttpResponse(json_data)\n\n    except KeyError:\n        return redirect(loadLoginPage)\n",
+  "unified_diff": "diff --git a/databases/views.py b/databases/views.py\nindex b8d532f2..f4c8a13c 100755\n--- a/databases/views.py\n+++ b/databases/views.py\n@@ -400,7 +400,6 @@ def getMysqlstatus(request):\n def restartMySQL(request):\n     try:\n         userID = request.session['userID']\n-        finalData = mysqlUtilities.restartMySQL()\n         currentACL = ACLManager.loadedACL(userID)\n \n         if currentACL['admin'] == 1:\n@@ -410,6 +409,8 @@ def restartMySQL(request):\n \n         data = {}\n \n+        finalData = mysqlUtilities.restartMySQL()\n+\n         data['status'] = finalData[0]\n         data['error_message'] = finalData[1]\n         json_data = json.dumps(data)",
+  "auto_locate_confidence": "auto"
+}

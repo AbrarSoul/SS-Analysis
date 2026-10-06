@@ -1,0 +1,27 @@
+{
+  "case_id": "CASE-0225",
+  "language": "javascript",
+  "cve_id": "CVE-2024-3104",
+  "cve_ids_all": [
+    "CVE-2024-3104"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const fs = require(\"fs\");",
+    "const path = require(\"path\");",
+    "const { Workspace } = require(\"../../models/workspace\");",
+    "const { EventLogs } = require(\"../../models/eventLogs\");",
+    "const fs = require(\"fs\");",
+    "const path = require(\"path\");"
+  ],
+  "vulnerable_function": "async function dumpENV() {\n  const fs = require(\"fs\");\n  const path = require(\"path\");\n\n  const frozenEnvs = {};\n  const protectedKeys = [\n    ...Object.values(KEY_MAPPING).map((values) => values.envKey),\n    \"STORAGE_DIR\",\n    \"SERVER_PORT\",\n    // Password Schema Keys if present.\n    \"PASSWORDMINCHAR\",\n    \"PASSWORDMAXCHAR\",\n    \"PASSWORDLOWERCASE\",\n    \"PASSWORDUPPERCASE\",\n    \"PASSWORDNUMERIC\",\n    \"PASSWORDSYMBOL\",\n    \"PASSWORDREQUIREMENTS\",\n    // HTTPS SETUP KEYS\n    \"ENABLE_HTTPS\",\n    \"HTTPS_CERT_PATH\",\n    \"HTTPS_KEY_PATH\",\n    // DISABLED TELEMETRY\n    \"DISABLE_TELEMETRY\",\n  ];\n\n  for (const key of protectedKeys) {\n    const envValue = process.env?.[key] || null;\n    if (!envValue) continue;\n    frozenEnvs[key] = process.env?.[key] || null;\n  }\n\n  var envResult = `# Auto-dump ENV from system call on ${new Date().toTimeString()}\\n`;\n  envResult += Object.entries(frozenEnvs)\n    .map(([key, value]) => {\n      return `${key}='${value}'`;\n    })\n    .join(\"\\n\");\n\n  const envPath = path.join(__dirname, \"../../.env\");\n  fs.writeFileSync(envPath, envResult, { encoding: \"utf8\", flag: \"w\" });\n  return true;\n}",
+  "patched_function": "async function dumpENV() {\n  const fs = require(\"fs\");\n  const path = require(\"path\");\n\n  const frozenEnvs = {};\n  const protectedKeys = [\n    ...Object.values(KEY_MAPPING).map((values) => values.envKey),\n    \"STORAGE_DIR\",\n    \"SERVER_PORT\",\n    // Password Schema Keys if present.\n    \"PASSWORDMINCHAR\",\n    \"PASSWORDMAXCHAR\",\n    \"PASSWORDLOWERCASE\",\n    \"PASSWORDUPPERCASE\",\n    \"PASSWORDNUMERIC\",\n    \"PASSWORDSYMBOL\",\n    \"PASSWORDREQUIREMENTS\",\n    // HTTPS SETUP KEYS\n    \"ENABLE_HTTPS\",\n    \"HTTPS_CERT_PATH\",\n    \"HTTPS_KEY_PATH\",\n    // DISABLED TELEMETRY\n    \"DISABLE_TELEMETRY\",\n  ];\n\n  // Simple sanitization of each value to prevent ENV injection via newline or quote escaping.\n  function sanitizeValue(value) {\n    const offendingChars =\n      /[\\n\\r\\t\\v\\f\\u0085\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\"'`#]/;\n    const firstOffendingCharIndex = value.search(offendingChars);\n    if (firstOffendingCharIndex === -1) return value;\n\n    return value.substring(0, firstOffendingCharIndex);\n  }\n\n  for (const key of protectedKeys) {\n    const envValue = process.env?.[key] || null;\n    if (!envValue) continue;\n    frozenEnvs[key] = process.env?.[key] || null;\n  }\n\n  var envResult = `# Auto-dump ENV from system call on ${new Date().toTimeString()}\\n`;\n  envResult += Object.entries(frozenEnvs)\n    .map(([key, value]) => `${key}='${sanitizeValue(value)}'`)\n    .join(\"\\n\");\n\n  const envPath = path.join(__dirname, \"../../.env\");\n  fs.writeFileSync(envPath, envResult, { encoding: \"utf8\", flag: \"w\" });\n  return true;\n}",
+  "unified_diff": "diff --git a/server/utils/helpers/updateENV.js b/server/utils/helpers/updateENV.js\nindex 29fa210e..6e0e5daa 100644\n--- a/server/utils/helpers/updateENV.js\n+++ b/server/utils/helpers/updateENV.js\n@@ -564,6 +564,16 @@ async function dumpENV() {\n     \"DISABLE_TELEMETRY\",\n   ];\n \n+  // Simple sanitization of each value to prevent ENV injection via newline or quote escaping.\n+  function sanitizeValue(value) {\n+    const offendingChars =\n+      /[\\n\\r\\t\\v\\f\\u0085\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\"'`#]/;\n+    const firstOffendingCharIndex = value.search(offendingChars);\n+    if (firstOffendingCharIndex === -1) return value;\n+\n+    return value.substring(0, firstOffendingCharIndex);\n+  }\n+\n   for (const key of protectedKeys) {\n     const envValue = process.env?.[key] || null;\n     if (!envValue) continue;\n@@ -572,9 +582,7 @@ async function dumpENV() {\n \n   var envResult = `# Auto-dump ENV from system call on ${new Date().toTimeString()}\\n`;\n   envResult += Object.entries(frozenEnvs)\n-    .map(([key, value]) => {\n-      return `${key}='${value}'`;\n-    })\n+    .map(([key, value]) => `${key}='${sanitizeValue(value)}'`)\n     .join(\"\\n\");\n \n   const envPath = path.join(__dirname, \"../../.env\");",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,14 @@
+{
+  "partition": "pilot",
+  "case_count": 40,
+  "frozen_at": "2026-09-20",
+  "dataset_hash_sha256": "a1757b2850a57ee08c4191b759d2acf5d9d9a3757f1dc8e80593fbff01b8c4fb",
+  "manifest_file": "manifest_frozen.jsonl",
+  "known_unpopulated_schema_fields": [
+    "ghsa_id",
+    "advisory_date",
+    "repository_license",
+    "source_urls"
+  ],
+  "note": "Development (50-case) and final (300-case) partitions have not been curated yet and are not part of this freeze."
+}

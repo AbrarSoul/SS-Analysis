@@ -1,0 +1,16 @@
+diff --git a/src/emulator/hub.ts b/src/emulator/hub.ts
+index 77b97f677..136dfaac7 100644
+--- a/src/emulator/hub.ts
++++ b/src/emulator/hub.ts
+@@ -98,6 +98,11 @@ export class EmulatorHub extends ExpressBasedEmulator {
+     });
+ 
+     app.post(EmulatorHub.PATH_EXPORT, async (req, res) => {
++      if (req.headers.origin) {
++        res.status(403).json({
++          message: `Export cannot be triggered by external callers.`,
++        });
++      }
+       const path: string = req.body.path;
+       const initiatedBy: string = req.body.initiatedBy || "unknown";
+       utils.logLabeledBullet("emulators", `Received export request. Exporting data to ${path}.`);

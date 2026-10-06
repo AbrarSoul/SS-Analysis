@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0112",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "changed_files": 1,
+  "lines_added": 27,
+  "lines_removed": 114,
+  "lines_changed_total": 141,
+  "function_size_chars": 3156,
+  "function_size_lines": 73,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Attacker-reachable name and environment passed to InitialContext.lookup (and rmi:// handling); JNDI injection sink."
+}

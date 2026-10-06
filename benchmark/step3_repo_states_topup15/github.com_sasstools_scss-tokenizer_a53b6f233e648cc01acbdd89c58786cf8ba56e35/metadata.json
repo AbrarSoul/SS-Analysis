@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_sasstools_scss-tokenizer_a53b6f233e648cc01acbdd89c58786cf8ba56e35",
+  "cve_ids": [
+    "CVE-2022-25758"
+  ],
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "javascript",
+  "repository": "sasstools/scss-tokenizer",
+  "repository_url": "https://github.com/sasstools/scss-tokenizer",
+  "vulnerable_commit": "b55257baa54197e7dae8085184cad7948fea0796",
+  "fixed_commit": "a53b6f233e648cc01acbdd89c58786cf8ba56e35",
+  "changed_file": "src/previous-map.js",
+  "max_score": "1337"
+}

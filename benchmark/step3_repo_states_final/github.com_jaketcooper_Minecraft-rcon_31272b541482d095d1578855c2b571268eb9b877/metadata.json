@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jaketcooper_Minecraft-rcon_31272b541482d095d1578855c2b571268eb9b877",
+  "cve_ids": [
+    "CVE-2025-61680"
+  ],
+  "cwe_ids": [
+    "CWE-256"
+  ],
+  "language": "typescript",
+  "repository": "jaketcooper/Minecraft-rcon",
+  "repository_url": "https://github.com/jaketcooper/Minecraft-rcon",
+  "vulnerable_commit": "3b95dec8e7a087503a6b40421fbfa6cd5d3e04b7",
+  "fixed_commit": "31272b541482d095d1578855c2b571268eb9b877",
+  "changed_file": "src/extension.ts",
+  "max_score": "1337"
+}

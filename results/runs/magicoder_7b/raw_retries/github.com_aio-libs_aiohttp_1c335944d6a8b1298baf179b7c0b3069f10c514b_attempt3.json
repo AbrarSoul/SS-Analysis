@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "magicoder:7b",
+  "temperature": 0.0,
+  "timestamp": 1789302809.069359,
+  "raw_content": " The provided context is not sufficient to generate a precise Semgrep rule for this vulnerability patch. However, here's an example of how you might write a rule for the specific issue mentioned in the patch:\n\n```yaml\nrules:\n  - id: \"vuln-aiohttp-1c335944\"\n    pattern: |\n      _directory = $any\n      _follow_symlinks = $bool\n      unresolved_path = _directory.joinpath($filename)\n      if _follow_symlinks:\n        normalized_path = Path(os.path.normpath(unresolved_path))\n        filepath = normalized_path.relative_to(_directory).resolve()\n      else:\n        filepath = unresolved_path.resolve()\n    languages: [\"python\"]\n    message: \"Detected potential directory traversal vulnerability in aiohttp library.\"\n    severity: ERROR\n    metadata:\n      source-url: https://github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n      category: security\n      cwe: CWE-78\n      references:\n        - https://owasp.org/www-community/attacks/Path_Traversal\n```\n\nThis rule will match if the `joinpath` method is used with a filename that could potentially lead to directory traversal, regardless of whether symlinks are followed or not. It's important to note that this is just an example and might need adjustments based on the specific vulnerability in the patch."
+}

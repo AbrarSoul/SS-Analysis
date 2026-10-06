@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Cp0204_quark-auto-save_ea8377a596446291953dbe36e2d119d85bcd865b",
+  "cve_ids": [
+    "CVE-2026-45229"
+  ],
+  "cwe_ids": [
+    "CWE-915"
+  ],
+  "language": "python",
+  "repository": "Cp0204/quark-auto-save",
+  "repository_url": "https://github.com/Cp0204/quark-auto-save",
+  "vulnerable_commit": "7f6ad600c2d89958923a4b377730c6be29afe4bc",
+  "fixed_commit": "ea8377a596446291953dbe36e2d119d85bcd865b",
+  "changed_file": "app/run.py",
+  "max_score": "1337"
+}

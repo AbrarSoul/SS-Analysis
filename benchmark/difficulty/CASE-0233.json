@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0233",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-732"
+  ],
+  "changed_files": 1,
+  "lines_added": 49,
+  "lines_removed": 44,
+  "lines_changed_total": 93,
+  "function_size_chars": 1175,
+  "function_size_lines": 28,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Admin flag decided from the client-controlled Referer header; header-to-privilege taint."
+}

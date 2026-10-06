@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0239",
+  "original_source_case_id": "github.com_npm_hosted-git-info_29adfe5ef789784c861b2cdeb15051ec2ba651a7",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-23362",
+  "cve_ids_all": [
+    "CVE-2021-23362"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "javascript",
+  "repository": "npm/hosted-git-info",
+  "repository_url": "https://github.com/npm/hosted-git-info",
+  "vulnerable_commit": "afeaefdd86ba9bb5044be3c1554a666d007cf19a",
+  "fixed_commit": "29adfe5ef789784c861b2cdeb15051ec2ba651a7",
+  "changed_file": "index.js",
+  "changed_function": "if (giturl == null || giturl === '') return",
+  "vulnerable_lines": [
+    39,
+    80
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0239/vulnerable_source.js": "e5b8f03df0f14afb00ba0ca7c82a6cdea76a12673b7d27ef93c93d5db91e3f00",
+    "cases/CASE-0239/patched_source.js": "519dbed3316df01a81732f519749fea55c8721316f317250c3f2ca7617cdb2fe",
+    "cases/CASE-0239/patch.diff": "56f5ed0c5059db16c9b0db39ac47571bdc94aa330e252369db76f24b1fecf39f",
+    "cases/CASE-0239/metadata.json": "d184887206b076da31af10598794254f98f550a7619ce20f2f38638da74fe5e1",
+    "model_context/CASE-0239.json": "18f445d6bb5903fb0a41f226894005ca7d84d68953c7885b2304843d2eab3572",
+    "difficulty/CASE-0239.json": "e54c4c54ccb85d3a3176b1dc5b0bb14be2beafce3d505271530fcd3c62afbf3a"
+  },
+  "case_level_hash": "6fe1a63e2ed3f7be9013f61a064902304129c19226581a78af5e986dc4b66c0a"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_agenticmail_agenticmail_1408de543fa3577d8c2d4fdb289c75fe6faafac7",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [],
+  "changed_files": 1,
+  "lines_added": 34,
+  "lines_removed": 1,
+  "lines_changed_total": 35,
+  "function_size_chars": 279,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

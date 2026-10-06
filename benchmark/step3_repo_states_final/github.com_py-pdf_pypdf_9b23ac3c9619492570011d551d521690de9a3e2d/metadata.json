@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_py-pdf_pypdf_9b23ac3c9619492570011d551d521690de9a3e2d",
+  "cve_ids": [
+    "CVE-2023-46250"
+  ],
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "language": "python",
+  "repository": "py-pdf/pypdf",
+  "repository_url": "https://github.com/py-pdf/pypdf",
+  "vulnerable_commit": "56e191db4268f6ceb41401f5236e24c1ac4a2bdd",
+  "fixed_commit": "9b23ac3c9619492570011d551d521690de9a3e2d",
+  "changed_file": "pypdf/generic/_data_structures.py",
+  "max_score": "1337"
+}

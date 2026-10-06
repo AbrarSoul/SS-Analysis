@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_thrift_0919c3d5506151514e283a63e1fe1ce83e2449d8",
+  "cve_ids": [
+    "CVE-2026-43869"
+  ],
+  "cwe_ids": [
+    "CWE-297"
+  ],
+  "language": "java",
+  "repository": "apache/thrift",
+  "repository_url": "https://github.com/apache/thrift",
+  "vulnerable_commit": "81fc6d54bbb3a37132e6d59cc0ad357f8759511e",
+  "fixed_commit": "0919c3d5506151514e283a63e1fe1ce83e2449d8",
+  "changed_file": "lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java",
+  "max_score": "1337"
+}

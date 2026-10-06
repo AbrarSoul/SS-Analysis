@@ -1,0 +1,31 @@
+{
+  "case_id": "github.com_reflex-dev_reflex_ade12549f3c0ddab3d7382c581bc04a3c1f989ec",
+  "language": "python",
+  "cve_id": "CVE-2025-62379",
+  "cve_ids_all": [
+    "CVE-2025-62379"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-601",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from __future__ import annotations",
+    "import os",
+    "from starlette.requests import Request",
+    "from starlette.responses import HTMLResponse",
+    "from reflex.components.base.script import Script",
+    "from reflex.components.component import Component",
+    "from reflex.components.core.banner import has_connection_errors",
+    "from reflex.components.core.cond import cond",
+    "from reflex.constants import Endpoint",
+    "from reflex.utils.decorator import once"
+  ],
+  "vulnerable_function": "def redirect_script() -> str:\n    \"\"\"Get the redirect script for Github Codespaces.\n\n    Returns:\n        The redirect script as a string.\n    \"\"\"\n    return f\"\"\"\nconst thisUrl = new URL(window.location.href);\nconst params = new URLSearchParams(thisUrl.search)\n\nfunction doRedirect(url) {{\n    if (!window.sessionStorage.getItem(\"authenticated_github_codespaces\")) {{\n        const a = document.createElement(\"a\");\n        if (params.has(\"redirect_to\")) {{\n            a.href = params.get(\"redirect_to\")\n        }} else if (!window.location.href.startsWith(url)) {{\n            a.href = url + `?redirect_to=${{window.location.href}}`\n        }} else {{\n            return\n        }}\n        a.hidden = true;\n        a.click();\n        a.remove();\n        window.sessionStorage.setItem(\"authenticated_github_codespaces\", \"true\")\n    }}\n}}\ndoRedirect(\"{Endpoint.AUTH_CODESPACE.get_url()}\")\n\"\"\"\n",
+  "patched_function": "def redirect_script() -> str:\n    \"\"\"Get the redirect script for Github Codespaces.\n\n    Returns:\n        The redirect script as a string.\n    \"\"\"\n    return f\"\"\"\nconst thisUrl = new URL(window.location.href);\nconst params = new URLSearchParams(thisUrl.search)\n\nfunction sameHostnameDifferentPort(one, two) {{\n    const hostnameOne = one.hostname;\n    const hostnameTwo = two.hostname;\n    const partsOne = hostnameOne.split(\".\");\n    const partsTwo = hostnameTwo.split(\".\");\n    if (partsOne.length !== partsTwo.length) {{ return false;  }}\n    for (let i = 1; i < partsOne.length; i++) {{\n        if (partsOne[i] !== partsTwo[i]) {{ return false; }}\n    }}\n    const uniqueNameOne = partsOne[0];\n    const uniqueNameTwo = partsTwo[0];\n    const uniqueNamePartsOne = uniqueNameOne.split(\"-\");\n    const uniqueNamePartsTwo = uniqueNameTwo.split(\"-\");\n    if (uniqueNamePartsOne.length !== uniqueNamePartsTwo.length) {{ return false;  }}\n    for (let i = 0; i < uniqueNamePartsOne.length - 1; i++) {{\n        if (uniqueNamePartsOne[i] !== uniqueNamePartsTwo[i]) {{ return false;  }}\n    }}\n    return true;\n}}\n\nfunction doRedirect(url) {{\n    if (!window.sessionStorage.getItem(\"authenticated_github_codespaces\")) {{\n        const a = document.createElement(\"a\");\n        if (params.has(\"redirect_to\")) {{\n            const redirect_to = new URL(params.get(\"redirect_to\"));\n            if (!sameHostnameDifferentPort(thisUrl, redirect_to)) {{\n                console.warn(\"Reflex: Not redirecting to different hostname\");\n                return;\n            }}\n            if (!redirect_to.hostname.endsWith(\".app.github.dev\")) {{\n                console.warn(\"Reflex: Not redirecting to non .app.github.dev hostname\");\n                return;\n            }}\n            a.href = redirect_to.href;\n        }} else if (!window.location.href.startsWith(url)) {{\n            a.href = url + `?redirect_to=${{window.location.href}}`\n        }} else {{\n            return\n        }}\n        a.hidden = true;\n        a.click();\n        a.remove();\n        window.sessionStorage.setItem(\"authenticated_github_codespaces\", \"true\")\n    }}\n}}\ndoRedirect(\"{Endpoint.AUTH_CODESPACE.get_url()}\")\n\"\"\"\n",
+  "unified_diff": "diff --git a/reflex/utils/codespaces.py b/reflex/utils/codespaces.py\nindex 0e4c8702d..2d20ea964 100644\n--- a/reflex/utils/codespaces.py\n+++ b/reflex/utils/codespaces.py\n@@ -26,11 +26,40 @@ def redirect_script() -> str:\n const thisUrl = new URL(window.location.href);\n const params = new URLSearchParams(thisUrl.search)\n \n+function sameHostnameDifferentPort(one, two) {{\n+    const hostnameOne = one.hostname;\n+    const hostnameTwo = two.hostname;\n+    const partsOne = hostnameOne.split(\".\");\n+    const partsTwo = hostnameTwo.split(\".\");\n+    if (partsOne.length !== partsTwo.length) {{ return false;  }}\n+    for (let i = 1; i < partsOne.length; i++) {{\n+        if (partsOne[i] !== partsTwo[i]) {{ return false; }}\n+    }}\n+    const uniqueNameOne = partsOne[0];\n+    const uniqueNameTwo = partsTwo[0];\n+    const uniqueNamePartsOne = uniqueNameOne.split(\"-\");\n+    const uniqueNamePartsTwo = uniqueNameTwo.split(\"-\");\n+    if (uniqueNamePartsOne.length !== uniqueNamePartsTwo.length) {{ return false;  }}\n+    for (let i = 0; i < uniqueNamePartsOne.length - 1; i++) {{\n+        if (uniqueNamePartsOne[i] !== uniqueNamePartsTwo[i]) {{ return false;  }}\n+    }}\n+    return true;\n+}}\n+\n function doRedirect(url) {{\n     if (!window.sessionStorage.getItem(\"authenticated_github_codespaces\")) {{\n         const a = document.createElement(\"a\");\n         if (params.has(\"redirect_to\")) {{\n-            a.href = params.get(\"redirect_to\")\n+            const redirect_to = new URL(params.get(\"redirect_to\"));\n+            if (!sameHostnameDifferentPort(thisUrl, redirect_to)) {{\n+                console.warn(\"Reflex: Not redirecting to different hostname\");\n+                return;\n+            }}\n+            if (!redirect_to.hostname.endsWith(\".app.github.dev\")) {{\n+                console.warn(\"Reflex: Not redirecting to non .app.github.dev hostname\");\n+                return;\n+            }}\n+            a.href = redirect_to.href;\n         }} else if (!window.location.href.startsWith(url)) {{\n             a.href = url + `?redirect_to=${{window.location.href}}`\n         }} else {{",
+  "auto_locate_confidence": "auto"
+}

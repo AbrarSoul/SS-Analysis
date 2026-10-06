@@ -1,0 +1,54 @@
+{
+  "case_id": "CASE-0001",
+  "language": "python",
+  "cve_id": "CVE-2026-39419",
+  "cwe": [
+    {
+      "id": "CWE-290",
+      "definition": "Authentication Bypass by Spoofing"
+    },
+    {
+      "id": "CWE-693",
+      "definition": "Protection Mechanism Failure"
+    },
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    }
+  ],
+  "function_name": "exec_code",
+  "class_name": "ToolExecutor",
+  "containing_class_declaration": "class ToolExecutor:",
+  "imports": [
+    "import ast",
+    "import base64",
+    "import getpass",
+    "import gzip",
+    "import json",
+    "import os",
+    "import pwd",
+    "import random",
+    "import resource",
+    "import socket",
+    "import subprocess",
+    "import sys",
+    "import tempfile",
+    "import time",
+    "from contextlib import contextmanager",
+    "from contextlib import suppress",
+    "from textwrap import dedent",
+    "import uuid_utils.compat as uuid",
+    "from django.utils.translation import gettext_lazy as _",
+    "from common.utils.logger import maxkb_logger",
+    "from maxkb.const import BASE_DIR, CONFIG",
+    "from maxkb.const import PROJECT_DIR"
+  ],
+  "vulnerable_function": "def exec_code(self, code_str, keywords, function_name=None):\n        _id = str(uuid.uuid7())\n        action_function = f'({function_name !a}, locals_v.get({function_name !a}))' if function_name else 'locals_v.popitem()'\n        set_run_user = f'os.setgid({pwd.getpwnam(_run_user).pw_gid});os.setuid({pwd.getpwnam(_run_user).pw_uid});' if _enable_sandbox else ''\n        _exec_code = f\"\"\"\ntry:\n    import os, sys, json\n    from contextlib import redirect_stdout\n    path_to_exclude = ['/opt/py3/lib/python3.11/site-packages', '/opt/maxkb-app/apps']\n    sys.path = [p for p in sys.path if p not in path_to_exclude]\n    sys.path += {_sandbox_python_sys_path}\n    locals_v={{}}\n    keywords={keywords}\n    globals_v={{}}\n    {set_run_user}\n    os.environ.clear()\n    with redirect_stdout(open(os.devnull, 'w')):\n        exec({dedent(code_str)!a}, globals_v, locals_v)\n        f_name, f = {action_function}\n        globals_v.update(locals_v)\n        exec_result=f(**keywords)\n    sys.stdout.write(\"\\\\n{_id}:\")\n    json.dump({{'code':200,'msg':'success','data':exec_result}}, sys.stdout, default=str)\nexcept Exception as e:\n    if isinstance(e, MemoryError): e = Exception(\"Cannot allocate more memory: exceeded the limit of {_process_limit_mem_mb} MB.\")\n    sys.stdout.write(\"\\\\n{_id}:\")\n    json.dump({{'code':500,'msg':str(e),'data':None}}, sys.stdout, default=str)\nsys.stdout.write(\"\\\\n\")\nsys.stdout.flush()\n\"\"\"\n        maxkb_logger.debug(f\"Sandbox execute code: {_exec_code}\")\n        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=True) as f:\n            f.write(_exec_code)\n            f.flush()\n            with execution_timer(_id):\n                subprocess_result = self._exec(f.name)\n        if subprocess_result.returncode != 0:\n            raise Exception(subprocess_result.stderr or subprocess_result.stdout or \"Unknown exception occurred\")\n        lines = subprocess_result.stdout.splitlines()\n        result_line = [line for line in lines if line.startswith(_id)]\n        if not result_line:\n            maxkb_logger.error(\"\\n\".join(lines))\n            raise Exception(\"No result found.\")\n        result = json.loads(result_line[-1].split(\":\", 1)[1])\n        if result.get('code') == 200:\n            return result.get('data')\n        raise Exception(result.get('msg') + (f'\\n{subprocess_result.stderr}' if subprocess_result.stderr else ''))",
+  "patched_function": "def exec_code(self, code_str, keywords, function_name=None):\n        _id = secrets.token_hex(32)\n        action_function = f'({function_name !a}, locals_v.get({function_name !a}))' if function_name else 'locals_v.popitem()'\n        set_run_user = f'os.setgid({pwd.getpwnam(_run_user).pw_gid});os.setuid({pwd.getpwnam(_run_user).pw_uid});' if _enable_sandbox else ''\n        _exec_code = f\"\"\"\ntry:\n    import os, sys, json\n    from contextlib import redirect_stdout\n    path_to_exclude = ['/opt/py3/lib/python3.11/site-packages', '/opt/maxkb-app/apps']\n    sys.path = [p for p in sys.path if p not in path_to_exclude]\n    sys.path += {_sandbox_python_sys_path}\n    _id = os.environ.get(\"_ID\")\n    locals_v={{}}\n    keywords={keywords}\n    globals_v={{}}\n    {set_run_user}\n    os.environ.clear()\n    with redirect_stdout(open(os.devnull, 'w')):\n        exec({dedent(code_str)!a}, globals_v, locals_v)\n        f_name, f = {action_function}\n        globals_v.update(locals_v)\n        exec_result=f(**keywords)\n    result = {{'code':200,'msg':'success','data':exec_result}}\nexcept Exception as e:\n    if isinstance(e, MemoryError): e = Exception(\"Cannot allocate more memory: exceeded the limit of {_process_limit_mem_mb} MB.\")\n    result = {{'code':500,'msg':str(e),'data':None}}\nfinally:\n    sys.stdout.write(\"\\\\n\" + _id)\n    json.dump(result, sys.stdout, default=str)\n    sys.stdout.write(\"\\\\n__END__\\\\n\")\n    sys.stdout.flush()\n\"\"\"\n        maxkb_logger.debug(f\"Tool execution({_id}) execute code: {_exec_code}\")\n        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=True) as f:\n            f.write(_exec_code)\n            f.flush()\n            with execution_timer(_id):\n                subprocess_result = self._exec(f.name, _id)\n        if subprocess_result.returncode != 0:\n            raise Exception(subprocess_result.stderr or subprocess_result.stdout or \"Unknown exception occurred\")\n        lines = subprocess_result.stdout.splitlines()\n        if len(lines) < 2 or lines[-1] != \"__END__\":\n            raise Exception(\"Execution interrupted or tampered\")\n        last_line = lines[-2]\n        if not last_line.startswith(_id):\n            raise Exception(\"No result found.\")\n        result = json.loads(last_line[len(_id):])\n        if result.get('code') == 200:\n            return result.get('data')\n        raise Exception(result.get('msg') + (f'\\n{subprocess_result.stderr}' if subprocess_result.stderr else ''))",
+  "unified_diff": "diff --git a/apps/common/utils/tool_code.py b/apps/common/utils/tool_code.py\nindex 1c584794b..348d580bf 100644\n--- a/apps/common/utils/tool_code.py\n+++ b/apps/common/utils/tool_code.py\n@@ -13,6 +13,7 @@ import subprocess\n import sys\n import tempfile\n import time\n+import secrets\n from contextlib import contextmanager\n from contextlib import suppress\n from textwrap import dedent\n@@ -90,7 +91,7 @@ class ToolExecutor:\n         maxkb_logger.error(f'Exception: {e}', exc_info=True)\n \n     def exec_code(self, code_str, keywords, function_name=None):\n-        _id = str(uuid.uuid7())\n+        _id = secrets.token_hex(32)\n         action_function = f'({function_name !a}, locals_v.get({function_name !a}))' if function_name else 'locals_v.popitem()'\n         set_run_user = f'os.setgid({pwd.getpwnam(_run_user).pw_gid});os.setuid({pwd.getpwnam(_run_user).pw_uid});' if _enable_sandbox else ''\n         _exec_code = f\"\"\"\n@@ -100,6 +101,7 @@ try:\n     path_to_exclude = ['/opt/py3/lib/python3.11/site-packages', '/opt/maxkb-app/apps']\n     sys.path = [p for p in sys.path if p not in path_to_exclude]\n     sys.path += {_sandbox_python_sys_path}\n+    _id = os.environ.get(\"_ID\")\n     locals_v={{}}\n     keywords={keywords}\n     globals_v={{}}\n@@ -110,29 +112,31 @@ try:\n         f_name, f = {action_function}\n         globals_v.update(locals_v)\n         exec_result=f(**keywords)\n-    sys.stdout.write(\"\\\\n{_id}:\")\n-    json.dump({{'code':200,'msg':'success','data':exec_result}}, sys.stdout, default=str)\n+    result = {{'code':200,'msg':'success','data':exec_result}}\n except Exception as e:\n     if isinstance(e, MemoryError): e = Exception(\"Cannot allocate more memory: exceeded the limit of {_process_limit_mem_mb} MB.\")\n-    sys.stdout.write(\"\\\\n{_id}:\")\n-    json.dump({{'code':500,'msg':str(e),'data':None}}, sys.stdout, default=str)\n-sys.stdout.write(\"\\\\n\")\n-sys.stdout.flush()\n+    result = {{'code':500,'msg':str(e),'data':None}}\n+finally:\n+    sys.stdout.write(\"\\\\n\" + _id)\n+    json.dump(result, sys.stdout, default=str)\n+    sys.stdout.write(\"\\\\n__END__\\\\n\")\n+    sys.stdout.flush()\n \"\"\"\n-        maxkb_logger.debug(f\"Sandbox execute code: {_exec_code}\")\n+        maxkb_logger.debug(f\"Tool execution({_id}) execute code: {_exec_code}\")\n         with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=True) as f:\n             f.write(_exec_code)\n             f.flush()\n             with execution_timer(_id):\n-                subprocess_result = self._exec(f.name)\n+                subprocess_result = self._exec(f.name, _id)\n         if subprocess_result.returncode != 0:\n             raise Exception(subprocess_result.stderr or subprocess_result.stdout or \"Unknown exception occurred\")\n         lines = subprocess_result.stdout.splitlines()\n-        result_line = [line for line in lines if line.startswith(_id)]\n-        if not result_line:\n-            maxkb_logger.error(\"\\n\".join(lines))\n+        if len(lines) < 2 or lines[-1] != \"__END__\":\n+            raise Exception(\"Execution interrupted or tampered\")\n+        last_line = lines[-2]\n+        if not last_line.startswith(_id):\n             raise Exception(\"No result found.\")\n-        result = json.loads(result_line[-1].split(\":\", 1)[1])\n+        result = json.loads(last_line[len(_id):])\n         if result.get('code') == 200:\n             return result.get('data')\n         raise Exception(result.get('msg') + (f'\\n{subprocess_result.stderr}' if subprocess_result.stderr else ''))\n@@ -286,9 +290,10 @@ exec({dedent(code)!a})\n         }\n         return app_config\n \n-    def _exec(self, execute_file):\n+    def _exec(self, execute_file, _id):\n         kwargs = {'cwd': BASE_DIR, 'env': {\n             'LD_PRELOAD': f'{_sandbox_path}/lib/sandbox.so',\n+            '_ID': _id,\n         }}\n         def _set_resource_limit():\n             if not _enable_sandbox or not sys.platform.startswith(\"linux\"): return",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 9186,
+  "context_size_chars_after_truncation": 9186
+}

@@ -1,0 +1,34 @@
+diff --git a/app/server/imapSearcher.js b/app/server/imapSearcher.js
+index b8d4a1f..624a8dd 100644
+--- a/app/server/imapSearcher.js
++++ b/app/server/imapSearcher.js
+@@ -6,9 +6,7 @@
+ "use strict";
+ 
+ var Imap = require('imap');
+-var simplecrypt = require('simplecrypt');
+-// var moment = require('moment');
+-
++var utils = require('../utils');
+ var log = require('../logger');
+ var Eventer = require('../eventer');
+ 
+@@ -17,9 +15,6 @@ var PatternsService = require('./patternsService');
+ var retrySecs = 30;
+ var searchDelaySecs = 2;
+ 
+-// FIXME: use non-deprected (and better) crypto system
+-var sc = simplecrypt({salt:'boopdeeboop',password:'blink1control', method:"aes-192-ecb"});
+-
+ 
+ function ImapSearcher(config) {
+     var self = this;
+@@ -96,7 +91,7 @@ ImapSearcher.prototype.start = function() {
+     var self = this;
+     var pass = '';
+     try {
+-        pass = sc.decrypt( self.config.password );
++        pass = utils.decrypt( self.config.passwordHash );
+     } catch(err) {
+         log.msg('ImapSearcher: bad password');
+     }

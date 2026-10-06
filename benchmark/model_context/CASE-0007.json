@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-0007",
+  "language": "python",
+  "cve_id": "CVE-2026-25211",
+  "cwe": [
+    {
+      "id": "CWE-532",
+      "definition": "Insertion of Sensitive Information into Log File"
+    }
+  ],
+  "function_name": "initialize",
+  "class_name": "PGVectorVectorIOAdapter",
+  "containing_class_declaration": "class PGVectorVectorIOAdapter(OpenAIVectorStoreMixin, VectorIO, VectorStoresProtocolPrivate):",
+  "imports": [
+    "import heapq",
+    "from typing import Any",
+    "import psycopg2",
+    "from numpy.typing import NDArray",
+    "from psycopg2 import sql",
+    "from psycopg2.extras import Json, execute_values",
+    "from pydantic import BaseModel, TypeAdapter",
+    "from llama_stack.core.storage.kvstore import kvstore_impl",
+    "from llama_stack.log import get_logger",
+    "from llama_stack.providers.utils.inference.prompt_adapter import interleaved_content_as_str",
+    "from llama_stack.providers.utils.memory.openai_vector_store_mixin import OpenAIVectorStoreMixin",
+    "from llama_stack.providers.utils.memory.vector_store import ChunkForDeletion, EmbeddingIndex, VectorStoreWithIndex",
+    "from llama_stack.providers.utils.vector_io.vector_utils import WeightedInMemoryAggregator, sanitize_collection_name",
+    "from llama_stack_api import Chunk, Files, Inference, InterleavedContent, QueryChunksResponse, VectorIO, VectorStore, VectorStoreNotFoundError, VectorStoresProtocolPrivate",
+    "from llama_stack_api.internal.kvstore import KVStore",
+    "from .config import PGVectorVectorIOConfig"
+  ],
+  "vulnerable_function": "async def initialize(self) -> None:\n        log.info(f\"Initializing PGVector memory adapter with config: {self.config}\")\n        self.kvstore = await kvstore_impl(self.config.persistence)\n        await self.initialize_openai_vector_stores()\n\n        try:\n            self.conn = psycopg2.connect(\n                host=self.config.host,\n                port=self.config.port,\n                database=self.config.db,\n                user=self.config.user,\n                password=self.config.password,\n            )\n            self.conn.autocommit = True\n            with self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:\n                version = check_extension_version(cur)\n                if version:\n                    log.info(f\"Vector extension version: {version}\")\n                else:\n                    raise RuntimeError(\"Vector extension is not installed.\")\n\n                cur.execute(\n                    \"\"\"\n                    CREATE TABLE IF NOT EXISTS metadata_store (\n                        key TEXT PRIMARY KEY,\n                        data JSONB\n                    )\n                \"\"\"\n                )\n        except Exception as e:\n            log.exception(\"Could not connect to PGVector database server\")\n            raise RuntimeError(\"Could not connect to PGVector database server\") from e\n\n        # Load existing vector stores from KV store into cache\n        start_key = VECTOR_DBS_PREFIX\n        end_key = f\"{VECTOR_DBS_PREFIX}\\xff\"\n        stored_vector_stores = await self.kvstore.values_in_range(start_key, end_key)\n        for vector_store_data in stored_vector_stores:\n            vector_store = VectorStore.model_validate_json(vector_store_data)\n            pgvector_index = PGVectorIndex(\n                vector_store=vector_store,\n                dimension=vector_store.embedding_dimension,\n                conn=self.conn,\n                kvstore=self.kvstore,\n            )\n            await pgvector_index.initialize()\n            index = VectorStoreWithIndex(vector_store, index=pgvector_index, inference_api=self.inference_api)\n            self.cache[vector_store.identifier] = index",
+  "patched_function": "async def initialize(self) -> None:\n        # Create a safe config representation with masked password for logging\n        safe_config = {**self.config.model_dump(exclude={\"password\"}), \"password\": \"******\"}\n        log.info(f\"Initializing PGVector memory adapter with config: {safe_config}\")\n        self.kvstore = await kvstore_impl(self.config.persistence)\n        await self.initialize_openai_vector_stores()\n\n        try:\n            self.conn = psycopg2.connect(\n                host=self.config.host,\n                port=self.config.port,\n                database=self.config.db,\n                user=self.config.user,\n                password=self.config.password,\n            )\n            self.conn.autocommit = True\n            with self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:\n                version = check_extension_version(cur)\n                if version:\n                    log.info(f\"Vector extension version: {version}\")\n                else:\n                    raise RuntimeError(\"Vector extension is not installed.\")\n\n                cur.execute(\n                    \"\"\"\n                    CREATE TABLE IF NOT EXISTS metadata_store (\n                        key TEXT PRIMARY KEY,\n                        data JSONB\n                    )\n                \"\"\"\n                )\n        except Exception as e:\n            log.exception(\"Could not connect to PGVector database server\")\n            raise RuntimeError(\"Could not connect to PGVector database server\") from e\n\n        # Load existing vector stores from KV store into cache\n        start_key = VECTOR_DBS_PREFIX\n        end_key = f\"{VECTOR_DBS_PREFIX}\\xff\"\n        stored_vector_stores = await self.kvstore.values_in_range(start_key, end_key)\n        for vector_store_data in stored_vector_stores:\n            vector_store = VectorStore.model_validate_json(vector_store_data)\n            pgvector_index = PGVectorIndex(\n                vector_store=vector_store,\n                dimension=vector_store.embedding_dimension,\n                conn=self.conn,\n                kvstore=self.kvstore,\n            )\n            await pgvector_index.initialize()\n            index = VectorStoreWithIndex(vector_store, index=pgvector_index, inference_api=self.inference_api)\n            self.cache[vector_store.identifier] = index",
+  "unified_diff": "diff --git a/src/llama_stack/providers/remote/vector_io/pgvector/pgvector.py b/src/llama_stack/providers/remote/vector_io/pgvector/pgvector.py\nindex 5c86fb08d..d8ba35193 100644\n--- a/src/llama_stack/providers/remote/vector_io/pgvector/pgvector.py\n+++ b/src/llama_stack/providers/remote/vector_io/pgvector/pgvector.py\n@@ -341,7 +341,9 @@ class PGVectorVectorIOAdapter(OpenAIVectorStoreMixin, VectorIO, VectorStoresProt\n         self.metadata_collection_name = \"openai_vector_stores_metadata\"\n \n     async def initialize(self) -> None:\n-        log.info(f\"Initializing PGVector memory adapter with config: {self.config}\")\n+        # Create a safe config representation with masked password for logging\n+        safe_config = {**self.config.model_dump(exclude={\"password\"}), \"password\": \"******\"}\n+        log.info(f\"Initializing PGVector memory adapter with config: {safe_config}\")\n         self.kvstore = await kvstore_impl(self.config.persistence)\n         await self.initialize_openai_vector_stores()\n ",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 6544,
+  "context_size_chars_after_truncation": 6544
+}

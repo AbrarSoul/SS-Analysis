@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0127",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-248",
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 17,
+  "lines_removed": 12,
+  "lines_changed_total": 29,
+  "function_size_chars": 4451,
+  "function_size_lines": 124,
+  "auto_locate_confidence": "hand_retargeted",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "String coercion of a header value with no try/catch; generic coercion shape whose harm depends on exotic values."
+}

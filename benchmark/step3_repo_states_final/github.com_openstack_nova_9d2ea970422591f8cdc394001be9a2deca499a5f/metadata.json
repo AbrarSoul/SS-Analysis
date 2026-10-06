@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openstack_nova_9d2ea970422591f8cdc394001be9a2deca499a5f",
+  "cve_ids": [
+    "CVE-2012-5625"
+  ],
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "python",
+  "repository": "openstack/nova",
+  "repository_url": "https://github.com/openstack/nova",
+  "vulnerable_commit": "ec6550f2d9636635683f0fd50a0d4e51849765df",
+  "fixed_commit": "9d2ea970422591f8cdc394001be9a2deca499a5f",
+  "changed_file": "nova/virt/libvirt/utils.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "CASE-0102",
+  "language": "java",
+  "cve_id": "CVE-2025-30177",
+  "cve_ids_all": [
+    "CVE-2025-30177"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-164",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import org.apache.camel.support.DefaultHeaderFilterStrategy;",
+    "import org.apache.camel.support.http.HttpUtil;"
+  ],
+  "vulnerable_function": "    protected void initialize() {\n        HttpUtil.addCommonFilters(getOutFilter());\n\n        setLowerCase(true);\n\n        // filter headers begin with \"Camel\" or \"org.apache.camel\"\n        // must ignore case for Http based transports\n        setOutFilterStartsWith(CAMEL_FILTER_STARTS_WITH);\n    }",
+  "patched_function": "    protected void initialize() {\n        HttpUtil.addCommonFilters(getOutFilter());\n\n        setLowerCase(true);\n\n        // filter headers begin with \"Camel\" or \"org.apache.camel\"\n        // must ignore case for Http based transports\n        setOutFilterStartsWith(CAMEL_FILTER_STARTS_WITH);\n        setInFilterStartsWith(CAMEL_FILTER_STARTS_WITH);\n    }",
+  "unified_diff": "diff --git a/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java b/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java\nindex 5805cb626b3c..95307d455923 100644\n--- a/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java\n+++ b/components/camel-undertow/src/main/java/org/apache/camel/component/undertow/UndertowHeaderFilterStrategy.java\n@@ -33,5 +33,6 @@ public class UndertowHeaderFilterStrategy extends DefaultHeaderFilterStrategy {\n         // filter headers begin with \"Camel\" or \"org.apache.camel\"\n         // must ignore case for Http based transports\n         setOutFilterStartsWith(CAMEL_FILTER_STARTS_WITH);\n+        setInFilterStartsWith(CAMEL_FILTER_STARTS_WITH);\n     }\n }",
+  "auto_locate_confidence": "auto"
+}

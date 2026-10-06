@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_conda_conda-build_f5a6aeef0d5d6940b8c2a88796910dc7476a62bb",
+  "cve_ids": [
+    "CVE-2025-32800"
+  ],
+  "cwe_ids": [
+    "CWE-1357"
+  ],
+  "language": "python",
+  "repository": "conda/conda-build",
+  "repository_url": "https://github.com/conda/conda-build",
+  "vulnerable_commit": "cd2a2e214b696f97c83f02f16ec3f794ae7107d1",
+  "fixed_commit": "f5a6aeef0d5d6940b8c2a88796910dc7476a62bb",
+  "changed_file": "conda_build/index.py",
+  "max_score": "1337"
+}

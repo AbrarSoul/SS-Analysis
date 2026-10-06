@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_npm_hosted-git-info_29adfe5ef789784c861b2cdeb15051ec2ba651a7",
+  "cve_ids": [
+    "CVE-2021-23362"
+  ],
+  "cwe_ids": [
+    "CWE-1333"
+  ],
+  "language": "javascript",
+  "repository": "npm/hosted-git-info",
+  "repository_url": "https://github.com/npm/hosted-git-info",
+  "vulnerable_commit": "afeaefdd86ba9bb5044be3c1554a666d007cf19a",
+  "fixed_commit": "29adfe5ef789784c861b2cdeb15051ec2ba651a7",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

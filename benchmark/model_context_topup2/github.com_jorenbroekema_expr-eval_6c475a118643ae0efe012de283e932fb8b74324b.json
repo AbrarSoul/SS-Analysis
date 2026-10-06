@@ -1,0 +1,22 @@
+{
+  "case_id": "github.com_jorenbroekema_expr-eval_6c475a118643ae0efe012de283e932fb8b74324b",
+  "language": "javascript",
+  "cve_id": "CVE-2025-13204",
+  "cve_ids_all": [
+    "CVE-2025-13204"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1321",
+      "definition": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { INUMBER, IOP1, IOP2, IOP3, IVAR, IVARNAME, IFUNCALL, IFUNDEF, IEXPR, IEXPREVAL, IMEMBER, IENDSTATEMENT, IARRAY } from './instruction';"
+  ],
+  "vulnerable_function": " else if (type === IVAR) {\n      if (item.value in expr.functions) {\n        nstack.push(expr.functions[item.value]);\n      } else if (item.value in expr.unaryOps && expr.parser.isOperatorEnabled(item.value)) {\n        nstack.push(expr.unaryOps[item.value]);\n      } else {\n        var v = values[item.value];\n        if (v !== undefined) {\n          nstack.push(v);\n        } else {\n          throw new Error('undefined variable: ' + item.value);\n        }\n      }\n    }",
+  "patched_function": " else if (type === IVAR) {\n      if (/^__proto__|prototype|constructor$/.test(item.value)) {\n        throw new Error('prototype access detected');\n      }\n      if (item.value in expr.functions) {\n        nstack.push(expr.functions[item.value]);\n      } else if (item.value in expr.unaryOps && expr.parser.isOperatorEnabled(item.value)) {\n        nstack.push(expr.unaryOps[item.value]);\n      } else {\n        var v = values[item.value];\n        if (v !== undefined) {\n          nstack.push(v);\n        } else {\n          throw new Error('undefined variable: ' + item.value);\n        }\n      }\n    }",
+  "unified_diff": "diff --git a/src/evaluate.js b/src/evaluate.js\nindex 80a63a2..f23cef7 100644\n--- a/src/evaluate.js\n+++ b/src/evaluate.js\n@@ -41,6 +41,9 @@ export default function evaluate(tokens, expr, values) {\n         nstack.push(f(resolveExpression(n1, values), resolveExpression(n2, values), resolveExpression(n3, values)));\n       }\n     } else if (type === IVAR) {\n+      if (/^__proto__|prototype|constructor$/.test(item.value)) {\n+        throw new Error('prototype access detected');\n+      }\n       if (item.value in expr.functions) {\n         nstack.push(expr.functions[item.value]);\n       } else if (item.value in expr.unaryOps && expr.parser.isOperatorEnabled(item.value)) {",
+  "auto_locate_confidence": "auto"
+}

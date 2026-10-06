@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_workos_authkit-nextjs_6c3f4f3179d66cbb15de3962792083ff3b244a01",
+  "batch": "topup38",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-294"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 1,
+  "lines_changed_total": 6,
+  "function_size_chars": 2338,
+  "function_size_lines": 64,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

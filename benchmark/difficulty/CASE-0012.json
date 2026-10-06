@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0012",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-400",
+    "CWE-787"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 12,
+  "lines_changed_total": 26,
+  "function_size_chars": 638,
+  "function_size_lines": 18,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Self-recursive call with no depth bound is a locally-recognizable structural idiom.",
+  "supported_status": "supported"
+}

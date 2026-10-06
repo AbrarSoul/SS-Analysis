@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_wagtail_wagtail_3c030490ed575bb9cd01dfb3a890477dcaeb2edf",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-208",
+    "CWE-362"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 252,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

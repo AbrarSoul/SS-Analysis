@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_cloudexplorer-dev_cloudexplorer-lite_7d4dab60352079953b7be120afe9bd14983ae3bc",
+  "cve_ids": [
+    "CVE-2023-3423"
+  ],
+  "cwe_ids": [
+    "CWE-521"
+  ],
+  "language": "java",
+  "repository": "cloudexplorer-dev/cloudexplorer-lite",
+  "repository_url": "https://github.com/cloudexplorer-dev/cloudexplorer-lite",
+  "vulnerable_commit": "deb80ffd17ef2e2cbc2c7229140f683561c16820",
+  "fixed_commit": "7d4dab60352079953b7be120afe9bd14983ae3bc",
+  "changed_file": "framework/sdk/backend/src/main/java/com/fit2cloud/base/service/impl/BaseUserServiceImpl.java",
+  "max_score": "1337"
+}

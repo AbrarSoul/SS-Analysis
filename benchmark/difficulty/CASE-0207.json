@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0207",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-319"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 1479,
+  "function_size_lines": 24,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Embedded-cluster mTLS gated on the remote-store TLS flag; the wrong-constant expression is matchable but intent is semantic."
+}

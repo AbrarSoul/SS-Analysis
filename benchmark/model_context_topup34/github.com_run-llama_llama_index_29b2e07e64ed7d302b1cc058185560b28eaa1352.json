@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_run-llama_llama_index_29b2e07e64ed7d302b1cc058185560b28eaa1352",
+  "language": "python",
+  "cve_id": "CVE-2025-6211",
+  "cve_ids_all": [
+    "CVE-2025-6211"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-440",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "DocugamiReader",
+  "imports": [
+    "import hashlib",
+    "import io",
+    "import logging",
+    "import os",
+    "import requests",
+    "from pathlib import Path",
+    "from typing import Any, Dict, List, Mapping, Optional, Sequence, Union",
+    "from llama_index.core.readers.base import BaseReader",
+    "from llama_index.core.schema import Document",
+    "from dgml_utils.models import Chunk",
+    "from dgml_utils.segmentation import get_chunks"
+  ],
+  "vulnerable_function": "        def _build_framework_chunk(dg_chunk: Chunk) -> Document:\n            # Stable IDs for chunks with the same text.\n            _hashed_id = hashlib.md5(dg_chunk.text.encode()).hexdigest()\n            metadata = {\n                XPATH_KEY: dg_chunk.xpath,\n                ID_KEY: _hashed_id,\n                DOCUMENT_NAME_KEY: document_name,\n                STRUCTURE_KEY: dg_chunk.structure,\n                TAG_KEY: dg_chunk.tag,\n            }\n\n            text = dg_chunk.text\n            if additional_doc_metadata:\n                if self.include_project_metadata_in_doc_metadata:\n                    metadata.update(additional_doc_metadata)\n\n            return Document(\n                text=text[: self.max_text_length],\n                metadata=metadata,\n                excluded_llm_metadata_keys=[XPATH_KEY, ID_KEY, STRUCTURE_KEY],\n            )\n",
+  "patched_function": "        def _build_framework_chunk(dg_chunk: Chunk) -> Document:\n            # Adding dg_chunk.text + dg_chunk.xpath should prevent hash collision between two chunks that have the same text but a different xpath\n            text = dg_chunk.xpath + \"\\n\" + dg_chunk.text\n            _hashed_id = hashlib.md5(text.encode()).hexdigest()\n            metadata = {\n                XPATH_KEY: dg_chunk.xpath,\n                ID_KEY: _hashed_id,\n                DOCUMENT_NAME_KEY: document_name,\n                STRUCTURE_KEY: dg_chunk.structure,\n                TAG_KEY: dg_chunk.tag,\n            }\n\n            text = dg_chunk.text\n            if additional_doc_metadata:\n                if self.include_project_metadata_in_doc_metadata:\n                    metadata.update(additional_doc_metadata)\n\n            return Document(\n                text=text[: self.max_text_length],\n                metadata=metadata,\n                excluded_llm_metadata_keys=[XPATH_KEY, ID_KEY, STRUCTURE_KEY],\n            )\n",
+  "unified_diff": "diff --git a/llama-index-integrations/readers/llama-index-readers-docugami/llama_index/readers/docugami/base.py b/llama-index-integrations/readers/llama-index-readers-docugami/llama_index/readers/docugami/base.py\nindex 627fe1a79..99599449a 100644\n--- a/llama-index-integrations/readers/llama-index-readers-docugami/llama_index/readers/docugami/base.py\n+++ b/llama-index-integrations/readers/llama-index-readers-docugami/llama_index/readers/docugami/base.py\n@@ -160,8 +160,9 @@ class DocugamiReader(BaseReader):\n             )\n \n         def _build_framework_chunk(dg_chunk: Chunk) -> Document:\n-            # Stable IDs for chunks with the same text.\n-            _hashed_id = hashlib.md5(dg_chunk.text.encode()).hexdigest()\n+            # Adding dg_chunk.text + dg_chunk.xpath should prevent hash collision between two chunks that have the same text but a different xpath\n+            text = dg_chunk.xpath + \"\\n\" + dg_chunk.text\n+            _hashed_id = hashlib.md5(text.encode()).hexdigest()\n             metadata = {\n                 XPATH_KEY: dg_chunk.xpath,\n                 ID_KEY: _hashed_id,",
+  "auto_locate_confidence": "auto"
+}

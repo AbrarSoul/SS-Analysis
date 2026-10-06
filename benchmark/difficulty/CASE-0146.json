@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0146",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-755"
+  ],
+  "changed_files": 1,
+  "lines_added": 18,
+  "lines_removed": 0,
+  "lines_changed_total": 18,
+  "function_size_chars": 665,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "WebSocket left without an 'error' listener before the connection handler; needs ws-library event semantics."
+}

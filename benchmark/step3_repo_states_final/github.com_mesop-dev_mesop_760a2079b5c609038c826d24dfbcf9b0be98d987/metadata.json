@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_mesop-dev_mesop_760a2079b5c609038c826d24dfbcf9b0be98d987",
+  "cve_ids": [
+    "CVE-2026-34824"
+  ],
+  "cwe_ids": [
+    "CWE-125",
+    "CWE-770"
+  ],
+  "language": "python",
+  "repository": "mesop-dev/mesop",
+  "repository_url": "https://github.com/mesop-dev/mesop",
+  "vulnerable_commit": "8d8378a89cb549798f1560f13f99439964a25a36",
+  "fixed_commit": "760a2079b5c609038c826d24dfbcf9b0be98d987",
+  "changed_file": "mesop/server/server.py",
+  "max_score": "1337"
+}

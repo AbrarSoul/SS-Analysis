@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0288",
+  "language": "javascript",
+  "cve_id": "CVE-2021-4269",
+  "cve_ids_all": [
+    "CVE-2021-4269"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-707",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": ")\n    // If issue elements exist, stop progress\n    if(issue_els.length > 0)\n    {\n        var error_messages = [];\n        issue_els.reverse();\n        for(var key in issue_els){\n            var issue_el = issue_els[key];\n            \n            if(issue_el.parent().hasClass(\"multiselect-native-select\")){\n                issue_el.parent().find(\"button.multiselect\").addClass(\"error\")\n                issue_el.parent().find(\"button.multiselect\").focus()\n            }else{\n                issue_el.addClass(\"error\");\n                issue_el.focus()\n            }\n            var message = field_required_lang.replace(\"_XXX_\", issue_el.attr(\"title\"))\n            showAlertFromMessage(message, false)\n        }\n        return false;\n    }",
+  "patched_function": ")\n    // If issue elements exist, stop progress\n    if(issue_els.length > 0)\n    {\n        var error_messages = [];\n        issue_els.reverse();\n        for(var key in issue_els){\n            var issue_el = issue_els[key];\n            \n            if(issue_el.parent().hasClass(\"multiselect-native-select\")){\n                issue_el.parent().find(\"button.multiselect\").addClass(\"error\")\n                issue_el.parent().find(\"button.multiselect\").focus()\n            }else{\n                issue_el.addClass(\"error\");\n                issue_el.focus()\n            }\n\n            // We have to make sure that no html gets through to toastr as it's displaying what it gets 'as is';\n            var escaped = $(\"<div/>\").text(issue_el.attr(\"title\")).html();\n            var message = field_required_lang.replace(\"_XXX_\", escaped);\n\n            showAlertFromMessage(message, false)\n        }\n        return false;\n    }",
+  "unified_diff": "diff --git a/simplerisk/js/common.js b/simplerisk/js/common.js\nindex 3bb9bf620..dae4e1b09 100644\n--- a/simplerisk/js/common.js\n+++ b/simplerisk/js/common.js\n@@ -339,7 +339,11 @@ function checkAndSetValidation(container)\n                 issue_el.addClass(\"error\");\n                 issue_el.focus()\n             }\n-            var message = field_required_lang.replace(\"_XXX_\", issue_el.attr(\"title\"))\n+\n+            // We have to make sure that no html gets through to toastr as it's displaying what it gets 'as is';\n+            var escaped = $(\"<div/>\").text(issue_el.attr(\"title\")).html();\n+            var message = field_required_lang.replace(\"_XXX_\", escaped);\n+\n             showAlertFromMessage(message, false)\n         }\n         return false;",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_jupyter-server_jupyter-scheduler_06435a2277bb2b8f441ec9cedafa474572b92c5d",
+    "language": "python",
+    "repository": "jupyter-server/jupyter-scheduler",
+    "error": "extracted vulnerable/patched functions are identical once comments are stripped -- no real code difference captured, useless as model context"
+  }
+]

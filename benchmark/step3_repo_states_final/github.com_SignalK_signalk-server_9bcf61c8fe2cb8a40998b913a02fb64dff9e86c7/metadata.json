@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_SignalK_signalk-server_9bcf61c8fe2cb8a40998b913a02fb64dff9e86c7",
+  "cve_ids": [
+    "CVE-2026-25228",
+    "CVE-2026-35038"
+  ],
+  "cwe_ids": [
+    "CWE-125",
+    "CWE-20",
+    "CWE-200",
+    "CWE-22"
+  ],
+  "language": "javascript",
+  "repository": "SignalK/signalk-server",
+  "repository_url": "https://github.com/SignalK/signalk-server",
+  "vulnerable_commit": "1069a9ae8abdd92c9bf3f5abe352e496018114e5",
+  "fixed_commit": "9bcf61c8fe2cb8a40998b913a02fb64dff9e86c7",
+  "changed_file": "src/interfaces/applicationData.js",
+  "max_score": "1337"
+}

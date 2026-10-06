@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dogtagpki_pki_50c23ec146ee9abf28c9de87a5f7787d495f0b72",
+  "cve_ids": [
+    "CVE-2020-15720"
+  ],
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "python",
+  "repository": "dogtagpki/pki",
+  "repository_url": "https://github.com/dogtagpki/pki",
+  "vulnerable_commit": "e39d5978db53553a12dd43afd8b38dfadd4f1cec",
+  "fixed_commit": "50c23ec146ee9abf28c9de87a5f7787d495f0b72",
+  "changed_file": "base/common/python/pki/client.py",
+  "max_score": "1337"
+}

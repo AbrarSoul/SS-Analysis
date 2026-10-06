@@ -1,0 +1,22 @@
+{
+  "case_id": "CASE-0117",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-113",
+    "CWE-22",
+    "CWE-346",
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 25,
+  "lines_removed": 9,
+  "lines_changed_total": 34,
+  "function_size_chars": 2024,
+  "function_size_lines": 65,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Several distinct flaws in one WebSocket upgrade handler (no Origin check, unvalidated path, header injection); no single local pattern captures the mechanism."
+}

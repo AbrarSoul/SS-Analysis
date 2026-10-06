@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xmldom_xmldom_17678a2a73ecbd1a2da90f3d47dc23da9cef81aa",
+  "cve_ids": [
+    "CVE-2026-41673"
+  ],
+  "cwe_ids": [
+    "CWE-674"
+  ],
+  "language": "javascript",
+  "repository": "xmldom/xmldom",
+  "repository_url": "https://github.com/xmldom/xmldom",
+  "vulnerable_commit": "19e39ffab0e8cd00dce68ede6906772acdfb4f33",
+  "fixed_commit": "17678a2a73ecbd1a2da90f3d47dc23da9cef81aa",
+  "changed_file": "lib/dom.js",
+  "max_score": "1337"
+}

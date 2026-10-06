@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_petl-developers_petl_07420ef8463cc387aea84e2d6241cf556574e2a5",
+  "cve_ids": [
+    "CVE-2020-29128"
+  ],
+  "cwe_ids": [
+    "CWE-91"
+  ],
+  "language": "python",
+  "repository": "petl-developers/petl",
+  "repository_url": "https://github.com/petl-developers/petl",
+  "vulnerable_commit": "defbc0527fe6e84c5b88a11893095adda4b8856a",
+  "fixed_commit": "07420ef8463cc387aea84e2d6241cf556574e2a5",
+  "changed_file": "petl/io/xml.py",
+  "max_score": "1337"
+}

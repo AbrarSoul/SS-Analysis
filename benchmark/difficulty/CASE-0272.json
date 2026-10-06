@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0272",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-319",
+    "CWE-614"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 1,
+  "lines_changed_total": 3,
+  "function_size_chars": 587,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Session configuration function never sets SESSION_COOKIE_SECURE; a missing default-config key whose need depends on deployment."
+}

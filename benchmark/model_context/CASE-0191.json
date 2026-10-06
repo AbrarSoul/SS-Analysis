@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-0191",
+  "language": "java",
+  "cve_id": "CVE-2020-2169",
+  "cve_ids_all": [
+    "CVE-2020-2169"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import hudson.Extension;",
+    "import hudson.Util;",
+    "import hudson.model.Describable;",
+    "import hudson.model.PeriodicWork;",
+    "import hudson.model.Descriptor;",
+    "import hudson.model.Queue;",
+    "import hudson.util.FormValidation;",
+    "import java.util.logging.Level;",
+    "import java.util.logging.Logger;",
+    "import java.util.regex.Pattern;",
+    "import java.util.regex.PatternSyntaxException;",
+    "import jenkins.model.Jenkins;",
+    "import net.sf.json.JSONObject;",
+    "import org.jenkinsci.Symbol;",
+    "import org.kohsuke.accmod.Restricted;",
+    "import org.kohsuke.accmod.restrictions.NoExternalUse;",
+    "import org.kohsuke.stapler.DataBoundSetter;",
+    "import org.kohsuke.stapler.QueryParameter;",
+    "import org.kohsuke.stapler.StaplerRequest;"
+  ],
+  "vulnerable_function": "        public FormValidation doCheckItemPattern(@QueryParameter String itemPattern) {\n            try {\n\n                Pattern.compile(itemPattern);\n                return FormValidation.ok();\n            } catch (PatternSyntaxException ex) {\n\n                // Wrap exception message to <pre> tag as the error messages\n                // uses position indicator (^) prefixed with spaces which work\n                // with monospace fonts only.\n                return FormValidation.errorWithMarkup(\"Not a regular expression: <pre>\" + ex.getMessage() + \"</pre>\");\n            }\n        }",
+  "patched_function": "        public FormValidation doCheckItemPattern(@QueryParameter String itemPattern) {\n            try {\n\n                Pattern.compile(itemPattern);\n                return FormValidation.ok();\n            } catch (PatternSyntaxException ex) {\n\n                // Wrap exception message to <pre> tag as the error messages\n                // uses position indicator (^) prefixed with spaces which work\n                // with monospace fonts only.\n                return FormValidation.error(\"Not a regular expression: \" + ex.getMessage());\n            }\n        }",
+  "unified_diff": "diff --git a/src/main/java/org/jenkinsci/plugins/queuecleanup/QueueCleanup.java b/src/main/java/org/jenkinsci/plugins/queuecleanup/QueueCleanup.java\nindex 2d526ab..bdf5c7b 100644\n--- a/src/main/java/org/jenkinsci/plugins/queuecleanup/QueueCleanup.java\n+++ b/src/main/java/org/jenkinsci/plugins/queuecleanup/QueueCleanup.java\n@@ -169,7 +169,7 @@ public class QueueCleanup extends PeriodicWork implements Describable<QueueClean\n                 // Wrap exception message to <pre> tag as the error messages\n                 // uses position indicator (^) prefixed with spaces which work\n                 // with monospace fonts only.\n-                return FormValidation.errorWithMarkup(\"Not a regular expression: <pre>\" + ex.getMessage() + \"</pre>\");\n+                return FormValidation.error(\"Not a regular expression: \" + ex.getMessage());\n             }\n         }\n ",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0243",
+  "original_source_case_id": "github.com_opencast_opencast_8d5ec1614eed109b812bc27b0c6d3214e456d4e7",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-29237",
+  "cve_ids_all": [
+    "CVE-2022-29237"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "opencast/opencast",
+  "repository_url": "https://github.com/opencast/opencast",
+  "vulnerable_commit": "eee0c26fe33afc0709373fcbd7c6870bee8e2bed",
+  "fixed_commit": "8d5ec1614eed109b812bc27b0c6d3214e456d4e7",
+  "changed_file": "modules/ingest-service-impl/src/main/java/org/opencastproject/ingest/impl/IngestServiceImpl.java",
+  "changed_function": "protected URI addContentToRepo(MediaPackage mp, String elementId, URI uri) throws IOException {",
+  "vulnerable_lines": [
+    1564,
+    1628
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 12,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0243/vulnerable_source.java": "4d60a78d4ce05b3b4024d77de4b2ec03982d40feeef3a21a3d0c2ac90941d237",
+    "cases/CASE-0243/patched_source.java": "16faa0531a30359129a67f8f3c494721535940cae5faaaf1fdf4c5e80b512fe1",
+    "cases/CASE-0243/patch.diff": "1540d40ecd4b0f8006388469ef7e006a81ca10e94e008c23193483e66d3f285e",
+    "cases/CASE-0243/metadata.json": "fc87edfa6c76c5e9a48df67d9cbbd898f7da49fd07f9e5d4b9e7a6edc5f24262",
+    "model_context/CASE-0243.json": "5e11f6179cb4a95cb9caa562ad12efff4b7dd38787c94de197ffd279b7942b13",
+    "difficulty/CASE-0243.json": "2c6e6d914d3c849b56cb3bbd3a6379c6882a680a22cbf7a956a45196a2ab4a22"
+  },
+  "case_level_hash": "ecdf125dcac78d12c4646d93e04bebea5b8e513e72cf267961902fce0cc1bfa1"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_ParzivalHack_PySpector_4e279e078c53d760fd321ff9b698d683c65ccb8e",
+  "cve_ids": [
+    "CVE-2026-33139",
+    "CVE-2026-41206"
+  ],
+  "cwe_ids": [
+    "CWE-184"
+  ],
+  "language": "python",
+  "repository": "ParzivalHack/PySpector",
+  "repository_url": "https://github.com/ParzivalHack/PySpector",
+  "vulnerable_commit": "3f9639ebad5f4a4ba75c08e967a7701c5691ca74",
+  "fixed_commit": "4e279e078c53d760fd321ff9b698d683c65ccb8e",
+  "changed_file": "src/pyspector/plugin_system.py",
+  "max_score": "1337"
+}

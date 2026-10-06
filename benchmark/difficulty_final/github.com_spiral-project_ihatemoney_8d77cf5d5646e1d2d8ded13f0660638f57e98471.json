@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_spiral-project_ihatemoney_8d77cf5d5646e1d2d8ded13f0660638f57e98471",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 211,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

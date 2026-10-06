@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_apache_camel_b61d5b6be4f98b673dc977ad1bc6f004642644ab",
+  "cve_ids": [
+    "CVE-2023-34442"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "apache/camel",
+  "repository_url": "https://github.com/apache/camel",
+  "vulnerable_commit": "a7f9e429ee688520298153dc6805c5117664c837",
+  "fixed_commit": "b61d5b6be4f98b673dc977ad1bc6f004642644ab",
+  "changed_file": "components/camel-jira/src/main/java/org/apache/camel/component/jira/FileConverter.java",
+  "max_score": "1337"
+}

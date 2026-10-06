@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_adfinis_document-merge-service_a1edd39d33d1bdf75c31ea01c317547be90ca074",
+  "language": "python",
+  "cve_id": "CVE-2024-37301",
+  "cve_ids_all": [
+    "CVE-2024-37301"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1336",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import imghdr",
+    "from babel.dates import format_date, format_datetime, format_time",
+    "from dateutil.parser import parse",
+    "from django.conf import settings",
+    "from django.utils.translation import to_locale",
+    "from docx.shared import Mm",
+    "from docxtpl import InlineImage, Listing",
+    "from jinja2 import Environment, pass_context",
+    "from rest_framework.exceptions import ValidationError"
+  ],
+  "vulnerable_function": "def get_jinja_env():\n    jinja_env = Environment(extensions=settings.DOCXTEMPLATE_JINJA_EXTENSIONS)\n    jinja_env.filters.update(get_jinja_filters())\n    return jinja_env\n",
+  "patched_function": "def get_jinja_env():\n    jinja_env = SandboxedEnvironment(extensions=settings.DOCXTEMPLATE_JINJA_EXTENSIONS)\n    jinja_env.filters.update(get_jinja_filters())\n    return jinja_env\n",
+  "unified_diff": "diff --git a/document_merge_service/api/jinja.py b/document_merge_service/api/jinja.py\nindex 6267d4b..1e8cb27 100644\n--- a/document_merge_service/api/jinja.py\n+++ b/document_merge_service/api/jinja.py\n@@ -6,7 +6,8 @@ from django.conf import settings\n from django.utils.translation import to_locale\n from docx.shared import Mm\n from docxtpl import InlineImage, Listing\n-from jinja2 import Environment, pass_context\n+from jinja2 import pass_context\n+from jinja2.sandbox import SandboxedEnvironment\n from rest_framework.exceptions import ValidationError\n \n \n@@ -98,6 +99,6 @@ def get_jinja_filters():\n \n \n def get_jinja_env():\n-    jinja_env = Environment(extensions=settings.DOCXTEMPLATE_JINJA_EXTENSIONS)\n+    jinja_env = SandboxedEnvironment(extensions=settings.DOCXTEMPLATE_JINJA_EXTENSIONS)\n     jinja_env.filters.update(get_jinja_filters())\n     return jinja_env",
+  "auto_locate_confidence": "auto"
+}

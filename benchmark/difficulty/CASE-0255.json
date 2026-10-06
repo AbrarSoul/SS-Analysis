@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0255",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-913"
+  ],
+  "changed_files": 1,
+  "lines_added": 21,
+  "lines_removed": 4,
+  "lines_changed_total": 25,
+  "function_size_chars": 331,
+  "function_size_lines": 11,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Sandbox writes into a host-realm array passed to prepareStackTrace; realm-boundary semantics Semgrep cannot model."
+}

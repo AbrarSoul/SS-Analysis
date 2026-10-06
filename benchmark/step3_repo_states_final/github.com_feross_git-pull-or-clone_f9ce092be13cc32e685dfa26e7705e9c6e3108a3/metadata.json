@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_feross_git-pull-or-clone_f9ce092be13cc32e685dfa26e7705e9c6e3108a3",
+  "cve_ids": [
+    "CVE-2022-24437"
+  ],
+  "cwe_ids": [
+    "CWE-88"
+  ],
+  "language": "javascript",
+  "repository": "feross/git-pull-or-clone",
+  "repository_url": "https://github.com/feross/git-pull-or-clone",
+  "vulnerable_commit": "4f8b9baf295e6d2e5dd987abca820987afb7643c",
+  "fixed_commit": "f9ce092be13cc32e685dfa26e7705e9c6e3108a3",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

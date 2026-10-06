@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_electron_electron_519a02d8d4d28e8a467acb40fb26172a80c9454f",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-1188"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 915,
+  "function_size_lines": 35,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

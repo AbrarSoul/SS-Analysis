@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_KYUUBl_school-register_1cf7e01b878aee923f2b22cc2535c71a680e4c30",
+  "cve_ids": [
+    "CVE-2015-10047"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "KYUUBl/school-register",
+  "repository_url": "https://github.com/KYUUBl/school-register",
+  "vulnerable_commit": "0c38043430f5d6f0f994646dfaa14688aa81ccb4",
+  "fixed_commit": "1cf7e01b878aee923f2b22cc2535c71a680e4c30",
+  "changed_file": "src/DBManager.java",
+  "max_score": "1337"
+}

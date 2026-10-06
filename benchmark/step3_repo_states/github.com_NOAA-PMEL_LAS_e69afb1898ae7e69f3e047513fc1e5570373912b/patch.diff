@@ -1,0 +1,17 @@
+diff --git a/JavaSource/gov/noaa/pmel/tmap/las/filter/RequestInputFilter.java b/JavaSource/gov/noaa/pmel/tmap/las/filter/RequestInputFilter.java
+index 79620d01..d34a11a2 100644
+--- a/JavaSource/gov/noaa/pmel/tmap/las/filter/RequestInputFilter.java
++++ b/JavaSource/gov/noaa/pmel/tmap/las/filter/RequestInputFilter.java
+@@ -365,6 +365,12 @@ public class RequestInputFilter implements Filter {
+             if ( (requestXML != null && !requestXML.equals("")) ) {
+             	try {
+             		requestXML = JDOMUtils.decode(requestXML, "UTF-8");
++					    String expression = lasRequest.getProperty("ferret", "expression");
++                        if (!expression.isEmpty()) {
++                            LASAction.logerror(request, "Ferret expressions are no longer allowed.", "");
++                            response.sendError(404, "Ferret expressions are no longer allowed.");
++                            return;
++                        }
+             	} catch (UnsupportedEncodingException e) {
+             		LASAction.logerror(request, "Error decoding the XML request query string.", e);
+             		response.sendError(HttpServletResponse.SC_NOT_FOUND, "Request contains an illegal xml query parameter value.");

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0325",
+  "original_source_case_id": "github.com_web2py_web2py_936e2260b0c34c44e2f3674a893e96d2a7fad0a3",
+  "selection_batch": "topup33",
+  "cve_id": "CVE-2023-45158",
+  "cve_ids_all": [
+    "CVE-2023-45158"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "web2py/web2py",
+  "repository_url": "https://github.com/web2py/web2py",
+  "vulnerable_commit": "38f44f7bd5d009f3905058d1c5f926b391aeccb9",
+  "fixed_commit": "936e2260b0c34c44e2f3674a893e96d2a7fad0a3",
+  "changed_file": "gluon/messageboxhandler.py",
+  "changed_function": "def emit(self, record):",
+  "vulnerable_lines": [
+    36,
+    40
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0325/vulnerable_source.py": "3b688ccfa41196c0c0683b69c392993b14c0321caa18ca507641e7f9db96cb18",
+    "cases/CASE-0325/patched_source.py": "567206ab2ecfbbe75bfb9d13f63e472a01a0b544f36173d80db6f0a18589282b",
+    "cases/CASE-0325/patch.diff": "af9dd9c2437a9f01cb8ad77b5af663f40516d82c4516d80db7148eb8ecc8a3f8",
+    "cases/CASE-0325/metadata.json": "988b05e66f65a21c835a4657acbfbae68720e53483432a22f762d30cf9656460",
+    "model_context/CASE-0325.json": "e79bb5caa8efd4ce09012365fe679dfc87650552b7321f67cfa0ddd6ffe5f385",
+    "difficulty/CASE-0325.json": "d49090e5cad0a93310ad3c2415d2180afd4cacf045f9f6c98d165c6105a8587a"
+  },
+  "case_level_hash": "c86a9dad86ddfbf4a3eda31a3d461daa1681c0780ce843d47914e33b8c11417f"
+}

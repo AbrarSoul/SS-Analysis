@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_python_cpython_43e523103886af66d6c27cd72431b5d9d14cd2a9",
+  "language": "python",
+  "cve_id": "CVE-2020-27619",
+  "cve_ids_all": [
+    "CVE-2020-27619"
+  ],
+  "cwe": [
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": "TestBase_Mapping",
+  "imports": [
+    "import codecs",
+    "import os",
+    "import re",
+    "import sys",
+    "import unittest",
+    "from http.client import HTTPException",
+    "from test import support",
+    "from io import BytesIO"
+  ],
+  "vulnerable_function": "    def _test_mapping_file_plain(self):\n        unichrs = lambda s: ''.join(map(chr, map(eval, s.split('+'))))\n        urt_wa = {}\n\n        with self.open_mapping_file() as f:\n            for line in f:\n                if not line:\n                    break\n                data = line.split('#')[0].strip().split()\n                if len(data) != 2:\n                    continue\n\n                csetval = eval(data[0])\n                if csetval <= 0x7F:\n                    csetch = bytes([csetval & 0xff])\n                elif csetval >= 0x1000000:\n                    csetch = bytes([(csetval >> 24), ((csetval >> 16) & 0xff),\n                                    ((csetval >> 8) & 0xff), (csetval & 0xff)])\n                elif csetval >= 0x10000:\n                    csetch = bytes([(csetval >> 16), ((csetval >> 8) & 0xff),\n                                    (csetval & 0xff)])\n                elif csetval >= 0x100:\n                    csetch = bytes([(csetval >> 8), (csetval & 0xff)])\n                else:\n                    continue\n\n                unich = unichrs(data[1])\n                if ord(unich) == 0xfffd or unich in urt_wa:\n                    continue\n                urt_wa[unich] = csetch\n\n                self._testpoint(csetch, unich)\n",
+  "patched_function": "    def _test_mapping_file_plain(self):\n        def unichrs(s):\n            return ''.join(chr(int(x, 16)) for x in s.split('+'))\n\n        urt_wa = {}\n\n        with self.open_mapping_file() as f:\n            for line in f:\n                if not line:\n                    break\n                data = line.split('#')[0].split()\n                if len(data) != 2:\n                    continue\n\n                if data[0][:2] != '0x':\n                    self.fail(f\"Invalid line: {line!r}\")\n                csetch = bytes.fromhex(data[0][2:])\n                if len(csetch) == 1 and 0x80 <= csetch[0]:\n                    continue\n\n                unich = unichrs(data[1])\n                if ord(unich) == 0xfffd or unich in urt_wa:\n                    continue\n                urt_wa[unich] = csetch\n\n                self._testpoint(csetch, unich)\n",
+  "unified_diff": "diff --git a/Lib/test/multibytecodec_support.py b/Lib/test/multibytecodec_support.py\nindex cca8af67d6d..f76c0153f5e 100644\n--- a/Lib/test/multibytecodec_support.py\n+++ b/Lib/test/multibytecodec_support.py\n@@ -305,29 +305,23 @@ class TestBase_Mapping(unittest.TestCase):\n             self._test_mapping_file_plain()\n \n     def _test_mapping_file_plain(self):\n-        unichrs = lambda s: ''.join(map(chr, map(eval, s.split('+'))))\n+        def unichrs(s):\n+            return ''.join(chr(int(x, 16)) for x in s.split('+'))\n+\n         urt_wa = {}\n \n         with self.open_mapping_file() as f:\n             for line in f:\n                 if not line:\n                     break\n-                data = line.split('#')[0].strip().split()\n+                data = line.split('#')[0].split()\n                 if len(data) != 2:\n                     continue\n \n-                csetval = eval(data[0])\n-                if csetval <= 0x7F:\n-                    csetch = bytes([csetval & 0xff])\n-                elif csetval >= 0x1000000:\n-                    csetch = bytes([(csetval >> 24), ((csetval >> 16) & 0xff),\n-                                    ((csetval >> 8) & 0xff), (csetval & 0xff)])\n-                elif csetval >= 0x10000:\n-                    csetch = bytes([(csetval >> 16), ((csetval >> 8) & 0xff),\n-                                    (csetval & 0xff)])\n-                elif csetval >= 0x100:\n-                    csetch = bytes([(csetval >> 8), (csetval & 0xff)])\n-                else:\n+                if data[0][:2] != '0x':\n+                    self.fail(f\"Invalid line: {line!r}\")\n+                csetch = bytes.fromhex(data[0][2:])\n+                if len(csetch) == 1 and 0x80 <= csetch[0]:\n                     continue\n \n                 unich = unichrs(data[1])",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0342",
+  "language": "java",
+  "cve_id": "CVE-2021-4178",
+  "cve_ids_all": [
+    "CVE-2021-4178"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.fasterxml.jackson.core.JsonProcessingException;",
+    "import com.fasterxml.jackson.core.type.TypeReference;",
+    "import com.fasterxml.jackson.databind.ObjectMapper;",
+    "import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;",
+    "import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;",
+    "import io.fabric8.kubernetes.api.model.KubernetesResource;",
+    "import io.fabric8.kubernetes.client.KubernetesClientException;",
+    "import org.yaml.snakeyaml.Yaml;",
+    "import java.io.BufferedInputStream;",
+    "import java.io.ByteArrayInputStream;",
+    "import java.io.ByteArrayOutputStream;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.lang.reflect.Type;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.ArrayList;",
+    "import java.util.Collections;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.regex.Matcher;",
+    "import java.util.regex.Pattern;",
+    "import java.util.stream.Collectors;"
+  ],
+  "vulnerable_function": "  private static <T> T unmarshalYaml(InputStream is, TypeReference<T> type) throws JsonProcessingException {\n    final Yaml yaml = new Yaml();\n    Map<String, Object> obj = yaml.load(is);\n    String objAsJsonStr = JSON_MAPPER.writeValueAsString(obj);\n    return unmarshalJsonStr(objAsJsonStr, type);\n  }",
+  "patched_function": "  private static <T> T unmarshalYaml(InputStream is, TypeReference<T> type) throws JsonProcessingException {\n    final Yaml yaml = new Yaml(new SafeConstructor());\n    Map<String, Object> obj = yaml.load(is);\n    String objAsJsonStr = JSON_MAPPER.writeValueAsString(obj);\n    return unmarshalJsonStr(objAsJsonStr, type);\n  }",
+  "unified_diff": "diff --git a/kubernetes-client/src/main/java/io/fabric8/kubernetes/client/utils/Serialization.java b/kubernetes-client/src/main/java/io/fabric8/kubernetes/client/utils/Serialization.java\nindex d68101908c..947c497cd4 100644\n--- a/kubernetes-client/src/main/java/io/fabric8/kubernetes/client/utils/Serialization.java\n+++ b/kubernetes-client/src/main/java/io/fabric8/kubernetes/client/utils/Serialization.java\n@@ -23,6 +23,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;\n import io.fabric8.kubernetes.api.model.KubernetesResource;\n import io.fabric8.kubernetes.client.KubernetesClientException;\n import org.yaml.snakeyaml.Yaml;\n+import org.yaml.snakeyaml.constructor.SafeConstructor;\n \n import java.io.BufferedInputStream;\n import java.io.ByteArrayInputStream;\n@@ -296,7 +297,7 @@ public class Serialization {\n   }\n \n   private static <T> T unmarshalYaml(InputStream is, TypeReference<T> type) throws JsonProcessingException {\n-    final Yaml yaml = new Yaml();\n+    final Yaml yaml = new Yaml(new SafeConstructor());\n     Map<String, Object> obj = yaml.load(is);\n     String objAsJsonStr = JSON_MAPPER.writeValueAsString(obj);\n     return unmarshalJsonStr(objAsJsonStr, type);",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_electerm_electerm_9dd8295e37d53396b980cd45dfc5ed11ad79b937",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-329",
+    "CWE-353",
+    "CWE-759",
+    "CWE-916"
+  ],
+  "changed_files": 1,
+  "lines_added": 64,
+  "lines_removed": 23,
+  "lines_changed_total": 87,
+  "function_size_chars": 487,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

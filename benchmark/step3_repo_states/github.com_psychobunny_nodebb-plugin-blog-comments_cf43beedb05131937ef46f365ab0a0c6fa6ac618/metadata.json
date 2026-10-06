@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_psychobunny_nodebb-plugin-blog-comments_cf43beedb05131937ef46f365ab0a0c6fa6ac618",
+  "cve_ids": [
+    "CVE-2020-15156"
+  ],
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "language": "javascript",
+  "repository": "psychobunny/nodebb-plugin-blog-comments",
+  "repository_url": "https://github.com/psychobunny/nodebb-plugin-blog-comments",
+  "vulnerable_commit": "ed0156594a44c6429743e314e9b5a313fad60730",
+  "fixed_commit": "cf43beedb05131937ef46f365ab0a0c6fa6ac618",
+  "changed_file": "library.js",
+  "max_score": "1337"
+}

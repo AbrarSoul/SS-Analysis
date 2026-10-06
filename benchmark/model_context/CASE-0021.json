@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0021",
+  "language": "javascript",
+  "cve_id": "CVE-2022-29174",
+  "cwe": [
+    {
+      "id": "CWE-640",
+      "definition": "Weak Password Recovery Mechanism for Forgotten Password"
+    }
+  ],
+  "unified_diff": "diff --git a/frontend/express/libs/members.js b/frontend/express/libs/members.js\nindex e53a873271..5adf2aaad4 100644\n--- a/frontend/express/libs/members.js\n+++ b/frontend/express/libs/members.js\n@@ -809,7 +809,7 @@ membersUtility.forgot = function(req, callback) {\n         membersUtility.db.collection('members').findOne({\"email\": email}, function(err, member) {\n             if (member) {\n                 var timestamp = Math.round(new Date().getTime() / 1000),\n-                    prid = sha512Hash(member.username + member.full_name, timestamp);\n+                    prid = crypto.randomBytes(32).toString('hex');\n                 member.lang = member.lang || req.body.lang || \"en\";\n                 membersUtility.db.collection('password_reset').insert({\"prid\": prid, \"user_id\": member._id, \"timestamp\": timestamp}, {safe: true}, function() {\n                     countlyMail.sendPasswordResetInfo(member, prid);",
+  "containing_class_declaration": null,
+  "imports": [
+    "var authorize = require('./../../../api/utils/authorizer.js'); //for token validations",
+    "var common = require('./../../../api/utils/common.js');",
+    "var plugins = require('./../../../plugins/pluginManager.js');",
+    "var { getUserApps } = require('./../../../api/utils/rights.js');",
+    "var configs = require('./../config', 'dont-enclose');",
+    "var countlyMail = require('./../../../api/parts/mgmt/mail.js');",
+    "var countlyStats = require('./../../../api/parts/data/stats.js');",
+    "var request = require('request');",
+    "var url = require('url');",
+    "var crypto = require('crypto');",
+    "var argon2 = require('argon2');",
+    "var versionInfo = require('./../version.info'),"
+  ],
+  "vulnerable_function": "membersUtility.forgot = function(req, callback) {\n    if (!req || !req.body || !req.body.email) {\n        callback(undefined); //to be sure email is passed\n    }\n    else {\n        var email = (req.body.email + \"\").trim();\n        membersUtility.db.collection('members').findOne({\"email\": email}, function(err, member) {\n            if (member) {\n                var timestamp = Math.round(new Date().getTime() / 1000),\n                    prid = sha512Hash(member.username + member.full_name, timestamp);\n                member.lang = member.lang || req.body.lang || \"en\";\n                membersUtility.db.collection('password_reset').insert({\"prid\": prid, \"user_id\": member._id, \"timestamp\": timestamp}, {safe: true}, function() {\n                    countlyMail.sendPasswordResetInfo(member, prid);\n                    plugins.callMethod(\"passwordRequest\", {req: req, data: req.body}); //used in systemlogs\n                    callback(member);\n                });\n            }\n            else {\n                callback(undefined);\n            }\n        });\n    }\n}",
+  "patched_function": "membersUtility.forgot = function(req, callback) {\n    if (!req || !req.body || !req.body.email) {\n        callback(undefined); //to be sure email is passed\n    }\n    else {\n        var email = (req.body.email + \"\").trim();\n        membersUtility.db.collection('members').findOne({\"email\": email}, function(err, member) {\n            if (member) {\n                var timestamp = Math.round(new Date().getTime() / 1000),\n                    prid = crypto.randomBytes(32).toString('hex');\n                member.lang = member.lang || req.body.lang || \"en\";\n                membersUtility.db.collection('password_reset').insert({\"prid\": prid, \"user_id\": member._id, \"timestamp\": timestamp}, {safe: true}, function() {\n                    countlyMail.sendPasswordResetInfo(member, prid);\n                    plugins.callMethod(\"passwordRequest\", {req: req, data: req.body}); //used in systemlogs\n                    callback(member);\n                });\n            }\n            else {\n                callback(undefined);\n            }\n        });\n    }\n}",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 3658,
+  "context_size_chars_after_truncation": 3658
+}

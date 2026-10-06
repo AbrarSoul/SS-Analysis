@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_apache_netbeans-html4j_fa70e507e5555e1adb4f6518479fc408a7abd0e6",
+  "language": "java",
+  "cve_id": "CVE-2020-17534",
+  "cve_ids_all": [
+    "CVE-2020-17534"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-362",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.File;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.net.JarURLConnection;",
+    "import java.net.URL;",
+    "import java.nio.file.Files;",
+    "import java.util.Enumeration;",
+    "import java.util.jar.JarEntry;",
+    "import java.util.jar.JarFile;"
+  ],
+  "vulnerable_function": "    static URL extract(URL url) throws IOException {\n        if (!\"jar\".equals(url.getProtocol())) {\n            return url;\n        }\n        JarURLConnection jarConnection = (JarURLConnection) url.openConnection();\n        JarFile jar = jarConnection.getJarFile();\n        if (jar == null) {\n            return url;\n        }\n        File dir = File.createTempFile(jar.getName(), \".dir\");\n        dir.delete();\n        dir.mkdirs();\n\n        Enumeration<JarEntry> en = jar.entries();\n        while (en.hasMoreElements()) {\n            JarEntry entry = en.nextElement();\n            final String entryName = entry.getName();\n            if (entryName.endsWith(\".class\") || entryName.endsWith(\"/\")) {\n                continue;\n            }\n            File file = new File(dir, entryName.replace('/', File.separatorChar));\n            file.getParentFile().mkdirs();\n            try (InputStream is = jar.getInputStream(entry)) {\n                Files.copy(is, file.toPath());\n            }\n        }\n\n        File file = new File(dir, jarConnection.getEntryName().replace('/', File.separatorChar));\n        if (file.exists()) {\n            return file.toURI().toURL();\n        } else {\n            return url;\n        }\n    }",
+  "patched_function": "    static URL extract(URL url) throws IOException {\n        if (!\"jar\".equals(url.getProtocol())) {\n            return url;\n        }\n        JarURLConnection jarConnection = (JarURLConnection) url.openConnection();\n        JarFile jar = jarConnection.getJarFile();\n        if (jar == null) {\n            return url;\n        }\n        File dir = Files.createTempDirectory(jar.getName() + \".dir\").toFile();\n\n        Enumeration<JarEntry> en = jar.entries();\n        while (en.hasMoreElements()) {\n            JarEntry entry = en.nextElement();\n            final String entryName = entry.getName();\n            if (entryName.endsWith(\".class\") || entryName.endsWith(\"/\")) {\n                continue;\n            }\n            File file = new File(dir, entryName.replace('/', File.separatorChar));\n            file.getParentFile().mkdirs();\n            try (InputStream is = jar.getInputStream(entry)) {\n                Files.copy(is, file.toPath());\n            }\n        }\n\n        File file = new File(dir, jarConnection.getEntryName().replace('/', File.separatorChar));\n        if (file.exists()) {\n            return file.toURI().toURL();\n        } else {\n            return url;\n        }\n    }",
+  "unified_diff": "diff --git a/webkit/src/main/java/org/netbeans/html/presenters/webkit/UnJarResources.java b/webkit/src/main/java/org/netbeans/html/presenters/webkit/UnJarResources.java\nindex fb001139..1559a6d5 100644\n--- a/webkit/src/main/java/org/netbeans/html/presenters/webkit/UnJarResources.java\n+++ b/webkit/src/main/java/org/netbeans/html/presenters/webkit/UnJarResources.java\n@@ -39,9 +39,7 @@ final class UnJarResources {\n         if (jar == null) {\n             return url;\n         }\n-        File dir = File.createTempFile(jar.getName(), \".dir\");\n-        dir.delete();\n-        dir.mkdirs();\n+        File dir = Files.createTempDirectory(jar.getName() + \".dir\").toFile();\n \n         Enumeration<JarEntry> en = jar.entries();\n         while (en.hasMoreElements()) {",
+  "auto_locate_confidence": "auto"
+}

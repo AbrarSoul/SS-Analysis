@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_elunez_eladmin_d6a16e9afc0a3b96a56f1a24ed167e1beec6ce2f",
+  "cve_ids": [
+    "CVE-2025-22978"
+  ],
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "java",
+  "repository": "elunez/eladmin",
+  "repository_url": "https://github.com/elunez/eladmin",
+  "vulnerable_commit": "6159b94c90854c34a52b5031ef60f51ccc2cc818",
+  "fixed_commit": "d6a16e9afc0a3b96a56f1a24ed167e1beec6ce2f",
+  "changed_file": "eladmin-common/src/main/java/me/zhengjie/utils/FileUtil.java",
+  "max_score": "1337"
+}

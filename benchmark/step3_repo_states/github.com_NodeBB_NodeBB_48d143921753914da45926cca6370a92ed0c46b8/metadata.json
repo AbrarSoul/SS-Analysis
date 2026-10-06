@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_NodeBB_NodeBB_48d143921753914da45926cca6370a92ed0c46b8",
+  "cve_ids": [
+    "CVE-2022-46164"
+  ],
+  "cwe_ids": [
+    "CWE-665"
+  ],
+  "language": "javascript",
+  "repository": "NodeBB/NodeBB",
+  "repository_url": "https://github.com/NodeBB/NodeBB",
+  "vulnerable_commit": "0e495f9ea4bde434dd4c2d03ad25509e55475abd",
+  "fixed_commit": "48d143921753914da45926cca6370a92ed0c46b8",
+  "changed_file": "src/socket.io/index.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_absolunet_kafe_c644c798bfcdc1b0bbb1f0ca59e2e2664ff3fdd0",
+  "cve_ids": [
+    "CVE-2020-7761"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "absolunet/kafe",
+  "repository_url": "https://github.com/absolunet/kafe",
+  "vulnerable_commit": "23a7af9bee56dd95600505ee1a14fbcc2abe54c6",
+  "fixed_commit": "c644c798bfcdc1b0bbb1f0ca59e2e2664ff3fdd0",
+  "changed_file": "src/kafe/string-validate.js",
+  "max_score": "1337"
+}

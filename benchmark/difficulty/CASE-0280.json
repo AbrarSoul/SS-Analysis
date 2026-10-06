@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0280",
+  "batch": "topup34",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-674"
+  ],
+  "changed_files": 1,
+  "lines_added": 13,
+  "lines_removed": 2,
+  "lines_changed_total": 15,
+  "function_size_chars": 1444,
+  "function_size_lines": 43,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Recursive crawl accepts max_depth but never uses it; unused-parameter recursion shape is visible but the harm is semantic."
+}

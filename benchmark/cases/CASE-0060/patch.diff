@@ -1,0 +1,22 @@
+diff --git a/server/utils/agents/aibitat/plugins/filesystem/copy-file.js b/server/utils/agents/aibitat/plugins/filesystem/copy-file.js
+index fd22cb27..ab18559e 100644
+--- a/server/utils/agents/aibitat/plugins/filesystem/copy-file.js
++++ b/server/utils/agents/aibitat/plugins/filesystem/copy-file.js
+@@ -3,9 +3,15 @@ const path = require("path");
+ const filesystem = require("./lib.js");
+ 
+ async function copyRecursive(source, destination) {
+-  const stats = await fs.stat(source);
++  const lstat = await fs.lstat(source);
+ 
+-  if (stats.isDirectory()) {
++  if (lstat.isSymbolicLink()) {
++    throw new Error(
++      `Cannot copy symbolic link: ${source}. Symlinks are not allowed during copy operations.`
++    );
++  }
++
++  if (lstat.isDirectory()) {
+     await fs.mkdir(destination, { recursive: true });
+     const entries = await fs.readdir(source);
+     for (const entry of entries) {

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_socketio_engine.io_734f9d1268840722c41219e69eb58318e0b2ac6b",
+  "cve_ids": [
+    "CVE-2020-36048"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "socketio/engine.io",
+  "repository_url": "https://github.com/socketio/engine.io",
+  "vulnerable_commit": "61b949259ed966ef6fc8bfd61f14d1a2ef06d319",
+  "fixed_commit": "734f9d1268840722c41219e69eb58318e0b2ac6b",
+  "changed_file": "lib/server.js",
+  "max_score": "1337"
+}

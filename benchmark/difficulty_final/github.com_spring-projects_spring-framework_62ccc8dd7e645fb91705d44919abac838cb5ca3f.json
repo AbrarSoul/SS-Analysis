@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_spring-projects_spring-framework_62ccc8dd7e645fb91705d44919abac838cb5ca3f",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-16"
+  ],
+  "changed_files": 1,
+  "lines_added": 33,
+  "lines_removed": 12,
+  "lines_changed_total": 45,
+  "function_size_chars": 377,
+  "function_size_lines": 7,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

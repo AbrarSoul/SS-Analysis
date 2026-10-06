@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_FreeOpcUa_opcua-asyncio_2be7ce80df05de8d6c6ae1ebce6fa2bb7147844a",
+  "cve_ids": [
+    "CVE-2023-26150"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "python",
+  "repository": "FreeOpcUa/opcua-asyncio",
+  "repository_url": "https://github.com/FreeOpcUa/opcua-asyncio",
+  "vulnerable_commit": "756616dafade3851dbc12e220632eda142033585",
+  "fixed_commit": "2be7ce80df05de8d6c6ae1ebce6fa2bb7147844a",
+  "changed_file": "tests/test_crypto_connect.py",
+  "max_score": "1337"
+}

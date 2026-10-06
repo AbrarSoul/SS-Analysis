@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0249",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-367"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 4,
+  "lines_changed_total": 7,
+  "function_size_chars": 2300,
+  "function_size_lines": 58,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Private key written to a file created with the default umask and only chmod-ed afterwards; ordering is visible but needs file-permission context."
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "github.com_traccar_traccar_e4f6e74e57ab743b65d49ae00f6624a20ca0291e",
+  "language": "java",
+  "cve_id": "CVE-2020-5246",
+  "cve_ids_all": [
+    "CVE-2020-5246"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    },
+    {
+      "id": "CWE-90",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import javax.naming.Context;",
+    "import javax.naming.NamingEnumeration;",
+    "import javax.naming.NamingException;",
+    "import javax.naming.directory.Attribute;",
+    "import javax.naming.directory.InitialDirContext;",
+    "import javax.naming.directory.SearchControls;",
+    "import javax.naming.directory.SearchResult;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.traccar.config.Config;",
+    "import org.traccar.model.User;",
+    "import java.util.Hashtable;"
+  ],
+  "vulnerable_function": "    private boolean isAdmin(String accountName) {\n        if (this.adminFilter != null) {\n            try {\n                InitialDirContext context = initContext();\n                String searchString = adminFilter.replace(\":login\", accountName);\n                SearchControls searchControls = new SearchControls();\n                searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);\n                NamingEnumeration<SearchResult> results = context.search(searchBase, searchString, searchControls);\n                if (results.hasMoreElements()) {\n                    results.nextElement();\n                    if (results.hasMoreElements()) {\n                        LOGGER.warn(\"Matched multiple users for the accountName: \" + accountName);\n                        return false;\n                    }\n                    return true;\n                }\n            } catch (NamingException e) {\n                return false;\n            }\n        }\n        return false;\n    }",
+  "patched_function": "    public String encodeForLdap(String input) {\n        if( input == null ) {\n            return null;\n        }\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < input.length(); i++) {\n            char c = input.charAt(i);\n            switch (c) {\n                case '\\\\':\n                    sb.append(\"\\\\5c\");\n                    break;\n                case '*':\n                    sb.append(\"\\\\2a\");\n                    break;\n                case '(':\n                    sb.append(\"\\\\28\");\n                    break;\n                case ')':\n                    sb.append(\"\\\\29\");\n                    break;\n                case '\\0':\n                    sb.append(\"\\\\00\");\n                    break;\n                default:\n                    sb.append(c);\n            }\n        }\n        return sb.toString();\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/traccar/database/LdapProvider.java b/src/main/java/org/traccar/database/LdapProvider.java\nindex d8b5c9f52..447904b35 100644\n--- a/src/main/java/org/traccar/database/LdapProvider.java\n+++ b/src/main/java/org/traccar/database/LdapProvider.java\n@@ -1,5 +1,5 @@\n /*\n- * Copyright 2017 Anton Tananaev (anton@traccar.org)\n+ * Copyright 2017 - 2020 Anton Tananaev (anton@traccar.org)\n  *\n  * Licensed under the Apache License, Version 2.0 (the \"License\");\n  * you may not use this file except in compliance with the License.\n@@ -81,7 +81,7 @@ public class LdapProvider {\n         if (this.adminFilter != null) {\n             try {\n                 InitialDirContext context = initContext();\n-                String searchString = adminFilter.replace(\":login\", accountName);\n+                String searchString = adminFilter.replace(\":login\", encodeForLdap(accountName));\n                 SearchControls searchControls = new SearchControls();\n                 searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);\n                 NamingEnumeration<SearchResult> results = context.search(searchBase, searchString, searchControls);\n@@ -107,7 +107,7 @@ public class LdapProvider {\n     private SearchResult lookupUser(String accountName) throws NamingException {\n         InitialDirContext context = initContext();\n \n-        String searchString = searchFilter.replace(\":login\", accountName);\n+        String searchString = searchFilter.replace(\":login\", encodeForLdap(accountName));\n \n         SearchControls searchControls = new SearchControls();\n         String[] attributeFilter = {idAttribute, nameAttribute, mailAttribute};\n@@ -176,4 +176,34 @@ public class LdapProvider {\n         return false;\n     }\n \n+    public String encodeForLdap(String input) {\n+        if( input == null ) {\n+            return null;\n+        }\n+        StringBuilder sb = new StringBuilder();\n+        for (int i = 0; i < input.length(); i++) {\n+            char c = input.charAt(i);\n+            switch (c) {\n+                case '\\\\':\n+                    sb.append(\"\\\\5c\");\n+                    break;\n+                case '*':\n+                    sb.append(\"\\\\2a\");\n+                    break;\n+                case '(':\n+                    sb.append(\"\\\\28\");\n+                    break;\n+                case ')':\n+                    sb.append(\"\\\\29\");\n+                    break;\n+                case '\\0':\n+                    sb.append(\"\\\\00\");\n+                    break;\n+                default:\n+                    sb.append(c);\n+            }\n+        }\n+        return sb.toString();\n+    }\n+\n }",
+  "auto_locate_confidence": "auto_low_confidence"
+}

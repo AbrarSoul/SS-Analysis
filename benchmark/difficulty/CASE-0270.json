@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0270",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "changed_files": 1,
+  "lines_added": 19,
+  "lines_removed": 5,
+  "lines_changed_total": 24,
+  "function_size_chars": 4456,
+  "function_size_lines": 102,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Chain-walk loop exits only when a node equals the starting object by value; loop-termination logic."
+}

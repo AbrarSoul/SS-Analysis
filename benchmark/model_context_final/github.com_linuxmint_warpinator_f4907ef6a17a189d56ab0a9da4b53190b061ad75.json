@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_linuxmint_warpinator_f4907ef6a17a189d56ab0a9da4b53190b061ad75",
+  "language": "python",
+  "cve_id": "CVE-2022-42725",
+  "cve_ids_all": [
+    "CVE-2022-42725"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-59",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import threading",
+    "import gettext",
+    "import math",
+    "import logging",
+    "import os",
+    "import socket",
+    "import traceback",
+    "from concurrent.futures import ThreadPoolExecutor",
+    "from gi.repository import GLib, Gtk, Gdk, GObject, GdkPixbuf, Gio",
+    "import prefs",
+    "import config",
+    "from enum import IntEnum"
+  ],
+  "vulnerable_function": "def files_exist(base_names):\n    for name in base_names:\n        path = os.path.join(prefs.get_save_path(), name)\n        logging.debug(\"(server side) Checking if file or folder %s already exists.\" % (path,))\n        if GLib.file_test(path, GLib.FileTest.EXISTS):\n            return True\n\n    return False\n",
+  "patched_function": "def files_exist(base_names):\n    for name in base_names:\n        path = os.path.join(prefs.get_save_path(), name)\n        logging.debug(\"(server side) Checking if file or folder %s already exists.\" % (path,))\n        file = Gio.File.new_for_path(path)\n        if file.query_exists(None):\n            return True\n\n    return False\n",
+  "unified_diff": "diff --git a/src/util.py b/src/util.py\nindex 1d5274f5..ce3fc0f4 100644\n--- a/src/util.py\n+++ b/src/util.py\n@@ -263,7 +263,8 @@ def files_exist(base_names):\n     for name in base_names:\n         path = os.path.join(prefs.get_save_path(), name)\n         logging.debug(\"(server side) Checking if file or folder %s already exists.\" % (path,))\n-        if GLib.file_test(path, GLib.FileTest.EXISTS):\n+        file = Gio.File.new_for_path(path)\n+        if file.query_exists(None):\n             return True\n \n     return False",
+  "auto_locate_confidence": "auto"
+}

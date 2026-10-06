@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_script-security-plugin_99e6ac0df5fe0f0cc6c2a695f7c1f845279bedbd",
+  "cve_ids": [
+    "CVE-2020-2190"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/script-security-plugin",
+  "repository_url": "https://github.com/jenkinsci/script-security-plugin",
+  "vulnerable_commit": "82d147c04878b4362253f5875ede9a4399f37312",
+  "fixed_commit": "99e6ac0df5fe0f0cc6c2a695f7c1f845279bedbd",
+  "changed_file": "src/test/java/org/jenkinsci/plugins/scriptsecurity/scripts/ScriptApprovalTest.java",
+  "max_score": "1337"
+}

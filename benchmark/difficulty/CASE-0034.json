@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0034",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-285"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 160,
+  "function_size_lines": 6,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Permission.Public vs [] in a decorator's create: field; recognizing the risk requires domain knowledge of what public creation of a User entity implies.",
+  "supported_status": "supported"
+}

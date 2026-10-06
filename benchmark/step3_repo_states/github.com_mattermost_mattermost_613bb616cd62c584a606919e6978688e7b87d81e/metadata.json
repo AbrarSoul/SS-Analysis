@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_mattermost_mattermost_613bb616cd62c584a606919e6978688e7b87d81e",
+  "cve_ids": [
+    "CVE-2025-12756",
+    "CVE-2025-14435"
+  ],
+  "cwe_ids": [
+    "CWE-770",
+    "CWE-863"
+  ],
+  "language": "typescript",
+  "repository": "mattermost/mattermost",
+  "repository_url": "https://github.com/mattermost/mattermost",
+  "vulnerable_commit": "f9fb13c7e6da9a07c9d6d38cf4b57396a3045ea9",
+  "fixed_commit": "613bb616cd62c584a606919e6978688e7b87d81e",
+  "changed_file": "webapp/channels/src/components/user_profile/user_profile.tsx",
+  "max_score": "1337"
+}

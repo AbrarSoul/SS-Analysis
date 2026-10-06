@@ -1,0 +1,19 @@
+diff --git a/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java b/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java
+index c510559b..f0c3100f 100644
+--- a/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java
++++ b/spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2014-2019 the original author or authors.
++ * Copyright 2014-2022 the original author or authors.
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+@@ -98,7 +98,6 @@ public class HeaderHttpSessionIdResolver implements HttpSessionIdResolver {
+ 	@Override
+ 	public List<String> resolveSessionIds(HttpServletRequest request) {
+ 		String headerValue = request.getHeader(this.headerName);
+-		System.out.println(headerValue);
+ 		return (headerValue != null) ? Collections.singletonList(headerValue) : Collections.emptyList();
+ 	}
+ 

@@ -1,0 +1,468 @@
+{
+  "model_tag": "qwen3-coder-next:latest",
+  "scores": {
+    "n_items": 15,
+    "n_scored": 15,
+    "overall_good_rate": 0.31666666666666665,
+    "per_field": {
+      "mechanism": {
+        "n_judged": 15,
+        "good_rate": 0.06666666666666667,
+        "verdict_counts": {
+          "CORRECT": 1,
+          "PARTIALLY_CORRECT": 14
+        }
+      },
+      "source": {
+        "n_judged": 15,
+        "good_rate": 0.3333333333333333,
+        "verdict_counts": {
+          "CORRECT": 4,
+          "PARTIALLY_CORRECT": 9,
+          "APPROPRIATE_ABSTENTION": 1,
+          "OVERREACHED": 1
+        }
+      },
+      "sink": {
+        "n_judged": 15,
+        "good_rate": 0.3333333333333333,
+        "verdict_counts": {
+          "CORRECT": 5,
+          "PARTIALLY_CORRECT": 6,
+          "OVERREACHED": 4
+        }
+      },
+      "fix": {
+        "n_judged": 15,
+        "good_rate": 0.5333333333333333,
+        "verdict_counts": {
+          "CORRECT": 8,
+          "PARTIALLY_CORRECT": 6,
+          "OVERREACHED": 1
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "CASE-0001",
+      "candidate_fields": {
+        "mechanism": "The vulnerability arises from the use of `uuid.uuid7()` to generate the `_id` identifier in the parent process, which is then embedded into the dynamically generated Python code string (`_exec_code`) and executed in a subprocess. Since `uuid7` includes a timestamp component, it is potentially predictable or reproducible across similar executions. More critically, the `_id` is passed to the subprocess via string interpolation in the generated code, but the subprocess also reassigns `_id` from `os.environ.get(\"_ID\")`. However, the parent process does not set `_ID` in the subprocess environment in the vulnerable version \u2014 instead, it relies on the interpolated `_id` in the code string. This allows an attacker who can influence or predict the `_id` (e.g., via timing attacks on `uuid7` generation or by observing past IDs) to potentially inject or manipulate the `_id` value in the subprocess environment (e.g., by setting `_ID` in the environment before execution), thereby causing the subprocess to output its result under a different `_id`, leading to misattribution or bypass of result validation in the parent process.",
+        "source": "The `_id` value generated via `uuid.uuid7()` in the parent process and interpolated directly into the dynamically generated Python code string (`_exec_code`) \u2014 specifically, the line `_id = str(uuid.uuid7())` and its use in the f-string that constructs `_exec_code`.",
+        "sink": "The subprocess execution (`subprocess.run`/`subprocess.Popen` via `self._exec(f.name)`) and subsequent parsing of stdout in the parent process, where the result line is identified by `line.startswith(_id)`. If the subprocess outputs a result under a different `_id` (e.g., due to environment variable injection overriding the interpolated `_id`), the parent may either miss the result or misinterpret another process\u2019s output as its own \u2014 enabling result injection or information leakage between concurrent executions.",
+        "fix": "The patch replaces `uuid.uuid7()` with `secrets.token_hex(32)` to generate an unpredictable `_id`, ensuring cryptographic randomness. It also explicitly passes `_id` to the subprocess via the environment variable `_ID` (added to `env` in `_exec`), and the subprocess now retrieves `_id` from `os.environ.get(\"_ID\")` instead of relying on the interpolated value. Additionally, the output format is standardized with a `finally` block to ensure consistent result formatting, and the parent now validates that the output ends with a sentinel `\"__END__\"` line and checks that the result line is the second-to-last line and starts with the expected `_id`. This prevents result tampering or misattribution."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the vulnerability in the permissive line-selection behavior and the use of `uuid.uuid7()`, but it incorrectly states that the subprocess reassigns `_id` from `os.environ.get(\"_ID\")`, which is not shown in the ground truth."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the source as the `_id` value generated via `uuid.uuid7()` and interpolated into the dynamically generated Python code string, but it incorrectly suggests that the subprocess reassigns `_id` from an environment variable, which is not shown in the ground truth."
+        },
+        "sink": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the sink as the subprocess execution and the parsing of stdout in the parent process, but it incorrectly suggests that the subprocess can output its result under a different `_id` due to environment variable injection, which is not shown in the ground truth."
+        },
+        "fix": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the fix as replacing `uuid.uuid7()` with `secrets.token_hex(32)` and passing `_id` via an environment variable, but it incorrectly suggests that the subprocess now retrieves `_id` from `os.environ.get(\"_ID\")` and that the final check is a full match, which are not shown in the ground truth."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability arises from the use of `uuid.uuid7()` to generate the `_id` identifier in the parent process, which is then embedded into the dynamically generated Python code string (`_exec_code`) and executed in a subprocess. Since `uuid7` includes a timestamp component, it is potentially predictable or reproducible across similar executions. More critically, the `_id` is passed to the subprocess via string interpolation in the generated code, but the subprocess also reassigns `_id` from `os.environ.get(\"_ID\")`. However, the parent process does not set `_ID` in the subprocess environment in the vulnerable version \u2014 instead, it relies on the interpolated `_id` in the code string. This allows an attacker who can influence or predict the `_id` (e.g., via timing attacks on `uuid7` generation or by observing past IDs) to potentially inject or manipulate the `_id` value in the subprocess environment (e.g., by setting `_ID` in the environment before execution), thereby causing the subprocess to output its result under a different `_id`, leading to misattribution or bypass of result validation in the parent process.\n\nSOURCE: The `_id` value generated via `uuid.uuid7()` in the parent process and interpolated directly into the dynamically generated Python code string (`_exec_code`) \u2014 specifically, the line `_id = str(uuid.uuid7())` and its use in the f-string that constructs `_exec_code`.\n\nSINK: The subprocess execution (`subprocess.run`/`subprocess.Popen` via `self._exec(f.name)`) and subsequent parsing of stdout in the parent process, where the result line is identified by `line.startswith(_id)`. If the subprocess outputs a result under a different `_id` (e.g., due to environment variable injection overriding the interpolated `_id`), the parent may either miss the result or misinterpret another process\u2019s output as its own \u2014 enabling result injection or information leakage between concurrent executions.\n\nFIX: The patch replaces `uuid.uuid7()` with `secrets.token_hex(32)` to generate an unpredictable `_id`, ensuring cryptographic randomness. It also explicitly passes `_id` to the subprocess via the environment variable `_ID` (added to `env` in `_exec`), and the subprocess now retrieves `_id` from `os.environ.get(\"_ID\")` instead of relying on the interpolated value. Additionally, the output format is standardized with a `finally` block to ensure consistent result formatting, and the parent now validates that the output ends with a sentinel `\"__END__\"` line and checks that the result line is the second-to-last line and starts with the expected `_id`. This prevents result tampering or misattribution."
+    },
+    {
+      "case_id": "CASE-0006",
+      "candidate_fields": {
+        "mechanism": "The endpoint `read_users` was accessible to any authenticated user (via `deps.get_current_user`), allowing them to retrieve a full list of users\u2014including potentially sensitive information like email, full name, phone, role, and active status\u2014without requiring elevated privileges. This constitutes an unauthorized data exposure vulnerability, as the operation should be restricted to administrative users only.",
+        "source": "The `current_user` dependency parameter `Depends(deps.get_current_user)` serves as the source of the authentication context, but it enforces only basic authentication (any logged-in user), not role-based authorization.",
+        "sink": "The sink is the `read_users` endpoint itself, which performs a database query returning all users matching the filters and returns the full user objects (including sensitive fields) in the response. The dangerous operation is the exposure of sensitive user data to non-privileged users.",
+        "fix": "The patch replaces `deps.get_current_user` with `deps.get_current_active_superuser`, enforcing that only authenticated users with superuser (admin) privileges and an active account may invoke the endpoint. This restricts access to the sensitive user listing functionality to authorized administrators only."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies that the endpoint was accessible to any authenticated user, but it overreaches by asserting that the endpoint allowed retrieval of a full list of users without specifying that this is not fully shown in the diff."
+        },
+        "source": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies that the `current_user` dependency parameter enforces only basic authentication, not role-based authorization."
+        },
+        "sink": {
+          "verdict": "OVERREACHED",
+          "reason": "The candidate confidently asserts that the endpoint returns all users matching the filters and returns full user objects, which is not fully shown in the diff and is marked as conditional in the ground truth."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly suggests replacing `deps.get_current_user` with `deps.get_current_active_superuser` to restrict access to administrative users only."
+        }
+      },
+      "raw_response": "MECHANISM: The endpoint `read_users` was accessible to any authenticated user (via `deps.get_current_user`), allowing them to retrieve a full list of users\u2014including potentially sensitive information like email, full name, phone, role, and active status\u2014without requiring elevated privileges. This constitutes an unauthorized data exposure vulnerability, as the operation should be restricted to administrative users only.\n\nSOURCE: The `current_user` dependency parameter `Depends(deps.get_current_user)` serves as the source of the authentication context, but it enforces only basic authentication (any logged-in user), not role-based authorization.\n\nSINK: The sink is the `read_users` endpoint itself, which performs a database query returning all users matching the filters and returns the full user objects (including sensitive fields) in the response. The dangerous operation is the exposure of sensitive user data to non-privileged users.\n\nFIX: The patch replaces `deps.get_current_user` with `deps.get_current_active_superuser`, enforcing that only authenticated users with superuser (admin) privileges and an active account may invoke the endpoint. This restricts access to the sensitive user listing functionality to authorized administrators only."
+    },
+    {
+      "case_id": "CASE-0008",
+      "candidate_fields": {
+        "mechanism": "Path traversal vulnerability: unsanitized user-controlled input (`app_name`, `asset_type`, `file_name`) is used directly in file system operations (directory creation, path construction, file copying, subprocess command construction), enabling an attacker to escape the intended directory via `..` or other path components, potentially reading/writing arbitrary files or executing arbitrary commands via conda/pip commands.",
+        "source": "User-provided HTTP request parameters: `app_name` in `/install/{app_name}` and `/uninstall/{app_name}` endpoints, and `asset_type`/`file_name` in `/lollms_assets/{asset_type}/{file_name}` endpoint.",
+        "sink": "File system operations using unsanitized `app_name` (e.g., `app_path = .../app_name`, `source_dir = .../app_name`, `os.makedirs(app_path, ...)`, `shutil.copytree`, `subprocess.run(..., shell=True, ...)` with commands built from `env_name = app_path.stem`), and similarly for `asset_type`/`file_name` in path construction for asset serving.",
+        "fix": "The patch applies `sanitize_path()` to all user-controlled path components before use: `app_name` in `/install` and `/uninstall`, and both `asset_type` and `file_name` in `/lollms_assets`. This ensures that path components cannot contain directory traversal sequences (e.g., `..`) or other unsafe path elements."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies a path traversal vulnerability but incorrectly claims that unsanitized user-controlled input is used in multiple file system operations not confirmed in the diff."
+        },
+        "source": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the sources of user-controlled input as route/path parameters from the URL."
+        },
+        "sink": {
+          "verdict": "OVERREACHED",
+          "reason": "The candidate confidently asserts specific filesystem operations for `install_app` and `lollms_assets` that are not shown in the diff, which the ground truth marks as incomplete evidence."
+        },
+        "fix": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the application of `sanitize_path()` to user-controlled path components but incorrectly implies that this fix is applied to all file system operations, including those not confirmed in the diff."
+        }
+      },
+      "raw_response": "MECHANISM: Path traversal vulnerability: unsanitized user-controlled input (`app_name`, `asset_type`, `file_name`) is used directly in file system operations (directory creation, path construction, file copying, subprocess command construction), enabling an attacker to escape the intended directory via `..` or other path components, potentially reading/writing arbitrary files or executing arbitrary commands via conda/pip commands.\n\nSOURCE: User-provided HTTP request parameters: `app_name` in `/install/{app_name}` and `/uninstall/{app_name}` endpoints, and `asset_type`/`file_name` in `/lollms_assets/{asset_type}/{file_name}` endpoint.\n\nSINK: File system operations using unsanitized `app_name` (e.g., `app_path = .../app_name`, `source_dir = .../app_name`, `os.makedirs(app_path, ...)`, `shutil.copytree`, `subprocess.run(..., shell=True, ...)` with commands built from `env_name = app_path.stem`), and similarly for `asset_type`/`file_name` in path construction for asset serving.\n\nFIX: The patch applies `sanitize_path()` to all user-controlled path components before use: `app_name` in `/install` and `/uninstall`, and both `asset_type` and `file_name` in `/lollms_assets`. This ensures that path components cannot contain directory traversal sequences (e.g., `..`) or other unsafe path elements."
+    },
+    {
+      "case_id": "CASE-0009",
+      "candidate_fields": {
+        "mechanism": "The vulnerability arises from passing user-controlled or internal data (`read_bytes`) directly as the argument to `EOFError`, which may expose sensitive or excessive information (e.g., partial or full byte contents) in exception messages or logs. This can leak unintended data through exception handling paths.",
+        "source": "The `read_bytes` variable, which contains the actual bytes read from the underlying bytestream (potentially including sensitive data), originates from the `self.read(num_bytes)` call.",
+        "sink": "The `EOFError` exception is raised with `read_bytes` as its argument, causing the potentially sensitive byte content to be embedded in the exception object and possibly exposed via traceback logging, debugging output, or serialization.",
+        "fix": "The patch replaces the sensitive `read_bytes` argument with a fixed, sanitized error message string that describes the condition without exposing the actual bytes read, thereby preventing unintended data leakage through the exception."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the mechanism of the vulnerability but does not explicitly state that the external exposure path is not shown in the diff."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies `read_bytes` as the source and mentions it potentially containing sensitive data, but it does not explicitly state that the control over the stream's contents is not established in the diff."
+        },
+        "sink": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the sink as the `EOFError` exception with `read_bytes` as its argument and mentions potential exposure via logging or serialization, but it does not explicitly state that the external exposure path is not shown in the diff."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly describes the fix as replacing the sensitive `read_bytes` with a fixed, sanitized error message string to prevent data leakage."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability arises from passing user-controlled or internal data (`read_bytes`) directly as the argument to `EOFError`, which may expose sensitive or excessive information (e.g., partial or full byte contents) in exception messages or logs. This can leak unintended data through exception handling paths.\n\nSOURCE: The `read_bytes` variable, which contains the actual bytes read from the underlying bytestream (potentially including sensitive data), originates from the `self.read(num_bytes)` call.\n\nSINK: The `EOFError` exception is raised with `read_bytes` as its argument, causing the potentially sensitive byte content to be embedded in the exception object and possibly exposed via traceback logging, debugging output, or serialization.\n\nFIX: The patch replaces the sensitive `read_bytes` argument with a fixed, sanitized error message string that describes the condition without exposing the actual bytes read, thereby preventing unintended data leakage through the exception."
+    },
+    {
+      "case_id": "CASE-0011",
+      "candidate_fields": {
+        "mechanism": "The vulnerability involves unsafe deserialization of Java objects via Jackson Databind, where certain classes with JNDI/LDAP lookup capabilities (e.g., data sources, connection providers, transaction managers) are allowed to be deserialized. These classes can be exploited to trigger remote code execution or data exfiltration by resolving JNDI references to malicious LDAP/JNDI servers controlled by an attacker. The `SubTypeValidator` maintains a denylist (`DEFAULT_NO_DESER_CLASS_NAMES`) of known dangerous classes; if a class is not in this list, it may be deserialized unsafely.",
+        "source": "Untrusted JSON input containing type information (e.g., `@class` field) that instructs Jackson to deserialize into a specific class. If the class is not in the denylist, it becomes a candidate for unsafe deserialization.",
+        "sink": "Deserialization of classes listed in `DEFAULT_NO_DESER_CLASS_NAMES` (or their absence from the list) during polymorphic deserialization in Jackson Databind, particularly when `SubTypeValidator` does not block them. The dangerous operation occurs when the deserialized object\u2019s initialization (e.g., constructor, `afterPropertiesSet()`, or similar lifecycle methods) triggers JNDI/LDAP lookups.",
+        "fix": "The patch adds `\"br.com.anteros.dbcp.AnterosDBCPDataSource\"` to the denylist (`DEFAULT_NO_DESER_CLASS_NAMES`) in `SubTypeValidator.java`, based on issue [databind#2814]. This prevents deserialization of this class, which (like `AnterosDBCPConfig` already in the list) can perform JNDI lookups and pose a remote code execution risk. The comment also clarifies that `AnterosDBCPConfig` and `AnterosDBCPDataSource` are both covered under the same issue."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate provides a detailed explanation of the mechanism, which is consistent with the general knowledge of Jackson gadget-chain CVEs, but it does not recognize that this specific mechanism is not demonstrated by the diff itself."
+        },
+        "source": {
+          "verdict": "OVERREACHED",
+          "reason": "The candidate confidently asserts specifics about the source (untrusted JSON input containing type information) that are not shown in the diff, which the ground truth explicitly marks as not shown."
+        },
+        "sink": {
+          "verdict": "OVERREACHED",
+          "reason": "The candidate confidently asserts specifics about the sink (deserialization of classes listed in `DEFAULT_NO_DESER_CLASS_NAMES`) that are not shown in the diff, which the ground truth explicitly marks as not shown."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly identifies the fix as adding `\"br.com.anteros.dbcp.AnterosDBCPDataSource\"` to the denylist in `SubTypeValidator.java`, which matches the ground truth."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability involves unsafe deserialization of Java objects via Jackson Databind, where certain classes with JNDI/LDAP lookup capabilities (e.g., data sources, connection providers, transaction managers) are allowed to be deserialized. These classes can be exploited to trigger remote code execution or data exfiltration by resolving JNDI references to malicious LDAP/JNDI servers controlled by an attacker. The `SubTypeValidator` maintains a denylist (`DEFAULT_NO_DESER_CLASS_NAMES`) of known dangerous classes; if a class is not in this list, it may be deserialized unsafely.\n\nSOURCE: Untrusted JSON input containing type information (e.g., `@class` field) that instructs Jackson to deserialize into a specific class. If the class is not in the denylist, it becomes a candidate for unsafe deserialization.\n\nSINK: Deserialization of classes listed in `DEFAULT_NO_DESER_CLASS_NAMES` (or their absence from the list) during polymorphic deserialization in Jackson Databind, particularly when `SubTypeValidator` does not block them. The dangerous operation occurs when the deserialized object\u2019s initialization (e.g., constructor, `afterPropertiesSet()`, or similar lifecycle methods) triggers JNDI/LDAP lookups.\n\nFIX: The patch adds `\"br.com.anteros.dbcp.AnterosDBCPDataSource\"` to the denylist (`DEFAULT_NO_DESER_CLASS_NAMES`) in `SubTypeValidator.java`, based on issue [databind#2814]. This prevents deserialization of this class, which (like `AnterosDBCPConfig` already in the list) can perform JNDI lookups and pose a remote code execution risk. The comment also clarifies that `AnterosDBCPConfig` and `AnterosDBCPDataSource` are both covered under the same issue."
+    },
+    {
+      "case_id": "CASE-0016",
+      "candidate_fields": {
+        "mechanism": "SQL injection vulnerability caused by direct string concatenation of untrusted user input (`cubeName`) into a SQL query string. The `cubeName` parameter is embedded directly into the SQL query via string concatenation, allowing an attacker to inject arbitrary SQL syntax if `cubeName` contains malicious input (e.g., `' OR '1'='1` or `'; DROP TABLE ... --`).",
+        "source": "The untrusted input originates from the `cubeName` parameter passed into the `getCuboidHitFrequency` method (and similarly into related methods `getCuboidRollingUpStats` and `getCuboidMatchHitFrequency`), which is likely sourced from user-controlled HTTP request parameters (e.g., query parameters or path variables in REST API calls).",
+        "sink": "The dangerous operation occurs in the SQL query construction where `cubeName` is directly concatenated into the `WHERE` clause:  \n`\" where \" + QueryCubePropertyEnum.CUBE.toString() + \" = '\" + cubeName + \"'\"`.  \nThis unsanitized string is then passed to `queryService.querySystemCube(sql)`, which executes the SQL against the underlying database.",
+        "fix": "The patch replaces the string concatenation with a parameterized query: the literal `cubeName` is replaced by a `?` placeholder in the SQL string, and the actual value is passed separately via a new helper method `getPrepareQueryResult(cubeName, sql)`. This method constructs a `PrepareSqlRequest` with the `cubeName` value bound as a typed parameter (`params[0].setValue(cubeName)`), ensuring the value is safely handled as data, not executable SQL. The `queryService.doQueryWithCache(sqlRequest, false)` method then executes the parameterized query, preventing SQL injection."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately describes the SQL injection vulnerability caused by direct string concatenation of `cubeName` into SQL queries."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies `cubeName` as the untrusted input but speculates about its origin from user-controlled HTTP request parameters, which is not shown in the diff."
+        },
+        "sink": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the sink as the direct concatenation of `cubeName` into the SQL query string and its execution via `queryService.querySystemCube(sql)`."
+        },
+        "fix": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly describes the fix as replacing string concatenation with a parameterized query but incorrectly mentions `getPrepareQueryResult(cubeName, sql)` instead of the ground truth's `getPrepareQueryResult()` with a `PrepareSqlRequest` object."
+        }
+      },
+      "raw_response": "MECHANISM: SQL injection vulnerability caused by direct string concatenation of untrusted user input (`cubeName`) into a SQL query string. The `cubeName` parameter is embedded directly into the SQL query via string concatenation, allowing an attacker to inject arbitrary SQL syntax if `cubeName` contains malicious input (e.g., `' OR '1'='1` or `'; DROP TABLE ... --`).\n\nSOURCE: The untrusted input originates from the `cubeName` parameter passed into the `getCuboidHitFrequency` method (and similarly into related methods `getCuboidRollingUpStats` and `getCuboidMatchHitFrequency`), which is likely sourced from user-controlled HTTP request parameters (e.g., query parameters or path variables in REST API calls).\n\nSINK: The dangerous operation occurs in the SQL query construction where `cubeName` is directly concatenated into the `WHERE` clause:  \n`\" where \" + QueryCubePropertyEnum.CUBE.toString() + \" = '\" + cubeName + \"'\"`.  \nThis unsanitized string is then passed to `queryService.querySystemCube(sql)`, which executes the SQL against the underlying database.\n\nFIX: The patch replaces the string concatenation with a parameterized query: the literal `cubeName` is replaced by a `?` placeholder in the SQL string, and the actual value is passed separately via a new helper method `getPrepareQueryResult(cubeName, sql)`. This method constructs a `PrepareSqlRequest` with the `cubeName` value bound as a typed parameter (`params[0].setValue(cubeName)`), ensuring the value is safely handled as data, not executable SQL. The `queryService.doQueryWithCache(sqlRequest, false)` method then executes the parameterized query, preventing SQL injection."
+    },
+    {
+      "case_id": "CASE-0019",
+      "candidate_fields": {
+        "mechanism": "The vulnerability is a Zip Slip (path traversal) flaw where a malicious ZIP entry containing a path with `../` components can cause extracted files to be written outside the intended target directory. The original code attempted to prevent this by checking if the canonical path of the destination file starts with the canonical path of the target directory plus a file separator. However, this check is flawed: if the target directory path does not end with a separator (e.g., `/tmp/dest`), and a ZIP entry is named `../evil.txt`, the canonical path of the destination file might be `/tmp/evil.txt`, while `canonicalDestinationDirPath + File.separator` becomes `/tmp/dest/`, and the `startsWith` check fails to detect the traversal because `/tmp/evil.txt` does not start with `/tmp/dest/`. More critically, the use of `String.startsWith` on canonical paths is unreliable across platforms and edge cases (e.g., symlinks, relative paths, or trailing separators), allowing bypasses.",
+        "source": "Untrusted ZIP entry names from the `ZipInputStream` (specifically, `entry.getName()`), which may contain path traversal sequences like `../`.",
+        "sink": "The file extraction operation via `new FileOutputStream(file)`, where the `file` object is constructed as `new File(dir, entry.getName())` and may resolve to a path outside the intended directory due to insufficient validation.",
+        "fix": "The patch replaces the flawed string-based path validation with a more robust path-based check: it converts both the destination file and the target directory to canonical `Path` objects using `getCanonicalFile().toPath()`, then uses `Path.startsWith(Path)` to verify containment. This approach correctly handles path normalization and is less susceptible to edge cases involving separators or platform-specific path representations. Additionally, the patch removes the unnecessary intermediate variable `canonicalDestinationDirPath`, simplifying the logic and reducing potential for error."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the flaw in the original check and the need for a more robust solution, but it incorrectly states that the original check fails when the target directory path does not end with a separator, which is not supported by the ground truth."
+        },
+        "source": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the source of the vulnerability as untrusted ZIP entry names from the `ZipInputStream`."
+        },
+        "sink": {
+          "verdict": "OVERREACHED",
+          "reason": "The candidate confidently asserts the specific file extraction operation (`new FileOutputStream(file)`) as the sink, which is not shown in the diff hunk according to the ground truth."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly describes the patch's approach of replacing the flawed string-based path validation with a more robust path-based check using `Path.startsWith(Path)`."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability is a Zip Slip (path traversal) flaw where a malicious ZIP entry containing a path with `../` components can cause extracted files to be written outside the intended target directory. The original code attempted to prevent this by checking if the canonical path of the destination file starts with the canonical path of the target directory plus a file separator. However, this check is flawed: if the target directory path does not end with a separator (e.g., `/tmp/dest`), and a ZIP entry is named `../evil.txt`, the canonical path of the destination file might be `/tmp/evil.txt`, while `canonicalDestinationDirPath + File.separator` becomes `/tmp/dest/`, and the `startsWith` check fails to detect the traversal because `/tmp/evil.txt` does not start with `/tmp/dest/`. More critically, the use of `String.startsWith` on canonical paths is unreliable across platforms and edge cases (e.g., symlinks, relative paths, or trailing separators), allowing bypasses.\n\nSOURCE: Untrusted ZIP entry names from the `ZipInputStream` (specifically, `entry.getName()`), which may contain path traversal sequences like `../`.\n\nSINK: The file extraction operation via `new FileOutputStream(file)`, where the `file` object is constructed as `new File(dir, entry.getName())` and may resolve to a path outside the intended directory due to insufficient validation.\n\nFIX: The patch replaces the flawed string-based path validation with a more robust path-based check: it converts both the destination file and the target directory to canonical `Path` objects using `getCanonicalFile().toPath()`, then uses `Path.startsWith(Path)` to verify containment. This approach correctly handles path normalization and is less susceptible to edge cases involving separators or platform-specific path representations. Additionally, the patch removes the unnecessary intermediate variable `canonicalDestinationDirPath`, simplifying the logic and reducing potential for error."
+    },
+    {
+      "case_id": "CASE-0020",
+      "candidate_fields": {
+        "mechanism": "The vulnerable code uses raw string patterns (`\"/login\"`, `\"/resources/**\"`) directly in `requestMatchers()`, which in older versions of Spring Security may be interpreted as Ant-style path patterns without proper context-aware resolution. This can lead to incorrect matching behavior\u2014specifically, over-permissive or under-permissive access control\u2014when request paths contain encoded characters, path extensions, or when used in conjunction with certain Spring MVC features (e.g., path extension parsing, content negotiation, or custom `HandlerMapping`s). The patched version uses `MvcRequestMatcher.Builder`, which leverages Spring MVC\u2019s `HandlerMapping` introspection to produce matchers that align precisely with how Spring MVC routes requests, avoiding ambiguity in path matching.",
+        "source": "The dangerous data originates from untrusted HTTP requests whose paths are matched against the configured patterns; the vulnerability arises from the *method of pattern interpretation*, not from external input per se.",
+        "sink": "The sink is the `authorizeHttpRequests(...).requestMatchers(...)` call in `HttpSecurity`, where the pattern matching decision determines whether access is permitted or denied.",
+        "fix": "The patch replaces raw string patterns with `MvcRequestMatcher.Builder.pattern(...)` calls, which generate matchers that are consistent with Spring MVC\u2019s request handling logic. It also introduces a `@Scope(\"prototype\")`-scoped `MvcRequestMatcher.Builder` bean, constructed using a `HandlerMappingIntrospector`, ensuring correct, context-aware pattern resolution."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate provides a detailed explanation of the vulnerability mechanism, including the potential issues with raw string patterns in older versions of Spring Security. However, it does not explicitly mention the multi-servlet condition specified in the official advisory."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the source as untrusted HTTP requests and the method of pattern interpretation as the vulnerability's root cause. However, it does not mention the specific servlet-mapping configuration condition mentioned in the advisory."
+        },
+        "sink": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the sink as the `authorizeHttpRequests(...).requestMatchers(...)` call in `HttpSecurity`, where the pattern matching decision determines access control."
+        },
+        "fix": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly describes the fix as replacing raw string patterns with `MvcRequestMatcher.Builder.pattern(...)` calls and introduces a `@Scope(\"prototype\")`-scoped `MvcRequestMatcher.Builder` bean. However, it does not explicitly mention that this fix is consistent with the advisory's mitigation without proving the specific sample application's conditions."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerable code uses raw string patterns (`\"/login\"`, `\"/resources/**\"`) directly in `requestMatchers()`, which in older versions of Spring Security may be interpreted as Ant-style path patterns without proper context-aware resolution. This can lead to incorrect matching behavior\u2014specifically, over-permissive or under-permissive access control\u2014when request paths contain encoded characters, path extensions, or when used in conjunction with certain Spring MVC features (e.g., path extension parsing, content negotiation, or custom `HandlerMapping`s). The patched version uses `MvcRequestMatcher.Builder`, which leverages Spring MVC\u2019s `HandlerMapping` introspection to produce matchers that align precisely with how Spring MVC routes requests, avoiding ambiguity in path matching.\n\nSOURCE: The dangerous data originates from untrusted HTTP requests whose paths are matched against the configured patterns; the vulnerability arises from the *method of pattern interpretation*, not from external input per se.\n\nSINK: The sink is the `authorizeHttpRequests(...).requestMatchers(...)` call in `HttpSecurity`, where the pattern matching decision determines whether access is permitted or denied.\n\nFIX: The patch replaces raw string patterns with `MvcRequestMatcher.Builder.pattern(...)` calls, which generate matchers that are consistent with Spring MVC\u2019s request handling logic. It also introduces a `@Scope(\"prototype\")`-scoped `MvcRequestMatcher.Builder` bean, constructed using a `HandlerMappingIntrospector`, ensuring correct, context-aware pattern resolution."
+    },
+    {
+      "case_id": "CASE-0021",
+      "candidate_fields": {
+        "mechanism": "The vulnerability arises because the password reset identifier (prid) is generated deterministically using predictable user data (username and full_name) combined with a timestamp. Since these values are known or guessable (especially username and full_name), an attacker can precompute or brute-force valid prid values, potentially enabling account takeover by predicting or replaying password reset tokens before they expire or are used.",
+        "source": "User-controlled or user-identifying data: `member.username` and `member.full_name`, which are retrieved from the database and are typically static or easily guessable for a given account.",
+        "sink": "The `prid` value is used as a password reset token and passed to `countlyMail.sendPasswordResetInfo(member, prid)`, meaning it is sent to the user (presumably via email) and later used to authenticate password reset requests. Its predictability undermines the security of the reset flow.",
+        "fix": "Replace the deterministic hash-based generation (`sha512Hash(member.username + member.full_name, timestamp)`) with a cryptographically secure random value (`crypto.randomBytes(32).toString('hex')`), ensuring the prid is unpredictable and non-replayable."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the use of predictable user data and a timestamp to generate the token, but it overstates the advisory's claim by suggesting that the attributes are 'sufficient' to guess the token, whereas the advisory only states that they 'increase the chances of guessing.'"
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies `member.username` and `member.full_name` as sources, but it incorrectly states they are user-controlled or user-identifying data, when the ground truth specifies they are account attributes and not necessarily attacker-controlled."
+        },
+        "sink": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the operations involving the `prid` value, but it omits the specific operations mentioned in the ground truth and does not mention that the validation and authorization logic are not shown in the diff."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly suggests replacing the deterministic hash-based generation with a cryptographically secure random value, matching the ground truth's recommendation."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability arises because the password reset identifier (prid) is generated deterministically using predictable user data (username and full_name) combined with a timestamp. Since these values are known or guessable (especially username and full_name), an attacker can precompute or brute-force valid prid values, potentially enabling account takeover by predicting or replaying password reset tokens before they expire or are used.\n\nSOURCE: User-controlled or user-identifying data: `member.username` and `member.full_name`, which are retrieved from the database and are typically static or easily guessable for a given account.\n\nSINK: The `prid` value is used as a password reset token and passed to `countlyMail.sendPasswordResetInfo(member, prid)`, meaning it is sent to the user (presumably via email) and later used to authenticate password reset requests. Its predictability undermines the security of the reset flow.\n\nFIX: Replace the deterministic hash-based generation (`sha512Hash(member.username + member.full_name, timestamp)`) with a cryptographically secure random value (`crypto.randomBytes(32).toString('hex')`), ensuring the prid is unpredictable and non-replayable."
+    },
+    {
+      "case_id": "CASE-0022",
+      "candidate_fields": {
+        "mechanism": "After TLS negotiation, for protocol version \u2265 8, the code re-reads the identity packet from the client without re-validating the device ID or protocol version. In the original code, `this.identity = await this.readPacket();` directly overwrites `this.identity` with data received from the client after TLS, bypassing all prior validation (e.g., `Device.validateId`, `Device.validateName`, and protocol version consistency checks). This allows a malicious client to send a forged identity packet post-TLS with an invalid or mismatched device ID or protocol version, potentially leading to device impersonation or protocol confusion.",
+        "source": "Untrusted input from the remote client, specifically the identity packet sent after TLS negotiation (via `this.readPacket()`), which is processed without re-validation in the vulnerable code path.",
+        "sink": "The assignment `this.identity = await this.readPacket();` in the protocol version \u2265 8 branch, where client-controlled data overwrites the previously validated identity without re-checking device ID, protocol version, or other fields.",
+        "fix": "The patch extracts the identity exchange logic into a new `_exchangeIdentities()` method that performs strict validation: it compares the protocol version and device ID of the newly received identity packet against the already-validated `this.identity`, and throws an error (after nullifying `this.identity`) if they differ. This ensures that the post-TLS identity cannot differ from the pre-TLS identity in critical fields, preventing identity substitution attacks."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the core issue of re-reading the identity packet without re-validation but does not mention the specific defects related to the error messages or the null assignment before throwing the error."
+        },
+        "source": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the source as the untrusted input from the remote client, specifically the identity packet sent after TLS negotiation."
+        },
+        "sink": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the sink as the assignment `this.identity = await this.readPacket();` in the protocol version \u2265 8 branch but does not specify that this assignment is present in both removed blocks in the original code."
+        },
+        "fix": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly describes the fix as extracting the identity exchange logic into a new `_exchangeIdentities()` method that performs strict validation, but it does not mention the specific details of the error messages or the null assignment before throwing the error."
+        }
+      },
+      "raw_response": "MECHANISM: After TLS negotiation, for protocol version \u2265 8, the code re-reads the identity packet from the client without re-validating the device ID or protocol version. In the original code, `this.identity = await this.readPacket();` directly overwrites `this.identity` with data received from the client after TLS, bypassing all prior validation (e.g., `Device.validateId`, `Device.validateName`, and protocol version consistency checks). This allows a malicious client to send a forged identity packet post-TLS with an invalid or mismatched device ID or protocol version, potentially leading to device impersonation or protocol confusion.\n\nSOURCE: Untrusted input from the remote client, specifically the identity packet sent after TLS negotiation (via `this.readPacket()`), which is processed without re-validation in the vulnerable code path.\n\nSINK: The assignment `this.identity = await this.readPacket();` in the protocol version \u2265 8 branch, where client-controlled data overwrites the previously validated identity without re-checking device ID, protocol version, or other fields.\n\nFIX: The patch extracts the identity exchange logic into a new `_exchangeIdentities()` method that performs strict validation: it compares the protocol version and device ID of the newly received identity packet against the already-validated `this.identity`, and throws an error (after nullifying `this.identity`) if they differ. This ensures that the post-TLS identity cannot differ from the pre-TLS identity in critical fields, preventing identity substitution attacks."
+    },
+    {
+      "case_id": "CASE-0025",
+      "candidate_fields": {
+        "mechanism": "Command injection via argument injection into the ripgrep CLI. A maliciously crafted `pattern` or `searchPath` string that begins with `-` (e.g., `\"--pre=/bin/sh -c malicious_command\"`) could be interpreted by ripgrep as command-line options, potentially enabling arbitrary command execution. In the vulnerable code, `pattern` and `searchPath` are appended directly to the argument array without sanitization or separation, allowing ripgrep to parse them as options if they start with `-`.",
+        "source": "User-controlled input passed as the `pattern` and/or `searchPath` parameters to the `searchWithRipgrep` function (and similarly `searchPath` in `searchFilesWithRipgrepGlob`, per the diff).",
+        "sink": "The `spawnSync(rgPath, args, ...)` call, where the unsanitized `args` array\u2014including potentially malicious `pattern` and `searchPath` values\u2014is passed directly to the ripgrep binary.",
+        "fix": "The patch applies two complementary mitigations:  \n1. Inserts a `\"--\"` separator before `pattern` and `searchPath` in the argument list, instructing ripgrep to treat all subsequent arguments as positional (non-option) values.  \n2. Adds a defense-in-depth check that throws an error if the `pattern` string starts with `\"-\"`, preventing injection via the pattern field.  \nAdditionally, for `searchFilesWithRipgrepGlob`, the patch adds `\"--\"` before `searchPath` to prevent `searchPath` from being misinterpreted as an option."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the mechanism of argument injection into the ripgrep subprocess but does not explicitly state that the reachability of these parameters by an external caller and the availability of ripgrep's `--pre` option are unverified."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies `pattern` and `searchPath` as user-controlled inputs but does not explicitly state that the diff does not demonstrate how these parameters can be set to attacker-chosen values."
+        },
+        "sink": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the `spawnSync(rgPath, args, ...)` call as the sink where the unsanitized arguments are passed to the ripgrep binary."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly describes the patch's two mitigations: inserting a `--` separator and adding a defense-in-depth check to prevent command injection."
+        }
+      },
+      "raw_response": "MECHANISM: Command injection via argument injection into the ripgrep CLI. A maliciously crafted `pattern` or `searchPath` string that begins with `-` (e.g., `\"--pre=/bin/sh -c malicious_command\"`) could be interpreted by ripgrep as command-line options, potentially enabling arbitrary command execution. In the vulnerable code, `pattern` and `searchPath` are appended directly to the argument array without sanitization or separation, allowing ripgrep to parse them as options if they start with `-`.\n\nSOURCE: User-controlled input passed as the `pattern` and/or `searchPath` parameters to the `searchWithRipgrep` function (and similarly `searchPath` in `searchFilesWithRipgrepGlob`, per the diff).\n\nSINK: The `spawnSync(rgPath, args, ...)` call, where the unsanitized `args` array\u2014including potentially malicious `pattern` and `searchPath` values\u2014is passed directly to the ripgrep binary.\n\nFIX: The patch applies two complementary mitigations:  \n1. Inserts a `\"--\"` separator before `pattern` and `searchPath` in the argument list, instructing ripgrep to treat all subsequent arguments as positional (non-option) values.  \n2. Adds a defense-in-depth check that throws an error if the `pattern` string starts with `\"-\"`, preventing injection via the pattern field.  \nAdditionally, for `searchFilesWithRipgrepGlob`, the patch adds `\"--\"` before `searchPath` to prevent `searchPath` from being misinterpreted as an option."
+    },
+    {
+      "case_id": "CASE-0029",
+      "candidate_fields": {
+        "mechanism": "The vulnerable regex `^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}` is overly permissive and allows nested brace patterns with arbitrary commas and braces, including malformed or deeply nested structures (e.g., `{,,{,}}`, `{,{{,}}}`), which can lead to catastrophic backtracking during regex matching due to overlapping quantifiers and ambiguous alternations. This causes denial-of-service via regex-based ReDoS (Regular Expression Denial of Service) when processing malicious input.",
+        "source": "User-controlled input passed to the `match()` call \u2014 specifically, the string being matched against the regex (e.g., a brace pattern in a glob or template string being parsed).",
+        "sink": "The `this.match(...)` call inside the `.set('multiplier', ...)` parser function \u2014 where the vulnerable regex is applied to user input, potentially triggering catastrophic backtracking.",
+        "fix": "The patch replaces the complex, ambiguous regex with a simpler, linear-time-safe alternative `^\\{((?:,|\\{,+\\})+)\\}`, which restricts the pattern to only match sequences of commas and well-formed `{,}`-style brace groups (e.g., `{,}`, `{,,}`, `{,{},}}`), eliminating overlapping quantifiers and backtracking-prone constructs. This ensures the regex runs in linear time relative to input length."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the issue with overlapping quantifiers and ambiguous alternations leading to catastrophic backtracking, but it overreaches by suggesting the regex allows \"malformed or deeply nested structures\" without evidence, and it incorrectly states the regex is \"overly permissive\" without specifying what is overly permissive."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies that the input is user-controlled and passed to the `match()` call, but it adds unnecessary examples that are not supported by the ground truth."
+        },
+        "sink": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the `this.match(...)` call as the sink where the vulnerable regex is applied, but it incorrectly specifies the call is inside the `.set('multiplier', ...)` parser function, which is not mentioned in the ground truth."
+        },
+        "fix": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the patch as replacing the complex regex with a simpler, linear-time-safe alternative, but it incorrectly states the new regex \"restricts the pattern to only match sequences of commas and well-formed `{,}`-style brace groups\" without acknowledging the behavior change and the specific pattern it matches."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerable regex `^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}` is overly permissive and allows nested brace patterns with arbitrary commas and braces, including malformed or deeply nested structures (e.g., `{,,{,}}`, `{,{{,}}}`), which can lead to catastrophic backtracking during regex matching due to overlapping quantifiers and ambiguous alternations. This causes denial-of-service via regex-based ReDoS (Regular Expression Denial of Service) when processing malicious input.\n\nSOURCE: User-controlled input passed to the `match()` call \u2014 specifically, the string being matched against the regex (e.g., a brace pattern in a glob or template string being parsed).\n\nSINK: The `this.match(...)` call inside the `.set('multiplier', ...)` parser function \u2014 where the vulnerable regex is applied to user input, potentially triggering catastrophic backtracking.\n\nFIX: The patch replaces the complex, ambiguous regex with a simpler, linear-time-safe alternative `^\\{((?:,|\\{,+\\})+)\\}`, which restricts the pattern to only match sequences of commas and well-formed `{,}`-style brace groups (e.g., `{,}`, `{,,}`, `{,{},}}`), eliminating overlapping quantifiers and backtracking-prone constructs. This ensures the regex runs in linear time relative to input length."
+    },
+    {
+      "case_id": "CASE-0032",
+      "candidate_fields": {
+        "mechanism": "The `authHandler` callback is invoked before a host verification promise (`hostVerifiedPromise`) resolves, allowing authentication to proceed without ensuring the host's identity has been verified first. This enables potential man-in-the-middle attacks by permitting authentication to occur prior to host key verification completion.",
+        "source": "The `hostVerifiedPromise` (not shown to be initialized or defined in the provided evidence, but its existence and purpose are implied by the patch). Its resolution is required before proceeding with authentication, but the vulnerable code does not wait for it.",
+        "sink": "The `callback(await this.handleAuth(methodsLeft))` invocation inside `authHandler`, where authentication logic (`handleAuth`) is executed without prior host verification.",
+        "fix": "The patch inserts `await hostVerifiedPromise` before invoking the callback, ensuring that host verification completes (i.e., `hostVerifiedPromise` resolves) before authentication proceeds."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies that authentication proceeds before host verification, but it incorrectly states that the `authHandler` callback is invoked before the promise resolves, which is not explicitly shown in the provided evidence."
+        },
+        "source": {
+          "verdict": "APPROPRIATE_ABSTENTION",
+          "reason": "The candidate mentions `hostVerifiedPromise` without providing evidence for its initialization or definition, which is correctly noted as not shown in the ground truth."
+        },
+        "sink": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the sink as the `callback(await this.handleAuth(methodsLeft))` invocation, which is where authentication logic is executed without prior host verification."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate correctly describes the fix as inserting `await hostVerifiedPromise` to ensure host verification completes before authentication proceeds, which aligns with the ground truth."
+        }
+      },
+      "raw_response": "MECHANISM: The `authHandler` callback is invoked before a host verification promise (`hostVerifiedPromise`) resolves, allowing authentication to proceed without ensuring the host's identity has been verified first. This enables potential man-in-the-middle attacks by permitting authentication to occur prior to host key verification completion.\n\nSOURCE: The `hostVerifiedPromise` (not shown to be initialized or defined in the provided evidence, but its existence and purpose are implied by the patch). Its resolution is required before proceeding with authentication, but the vulnerable code does not wait for it.\n\nSINK: The `callback(await this.handleAuth(methodsLeft))` invocation inside `authHandler`, where authentication logic (`handleAuth`) is executed without prior host verification.\n\nFIX: The patch inserts `await hostVerifiedPromise` before invoking the callback, ensuring that host verification completes (i.e., `hostVerifiedPromise` resolves) before authentication proceeds."
+    },
+    {
+      "case_id": "CASE-0036",
+      "candidate_fields": {
+        "mechanism": "The vulnerability arises from the use of `execSync` with a dynamically constructed command string that includes user-provided input (`parsed.data.identifier`). This allows command injection if the input contains shell metacharacters (e.g., `;`, `|`, `&`, `$()`, backticks, etc.), as the shell interprets the entire string as a command to execute. In the vulnerable code, `execSync(\\`task ${parsed.data.identifier} done\\`)` concatenates user input directly into a shell command string, enabling an attacker to inject arbitrary shell commands.",
+        "source": "User-provided input passed as `args` to the `mark_task_done` handler, specifically `parsed.data.identifier`, which originates from untrusted client-side input (e.g., a tool call request from an external LLM or user).",
+        "sink": "The `execSync` call in the `mark_task_done` case, which executes a shell command constructed by interpolating untrusted `identifier` data into a shell command string.",
+        "fix": "The patch replaces `execSync` with `execFileSync`, which executes the program directly without invoking a shell. It passes arguments as an array (`[parsed.data.identifier, 'done']`) instead of a single shell command string, preventing shell interpretation of special characters in `identifier`. Additionally, `encoding: 'utf8'` is explicitly set for consistent output handling, and `.toString()` is removed because `execFileSync` returns a string directly when `encoding` is specified."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the potential for shell command injection but does not explicitly state that this is conditional on the schema accepting shell-significant characters, which is marked as conditional in the ground truth."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies `parsed.data.identifier` as a source of user-provided input but does not mention the other sources (`parsed.data.tags` and `parsed.data.project`) mentioned in the ground truth."
+        },
+        "sink": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies one of the sinks (`execSync(\\`task ${parsed.data.identifier} done\\`)`) but does not mention the other two sinks (`execSync(\\`task limit: ${task_args.join(\" \")} next\\`)` and `execSync(\\`task add ${task_args.join(\" \")}\\`)`)."
+        },
+        "fix": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately describes the fix as replacing `execSync` with `execFileSync` and passing arguments as an array, which aligns with the ground truth."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability arises from the use of `execSync` with a dynamically constructed command string that includes user-provided input (`parsed.data.identifier`). This allows command injection if the input contains shell metacharacters (e.g., `;`, `|`, `&`, `$()`, backticks, etc.), as the shell interprets the entire string as a command to execute. In the vulnerable code, `execSync(\\`task ${parsed.data.identifier} done\\`)` concatenates user input directly into a shell command string, enabling an attacker to inject arbitrary shell commands.\n\nSOURCE: User-provided input passed as `args` to the `mark_task_done` handler, specifically `parsed.data.identifier`, which originates from untrusted client-side input (e.g., a tool call request from an external LLM or user).\n\nSINK: The `execSync` call in the `mark_task_done` case, which executes a shell command constructed by interpolating untrusted `identifier` data into a shell command string.\n\nFIX: The patch replaces `execSync` with `execFileSync`, which executes the program directly without invoking a shell. It passes arguments as an array (`[parsed.data.identifier, 'done']`) instead of a single shell command string, preventing shell interpretation of special characters in `identifier`. Additionally, `encoding: 'utf8'` is explicitly set for consistent output handling, and `.toString()` is removed because `execFileSync` returns a string directly when `encoding` is specified."
+    },
+    {
+      "case_id": "CASE-0039",
+      "candidate_fields": {
+        "mechanism": "The vulnerability is a command injection flaw where unsanitized user-provided input (`host`) is directly interpolated into a shell command string (`exec(cmd, ...)`), enabling an attacker to inject arbitrary shell commands via specially crafted host values (e.g., containing `;`, `|`, `&`, or backticks). Although square brackets are stripped, this is insufficient to prevent injection of shell metacharacters.",
+        "source": "The `host` parameter passed into the `ping` function \u2014 untrusted user input.",
+        "sink": "The `exec(cmd, ...)` call, where the `cmd` string (constructed using the unsanitized `host`) is executed by the shell.",
+        "fix": "The patch adds an input validation step via `isValidHost(host)` before constructing the command. This function first checks if the host matches a strict character set (`[a-zA-Z0-9\\-.:[\\]-]+`), and if not, attempts to convert it using `domainToASCII` (to handle Internationalized Domain Names) and re-validates. If validation fails, the function returns early with an error, preventing command execution."
+      },
+      "judge_result": {
+        "mechanism": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies the mechanism as command injection but incorrectly states that square brackets are stripped, which is not fully accurate according to the ground truth."
+        },
+        "source": {
+          "verdict": "PARTIALLY_CORRECT",
+          "reason": "The candidate correctly identifies `host` as untrusted user input but does not mention that its external, attacker-controlled API origin is not shown in the diff."
+        },
+        "sink": {
+          "verdict": "CORRECT",
+          "reason": "The candidate accurately identifies the sink as the `exec(cmd, ...)` call where the unsanitized `host` is used to construct and execute the command."
+        },
+        "fix": {
+          "verdict": "OVERREACHED",
+          "reason": "The candidate incorrectly states that `domainToASCII` is used to convert the host and re-validate, which is not shown in the ground truth and contradicts the information provided."
+        }
+      },
+      "raw_response": "MECHANISM: The vulnerability is a command injection flaw where unsanitized user-provided input (`host`) is directly interpolated into a shell command string (`exec(cmd, ...)`), enabling an attacker to inject arbitrary shell commands via specially crafted host values (e.g., containing `;`, `|`, `&`, or backticks). Although square brackets are stripped, this is insufficient to prevent injection of shell metacharacters.\n\nSOURCE: The `host` parameter passed into the `ping` function \u2014 untrusted user input.\n\nSINK: The `exec(cmd, ...)` call, where the `cmd` string (constructed using the unsanitized `host`) is executed by the shell.\n\nFIX: The patch adds an input validation step via `isValidHost(host)` before constructing the command. This function first checks if the host matches a strict character set (`[a-zA-Z0-9\\-.:[\\]-]+`), and if not, attempts to convert it using `domainToASCII` (to handle Internationalized Domain Names) and re-validates. If validation fails, the function returns early with an error, preventing command execution."
+    }
+  ]
+}

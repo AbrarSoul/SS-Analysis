@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0124",
+  "language": "python",
+  "cve_id": "CVE-2024-34073",
+  "cve_ids_all": [
+    "CVE-2024-34073"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "from __future__ import absolute_import",
+    "import secrets",
+    "import hmac",
+    "import hashlib",
+    "import os",
+    "import logging",
+    "import sys",
+    "import platform",
+    "from collections import defaultdict",
+    "from pathlib import Path",
+    "import tempfile",
+    "import yaml",
+    "from sagemaker.model import Model",
+    "from sagemaker.session import Session",
+    "from sagemaker.serve.builder.schema_builder import SchemaBuilder",
+    "from sagemaker.s3_utils import parse_s3_url",
+    "from sagemaker.utils import create_tar_file",
+    "import cloudpickle",
+    "import pigar",
+    "import sagemaker",
+    "import torch",
+    "import xgboost"
+  ],
+  "vulnerable_function": "def capture_dependencies(requirements_path: str):\n    \"\"\"Placeholder docstring\"\"\"\n    logger.info(\"Capturing dependencies...\")\n\n    try:\n        import pigar\n\n        pigar.__version__  # pylint: disable=W0104\n    except ModuleNotFoundError:\n        logger.warning(\n            \"pigar module is not installed in python environment, \"\n            \"dependency generation may be incomplete\"\n            \"Checkout the instructions on the installation page of its repo: \"\n            \"https://github.com/damnever/pigar \"\n            \"And follow the ones that match your environment.\"\n            \"Please note that you may need to restart your runtime after installation.\"\n        )\n        import sagemaker\n\n        sagemaker_dependency = f\"{sagemaker.__package__}=={sagemaker.__version__}\"\n        with open(requirements_path, \"w\") as f:\n            f.write(sagemaker_dependency)\n        return\n\n    command = f\"pigar gen -f {Path(requirements_path)} {os.getcwd()}\"\n    logging.info(\"Running command %s\", command)\n\n    os.system(command)\n    logger.info(\"Dependencies captured successfully\")\n",
+  "patched_function": "def capture_dependencies(requirements_path: str):\n    \"\"\"Placeholder docstring\"\"\"\n    logger.info(\"Capturing dependencies...\")\n\n    try:\n        import pigar\n\n        pigar.__version__  # pylint: disable=W0104\n    except ModuleNotFoundError:\n        logger.warning(\n            \"pigar module is not installed in python environment, \"\n            \"dependency generation may be incomplete\"\n            \"Checkout the instructions on the installation page of its repo: \"\n            \"https://github.com/damnever/pigar \"\n            \"And follow the ones that match your environment.\"\n            \"Please note that you may need to restart your runtime after installation.\"\n        )\n        import sagemaker\n\n        sagemaker_dependency = f\"{sagemaker.__package__}=={sagemaker.__version__}\"\n        with open(requirements_path, \"w\") as f:\n            f.write(sagemaker_dependency)\n        return\n\n    command = [\"pigar\", \"gen\", \"-f\", str(Path(requirements_path)), str(os.getcwd())]\n    logging.info(\"Running command: %s\", \" \".join(command))\n\n    subprocess.run(command, check=True, capture_output=True)\n    logger.info(\"Dependencies captured successfully\")\n",
+  "unified_diff": "diff --git a/src/sagemaker/serve/save_retrive/version_1_0_0/save/utils.py b/src/sagemaker/serve/save_retrive/version_1_0_0/save/utils.py\nindex 73700664..305b66fa 100644\n--- a/src/sagemaker/serve/save_retrive/version_1_0_0/save/utils.py\n+++ b/src/sagemaker/serve/save_retrive/version_1_0_0/save/utils.py\n@@ -5,6 +5,7 @@ import hmac\n import hashlib\n import os\n import logging\n+import subprocess\n import sys\n import platform\n from collections import defaultdict\n@@ -98,10 +99,10 @@ def capture_dependencies(requirements_path: str):\n             f.write(sagemaker_dependency)\n         return\n \n-    command = f\"pigar gen -f {Path(requirements_path)} {os.getcwd()}\"\n-    logging.info(\"Running command %s\", command)\n+    command = [\"pigar\", \"gen\", \"-f\", str(Path(requirements_path)), str(os.getcwd())]\n+    logging.info(\"Running command: %s\", \" \".join(command))\n \n-    os.system(command)\n+    subprocess.run(command, check=True, capture_output=True)\n     logger.info(\"Dependencies captured successfully\")\n \n ",
+  "auto_locate_confidence": "auto"
+}

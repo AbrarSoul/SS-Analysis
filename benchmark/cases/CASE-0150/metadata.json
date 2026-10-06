@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0150",
+  "original_source_case_id": "github.com_dromara_sureness_12987a72cbf1eabbca1e308ed1fe9445958aeca7",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-31581",
+  "cve_ids_all": [
+    "CVE-2023-31581"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-798"
+  ],
+  "language": "java",
+  "repository": "dromara/sureness",
+  "repository_url": "https://github.com/dromara/sureness",
+  "vulnerable_commit": "4e54fb20a927accca23f70aa5b547c00bc7843bf",
+  "fixed_commit": "12987a72cbf1eabbca1e308ed1fe9445958aeca7",
+  "changed_file": "core/src/main/java/com/usthe/sureness/util/JsonWebTokenUtil.java",
+  "changed_function": "public static String issueJwtAll(String id, String subject, String issuer, Long period,",
+  "vulnerable_lines": [
+    200,
+    241
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 7,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0150/vulnerable_source.java": "bf1f38f09e4463282a54aa573e2e26e896c2dada21368db3262acce9d8b1c1e1",
+    "cases/CASE-0150/patched_source.java": "2318037521a5b6c75936bdbba88f6e01b79b203e1c3d33800c231ad490edea2e",
+    "cases/CASE-0150/patch.diff": "dfb2f83f8b093b067d4e8cb8bfe3056ec9fa880d895078e757a95f81cf11132e",
+    "cases/CASE-0150/metadata.json": "43fe23fae46895e1ca013dcbe29a5d77ff584a2c5af1d19826c2b9d897188d35",
+    "model_context/CASE-0150.json": "7b6ed8431c808bfe2de874634a00c8c792dfa057f38ee76b271079f5cf469839",
+    "difficulty/CASE-0150.json": "34d3ec5bc348229ab29dc7a7b123710ee249ddcf2a4acca680f9367757d344df"
+  },
+  "case_level_hash": "92aaf194d8175056c9f1fa7cf5c83d35a0a241e4d5b306c6aff3b200f2a2df5c"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_ws-wss4j_970b3e3756e2c75bf2379ce198365e1a7168c3c3",
+  "cve_ids": [
+    "CVE-2015-0226"
+  ],
+  "cwe_ids": [
+    "CWE-327"
+  ],
+  "language": "java",
+  "repository": "apache/ws-wss4j",
+  "repository_url": "https://github.com/apache/ws-wss4j",
+  "vulnerable_commit": "d05e1601f5d524ab6ea2f3f7d0f8bfe71d6c9f0f",
+  "fixed_commit": "970b3e3756e2c75bf2379ce198365e1a7168c3c3",
+  "changed_file": "src/main/java/org/apache/ws/security/processor/EncryptedKeyProcessor.java",
+  "max_score": "1337"
+}

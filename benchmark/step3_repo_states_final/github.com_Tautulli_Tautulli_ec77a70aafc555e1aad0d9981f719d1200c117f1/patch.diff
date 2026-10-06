@@ -1,0 +1,23 @@
+diff --git a/plexpy/webserve.py b/plexpy/webserve.py
+index 94049a8f..a7d91078 100644
+--- a/plexpy/webserve.py
++++ b/plexpy/webserve.py
+@@ -4740,7 +4740,7 @@ class WebInterface(object):
+                 opacity (str):          25
+                 background (str):       Hex color, e.g. 282828
+                 blur (str):             3
+-                img_format (str):       png
++                img_format (str):       png or jpg
+                 fallback (str):         "poster", "cover", "art", "poster-live", "art-live", "art-live-full", "user"
+                 refresh (bool):         True or False whether to refresh the image cache
+                 return_hash (bool):     True or False to return the self-hosted image hash instead of the image
+@@ -4800,6 +4800,9 @@ class WebInterface(object):
+         if return_hash:
+             return {'img_hash': img_hash}
+ 
++        if img_format not in ('png', 'jpg'):
++            img_format = 'png'
++
+         fp = '{}.{}'.format(img_hash, img_format)  # we want to be able to preview the thumbs
+         c_dir = os.path.join(plexpy.CONFIG.CACHE_DIR, 'images')
+         ffp = os.path.join(c_dir, fp)

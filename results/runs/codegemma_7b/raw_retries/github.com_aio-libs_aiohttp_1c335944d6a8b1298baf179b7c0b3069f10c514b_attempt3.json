@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "codegemma:7b",
+  "temperature": 0.0,
+  "timestamp": 1789302706.5119638,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    self._directory.joinpath($FILENAME).resolve()\n    if not self._follow_symlinks:\n  pattern-not: |\n    self._directory.joinpath($FILENAME).resolve()\n    if self._follow_symlinks:\n  languages: [\"python\"]\n  message: \"Detected potential directory traversal vulnerability in aiohttp library. Follow_symlinks should be set to False to prevent malicious file access.\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n    category: security\n    cwe: CWE-22\n    owasp: A10:2021-Injection\n    references:\n      - https://owasp.org/www-community/attacks/Directory_Traversal\n```"
+}

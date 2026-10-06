@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0218",
+  "original_source_case_id": "github.com_mesop-dev_mesop_760a2079b5c609038c826d24dfbcf9b0be98d987",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-34824",
+  "cve_ids_all": [
+    "CVE-2026-34824"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-125",
+    "CWE-770"
+  ],
+  "language": "python",
+  "repository": "mesop-dev/mesop",
+  "repository_url": "https://github.com/mesop-dev/mesop",
+  "vulnerable_commit": "8d8378a89cb549798f1560f13f99439964a25a36",
+  "fixed_commit": "760a2079b5c609038c826d24dfbcf9b0be98d987",
+  "changed_file": "mesop/server/server.py",
+  "changed_function": "def handle_websocket(ws: Server):",
+  "vulnerable_lines": [
+    342,
+    395
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 41,
+  "patch_size_deleted": 14,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0218/vulnerable_source.py": "35bc7cb913c9f6e276b65168630b689de110f333de2d24978abb6b183b5f9b47",
+    "cases/CASE-0218/patched_source.py": "875d37b1b36f3927f39560ff06200e34ea1a93a909ddfe923fe4931c73215663",
+    "cases/CASE-0218/patch.diff": "761474c2dfbcc5be5fb7a3c16f916e3da9554f2e8d574b8e1b5ef8c33de3ce8c",
+    "cases/CASE-0218/metadata.json": "4204d7e55d3b6d35f4a9c4a2a100f5183c143fb49d42db259ff845590903204c",
+    "model_context/CASE-0218.json": "4026b34d9578c7d69c734089f3871ca7bf6ebd65e160fdb766d2814a26968c95",
+    "difficulty/CASE-0218.json": "49c6ef2496166de5cd2ffd72a64f4d4d24109fda0273f9ecbb0bc71208c7c10a"
+  },
+  "case_level_hash": "a4f4bbfa889d9143df06300cc4c34eba28752a36eae2cf84170299c896effee1"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_hyperledger_indy-node_55056f22c83b7c3520488b615e1577e0f895d75a",
+  "cve_ids": [
+    "CVE-2020-11093"
+  ],
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "language": "python",
+  "repository": "hyperledger/indy-node",
+  "repository_url": "https://github.com/hyperledger/indy-node",
+  "vulnerable_commit": "03db74e2d5033d8fbb0f2c915eb3825a4d62f20e",
+  "fixed_commit": "55056f22c83b7c3520488b615e1577e0f895d75a",
+  "changed_file": "indy_node/test/nym_txn/test_nym_auth_rules.py",
+  "max_score": "1337"
+}

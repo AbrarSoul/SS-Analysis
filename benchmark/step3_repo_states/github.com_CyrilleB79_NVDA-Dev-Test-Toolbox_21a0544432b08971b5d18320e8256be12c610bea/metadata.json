@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_CyrilleB79_NVDA-Dev-Test-Toolbox_21a0544432b08971b5d18320e8256be12c610bea",
+  "cve_ids": [
+    "CVE-2026-28211"
+  ],
+  "cwe_ids": [
+    "CWE-943"
+  ],
+  "language": "python",
+  "repository": "CyrilleB79/NVDA-Dev-Test-Toolbox",
+  "repository_url": "https://github.com/CyrilleB79/NVDA-Dev-Test-Toolbox",
+  "vulnerable_commit": "3e53740986a5963525671aca4702f5568dd0ea57",
+  "fixed_commit": "21a0544432b08971b5d18320e8256be12c610bea",
+  "changed_file": "addon/globalPlugins/ndtt/logReader.py",
+  "max_score": "1337"
+}

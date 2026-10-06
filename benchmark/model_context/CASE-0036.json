@@ -1,0 +1,37 @@
+{
+  "case_id": "CASE-0036",
+  "language": "typescript",
+  "cve_id": "CVE-2026-5833",
+  "cwe": [
+    {
+      "id": "CWE-74",
+      "definition": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+    },
+    {
+      "id": "CWE-77",
+      "definition": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+    }
+  ],
+  "unified_diff": "diff --git a/index.ts b/index.ts\nindex 3d9b3ec..50b937e 100644\n--- a/index.ts\n+++ b/index.ts\n@@ -15,7 +15,7 @@ import { zodToJsonSchema } from \"zod-to-json-schema\";\n import { diffLines, createTwoFilesPatch } from 'diff';\n import { minimatch } from 'minimatch';\n \n-import { execSync } from 'child_process';\n+import { execFileSync } from 'child_process';\n \n // Schema definitions\n \n@@ -123,16 +123,21 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {\n         if (!parsed.success) {\n           throw new Error(`Invalid arguments for get_next_tasks: ${parsed.error}`);\n         }\n-        let task_args = [];\n-        if (parsed.data.tags) {\n-          for(let tag of parsed.data.tags) {\n-            task_args.push(`+${tag}`);\n-          }\n-        }\n-        if (parsed.data.project) {\n-            task_args.push(`project:${parsed.data.project}`);\n-        }\n-        const content = execSync(`task limit: ${task_args.join(\" \")} next`, { maxBuffer: 1024 * 1024 * 10 }).toString().trim();\n+        let task_args = ['limit:'];  \n+        if (parsed.data.tags) {  \n+          for(let tag of parsed.data.tags) {  \n+            task_args.push(`+${tag}`);  \n+          }  \n+        }  \n+        if (parsed.data.project) {  \n+            task_args.push(`project:${parsed.data.project}`);  \n+        }  \n+        task_args.push('next');  \n+          \n+        const content = execFileSync('task', task_args, {   \n+          encoding: 'utf8',  \n+          maxBuffer: 1024 * 1024 * 10   \n+        }).trim();\n         return {\n           content: [{ type: \"text\", text: content }],\n         };\n@@ -143,7 +148,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {\n         if (!parsed.success) {\n           throw new Error(`Invalid arguments for mark_task_done: ${parsed.error}`);\n         }\n-        const content = execSync(`task ${parsed.data.identifier} done`, { maxBuffer: 1024 * 1024 * 10 }).toString().trim();\n+        const content = execFileSync('task', [parsed.data.identifier, 'done'], {   \n+          encoding: 'utf8',  \n+          maxBuffer: 1024 * 1024 * 10   \n+        }).trim();\n         return {\n           content: [{ type: \"text\", text: content }],\n         };\n@@ -172,7 +180,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {\n           }\n         }\n \n-        const content = execSync(`task add ${task_args.join(\" \")}`, { maxBuffer: 1024 * 1024 * 10 }).toString().trim();\n+        const content = execFileSync('task', ['add', ...task_args], {   \n+          encoding: 'utf8',  \n+          maxBuffer: 1024 * 1024 * 10   \n+        }).trim();\n         return {\n           content: [{ type: \"text\", text: content }],\n         };",
+  "containing_class_declaration": null,
+  "imports": [
+    "import { Server } from \"@modelcontextprotocol/sdk/server/index.js\";",
+    "import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";",
+    "import {",
+    "import fs from \"fs/promises\";",
+    "import path from \"path\";",
+    "import os from 'os';",
+    "import { z } from \"zod\";",
+    "import { zodToJsonSchema } from \"zod-to-json-schema\";",
+    "import { diffLines, createTwoFilesPatch } from 'diff';",
+    "import { minimatch } from 'minimatch';",
+    "import { execSync } from 'child_process';"
+  ],
+  "vulnerable_function": "case \"mark_task_done\": {\n        const parsed = markTaskDoneRequest.safeParse(args);\n        if (!parsed.success) {\n          throw new Error(`Invalid arguments for mark_task_done: ${parsed.error}`);\n        }\n        const content = execSync(`task ${parsed.data.identifier} done`, { maxBuffer: 1024 * 1024 * 10 }).toString().trim();\n        return {\n          content: [{ type: \"text\", text: content }],\n        };\n      }",
+  "patched_function": "case \"mark_task_done\": {\n        const parsed = markTaskDoneRequest.safeParse(args);\n        if (!parsed.success) {\n          throw new Error(`Invalid arguments for mark_task_done: ${parsed.error}`);\n        }\n        const content = execFileSync('task', [parsed.data.identifier, 'done'], {   \n          encoding: 'utf8',  \n          maxBuffer: 1024 * 1024 * 10   \n        }).trim();\n        return {\n          content: [{ type: \"text\", text: content }],\n        };\n      }",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 4034,
+  "context_size_chars_after_truncation": 4034
+}

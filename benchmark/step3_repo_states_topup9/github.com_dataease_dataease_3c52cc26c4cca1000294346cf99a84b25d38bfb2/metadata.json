@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_dataease_dataease_3c52cc26c4cca1000294346cf99a84b25d38bfb2",
+  "cve_ids": [
+    "CVE-2025-62422"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "dataease/dataease",
+  "repository_url": "https://github.com/dataease/dataease",
+  "vulnerable_commit": "083c2e35c766037fccac307d5ec7d1909589bdf9",
+  "fixed_commit": "3c52cc26c4cca1000294346cf99a84b25d38bfb2",
+  "changed_file": "core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java",
+  "max_score": "1337"
+}

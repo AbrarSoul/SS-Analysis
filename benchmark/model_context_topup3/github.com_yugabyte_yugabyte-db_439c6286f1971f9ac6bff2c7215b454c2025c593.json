@@ -1,0 +1,62 @@
+{
+  "case_id": "github.com_yugabyte_yugabyte-db_439c6286f1971f9ac6bff2c7215b454c2025c593",
+  "language": "java",
+  "cve_id": "CVE-2024-0006",
+  "cve_ids_all": [
+    "CVE-2024-0006"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-532",
+      "definition": "Insertion of Sensitive Information into Log File"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.google.inject.Inject;",
+    "import com.google.inject.Singleton;",
+    "import com.yugabyte.yw.commissioner.Common;",
+    "import com.yugabyte.yw.commissioner.Common.CloudType;",
+    "import com.yugabyte.yw.commissioner.NodeAgentPoller;",
+    "import com.yugabyte.yw.common.concurrent.KeyLock;",
+    "import com.yugabyte.yw.common.config.GlobalConfKeys;",
+    "import com.yugabyte.yw.common.config.RuntimeConfGetter;",
+    "import com.yugabyte.yw.common.config.UniverseConfKeys;",
+    "import com.yugabyte.yw.forms.UniverseDefinitionTaskParams;",
+    "import com.yugabyte.yw.forms.UniverseDefinitionTaskParams.Cluster;",
+    "import com.yugabyte.yw.forms.UniverseDefinitionTaskParams.UserIntent;",
+    "import com.yugabyte.yw.models.AccessKey;",
+    "import com.yugabyte.yw.models.ImageBundle;",
+    "import com.yugabyte.yw.models.NodeAgent;",
+    "import com.yugabyte.yw.models.Provider;",
+    "import com.yugabyte.yw.models.ProviderDetails;",
+    "import com.yugabyte.yw.models.Universe;",
+    "import com.yugabyte.yw.models.helpers.NodeDetails;",
+    "import java.io.File;",
+    "import java.io.FileWriter;",
+    "import java.io.IOException;",
+    "import java.io.PrintWriter;",
+    "import java.nio.file.Files;",
+    "import java.nio.file.Path;",
+    "import java.nio.file.Paths;",
+    "import java.util.ArrayList;",
+    "import java.util.Arrays;",
+    "import java.util.Collections;",
+    "import java.util.HashMap;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.Optional;",
+    "import java.util.UUID;",
+    "import java.util.concurrent.TimeUnit;",
+    "import java.util.stream.Collectors;",
+    "import lombok.extern.slf4j.Slf4j;",
+    "import org.apache.commons.collections4.MapUtils;",
+    "import org.apache.commons.io.FileUtils;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import play.libs.Json;"
+  ],
+  "vulnerable_function": "  private ShellResponse executeNodeAction(\n      UniverseNodeAction nodeAction,\n      Universe universe,\n      NodeDetails node,\n      List<String> actionArgs,\n      ShellProcessContext context) {\n    List<String> commandArgs = new ArrayList<>();\n    Map<String, String> redactedVals = new HashMap<>();\n    commandArgs.add(PY_WRAPPER);\n    commandArgs.add(NODE_ACTION_SSH_SCRIPT);\n    if (node.isMaster) {\n      commandArgs.add(\"--is_master\");\n    }\n    commandArgs.add(\"--node_name\");\n    commandArgs.add(node.nodeName);\n    addConnectionParams(universe, node, commandArgs, redactedVals, context);\n    commandArgs.add(nodeAction.name().toLowerCase());\n    commandArgs.addAll(actionArgs);\n    if (MapUtils.isNotEmpty(redactedVals)) {\n      // Create a new context as a context is immutable.\n      context = context.toBuilder().redactedVals(redactedVals).build();\n    }\n    return shellProcessHandler.run(commandArgs, context);\n  }",
+  "patched_function": "  private ShellResponse executeNodeAction(\n      UniverseNodeAction nodeAction,\n      Universe universe,\n      NodeDetails node,\n      List<String> actionArgs,\n      ShellProcessContext context) {\n    List<String> commandArgs = new ArrayList<>();\n    Map<String, String> redactedVals = new HashMap<>();\n    commandArgs.add(PY_WRAPPER);\n    commandArgs.add(NODE_ACTION_SSH_SCRIPT);\n    if (node.isMaster) {\n      commandArgs.add(\"--is_master\");\n    }\n    commandArgs.add(\"--node_name\");\n    commandArgs.add(node.nodeName);\n    addConnectionParams(universe, node, commandArgs, redactedVals, context);\n    commandArgs.add(nodeAction.name().toLowerCase());\n    commandArgs.addAll(actionArgs);\n    if (MapUtils.isNotEmpty(redactedVals)) {\n      // Create a new context as a context is immutable.\n      if (MapUtils.isNotEmpty(context.getRedactedVals())) {\n        redactedVals.putAll(context.getRedactedVals());\n      }\n      context = context.toBuilder().redactedVals(redactedVals).build();\n    }\n    return shellProcessHandler.run(commandArgs, context);\n  }",
+  "unified_diff": "diff --git a/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java b/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java\nindex 02bf1d67797..5a0c873a7cb 100644\n--- a/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java\n+++ b/managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java\n@@ -527,6 +527,9 @@ public class NodeUniverseManager extends DevopsBase {\n     commandArgs.addAll(actionArgs);\n     if (MapUtils.isNotEmpty(redactedVals)) {\n       // Create a new context as a context is immutable.\n+      if (MapUtils.isNotEmpty(context.getRedactedVals())) {\n+        redactedVals.putAll(context.getRedactedVals());\n+      }\n       context = context.toBuilder().redactedVals(redactedVals).build();\n     }\n     return shellProcessHandler.run(commandArgs, context);",
+  "auto_locate_confidence": "auto"
+}

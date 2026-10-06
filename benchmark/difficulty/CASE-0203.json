@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0203",
+  "batch": "topup2",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 0,
+  "lines_changed_total": 3,
+  "function_size_chars": 471,
+  "function_size_lines": 14,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Variable lookup as values[name] with no own-property check; generic dynamic lookup that is benign in most uses."
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "CASE-0132",
+  "language": "javascript",
+  "cve_id": "CVE-2025-48024",
+  "cve_ids_all": [
+    "CVE-2025-48024"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-497",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { updateAppSettingsBodyValidation } from \"../validation/joi.js\";",
+    "import { handleValidationError, handleError } from \"./controllerUtils.js\";"
+  ],
+  "vulnerable_function": "\tgetAppSettings = async (req, res, next) => {\n\t\tconst dbSettings = await this.settingsService.getDBSettings();\n\t\tconst sanitizedSettings = { ...dbSettings };\n\t\tif (typeof sanitizedSettings.pagespeedApiKey !== \"undefined\") {\n\t\t\tsanitizedSettings.pagespeedApiKey = \"********\";\n\t\t}\n\t\treturn res.success({\n\t\t\tmsg: this.stringService.getAppSettings,\n\t\t\tdata: sanitizedSettings,\n\t\t});\n\t}",
+  "patched_function": "\tgetAppSettings = async (req, res, next) => {\n\t\tconst dbSettings = await this.settingsService.getDBSettings();\n\t\tconst sanitizedSettings = { ...dbSettings };\n\n\t\tconst returnSettings = {\n\t\t\tpagespeedKeySet: false,\n\t\t\temailPasswordSet: false,\n\t\t};\n\n\t\tif (typeof sanitizedSettings.pagespeedApiKey !== \"undefined\") {\n\t\t\treturnSettings.pagespeedKeySet = true;\n\t\t\tdelete sanitizedSettings.pagespeedApiKey;\n\t\t}\n\t\tif (typeof sanitizedSettings.systemEmailPassword !== \"undefined\") {\n\t\t\treturnSettings.emailPasswordSet = true;\n\t\t\tdelete sanitizedSettings.systemEmailPassword;\n\t\t}\n\n\t\treturnSettings.settings = sanitizedSettings;\n\t\treturn res.success({\n\t\t\tmsg: this.stringService.getAppSettings,\n\t\t\tdata: returnSettings,\n\t\t});\n\t}",
+  "unified_diff": "diff --git a/server/controllers/settingsController.js b/server/controllers/settingsController.js\nindex 4d561216e..b557e8dd6 100755\n--- a/server/controllers/settingsController.js\n+++ b/server/controllers/settingsController.js\n@@ -13,12 +13,25 @@ class SettingsController {\n \tgetAppSettings = async (req, res, next) => {\n \t\tconst dbSettings = await this.settingsService.getDBSettings();\n \t\tconst sanitizedSettings = { ...dbSettings };\n+\n+\t\tconst returnSettings = {\n+\t\t\tpagespeedKeySet: false,\n+\t\t\temailPasswordSet: false,\n+\t\t};\n+\n \t\tif (typeof sanitizedSettings.pagespeedApiKey !== \"undefined\") {\n-\t\t\tsanitizedSettings.pagespeedApiKey = \"********\";\n+\t\t\treturnSettings.pagespeedKeySet = true;\n+\t\t\tdelete sanitizedSettings.pagespeedApiKey;\n \t\t}\n+\t\tif (typeof sanitizedSettings.systemEmailPassword !== \"undefined\") {\n+\t\t\treturnSettings.emailPasswordSet = true;\n+\t\t\tdelete sanitizedSettings.systemEmailPassword;\n+\t\t}\n+\n+\t\treturnSettings.settings = sanitizedSettings;\n \t\treturn res.success({\n \t\t\tmsg: this.stringService.getAppSettings,\n-\t\t\tdata: sanitizedSettings,\n+\t\t\tdata: returnSettings,\n \t\t});\n \t};\n ",
+  "auto_locate_confidence": "auto"
+}

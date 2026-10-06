@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_rhnpush-plugin_7827db39925d0fc8f5b95e013466987b513b3f3c",
+  "cve_ids": [
+    "CVE-2022-36892"
+  ],
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/rhnpush-plugin",
+  "repository_url": "https://github.com/jenkinsci/rhnpush-plugin",
+  "vulnerable_commit": "8b36f5655d27d3fecda5dd155fcf3435a2239708",
+  "fixed_commit": "7827db39925d0fc8f5b95e013466987b513b3f3c",
+  "changed_file": "src/main/java/jenkins/plugins/rhnpush/RhnPush.java",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mintplex-labs_anything-llm_e208074ef4c240fe03e4147ab097ec3b52b97619",
+  "cve_ids": [
+    "CVE-2024-5211"
+  ],
+  "cwe_ids": [
+    "CWE-29"
+  ],
+  "language": "javascript",
+  "repository": "mintplex-labs/anything-llm",
+  "repository_url": "https://github.com/mintplex-labs/anything-llm",
+  "vulnerable_commit": "e2439c6d4c3cfdacd96cd1b7b92d1f89c3cc8459",
+  "fixed_commit": "e208074ef4c240fe03e4147ab097ec3b52b97619",
+  "changed_file": "collector/utils/files/index.js",
+  "max_score": "1337"
+}

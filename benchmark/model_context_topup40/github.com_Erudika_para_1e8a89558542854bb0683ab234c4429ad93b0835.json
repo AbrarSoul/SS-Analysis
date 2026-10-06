@@ -1,0 +1,41 @@
+{
+  "case_id": "github.com_Erudika_para_1e8a89558542854bb0683ab234c4429ad93b0835",
+  "language": "java",
+  "cve_id": "CVE-2025-48955",
+  "cve_ids_all": [
+    "CVE-2025-48955"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-532",
+      "definition": "Insertion of Sensitive Information into Log File"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.erudika.para.core.App;",
+    "import com.erudika.para.core.listeners.InitializeListener;",
+    "import com.erudika.para.core.utils.Para;",
+    "import java.io.ByteArrayInputStream;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.nio.file.Files;",
+    "import java.nio.file.Path;",
+    "import java.nio.file.Paths;",
+    "import java.util.ArrayList;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.Optional;",
+    "import java.util.UUID;",
+    "import java.util.concurrent.ScheduledFuture;",
+    "import java.util.concurrent.TimeUnit;",
+    "import org.apache.commons.lang3.StringUtils;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;"
+  ],
+  "vulnerable_function": "\t\tprivate void saveConfigFile(String confFile, Map<String, String> rootAppCredentials) {\n\t\t\tif (rootAppCredentials.containsKey(\"secretKey\")) {\n\t\t\t\tString confString = \"\";\n\t\t\t\ttry {\n\t\t\t\t\tconfString = loadConfigFile(confFile);\n\t\t\t\t} catch (IOException e) {\n\t\t\t\t\tlogger.info(\"Initialized root app with access key '{}' and secret '{}', \"\n\t\t\t\t\t\t\t+ \"but could not write these to {}.\",\n\t\t\t\t\t\t\trootAppCredentials.get(\"accessKey\"), rootAppCredentials.get(\"secretKey\"), confFile);\n\t\t\t\t}\n\t\t\t\tString accessKey = \"para.root_access_key = \\\"\" + rootAppCredentials.get(\"accessKey\") + \"\\\"\";\n\t\t\t\tString secretKey = \"para.root_secret_key = \\\"\" + rootAppCredentials.get(\"secretKey\") + \"\\\"\";\n\t\t\t\tif (confString.contains(\"para.root_access_key\")) {\n\t\t\t\t\tconfString = confString.replaceAll(\"para\\\\.root_access_key\\\\s*=\\\\s*\\\".*?\\\"\", accessKey);\n\t\t\t\t} else {\n\t\t\t\t\tconfString += \"\\n\" + accessKey;\n\t\t\t\t}\n\t\t\t\tif (confString.contains(\"para.root_secret_key\")) {\n\t\t\t\t\tconfString = confString.replaceAll(\"para\\\\.root_secret_key\\\\s*=\\\\s*\\\".*?\\\"\", secretKey);\n\t\t\t\t} else {\n\t\t\t\t\tconfString += \"\\n\" + secretKey;\n\t\t\t\t}\n\t\t\t\tPara.getFileStore().store(confFile, new ByteArrayInputStream(confString.\n\t\t\t\t\t\tgetBytes(StandardCharsets.UTF_8)));\n\t\t\t\tlogger.info(\"Saved root app credentials to {}.\", confFile);\n\t\t\t} else {\n\t\t\t\tlogger.warn(\"Server is unhealthy - failed to initialize root app. Open http://localhost:\" +\n\t\t\t\t\t\tPara.getConfig().serverPort() + \"/v1/_setup in the browser to initialize Para manually.\");\n\t\t\t}\n\t\t}",
+  "patched_function": "\t\tprivate void saveConfigFile(String confFile, Map<String, String> rootAppCredentials) {\n\t\t\tif (rootAppCredentials.containsKey(\"secretKey\")) {\n\t\t\t\tString confString = \"\";\n\t\t\t\ttry {\n\t\t\t\t\tconfString = loadConfigFile(confFile);\n\t\t\t\t} catch (IOException e) {\n\t\t\t\t\tlogger.info(\"Initialized root app with access key '{}', \"\n\t\t\t\t\t\t\t+ \"but could not write to {}.\", rootAppCredentials.get(\"accessKey\"), confFile);\n\t\t\t\t}\n\t\t\t\tString accessKey = \"para.root_access_key = \\\"\" + rootAppCredentials.get(\"accessKey\") + \"\\\"\";\n\t\t\t\tString secretKey = \"para.root_secret_key = \\\"\" + rootAppCredentials.get(\"secretKey\") + \"\\\"\";\n\t\t\t\tif (confString.contains(\"para.root_access_key\")) {\n\t\t\t\t\tconfString = confString.replaceAll(\"para\\\\.root_access_key\\\\s*=\\\\s*\\\".*?\\\"\", accessKey);\n\t\t\t\t} else {\n\t\t\t\t\tconfString += \"\\n\" + accessKey;\n\t\t\t\t}\n\t\t\t\tif (confString.contains(\"para.root_secret_key\")) {\n\t\t\t\t\tconfString = confString.replaceAll(\"para\\\\.root_secret_key\\\\s*=\\\\s*\\\".*?\\\"\", secretKey);\n\t\t\t\t} else {\n\t\t\t\t\tconfString += \"\\n\" + secretKey;\n\t\t\t\t}\n\t\t\t\tPara.getFileStore().store(confFile, new ByteArrayInputStream(confString.\n\t\t\t\t\t\tgetBytes(StandardCharsets.UTF_8)));\n\t\t\t\tlogger.info(\"Saved root app credentials to {}.\", confFile);\n\t\t\t} else {\n\t\t\t\tlogger.warn(\"Server is unhealthy - failed to initialize root app. Open http://localhost:\" +\n\t\t\t\t\t\tPara.getConfig().serverPort() + \"/v1/_setup in the browser to initialize Para manually.\");\n\t\t\t}\n\t\t}",
+  "unified_diff": "diff --git a/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java b/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java\nindex 867bb842..1c7cc3c6 100644\n--- a/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java\n+++ b/para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java\n@@ -129,9 +129,8 @@ public enum HealthUtils implements InitializeListener, Runnable {\n \t\t\t\ttry {\n \t\t\t\t\tconfString = loadConfigFile(confFile);\n \t\t\t\t} catch (IOException e) {\n-\t\t\t\t\tlogger.info(\"Initialized root app with access key '{}' and secret '{}', \"\n-\t\t\t\t\t\t\t+ \"but could not write these to {}.\",\n-\t\t\t\t\t\t\trootAppCredentials.get(\"accessKey\"), rootAppCredentials.get(\"secretKey\"), confFile);\n+\t\t\t\t\tlogger.info(\"Initialized root app with access key '{}', \"\n+\t\t\t\t\t\t\t+ \"but could not write to {}.\", rootAppCredentials.get(\"accessKey\"), confFile);\n \t\t\t\t}\n \t\t\t\tString accessKey = \"para.root_access_key = \\\"\" + rootAppCredentials.get(\"accessKey\") + \"\\\"\";\n \t\t\t\tString secretKey = \"para.root_secret_key = \\\"\" + rootAppCredentials.get(\"secretKey\") + \"\\\"\";",
+  "auto_locate_confidence": "auto"
+}

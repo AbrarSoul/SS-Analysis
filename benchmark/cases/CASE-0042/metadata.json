@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0042",
+  "original_source_case_id": "github.com_1Panel-dev_MaxKB_4ae02c8d3eb65542c88ef58c0abd94c52c949d8f",
+  "selection_batch": "topup5",
+  "cve_id": "CVE-2025-32383",
+  "cve_ids_all": [
+    "CVE-2025-32383"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "1Panel-dev/MaxKB",
+  "repository_url": "https://github.com/1Panel-dev/MaxKB",
+  "vulnerable_commit": "3557ea50fa444022c6fec206dec0864fd22e1952",
+  "fixed_commit": "4ae02c8d3eb65542c88ef58c0abd94c52c949d8f",
+  "changed_file": "apps/common/util/function_code.py",
+  "changed_function": "def _exec_sandbox(self, _code, _id):",
+  "vulnerable_lines": [
+    84,
+    96
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0042/vulnerable_source.py": "56b76212a93fd64ee7fd511f18d381202ccc1e8f02ce43b49ca39fa37219a829",
+    "cases/CASE-0042/patched_source.py": "172cefd5daae962c409a2736cc97debae2986a71d456c9d6b31900398f18f5d6",
+    "cases/CASE-0042/patch.diff": "504aceeeee082c24f6a7c38b686c1aa3252f13ed058e6d8ef882c39461aba8ae",
+    "cases/CASE-0042/metadata.json": "dddb2c9e50e30cde3b3048ddd15d36b4df58d00fac824f7cbb4025a681d6b230",
+    "model_context/CASE-0042.json": "adcb443d24d3b8bd7915d3c03c416b52b56225be050a589b67190dc4fdd20fd5",
+    "difficulty/CASE-0042.json": "0c4bb1b72736aa8465e278e069e59cbd359e88a07f251666057d9d18058d263a"
+  },
+  "case_level_hash": "fde84eaca60ffbf97685bdf2b9a7fbc2a4405fb6eb78fdd6e4a2eb35b1ad2c55"
+}

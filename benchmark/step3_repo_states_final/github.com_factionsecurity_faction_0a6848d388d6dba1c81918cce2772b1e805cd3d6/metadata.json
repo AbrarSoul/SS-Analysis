@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_factionsecurity_faction_0a6848d388d6dba1c81918cce2772b1e805cd3d6",
+  "cve_ids": [
+    "CVE-2025-27422"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "factionsecurity/faction",
+  "repository_url": "https://github.com/factionsecurity/faction",
+  "vulnerable_commit": "0025beb8d9289123185899edcca35af5f493965c",
+  "fixed_commit": "0a6848d388d6dba1c81918cce2772b1e805cd3d6",
+  "changed_file": "src/com/fuse/actions/Login.java",
+  "max_score": "1337"
+}

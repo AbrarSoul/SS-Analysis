@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_KnowageLabs_Knowage-Server_f7d0362f737e1b0db1cc9cc95b1236d62d83dd0c",
+  "cve_ids": [
+    "CVE-2024-57971"
+  ],
+  "cwe_ids": [
+    "CWE-99"
+  ],
+  "language": "java",
+  "repository": "KnowageLabs/Knowage-Server",
+  "repository_url": "https://github.com/KnowageLabs/Knowage-Server",
+  "vulnerable_commit": "788b8ef79d0a805f48082f146b9835169f2d129a",
+  "fixed_commit": "f7d0362f737e1b0db1cc9cc95b1236d62d83dd0c",
+  "changed_file": "knowage-core/src/main/java/it/eng/spagobi/api/v2/DataSourceResource.java",
+  "max_score": "1337"
+}

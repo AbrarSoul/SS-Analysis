@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_Yonle_bostr_49181f4ec9ae1472c6675cab56bbc01e723855af",
+  "cve_ids": [
+    "CVE-2024-41962"
+  ],
+  "cwe_ids": [
+    "CWE-285",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "Yonle/bostr",
+  "repository_url": "https://github.com/Yonle/bostr",
+  "vulnerable_commit": "8b131e239b92db889ac5d8fd02bee1d3a035fd9d",
+  "fixed_commit": "49181f4ec9ae1472c6675cab56bbc01e723855af",
+  "changed_file": "auth.js",
+  "max_score": "1337"
+}

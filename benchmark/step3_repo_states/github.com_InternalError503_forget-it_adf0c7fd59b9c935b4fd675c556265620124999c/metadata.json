@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_InternalError503_forget-it_adf0c7fd59b9c935b4fd675c556265620124999c",
+  "cve_ids": [
+    "CVE-2015-10103"
+  ],
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "language": "javascript",
+  "repository": "InternalError503/forget-it",
+  "repository_url": "https://github.com/InternalError503/forget-it",
+  "vulnerable_commit": "cbc240cea8b1770971372dcd054733f0596ed49a",
+  "fixed_commit": "adf0c7fd59b9c935b4fd675c556265620124999c",
+  "changed_file": "js/settings.js",
+  "max_score": "1337"
+}

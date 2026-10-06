@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_zulip_zulip_1a8429e338ff53bdcc4b42e7e71b6fffdd84fcd1",
+  "cve_ids": [
+    "CVE-2025-52559"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "zulip/zulip",
+  "repository_url": "https://github.com/zulip/zulip",
+  "vulnerable_commit": "6608c8777254e73a4b540e5e1c4af92e680a55fc",
+  "fixed_commit": "1a8429e338ff53bdcc4b42e7e71b6fffdd84fcd1",
+  "changed_file": "zerver/lib/email_notifications.py",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0287",
+  "batch": "topup3",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-284"
+  ],
+  "changed_files": 1,
+  "lines_added": 38,
+  "lines_removed": 6,
+  "lines_changed_total": 44,
+  "function_size_chars": 746,
+  "function_size_lines": 22,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Prisma include: { author: true } returns whole user rows from public procedures; needs schema knowledge of what is sensitive."
+}

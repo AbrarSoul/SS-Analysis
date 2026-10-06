@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0296",
+  "original_source_case_id": "github.com_spring-projects_spring-ldap_08e8ae289bbd1b581986c7238604a147119c1336",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2017-8028",
+  "cve_ids_all": [
+    "CVE-2017-8028"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-ldap",
+  "repository_url": "https://github.com/spring-projects/spring-ldap",
+  "vulnerable_commit": "9d8f9fb1882b99a71d510097bb9c32cd1b2331cb",
+  "fixed_commit": "08e8ae289bbd1b581986c7238604a147119c1336",
+  "changed_file": "core/src/main/java/org/springframework/ldap/core/support/DefaultTlsDirContextAuthenticationStrategy.java",
+  "changed_function": "protected void applyAuthentication(LdapContext ctx, String userDn, String password) throws NamingException {",
+  "vulnerable_lines": [
+    35,
+    39
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0296/vulnerable_source.java": "21ee6b8ac25c51c5525f0630d491ed84a751c07f54e08e91479f0063c3be519f",
+    "cases/CASE-0296/patched_source.java": "df3ff00b688bb5a88e37eb1eea02a2cd3dcce57855802f895b7fdea04f7f23d9",
+    "cases/CASE-0296/patch.diff": "5c726243d1a2c65fe5200ed7a1928ce25bbe8d4e0a29ab7b9c1eeaac48e3a83f",
+    "cases/CASE-0296/metadata.json": "3641c1ea99599e056faa9b80344bc14174348643b13fc2a1c2269c07129b1de8",
+    "model_context/CASE-0296.json": "81c98bb6955e2624e90e50db49b7e0485f15c5cfbbab564958c4e4312314fbb4",
+    "difficulty/CASE-0296.json": "148e5c65fc7d185b418a7633d54b78e014568a265a79f413cf26e14e9e33d5de"
+  },
+  "case_level_hash": "456b5c1e399407987db18c8aee880441bcdb9ffbe54004b6d4634941f8d81021"
+}

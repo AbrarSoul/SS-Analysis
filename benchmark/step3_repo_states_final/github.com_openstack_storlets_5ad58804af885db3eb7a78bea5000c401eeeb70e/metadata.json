@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openstack_storlets_5ad58804af885db3eb7a78bea5000c401eeeb70e",
+  "cve_ids": [
+    "CVE-2024-28717"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "python",
+  "repository": "openstack/storlets",
+  "repository_url": "https://github.com/openstack/storlets",
+  "vulnerable_commit": "9aa8ab2cdaadd387282701d43463e486d29fa91d",
+  "fixed_commit": "5ad58804af885db3eb7a78bea5000c401eeeb70e",
+  "changed_file": "storlets/gateway/gateways/docker/gateway.py",
+  "max_score": "1337"
+}

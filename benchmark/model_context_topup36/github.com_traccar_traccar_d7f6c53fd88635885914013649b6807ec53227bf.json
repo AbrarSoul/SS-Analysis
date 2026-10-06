@@ -1,0 +1,44 @@
+{
+  "case_id": "github.com_traccar_traccar_d7f6c53fd88635885914013649b6807ec53227bf",
+  "language": "java",
+  "cve_id": "CVE-2019-5748",
+  "cve_ids_all": [
+    "CVE-2019-5748"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-611",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;",
+    "import io.netty.channel.Channel;",
+    "import io.netty.handler.codec.http.FullHttpRequest;",
+    "import io.netty.handler.codec.http.HttpResponseStatus;",
+    "import org.traccar.BaseHttpProtocolDecoder;",
+    "import org.traccar.DeviceSession;",
+    "import org.traccar.Protocol;",
+    "import org.traccar.helper.DateUtil;",
+    "import org.traccar.model.Position;",
+    "import org.w3c.dom.Document;",
+    "import org.w3c.dom.Node;",
+    "import org.w3c.dom.NodeList;",
+    "import javax.xml.parsers.DocumentBuilder;",
+    "import javax.xml.parsers.DocumentBuilderFactory;",
+    "import javax.xml.parsers.ParserConfigurationException;",
+    "import javax.xml.xpath.XPath;",
+    "import javax.xml.xpath.XPathConstants;",
+    "import javax.xml.xpath.XPathExpression;",
+    "import javax.xml.xpath.XPathExpressionException;",
+    "import javax.xml.xpath.XPathFactory;",
+    "import java.net.SocketAddress;",
+    "import java.util.LinkedList;",
+    "import java.util.List;"
+  ],
+  "vulnerable_function": "    public SpotProtocolDecoder(Protocol protocol) {\n        super(protocol);\n        try {\n            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();\n            xPath = XPathFactory.newInstance().newXPath();\n            messageExpression = xPath.compile(\"//messageList/message\");\n        } catch (ParserConfigurationException | XPathExpressionException e) {\n            throw new RuntimeException(e);\n        }\n    }",
+  "patched_function": "    public SpotProtocolDecoder(Protocol protocol) {\n        super(protocol);\n        try {\n            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();\n            builderFactory.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\n            builderFactory.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\n            builderFactory.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\n            builderFactory.setFeature(\"http://apache.org/xml/features/nonvalidating/load-external-dtd\", false);\n            builderFactory.setXIncludeAware(false);\n            builderFactory.setExpandEntityReferences(false);\n            documentBuilder = builderFactory.newDocumentBuilder();\n            xPath = XPathFactory.newInstance().newXPath();\n            messageExpression = xPath.compile(\"//messageList/message\");\n        } catch (ParserConfigurationException | XPathExpressionException e) {\n            throw new RuntimeException(e);\n        }\n    }",
+  "unified_diff": "diff --git a/src/org/traccar/protocol/SpotProtocolDecoder.java b/src/org/traccar/protocol/SpotProtocolDecoder.java\nindex 78b2b0487..da36c2048 100644\n--- a/src/org/traccar/protocol/SpotProtocolDecoder.java\n+++ b/src/org/traccar/protocol/SpotProtocolDecoder.java\n@@ -1,5 +1,5 @@\n /*\n- * Copyright 2017 - 2018 Anton Tananaev (anton@traccar.org)\n+ * Copyright 2017 - 2019 Anton Tananaev (anton@traccar.org)\n  *\n  * Licensed under the Apache License, Version 2.0 (the \"License\");\n  * you may not use this file except in compliance with the License.\n@@ -49,7 +49,14 @@ public class SpotProtocolDecoder extends BaseHttpProtocolDecoder {\n     public SpotProtocolDecoder(Protocol protocol) {\n         super(protocol);\n         try {\n-            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();\n+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();\n+            builderFactory.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\n+            builderFactory.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\n+            builderFactory.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\n+            builderFactory.setFeature(\"http://apache.org/xml/features/nonvalidating/load-external-dtd\", false);\n+            builderFactory.setXIncludeAware(false);\n+            builderFactory.setExpandEntityReferences(false);\n+            documentBuilder = builderFactory.newDocumentBuilder();\n             xPath = XPathFactory.newInstance().newXPath();\n             messageExpression = xPath.compile(\"//messageList/message\");\n         } catch (ParserConfigurationException | XPathExpressionException e) {",
+  "auto_locate_confidence": "auto"
+}

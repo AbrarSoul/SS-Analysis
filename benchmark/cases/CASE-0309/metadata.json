@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0309",
+  "original_source_case_id": "github.com_traccar_traccar_d7f6c53fd88635885914013649b6807ec53227bf",
+  "selection_batch": "topup36",
+  "cve_id": "CVE-2019-5748",
+  "cve_ids_all": [
+    "CVE-2019-5748"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "traccar/traccar",
+  "repository_url": "https://github.com/traccar/traccar",
+  "vulnerable_commit": "eea01d00aad283bf505262b3c462dc7b88011fae",
+  "fixed_commit": "d7f6c53fd88635885914013649b6807ec53227bf",
+  "changed_file": "src/org/traccar/protocol/SpotProtocolDecoder.java",
+  "changed_function": "public SpotProtocolDecoder(Protocol protocol) {",
+  "vulnerable_lines": [
+    49,
+    58
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0309/vulnerable_source.java": "6112d89779be6549aa320cd937b712131e2c3be3d24745002b2ecd599c333641",
+    "cases/CASE-0309/patched_source.java": "ff2a4601707a29dbce087c868eccf9cbcc3f45d14e1cd35dc8b416fad0764547",
+    "cases/CASE-0309/patch.diff": "e42baa4fea83ff7a45ec1b2edd22b53643c46fac426f260d6b1ce4c76a659707",
+    "cases/CASE-0309/metadata.json": "62c00991ef813d421e7e7f7f9ddc2f96b82804e17f468a1a979a204cddcfb082",
+    "model_context/CASE-0309.json": "c0380a70a27e47a3eaa86f735a0bccb39357e48c0dbeff5ca02f290ab7319b99",
+    "difficulty/CASE-0309.json": "1b6f17fa811395060d40a0aff38a7fa0835b3825cb62c9eea34ebbfaee8448f5"
+  },
+  "case_level_hash": "69ab2cfc6f84c9d5fd477de7a4bbde2ea50c9e8318674a13a97bf0b64b00f4d6"
+}

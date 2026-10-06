@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0120",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-193"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 783,
+  "function_size_lines": 21,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Counter incremented before the limit comparison (off-by-one); semantic counting error rather than a matchable idiom. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0282",
+  "batch": "topup29",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 1,
+  "lines_changed_total": 1,
+  "function_size_chars": 764,
+  "function_size_lines": 17,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "exec() of an f-string built from caller-supplied module and class names; code-injection sink."
+}

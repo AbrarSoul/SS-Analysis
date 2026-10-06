@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0121",
+  "original_source_case_id": "github.com_apache_ws-wss4j_970b3e3756e2c75bf2379ce198365e1a7168c3c3",
+  "selection_batch": "final",
+  "cve_id": "CVE-2015-0226",
+  "cve_ids_all": [
+    "CVE-2015-0226"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-327"
+  ],
+  "language": "java",
+  "repository": "apache/ws-wss4j",
+  "repository_url": "https://github.com/apache/ws-wss4j",
+  "vulnerable_commit": "d05e1601f5d524ab6ea2f3f7d0f8bfe71d6c9f0f",
+  "fixed_commit": "970b3e3756e2c75bf2379ce198365e1a7168c3c3",
+  "changed_file": "src/main/java/org/apache/ws/security/processor/EncryptedKeyProcessor.java",
+  "changed_function": "private static byte[] getRandomKey(List<String> dataRefURIs, Document doc, WSDocInfo wsDocInfo) throws WSSecurityException {",
+  "vulnerable_lines": [
+    212,
+    230
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0121/vulnerable_source.java": "12b66ea3df1f94403e9ee63f54b7bfad17ea2671c66c0eccca594f532dbc6ad8",
+    "cases/CASE-0121/patched_source.java": "ab0354dc7f8f35fdea86bff236852613c8b596422b3ea99805a828c7a76f3cd4",
+    "cases/CASE-0121/patch.diff": "baad98a7e2e9709da2698e8e5a1e31475cd5857a394aae196cefbc048318967f",
+    "cases/CASE-0121/metadata.json": "3ca1849fc39c58988fe799a46ce2405d5c035b33d9e82a209e7e8c45ff045f4c",
+    "model_context/CASE-0121.json": "f7e822821c99b744b70c42218b16744eebb70ca7786db87d02b65ee684612ac2",
+    "difficulty/CASE-0121.json": "828ca00fef6cadf6c9b17da62760ded15f35441c5eb5af84161df850570bd48b"
+  },
+  "case_level_hash": "dc8fd6ea3ade6fcdf95086992b9d0f6658e63754581a0931b644198622ff5c7f"
+}

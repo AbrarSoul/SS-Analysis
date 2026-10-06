@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0058",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "changed_files": 1,
+  "lines_added": 40,
+  "lines_removed": 24,
+  "lines_changed_total": 64,
+  "function_size_chars": 2005,
+  "function_size_lines": 60,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "ElGamal prime and generator lack algebraic checks; cryptographic parameter quality is not expressible."
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_sonar-gerrit-plugin_f4646d4df0870bd06b76de86309bb38fbd929d54",
+  "cve_ids": [
+    "CVE-2022-46688"
+  ],
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/sonar-gerrit-plugin",
+  "repository_url": "https://github.com/jenkinsci/sonar-gerrit-plugin",
+  "vulnerable_commit": "8f3808963dc55315676746aef0705b6cae5b559c",
+  "fixed_commit": "f4646d4df0870bd06b76de86309bb38fbd929d54",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/sonargerrit/gerrit/GerritAuthenticationConfig.java",
+  "max_score": "1337"
+}

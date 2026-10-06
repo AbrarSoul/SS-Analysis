@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_joniles_mpxj_8eaf4225048ea5ba7e59ef4556dab2098fcc4a1d",
+  "cve_ids": [
+    "CVE-2020-35460"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "joniles/mpxj",
+  "repository_url": "https://github.com/joniles/mpxj",
+  "vulnerable_commit": "1eed5f01ac8e49b433e0538bdc079caeda7d6fd7",
+  "fixed_commit": "8eaf4225048ea5ba7e59ef4556dab2098fcc4a1d",
+  "changed_file": "src/main/java/net/sf/mpxj/common/InputStreamHelper.java",
+  "max_score": "1337"
+}

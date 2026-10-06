@@ -1,0 +1,44 @@
+{
+  "case_id": "github.com_mintplex-labs_anything-llm_d5cde8b7c27a47ab45b05b441db16751537f1733",
+  "language": "javascript",
+  "cve_id": "CVE-2024-0798",
+  "cve_ids_all": [
+    "CVE-2024-0798"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-272",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const { viewLocalFiles, normalizePath } = require(\"../utils/files\");",
+    "const { purgeDocument, purgeFolder } = require(\"../utils/files/purgeDocument\");",
+    "const { getVectorDbClass } = require(\"../utils/helpers\");",
+    "const { updateENV, dumpENV } = require(\"../utils/helpers/updateENV\");",
+    "const { setupLogoUploads, setupPfpUploads } = require(\"../utils/files/multer\");",
+    "const { v4 } = require(\"uuid\");",
+    "const { SystemSettings } = require(\"../models/systemSettings\");",
+    "const { User } = require(\"../models/user\");",
+    "const { validatedRequest } = require(\"../utils/middleware/validatedRequest\");",
+    "const fs = require(\"fs\");",
+    "const path = require(\"path\");",
+    "const { Telemetry } = require(\"../models/telemetry\");",
+    "const { WelcomeMessages } = require(\"../models/welcomeMessages\");",
+    "const { ApiKey } = require(\"../models/apiKeys\");",
+    "const { getCustomModels } = require(\"../utils/helpers/customModels\");",
+    "const { WorkspaceChats } = require(\"../models/workspaceChats\");",
+    "const { fetchPfp, determinePfpFilepath } = require(\"../utils/files/pfp\");",
+    "const execSync = require(\"child_process\").execSync;",
+    "const bcrypt = require(\"bcrypt\");"
+  ],
+  "vulnerable_function": "  app.get(\"/system/local-files\", [validatedRequest], async (_, response) => {\n    try {\n      const localFiles = await viewLocalFiles();\n      response.status(200).json({ localFiles });\n    } catch (e) {\n      console.log(e.message, e);\n      response.sendStatus(500).end();\n    }\n  }",
+  "patched_function": "  app.get(\n    \"/system/local-files\",\n    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],\n    async (_, response) => {\n      try {\n        const localFiles = await viewLocalFiles();\n        response.status(200).json({ localFiles });\n      } catch (e) {\n        console.log(e.message, e);\n        response.sendStatus(500).end();\n      }\n    }",
+  "unified_diff": "diff --git a/server/endpoints/system.js b/server/endpoints/system.js\nindex 14aa22e0..4eb82fb0 100644\n--- a/server/endpoints/system.js\n+++ b/server/endpoints/system.js\n@@ -189,7 +189,7 @@ function systemEndpoints(app) {\n \n   app.get(\n     \"/system/system-vectors\",\n-    [validatedRequest],\n+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],\n     async (request, response) => {\n       try {\n         const query = queryParams(request);\n@@ -207,7 +207,7 @@ function systemEndpoints(app) {\n \n   app.delete(\n     \"/system/remove-document\",\n-    [validatedRequest],\n+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],\n     async (request, response) => {\n       try {\n         const { name } = reqBody(request);\n@@ -222,7 +222,7 @@ function systemEndpoints(app) {\n \n   app.delete(\n     \"/system/remove-folder\",\n-    [validatedRequest],\n+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],\n     async (request, response) => {\n       try {\n         const { name } = reqBody(request);\n@@ -235,15 +235,19 @@ function systemEndpoints(app) {\n     }\n   );\n \n-  app.get(\"/system/local-files\", [validatedRequest], async (_, response) => {\n-    try {\n-      const localFiles = await viewLocalFiles();\n-      response.status(200).json({ localFiles });\n-    } catch (e) {\n-      console.log(e.message, e);\n-      response.sendStatus(500).end();\n+  app.get(\n+    \"/system/local-files\",\n+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],\n+    async (_, response) => {\n+      try {\n+        const localFiles = await viewLocalFiles();\n+        response.status(200).json({ localFiles });\n+      } catch (e) {\n+        console.log(e.message, e);\n+        response.sendStatus(500).end();\n+      }\n     }\n-  });\n+  );\n \n   app.get(\n     \"/system/document-processing-status\",",
+  "auto_locate_confidence": "auto"
+}

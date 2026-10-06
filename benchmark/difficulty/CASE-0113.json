@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0113",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 12,
+  "lines_changed_total": 12,
+  "function_size_chars": 2927,
+  "function_size_lines": 72,
+  "auto_locate_confidence": "hand_retargeted",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "System.getenv() iterated into a published metrics map; env-var exposure sink."
+}

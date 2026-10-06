@@ -1,0 +1,40 @@
+{
+  "case_id": "github.com_trailofbits_fickling_eb299b453342f1931c787bcb3bc33f3a03a173f9",
+  "language": "python",
+  "cve_id": "CVE-2026-22609",
+  "cve_ids_all": [
+    "CVE-2026-22609"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-184",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-502",
+      "definition": "Deserialization of Untrusted Data"
+    }
+  ],
+  "containing_class_declaration": "Pickled",
+  "imports": [
+    "from __future__ import annotations",
+    "import ast",
+    "import keyword",
+    "import marshal",
+    "import re",
+    "import struct",
+    "import sys",
+    "from abc import ABC, abstractmethod",
+    "from collections.abc import Iterable, Iterator, MutableSequence, Sequence",
+    "from enum import Enum",
+    "from io import BytesIO",
+    "from pickletools import OpcodeInfo, genops, opcodes",
+    "from typing import Any, BinaryIO, Generic, TypeVar, overload",
+    "from stdlib_list import in_stdlib",
+    "from fickling.exception import WrongMethodError"
+  ],
+  "vulnerable_function": "    def unsafe_imports(self) -> Iterator[ast.Import | ast.ImportFrom]:\n        for node in self.properties.imports:\n            if node.module in (\n                \"__builtin__\",\n                \"__builtins__\",\n                \"builtins\",\n                \"os\",\n                \"posix\",\n                \"nt\",\n                \"subprocess\",\n                \"sys\",\n                \"builtins\",\n                \"socket\",\n                \"pty\",\n                \"marshal\",\n                \"types\",\n                \"runpy\",\n                \"cProfile\",\n                \"ctypes\",\n                \"pydoc\",\n            ):\n                yield node\n            elif \"eval\" in (n.name for n in node.names):\n                yield node\n",
+  "patched_function": "    def unsafe_imports(self) -> Iterator[ast.Import | ast.ImportFrom]:\n        for node in self.properties.imports:\n            if node.module and node.module.split(\".\")[0] in (\n                \"__builtin__\",\n                \"__builtins__\",\n                \"builtins\",\n                \"os\",\n                \"posix\",\n                \"nt\",\n                \"subprocess\",\n                \"sys\",\n                \"builtins\",\n                \"socket\",\n                \"pty\",\n                \"marshal\",\n                \"types\",\n                \"runpy\",\n                \"cProfile\",\n                \"ctypes\",\n                \"pydoc\",\n            ):\n                yield node\n            elif \"eval\" in (n.name for n in node.names):\n                yield node\n",
+  "unified_diff": "diff --git a/fickling/fickle.py b/fickling/fickle.py\nindex ce2b3c5..c0269c8 100644\n--- a/fickling/fickle.py\n+++ b/fickling/fickle.py\n@@ -864,7 +864,7 @@ on the Pickled object instead\"\"\"\n \n     def unsafe_imports(self) -> Iterator[ast.Import | ast.ImportFrom]:\n         for node in self.properties.imports:\n-            if node.module in (\n+            if node.module and node.module.split(\".\")[0] in (\n                 \"__builtin__\",\n                 \"__builtins__\",\n                 \"builtins\",\n@@ -1157,7 +1157,7 @@ class StackGlobal(NoOp):\n                 f\"Module: {type(module).__name__}, Attr: {type(attr).__name__}\"\n             )\n \n-        if not module.isidentifier() or not attr.isidentifier():\n+        if not all(m.isidentifier() for m in module.split(\".\")) or not attr.isidentifier():\n             raise ValueError(\n                 f\"Extracted identifiers are not valid Python identifiers. \"\n                 f\"Module: {module!r}, Attr: {attr!r}\"",
+  "auto_locate_confidence": "auto_low_confidence"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "github.com_tox-dev_filelock_41b42dd2c72aecf7da83dbda5903b8087dddc4d5",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-362",
+    "CWE-367",
+    "CWE-59"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 1,
+  "lines_changed_total": 4,
+  "function_size_chars": 974,
+  "function_size_lines": 21,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

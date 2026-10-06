@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_directus_directus_d84dcc36f75fc5c858d43746b8f9c426c38d696b",
+  "cve_ids": [
+    "CVE-2025-55746"
+  ],
+  "cwe_ids": [
+    "CWE-434",
+    "CWE-73"
+  ],
+  "language": "typescript",
+  "repository": "directus/directus",
+  "repository_url": "https://github.com/directus/directus",
+  "vulnerable_commit": "7532b2b8fc8dbb6eeaa9bdd72ec8eefa2eb2a95c",
+  "fixed_commit": "d84dcc36f75fc5c858d43746b8f9c426c38d696b",
+  "changed_file": "api/src/services/files.ts",
+  "max_score": "1337"
+}

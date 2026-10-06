@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_janeczku_calibre-web_3e0d8763c377d2146462811e3e4ccf13f0d312ce",
+  "cve_ids": [
+    "CVE-2021-4171"
+  ],
+  "cwe_ids": [
+    "CWE-840",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "janeczku/calibre-web",
+  "repository_url": "https://github.com/janeczku/calibre-web",
+  "vulnerable_commit": "47f5e2ffb4253b57271e76444e465da425752239",
+  "fixed_commit": "3e0d8763c377d2146462811e3e4ccf13f0d312ce",
+  "changed_file": "cps/shelf.py",
+  "max_score": "1337"
+}

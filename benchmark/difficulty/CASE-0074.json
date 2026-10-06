@@ -1,0 +1,22 @@
+{
+  "case_id": "CASE-0074",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-125",
+    "CWE-20",
+    "CWE-200",
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 15,
+  "lines_removed": 4,
+  "lines_changed_total": 19,
+  "function_size_chars": 169,
+  "function_size_lines": 6,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "path.join result returned without a containment check; path-traversal shape though validation lives elsewhere."
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0272",
+  "original_source_case_id": "github.com_pyload_pyload_7b53b8d43c2c072b457dcd19c8a09bcfc3721703",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-0055",
+  "cve_ids_all": [
+    "CVE-2023-0055"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-319",
+    "CWE-614"
+  ],
+  "language": "python",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "7d73ba7919e594d783b3411d7ddb87885aea782d",
+  "fixed_commit": "7b53b8d43c2c072b457dcd19c8a09bcfc3721703",
+  "changed_file": "src/pyload/webui/app/__init__.py",
+  "changed_function": "def _configure_session(cls, app):",
+  "vulnerable_lines": [
+    97,
+    109
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0272/vulnerable_source.py": "258c97580357e15a47a0bf91f1ff473c1e768430ef20aa0802533cbe55fd786e",
+    "cases/CASE-0272/patched_source.py": "0fdabdd1d1fff92500f1860f908301ccde7a0ac303c8fd9d082f3106f9bbadca",
+    "cases/CASE-0272/patch.diff": "174d27c7fc17296fac51a8ba79fe53180732170edf6909f7d21325a79bb077e8",
+    "cases/CASE-0272/metadata.json": "30c4ac6b94bff5c28b537795dfd6923f731aa2050ceb9282c276f67acb7587fb",
+    "model_context/CASE-0272.json": "86492be29f52c09c68db0c5f9d701156185205f5de190a0717e35bc2a6d72145",
+    "difficulty/CASE-0272.json": "e068ecf82c01f7a5935210fec65f97b6d219faa8b5b56aed521dad4f22156497"
+  },
+  "case_level_hash": "947b02220e5e47ed99c8e169e271eca78a05231570a9e5fd8b4b365a403df91a"
+}

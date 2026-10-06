@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_useplunk_plunk_b8f1ad9ab53c78f8ef063fdc125f397c8bfc7652",
+  "cve_ids": [
+    "CVE-2026-32096",
+    "CVE-2026-42193"
+  ],
+  "cwe_ids": [
+    "CWE-347",
+    "CWE-918"
+  ],
+  "language": "typescript",
+  "repository": "useplunk/plunk",
+  "repository_url": "https://github.com/useplunk/plunk",
+  "vulnerable_commit": "ec1f4c9374e06e3defed3c728be603c10e4e7baa",
+  "fixed_commit": "b8f1ad9ab53c78f8ef063fdc125f397c8bfc7652",
+  "changed_file": "apps/api/src/controllers/Webhooks.ts",
+  "max_score": "1337"
+}

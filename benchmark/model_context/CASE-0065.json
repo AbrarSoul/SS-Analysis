@@ -1,0 +1,31 @@
+{
+  "case_id": "CASE-0065",
+  "language": "javascript",
+  "cve_id": "CVE-2021-43786",
+  "cve_ids_all": [
+    "CVE-2021-43786"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-287",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const async = require('async');",
+    "const passport = require('passport');",
+    "const passportLocal = require('passport-local').Strategy;",
+    "const BearerStrategy = require('passport-http-bearer').Strategy;",
+    "const winston = require('winston');",
+    "const meta = require('../meta');",
+    "const controllers = require('../controllers');",
+    "const helpers = require('../controllers/helpers');",
+    "const plugins = require('../plugins');",
+    "const multipart = require('connect-multiparty');"
+  ],
+  "vulnerable_function": "Auth.verifyToken = async function (token, done) {\n\tlet { tokens = [] } = await meta.settings.get('core.api');\n\ttokens = tokens.reduce((memo, cur) => {\n\t\tmemo[cur.token] = cur.uid;\n\t\treturn memo;\n\t}, {});\n\n\tconst uid = tokens[token];\n\n\tif (uid !== undefined) {\n\t\tif (parseInt(uid, 10) > 0) {\n\t\t\tdone(null, {\n\t\t\t\tuid: uid,\n\t\t\t});\n\t\t} else {\n\t\t\tdone(null, {\n\t\t\t\tmaster: true,\n\t\t\t});\n\t\t}\n\t} else {\n\t\tdone(false);\n\t}\n}",
+  "patched_function": "Auth.verifyToken = async function (token, done) {\n\tconst { tokens = [] } = await meta.settings.get('core.api');\n\tconst tokenObj = tokens.find(t => t.token === token);\n\tconst uid = tokenObj ? tokenObj.uid : undefined;\n\n\tif (uid !== undefined) {\n\t\tif (parseInt(uid, 10) > 0) {\n\t\t\tdone(null, {\n\t\t\t\tuid: uid,\n\t\t\t});\n\t\t} else {\n\t\t\tdone(null, {\n\t\t\t\tmaster: true,\n\t\t\t});\n\t\t}\n\t} else {\n\t\tdone(false);\n\t}\n}",
+  "unified_diff": "diff --git a/src/routes/authentication.js b/src/routes/authentication.js\nindex d6b98aa057..6d7a36e037 100644\n--- a/src/routes/authentication.js\n+++ b/src/routes/authentication.js\n@@ -44,13 +44,9 @@ Auth.getLoginStrategies = function () {\n };\n \n Auth.verifyToken = async function (token, done) {\n-\tlet { tokens = [] } = await meta.settings.get('core.api');\n-\ttokens = tokens.reduce((memo, cur) => {\n-\t\tmemo[cur.token] = cur.uid;\n-\t\treturn memo;\n-\t}, {});\n-\n-\tconst uid = tokens[token];\n+\tconst { tokens = [] } = await meta.settings.get('core.api');\n+\tconst tokenObj = tokens.find(t => t.token === token);\n+\tconst uid = tokenObj ? tokenObj.uid : undefined;\n \n \tif (uid !== undefined) {\n \t\tif (parseInt(uid, 10) > 0) {",
+  "auto_locate_confidence": "auto"
+}

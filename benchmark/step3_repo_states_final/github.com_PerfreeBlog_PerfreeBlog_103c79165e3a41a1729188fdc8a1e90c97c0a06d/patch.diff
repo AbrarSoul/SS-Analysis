@@ -1,0 +1,12 @@
+diff --git a/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java b/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java
+index b1ba58fd..7764dd4a 100644
+--- a/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java
++++ b/perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java
+@@ -87,6 +87,7 @@ public class AttachController {
+     @PostMapping("/uploadAttachByUrl")
+     @Operation(summary = "通过url下载并上传附件")
+     @DemoMode
++    @PreAuthorize("@ss.hasPermission('admin:attach:update')")
+     public CommonResult<AttachByUrlRespVO> uploadAttachByUrl(@Valid @RequestBody AttachUploadByUrlVO attachUploadByUrlVO) {
+         Attach attach = attachService.uploadAttachByUrl(attachUploadByUrlVO.getUrl());
+         AttachByUrlRespVO attachByUrlRespVO = AttachConvert.INSTANCE.convertByUrlRespVO(attach);

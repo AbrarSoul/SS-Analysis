@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0260",
+  "batch": "topup19",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 38,
+  "lines_changed_total": 44,
+  "function_size_chars": 1169,
+  "function_size_lines": 22,
+  "auto_locate_confidence": "hand_retargeted",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Hand-rolled DOT sanitiser only handles quoted attributes and misses HTML-like labels; sanitiser correctness is not a code shape."
+}

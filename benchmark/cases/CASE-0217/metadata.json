@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0217",
+  "original_source_case_id": "github.com_matrix-org_synapse_5bf8bc79ebc22c61968f2eb487714813fccbdb9b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-16515",
+  "cve_ids_all": [
+    "CVE-2018-16515"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "language": "python",
+  "repository": "matrix-org/synapse",
+  "repository_url": "https://github.com/matrix-org/synapse",
+  "vulnerable_commit": "67dbe4c89944cf5957f806ad63f60880e2242b23",
+  "fixed_commit": "5bf8bc79ebc22c61968f2eb487714813fccbdb9b",
+  "changed_file": "synapse/federation/federation_base.py",
+  "changed_function": "def _check_sigs_and_hashes(self, pdus):",
+  "vulnerable_lines": [
+    121,
+    184
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 110,
+  "patch_size_deleted": 16,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0217/vulnerable_source.py": "e6d98f7fbdce7e183d46b3a48badc4dc0b6786af1adbc0075e881c2738da0552",
+    "cases/CASE-0217/patched_source.py": "1d9cada290f1ea38b3124d2087efcc364d9ee82f0c100a0d2b9b61d40eea072d",
+    "cases/CASE-0217/patch.diff": "8ecb00df63c2b0ca7cba978eb5fb55ff92926787d0bec42e5361941981eed1f5",
+    "cases/CASE-0217/metadata.json": "0d1210c0cc2080df23259ede740699d055eb573964b3af7324009f6ed659c4ae",
+    "model_context/CASE-0217.json": "2f82f80fc7866a579f5551baece8f58c1962dfa8e479463a0ba6d4f52aee17ae",
+    "difficulty/CASE-0217.json": "aef7c79c4eda42980764a7c62198f7f5929f298ba81be9f2e4e13e71062127b9"
+  },
+  "case_level_hash": "eca933761b18ecc732783ec3f8bcb371a520d5480841abf9b28210f4f49f55a6"
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "github.com_Kozea_Radicale_059ba8dec1f22ccbeab837e288b3833a099cee2d",
+  "language": "python",
+  "cve_id": "CVE-2017-8342",
+  "cve_ids_all": [
+    "CVE-2017-8342"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-362",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "Auth",
+  "imports": [
+    "import base64",
+    "import functools",
+    "import hashlib",
+    "import os",
+    "from importlib import import_module",
+    "import crypt"
+  ],
+  "vulnerable_function": "    def is_authenticated(self, user, password):\n        # The content of the file is not cached because reading is generally a\n        # very cheap operation, and it's useful to get live updates of the\n        # htpasswd file.\n        with open(self.filename) as fd:\n            for line in fd:\n                line = line.strip()\n                if line:\n                    login, hash_value = line.split(\":\")\n                    if login == user:\n                        return self.verify(hash_value, password)\n        return False\n",
+  "patched_function": "    def is_authenticated(self, user, password):\n        # The content of the file is not cached because reading is generally a\n        # very cheap operation, and it's useful to get live updates of the\n        # htpasswd file.\n        with open(self.filename) as fd:\n            for line in fd:\n                line = line.strip()\n                if line:\n                    login, hash_value = line.split(\":\")\n                    if login == user and self.verify(hash_value, password):\n                        return True\n        # Random timer to avoid timing oracles and simple bruteforce attacks\n        time.sleep(1 + random.random())\n        return False\n",
+  "unified_diff": "diff --git a/radicale/auth.py b/radicale/auth.py\nindex 2fa2807e..8ae493a7 100644\n--- a/radicale/auth.py\n+++ b/radicale/auth.py\n@@ -57,6 +57,8 @@ import base64\n import functools\n import hashlib\n import os\n+import random\n+import time\n from importlib import import_module\n \n \n@@ -192,6 +194,8 @@ class Auth(BaseAuth):\n                 line = line.strip()\n                 if line:\n                     login, hash_value = line.split(\":\")\n-                    if login == user:\n-                        return self.verify(hash_value, password)\n+                    if login == user and self.verify(hash_value, password):\n+                        return True\n+        # Random timer to avoid timing oracles and simple bruteforce attacks\n+        time.sleep(1 + random.random())\n         return False",
+  "auto_locate_confidence": "auto"
+}

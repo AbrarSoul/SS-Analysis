@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_matrix-org_matrix-js-sdk_894c24880da0e1cc81818f51c0db80e3c9fb2be9",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "changed_files": 1,
+  "lines_added": 29,
+  "lines_removed": 9,
+  "lines_changed_total": 38,
+  "function_size_chars": 2920,
+  "function_size_lines": 82,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

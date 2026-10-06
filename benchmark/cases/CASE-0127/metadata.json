@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0127",
+  "original_source_case_id": "github.com_balderdashy_sails_4a023dc5095a4b30fdc8535f705ed34cd22d2f7d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-38504",
+  "cve_ids_all": [
+    "CVE-2023-38504"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-248",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "balderdashy/sails",
+  "repository_url": "https://github.com/balderdashy/sails",
+  "vulnerable_commit": "406a12095bc7708fc20c2f9056782a6084dd412f",
+  "fixed_commit": "4a023dc5095a4b30fdc8535f705ed34cd22d2f7d",
+  "changed_file": "lib/router/req.js",
+  "changed_function": "module.exports = function buildRequest (_req) {",
+  "vulnerable_lines": [
+    26,
+    149
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 17,
+  "patch_size_deleted": 12,
+  "auto_locate_confidence": "hand_retargeted",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0127/vulnerable_source.js": "c0cb6903061a84747e08596bbb30b47bd18ae147e7cc899d53aa657a0645b18a",
+    "cases/CASE-0127/patched_source.js": "14625921cde5de80c6081020e04b00bfaa9e2407747e6bf368ef1a0a8217c483",
+    "cases/CASE-0127/patch.diff": "cc50a6654c3717c852cbd24ce9bee5114df6b27ac28ba234ca6dd4a5e01273f2",
+    "model_context/CASE-0127.json": "6e76e76a1b7adaf1c52ae5ea5ff383decdf1e5448b4f6b82c8f45785c5d92ca7",
+    "difficulty/CASE-0127.json": "43af23e06660ef082b266b426301ae868038e2f74f2783b9dde5abe14860751b",
+    "cases/CASE-0127/metadata.json": "beddfdd24698e274b6d0c222dab7af9a54c3538ca2542236c9eeae5268550dba"
+  },
+  "case_level_hash": "750699f271e69e9e3b29f896215cb8aa3783d08bbbdd60985a26f8d0f9d7eff7"
+}

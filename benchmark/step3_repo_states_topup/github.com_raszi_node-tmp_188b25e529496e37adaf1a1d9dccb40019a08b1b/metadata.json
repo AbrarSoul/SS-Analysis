@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_raszi_node-tmp_188b25e529496e37adaf1a1d9dccb40019a08b1b",
+  "cve_ids": [
+    "CVE-2025-54798"
+  ],
+  "cwe_ids": [
+    "CWE-59"
+  ],
+  "language": "javascript",
+  "repository": "raszi/node-tmp",
+  "repository_url": "https://github.com/raszi/node-tmp",
+  "vulnerable_commit": "73b9fe45bbb40157acdfab8126dd0911de91c8fa",
+  "fixed_commit": "188b25e529496e37adaf1a1d9dccb40019a08b1b",
+  "changed_file": "lib/tmp.js",
+  "max_score": "1337"
+}

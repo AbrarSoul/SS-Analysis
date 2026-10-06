@@ -1,0 +1,27 @@
+{
+  "partition": "final",
+  "case_count": 300,
+  "case_id_range": [
+    "CASE-0041",
+    "CASE-0342"
+  ],
+  "retired_case_ids_gaps": [
+    "CASE-0277",
+    "CASE-0338"
+  ],
+  "by_language": {
+    "python": 100,
+    "javascript": 77,
+    "java": 100,
+    "typescript": 23
+  },
+  "dataset_hash_sha256": "cbb5afc56809a826cb941a2833484eea77d7ab903c6818e9bb4e1dfec951165b",
+  "manifest_file": "manifest_frozen_final.jsonl",
+  "known_unpopulated_schema_fields": [
+    "ghsa_id",
+    "advisory_date",
+    "repository_license",
+    "source_urls"
+  ],
+  "note": "pattern_or_taint / context_complexity / semgrep_representability filled from benchmark/labels_final.json (single-rater judgement made while building each case's Section 9 bundle; rubric in that file's _meta; see Implementation_Log.md Section 12.18). Development (50-case multi-agent) partition not curated yet. Post-freeze hand-curations (wrong-commit captures whose real fix is a small single-file change; see benchmark/hand_curations.json, applied idempotently by pipeline/apply_hand_curations.py, which MUST be re-run after any re-run of freeze_manifest_final.py): Tethik/flask-session-captcha (ab36ee2); advplyr/audiobookshelf (ec65376); unshiftio/url-parse (53b1794); retargeted (function re-picked by hand, files unchanged): ant-media/ant-media-server, apache/solr, balderdashy/sails, plantuml/plantuml, w8tcha/CKEditor-oEmbed-Plugin. See Implementation_Log.md Section 12.16."
+}

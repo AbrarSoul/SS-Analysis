@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0081",
+  "original_source_case_id": "github.com_YosefHayim_ebay-mcp_aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-27203",
+  "cve_ids_all": [
+    "CVE-2026-27203"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-15",
+    "CWE-74"
+  ],
+  "language": "typescript",
+  "repository": "YosefHayim/ebay-mcp",
+  "repository_url": "https://github.com/YosefHayim/ebay-mcp",
+  "vulnerable_commit": "6018e4c61110f43d254fdc749dc6baf3dc997ce7",
+  "fixed_commit": "aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a",
+  "changed_file": "src/auth/oauth.ts",
+  "changed_function": "function updateEnvFile(updates: Record<string, string>): void {",
+  "vulnerable_lines": [
+    17,
+    43
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 10,
+  "patch_size_deleted": 16,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0081/vulnerable_source.ts": "55e9ec5c0031da0f0f9823d9f9a3e7411291725778ea8a3c871142f8787a2977",
+    "cases/CASE-0081/patched_source.ts": "2e90ea3c0b159a6e76bfbf6c79bef89509f2dd095727adda5b35067ba0a42a39",
+    "cases/CASE-0081/patch.diff": "d62e60f1e008c34714f1bd4aab1cb6c50ba826a70f7b2cc9c156f5776995cec0",
+    "cases/CASE-0081/metadata.json": "0d211b7063e578cdf305f701322971a7b6f176891d5d2e2ac315cfd6b597f550",
+    "model_context/CASE-0081.json": "c1059be5bf714c686fe6cee5391d66aa8b736bb34f8368b93d919b33498a439c",
+    "difficulty/CASE-0081.json": "a18b623ff8b8939a69c56e4e232c90792262af0e8edfa44e6bbc73dd37d516f7"
+  },
+  "case_level_hash": "8cca499ad07c6e4b48b6e1d7bd74779a8eac77cf7d257b4307b7f0527e835961"
+}

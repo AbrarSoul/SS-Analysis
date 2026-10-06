@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0258",
+  "language": "javascript",
+  "cve_id": "CVE-2023-5890",
+  "cve_ids_all": [
+    "CVE-2023-5890"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "\t\tpkp.eventBus.$on('selected:reviewer', function(reviewer) {\n\t\t\t$('#reviewerId').val(reviewer.id);\n\t\t\t$('[id^=\"selectedReviewerName\"]').html(reviewer.fullName);\n\t\t\t$('#searchGridAndButton').hide();\n\t\t\t$('#regularReviewerForm').show();\n\t\t}",
+  "patched_function": "\t\tpkp.eventBus.$on('selected:reviewer', function(reviewer) {\n\t\t\t$('#reviewerId').val(reviewer.id);\n\t\t\t$('[id^=\"selectedReviewerName\"]').text(reviewer.fullName);\n\t\t\t$('#searchGridAndButton').hide();\n\t\t\t$('#regularReviewerForm').show();\n\t\t}",
+  "unified_diff": "diff --git a/js/controllers/grid/users/reviewer/AdvancedReviewerSearchHandler.js b/js/controllers/grid/users/reviewer/AdvancedReviewerSearchHandler.js\nindex 95bb4adac8..9f9c390142 100644\n--- a/js/controllers/grid/users/reviewer/AdvancedReviewerSearchHandler.js\n+++ b/js/controllers/grid/users/reviewer/AdvancedReviewerSearchHandler.js\n@@ -37,7 +37,7 @@\n \n \t\tpkp.eventBus.$on('selected:reviewer', function(reviewer) {\n \t\t\t$('#reviewerId').val(reviewer.id);\n-\t\t\t$('[id^=\"selectedReviewerName\"]').html(reviewer.fullName);\n+\t\t\t$('[id^=\"selectedReviewerName\"]').text(reviewer.fullName);\n \t\t\t$('#searchGridAndButton').hide();\n \t\t\t$('#regularReviewerForm').show();\n \t\t});",
+  "auto_locate_confidence": "auto"
+}

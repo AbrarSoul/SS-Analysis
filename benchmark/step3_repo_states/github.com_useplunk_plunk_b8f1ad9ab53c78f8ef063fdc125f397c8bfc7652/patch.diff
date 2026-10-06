@@ -1,0 +1,58 @@
+diff --git a/apps/api/src/controllers/Webhooks.ts b/apps/api/src/controllers/Webhooks.ts
+index 9242955..0c597f9 100644
+--- a/apps/api/src/controllers/Webhooks.ts
++++ b/apps/api/src/controllers/Webhooks.ts
+@@ -34,11 +34,35 @@ export class Webhooks {
+       // Handle SNS subscription confirmation FIRST (before parsing Message field)
+       if (req.body.Type === 'SubscriptionConfirmation') {
+         signale.info('SNS Subscription Confirmation received');
+-        signale.info('Subscribe URL:', req.body.SubscribeURL);
++
++        // Validate SubscribeURL to prevent SSRF: must be HTTPS and from an official AWS SNS host.
++        // Legitimate URLs look like:
++        //   https://sns.<region>.amazonaws.com/?Action=ConfirmSubscription&...
++        const subscribeURL: unknown = req.body.SubscribeURL;
++        if (typeof subscribeURL !== 'string') {
++          signale.warn('SNS SubscriptionConfirmation missing SubscribeURL');
++          return res.status(400).json({success: false, message: 'Invalid SubscribeURL'});
++        }
++
++        let parsedURL: URL;
++        try {
++          parsedURL = new URL(subscribeURL);
++        } catch {
++          signale.warn('SNS SubscriptionConfirmation has unparseable SubscribeURL');
++          return res.status(400).json({success: false, message: 'Invalid SubscribeURL'});
++        }
++
++        // Only allow HTTPS requests to official AWS SNS endpoints.
++        // The hostname must be exactly sns.<region>.amazonaws.com.
++        const SNS_HOST_RE = /^sns\.[a-z0-9-]+\.amazonaws\.com$/;
++        if (parsedURL.protocol !== 'https:' || !SNS_HOST_RE.test(parsedURL.hostname)) {
++          signale.warn(`SNS SubscriptionConfirmation rejected — disallowed SubscribeURL host: ${parsedURL.hostname}`);
++          return res.status(400).json({success: false, message: 'Invalid SubscribeURL'});
++        }
+ 
+         // Automatically confirm the subscription
+         try {
+-          const confirmResponse = await fetch(req.body.SubscribeURL);
++          const confirmResponse = await fetch(subscribeURL);
+           if (confirmResponse.ok) {
+             signale.success('SNS subscription confirmed successfully');
+             return res.status(200).json({
+@@ -50,7 +74,6 @@ export class Webhooks {
+             return res.status(200).json({
+               success: false,
+               message: 'Failed to confirm subscription',
+-              subscribeURL: req.body.SubscribeURL,
+             });
+           }
+         } catch (confirmError) {
+@@ -58,7 +81,6 @@ export class Webhooks {
+           return res.status(200).json({
+             success: false,
+             message: 'Error confirming subscription',
+-            subscribeURL: req.body.SubscribeURL,
+           });
+         }
+       }

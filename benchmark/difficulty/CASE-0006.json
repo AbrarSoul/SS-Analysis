@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0006",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 1492,
+  "function_size_lines": 50,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "The flaw is a wrong dependency choice (get_current_user vs get_current_active_superuser); recognizing it as wrong requires comparing against sibling endpoints' correct usage in the same file.",
+  "supported_status": "supported"
+}

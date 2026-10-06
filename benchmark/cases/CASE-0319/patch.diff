@@ -1,0 +1,21 @@
+diff --git a/databases/views.py b/databases/views.py
+index b8d532f2..f4c8a13c 100755
+--- a/databases/views.py
++++ b/databases/views.py
+@@ -400,7 +400,6 @@ def getMysqlstatus(request):
+ def restartMySQL(request):
+     try:
+         userID = request.session['userID']
+-        finalData = mysqlUtilities.restartMySQL()
+         currentACL = ACLManager.loadedACL(userID)
+ 
+         if currentACL['admin'] == 1:
+@@ -410,6 +409,8 @@ def restartMySQL(request):
+ 
+         data = {}
+ 
++        finalData = mysqlUtilities.restartMySQL()
++
+         data['status'] = finalData[0]
+         data['error_message'] = finalData[1]
+         json_data = json.dumps(data)

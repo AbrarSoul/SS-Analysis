@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nextauthjs_next-auth_e498483b23273d1bfc81be68339607f88d411bd6",
+  "cve_ids": [
+    "CVE-2022-31093"
+  ],
+  "cwe_ids": [
+    "CWE-754"
+  ],
+  "language": "typescript",
+  "repository": "nextauthjs/next-auth",
+  "repository_url": "https://github.com/nextauthjs/next-auth",
+  "vulnerable_commit": "7cf49566a6327ae99a3def6d20b28c3786c7368c",
+  "fixed_commit": "e498483b23273d1bfc81be68339607f88d411bd6",
+  "changed_file": "packages/next-auth/tests/assert.test.ts",
+  "max_score": "1337"
+}

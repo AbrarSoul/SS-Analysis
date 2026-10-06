@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0054",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-522"
+  ],
+  "changed_files": 1,
+  "lines_added": 20,
+  "lines_removed": 2,
+  "lines_changed_total": 22,
+  "function_size_chars": 91,
+  "function_size_lines": 3,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Request arguments logged verbatim; needs knowing which requests carry credentials."
+}

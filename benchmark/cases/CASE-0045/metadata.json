@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0045",
+  "original_source_case_id": "github.com_AiondaDotCom_mcp-ssh_5b9b9c5b28d3f2672f356a790154ed68e17ef453",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-9654",
+  "cve_ids_all": [
+    "CVE-2025-9654"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "language": "javascript",
+  "repository": "AiondaDotCom/mcp-ssh",
+  "repository_url": "https://github.com/AiondaDotCom/mcp-ssh",
+  "vulnerable_commit": "e1cb8234dfd47a02775cae2b4bf2abf981fa3412",
+  "fixed_commit": "5b9b9c5b28d3f2672f356a790154ed68e17ef453",
+  "changed_file": "server-simple.mjs",
+  "changed_function": "async uploadFile(hostAlias, localPath, remotePath) {",
+  "vulnerable_lines": [
+    218,
+    229
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 13,
+  "patch_size_deleted": 11,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0045/vulnerable_source.js": "a0ea8be290e1472aa61f8d5850c5b36b45bdbfd77c911338ea2393a71cd6a6cc",
+    "cases/CASE-0045/patched_source.js": "772b70b194dc19ddc6cd28a9a5940cd195007c330d0c177bbdc363f19b1f771f",
+    "cases/CASE-0045/patch.diff": "5b938f17dbed98c797714812e594c1dd94e301a8c0459cdb4d102f84bbcbe1e5",
+    "cases/CASE-0045/metadata.json": "e927e57f9b337d1b4ee4f6c2ffe4818710af991fcef64d5ec80ad5c300ebb127",
+    "model_context/CASE-0045.json": "00adde830fee2275c9d4618cf8da310b20501f662329d0f82ad8954342af10ff",
+    "difficulty/CASE-0045.json": "a20cec7743e35531dba7d6d29cbf2068acc7a50f80e14c9595e26ee01aedaa98"
+  },
+  "case_level_hash": "ab395b130e86d131bf92d499f722f6adc566266e26d226ddbc5b5bb9661e5f44"
+}

@@ -1,0 +1,13 @@
+diff --git a/Lib/urllib/request.py b/Lib/urllib/request.py
+index e5febe61f55..8363905f20f 100644
+--- a/Lib/urllib/request.py
++++ b/Lib/urllib/request.py
+@@ -945,7 +945,7 @@ class AbstractBasicAuthHandler:
+     # (single quotes are a violation of the RFC, but appear in the wild)
+     rx = re.compile('(?:^|,)'   # start of the string or ','
+                     '[ \t]*'    # optional whitespaces
+-                    '([^ \t]+)' # scheme like "Basic"
++                    '([^ \t,]+)' # scheme like "Basic"
+                     '[ \t]+'    # mandatory whitespaces
+                     # realm=xxx
+                     # realm='xxx'

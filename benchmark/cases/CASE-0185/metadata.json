@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0185",
+  "original_source_case_id": "github.com_jenkinsci_google-login-plugin_2273af025ad06ee13ab73a5a070b10689c2db61e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-41936",
+  "cve_ids_all": [
+    "CVE-2023-41936"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-697"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/google-login-plugin",
+  "repository_url": "https://github.com/jenkinsci/google-login-plugin",
+  "vulnerable_commit": "af1b61fbafd8612db70b3a8dd23c7be8d2d29f96",
+  "fixed_commit": "2273af025ad06ee13ab73a5a070b10689c2db61e",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/googlelogin/OAuthSession.java",
+  "changed_function": "public HttpResponse doFinishLogin(StaplerRequest request) throws IOException {",
+  "vulnerable_lines": [
+    90,
+    115
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0185/vulnerable_source.java": "37a49f3ea9c24636430403ec148c4f50a5cd75aea4ed6f16451625731ae70395",
+    "cases/CASE-0185/patched_source.java": "807e4d619d02893195aab04948ac0c1a7f597856b9c1b050591be694d4858152",
+    "cases/CASE-0185/patch.diff": "3bd23855ffe8acc1142bf3609efff4596401e708eeefcebd02d0aa7bec86d08b",
+    "cases/CASE-0185/metadata.json": "6e785b5d52c3f9dd5a3d1d5202f13c1c34f147a94296b2257ecc4d26e3e9e41d",
+    "model_context/CASE-0185.json": "ab881dd920b9b749ec8671c7d54592ed5208e9be7811daa7be7b0d10f9cd1c88",
+    "difficulty/CASE-0185.json": "ac6f2ff146c574c38e54dcb4ed7bd57215ae1c2bd7454b2182a63fd69b398fa5"
+  },
+  "case_level_hash": "5660ea347012727e5b5a6d20f8a04d4b0dc8412f61f26c8a7a817046921fe054"
+}

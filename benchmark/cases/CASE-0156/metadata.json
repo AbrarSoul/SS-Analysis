@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0156",
+  "original_source_case_id": "github.com_eosphoros-ai_DB-GPT_295cdb8723663d5b0954d5d1dfb4f02b7223b8ff",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-10901",
+  "cve_ids_all": [
+    "CVE-2024-10901"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-434"
+  ],
+  "language": "python",
+  "repository": "eosphoros-ai/DB-GPT",
+  "repository_url": "https://github.com/eosphoros-ai/DB-GPT",
+  "vulnerable_commit": "d40e80153b743c9763e397ce2bb4b40568912152",
+  "fixed_commit": "295cdb8723663d5b0954d5d1dfb4f02b7223b8ff",
+  "changed_file": "dbgpt/app/openapi/api_v1/editor/api_editor_v1.py",
+  "changed_function": "async def editor_chart_run(run_param: dict = Body()):",
+  "vulnerable_lines": [
+    220,
+    255
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 69,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0156/vulnerable_source.py": "56610103c00fbb05c3824117491ffc4711e425a3a55384be1c9894980b9152df",
+    "cases/CASE-0156/patched_source.py": "8f7e6073d6ec0bc3e10455b7c22677f21f2b3134ffb9bb0cdb43fd998213d51a",
+    "cases/CASE-0156/patch.diff": "a6476b533709fed2552b74988383ec09ba00d825afb96f175cd077fb14cf926a",
+    "cases/CASE-0156/metadata.json": "ec3ebd15d63a47fe9b0899f8b496e80867bcbef87d0d1c568faab212fccb9916",
+    "model_context/CASE-0156.json": "23a6f294a78e0282933c2b6dadfe9d54d3dee0457cb576cdb493bf202ce1d18b",
+    "difficulty/CASE-0156.json": "6b0c112eab3302ad30bc027da11a7341f178b071587d6f3ea97289fc2ea86863"
+  },
+  "case_level_hash": "454a30f5d8ba53078844bea9090bf0b246519e1abf6ef2d34a0d7971e40c9b17"
+}

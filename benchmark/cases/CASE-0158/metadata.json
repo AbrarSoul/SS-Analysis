@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0158",
+  "original_source_case_id": "github.com_ether_etherpad-lite_a0fb65205c7d7ff95f00eb9fd88e93b300f30c3d",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2015-2298",
+  "cve_ids_all": [
+    "CVE-2015-2298"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "javascript",
+  "repository": "ether/etherpad-lite",
+  "repository_url": "https://github.com/ether/etherpad-lite",
+  "vulnerable_commit": "ec7ff3a0cac87b9319c714f792f5d39d68716c6f",
+  "fixed_commit": "a0fb65205c7d7ff95f00eb9fd88e93b300f30c3d",
+  "changed_file": "src/node/utils/ExportEtherpad.js",
+  "changed_function": "async.waterfall([",
+  "vulnerable_lines": [
+    23,
+    32
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 11,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0158/vulnerable_source.js": "f4a4e109f1517608a52f18791e9622445857ee618b97f0a40415d3488dbf8bb9",
+    "cases/CASE-0158/patched_source.js": "87292a28013e8d173f3e5fb6e952a7c5db2b09d87e773a2b858f4f461dc6de88",
+    "cases/CASE-0158/patch.diff": "0e0e4a2bd06cef2c058fb71cfe6c84e645b141fcb1a537cdab363126b98f27a5",
+    "cases/CASE-0158/metadata.json": "0a85e2035a0cd308148c41d02af5536d96862e0f038314af974e90812ea67fef",
+    "model_context/CASE-0158.json": "a632ec2e34791f3f377617f7942e3a61ea5f8ca1c0103690dcf5df8f2554e068",
+    "difficulty/CASE-0158.json": "c05028e9c2d6fbc88f013c5ea1b0b08e1c312d04e9c1707ec6d1939a7d410a90"
+  },
+  "case_level_hash": "42be70428297743c371c5b075c844fd8140c626c38d21d3705dbc4fd556c6bd7"
+}

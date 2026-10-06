@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_w8tcha_CKEditor-oEmbed-Plugin_10f6169e39510bbf5af913886037044458b9dc9b",
+  "language": "javascript",
+  "cve_id": "CVE-2019-9870",
+  "cve_ids_all": [
+    "CVE-2019-9870"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-19",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": ",\n                                'div(embeddedContent,oembed-provider-*) script': {\n                                    attributes: '*'\n                                }",
+  "patched_function": ",\n                                'div(embeddedContent,oembed-provider-*) embed': {\n                                    attributes: '*'\n                                }",
+  "unified_diff": "diff --git a/oembed/plugin.js b/oembed/plugin.js\nindex 78108bb..06b52c5 100644\n--- a/oembed/plugin.js\n+++ b/oembed/plugin.js\n@@ -79,9 +79,6 @@\n                                 'div(embeddedContent,oembed-provider-*) blockquote': {\n                                     attributes: '*'\n                                 },\n-                                'div(embeddedContent,oembed-provider-*) script': {\n-                                    attributes: '*'\n-                                },\n                                 'div(embeddedContent,oembed-provider-*) embed': {\n                                     attributes: '*'\n                                 }",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_socketio_engine.io-client_2c55b278a491bf45313ecc0825cf800e2f7ff5c1",
+  "cve_ids": [
+    "CVE-2016-10536"
+  ],
+  "cwe_ids": [
+    "CWE-295",
+    "CWE-300"
+  ],
+  "language": "javascript",
+  "repository": "socketio/engine.io-client",
+  "repository_url": "https://github.com/socketio/engine.io-client",
+  "vulnerable_commit": "6045ccf5aa3ad5dbd976acb1e722a9692a5d55fb",
+  "fixed_commit": "2c55b278a491bf45313ecc0825cf800e2f7ff5c1",
+  "changed_file": "lib/socket.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_mrvautin_expressCart_baccaae9b0b72f00b10c5453ca00231340ad3e3b",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-732"
+  ],
+  "changed_files": 1,
+  "lines_added": 49,
+  "lines_removed": 44,
+  "lines_changed_total": 93,
+  "function_size_chars": 1175,
+  "function_size_lines": 28,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

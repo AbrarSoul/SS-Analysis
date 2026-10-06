@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_mhuertos_phpLDAPadmin_dd6e9583a2eb2ca085583765e8a63df5904cb036",
+  "language": "javascript",
+  "cve_id": "CVE-2016-15039",
+  "cve_ids_all": [
+    "CVE-2016-15039"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-444",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "function makeHttpRequest(url,parameters,meth,successCallbackFunctionName,errorCallbackFunctionName,div) {\n\tcancelHttpRequest(div);\n\n\thttp_request_success_callback = successCallbackFunctionName;\n\thttp_request_error_callback = errorCallbackFunctionName;\n\thttp_div = div;\n\n\tif (window.XMLHttpRequest) { // Mozilla, Safari,...\n\t\thttp_request = new XMLHttpRequest();\n\t\tif (http_request.overrideMimeType) {\n\t\t\thttp_request.overrideMimeType('text/html');\n\t\t}\n\n\t} else if (window.ActiveXObject) { // IE\n\t\ttry {\n\t\t\thttp_request = new ActiveXObject('Msxml2.XMLHTTP');\n\t\t} catch (e) {\n\t\t\ttry {\n\t\t\t\thttp_request = new ActiveXObject('Microsoft.XMLHTTP');\n\t\t\t} catch (e) {}\n\t\t}\n\t}\n\n\tif (!http_request) {\n\t\talert('Cannot create XMLHTTP instance.');\n\t\treturn false;\n\t}\n\n\thttp_request.onreadystatechange = window['alertHttpRequest'];\n\tif (meth == 'GET') url = url + '?' + parameters;\n\thttp_request.open(meth,url,true);\n\n\thttp_request.setRequestHeader('Content-type','application/x-www-form-urlencoded');\n\thttp_request.setRequestHeader('Content-length',parameters.length);\n\thttp_request.setRequestHeader('Connection','close');\n\n\tif (meth == 'GET') parameters = null;\n\thttp_request.send(parameters);\n}",
+  "patched_function": "function makeHttpRequest(url,parameters,meth,successCallbackFunctionName,errorCallbackFunctionName,div) {\n\tcancelHttpRequest(div);\n\n\thttp_request_success_callback = successCallbackFunctionName;\n\thttp_request_error_callback = errorCallbackFunctionName;\n\thttp_div = div;\n\n\tif (window.XMLHttpRequest) { // Mozilla, Safari,...\n\t\thttp_request = new XMLHttpRequest();\n\t\tif (http_request.overrideMimeType) {\n\t\t\thttp_request.overrideMimeType('text/html');\n\t\t}\n\n\t} else if (window.ActiveXObject) { // IE\n\t\ttry {\n\t\t\thttp_request = new ActiveXObject('Msxml2.XMLHTTP');\n\t\t} catch (e) {\n\t\t\ttry {\n\t\t\t\thttp_request = new ActiveXObject('Microsoft.XMLHTTP');\n\t\t\t} catch (e) {}\n\t\t}\n\t}\n\n\tif (!http_request) {\n\t\talert('Cannot create XMLHTTP instance.');\n\t\treturn false;\n\t}\n\n\thttp_request.onreadystatechange = window['alertHttpRequest'];\n\tif (meth == 'GET') url = url + '?' + parameters;\n\thttp_request.open(meth,url,true);\n\n\thttp_request.setRequestHeader('Content-type','application/x-www-form-urlencoded');\n\n\tif (meth == 'GET') parameters = null;\n\thttp_request.send(parameters);\n}",
+  "unified_diff": "diff --git a/htdocs/js/ajax_functions.js b/htdocs/js/ajax_functions.js\nindex 1b3a955..540b925 100644\n--- a/htdocs/js/ajax_functions.js\n+++ b/htdocs/js/ajax_functions.js\n@@ -202,8 +202,6 @@ function makeHttpRequest(url,parameters,meth,successCallbackFunctionName,errorCa\n \thttp_request.open(meth,url,true);\n \n \thttp_request.setRequestHeader('Content-type','application/x-www-form-urlencoded');\n-\thttp_request.setRequestHeader('Content-length',parameters.length);\n-\thttp_request.setRequestHeader('Connection','close');\n \n \tif (meth == 'GET') parameters = null;\n \thttp_request.send(parameters);",
+  "auto_locate_confidence": "auto"
+}

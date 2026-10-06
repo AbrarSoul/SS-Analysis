@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0191",
+  "original_source_case_id": "github.com_jenkinsci_queue-cleanup-plugin_b3e562a427e704fc15dafe7664bd67aafcd4e03e",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2020-2169",
+  "cve_ids_all": [
+    "CVE-2020-2169"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/queue-cleanup-plugin",
+  "repository_url": "https://github.com/jenkinsci/queue-cleanup-plugin",
+  "vulnerable_commit": "b54e362d1d804767b33744f00576cecffee0adf6",
+  "fixed_commit": "b3e562a427e704fc15dafe7664bd67aafcd4e03e",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/queuecleanup/QueueCleanup.java",
+  "changed_function": "public FormValidation doCheckItemPattern(@QueryParameter String itemPattern) {",
+  "vulnerable_lines": [
+    162,
+    174
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0191/vulnerable_source.java": "d229035ad8d1add80a70bba5071f538d605c2dbea52f7fe2d3e82ba86725278e",
+    "cases/CASE-0191/patched_source.java": "fe9e442c7b3ef3e6c775f7a65e86243dbd2caaaa51dad86e1d1567ecb305d81c",
+    "cases/CASE-0191/patch.diff": "dce2cc1f6d62bc6ac91fa9ac510d94dff429534cff31c6eb3d5806cc8da7f359",
+    "cases/CASE-0191/metadata.json": "5bd72fac43b82fcea7f1814e1974f6788926ba8360bc4a1cee0cd87372451e6e",
+    "model_context/CASE-0191.json": "9b34fb68ae25450e8d20ba809497239bbda33035f07363d52fac988026ca70fc",
+    "difficulty/CASE-0191.json": "86790a237eb0ef504009110a26bd787996d2e0377f6763a2d1915fa0d86f7658"
+  },
+  "case_level_hash": "ffd18d0c4e4955fcf33284540c834078ce21050d80a3137ce37c92952e758386"
+}

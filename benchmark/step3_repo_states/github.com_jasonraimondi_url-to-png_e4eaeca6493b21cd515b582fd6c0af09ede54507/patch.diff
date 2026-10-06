@@ -1,0 +1,13 @@
+diff --git a/src/middlewares/extract_query_params.ts b/src/middlewares/extract_query_params.ts
+index d3581bc..e193332 100644
+--- a/src/middlewares/extract_query_params.ts
++++ b/src/middlewares/extract_query_params.ts
+@@ -72,7 +72,7 @@ export function handleExtractQueryParamsMiddleware(encryptionService?: StringEnc
+ 
+     const date = new Date();
+     const dateString = date.toLocaleDateString().replace(/\//g, "-");
+-    const imageId = dateString + "." + slugify(validData.url) + configToString(params);
++    const imageId = dateString + "." + slugify(validData.url) + slugify(configToString(params));
+ 
+     c.set("input", validData);
+     c.set("imageId", imageId);

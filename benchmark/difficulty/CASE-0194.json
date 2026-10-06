@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0194",
+  "batch": "topup10",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 42,
+  "lines_removed": 15,
+  "lines_changed_total": 57,
+  "function_size_chars": 782,
+  "function_size_lines": 17,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Query parameter passed to getRootPath().child(value) with no confinement to userContent; taint to file-system path."
+}

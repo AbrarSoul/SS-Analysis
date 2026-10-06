@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_global-build-stats-plugin_214f74360b3a91734b6e2a4b281ff0086a1e0679",
+  "cve_ids": [
+    "CVE-2022-27207"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/global-build-stats-plugin",
+  "repository_url": "https://github.com/jenkinsci/global-build-stats-plugin",
+  "vulnerable_commit": "945cf75db793483c5b0ea3faff3e58041c6316d2",
+  "fixed_commit": "214f74360b3a91734b6e2a4b281ff0086a1e0679",
+  "changed_file": "src/main/java/hudson/plugins/global_build_stats/model/AbstractBuildStatChartDimension.java",
+  "max_score": "1337"
+}

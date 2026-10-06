@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-0147",
+  "language": "typescript",
+  "cve_id": "CVE-2024-27295",
+  "cve_ids_all": [
+    "CVE-2024-27295"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-706",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import type { Query } from '@directus/types';",
+    "import { getSimpleHash, toArray } from '@directus/utils';",
+    "import { FailedValidationError, joiValidationErrorItemToErrorExtensions } from '@directus/validation';",
+    "import Joi from 'joi';",
+    "import jwt from 'jsonwebtoken';",
+    "import { cloneDeep, isEmpty } from 'lodash-es';",
+    "import { performance } from 'perf_hooks';",
+    "import getDatabase from '../database/index.js';",
+    "import env from '../env.js';",
+    "import { ForbiddenError } from '@directus/errors';",
+    "import { InvalidPayloadError, RecordNotUniqueError, UnprocessableContentError } from '@directus/errors';",
+    "import type { AbstractServiceOptions, Item, MutationOptions, PrimaryKey } from '../types/index.js';",
+    "import isUrlAllowed from '../utils/is-url-allowed.js';",
+    "import { verifyJWT } from '../utils/jwt.js';",
+    "import { stall } from '../utils/stall.js';",
+    "import { Url } from '../utils/url.js';",
+    "import { ItemsService } from './items.js';",
+    "import { MailService } from './mail/index.js';",
+    "import { SettingsService } from './settings.js';"
+  ],
+  "vulnerable_function": "\tasync requestPasswordReset(email: string, url: string | null, subject?: string | null): Promise<void> {\n\t\tconst STALL_TIME = 500;\n\t\tconst timeStart = performance.now();\n\n\t\tconst user = await this.getUserByEmail(email);\n\n\t\tif (user?.status !== 'active') {\n\t\t\tawait stall(STALL_TIME, timeStart);\n\t\t\tthrow new ForbiddenError();\n\t\t}\n\n\t\tif (url && isUrlAllowed(url, env['PASSWORD_RESET_URL_ALLOW_LIST']) === false) {\n\t\t\tthrow new InvalidPayloadError({ reason: `Url \"${url}\" can't be used to reset passwords` });\n\t\t}\n\n\t\tconst mailService = new MailService({\n\t\t\tschema: this.schema,\n\t\t\tknex: this.knex,\n\t\t\taccountability: this.accountability,\n\t\t});\n\n\t\tconst payload = { email, scope: 'password-reset', hash: getSimpleHash('' + user.password) };\n\t\tconst token = jwt.sign(payload, env['SECRET'] as string, { expiresIn: '1d', issuer: 'directus' });\n\n\t\tconst acceptURL = url\n\t\t\t? new Url(url).setQuery('token', token).toString()\n\t\t\t: new Url(env['PUBLIC_URL']).addPath('admin', 'reset-password').setQuery('token', token).toString();\n\n\t\tconst subjectLine = subject ? subject : 'Password Reset Request';\n\n\t\tawait mailService.send({\n\t\t\tto: email,\n\t\t\tsubject: subjectLine,\n\t\t\ttemplate: {\n\t\t\t\tname: 'password-reset',\n\t\t\t\tdata: {\n\t\t\t\t\turl: acceptURL,\n\t\t\t\t\temail,\n\t\t\t\t},\n\t\t\t},\n\t\t});\n\n\t\tawait stall(STALL_TIME, timeStart);\n\t}",
+  "patched_function": "\tasync requestPasswordReset(email: string, url: string | null, subject?: string | null): Promise<void> {\n\t\tconst STALL_TIME = 500;\n\t\tconst timeStart = performance.now();\n\n\t\tconst user = await this.getUserByEmail(email);\n\n\t\tif (user?.status !== 'active') {\n\t\t\tawait stall(STALL_TIME, timeStart);\n\t\t\tthrow new ForbiddenError();\n\t\t}\n\n\t\tif (url && isUrlAllowed(url, env['PASSWORD_RESET_URL_ALLOW_LIST']) === false) {\n\t\t\tthrow new InvalidPayloadError({ reason: `Url \"${url}\" can't be used to reset passwords` });\n\t\t}\n\n\t\tconst mailService = new MailService({\n\t\t\tschema: this.schema,\n\t\t\tknex: this.knex,\n\t\t\taccountability: this.accountability,\n\t\t});\n\n\t\tconst payload = { email: user.email, scope: 'password-reset', hash: getSimpleHash('' + user.password) };\n\t\tconst token = jwt.sign(payload, env['SECRET'] as string, { expiresIn: '1d', issuer: 'directus' });\n\n\t\tconst acceptURL = url\n\t\t\t? new Url(url).setQuery('token', token).toString()\n\t\t\t: new Url(env['PUBLIC_URL']).addPath('admin', 'reset-password').setQuery('token', token).toString();\n\n\t\tconst subjectLine = subject ? subject : 'Password Reset Request';\n\n\t\tawait mailService.send({\n\t\t\tto: user.email,\n\t\t\tsubject: subjectLine,\n\t\t\ttemplate: {\n\t\t\t\tname: 'password-reset',\n\t\t\t\tdata: {\n\t\t\t\t\turl: acceptURL,\n\t\t\t\t\temail: user.email,\n\t\t\t\t},\n\t\t\t},\n\t\t});\n\n\t\tawait stall(STALL_TIME, timeStart);\n\t}",
+  "unified_diff": "diff --git a/api/src/services/users.ts b/api/src/services/users.ts\nindex b93be123fa..49602886b1 100644\n--- a/api/src/services/users.ts\n+++ b/api/src/services/users.ts\n@@ -139,9 +139,11 @@ export class UsersService extends ItemsService {\n \t/**\n \t * Get basic information of user identified by email\n \t */\n-\tprivate async getUserByEmail(email: string): Promise<{ id: string; role: string; status: string; password: string }> {\n+\tprivate async getUserByEmail(\n+\t\temail: string\n+\t): Promise<{ id: string; role: string; status: string; password: string; email: string }> {\n \t\treturn await this.knex\n-\t\t\t.select('id', 'role', 'status', 'password')\n+\t\t\t.select('id', 'role', 'status', 'password', 'email')\n \t\t\t.from('directus_users')\n \t\t\t.whereRaw(`LOWER(??) = ?`, ['email', email.toLowerCase()])\n \t\t\t.first();\n@@ -393,13 +395,13 @@ export class UsersService extends ItemsService {\n \t\t\t\tconst subjectLine = subject ?? \"You've been invited\";\n \n \t\t\t\tawait mailService.send({\n-\t\t\t\t\tto: email,\n+\t\t\t\t\tto: user.email,\n \t\t\t\t\tsubject: subjectLine,\n \t\t\t\t\ttemplate: {\n \t\t\t\t\t\tname: 'user-invitation',\n \t\t\t\t\t\tdata: {\n \t\t\t\t\t\t\turl: this.inviteUrl(email, url),\n-\t\t\t\t\t\t\temail,\n+\t\t\t\t\t\t\temail: user.email,\n \t\t\t\t\t\t},\n \t\t\t\t\t},\n \t\t\t\t});\n@@ -451,7 +453,7 @@ export class UsersService extends ItemsService {\n \t\t\taccountability: this.accountability,\n \t\t});\n \n-\t\tconst payload = { email, scope: 'password-reset', hash: getSimpleHash('' + user.password) };\n+\t\tconst payload = { email: user.email, scope: 'password-reset', hash: getSimpleHash('' + user.password) };\n \t\tconst token = jwt.sign(payload, env['SECRET'] as string, { expiresIn: '1d', issuer: 'directus' });\n \n \t\tconst acceptURL = url\n@@ -461,13 +463,13 @@ export class UsersService extends ItemsService {\n \t\tconst subjectLine = subject ? subject : 'Password Reset Request';\n \n \t\tawait mailService.send({\n-\t\t\tto: email,\n+\t\t\tto: user.email,\n \t\t\tsubject: subjectLine,\n \t\t\ttemplate: {\n \t\t\t\tname: 'password-reset',\n \t\t\t\tdata: {\n \t\t\t\t\turl: acceptURL,\n-\t\t\t\t\temail,\n+\t\t\t\t\temail: user.email,\n \t\t\t\t},\n \t\t\t},\n \t\t});",
+  "auto_locate_confidence": "auto_low_confidence"
+}

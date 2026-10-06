@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0271",
+  "original_source_case_id": "github.com_pyca_cryptography_58494b41d6ecb0f56b7c5f05d5f5e3ca0320d494",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-25659",
+  "cve_ids_all": [
+    "CVE-2020-25659"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-385",
+    "NVD-CWE-Other"
+  ],
+  "language": "python",
+  "repository": "pyca/cryptography",
+  "repository_url": "https://github.com/pyca/cryptography",
+  "vulnerable_commit": "cf9bd6a36bc7b05abca114b76e216598d9ad9b16",
+  "fixed_commit": "58494b41d6ecb0f56b7c5f05d5f5e3ca0320d494",
+  "changed_file": "src/cryptography/hazmat/backends/openssl/rsa.py",
+  "changed_function": "def _enc_dec_rsa_pkey_ctx(backend, key, data, padding_enum, padding):",
+  "vulnerable_lines": [
+    78,
+    127
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 11,
+  "patch_size_deleted": 15,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0271/vulnerable_source.py": "f6b5e9f314a2f768a19d46e845925992aa31c97873793489a414624bba880bb0",
+    "cases/CASE-0271/patched_source.py": "cc2abd4fcd07eefbf952f1a9b9f2d622ab416593541d6f64226ee69ca220fb63",
+    "cases/CASE-0271/patch.diff": "a8dcd970540aeb9326e43abadcac66aca048a00e13acf0508922a1e0e155d63c",
+    "cases/CASE-0271/metadata.json": "1f540cfaabba5d80923bc4ff1b616e95dd42acee66bd968587a3c00fa04cfe04",
+    "model_context/CASE-0271.json": "0386adbd2d5e948d39ad93ac80fd1e99a079edd846b460fd379d566b26176a73",
+    "difficulty/CASE-0271.json": "6022d79810a371a0a1b6e8b556af42f745fb22422e790d0cdb9164ccb92fa737"
+  },
+  "case_level_hash": "2af2f84e08161f08d51240186bebc07a4198973eceba9bbedb3a842bde61854a"
+}

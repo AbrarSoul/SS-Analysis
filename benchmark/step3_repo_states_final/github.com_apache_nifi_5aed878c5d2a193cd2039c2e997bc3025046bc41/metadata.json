@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_nifi_5aed878c5d2a193cd2039c2e997bc3025046bc41",
+  "cve_ids": [
+    "CVE-2024-52067"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "java",
+  "repository": "apache/nifi",
+  "repository_url": "https://github.com/apache/nifi",
+  "vulnerable_commit": "8e641723b428bffd902b65650fdb95997227afa3",
+  "fixed_commit": "5aed878c5d2a193cd2039c2e997bc3025046bc41",
+  "changed_file": "nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-framework-core/src/main/java/org/apache/nifi/controller/serialization/VersionedFlowSynchronizer.java",
+  "max_score": "1337"
+}

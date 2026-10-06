@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_AntonKueltz_fastecdsa_7b64e3efaa806b4daaf73bb5172af3581812f8de",
+  "cve_ids": [
+    "CVE-2020-12607"
+  ],
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "language": "python",
+  "repository": "AntonKueltz/fastecdsa",
+  "repository_url": "https://github.com/AntonKueltz/fastecdsa",
+  "vulnerable_commit": "8971a6b74134beacee510232f2f321b1e5706ccc",
+  "fixed_commit": "7b64e3efaa806b4daaf73bb5172af3581812f8de",
+  "changed_file": "docs/conf.py",
+  "max_score": "1337"
+}

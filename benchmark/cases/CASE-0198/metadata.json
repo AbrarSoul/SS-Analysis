@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0198",
+  "original_source_case_id": "github.com_jgraph_mxgraph_76e8e2809b622659a9c5ffdc4f19922b7a68cfa3",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-13127",
+  "cve_ids_all": [
+    "CVE-2019-13127"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "jgraph/mxgraph",
+  "repository_url": "https://github.com/jgraph/mxgraph",
+  "vulnerable_commit": "33911ed7e055c17b74d0367f5f1f6c9ee4b4fd44",
+  "fixed_commit": "76e8e2809b622659a9c5ffdc4f19922b7a68cfa3",
+  "changed_file": "javascript/examples/grapheditor/www/js/Dialogs.js",
+  "changed_function": "var applyBtn = mxUtils.button(mxResources.get('apply'), function()",
+  "vulnerable_lines": [
+    204,
+    216
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 11,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0198/vulnerable_source.js": "0967010987514e79fb03e5ae2ee4d387c5c25903ae76e31a28afef8f87cf01fb",
+    "cases/CASE-0198/patched_source.js": "ff0c2e7a9f1428b7f8821654664f0eea849d37f39754f6bdd17cff783e3f274b",
+    "cases/CASE-0198/patch.diff": "be3c954e94e038db7d5b7ac964929694c25d62f92d74200046801e6c8f6bec8c",
+    "cases/CASE-0198/metadata.json": "cc41d123fe52f505a7a7c513a06262213dd8687714e7c864a8a8a02ab3c7b8f3",
+    "model_context/CASE-0198.json": "afbfe0c0178f68a7650d0db9d2eee40b136a9463b917f7a13a514de363fb9ade",
+    "difficulty/CASE-0198.json": "23f11ea848a3a4271a0b07159175cb19da688ec3518c5aa8770aefd25f9ec100"
+  },
+  "case_level_hash": "3a3dba2ae124053d7c29ec6880efb5530dd2713aabc62e34b15822e93427ec5b"
+}

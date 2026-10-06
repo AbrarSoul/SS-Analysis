@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_hap-wi_roxy-wi_82666df1e60c45dd6aa533b01a392f015d32f755",
+  "cve_ids": [
+    "CVE-2022-31137"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "hap-wi/roxy-wi",
+  "repository_url": "https://github.com/hap-wi/roxy-wi",
+  "vulnerable_commit": "1fbcce83c0adae231f0652932757e0e3ecea033f",
+  "fixed_commit": "82666df1e60c45dd6aa533b01a392f015d32f755",
+  "changed_file": "app/options.py",
+  "max_score": "1337"
+}

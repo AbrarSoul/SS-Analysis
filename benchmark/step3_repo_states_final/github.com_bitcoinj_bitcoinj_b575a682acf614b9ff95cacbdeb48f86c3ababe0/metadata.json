@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_bitcoinj_bitcoinj_b575a682acf614b9ff95cacbdeb48f86c3ababe0",
+  "cve_ids": [
+    "CVE-2026-44714"
+  ],
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "language": "java",
+  "repository": "bitcoinj/bitcoinj",
+  "repository_url": "https://github.com/bitcoinj/bitcoinj",
+  "vulnerable_commit": "2493eb544f6fbd99eb1e6758bb1a34789b6fa8e4",
+  "fixed_commit": "b575a682acf614b9ff95cacbdeb48f86c3ababe0",
+  "changed_file": "core/src/main/java/org/bitcoinj/script/ScriptExecution.java",
+  "max_score": "1337"
+}

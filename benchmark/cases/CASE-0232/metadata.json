@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0232",
+  "original_source_case_id": "github.com_modular_modular_10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2025-60455",
+  "cve_ids_all": [
+    "CVE-2025-60455"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-502"
+  ],
+  "language": "python",
+  "repository": "modular/modular",
+  "repository_url": "https://github.com/modular/modular",
+  "vulnerable_commit": "5bc48caa56fc2912fe5e360911bd414120b41a7b",
+  "fixed_commit": "10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+  "changed_file": "max/serve/kvcache_agent/kvcache_agent.py",
+  "changed_function": "def __init__(",
+  "vulnerable_lines": [
+    205,
+    245
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0232/vulnerable_source.py": "7c98d24f97f386e30e3d36a1150162dfdeb76c5cd12d1c834d1a205c12da4da9",
+    "cases/CASE-0232/patched_source.py": "c801c3efab5c8c1e18f62fc3ae17d07bdcafa51fd1ffedfbf00b374083362786",
+    "cases/CASE-0232/patch.diff": "e62591454587ccb5e2361adf1b00ccd605fa002ffb5e9be5975bd415ea9ab788",
+    "cases/CASE-0232/metadata.json": "628f4d34bd0ec43d88c1d605b4e6dec775c7713480a699e157566c16fb6e9ce8",
+    "model_context/CASE-0232.json": "f4596c9f76e0f0c7c380f86041b3b1a1cb0f21298297d0d45b5cd5d675cb6b21",
+    "difficulty/CASE-0232.json": "f58e2b9950b99e845aabc0751597229ba3e05fbffc98aacfd69ab734fcfcf9c3"
+  },
+  "case_level_hash": "aa1dede7177581048ce98e5b4108a16257996afd82731dd9716a5ee75643bf7d"
+}

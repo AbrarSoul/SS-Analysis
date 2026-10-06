@@ -1,0 +1,62 @@
+{
+  "case_id": "CASE-0025",
+  "original_patch_filename": "github.com_Mintplex-Labs_anything-llm_94ed62d320df1a06c229e4bc3ee09c2cb5111b33.patch",
+  "cve_id": "CVE-2026-48116",
+  "cve_ids_all": [
+    "CVE-2026-48116"
+  ],
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-88"
+  ],
+  "language": "javascript",
+  "repository": "Mintplex-Labs/anything-llm",
+  "repository_url": "https://github.com/Mintplex-Labs/anything-llm",
+  "vulnerable_commit": "b4a68c6910ecbb084865dedd77c0490ed2a6ffb2",
+  "fixed_commit": "94ed62d320df1a06c229e4bc3ee09c2cb5111b33",
+  "changed_file": "server/utils/agents/aibitat/plugins/filesystem/search-files.js",
+  "patch_path": "cases/CASE-0025/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0025/vulnerable_source.js",
+  "patched_code_path": "cases/CASE-0025/patched_source.js",
+  "semgrep_representability": "supported",
+  "advisory_source": "nvd",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.js",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.js",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.js",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.js",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.js",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.js",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

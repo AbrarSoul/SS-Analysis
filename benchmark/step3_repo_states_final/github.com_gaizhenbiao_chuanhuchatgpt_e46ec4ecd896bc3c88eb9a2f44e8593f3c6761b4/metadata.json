@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_gaizhenbiao_chuanhuchatgpt_e46ec4ecd896bc3c88eb9a2f44e8593f3c6761b4",
+  "cve_ids": [
+    "CVE-2024-5124"
+  ],
+  "cwe_ids": [
+    "CWE-203"
+  ],
+  "language": "python",
+  "repository": "gaizhenbiao/chuanhuchatgpt",
+  "repository_url": "https://github.com/gaizhenbiao/chuanhuchatgpt",
+  "vulnerable_commit": "9546107ddccfb91237fd931593c134532e0c160f",
+  "fixed_commit": "e46ec4ecd896bc3c88eb9a2f44e8593f3c6761b4",
+  "changed_file": "modules/utils.py",
+  "max_score": "1337"
+}

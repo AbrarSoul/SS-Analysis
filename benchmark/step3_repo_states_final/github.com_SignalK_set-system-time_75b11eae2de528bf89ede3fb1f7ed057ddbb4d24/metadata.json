@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_SignalK_set-system-time_75b11eae2de528bf89ede3fb1f7ed057ddbb4d24",
+  "cve_ids": [
+    "CVE-2026-23515"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "SignalK/set-system-time",
+  "repository_url": "https://github.com/SignalK/set-system-time",
+  "vulnerable_commit": "7008d7fa0ba625b2a423746dcfb5299f93fe234c",
+  "fixed_commit": "75b11eae2de528bf89ede3fb1f7ed057ddbb4d24",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

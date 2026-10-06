@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 2,
+  "condition": "retry",
+  "model": "yi-coder:9b",
+  "temperature": 0.0,
+  "timestamp": 1789302757.0502021,
+  "raw_content": "rules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    filepath = self._directory.joinpath(filename).resolve()\n    if not self._follow_symlinks:\n  pattern-not: |\n    filepath = self._directory.joinpath(filename).resolve()\n    if self._follow_symlinks:\n  languages: [\"python\"]\n  message: \"Potential directory traversal vulnerability detected in aiohttp's static file serving. If `follow_symlinks` is set to False, it may allow an attacker to access files outside the specified directory through directory traversal attacks.\"\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-352\n    owasp: A1:2021-XML External Entities (XXE)\n    references:\n      - https://github.com/aio-libs/aiohttp/blob/1c335944d6a8b1298baf179b7c0b3069f10c514b/aiohttp/web_urldispatcher.py#L234\n      - https://cheatsheetseries.owasp.org/cheatsheets/Directory_Traversal_Cheat_Sheet.html\n      - https://cheatsheetseries.owasp.org/cheatsheets/Symlink_Pinning_Cheat_Sheet.html\n    technology: [\"python\"]"
+}

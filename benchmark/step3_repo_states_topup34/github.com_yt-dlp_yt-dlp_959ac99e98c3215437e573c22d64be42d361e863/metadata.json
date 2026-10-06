@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_yt-dlp_yt-dlp_959ac99e98c3215437e573c22d64be42d361e863",
+  "cve_ids": [
+    "CVE-2025-54072"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "yt-dlp/yt-dlp",
+  "repository_url": "https://github.com/yt-dlp/yt-dlp",
+  "vulnerable_commit": "d88b304d44c599d81acfa4231502270c8b9fe2f8",
+  "fixed_commit": "959ac99e98c3215437e573c22d64be42d361e863",
+  "changed_file": "yt_dlp/postprocessor/exec.py",
+  "max_score": "1337"
+}

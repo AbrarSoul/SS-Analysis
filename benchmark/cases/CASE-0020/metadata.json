@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0020",
+  "original_patch_filename": "github.com_spring-projects_spring-security-samples_4e3bec904a5467db28ea33e25ac9d90524b53d66.patch",
+  "cve_id": "CVE-2023-34035",
+  "cve_ids_all": [
+    "CVE-2023-34035"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-security-samples",
+  "repository_url": "https://github.com/spring-projects/spring-security-samples",
+  "vulnerable_commit": "2d2ffb5d7bdcae0c0d32edf3cf4bc3b98d6f2ed7",
+  "fixed_commit": "4e3bec904a5467db28ea33e25ac9d90524b53d66",
+  "changed_file": "servlet/java-configuration/authentication/preauth/src/main/java/example/SecurityConfiguration.java",
+  "patch_path": "cases/CASE-0020/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0020/vulnerable_source.java",
+  "patched_code_path": "cases/CASE-0020/patched_source.java",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.java",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.java",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.java",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.java",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.java",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.java",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

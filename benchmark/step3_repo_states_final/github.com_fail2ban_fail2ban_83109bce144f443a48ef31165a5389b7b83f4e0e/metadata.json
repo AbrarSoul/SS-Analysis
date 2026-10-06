@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_fail2ban_fail2ban_83109bce144f443a48ef31165a5389b7b83f4e0e",
+  "cve_ids": [
+    "CVE-2012-5642"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "fail2ban/fail2ban",
+  "repository_url": "https://github.com/fail2ban/fail2ban",
+  "vulnerable_commit": "6ee2c0a01436daa2c95773b26852ba9d5dc52871",
+  "fixed_commit": "83109bce144f443a48ef31165a5389b7b83f4e0e",
+  "changed_file": "server/action.py",
+  "max_score": "1337"
+}

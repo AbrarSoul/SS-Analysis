@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0253",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 2,
+  "lines_changed_total": 8,
+  "function_size_chars": 831,
+  "function_size_lines": 23,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Plugin-scope variables shared by every document instance; shared-mutable-state design flaw."
+}

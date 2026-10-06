@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0158",
+  "batch": "topup3",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 1,
+  "lines_changed_total": 12,
+  "function_size_chars": 202,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Key lookup built as \"pad:\" + id + \"*\" prefix wildcard; over-broad prefix query shape."
+}

@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0296",
+  "language": "java",
+  "cve_id": "CVE-2017-8028",
+  "cve_ids_all": [
+    "CVE-2017-8028"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-287",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import javax.naming.Context;",
+    "import javax.naming.NamingException;",
+    "import javax.naming.ldap.LdapContext;"
+  ],
+  "vulnerable_function": "\tprotected void applyAuthentication(LdapContext ctx, String userDn, String password) throws NamingException {\n\t\tctx.addToEnvironment(Context.SECURITY_AUTHENTICATION, SIMPLE_AUTHENTICATION);\n\t\tctx.addToEnvironment(Context.SECURITY_PRINCIPAL, userDn);\n\t\tctx.addToEnvironment(Context.SECURITY_CREDENTIALS, password);\n\t}",
+  "patched_function": "\tprotected void applyAuthentication(LdapContext ctx, String userDn, String password) throws NamingException {\n\t\tctx.addToEnvironment(Context.SECURITY_AUTHENTICATION, SIMPLE_AUTHENTICATION);\n\t\tctx.addToEnvironment(Context.SECURITY_PRINCIPAL, userDn);\n\t\tctx.addToEnvironment(Context.SECURITY_CREDENTIALS, password);\n\t\t// Force reconnect with user credentials\n\t\tctx.reconnect(null);\n\t}",
+  "unified_diff": "diff --git a/core/src/main/java/org/springframework/ldap/core/support/DefaultTlsDirContextAuthenticationStrategy.java b/core/src/main/java/org/springframework/ldap/core/support/DefaultTlsDirContextAuthenticationStrategy.java\nindex 56975408..9fe144d6 100755\n--- a/core/src/main/java/org/springframework/ldap/core/support/DefaultTlsDirContextAuthenticationStrategy.java\n+++ b/core/src/main/java/org/springframework/ldap/core/support/DefaultTlsDirContextAuthenticationStrategy.java\n@@ -36,6 +36,8 @@ public class DefaultTlsDirContextAuthenticationStrategy extends AbstractTlsDirCo\n \t\tctx.addToEnvironment(Context.SECURITY_AUTHENTICATION, SIMPLE_AUTHENTICATION);\n \t\tctx.addToEnvironment(Context.SECURITY_PRINCIPAL, userDn);\n \t\tctx.addToEnvironment(Context.SECURITY_CREDENTIALS, password);\n+\t\t// Force reconnect with user credentials\n+\t\tctx.reconnect(null);\n \t}\n \n }\n",
+  "auto_locate_confidence": "auto"
+}

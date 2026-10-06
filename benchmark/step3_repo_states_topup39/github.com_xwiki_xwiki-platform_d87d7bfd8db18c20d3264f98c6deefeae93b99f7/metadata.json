@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_d87d7bfd8db18c20d3264f98c6deefeae93b99f7",
+  "cve_ids": [
+    "CVE-2023-26475"
+  ],
+  "cwe_ids": [
+    "CWE-269",
+    "CWE-270"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "05dc33154cecd4a4d542fc8f883718b378333be5",
+  "fixed_commit": "d87d7bfd8db18c20d3264f98c6deefeae93b99f7",
+  "changed_file": "xwiki-platform-core/xwiki-platform-oldcore/src/main/java/com/xpn/xwiki/internal/mandatory/XWikiCommentsDocumentInitializer.java",
+  "max_score": "1337"
+}

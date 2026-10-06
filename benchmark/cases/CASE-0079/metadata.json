@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0079",
+  "original_source_case_id": "github.com_TooTallNate_node-http-proxy-agent_b7b7cc793c3226aa83f820ce5c277e81862d32eb",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-10196",
+  "cve_ids_all": [
+    "CVE-2019-10196"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-665"
+  ],
+  "language": "javascript",
+  "repository": "TooTallNate/node-http-proxy-agent",
+  "repository_url": "https://github.com/TooTallNate/node-http-proxy-agent",
+  "vulnerable_commit": "687da671c075cde76be2d3e907d5384c970efadc",
+  "fixed_commit": "b7b7cc793c3226aa83f820ce5c277e81862d32eb",
+  "changed_file": "index.js",
+  "changed_function": "HttpProxyAgent.prototype.callback = function connect (req, opts, fn) {",
+  "vulnerable_lines": [
+    60,
+    109
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0079/vulnerable_source.js": "ee42fbd34b7960e0e20e51f74d66d00f330957cdbe26303fedb1f403cb0a3bd2",
+    "cases/CASE-0079/patched_source.js": "8ea7f37ba27e9f58ea960745a98fe2aa45f51648dc134f308a6b21d660b2a474",
+    "cases/CASE-0079/patch.diff": "95773eef6b5df66d289ca29730b56688a98ce44730e4d1148b47b6186ee83ce1",
+    "cases/CASE-0079/metadata.json": "6aa60f8206ab0206fd2c2178d4905179e637f7cd3df284075f52ff3c8f43e189",
+    "model_context/CASE-0079.json": "d3a2cb9ab41a702902e38a860876c9659e4e9706ed70c2ce2e8f3680de5f00c5",
+    "difficulty/CASE-0079.json": "3d973d76d4e77978854cb1d8affd4cad7d6503fc9d76310a1075e49997910d8b"
+  },
+  "case_level_hash": "c06f039883809c542566a9a0ed1e8089088f270331319187d59e51736a06ed1e"
+}

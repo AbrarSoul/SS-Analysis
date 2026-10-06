@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0031",
+  "language": "typescript",
+  "cve_id": "CVE-2025-53374",
+  "cwe": [
+    {
+      "id": "CWE-359",
+      "definition": "Exposure of Private Personal Information to an Unauthorized Actor"
+    },
+    {
+      "id": "CWE-862",
+      "definition": "Missing Authorization"
+    }
+  ],
+  "unified_diff": "diff --git a/apps/dokploy/server/api/routers/user.ts b/apps/dokploy/server/api/routers/user.ts\nindex b2277399b..3ac91dc03 100644\n--- a/apps/dokploy/server/api/routers/user.ts\n+++ b/apps/dokploy/server/api/routers/user.ts\n@@ -75,6 +75,24 @@ export const userRouter = createTRPCRouter({\n \t\t\t\t},\n \t\t\t});\n \n+\t\t\t// If user not found in the organization, deny access\n+\t\t\tif (!memberResult) {\n+\t\t\t\tthrow new TRPCError({\n+\t\t\t\t\tcode: \"NOT_FOUND\",\n+\t\t\t\t\tmessage: \"User not found in this organization\",\n+\t\t\t\t});\n+\t\t\t}\n+\n+\t\t\t// Allow access if:\n+\t\t\t// 1. User is requesting their own information\n+\t\t\t// 2. User has owner role (admin permissions) AND user is in the same organization\n+\t\t\tif (memberResult.userId !== ctx.user.id && ctx.user.role !== \"owner\") {\n+\t\t\t\tthrow new TRPCError({\n+\t\t\t\t\tcode: \"UNAUTHORIZED\",\n+\t\t\t\t\tmessage: \"You are not authorized to access this user\",\n+\t\t\t\t});\n+\t\t\t}\n+\n \t\t\treturn memberResult;\n \t\t}),\n \tget: protectedProcedure.query(async ({ ctx }) => {",
+  "containing_class_declaration": null,
+  "imports": [
+    "import {",
+    "import { db } from \"@dokploy/server/db\";",
+    "import {",
+    "import { TRPCError } from \"@trpc/server\";",
+    "import * as bcrypt from \"bcrypt\";",
+    "import { and, asc, eq, gt } from \"drizzle-orm\";",
+    "import { z } from \"zod\";",
+    "import {"
+  ],
+  "vulnerable_function": ".query(async ({ input, ctx }) => {\n\t\t\tconst memberResult = await db.query.member.findFirst({\n\t\t\t\twhere: and(\n\t\t\t\t\teq(member.userId, input.userId),\n\t\t\t\t\teq(member.organizationId, ctx.session?.activeOrganizationId || \"\"),\n\t\t\t\t),\n\t\t\t\twith: {\n\t\t\t\t\tuser: true,\n\t\t\t\t},\n\t\t\t});\n\n\t\t\treturn memberResult;\n\t\t}",
+  "patched_function": ".query(async ({ input, ctx }) => {\n\t\t\tconst memberResult = await db.query.member.findFirst({\n\t\t\t\twhere: and(\n\t\t\t\t\teq(member.userId, input.userId),\n\t\t\t\t\teq(member.organizationId, ctx.session?.activeOrganizationId || \"\"),\n\t\t\t\t),\n\t\t\t\twith: {\n\t\t\t\t\tuser: true,\n\t\t\t\t},\n\t\t\t});\n\n\t\t\t// If user not found in the organization, deny access\n\t\t\tif (!memberResult) {\n\t\t\t\tthrow new TRPCError({\n\t\t\t\t\tcode: \"NOT_FOUND\",\n\t\t\t\t\tmessage: \"User not found in this organization\",\n\t\t\t\t});\n\t\t\t}\n\n\t\t\t// Allow access if:\n\t\t\t// 1. User is requesting their own information\n\t\t\t// 2. User has owner role (admin permissions) AND user is in the same organization\n\t\t\tif (memberResult.userId !== ctx.user.id && ctx.user.role !== \"owner\") {\n\t\t\t\tthrow new TRPCError({\n\t\t\t\t\tcode: \"UNAUTHORIZED\",\n\t\t\t\t\tmessage: \"You are not authorized to access this user\",\n\t\t\t\t});\n\t\t\t}\n\n\t\t\treturn memberResult;\n\t\t}",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 2328,
+  "context_size_chars_after_truncation": 2328
+}

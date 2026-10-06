@@ -1,0 +1,26 @@
+{
+  "case_id": "CASE-0064",
+  "language": "javascript",
+  "cve_id": "CVE-2026-25896",
+  "cve_ids_all": [
+    "CVE-2026-25896"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-185",
+      "definition": "Incorrect Regular Expression"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import {getAllMatches, isExist} from '../util.js';",
+    "import xmlNode from './xmlNode.js';",
+    "import DocTypeReader from './DocTypeReader.js';",
+    "import toNumber from \"strnum\";",
+    "import getIgnoreAttributesFn from \"../ignoreAttributes.js\";"
+  ],
+  "vulnerable_function": "function addExternalEntities(externalEntities){\n  const entKeys = Object.keys(externalEntities);\n  for (let i = 0; i < entKeys.length; i++) {\n    const ent = entKeys[i];\n    this.lastEntities[ent] = {\n       regex: new RegExp(\"&\"+ent+\";\",\"g\"),\n       val : externalEntities[ent]\n    }\n  }\n}",
+  "patched_function": "function addExternalEntities(externalEntities){\n  const entKeys = Object.keys(externalEntities);\n  for (let i = 0; i < entKeys.length; i++) {\n    const ent = entKeys[i];\n    const escaped = ent.replace(/[.\\-+*:]/g, '\\\\.');\n    this.lastEntities[ent] = {\n       regex: new RegExp(\"&\"+escaped+\";\",\"g\"),\n       val : externalEntities[ent]\n    }\n  }\n}",
+  "unified_diff": "diff --git a/src/xmlparser/OrderedObjParser.js b/src/xmlparser/OrderedObjParser.js\nindex 78d3dfa..ecb2b85 100644\n--- a/src/xmlparser/OrderedObjParser.js\n+++ b/src/xmlparser/OrderedObjParser.js\n@@ -77,8 +77,9 @@ function addExternalEntities(externalEntities){\n   const entKeys = Object.keys(externalEntities);\n   for (let i = 0; i < entKeys.length; i++) {\n     const ent = entKeys[i];\n+    const escaped = ent.replace(/[.\\-+*:]/g, '\\\\.');\n     this.lastEntities[ent] = {\n-       regex: new RegExp(\"&\"+ent+\";\",\"g\"),\n+       regex: new RegExp(\"&\"+escaped+\";\",\"g\"),\n        val : externalEntities[ent]\n     }\n   }",
+  "auto_locate_confidence": "auto"
+}

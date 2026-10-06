@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0069",
+  "original_source_case_id": "github.com_OpenNMS_opennms_e59b0ddd164cf0598ac0294d11a2d677d9e310b8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-0872",
+  "cve_ids_all": [
+    "CVE-2023-0872",
+    "CVE-2023-40612"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-269",
+    "CWE-91",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "OpenNMS/opennms",
+  "repository_url": "https://github.com/OpenNMS/opennms",
+  "vulnerable_commit": "1365ba9129f1762707fdbf1edd1f3e460bfb31e0",
+  "fixed_commit": "e59b0ddd164cf0598ac0294d11a2d677d9e310b8",
+  "changed_file": "opennms-webapp-rest/src/main/java/org/opennms/web/rest/v1/UserRestService.java",
+  "changed_function": "private static boolean hasEditRights(SecurityContext securityContext) {",
+  "vulnerable_lines": [
+    285,
+    291
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0069/vulnerable_source.java": "9605477055e83678bee958635d6af5d05ede549a7d4aca2a88dae4cba8c83c4c",
+    "cases/CASE-0069/patched_source.java": "d6b17425445fe3e0e84f10ebde746c1cf71f4fd6b402637ad882ed81cacf4cca",
+    "cases/CASE-0069/patch.diff": "d3ac91eefcbaf141ceff2cd9dd1e55c234d0d97e178e4ca86828f648a878cd38",
+    "cases/CASE-0069/metadata.json": "e4f30ab3cb10940928961f6f24e83b84f54e1549a7ae7f92702b836dc287097a",
+    "model_context/CASE-0069.json": "00bd2df944edfa9d26b78b18f868d64699e4403cd3780ca23e68c9d961caa1af",
+    "difficulty/CASE-0069.json": "1dc9331ad51df235e30c2bd79053a6dcdc8802c8b28961a3969aaef276836747"
+  },
+  "case_level_hash": "80c24835489c3c739648f0f48373bfd7ffa67203d432c2ad80a1bcd56d9ff7af"
+}

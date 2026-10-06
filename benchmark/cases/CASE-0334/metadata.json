@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0334",
+  "original_source_case_id": "github.com_xwiki_xwiki-platform_ab778254fb8f71c774e1c1239368c44fe3b6bba5",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-23620",
+  "cve_ids_all": [
+    "CVE-2022-23620"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-116",
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "9e4d40d03960b20233f6887bc142fe4474f620c4",
+  "fixed_commit": "ab778254fb8f71c774e1c1239368c44fe3b6bba5",
+  "changed_file": "xwiki-platform-core/xwiki-platform-skin/xwiki-platform-skin-skinx/src/main/java/org/xwiki/skinx/internal/AbstractSxExportURLFactoryActionHandler.java",
+  "changed_function": "private URL processSx(List<String> spaceNames, String name, String queryString, XWikiContext context,",
+  "vulnerable_lines": [
+    109,
+    158
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 7,
+  "patch_size_deleted": 11,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0334/vulnerable_source.java": "47cb869ae4087bced0538900963a662099e3b91606185f59774fd4e1aec03725",
+    "cases/CASE-0334/patched_source.java": "41983b7c0dcc65861abfb20a502febd8c688aec8f4cf3431e0b61f4b26d4b162",
+    "cases/CASE-0334/patch.diff": "6e927eeba6c26e8799048a939d19b31f73bcdf13e7b37f1a24c2a8511c0adb16",
+    "cases/CASE-0334/metadata.json": "a473798decbbdc9829c99766f95d96713fea6c98c1b040fc64c11e0fb26bdbe2",
+    "model_context/CASE-0334.json": "2bfebd4b6159897df1e20488c7aa5120b3f7184bfe0b46bc8a5ffa5918233df1",
+    "difficulty/CASE-0334.json": "e7ff483792ddcc0a41e79ba11611d4ae3c1395da3c2ec6075f8805a47440baf8"
+  },
+  "case_level_hash": "e849bc9010e008ed1eef94a75aff55a55b3790dd8020b98b8212740f5dd0cc5b"
+}

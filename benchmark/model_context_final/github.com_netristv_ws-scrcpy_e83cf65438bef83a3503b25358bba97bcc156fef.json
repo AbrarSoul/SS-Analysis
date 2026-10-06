@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_netristv_ws-scrcpy_e83cf65438bef83a3503b25358bba97bcc156fef",
+  "language": "typescript",
+  "cve_id": "CVE-2021-3845",
+  "cve_ids_all": [
+    "CVE-2021-3845"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-610",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-73",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import * as http from 'http';",
+    "import { IncomingMessage, ServerResponse, STATUS_CODES } from 'http';",
+    "import url from 'url';",
+    "import path from 'path';",
+    "import fs from 'fs';",
+    "import { Service } from './Service';",
+    "import { Utils } from '../Utils';"
+  ],
+  "vulnerable_function": "        const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {\n            if (!req.url) {\n                res.statusCode = 400;\n                res.end(STATUS_CODES[400]);\n                return;\n            }\n            const parsedUrl = url.parse(req.url);\n            let pathname = path.join(publicDir, (parsedUrl.pathname || '.').replace(/^(\\.)+/, '.'));\n            fs.stat(pathname, (statErr, stat) => {\n                if (statErr) {\n                    if (statErr.code === 'ENOENT') {\n                        // if the file is not found, return 404\n                        res.statusCode = 404;\n                        res.end(`File ${pathname} not found!`);\n                    } else {\n                        res.statusCode = 500;\n                        res.end(`Error getting the file: ${statErr}.`);\n                    }\n                    return;\n                }\n                if (stat.isDirectory()) {\n                    pathname = path.join(pathname, 'index.html');\n                }\n                const ext = path.parse(pathname).ext;\n                fs.readFile(pathname, (readErr, data) => {\n                    if (readErr) {\n                        res.statusCode = 500;\n                        res.end(`Error getting the file: ${statErr}.`);\n                    } else {\n                        // if the file is found, set Content-type and send data\n                        res.setHeader('Content-type', map[ext] || 'text/plain');\n                        res.end(data);\n                    }\n                });\n            });\n        }",
+  "patched_function": "        const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {\n            if (!req.url) {\n                res.statusCode = 400;\n                res.end(STATUS_CODES[400]);\n                return;\n            }\n            const parsedUrl = url.parse(req.url);\n            let pathname = path.join(publicDir, (parsedUrl.pathname || '.').replace(/^(\\.)+/, '.'));\n            if (pathname.indexOf(publicDir) !== 0) {\n                res.statusCode = 403;\n                res.end();\n                return;\n            }\n            fs.stat(pathname, (statErr, stat) => {\n                if (statErr) {\n                    if (statErr.code === 'ENOENT') {\n                        // if the file is not found, return 404\n                        res.statusCode = 404;\n                        res.end(`File ${pathname} not found!`);\n                    } else {\n                        res.statusCode = 500;\n                        res.end(`Error getting the file: ${statErr}.`);\n                    }\n                    return;\n                }\n                if (stat.isDirectory()) {\n                    pathname = path.join(pathname, 'index.html');\n                }\n                const ext = path.parse(pathname).ext;\n                fs.readFile(pathname, (readErr, data) => {\n                    if (readErr) {\n                        res.statusCode = 500;\n                        res.end(`Error getting the file: ${statErr}.`);\n                    } else {\n                        // if the file is found, set Content-type and send data\n                        res.setHeader('Content-type', map[ext] || 'text/plain');\n                        res.end(data);\n                    }\n                });\n            });\n        }",
+  "unified_diff": "diff --git a/src/server/services/HttpServer.ts b/src/server/services/HttpServer.ts\nindex 10ee844..145d3ae 100644\n--- a/src/server/services/HttpServer.ts\n+++ b/src/server/services/HttpServer.ts\n@@ -45,6 +45,11 @@ export class HttpServer implements Service {\n             }\n             const parsedUrl = url.parse(req.url);\n             let pathname = path.join(publicDir, (parsedUrl.pathname || '.').replace(/^(\\.)+/, '.'));\n+            if (pathname.indexOf(publicDir) !== 0) {\n+                res.statusCode = 403;\n+                res.end();\n+                return;\n+            }\n             fs.stat(pathname, (statErr, stat) => {\n                 if (statErr) {\n                     if (statErr.code === 'ENOENT') {",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_mintplex-labs_anything-llm_d5cde8b7c27a47ab45b05b441db16751537f1733",
+  "cve_ids": [
+    "CVE-2024-0798"
+  ],
+  "cwe_ids": [
+    "CWE-272",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "mintplex-labs/anything-llm",
+  "repository_url": "https://github.com/mintplex-labs/anything-llm",
+  "vulnerable_commit": "9a237db3d1f66cdbcf5079599258f5fb251c5564",
+  "fixed_commit": "d5cde8b7c27a47ab45b05b441db16751537f1733",
+  "changed_file": "server/endpoints/system.js",
+  "max_score": "1337"
+}

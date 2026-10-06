@@ -1,0 +1,24 @@
+{
+  "case_id": "CASE-0163",
+  "language": "javascript",
+  "cve_id": "CVE-2022-24437",
+  "cve_ids_all": [
+    "CVE-2022-24437"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-88",
+      "definition": "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const crossSpawn = require('cross-spawn')",
+    "const debug = require('debug')('git-pull-or-clone')",
+    "const fs = require('fs')"
+  ],
+  "vulnerable_function": ")\n\n  function gitClone () {\n    // --depth implies --single-branch\n    const flag = depth < Infinity ? '--depth=' + depth : '--single-branch'\n    const args = ['clone', flag, url, outPath]\n    debug('git ' + args.join(' '))\n    spawn('git', args, {}, function (err) {\n      if (err) err.message += ' (git clone) (' + url + ')'\n      cb(err)\n    })\n  }",
+  "patched_function": ")\n\n  function gitClone () {\n    // --depth implies --single-branch\n    const flag = depth < Infinity ? '--depth=' + depth : '--single-branch'\n    const args = ['clone', flag, '--', url, outPath]\n    debug('git ' + args.join(' '))\n    spawn('git', args, {}, function (err) {\n      if (err) err.message += ' (git clone) (' + url + ')'\n      cb(err)\n    })\n  }",
+  "unified_diff": "diff --git a/index.js b/index.js\nindex c38c84d..aa40114 100644\n--- a/index.js\n+++ b/index.js\n@@ -28,7 +28,7 @@ function gitPullOrClone (url, outPath, opts, cb) {\n   function gitClone () {\n     // --depth implies --single-branch\n     const flag = depth < Infinity ? '--depth=' + depth : '--single-branch'\n-    const args = ['clone', flag, url, outPath]\n+    const args = ['clone', flag, '--', url, outPath]\n     debug('git ' + args.join(' '))\n     spawn('git', args, {}, function (err) {\n       if (err) err.message += ' (git clone) (' + url + ')'",
+  "auto_locate_confidence": "auto"
+}

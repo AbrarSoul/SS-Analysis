@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openedx_openedx-translations_3c4093705dec99590577c4d8270ce263f7fffc5a",
+  "cve_ids": [
+    "CVE-2024-43782"
+  ],
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "python",
+  "repository": "openedx/openedx-translations",
+  "repository_url": "https://github.com/openedx/openedx-translations",
+  "vulnerable_commit": "3108cb7c68c1a029853dd8b31737787bbc66d13c",
+  "fixed_commit": "3c4093705dec99590577c4d8270ce263f7fffc5a",
+  "changed_file": "scripts/validate_translation_files.py",
+  "max_score": "1337"
+}

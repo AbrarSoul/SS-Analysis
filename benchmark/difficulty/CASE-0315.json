@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0315",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-488"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 4,
+  "lines_changed_total": 5,
+  "function_size_chars": 567,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Shared StringBuilder instance field used as a decode buffer across threads; thread-safety semantics are needed."
+}

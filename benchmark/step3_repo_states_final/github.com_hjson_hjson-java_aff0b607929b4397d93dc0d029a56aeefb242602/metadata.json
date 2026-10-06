@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_hjson_hjson-java_aff0b607929b4397d93dc0d029a56aeefb242602",
+  "cve_ids": [
+    "CVE-2023-39685"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "hjson/hjson-java",
+  "repository_url": "https://github.com/hjson/hjson-java",
+  "vulnerable_commit": "8cce3b8e9dae9a195b056eb73ef28b78f0bc02e2",
+  "fixed_commit": "aff0b607929b4397d93dc0d029a56aeefb242602",
+  "changed_file": "src/main/org/hjson/HjsonParser.java",
+  "max_score": "1337"
+}

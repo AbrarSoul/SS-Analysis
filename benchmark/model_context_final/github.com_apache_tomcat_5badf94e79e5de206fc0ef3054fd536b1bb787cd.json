@@ -1,0 +1,39 @@
+{
+  "case_id": "github.com_apache_tomcat_5badf94e79e5de206fc0ef3054fd536b1bb787cd",
+  "language": "java",
+  "cve_id": "CVE-2023-28709",
+  "cve_ids_all": [
+    "CVE-2023-28709"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-193",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.UnsupportedEncodingException;",
+    "import java.nio.charset.Charset;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.ArrayList;",
+    "import java.util.Collections;",
+    "import java.util.Enumeration;",
+    "import java.util.LinkedHashMap;",
+    "import java.util.Map;",
+    "import org.apache.juli.logging.Log;",
+    "import org.apache.juli.logging.LogFactory;",
+    "import org.apache.tomcat.util.buf.B2CConverter;",
+    "import org.apache.tomcat.util.buf.ByteChunk;",
+    "import org.apache.tomcat.util.buf.MessageBytes;",
+    "import org.apache.tomcat.util.buf.StringUtils;",
+    "import org.apache.tomcat.util.buf.UDecoder;",
+    "import org.apache.tomcat.util.log.UserDataHelper;",
+    "import org.apache.tomcat.util.res.StringManager;"
+  ],
+  "vulnerable_function": "    public void addParameter(String key, String value) throws IllegalStateException {\n\n        if (key == null) {\n            return;\n        }\n\n        parameterCount++;\n        if (limit > -1 && parameterCount > limit) {\n            // Processing this parameter will push us over the limit. ISE is\n            // what Request.parseParts() uses for requests that are too big\n            setParseFailedReason(FailReason.TOO_MANY_PARAMETERS);\n            throw new IllegalStateException(sm.getString(\"parameters.maxCountFail\", Integer.valueOf(limit)));\n        }\n\n        ArrayList<String> values = paramHashValues.get(key);\n        if (values == null) {\n            values = new ArrayList<>(1);\n            paramHashValues.put(key, values);\n        }\n        values.add(value);\n    }",
+  "patched_function": "    public void addParameter(String key, String value) throws IllegalStateException {\n\n        if (key == null) {\n            return;\n        }\n\n        if (limit > -1 && parameterCount >= limit) {\n            // Processing this parameter will push us over the limit. ISE is\n            // what Request.parseParts() uses for requests that are too big\n            setParseFailedReason(FailReason.TOO_MANY_PARAMETERS);\n            throw new IllegalStateException(sm.getString(\"parameters.maxCountFail\", Integer.valueOf(limit)));\n        }\n        parameterCount++;\n\n        ArrayList<String> values = paramHashValues.get(key);\n        if (values == null) {\n            values = new ArrayList<>(1);\n            paramHashValues.put(key, values);\n        }\n        values.add(value);\n    }",
+  "unified_diff": "diff --git a/java/org/apache/tomcat/util/http/Parameters.java b/java/org/apache/tomcat/util/http/Parameters.java\nindex de99e5b190..66fdc9302a 100644\n--- a/java/org/apache/tomcat/util/http/Parameters.java\n+++ b/java/org/apache/tomcat/util/http/Parameters.java\n@@ -233,13 +233,13 @@ public final class Parameters {\n             return;\n         }\n \n-        parameterCount++;\n-        if (limit > -1 && parameterCount > limit) {\n+        if (limit > -1 && parameterCount >= limit) {\n             // Processing this parameter will push us over the limit. ISE is\n             // what Request.parseParts() uses for requests that are too big\n             setParseFailedReason(FailReason.TOO_MANY_PARAMETERS);\n             throw new IllegalStateException(sm.getString(\"parameters.maxCountFail\", Integer.valueOf(limit)));\n         }\n+        parameterCount++;\n \n         ArrayList<String> values = paramHashValues.get(key);\n         if (values == null) {",
+  "auto_locate_confidence": "auto"
+}

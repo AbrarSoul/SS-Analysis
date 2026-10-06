@@ -1,0 +1,32 @@
+{
+  "case_id": "github.com_streetwriters_notesnook_e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7",
+  "language": "typescript",
+  "cve_id": "CVE-2026-31876",
+  "cve_ids_all": [
+    "CVE-2026-31876"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import { Box, Flex } from \"@theme-ui/components\";",
+    "import { useState } from \"react\";",
+    "import { EmbedAlignmentOptions, EmbedAttributes } from \"./embed.js\";",
+    "import { ReactNodeViewProps } from \"../react/index.js\";",
+    "import { DesktopOnly } from \"../../components/responsive/index.js\";",
+    "import { ToolbarGroup } from \"../../toolbar/components/toolbar-group.js\";",
+    "import { Icons } from \"../../toolbar/index.js\";",
+    "import { Icon } from \"@notesnook/ui\";",
+    "import { Resizer } from \"../../components/resizer/index.js\";",
+    "import { useThemeEngineStore } from \"@notesnook/theme\";",
+    "import { useToolbarStore } from \"../../toolbar/stores/toolbar-store.js\";"
+  ],
+  "vulnerable_function": "function tweetToEmbed(src: string, isDarkTheme: boolean) {\n  src = src.replaceAll(\"x.com\", \"twitter.com\");\n  return `<blockquote class=\"twitter-tweet\" data-dnt=\"true\" ${\n    isDarkTheme ? 'data-theme=\"dark\"' : \"\"\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n}",
+  "patched_function": "function tweetToEmbed(src: string, isDarkTheme: boolean) {\n  src = src.replaceAll(\"x.com\", \"twitter.com\");\n\n  const anchor = document.createElement(\"a\");\n  anchor.href = `${src}?ref_src=twsrc%5Etfw`;\n\n  return `<blockquote class=\"twitter-tweet\" data-dnt=\"true\" ${\n    isDarkTheme ? 'data-theme=\"dark\"' : \"\"\n  }><p lang=\"en\" dir=\"ltr\">${\n    anchor.outerHTML\n  }</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n}",
+  "unified_diff": "diff --git a/packages/editor/src/extensions/embed/component.tsx b/packages/editor/src/extensions/embed/component.tsx\nindex 999c570bf..4e22eaabb 100644\n--- a/packages/editor/src/extensions/embed/component.tsx\n+++ b/packages/editor/src/extensions/embed/component.tsx\n@@ -206,7 +206,13 @@ function isTwitterX(src: string) {\n \n function tweetToEmbed(src: string, isDarkTheme: boolean) {\n   src = src.replaceAll(\"x.com\", \"twitter.com\");\n+\n+  const anchor = document.createElement(\"a\");\n+  anchor.href = `${src}?ref_src=twsrc%5Etfw`;\n+\n   return `<blockquote class=\"twitter-tweet\" data-dnt=\"true\" ${\n     isDarkTheme ? 'data-theme=\"dark\"' : \"\"\n-  }><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n+  }><p lang=\"en\" dir=\"ltr\">${\n+    anchor.outerHTML\n+  }</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n }",
+  "auto_locate_confidence": "auto"
+}

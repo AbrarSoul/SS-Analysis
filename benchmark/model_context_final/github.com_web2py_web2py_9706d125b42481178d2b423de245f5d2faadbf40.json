@@ -1,0 +1,63 @@
+{
+  "case_id": "github.com_web2py_web2py_9706d125b42481178d2b423de245f5d2faadbf40",
+  "language": "python",
+  "cve_id": "CVE-2016-3952",
+  "cve_ids_all": [
+    "CVE-2016-3952",
+    "CVE-2016-3953"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-255",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-798",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "Request",
+  "imports": [
+    "from gluon.storage import Storage, List",
+    "from gluon.streamer import streamer, stream_file_or_304_or_206, DEFAULT_CHUNK_SIZE",
+    "from gluon.xmlrpc import handler",
+    "from gluon.contenttype import contenttype",
+    "from gluon.html import xmlescape, TABLE, TR, PRE, URL",
+    "from gluon.http import HTTP, redirect",
+    "from gluon.fileutils import up",
+    "from gluon.serializers import json, custom_json",
+    "import gluon.settings as settings",
+    "from gluon.utils import web2py_uuid, secure_dumps, secure_loads",
+    "from gluon.settings import global_settings",
+    "from gluon import recfile",
+    "from gluon.cache import CacheInRam",
+    "from gluon.fileutils import copystream",
+    "import hashlib",
+    "import portalocker",
+    "from pickle import Pickler, MARK, DICT, EMPTY_DICT",
+    "from types import DictionaryType",
+    "import cStringIO",
+    "import datetime",
+    "import re",
+    "import copy_reg",
+    "import Cookie",
+    "import os",
+    "import sys",
+    "import traceback",
+    "import threading",
+    "import cgi",
+    "import urlparse",
+    "import copy",
+    "import tempfile",
+    "import cPickle as pickle",
+    "import simplejson as sj",
+    "import pickle",
+    "import json as sj",
+    "import cStringIO",
+    "import gluon.contrib.simplejson as sj"
+  ],
+  "vulnerable_function": "    def __init__(self, env):\n        Storage.__init__(self)\n        self.env = Storage(env)\n        self.env.web2py_path = global_settings.applications_parent\n        self.env.update(global_settings)\n        self.cookies = Cookie.SimpleCookie()\n        self._get_vars = None\n        self._post_vars = None\n        self._vars = None\n        self._body = None\n        self.folder = None\n        self.application = None\n        self.function = None\n        self.args = List()\n        self.extension = 'html'\n        self.now = datetime.datetime.now()\n        self.utcnow = datetime.datetime.utcnow()\n        self.is_restful = False\n        self.is_https = False\n        self.is_local = False\n        self.global_settings = settings.global_settings\n        self._uuid = None\n",
+  "patched_function": "    def __init__(self, env):\n        Storage.__init__(self)\n        self.env = Storage(env)\n        self.env.web2py_path = global_settings.applications_parent\n        self.cookies = Cookie.SimpleCookie()\n        self._get_vars = None\n        self._post_vars = None\n        self._vars = None\n        self._body = None\n        self.folder = None\n        self.application = None\n        self.function = None\n        self.args = List()\n        self.extension = 'html'\n        self.now = datetime.datetime.now()\n        self.utcnow = datetime.datetime.utcnow()\n        self.is_restful = False\n        self.is_https = False\n        self.is_local = False\n        self._uuid = None\n",
+  "unified_diff": "diff --git a/gluon/globals.py b/gluon/globals.py\nindex 5581ade8..4f9ff811 100644\n--- a/gluon/globals.py\n+++ b/gluon/globals.py\n@@ -186,7 +186,6 @@ class Request(Storage):\n         Storage.__init__(self)\n         self.env = Storage(env)\n         self.env.web2py_path = global_settings.applications_parent\n-        self.env.update(global_settings)\n         self.cookies = Cookie.SimpleCookie()\n         self._get_vars = None\n         self._post_vars = None\n@@ -202,7 +201,6 @@ class Request(Storage):\n         self.is_restful = False\n         self.is_https = False\n         self.is_local = False\n-        self.global_settings = settings.global_settings\n         self._uuid = None\n \n     def parse_get_vars(self):",
+  "auto_locate_confidence": "auto"
+}

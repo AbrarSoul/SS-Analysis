@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0026",
+  "original_patch_filename": "github.com_NodeBB_NodeBB_48d143921753914da45926cca6370a92ed0c46b8.patch",
+  "cve_id": "CVE-2022-46164",
+  "cve_ids_all": [
+    "CVE-2022-46164"
+  ],
+  "cwe_ids": [
+    "CWE-665"
+  ],
+  "language": "javascript",
+  "repository": "NodeBB/NodeBB",
+  "repository_url": "https://github.com/NodeBB/NodeBB",
+  "vulnerable_commit": "0e495f9ea4bde434dd4c2d03ad25509e55475abd",
+  "fixed_commit": "48d143921753914da45926cca6370a92ed0c46b8",
+  "changed_file": "src/socket.io/index.js",
+  "patch_path": "cases/CASE-0026/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0026/vulnerable_source.js",
+  "patched_code_path": "cases/CASE-0026/patched_source.js",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.js",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.js",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.js",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.js",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.js",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.js",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

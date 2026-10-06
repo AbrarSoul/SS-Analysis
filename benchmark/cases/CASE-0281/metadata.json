@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0281",
+  "original_source_case_id": "github.com_run-llama_llama_index_a86c96ae0e662492eeb471b658ae849a93f628ff",
+  "selection_batch": "topup17",
+  "cve_id": "CVE-2025-6210",
+  "cve_ids_all": [
+    "CVE-2025-6210"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "run-llama/llama_index",
+  "repository_url": "https://github.com/run-llama/llama_index",
+  "vulnerable_commit": "1359a5300b15216766aa0ac0db0173d2016e03bf",
+  "fixed_commit": "a86c96ae0e662492eeb471b658ae849a93f628ff",
+  "changed_file": "llama-index-integrations/readers/llama-index-readers-obsidian/llama_index/readers/obsidian/base.py",
+  "changed_function": "def load_data(self, *args: Any, **load_kwargs: Any) -> List[Document]:",
+  "vulnerable_lines": [
+    53,
+    117
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 17,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0281/vulnerable_source.py": "2a069a9e929df789f79a4742296dfcc0139d0e946acb450412b9248e3a0a219e",
+    "cases/CASE-0281/patched_source.py": "af88223c540257e6b25efdddd2936deb9be3e774d5bdd8ccb33ab213c082a0c5",
+    "cases/CASE-0281/patch.diff": "792e208c9e25e1dd20f356d36aed57c256a338a0133defe96b858ef70bc4759b",
+    "cases/CASE-0281/metadata.json": "19e6fbc09dabfb84a374428bc046734a5d4dddc8b9b48cb632a1009c997a9189",
+    "model_context/CASE-0281.json": "a7b7b3864f0ed8d2a623ae62795240780b1fe692bd86da057ae9e0bb7954c2ec",
+    "difficulty/CASE-0281.json": "7c9f67c198086bbccb9c260fea98abd4d561a6ce02e870284467f1917f687cf0"
+  },
+  "case_level_hash": "a725228d51156e6d56f10681fdba45faa30bf8eaaa17347ddb6d17774ddd5039"
+}

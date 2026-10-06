@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_m0ver_bible-online_6ef0aabfb2d4ccd53fcaa9707781303af357410e",
+  "cve_ids": [
+    "CVE-2022-4454"
+  ],
+  "cwe_ids": [
+    "CWE-707",
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "m0ver/bible-online",
+  "repository_url": "https://github.com/m0ver/bible-online",
+  "vulnerable_commit": "32c44270b77536026d7f927ebddfbc27a8fbc1a9",
+  "fixed_commit": "6ef0aabfb2d4ccd53fcaa9707781303af357410e",
+  "changed_file": "src/main/java/custom/application/search.java",
+  "max_score": "1337"
+}

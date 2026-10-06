@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_jupyter-server_jupyter-scheduler_06435a2277bb2b8f441ec9cedafa474572b92c5d",
+  "cve_ids": [
+    "CVE-2024-28188"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-287"
+  ],
+  "language": "python",
+  "repository": "jupyter-server/jupyter-scheduler",
+  "repository_url": "https://github.com/jupyter-server/jupyter-scheduler",
+  "vulnerable_commit": "b01c76088bb9acfac846727681a94c6e58493b9e",
+  "fixed_commit": "06435a2277bb2b8f441ec9cedafa474572b92c5d",
+  "changed_file": "jupyter_scheduler/handlers.py",
+  "max_score": "1337"
+}

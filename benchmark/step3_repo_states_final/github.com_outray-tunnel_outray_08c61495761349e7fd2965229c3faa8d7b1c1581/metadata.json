@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_outray-tunnel_outray_08c61495761349e7fd2965229c3faa8d7b1c1581",
+  "cve_ids": [
+    "CVE-2026-22819",
+    "CVE-2026-22820"
+  ],
+  "cwe_ids": [
+    "CWE-366",
+    "CWE-367"
+  ],
+  "language": "typescript",
+  "repository": "outray-tunnel/outray",
+  "repository_url": "https://github.com/outray-tunnel/outray",
+  "vulnerable_commit": "7e88c997750c07bd523f9ef4bce1578abe612286",
+  "fixed_commit": "08c61495761349e7fd2965229c3faa8d7b1c1581",
+  "changed_file": "apps/web/src/routes/api/tunnel/register.ts",
+  "max_score": "1337"
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "github.com_pyload_pyload_c4cf995a2803bdbe388addfc2b0f323277efc0e1",
+  "batch": "topup29",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-295",
+    "CWE-306",
+    "CWE-441",
+    "CWE-502",
+    "CWE-78",
+    "CWE-863",
+    "CWE-918"
+  ],
+  "changed_files": 1,
+  "lines_added": 30,
+  "lines_removed": 19,
+  "lines_changed_total": 49,
+  "function_size_chars": 2328,
+  "function_size_lines": 63,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

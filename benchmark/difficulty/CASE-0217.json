@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0217",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-347"
+  ],
+  "changed_files": 1,
+  "lines_added": 110,
+  "lines_removed": 16,
+  "lines_changed_total": 126,
+  "function_size_chars": 2198,
+  "function_size_lines": 64,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Signature checked against the sending server only, not the event-id and sender domains; protocol trust logic."
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0291",
+  "original_source_case_id": "github.com_sorlen008_DesktopCommanderMCP_53699bebba9950047bca16ac4dc8f0568f596aaa",
+  "selection_batch": "topup13",
+  "cve_id": "CVE-2026-10690",
+  "cve_ids_all": [
+    "CVE-2026-10690"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "typescript",
+  "repository": "sorlen008/DesktopCommanderMCP",
+  "repository_url": "https://github.com/sorlen008/DesktopCommanderMCP",
+  "vulnerable_commit": "eb687ccccf5b40098d69a2b98cb69b8ff1361d94",
+  "fixed_commit": "53699bebba9950047bca16ac4dc8f0568f596aaa",
+  "changed_file": "src/tools/filesystem.ts",
+  "changed_function": "export async function readFileFromUrl(url: string): Promise<FileResult> {",
+  "vulnerable_lines": [
+    318,
+    384
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 82,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0291/vulnerable_source.ts": "2f26379024b394f76d2ec01c5c029272a006cb903137d918ad0b587397bce59b",
+    "cases/CASE-0291/patched_source.ts": "3fc1cf98967add84cae689a9f4b4042a036206aef5fcd921dd432d2f8c5e92dd",
+    "cases/CASE-0291/patch.diff": "71c32a64bdfe9527b9fb08f18ed204748aeb5858423403941404ff5d49bc4a36",
+    "cases/CASE-0291/metadata.json": "445bc35cdf7da637391b64cbf9e6eefe79f3541ff0635152a2c3bbb75733d353",
+    "model_context/CASE-0291.json": "5e83fa9e1fb126e8a7aa2ddc495e9b73ed1d614ef4f3edc87bd3c9c45409145e",
+    "difficulty/CASE-0291.json": "80a68de0381b1a2fefbc4fa31504d9a718571de7eb44b962a5c818d7ab2cc3a4"
+  },
+  "case_level_hash": "2c9f3ebd0666766785e6f77aac5896ad09764002ce81aa4974f3ab063e991ff1"
+}

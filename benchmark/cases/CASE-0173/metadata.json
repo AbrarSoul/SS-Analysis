@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0173",
+  "original_source_case_id": "github.com_honojs_hono_cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2026-24473",
+  "cve_ids_all": [
+    "CVE-2026-24473"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-284",
+    "CWE-668"
+  ],
+  "language": "typescript",
+  "repository": "honojs/hono",
+  "repository_url": "https://github.com/honojs/hono",
+  "vulnerable_commit": "edbf6eea8e6c26a3937518d4ed91d8666edeec37",
+  "fixed_commit": "cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817",
+  "changed_file": "src/adapter/cloudflare-workers/utils.ts",
+  "changed_function": "const key = ASSET_MANIFEST[path] || path",
+  "vulnerable_lines": [
+    39,
+    42
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0173/vulnerable_source.ts": "ed7fa0c3cf911aebef0b2259710af3d7dfc53e29f638bf88e2743a0914041ad5",
+    "cases/CASE-0173/patched_source.ts": "35ec7619eec63023dfc3d65c9414b0cfc9314dabbb333743d418bd23c0c1a30c",
+    "cases/CASE-0173/patch.diff": "66d9c3eda9d481fb3baf64606d8de2b982d04234d228131559a6ee32fb6d4186",
+    "cases/CASE-0173/metadata.json": "b1072ad4b3775f42d5776fc7157e2c04ffff9cee02980c4fa7f96e37a1ea2071",
+    "model_context/CASE-0173.json": "876e9ac80d8a28653db2c81660a23e14327763f426ed626491b118e1a8973280",
+    "difficulty/CASE-0173.json": "b13ed5c9cff845fdf8d635a34b16a5aebd976f7e4c7d928208d0da35b702741d"
+  },
+  "case_level_hash": "ae8f0d7236fd2d9e5dd1491f3cc67a62d7d35e8dc7222c0aa6ffe691a566c000"
+}

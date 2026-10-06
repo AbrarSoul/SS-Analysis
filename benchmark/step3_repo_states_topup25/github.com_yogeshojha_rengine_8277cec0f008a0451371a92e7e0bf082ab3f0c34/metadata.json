@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_yogeshojha_rengine_8277cec0f008a0451371a92e7e0bf082ab3f0c34",
+  "cve_ids": [
+    "CVE-2022-1813"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "yogeshojha/rengine",
+  "repository_url": "https://github.com/yogeshojha/rengine",
+  "vulnerable_commit": "72a5fb2eb766c7b0334a3420af7576a60c95b182",
+  "fixed_commit": "8277cec0f008a0451371a92e7e0bf082ab3f0c34",
+  "changed_file": "web/reNgine/common_func.py",
+  "max_score": "1337"
+}

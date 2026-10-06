@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "github.com_jupyterlab_jupyterlab_504825938c0abfa2fb8ff8d529308830a5ae42ed",
+    "language": "typescript",
+    "repository": "jupyterlab/jupyterlab",
+    "error": "no method-like block contains line 626; no method-like block contains line 628"
+  }
+]

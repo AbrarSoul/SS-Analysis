@@ -1,0 +1,50 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_dd3f4735b41971b3afc3f3aedf6664b4e8be4894",
+  "language": "java",
+  "cve_id": "CVE-2023-26056",
+  "cve_ids_all": [
+    "CVE-2023-26056"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-863",
+      "definition": "Incorrect Authorization"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.util.Arrays;",
+    "import java.util.Collections;",
+    "import java.util.HashMap;",
+    "import java.util.List;",
+    "import java.util.Map;",
+    "import java.util.Set;",
+    "import javax.inject.Inject;",
+    "import javax.inject.Named;",
+    "import javax.inject.Singleton;",
+    "import org.xwiki.bridge.DocumentModelBridge;",
+    "import org.xwiki.component.annotation.Component;",
+    "import org.xwiki.model.reference.DocumentReference;",
+    "import org.xwiki.model.reference.DocumentReferenceResolver;",
+    "import org.xwiki.rendering.async.internal.AbstractExecutedContentMacro;",
+    "import org.xwiki.rendering.async.internal.block.BlockAsyncRendererConfiguration;",
+    "import org.xwiki.rendering.block.Block;",
+    "import org.xwiki.rendering.block.MetaDataBlock;",
+    "import org.xwiki.rendering.block.XDOM;",
+    "import org.xwiki.rendering.listener.MetaData;",
+    "import org.xwiki.rendering.macro.MacroExecutionException;",
+    "import org.xwiki.rendering.macro.context.ContextMacroParameters;",
+    "import org.xwiki.rendering.macro.context.TransformationContextMode;",
+    "import org.xwiki.rendering.macro.descriptor.DefaultContentDescriptor;",
+    "import org.xwiki.rendering.transformation.MacroTransformationContext;",
+    "import org.xwiki.rendering.transformation.TransformationContext;",
+    "import org.xwiki.rendering.transformation.TransformationManager;",
+    "import org.xwiki.security.authorization.AccessDeniedException;",
+    "import org.xwiki.security.authorization.AuthorizationManager;",
+    "import org.xwiki.security.authorization.Right;"
+  ],
+  "vulnerable_function": "    public List<Block> execute(ContextMacroParameters parameters, String content, MacroTransformationContext context)\n        throws MacroExecutionException\n    {\n        if (parameters.getDocument() == null) {\n            throw new MacroExecutionException(\"You must specify a 'document' parameter pointing to the document to \"\n                + \"set in the context as the current document.\");\n        }\n\n        DocumentReference currentAuthor = this.documentAccessBridge.getCurrentAuthorReference();\n        DocumentReference referencedDocReference =\n            this.macroReferenceResolver.resolve(parameters.getDocument(), context.getCurrentMacroBlock());\n\n        // Make sure the author is allowed to use the target document\n        checkAccess(currentAuthor, referencedDocReference);\n\n        MetaData metadata = new MetaData();\n        metadata.addMetaData(MetaData.SOURCE, parameters.getDocument());\n        metadata.addMetaData(MetaData.BASE, parameters.getDocument());\n\n        XDOM xdom = this.parser.parse(content, context, false, metadata, context.isInline());\n\n        if (xdom.getChildren().isEmpty()) {\n            return Collections.emptyList();\n        }\n\n        // Reuse the very generic async rendering framework (even if we don't do async and caching) since it's taking\n        // care of many other things\n        BlockAsyncRendererConfiguration configuration = createBlockAsyncRendererConfiguration(null, xdom, context);\n\n        // Configure the Transformation Context XDOM depending on the mode asked.\n        configuration.setXDOM(getXDOM(referencedDocReference, parameters));\n\n        Map<String, Object> backupObjects = new HashMap<>();\n        try {\n            // Switch the context document\n            this.documentAccessBridge.pushDocumentInContext(backupObjects, referencedDocReference);\n\n            // Execute the content\n            Block result = this.executor.execute(configuration);\n\n            // Keep metadata so that the result stay associated to context properties when inserted in the parent XDOM\n            return Arrays.asList((Block) new MetaDataBlock(result.getChildren(), xdom.getMetaData()));\n        } catch (Exception e) {\n            throw new MacroExecutionException(\"Failed start the execution of the macro\", e);\n        } finally {\n            // Restore the context document\n            this.documentAccessBridge.popDocumentFromContext(backupObjects);\n        }\n    }",
+  "patched_function": "    public List<Block> execute(ContextMacroParameters parameters, String content, MacroTransformationContext context)\n        throws MacroExecutionException\n    {\n        if (parameters.getDocument() == null) {\n            throw new MacroExecutionException(\"You must specify a 'document' parameter pointing to the document to \"\n                + \"set in the context as the current document.\");\n        }\n\n        DocumentReference currentAuthor = this.documentAccessBridge.getCurrentAuthorReference();\n        DocumentReference referencedDocReference =\n            this.macroReferenceResolver.resolve(parameters.getDocument(), context.getCurrentMacroBlock());\n\n        // Make sure the author is allowed to use the target document\n        checkAccess(currentAuthor, referencedDocReference);\n\n        MetaData metadata = new MetaData();\n        metadata.addMetaData(MetaData.SOURCE, parameters.getDocument());\n        metadata.addMetaData(MetaData.BASE, parameters.getDocument());\n\n        XDOM xdom = this.parser.parse(content, context, false, metadata, context.isInline());\n\n        if (xdom.getChildren().isEmpty()) {\n            return Collections.emptyList();\n        }\n\n        // Reuse the very generic async rendering framework (even if we don't do async and caching) since it's taking\n        // care of many other things\n        BlockAsyncRendererConfiguration configuration = createBlockAsyncRendererConfiguration(null, xdom, context);\n\n        Map<String, Object> backupObjects = new HashMap<>();\n        try {\n            // Switch the context document\n            this.documentAccessBridge.pushDocumentInContext(backupObjects, referencedDocReference);\n\n            // Configure the Transformation Context XDOM depending on the mode asked.\n            configuration.setXDOM(getXDOM(referencedDocReference, parameters));\n\n            // Execute the content\n            Block result = this.executor.execute(configuration);\n\n            // Keep metadata so that the result stay associated to context properties when inserted in the parent XDOM\n            return Arrays.asList((Block) new MetaDataBlock(result.getChildren(), xdom.getMetaData()));\n        } catch (Exception e) {\n            throw new MacroExecutionException(\"Failed start the execution of the macro\", e);\n        } finally {\n            // Restore the context document\n            this.documentAccessBridge.popDocumentFromContext(backupObjects);\n        }\n    }",
+  "unified_diff": "diff --git a/xwiki-platform-core/xwiki-platform-rendering/xwiki-platform-rendering-macros/xwiki-platform-rendering-macro-context/src/main/java/org/xwiki/rendering/internal/macro/context/ContextMacro.java b/xwiki-platform-core/xwiki-platform-rendering/xwiki-platform-rendering-macros/xwiki-platform-rendering-macro-context/src/main/java/org/xwiki/rendering/internal/macro/context/ContextMacro.java\nindex 03ae81837db..c01d8c45285 100644\n--- a/xwiki-platform-core/xwiki-platform-rendering/xwiki-platform-rendering-macros/xwiki-platform-rendering-macro-context/src/main/java/org/xwiki/rendering/internal/macro/context/ContextMacro.java\n+++ b/xwiki-platform-core/xwiki-platform-rendering/xwiki-platform-rendering-macros/xwiki-platform-rendering-macro-context/src/main/java/org/xwiki/rendering/internal/macro/context/ContextMacro.java\n@@ -170,14 +170,14 @@ public List<Block> execute(ContextMacroParameters parameters, String content, Ma\n         // care of many other things\n         BlockAsyncRendererConfiguration configuration = createBlockAsyncRendererConfiguration(null, xdom, context);\n \n-        // Configure the Transformation Context XDOM depending on the mode asked.\n-        configuration.setXDOM(getXDOM(referencedDocReference, parameters));\n-\n         Map<String, Object> backupObjects = new HashMap<>();\n         try {\n             // Switch the context document\n             this.documentAccessBridge.pushDocumentInContext(backupObjects, referencedDocReference);\n \n+            // Configure the Transformation Context XDOM depending on the mode asked.\n+            configuration.setXDOM(getXDOM(referencedDocReference, parameters));\n+\n             // Execute the content\n             Block result = this.executor.execute(configuration);\n ",
+  "auto_locate_confidence": "auto"
+}

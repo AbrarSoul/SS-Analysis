@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_mintplex-labs_anything-llm_bfedfebfab032e6f4d5a369c8a2f947c5d0c5286",
+  "batch": "topup18",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 3,
+  "lines_changed_total": 14,
+  "function_size_chars": 1129,
+  "function_size_lines": 42,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

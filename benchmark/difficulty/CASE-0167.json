@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0167",
+  "batch": "topup6",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 3,
+  "lines_changed_total": 6,
+  "function_size_chars": 1701,
+  "function_size_lines": 63,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Guest input passed through a rich-text sanitiser with known bypasses; needs knowledge of the sanitiser's behaviour."
+}

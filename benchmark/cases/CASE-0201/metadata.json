@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0201",
+  "original_source_case_id": "github.com_joniles_mpxj_8eaf4225048ea5ba7e59ef4556dab2098fcc4a1d",
+  "selection_batch": "topup4",
+  "cve_id": "CVE-2020-35460",
+  "cve_ids_all": [
+    "CVE-2020-35460"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "joniles/mpxj",
+  "repository_url": "https://github.com/joniles/mpxj",
+  "vulnerable_commit": "1eed5f01ac8e49b433e0538bdc079caeda7d6fd7",
+  "fixed_commit": "8eaf4225048ea5ba7e59ef4556dab2098fcc4a1d",
+  "changed_file": "src/main/java/net/sf/mpxj/common/InputStreamHelper.java",
+  "changed_function": "private static void processZipStream(File dir, InputStream inputStream) throws IOException",
+  "vulnerable_lines": [
+    115,
+    148
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 9,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0201/vulnerable_source.java": "418e11f597cf1760a5ac7e677cd96855902da6fcebc078836cb379fe0961f181",
+    "cases/CASE-0201/patched_source.java": "671df8708ea835e38b18a9d19077fd543f4ff9d2317a317e5d8b5cc0565247bd",
+    "cases/CASE-0201/patch.diff": "6c2e3ebeb332f9829381b437ed4c0c570f7aacd7af33ca5b46832f3e1f43e9b9",
+    "cases/CASE-0201/metadata.json": "b73ebe7a5e0cbcc04bb32624de6913355ac0584cb08fe5d21ad99e219ca71adf",
+    "model_context/CASE-0201.json": "eb752f5e58a21ba22a27c22e8194028d5bde227abc7ac5442ffc847d5a85ee44",
+    "difficulty/CASE-0201.json": "d6ec4df78481b620bf0ff0ca67fe5638d7ff36e960b933bb5a066fd39fa8713a"
+  },
+  "case_level_hash": "8f3fbb74aec54a25b830d47b5574d69dd442bb892b371bf7768fd62e65e8c2ca"
+}

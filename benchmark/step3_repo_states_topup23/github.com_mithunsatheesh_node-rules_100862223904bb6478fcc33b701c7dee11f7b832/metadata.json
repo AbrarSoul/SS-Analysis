@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_mithunsatheesh_node-rules_100862223904bb6478fcc33b701c7dee11f7b832",
+  "cve_ids": [
+    "CVE-2020-7609"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "mithunsatheesh/node-rules",
+  "repository_url": "https://github.com/mithunsatheesh/node-rules",
+  "vulnerable_commit": "1b07c48336ce30aa6d3b6b3be1850cd292860dbb",
+  "fixed_commit": "100862223904bb6478fcc33b701c7dee11f7b832",
+  "changed_file": "lib/node-rules.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_jgraph_mxgraph_76e8e2809b622659a9c5ffdc4f19922b7a68cfa3",
+  "cve_ids": [
+    "CVE-2019-13127"
+  ],
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "jgraph/mxgraph",
+  "repository_url": "https://github.com/jgraph/mxgraph",
+  "vulnerable_commit": "33911ed7e055c17b74d0367f5f1f6c9ee4b4fd44",
+  "fixed_commit": "76e8e2809b622659a9c5ffdc4f19922b7a68cfa3",
+  "changed_file": "javascript/examples/grapheditor/www/js/Dialogs.js",
+  "max_score": "1337"
+}

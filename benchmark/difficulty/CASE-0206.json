@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0206",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 4059,
+  "function_size_lines": 108,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Cookies extracted using the already-redirected request; the wrong-argument expression is matchable but why it is wrong is semantic."
+}

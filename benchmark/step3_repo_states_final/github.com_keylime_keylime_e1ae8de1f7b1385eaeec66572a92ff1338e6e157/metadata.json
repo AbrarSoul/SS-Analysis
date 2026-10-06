@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_keylime_keylime_e1ae8de1f7b1385eaeec66572a92ff1338e6e157",
+  "cve_ids": [
+    "CVE-2025-13609"
+  ],
+  "cwe_ids": [
+    "CWE-694"
+  ],
+  "language": "python",
+  "repository": "keylime/keylime",
+  "repository_url": "https://github.com/keylime/keylime",
+  "vulnerable_commit": "b1a9a8ac6572d0851896afa407b5808087ace6ff",
+  "fixed_commit": "e1ae8de1f7b1385eaeec66572a92ff1338e6e157",
+  "changed_file": "keylime/cloud_verifier_tornado.py",
+  "max_score": "1337"
+}

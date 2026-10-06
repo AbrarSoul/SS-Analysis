@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0323",
+  "original_source_case_id": "github.com_w8tcha_CKEditor-oEmbed-Plugin_10f6169e39510bbf5af913886037044458b9dc9b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-9870",
+  "cve_ids_all": [
+    "CVE-2019-9870"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-19"
+  ],
+  "language": "javascript",
+  "repository": "w8tcha/CKEditor-oEmbed-Plugin",
+  "repository_url": "https://github.com/w8tcha/CKEditor-oEmbed-Plugin",
+  "vulnerable_commit": "403fc18c078983b5c88a49db8dfaed302123f8c5",
+  "fixed_commit": "10f6169e39510bbf5af913886037044458b9dc9b",
+  "changed_file": "oembed/plugin.js",
+  "changed_function": ",",
+  "vulnerable_lines": [
+    18,
+    534
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 0,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "hand_retargeted",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0323/vulnerable_source.js": "1bf46195bb5fff90dfd11654098238a4f787e7f13acca9f9a133b88a45804c61",
+    "cases/CASE-0323/patched_source.js": "8fc2da1189276ad6f5e2d189522f7a7e9d238d5f0498868d9c93e67440d55fc7",
+    "cases/CASE-0323/patch.diff": "2b45df10694ac89f4aa17713b0990d00c694a9bb566d21ac4376b6d359cfd26f",
+    "model_context/CASE-0323.json": "3311df0946f8cc8da124122252c6a740fb133bab2753c888f38a846294d3011c",
+    "difficulty/CASE-0323.json": "4c776f0dbcbb01398704930b4734fc7ce3ce859aa39ae98944b4872530de2cbc",
+    "cases/CASE-0323/metadata.json": "2db8a4c31ce40137577a36134b0a04f23802456b6485fd3d36c613ddb4e1d620"
+  },
+  "case_level_hash": "e345358e9a0a4e23fc2ec0b168988775826e731b584967de06653bf33a4e630b"
+}

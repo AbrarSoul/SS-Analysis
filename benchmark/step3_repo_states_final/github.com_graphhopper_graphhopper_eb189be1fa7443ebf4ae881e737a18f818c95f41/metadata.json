@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_graphhopper_graphhopper_eb189be1fa7443ebf4ae881e737a18f818c95f41",
+  "cve_ids": [
+    "CVE-2021-29506"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "java",
+  "repository": "graphhopper/graphhopper",
+  "repository_url": "https://github.com/graphhopper/graphhopper",
+  "vulnerable_commit": "744f0e2535355e67aefbb6906303332b8aff0a7f",
+  "fixed_commit": "eb189be1fa7443ebf4ae881e737a18f818c95f41",
+  "changed_file": "navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java",
+  "max_score": "1337"
+}

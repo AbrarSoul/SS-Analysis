@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0247",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "changed_files": 1,
+  "lines_added": 25,
+  "lines_removed": 15,
+  "lines_changed_total": 40,
+  "function_size_chars": 1406,
+  "function_size_lines": 30,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Uploaded data not removed when the task exits through an error path; missing cleanup on exceptional paths is only partly expressible."
+}

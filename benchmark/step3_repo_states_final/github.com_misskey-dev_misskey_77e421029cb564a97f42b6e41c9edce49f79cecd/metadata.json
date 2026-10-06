@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_misskey-dev_misskey_77e421029cb564a97f42b6e41c9edce49f79cecd",
+  "cve_ids": [
+    "CVE-2025-24897"
+  ],
+  "cwe_ids": [
+    "CWE-1275",
+    "CWE-352",
+    "CWE-614"
+  ],
+  "language": "typescript",
+  "repository": "misskey-dev/misskey",
+  "repository_url": "https://github.com/misskey-dev/misskey",
+  "vulnerable_commit": "f8f17a44d4113cf2e84418f7a1189c6884c5e134",
+  "fixed_commit": "77e421029cb564a97f42b6e41c9edce49f79cecd",
+  "changed_file": "packages/frontend/src/account.ts",
+  "max_score": "1337"
+}

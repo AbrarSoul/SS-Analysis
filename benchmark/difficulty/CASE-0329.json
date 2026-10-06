@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0329",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-639"
+  ],
+  "changed_files": 1,
+  "lines_added": 21,
+  "lines_removed": 12,
+  "lines_changed_total": 33,
+  "function_size_chars": 1991,
+  "function_size_lines": 64,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Custom field updated by id alone after a board-level check (IDOR); which selector scoping is required is contextual."
+}

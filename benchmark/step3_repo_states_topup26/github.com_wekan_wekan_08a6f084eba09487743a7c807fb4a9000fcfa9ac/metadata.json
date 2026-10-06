@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wekan_wekan_08a6f084eba09487743a7c807fb4a9000fcfa9ac",
+  "cve_ids": [
+    "CVE-2026-25564"
+  ],
+  "cwe_ids": [
+    "CWE-639"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "181f837d8cbae96bdf9dcbd31beaa3653c2c0285",
+  "fixed_commit": "08a6f084eba09487743a7c807fb4a9000fcfa9ac",
+  "changed_file": "models/checklists.js",
+  "max_score": "1337"
+}

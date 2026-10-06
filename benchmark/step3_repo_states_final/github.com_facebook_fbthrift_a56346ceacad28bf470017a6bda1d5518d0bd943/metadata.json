@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_facebook_fbthrift_a56346ceacad28bf470017a6bda1d5518d0bd943",
+  "cve_ids": [
+    "CVE-2019-3559"
+  ],
+  "cwe_ids": [
+    "CWE-755",
+    "CWE-834"
+  ],
+  "language": "java",
+  "repository": "facebook/fbthrift",
+  "repository_url": "https://github.com/facebook/fbthrift",
+  "vulnerable_commit": "9443939948a77691ec96df25bb9d46c7f98aa2b9",
+  "fixed_commit": "a56346ceacad28bf470017a6bda1d5518d0bd943",
+  "changed_file": "thrift/lib/java/thrift/src/main/java/com/facebook/thrift/protocol/TProtocolUtil.java",
+  "max_score": "1337"
+}

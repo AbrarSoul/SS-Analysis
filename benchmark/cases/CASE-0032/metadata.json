@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0032",
+  "original_patch_filename": "github.com_Eugeny_tabby_1c077147acd0a6ec9f8ee80d83a3e9688fbb9444.patch",
+  "cve_id": "CVE-2024-48460",
+  "cve_ids_all": [
+    "CVE-2024-48460"
+  ],
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "typescript",
+  "repository": "Eugeny/tabby",
+  "repository_url": "https://github.com/Eugeny/tabby",
+  "vulnerable_commit": "bc63068af54e83a8d8c59d93e0a08f271d4dfe79",
+  "fixed_commit": "1c077147acd0a6ec9f8ee80d83a3e9688fbb9444",
+  "changed_file": "tabby-ssh/src/session/ssh.ts",
+  "patch_path": "cases/CASE-0032/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0032/vulnerable_source.ts",
+  "patched_code_path": "cases/CASE-0032/patched_source.ts",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.ts",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.ts",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.ts",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.ts",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.ts",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.ts",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

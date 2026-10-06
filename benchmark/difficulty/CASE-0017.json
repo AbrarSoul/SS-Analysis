@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0017",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-209"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 2,
+  "lines_changed_total": 3,
+  "function_size_chars": 792,
+  "function_size_lines": 19,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "Both compared values embedded directly in one exception constructor call.",
+  "supported_status": "supported"
+}

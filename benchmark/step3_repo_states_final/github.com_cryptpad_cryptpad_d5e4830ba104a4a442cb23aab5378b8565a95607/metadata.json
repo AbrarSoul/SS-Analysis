@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_cryptpad_cryptpad_d5e4830ba104a4a442cb23aab5378b8565a95607",
+  "cve_ids": [
+    "CVE-2025-49590"
+  ],
+  "cwe_ids": [
+    "CWE-692"
+  ],
+  "language": "javascript",
+  "repository": "cryptpad/cryptpad",
+  "repository_url": "https://github.com/cryptpad/cryptpad",
+  "vulnerable_commit": "f624f9d457d36040f57c7598d98a8b9461b79837",
+  "fixed_commit": "d5e4830ba104a4a442cb23aab5378b8565a95607",
+  "changed_file": "www/bounce/main.js",
+  "max_score": "1337"
+}

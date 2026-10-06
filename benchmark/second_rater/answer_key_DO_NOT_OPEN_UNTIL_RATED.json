@@ -1,0 +1,227 @@
+{
+ "CASE-0305": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0271": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0106": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0085": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0067": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0179": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0166": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0054": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0218": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0332": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0227": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0120": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0078": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0183": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0222": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0056": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0224": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0220": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0163": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0225": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0132": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0270": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0229": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0042": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0238": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0302": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0325": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0288": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0089": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0063": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0264": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0137": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0189": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0176": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0061": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0310": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0300": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0162": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0196": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0170": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ },
+ "CASE-0098": {
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0181": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0199": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "unsupported"
+ },
+ "CASE-0116": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "semgrep_representability": "supported"
+ },
+ "CASE-0328": {
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "semgrep_representability": "partially_supported"
+ }
+}

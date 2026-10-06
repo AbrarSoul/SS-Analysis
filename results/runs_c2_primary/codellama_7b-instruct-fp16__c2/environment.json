@@ -1,0 +1,18 @@
+{
+  "model_tag": "codellama:7b-instruct-fp16",
+  "condition": "c2",
+  "base_url": "https://gptlab.rd.tuni.fi/GPT-Lab/resources/GPU-farmi-003/v1",
+  "temperature": 0.0,
+  "budget": {
+    "max_llm_calls": 6,
+    "max_combined_input_tokens": 30000,
+    "max_combined_output_tokens": 6000,
+    "max_repair_rounds": 3,
+    "max_wall_clock_seconds": 600
+  },
+  "python_version": "3.12.3",
+  "platform": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+  "recorded_at": 1790879952.5734968,
+  "semgrep_version": "1.177.0",
+  "autogrep_commit": "ace3c87a707a5b02632906b76195b6f97d411b8d"
+}

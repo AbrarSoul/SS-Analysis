@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_micronaut-projects_micronaut-core_9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1",
+  "cve_ids": [
+    "CVE-2020-7611"
+  ],
+  "cwe_ids": [
+    "CWE-444"
+  ],
+  "language": "java",
+  "repository": "micronaut-projects/micronaut-core",
+  "repository_url": "https://github.com/micronaut-projects/micronaut-core",
+  "vulnerable_commit": "a2392f4289f7777c4a310c3ae3bb4bc0ce5a65c2",
+  "fixed_commit": "9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1",
+  "changed_file": "http-netty/src/main/java/io/micronaut/http/netty/NettyHttpHeaders.java",
+  "max_score": "1337"
+}

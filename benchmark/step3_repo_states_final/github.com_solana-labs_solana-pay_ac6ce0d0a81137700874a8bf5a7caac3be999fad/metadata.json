@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_solana-labs_solana-pay_ac6ce0d0a81137700874a8bf5a7caac3be999fad",
+  "cve_ids": [
+    "CVE-2022-35917"
+  ],
+  "cwe_ids": [
+    "CWE-670"
+  ],
+  "language": "typescript",
+  "repository": "solana-labs/solana-pay",
+  "repository_url": "https://github.com/solana-labs/solana-pay",
+  "vulnerable_commit": "f41701dc7931f7882c6eb0582c9ddd796eb9d3aa",
+  "fixed_commit": "ac6ce0d0a81137700874a8bf5a7caac3be999fad",
+  "changed_file": "core/src/validateTransfer.ts",
+  "max_score": "1337"
+}

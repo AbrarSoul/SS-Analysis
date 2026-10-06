@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_voila-dashboards_voila_c045be6988539d07cceeb9f82fc660a49485d504",
+  "cve_ids": [
+    "CVE-2024-30265"
+  ],
+  "cwe_ids": [
+    "CWE-73"
+  ],
+  "language": "python",
+  "repository": "voila-dashboards/voila",
+  "repository_url": "https://github.com/voila-dashboards/voila",
+  "vulnerable_commit": "ae0ec0458818723560fa452c7b3513372df7ab49",
+  "fixed_commit": "c045be6988539d07cceeb9f82fc660a49485d504",
+  "changed_file": "voila/app.py",
+  "max_score": "1337"
+}

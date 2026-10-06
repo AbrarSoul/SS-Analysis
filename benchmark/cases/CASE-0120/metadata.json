@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0120",
+  "original_source_case_id": "github.com_apache_tomcat_5badf94e79e5de206fc0ef3054fd536b1bb787cd",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-28709",
+  "cve_ids_all": [
+    "CVE-2023-28709"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-193"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "f00b3b95a0fbb343a3dce17986f4866c6b485570",
+  "fixed_commit": "5badf94e79e5de206fc0ef3054fd536b1bb787cd",
+  "changed_file": "java/org/apache/tomcat/util/http/Parameters.java",
+  "changed_function": "public void addParameter(String key, String value) throws IllegalStateException {",
+  "vulnerable_lines": [
+    230,
+    250
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0120/vulnerable_source.java": "741beac3fd93dab0f56c08064d91b747c1719029c9be268b4e422b8c0c230728",
+    "cases/CASE-0120/patched_source.java": "ea6c2e690b6f4620856af3ef71b0f16eac34e6a1ea9d5e7a4126a39abf77de6f",
+    "cases/CASE-0120/patch.diff": "540f1dba22aa4c36c92eb3d4f8ddfde506b15f7176b6c70f1be28fcb78e1becf",
+    "cases/CASE-0120/metadata.json": "f66e45d1f19a76b6f1b9392466592c7ea0eb2e7efe7d2b9c92bd42fbffca3e33",
+    "model_context/CASE-0120.json": "baf30a06d71f1acbee7ca2a10bf59bd0c2a90577ce961d240a281fca879d1f94",
+    "difficulty/CASE-0120.json": "e3d0eef3c0a1b555afa453a313639f4d4253b95ffbedb175b208d67eee45721e"
+  },
+  "case_level_hash": "afcee375a4c7b5e433a26e87874588d6fb0d1b33b1d8b72ffd4fc60ee1950d29"
+}

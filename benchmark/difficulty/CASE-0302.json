@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0302",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-732",
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 9,
+  "lines_changed_total": 12,
+  "function_size_chars": 2675,
+  "function_size_lines": 81,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Response Content-Type sniffed from artifact content, so HTML artifacts are served inline; harm depends on serving origin."
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_wekan_wekan_1c8667eae8b28739e43569b612ffdb2693c6b1ce",
+  "cve_ids": [
+    "CVE-2026-30847"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-285"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "f0deed448aa37a07b0f617fb29cc91435320d1cd",
+  "fixed_commit": "1c8667eae8b28739e43569b612ffdb2693c6b1ce",
+  "changed_file": "server/publications/notifications.js",
+  "max_score": "1337"
+}

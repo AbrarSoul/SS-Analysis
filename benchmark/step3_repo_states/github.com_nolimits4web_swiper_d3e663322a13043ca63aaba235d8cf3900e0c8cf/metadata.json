@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_nolimits4web_swiper_d3e663322a13043ca63aaba235d8cf3900e0c8cf",
+  "cve_ids": [
+    "CVE-2026-27212"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "javascript",
+  "repository": "nolimits4web/swiper",
+  "repository_url": "https://github.com/nolimits4web/swiper",
+  "vulnerable_commit": "70c48c16f99affa29236ac13b16a37f43da38ae0",
+  "fixed_commit": "d3e663322a13043ca63aaba235d8cf3900e0c8cf",
+  "changed_file": "src/shared/utils.mjs",
+  "max_score": "1337"
+}

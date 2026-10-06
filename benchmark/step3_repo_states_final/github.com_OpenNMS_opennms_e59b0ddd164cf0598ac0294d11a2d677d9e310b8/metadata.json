@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_OpenNMS_opennms_e59b0ddd164cf0598ac0294d11a2d677d9e310b8",
+  "cve_ids": [
+    "CVE-2023-0872",
+    "CVE-2023-40612"
+  ],
+  "cwe_ids": [
+    "CWE-269",
+    "CWE-91",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "OpenNMS/opennms",
+  "repository_url": "https://github.com/OpenNMS/opennms",
+  "vulnerable_commit": "1365ba9129f1762707fdbf1edd1f3e460bfb31e0",
+  "fixed_commit": "e59b0ddd164cf0598ac0294d11a2d677d9e310b8",
+  "changed_file": "opennms-webapp-rest/src/main/java/org/opennms/web/rest/v1/UserRestService.java",
+  "max_score": "1337"
+}

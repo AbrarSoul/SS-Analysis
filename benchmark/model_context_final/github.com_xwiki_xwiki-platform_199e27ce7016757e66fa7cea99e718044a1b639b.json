@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_199e27ce7016757e66fa7cea99e718044a1b639b",
+  "language": "javascript",
+  "cve_id": "CVE-2023-45135",
+  "cve_ids_all": [
+    "CVE-2023-45135"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-116",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "    var getPageName = function(title) {\n      var url = XWiki.currentDocument.getURL(\"get\");\n      return Promise.resolve($.get(url, {\n        'xpage': 'entitynamevalidation_json',\n        'outputSyntax': 'plain',\n        'name': title,\n        'form_token': xm.form_token\n      }));\n    }",
+  "patched_function": "    var getPageName = function(title) {\n      if (nameInput.prop('readonly')) {\n        // The page name is read-only so we shouldn't update it based on the title.\n        return Promise.resolve({transformedName: nameInput.val()});\n      } else {\n        var url = XWiki.currentDocument.getURL(\"get\");\n        return Promise.resolve($.get(url, {\n          'xpage': 'entitynamevalidation_json',\n          'outputSyntax': 'plain',\n          'name': title,\n          'form_token': xm.form_token\n        }));\n      }\n    }",
+  "unified_diff": "diff --git a/xwiki-platform-core/xwiki-platform-web/xwiki-platform-web-war/src/main/webapp/resources/uicomponents/widgets/locationPicker.js b/xwiki-platform-core/xwiki-platform-web/xwiki-platform-web-war/src/main/webapp/resources/uicomponents/widgets/locationPicker.js\nindex a327c47c33a..f596af5783c 100644\n--- a/xwiki-platform-core/xwiki-platform-web/xwiki-platform-web-war/src/main/webapp/resources/uicomponents/widgets/locationPicker.js\n+++ b/xwiki-platform-core/xwiki-platform-web/xwiki-platform-web-war/src/main/webapp/resources/uicomponents/widgets/locationPicker.js\n@@ -151,13 +151,18 @@ require(['jquery', 'xwiki-meta', 'xwiki-events-bridge', 'xwiki-form-validation-a\n      * Compute a page name from a given title.\n      **/\n     var getPageName = function(title) {\n-      var url = XWiki.currentDocument.getURL(\"get\");\n-      return Promise.resolve($.get(url, {\n-        'xpage': 'entitynamevalidation_json',\n-        'outputSyntax': 'plain',\n-        'name': title,\n-        'form_token': xm.form_token\n-      }));\n+      if (nameInput.prop('readonly')) {\n+        // The page name is read-only so we shouldn't update it based on the title.\n+        return Promise.resolve({transformedName: nameInput.val()});\n+      } else {\n+        var url = XWiki.currentDocument.getURL(\"get\");\n+        return Promise.resolve($.get(url, {\n+          'xpage': 'entitynamevalidation_json',\n+          'outputSyntax': 'plain',\n+          'name': title,\n+          'form_token': xm.form_token\n+        }));\n+      }\n     };\n \n     /**",
+  "auto_locate_confidence": "auto"
+}

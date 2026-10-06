@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0251",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 8,
+  "lines_removed": 7,
+  "lines_changed_total": 15,
+  "function_size_chars": 4437,
+  "function_size_lines": 103,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Directories and files created with default modes while metadata permissions apply only to dependencies; permission logic across statements."
+}

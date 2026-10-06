@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_haxtheweb_haxcms-nodejs_6dc2441c876350ca6fe9fbaecb058d92ef442869",
+  "cve_ids": [
+    "CVE-2025-54137"
+  ],
+  "cwe_ids": [
+    "CWE-1392"
+  ],
+  "language": "javascript",
+  "repository": "haxtheweb/haxcms-nodejs",
+  "repository_url": "https://github.com/haxtheweb/haxcms-nodejs",
+  "vulnerable_commit": "2a0ad4374e01e0e774c27d4b7fba84b6f5a742af",
+  "fixed_commit": "6dc2441c876350ca6fe9fbaecb058d92ef442869",
+  "changed_file": "src/lib/HAXCMS.js",
+  "max_score": "1337"
+}

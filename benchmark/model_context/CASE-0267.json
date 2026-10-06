@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0267",
+  "language": "python",
+  "cve_id": "CVE-2026-25645",
+  "cve_ids_all": [
+    "CVE-2026-25645"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-377",
+      "definition": "Insecure Temporary File"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import codecs",
+    "import contextlib",
+    "import io",
+    "import os",
+    "import re",
+    "import socket",
+    "import struct",
+    "import sys",
+    "import tempfile",
+    "import warnings",
+    "import zipfile",
+    "from collections import OrderedDict",
+    "from urllib3.util import make_headers, parse_url",
+    "from . import certs",
+    "from .__version__ import __version__",
+    "from ._internal_utils import _HEADER_VALIDATORS_BYTE, _HEADER_VALIDATORS_STR, HEADER_VALIDATORS, to_native_string",
+    "from .compat import Mapping, basestring, bytes, getproxies, getproxies_environment, integer_types, is_urllib3_1, proxy_bypass, proxy_bypass_environment, quote, str, unquote, urlparse, urlunparse",
+    "from .compat import parse_http_list as _parse_list_header",
+    "from .cookies import cookiejar_from_dict",
+    "from .exceptions import FileModeWarning, InvalidHeader, InvalidURL, UnrewindableBodyError",
+    "from .structures import CaseInsensitiveDict",
+    "import winreg"
+  ],
+  "vulnerable_function": "def extract_zipped_paths(path):\n    \"\"\"Replace nonexistent paths that look like they refer to a member of a zip\n    archive with the location of an extracted copy of the target, or else\n    just return the provided path unchanged.\n    \"\"\"\n    if os.path.exists(path):\n        # this is already a valid path, no need to do anything further\n        return path\n\n    # find the first valid part of the provided path and treat that as a zip archive\n    # assume the rest of the path is the name of a member in the archive\n    archive, member = os.path.split(path)\n    while archive and not os.path.exists(archive):\n        archive, prefix = os.path.split(archive)\n        if not prefix:\n            # If we don't check for an empty prefix after the split (in other words, archive remains unchanged after the split),\n            # we _can_ end up in an infinite loop on a rare corner case affecting a small number of users\n            break\n        member = \"/\".join([prefix, member])\n\n    if not zipfile.is_zipfile(archive):\n        return path\n\n    zip_file = zipfile.ZipFile(archive)\n    if member not in zip_file.namelist():\n        return path\n\n    # we have a valid zip archive and a valid member of that archive\n    tmp = tempfile.gettempdir()\n    extracted_path = os.path.join(tmp, member.split(\"/\")[-1])\n    if not os.path.exists(extracted_path):\n        # use read + write to avoid the creating nested folders, we only want the file, avoids mkdir racing condition\n        with atomic_open(extracted_path) as file_handler:\n            file_handler.write(zip_file.read(member))\n    return extracted_path\n",
+  "patched_function": "def extract_zipped_paths(path):\n    \"\"\"Replace nonexistent paths that look like they refer to a member of a zip\n    archive with the location of an extracted copy of the target, or else\n    just return the provided path unchanged.\n    \"\"\"\n    if os.path.exists(path):\n        # this is already a valid path, no need to do anything further\n        return path\n\n    # find the first valid part of the provided path and treat that as a zip archive\n    # assume the rest of the path is the name of a member in the archive\n    archive, member = os.path.split(path)\n    while archive and not os.path.exists(archive):\n        archive, prefix = os.path.split(archive)\n        if not prefix:\n            # If we don't check for an empty prefix after the split (in other words, archive remains unchanged after the split),\n            # we _can_ end up in an infinite loop on a rare corner case affecting a small number of users\n            break\n        member = \"/\".join([prefix, member])\n\n    if not zipfile.is_zipfile(archive):\n        return path\n\n    zip_file = zipfile.ZipFile(archive)\n    if member not in zip_file.namelist():\n        return path\n\n    # we have a valid zip archive and a valid member of that archive\n    suffix = os.path.splitext(member.split(\"/\")[-1])[-1]\n    fd, extracted_path = tempfile.mkstemp(suffix=suffix)\n    try:\n        os.write(fd, zip_file.read(member))\n    finally:\n        os.close(fd)\n\n    return extracted_path\n",
+  "unified_diff": "diff --git a/src/requests/utils.py b/src/requests/utils.py\nindex d8803e6e..54959bb8 100644\n--- a/src/requests/utils.py\n+++ b/src/requests/utils.py\n@@ -282,12 +282,13 @@ def extract_zipped_paths(path):\n         return path\n \n     # we have a valid zip archive and a valid member of that archive\n-    tmp = tempfile.gettempdir()\n-    extracted_path = os.path.join(tmp, member.split(\"/\")[-1])\n-    if not os.path.exists(extracted_path):\n-        # use read + write to avoid the creating nested folders, we only want the file, avoids mkdir racing condition\n-        with atomic_open(extracted_path) as file_handler:\n-            file_handler.write(zip_file.read(member))\n+    suffix = os.path.splitext(member.split(\"/\")[-1])[-1]\n+    fd, extracted_path = tempfile.mkstemp(suffix=suffix)\n+    try:\n+        os.write(fd, zip_file.read(member))\n+    finally:\n+        os.close(fd)\n+\n     return extracted_path\n \n ",
+  "auto_locate_confidence": "auto"
+}

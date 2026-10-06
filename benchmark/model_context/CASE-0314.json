@@ -1,0 +1,60 @@
+{
+  "case_id": "CASE-0314",
+  "language": "java",
+  "cve_id": "CVE-2023-1108",
+  "cve_ids_all": [
+    "CVE-2023-1108"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-835",
+      "definition": "Loop with Unreachable Exit Condition ('Infinite Loop')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.IOException;",
+    "import java.io.InterruptedIOException;",
+    "import java.nio.ByteBuffer;",
+    "import java.nio.channels.ClosedChannelException;",
+    "import java.nio.channels.FileChannel;",
+    "import java.util.ArrayList;",
+    "import java.util.List;",
+    "import java.util.concurrent.Executor;",
+    "import java.util.concurrent.RejectedExecutionException;",
+    "import java.util.concurrent.TimeUnit;",
+    "import javax.net.ssl.SSLEngine;",
+    "import javax.net.ssl.SSLEngineResult;",
+    "import javax.net.ssl.SSLException;",
+    "import javax.net.ssl.SSLSession;",
+    "import io.undertow.UndertowLogger;",
+    "import io.undertow.connector.ByteBufferPool;",
+    "import io.undertow.connector.PooledByteBuffer;",
+    "import io.undertow.server.DefaultByteBufferPool;",
+    "import org.xnio.Buffers;",
+    "import org.xnio.ChannelListener;",
+    "import org.xnio.ChannelListeners;",
+    "import org.xnio.IoUtils;",
+    "import org.xnio.StreamConnection;",
+    "import org.xnio.XnioIoThread;",
+    "import org.xnio.XnioWorker;",
+    "import org.xnio.channels.StreamSinkChannel;",
+    "import org.xnio.channels.StreamSourceChannel;",
+    "import org.xnio.conduits.ConduitReadableByteChannel;",
+    "import org.xnio.conduits.ConduitStreamSinkChannel;",
+    "import org.xnio.conduits.ConduitStreamSourceChannel;",
+    "import org.xnio.conduits.ConduitWritableByteChannel;",
+    "import org.xnio.conduits.Conduits;",
+    "import org.xnio.conduits.ReadReadyHandler;",
+    "import org.xnio.conduits.StreamSinkConduit;",
+    "import org.xnio.conduits.StreamSourceConduit;",
+    "import org.xnio.conduits.WriteReadyHandler;",
+    "import static org.xnio.Bits.allAreClear;",
+    "import static org.xnio.Bits.allAreSet;",
+    "import static org.xnio.Bits.anyAreSet;"
+  ],
+  "vulnerable_function": "    private SSLEngineResult wrapAndFlip(ByteBuffer[] userBuffers, int off, int len) throws IOException {\n        SSLEngineResult result = null;\n        while (result == null || (result.getHandshakeStatus() == SSLEngineResult.HandshakeStatus.NEED_WRAP && result.getStatus() != SSLEngineResult.Status.BUFFER_OVERFLOW)) {\n            if (userBuffers == null) {\n                result = engine.wrap(EMPTY_BUFFER, wrappedData.getBuffer());\n            } else {\n                result = engine.wrap(userBuffers, off, len, wrappedData.getBuffer());\n            }\n        }\n        wrappedData.getBuffer().flip();\n        return result;\n    }",
+  "patched_function": "    private SSLEngineResult wrapAndFlip(ByteBuffer[] userBuffers, int off, int len) throws IOException {\n        SSLEngineResult result = null;\n        while (result == null || (result.getHandshakeStatus() == SSLEngineResult.HandshakeStatus.NEED_WRAP\n                && result.getStatus() != SSLEngineResult.Status.BUFFER_OVERFLOW && !engine.isInboundDone())) {\n            if (userBuffers == null) {\n                result = engine.wrap(EMPTY_BUFFER, wrappedData.getBuffer());\n            } else {\n                result = engine.wrap(userBuffers, off, len, wrappedData.getBuffer());\n            }\n        }\n        wrappedData.getBuffer().flip();\n        return result;\n    }",
+  "unified_diff": "diff --git a/core/src/main/java/io/undertow/protocols/ssl/SslConduit.java b/core/src/main/java/io/undertow/protocols/ssl/SslConduit.java\nindex 92a6b1fa5..a3ed27936 100644\n--- a/core/src/main/java/io/undertow/protocols/ssl/SslConduit.java\n+++ b/core/src/main/java/io/undertow/protocols/ssl/SslConduit.java\n@@ -999,7 +999,8 @@ public class SslConduit implements StreamSourceConduit, StreamSinkConduit {\n \n     private SSLEngineResult wrapAndFlip(ByteBuffer[] userBuffers, int off, int len) throws IOException {\n         SSLEngineResult result = null;\n-        while (result == null || (result.getHandshakeStatus() == SSLEngineResult.HandshakeStatus.NEED_WRAP && result.getStatus() != SSLEngineResult.Status.BUFFER_OVERFLOW)) {\n+        while (result == null || (result.getHandshakeStatus() == SSLEngineResult.HandshakeStatus.NEED_WRAP\n+                && result.getStatus() != SSLEngineResult.Status.BUFFER_OVERFLOW && !engine.isInboundDone())) {\n             if (userBuffers == null) {\n                 result = engine.wrap(EMPTY_BUFFER, wrappedData.getBuffer());\n             } else {",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_cobbler_cobbler_1b91a3d3ac87c31d9dac2307513feb2aa49620a6",
+  "cve_ids": [
+    "CVE-2018-1000225",
+    "CVE-2018-1000226",
+    "CVE-2018-10931"
+  ],
+  "cwe_ids": [
+    "CWE-732",
+    "CWE-749",
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "cobbler/cobbler",
+  "repository_url": "https://github.com/cobbler/cobbler",
+  "vulnerable_commit": "fe8cd399140e155d7bbf9111a2272653b22725f2",
+  "fixed_commit": "1b91a3d3ac87c31d9dac2307513feb2aa49620a6",
+  "changed_file": "cobbler/remote.py",
+  "max_score": "1337"
+}

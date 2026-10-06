@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0106",
+  "original_source_case_id": "github.com_apache_inlong_cab63a8eea6c0f4bf3d30ce245b7e1beee42504d",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2023-35088",
+  "cve_ids_all": [
+    "CVE-2023-35088"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "apache/inlong",
+  "repository_url": "https://github.com/apache/inlong",
+  "vulnerable_commit": "77b66925708e00bee8f8442e8c7e22c0a8209aa4",
+  "fixed_commit": "cab63a8eea6c0f4bf3d30ce245b7e1beee42504d",
+  "changed_file": "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/core/impl/AuditServiceImpl.java",
+  "changed_function": "private String toAuditCkSql(String groupId, String streamId, String auditId, String dt) {",
+  "vulnerable_lines": [
+    319,
+    333
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 25,
+  "patch_size_deleted": 11,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0106/vulnerable_source.java": "06dd230e59290558d9f5baf7e68bdb1abb67906e81b2ac4b5f10a652b18cb610",
+    "cases/CASE-0106/patched_source.java": "0b9b86a5c682f6e1666e151316e641985e61eb95de49f368aaaef71a47215e38",
+    "cases/CASE-0106/patch.diff": "af381f8e4e935b4530a8ec5fcb65a41fa19e44ba8083568325136a9e45c5671c",
+    "cases/CASE-0106/metadata.json": "b000ccb31772c21a44aff6d25e0da83f6df85ea8bb1083fb2b5a3cdd34b1b79e",
+    "model_context/CASE-0106.json": "51ccd80c61c44789ca8e6d80bf42251355446c55c7ccde3c356f9b5506049ede",
+    "difficulty/CASE-0106.json": "88dfca5b7e53a767801b0d12cb2e461a4bfa86e512e971de96d0006f71c449df"
+  },
+  "case_level_hash": "02d4299d0dcb5fac2b932af66c080687199d950561fd6ba39e2c0ebb23589e8b"
+}

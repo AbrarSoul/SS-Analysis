@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_fgribreau_node-request-retry_0979c6001d9d57c2aac3157c11b007397158922a",
+  "cve_ids": [
+    "CVE-2022-0654"
+  ],
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "fgribreau/node-request-retry",
+  "repository_url": "https://github.com/fgribreau/node-request-retry",
+  "vulnerable_commit": "5e1a63c13c9b65ed927e8eb797d8cc7da0dae243",
+  "fixed_commit": "0979c6001d9d57c2aac3157c11b007397158922a",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

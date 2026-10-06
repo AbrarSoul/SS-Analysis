@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0141",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-670"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 596,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Cache expiry comparison inverted (isBefore vs isAfter); a semantic operator inversion with no distinguishing code shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+}

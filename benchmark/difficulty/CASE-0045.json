@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0045",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-77"
+  ],
+  "changed_files": 1,
+  "lines_added": 13,
+  "lines_removed": 11,
+  "lines_changed_total": 24,
+  "function_size_chars": 434,
+  "function_size_lines": 12,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Template-literal shell command passed straight to child_process exec; self-contained sink."
+}

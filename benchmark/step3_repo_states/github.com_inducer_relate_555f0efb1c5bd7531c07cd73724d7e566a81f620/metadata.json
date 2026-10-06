@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_inducer_relate_555f0efb1c5bd7531c07cd73724d7e566a81f620",
+  "cve_ids": [
+    "CVE-2026-42197"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "inducer/relate",
+  "repository_url": "https://github.com/inducer/relate",
+  "vulnerable_commit": "032c6170b28fea2d9647c57605991c3c16796041",
+  "fixed_commit": "555f0efb1c5bd7531c07cd73724d7e566a81f620",
+  "changed_file": "course/admin.py",
+  "max_score": "1337"
+}

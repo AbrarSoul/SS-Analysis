@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0259",
+  "original_source_case_id": "github.com_pkrumins_node-tree-kill_ff73dbf144c4c2daa67799a50dfff59cd455c63c",
+  "selection_batch": "topup22",
+  "cve_id": "CVE-2019-15598",
+  "cve_ids_all": [
+    "CVE-2019-15598"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78",
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "pkrumins/node-tree-kill",
+  "repository_url": "https://github.com/pkrumins/node-tree-kill",
+  "vulnerable_commit": "3b5b8feeb3175a3e16ea7e0e09fdf5b8d2b87b08",
+  "fixed_commit": "ff73dbf144c4c2daa67799a50dfff59cd455c63c",
+  "changed_file": "index.js",
+  "changed_function": "module.exports = function (pid, signal, callback) {",
+  "vulnerable_lines": [
+    7,
+    42
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 4,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0259/vulnerable_source.js": "ef062235d7b042bae150f97d57dc73081488779b08f479f88f32dcc93282c71f",
+    "cases/CASE-0259/patched_source.js": "02541b83623397c12ecf72e9f40b4395f2c5014d4c37383775a72dd090025000",
+    "cases/CASE-0259/patch.diff": "d2c2ca7e0b313798051590859ae23dff73782c8ad810c2c34b1c0289018684f3",
+    "cases/CASE-0259/metadata.json": "f0ab3158c10e842b59d1b0a1a353754731d3dac3adfd92d8238a4092fa57a3c3",
+    "model_context/CASE-0259.json": "82ad5098ec925f7641a0bd8c76ab778fe350086a8dbb0900decfc5f5c31ae755",
+    "difficulty/CASE-0259.json": "d12bac5f79221fb826788d003e61c085b390633af34e9f1542a228fda373ab49"
+  },
+  "case_level_hash": "27af291433a2571618d198097b9078b4a1a52c1deb5eefa3c51893a681527239"
+}

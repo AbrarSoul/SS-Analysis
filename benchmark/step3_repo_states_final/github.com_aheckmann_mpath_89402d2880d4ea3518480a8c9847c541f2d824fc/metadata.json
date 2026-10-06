@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_aheckmann_mpath_89402d2880d4ea3518480a8c9847c541f2d824fc",
+  "cve_ids": [
+    "CVE-2021-23438"
+  ],
+  "cwe_ids": [
+    "CWE-843"
+  ],
+  "language": "javascript",
+  "repository": "aheckmann/mpath",
+  "repository_url": "https://github.com/aheckmann/mpath",
+  "vulnerable_commit": "03c4efef8b25425476c1e0d7b6a0fb5adc18c0f9",
+  "fixed_commit": "89402d2880d4ea3518480a8c9847c541f2d824fc",
+  "changed_file": "lib/index.js",
+  "max_score": "1337"
+}

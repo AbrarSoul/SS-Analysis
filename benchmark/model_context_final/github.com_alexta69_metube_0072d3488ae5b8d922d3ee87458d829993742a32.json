@@ -1,0 +1,42 @@
+{
+  "case_id": "github.com_alexta69_metube_0072d3488ae5b8d922d3ee87458d829993742a32",
+  "language": "python",
+  "cve_id": "CVE-2026-7581",
+  "cve_ids_all": [
+    "CVE-2026-7581"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-346",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-942",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import os",
+    "import sys",
+    "import asyncio",
+    "from pathlib import Path",
+    "from aiohttp import web",
+    "from aiohttp.log import access_logger",
+    "import ssl",
+    "import socket",
+    "import socketio",
+    "import logging",
+    "import json",
+    "import pathlib",
+    "import re",
+    "from watchfiles import DefaultFilter, Change, awatch",
+    "from ytdl import DownloadQueueNotifier, DownloadQueue, Download",
+    "from subscriptions import SubscriptionManager, SubscriptionNotifier, SubscriptionInfo",
+    "from yt_dlp.version import __version__ as yt_dlp_version"
+  ],
+  "vulnerable_function": "async def on_prepare(request, response):\n    if 'Origin' in request.headers:\n        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']\n        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'\n",
+  "patched_function": "async def on_prepare(request, response):\n    origin = request.headers.get('Origin')\n    if origin and _cors_origins and origin in _cors_origins:\n        response.headers['Access-Control-Allow-Origin'] = origin\n        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'\n",
+  "unified_diff": "diff --git a/app/main.py b/app/main.py\nindex 5853163..7269c8c 100644\n--- a/app/main.py\n+++ b/app/main.py\n@@ -60,6 +60,7 @@ class Config:\n         'YTDL_OPTIONS_PRESETS': '{}',\n         'YTDL_OPTIONS_PRESETS_FILE': '',\n         'ALLOW_YTDL_OPTIONS_OVERRIDES': 'false',\n+        'CORS_ALLOWED_ORIGINS': '',\n         'ROBOTS_TXT': '',\n         'HOST': '0.0.0.0',\n         'PORT': '8081',\n@@ -223,7 +224,8 @@ class ObjectSerializer(json.JSONEncoder):\n \n serializer = ObjectSerializer()\n app = web.Application()\n-sio = socketio.AsyncServer(cors_allowed_origins='*')\n+_cors_origins = [o.strip() for o in config.CORS_ALLOWED_ORIGINS.split(',') if o.strip()] if config.CORS_ALLOWED_ORIGINS else []\n+sio = socketio.AsyncServer(cors_allowed_origins=_cors_origins if _cors_origins else [])\n sio.attach(app, socketio_path=config.URL_PREFIX + 'socket.io')\n routes = web.RouteTableDef()\n VALID_SUBTITLE_FORMATS = {'srt', 'txt', 'vtt', 'ttml', 'sbv', 'scc', 'dfxp'}\n@@ -912,8 +914,9 @@ app.router.add_route('OPTIONS', config.URL_PREFIX + 'upload-cookies', add_cors)\n app.router.add_route('OPTIONS', config.URL_PREFIX + 'delete-cookies', add_cors)\n \n async def on_prepare(request, response):\n-    if 'Origin' in request.headers:\n-        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']\n+    origin = request.headers.get('Origin')\n+    if origin and _cors_origins and origin in _cors_origins:\n+        response.headers['Access-Control-Allow-Origin'] = origin\n         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'\n \n app.on_response_prepare.append(on_prepare)",
+  "auto_locate_confidence": "auto"
+}

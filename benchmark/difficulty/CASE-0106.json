@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0106",
+  "batch": "topup3",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "changed_files": 1,
+  "lines_added": 25,
+  "lines_removed": 11,
+  "lines_changed_total": 36,
+  "function_size_chars": 817,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Request values concatenated into SQL string literals then executed; SQL injection."
+}

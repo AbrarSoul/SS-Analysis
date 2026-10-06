@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_juliangruber_keypair_9596418d3363d3e757676c0b6a8f2d35a9d1cb18",
+  "cve_ids": [
+    "CVE-2021-41117"
+  ],
+  "cwe_ids": [
+    "CWE-335"
+  ],
+  "language": "javascript",
+  "repository": "juliangruber/keypair",
+  "repository_url": "https://github.com/juliangruber/keypair",
+  "vulnerable_commit": "87c62f255baa12c1ec4f98a91600f82af80be6db",
+  "fixed_commit": "9596418d3363d3e757676c0b6a8f2d35a9d1cb18",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

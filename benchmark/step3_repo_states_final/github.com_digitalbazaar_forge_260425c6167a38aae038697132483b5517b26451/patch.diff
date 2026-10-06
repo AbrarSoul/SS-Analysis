@@ -1,0 +1,39 @@
+diff --git a/lib/asn1.js b/lib/asn1.js
+index 3bc061f..22e0ec6 100644
+--- a/lib/asn1.js
++++ b/lib/asn1.js
+@@ -178,6 +178,11 @@ asn1.Type = {
+   BMPSTRING:       30
+ };
+ 
++/**
++ * Sets the default maximum recursion depth when parsing ASN.1 structures.
++ */
++asn1.maxDepth = 256;
++
+ /**
+  * Creates a new asn1 object.
+  *
+@@ -448,6 +453,9 @@ asn1.fromDer = function(bytes, options) {
+   if(!('decodeBitStrings' in options)) {
+     options.decodeBitStrings = true;
+   }
++  if(!('maxDepth' in options)) {
++    options.maxDepth = asn1.maxDepth;
++  }
+ 
+   // wrap in buffer if needed
+   if(typeof bytes === 'string') {
+@@ -476,6 +484,12 @@ asn1.fromDer = function(bytes, options) {
+  * @return the parsed asn1 object.
+  */
+ function _fromDer(bytes, remaining, depth, options) {
++
++  // check depth limit
++  if(depth >= options.maxDepth) {
++    throw new Error('ASN.1 parsing error: Max depth exceeded.');
++  }
++
+   // temporary storage for consumption calculations
+   var start;
+ 

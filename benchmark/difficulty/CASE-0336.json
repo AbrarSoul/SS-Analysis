@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0336",
+  "batch": "topup25",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 7,
+  "lines_removed": 2,
+  "lines_changed_total": 9,
+  "function_size_chars": 1197,
+  "function_size_lines": 43,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Scan target formatted into a command string run through os.system."
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_openstack_magnum_272fd686d8c8bf5954e9e7d3bc991ff27e46184d",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-367"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 4,
+  "lines_changed_total": 7,
+  "function_size_chars": 2300,
+  "function_size_lines": 58,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

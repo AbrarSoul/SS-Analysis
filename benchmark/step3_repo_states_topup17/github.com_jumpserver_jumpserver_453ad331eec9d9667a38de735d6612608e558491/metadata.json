@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jumpserver_jumpserver_453ad331eec9d9667a38de735d6612608e558491",
+  "cve_ids": [
+    "CVE-2025-62712"
+  ],
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "language": "python",
+  "repository": "jumpserver/jumpserver",
+  "repository_url": "https://github.com/jumpserver/jumpserver",
+  "vulnerable_commit": "d309d11a8fafbab90aefa120d4ca510b33e6b19b",
+  "fixed_commit": "453ad331eec9d9667a38de735d6612608e558491",
+  "changed_file": "apps/authentication/api/connection_token.py",
+  "max_score": "1337"
+}

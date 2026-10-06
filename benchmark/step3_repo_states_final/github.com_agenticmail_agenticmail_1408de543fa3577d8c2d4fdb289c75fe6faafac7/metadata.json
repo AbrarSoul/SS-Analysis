@@ -1,0 +1,14 @@
+{
+  "case_id": "github.com_agenticmail_agenticmail_1408de543fa3577d8c2d4fdb289c75fe6faafac7",
+  "cve_ids": [
+    "CVE-2026-47255"
+  ],
+  "cwe_ids": [],
+  "language": "typescript",
+  "repository": "agenticmail/agenticmail",
+  "repository_url": "https://github.com/agenticmail/agenticmail",
+  "vulnerable_commit": "41dd8153809cabbc9b79aba1b726266af923a1b7",
+  "fixed_commit": "1408de543fa3577d8c2d4fdb289c75fe6faafac7",
+  "changed_file": "packages/api/src/routes/storage.ts",
+  "max_score": "1337"
+}

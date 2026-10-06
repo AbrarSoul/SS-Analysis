@@ -1,0 +1,825 @@
+{
+  "purpose": "Semantic Review role-capability screening test set (design Sections 17.2/19/17.3)",
+  "samples_per_category_requested": 15,
+  "random_seed": 20261002,
+  "category_counts_available": {
+    "MISS": 131,
+    "PATCHED_CODE_FINDING": 38,
+    "OVER_GENERALIZATION": 14,
+    "UNDER_GENERALIZATION": 33,
+    "NONE": 8
+  },
+  "category_counts_sampled": {
+    "MISS": 15,
+    "PATCHED_CODE_FINDING": 15,
+    "OVER_GENERALIZATION": 14,
+    "UNDER_GENERALIZATION": 15,
+    "NONE": 8
+  },
+  "items": [
+    {
+      "case_id": "CASE-0019",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-mpxj-80028028\n  pattern: '$FILE.getCanonicalPath() |> startsWith($DIR.getCanonicalPath() + File.separator)\n\n    '\n  pattern-not: '$FILE.getCanonicalFile().toPath().startsWith($DIR.getCanonicalFile().toPath())\n\n    '\n  languages:\n  - java\n  message: Potential path traversal vulnerability. Use $FILE.getCanonicalFile().toPath().startsWith($DIR.getCanonicalFile().toPath())\n    to avoid directory traversal.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-22\n    owasp: A10\n    references: https://cwe.mitre.org/data/definitions/22.html\n    technology: java\n    source-url: github.com/joniles/mpxj/commit/8002802890dfdc8bc74259f37e053e15b827eea0\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0021",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-countly-server-2bfa1ee1\n  pattern: $VAR = sha512Hash($DATA, $TIMESTAMP)\n  pattern-not: $VAR = crypto.randomBytes(32).toString('hex')\n  languages:\n  - javascript\n  message: Potential cryptographic weakness using sha512Hash. Use a secure random\n    method like crypto.randomBytes for generating unique identifiers.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-327\n    owasp: A9:2017 - Security Misconfiguration\n    references: https://cwe.mitre.org/data/definitions/327.html\n    technology: javascript\n    source-url: github.com/Countly/countly-server/commit/2bfa1ee1fa46e9bb007cf8687ad197ab9c604999\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0024",
+      "source_model": "codellama:7b-instruct-fp16",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-gmail-js-a83436f4\n  pattern: '$VARNAME = new Function(\"\\\"use strict\\\"; return \" + $DATA);\n\n    realData = $VARNAME();\n\n\n    parsedResponse.push(realData);\n\n    '\n  pattern-not: 'var json = JSON.parse($DATA);\n\n    parsedResponse.push(json);\n\n    '\n  languages:\n  - javascript\n  message: 'Potential vulnerability in gmail.js detected. The code is using the Function\n    constructor to create a new function, which can lead to code injection if the\n    data passed to the function is untrusted. It''s recommended to use JSON.parse\n    instead to parse JSON data.\n\n    '\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-95\n    source-url: github.com/KartikTalwar/gmail.js/commit/a83436f499f9c01b04280af945a5a81137b6baf1\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0009",
+      "source_model": "yi-coder:9b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-openssh-key-parser-26e0a471\n  pattern: raise EOFError($READ_BYTES)\n  pattern-not: raise EOFError(\"Fewer than 'num_bytes' bytes remaining in the underlying\n    bytestream\")\n  languages:\n  - python\n  message: Detected a potential vulnerability in the OpenSSH key parser where it raises\n    an EOFError with the number of read bytes. This can lead to security issues as\n    it may reveal parts of the key file to an attacker. Always raise EOFError with\n    a descriptive message to avoid revealing sensitive information.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-20\n    owasp: A2:2013-XML External Entities (XXE)\n    references:\n    - https://cwe.mitre.org/data/definitions/20.html\n    - https://owasp.org/www-community/attacks/XML_External_Entity_%28XXE%29\n    technology: python\n    source-url: github.com/scottcwang/openssh_key_parser/commit/26e0a471e9fdb23e635bc3014cf4cbd2323a08d3\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0027",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-etherpad-lite-9d4e5f6e\n  pattern: $VAR = $VAR.replace(/\\\\\\\\/g, '/')\n  pattern-not: $VAR = $VAR.replace(/\\\\\\\\/g, '/').replace(/\\\\/g, '/')\n  languages:\n  - javascript\n  message: Potential path normalization vulnerability. The code replaces backslashes\n    with forward slashes without considering other path normalization issues. This\n    can lead to directory traversal or other path manipulation vulnerabilities. Ensure\n    proper path normalization using libraries like 'path' in Node.js.\n  severity: ERROR\n  metadata:\n    source-url: github.com/ether/etherpad-lite/commit/9d4e5f6e35153129377206ef545d4965afae627d\n    category: security\n    cwe: CWE-22\n    owasp: A7\n    references:\n    - https://owasp.org/www-community/vulnerabilities/Path_Traversal\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0005",
+      "source_model": "yi-coder:9b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-relate-555f0efb\n  pattern: \"def $FUNC(...):\\n    ...\\n    from django.utils.html import mark_safe\\n\\\n    \\    return mark_safe(string_concat(...))\\n\"\n  pattern-not: \"def $FUNC(...):\\n    ...\\n    from django.utils.html import format_html\\n\\\n    \\    return format_html(...)\\n\"\n  languages:\n  - python\n  message: Potential security vulnerability detected in function `get_user`. The use\n    of `mark_safe` and `string_concat` can lead to Cross-Site Scripting (XSS) attacks\n    if the user's full name is not properly escaped. Use `format_html` instead for\n    safer HTML rendering.\n  severity: WARNING\n  metadata:\n    category: security\n    cwe: CWE-79\n    owasp: A1:2013-Cross Site Scripting (XSS)\n    references:\n    - https://docs.djangoproject.com/en/3.1/topics/security/\n    - https://docs.djangoproject.com/en/3.1/ref/utils/\n    technology:\n    - python\n    - django\n    source-url: github.com/inducer/relate/commit/555f0efb1c5bd7531c07cd73724d7e566a81f620\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0024",
+      "source_model": "magicoder:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-gmail-js-a83436f4\n  pattern: 'FunctionDeclaration[name=\"get_data\"] > :x $data = $FunctionDeclaration[name=\"get_data\"].params.properties[0].value;\n\n    $json = JSON.parse($data);\n\n    $parsedResponse.push($json);\n\n    '\n  languages:\n  - javascript\n  message: Potential XSS vulnerability using innerHTML. Use DOMPurify or safe alternatives.\n  severity: ERROR\n  metadata:\n    source-url: github.com/KartikTalwar/gmail.js/commit/a83436f499f9c01b04280af945a5a81137b6baf1\n    category: security\n    cwe: CWE-79\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0007",
+      "source_model": "magicoder:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-llama-stack-b709bd77\n  pattern:\n  - 'log.info(f\"Initializing PGVector memory adapter with config: {self.config}\")'\n  languages:\n  - python\n  message: Potential logging of sensitive data (password) in log statement.\n  severity: ERROR\n  metadata:\n    source-url: github.com/llamastack/llama-stack/commit/b709bd77b6c1fad68a30a4888baa6f2337eaef6f\n    category: security\n    cwe: CWE-220\n    technology:\n    - python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0029",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-braces-abdafb0c\n  pattern: $M = this.match(/^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}/)\n  pattern-not: $M = this.match(/^\\{((?:,|\\{,+\\})+)\\}/)\n  languages:\n  - javascript\n  message: Potential vulnerability in braces parsing. The original regex allows for\n    nested and repeated commas which can lead to unexpected behavior or security issues.\n    Update the regex to match only a single level of nesting.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-190\n    owasp: A3\n    references: https://cwe.mitre.org/data/definitions/190.html\n    technology: javascript\n    source-url: github.com/micromatch/braces/commit/abdafb0cae1e0c00f184abbadc692f4eaa98f451\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0029",
+      "source_model": "magicoder:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-braces-abdafb0c\n  pattern: '$ELEMENT.innerHTML = $DATA;\n\n    '\n  pattern-not: '$ELEMENT.innerHTML = DOMPurify.sanitize($DATA);\n\n    '\n  languages:\n  - javascript\n  message: Potential XSS vulnerability using innerHTML. Use DOMPurify or safe alternatives.\n  severity: ERROR\n  metadata:\n    source-url: https://github.com/micromatch/braces/commit/abdafb0cae1e0c00f184abbadc692f4eaa98f451\n    category: security\n    cwe: CWE-79\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0014",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-portofino-94653cb3\n  pattern: 'File.createTempFile($PREFIX, $SUFFIX)\n\n    '\n  pattern-not: 'Files.createTempDirectory($PREFIX + $SUFFIX).toFile()\n\n    '\n  languages:\n  - java\n  message: 'Potential temporary file creation vulnerability. Use `Files.createTempDirectory`\n    instead of `File.createTempFile` to avoid potential security issues.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/ManyDesigns/Portofino/commit/94653cb357806c9cf24d8d294e6afea33f8f0775\n    category: security\n    cwe: CWE-78\n    owasp: A10\n    references: https://owasp.org/www-community/vulnerabilities/Improper Neutralization\n      of Special Elements used in an OS Command ('OS Command Injection')\n    technology: java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0034",
+      "source_model": "yi-coder:9b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-oneuptime-07bc6d4e\n  pattern: 'create: [Permission.Public]\n\n    '\n  pattern-not: 'create: []\n\n    '\n  languages:\n  - typescript\n  message: 'This rule detects instances where a public create operation is allowed.\n    This can be a security risk as it allows any user to create new entries, potentially\n    leading to data corruption or exposure. To fix this, ensure that the create operation\n    is only accessible to authorized users.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/OneUptime/oneuptime/commit/07bc6d4edde7397ea6b88f889c065ec392052ab4\n    category: security\n    cwe:\n    - 284\n    owasp:\n    - A2 - Injection\n    references:\n    - https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0028",
+      "source_model": "DeepHat/DeepHat-V1-7B",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-novnc-ad941fad\n  pattern: 'document.cookie = $NAME+\"=\"+$VALUE+$EXPIRES+\"; path=/\"\n\n    '\n  pattern-not: \"if (document.location.protocol === \\\"https:\\\") {\\n    secure = \\\"\\\n    ; secure\\\";\\n} else {\\n    secure = \\\"\\\";\\n}\\ndocument.cookie = $NAME+\\\"=\\\"+$VALUE+$EXPIRES+\\\"\\\n    ; path=/\\\"+secure\\n\"\n  languages:\n  - javascript\n  message: 'Cookie vulnerability: Missing secure flag in cookie setting. Cookies over\n    HTTP can be intercepted.'\n  severity: ERROR\n  metadata:\n    source-url: github.com/kanaka/noVNC/commit/ad941faddead705cd611921730054767a0b32dcd\n    category: security\n    cwe: CWE-311\n    owasp: A05:2021-Security Misconfiguration\n    references: https://owasp.org/www-project-top-ten/2021/A05_2021-Security_Misconfiguration\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0040",
+      "source_model": "yi-coder:9b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-url-to-png-e4eaeca6\n  pattern: 'const imageId = dateString + \".\" + slugify(validData.url) + configToString(params)\n\n    '\n  pattern-not: 'const imageId = dateString + \".\" + slugify(validData.url) + slugify(configToString(params))\n\n    '\n  languages:\n  - typescript\n  message: 'This rule detects instances where an image id is created from a url and\n    configuration parameters without properly slugifying the resulting string. This\n    can lead to security vulnerabilities such as directory traversal or file overwriting.\n    To fix this, ensure to slugify the entire image id, not just the url and configuration\n    parameters.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/jasonraimondi/url-to-png/commit/e4eaeca6493b21cd515b582fd6c0af09ede54507\n    category: security\n    cwe:\n    - 22\n    - 59\n    owasp:\n    - Path-Traversal\n    references:\n    - https://cheatsheetseries.owasp.org/cheatsheets/Path_Traversal_Cheat_Sheet.html\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0040",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-url-to-png-e4eaeca6\n  pattern: $VAR1 + \".\" + slugify($VAR2) + configToString($VAR3)\n  pattern-not: $VAR1 + \".\" + slugify($VAR2) + slugify(configToString($VAR3))\n  languages:\n  - typescript\n  message: 'This code concatenates a URL parameter directly with a configuration string\n    without proper sanitization, which can lead to security vulnerabilities such as\n    injection attacks. The vulnerability arises because the `configToString` function''s\n    output is not being sanitized before being concatenated with other strings. To\n    fix this, ensure that the output of `configToString` is properly sanitized using\n    a function like `slugify` before concatenation.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/jasonraimondi/url-to-png/commit/e4eaeca6493b21cd515b582fd6c0af09ede54507\n    category: security\n    cwe:\n    - CWE-94\n    owasp:\n    - A1:2021 - Broken Access Control\n    - A7:2021 - Security Misconfiguration\n    references:\n    - https://cwe.mitre.org/data/definitions/94.html\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0005",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-relate-555f0efb\n  pattern: \"from django.utils.html import mark_safe\\n...\\nreturn mark_safe(string_concat(\\n\\\n    \\    \\\"<a href='%(link)s'>\\\", \\\"%(user_fullname)s\\\", \\\"</a>\\\"\\n) % { ... })\\n\"\n  pattern-not: \"from django.utils.html import format_html\\n...\\nreturn format_html(\\n\\\n    \\    \\\"<a href='{}'>{}</a>\\\",\\n    ...\\n)\\n\"\n  languages:\n  - python\n  message: Detected use of mark_safe with string_concat which can lead to Cross-Site\n    Scripting (XSS) vulnerabilities. Use format_html instead to safely include variables\n    in HTML strings.\n  severity: ERROR\n  metadata:\n    source-url: github.com/inducer/relate/commit/555f0efb1c5bd7531c07cd73724d7e566a81f620\n    category: security\n    cwe: CWE-79\n    owasp: A7:2021-Cross-Site Scripting (XSS)\n    references:\n    - https://docs.djangoproject.com/en/stable/ref/utils/#django.utils.html.format_html\n    technology: python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0021",
+      "source_model": "codellama:7b-instruct-fp16",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-countly-server-2bfa1ee1\n  pattern: prid = sha512Hash(member.username + member.full_name, timestamp);\n  pattern-not: crypto.randomBytes(32).toString('hex');\n  languages:\n  - javascript\n  message: Potential vulnerability in Countly Server detected. The use of SHA512 hash\n    for generating a random ID is not secure and can lead to collisions. Consider\n    using a more secure method such as crypto.randomBytes().\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-328\n    owasp: A9\n    source-url: github.com/Countly/countly-server/commit/2bfa1ee1fa46e9bb007cf8687ad197ab9c604999\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0005",
+      "source_model": "magicoder:7b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-relate-555f0efb\n  pattern: 'django.utils.html.mark_safe($VARNAME)\n\n    '\n  languages:\n  - python\n  message: Detected unsafe use of django.utils.html.mark_safe(). This can lead to\n    Cross-Site Scripting (XSS).\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-79\n    owasp: A10:2017-Broken Authentication and Session Management\n    references:\n    - https://docs.djangoproject.com/en/3.1/topics/security/#cross-site-scripting-xss-protection\n    source-url: github.com/inducer/relate/commit/555f0efb1c5bd7531c07cd73724d7e566a81f620\n    technology:\n    - python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0007",
+      "source_model": "magicoder:7b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-llama-stack-b709bd77\n  pattern: 'log.info(f\"Initializing PGVector memory adapter with config: {self.config}\")\n\n    '\n  languages:\n  - python\n  message: Potential logging of sensitive data detected. Mask sensitive fields before\n    logging.\n  severity: ERROR\n  metadata:\n    source-url: github.com/llamastack/llama-stack/commit/b709bd77b6c1fad68a30a4888baa6f2337eaef6f\n    category: security\n    cwe: CWE-532\n    technology:\n    - python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0025",
+      "source_model": "magicoder:7b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-anything-llm-94ed62d3\n  pattern: 'args.push(searchPath);\n\n    '\n  languages:\n  - javascript\n  message: Potential argument injection vulnerability in 'args.push()' function.\n  severity: ERROR\n  metadata:\n    source-url: github.com/Mintplex-Labs/anything-llm/commit/94ed62d320df1a06c229e4bc3ee09c2cb5111b33\n    category: security\n    cwe: CWE-79\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0018",
+      "source_model": "yi-coder:9b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-gitlab-oauth-plugin-695ce63f\n  pattern: HttpSession session = request.getSession(false)\n  pattern-inside: \"class $CLASS {\\n    ...\\n}\\n\"\n  languages:\n  - java\n  message: Potential session fixation vulnerability. Avoid directly manipulating HttpSession.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-377\n    source-url: github.com/jenkinsci/gitlab-oauth-plugin/commit/695ce63fddb3567cf8d87339ddc1fa3b67ae2db8\n    references:\n    - https://owasp.org/www-community/attacks/Session-Fixation\n    - https://cwe.mitre.org/data/definitions/377.html\n    technology:\n    - java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0010",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-interactsh-6a0cb98b\n  pattern: '$SERVER.addShare($SHARE_NAME, $PATH)\n\n    '\n  pattern-not: 'configure_shares($SERVER)\n\n    '\n  pattern-inside: \"def $FUNC(...):\\n    ...\\n\"\n  languages:\n  - python\n  message: Detected hardcoded share addition in SMB server configuration. This can\n    lead to unauthorized access if the shares are not properly managed. Consider using\n    a function to configure shares dynamically and remove unnecessary default shares.\n  severity: ERROR\n  metadata:\n    source-url: github.com/projectdiscovery/interactsh/commit/6a0cb98b16636a98712729f3d23e34d8bf7260e7\n    category: security\n    cwe: CWE-798\n    owasp: A6:2021-Security Misconfiguration\n    references:\n    - https://cwe.mitre.org/data/definitions/798.html\n    technology: python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0040",
+      "source_model": "codegemma:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-url-to-png-e4eaeca6\n  pattern: configToString\\(params\\)\n  pattern-not: slugify\\(configToString\\(params\\)\n  languages:\n  - typescript\n  message: Vulnerable code concatenates user input into image ID, potentially allowing\n    an attacker to inject malicious code. Use slugify() to sanitize user input.\n  severity: ERROR\n  metadata:\n    source-url: github.com/jasonraimondi/url-to-png/commit/e4eaeca6493b21cd515b582fd6c0af09ede54507\n    category: security\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0029",
+      "source_model": "yi-coder:9b",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-braces-abdafb0c\n  pattern: $VAR.match(/^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}/)\n  pattern-not: $VAR.match(/^\\{((?:,|\\{,+\\})+)\\}/)\n  languages:\n  - javascript\n  message: Potential vulnerability in braces library. Use updated version of the library\n    to fix.\n  severity: ERROR\n  metadata:\n    source-url: github.com/micromatch/braces/commit/abdafb0cae1e0c00f184abbadc692f4eaa98f451\n    category: security\n    references:\n    - https://huntr.dev/browse/js/1337\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0009",
+      "source_model": "yi-coder:9b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-openssh-key-parser-26e0a471\n  pattern: raise EOFError(read_bytes)\n  pattern-not: raise EOFError('Fewer than 'num_bytes' bytes remaining in the underlying\n    bytestream')\n  languages:\n  - python\n  message: Detected potential vulnerability in the openssh_key_parser python library\n    where an EOFError is raised without sufficient context. This can lead to false\n    positives or misleading error messages.\n  severity: ERROR\n  metadata:\n    source-url: github.com/scottcwang/openssh_key_parser/commit/26e0a471e9fdb23e635bc3014cf4cbd2323a08d3\n    category: security\n    cwe: CWE-20\n    owasp: A1:2021-XML External Entities (XXE)\n    references:\n    - https://docs.python.org/3/library/exceptions.html#EOFError\n    technology: python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0018",
+      "source_model": "codellama:7b-instruct-fp16",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-gitlab-oauth-plugin-695ce63f\n  pattern: \"import sun.net.util.URLUtil;\\n...\\nHttpSession session = request.getSession(false);\\n\\\n    if (session != null) {\\n    // avoid session fixation\\n    session.invalidate();\\n\\\n    }\\nrequest.getSession(true);\\n\"\n  pattern-not: \"import javax.servlet.http.HttpSession;\\n...\\nHttpSession session =\\\n    \\ request.getSession(false);\\nif (session != null) {\\n    // avoid session fixation\\n\\\n    \\    session.invalidate();\\n}\\nrequest.getSession(true);\\n\"\n  languages:\n  - java\n  message: Potential vulnerability in GitLab OAuth plugin due to unprotected session\n    creation. Consider using a secure session management mechanism.\n  severity: ERROR\n  metadata:\n    source-url: github.com/jenkinsci/gitlab-oauth-plugin/commit/695ce63fddb3567cf8d87339ddc1fa3b67ae2db8\n    category: security\n    cwe: CWE-200\n    owasp: A3\n    technology:\n    - java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0016",
+      "source_model": "codegemma:7b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-kylin-e373c64c\n  pattern: 'queryService.querySystemCube(sql).getResults()\n\n    '\n  pattern-not: 'getPrepareQueryResult(cubeName, sql)\n\n    '\n  languages:\n  - java\n  message: SQL injection vulnerability in Kylin. Query results are not properly sanitized.\n  severity: ERROR\n  metadata:\n    source-url: github.com/apache/kylin/commit/e373c64c96a54a7abfe4bccb82e8feb60db04749\n    category: security\n    cwe: CWE-89\n    owasp: A9\n    references:\n    - Kylin Security Guide\n    technology:\n    - java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0011",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-jackson-databind-3d971539\n  pattern: 's.add($SUBTYPE)\n\n    '\n  pattern-not: 's.add(\"br.com.anteros.dbcp.AnterosDBCPDataSource\")\n\n    '\n  languages:\n  - java\n  message: 'Potential security vulnerability in Jackson Databind. Adding a specific\n    subtype that could lead to deserialization issues. Ensure only trusted subtypes\n    are added.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/FasterXML/jackson-databind/commit/3d97153944f7de9c19c1b3637b33d3cf1fbbe4d7\n    category: security\n    cwe: CWE-502\n    owasp: A8\n    references: https://www.cvedetails.com/CVE-2019-1208.html\n    technology: java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0026",
+      "source_model": "codellama:7b-instruct-fp16",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-nodebb-48d14392\n  pattern: Namespaces = $VARNAME\n  pattern-not: Namespaces = Object.create(null)\n  languages:\n  - javascript\n  message: Potential vulnerability detected in NodeBB. The variable Namespaces is\n    being assigned a value that could be a reference to an object with properties\n    that are functions, which could lead to code injection attacks. It's recommended\n    to use the Object.create(null) syntax instead to create an empty object without\n    any prototype.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-95\n    owasp: A3\n    source-url: github.com/NodeBB/NodeBB/commit/48d143921753914da45926cca6370a92ed0c46b8\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0017",
+      "source_model": "yi-coder:9b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-spark-cf59b1f5\n  pattern: throw new IllegalArgumentException(\"Invalid sign\")\n  pattern-not: throw new IllegalArgumentException(\"Invalid sign, original = \" + originalSignature\n    + \" current = \" + currentSignature);\n  languages:\n  - java\n  message: Apache Spark CookieSigner may throw an exception with an invalid signature.\n    This can be exploited to cause an application crash or potentially allow for remote\n    code execution. To fix this, ensure the signature is valid before throwing an\n    exception.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-287\n    references:\n    - https://cwe.mitre.org/data/definitions/287.html\n    technology:\n    - java\n    source-url: github.com/apache/spark/commit/cf59b1f51c16301f689b4e0f17ba4dbd140e1b19\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0038",
+      "source_model": "yi-coder:9b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-note-mark-a0997fac\n  pattern: '$content = DOMPurify.sanitize($content) |> $content = markdown_to_html($content)\n\n    '\n  pattern-not: '$content = markdown_to_html($content) |> $content = DOMPurify.sanitize($content)\n\n    '\n  languages:\n  - typescript\n  message: 'This pattern can lead to XSS (Cross-Site Scripting) attacks in the Note-Mark\n    application. The order of sanitization is incorrect. The HTML should be sanitized\n    after it is converted to markdown, not before. To fix this, move the sanitization\n    after the markdown conversion.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/enchant97/note-mark/commit/a0997facb82f85bfb8c0d497606d89e7d150e182\n    category: security\n    cwe:\n    - 74\n    - 91\n    owasp:\n    - A1 - Injection\n    - A10 - Unvalidated Redirects and Forwards\n    references:\n    - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html\n    - https://cwe.mitre.org/data/definitions/74.html\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0027",
+      "source_model": "yi-coder:9b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-etherpad-lite-9d4e5f6e\n  pattern: $FILENAME.replace(/\\\\/g, '/')\n  pattern-not: $FILENAME.replace(/\\\\/g, '/') // Fixed version\n  languages:\n  - javascript\n  message: Potential security vulnerability detected in Etherpad Lite. Avoid using\n    replace() with \\g, as it may lead to path traversal attacks.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-22\n    owasp: Path-Traversal\n    references:\n    - https://cheatsheetseries.owasp.org/cheatsheets/Path_Traversal_Cheat_Sheet.html\n    technology: javascript\n    source-url: github.com/ether/etherpad-lite/commit/9d4e5f6e35153129377206ef545d4965afae627d\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0001",
+      "source_model": "codegemma:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-maxkb-38c4cfec\n  pattern: 'sys.stdout.write(\"\\\\n{_id}:\")\n\n    json.dump({{''code'':200,''msg'':''success'',''data'':exec_result}}, sys.stdout,\n    default=str)\n\n    sys.stdout.write(\"\\\\n{_id}:\")\n\n    json.dump({{''code'':500,''msg'':str(e),''data'':None}}, sys.stdout, default=str)\n\n    '\n  pattern-not: 'sys.stdout.write(\"\\\\n{_id}:\")\n\n    json.dump({{''code'':200,''msg'':''success'',''data'':exec_result}}, sys.stdout,\n    default=str)\n\n    sys.stdout.write(\"\\\\n{_id}:\")\n\n    json.dump({{''code'':500,''msg'':str(e),''data'':None}}, sys.stdout, default=str)\n\n    sys.stdout.write(\"\\\\n\")\n\n    sys.stdout.flush()\n\n    '\n  languages:\n  - python\n  message: Detected insecure JSON serialization and deserialization. Use secure methods\n    like `json.dumps()` and `json.loads()`.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-502\n    owasp: A8:2017-Insecure Deserialization\n    references:\n    - https://docs.python.org/3/library/json.html\n    source-url: github.com/1Panel-dev/MaxKB/commit/38c4cfecd065293ede0437f6fa76cf0116591d25\n    technology:\n    - python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0014",
+      "source_model": "DeepHat/DeepHat-V1-7B",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-portofino-94653cb3\n  pattern: File.createTempFile($PATTERN, $EXTENSION)\n  pattern-not: Files.createTempDirectory($PATTERN + \".\" + $PORT).toFile()\n  languages:\n  - java\n  message: Vulnerable temporary file creation detected. Use Files.createTempDirectory()\n    instead.\n  severity: ERROR\n  metadata:\n    source-url: github.com/ManyDesigns/Portofino/commit/94653cb357806c9cf24d8d294e6afea33f8f0775\n    category: security\n    cwe: CWE-377\n    owasp: A01:2021-Injection\n    references: https://owasp.org/www-project-top-ten/2021/A01_2021-Injection\n    technology: java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0038",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-note-mark-a0997fac\n  pattern: '$X = DOMPurify.sanitize($Y)\n\n    return markdown_to_html($Y)\n\n    '\n  pattern-not: 'content = markdown_to_html(content)\n\n    return DOMPurify.sanitize(content)\n\n    '\n  languages:\n  - typescript\n  message: 'This code is vulnerable to Cross-Site Scripting (XSS) because it sanitizes\n    the input after converting it from Markdown. The correct order should be to convert\n    the Markdown first and then sanitize the result.\n\n\n    **Why it''s dangerous:** XSS vulnerabilities allow attackers to inject malicious\n    scripts into web pages viewed by other users. This can lead to data theft, session\n    hijacking, or other malicious activities.\n\n\n    **How to fix it:** Ensure that the input is sanitized before any transformations\n    are applied. The correct order should be:'\n  severity: ERROR\n  metadata:\n    source-url: github.com/enchant97/note-mark/commit/a0997facb82f85bfb8c0d497606d89e7d150e182\n    category: security\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0002",
+      "source_model": "yi-coder:9b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-composio-ed82fb45\n  pattern: eval(request.operation)\n  pattern-not: eval(trusted_operation)\n  languages:\n  - python\n  message: Potential code injection detected in the eval function. This can lead to\n    arbitrary code execution. Use a safe evaluation method like ast.literal_eval or\n    a restricted environment for evaluation.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-94\n    owasp: A1:2021-XML External Entities (XXE)\n    references:\n    - https://docs.python.org/3/library/ast.html#ast.literal_eval\n    - https://docs.python.org/3/library/safe_eval.html\n    technology:\n    - python\n    source-url: github.com/ComposioHQ/composio/commit/ed82fb45dc9fbd7f07c535c72bada871c158ae5f\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0017",
+      "source_model": "DeepHat/DeepHat-V1-7B",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-spark-cf59b1f5\n  pattern: throw new IllegalArgumentException(\"Invalid sign, original = \" + $ORIGINAL\n    + \" current = \" + $CURRENT)\n  pattern-not: throw new IllegalArgumentException(\"Invalid sign\")\n  languages:\n  - java\n  message: Cookie signature validation bypass vulnerability. Original signature is\n    leaked in error message.\n  severity: ERROR\n  metadata:\n    source-url: github.com/apache/spark/commit/cf59b1f51c16301f689b4e0f17ba4dbd140e1b19\n    category: security\n    cwe: CWE-209\n    owasp: A01:2021\n    references: https://owasp.org/www-project-top-ten/2021/A01_2021-Injection\n    technology: java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0020",
+      "source_model": "codegemma:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-spring-security-samples-4e3bec90\n  pattern: 'HttpSecurity http = ...;\n\n    http.requestMatchers($PATTERN)\n\n    '\n  pattern-not: 'HttpSecurity http = ...;\n\n    http.requestMatchers(\"/login\", \"/resources/**\").permitAll()\n\n    '\n  languages:\n  - java\n  message: Spring Security configuration allows unauthorized access to resources.\n    Ensure request mappings are properly restricted.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-287\n    owasp: A05\n    references:\n    - Spring Security documentation on request mappings\n    technology:\n    - java\n    source-url: github.com/spring-projects/spring-security-samples/commit/4e3bec904a5467db28ea33e25ac9d90524b53d66\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0011",
+      "source_model": "codegemma:7b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-jackson-databind-3d971539\n  pattern: s.add($VARIABLE)\n  pattern-not: s.add(\"br.com.anteros.dbcp.AnterosDBCPDataSource\")\n  languages:\n  - java\n  message: Potential SQL injection vulnerability. Validate and sanitize user input\n    before adding it to the database.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-89\n    owasp: A9\n    references:\n    - link to Jackson documentation on SQL injection\n    technology:\n    - java\n    source-url: github.com/FasterXML/jackson-databind/commit/3d97153944f7de9c19c1b3637b33d3cf1fbbe4d7\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0005",
+      "source_model": "yi-coder:9b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-relate-555f0efb\n  pattern: \"def get_user(...):\\n    ...\\n    from django.utils.html import mark_safe\\n\\\n    \\    return mark_safe(string_concat(\\n            \\\"<a href='%(link)s'>\\\", \\\"\\\n    %(user_fullname)s\\\",\\n            \\\"</a>\\\"\\n            ) % {\\n              \\\n    \\  \\\"link\\\": reverse(\\n                    \\\"admin:{}_change\\\".format(\\n     \\\n    \\                   settings.AUTH_USER_MODEL.replace(\\\".\\\", \\\"_\\\").lower()),\\n\\\n    \\                    args=(obj.user.id,)),\\n                \\\"user_fullname\\\"\\\n    : obj.user.get_full_name(\\n                    force_verbose_blank=True),\\n  \\\n    \\              })\\n\"\n  pattern-not: \"def get_user(...):\\n    ...\\n    from django.utils.html import format_html\\n\\\n    \\    return format_html(\\n            \\\"<a href='{}'>{}</a>\\\",\\n            reverse(\\n\\\n    \\                \\\"admin:{}_change\\\".format(\\n                    settings.AUTH_USER_MODEL.replace(\\\"\\\n    .\\\", \\\"_\\\").lower()),\\n                args=(obj.user.id,)),\\n            obj.user.get_full_name(force_verbose_blank=True),\\n\\\n    \\            )\\n\"\n  languages:\n  - python\n  message: Potential security vulnerability detected in the get_user method. The use\n    of mark_safe and string_concat can lead to Cross-Site Scripting (XSS) attacks.\n    Use format_html instead.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-79\n    owasp: A1:2021-Cross-Site Scripting (XSS)\n    references:\n    - https://docs.djangoproject.com/en/3.2/topics/security/\n    - https://docs.djangoproject.com/en/3.2/ref/utils/\n    technology:\n    - python\n    source-url: github.com/inducer/relate/commit/555f0efb1c5bd7531c07cd73724d7e566a81f620\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0028",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-novnc-ad941fad\n  pattern: 'document.cookie = $NAME + \"=\" + $VALUE + $EXPIRES + \"; path=/\"\n\n    '\n  pattern-not: \"if (document.location.protocol === \\\"https:\\\") {\\n    $SECURE = \\\"\\\n    ; secure\\\";\\n} else {\\n    $SECURE = \\\"\\\";\\n}\\ndocument.cookie = $NAME + \\\"=\\\"\\\n    \\ + $VALUE + $EXPIRES + \\\"; path=/\\\" + $SECURE;\\n\"\n  languages:\n  - javascript\n  message: Potential cookie security vulnerability. Cookies should be marked as secure\n    when using HTTPS to prevent interception. Ensure that cookies are set with the\n    'secure' attribute when the connection is secure.\n  severity: ERROR\n  metadata:\n    source-url: github.com/kanaka/noVNC/commit/ad941faddead705cd611921730054767a0b32dcd\n    category: security\n    cwe: CWE-614\n    owasp: A3:2021-Sensitive Data Exposure\n    references:\n    - https://owasp.org/www-project-top-ten/2021/A03_Sensitive_Data_Exposure\n    - https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#security\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0032",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-tabby-1c077147\n  pattern: 'await $VARNAME\n\n    '\n  pattern-not: 'await hostVerifiedPromise\n\n    '\n  languages:\n  - typescript\n  message: 'This code is missing a check for the verification of the SSH host. This\n    can lead to security vulnerabilities as it allows connections to untrusted hosts.\n\n\n    **Why it''s dangerous:** Without verifying the SSH host, an attacker could potentially\n    connect to a malicious server and gain unauthorized access to your system.\n\n\n    **How to fix it:** Ensure that the SSH host is verified before proceeding with\n    the connection. This can be done by checking the `hostVerifiedPromise` or similar\n    verification mechanism.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/Eugeny/tabby/commit/1c077147acd0a6ec9f8ee80d83a3e9688fbb9444\n    category: security\n    cwe:\n    - CWE-259\n    owasp:\n    - A6: Security Misconfiguration\n    references:\n    - https://cwe.mitre.org/data/definitions/259.html\n    - https://owasp.org/www-community/AWS_Security_Cheat_Sheet#Security_Misconfiguration\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0038",
+      "source_model": "deepseek-coder:6.7b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-note-mark-a0997fac\n  pattern: $FUNC($ARG1)\n  pattern-not: markdown_to_html($ARG1) | DOMPurify.sanitize($ARG1)\n  languages:\n  - typescript\n  message: \"This Semgrep rule detects the vulnerable code structure where the markdown\\\n    \\ content is first converted to HTML and then sanitized using DOMPurify. \\n\\n\\\n    The vulnerability is that the markdown content is first converted to HTML and\\\n    \\ then sanitized using DOMPurify. This can lead to XSS attacks if the HTML content\\\n    \\ contains user-supplied data.\\n\\nTo fix this, the order of operations should\\\n    \\ be reversed. The markdown content should be sanitized first, and then converted\\\n    \\ to HTML.\\n\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/enchant97/note-mark/commit/a0997facb82f85bfb8c0d497606d89e7d150e182\n    category: security\n    cwe:\n    - 60\n    owasp:\n    - A3\n    references: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html\n    technology: typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0003",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-nvda-dev-test-toolbox-21a05444\n  pattern: 'seq = eval($DATA)\n\n    '\n  pattern-not: \"try:\\n    seq = generateSpeechSequence(txtSeq)\\nexcept SyntaxError:\\n\\\n    \\    log.error(\\\"Sequence cannot be spoken: {seq}\\\".format(seq=match['seq']))\\n\\\n    \\    return self.content\\n\"\n  languages:\n  - python\n  message: Detected use of eval() to parse speech sequences from logs. This can lead\n    to arbitrary code execution if the log data is crafted maliciously. Replace eval()\n    with a safer method like the generateSpeechSequence function provided in the patch.\n  severity: ERROR\n  metadata:\n    source-url: github.com/CyrilleB79/NVDA-Dev-Test-Toolbox/commit/21a0544432b08971b5d18320e8256be12c610bea\n    category: security\n    cwe: CWE-94\n    owasp: A7:2021-Security Misconfiguration\n    references:\n    - https://owasp.org/www-project-top-ten/2021/A07_2021-Security_Misconfiguration\n    technology: python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0003",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-nvda-dev-test-toolbox-21a05444\n  pattern: 'eval($DATA)\n\n    '\n  pattern-not: 'generateSpeechSequence($DATA)\n\n    '\n  languages:\n  - python\n  message: Detected use of eval() with untrusted data. This can lead to arbitrary\n    code execution.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-94\n    owasp: A1:2021-Injection\n    references:\n    - https://docs.python.org/3/library/functions.html#eval\n    source-url: github.com/CyrilleB79/NVDA-Dev-Test-Toolbox/commit/21a0544432b08971b5d18320e8256be12c610bea\n    technology:\n    - python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0021",
+      "source_model": "yi-coder:9b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-countly-server-2bfa1ee1\n  pattern: $MEMBER.username + $MEMBER.full_name\n  pattern-not: crypto.randomBytes(32).toString('hex')\n  languages:\n  - javascript\n  message: Potential security vulnerability detected in Countly server. The username\n    and full name are being used to generate a hash without any additional randomness,\n    which can lead to predictable hashes. This can be exploited to impersonate users.\n    Use crypto.randomBytes() for generating a truly random string.\n  severity: ERROR\n  metadata:\n    source-url: github.com/Countly/countly-server/commit/2bfa1ee1fa46e9bb007cf8687ad197ab9c604999\n    category: security\n    cwe: CWE-330\n    owasp: Injection\n    references:\n    - https://cheatsheetseries.owasp.org/cheatsheets/Random_Number_Generation_Cheat_Sheet.html\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0007",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-llama-stack-b709bd77\n  pattern: 'log.info(f\"Initializing PGVector memory adapter with config: {self.config}\")\n\n    '\n  pattern-not: '# Create a safe config representation with masked password for logging\n\n    safe_config = {**self.config.model_dump(exclude={\"password\"}), \"password\": \"******\"}\n\n    log.info(f\"Initializing PGVector memory adapter with config: {safe_config}\")\n\n    '\n  languages:\n  - python\n  message: Potential exposure of sensitive information in logs. Ensure that passwords\n    and other sensitive data are not logged directly.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-522\n    owasp: A10:2017-Security Misconfiguration\n    references:\n    - https://owasp.org/www-community/vulnerabilities/Information_Exposure_through_Logging\n    technology:\n    - python\n    source-url: github.com/llamastack/llama-stack/commit/b709bd77b6c1fad68a30a4888baa6f2337eaef6f\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0024",
+      "source_model": "codegemma:7b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-gmail-js-a83436f4\n  pattern: 'new Function(\"\\\"use strict\\\"; return \" + data)\n\n    '\n  pattern-not: 'JSON.parse(data)\n\n    '\n  languages:\n  - javascript\n  message: Vulnerable code using new Function to parse data. Use JSON.parse instead.\n  severity: ERROR\n  metadata:\n    source-url: github.com/KartikTalwar/gmail.js/commit/a83436f499f9c01b04280af945a5a81137b6baf1\n    category: security\n    cwe: CWE-78\n    owasp: XSS\n    references:\n    - OWASP XSS Prevention Cheat Sheet\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0026",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-nodebb-48d14392\n  pattern: $OBJECT = {}\n  pattern-not: $OBJECT = Object.create(null)\n  languages:\n  - javascript\n  message: Potential prototype pollution vulnerability. Use `Object.create(null)`\n    to avoid unintended inheritance.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-487\n    owasp: A9 - Security Misconfiguration\n    references: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create#avoiding_proptotype_pollution\n    technology: javascript\n    source-url: github.com/NodeBB/NodeBB/commit/48d143921753914da45926cca6370a92ed0c46b8\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0022",
+      "source_model": "yi-coder:9b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-gnome-shell-extension-gsconnect-a38246de\n  pattern: $THIS.identity = await $THIS.readPacket();\n  pattern-not: $THIS.identity = await this._exchangeIdentities();\n  languages:\n  - javascript\n  message: Potential vulnerability in the handshake process of the Gnome Shell Extension\n    GSConnect. The device identities are not properly validated.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-297\n    source-url: github.com/GSConnect/gnome-shell-extension-gsconnect/commit/a38246deec0af50ae218cdc51db32cdd7eb145e3\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0029",
+      "source_model": "codellama:7b-instruct-fp16",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-braces-abdafb0c\n  pattern: $VARNAME.match(/^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}/)\n  languages:\n  - javascript\n  message: Potential vulnerability in braces library detected. This version of the\n    library has a RegEx pattern that can lead to code injection.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-95\n    owasp: A3\n    source-url: github.com/micromatch/braces/commit/abdafb0cae1e0c00f184abbadc692f4eaa98f451\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0021",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-countly-server-2bfa1ee1\n  pattern: $VAR = sha512Hash($MEMBER.username + $MEMBER.full_name, $TIMESTAMP)\n  pattern-not: $VAR = crypto.randomBytes(32).toString('hex')\n  languages:\n  - javascript\n  message: Potential security vulnerability due to predictable ID generation. Using\n    a hash of user information and timestamp can lead to predictable IDs, which can\n    be exploited. Use a secure random value generator like `crypto.randomBytes` instead.\n  severity: ERROR\n  metadata:\n    source-url: github.com/Countly/countly-server/commit/2bfa1ee1fa46e9bb007cf8687ad197ab9c604999\n    category: security\n    cwe: CWE-338\n    owasp: A3:2021-Sensitive Data Exposure\n    references:\n    - https://cwe.mitre.org/data/definitions/338.html\n    - https://owasp.org/www-project-top-ten/2021/A03_2021-Sensitive_Data_Exposure/\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0027",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-etherpad-lite-9d4e5f6e\n  pattern: $FILENAME.replace(/\\\\/g, '/')\n  pattern-not: $FILENAME.replace(/\\\\/g, '/').replace(/\\/\\\\+/g, '/')\n  languages:\n  - javascript\n  message: Potential path traversal vulnerability. Replace backslashes with forward\n    slashes to mitigate.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-23\n    owasp: A10\n    references: https://cwe.mitre.org/data/definitions/23.html\n    technology: javascript\n    source-url: github.com/ether/etherpad-lite/commit/9d4e5f6e35153129377206ef545d4965afae627d\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0022",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-gnome-shell-extension-gsconnect-a38246de\n  pattern: 'await this.sendPacket(this.backend.identity);\n\n    this.identity = await this.readPacket();\n\n    '\n  pattern-not: 'await this._exchangeIdentities();\n\n    '\n  languages:\n  - javascript\n  message: Potential security vulnerability due to lack of identity verification during\n    handshake. This can lead to man-in-the-middle attacks. Consider implementing identity\n    verification by comparing protocol version and device ID as shown in the fixed\n    version.\n  severity: ERROR\n  metadata:\n    source-url: github.com/GSConnect/gnome-shell-extension-gsconnect/commit/a38246deec0af50ae218cdc51db32cdd7eb145e3\n    category: security\n    cwe: CWE-290\n    owasp: A3:2021-Sensitive Data Exposure\n    references:\n    - https://cwe.mitre.org/data/definitions/290.html\n    - https://owasp.org/www-project-top-ten/2021/A03_2021-Sensitive_Data_Exposure/\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0025",
+      "source_model": "DeepHat/DeepHat-V1-7B",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-anything-llm-94ed62d3\n  pattern: 'args.push($SEARCH_PATH)\n\n    '\n  pattern-not: 'args.push(\"--\", $SEARCH_PATH)\n\n    '\n  languages:\n  - javascript\n  message: 'Potential argument injection vulnerability in search-files.js.\n\n    The code is vulnerable to argument injection attacks where a malicious searchPath\n    could be interpreted as an option.\n\n    The fix adds \"--\" as a separator to prevent this vulnerability.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/Mintplex-Labs/anything-llm/commit/94ed62d320df1a06c229e4bc3ee09c2cb5111b33\n    category: security\n    cwe: CWE-78\n    owasp: A03:2021-Injection\n    references: https://github.com/Mintplex-Labs/anything-llm/commit/94ed62d320df1a06c229e4bc3ee09c2cb5111b33\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0036",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-mcp-server-taskwarrior-1ee3d282\n  pattern: 'execSync($COMMAND, { maxBuffer: $MAX_BUFFER })\n\n    '\n  pattern-not: 'execFileSync(''task'', [...$TASK_ARGS], { encoding: ''utf8'', maxBuffer:\n    $MAX_BUFFER })\n\n    '\n  languages:\n  - typescript\n  message: 'The use of `execSync` with a command string constructed from user input\n    can lead to command injection vulnerabilities. This is because the command string\n    is not properly sanitized, allowing an attacker to inject malicious commands.\n\n\n    To fix this issue, use `execFileSync` with an array of arguments instead of constructing\n    a command string. This ensures that each argument is treated as a separate entity\n    and prevents command injection.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/awwaiid/mcp-server-taskwarrior/commit/1ee3d282debfa0a99afeb41d22c4b2fd5a3148f2\n    category: security\n    cwe:\n    - CWE-78\n    owasp:\n    - A1: Injection\n    references:\n    - https://owasp.org/www-community/vulnerabilities/Command_Injection\n    - https://cwe.mitre.org/data/definitions/78.html\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0025",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-anything-llm-94ed62d3\n  pattern: '$CMD.push($ARG)\n\n    '\n  pattern-not: '$CMD.push(\"--\", $ARG)\n\n    '\n  languages:\n  - javascript\n  message: 'Potential argument injection vulnerability. Ensure that arguments are\n    not being parsed as options if they start with \"-\". Use a separator like \"--\"\n    to prevent this.\n\n    '\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-78\n    owasp: A10\n    references: https://owasp.org/www-community/vulnerabilities/Command_Injection\n    technology: javascript\n    source-url: github.com/Mintplex-Labs/anything-llm/commit/94ed62d320df1a06c229e4bc3ee09c2cb5111b33\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0012",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-htmlunit-940dc7fd\n  pattern: \"final DomNode parent = $STARTING_NODE.getParentNode();\\nif (parent ==\\\n    \\ null || parent == DomNode.this) {\\n    return null;\\n}\\nDomNode next = parent.getNextSibling();\\n\\\n    while (next != null && !isAccepted(next)) {\\n    next = next.getNextSibling();\\n\\\n    }\\nif (next == null) {\\n    return getNextElementUpwards(parent);\\n}\\nreturn next;\\n\"\n  pattern-not: \"DomNode parent = $STARTING_NODE.getParentNode();\\nwhile (parent !=\\\n    \\ null && parent != DomNode.this) {\\n    DomNode next = parent.getNextSibling();\\n\\\n    \\    while (next != null && !isAccepted(next)) {\\n        next = next.getNextSibling();\\n\\\n    \\    }\\n    if (next != null) {\\n        return next;\\n    }\\n    parent = parent.getParentNode();\\n\\\n    }\\nreturn null;\\n\"\n  languages:\n  - java\n  message: Potential logic flaw in DOM node traversal. The original code could incorrectly\n    return null when a valid next node exists. This can lead to unexpected behavior\n    or security issues. Ensure that the traversal logic correctly handles all cases\n    and returns the appropriate node.\n  severity: ERROR\n  metadata:\n    source-url: github.com/HtmlUnit/htmlunit/commit/940dc7fd8af9f46ca448c1e548b8f6d064a64290\n    category: security\n    cwe: CWE-685\n    owasp: A07:2021-Security_Misconfiguration\n    references:\n    - https://cwe.mitre.org/data/definitions/685.html\n    technology: java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0002",
+      "source_model": "qwen2.5-coder:7b-instruct",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-composio-ed82fb45\n  pattern: 'eval($DATA)\n\n    '\n  pattern-not: 'eval(trusted_data)\n\n    '\n  languages:\n  - python\n  message: Detected use of eval() with untrusted data. This can lead to arbitrary\n    code execution.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-94\n    owasp: A1:2021-Injection\n    references:\n    - https://docs.python.org/3/library/functions.html#eval\n    technology:\n    - python\n    source-url: github.com/ComposioHQ/composio/commit/ed82fb45dc9fbd7f07c535c72bada871c158ae5f\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0001",
+      "source_model": "magicoder:7b",
+      "category": "MISS",
+      "rule_text": "rules:\n- id: vuln-maxkb-38c4cfec\n  pattern: '$json.dump({{code:200,msg:''success'',data:$exec_result}}, sys.stdout)\n\n    '\n  languages:\n  - python\n  message: Potential vulnerability to code injection in JSON serialization detected.\n  severity: ERROR\n  metadata:\n    source-url: github.com/1Panel-dev/MaxKB/commit/38c4cfecd065293ede0437f6fa76cf0116591d25\n    category: security\n    cwe: CWE-89\n    technology:\n    - python\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": false,
+        "original_vulnerable_outcome": "FN",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0029",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-braces-abdafb0c\n  pattern: this.match(/^\\{(,+(?:(\\{,+\\})*),*|,*(?:(\\{,+\\})*),+)\\}/)\n  pattern-not: this.match(/^\\{((?:,|\\{,+\\})+)\\}/)\n  languages:\n  - javascript\n  message: Potential regex vulnerability in pattern matching. The original regex allows\n    for complex and potentially malicious input patterns. This can lead to unexpected\n    behavior or security issues. Update the regex to a more controlled pattern as\n    shown in the patch.\n  severity: ERROR\n  metadata:\n    source-url: github.com/micromatch/braces/commit/abdafb0cae1e0c00f184abbadc692f4eaa98f451\n    category: security\n    cwe: CWE-194\n    owasp: Input Validation\n    references:\n    - https://cwe.mitre.org/data/definitions/194.html\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0028",
+      "source_model": "yi-coder:9b",
+      "category": "NONE",
+      "rule_text": "rules:\n- id: vuln-novnc-ad941fad\n  pattern: $ELEMENT.cookie = $NAME+\"=\"+$VALUE+...+\"; path=/\"\n  pattern-not: $ELEMENT.cookie = $NAME+\"=\"+$VALUE+...+\"; path=/\"+\"; secure\"\n  languages:\n  - javascript\n  message: Potential security vulnerability detected in noVNC. The cookie is being\n    set without the 'secure' attribute, which means it will not be sent over HTTPS\n    and can be intercepted over unsecured networks. Always set the secure attribute\n    when cookies are sent over HTTPS.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-311\n    owasp: Unvalidated Redirects and Forwards\n    references:\n    - https://cheatsheetseries.owasp.org/cheatsheets/Secure_Cookie_Cheat_Sheet.html\n    - https://www.owasp.org/index.php/Cookie_Should_Be_Secure\n    technology: javascript\n    source-url: github.com/kanaka/noVNC/commit/ad941faddead705cd611921730054767a0b32dcd\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0025",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "PATCHED_CODE_FINDING",
+      "rule_text": "rules:\n- id: vuln-anything-llm-94ed62d3\n  pattern: 'args.push($PATTERN, $SEARCH_PATH)\n\n    '\n  pattern-not: 'args.push(\"--\", $PATTERN, $SEARCH_PATH)\n\n    if (typeof $PATTERN === \"string\" && $PATTERN.startsWith(\"-\")) { ... }\n\n    '\n  languages:\n  - javascript\n  message: Potential argument injection vulnerability. Directly pushing user-controlled\n    input into command arguments can lead to command execution. Use '--' to separate\n    options from arguments and validate user input to prevent this.\n  severity: ERROR\n  metadata:\n    source-url: github.com/Mintplex-Labs/anything-llm/commit/94ed62d320df1a06c229e4bc3ee09c2cb5111b33\n    category: security\n    cwe: CWE-78\n    owasp: A1:2021-Broken_Access_Control\n    references:\n    - https://cwe.mitre.org/data/definitions/78.html\n    technology: javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": true,
+        "original_patched_outcome": "FP"
+      }
+    },
+    {
+      "case_id": "CASE-0040",
+      "source_model": "DeepHat/DeepHat-V1-7B",
+      "category": "UNDER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-url-to-png-e4eaeca6\n  pattern: '$ID = $DATESTRING + \".\" + slugify($URL) + configToString($PARAMS)\n\n    '\n  pattern-not: '$ID = $DATESTRING + \".\" + slugify(slugify($URL)) + slugify(configToString($PARAMS))\n\n    '\n  languages:\n  - typescript\n  message: 'Vulnerable code pattern detected in extract_query_params.ts.\n\n    The code concatenates a slugified URL with other data without proper sanitization.\n\n    This could lead to path traversal attacks if user-controlled input is involved.\n\n    Fix by applying slugify to each component separately.\n\n    '\n  severity: ERROR\n  metadata:\n    source-url: github.com/jasonraimondi/url-to-png/commit/e4eaeca6493b21cd515b582fd6c0af09ede54507\n    category: security\n    cwe:\n    - CWE-22\n    owasp:\n    - A01:2021\n    references:\n    - https://owasp.org/www-project-top-ten/2021/A01_2021-Injection\n    technology:\n    - typescript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0022",
+      "source_model": "codegemma:7b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-gnome-shell-extension-gsconnect-a38246de\n  pattern: 'await this.sendPacket(this.backend.identity);\n\n    this.identity = await this.readPacket();\n\n    '\n  pattern-not: 'await this._exchangeIdentities();\n\n    '\n  languages:\n  - javascript\n  message: 'Vulnerable code detected: `await this.sendPacket(this.backend.identity);`\n    followed by `this.identity = await this.readPacket();` should be replaced with\n    `await this._exchangeIdentities();` to fix version mismatch vulnerabilities.'\n  severity: ERROR\n  metadata:\n    source-url: github.com/GSConnect/gnome-shell-extension-gsconnect/commit/a38246deec0af50ae218cdc51db32cdd7eb145e3\n    category: security\n    cwe: CWE-200\n    owasp: A02\n    references:\n    - CWE-200\n    - OWASP A02\n    technology:\n    - javascript\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0016",
+      "source_model": "qwen2.5-coder:32b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-kylin-e373c64c\n  pattern: '$VAR + \" where \" + QueryCubePropertyEnum.CUBE.toString() + \" = ''\" + $CUBE_NAME\n    + \"''\"\n\n    '\n  pattern-not: '$VAR + \" where \" + QueryCubePropertyEnum.CUBE.toString() + \" = ?\"\n\n    '\n  languages:\n  - java\n  message: SQL injection vulnerability detected. Directly concatenating user input\n    into SQL queries can lead to SQL injection attacks. Use parameterized queries\n    to prevent this.\n  severity: ERROR\n  metadata:\n    source-url: github.com/apache/kylin/commit/e373c64c96a54a7abfe4bccb82e8feb60db04749\n    category: security\n    cwe: CWE-89\n    owasp: A1:2021-Injection\n    references:\n    - https://owasp.org/www-project-top-ten/2021/A01_2021-Injection\n    technology: java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    },
+    {
+      "case_id": "CASE-0014",
+      "source_model": "yi-coder:9b",
+      "category": "OVER_GENERALIZATION",
+      "rule_text": "rules:\n- id: vuln-portofino-94653cb3\n  pattern: File.createTempFile($NAME, $EXTENSION)\n  pattern-not: Files.createTempDirectory($NAME + $EXTENSION)\n  languages:\n  - java\n  message: Usage of File.createTempFile with unsanitized parameters may lead to potential\n    path traversal vulnerabilities. Use java.nio.file.Files.createTempDirectory instead\n    and sanitize the parameters.\n  severity: ERROR\n  metadata:\n    category: security\n    cwe: CWE-22\n    source-url: github.com/ManyDesigns/Portofino/commit/94653cb357806c9cf24d8d294e6afea33f8f0775\n    technology:\n    - java\n",
+      "visible_outcome": {
+        "original_vulnerable_detected": true,
+        "original_vulnerable_outcome": "TP",
+        "original_patched_detected": false,
+        "original_patched_outcome": "TN"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0218",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-125",
+    "CWE-770"
+  ],
+  "changed_files": 1,
+  "lines_added": 41,
+  "lines_removed": 14,
+  "lines_changed_total": 55,
+  "function_size_chars": 2144,
+  "function_size_lines": 54,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "A new thread started for every WebSocket message; the unbounded spawn is visible but the resource bound is a policy."
+}

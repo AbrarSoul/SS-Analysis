@@ -1,0 +1,9 @@
+{
+  "case_id": "github.com_aio-libs_aiohttp_1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "DeepHat/DeepHat-V1-7B",
+  "temperature": 0.0,
+  "timestamp": 1789302949.263191,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-aiohttp-1c335944\"\n  pattern: |\n    if $CONDITION:\n        $PATH = $DIRECTORY.joinpath($FILENAME).resolve()\n        if not $FOLLOW_SYMLINKS:\n            $PATH = $DIRECTORY.joinpath($FILENAME).resolve()\n  pattern-not: |\n    if $CONDITION:\n        $PATH = $DIRECTORY.joinpath($FILENAME)\n        if $FOLLOW_SYMLINKS:\n            $PATH = Path(os.path.normpath($PATH)).relative_to($DIRECTORY).resolve()\n        else:\n            $PATH = $DIRECTORY.joinpath($FILENAME).resolve()\n  languages: [\"python\"]\n  message: \"Directory traversal vulnerability in aiohttp static file handling. When follow_symlinks=True, attackers can access files outside the intended directory.\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b\n    category: security\n    cwe: CWE-22\n    owasp: A1:2021-Broken Access Control\n    references:\n      - https://owasp.org/www-project-top-ten/2021/A1_2021-Broken_Access_Control\n      - https://cwe.mitre.org/data/definitions/22.html\n    technology: [python]\n```"
+}

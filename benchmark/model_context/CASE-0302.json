@@ -1,0 +1,52 @@
+{
+  "case_id": "CASE-0302",
+  "language": "java",
+  "cve_id": "CVE-2022-39207",
+  "cve_ids_all": [
+    "CVE-2022-39207"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-732",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.BufferedInputStream;",
+    "import java.io.File;",
+    "import java.io.FileInputStream;",
+    "import java.io.IOException;",
+    "import java.io.InputStream;",
+    "import java.io.UnsupportedEncodingException;",
+    "import java.net.URLEncoder;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.ArrayList;",
+    "import java.util.List;",
+    "import java.util.concurrent.Callable;",
+    "import javax.persistence.EntityNotFoundException;",
+    "import org.apache.shiro.authz.UnauthorizedException;",
+    "import org.apache.tika.io.IOUtils;",
+    "import org.apache.wicket.request.mapper.parameter.PageParameters;",
+    "import org.apache.wicket.request.resource.AbstractResource;",
+    "import com.google.common.base.Joiner;",
+    "import com.google.common.base.Splitter;",
+    "import io.onedev.commons.utils.ExplicitException;",
+    "import io.onedev.commons.utils.LockUtils;",
+    "import io.onedev.server.OneDev;",
+    "import io.onedev.server.entitymanager.BuildManager;",
+    "import io.onedev.server.entitymanager.ProjectManager;",
+    "import io.onedev.server.model.Build;",
+    "import io.onedev.server.model.Project;",
+    "import io.onedev.server.security.SecurityUtils;",
+    "import io.onedev.server.util.ContentDetector;"
+  ],
+  "vulnerable_function": "\tprotected ResourceResponse newResourceResponse(Attributes attributes) {\n\t\tPageParameters params = attributes.getParameters();\n\n\t\tLong projectId = params.get(PARAM_PROJECT).toLong();\n\t\tProject project = OneDev.getInstance(ProjectManager.class).load(projectId);\n\t\t\n\t\tLong buildNumber = params.get(PARAM_BUILD).toOptionalLong();\n\t\t\n\t\tif (buildNumber == null)\n\t\t\tthrow new IllegalArgumentException(\"build number has to be specified\");\n\t\t\n\t\tBuild build = OneDev.getInstance(BuildManager.class).find(project, buildNumber);\n\n\t\tif (build == null) {\n\t\t\tString message = String.format(\"Unable to find build (project: %s, build number: %d)\", \n\t\t\t\t\tproject.getPath(), buildNumber);\n\t\t\tthrow new EntityNotFoundException(message);\n\t\t}\n\t\t\n\t\tif (!SecurityUtils.canAccess(build))\n\t\t\tthrow new UnauthorizedException();\n\t\t\n\t\tList<String> pathSegments = new ArrayList<>();\n\n\t\tfor (int i = 0; i < params.getIndexedCount(); i++) {\n\t\t\tString pathSegment = params.get(i).toString();\n\t\t\tif (pathSegment.length() != 0)\n\t\t\t\tpathSegments.add(pathSegment);\n\t\t}\n\t\t\n\t\tif (pathSegments.isEmpty())\n\t\t\tthrow new ExplicitException(\"Artifact path has to be specified\");\n\t\t\n\t\tString artifactPath = Joiner.on(\"/\").join(pathSegments);\n\t\t\n\t\tFile artifactsDir = build.getArtifactsDir();\n\t\tFile artifactFile = new File(artifactsDir, artifactPath);\n\t\tif (!artifactFile.exists() || artifactFile.isDirectory()) {\n\t\t\tString message = String.format(\"Specified artifact path does not exist or is a directory (project: %s, build number: %d, path: %s)\", \n\t\t\t\t\tproject.getPath(), build.getNumber(), artifactPath);\n\t\t\tthrow new ExplicitException(message);\n\t\t}\n\t\t\t\n\t\tResourceResponse response = new ResourceResponse();\n\t\ttry (InputStream is = new BufferedInputStream(new FileInputStream(artifactFile))) {\n\t\t\tresponse.setContentType(ContentDetector.detectMediaType(is, artifactPath).toString());\n\t\t} catch (Exception e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\t\n\t\tresponse.disableCaching();\n\t\t\n\t\ttry {\n\t\t\tresponse.setFileName(URLEncoder.encode(artifactFile.getName(), StandardCharsets.UTF_8.name()));\n\t\t} catch (UnsupportedEncodingException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\t\n\t\tresponse.setContentLength(artifactFile.length());\n\t\t\n\t\tresponse.setWriteCallback(new WriteCallback() {\n\n\t\t\t@Override\n\t\t\tpublic void writeData(Attributes attributes) throws IOException {\n\t\t\t\tLockUtils.read(build.getArtifactsLockKey(), new Callable<Void>() {\n\n\t\t\t\t\t@Override\n\t\t\t\t\tpublic Void call() throws Exception {\n\t\t\t\t\t\ttry (InputStream is = new FileInputStream(artifactFile)) {\n\t\t\t\t\t\t\tIOUtils.copy(is, attributes.getResponse().getOutputStream());\n\t\t\t\t\t\t}\n\t\t\t\t\t\treturn null;\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t});\n\t\t\t}\t\t\t\n\t\t\t\n\t\t});\n\n\t\treturn response;\n\t}",
+  "patched_function": "\tprotected ResourceResponse newResourceResponse(Attributes attributes) {\n\t\tPageParameters params = attributes.getParameters();\n\n\t\tLong projectId = params.get(PARAM_PROJECT).toLong();\n\t\tProject project = OneDev.getInstance(ProjectManager.class).load(projectId);\n\t\t\n\t\tLong buildNumber = params.get(PARAM_BUILD).toOptionalLong();\n\t\t\n\t\tif (buildNumber == null)\n\t\t\tthrow new IllegalArgumentException(\"build number has to be specified\");\n\t\t\n\t\tBuild build = OneDev.getInstance(BuildManager.class).find(project, buildNumber);\n\n\t\tif (build == null) {\n\t\t\tString message = String.format(\"Unable to find build (project: %s, build number: %d)\", \n\t\t\t\t\tproject.getPath(), buildNumber);\n\t\t\tthrow new EntityNotFoundException(message);\n\t\t}\n\t\t\n\t\tif (!SecurityUtils.canAccess(build))\n\t\t\tthrow new UnauthorizedException();\n\t\t\n\t\tList<String> pathSegments = new ArrayList<>();\n\n\t\tfor (int i = 0; i < params.getIndexedCount(); i++) {\n\t\t\tString pathSegment = params.get(i).toString();\n\t\t\tif (pathSegment.length() != 0)\n\t\t\t\tpathSegments.add(pathSegment);\n\t\t}\n\t\t\n\t\tif (pathSegments.isEmpty())\n\t\t\tthrow new ExplicitException(\"Artifact path has to be specified\");\n\t\t\n\t\tString artifactPath = Joiner.on(\"/\").join(pathSegments);\n\t\t\n\t\tFile artifactsDir = build.getArtifactsDir();\n\t\tFile artifactFile = new File(artifactsDir, artifactPath);\n\t\tif (!artifactFile.exists() || artifactFile.isDirectory()) {\n\t\t\tString message = String.format(\"Specified artifact path does not exist or is a directory (project: %s, build number: %d, path: %s)\", \n\t\t\t\t\tproject.getPath(), build.getNumber(), artifactPath);\n\t\t\tthrow new ExplicitException(message);\n\t\t}\n\t\t\t\n\t\tResourceResponse response = new ResourceResponse();\n\t\tresponse.getHeaders().addHeader(\"X-Content-Type-Options\", \"nosniff\");\n\t\tresponse.setContentType(MimeTypes.OCTET_STREAM);\n\t\tresponse.disableCaching();\n\t\t\n\t\ttry {\n\t\t\tresponse.setFileName(URLEncoder.encode(artifactFile.getName(), StandardCharsets.UTF_8.name()));\n\t\t} catch (UnsupportedEncodingException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\tresponse.setContentLength(artifactFile.length());\n\t\t\n\t\tresponse.setWriteCallback(new WriteCallback() {\n\n\t\t\t@Override\n\t\t\tpublic void writeData(Attributes attributes) throws IOException {\n\t\t\t\tLockUtils.read(build.getArtifactsLockKey(), new Callable<Void>() {\n\n\t\t\t\t\t@Override\n\t\t\t\t\tpublic Void call() throws Exception {\n\t\t\t\t\t\ttry (InputStream is = new FileInputStream(artifactFile)) {\n\t\t\t\t\t\t\tIOUtils.copy(is, attributes.getResponse().getOutputStream());\n\t\t\t\t\t\t}\n\t\t\t\t\t\treturn null;\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t});\n\t\t\t}\t\t\t\n\t\t\t\n\t\t});\n\n\t\treturn response;\n\t}",
+  "unified_diff": "diff --git a/server-core/src/main/java/io/onedev/server/web/resource/ArtifactResource.java b/server-core/src/main/java/io/onedev/server/web/resource/ArtifactResource.java\nindex 92f3af3443..449ac51085 100644\n--- a/server-core/src/main/java/io/onedev/server/web/resource/ArtifactResource.java\n+++ b/server-core/src/main/java/io/onedev/server/web/resource/ArtifactResource.java\n@@ -1,6 +1,5 @@\n package io.onedev.server.web.resource;\n \n-import java.io.BufferedInputStream;\n import java.io.File;\n import java.io.FileInputStream;\n import java.io.IOException;\n@@ -16,6 +15,7 @@ import javax.persistence.EntityNotFoundException;\n \n import org.apache.shiro.authz.UnauthorizedException;\n import org.apache.tika.io.IOUtils;\n+import org.apache.tika.mime.MimeTypes;\n import org.apache.wicket.request.mapper.parameter.PageParameters;\n import org.apache.wicket.request.resource.AbstractResource;\n \n@@ -30,7 +30,6 @@ import io.onedev.server.entitymanager.ProjectManager;\n import io.onedev.server.model.Build;\n import io.onedev.server.model.Project;\n import io.onedev.server.security.SecurityUtils;\n-import io.onedev.server.util.ContentDetector;\n \n public class ArtifactResource extends AbstractResource {\n \n@@ -85,12 +84,8 @@ public class ArtifactResource extends AbstractResource {\n \t\t}\n \t\t\t\n \t\tResourceResponse response = new ResourceResponse();\n-\t\ttry (InputStream is = new BufferedInputStream(new FileInputStream(artifactFile))) {\n-\t\t\tresponse.setContentType(ContentDetector.detectMediaType(is, artifactPath).toString());\n-\t\t} catch (Exception e) {\n-\t\t\tthrow new RuntimeException(e);\n-\t\t}\n-\t\t\n+\t\tresponse.getHeaders().addHeader(\"X-Content-Type-Options\", \"nosniff\");\n+\t\tresponse.setContentType(MimeTypes.OCTET_STREAM);\n \t\tresponse.disableCaching();\n \t\t\n \t\ttry {\n@@ -98,7 +93,6 @@ public class ArtifactResource extends AbstractResource {\n \t\t} catch (UnsupportedEncodingException e) {\n \t\t\tthrow new RuntimeException(e);\n \t\t}\n-\t\t\n \t\tresponse.setContentLength(artifactFile.length());\n \t\t\n \t\tresponse.setWriteCallback(new WriteCallback() {",
+  "auto_locate_confidence": "auto"
+}

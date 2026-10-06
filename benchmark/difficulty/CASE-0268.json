@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0268",
+  "batch": "topup28",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-434"
+  ],
+  "changed_files": 1,
+  "lines_added": 18,
+  "lines_removed": 2,
+  "lines_changed_total": 20,
+  "function_size_chars": 2257,
+  "function_size_lines": 65,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Upload handler lets PATCH through without checking the file is already complete; missing state check, not a code shape."
+}

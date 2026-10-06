@@ -1,0 +1,18 @@
+{
+  "case_id": "github.com_jenkinsci_monitoring-plugin_f0f6aeef2032696c97d4b015dd51fa2b841b0473",
+  "cve_ids": [
+    "CVE-2014-3678",
+    "CVE-2014-3679"
+  ],
+  "cwe_ids": [
+    "CWE-79",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/monitoring-plugin",
+  "repository_url": "https://github.com/jenkinsci/monitoring-plugin",
+  "vulnerable_commit": "f574a976b9cb4c3aad7f8af5e7f1eaa12f6bd548",
+  "fixed_commit": "f0f6aeef2032696c97d4b015dd51fa2b841b0473",
+  "changed_file": "src/main/java/org/jvnet/hudson/plugins/monitoring/HudsonMonitoringFilter.java",
+  "max_score": "1337"
+}

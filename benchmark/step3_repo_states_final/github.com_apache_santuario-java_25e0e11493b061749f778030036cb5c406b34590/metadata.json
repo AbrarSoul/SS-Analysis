@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_santuario-java_25e0e11493b061749f778030036cb5c406b34590",
+  "cve_ids": [
+    "CVE-2013-2172"
+  ],
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "language": "java",
+  "repository": "apache/santuario-java",
+  "repository_url": "https://github.com/apache/santuario-java",
+  "vulnerable_commit": "043ea0bf5536c6bd68cb5ab3bec47f31b1633989",
+  "fixed_commit": "25e0e11493b061749f778030036cb5c406b34590",
+  "changed_file": "src/org/jcp/xml/dsig/internal/dom/DOMCanonicalizationMethod.java",
+  "max_score": "1337"
+}

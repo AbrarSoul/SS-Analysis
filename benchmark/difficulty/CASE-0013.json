@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0013",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-99"
+  ],
+  "changed_files": 1,
+  "lines_added": 15,
+  "lines_removed": 0,
+  "lines_changed_total": 15,
+  "function_size_chars": 1203,
+  "function_size_lines": 34,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "Missing JNDI validation before use; recognizing the gap requires comparing against the sibling endpoint pattern and knowing what a validation call should look like.",
+  "supported_status": "supported"
+}

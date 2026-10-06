@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0005",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "changed_files": 1,
+  "lines_added": 11,
+  "lines_removed": 14,
+  "lines_changed_total": 25,
+  "function_size_chars": 648,
+  "function_size_lines": 16,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "mark_safe() wrapping an unescaped %-interpolated value is a self-contained syntactic idiom.",
+  "supported_status": "supported"
+}

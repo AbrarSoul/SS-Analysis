@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_gulpjs_glob-parent_4a80667c69355c76a572a5892b0f133c8e1f457e",
+  "cve_ids": [
+    "CVE-2020-28469"
+  ],
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "gulpjs/glob-parent",
+  "repository_url": "https://github.com/gulpjs/glob-parent",
+  "vulnerable_commit": "2a551dd0dc3235e78bf3c94843d4107072d17841",
+  "fixed_commit": "4a80667c69355c76a572a5892b0f133c8e1f457e",
+  "changed_file": "index.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_linuxmint_warpinator_f4907ef6a17a189d56ab0a9da4b53190b061ad75",
+  "cve_ids": [
+    "CVE-2022-42725"
+  ],
+  "cwe_ids": [
+    "CWE-59"
+  ],
+  "language": "python",
+  "repository": "linuxmint/warpinator",
+  "repository_url": "https://github.com/linuxmint/warpinator",
+  "vulnerable_commit": "5244c33d4c109ede9607b9d94461650410e2cddc",
+  "fixed_commit": "f4907ef6a17a189d56ab0a9da4b53190b061ad75",
+  "changed_file": "src/util.py",
+  "max_score": "1337"
+}

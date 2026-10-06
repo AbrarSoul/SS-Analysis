@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_avwo_whistle_d1b8ca275dc4e453bd2efed392c0fd4b92f73cdf",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "changed_files": 1,
+  "lines_added": 32,
+  "lines_removed": 39,
+  "lines_changed_total": 71,
+  "function_size_chars": 1061,
+  "function_size_lines": 46,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

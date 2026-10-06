@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_apache_axis-axis1-java_7e66753427466590d6def0125e448d2791723210",
+  "cve_ids": [
+    "CVE-2023-40743"
+  ],
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-75"
+  ],
+  "language": "java",
+  "repository": "apache/axis-axis1-java",
+  "repository_url": "https://github.com/apache/axis-axis1-java",
+  "vulnerable_commit": "75e8c723c489761388e48c6df6f00d6061928cea",
+  "fixed_commit": "7e66753427466590d6def0125e448d2791723210",
+  "changed_file": "axis-rt-core/src/main/java/org/apache/axis/client/ServiceFactory.java",
+  "max_score": "1337"
+}

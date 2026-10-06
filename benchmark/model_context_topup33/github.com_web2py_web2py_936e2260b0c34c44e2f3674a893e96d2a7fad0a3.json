@@ -1,0 +1,26 @@
+{
+  "case_id": "github.com_web2py_web2py_936e2260b0c34c44e2f3674a893e96d2a7fad0a3",
+  "language": "python",
+  "cve_id": "CVE-2023-45158",
+  "cve_ids_all": [
+    "CVE-2023-45158"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "NotifySendHandler",
+  "imports": [
+    "import logging",
+    "import os",
+    "import sys",
+    "import Tkinter as tkinter",
+    "import tkinter"
+  ],
+  "vulnerable_function": "    def emit(self, record):\n        if tkinter:\n            msg = self.format(record)\n            os.system(\"notify-send '%s'\" % msg)\n",
+  "patched_function": "    def emit(self, record):\n        if tkinter:\n            msg = self.format(record)\n            subprocess.run([\"notify-send\", msg], check=False, timeout=2)\n",
+  "unified_diff": "diff --git a/gluon/messageboxhandler.py b/gluon/messageboxhandler.py\nindex 70079cdf..7ca08274 100644\n--- a/gluon/messageboxhandler.py\n+++ b/gluon/messageboxhandler.py\n@@ -1,6 +1,6 @@\n import logging\n-import os\n import sys\n+import subprocess\n \n try:\n     if sys.version_info[0] == 2:\n@@ -36,4 +36,4 @@ class NotifySendHandler(logging.Handler):\n     def emit(self, record):\n         if tkinter:\n             msg = self.format(record)\n-            os.system(\"notify-send '%s'\" % msg)\n+            subprocess.run([\"notify-send\", msg], check=False, timeout=2)",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0099",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-134"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 2,
+  "lines_changed_total": 5,
+  "function_size_chars": 5099,
+  "function_size_lines": 114,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "A user-influenced path joined into a string that is then passed to str.format(); format-injection shape."
+}

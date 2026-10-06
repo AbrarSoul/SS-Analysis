@@ -1,0 +1,44 @@
+{
+  "case_id": "github.com_lessthanoptimal_BoofCV_0da6139ff69fd5a49359854ab01935d06c7f5aac",
+  "language": "java",
+  "cve_id": "CVE-2023-39010",
+  "cve_ids_all": [
+    "CVE-2023-39010"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import boofcv.BoofVersion;",
+    "import boofcv.alg.geo.PerspectiveOps;",
+    "import boofcv.alg.geo.calibration.CalibrationObservation;",
+    "import boofcv.io.UtilIO;",
+    "import boofcv.misc.BoofMiscOps;",
+    "import boofcv.struct.calib.*;",
+    "import boofcv.struct.geo.PointIndex2D_F64;",
+    "import georegression.struct.se.Se3_F64;",
+    "import org.apache.commons.io.IOUtils;",
+    "import org.ejml.data.DMatrixRMaj;",
+    "import org.jetbrains.annotations.Nullable;",
+    "import org.yaml.snakeyaml.DumperOptions;",
+    "import org.yaml.snakeyaml.LoaderOptions;",
+    "import org.yaml.snakeyaml.Yaml;",
+    "import org.yaml.snakeyaml.constructor.Constructor;",
+    "import org.yaml.snakeyaml.representer.Representer;",
+    "import java.io.*;",
+    "import java.net.URL;",
+    "import java.text.DateFormat;",
+    "import java.text.SimpleDateFormat;",
+    "import java.util.*;",
+    "import static boofcv.misc.BoofMiscOps.getOrThrow;",
+    "import static java.nio.charset.StandardCharsets.UTF_8;"
+  ],
+  "vulnerable_function": "\tpublic static Yaml createYmlObject() {\n\t\tDumperOptions options = new DumperOptions();\n\t\toptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);\n\t\treturn new Yaml(options);\n\t}",
+  "patched_function": "\tpublic static Yaml createYmlObject() {\n\t\tvar dumperOptions = new DumperOptions();\n\t\tdumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);\n\n\t\t// Configure to get around point limit (as of SnakeYaml 1.32) causing a crash in a regression test\n\t\tvar loaderOptions = new LoaderOptions();\n\t\tloaderOptions.setCodePointLimit(30_145_728);\n\n\t\treturn new Yaml(new Constructor(new LoaderOptions()), new Representer(dumperOptions),\n\t\t\t\tdumperOptions, loaderOptions);\n\t}",
+  "unified_diff": "diff --git a/main/boofcv-io/src/main/java/boofcv/io/calibration/CalibrationIO.java b/main/boofcv-io/src/main/java/boofcv/io/calibration/CalibrationIO.java\nindex 114c63341..be9bcd93d 100644\n--- a/main/boofcv-io/src/main/java/boofcv/io/calibration/CalibrationIO.java\n+++ b/main/boofcv-io/src/main/java/boofcv/io/calibration/CalibrationIO.java\n@@ -123,9 +123,15 @@ public class CalibrationIO {\n \t}\n \n \tpublic static Yaml createYmlObject() {\n-\t\tDumperOptions options = new DumperOptions();\n-\t\toptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);\n-\t\treturn new Yaml(options);\n+\t\tvar dumperOptions = new DumperOptions();\n+\t\tdumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);\n+\n+\t\t// Configure to get around point limit (as of SnakeYaml 1.32) causing a crash in a regression test\n+\t\tvar loaderOptions = new LoaderOptions();\n+\t\tloaderOptions.setCodePointLimit(30_145_728);\n+\n+\t\treturn new Yaml(new Constructor(new LoaderOptions()), new Representer(dumperOptions),\n+\t\t\t\tdumperOptions, loaderOptions);\n \t}\n \n \t/**",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0066",
+  "original_source_case_id": "github.com_NodeBB_NodeBB_4d2d76897a02e7068ab74c81d17a2febfae8bfb9",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-30591",
+  "cve_ids_all": [
+    "CVE-2023-30591"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-241",
+    "CWE-754"
+  ],
+  "language": "javascript",
+  "repository": "NodeBB/NodeBB",
+  "repository_url": "https://github.com/NodeBB/NodeBB",
+  "vulnerable_commit": "7397873db355d5449e9de3e6ca39b47b4cb34813",
+  "fixed_commit": "4d2d76897a02e7068ab74c81d17a2febfae8bfb9",
+  "changed_file": "src/socket.io/index.js",
+  "changed_function": "async function onMessage(socket, payload) {",
+  "vulnerable_lines": [
+    110,
+    176
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 33,
+  "patch_size_deleted": 32,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0066/vulnerable_source.js": "ab1c711acf4e75b2cac27dc41f0003a734a592a0c3a80a488b4abc22e8c15df1",
+    "cases/CASE-0066/patched_source.js": "a5bad785721889ae1a9ac4658d4b8566a780fd9a57f28c94cbfde7c9c629a4bf",
+    "cases/CASE-0066/patch.diff": "39af7d275d35b5b0b393ca55486bdad5948d96036dbbca4bb591bbcf962da6cd",
+    "cases/CASE-0066/metadata.json": "5aa100c086bce7b3327d510368d82e9684205691707e5e9a308747a37ead6ac3",
+    "model_context/CASE-0066.json": "7f4db75da5aa1847cac203800b2112add915f2f95436480f8bd4d7d496607cfa",
+    "difficulty/CASE-0066.json": "e72733b9f7ae76ac608f2ddf7b51e792ef5bd4b3957cb6d0475fc1c53a9eadc1"
+  },
+  "case_level_hash": "778a19c82b47d62858edb9921dc88782fa90264164c144626f58b875277e0716"
+}

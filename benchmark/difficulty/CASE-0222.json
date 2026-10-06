@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0222",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-311"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 620,
+  "function_size_lines": 20,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "requests.post(..., verify=False); certificate-validation-disabled pattern."
+}

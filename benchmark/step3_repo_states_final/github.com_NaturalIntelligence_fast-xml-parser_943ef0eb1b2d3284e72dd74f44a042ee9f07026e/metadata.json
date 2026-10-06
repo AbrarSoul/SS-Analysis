@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_NaturalIntelligence_fast-xml-parser_943ef0eb1b2d3284e72dd74f44a042ee9f07026e",
+  "cve_ids": [
+    "CVE-2026-25896"
+  ],
+  "cwe_ids": [
+    "CWE-185"
+  ],
+  "language": "javascript",
+  "repository": "NaturalIntelligence/fast-xml-parser",
+  "repository_url": "https://github.com/NaturalIntelligence/fast-xml-parser",
+  "vulnerable_commit": "ddcd0acf26ddd682cb0dc15a2bd6aa3b96bb1e69",
+  "fixed_commit": "943ef0eb1b2d3284e72dd74f44a042ee9f07026e",
+  "changed_file": "src/xmlparser/OrderedObjParser.js",
+  "max_score": "1337"
+}

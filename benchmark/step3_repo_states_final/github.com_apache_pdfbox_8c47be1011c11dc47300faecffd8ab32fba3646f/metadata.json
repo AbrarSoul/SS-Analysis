@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_apache_pdfbox_8c47be1011c11dc47300faecffd8ab32fba3646f",
+  "cve_ids": [
+    "CVE-2021-27906"
+  ],
+  "cwe_ids": [
+    "CWE-789",
+    "NVD-CWE-Other"
+  ],
+  "language": "java",
+  "repository": "apache/pdfbox",
+  "repository_url": "https://github.com/apache/pdfbox",
+  "vulnerable_commit": "ef53b45f111c4e391faf1c331c4e81a21e24c0b8",
+  "fixed_commit": "8c47be1011c11dc47300faecffd8ab32fba3646f",
+  "changed_file": "pdfbox/src/main/java/org/apache/pdfbox/pdfparser/PDFXrefStreamParser.java",
+  "max_score": "1337"
+}

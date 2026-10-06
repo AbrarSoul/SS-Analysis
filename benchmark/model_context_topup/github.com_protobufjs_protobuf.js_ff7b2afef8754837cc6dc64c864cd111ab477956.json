@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_protobufjs_protobuf.js_ff7b2afef8754837cc6dc64c864cd111ab477956",
+  "language": "javascript",
+  "cve_id": "CVE-2026-41242",
+  "cve_ids_all": [
+    "CVE-2026-41242"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-94",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var Namespace = require(\"./namespace\");",
+    "var Enum      = require(\"./enum\"),"
+  ],
+  "vulnerable_function": "function Type(name, options) {\n    Namespace.call(this, name, options);\n\n    /**\n     * Message fields.\n     * @type {Object.<string,Field>}\n     */\n    this.fields = {};  // toJSON, marker\n\n    /**\n     * Oneofs declared within this namespace, if any.\n     * @type {Object.<string,OneOf>}\n     */\n    this.oneofs = undefined; // toJSON\n\n    /**\n     * Extension ranges, if any.\n     * @type {number[][]}\n     */\n    this.extensions = undefined; // toJSON\n\n    /**\n     * Reserved ranges, if any.\n     * @type {Array.<number[]|string>}\n     */\n    this.reserved = undefined; // toJSON\n\n    /*?\n     * Whether this type is a legacy group.\n     * @type {boolean|undefined}\n     */\n    this.group = undefined; // toJSON\n\n    /**\n     * Cached fields by id.\n     * @type {Object.<number,Field>|null}\n     * @private\n     */\n    this._fieldsById = null;\n\n    /**\n     * Cached fields as an array.\n     * @type {Field[]|null}\n     * @private\n     */\n    this._fieldsArray = null;\n\n    /**\n     * Cached oneofs as an array.\n     * @type {OneOf[]|null}\n     * @private\n     */\n    this._oneofsArray = null;\n\n    /**\n     * Cached constructor.\n     * @type {Constructor<{}>}\n     * @private\n     */\n    this._ctor = null;\n}",
+  "patched_function": "function Type(name, options) {\n    name = name.replace(/\\W/g, \"\");\n    Namespace.call(this, name, options);\n\n    /**\n     * Message fields.\n     * @type {Object.<string,Field>}\n     */\n    this.fields = {};  // toJSON, marker\n\n    /**\n     * Oneofs declared within this namespace, if any.\n     * @type {Object.<string,OneOf>}\n     */\n    this.oneofs = undefined; // toJSON\n\n    /**\n     * Extension ranges, if any.\n     * @type {number[][]}\n     */\n    this.extensions = undefined; // toJSON\n\n    /**\n     * Reserved ranges, if any.\n     * @type {Array.<number[]|string>}\n     */\n    this.reserved = undefined; // toJSON\n\n    /*?\n     * Whether this type is a legacy group.\n     * @type {boolean|undefined}\n     */\n    this.group = undefined; // toJSON\n\n    /**\n     * Cached fields by id.\n     * @type {Object.<number,Field>|null}\n     * @private\n     */\n    this._fieldsById = null;\n\n    /**\n     * Cached fields as an array.\n     * @type {Field[]|null}\n     * @private\n     */\n    this._fieldsArray = null;\n\n    /**\n     * Cached oneofs as an array.\n     * @type {OneOf[]|null}\n     * @private\n     */\n    this._oneofsArray = null;\n\n    /**\n     * Cached constructor.\n     * @type {Constructor<{}>}\n     * @private\n     */\n    this._ctor = null;\n}",
+  "unified_diff": "diff --git a/src/type.js b/src/type.js\nindex 978baf94..4392c1e0 100644\n--- a/src/type.js\n+++ b/src/type.js\n@@ -29,6 +29,7 @@ var Enum      = require(\"./enum\"),\n  * @param {Object.<string,*>} [options] Declared options\n  */\n function Type(name, options) {\n+    name = name.replace(/\\W/g, \"\");\n     Namespace.call(this, name, options);\n \n     /**",
+  "auto_locate_confidence": "auto"
+}

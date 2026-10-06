@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_python-pillow_Pillow_10c4f75aaa383bd9671e923e3b91d391ea12d781",
+  "batch": "topup40",
+  "language": "python",
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 12,
+  "lines_removed": 9,
+  "lines_changed_total": 21,
+  "function_size_chars": 1009,
+  "function_size_lines": 29,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

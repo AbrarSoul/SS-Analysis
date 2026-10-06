@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0293",
+  "original_source_case_id": "github.com_spring-projects_spring-framework_0009806debb578e884f6dc98bd1f2dc668020021",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-1270",
+  "cve_ids_all": [
+    "CVE-2018-1270",
+    "CVE-2018-1275"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-358",
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "6deee3e8180e3b4f0c775ff27b81ee6b5728ac90",
+  "fixed_commit": "0009806debb578e884f6dc98bd1f2dc668020021",
+  "changed_file": "spring-messaging/src/main/java/org/springframework/messaging/simp/broker/DefaultSubscriptionRegistry.java",
+  "changed_function": "public TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {",
+  "vulnerable_lines": [
+    537,
+    552
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 27,
+  "patch_size_deleted": 19,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0293/vulnerable_source.java": "3a54a37780fc9abfd87e86851652608ccc3f894d615742b5388d50fa1e121512",
+    "cases/CASE-0293/patched_source.java": "147224fc5868101c53aee48c73944ee0dcf79f567c5fa4dee032e2e0ccbcd1c5",
+    "cases/CASE-0293/patch.diff": "ab7a0c5ba374a8fe8eea2ea1401508af692099025d3845eca4292a906b8fb84a",
+    "cases/CASE-0293/metadata.json": "e9759c7ee1bbc586e3ab0b9b2437c1666a34824e58affbb3f14c681fd1c2a3b2",
+    "model_context/CASE-0293.json": "9f31759761bb28f1c26e20fc20bd7ad29a0e47b74198900c748c9029dbc06022",
+    "difficulty/CASE-0293.json": "03a9248aa0f7a2a96b910b1389b894f41e2a80a8288ebabc72ddef077ce04019"
+  },
+  "case_level_hash": "8072fcac8a4176b0611957ae283566db9ecdd0f4cae1a5ce882b10af1b48b281"
+}

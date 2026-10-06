@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_openwrt_luci_068150ba5f524ef6b03817b258d31ec310053fd6",
+  "cve_ids": [
+    "CVE-2026-32721"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "openwrt/luci",
+  "repository_url": "https://github.com/openwrt/luci",
+  "vulnerable_commit": "5e9c736a9c661b6d2aec11022cecc59f40f6b628",
+  "fixed_commit": "068150ba5f524ef6b03817b258d31ec310053fd6",
+  "changed_file": "modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js",
+  "max_score": "1337"
+}

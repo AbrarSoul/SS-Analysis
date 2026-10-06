@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_softwarepub_hermes_7f64f102e916c76dc44404b77ab2a80f5a4e59b1",
+  "cve_ids": [
+    "CVE-2026-22798"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "python",
+  "repository": "softwarepub/hermes",
+  "repository_url": "https://github.com/softwarepub/hermes",
+  "vulnerable_commit": "7a4aa40de40c62d644753b28a82636dac2ddba08",
+  "fixed_commit": "7f64f102e916c76dc44404b77ab2a80f5a4e59b1",
+  "changed_file": "src/hermes/commands/cli.py",
+  "max_score": "1337"
+}

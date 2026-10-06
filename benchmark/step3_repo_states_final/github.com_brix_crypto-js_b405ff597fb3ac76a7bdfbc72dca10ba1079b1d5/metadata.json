@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_brix_crypto-js_b405ff597fb3ac76a7bdfbc72dca10ba1079b1d5",
+  "cve_ids": [
+    "CVE-2020-36732"
+  ],
+  "cwe_ids": [
+    "CWE-330",
+    "CWE-331"
+  ],
+  "language": "javascript",
+  "repository": "brix/crypto-js",
+  "repository_url": "https://github.com/brix/crypto-js",
+  "vulnerable_commit": "8e6d15bf2e26d6ff0af5277df2604ca12b60a718",
+  "fixed_commit": "b405ff597fb3ac76a7bdfbc72dca10ba1079b1d5",
+  "changed_file": "src/core.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "CASE-0185",
+  "language": "java",
+  "cve_id": "CVE-2023-41936",
+  "cve_ids_all": [
+    "CVE-2023-41936"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-697",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;",
+    "import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;",
+    "import com.google.api.client.auth.oauth2.AuthorizationCodeResponseUrl;",
+    "import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;",
+    "import hudson.model.Failure;",
+    "import hudson.remoting.Base64;",
+    "import hudson.util.HttpResponses;",
+    "import org.kohsuke.stapler.HttpRedirect;",
+    "import org.kohsuke.stapler.HttpResponse;",
+    "import org.kohsuke.stapler.Stapler;",
+    "import org.kohsuke.stapler.StaplerRequest;",
+    "import java.io.IOException;",
+    "import java.io.Serializable;",
+    "import java.lang.IllegalArgumentException;",
+    "import java.nio.charset.StandardCharsets;",
+    "import java.util.UUID;"
+  ],
+  "vulnerable_function": "    public HttpResponse doFinishLogin(StaplerRequest request) throws IOException {\n        if (request.getParameter(\"state\") == null) {\n            // user was not sent here by Google\n            return HttpResponses.redirectToContextRoot();\n        }\n        StringBuffer buf = request.getRequestURL();\n        if (request.getQueryString() != null) {\n            buf.append('?').append(request.getQueryString());\n        }\n        try {\n            AuthorizationCodeResponseUrl responseUrl = new AuthorizationCodeResponseUrl(buf.toString());\n            if (! uuid.equals(responseUrl.getState())) {\n                return HttpResponses.error(401, \"State is invalid\");\n            }\n            String code = responseUrl.getCode();\n            if (responseUrl.getError() != null) {\n                return HttpResponses.error(401, \"Error from provider: \" + code);\n            } else if (code == null) {\n                return HttpResponses.error(404, \"Missing authorization code\");\n            } else {\n                return onSuccess(code);\n            }\n        } catch (IllegalArgumentException e) {\n            throw new Failure(\"Failed to login. Cannot parse URL.\");\n        }\n    }",
+  "patched_function": "    public HttpResponse doFinishLogin(StaplerRequest request) throws IOException {\n        if (request.getParameter(\"state\") == null) {\n            // user was not sent here by Google\n            return HttpResponses.redirectToContextRoot();\n        }\n        StringBuffer buf = request.getRequestURL();\n        if (request.getQueryString() != null) {\n            buf.append('?').append(request.getQueryString());\n        }\n        try {\n            AuthorizationCodeResponseUrl responseUrl = new AuthorizationCodeResponseUrl(buf.toString());\n            String state = responseUrl.getState();\n            if (state == null || !MessageDigest.isEqual(uuid.getBytes(StandardCharsets.UTF_8), state.getBytes(StandardCharsets.UTF_8))) {\n                return HttpResponses.error(401, \"State is invalid\");\n            }\n            String code = responseUrl.getCode();\n            if (responseUrl.getError() != null) {\n                return HttpResponses.error(401, \"Error from provider: \" + code);\n            } else if (code == null) {\n                return HttpResponses.error(404, \"Missing authorization code\");\n            } else {\n                return onSuccess(code);\n            }\n        } catch (IllegalArgumentException e) {\n            throw new Failure(\"Failed to login. Cannot parse URL.\");\n        }\n    }",
+  "unified_diff": "diff --git a/src/main/java/org/jenkinsci/plugins/googlelogin/OAuthSession.java b/src/main/java/org/jenkinsci/plugins/googlelogin/OAuthSession.java\nindex 74ab3d8..d009d3a 100644\n--- a/src/main/java/org/jenkinsci/plugins/googlelogin/OAuthSession.java\n+++ b/src/main/java/org/jenkinsci/plugins/googlelogin/OAuthSession.java\n@@ -30,6 +30,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;\n import hudson.model.Failure;\n import hudson.remoting.Base64;\n import hudson.util.HttpResponses;\n+import java.security.MessageDigest;\n import org.kohsuke.stapler.HttpRedirect;\n import org.kohsuke.stapler.HttpResponse;\n import org.kohsuke.stapler.Stapler;\n@@ -98,7 +99,8 @@ public abstract class OAuthSession implements Serializable {\n         }\n         try {\n             AuthorizationCodeResponseUrl responseUrl = new AuthorizationCodeResponseUrl(buf.toString());\n-            if (! uuid.equals(responseUrl.getState())) {\n+            String state = responseUrl.getState();\n+            if (state == null || !MessageDigest.isEqual(uuid.getBytes(StandardCharsets.UTF_8), state.getBytes(StandardCharsets.UTF_8))) {\n                 return HttpResponses.error(401, \"State is invalid\");\n             }\n             String code = responseUrl.getCode();",
+  "auto_locate_confidence": "auto"
+}

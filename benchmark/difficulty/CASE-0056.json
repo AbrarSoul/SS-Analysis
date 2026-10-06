@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0056",
+  "batch": "topup",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "changed_files": 1,
+  "lines_added": 6,
+  "lines_removed": 2,
+  "lines_changed_total": 8,
+  "function_size_chars": 536,
+  "function_size_lines": 13,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Timing side channel from an early return; a missing delay is not a code-shape Semgrep can observe."
+}

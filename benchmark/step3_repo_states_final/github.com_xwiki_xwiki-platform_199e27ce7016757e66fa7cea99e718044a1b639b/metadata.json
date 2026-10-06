@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_xwiki_xwiki-platform_199e27ce7016757e66fa7cea99e718044a1b639b",
+  "cve_ids": [
+    "CVE-2023-45135"
+  ],
+  "cwe_ids": [
+    "CWE-116"
+  ],
+  "language": "javascript",
+  "repository": "xwiki/xwiki-platform",
+  "repository_url": "https://github.com/xwiki/xwiki-platform",
+  "vulnerable_commit": "81e73c5b679706ef437c736278cca675a6e3c638",
+  "fixed_commit": "199e27ce7016757e66fa7cea99e718044a1b639b",
+  "changed_file": "xwiki-platform-core/xwiki-platform-web/xwiki-platform-web-war/src/main/webapp/resources/uicomponents/widgets/locationPicker.js",
+  "max_score": "1337"
+}

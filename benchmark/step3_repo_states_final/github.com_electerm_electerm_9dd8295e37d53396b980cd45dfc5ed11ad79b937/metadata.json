@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_electerm_electerm_9dd8295e37d53396b980cd45dfc5ed11ad79b937",
+  "cve_ids": [
+    "CVE-2026-45787"
+  ],
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-329",
+    "CWE-353",
+    "CWE-759",
+    "CWE-916"
+  ],
+  "language": "javascript",
+  "repository": "electerm/electerm",
+  "repository_url": "https://github.com/electerm/electerm",
+  "vulnerable_commit": "22c61257837f2bccb34d224a4620c6fb2fa8fb9c",
+  "fixed_commit": "9dd8295e37d53396b980cd45dfc5ed11ad79b937",
+  "changed_file": "src/app/lib/enc.js",
+  "max_score": "1337"
+}

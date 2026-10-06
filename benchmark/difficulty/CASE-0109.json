@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0109",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-789",
+    "NVD-CWE-Other"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 0,
+  "lines_changed_total": 5,
+  "function_size_chars": 289,
+  "function_size_lines": 10,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Iterator next() without an exhaustion guard; a bounds-guard omission whose harm depends on callers and crafted data."
+}

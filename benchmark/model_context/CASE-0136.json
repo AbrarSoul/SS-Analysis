@@ -1,0 +1,27 @@
+{
+  "case_id": "CASE-0136",
+  "language": "java",
+  "cve_id": "CVE-2022-24913",
+  "cve_ids_all": [
+    "CVE-2022-24913"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-377",
+      "definition": "Insecure Temporary File"
+    },
+    {
+      "id": "CWE-668",
+      "definition": "Exposure of Resource to Wrong Sphere"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.io.*;",
+    "import com.fasterxml.sort.TempFileProvider;"
+  ],
+  "vulnerable_function": "    public File provide() throws IOException\n    {\n        File f = File.createTempFile(_prefix, _suffix);\n        f.deleteOnExit();\n        return f;\n    }",
+  "patched_function": "    public File provide() throws IOException\n    {\n        File f = Files.createTempFile(_prefix, _suffix).toFile();\n        f.deleteOnExit();\n        return f;\n    }",
+  "unified_diff": "diff --git a/src/main/java/com/fasterxml/sort/std/StdTempFileProvider.java b/src/main/java/com/fasterxml/sort/std/StdTempFileProvider.java\nindex d2e37fa..213f9eb 100644\n--- a/src/main/java/com/fasterxml/sort/std/StdTempFileProvider.java\n+++ b/src/main/java/com/fasterxml/sort/std/StdTempFileProvider.java\n@@ -1,6 +1,7 @@\n package com.fasterxml.sort.std;\n \n import java.io.*;\n+import java.nio.file.Files;\n \n import com.fasterxml.sort.TempFileProvider;\n \n@@ -35,7 +36,7 @@ public class StdTempFileProvider\n     @Override\n     public File provide() throws IOException\n     {\n-        File f = File.createTempFile(_prefix, _suffix);\n+        File f = Files.createTempFile(_prefix, _suffix).toFile();\n         f.deleteOnExit();\n         return f;\n     }",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,54 @@
+{
+  "case_id": "github.com_jumpserver_jumpserver_453ad331eec9d9667a38de735d6612608e558491",
+  "language": "python",
+  "cve_id": "CVE-2025-62712",
+  "cve_ids_all": [
+    "CVE-2025-62712"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-862",
+      "definition": "Missing Authorization"
+    }
+  ],
+  "containing_class_declaration": "SuperConnectionTokenViewSet",
+  "imports": [
+    "import base64",
+    "import json",
+    "import os",
+    "import urllib.parse",
+    "from django.conf import settings",
+    "from django.http import HttpResponse",
+    "from django.shortcuts import get_object_or_404",
+    "from django.utils import timezone",
+    "from django.utils.translation import gettext_lazy as _",
+    "from rest_framework import status, serializers",
+    "from rest_framework.decorators import action",
+    "from rest_framework.exceptions import PermissionDenied, ValidationError",
+    "from rest_framework.request import Request",
+    "from rest_framework.response import Response",
+    "from accounts.const import AliasAccount",
+    "from acls.notifications import AssetLoginReminderMsg",
+    "from common.api import JMSModelViewSet",
+    "from common.exceptions import JMSException",
+    "from common.utils import random_string, get_logger, get_request_ip_or_data",
+    "from common.utils.django import get_request_os",
+    "from common.utils.http import is_true, is_false",
+    "from orgs.mixins.api import RootOrgViewMixin",
+    "from orgs.utils import tmp_to_org",
+    "from perms.models import ActionChoices",
+    "from terminal.connect_methods import NativeClient, ConnectMethodUtil, WebMethod",
+    "from terminal.models import EndpointRule, Endpoint",
+    "from users.const import FileNameConflictResolution",
+    "from users.const import RDPSmartSize, RDPColorQuality",
+    "from users.models import Preference",
+    "from .face import FaceMonitorContext",
+    "from ..mixins import AuthFaceMixin",
+    "from ..models import ConnectionToken, AdminConnectionToken, date_expired_default",
+    "from ..serializers import ConnectionTokenSerializer, ConnectionTokenSecretSerializer, SuperConnectionTokenSerializer, ConnectTokenAppletOptionSerializer, ConnectionTokenReusableSerializer, ConnectTokenVirtualAppOptionSerializer, AdminConnectionTokenSerializer"
+  ],
+  "vulnerable_function": "    def get_queryset(self):\n        return ConnectionToken.objects.all()\n",
+  "patched_function": "    def get_queryset(self):\n        return ConnectionToken.objects.none()\n",
+  "unified_diff": "diff --git a/apps/authentication/api/connection_token.py b/apps/authentication/api/connection_token.py\nindex 4359257e8..33393b629 100644\n--- a/apps/authentication/api/connection_token.py\n+++ b/apps/authentication/api/connection_token.py\n@@ -362,6 +362,7 @@ class ConnectionTokenViewSet(AuthFaceMixin, ExtraActionApiMixin, RootOrgViewMixi\n         self.validate_serializer(serializer)\n         return super().perform_create(serializer)\n \n+\n     def _insert_connect_options(self, data, user):\n         connect_options = data.pop('connect_options', {})\n         default_name_opts = {\n@@ -564,7 +565,9 @@ class SuperConnectionTokenViewSet(ConnectionTokenViewSet):\n     rbac_perms = {\n         'create': 'authentication.add_superconnectiontoken',\n         'renewal': 'authentication.add_superconnectiontoken',\n+        'list': 'authentication.view_superconnectiontoken',\n         'check': 'authentication.view_superconnectiontoken',\n+        'retrieve': 'authentication.view_superconnectiontoken',\n         'get_secret_detail': 'authentication.view_superconnectiontokensecret',\n         'get_applet_info': 'authentication.view_superconnectiontoken',\n         'release_applet_account': 'authentication.view_superconnectiontoken',\n@@ -572,7 +575,12 @@ class SuperConnectionTokenViewSet(ConnectionTokenViewSet):\n     }\n \n     def get_queryset(self):\n-        return ConnectionToken.objects.all()\n+        return ConnectionToken.objects.none()\n+\n+    def get_object(self):\n+        pk = self.kwargs.get(self.lookup_field)\n+        token = get_object_or_404(ConnectionToken, pk=pk)\n+        return token\n \n     def get_user(self, serializer):\n         return serializer.validated_data.get('user')",
+  "auto_locate_confidence": "auto"
+}

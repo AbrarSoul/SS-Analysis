@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0178",
+  "original_source_case_id": "github.com_janeczku_calibre-web_3e0d8763c377d2146462811e3e4ccf13f0d312ce",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-4171",
+  "cve_ids_all": [
+    "CVE-2021-4171"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-840",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "janeczku/calibre-web",
+  "repository_url": "https://github.com/janeczku/calibre-web",
+  "vulnerable_commit": "47f5e2ffb4253b57271e76444e465da425752239",
+  "fixed_commit": "3e0d8763c377d2146462811e3e4ccf13f0d312ce",
+  "changed_file": "cps/shelf.py",
+  "changed_function": "def create_edit_shelf(shelf, page_title, page, shelf_id=False):",
+  "vulnerable_lines": [
+    243,
+    285
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0178/vulnerable_source.py": "ac3e48d97371ac2c14d9415e45f5842aac9f2ecb01b48ae1423f6fae6acd7cf3",
+    "cases/CASE-0178/patched_source.py": "c3ea2738d4168e4e983cad00f2b2563f59361cf48251c32990d33b5880258b82",
+    "cases/CASE-0178/patch.diff": "d8c8d9dff8284e0427872ed0c403d196679801635a06d62d450325d303d3583b",
+    "cases/CASE-0178/metadata.json": "e53757ba4dfc9309260b983f8295289b00c4f27e05cf446532b3cc148e70dd58",
+    "model_context/CASE-0178.json": "b0743c0dfeae2508ed34d67cb38558b716b8a613df5da7700e655d4059fdb9bc",
+    "difficulty/CASE-0178.json": "5b985c311e6ec0cf12e940985ca85e1b2dfc21250f3ab366530f47815f5eff69"
+  },
+  "case_level_hash": "8749875461b713401268752962c3e4f99299549dc11fa1c1f27b62bdee8cd9ae"
+}

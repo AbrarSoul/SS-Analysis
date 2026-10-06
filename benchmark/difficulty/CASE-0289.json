@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0289",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-295",
+    "CWE-300"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 2683,
+  "function_size_lines": 77,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "rejectUnauthorized defaults to null, which Node treats as disabled verification; falsy-default semantics are not visible."
+}

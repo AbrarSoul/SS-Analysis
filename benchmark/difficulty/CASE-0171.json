@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0171",
+  "batch": "final",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 5,
+  "lines_changed_total": 8,
+  "function_size_chars": 570,
+  "function_size_lines": 15,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Caller-supplied path parameter concatenated into a regex passed to replaceFirst; regex injection."
+}

@@ -1,0 +1,2132 @@
+{
+ "_meta": {
+  "purpose": "Section 8 Step 6 judgement fields deferred to Section 9: pattern_or_taint, structural_or_context_heavy (stored as context_complexity in metadata), semgrep_representability (design doc Section 7.3).",
+  "rater": "Single rater (Claude Code), judged from the hands-on construction of each case's Section 9 bundle. NOT independently double-rated; treat borderline supported/partially_supported calls as subject to review.",
+  "rubric": {
+   "pattern_or_taint": "pattern = a local syntactic/AST pattern flags the vulnerable instance; taint = a value must be tracked from an untrusted source to a sink across statements.",
+   "structural_or_context_heavy": "structural = self-contained within a few lines; context_heavy = needs broader context (sibling methods/routes, framework or protocol semantics, what 'correct' looks like elsewhere) to tell the vulnerable instance from a look-alike.",
+   "supported": "The vulnerable code has a matchable shape inside the function itself (dangerous call/API, missing-check or missing-annotation idiom, tainted flow to a sink, hard-coded secret/literal, missing entry in a literal security list).",
+   "partially_supported": "Semgrep can observe part of the mechanism but important context is unavailable: a locally matchable faulty expression/statement-order whose wrongness is semantic (wrong operand/constant/argument, inverted comparison), or the sink/source/semantics lie outside the function, or framework/runtime behaviour decides harm.",
+   "unsupported": "The vulnerable/patched difference is not a code-shape property: timing side channels, cryptographic parameter quality, data remanence, log volume, file-system/runtime behaviour, parser differentials, cross-function bookkeeping or business/authorization logic spread over statements."
+  },
+  "near_duplicates_resolved": "CASE-0277 and CASE-0338 retired (duplicates of CASE-0276 / CASE-0337); replaced by CASE-0341 and CASE-0342. See Implementation_Log.md Section 12.19."
+ },
+ "labels": {
+  "github.com_1Panel-dev_MaxKB_24cd68acae5f726eed828e2ac801827a2a70536f": {
+   "case_id_at_labelling": "CASE-0041",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Value-cleaning helper lacks a formula-prefix check; Semgrep cannot tell the helper feeds spreadsheet cells without cross-function context."
+  },
+  "github.com_1Panel-dev_MaxKB_4ae02c8d3eb65542c88ef58c0abd94c52c949d8f": {
+   "case_id_at_labelling": "CASE-0042",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Interpolated id embedded in the string passed to `su -c` inside a subprocess argument list; local syntactic pattern."
+  },
+  "github.com_9001_copyparty_e0a92ba72d46074209a9c304eb2a01ca0429e60c": {
+   "case_id_at_labelling": "CASE-0043",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Cross-cutting share-restriction logic spread over several path-resolution methods; not expressible as a code-shape difference."
+  },
+  "github.com_Aarondoran_servify-express_8dff7f56504b356278d849734ef2050e5cd23b61": {
+   "case_id_at_labelling": "CASE-0044",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Express app started with no rate-limit middleware; absence is app-wide and needs whole-app context."
+  },
+  "github.com_AiondaDotCom_mcp-ssh_5b9b9c5b28d3f2672f356a790154ed68e17ef453": {
+   "case_id_at_labelling": "CASE-0045",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Template-literal shell command passed straight to child_process exec; self-contained sink."
+  },
+  "github.com_Cp0204_quark-auto-save_ea8377a596446291953dbe36e2d119d85bcd865b": {
+   "case_id_at_labelling": "CASE-0046",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Every request-JSON key copied into config with only a small denylist; loop over request items into config is visible locally."
+  },
+  "github.com_DSpace_DSpace_afcc6c3389729b85d5c7b0230cbf9aaf7452f31a": {
+   "case_id_at_labelling": "CASE-0047",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Fix only adds an error-correlation UUID to a log line and request attribute; no vulnerable code shape to match."
+  },
+  "github.com_Dav-Git_Dav-Cogs_3d54ef9b52ce03f139b7d6c1cc38c375e65593fd": {
+   "case_id_at_labelling": "CASE-0048",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "User-supplied template string passed to str.format() with a real object; format-string injection sink."
+  },
+  "github.com_FasterXML_jackson-databind_454be8bb8c913be18298327a84ca45a280b61605": {
+   "case_id_at_labelling": "CASE-0049",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Denylist static initializer missing two gadget class names; matches pilot precedent for missing denylist literals (CASE-0011)."
+  },
+  "github.com_FasterXML_jackson-databind_998efd708284778f29d83d7962a9bd935c228317": {
+   "case_id_at_labelling": "CASE-0050",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Denylist static initializer missing one gadget class name; same construct as the pilot's denylist case."
+  },
+  "github.com_FasterXML_jackson-databind_9f4e97019fb0dd836533d0b6198c88787e235ae2": {
+   "case_id_at_labelling": "CASE-0051",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Denylist static initializer missing three gadget class names; same construct as the pilot's denylist case."
+  },
+  "github.com_HKUDS_LightRAG_60777d535b719631680bcf5d0969bdef79ca4eaf": {
+   "case_id_at_labelling": "CASE-0052",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Client-supplied upload filename joined directly onto the input directory; taint from request file name to path join."
+  },
+  "github.com_HtmlUnit_htmlunit_940dc7fd": {
+   "case_id_at_labelling": "CASE-0053",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Self-recursive tree walk; recursion is visible but depth being attacker-bounded is semantic context."
+  },
+  "github.com_JanssenProject_jans_3592837764fe48b956e3140ca17b8ef7cac00a47": {
+   "case_id_at_labelling": "CASE-0054",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Request arguments logged verbatim; needs knowing which requests carry credentials."
+  },
+  "github.com_Josh-XT_AGiXT_2079ea5a88fa671a921bf0b5eba887a5a1b73d5f": {
+   "case_id_at_labelling": "CASE-0055",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "normpath(join(base, user_path)) with no realpath or containment check; visible path-traversal idiom."
+  },
+  "github.com_Kozea_Radicale_059ba8dec1f22ccbeab837e288b3833a099cee2d": {
+   "case_id_at_labelling": "CASE-0056",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Timing side channel from an early return; a missing delay is not a code-shape Semgrep can observe."
+  },
+  "github.com_LEMS_jLEMS_8c224637d7d561076364a9e3c2c375daeaf463dc": {
+   "case_id_at_labelling": "CASE-0057",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Zip entry name passed to new File(dir, name) with no canonical-path check; classic Zip Slip pattern."
+  },
+  "github.com_Legrandin_pycrypto_9f912f13df99ad3421eff360d6a62d7dbec755c2": {
+   "case_id_at_labelling": "CASE-0058",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "ElGamal prime and generator lack algebraic checks; cryptographic parameter quality is not expressible."
+  },
+  "github.com_LibrIT_passhport_366b03f607729c4538e91b634ecc57c8398522a1": {
+   "case_id_at_labelling": "CASE-0059",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Login string concatenated directly into an LDAP filter; LDAP injection sink."
+  },
+  "github.com_Mintplex-Labs_anything-llm_21ce03087145a4261c1de03b056fba639f699c09": {
+   "case_id_at_labelling": "CASE-0060",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "fs.stat follows symlinks; API semantics visible but whether it guards a copy needs surrounding context."
+  },
+  "github.com_MirahezeBots_sopel-channelmgnt_643388365f28c5cc682254ab913c401f0e53260a": {
+   "case_id_at_labelling": "CASE-0061",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "IRC KICK argument accepts comma lists; depends on protocol semantics, not visible as a code shape."
+  },
+  "github.com_Morgan-Phoenix_EnroCrypt_e652d56ac60eadfc26489ab83927af13a9b9d8ce": {
+   "case_id_at_labelling": "CASE-0062",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "hashlib.md5 used for hashing; a well-known insecure-hash call pattern."
+  },
+  "github.com_MrRio_jsPDF_d8bb3b39efcd129994f7a3b01b632164144ec43e": {
+   "case_id_at_labelling": "CASE-0063",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Regex literal with a nested quantifier; ReDoS shape is visible in the literal itself."
+  },
+  "github.com_NaturalIntelligence_fast-xml-parser_943ef0eb1b2d3284e72dd74f44a042ee9f07026e": {
+   "case_id_at_labelling": "CASE-0064",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "RegExp built from an unescaped caller-supplied key; unescaped input into RegExp sink."
+  },
+  "github.com_NodeBB_NodeBB_04dab1d550cdebf4c1567bca9a51f8b9ca48a500": {
+   "case_id_at_labelling": "CASE-0065",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Plain-object lookup with an attacker-chosen key falls through to Object.prototype; needs JS object semantics plus flow."
+  },
+  "github.com_NodeBB_NodeBB_4d2d76897a02e7068ab74c81d17a2febfae8bfb9": {
+   "case_id_at_labelling": "CASE-0066",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "String() applied to an attacker-controlled value; generic call that is benign almost everywhere."
+  },
+  "github.com_OSC_ondemand_96f29b995e1add7562516614e4dc8d961987e8b4": {
+   "case_id_at_labelling": "CASE-0067",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Unthrottled console.log in a send callback; volume of logging is not a code-shape property."
+  },
+  "github.com_OWASP_NodeGoat_4a4d1db74c63fb4ff8d366551c3af006c25ead12": {
+   "case_id_at_labelling": "CASE-0068",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Callback dereferences the response without checking the error argument first; visible missing-guard shape."
+  },
+  "github.com_OpenNMS_opennms_e59b0ddd164cf0598ac0294d11a2d677d9e310b8": {
+   "case_id_at_labelling": "CASE-0069",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Edit-rights check also admits ROLE_REST; extra role operand is a matchable condition shape in the function. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_OpenRefine_OpenRefine_8060477fa53842ebabf43b63e039745932fa629d": {
+   "case_id_at_labelling": "CASE-0070",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Client-chosen contentType parameter flows into the response Content-Type header."
+  },
+  "github.com_OsamaTaher_Java-springboot-codebase_c835c6f7799eacada4c0fc77e0816f250af01ad2": {
+   "case_id_at_labelling": "CASE-0071",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Caller filename passed to load() unvalidated; needs to know load() reads files and that sibling save validates."
+  },
+  "github.com_PerfreeBlog_PerfreeBlog_103c79165e3a41a1729188fdc8a1e90c97c0a06d": {
+   "case_id_at_labelling": "CASE-0072",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Endpoint method lacks the @PreAuthorize annotation its siblings carry; missing-annotation shape."
+  },
+  "github.com_SignalK_set-system-time_75b11eae2de528bf89ede3fb1f7ed057ddbb4d24": {
+   "case_id_at_labelling": "CASE-0073",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Network-supplied datetime interpolated into an sh -c command string."
+  },
+  "github.com_SignalK_signalk-server_9bcf61c8fe2cb8a40998b913a02fb64dff9e86c7": {
+   "case_id_at_labelling": "CASE-0074",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "path.join result returned without a containment check; path-traversal shape though validation lives elsewhere."
+  },
+  "github.com_Speedy11CZ_mcrpx_02ca6d1fd851567560046766ac9d04d20db35b8e": {
+   "case_id_at_labelling": "CASE-0075",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Zip entry name concatenated into the extraction path with no traversal check; Zip Slip."
+  },
+  "github.com_Tautulli_Tautulli_ec77a70aafc555e1aad0d9981f719d1200c117f1": {
+   "case_id_at_labelling": "CASE-0076",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request img_format parameter used to build a cache file path; taint to path construction."
+  },
+  "github.com_Tencent_NeuralNLP-NeuralClassifier_8dea5ffdb45cf0a33b3d116de38507afaee87594": {
+   "case_id_at_labelling": "CASE-0077",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "torch.load(...) without weights_only; well-known unsafe-deserialization call."
+  },
+  "github.com_Tethik_flask-session-captcha_2811ae23a38d33b620fb7a07de8837c6d65c13e4": {
+   "case_id_at_labelling": "CASE-0078",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "`return x and x == y` shape is visible but the harm depends on callers comparing the result with == False."
+  },
+  "github.com_TooTallNate_node-http-proxy-agent_b7b7cc793c3226aa83f820ce5c277e81862d32eb": {
+   "case_id_at_labelling": "CASE-0079",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Deprecated new Buffer(value) applied to an unvalidated argument; matchable constructor pattern."
+  },
+  "github.com_Yonle_bostr_49181f4ec9ae1472c6675cab56bbc01e723855af": {
+   "case_id_at_labelling": "CASE-0080",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Authorization condition has an extra `&& !noscraper` operand; the wrong condition shape is matchable in the function. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_YosefHayim_ebay-mcp_aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a": {
+   "case_id_at_labelling": "CASE-0081",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Value interpolated unescaped into KEY=\"value\" lines of an env file; injection into a file sink."
+  },
+  "github.com_absolunet_kafe_c644c798bfcdc1b0bbb1f0ca59e2e2664ff3fdd0": {
+   "case_id_at_labelling": "CASE-0082",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Email regex literal with an ambiguous nested quantifier; ReDoS shape visible in the literal."
+  },
+  "github.com_adfinis_document-merge-service_a1edd39d33d1bdf75c31ea01c317547be90ca074": {
+   "case_id_at_labelling": "CASE-0083",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Plain jinja2.Environment used for untrusted templates instead of a SandboxedEnvironment."
+  },
+  "github.com_advplyr_audiobookshelf_bf8407274e3ee300af1927ee660d078a7a801e1c": {
+   "case_id_at_labelling": "CASE-0084",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Unanchored allow-list regexes tested against originalUrl; unanchored-regex auth-skip shape is visible in the function."
+  },
+  "github.com_aedart_ion_c3e2ee08710d4164d796ecb66ed291335dae9291": {
+   "case_id_at_labelling": "CASE-0085",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Metadata record created as a plain {} and later written with attacker keys; the flow crosses functions."
+  },
+  "github.com_agenticmail_agenticmail_1408de543fa3577d8c2d4fdb289c75fe6faafac7": {
+   "case_id_at_labelling": "CASE-0086",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Incomplete regex-based table extraction misses comma-joins; parser completeness is not a code-shape property."
+  },
+  "github.com_aheckmann_mpath_89402d2880d4ea3518480a8c9847c541f2d824fc": {
+   "case_id_at_labelling": "CASE-0087",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Prototype-guard indexOf check lacks a type check; strict-equality semantics need JS coercion knowledge."
+  },
+  "github.com_aio-libs_aiohttp_0ae2aa076c84573df83fc1fdc39eec0f5862fe3d": {
+   "case_id_at_labelling": "CASE-0088",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request filename passed to Path.joinpath with no absolute-path rejection; taint to path join."
+  },
+  "github.com_aio-libs_aiosmtpd_b3a4a2c6ecfd228856a20d637dc383541fcdbfda": {
+   "case_id_at_labelling": "CASE-0089",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Missing reader-buffer clear after the STARTTLS transport switch; the omitted statement is decidable inside the function (a non-TLS protocol lacks the swap)."
+  },
+  "github.com_airbnb_knowledge-repo_f026ad2afea14e0ffc91f1aa0eaedcdc72c63167": {
+   "case_id_at_labelling": "CASE-0090",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request text stored unescaped and later rendered; missing escape on stored request data."
+  },
+  "github.com_airlinklabs_daemon_5e6222dd9eec6d7cb0876b12507e3d6011797693": {
+   "case_id_at_labelling": "CASE-0091",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Textual join+startsWith containment check with no symlink resolution; symlink behaviour is file-system state Semgrep cannot observe."
+  },
+  "github.com_airsonic_airsonic_3e07ea52885f88d3fbec444dfd592f27bfb65647": {
+   "case_id_at_labelling": "CASE-0092",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Hard-coded string literal passed to rememberMe().key(...); a literal-key pattern."
+  },
+  "github.com_airsonic_airsonic_61c842923a6d60d4aedd126445a8437b53b752c8": {
+   "case_id_at_labelling": "CASE-0093",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "RandomStringUtils.randomAlphanumeric used to generate a password; insecure-RNG call pattern."
+  },
+  "github.com_ajenti_ajenti_7aa146b724e0e20cfee2c71ca78fafbf53a8767c": {
+   "case_id_at_labelling": "CASE-0094",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Username %-formatted into a /bin/sh -c command string passed to pexpect.spawn."
+  },
+  "github.com_alexta69_metube_0072d3488ae5b8d922d3ee87458d829993742a32": {
+   "case_id_at_labelling": "CASE-0095",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request Origin header reflected into Access-Control-Allow-Origin (and wildcard Socket.IO origins)."
+  },
+  "github.com_alfio-event_alf.io_94e2923a317452e337393789c9f3192dfc1ddac2": {
+   "case_id_at_labelling": "CASE-0096",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Rows written to CSV with no formula-prefix neutralisation; whether cell data is attacker-influenced is not visible locally."
+  },
+  "github.com_ansible_ansible-modules-core_1182d1f0b76d56f3667e27987a10b9ec8f03357d": {
+   "case_id_at_labelling": "CASE-0097",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Tuple unpacked in a different order than the same-file callee returns it; the exact unpack is matchable but the rule is project-specific. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_ant-media_ant-media-server_4d4763bd4fd06e515c19544e5170ca0f34c9ce45": {
+   "case_id_at_labelling": "CASE-0098",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Caller-supplied id logged verbatim with no CR/LF neutralisation; log-injection taint to logger."
+  },
+  "github.com_apache_airflow_18386026c28939fa6d91d198c5489c295a05dcd2": {
+   "case_id_at_labelling": "CASE-0099",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "A user-influenced path joined into a string that is then passed to str.format(); format-injection shape."
+  },
+  "github.com_apache_axis-axis1-java_7e66753427466590d6def0125e448d2791723210": {
+   "case_id_at_labelling": "CASE-0100",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Map-supplied jndiName passed straight to InitialContext.lookup/bind; JNDI injection sink."
+  },
+  "github.com_apache_calcite_43eeafcbac29d02c72bd520c003cdfc571de2d15": {
+   "case_id_at_labelling": "CASE-0101",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Trust-all SSL socket factory plus an always-true hostname verifier; classic insecure-TLS pattern."
+  },
+  "github.com_apache_camel_9fd8fc30dbd98511a1faa0cbcf39ef5aeec88a64": {
+   "case_id_at_labelling": "CASE-0102",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "initialize() sets only the outbound filter, never the inbound one; missing-call shape inside one method."
+  },
+  "github.com_apache_cxf_1a4fe22fc297f8be204788bcdfcd498e91201a01": {
+   "case_id_at_labelling": "CASE-0103",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Cache key taken from an id attribute of the token itself; collision semantics need STS cache context."
+  },
+  "github.com_apache_hadoop_8c2836402fbb2f619f1fef4ef625a8542e853a64": {
+   "case_id_at_labelling": "CASE-0104",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "createTempFile followed by delete and mkdirs in a shared temp dir; known insecure temp-directory idiom."
+  },
+  "github.com_apache_hive_b418e3c9f479ba8e7d31e6470306111002ffa809": {
+   "case_id_at_labelling": "CASE-0105",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Arrays.equals used to compare a MAC signature; non-constant-time comparison pattern."
+  },
+  "github.com_apache_inlong_cab63a8eea6c0f4bf3d30ce245b7e1beee42504d": {
+   "case_id_at_labelling": "CASE-0106",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request values concatenated into SQL string literals then executed; SQL injection."
+  },
+  "github.com_apache_netbeans-html4j_fa70e507e5555e1adb4f6518479fc408a7abd0e6": {
+   "case_id_at_labelling": "CASE-0107",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "createTempFile followed by delete and mkdirs with the return ignored; temp-directory race idiom."
+  },
+  "github.com_apache_openmeetings_1fb71af36": {
+   "case_id_at_labelling": "CASE-0108",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Button-enable condition too permissive (any single recipient); business-logic authorization, not a code-shape defect. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_apache_pdfbox_8c47be1011c11dc47300faecffd8ab32fba3646f": {
+   "case_id_at_labelling": "CASE-0109",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Iterator next() without an exhaustion guard; a bounds-guard omission whose harm depends on callers and crafted data."
+  },
+  "github.com_apache_poi_25bc679244188d63de690354db0e3f301291e252": {
+   "case_id_at_labelling": "CASE-0110",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Array allocated from an attacker-controlled length before bounds checks; ordering of allocation vs check is hard to express."
+  },
+  "github.com_apache_santuario-java_25e0e11493b061749f778030036cb5c406b34590": {
+   "case_id_at_labelling": "CASE-0111",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Constructors accept any TransformService with no algorithm check; needs XML-signature semantics to know what is required."
+  },
+  "github.com_apache_sling-org-apache-sling-jcr-base_6ed0a030fd5f13774aff0073c55cbe3ace0153cb": {
+   "case_id_at_labelling": "CASE-0112",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Attacker-reachable name and environment passed to InitialContext.lookup (and rmi:// handling); JNDI injection sink."
+  },
+  "github.com_apache_solr_35fc4bdc48171d9a64251c54a1e76deb558cf9d8": {
+   "case_id_at_labelling": "CASE-0113",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "System.getenv() iterated into a published metrics map; env-var exposure sink."
+  },
+  "github.com_apache_struts_3292152f8c0a77ee4827beede82b6580478a2c2a": {
+   "case_id_at_labelling": "CASE-0114",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Temp-file delete skipped on an early return and on exceptions; path-sensitive resource cleanup is only partly expressible."
+  },
+  "github.com_apache_struts_6d7ac40dcede1793a4534a3dc249fd562d495e8c": {
+   "case_id_at_labelling": "CASE-0115",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Request-derived method name stored with setMethod; that it is later evaluated as OGNL is framework knowledge."
+  },
+  "github.com_apache_thrift_0919c3d5506151514e283a63e1fe1ce83e2449d8": {
+   "case_id_at_labelling": "CASE-0116",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "TLS client socket created without setting endpoint identification; known missing-hostname-verification pattern."
+  },
+  "github.com_apache_thrift_80184ddca4d4f60ac657bd82b2abc47269814f79": {
+   "case_id_at_labelling": "CASE-0117",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Several distinct flaws in one WebSocket upgrade handler (no Origin check, unvalidated path, header injection); no single local pattern captures the mechanism."
+  },
+  "github.com_apache_tomcat_0f01966eb60015d975525019e12a087f05ebf01a": {
+   "case_id_at_labelling": "CASE-0118",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Case-insensitive file-system resolution bypasses URL constraints; depends on runtime FS behaviour Semgrep cannot observe."
+  },
+  "github.com_apache_tomcat_2cb9c724e6a2d15a5bc909c4bf1ab9dfc26fa362": {
+   "case_id_at_labelling": "CASE-0119",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "close() never resets still-open HTTP/2 streams; connection-lifecycle bookkeeping, not a code shape."
+  },
+  "github.com_apache_tomcat_5badf94e79e5de206fc0ef3054fd536b1bb787cd": {
+   "case_id_at_labelling": "CASE-0120",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Counter incremented before the limit comparison (off-by-one); semantic counting error rather than a matchable idiom. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_apache_ws-wss4j_970b3e3756e2c75bf2379ce198365e1a7168c3c3": {
+   "case_id_at_labelling": "CASE-0121",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Countermeasure key generator always throws or leaks via exceptions; cryptographic side-channel behaviour is not a code-shape property."
+  },
+  "github.com_aryan6673_project-ai_8db90e3d9777850741804533ebde5824b4a5795c": {
+   "case_id_at_labelling": "CASE-0122",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "API key assigned as a string literal; hard-coded credential pattern."
+  },
+  "github.com_avwo_whistle_d1b8ca275dc4e453bd2efed392c0fd4b92f73cdf": {
+   "case_id_at_labelling": "CASE-0123",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Request Origin reflected with allow-credentials in cgiHandler; CORS reflection shape though the gate logic spans two functions."
+  },
+  "github.com_aws_sagemaker-python-sdk_2d873d53f708ea570fc2e2a6974f8c3097fe9df5": {
+   "case_id_at_labelling": "CASE-0124",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Path interpolated into an f-string command run through os.system; shell injection."
+  },
+  "github.com_axios_axios_0a8d6e19da5b9899a2abafaaa06a75ee548597db": {
+   "case_id_at_labelling": "CASE-0125",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "DOM anchor setAttribute('href', ...) used for the same-origin decision; advisory is disputed, so whether it is a vulnerability at all is contested."
+  },
+  "github.com_badkeys_badkeys_de631f69f040974bb5fb442cdab9a1d904c64087": {
+   "case_id_at_labelling": "CASE-0126",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Untrusted DNS text copied into a terminal-printed warning; needs knowing the message reaches a terminal and control characters matter."
+  },
+  "github.com_balderdashy_sails_4a023dc5095a4b30fdc8535f705ed34cd22d2f7d": {
+   "case_id_at_labelling": "CASE-0127",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "String coercion of a header value with no try/catch; generic coercion shape whose harm depends on exotic values."
+  },
+  "github.com_bcgit_bc-java_cd98322b171b15b3f88c5ec871175147893c31e6": {
+   "case_id_at_labelling": "CASE-0128",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "resolveClass checks only the first class then defers all others unchecked; matchable `found` guard shape in an ObjectInputStream override."
+  },
+  "github.com_bigbluebutton_bigbluebutton_7dcdfb191373684bafa7b11cdd0128c9869040a1": {
+   "case_id_at_labelling": "CASE-0129",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "MongoDB projection omits a field that is read later; cross-statement data-shape reasoning, not a code-shape defect."
+  },
+  "github.com_bit-team_backintime_cef81d0da93ff601252607df3db1a48f7f6f01b3": {
+   "case_id_at_labelling": "CASE-0130",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Title and message %-formatted into a command string run through os.system."
+  },
+  "github.com_bitcoinj_bitcoinj_b575a682acf614b9ff95cacbdeb48f86c3ababe0": {
+   "case_id_at_labelling": "CASE-0131",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Signature verified against the spender's key but the key hash is never compared with the scriptPubKey hash; a semantic omission Semgrep cannot identify."
+  },
+  "github.com_bluewave-labs_Checkmate_36d78a9aa4ed607ca1bd2b5fdaca5a3927b2d287": {
+   "case_id_at_labelling": "CASE-0132",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Only one of several secrets is masked in the returned settings; which fields are secret is domain knowledge."
+  },
+  "github.com_bsv-blockchain_ts-sdk_d8cf6930028372079d977138ae9eaa03ae2f50bb": {
+   "case_id_at_labelling": "CASE-0133",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Two base64 strings concatenated then decoded once; encoding-semantics flaw with no distinguishing code shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_caronc_apprise_e20fce630d55e4ca9b0a1e325a5fea6997489831": {
+   "case_id_at_labelling": "CASE-0134",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Regex literal with a nested quantifier over an ambiguous body; ReDoS shape visible in the literal."
+  },
+  "github.com_cloudexplorer-dev_cloudexplorer-lite_7d4dab60352079953b7be120afe9bd14983ae3bc": {
+   "case_id_at_labelling": "CASE-0135",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Password stored with no policy check; omission of complexity validation in a reset routine needs domain context."
+  },
+  "github.com_cowtowncoder_java-merge-sort_450fdee70b5f181c2afc5d817f293efa1a543902": {
+   "case_id_at_labelling": "CASE-0136",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "File.createTempFile used for sensitive temp data; default-permission temp-file API."
+  },
+  "github.com_cryptpad_cryptpad_d5e4830ba104a4a442cb23aab5378b8565a95607": {
+   "case_id_at_labelling": "CASE-0137",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Scheme denylist runs after a same-host shortcut; ordering logic between statements, not a code-shape defect. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_danswer-ai_danswer_89ff07a96b41be9e05256bd252105be233f4d28a": {
+   "case_id_at_labelling": "CASE-0138",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Routes lack the Depends(current_admin_user) dependency every sibling route carries; missing-dependency shape."
+  },
+  "github.com_dataease_dataease_3c52cc26c4cca1000294346cf99a84b25d38bfb2": {
+   "case_id_at_labelling": "CASE-0139",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Caller-supplied table name concatenated into a double-quoted SQL identifier; SQL injection sink."
+  },
+  "github.com_dataease_dataease_956ee2d6c9e81349a60aef435efc046888e10a6d": {
+   "case_id_at_labelling": "CASE-0140",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "User-supplied extra parameters appended to a JDBC URL unvalidated; tainted string into a connection URL."
+  },
+  "github.com_datasharingframework_dsf_d3ca59b4daccde16a006fedeccce28fd1f826908": {
+   "case_id_at_labelling": "CASE-0141",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Cache expiry comparison inverted (isBefore vs isAfter); a semantic operator inversion with no distinguishing code shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_decolua_9router_428e2c045cb9c0eb8080e8b580471a9c2eaa95ca": {
+   "case_id_at_labelling": "CASE-0142",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Client-supplied Host header compared with localhost to decide authorization; header-to-auth-decision shape."
+  },
+  "github.com_deeplook_svglib_35686a130ed260c71a382a8f83d41fd31a46704d": {
+   "case_id_at_labelling": "CASE-0143",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "lxml XMLParser created without disabling entity resolution; known XXE parser-configuration pattern."
+  },
+  "github.com_dgtlmoon_changedetection.io_ec7d56f85d1e9690fca7cb4711c1fb20dffec780": {
+   "case_id_at_labelling": "CASE-0144",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Route parameter reflected in an f-string returned as a Flask response; reflected-XSS taint."
+  },
+  "github.com_dimtion_Shaarlier_3d1d9b239d9b3cd87e8bed45a0f02da583ad371e": {
+   "case_id_at_labelling": "CASE-0145",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Tag value concatenated into a SQL WHERE clause; SQL injection."
+  },
+  "github.com_directus_directus_243eed781b42d6b4948ddb8c3792bcf5b44f55bb": {
+   "case_id_at_labelling": "CASE-0146",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "WebSocket left without an 'error' listener before the connection handler; needs ws-library event semantics."
+  },
+  "github.com_directus_directus_a8ef790ea2d28b1727f9027d99bd360920d57919": {
+   "case_id_at_labelling": "CASE-0147",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Loose case/accent-insensitive email match plus token built from the supplied address; depends on database collation at runtime."
+  },
+  "github.com_dom4j_dom4j_1707bf3d898a8ada3b213acb0e3b38f16eaae73d": {
+   "case_id_at_labelling": "CASE-0148",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "SAXReader created and used without disabling external entities or DTD loading; known XXE pattern."
+  },
+  "github.com_drogatkin_TJWS2_1bac15c496ec54efe21ad7fab4e17633778582fc": {
+   "case_id_at_labelling": "CASE-0149",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Zip entry name used to build an output File with no `..` check; Zip Slip."
+  },
+  "github.com_dromara_sureness_12987a72cbf1eabbca1e308ed1fe9445958aeca7": {
+   "case_id_at_labelling": "CASE-0150",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "JWT signing key defaults to a published constant; hard-coded secret used as a signing key."
+  },
+  "github.com_electerm_electerm_9dd8295e37d53396b980cd45dfc5ed11ad79b937": {
+   "case_id_at_labelling": "CASE-0151",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "scrypt with a constant salt plus AES-CBC with a constant zero IV; literal weak-crypto parameters."
+  },
+  "github.com_electron_electron_519a02d8d4d28e8a467acb40fb26172a80c9454f": {
+   "case_id_at_labelling": "CASE-0152",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Option-merge skip rule drops parent webPreferences; behavioural merge logic with no matchable defect shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_electron_packager_d421d4bd3ced889a4143c5c3ab6d95e3be249eee": {
+   "case_id_at_labelling": "CASE-0153",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Wrong resource names and Buffer.from(...).buffer pool misuse when embedding integrity data; encoding semantics, not a code shape. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_elunez_eladmin_d6a16e9afc0a3b96a56f1a24ed167e1beec6ce2f": {
+   "case_id_at_labelling": "CASE-0154",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Map values written to a spreadsheet with no formula-prefix neutralisation; whether values are attacker-influenced is not visible locally."
+  },
+  "github.com_emmett-framework_core_9557ea23a27cbadf7774d8bca6bbe4b54fa8a3ec": {
+   "case_id_at_labelling": "CASE-0155",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "SimpleCookie.load called on untrusted fragments outside any try/except; specific unguarded-call pattern."
+  },
+  "github.com_eosphoros-ai_DB-GPT_295cdb8723663d5b0954d5d1dfb4f02b7223b8ff": {
+   "case_id_at_labelling": "CASE-0156",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Request SQL string passed to query_ex with no keyword filter, unlike the sibling route; request-to-query taint."
+  },
+  "github.com_ether_etherpad-lite_53f126082a8b3d094e48b159f0f0bc8a5db4b2f4": {
+   "case_id_at_labelling": "CASE-0157",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Whole session object stored in the database; that it contains a plaintext password is runtime knowledge."
+  },
+  "github.com_ether_etherpad-lite_a0fb65205c7d7ff95f00eb9fd88e93b300f30c3d": {
+   "case_id_at_labelling": "CASE-0158",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Key lookup built as \"pad:\" + id + \"*\" prefix wildcard; over-broad prefix query shape."
+  },
+  "github.com_eventlet_eventlet_51e3c4928d4938beb576eff34f3bf97e6e64e6b4": {
+   "case_id_at_labelling": "CASE-0159",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Receive loop breaks on the first datagram from the right source before validating it; control-flow logic."
+  },
+  "github.com_facebook_fbthrift_a56346ceacad28bf470017a6bda1d5518d0bd943": {
+   "case_id_at_labelling": "CASE-0160",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Unknown wire type falls into `default: break;` consuming nothing; the harm depends on the surrounding size loop."
+  },
+  "github.com_fail2ban_fail2ban_83109bce144f443a48ef31165a5389b7b83f4e0e": {
+   "case_id_at_labelling": "CASE-0161",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Attacker-influenced log text substituted into an action command later run by a shell; the sink is in another function."
+  },
+  "github.com_fedora-selinux_setroubleshoot_dda55aa50db95a25f0d919c3a0d5871827cdc40f": {
+   "case_id_at_labelling": "CASE-0162",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Ids %-formatted into a command string passed to commands.getoutput; shell injection."
+  },
+  "github.com_feross_git-pull-or-clone_f9ce092be13cc32e685dfa26e7705e9c6e3108a3": {
+   "case_id_at_labelling": "CASE-0163",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "git clone argv lacks the `--` end-of-options marker before url and path; option-injection shape."
+  },
+  "github.com_flitto_express-param_db94f7391ad0a16dcfcba8b9be1af385b25c42db": {
+   "case_id_at_labelling": "CASE-0164",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Repeated query parameters arrive as arrays where a string is expected; depends on Express query-parser semantics."
+  },
+  "github.com_formio_formio_1836bdd9f55f5888ff397c257b2108c09d3de478": {
+   "case_id_at_labelling": "CASE-0165",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "URL parameter keys stored in original case while routes are case-insensitive; needs framework routing semantics."
+  },
+  "github.com_foxinmy_weixin4j_d1c825835802cd3a0c04772be1220ff4476ea27c": {
+   "case_id_at_labelling": "CASE-0166",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Integer overflow in `len + required` int arithmetic; arithmetic overflow is not observable by Semgrep patterns."
+  },
+  "github.com_frappe_press_5d118a902872d7941f099ad1fb918e2421e79ccd": {
+   "case_id_at_labelling": "CASE-0167",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Guest input passed through a rich-text sanitiser with known bypasses; needs knowledge of the sanitiser's behaviour."
+  },
+  "github.com_gaizhenbiao_chuanhuchatgpt_71cb89c4c948dae5aaa0ae64b98f98e3965bdb37": {
+   "case_id_at_labelling": "CASE-0168",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request user_name joined into a directory path and listed; taint to path join."
+  },
+  "github.com_gaizhenbiao_chuanhuchatgpt_e46ec4ecd896bc3c88eb9a2f44e8593f3c6761b4": {
+   "case_id_at_labelling": "CASE-0169",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Password compared with == (non-constant-time) and skipped for unknown users; secret-comparison pattern."
+  },
+  "github.com_getsentry_sentry_d5b34568d9f1c41362ccb62141532a0a2169512f": {
+   "case_id_at_labelling": "CASE-0170",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Serializer holding the submitted password placed in log extras; needs knowing its repr contains the data."
+  },
+  "github.com_graphhopper_graphhopper_eb189be1fa7443ebf4ae881e737a18f818c95f41": {
+   "case_id_at_labelling": "CASE-0171",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Caller-supplied path parameter concatenated into a regex passed to replaceFirst; regex injection."
+  },
+  "github.com_hjson_hjson-java_aff0b607929b4397d93dc0d029a56aeefb242602": {
+   "case_id_at_labelling": "CASE-0172",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "charAt(length()-1) with no non-empty check; unguarded-index shape visible locally."
+  },
+  "github.com_honojs_hono_cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817": {
+   "case_id_at_labelling": "CASE-0173",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Manifest lookup falls back to the raw request path (`|| path`); fallback-to-user-input shape."
+  },
+  "github.com_huggingface_transformers_54a02160eb030da9be18231c77791f2eb3a52216": {
+   "case_id_at_labelling": "CASE-0174",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Unanchored digit-run regexes with quadratic backtracking; slow-regex detection is over-broad and shape-only."
+  },
+  "github.com_igniterealtime_Openfire_5c022bfa82d71d1710381ab395b100cdbcb8f310": {
+   "case_id_at_labelling": "CASE-0175",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Admin list not updated when an account is deleted; missing lifecycle listener registration, not a code shape."
+  },
+  "github.com_indutny_elliptic_856fe4d99fe7b6200556e6400b3bf585b1721bec": {
+   "case_id_at_labelling": "CASE-0176",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Lenient BER/DER signature parser accepts non-canonical encodings; parser strictness is not expressible as a pattern."
+  },
+  "github.com_jaketcooper_Minecraft-rcon_31272b541482d095d1578855c2b571268eb9b877": {
+   "case_id_at_labelling": "CASE-0177",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Password stored via config.update('defaultPassword', ...) into settings.json; secret-in-plain-config pattern."
+  },
+  "github.com_janeczku_calibre-web_3e0d8763c377d2146462811e3e4ccf13f0d312ce": {
+   "case_id_at_labelling": "CASE-0178",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "ORM object mutated before the uniqueness check and persisted by a later commit; order-of-operations state."
+  },
+  "github.com_jaredhanson_passport_7e9b9cf4d7be02428e963fc729496a45baeea608": {
+   "case_id_at_labelling": "CASE-0179",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Login stores the user in the existing session without regenerate(); missing-call session-fixation shape."
+  },
+  "github.com_jaspernbrouwer_powerline-gitstatus_fe8e963b3489e4cceaa2c1f26f2bcc2ef405364c": {
+   "case_id_at_labelling": "CASE-0180",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "git command lists built without `-c core.fsmonitor=`; missing-argument pattern at two return sites."
+  },
+  "github.com_jazzband_tablib_69abfc3ada5d754cb152119c0b4777043657cb6e": {
+   "case_id_at_labelling": "CASE-0181",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "yaml.load with the general loader on file input; unsafe-deserialization call pattern."
+  },
+  "github.com_jenkinsci_aws-device-farm-plugin_2d8cfe3cdd299c152ca5d13aada51cb69d0fec88": {
+   "case_id_at_labelling": "CASE-0182",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Secret fields declared as plain String rather than Secret; relies on field-name and framework knowledge."
+  },
+  "github.com_jenkinsci_dynatrace-plugin_b6e55709476d9f6dfaf75a4cd744fe1798868168": {
+   "case_id_at_labelling": "CASE-0183",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Stapler web method makes a connection with no checkPermission call; missing-permission-check shape."
+  },
+  "github.com_jenkinsci_git-client-plugin_75ea3fe05650fc6ca09046a72493e2b3f066fb98": {
+   "case_id_at_labelling": "CASE-0184",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "File.createTempFile used for private keys and askpass scripts; default-permission temp-file API."
+  },
+  "github.com_jenkinsci_google-login-plugin_2273af025ad06ee13ab73a5a070b10689c2db61e": {
+   "case_id_at_labelling": "CASE-0185",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "OAuth state compared with String.equals; non-constant-time comparison pattern."
+  },
+  "github.com_jenkinsci_jenkins_ad38d8480f20ce3cbf8fec3e2003bc83efda4f7d": {
+   "case_id_at_labelling": "CASE-0186",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Job name passed to createProjectFromXML without checkGoodName; missing-validation call shape."
+  },
+  "github.com_jenkinsci_mercurial-plugin_54b4f82e80c89d51b12bc64258f6b59e98b0c16a": {
+   "case_id_at_labelling": "CASE-0187",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "UnprotectedRootAction that also extends AbstractModelObject and defines getSearchUrl; class-shape combination."
+  },
+  "github.com_jenkinsci_mercurial-plugin_edd59db1eec7e3c8d467372cd8417ae65eeb29dd": {
+   "case_id_at_labelling": "CASE-0188",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "doFill method returns configured installations with no permission check; missing-permission-check shape."
+  },
+  "github.com_jenkinsci_monitoring-plugin_f0f6aeef2032696c97d4b015dd51fa2b841b0473": {
+   "case_id_at_labelling": "CASE-0189",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Permission check uses equality while serving uses startsWith; inconsistency between two conditions. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_jenkinsci_openid-plugin_5a91a74a94e44d87cd61afc2441aab42b7542bf0": {
+   "case_id_at_labelling": "CASE-0190",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Stapler doValidate lacks @RequirePOST and any permission check; missing-annotation and missing-check shape."
+  },
+  "github.com_jenkinsci_queue-cleanup-plugin_b3e562a427e704fc15dafe7664bd67aafcd4e03e": {
+   "case_id_at_labelling": "CASE-0191",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "FormValidation.errorWithMarkup given text that includes an exception message containing user input; known markup-injection API pattern."
+  },
+  "github.com_jenkinsci_rhnpush-plugin_7827db39925d0fc8f5b95e013466987b513b3f3c": {
+   "case_id_at_labelling": "CASE-0192",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Stapler form-validation method touches the workspace with no checkPermission(Item.WORKSPACE); missing-permission-check shape."
+  },
+  "github.com_jenkinsci_semantic-versioning-plugin_8df2fabd7d7396ae29c374914d1357744d3e454f": {
+   "case_id_at_labelling": "CASE-0193",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "DocumentBuilderFactory used with JAXP defaults on workspace XML; known XXE parser pattern."
+  },
+  "github.com_jenkinsci_sidebar-link-plugin_1bfd878ee107cdf349bc6a6bf3e9e6e25ef95ad5": {
+   "case_id_at_labelling": "CASE-0194",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Query parameter passed to getRootPath().child(value) with no confinement to userContent; taint to file-system path."
+  },
+  "github.com_jenkinsci_subversion-plugin_7d4562d6f7e40de04bbe29577b51c79f07d05ba6": {
+   "case_id_at_labelling": "CASE-0195",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Password kept only Base64-scrambled in a persisted credential object; needs knowledge that the field is persisted."
+  },
+  "github.com_jenkinsci_warnings-ng-plugin_17d18d2fae58f5658a40d03a03f927819eb6cf1a": {
+   "case_id_at_labelling": "CASE-0196",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "lookupCredentials called with a null Item and null authentication (global scope); specific API-argument pattern."
+  },
+  "github.com_jenkinsci_xcode-plugin_01335f1f4734e4a7eda69b28e182ecd4c34a1a4b": {
+   "case_id_at_labelling": "CASE-0197",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "DocumentBuilderFactory used with JAXP defaults on workspace files at two sites; known XXE parser pattern."
+  },
+  "github.com_jgraph_mxgraph_76e8e2809b622659a9c5ffdc4f19922b7a68cfa3": {
+   "case_id_at_labelling": "CASE-0198",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Free-text colour value passed to applyFunction unvalidated; that it reaches HTML/CSS is downstream knowledge."
+  },
+  "github.com_jhpyle_docassemble_97f77dc486a26a22ba804765bfd7058aabd600c9": {
+   "case_id_at_labelling": "CASE-0199",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "File-name validator lacks an absolute-path rejection; an absent condition in a validator, not a code-shape defect."
+  },
+  "github.com_jitsi_jitsi_8aa7be58522f4264078d54752aae5483bfd854b2": {
+   "case_id_at_labelling": "CASE-0200",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "URL string handed to launchBrowser with no scheme check; the executing sink is in another function."
+  },
+  "github.com_joniles_mpxj_8eaf4225048ea5ba7e59ef4556dab2098fcc4a1d": {
+   "case_id_at_labelling": "CASE-0201",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Zip entry name used to create a File in the temp directory with no canonical-path check; Zip Slip."
+  },
+  "github.com_jonschlinkert_assign-deep_19953a8c089b0328c470acaaaf6accdfcb34da11": {
+   "case_id_at_labelling": "CASE-0202",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Recursive object merge with no guard against the `__proto__` key; prototype-pollution merge pattern."
+  },
+  "github.com_jorenbroekema_expr-eval_6c475a118643ae0efe012de283e932fb8b74324b": {
+   "case_id_at_labelling": "CASE-0203",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Variable lookup as values[name] with no own-property check; generic dynamic lookup that is benign in most uses."
+  },
+  "github.com_jsreport_jsreport-chrome-pdf_6750b2f77d05cb843aefc1c4a98097a3bd33a6a2": {
+   "case_id_at_labelling": "CASE-0204",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Chrome page loads user HTML with only a request logger and no setRequestInterception; missing-call shape."
+  },
+  "github.com_juliangruber_keypair_9596418d3363d3e757676c0b6a8f2d35a9d1cb18": {
+   "case_id_at_labelling": "CASE-0205",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "`var crypto = null` is never assigned so the strong-entropy branch is dead; variable-lifecycle logic."
+  },
+  "github.com_kennethreitz_requests_3bd8afbff29e50b38f889b2f688785a669b9aafc": {
+   "case_id_at_labelling": "CASE-0206",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Cookies extracted using the already-redirected request; the wrong-argument expression is matchable but why it is wrong is semantic."
+  },
+  "github.com_keycloak_keycloak_071032a108bd9e9fce9e66d00c36d56bd4b334df": {
+   "case_id_at_labelling": "CASE-0207",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Embedded-cluster mTLS gated on the remote-store TLS flag; the wrong-constant expression is matchable but intent is semantic."
+  },
+  "github.com_keylime_keylime_e1ae8de1f7b1385eaeec66572a92ff1338e6e157": {
+   "case_id_at_labelling": "CASE-0208",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Database query in a notifier with no exception handling; unguarded call is visible but its harm depends on the incident-time context."
+  },
+  "github.com_keylime_keylime_ea5d0373fa2c050d5d95404eb779be7e8327b911": {
+   "case_id_at_labelling": "CASE-0209",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "ZeroMQ IPC socket bound to a fixed path in /tmp; predictable shared-directory path literal."
+  },
+  "github.com_kindspells_astro-shield_5ae8b8ef4f681d3a81431ee7e79d5dec545c6e1f": {
+   "case_id_at_labelling": "CASE-0210",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Untrusted integrity hash in rendered HTML is accepted into the trusted allow-list; trust-model logic, not a code shape."
+  },
+  "github.com_langchain-ai_langchain_de9a6cdf163ed00adaf2e559203ed0a9ca2f1de7": {
+   "case_id_at_labelling": "CASE-0211",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Code-validation gate checks call names but not attribute access; validator incompleteness is not expressible as a pattern."
+  },
+  "github.com_linuxmint_warpinator_f4907ef6a17a189d56ab0a9da4b53190b061ad75": {
+   "case_id_at_labelling": "CASE-0212",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "GLib.file_test EXISTS follows symlinks, missing dangling ones; API semantics plus filesystem state."
+  },
+  "github.com_mafintosh_dns-packet_0d0d593f8df4e2712c43957a6c62e95047f12b2d": {
+   "case_id_at_labelling": "CASE-0213",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "encodingLength and encode disagree about stripping dots, leaving uninitialised buffer bytes; cross-function size bookkeeping."
+  },
+  "github.com_markdown-it_markdown-it_f76d3beb46abd121892a2e2e5c78376354c214e3": {
+   "case_id_at_labelling": "CASE-0214",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Blocked-scheme regex omits `data:`; missing entry in a denylist literal, matching the pilot's denylist precedent."
+  },
+  "github.com_matrix-org_matrix-appservice-irc_1835e047f269001054be4c68867797aa12372a0f": {
+   "case_id_at_labelling": "CASE-0215",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Join time taken from the sender-supplied origin_server_ts; the trust decision on that timestamp is semantic."
+  },
+  "github.com_matrix-org_matrix-js-sdk_894c24880da0e1cc81818f51c0db80e3c9fb2be9": {
+   "case_id_at_labelling": "CASE-0216",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Shared-with record keyed by device id without the device key; data-model logic, not a code shape."
+  },
+  "github.com_matrix-org_synapse_5bf8bc79ebc22c61968f2eb487714813fccbdb9b": {
+   "case_id_at_labelling": "CASE-0217",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Signature checked against the sending server only, not the event-id and sender domains; protocol trust logic."
+  },
+  "github.com_mesop-dev_mesop_760a2079b5c609038c826d24dfbcf9b0be98d987": {
+   "case_id_at_labelling": "CASE-0218",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "A new thread started for every WebSocket message; the unbounded spawn is visible but the resource bound is a policy."
+  },
+  "github.com_metersphere_metersphere_c59e381d368990214813085a1a4877c5ef865411": {
+   "case_id_at_labelling": "CASE-0219",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "No maximum length on login credentials before hashing and querying; a missing length check whose need is contextual."
+  },
+  "github.com_mhuertos_phpLDAPadmin_dd6e9583a2eb2ca085583765e8a63df5904cb036": {
+   "case_id_at_labelling": "CASE-0220",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "setRequestHeader used for Content-length and Connection; forbidden-header pattern in XHR code."
+  },
+  "github.com_micronaut-projects_micronaut-core_9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1": {
+   "case_id_at_labelling": "CASE-0221",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "new DefaultHttpHeaders(false) disables header validation; specific constructor-argument pattern."
+  },
+  "github.com_mindsdb_mindsdb_083afcf6567cf51aa7d89ea892fd97689919053b": {
+   "case_id_at_labelling": "CASE-0222",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "requests.post(..., verify=False); certificate-validation-disabled pattern."
+  },
+  "github.com_mintplex-labs_anything-llm_7aaa4b38e7112a6cd879c1238310c56b1844c6d8": {
+   "case_id_at_labelling": "CASE-0223",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Route registered with validatedRequest only, lacking flexUserRoleValid like sibling admin routes; missing-middleware shape."
+  },
+  "github.com_mintplex-labs_anything-llm_99cfee1e7025fe9a0919a4d506ba1e1b819f6073": {
+   "case_id_at_labelling": "CASE-0224",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Body parsed before the already-enabled check so the catch block rolls back settings; ordering logic between statements. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+  },
+  "github.com_mintplex-labs_anything-llm_bfedfebfab032e6f4d5a369c8a2f947c5d0c5286": {
+   "case_id_at_labelling": "CASE-0225",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Values joined unescaped into KEY='value' lines of an env file; injection into a file sink."
+  },
+  "github.com_mintplex-labs_anything-llm_d5cde8b7c27a47ab45b05b441db16751537f1733": {
+   "case_id_at_labelling": "CASE-0226",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Four routes registered with validatedRequest only, lacking the role middleware siblings carry; missing-middleware shape."
+  },
+  "github.com_mintplex-labs_anything-llm_e208074ef4c240fe03e4147ab097ec3b52b97619": {
+   "case_id_at_labelling": "CASE-0227",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Traversal sanitiser defeated by whitespace between `..` groups; sanitiser correctness is not a code shape."
+  },
+  "github.com_misskey-dev_misskey_77e421029cb564a97f42b6e41c9edce49f79cecd": {
+   "case_id_at_labelling": "CASE-0228",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "document.cookie assigned with path=/ and no SameSite or Secure; missing-cookie-attribute pattern."
+  },
+  "github.com_mitreid-connect_OpenID-Connect-Java-Spring-Server_7eba3c12fed82388f917e8dd9b73e86e3a311e4c": {
+   "case_id_at_labelling": "CASE-0229",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "@ModelAttribute parameter bound to request parameters via session attributes; depends on Spring binding semantics."
+  },
+  "github.com_mlflow_mlflow_432b8ccf27fd3a76df4ba79bb1bec62118a85625": {
+   "case_id_at_labelling": "CASE-0230",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "jinja2.Environment(...).from_string on a caller template instead of a sandboxed environment."
+  },
+  "github.com_modelscope_agentscope_7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a": {
+   "case_id_at_labelling": "CASE-0231",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request filename joined onto the user directory with os.path.join; taint to path join."
+  },
+  "github.com_modular_modular_10620059fb5c47fb0c30e5d21a8ff3b8d622fba4": {
+   "case_id_at_labelling": "CASE-0232",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "deserialize=pickle.loads on frames from a network socket; unsafe-deserialization pattern."
+  },
+  "github.com_mrvautin_expressCart_baccaae9b0b72f00b10c5453ca00231340ad3e3b": {
+   "case_id_at_labelling": "CASE-0233",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Admin flag decided from the client-controlled Referer header; header-to-privilege taint."
+  },
+  "github.com_neo4j-contrib_neo4j-apoc-procedures_d2f415c6f703bbc2cda4a753928821ff15d5c620": {
+   "case_id_at_labelling": "CASE-0234",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Canonical path checked with a string startsWith against the log directory; string-prefix containment pattern."
+  },
+  "github.com_netristv_ws-scrcpy_e83cf65438bef83a3503b25358bba97bcc156fef": {
+   "case_id_at_labelling": "CASE-0235",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "URL pathname joined onto the public directory with only leading-dot stripping; taint to path join."
+  },
+  "github.com_netty_netty_2fa9400a59d0563a66908aba55c41e7285a04994": {
+   "case_id_at_labelling": "CASE-0236",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Retry loop on BUFFER_OVERFLOW that can never succeed with the small buffer; control-flow and runtime buffer sizing."
+  },
+  "github.com_new-usemame_Calibre-Web-NextGen_9f50bb2c16160564c9f8777dc2ceed3eb95e4807": {
+   "case_id_at_labelling": "CASE-0237",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Route uses a URL user id with no ownership check (IDOR); which id is user-controlled and what authorizes is contextual."
+  },
+  "github.com_nocodb_nocodb_079e3abe": {
+   "case_id_at_labelling": "CASE-0238",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Papaparse.unparse called without the escapeFormulae option; missing-option pattern."
+  },
+  "github.com_npm_hosted-git-info_29adfe5ef789784c861b2cdeb15051ec2ba651a7": {
+   "case_id_at_labelling": "CASE-0239",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Regex literal with adjacent overlapping unbounded quantifiers; slow-regex shape visible in the literal."
+  },
+  "github.com_ome_omero-web_d41207cbb82afc56ea79e84db532608aa24ab4aa": {
+   "case_id_at_labelling": "CASE-0240",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Request callback parameter copied into a JavaScript response unchecked; taint to script output."
+  },
+  "github.com_open-iscsi_rtslib-fb_b23d061ee0fa7924d2cdce6194c313b9ee06c468": {
+   "case_id_at_labelling": "CASE-0241",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "shutil.copyfile used to publish a file created with restrictive mode; copyfile copies content only, a known API-semantics pattern."
+  },
+  "github.com_open-webui_open-webui_167c8bf00d165af523acfc3b870749f6be6d3e57": {
+   "case_id_at_labelling": "CASE-0242",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Chat text interpolated unescaped into HTML given to write_html; that the PDF library fetches image URLs is library knowledge."
+  },
+  "github.com_opencast_opencast_8d5ec1614eed109b812bc27b0c6d3214e456d4e7": {
+   "case_id_at_labelling": "CASE-0243",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Deciding which server to trust by the organization of the requested URL; multi-tenant trust logic, not a code shape."
+  },
+  "github.com_opencast_opencast_b157e1fb3b35991ca7bf59f0730329fbe7ce82e8": {
+   "case_id_at_labelling": "CASE-0244",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Per-thread cached identity never cleared and reused across requests; thread-reuse state leak rather than a code shape."
+  },
+  "github.com_opendns_OpenResolve_c680170d5583cd9342fe1af43001fe8b2b8004dd": {
+   "case_id_at_labelling": "CASE-0245",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Caller input echoed into error-message strings; harm needs a client that renders the message as HTML."
+  },
+  "github.com_openstack_cinder_ba785eef5f515b869c0d68016e84bb74f76ab45e": {
+   "case_id_at_labelling": "CASE-0246",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Storage credentials placed in a dict later returned as connection info; needs knowing the dict is handed to API callers."
+  },
+  "github.com_openstack_glance_7858d4d95154c8596720365e465cca7858cfec5c": {
+   "case_id_at_labelling": "CASE-0247",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Uploaded data not removed when the task exits through an error path; missing cleanup on exceptional paths is only partly expressible."
+  },
+  "github.com_openstack_glance_store_d6e531af4821c8466b1e9404f12f89f6216417f2": {
+   "case_id_at_labelling": "CASE-0248",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Debug log statements that include the storage access key; secret-in-log pattern."
+  },
+  "github.com_openstack_magnum_272fd686d8c8bf5954e9e7d3bc991ff27e46184d": {
+   "case_id_at_labelling": "CASE-0249",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Private key written to a file created with the default umask and only chmod-ed afterwards; ordering is visible but needs file-permission context."
+  },
+  "github.com_openstack_nova_9d2ea970422591f8cdc394001be9a2deca499a5f": {
+   "case_id_at_labelling": "CASE-0250",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Logical volumes removed without overwriting leftover data; data remanence is not a code-shape property."
+  },
+  "github.com_openstack_storlets_5ad58804af885db3eb7a78bea5000c401eeeb70e": {
+   "case_id_at_labelling": "CASE-0251",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Directories and files created with default modes while metadata permissions apply only to dependencies; permission logic across statements."
+  },
+  "github.com_pallets_werkzeug_00bc43b1672e662e5e3b8cecd79e67fc968fa246": {
+   "case_id_at_labelling": "CASE-0252",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Debugger PIN derived from machine identifiers that are identical across containers; predictable-secret derivation, not a code shape."
+  },
+  "github.com_parallax_jsPDF_2863e5c26afef211a545e8c174ab4d5fce3b8c0e": {
+   "case_id_at_labelling": "CASE-0253",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Plugin-scope variables shared by every document instance; shared-mutable-state design flaw."
+  },
+  "github.com_parisneo_lollms_76a54f0df2df8a5b254aa627d487b5dc939a0263": {
+   "case_id_at_labelling": "CASE-0254",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "User-authored image URL passed to requests.get with no host validation; SSRF taint."
+  },
+  "github.com_patriksimek_vm2_d534e5785f38307b70d3aac1945260a261a94d50": {
+   "case_id_at_labelling": "CASE-0255",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Sandbox writes into a host-realm array passed to prepareStackTrace; realm-boundary semantics Semgrep cannot model."
+  },
+  "github.com_petl-developers_petl_07420ef8463cc387aea84e2d6241cf556574e2a5": {
+   "case_id_at_labelling": "CASE-0256",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "etree.parse called with no explicit parser on untrusted XML; known lxml XXE pattern."
+  },
+  "github.com_pgadmin-org_pgadmin4_4e49d752fba72953acceeb7f4aa2e6e32d25853d": {
+   "case_id_at_labelling": "CASE-0257",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Cookie-supplied session id joined onto the session directory with os.path.join; taint to path join."
+  },
+  "github.com_pkp_pkp-lib_a868f1cdd98a4f1255a70fd6d8320511e0083f38": {
+   "case_id_at_labelling": "CASE-0258",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "jQuery .html() given a user-controlled name; DOM XSS sink pattern."
+  },
+  "github.com_pkrumins_node-tree-kill_ff73dbf144c4c2daa67799a50dfff59cd455c63c": {
+   "case_id_at_labelling": "CASE-0259",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "pid concatenated into an exec() command string; shell injection."
+  },
+  "github.com_plantuml_plantuml_6826315db092d2e432aeab1a0894e08017c6e4bd": {
+   "case_id_at_labelling": "CASE-0260",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Hand-rolled DOT sanitiser only handles quoted attributes and misses HTML-like labels; sanitiser correctness is not a code shape."
+  },
+  "github.com_plone_volto_58d9f82d2d50ca9a87edbe16fed91762e57c109c": {
+   "case_id_at_labelling": "CASE-0261",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Dereference of error.response.body.message that can be undefined; null-dereference shape needs data-shape knowledge."
+  },
+  "github.com_poezio_slixmpp_22664ee7b86c8e010f312b66d12590fb47160ad8": {
+   "case_id_at_labelling": "CASE-0262",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Carbon handlers accept the stanza without checking the sender; needs XMPP trust semantics."
+  },
+  "github.com_polonel_trudesk_6ea9db7a5cf300e3cbf0eab7e1d6da1155a2f7f8": {
+   "case_id_at_labelling": "CASE-0263",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "CORS middleware sets headers but never a frame-restriction header; an absent header whose need is app-wide."
+  },
+  "github.com_polonel_trudesk_889876f66c9a5b28f019258e329310c31d72cbd2": {
+   "case_id_at_labelling": "CASE-0264",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "API v2 routes registered with authentication middleware but no canUser check, unlike the notices routes; missing-middleware shape."
+  },
+  "github.com_polonel_trudesk_a9e38f25c2af2722dee4fdafb2fb70d30d5106c5": {
+   "case_id_at_labelling": "CASE-0265",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Conversation fetched by id alone with no participant check (IDOR); what authorizes access is domain knowledge."
+  },
+  "github.com_protobufjs_protobuf.js_535df444ac060243722ac5d672db205e5c531d75": {
+   "case_id_at_labelling": "CASE-0266",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Unvalidated type name passed to util.codegen as a function name; the untrusted source is outside this function."
+  },
+  "github.com_psf_requests_66d21cb07bd6255b1280291c4fafb71803cdb3b7": {
+   "case_id_at_labelling": "CASE-0267",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Zip member extracted to gettempdir()/<name> when it does not already exist; predictable shared-temp-path pattern."
+  },
+  "github.com_psi-4ward_psitransfer_b9853c97e6911e1c1c5341245ca1eb363fda5269": {
+   "case_id_at_labelling": "CASE-0268",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Upload handler lets PATCH through without checking the file is already complete; missing state check, not a code shape."
+  },
+  "github.com_pugjs_pug_32acfe8f197dc44c54e8af32c7d7b19aa9d350fb": {
+   "case_id_at_labelling": "CASE-0269",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Compiler options concatenated into generated function source with no validation; string-concatenated code-generation sink."
+  },
+  "github.com_py-pdf_pypdf_9b23ac3c9619492570011d551d521690de9a3e2d": {
+   "case_id_at_labelling": "CASE-0270",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Chain-walk loop exits only when a node equals the starting object by value; loop-termination logic."
+  },
+  "github.com_pyca_cryptography_58494b41d6ecb0f56b7c5f05d5f5e3ca0320d494": {
+   "case_id_at_labelling": "CASE-0271",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Failure path does different work from the success path, leaking a timing oracle; timing behaviour is not observable."
+  },
+  "github.com_pyload_pyload_7b53b8d43c2c072b457dcd19c8a09bcfc3721703": {
+   "case_id_at_labelling": "CASE-0272",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Session configuration function never sets SESSION_COOKIE_SECURE; a missing default-config key whose need depends on deployment."
+  },
+  "github.com_pyload_pyload_bd2a31b7de54570b919aa1581d486e6ee18c0f64": {
+   "case_id_at_labelling": "CASE-0273",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Handler registration adds no frame-restriction header; an absent header whose need is app-wide."
+  },
+  "github.com_pyload_pyload_e95804fb0d06cbb07d2ba380fc494d9ff89b68c1": {
+   "case_id_at_labelling": "CASE-0274",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Role or password changes never invalidate existing sessions; session-lifecycle logic, not a code shape."
+  },
+  "github.com_pyload_pyload_f4e2d12416ba2dfac7b036d5c8d6dab5461b9840": {
+   "case_id_at_labelling": "CASE-0275",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Client-supplied Host header accepted as proof the caller is local; header-to-trust-decision shape."
+  },
+  "github.com_python_cpython_482d6f8bdba9da3725d272e8bb4a2d25fb6a603e": {
+   "case_id_at_labelling": "CASE-0276",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "isinstance tuple that selects the audited open_code path omits SourcelessFileLoader; missing entry in a matchable literal list. NEAR-DUPLICATE of CASE-0277 (same CVE-2026-2297 on another branch)."
+  },
+  "github.com_quarkusio_quarkus_3a3b0d739222a2e476e085a955cfa090739f5924": {
+   "case_id_at_labelling": "CASE-0278",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Raw git remote URL, possibly with embedded credentials, written into a manifest annotation; needs knowing remotes carry secrets."
+  },
+  "github.com_quarkusio_quarkus_80b8eb41678cdccb46e964dc324d048a5ef00f4b": {
+   "case_id_at_labelling": "CASE-0279",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Early return skips closing the response output stream; missing cleanup on one path."
+  },
+  "github.com_run-llama_llama_index_3c65db2947271de3bd1927dc66a044da385de4da": {
+   "case_id_at_labelling": "CASE-0280",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Recursive crawl accepts max_depth but never uses it; unused-parameter recursion shape is visible but the harm is semantic."
+  },
+  "github.com_run-llama_llama_index_a86c96ae0e662492eeb471b658ae849a93f628ff": {
+   "case_id_at_labelling": "CASE-0281",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "resolve()-based containment check is defeated by hard links; file-system semantics not observable."
+  },
+  "github.com_run-llama_llama_index_bd827c30484fa085ec769fa55dc7f2add8006ac8": {
+   "case_id_at_labelling": "CASE-0282",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "exec() of an f-string built from caller-supplied module and class names; code-injection sink."
+  },
+  "github.com_sebhildebrandt_systeminformation_bad372e654cdd549e7d786acbba0035ded54c607": {
+   "case_id_at_labelling": "CASE-0283",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Shell-character denylist omits newline, tab and double quote; missing entries in a matchable literal list."
+  },
+  "github.com_seerr-team_seerr_4ae20684092b5b28527b23dfbc1a3417858fee8e": {
+   "case_id_at_labelling": "CASE-0284",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Login guard's second branch also requires a configured Jellyfin IP; wrong condition operand is matchable but intent is semantic."
+  },
+  "github.com_sequelize_sequelize_c876192aa6ce1f67e22b26a4d175b8478615f42d": {
+   "case_id_at_labelling": "CASE-0285",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Quote-escaping strategy chosen by dialect treats sqlite like MySQL; dialect condition is visible but escaping semantics are not."
+  },
+  "github.com_shsuishang_modulithshop_42bcb9463425d1be906c3b290cf29885eb5a2324": {
+   "case_id_at_labelling": "CASE-0286",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Client sort column and direction passed to a repository whose mapper interpolates ${}; the sink is in a mapper file."
+  },
+  "github.com_siemvk_OpenLearn_844b2a40a69d0c4911580fe501923f0b391313ab": {
+   "case_id_at_labelling": "CASE-0287",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Prisma include: { author: true } returns whole user rows from public procedures; needs schema knowledge of what is sensitive."
+  },
+  "github.com_simplerisk_code_591405b4ed160fbefc1dca1e55c5745079a7bb48": {
+   "case_id_at_labelling": "CASE-0288",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Attribute text substituted into a message given to a toast library that renders HTML; needs library-behaviour knowledge."
+  },
+  "github.com_socketio_engine.io-client_2c55b278a491bf45313ecc0825cf800e2f7ff5c1": {
+   "case_id_at_labelling": "CASE-0289",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "rejectUnauthorized defaults to null, which Node treats as disabled verification; falsy-default semantics are not visible."
+  },
+  "github.com_solana-labs_solana-pay_ac6ce0d0a81137700874a8bf5a7caac3be999fad": {
+   "case_id_at_labelling": "CASE-0290",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Payment validation checks the balance and reference but not the memo or instruction; business-logic completeness."
+  },
+  "github.com_sorlen008_DesktopCommanderMCP_53699bebba9950047bca16ac4dc8f0568f596aaa": {
+   "case_id_at_labelling": "CASE-0291",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Agent-supplied URL passed straight to fetch with no host validation; SSRF taint."
+  },
+  "github.com_spiral-project_ihatemoney_8d77cf5d5646e1d2d8ded13f0660638f57e98471": {
+   "case_id_at_labelling": "CASE-0292",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Person lookup filtered on Project.id, a predicate on the wrong table; needs ORM model knowledge to see why it is wrong."
+  },
+  "github.com_spring-projects_spring-framework_0009806debb578e884f6dc98bd1f2dc668020021": {
+   "case_id_at_labelling": "CASE-0293",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "User-supplied SpEL selector evaluated in a StandardEvaluationContext; known unsafe-SpEL pattern."
+  },
+  "github.com_spring-projects_spring-framework_297cbae2990e1413537c55845a7e0ea0ffd9f9bb": {
+   "case_id_at_labelling": "CASE-0294",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "URL-parsing regexes disagree with real parsers about userinfo and host; a parser differential, not a code shape."
+  },
+  "github.com_spring-projects_spring-framework_3a5af35d37c79d0644d49b93f792a4c18fe8eb71": {
+   "case_id_at_labelling": "CASE-0295",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Data binder exposes class and classLoader through bean introspection; needs framework binding semantics."
+  },
+  "github.com_spring-projects_spring-ldap_08e8ae289bbd1b581986c7238604a147119c1336": {
+   "case_id_at_labelling": "CASE-0296",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Security properties set with addToEnvironment and no reconnect; JNDI reconnect semantics are needed to see the flaw."
+  },
+  "github.com_spring-projects_spring-session_c98a7be0e2ced7f795018f05397dca4bd5ca8212": {
+   "case_id_at_labelling": "CASE-0297",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Leftover System.out.println of the session-id header value; needs knowing the header is a credential."
+  },
+  "github.com_streetwriters_notesnook_e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7": {
+   "case_id_at_labelling": "CASE-0298",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Note-author URL interpolated into a double-quoted HTML attribute in a srcDoc string; injection into markup."
+  },
+  "github.com_themoken_canto-curses_2817869f98c54975f31e2dd674c1aefa70749cca": {
+   "case_id_at_labelling": "CASE-0299",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Feed link substituted into a command run through /bin/sh -c via execv; shell injection."
+  },
+  "github.com_theonedev_onedev_4440f0c57e440488d7e653417b2547eaae8ad19c": {
+   "case_id_at_labelling": "CASE-0300",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Login name substituted into an LDAP search filter template; LDAP injection."
+  },
+  "github.com_theonedev_onedev_9196fd795e87dab069b4260a3590a0ea886e770f": {
+   "case_id_at_labelling": "CASE-0301",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "dom4j SAXReader with default settings on untrusted XML; known XXE parser pattern."
+  },
+  "github.com_theonedev_onedev_adb6e31476621f824fc3227a695232df830d83ab": {
+   "case_id_at_labelling": "CASE-0302",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Response Content-Type sniffed from artifact content, so HTML artifacts are served inline; harm depends on serving origin."
+  },
+  "github.com_thlorenz_browserify-shim_97855e622b6dcd117c77e6583701962ff45e7338": {
+   "case_id_at_labelling": "CASE-0303",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Config keys from JSON assigned into a table with no `__proto__` guard; prototype-pollution assignment pattern."
+  },
+  "github.com_todbot_Blink1Control2_74827462aba3a26d7bf157522f69eec999d7ba85": {
+   "case_id_at_labelling": "CASE-0304",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Encryption salt and password given as string literals; hard-coded key-material pattern."
+  },
+  "github.com_tornadoweb_tornado_32ad07c54e607839273b4e1819c347f5c8976b2f": {
+   "case_id_at_labelling": "CASE-0305",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Raw request path used to build a permanent redirect target; open-redirect taint."
+  },
+  "github.com_totaljs_cms_75205f93009db3cf8c0b0f4f1fc8ab82d70da8ad": {
+   "case_id_at_labelling": "CASE-0306",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Raw row values concatenated into cell HTML inserted into the DOM; DOM XSS."
+  },
+  "github.com_totaljs_framework_b3f901561d66ab799a4a99279893b94cad7ae4ff": {
+   "case_id_at_labelling": "CASE-0307",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Path compiled into source passed to new Function with no check for prototype keys; code-generation and pollution sink."
+  },
+  "github.com_traccar_traccar_cc69a9907ac9878db3750aa14ffedb28626455da": {
+   "case_id_at_labelling": "CASE-0308",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Windows service binary path built unquoted; needs Windows path-parsing semantics."
+  },
+  "github.com_traccar_traccar_d7f6c53fd88635885914013649b6807ec53227bf": {
+   "case_id_at_labelling": "CASE-0309",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "DocumentBuilderFactory with JAXP defaults on an incoming XML body; known XXE parser pattern."
+  },
+  "github.com_trailofbits_fickling_eb299b453342f1931c787bcb3bc33f3a03a173f9": {
+   "case_id_at_labelling": "CASE-0310",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Analysis tool matches only exact module names and rejects dotted ones; detector-logic bug in a security tool, not a code shape."
+  },
+  "github.com_trevp_tlslite_aca8d4f898b436ff6754e1a9ab96cae976c8a853": {
+   "case_id_at_labelling": "CASE-0311",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "b[-1] on a buffer that can be empty after IV removal; unguarded-index shape needs data-length knowledge."
+  },
+  "github.com_trpc_trpc_78629d524968ef8db5a7adf68d8b95a44369d77e": {
+   "case_id_at_labelling": "CASE-0312",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Recursive set walking user-controlled form keys with no `__proto__` guard; prototype-pollution pattern."
+  },
+  "github.com_tryton_trytond_d059ebb792401ded3129cd9402d7392dc34b81e3": {
+   "case_id_at_labelling": "CASE-0313",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "RPC methods registered for every storage model, not only view models; registration-scope logic."
+  },
+  "github.com_undertow-io_undertow_1302c8cf4476936802504efe0d36c58dcd954f78": {
+   "case_id_at_labelling": "CASE-0314",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "wrap loop lacks an inbound-done termination condition; loop-termination logic tied to SSLEngine state."
+  },
+  "github.com_undertow-io_undertow_90f202ada89b6d9883beed0f1fe10c99d470d9a8": {
+   "case_id_at_labelling": "CASE-0315",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Shared StringBuilder instance field used as a decode buffer across threads; thread-safety semantics are needed."
+  },
+  "github.com_unshiftio_url-parse_209c296d302317268afbe19700a70c63ecbeb2d2": {
+   "case_id_at_labelling": "CASE-0316",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "URL parser treats only forward slash as a separator while clients accept backslash; a parser differential."
+  },
+  "github.com_urllib3_urllib3_c32cdbc16a9634fa0f8c829d1270301570158715": {
+   "case_id_at_labelling": "CASE-0317",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Stdlib verify-mode constant passed straight to pyOpenSSL without translation; constant-mapping semantics are needed."
+  },
+  "github.com_usmannasir_cyberpanel_5b08cd6d53f4dbc2107ad9f555122ce8b0996515": {
+   "case_id_at_labelling": "CASE-0318",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Django view runs sudo commands with no session or ACL check unlike siblings; missing-authorization-check shape."
+  },
+  "github.com_usmannasir_cyberpanel_6778ad1eaae41f72365da8fd021f9a60369600dc": {
+   "case_id_at_labelling": "CASE-0319",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Privileged restart executed before the admin check; a statement-order shape that needs to know which check matters."
+  },
+  "github.com_vercel_ms_caae2988ba2a37765d055c4eee63d383320ee662": {
+   "case_id_at_labelling": "CASE-0320",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Duration regex with overlapping quantifiers guarded only by a large length cap; the exploitable size threshold is semantic."
+  },
+  "github.com_viakondratiuk_cash-machine_62a6e24efdfa195b70d7df140d8287fdc38eb66d": {
+   "case_id_at_labelling": "CASE-0321",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Card number %-formatted into a SQL string; SQL injection."
+  },
+  "github.com_voila-dashboards_voila_c045be6988539d07cceeb9f82fc660a49485d504": {
+   "case_id_at_labelling": "CASE-0322",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Tornado Application created with static_path='/'; static-root-at-filesystem-root pattern."
+  },
+  "github.com_w8tcha_CKEditor-oEmbed-Plugin_10f6169e39510bbf5af913886037044458b9dc9b": {
+   "case_id_at_labelling": "CASE-0323",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "CKEditor allowedContent rule permitting <script> elements with any attributes; matchable literal rule."
+  },
+  "github.com_wagtail_wagtail_3c030490ed575bb9cd01dfb3a890477dcaeb2edf": {
+   "case_id_at_labelling": "CASE-0324",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Submitted password compared with != against the stored one; non-constant-time comparison pattern."
+  },
+  "github.com_web2py_web2py_936e2260b0c34c44e2f3674a893e96d2a7fad0a3": {
+   "case_id_at_labelling": "CASE-0325",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Log message %-formatted into a notify-send shell command run through os.system."
+  },
+  "github.com_web2py_web2py_9706d125b42481178d2b423de245f5d2faadbf40": {
+   "case_id_at_labelling": "CASE-0326",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Whole global_settings object copied into request.env; needs knowing the settings hold secrets that get displayed."
+  },
+  "github.com_wekan_wekan_1c8667eae8b28739e43569b612ffdb2693c6b1ce": {
+   "case_id_at_labelling": "CASE-0327",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Publication returns user documents with an empty projection; which fields are private is schema knowledge."
+  },
+  "github.com_wekan_wekan_6dfa3beb2b6ab23438d0f4395b84bf0749eb4820": {
+   "case_id_at_labelling": "CASE-0328",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Publication queries attachments with an empty selector so every user sees all; needs authorization semantics."
+  },
+  "github.com_wekan_wekan_73eb98c57afd3d72377a1f7160a52450ab0eeb8b": {
+   "case_id_at_labelling": "CASE-0329",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "partially_supported",
+   "rationale": "Custom field updated by id alone after a board-level check (IDOR); which selector scoping is required is contextual."
+  },
+  "github.com_wekan_wekan_7ed76c180ede46ab1dac6b8ad27e9128a272c2c8": {
+   "case_id_at_labelling": "CASE-0330",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Setting enforced only in the UI while server routes accept the change; missing server-side policy enforcement."
+  },
+  "github.com_wekan_wekan_91a936e07d2976d4246dfe834281c3aaa87f9503": {
+   "case_id_at_labelling": "CASE-0331",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Publication adds linked boards without checking the subscriber's access; authorization logic across steps."
+  },
+  "github.com_whyour_qinglong_6bec52dca158481258315ba0fc2f11206df7b719": {
+   "case_id_at_labelling": "CASE-0332",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Setup guard recognises only the /api spelling while an /open alias reaches the same handlers; routing-alias logic."
+  },
+  "github.com_xwiki_xwiki-platform_0b732f2ef0224e2aaf10e2e1ef48dbd3fb6e10cd": {
+   "case_id_at_labelling": "CASE-0333",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Public scripting-API method disables any account with no hasAdminRights() check; missing-permission-check shape."
+  },
+  "github.com_xwiki_xwiki-platform_ab778254fb8f71c774e1c1239368c44fe3b6bba5": {
+   "case_id_at_labelling": "CASE-0334",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Space and page names formatted into an export path used with mkdirs and createTempFile; taint to file path."
+  },
+  "github.com_xwiki_xwiki-platform_e3527b98fdd8dc8179c24dc55e662b2c55199434": {
+   "case_id_at_labelling": "CASE-0335",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "DocumentBuilderFactory with JAXP defaults on an uploaded descriptor; known XXE parser pattern."
+  },
+  "github.com_yogeshojha_rengine_8277cec0f008a0451371a92e7e0bf082ab3f0c34": {
+   "case_id_at_labelling": "CASE-0336",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Scan target formatted into a command string run through os.system."
+  },
+  "github.com_yugabyte_yugabyte-db_439c6286f1971f9ac6bff2c7215b454c2025c593": {
+   "case_id_at_labelling": "CASE-0337",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Rebuilt context replaces the caller's redaction map instead of merging it; data-merge semantics with no distinguishing code shape. NEAR-DUPLICATE of CASE-0338 (same CVE-2024-0006)."
+  },
+  "github.com_zadam_trilium_4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b": {
+   "case_id_at_labelling": "CASE-0339",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "String.replace given a regex-looking string literal instead of a RegExp; known bug shape."
+  },
+  "github.com_zamotany_logkitty_ef2f673e25c629544dd3de6429999318447dd6bf": {
+   "case_id_at_labelling": "CASE-0340",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "Application id and adb path interpolated into execSync command strings; shell injection."
+  },
+  "github.com_AUTOMATIC1111_stable-diffusion-webui_d9708c92b444894bce8070e4dcfaa093f8eb8d43": {
+   "case_id_at_labelling": "CASE-0341",
+   "pattern_or_taint": "taint",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "User-typed config name flows into the path of a file opened for writing, with no sanitisation; taint to a file-path sink inside one short function."
+  },
+  "github.com_fabric8io_kubernetes-client_445103004d1ed3153d5abb272473451d05891e39": {
+   "case_id_at_labelling": "CASE-0342",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "structural",
+   "semgrep_representability": "supported",
+   "rationale": "YAML parsed with the default `new Yaml()` constructor, which honours global class tags; a known unsafe-deserialization constructor pattern."
+  }
+ },
+ "retired_labels": {
+  "github.com_python_cpython_69ddd9bb2cc4bd69b1565647c18659c6a789ccd9": {
+   "case_id_at_labelling": "CASE-0277",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "supported",
+   "rationale": "Same one-line isinstance-tuple fix as CASE-0276 on another cpython branch. NEAR-DUPLICATE of CASE-0276 (same CVE-2026-2297)."
+  },
+  "github.com_yugabyte_yugabyte-db_d96e6b629f34d065b47204daeeb44064e484c579": {
+   "case_id_at_labelling": "CASE-0338",
+   "pattern_or_taint": "pattern",
+   "structural_or_context_heavy": "context_heavy",
+   "semgrep_representability": "unsupported",
+   "rationale": "Same redaction-map replacement fix as CASE-0337. NEAR-DUPLICATE of CASE-0337 (same CVE-2024-0006)."
+  }
+ }
+}

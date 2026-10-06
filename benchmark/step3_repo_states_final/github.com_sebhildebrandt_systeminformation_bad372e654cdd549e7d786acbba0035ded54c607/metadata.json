@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_sebhildebrandt_systeminformation_bad372e654cdd549e7d786acbba0035ded54c607",
+  "cve_ids": [
+    "CVE-2020-26300"
+  ],
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "sebhildebrandt/systeminformation",
+  "repository_url": "https://github.com/sebhildebrandt/systeminformation",
+  "vulnerable_commit": "147550532ab11cac4b609844a519a1d945f5c103",
+  "fixed_commit": "bad372e654cdd549e7d786acbba0035ded54c607",
+  "changed_file": "lib/util.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0067",
+  "language": "javascript",
+  "cve_id": "CVE-2025-53636",
+  "cve_ids_all": [
+    "CVE-2025-53636"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-400",
+      "definition": "Uncontrolled Resource Consumption"
+    },
+    {
+      "id": "CWE-779",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "const fs        = require('fs');",
+    "const http      = require('http');",
+    "const path      = require('path');",
+    "const WebSocket = require('ws');",
+    "const express   = require('express');",
+    "const pty       = require('node-pty');",
+    "const hbs       = require('hbs');",
+    "const dotenv    = require('dotenv');",
+    "const Tokens    = require('csrf');",
+    "const url       = require('url');",
+    "const yaml      = require('js-yaml');",
+    "const glob      = require('glob');",
+    "const helpers   = require('./utils/helpers');"
+  ],
+  "vulnerable_function": "      ws.send(data, function (error) {\n        if (error) console.log('Send error: ' + error.message);\n      }",
+  "patched_function": "      ws.send(data, function (error) {\n        if(ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING) {\n          ws.logger.log('The websocket will not receive any more messages. Killing the terminal connection');\n          term.kill();\n        } else if (error) {\n          ws.logger.log('Send error: ' + error.message);\n        }\n      }",
+  "unified_diff": "diff --git a/apps/shell/app.js b/apps/shell/app.js\nindex 89189c0a..104d39ed 100644\n--- a/apps/shell/app.js\n+++ b/apps/shell/app.js\n@@ -142,6 +142,47 @@ function detect_auth_error(requestToken, client_origin, server_origin, host) {\n   }\n }\n \n+// Combines duplicated lines into a single message (log message + number of skipped messages)\n+function createLogger() {\n+  // Combine logs for logInterval ms duration\n+  const logInterval = 5000;\n+  const messages = [];\n+  let lastLog = 0;\n+  let timer;\n+\n+  const logQueuedMessages = (immediate = false) => {\n+    const now = Date.now();\n+    clearTimeout(timer);\n+    // Nothing logged since logInterval, log immediately\n+    if (now - lastLog > logInterval || immediate) {\n+      for (const { message, count } of messages) {\n+        console.log(message);\n+        if (count > 1) {\n+          console.log(`Skipped ${count-1} previous duplicated messages`);\n+        }\n+      }\n+      messages.length = 0;\n+      lastLog = now;\n+    } else if (messages.length > 0) {\n+      // Log at most logInterval duration since current queue started\n+      timer = setTimeout(logQueuedMessages, (lastLog + logInterval - now));\n+    }\n+  }\n+\n+  return {\n+    log: (msg) => {\n+      const lastMessage = messages.at(-1);\n+      if (lastMessage && lastMessage.message == msg) {\n+        lastMessage.count++;\n+      } else {\n+        messages.push({\"message\": msg, count: 1});\n+      }\n+      logQueuedMessages();\n+    },\n+    flush: () => logQueuedMessages(true),\n+  };\n+};\n+\n wss.on('connection', function connection (ws, req) {\n   var dir,\n       term,\n@@ -152,7 +193,8 @@ wss.on('connection', function connection (ws, req) {\n   ws.isAlive = true;\n   ws.startedAt = Date.now();\n   ws.lastActivity = Date.now();\n-  \n+  ws.logger = createLogger();\n+\n   console.log('Connection established');\n \n   [host, dir] = host_and_dir_from_url(req.url);\n@@ -179,7 +221,12 @@ wss.on('connection', function connection (ws, req) {\n \n     term.onData(function (data) {\n       ws.send(data, function (error) {\n-        if (error) console.log('Send error: ' + error.message);\n+        if(ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING) {\n+          ws.logger.log('The websocket will not receive any more messages. Killing the terminal connection');\n+          term.kill();\n+        } else if (error) {\n+          ws.logger.log('Send error: ' + error.message);\n+        }\n       });\n       ws.lastActivity = Date.now();\n     });\n@@ -201,6 +248,7 @@ wss.on('connection', function connection (ws, req) {\n       term.end();\n       this.isAlive = false;\n       console.log('Closed terminal: ' + term.pid);\n+      ws.logger.flush();\n     });\n \n     ws.on('pong', function () {",
+  "auto_locate_confidence": "auto"
+}

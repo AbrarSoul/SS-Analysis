@@ -1,0 +1,17 @@
+diff --git a/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java
+index d0753df93..d470bb53d 100644
+--- a/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java
++++ b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java
+@@ -137,9 +137,11 @@ public class SubTypeValidator
+         // [databind#2631]: shaded hikari-config
+         s.add("org.apache.hadoop.shaded.com.zaxxer.hikari.HikariConfig");
+ 
+-        // [databind#2634]: ibatis-sqlmap, anteros-core
++        // [databind#2634]: ibatis-sqlmap, anteros-core/-dbcp
+         s.add("com.ibatis.sqlmap.engine.transaction.jta.JtaTransactionConfig");
+         s.add("br.com.anteros.dbcp.AnterosDBCPConfig");
++        // [databind#2814]: anteros-dbcp
++        s.add("br.com.anteros.dbcp.AnterosDBCPDataSource");
+ 
+         // [databind#2642]: javax.swing (jdk)
+         s.add("javax.swing.JEditorPane");

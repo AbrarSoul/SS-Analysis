@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_drogatkin_TJWS2_1bac15c496ec54efe21ad7fab4e17633778582fc",
+  "cve_ids": [
+    "CVE-2022-4594"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "drogatkin/TJWS2",
+  "repository_url": "https://github.com/drogatkin/TJWS2",
+  "vulnerable_commit": "6974a7ce78ec1491c35e3e8601384af24d6c3256",
+  "fixed_commit": "1bac15c496ec54efe21ad7fab4e17633778582fc",
+  "changed_file": "1.x/src/rogatkin/web/WarRoller.java",
+  "max_score": "1337"
+}

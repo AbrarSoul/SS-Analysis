@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_run-llama_llama_index_bd827c30484fa085ec769fa55dc7f2add8006ac8",
+  "batch": "topup29",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "changed_files": 1,
+  "lines_added": 0,
+  "lines_removed": 1,
+  "lines_changed_total": 1,
+  "function_size_chars": 764,
+  "function_size_lines": 17,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

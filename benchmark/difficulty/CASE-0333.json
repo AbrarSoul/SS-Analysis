@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0333",
+  "batch": "topup39",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "changed_files": 1,
+  "lines_added": 3,
+  "lines_removed": 1,
+  "lines_changed_total": 4,
+  "function_size_chars": 135,
+  "function_size_lines": 4,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "supported",
+  "classification_rationale": "Public scripting-API method disables any account with no hasAdminRights() check; missing-permission-check shape."
+}

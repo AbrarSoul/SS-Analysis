@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_theonedev_onedev_5b6a19c1f7fe9c271acc4268bcd261a9a1cbb3ea",
+  "cve_ids": [
+    "CVE-2022-38301"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "6ecf335728b4994a66e1a0274419f074eb762d31",
+  "fixed_commit": "5b6a19c1f7fe9c271acc4268bcd261a9a1cbb3ea",
+  "changed_file": "server-core/src/main/java/io/onedev/server/web/page/project/builds/detail/artifacts/ArtifactUploadPanel.java",
+  "max_score": "1337"
+}

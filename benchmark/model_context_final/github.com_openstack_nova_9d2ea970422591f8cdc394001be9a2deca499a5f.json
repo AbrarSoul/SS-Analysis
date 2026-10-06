@@ -1,0 +1,29 @@
+{
+  "case_id": "github.com_openstack_nova_9d2ea970422591f8cdc394001be9a2deca499a5f",
+  "language": "python",
+  "cve_id": "CVE-2012-5625",
+  "cve_ids_all": [
+    "CVE-2012-5625"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-200",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import os",
+    "import time",
+    "from lxml import etree",
+    "from nova import exception",
+    "from nova.openstack.common import cfg",
+    "from nova.openstack.common import log as logging",
+    "from nova import utils",
+    "from nova.virt import images"
+  ],
+  "vulnerable_function": "def remove_logical_volumes(*paths):\n    \"\"\"Remove one or more logical volume.\"\"\"\n    if paths:\n        lvremove = ('lvremove', '-f') + paths\n        execute(*lvremove, attempts=3, run_as_root=True)\n",
+  "patched_function": "def logical_volume_size(path):\n    \"\"\"Get logical volume size in bytes.\n\n    :param path: logical volume path\n    \"\"\"\n    # TODO(p-draigbrady) POssibly replace with the more general\n    # use of blockdev --getsize64 in future\n    out, _err = execute('lvs', '-o', 'lv_size', '--noheadings', '--units',\n                        'b', '--nosuffix', path, run_as_root=True)\n\n    return int(out)\n",
+  "unified_diff": "diff --git a/nova/virt/libvirt/utils.py b/nova/virt/libvirt/utils.py\nindex 523d4def3f..4b53664b82 100644\n--- a/nova/virt/libvirt/utils.py\n+++ b/nova/virt/libvirt/utils.py\n@@ -172,8 +172,55 @@ def logical_volume_info(path):\n     return dict(zip(*info))\n \n \n+def logical_volume_size(path):\n+    \"\"\"Get logical volume size in bytes.\n+\n+    :param path: logical volume path\n+    \"\"\"\n+    # TODO(p-draigbrady) POssibly replace with the more general\n+    # use of blockdev --getsize64 in future\n+    out, _err = execute('lvs', '-o', 'lv_size', '--noheadings', '--units',\n+                        'b', '--nosuffix', path, run_as_root=True)\n+\n+    return int(out)\n+\n+\n+def clear_logical_volume(path):\n+    \"\"\"Obfuscate the logical volume.\n+\n+    :param path: logical volume path\n+    \"\"\"\n+    # TODO(p-draigbrady): We currently overwrite with zeros\n+    # but we may want to make this configurable in future\n+    # for more or less security conscious setups.\n+\n+    vol_size = logical_volume_size(path)\n+    bs = 1024 * 1024\n+    direct_flags = ('oflag=direct',)\n+    remaining_bytes = vol_size\n+\n+    # The loop caters for versions of dd that\n+    # don't support the iflag=count_bytes option.\n+    while remaining_bytes:\n+        zero_blocks = remaining_bytes / bs\n+        seek_blocks = (vol_size - remaining_bytes) / bs\n+        zero_cmd = ('dd', 'bs=%s' % bs,\n+                    'if=/dev/zero', 'of=%s' % path,\n+                    'seek=%s' % seek_blocks, 'count=%s' % zero_blocks)\n+        zero_cmd += direct_flags\n+        if zero_blocks:\n+            utils.execute(*zero_cmd, run_as_root=True)\n+        remaining_bytes %= bs\n+        bs /= 1024  # Limit to 3 iterations\n+        direct_flags = ()  # Only use O_DIRECT with initial block size\n+\n+\n def remove_logical_volumes(*paths):\n     \"\"\"Remove one or more logical volume.\"\"\"\n+\n+    for path in paths:\n+        clear_logical_volume(path)\n+\n     if paths:\n         lvremove = ('lvremove', '-f') + paths\n         execute(*lvremove, attempts=3, run_as_root=True)",
+  "auto_locate_confidence": "auto"
+}

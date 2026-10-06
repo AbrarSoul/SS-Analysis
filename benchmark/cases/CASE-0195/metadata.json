@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0195",
+  "original_source_case_id": "github.com_jenkinsci_subversion-plugin_7d4562d6f7e40de04bbe29577b51c79f07d05ba6",
+  "selection_batch": "final",
+  "cve_id": "CVE-2013-6372",
+  "cve_ids_all": [
+    "CVE-2013-6372"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-255"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/subversion-plugin",
+  "repository_url": "https://github.com/jenkinsci/subversion-plugin",
+  "vulnerable_commit": "b5cd30370ef40439c37b7350810d3469b9a17fc1",
+  "fixed_commit": "7d4562d6f7e40de04bbe29577b51c79f07d05ba6",
+  "changed_file": "src/main/java/hudson/scm/SubversionSCM.java",
+  "changed_function": "public SVNAuthentication createSVNAuthentication(String kind) {",
+  "vulnerable_lines": [
+    1519,
+    1524
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 10,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0195/vulnerable_source.java": "28559faba52b9140ed761b520e9382ff840ece50e37326d7f1c577562d652f53",
+    "cases/CASE-0195/patched_source.java": "9ed9fcc0d84de00edb2137632bd48d22ceb487af52de32f4ea7c8d12b3dad322",
+    "cases/CASE-0195/patch.diff": "ef0fa58180e808e52cf40f956d53c9e6f21d131a3f49dc37a0202844e2a85894",
+    "cases/CASE-0195/metadata.json": "69ccb7f92784add7e4545c7a9b2145f56d74187cd9f8b8a232a3def2f1210fd3",
+    "model_context/CASE-0195.json": "1510327105aa41834530e14d0ea93f9261a7b7122feab00ca511cbf5d1fc09ab",
+    "difficulty/CASE-0195.json": "a5ca4c693a0edc0528ee026186bdb3363d4b43807b058381693f32c38fd64e3b"
+  },
+  "case_level_hash": "acdeebfe7e4e1cb0135555fa6de97c105ac9511c4b365d20cdec720f65763d02"
+}

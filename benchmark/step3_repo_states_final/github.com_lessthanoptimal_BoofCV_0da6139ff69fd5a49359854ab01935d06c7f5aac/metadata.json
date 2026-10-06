@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_lessthanoptimal_BoofCV_0da6139ff69fd5a49359854ab01935d06c7f5aac",
+  "cve_ids": [
+    "CVE-2023-39010"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "lessthanoptimal/BoofCV",
+  "repository_url": "https://github.com/lessthanoptimal/BoofCV",
+  "vulnerable_commit": "e36cc36d753cc53da37cfcce532cbf7751a944e0",
+  "fixed_commit": "0da6139ff69fd5a49359854ab01935d06c7f5aac",
+  "changed_file": "main/boofcv-io/src/main/java/boofcv/io/calibration/CalibrationIO.java",
+  "max_score": "1337"
+}

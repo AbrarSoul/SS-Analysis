@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_pyload_pyload_e95804fb0d06cbb07d2ba380fc494d9ff89b68c1",
+  "cve_ids": [
+    "CVE-2026-41133"
+  ],
+  "cwe_ids": [
+    "CWE-613"
+  ],
+  "language": "python",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "40c833bcecd9a3a605228b7b2ed4334ffbfed82c",
+  "fixed_commit": "e95804fb0d06cbb07d2ba380fc494d9ff89b68c1",
+  "changed_file": "src/pyload/webui/app/blueprints/json_blueprint.py",
+  "max_score": "1337"
+}

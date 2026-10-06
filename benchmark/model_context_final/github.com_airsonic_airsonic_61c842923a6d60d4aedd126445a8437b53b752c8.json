@@ -1,0 +1,45 @@
+{
+  "case_id": "github.com_airsonic_airsonic_61c842923a6d60d4aedd126445a8437b53b752c8",
+  "language": "java",
+  "cve_id": "CVE-2019-10908",
+  "cve_ids_all": [
+    "CVE-2019-10908"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-335",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import de.triology.recaptchav2java.ReCaptcha;",
+    "import org.airsonic.player.domain.User;",
+    "import org.airsonic.player.service.SecurityService;",
+    "import org.airsonic.player.service.SettingsService;",
+    "import org.apache.commons.lang.RandomStringUtils;",
+    "import org.apache.commons.lang.StringUtils;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.springframework.beans.factory.annotation.Autowired;",
+    "import org.springframework.stereotype.Controller;",
+    "import org.springframework.web.bind.annotation.RequestMapping;",
+    "import org.springframework.web.bind.annotation.RequestMethod;",
+    "import org.springframework.web.servlet.ModelAndView;",
+    "import javax.mail.Message;",
+    "import javax.mail.Session;",
+    "import javax.mail.Transport;",
+    "import javax.mail.internet.InternetAddress;",
+    "import javax.mail.internet.MimeMessage;",
+    "import javax.servlet.http.HttpServletRequest;",
+    "import javax.servlet.http.HttpServletResponse;",
+    "import java.util.Date;",
+    "import java.util.HashMap;",
+    "import java.util.Map;",
+    "import java.util.Properties;"
+  ],
+  "vulnerable_function": "    public ModelAndView recover(HttpServletRequest request, HttpServletResponse response) throws Exception {\n\n        Map<String, Object> map = new HashMap<String, Object>();\n        String usernameOrEmail = StringUtils.trimToNull(request.getParameter(\"usernameOrEmail\"));\n\n        if (usernameOrEmail != null) {\n\n            map.put(\"usernameOrEmail\", usernameOrEmail);\n            User user = getUserByUsernameOrEmail(usernameOrEmail);\n\n            boolean captchaOk;\n            if (settingsService.isCaptchaEnabled()) {\n                String recaptchaResponse = request.getParameter(\"g-recaptcha-response\");\n                ReCaptcha captcha = new ReCaptcha(settingsService.getRecaptchaSecretKey());\n                captchaOk = recaptchaResponse != null && captcha.isValid(recaptchaResponse);\n            } else {\n                captchaOk = true;\n            }\n            \n            if (!captchaOk) {\n                map.put(\"error\", \"recover.error.invalidcaptcha\");\n            } else if (user == null) {\n                map.put(\"error\", \"recover.error.usernotfound\");\n            } else if (user.getEmail() == null) {\n                map.put(\"error\", \"recover.error.noemail\");\n            } else {\n                String password = RandomStringUtils.randomAlphanumeric(8);\n                if (emailPassword(password, user.getUsername(), user.getEmail())) {\n                    map.put(\"sentTo\", user.getEmail());\n                    user.setLdapAuthenticated(false);\n                    user.setPassword(password);\n                    securityService.updateUser(user);\n                } else {\n                    map.put(\"error\", \"recover.error.sendfailed\");\n                }\n            }\n        }\n\n        if (settingsService.isCaptchaEnabled()) {\n            map.put(\"recaptchaSiteKey\", settingsService.getRecaptchaSiteKey());\n        }\n\n        return new ModelAndView(\"recover\", \"model\", map);\n    }",
+  "patched_function": "    public ModelAndView recover(HttpServletRequest request, HttpServletResponse response) throws Exception {\n\n        Map<String, Object> map = new HashMap<String, Object>();\n        String usernameOrEmail = StringUtils.trimToNull(request.getParameter(\"usernameOrEmail\"));\n\n        if (usernameOrEmail != null) {\n\n            map.put(\"usernameOrEmail\", usernameOrEmail);\n            User user = getUserByUsernameOrEmail(usernameOrEmail);\n\n            boolean captchaOk;\n            if (settingsService.isCaptchaEnabled()) {\n                String recaptchaResponse = request.getParameter(\"g-recaptcha-response\");\n                ReCaptcha captcha = new ReCaptcha(settingsService.getRecaptchaSecretKey());\n                captchaOk = recaptchaResponse != null && captcha.isValid(recaptchaResponse);\n            } else {\n                captchaOk = true;\n            }\n            \n            if (!captchaOk) {\n                map.put(\"error\", \"recover.error.invalidcaptcha\");\n            } else if (user == null) {\n                map.put(\"error\", \"recover.error.usernotfound\");\n            } else if (user.getEmail() == null) {\n                map.put(\"error\", \"recover.error.noemail\");\n            } else {\n                StringBuilder sb = new StringBuilder(PASSWORD_LENGTH);\n                for(int i=0; i<PASSWORD_LENGTH; i++) {\n                  int index = random.nextInt(SYMBOLS.length());\n                  sb.append(SYMBOLS.charAt(index));\n                }\n                String password = sb.toString();\n\n                if (emailPassword(password, user.getUsername(), user.getEmail())) {\n                    map.put(\"sentTo\", user.getEmail());\n                    user.setLdapAuthenticated(false);\n                    user.setPassword(password);\n                    securityService.updateUser(user);\n                } else {\n                    map.put(\"error\", \"recover.error.sendfailed\");\n                }\n            }\n        }\n\n        if (settingsService.isCaptchaEnabled()) {\n            map.put(\"recaptchaSiteKey\", settingsService.getRecaptchaSiteKey());\n        }\n\n        return new ModelAndView(\"recover\", \"model\", map);\n    }",
+  "unified_diff": "diff --git a/airsonic-main/src/main/java/org/airsonic/player/controller/RecoverController.java b/airsonic-main/src/main/java/org/airsonic/player/controller/RecoverController.java\nindex e095b349..ecba6702 100644\n--- a/airsonic-main/src/main/java/org/airsonic/player/controller/RecoverController.java\n+++ b/airsonic-main/src/main/java/org/airsonic/player/controller/RecoverController.java\n@@ -4,7 +4,6 @@ import de.triology.recaptchav2java.ReCaptcha;\n import org.airsonic.player.domain.User;\n import org.airsonic.player.service.SecurityService;\n import org.airsonic.player.service.SettingsService;\n-import org.apache.commons.lang.RandomStringUtils;\n import org.apache.commons.lang.StringUtils;\n import org.slf4j.Logger;\n import org.slf4j.LoggerFactory;\n@@ -22,6 +21,7 @@ import javax.mail.internet.MimeMessage;\n import javax.servlet.http.HttpServletRequest;\n import javax.servlet.http.HttpServletResponse;\n \n+import java.security.SecureRandom;\n import java.util.Date;\n import java.util.HashMap;\n import java.util.Map;\n@@ -37,6 +37,10 @@ public class RecoverController {\n \n     private static final Logger LOG = LoggerFactory.getLogger(RecoverController.class);\n \n+    private static final String SYMBOLS = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890\";\n+    private final SecureRandom random = new SecureRandom();\n+    private static final int PASSWORD_LENGTH = 32;\n+\n     @Autowired\n     private SettingsService settingsService;\n     @Autowired\n@@ -69,7 +73,13 @@ public class RecoverController {\n             } else if (user.getEmail() == null) {\n                 map.put(\"error\", \"recover.error.noemail\");\n             } else {\n-                String password = RandomStringUtils.randomAlphanumeric(8);\n+                StringBuilder sb = new StringBuilder(PASSWORD_LENGTH);\n+                for(int i=0; i<PASSWORD_LENGTH; i++) {\n+                  int index = random.nextInt(SYMBOLS.length());\n+                  sb.append(SYMBOLS.charAt(index));\n+                }\n+                String password = sb.toString();\n+\n                 if (emailPassword(password, user.getUsername(), user.getEmail())) {\n                     map.put(\"sentTo\", user.getEmail());\n                     user.setLdapAuthenticated(false);",
+  "auto_locate_confidence": "auto"
+}

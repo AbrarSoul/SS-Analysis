@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0178",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-840",
+    "NVD-CWE-noinfo"
+  ],
+  "changed_files": 1,
+  "lines_added": 5,
+  "lines_removed": 4,
+  "lines_changed_total": 9,
+  "function_size_chars": 2335,
+  "function_size_lines": 43,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "ORM object mutated before the uniqueness check and persisted by a later commit; order-of-operations state."
+}

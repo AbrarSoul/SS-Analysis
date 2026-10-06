@@ -1,0 +1,30 @@
+diff --git a/xwiki-platform-core/xwiki-platform-rest/xwiki-platform-rest-server/src/main/java/org/xwiki/rest/internal/resources/attachments/AttachmentResourceImpl.java b/xwiki-platform-core/xwiki-platform-rest/xwiki-platform-rest-server/src/main/java/org/xwiki/rest/internal/resources/attachments/AttachmentResourceImpl.java
+index 090ecb27048..c68cf38f4ed 100644
+--- a/xwiki-platform-core/xwiki-platform-rest/xwiki-platform-rest-server/src/main/java/org/xwiki/rest/internal/resources/attachments/AttachmentResourceImpl.java
++++ b/xwiki-platform-core/xwiki-platform-rest/xwiki-platform-rest-server/src/main/java/org/xwiki/rest/internal/resources/attachments/AttachmentResourceImpl.java
+@@ -22,7 +22,6 @@
+ import java.io.ByteArrayInputStream;
+ import java.io.InputStream;
+ 
+-import javax.inject.Inject;
+ import javax.inject.Named;
+ import javax.ws.rs.WebApplicationException;
+ import javax.ws.rs.core.Response;
+@@ -34,7 +33,6 @@
+ import org.xwiki.rest.internal.Utils;
+ import org.xwiki.rest.internal.resources.BaseAttachmentsResource;
+ import org.xwiki.rest.resources.attachments.AttachmentResource;
+-import org.xwiki.security.authorization.ContextualAuthorizationManager;
+ import org.xwiki.security.authorization.Right;
+ 
+ import com.xpn.xwiki.XWikiException;
+@@ -49,9 +47,6 @@
+ @Named("org.xwiki.rest.internal.resources.attachments.AttachmentResourceImpl")
+ public class AttachmentResourceImpl extends BaseAttachmentsResource implements AttachmentResource
+ {
+-    @Inject
+-    private ContextualAuthorizationManager authorization;
+-
+     @Override
+     public Response getAttachment(String wikiName, String spaceName, String pageName, String attachmentName)
+         throws XWikiRestException

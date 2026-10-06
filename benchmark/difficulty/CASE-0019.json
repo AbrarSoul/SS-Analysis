@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-0019",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 3,
+  "lines_changed_total": 4,
+  "function_size_chars": 1298,
+  "function_size_lines": 44,
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "context_heavy",
+  "classification_rationale": "String-based canonical-path prefix containment vs. NIO Path-based containment is a subtle semantic distinction that requires understanding path-traversal semantics, not just spotting an API name.",
+  "supported_status": "supported"
+}

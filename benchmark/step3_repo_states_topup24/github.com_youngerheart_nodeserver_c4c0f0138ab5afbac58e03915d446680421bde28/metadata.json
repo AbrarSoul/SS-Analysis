@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_youngerheart_nodeserver_c4c0f0138ab5afbac58e03915d446680421bde28",
+  "cve_ids": [
+    "CVE-2020-36651"
+  ],
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "javascript",
+  "repository": "youngerheart/nodeserver",
+  "repository_url": "https://github.com/youngerheart/nodeserver",
+  "vulnerable_commit": "56b51bd4bdff640a4eb2e16e8558ce7b709a95b6",
+  "fixed_commit": "c4c0f0138ab5afbac58e03915d446680421bde28",
+  "changed_file": "nodeserver.js",
+  "max_score": "1337"
+}

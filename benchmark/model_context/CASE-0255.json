@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0255",
+  "language": "javascript",
+  "cve_id": "CVE-2023-29017",
+  "cve_ids_all": [
+    "CVE-2023-29017"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-913",
+      "definition": "Improper Control of Dynamically-Managed Code Resources"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [],
+  "vulnerable_function": "\t\t\tconst newWrapped = (error, sst) => {\n\t\t\t\tif (localArrayIsArray(sst)) {\n\t\t\t\t\tfor (let i=0; i < sst.length; i++) {\n\t\t\t\t\t\tconst cs = sst[i];\n\t\t\t\t\t\tif (typeof cs === 'object' && localReflectGetPrototypeOf(cs) === OriginalCallSite.prototype) {\n\t\t\t\t\t\t\tsst[i] = new CallSite(cs);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\treturn value(error, sst);\n\t\t\t}",
+  "patched_function": "\t\t\tconst newWrapped = (error, sst) => {\n\t\t\t\tconst sandboxSst = ensureThis(sst);\n\t\t\t\tif (localArrayIsArray(sst)) {\n\t\t\t\t\tif (sst === sandboxSst) {\n\t\t\t\t\t\tfor (let i=0; i < sst.length; i++) {\n\t\t\t\t\t\t\tconst cs = sst[i];\n\t\t\t\t\t\t\tif (typeof cs === 'object' && localReflectGetPrototypeOf(cs) === OriginalCallSite.prototype) {\n\t\t\t\t\t\t\t\tsst[i] = new CallSite(cs);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t} else {\n\t\t\t\t\t\tsst = [];\n\t\t\t\t\t\tfor (let i=0; i < sandboxSst.length; i++) {\n\t\t\t\t\t\t\tconst cs = sandboxSst[i];\n\t\t\t\t\t\t\tlocalReflectDefineProperty(sst, i, {\n\t\t\t\t\t\t\t\t__proto__: null,\n\t\t\t\t\t\t\t\tvalue: new CallSite(cs),\n\t\t\t\t\t\t\t\tenumerable: true,\n\t\t\t\t\t\t\t\tconfigurable: true,\n\t\t\t\t\t\t\t\twritable: true\n\t\t\t\t\t\t\t});\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t} else {\n\t\t\t\t\tsst = sandboxSst;\n\t\t\t\t}\n\t\t\t\treturn value(error, sst);\n\t\t\t}",
+  "unified_diff": "diff --git a/lib/setup-sandbox.js b/lib/setup-sandbox.js\nindex f6cbb8e..539ce04 100644\n--- a/lib/setup-sandbox.js\n+++ b/lib/setup-sandbox.js\n@@ -276,13 +276,30 @@ if (typeof OriginalCallSite === 'function') {\n \t\t\t\treturn;\n \t\t\t}\n \t\t\tconst newWrapped = (error, sst) => {\n+\t\t\t\tconst sandboxSst = ensureThis(sst);\n \t\t\t\tif (localArrayIsArray(sst)) {\n-\t\t\t\t\tfor (let i=0; i < sst.length; i++) {\n-\t\t\t\t\t\tconst cs = sst[i];\n-\t\t\t\t\t\tif (typeof cs === 'object' && localReflectGetPrototypeOf(cs) === OriginalCallSite.prototype) {\n-\t\t\t\t\t\t\tsst[i] = new CallSite(cs);\n+\t\t\t\t\tif (sst === sandboxSst) {\n+\t\t\t\t\t\tfor (let i=0; i < sst.length; i++) {\n+\t\t\t\t\t\t\tconst cs = sst[i];\n+\t\t\t\t\t\t\tif (typeof cs === 'object' && localReflectGetPrototypeOf(cs) === OriginalCallSite.prototype) {\n+\t\t\t\t\t\t\t\tsst[i] = new CallSite(cs);\n+\t\t\t\t\t\t\t}\n+\t\t\t\t\t\t}\n+\t\t\t\t\t} else {\n+\t\t\t\t\t\tsst = [];\n+\t\t\t\t\t\tfor (let i=0; i < sandboxSst.length; i++) {\n+\t\t\t\t\t\t\tconst cs = sandboxSst[i];\n+\t\t\t\t\t\t\tlocalReflectDefineProperty(sst, i, {\n+\t\t\t\t\t\t\t\t__proto__: null,\n+\t\t\t\t\t\t\t\tvalue: new CallSite(cs),\n+\t\t\t\t\t\t\t\tenumerable: true,\n+\t\t\t\t\t\t\t\tconfigurable: true,\n+\t\t\t\t\t\t\t\twritable: true\n+\t\t\t\t\t\t\t});\n \t\t\t\t\t\t}\n \t\t\t\t\t}\n+\t\t\t\t} else {\n+\t\t\t\t\tsst = sandboxSst;\n \t\t\t\t}\n \t\t\t\treturn value(error, sst);\n \t\t\t};",
+  "auto_locate_confidence": "auto"
+}

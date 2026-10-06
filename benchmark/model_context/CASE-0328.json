@@ -1,0 +1,23 @@
+{
+  "case_id": "CASE-0328",
+  "language": "javascript",
+  "cve_id": "CVE-2026-25562",
+  "cve_ids_all": [
+    "CVE-2026-25562"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-203",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import Attachments from '/models/attachments';",
+    "import { ObjectID } from 'bson';"
+  ],
+  "vulnerable_function": "Meteor.publish('attachmentsList', function(limit) {\n  const ret = ReactiveCache.getAttachments(\n    {},\n    {\n      fields: {\n        _id: 1,\n        name: 1,\n        size: 1,\n        type: 1,\n        meta: 1,\n        path: 1,\n        versions: 1,\n      },\n      sort: {\n        name: 1,\n      },\n      limit: limit,\n    },\n    true,\n  ).cursor;\n  return ret;\n}",
+  "patched_function": "Meteor.publish('attachmentsList', function(limit) {\n  const userId = this.userId;\n\n  // Get boards the user has access to\n  const userBoards = ReactiveCache.getBoards({\n    $or: [\n      { permission: 'public' },\n      { members: { $elemMatch: { userId, isActive: true } } }\n    ]\n  }).map(board => board._id);\n\n  if (userBoards.length === 0) {\n    // User has no access to any boards, return empty cursor\n    return this.ready();\n  }\n\n  // Get cards from those boards\n  const userCards = ReactiveCache.getCards({\n    boardId: { $in: userBoards },\n    archived: false\n  }).map(card => card._id);\n\n  if (userCards.length === 0) {\n    // No cards found, return empty cursor\n    return this.ready();\n  }\n\n  // Only return attachments for cards the user has access to\n  const ret = ReactiveCache.getAttachments(\n    { 'meta.cardId': { $in: userCards } },\n    {\n      fields: {\n        _id: 1,\n        name: 1,\n        size: 1,\n        type: 1,\n        meta: 1,\n        path: 1,\n        versions: 1,\n      },\n      sort: {\n        name: 1,\n      },\n      limit: limit,\n    },\n    true,\n  ).cursor;\n  return ret;\n}",
+  "unified_diff": "diff --git a/server/publications/attachments.js b/server/publications/attachments.js\nindex ae421b8c8..d618012f8 100644\n--- a/server/publications/attachments.js\n+++ b/server/publications/attachments.js\n@@ -2,8 +2,35 @@ import Attachments from '/models/attachments';\n import { ObjectID } from 'bson';\n \n Meteor.publish('attachmentsList', function(limit) {\n+  const userId = this.userId;\n+\n+  // Get boards the user has access to\n+  const userBoards = ReactiveCache.getBoards({\n+    $or: [\n+      { permission: 'public' },\n+      { members: { $elemMatch: { userId, isActive: true } } }\n+    ]\n+  }).map(board => board._id);\n+\n+  if (userBoards.length === 0) {\n+    // User has no access to any boards, return empty cursor\n+    return this.ready();\n+  }\n+\n+  // Get cards from those boards\n+  const userCards = ReactiveCache.getCards({\n+    boardId: { $in: userBoards },\n+    archived: false\n+  }).map(card => card._id);\n+\n+  if (userCards.length === 0) {\n+    // No cards found, return empty cursor\n+    return this.ready();\n+  }\n+\n+  // Only return attachments for cards the user has access to\n   const ret = ReactiveCache.getAttachments(\n-    {},\n+    { 'meta.cardId': { $in: userCards } },\n     {\n       fields: {\n         _id: 1,",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_pkp_pkp-lib_a868f1cdd98a4f1255a70fd6d8320511e0083f38",
+  "cve_ids": [
+    "CVE-2023-5890"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "pkp/pkp-lib",
+  "repository_url": "https://github.com/pkp/pkp-lib",
+  "vulnerable_commit": "01feef7a9392d314bf75b97a7e099cf0a307acd9",
+  "fixed_commit": "a868f1cdd98a4f1255a70fd6d8320511e0083f38",
+  "changed_file": "js/controllers/grid/users/reviewer/AdvancedReviewerSearchHandler.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,13 @@
+diff --git a/src/com/fuse/actions/Login.java b/src/com/fuse/actions/Login.java
+index 031f380..fc20cc4 100644
+--- a/src/com/fuse/actions/Login.java
++++ b/src/com/fuse/actions/Login.java
+@@ -161,7 +161,7 @@ public class Login extends FSActionSupport {
+ 				return "failedAuth";
+ 			}
+ 
+-		} else if (action != null && action.equals("create")) {
++		} else if (AccessControl.isNewInstance(em) && (action != null && action.equals("create"))) {
+ 			if (adminUsername == null || adminUsername.trim().equals("")) {
+ 				this.message = "Username is blank";
+ 				return "createAccount";

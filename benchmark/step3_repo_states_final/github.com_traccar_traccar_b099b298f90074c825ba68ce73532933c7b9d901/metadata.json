@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_traccar_traccar_b099b298f90074c825ba68ce73532933c7b9d901",
+  "cve_ids": [
+    "CVE-2024-24809"
+  ],
+  "cwe_ids": [
+    "CWE-27",
+    "CWE-434"
+  ],
+  "language": "java",
+  "repository": "traccar/traccar",
+  "repository_url": "https://github.com/traccar/traccar",
+  "vulnerable_commit": "1c29f3a604fe13c8a337935a1a1ad966b4b62d5b",
+  "fixed_commit": "b099b298f90074c825ba68ce73532933c7b9d901",
+  "changed_file": "src/main/java/org/traccar/api/resource/DeviceResource.java",
+  "max_score": "1337"
+}

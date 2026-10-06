@@ -1,0 +1,43 @@
+diff --git a/packages/conform-dom/formdata.ts b/packages/conform-dom/formdata.ts
+index 7492927d..afacb016 100644
+--- a/packages/conform-dom/formdata.ts
++++ b/packages/conform-dom/formdata.ts
+@@ -38,7 +38,13 @@ export function getPaths(name: string | undefined): Array<string | number> {
+ 	return name
+ 		.split(/\.|(\[\d*\])/)
+ 		.reduce<Array<string | number>>((result, segment) => {
+-			if (typeof segment !== 'undefined' && segment !== '') {
++			if (
++				typeof segment !== 'undefined' &&
++				segment !== '' &&
++				segment !== '__proto__' &&
++				segment !== 'constructor' &&
++				segment !== 'prototype'
++			) {
+ 				if (segment.startsWith('[') && segment.endsWith(']')) {
+ 					const index = segment.slice(1, -1);
+ 
+@@ -114,7 +120,11 @@ export function setValue(
+ 		const nextKey = paths[index + 1];
+ 		const newValue =
+ 			index != lastIndex
+-				? pointer[key] ?? (typeof nextKey === 'number' ? [] : {})
++				? Object.hasOwn(pointer, key)
++					? pointer[key]
++					: typeof nextKey === 'number'
++					? []
++					: {}
+ 				: valueFn(pointer[key]);
+ 
+ 		pointer[key] = newValue;
+@@ -133,6 +143,10 @@ export function getValue(target: unknown, name: string): unknown {
+ 			break;
+ 		}
+ 
++		if (!Object.hasOwn(pointer, path)) {
++			return;
++		}
++
+ 		if (isPlainObject(pointer) && typeof path === 'string') {
+ 			pointer = pointer[path];
+ 		} else if (Array.isArray(pointer) && typeof path === 'number') {

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_gwozai_ruoyi-ai_c0daf641fb25b244591b7a6c3affa35c69d321fe",
+  "cve_ids": [
+    "CVE-2025-3199"
+  ],
+  "cwe_ids": [
+    "CWE-266",
+    "CWE-285"
+  ],
+  "language": "java",
+  "repository": "gwozai/ruoyi-ai",
+  "repository_url": "https://github.com/gwozai/ruoyi-ai",
+  "vulnerable_commit": "8f3f4384c3ef967a3dfda53ccd6a39a19638a06c",
+  "fixed_commit": "c0daf641fb25b244591b7a6c3affa35c69d321fe",
+  "changed_file": "ruoyi-modules/ruoyi-system/src/main/java/org/ruoyi/system/controller/system/SysModelController.java",
+  "max_score": "1337"
+}

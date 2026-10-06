@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_1Panel-dev_MaxKB_24cd68acae5f726eed828e2ac801827a2a70536f",
+  "cve_ids": [
+    "CVE-2026-39424"
+  ],
+  "cwe_ids": [
+    "CWE-1236"
+  ],
+  "language": "python",
+  "repository": "1Panel-dev/MaxKB",
+  "repository_url": "https://github.com/1Panel-dev/MaxKB",
+  "vulnerable_commit": "675fdd0f309d878afe559c803461346ba0e036cf",
+  "fixed_commit": "24cd68acae5f726eed828e2ac801827a2a70536f",
+  "changed_file": "apps/application/serializers/application_chat.py",
+  "max_score": "1337"
+}

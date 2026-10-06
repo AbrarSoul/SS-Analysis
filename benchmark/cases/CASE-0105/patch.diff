@@ -1,0 +1,24 @@
+diff --git a/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java b/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java
+index a7fc398892..047e17686b 100644
+--- a/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java
++++ b/llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java
+@@ -18,7 +18,7 @@
+ package org.apache.hadoop.hive.llap.security;
+ 
+ import java.io.IOException;
+-import java.util.Arrays;
++import java.security.MessageDigest;
+ 
+ import org.apache.hadoop.conf.Configuration;
+ import org.apache.hadoop.security.UserGroupInformation;
+@@ -58,7 +58,9 @@ public SignedMessage serializeAndSign(Signable message) throws IOException {
+   public void checkSignature(byte[] message, byte[] signature, int keyId)
+       throws SecurityException {
+     byte[] expectedSignature = secretManager.signWithKey(message, keyId);
+-    if (Arrays.equals(signature, expectedSignature)) return;
++    if (MessageDigest.isEqual(signature, expectedSignature)) {
++      return;
++    }
+     throw new SecurityException("Message signature does not match");
+   }
+ 

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0275",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-281"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 5,
+  "lines_changed_total": 6,
+  "function_size_chars": 423,
+  "function_size_lines": 12,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Client-supplied Host header accepted as proof the caller is local; header-to-trust-decision shape."
+}

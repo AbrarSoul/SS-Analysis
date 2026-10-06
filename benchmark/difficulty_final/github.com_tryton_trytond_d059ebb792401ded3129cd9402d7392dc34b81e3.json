@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_tryton_trytond_d059ebb792401ded3129cd9402d7392dc34b81e3",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-264"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 12,
+  "lines_changed_total": 26,
+  "function_size_chars": 439,
+  "function_size_lines": 16,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

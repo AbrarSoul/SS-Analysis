@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wekan_wekan_198509e7600981400353aec6259247b3c04e043e",
+  "cve_ids": [
+    "CVE-2026-25566"
+  ],
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "67cb47173c1a152d9eaf5469740992b2dacdf62d",
+  "fixed_commit": "198509e7600981400353aec6259247b3c04e043e",
+  "changed_file": "models/cards.js",
+  "max_score": "1337"
+}

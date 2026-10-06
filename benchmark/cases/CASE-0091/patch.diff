@@ -1,0 +1,58 @@
+diff --git a/src/routes/fileSystem.ts b/src/routes/fileSystem.ts
+index 1b4af48..1841e8d 100644
+--- a/src/routes/fileSystem.ts
++++ b/src/routes/fileSystem.ts
+@@ -6,11 +6,24 @@ import { validateContainerId, validatePath, validateFileName } from '../utils/va
+ 
+ const router = Router();
+ 
+-const sanitizePath = (base: string, relativePath: string): string => {
+-    const fullPath = path.join(base, relativePath);
++const sanitizePath = async (base: string, relativePath: string): Promise<string> => {
++    const fullPath = path.resolve(base, relativePath);
++
+     if (!fullPath.startsWith(base)) {
+         throw new Error('Invalid path: Directory traversal is not allowed.');
+     }
++
++    try {
++        const stats = await fs.lstat(fullPath);
++        if (stats.isSymbolicLink()) {
++            throw new Error('Invalid path: Symlinks are not allowed.');
++        }
++    } catch (err: any) {
++        if (err.code !== 'ENOENT') { // Ignore "file not found", because we're creating it later
++            throw err;
++        }
++    }
++
+     return fullPath;
+ };
+ 
+@@ -350,7 +363,7 @@ router.post('/fs/upload', async (req: Request, res: Response) => {
+ 
+         // Create the base directory if it doesn't exist
+         const baseDirectory = path.resolve(`volumes/${id}`);
+-        const filePath = sanitizePath(baseDirectory, targetPath);
++        const filePath = await sanitizePath(baseDirectory, targetPath);
+         const dir = path.dirname(filePath);
+ 
+         try {
+@@ -412,7 +425,7 @@ router.post('/fs/create-empty-file', async (req: Request, res: Response) => {
+         console.log(`Normalized target path: ${targetPath}`);
+ 
+         const baseDirectory = path.resolve(`volumes/${id}`);
+-        const filePath = sanitizePath(baseDirectory, targetPath);
++        const filePath= await sanitizePath(baseDirectory, targetPath);
+         const dir = path.dirname(filePath);
+ 
+         try {
+@@ -513,7 +526,7 @@ router.post('/fs/append-file', async (req: Request, res: Response) => {
+         }
+ 
+         const baseDirectory = path.resolve(`volumes/${id}`);
+-        const filePath = sanitizePath(baseDirectory, targetPath);
++        const filePath= await sanitizePath(baseDirectory, targetPath);
+ 
+         try {
+             if (typeof content === 'string') {

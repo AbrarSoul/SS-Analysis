@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_s134328_Webapplication-Veganguide_2aa760fa4e779e40a28206a32ac22ac10356f519",
+  "cve_ids": [
+    "CVE-2015-10059"
+  ],
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "s134328/Webapplication-Veganguide",
+  "repository_url": "https://github.com/s134328/Webapplication-Veganguide",
+  "vulnerable_commit": "f0b33e5ea99af4964ca6578cc3ae82f8d3f5aa03",
+  "fixed_commit": "2aa760fa4e779e40a28206a32ac22ac10356f519",
+  "changed_file": "p05-integration/app/shared/api/apiService.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,61 @@
+{
+  "case_id": "CASE-0037",
+  "original_patch_filename": "github.com_edmundhung_conform_4819d51b5a53fd5486fc85c17cdc148eb160e3de.patch",
+  "cve_id": "CVE-2024-32866",
+  "cve_ids_all": [
+    "CVE-2024-32866"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "typescript",
+  "repository": "edmundhung/conform",
+  "repository_url": "https://github.com/edmundhung/conform",
+  "vulnerable_commit": "59156d7115a7207fa3b6f8a70a4342a9b24c2501",
+  "fixed_commit": "4819d51b5a53fd5486fc85c17cdc148eb160e3de",
+  "changed_file": "packages/conform-dom/formdata.ts",
+  "patch_path": "cases/CASE-0037/patch.diff",
+  "vulnerable_code_path": "cases/CASE-0037/vulnerable_source.ts",
+  "patched_code_path": "cases/CASE-0037/patched_source.ts",
+  "semgrep_representability": "supported",
+  "advisory_source": "github",
+  "advisory_confidence_score": "1337",
+  "verification_method": "manual: diff read against real advisory text, Section 8 Step 4 criteria",
+  "split": "pilot",
+  "test_bundle": {
+    "status": "complete",
+    "samples": [
+      {
+        "file": "vulnerable_source.ts",
+        "label": "vulnerable",
+        "sample_type": "original_vulnerable"
+      },
+      {
+        "file": "patched_source.ts",
+        "label": "safe",
+        "sample_type": "original_patched"
+      },
+      {
+        "file": "variant_vulnerable_01.ts",
+        "label": "vulnerable",
+        "sample_type": "renamed_vulnerable_variant"
+      },
+      {
+        "file": "variant_vulnerable_02.ts",
+        "label": "vulnerable",
+        "sample_type": "structurally_changed_vulnerable_variant"
+      },
+      {
+        "file": "variant_safe_01.ts",
+        "label": "safe",
+        "sample_type": "transformed_safe_variant"
+      },
+      {
+        "file": "benign_lookalike.ts",
+        "label": "safe",
+        "sample_type": "benign_structural_lookalike"
+      }
+    ],
+    "transformation_manifest": "benchmark/transformation_manifest.jsonl"
+  }
+}

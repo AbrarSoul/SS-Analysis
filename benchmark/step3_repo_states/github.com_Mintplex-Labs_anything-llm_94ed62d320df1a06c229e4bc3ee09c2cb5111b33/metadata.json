@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_Mintplex-Labs_anything-llm_94ed62d320df1a06c229e4bc3ee09c2cb5111b33",
+  "cve_ids": [
+    "CVE-2026-48116"
+  ],
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-88"
+  ],
+  "language": "javascript",
+  "repository": "Mintplex-Labs/anything-llm",
+  "repository_url": "https://github.com/Mintplex-Labs/anything-llm",
+  "vulnerable_commit": "b4a68c6910ecbb084865dedd77c0490ed2a6ffb2",
+  "fixed_commit": "94ed62d320df1a06c229e4bc3ee09c2cb5111b33",
+  "changed_file": "server/utils/agents/aibitat/plugins/filesystem/search-files.js",
+  "max_score": "1337"
+}

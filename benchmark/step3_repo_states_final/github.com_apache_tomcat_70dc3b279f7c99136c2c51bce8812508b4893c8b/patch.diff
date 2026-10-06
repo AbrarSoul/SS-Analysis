@@ -1,0 +1,13 @@
+diff --git a/java/org/apache/coyote/http11/filters/ChunkedInputFilter.java b/java/org/apache/coyote/http11/filters/ChunkedInputFilter.java
+index 485e3689b6..a5b5ecbee2 100644
+--- a/java/org/apache/coyote/http11/filters/ChunkedInputFilter.java
++++ b/java/org/apache/coyote/http11/filters/ChunkedInputFilter.java
+@@ -128,7 +128,7 @@ public class ChunkedInputFilter implements InputFilter {
+     /**
+      * Limit for trailer size.
+      */
+-    private int maxTrailerSize;
++    private final int maxTrailerSize;
+ 
+     /**
+      * Size of extensions processed for this request.

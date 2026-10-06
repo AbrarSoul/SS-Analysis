@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0216",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-290"
+  ],
+  "changed_files": 1,
+  "lines_added": 29,
+  "lines_removed": 9,
+  "lines_changed_total": 38,
+  "function_size_chars": 2920,
+  "function_size_lines": 82,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Shared-with record keyed by device id without the device key; data-model logic, not a code shape."
+}

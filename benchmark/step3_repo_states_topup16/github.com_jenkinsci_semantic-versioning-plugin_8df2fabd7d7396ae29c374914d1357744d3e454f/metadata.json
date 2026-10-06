@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_semantic-versioning-plugin_8df2fabd7d7396ae29c374914d1357744d3e454f",
+  "cve_ids": [
+    "CVE-2023-24430"
+  ],
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/semantic-versioning-plugin",
+  "repository_url": "https://github.com/jenkinsci/semantic-versioning-plugin",
+  "vulnerable_commit": "c67a89822f86a7d10498ea2783b833052b719086",
+  "fixed_commit": "8df2fabd7d7396ae29c374914d1357744d3e454f",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java",
+  "max_score": "1337"
+}

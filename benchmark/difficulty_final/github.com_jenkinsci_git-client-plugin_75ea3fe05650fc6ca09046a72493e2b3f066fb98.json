@@ -1,0 +1,19 @@
+{
+  "case_id": "github.com_jenkinsci_git-client-plugin_75ea3fe05650fc6ca09046a72493e2b3f066fb98",
+  "batch": "topup",
+  "language": "java",
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "changed_files": 1,
+  "lines_added": 42,
+  "lines_removed": 9,
+  "lines_changed_total": 51,
+  "function_size_chars": 563,
+  "function_size_lines": 12,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

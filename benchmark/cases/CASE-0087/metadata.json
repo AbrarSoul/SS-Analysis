@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0087",
+  "original_source_case_id": "github.com_aheckmann_mpath_89402d2880d4ea3518480a8c9847c541f2d824fc",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-23438",
+  "cve_ids_all": [
+    "CVE-2021-23438"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-843"
+  ],
+  "language": "javascript",
+  "repository": "aheckmann/mpath",
+  "repository_url": "https://github.com/aheckmann/mpath",
+  "vulnerable_commit": "03c4efef8b25425476c1e0d7b6a0fb5adc18c0f9",
+  "fixed_commit": "89402d2880d4ea3518480a8c9847c541f2d824fc",
+  "changed_file": "lib/index.js",
+  "changed_function": "exports.get = function(path, o, special, map) {",
+  "vulnerable_lines": [
+    39,
+    94
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0087/vulnerable_source.js": "d4e0893e65ecdef6238b9104c0c63a6e1969ededb016676c08bfabc0cfc29ff6",
+    "cases/CASE-0087/patched_source.js": "9362e7c80299b6100ef3bbd9bda30dc9a131ce4286988f122b1dab2a63a92177",
+    "cases/CASE-0087/patch.diff": "8edcdb51016d755183cd18787e5a30ccfa229611ab44d772d120a1dcb739fc5a",
+    "cases/CASE-0087/metadata.json": "8609d1cc9de03fb115e9fab78787496e435ab2eee7de5cea3132b3054de1e856",
+    "model_context/CASE-0087.json": "5cf5912b777a95f6432f8ef41adb2b714c73e06f226e2647204a80310d1d4158",
+    "difficulty/CASE-0087.json": "e2957b4dbf3407480bbb2deb2c6f85005b23a54e3a9f48aaf397a2371227ac25"
+  },
+  "case_level_hash": "c7b84bcb161da69d7098a23564476352440427a501f1ca323a9b9abec5286461"
+}

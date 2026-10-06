@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_emmett-framework_core_9557ea23a27cbadf7774d8bca6bbe4b54fa8a3ec",
+  "cve_ids": [
+    "CVE-2026-25577"
+  ],
+  "cwe_ids": [
+    "CWE-248",
+    "CWE-307"
+  ],
+  "language": "python",
+  "repository": "emmett-framework/core",
+  "repository_url": "https://github.com/emmett-framework/core",
+  "vulnerable_commit": "5b686ff528359da6ba3e92ffa76d037dff6f886e",
+  "fixed_commit": "9557ea23a27cbadf7774d8bca6bbe4b54fa8a3ec",
+  "changed_file": "emmett_core/http/wrappers/__init__.py",
+  "max_score": "1337"
+}

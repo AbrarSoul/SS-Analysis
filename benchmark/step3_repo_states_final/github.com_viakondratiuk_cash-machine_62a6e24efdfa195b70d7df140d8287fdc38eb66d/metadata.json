@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_viakondratiuk_cash-machine_62a6e24efdfa195b70d7df140d8287fdc38eb66d",
+  "cve_ids": [
+    "CVE-2015-10069"
+  ],
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "python",
+  "repository": "viakondratiuk/cash-machine",
+  "repository_url": "https://github.com/viakondratiuk/cash-machine",
+  "vulnerable_commit": "e3496978a07aa6f53aa76c7223df311dd8424f20",
+  "fixed_commit": "62a6e24efdfa195b70d7df140d8287fdc38eb66d",
+  "changed_file": "machine.py",
+  "max_score": "1337"
+}

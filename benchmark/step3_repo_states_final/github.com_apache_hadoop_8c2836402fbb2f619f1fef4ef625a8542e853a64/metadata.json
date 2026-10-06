@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_apache_hadoop_8c2836402fbb2f619f1fef4ef625a8542e853a64",
+  "cve_ids": [
+    "CVE-2024-23454"
+  ],
+  "cwe_ids": [
+    "CWE-378"
+  ],
+  "language": "java",
+  "repository": "apache/hadoop",
+  "repository_url": "https://github.com/apache/hadoop",
+  "vulnerable_commit": "5e30d28d7e524dd3eed179d81c38e2eb82ae4673",
+  "fixed_commit": "8c2836402fbb2f619f1fef4ef625a8542e853a64",
+  "changed_file": "hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/RunJar.java",
+  "max_score": "1337"
+}

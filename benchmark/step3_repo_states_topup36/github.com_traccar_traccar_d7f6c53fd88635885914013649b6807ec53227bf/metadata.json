@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_traccar_traccar_d7f6c53fd88635885914013649b6807ec53227bf",
+  "cve_ids": [
+    "CVE-2019-5748"
+  ],
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "traccar/traccar",
+  "repository_url": "https://github.com/traccar/traccar",
+  "vulnerable_commit": "eea01d00aad283bf505262b3c462dc7b88011fae",
+  "fixed_commit": "d7f6c53fd88635885914013649b6807ec53227bf",
+  "changed_file": "src/org/traccar/protocol/SpotProtocolDecoder.java",
+  "max_score": "1337"
+}

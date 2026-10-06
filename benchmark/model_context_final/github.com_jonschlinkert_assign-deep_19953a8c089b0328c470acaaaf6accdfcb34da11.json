@@ -1,0 +1,28 @@
+{
+  "case_id": "github.com_jonschlinkert_assign-deep_19953a8c089b0328c470acaaaf6accdfcb34da11",
+  "language": "javascript",
+  "cve_id": "CVE-2018-3720",
+  "cve_ids_all": [
+    "CVE-2018-3720"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-471",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "NVD-CWE-noinfo",
+      "definition": "NVD placeholder designation meaning insufficient information was available to assign a specific CWE; not an actual CWE catalog entry."
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var isPrimitive = require('is-primitive');",
+    "var assignSymbols = require('assign-symbols');",
+    "var typeOf = require('kind-of');"
+  ],
+  "vulnerable_function": "function extend(target, obj) {\n  assignSymbols(target, obj);\n\n  for (var key in obj) {\n    if (hasOwn(obj, key)) {\n      var val = obj[key];\n      if (isObject(val)) {\n        if (typeOf(target[key]) === 'undefined' && typeOf(val) === 'function') {\n          target[key] = val;\n        }\n        target[key] = assign(target[key] || {}, val);\n      } else {\n        target[key] = val;\n      }\n    }\n  }\n  return target;\n}",
+  "patched_function": "function extend(target, obj) {\n  assignSymbols(target, obj);\n\n  for (var key in obj) {\n    if (key !== '__proto__' && hasOwn(obj, key)) {\n      var val = obj[key];\n      if (isObject(val)) {\n        if (typeOf(target[key]) === 'undefined' && typeOf(val) === 'function') {\n          target[key] = val;\n        }\n        target[key] = assign(target[key] || {}, val);\n      } else {\n        target[key] = val;\n      }\n    }\n  }\n  return target;\n}",
+  "unified_diff": "diff --git a/index.js b/index.js\nindex b2e74cf..c5dc494 100644\n--- a/index.js\n+++ b/index.js\n@@ -37,7 +37,7 @@ function extend(target, obj) {\n   assignSymbols(target, obj);\n \n   for (var key in obj) {\n-    if (hasOwn(obj, key)) {\n+    if (key !== '__proto__' && hasOwn(obj, key)) {\n       var val = obj[key];\n       if (isObject(val)) {\n         if (typeOf(target[key]) === 'undefined' && typeOf(val) === 'function') {",
+  "auto_locate_confidence": "auto"
+}

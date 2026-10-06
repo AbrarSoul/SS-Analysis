@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_opencast_opencast_b157e1fb3b35991ca7bf59f0730329fbe7ce82e8",
+  "cve_ids": [
+    "CVE-2020-5206"
+  ],
+  "cwe_ids": [
+    "CWE-285",
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "opencast/opencast",
+  "repository_url": "https://github.com/opencast/opencast",
+  "vulnerable_commit": "1a7172c95af8d542a77ae5b153e4c834dd4788a6",
+  "fixed_commit": "b157e1fb3b35991ca7bf59f0730329fbe7ce82e8",
+  "changed_file": "modules/kernel/src/main/java/org/opencastproject/kernel/security/SecurityServiceSpringImpl.java",
+  "max_score": "1337"
+}

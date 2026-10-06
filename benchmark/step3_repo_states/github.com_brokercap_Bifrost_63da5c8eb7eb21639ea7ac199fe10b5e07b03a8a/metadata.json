@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_brokercap_Bifrost_63da5c8eb7eb21639ea7ac199fe10b5e07b03a8a",
+  "cve_ids": [
+    "CVE-2022-39267"
+  ],
+  "cwe_ids": [
+    "CWE-287"
+  ],
+  "language": "javascript",
+  "repository": "brokercap/Bifrost",
+  "repository_url": "https://github.com/brokercap/Bifrost",
+  "vulnerable_commit": "61c4204d2301f37ad9cc591f05d68d9c578ede3b",
+  "fixed_commit": "63da5c8eb7eb21639ea7ac199fe10b5e07b03a8a",
+  "changed_file": "admin/view/public/js/ajax.js",
+  "max_score": "1337"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_new-usemame_Calibre-Web-NextGen_9f50bb2c16160564c9f8777dc2ceed3eb95e4807",
+  "cve_ids": [
+    "CVE-2026-7713"
+  ],
+  "cwe_ids": [
+    "CWE-266",
+    "CWE-285"
+  ],
+  "language": "python",
+  "repository": "new-usemame/Calibre-Web-NextGen",
+  "repository_url": "https://github.com/new-usemame/Calibre-Web-NextGen",
+  "vulnerable_commit": "09bf581ca38d115e30b67283bb99575ee7cdef89",
+  "fixed_commit": "9f50bb2c16160564c9f8777dc2ceed3eb95e4807",
+  "changed_file": "cps/kobo_auth.py",
+  "max_score": "1337"
+}

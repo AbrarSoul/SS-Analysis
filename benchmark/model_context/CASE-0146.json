@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0146",
+  "language": "typescript",
+  "cve_id": "CVE-2023-45820",
+  "cve_ids_all": [
+    "CVE-2023-45820"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-755",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import type { Accountability } from '@directus/types';",
+    "import { parseJSON } from '@directus/utils';",
+    "import type { IncomingMessage, Server as httpServer } from 'http';",
+    "import type { ParsedUrlQuery } from 'querystring';",
+    "import type { RateLimiterAbstract } from 'rate-limiter-flexible';",
+    "import type internal from 'stream';",
+    "import { parse } from 'url';",
+    "import { v4 as uuid } from 'uuid';",
+    "import WebSocket, { WebSocketServer } from 'ws';",
+    "import { fromZodError } from 'zod-validation-error';",
+    "import emitter from '../../emitter.js';",
+    "import env from '../../env.js';",
+    "import { InvalidProviderConfigError, TokenExpiredError } from '../../errors/index.js';",
+    "import logger from '../../logger.js';",
+    "import { createRateLimiter } from '../../rate-limiter.js';",
+    "import { getAccountabilityForToken } from '../../utils/get-accountability-for-token.js';",
+    "import { toBoolean } from '../../utils/to-boolean.js';",
+    "import { authenticateConnection, authenticationSuccess } from '../authenticate.js';",
+    "import { WebSocketError, handleWebSocketError } from '../errors.js';",
+    "import { AuthMode, WebSocketAuthMessage, WebSocketMessage } from '../messages.js';",
+    "import type { AuthenticationState, UpgradeContext, WebSocketClient } from '../types.js';",
+    "import { getExpiresAtForToken } from '../utils/get-expires-at-for-token.js';",
+    "import { getMessageType } from '../utils/message.js';",
+    "import { waitForAnyMessage, waitForMessageType } from '../utils/wait-for-message.js';",
+    "import { registerWebSocketEvents } from './hooks.js';"
+  ],
+  "vulnerable_function": "\t\tthis.server.handleUpgrade(request, socket, head, async (ws) => {\n\t\t\ttry {\n\t\t\t\tconst payload = await waitForAnyMessage(ws, this.authentication.timeout);\n\t\t\t\tif (getMessageType(payload) !== 'auth') throw new Error();\n\n\t\t\t\tconst state = await authenticateConnection(WebSocketAuthMessage.parse(payload));\n\t\t\t\tws.send(authenticationSuccess(payload['uid'], state.refresh_token));\n\t\t\t\tthis.server.emit('connection', ws, state);\n\t\t\t} catch {\n\t\t\t\tlogger.debug('WebSocket authentication handshake failed');\n\t\t\t\tconst error = new WebSocketError('auth', 'AUTH_FAILED', 'Authentication handshake failed.');\n\t\t\t\thandleWebSocketError(ws, error, 'auth');\n\t\t\t\tws.close();\n\t\t\t}\n\t\t}",
+  "patched_function": "\tprivate catchInvalidMessages(ws: WebSocket) {\n\t\t/**\n\t\t * This fix was done to prevent the API from crashing on receiving invalid WebSocket frames\n\t\t * https://github.com/directus/directus/security/advisories/GHSA-hmgw-9jrg-hf2m\n\t\t * https://github.com/websockets/ws/issues/2098\n\t\t */\n\t\t// @ts-ignore <- required because \"_socket\" is not typed on WS\n\t\tws._socket.prependListener('data', (data) => data.toString());\n\n\t\tws.on('error', (error) => {\n\t\t\tif (error.message) logger.debug(error.message);\n\t\t});\n\t}",
+  "unified_diff": "diff --git a/api/src/websocket/controllers/base.ts b/api/src/websocket/controllers/base.ts\nindex dcf121ed2f..704112518c 100644\n--- a/api/src/websocket/controllers/base.ts\n+++ b/api/src/websocket/controllers/base.ts\n@@ -97,6 +97,20 @@ export default abstract class SocketController {\n \t\treturn null;\n \t}\n \n+\tprivate catchInvalidMessages(ws: WebSocket) {\n+\t\t/**\n+\t\t * This fix was done to prevent the API from crashing on receiving invalid WebSocket frames\n+\t\t * https://github.com/directus/directus/security/advisories/GHSA-hmgw-9jrg-hf2m\n+\t\t * https://github.com/websockets/ws/issues/2098\n+\t\t */\n+\t\t// @ts-ignore <- required because \"_socket\" is not typed on WS\n+\t\tws._socket.prependListener('data', (data) => data.toString());\n+\n+\t\tws.on('error', (error) => {\n+\t\t\tif (error.message) logger.debug(error.message);\n+\t\t});\n+\t}\n+\n \tprotected async handleUpgrade(request: IncomingMessage, socket: internal.Duplex, head: Buffer) {\n \t\tconst { pathname, query } = parse(request.url!, true);\n \t\tif (pathname !== this.endpoint) return;\n@@ -121,6 +135,7 @@ export default abstract class SocketController {\n \t\t}\n \n \t\tthis.server.handleUpgrade(request, socket, head, async (ws) => {\n+\t\t\tthis.catchInvalidMessages(ws);\n \t\t\tconst state = { accountability: null, expires_at: null } as AuthenticationState;\n \t\t\tthis.server.emit('connection', ws, state);\n \t\t});\n@@ -146,6 +161,7 @@ export default abstract class SocketController {\n \t\t}\n \n \t\tthis.server.handleUpgrade(request, socket, head, async (ws) => {\n+\t\t\tthis.catchInvalidMessages(ws);\n \t\t\tconst state = { accountability, expires_at } as AuthenticationState;\n \t\t\tthis.server.emit('connection', ws, state);\n \t\t});\n@@ -153,6 +169,8 @@ export default abstract class SocketController {\n \n \tprotected async handleHandshakeUpgrade({ request, socket, head }: UpgradeContext) {\n \t\tthis.server.handleUpgrade(request, socket, head, async (ws) => {\n+\t\t\tthis.catchInvalidMessages(ws);\n+\n \t\t\ttry {\n \t\t\t\tconst payload = await waitForAnyMessage(ws, this.authentication.timeout);\n \t\t\t\tif (getMessageType(payload) !== 'auth') throw new Error();",
+  "auto_locate_confidence": "auto"
+}

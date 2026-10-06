@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_python_cpython_13360efd385d1a7d0659beba03787ea3d063ef9b",
+  "cve_ids": [
+    "CVE-2025-12781"
+  ],
+  "cwe_ids": [
+    "CWE-704"
+  ],
+  "language": "python",
+  "repository": "python/cpython",
+  "repository_url": "https://github.com/python/cpython",
+  "vulnerable_commit": "4e6e208be9d1c52d1b55a8bb3a83682cb078e55e",
+  "fixed_commit": "13360efd385d1a7d0659beba03787ea3d063ef9b",
+  "changed_file": "Lib/test/test_base64.py",
+  "max_score": "1337"
+}

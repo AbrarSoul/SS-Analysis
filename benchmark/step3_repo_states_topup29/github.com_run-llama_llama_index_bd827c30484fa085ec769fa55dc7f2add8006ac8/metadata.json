@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_run-llama_llama_index_bd827c30484fa085ec769fa55dc7f2add8006ac8",
+  "cve_ids": [
+    "CVE-2024-45201"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "run-llama/llama_index",
+  "repository_url": "https://github.com/run-llama/llama_index",
+  "vulnerable_commit": "ece8f2ddc4669b5cc820261329bf68bf99999e48",
+  "fixed_commit": "bd827c30484fa085ec769fa55dc7f2add8006ac8",
+  "changed_file": "llama-index-core/llama_index/core/download/integration.py",
+  "max_score": "1337"
+}

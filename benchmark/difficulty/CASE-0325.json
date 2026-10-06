@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0325",
+  "batch": "topup33",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "changed_files": 1,
+  "lines_added": 2,
+  "lines_removed": 2,
+  "lines_changed_total": 4,
+  "function_size_chars": 134,
+  "function_size_lines": 5,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Log message %-formatted into a notify-send shell command run through os.system."
+}

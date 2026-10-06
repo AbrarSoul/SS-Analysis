@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_yugabyte_yugabyte-db_439c6286f1971f9ac6bff2c7215b454c2025c593",
+  "cve_ids": [
+    "CVE-2024-0006"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "java",
+  "repository": "yugabyte/yugabyte-db",
+  "repository_url": "https://github.com/yugabyte/yugabyte-db",
+  "vulnerable_commit": "353d2ec7d562c3bf94f2ecd879641b3d35ce63ad",
+  "fixed_commit": "439c6286f1971f9ac6bff2c7215b454c2025c593",
+  "changed_file": "managed/src/main/java/com/yugabyte/yw/common/NodeUniverseManager.java",
+  "max_score": "1337"
+}

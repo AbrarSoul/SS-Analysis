@@ -1,0 +1,31 @@
+{
+  "case_id": "CASE-0167",
+  "language": "python",
+  "cve_id": "CVE-2024-49751",
+  "cve_ids_all": [
+    "CVE-2024-49751"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-79",
+      "definition": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import frappe",
+    "import json",
+    "from frappe.core.utils import find",
+    "from press.press.doctype.team.team import Team",
+    "from press.api.account import get_account_request_from_key",
+    "from press.utils import get_current_team, group_children_in_result, log_error",
+    "from press.press.doctype.site.saas_site import SaasSite, get_default_team_for_app, get_saas_domain, get_saas_site_plan, set_site_in_subscription_docs",
+    "from press.press.doctype.site.saas_pool import get as get_pooled_saas_site",
+    "from press.press.doctype.site.erpnext_site import get_erpnext_domain",
+    "from press.utils.telemetry import capture, identify"
+  ],
+  "vulnerable_function": "def account_request(\n\tsubdomain,\n\temail,\n\tfirst_name,\n\tlast_name,\n\tcountry,\n\tapp,\n\turl_args=None,\n):\n\t\"\"\"\n\treturn: Stripe setup intent and AR key if stripe flow, else None\n\t\"\"\"\n\tfrom frappe.utils import sanitize_html\n\n\temail = email.strip().lower()\n\tfrappe.utils.validate_email_address(email, True)\n\n\tif not check_subdomain_availability(subdomain, app):\n\t\tfrappe.throw(f\"Subdomain {subdomain} is already taken\")\n\n\tall_countries = frappe.db.get_all(\"Country\", pluck=\"name\")\n\tcountry = find(all_countries, lambda x: x.lower() == country.lower())\n\tif not country:\n\t\tfrappe.throw(\"Country field should be a valid country name\")\n\n\tteam = frappe.db.get_value(\"Team\", {\"user\": email})\n\tif team:\n\t\tif frappe.db.exists(\n\t\t\t\"Invoice\", {\"team\": team, \"status\": \"Unpaid\", \"type\": \"Subscription\"}\n\t\t):\n\t\t\tfrappe.throw(f\"Account {email} already exists with unpaid invoices\")\n\n\ttry:\n\t\taccount_request = frappe.get_doc(\n\t\t\t{\n\t\t\t\t\"doctype\": \"Account Request\",\n\t\t\t\t\"saas\": True,\n\t\t\t\t\"saas_app\": app,\n\t\t\t\t\"erpnext\": False,\n\t\t\t\t\"subdomain\": subdomain,\n\t\t\t\t\"email\": email,\n\t\t\t\t\"role\": \"Press Admin\",\n\t\t\t\t\"first_name\": sanitize_html(first_name),\n\t\t\t\t\"last_name\": sanitize_html(last_name),\n\t\t\t\t\"country\": country,\n\t\t\t\t\"url_args\": url_args or json.dumps({}),\n\t\t\t\t\"send_email\": True,\n\t\t\t}\n\t\t)\n\t\tsite_name = account_request.get_site_name()\n\t\tidentify(\n\t\t\tsite_name,\n\t\t\tapp=account_request.saas_app,\n\t\t\tsource=json.loads(url_args).get(\"source\") if url_args else \"fc\",\n\t\t)\n\t\taccount_request.insert(ignore_permissions=True)\n\t\tcapture(\"completed_server_account_request\", \"fc_saas\", site_name)\n\texcept Exception as e:\n\t\tlog_error(\"Account Request Creation Failed\", data=e)\n\t\traise\n\n\tcreate_or_rename_saas_site(app, account_request)\n",
+  "patched_function": "def account_request(\n\tsubdomain,\n\temail,\n\tfirst_name,\n\tlast_name,\n\tcountry,\n\tapp,\n\turl_args=None,\n):\n\t\"\"\"\n\treturn: Stripe setup intent and AR key if stripe flow, else None\n\t\"\"\"\n\tfrom frappe.utils.html_utils import clean_html\n\n\temail = email.strip().lower()\n\tfrappe.utils.validate_email_address(email, True)\n\n\tif not check_subdomain_availability(subdomain, app):\n\t\tfrappe.throw(f\"Subdomain {subdomain} is already taken\")\n\n\tall_countries = frappe.db.get_all(\"Country\", pluck=\"name\")\n\tcountry = find(all_countries, lambda x: x.lower() == country.lower())\n\tif not country:\n\t\tfrappe.throw(\"Country field should be a valid country name\")\n\n\tteam = frappe.db.get_value(\"Team\", {\"user\": email})\n\tif team:\n\t\tif frappe.db.exists(\n\t\t\t\"Invoice\", {\"team\": team, \"status\": \"Unpaid\", \"type\": \"Subscription\"}\n\t\t):\n\t\t\tfrappe.throw(f\"Account {email} already exists with unpaid invoices\")\n\n\ttry:\n\t\taccount_request = frappe.get_doc(\n\t\t\t{\n\t\t\t\t\"doctype\": \"Account Request\",\n\t\t\t\t\"saas\": True,\n\t\t\t\t\"saas_app\": app,\n\t\t\t\t\"erpnext\": False,\n\t\t\t\t\"subdomain\": subdomain,\n\t\t\t\t\"email\": email,\n\t\t\t\t\"role\": \"Press Admin\",\n\t\t\t\t\"first_name\": clean_html(first_name),\n\t\t\t\t\"last_name\": clean_html(last_name),\n\t\t\t\t\"country\": country,\n\t\t\t\t\"url_args\": url_args or json.dumps({}),\n\t\t\t\t\"send_email\": True,\n\t\t\t}\n\t\t)\n\t\tsite_name = account_request.get_site_name()\n\t\tidentify(\n\t\t\tsite_name,\n\t\t\tapp=account_request.saas_app,\n\t\t\tsource=json.loads(url_args).get(\"source\") if url_args else \"fc\",\n\t\t)\n\t\taccount_request.insert(ignore_permissions=True)\n\t\tcapture(\"completed_server_account_request\", \"fc_saas\", site_name)\n\texcept Exception as e:\n\t\tlog_error(\"Account Request Creation Failed\", data=e)\n\t\traise\n\n\tcreate_or_rename_saas_site(app, account_request)\n",
+  "unified_diff": "diff --git a/press/api/saas.py b/press/api/saas.py\nindex ab4e2cef9..f8336d21a 100644\n--- a/press/api/saas.py\n+++ b/press/api/saas.py\n@@ -33,7 +33,7 @@ def account_request(\n \t\"\"\"\n \treturn: Stripe setup intent and AR key if stripe flow, else None\n \t\"\"\"\n-\tfrom frappe.utils import sanitize_html\n+\tfrom frappe.utils.html_utils import clean_html\n \n \temail = email.strip().lower()\n \tfrappe.utils.validate_email_address(email, True)\n@@ -63,8 +63,8 @@ def account_request(\n \t\t\t\t\"subdomain\": subdomain,\n \t\t\t\t\"email\": email,\n \t\t\t\t\"role\": \"Press Admin\",\n-\t\t\t\t\"first_name\": sanitize_html(first_name),\n-\t\t\t\t\"last_name\": sanitize_html(last_name),\n+\t\t\t\t\"first_name\": clean_html(first_name),\n+\t\t\t\t\"last_name\": clean_html(last_name),\n \t\t\t\t\"country\": country,\n \t\t\t\t\"url_args\": url_args or json.dumps({}),\n \t\t\t\t\"send_email\": True,",
+  "auto_locate_confidence": "auto"
+}

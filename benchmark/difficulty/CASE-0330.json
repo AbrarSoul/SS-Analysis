@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0330",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "changed_files": 1,
+  "lines_added": 31,
+  "lines_removed": 2,
+  "lines_changed_total": 33,
+  "function_size_chars": 1132,
+  "function_size_lines": 37,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Setting enforced only in the UI while server routes accept the change; missing server-side policy enforcement."
+}

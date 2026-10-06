@@ -1,0 +1,28 @@
+{
+  "case_id": "CASE-0175",
+  "language": "java",
+  "cve_id": "CVE-2024-25420",
+  "cve_ids_all": [
+    "CVE-2024-25420"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-273",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import java.util.ArrayList;",
+    "import java.util.List;",
+    "import org.jivesoftware.openfire.XMPPServer;",
+    "import org.jivesoftware.util.SystemProperty;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;",
+    "import org.xmpp.packet.JID;"
+  ],
+  "vulnerable_function": "    private AdminManager() {\n        // Load an admin provider.\n        initProvider(ADMIN_PROVIDER.getValue());\n    }",
+  "patched_function": "    private AdminManager() {\n        // Load an admin provider.\n        initProvider(ADMIN_PROVIDER.getValue());\n\n        UserEventDispatcher.addListener(new UserEventListener() {\n            @Override\n            public void userDeleting(final User user, final Map<String, Object> params) {\n                // OF-2758: Ensure that if a user is re-created with the same name, they're not automatically an admin.\n                removeAdminAccount(user.getUsername());\n            }\n\n            @Override public void userCreated(final User user, final Map<String, Object> params) {}\n            @Override public void userModified(final User user, final Map<String, Object> params) {}\n        });\n    }",
+  "unified_diff": "diff --git a/xmppserver/src/main/java/org/jivesoftware/openfire/admin/AdminManager.java b/xmppserver/src/main/java/org/jivesoftware/openfire/admin/AdminManager.java\nindex 6782b6db0..fbaa4dcb1 100644\n--- a/xmppserver/src/main/java/org/jivesoftware/openfire/admin/AdminManager.java\n+++ b/xmppserver/src/main/java/org/jivesoftware/openfire/admin/AdminManager.java\n@@ -1,5 +1,5 @@\n /*\n- * Copyright (C) 2005-2008 Jive Software, 2017-2019 Ignite Realtime Foundation. All rights reserved.\n+ * Copyright (C) 2005-2008 Jive Software, 2017-2024 Ignite Realtime Foundation. All rights reserved.\n  *\n  * Licensed under the Apache License, Version 2.0 (the \"License\");\n  * you may not use this file except in compliance with the License.\n@@ -17,8 +17,12 @@ package org.jivesoftware.openfire.admin;\n \n import java.util.ArrayList;\n import java.util.List;\n+import java.util.Map;\n \n import org.jivesoftware.openfire.XMPPServer;\n+import org.jivesoftware.openfire.event.UserEventDispatcher;\n+import org.jivesoftware.openfire.event.UserEventListener;\n+import org.jivesoftware.openfire.user.User;\n import org.jivesoftware.util.SystemProperty;\n import org.slf4j.Logger;\n import org.slf4j.LoggerFactory;\n@@ -85,6 +89,17 @@ public class AdminManager {\n     private AdminManager() {\n         // Load an admin provider.\n         initProvider(ADMIN_PROVIDER.getValue());\n+\n+        UserEventDispatcher.addListener(new UserEventListener() {\n+            @Override\n+            public void userDeleting(final User user, final Map<String, Object> params) {\n+                // OF-2758: Ensure that if a user is re-created with the same name, they're not automatically an admin.\n+                removeAdminAccount(user.getUsername());\n+            }\n+\n+            @Override public void userCreated(final User user, final Map<String, Object> params) {}\n+            @Override public void userModified(final User user, final Map<String, Object> params) {}\n+        });\n     }\n \n     private static void initProvider(final Class clazz) {",
+  "auto_locate_confidence": "auto"
+}

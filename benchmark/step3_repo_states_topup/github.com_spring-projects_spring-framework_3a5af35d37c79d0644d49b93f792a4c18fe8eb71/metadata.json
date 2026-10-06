@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_spring-projects_spring-framework_3a5af35d37c79d0644d49b93f792a4c18fe8eb71",
+  "cve_ids": [
+    "CVE-2010-1622"
+  ],
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "dea5918d66aa25ea9ad9f44598cea3f765e21f75",
+  "fixed_commit": "3a5af35d37c79d0644d49b93f792a4c18fe8eb71",
+  "changed_file": "org.springframework.beans/src/main/java/org/springframework/beans/CachedIntrospectionResults.java",
+  "max_score": "1337"
+}

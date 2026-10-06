@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_workos_authkit-nextjs_6c3f4f3179d66cbb15de3962792083ff3b244a01",
+  "cve_ids": [
+    "CVE-2024-29901"
+  ],
+  "cwe_ids": [
+    "CWE-294"
+  ],
+  "language": "typescript",
+  "repository": "workos/authkit-nextjs",
+  "repository_url": "https://github.com/workos/authkit-nextjs",
+  "vulnerable_commit": "ffd2ef4b0594e288db97b53c4a04932e9d5a397a",
+  "fixed_commit": "6c3f4f3179d66cbb15de3962792083ff3b244a01",
+  "changed_file": "src/session.ts",
+  "max_score": "1337"
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0176",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-190"
+  ],
+  "changed_files": 1,
+  "lines_added": 36,
+  "lines_removed": 4,
+  "lines_changed_total": 40,
+  "function_size_chars": 844,
+  "function_size_lines": 37,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Lenient BER/DER signature parser accepts non-canonical encodings; parser strictness is not expressible as a pattern."
+}

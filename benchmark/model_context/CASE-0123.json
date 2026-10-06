@@ -1,0 +1,42 @@
+{
+  "case_id": "CASE-0123",
+  "language": "javascript",
+  "cve_id": "CVE-2024-55500",
+  "cve_ids_all": [
+    "CVE-2024-55500"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-352",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var express = require('express');",
+    "var path = require('path');",
+    "var http = require('http');",
+    "var https = require('https');",
+    "var parseReqUrl = require('parseurl');",
+    "var bodyParser = require('body-parser');",
+    "var crypto = require('crypto');",
+    "var fs = require('fs');",
+    "var zlib = require('zlib');",
+    "var extend = require('extend');",
+    "var htdocs = require('../htdocs');",
+    "var handleWeinreReq = require('../../weinre');",
+    "var setProxy = require('./proxy');",
+    "var rulesUtil = require('../../../lib/rules/util');",
+    "var getRootCAFile = require('../../../lib/https/ca').getRootCAFile;",
+    "var config = require('../../../lib/config');",
+    "var sendError = require('../cgi-bin/util').sendError;",
+    "var parseAuth = require('../../../lib/util/common').parseAuth;",
+    "var getWorker = require('../../../lib/plugins/util').getWorker;",
+    "var loadAuthPlugins = require('../../../lib/plugins').loadAuthPlugins;",
+    "var parseUrl = require('../../../lib/util/parse-url-safe');"
+  ],
+  "vulnerable_function": "function checkAllowOrigin(req) {\n  if (config.allowAllOrigin ||\n    req.headers['sec-fetch-site'] === 'same-origin' ||\n    ALLOW_CROSS_URLS.indexOf(req.path) !== -1) {\n    return true;\n  }\n  var host = req.headers['x-whistle-origin-host'];\n  var list = config.allowOrigin;\n  if (!host) {\n    host = req.headers.origin;\n    if (!host || typeof host !== 'string') {\n      return true;\n    }\n    var index = host.indexOf('://');\n    if (index !== -1) {\n      host = host.substring(index + 3);\n    }\n    host = util.parseHost(host)[0];\n    if (!host) {\n      return false;\n    }\n    if (!list) {\n      if (config.isWebUIHost(host)) {\n        req._isWebUIHost = true;\n        return true;\n      }\n      return false;\n    }\n  }\n  if (host === '*') {\n    return false;\n  }\n  if (list) {\n    for (var i = 0, len = list.length; i < len; i++) {\n      var h = list[i];\n      if (typeof h === 'string' ? host === h : h.test(host)) {\n        return true;\n      }\n    }\n  }\n  if (config.isWebUIHost(host)) {\n    req._isWebUIHost = true;\n    return true;\n  }\n  return false;\n}",
+  "patched_function": "function isAllowHost(host) {\n  var list = config.allowOrigin;\n  if (list) {\n    for (var i = 0, len = list.length; i < len; i++) {\n      var h = list[i];\n      if (typeof h === 'string' ? host === h : h.test(host)) {\n        return true;\n      }\n    }\n  }\n}",
+  "unified_diff": "diff --git a/biz/webui/lib/index.js b/biz/webui/lib/index.js\nindex 9217eb3a1..8fa624e5b 100644\n--- a/biz/webui/lib/index.js\n+++ b/biz/webui/lib/index.js\n@@ -291,47 +291,17 @@ app.use(function(req, res, next) {\n   if (req.headers.host !== 'rootca.pro') {\n     return next();\n   }\n-  var type = 'crt';\n-  if (!req.path.indexOf('/cer')) {\n-    type = 'cer';\n+  var type = 'cer';\n+  if (!req.path.indexOf('/crt')) {\n+    type = 'crt';\n   } else if (!req.path.indexOf('/pem')) {\n     type = 'pem';\n   }\n   res.download(getRootCAFile(), 'rootCA.' + type);\n });\n \n-function checkAllowOrigin(req) {\n-  if (config.allowAllOrigin ||\n-    req.headers['sec-fetch-site'] === 'same-origin' ||\n-    ALLOW_CROSS_URLS.indexOf(req.path) !== -1) {\n-    return true;\n-  }\n-  var host = req.headers['x-whistle-origin-host'];\n+function isAllowHost(host) {\n   var list = config.allowOrigin;\n-  if (!host) {\n-    host = req.headers.origin;\n-    if (!host || typeof host !== 'string') {\n-      return true;\n-    }\n-    var index = host.indexOf('://');\n-    if (index !== -1) {\n-      host = host.substring(index + 3);\n-    }\n-    host = util.parseHost(host)[0];\n-    if (!host) {\n-      return false;\n-    }\n-    if (!list) {\n-      if (config.isWebUIHost(host)) {\n-        req._isWebUIHost = true;\n-        return true;\n-      }\n-      return false;\n-    }\n-  }\n-  if (host === '*') {\n-    return false;\n-  }\n   if (list) {\n     for (var i = 0, len = list.length; i < len; i++) {\n       var h = list[i];\n@@ -340,18 +310,41 @@ function checkAllowOrigin(req) {\n       }\n     }\n   }\n-  if (config.isWebUIHost(host)) {\n-    req._isWebUIHost = true;\n+}\n+\n+function checkInternalPath(req) {\n+  if (config.allowAllOrigin || ALLOW_CROSS_URLS.indexOf(req.path) !== -1) {\n     return true;\n   }\n-  return false;\n+  var host = req.headers['x-whistle-origin-host'];\n+  return !host || isAllowHost(host);\n+}\n+\n+function checkAllowOrigin(req) {\n+  var host = req.headers.origin;\n+  if (!host || typeof host !== 'string' ||\n+    req.headers['sec-fetch-site'] === 'same-origin') {\n+    return false;\n+  }\n+  if (config.allowAllOrigin) {\n+    return true;\n+  }\n+  if (!config.allowOrigin) {\n+    return false;\n+  }\n+  var index = host.indexOf('://');\n+  if (index !== -1) {\n+    host = host.substring(index + 3);\n+  }\n+  host = util.parseHost(host)[0];\n+  return host && isAllowHost(host);\n }\n \n function cgiHandler(req, res) {\n-  if (UP_PATH_REGEXP.test(req.path) || !checkAllowOrigin(req)) {\n+  if (UP_PATH_REGEXP.test(req.path) || !checkInternalPath(req)) {\n     return res.status(403).end('Forbidden');\n   }\n-  if (!req._isWebUIHost && req.headers.origin) {\n+  if (checkAllowOrigin(req)) {\n     res.setHeader('access-control-allow-origin', req.headers.origin);\n     res.setHeader('access-control-allow-credentials', true);\n   }",
+  "auto_locate_confidence": "auto_low_confidence"
+}

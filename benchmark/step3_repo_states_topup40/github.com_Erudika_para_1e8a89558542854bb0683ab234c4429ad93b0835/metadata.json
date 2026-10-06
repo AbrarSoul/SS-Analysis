@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_Erudika_para_1e8a89558542854bb0683ab234c4429ad93b0835",
+  "cve_ids": [
+    "CVE-2025-48955"
+  ],
+  "cwe_ids": [
+    "CWE-532"
+  ],
+  "language": "java",
+  "repository": "Erudika/para",
+  "repository_url": "https://github.com/Erudika/para",
+  "vulnerable_commit": "a48d3dff85e6d36402c2f6eea14f371acfcdbbf7",
+  "fixed_commit": "1e8a89558542854bb0683ab234c4429ad93b0835",
+  "changed_file": "para-server/src/main/java/com/erudika/para/server/utils/HealthUtils.java",
+  "max_score": "1337"
+}

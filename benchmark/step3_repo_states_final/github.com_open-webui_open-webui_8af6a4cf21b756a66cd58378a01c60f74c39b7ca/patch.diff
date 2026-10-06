@@ -1,0 +1,15 @@
+diff --git a/backend/open_webui/utils/middleware.py b/backend/open_webui/utils/middleware.py
+index dd42612ee..fc8cc1feb 100644
+--- a/backend/open_webui/utils/middleware.py
++++ b/backend/open_webui/utils/middleware.py
+@@ -2349,7 +2349,9 @@ async def process_chat_response(
+                             )
+ 
+                             if data:
+-                                if "event" in data:
++                                if "event" in data and not getattr(
++                                    request.state, "direct", False
++                                ):
+                                     await event_emitter(data.get("event", {}))
+ 
+                                 if "selected_model_id" in data:

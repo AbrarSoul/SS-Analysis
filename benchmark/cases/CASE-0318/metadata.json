@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0318",
+  "original_source_case_id": "github.com_usmannasir_cyberpanel_5b08cd6d53f4dbc2107ad9f555122ce8b0996515",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-51567",
+  "cve_ids_all": [
+    "CVE-2024-51567"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "language": "python",
+  "repository": "usmannasir/cyberpanel",
+  "repository_url": "https://github.com/usmannasir/cyberpanel",
+  "vulnerable_commit": "fd05ec40262497ca30603b81c535ee8b063b948c",
+  "fixed_commit": "5b08cd6d53f4dbc2107ad9f555122ce8b0996515",
+  "changed_file": "databases/views.py",
+  "changed_function": "def upgrademysqlstatus(request):",
+  "vulnerable_lines": [
+    504,
+    542
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 10,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0318/vulnerable_source.py": "4e059cdb008f0ece0cef74ded48ddf2acce57a43eba911efd266a247409ce7b5",
+    "cases/CASE-0318/patched_source.py": "13a04c20b0dd61b745f91b5655968d9ac9f0e4a4b426708a4949f4240e47ed30",
+    "cases/CASE-0318/patch.diff": "4d7b1c16229f85ae52808ee3d7d85476e9347be5989c7369414fa2d4de9c40fb",
+    "cases/CASE-0318/metadata.json": "66299b6fd2f87f586ff6f1db41840fa2fea0b20c684878fcb749849af5c74400",
+    "model_context/CASE-0318.json": "dd979c667f89f645699b875b03151c2db85b5441c047891de7a9257ec9065259",
+    "difficulty/CASE-0318.json": "4ba582739c1a984bc70a86d8055d6abf70024692b7ca05a1fcc0863db7842db8"
+  },
+  "case_level_hash": "9e731dfd37c2af10e05d94b5a057faab6982960dd4e1db77aaa8fbe9bd903480"
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "github.com_pyload_pyload_7b53b8d43c2c072b457dcd19c8a09bcfc3721703",
+  "cve_ids": [
+    "CVE-2023-0055"
+  ],
+  "cwe_ids": [
+    "CWE-319",
+    "CWE-614"
+  ],
+  "language": "python",
+  "repository": "pyload/pyload",
+  "repository_url": "https://github.com/pyload/pyload",
+  "vulnerable_commit": "7d73ba7919e594d783b3411d7ddb87885aea782d",
+  "fixed_commit": "7b53b8d43c2c072b457dcd19c8a09bcfc3721703",
+  "changed_file": "src/pyload/webui/app/__init__.py",
+  "max_score": "1337"
+}

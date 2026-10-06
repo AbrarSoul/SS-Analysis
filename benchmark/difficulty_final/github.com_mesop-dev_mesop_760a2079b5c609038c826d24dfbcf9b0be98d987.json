@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_mesop-dev_mesop_760a2079b5c609038c826d24dfbcf9b0be98d987",
+  "batch": "final",
+  "language": "python",
+  "cwe_ids": [
+    "CWE-125",
+    "CWE-770"
+  ],
+  "changed_files": 1,
+  "lines_added": 41,
+  "lines_removed": 14,
+  "lines_changed_total": 55,
+  "function_size_chars": 2144,
+  "function_size_lines": 54,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

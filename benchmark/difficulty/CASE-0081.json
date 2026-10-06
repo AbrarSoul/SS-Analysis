@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0081",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-15",
+    "CWE-74"
+  ],
+  "changed_files": 1,
+  "lines_added": 10,
+  "lines_removed": 16,
+  "lines_changed_total": 26,
+  "function_size_chars": 983,
+  "function_size_lines": 27,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "taint",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Value interpolated unescaped into KEY=\"value\" lines of an env file; injection into a file sink."
+}

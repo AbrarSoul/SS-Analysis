@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_soyuka_pidusage_b70eca15f7ca7f1b82a15f8a5d4bb48737f5a89d",
+  "cve_ids": [
+    "CVE-2017-1000220"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "soyuka/pidusage",
+  "repository_url": "https://github.com/soyuka/pidusage",
+  "vulnerable_commit": "e3660d8a8e5e61afad9b02af67356a1e239d6bde",
+  "fixed_commit": "b70eca15f7ca7f1b82a15f8a5d4bb48737f5a89d",
+  "changed_file": "lib/stats.js",
+  "max_score": "1337"
+}

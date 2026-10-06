@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_edmundhung_conform_4819d51b5a53fd5486fc85c17cdc148eb160e3de",
+  "cve_ids": [
+    "CVE-2024-32866"
+  ],
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "typescript",
+  "repository": "edmundhung/conform",
+  "repository_url": "https://github.com/edmundhung/conform",
+  "vulnerable_commit": "59156d7115a7207fa3b6f8a70a4342a9b24c2501",
+  "fixed_commit": "4819d51b5a53fd5486fc85c17cdc148eb160e3de",
+  "changed_file": "packages/conform-dom/formdata.ts",
+  "max_score": "1337"
+}

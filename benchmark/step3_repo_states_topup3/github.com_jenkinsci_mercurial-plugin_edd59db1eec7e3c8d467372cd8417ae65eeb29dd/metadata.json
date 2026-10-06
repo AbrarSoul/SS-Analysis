@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_jenkinsci_mercurial-plugin_edd59db1eec7e3c8d467372cd8417ae65eeb29dd",
+  "cve_ids": [
+    "CVE-2020-2306"
+  ],
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/mercurial-plugin",
+  "repository_url": "https://github.com/jenkinsci/mercurial-plugin",
+  "vulnerable_commit": "304e1b4732ad623f88e8102baae891f6c7a24403",
+  "fixed_commit": "edd59db1eec7e3c8d467372cd8417ae65eeb29dd",
+  "changed_file": "src/main/java/hudson/plugins/mercurial/traits/MercurialInstallationSCMSourceTrait.java",
+  "max_score": "1337"
+}

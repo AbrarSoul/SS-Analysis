@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0137",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-692"
+  ],
+  "changed_files": 1,
+  "lines_added": 14,
+  "lines_removed": 13,
+  "lines_changed_total": 27,
+  "function_size_chars": 4244,
+  "function_size_lines": 92,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "partially_supported",
+  "classification_rationale": "Scheme denylist runs after a same-host shortcut; ordering logic between statements, not a code-shape defect. (Faulty expression or statement order is matchable, but why it is wrong is semantic, so only partly expressible.)"
+}

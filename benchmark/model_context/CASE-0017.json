@@ -1,0 +1,29 @@
+{
+  "case_id": "CASE-0017",
+  "language": "java",
+  "cve_id": "CVE-2024-23945",
+  "cwe": [
+    {
+      "id": "CWE-209",
+      "definition": "Generation of Error Message Containing Sensitive Information"
+    }
+  ],
+  "extraction_kind": "method",
+  "class_name": "CookieSigner",
+  "containing_class_declaration": "public class CookieSigner {",
+  "imports": [
+    "import java.security.MessageDigest;",
+    "import java.security.NoSuchAlgorithmException;",
+    "import org.apache.commons.codec.binary.Base64;",
+    "import org.slf4j.Logger;",
+    "import org.slf4j.LoggerFactory;"
+  ],
+  "vulnerable_function": "  public String verifyAndExtract(String signedStr) {\n    int index = signedStr.lastIndexOf(SIGNATURE);\n    if (index == -1) {\n      throw new IllegalArgumentException(\"Invalid input sign: \" + signedStr);\n    }\n    String originalSignature = signedStr.substring(index + SIGNATURE.length());\n    String rawValue = signedStr.substring(0, index);\n    String currentSignature = getSignature(rawValue);\n\n    if (LOG.isDebugEnabled()) {\n      LOG.debug(\"Signature generated for \" + rawValue + \" inside verify is \" + currentSignature);\n    }\n    if (!MessageDigest.isEqual(originalSignature.getBytes(), currentSignature.getBytes())) {\n      throw new IllegalArgumentException(\"Invalid sign, original = \" + originalSignature +\n        \" current = \" + currentSignature);\n    }\n    return rawValue;\n  }\n",
+  "patched_function": "  public String verifyAndExtract(String signedStr) {\n    int index = signedStr.lastIndexOf(SIGNATURE);\n    if (index == -1) {\n      throw new IllegalArgumentException(\"Invalid input sign: \" + signedStr);\n    }\n    String originalSignature = signedStr.substring(index + SIGNATURE.length());\n    String rawValue = signedStr.substring(0, index);\n    String currentSignature = getSignature(rawValue);\n\n    if (LOG.isDebugEnabled()) {\n      LOG.debug(\"Signature generated for \" + rawValue + \" inside verify is \" + currentSignature);\n    }\n    if (!MessageDigest.isEqual(originalSignature.getBytes(), currentSignature.getBytes())) {\n      throw new IllegalArgumentException(\"Invalid sign\");\n    }\n    return rawValue;\n  }\n",
+  "unified_diff": "diff --git a/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java b/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java\nindex 782e47a6cd9..4b8d2cb1536 100644\n--- a/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java\n+++ b/sql/hive-thriftserver/src/main/java/org/apache/hive/service/CookieSigner.java\n@@ -81,8 +81,7 @@ public class CookieSigner {\n       LOG.debug(\"Signature generated for \" + rawValue + \" inside verify is \" + currentSignature);\n     }\n     if (!MessageDigest.isEqual(originalSignature.getBytes(), currentSignature.getBytes())) {\n-      throw new IllegalArgumentException(\"Invalid sign, original = \" + originalSignature +\n-        \" current = \" + currentSignature);\n+      throw new IllegalArgumentException(\"Invalid sign\");\n     }\n     return rawValue;\n   }",
+  "truncation_applied": false,
+  "truncation_notes": [],
+  "context_budget_chars": 12000,
+  "context_size_chars_before_truncation": 2568,
+  "context_size_chars_after_truncation": 2568
+}

@@ -1,0 +1,30 @@
+{
+  "case_id": "github.com_markdown-it_markdown-it_f76d3beb46abd121892a2e2e5c78376354c214e3",
+  "language": "javascript",
+  "cve_id": "CVE-2015-3295",
+  "cve_ids_all": [
+    "CVE-2015-3295"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-284",
+      "definition": "Improper Access Control"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "var utils        = require('./common/utils');",
+    "var helpers      = require('./helpers');",
+    "var Renderer     = require('./renderer');",
+    "var ParserCore   = require('./parser_core');",
+    "var ParserBlock  = require('./parser_block');",
+    "var ParserInline = require('./parser_inline');",
+    "var LinkifyIt    = require('linkify-it');",
+    "var mdurl        = require('mdurl');",
+    "var punycode     = require('punycode');"
+  ],
+  "vulnerable_function": "function validateLink(url) {\n  // url should be normalized at this point, and existing entities are decoded\n  //\n  var str = url.trim().toLowerCase();\n\n  if (str.indexOf(':') >= 0 && BAD_PROTOCOLS.indexOf(str.split(':')[0]) >= 0) {\n    return false;\n  }\n  return true;\n}",
+  "patched_function": "function validateLink(url) {\n  // url should be normalized at this point, and existing entities are decoded\n\n  var str      = url.trim().toLowerCase(),\n      protocol = str.split(':')[0];\n\n  if (str.indexOf(':') >= 0 && BAD_PROTOCOLS.indexOf(protocol) >= 0) {\n    if (protocol === 'data' && ALLOWED_DATA_MIMES.indexOf(str.split(';')[0]) >= 0) {\n      return true;\n    }\n    return false;\n  }\n\n  return true;\n}",
+  "unified_diff": "diff --git a/lib/index.js b/lib/index.js\nindex abc1525..320b983 100644\n--- a/lib/index.js\n+++ b/lib/index.js\n@@ -20,20 +20,41 @@ var config = {\n   commonmark: require('./presets/commonmark')\n };\n \n-\n-var BAD_PROTOCOLS    = [ 'vbscript', 'javascript', 'file' ];\n+////////////////////////////////////////////////////////////////////////////////\n+//\n+// This validator does not pretent to functionality of full weight sanitizers.\n+// It's a tradeoff between default security, simplicity and usability.\n+// If you need different setup - override validator method as you wish. Or\n+// replace it with dummy function and use external sanitizer.\n+//\n+\n+var BAD_PROTOCOLS      = [ 'vbscript', 'javascript', 'file', 'data' ];\n+var ALLOWED_DATA_MIMES = [\n+  'data:image/gif',\n+  'data:image/png',\n+  'data:image/jpeg',\n+  'data:image/webp'\n+];\n \n function validateLink(url) {\n   // url should be normalized at this point, and existing entities are decoded\n-  //\n-  var str = url.trim().toLowerCase();\n \n-  if (str.indexOf(':') >= 0 && BAD_PROTOCOLS.indexOf(str.split(':')[0]) >= 0) {\n+  var str      = url.trim().toLowerCase(),\n+      protocol = str.split(':')[0];\n+\n+  if (str.indexOf(':') >= 0 && BAD_PROTOCOLS.indexOf(protocol) >= 0) {\n+    if (protocol === 'data' && ALLOWED_DATA_MIMES.indexOf(str.split(';')[0]) >= 0) {\n+      return true;\n+    }\n     return false;\n   }\n+\n   return true;\n }\n \n+////////////////////////////////////////////////////////////////////////////////\n+\n+\n var RECODE_HOSTNAME_FOR = [ 'http:', 'https:', 'mailto:' ];\n \n function normalizeLink(url) {",
+  "auto_locate_confidence": "auto"
+}

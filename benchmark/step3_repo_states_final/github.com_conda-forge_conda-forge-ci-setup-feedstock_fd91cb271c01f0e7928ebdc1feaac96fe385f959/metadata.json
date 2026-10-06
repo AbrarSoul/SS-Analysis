@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_conda-forge_conda-forge-ci-setup-feedstock_fd91cb271c01f0e7928ebdc1feaac96fe385f959",
+  "cve_ids": [
+    "CVE-2025-49598"
+  ],
+  "cwe_ids": [
+    "CWE-95"
+  ],
+  "language": "python",
+  "repository": "conda-forge/conda-forge-ci-setup-feedstock",
+  "repository_url": "https://github.com/conda-forge/conda-forge-ci-setup-feedstock",
+  "vulnerable_commit": "c3bd014fec4acbeb6adfad49385222bdf4b3fd9f",
+  "fixed_commit": "fd91cb271c01f0e7928ebdc1feaac96fe385f959",
+  "changed_file": "recipe/setup.py",
+  "max_score": "1337"
+}

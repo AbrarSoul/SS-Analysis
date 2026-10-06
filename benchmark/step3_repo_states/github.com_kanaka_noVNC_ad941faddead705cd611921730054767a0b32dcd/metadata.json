@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_kanaka_noVNC_ad941faddead705cd611921730054767a0b32dcd",
+  "cve_ids": [
+    "CVE-2013-7436"
+  ],
+  "cwe_ids": [
+    "CWE-310"
+  ],
+  "language": "javascript",
+  "repository": "kanaka/noVNC",
+  "repository_url": "https://github.com/kanaka/noVNC",
+  "vulnerable_commit": "142aa4583cd0ffa11e8ebc19a52f024f1ff1b235",
+  "fixed_commit": "ad941faddead705cd611921730054767a0b32dcd",
+  "changed_file": "include/webutil.js",
+  "max_score": "1337"
+}

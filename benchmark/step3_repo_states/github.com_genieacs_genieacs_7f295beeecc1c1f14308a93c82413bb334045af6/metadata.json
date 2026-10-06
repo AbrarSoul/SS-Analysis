@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_genieacs_genieacs_7f295beeecc1c1f14308a93c82413bb334045af6",
+  "cve_ids": [
+    "CVE-2021-46704"
+  ],
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "typescript",
+  "repository": "genieacs/genieacs",
+  "repository_url": "https://github.com/genieacs/genieacs",
+  "vulnerable_commit": "2ac536bf8f2dd03c24b2eff35b69578b4efae94e",
+  "fixed_commit": "7f295beeecc1c1f14308a93c82413bb334045af6",
+  "changed_file": "lib/ping.ts",
+  "max_score": "1337"
+}

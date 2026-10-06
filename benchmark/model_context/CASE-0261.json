@@ -1,0 +1,38 @@
+{
+  "case_id": "CASE-0261",
+  "language": "javascript",
+  "cve_id": "CVE-2025-61668",
+  "cve_ids_all": [
+    "CVE-2025-61668"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-476",
+      "definition": "(definition not found)"
+    },
+    {
+      "id": "CWE-754",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import Cookies from 'universal-cookie';",
+    "import jwtDecode from 'jwt-decode';",
+    "import compact from 'lodash/compact';",
+    "import flatten from 'lodash/flatten';",
+    "import union from 'lodash/union';",
+    "import { matchPath } from 'react-router';",
+    "import qs from 'query-string';",
+    "import config from '@plone/volto/registry';",
+    "import {",
+    "import { changeLanguage } from '@plone/volto/actions/language/language';",
+    "import { updateUploadedFiles } from '@plone/volto/actions/content/content';",
+    "import {",
+    "import { getCookieOptions } from '@plone/volto/helpers/Cookies/cookies';"
+  ],
+  "vulnerable_function": "            else if (error?.response?.statusCode === 401) {\n              next({\n                ...rest,\n                error,\n                statusCode: error.response,\n                message: error.response.body.message,\n                connectionRefused: false,\n                type: SET_APIERROR,\n              });\n            }",
+  "patched_function": "            else if (error?.response?.statusCode === 401) {\n              next({\n                ...rest,\n                error,\n                statusCode: error.response,\n                message: error.response?.body?.message,\n                connectionRefused: false,\n                type: SET_APIERROR,\n              });\n            }",
+  "unified_diff": "diff --git a/packages/volto/src/middleware/api.js b/packages/volto/src/middleware/api.js\nindex da13c50f6..2202d7a1b 100644\n--- a/packages/volto/src/middleware/api.js\n+++ b/packages/volto/src/middleware/api.js\n@@ -410,7 +410,7 @@ const apiMiddlewareFactory =\n                 ...rest,\n                 error,\n                 statusCode: error.response,\n-                message: error.response.body.message,\n+                message: error.response?.body?.message,\n                 connectionRefused: false,\n                 type: SET_APIERROR,\n               });",
+  "auto_locate_confidence": "auto"
+}

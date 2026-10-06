@@ -1,0 +1,33 @@
+{
+  "case_id": "github.com_pyload_pyload_bd2a31b7de54570b919aa1581d486e6ee18c0f64",
+  "language": "python",
+  "cve_id": "CVE-2023-0057",
+  "cve_ids_all": [
+    "CVE-2023-0057"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-1021",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": "App",
+  "imports": [
+    "import os",
+    "import flask",
+    "import jinja2",
+    "from werkzeug.serving import WSGIRequestHandler",
+    "from .blueprints import BLUEPRINTS",
+    "from .config import get_default_config",
+    "from .extensions import EXTENSIONS, THEMES",
+    "from .filters import TEMPLATE_FILTERS",
+    "from .globals import TEMPLATE_GLOBALS",
+    "from .handlers import ERROR_HANDLERS",
+    "from .helpers import JSONEncoder",
+    "from .processors import CONTEXT_PROCESSORS"
+  ],
+  "vulnerable_function": "    def _configure_handlers(cls, app):\n        \"\"\"\n        Register error handlers.\n        \"\"\"\n        for exc, fn in cls.FLASK_ERROR_HANDLERS:\n            app.register_error_handler(exc, fn)\n",
+  "patched_function": "    def _configure_handlers(cls, app):\n        \"\"\"\n        Register app handlers.\n        \"\"\"\n        for exc, fn in cls.FLASK_ERROR_HANDLERS:\n            app.register_error_handler(exc, fn)\n\n        @app.after_request\n        def deny_iframe(response):\n            response.headers[\"X-Frame-Options\"] = \"DENY\"\n            return response\n",
+  "unified_diff": "diff --git a/src/pyload/webui/app/__init__.py b/src/pyload/webui/app/__init__.py\nindex 3441f5bab..ffdc15eeb 100644\n--- a/src/pyload/webui/app/__init__.py\n+++ b/src/pyload/webui/app/__init__.py\n@@ -60,11 +60,16 @@ class App:\n     @classmethod\n     def _configure_handlers(cls, app):\n         \"\"\"\n-        Register error handlers.\n+        Register app handlers.\n         \"\"\"\n         for exc, fn in cls.FLASK_ERROR_HANDLERS:\n             app.register_error_handler(exc, fn)\n \n+        @app.after_request\n+        def deny_iframe(response):\n+            response.headers[\"X-Frame-Options\"] = \"DENY\"\n+            return response\n+\n     @classmethod\n     def _configure_json_encoding(cls, app):\n         app.json_encoder = JSONEncoder",
+  "auto_locate_confidence": "auto"
+}

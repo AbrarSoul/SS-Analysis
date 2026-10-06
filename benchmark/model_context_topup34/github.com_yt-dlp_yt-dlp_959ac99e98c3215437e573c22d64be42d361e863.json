@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_yt-dlp_yt-dlp_959ac99e98c3215437e573c22d64be42d361e863",
+  "language": "python",
+  "cve_id": "CVE-2025-54072",
+  "cve_ids_all": [
+    "CVE-2025-54072"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-78",
+      "definition": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    }
+  ],
+  "containing_class_declaration": "ExecPP",
+  "imports": [
+    "from .common import PostProcessor",
+    "from ..utils import Popen, PostProcessingError, shell_quote, variadic"
+  ],
+  "vulnerable_function": "    def parse_cmd(self, cmd, info):\n        tmpl, tmpl_dict = self._downloader.prepare_outtmpl(cmd, info)\n        if tmpl_dict:  # if there are no replacements, tmpl_dict = {}\n            return self._downloader.escape_outtmpl(tmpl) % tmpl_dict\n\n        filepath = info.get('filepath', info.get('_filename'))\n        # If video, and no replacements are found, replace {} for backard compatibility\n        if filepath:\n            if '{}' not in cmd:\n                cmd += ' {}'\n            cmd = cmd.replace('{}', shell_quote(filepath))\n        return cmd\n",
+  "patched_function": "    def parse_cmd(self, cmd, info):\n        tmpl, tmpl_dict = self._downloader.prepare_outtmpl(cmd, info)\n        if tmpl_dict:  # if there are no replacements, tmpl_dict = {}\n            return self._downloader.escape_outtmpl(tmpl) % tmpl_dict\n\n        filepath = info.get('filepath', info.get('_filename'))\n        # If video, and no replacements are found, replace {} for backard compatibility\n        if filepath:\n            if '{}' not in cmd:\n                cmd += ' {}'\n            cmd = cmd.replace('{}', shell_quote(filepath, shell=True))\n        return cmd\n",
+  "unified_diff": "diff --git a/yt_dlp/postprocessor/exec.py b/yt_dlp/postprocessor/exec.py\nindex 1f0a0015e..243487dd2 100644\n--- a/yt_dlp/postprocessor/exec.py\n+++ b/yt_dlp/postprocessor/exec.py\n@@ -18,7 +18,7 @@ def parse_cmd(self, cmd, info):\n         if filepath:\n             if '{}' not in cmd:\n                 cmd += ' {}'\n-            cmd = cmd.replace('{}', shell_quote(filepath))\n+            cmd = cmd.replace('{}', shell_quote(filepath, shell=True))\n         return cmd\n \n     def run(self, info):",
+  "auto_locate_confidence": "auto"
+}

@@ -1,0 +1,20 @@
+{
+  "case_id": "github.com_microweber-dev_whmcs_plugin_2e7a11d332db79cc52ccda00455a15f4dc6147ff",
+  "batch": "final",
+  "language": "javascript",
+  "cwe_ids": [
+    "CWE-41",
+    "CWE-706"
+  ],
+  "changed_files": 1,
+  "lines_added": 9,
+  "lines_removed": 0,
+  "lines_changed_total": 9,
+  "function_size_chars": 2723,
+  "function_size_lines": 91,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": null,
+  "structural_or_context_heavy": null,
+  "supported_status": null,
+  "classification_pending_reason": "Deferred to Section 9 (test-bundle construction) -- these three fields require genuine per-case understanding of the vulnerability mechanism, not something mechanically derivable from the diff alone."
+}

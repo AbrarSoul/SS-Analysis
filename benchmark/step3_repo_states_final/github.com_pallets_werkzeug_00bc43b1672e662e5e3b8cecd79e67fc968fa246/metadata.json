@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_pallets_werkzeug_00bc43b1672e662e5e3b8cecd79e67fc968fa246",
+  "cve_ids": [
+    "CVE-2019-14806"
+  ],
+  "cwe_ids": [
+    "CWE-331"
+  ],
+  "language": "python",
+  "repository": "pallets/werkzeug",
+  "repository_url": "https://github.com/pallets/werkzeug",
+  "vulnerable_commit": "2cbdf2b02273daccf85845b1e1569096e65ffe58",
+  "fixed_commit": "00bc43b1672e662e5e3b8cecd79e67fc968fa246",
+  "changed_file": "src/werkzeug/debug/__init__.py",
+  "max_score": "1337"
+}

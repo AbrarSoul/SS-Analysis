@@ -1,0 +1,23 @@
+{
+  "case_id": "github.com_wekan_wekan_0b0e16c3eae28bbf453d33a81a9c58ce7db6d5bb",
+  "language": "javascript",
+  "cve_id": "CVE-2026-25560",
+  "cve_ids_all": [
+    "CVE-2026-25560"
+  ],
+  "cwe": [
+    {
+      "id": "CWE-90",
+      "definition": "(definition not found)"
+    }
+  ],
+  "containing_class_declaration": null,
+  "imports": [
+    "import ldapjs from 'ldapjs';",
+    "import { Log } from 'meteor/logging';"
+  ],
+  "vulnerable_function": "  bindUserIfNecessary(username, password) {\n\n    if (this.domainBinded === true) {\n      return;\n    }\n\n    if (!this.options.User_Authentication) {\n      return;\n    }\n\n    /* if SimpleAuth is configured, the BaseDN is not needed */\n    if (!this.options.BaseDN && !this.options.AD_Simple_Auth) throw new Error('BaseDN is not provided');\n\n    var userDn = \"\";\n    if (this.options.AD_Simple_Auth === true || this.options.AD_Simple_Auth === 'true') {\n      userDn = `${username}@${this.options.Default_Domain}`;\n    } else {\n      userDn = `${this.options.User_Authentication_Field}=${username},${this.options.BaseDN}`;\n    }\n\n    Log.info(`Binding with User ${userDn}`);\n\n    this.bindSync(userDn, password);\n    this.domainBinded = true;\n  }",
+  "patched_function": "  bindUserIfNecessary(username, password) {\n\n    if (this.domainBinded === true) {\n      return;\n    }\n\n    if (!this.options.User_Authentication) {\n      return;\n    }\n\n    /* if SimpleAuth is configured, the BaseDN is not needed */\n    if (!this.options.BaseDN && !this.options.AD_Simple_Auth) throw new Error('BaseDN is not provided');\n\n    // Escape the username to prevent LDAP injection in DN construction\n    const escapedUsername = escapedToHex(username);\n    var userDn = \"\";\n    if (this.options.AD_Simple_Auth === true || this.options.AD_Simple_Auth === 'true') {\n      userDn = `${escapedUsername}@${this.options.Default_Domain}`;\n    } else {\n      userDn = `${this.options.User_Authentication_Field}=${escapedUsername},${this.options.BaseDN}`;\n    }\n\n    Log.info(`Binding with User ${userDn}`);\n\n    this.bindSync(userDn, password);\n    this.domainBinded = true;\n  }",
+  "unified_diff": "diff --git a/packages/wekan-ldap/server/ldap.js b/packages/wekan-ldap/server/ldap.js\nindex 428196423..890b03b4e 100644\n--- a/packages/wekan-ldap/server/ldap.js\n+++ b/packages/wekan-ldap/server/ldap.js\n@@ -208,7 +208,9 @@ export default class LDAP {\n       }\n     }\n \n-    const usernameFilter = this.options.User_Search_Field.split(',').map((item) => `(${item}=${username})`);\n+    // Escape the username to prevent LDAP injection\n+    const escapedUsername = escapedToHex(username);\n+    const usernameFilter = this.options.User_Search_Field.split(',').map((item) => `(${item}=${escapedUsername})`);\n \n     if (usernameFilter.length === 0) {\n       Log.error('LDAP_LDAP_User_Search_Field not defined');\n@@ -234,11 +236,13 @@ export default class LDAP {\n     /* if SimpleAuth is configured, the BaseDN is not needed */\n     if (!this.options.BaseDN && !this.options.AD_Simple_Auth) throw new Error('BaseDN is not provided');\n \n+    // Escape the username to prevent LDAP injection in DN construction\n+    const escapedUsername = escapedToHex(username);\n     var userDn = \"\";\n     if (this.options.AD_Simple_Auth === true || this.options.AD_Simple_Auth === 'true') {\n-      userDn = `${username}@${this.options.Default_Domain}`;\n+      userDn = `${escapedUsername}@${this.options.Default_Domain}`;\n     } else {\n-      userDn = `${this.options.User_Authentication_Field}=${username},${this.options.BaseDN}`;\n+      userDn = `${this.options.User_Authentication_Field}=${escapedUsername},${this.options.BaseDN}`;\n     }\n \n     Log.info(`Binding with User ${userDn}`);\n@@ -381,8 +385,10 @@ export default class LDAP {\n \n     filter.push(')');\n \n+    // Escape the username to prevent LDAP injection\n+    const escapedUsername = escapedToHex(username);\n     const searchOptions = {\n-      filter: filter.join('').replace(/#{username}/g, username).replace(\"\\\\\", \"\\\\\\\\\"),\n+      filter: filter.join('').replace(/#{username}/g, escapedUsername).replace(\"\\\\\", \"\\\\\\\\\"),\n       scope : 'sub',\n     };\n \n@@ -429,8 +435,10 @@ export default class LDAP {\n     }\n     filter.push(')');\n \n+    // Escape the username to prevent LDAP injection\n+    const escapedUsername = escapedToHex(username);\n     const searchOptions = {\n-      filter: filter.join('').replace(/#{username}/g, username).replace(\"\\\\\", \"\\\\\\\\\"),\n+      filter: filter.join('').replace(/#{username}/g, escapedUsername).replace(\"\\\\\", \"\\\\\\\\\"),\n       scope : 'sub',\n     };\n ",
+  "auto_locate_confidence": "auto_low_confidence"
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_wildfly-security_jboss-negotiation_0dc9d191b6eb1d13b8f0189c5b02ba6576f4722e",
+  "cve_ids": [
+    "CVE-2015-1849"
+  ],
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "java",
+  "repository": "wildfly-security/jboss-negotiation",
+  "repository_url": "https://github.com/wildfly-security/jboss-negotiation",
+  "vulnerable_commit": "347d35e7b4cd72f1148f27d4b263d269a43f108f",
+  "fixed_commit": "0dc9d191b6eb1d13b8f0189c5b02ba6576f4722e",
+  "changed_file": "jboss-negotiation-extras/src/main/java/org/jboss/security/negotiation/AdvancedLdapLoginModule.java",
+  "max_score": "1337"
+}

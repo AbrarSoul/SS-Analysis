@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0033",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-300",
+    "CWE-319",
+    "CWE-598"
+  ],
+  "changed_files": 1,
+  "lines_added": 1,
+  "lines_removed": 1,
+  "lines_changed_total": 2,
+  "function_size_chars": 771,
+  "function_size_lines": 24,
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "classification_rationale": "http:// vs https:// literal in a URL constructor call; self-contained.",
+  "supported_status": "supported"
+}

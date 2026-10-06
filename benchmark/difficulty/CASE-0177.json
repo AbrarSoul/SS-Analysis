@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0177",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-256"
+  ],
+  "changed_files": 1,
+  "lines_added": 26,
+  "lines_removed": 3,
+  "lines_changed_total": 29,
+  "function_size_chars": 3638,
+  "function_size_lines": 93,
+  "auto_locate_confidence": "auto",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "structural",
+  "supported_status": "supported",
+  "classification_rationale": "Password stored via config.update('defaultPassword', ...) into settings.json; secret-in-plain-config pattern."
+}

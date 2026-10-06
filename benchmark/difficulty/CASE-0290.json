@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0290",
+  "batch": "final",
+  "language": "typescript",
+  "cwe_ids": [
+    "CWE-670"
+  ],
+  "changed_files": 1,
+  "lines_added": 60,
+  "lines_removed": 18,
+  "lines_changed_total": 78,
+  "function_size_chars": 796,
+  "function_size_lines": 18,
+  "auto_locate_confidence": "auto_low_confidence",
+  "pattern_or_taint": "pattern",
+  "structural_or_context_heavy": "context_heavy",
+  "supported_status": "unsupported",
+  "classification_rationale": "Payment validation checks the balance and reference but not the memo or instruction; business-logic completeness."
+}

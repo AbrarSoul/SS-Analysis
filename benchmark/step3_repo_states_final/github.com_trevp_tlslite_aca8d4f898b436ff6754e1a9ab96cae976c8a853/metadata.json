@@ -1,0 +1,16 @@
+{
+  "case_id": "github.com_trevp_tlslite_aca8d4f898b436ff6754e1a9ab96cae976c8a853",
+  "cve_ids": [
+    "CVE-2015-3220"
+  ],
+  "cwe_ids": [
+    "CWE-119"
+  ],
+  "language": "python",
+  "repository": "trevp/tlslite",
+  "repository_url": "https://github.com/trevp/tlslite",
+  "vulnerable_commit": "496980fdc2bc980ca120aed511cffdf8766d9ffe",
+  "fixed_commit": "aca8d4f898b436ff6754e1a9ab96cae976c8a853",
+  "changed_file": "tlslite/tlsrecordlayer.py",
+  "max_score": "1337"
+}
