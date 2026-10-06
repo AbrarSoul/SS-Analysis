@@ -22,10 +22,11 @@ here explaining why, and the original (pre-correction) value remains readable at
       disposable pre-experiment smoke-test run (`results/runs_final_realsmoke_*`, never part of
       any reported result — contained embedded git clones that would have complicated the commit
       without adding anything the audit needs).
-- [x] **Step 2 — Audit the evaluator.** COMPLETE. Wrapper schema restrictions, Semgrep errors,
-      skipped files, finding-location checks, original vs. transformed samples; separated
-      compilation success from visible-pair acceptance. Findings 1-4 below; Finding 1 (serious) is
-      fixed and committed.
+- [x] **Step 2 — Audit the evaluator.** COMPLETE (reopened once, see Finding 5, while starting
+      Step 3 — a real gap in the original audit, not held back deliberately). Wrapper schema
+      restrictions, Semgrep errors, skipped files, finding-location checks, original vs.
+      transformed samples; separated compilation success from visible-pair acceptance. Findings
+      1-5 below; Finding 1 (serious) is fixed and committed.
 - [ ] **Step 3 — Audit questionable dataset cases.** All "kept and flagged" cases, incomplete
       fixes, uncertain negatives, parsing problems; complete the prepared independent label review.
       NOT STARTED.
@@ -200,6 +201,46 @@ wrapper layer.
 **Step 2 is now complete.** Moving to Step 6 (recalculate statistics) directly, per the user's
 instruction to finish any remaining Step 2 items before rerunning Section 22's statistical battery
 on the corrected data from Finding 1's fix.
+
+### 2026-10-06 — Finding 5 (found while starting Step 3, retroactively belongs to Step 2): wrapper
+### requires a literal top-level `pattern` key, rejecting valid composite-pattern rules
+
+While beginning Step 3's dataset audit, re-read `Implementation_Log.md`'s own record of this exact
+issue (Section 12.30-adjacent, "Noted, not changed" at the time): `autogrep/llm_client.py`'s
+`validate_rule_schema()` hard-requires a literal `pattern` key (`required_fields = ['id', 'pattern',
+'message', 'severity', 'languages']`). Re-verified directly in the current code: this means ANY
+syntactically valid Semgrep rule using `patterns:` (the list combinator), `pattern-either:`, or
+`pattern-not:` instead of a bare `pattern:` string is rejected by THIS WRAPPER before ever reaching
+Semgrep — even though Semgrep itself accepts all of these forms. This is exactly the audit's named
+concern ("wrapper schema restrictions... a valid rule rejected only during offline scoring"), except
+it fires at GENERATION time, not offline scoring, for every model in the entire study, in every
+condition (primary benchmark, C2, C3, C4) — `parse_and_sanitize_response()` is the single shared
+code path all of them use.
+
+**Practical significance, checked rather than assumed**: a model correctly using `pattern-not` to
+exclude a benign look-alike — directly relevant to this study's own FPR metric — can never do so
+successfully, no matter how good the underlying reasoning is. This is a structural ceiling on every
+condition's achievable FPR, not a per-model quirk.
+
+**Measured real-world footprint**: searched every real generation/episode log (primary benchmark,
+C2, C3, C4) for this specific rejection (`"Missing required fields: pattern"` or `"...pattern,
+message"`) — found 16 occurrences total, ALL concentrated in C2 (1 in `deepseek-coder:6.7b`, 15 in
+`magicoder:7b` — zero in the primary benchmark's raw/autogrep conditions and zero in C3/C4).
+**Cannot verify whether these 16 are genuine composite-pattern attempts wrongly rejected, or just
+malformed output from `magicoder:7b`** (independently established as one of this study's weakest,
+least format-consistent models) **that happened to omit `pattern` for an unrelated reason** — no raw
+rule text was retained for C2 (confirmed: its episode schema has no text field for the proposed
+rule), so this cannot be resolved retroactively without either recovering lost artifacts (not
+available) or regenerating (a rerun, not justified by 16 out of several thousand real attempts).
+
+**Resolution**: NOT retroactively fixable with available data, and the observed footprint (16
+occurrences, concentrated in one already-weak model/condition pair) does not justify a full rerun
+under "rerun only what the audit shows is necessary." This is reported as a disclosed **validity
+threat / known limitation** for the manuscript (Step 7's job) rather than silently left out: the
+study structurally could never evaluate any model's ability to express a vulnerability using
+Semgrep's composite pattern forms, and this plausibly suppresses achievable FPR for any model whose
+best rule-writing instinct would have reached for `pattern-not`. Stated honestly rather than buried,
+per the audit's own "do not claim complete contamination/limitation removal" spirit.
 
 ### 2026-10-06 — Finding 1 FIXED, impact measured: this is a major correction, not a minor one
 
