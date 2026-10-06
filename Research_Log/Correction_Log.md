@@ -27,12 +27,13 @@ here explaining why, and the original (pre-correction) value remains readable at
       restrictions, Semgrep errors, skipped files, finding-location checks, original vs.
       transformed samples; separated compilation success from visible-pair acceptance. Findings
       1-5 below; Finding 1 (serious) is fixed and committed.
-- [~] **Step 3 — Audit questionable dataset cases.** SUBSTANTIALLY COMPLETE. All 11 kept-and-flagged
-      cases documented with their specific concerns; benign-lookalike uncertain-negative count
-      corrected to 4 confirmed; bypassable-fix ground-truth concern quantified (negligible measured
-      impact, no rerun needed); 2 parsing-problem cases confirmed. THREE ITEMS LEFT OPEN FOR THE
-      USER, not resolved by this session: the CASE-0166/CASE-0063 precedent inconsistency, CASE-0084's
-      explicitly-reversible hand-curation decision, and the independent second-rater review (needs
+- [x] **Step 3 — Audit questionable dataset cases.** COMPLETE except the independent second-rater
+      review, which depends on action outside this session. All 11 kept-and-flagged cases documented
+      with their specific concerns; benign-lookalike uncertain-negative count corrected to 4
+      confirmed; bypassable-fix ground-truth concern quantified (negligible measured impact, no
+      rerun needed); 2 parsing-problem cases confirmed; CASE-0166 excluded and CASE-0084 kept, both
+      per the user's explicit decision (2026-10-07). Remaining open item: the independent second-rater
+      review (needs
       a genuinely independent rater, not this session).
 - [x] **Step 4 — Recompute all metrics consistently.** COMPLETE. All 5 required rows (compilation
       rate, acceptance coverage, conditional MCC, end-to-end hidden-positive detection rate,
@@ -541,3 +542,34 @@ Step 4 is now complete. Combined with Steps 1-3, 5, and 6 all complete, the only
 Step 7: rewriting `Paper_Draft_Notes.md` with the corrected numbers, the explicit 5-row tables, the
 hedged causal language, and the specific manuscript-wording corrections the audit lists (contamination
 language, "no statistically detectable difference" phrasing, elapsed-runtime-not-GPU-hours, etc.).
+
+### 2026-10-07 — The 3 open Step 3 decisions: 2 resolved by the user, 1 still pending
+
+**CASE-0166: EXCLUDED, on the user's explicit decision** ("The upstream patched revision does not
+compile, so it cannot serve as a verified executable negative reference. Adding the missing
+constant would create a researcher-modified fix rather than preserve the real upstream revision").
+Implemented as a new row in `benchmark/exclusion_log.csv`, keyed by its original source id
+(`github.com_foxinmy_weixin4j_...`), explicitly marked `post_hoc_audit_2026-10-06` to distinguish it
+from the original curation-time exclusion+topup cycle — this is a provenance record, NOT a trigger
+for case-ID renumbering or a replacement case (that mechanism was for ongoing curation, not a
+post-hoc audit correction on an already-fully-experimented-on dataset). **Measured impact: zero.**
+Confirmed directly: `CASE-0166` already carried `semgrep_representability=unsupported` (excluded
+from every headline 153-case comparison already) and has 0 hits in every `sample_execution_log`
+across all 300 cases × 8 models (searched directly) — every generation attempt for this case failed
+before reaching Semgrep execution, so it never contributed a single sample to any pooled MCC/VGR/FPR
+number. The only cosmetic change going forward: the full dataset should be described as 299 cases in
+any new narrative text, not 300 — no existing reported number needs correction.
+
+**CASE-0084: KEPT, finalized** ("Replacing an incorrectly selected introducing commit with the
+verified real fixing commit corrects the dataset's provenance. It does not invent or modify the
+upstream fix. This is consistent with CASE-0078."). The "flagged so it can be reversed" note from
+curation time is now resolved — no further action needed, no change to any existing number (the
+hand-curation was already baked into every result reported so far).
+
+**Independent second-rater review: still pending**, genuinely requires the user's own participation
+(or another independent party) — instructions already given separately. Not something this session
+can resolve further; the manuscript should state its status honestly (completed with real
+percent-agreement/kappa numbers, or disclosed as "prepared but not completed") once the user decides.
+
+**Step 3 is now fully resolved** except for the second-rater item, which depends on action outside
+this session. Proceeding to Step 7 (the paper rewrite) next.
