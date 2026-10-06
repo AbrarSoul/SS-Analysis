@@ -34,11 +34,10 @@ here explaining why, and the original (pre-correction) value remains readable at
       USER, not resolved by this session: the CASE-0166/CASE-0063 precedent inconsistency, CASE-0084's
       explicitly-reversible hand-curation decision, and the independent second-rater review (needs
       a genuinely independent rater, not this session).
-- [~] **Step 4 — Recompute all metrics consistently.** Compilation rate / acceptance coverage /
-      conditional MCC·VGR·FPR computed and corrected (compilation-vs-acceptance split: Finding 2;
-      MCC/VGR correction: Finding 1). NOT YET DONE: the explicit end-to-end hidden-positive
-      detection rate and end-to-end successful rule rate rows (ESR already approximates the
-      latter but hasn't been relabeled/presented as such in the paper draft itself yet).
+- [x] **Step 4 — Recompute all metrics consistently.** COMPLETE. All 5 required rows (compilation
+      rate, acceptance coverage, conditional MCC, end-to-end hidden-positive detection rate,
+      end-to-end successful rule rate) built for every condition with explicit denominators —
+      `pipeline/build_step4_tables.py`, full output `results_corrected/step4_tables_report.txt`.
 - [x] **Step 5 — Verify workflow comparability.** COMPLETE. See
       `Research_Log/Workflow_Comparability_C2_C3_C4.md`. Found 3 previously-unstated real
       asymmetries beyond "role separation": C3/C4's Rule Generation never sees the raw diff (only
@@ -510,3 +509,35 @@ not assumed.
 Everything else in Step 3 (the 11 kept-and-flagged cases' concerns, the corrected benign-lookalike
 count, the 2 parsing-problem cases, the bypassable-fix sensitivity check) is now documented,
 quantified, and — where checked — confirmed to have no further corrective action required.
+
+### 2026-10-06 — Step 4 (recompute all metrics consistently): the explicit 5-row table
+
+Built `pipeline/build_step4_tables.py` against the CORRECTED data throughout. Full output:
+`results_corrected/step4_tables_report.txt`. Every row's denominator is stated explicitly; a
+missing/invalid rule contributes 0 to the end-to-end detection numerator and 0 to the end-to-end
+success numerator, never silently excluded from either denominator and never credited as a true
+negative for a scan that never ran.
+
+**One real limitation surfaced while building this, stated rather than hidden**: for the
+`autogrep` primary-benchmark condition specifically, compilation rate and acceptance coverage come
+out IDENTICAL for every model. This is not a bug — Autogrep's own retry loop only ever RETURNS a
+rule once it has already passed full validation (`semgrep_valid = autogrep_rule is not None` by
+construction, `run_generation.py` line 201/302), so the "compiled but failed discrimination"
+distinction that IS visible for `raw`/C2/C3/C4 is structurally invisible for `autogrep` — there is
+no way to recover it retroactively without re-architecting that condition's own validation loop.
+
+**The headline result — this is the single most important corrected number in the whole study**:
+end-to-end hidden-positive detection rates range **1.6%-16.3%** across every condition, and
+end-to-end successful-rule rates range **0.7%-5.9%** — both dramatically lower than the "conditional"
+MCC/VGR numbers (computed only among already-accepted cases, 0.36-0.67 MCC) that this project has
+reported throughout. The best-performing condition by end-to-end success is `C3-S` (5.2%, 8/153)
+and `DeepHat-V1-7B` under C2 (5.9%, 9/153) — meaning even the best-performing condition in this
+entire study solves fewer than 1 in 16 requested cases completely end-to-end. This is exactly the
+gap the audit named as "the paper's strongest current focus" — now quantified precisely, per
+condition, rather than left implicit behind conditional-quality numbers that look far more
+favorable in isolation.
+
+Step 4 is now complete. Combined with Steps 1-3, 5, and 6 all complete, the only remaining work is
+Step 7: rewriting `Paper_Draft_Notes.md` with the corrected numbers, the explicit 5-row tables, the
+hedged causal language, and the specific manuscript-wording corrections the audit lists (contamination
+language, "no statistically detectable difference" phrasing, elapsed-runtime-not-GPU-hours, etc.).

@@ -1,0 +1,43 @@
+==================================================================================================================================
+PRIMARY BENCHMARK -- autogrep condition, CORRECTED data, 153 supported cases
+==================================================================================================================================
+qwen2.5-coder:7b-instruct              n= 153  compile= 31.4%  accept= 31.4%  cond.MCC=   0.514  e2e-detect= 16.0% (49/306)  e2e-success=  4.6% (7/153)
+qwen2.5-coder:32b                      n= 153  compile= 30.1%  accept= 30.1%  cond.MCC=   0.536  e2e-detect= 16.0% (49/306)  e2e-success=  4.6% (7/153)
+DeepHat-V1-7B                          n= 153  compile= 35.9%  accept= 35.9%  cond.MCC=   0.543  e2e-detect= 16.0% (49/306)  e2e-success=  5.9% (9/153)
+deepseek-coder:6.7b                    n= 153  compile= 11.8%  accept= 11.8%  cond.MCC=   0.373  e2e-detect=  2.6% (8/306)  e2e-success=  1.3% (2/153)
+codegemma:7b                           n= 153  compile= 18.3%  accept= 18.3%  cond.MCC=   0.521  e2e-detect=  6.9% (21/306)  e2e-success=  2.0% (3/153)
+magicoder:7b                           n= 153  compile=  9.8%  accept=  9.8%  cond.MCC=   0.374  e2e-detect=  2.3% (7/306)  e2e-success=  0.7% (1/153)
+yi-coder:9b                            n= 153  compile= 29.4%  accept= 29.4%  cond.MCC=   0.529  e2e-detect= 14.1% (43/306)  e2e-success=  5.2% (8/153)
+codellama:7b-instruct-fp16             n= 153  compile= 15.7%  accept= 15.7%  cond.MCC=   0.508  e2e-detect=  4.6% (14/306)  e2e-success=  0.7% (1/153)
+
+==================================================================================================================================
+PRIMARY BENCHMARK -- raw condition, CORRECTED data, 153 supported cases
+==================================================================================================================================
+qwen2.5-coder:7b-instruct              n= 153  compile= 73.2%  accept= 24.2%  cond.MCC=   0.627  e2e-detect= 15.0% (46/306)  e2e-success=  3.9% (6/153)
+qwen2.5-coder:32b                      n= 153  compile= 79.7%  accept= 25.5%  cond.MCC=   0.628  e2e-detect= 16.0% (49/306)  e2e-success=  4.6% (7/153)
+DeepHat-V1-7B                          n= 153  compile= 83.7%  accept= 28.1%  cond.MCC=   0.589  e2e-detect= 14.4% (44/306)  e2e-success=  5.2% (8/153)
+deepseek-coder:6.7b                    n= 153  compile= 72.5%  accept=  6.5%  cond.MCC=   0.481  e2e-detect=  1.6% (5/306)  e2e-success=  0.7% (1/153)
+codegemma:7b                           n= 153  compile= 71.9%  accept= 13.1%  cond.MCC=   0.580  e2e-detect=  5.6% (17/306)  e2e-success=  2.0% (3/153)
+magicoder:7b                           n= 153  compile= 56.2%  accept=  3.9%  cond.MCC=   0.520  e2e-detect=  1.6% (5/306)  e2e-success=  0.7% (1/153)
+yi-coder:9b                            n= 153  compile= 76.5%  accept= 19.0%  cond.MCC=   0.583  e2e-detect= 10.5% (32/306)  e2e-success=  3.3% (5/153)
+codellama:7b-instruct-fp16             n= 153  compile= 70.6%  accept= 11.1%  cond.MCC=   0.500  e2e-detect=  2.9% (9/306)  e2e-success=  0.0% (0/153)
+
+==================================================================================================================================
+C2, CORRECTED data, 153 supported cases
+==================================================================================================================================
+qwen2.5-coder:7b-instruct              n= 153  compile= 75.8%  accept= 32.0%  cond.MCC=   0.504  e2e-detect= 16.0% (49/306)  e2e-success=  4.6% (7/153)
+qwen2.5-coder:32b                      n= 153  compile= 79.7%  accept= 30.1%  cond.MCC=   0.536  e2e-detect= 16.0% (49/306)  e2e-success=  4.6% (7/153)
+DeepHat-V1-7B                          n= 153  compile= 81.7%  accept= 35.9%  cond.MCC=   0.543  e2e-detect= 16.0% (49/306)  e2e-success=  5.9% (9/153)
+deepseek-coder:6.7b                    n= 153  compile= 69.3%  accept= 11.8%  cond.MCC=   0.373  e2e-detect=  2.6% (8/306)  e2e-success=  1.3% (2/153)
+codegemma:7b                           n= 153  compile= 68.6%  accept= 18.3%  cond.MCC=   0.521  e2e-detect=  6.9% (21/306)  e2e-success=  2.0% (3/153)
+magicoder:7b                           n= 153  compile= 52.3%  accept= 13.1%  cond.MCC=   0.364  e2e-detect=  2.6% (8/306)  e2e-success=  0.7% (1/153)
+yi-coder:9b                            n= 153  compile= 76.5%  accept= 30.1%  cond.MCC=   0.511  e2e-detect= 14.1% (43/306)  e2e-success=  5.2% (8/153)
+codellama:7b-instruct-fp16             n= 153  compile= 69.3%  accept= 15.7%  cond.MCC=   0.508  e2e-detect=  4.6% (14/306)  e2e-success=  0.7% (1/153)
+
+==================================================================================================================================
+C3 / C4, CORRECTED data, 153 supported cases
+==================================================================================================================================
+C3-S                                   n= 153  compile= 58.8%  accept= 22.9%  cond.MCC=   0.649  e2e-detect= 16.3% (50/306)  e2e-success=  5.2% (8/153)
+C3-E                                   n= 153  compile= 69.9%  accept=  8.5%  cond.MCC=   0.545  e2e-detect=  4.6% (14/306)  e2e-success=  1.3% (2/153)
+C4-A                                   n= 153  compile= 68.0%  accept=  7.2%  cond.MCC=   0.524  e2e-detect=  3.9% (12/306)  e2e-success=  0.7% (1/153)
+C4-B                                   n= 153  compile= 62.7%  accept= 17.0%  cond.MCC=   0.668  e2e-detect= 13.4% (41/306)  e2e-success=  3.9% (6/153)
