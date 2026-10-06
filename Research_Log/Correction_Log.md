@@ -173,3 +173,87 @@ hidden-evaluation numbers reported in the paper — but still needs confirming b
 surfaces (the 30 "X is not of type 'string'" / nested-metavariable-pattern cases from the §24
 failure-taxonomy work are a start, not a complete audit of the wrapper itself); Finding 4's
 real-data check.
+
+### 2026-10-06 — Finding 1 FIXED, impact measured: this is a major correction, not a minor one
+
+Per the user's explicit direction ("fix it now, before continuing the audit"), built and ran the
+fix for Finding 1:
+
+1. **`pipeline/compute_variant_vulnerable_lines.py`** — computes, for every case's two vulnerable
+   variants, the line range where the (transformed) vulnerable construct actually sits, WITHOUT
+   parsing any build script or re-executing anything. Method: variants are built by replacing one
+   localized block and leaving the rest of the file byte-identical, so the known ORIGINAL file's
+   `vulnerable_lines` range (always populated, 300/300) can be mapped to the variant via anchor
+   text matching (lines immediately before/after the known range, located in the variant, preferring
+   the occurrence nearest the expected position — a real bug in the first version, caught by testing
+   on 5 diverse real cases before trusting it: a naive "first occurrence" match put CASE-0150 badly
+   wrong, 144-line inferred span vs a true 42-line span; fixed and reverified clean on all 5 test
+   cases before running at scale), with a diff-opcode-overlap fallback and an explicit confidence
+   flag (span-ratio sanity check) so a wrong inference is never silently trusted.
+   **Result: 600 variant annotations computed, 571 (95.2%) high-confidence, 29 (4.8%) flagged LOW
+   for manual review rather than used.** Output: `benchmark/variant_vulnerable_lines.jsonl`.
+   **Not yet covered**: the 40-case pilot set (`manifest.jsonl`) has no `vulnerable_lines` field at
+   all, so this fix doesn't reach it yet — lower priority since the pilot was only used for
+   prompt-template/model selection (§6), not any headline result, but flagged here rather than
+   silently left out of scope.
+
+2. **`pipeline/rescore_variant_location.py`** — applies the high-confidence annotations to every
+   existing `variant_vulnerable_1/2` sample record with `detected=True` across every real result
+   set (primary benchmark, all 5 stability reps, C2, C3-S/C3-E, C4-A/C4-B), recomputing
+   `finding_location_correct` and `outcome` using the SAME `SampleExecutionRecord._derive_outcome()`
+   logic already trusted elsewhere (reused directly, not reimplemented). Writes corrected copies to
+   `results_corrected/` — every original file under `results/` is untouched (verified: a diff of any
+   original against its corrected counterpart shows ONLY the rescored records' two fields changed,
+   nothing else).
+
+   **Result: of 4,063 "detected=True" hidden-variant records across the whole study, 879 (21.6%)
+   were wrong-location matches, now correctly reclassified from TP to FN.** This is not a small
+   correction — roughly 1 in 5 "hidden-variant detections" this entire study's VGR metric has been
+   built on were matching the wrong part of the file, not the actual (transformed) vulnerability.
+
+3. **Measured the actual downstream impact on every condition's MCC/VGR** (recomputed from
+   `results_corrected/` using the same `confusion_from_samples`/`mcc`/`rate` functions used
+   throughout this project, for direct comparability):
+
+   **Primary benchmark (autogrep condition), ORIGINAL -> CORRECTED**:
+
+   | Model | MCC | VGR |
+   |---|---|---|
+   | DeepHat-V1-7B | 0.581 -> 0.556 | 0.473 -> 0.429 |
+   | codegemma:7b | 0.553 -> 0.493 | 0.477 -> 0.372 |
+   | codellama:7b-instruct-fp16 | 0.526 -> 0.511 | 0.346 -> 0.321 |
+   | deepseek-coder:6.7b | 0.609 -> 0.514 | 0.583 -> 0.417 |
+   | magicoder:7b | 0.567 -> 0.432 | 0.567 -> 0.333 |
+   | qwen2.5-coder:32b | 0.608 -> 0.552 | 0.622 -> 0.529 |
+   | qwen2.5-coder:7b-instruct | 0.598 -> 0.508 | 0.658 -> 0.507 |
+   | yi-coder:9b | 0.584 -> 0.528 | 0.537 -> 0.441 |
+
+   **The headline model ranking changes.** Original (excluding `codellama` per its existing
+   precision-confound flag): `deepseek-coder` (0.609) > `qwen32b` (0.608) > `qwen7b` (0.598) >
+   `yi-coder` (0.584) > `DeepHat` (0.581) > `magicoder` (0.567) > `codegemma` (0.553). **Corrected**:
+   `DeepHat` (0.556) > `qwen32b` (0.552) > `yi-coder` (0.528) > `deepseek-coder` (0.514) > `qwen7b`
+   (0.508) > `codegemma` (0.493) > `magicoder` (0.432). `DeepHat` moves from 5th to 1st;
+   `deepseek-coder` drops from 1st to 4th; `qwen7b` drops from 3rd to 5th. The two weakest
+   format-following models (§9's own finding: `deepseek-coder` and `magicoder` had the worst
+   YAML-invalid rates) also show the LARGEST corrections (-0.096 and -0.135 MCC respectively) —
+   a coherent pattern (looser, less precisely-targeted rules get more undeserved credit under the
+   old scoring), not noise.
+
+   **C2 (all 8 models)** and **C3/C4 (4 multi-agent configs)** both corrected similarly (full
+   tables in this commit's diff) — multi-agent conditions shift by a smaller, more uniform amount
+   (-0.013 to -0.048 MCC) since C3/C4's own Semantic Review step already filters out some of the
+   worst-discriminating rules before they'd ever reach this stage. One qualitative change worth
+   flagging directly: the `qwen2.5-coder:7b-instruct` C2-vs-C3-E comparison (§7.6, previously
+   reported as "flat," MCC 0.601 vs 0.593) becomes 0.504 vs 0.545 after correction — a sign flip
+   (C3-E now reads as BETTER than C2 for this model, not flat/slightly worse). Whether this is a
+   real, significant change or still noise is NOT yet known — Section 22's statistical battery
+   was run entirely on the UNCORRECTED data and needs to be rerun on `results_corrected/` before
+   any claim (old or new) about C2-vs-C3 or any other comparison can be trusted.
+
+**Status**: Finding 1 is fixed at the data layer (corrected sample logs + annotations exist and are
+committed). Step 4 (recompute all metrics) and Step 6 (recalculate statistics) are NOT yet done
+against this corrected data — the numbers above are point estimates only, re-derived with the
+project's existing pooling functions for a fast comparison, not yet run through Section 22's actual
+paired/bootstrap/Holm-corrected machinery. That is the next concrete piece of work, and given the
+ranking change above is substantial, it should happen before any other claim in
+`Paper_Draft_Notes.md` is treated as current.
