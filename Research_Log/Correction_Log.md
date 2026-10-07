@@ -1020,3 +1020,71 @@ subtlety, and the second time an external check (first `Implementation_Log.md`, 
 caught something this session's own re-analysis had not. The lesson from the first entry is repeated
 and extended: cross-check every reported number against an independent recomputation path BEFORE
 writing a causal explanation for it, not just BEFORE publishing the explanation.
+
+### 2026-10-07 — External reviewer feedback round 4: subgroup analysis never filtered through eligible_cases.py, plus four smaller consistency fixes
+
+**1. Subgroup analysis (§22.4) was never filtered through `eligible_cases.py`.** Caught concretely by
+the reviewer: the subgroup table's "supported" bucket MCC (0.536) didn't match the primary table's
+0.539 for the identical model/condition. Root cause: `analyze_section22_subgroups_corrected.py` used
+`load_full_manifest()` directly, with no exclusion logic at all -- CASE-0166 and the 5 ground-truth
+exclusions were still being pooled into every bucket, not just the representability one. Fixed by
+filtering `all_cases` through `eligible_cases.py`'s exclusions globally (not only for the
+representability bucket -- a case with untrustworthy ground truth shouldn't inform ANY subgroup
+breakdown). Rerun: supported-bucket MCC now reads 0.539, matching exactly.
+
+**Also checked, per the reviewer's explicit question: does the stability subset's "51 supported
+cases" remain fully eligible?** No -- 2 of the 51 (`CASE-0140`, `CASE-0194`) are ground-truth-excluded.
+`pipeline/analyze_phase5_stability.py` now filters through the same exclusions, giving **n=49**.
+Pooled MCC mean/min/max (§7.3's table) are unchanged to 3 decimals (those 2 cases contributed zero
+accepted autogrep samples in any of the 5 repeats, for any model), but per-case agreement figures
+shift slightly, and -- more importantly -- the "same-subset temperature-0" comparison built around
+this subset changes substantially: `magicoder:7b`'s temp-0 MCC moves from 0.422 (rank last) to 0.566
+(rank first) at n=49 vs n=51, and `codellama` moves from 0.566 to 0.547. By coincidence of where the
+new values land, the §7.3 conclusion is unchanged -- the same 6 of 8 models still fall inside their
+own 5-repeat temp-0.2 range, and the same 2 (`qwen2.5-coder:32b`, `codellama`) remain the unexplained
+exception -- but this was verified fresh at n=49, not assumed to carry over from n=51.
+
+**2. Autogrep's compile column no longer duplicates the acceptance-coverage number.** The reviewer
+correctly flagged that showing the same percentage in both columns (e.g. "compile=36.0%,
+accept=36.0%") reads as a real, independently-recovered compile rate that happens to equal
+acceptance -- it does not, it is not recovered at all. `build_step4_tables.py` now returns `None`
+for autogrep's `compilation_rate` and prints the literal string `"N/A: not recoverable"`, never a
+number, in both the script's own report and the manuscript table.
+
+**3. Statistical documentation, three sub-fixes:**
+- The Friedman omnibus print statements (`analyze_section22_corrected.py`, Comparisons 3 and 7) now
+  print the same exploratory-only qualification the manuscript already stated, so the report and the
+  manuscript say the same thing instead of the report looking more confident than the prose.
+- Retracted an incorrect claim that "MCC/ESR differences are continuous-valued, not ranks" needing
+  no tie-handling -- ESR is a pooled rate over binary per-case outcomes and visibly produces exact
+  ties in this document's own output (`diff=+0.000` appears repeatedly). The tail-proportion p-value
+  construction handles ties correctly without any special-casing, so no result changes -- the error
+  was in the written justification, not the math.
+- The degenerate-resample check previously covered only 2 conditions and wrongly implied the question
+  was closed. Redone across all 28 conditions actually used in comparisons 4-7: 27 show zero
+  degenerate resamples out of 10,000; **`magicoder:7b` (raw) -- the actual lowest-coverage condition
+  in the study at 6/150 accepted cases, which the earlier check never looked at -- shows 27/10,000
+  (0.27%)**. Checked this doesn't produce a false positive: a degenerate resample returns MCC=0.0, an
+  extreme value relative to the observed 0.520, which widens that comparison's CI conservatively; the
+  magicoder raw-vs-autogrep comparison is in fact not significant.
+
+**4. Three remaining overbroad/contradictory summary statements corrected:**
+- "0 of 8... across every one of the 7 predefined comparisons" was genuinely overbroad -- only
+  comparisons 4 and 5 are structured as 8 independent per-model tests; 1/2/6 are single pairs, 3/7
+  are omnibus-plus-follow-up families. Scoped the claim to comparisons 4-5 specifically.
+- "Every metric reported in §7.1-7.8 is conditional" was wrong -- §7.8 includes the end-to-end ESR
+  comparisons, which are explicitly NOT conditional (that's the whole point of computing them).
+  Corrected to describe §7.8 as a mix, with each comparison already stating which of its own two
+  reported metrics is which.
+- "This completes Section 22 in full" was asserted before the subgroup analysis had actually been
+  verified against final eligibility rules (fix #1 above) -- true contradiction, now resolved by
+  actually completing the rerun it claimed was already done, not by softening the sentence.
+
+**Verified before closing this entry**: a fresh `git clone` of the published GitHub repository
+(https://github.com/AbrarSoul/SS-Analysis) confirms 1,212 `.py` files, 304 `.json` files, 3 `.jsonl`
+files, 3,060 files total, including the full `pipeline/` scoring/analysis code and `benchmark/cases/`
+source data -- directly contradicting the reviewer's "zero Python scripts, zero JSONL files, zero
+JSON files" observation about "this ZIP." The two are inconsistent; flagged to the user rather than
+silently re-doing already-complete work, since the most likely explanation is that a different
+artifact (plausibly the `~/Desktop/SSRP/` folder, which genuinely IS reports/docs only) was reviewed
+instead of the GitHub repository.

@@ -40,6 +40,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analyze_phase5_primary import load_manifest, analyze_model
+from eligible_cases import POST_HOC_DATASET_EXCLUSIONS, GROUND_TRUTH_EXCLUSIONS, VERSION as ELIGIBLE_VERSION
 
 BENCH_DIR = Path(__file__).resolve().parent.parent / "benchmark"
 RESULTS_ROOT = Path(__file__).resolve().parent.parent / "results"
@@ -71,14 +72,20 @@ def main():
     subset_ids = load_stability_subset_ids()
     subset_manifest = {cid: manifest[cid] for cid in subset_ids}
     rep_counts = Counter(subset_manifest[cid]["semgrep_representability"] for cid in subset_ids)
-    supported_ids = [cid for cid in subset_ids if subset_manifest[cid]["semgrep_representability"] == "supported"]
+    excluded = POST_HOC_DATASET_EXCLUSIONS | GROUND_TRUTH_EXCLUSIONS
+    supported_ids_raw = [cid for cid in subset_ids if subset_manifest[cid]["semgrep_representability"] == "supported"]
+    supported_ids = [cid for cid in supported_ids_raw if cid not in excluded]
 
     print("=" * 100)
     print("PHASE 7 STABILITY ANALYSIS -- Section 13.4 / RQ8 (5 repeats, temperature 0.2, autogrep_default)")
     print("=" * 100)
     print(f"\nStability subset: {len(subset_ids)} cases -- supported={rep_counts['supported']}, "
-          f"partially_supported={rep_counts['partially_supported']}, unsupported={rep_counts['unsupported']} "
-          f"(metrics below use supported cases only, n={len(supported_ids)}, matching Section 7.3's primary scope)")
+          f"partially_supported={rep_counts['partially_supported']}, unsupported={rep_counts['unsupported']}")
+    print(f"Of the {len(supported_ids_raw)} supported cases, {len(supported_ids_raw) - len(supported_ids)} are "
+          f"ground-truth-excluded (eligible_cases.py v{ELIGIBLE_VERSION}) -- metrics below use the "
+          f"eligible n={len(supported_ids)}, matching Section 7.3's primary scope exactly (2026-10-07, "
+          f"external reviewer feedback round 3: previously used all {len(supported_ids_raw)} supported "
+          f"cases without applying the ground-truth exclusions).")
 
     rep1_dirs = sorted(glob.glob(str(RESULTS_ROOT / "runs_phase5_stability_rep1" / "*__autogrep_default")))
     models = [json.loads((Path(d) / "generation_log.jsonl").read_text().splitlines()[0])["model_tag"] for d in rep1_dirs]

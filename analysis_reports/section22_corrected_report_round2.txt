@@ -22,13 +22,16 @@ COMPARISON 2: Qwen2.5-Coder 7B vs DeepHat 7B (security fine-tuning effect) -- CO
 COMPARISON 3: Small code-model family effect (Friedman omnibus on ESR) -- CORRECTED
 ====================================================================================================
   Friedman omnibus (n=150, k=6): stat=15.536  p=0.0083
+  (descriptive/exploratory only -- NOT repository-aware; scipy's friedmanchisquare
+  assumes independent rows, false here since cases share repositories. Only the
+  repo-aware bootstrap pairwise follow-ups below carry a confirmatory claim.)
     qwen2.5-coder:7b-instruct: ESR=0.047
     deepseek-coder:6.7b: ESR=0.013
     codegemma:7b: ESR=0.020
     magicoder:7b: ESR=0.007
     yi-coder:9b: ESR=0.053
     DeepHat-V1-7B: ESR=0.060
-  Omnibus significant -- running repo-aware ESR bootstrap pairwise follow-ups
+  Omnibus p<0.05 (descriptive) -- running repo-aware ESR bootstrap pairwise follow-ups
   (not McNemar: cases sharing a repo aren't independent, Section22_Scope.md):
     qwen2.5-coder:7b-instruct vs deepseek-coder:6.7b: raw p=0.1196  Holm-adj p=0.9568
     qwen2.5-coder:7b-instruct vs codegemma:7b: raw p=0.2012  Holm-adj p=1.0000
@@ -158,6 +161,8 @@ COMPARISON 6: C2 vs C3 (role-separation effect) -- CORRECTED
 COMPARISON 7: C3 vs C4 (heterogeneous assignment effect) -- CORRECTED
 ====================================================================================================
   Friedman omnibus (n=150, k=4): stat=9.140  p=0.0275
+  (descriptive/exploratory only -- NOT repository-aware; see Comparison 3's note.
+  Only the repo-aware bootstrap pairwise follow-ups below carry a confirmatory claim.)
     C3-S: ESR=0.053
     C3-E: ESR=0.013
     C4-A: ESR=0.007
