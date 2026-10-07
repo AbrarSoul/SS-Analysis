@@ -1088,3 +1088,57 @@ JSON files" observation about "this ZIP." The two are inconsistent; flagged to t
 silently re-doing already-complete work, since the most likely explanation is that a different
 artifact (plausibly the `~/Desktop/SSRP/` folder, which genuinely IS reports/docs only) was reviewed
 instead of the GitHub repository.
+
+### 2026-10-07 — External reviewer feedback round 5: manuscript synced to the corrected subgroup report, execution logs published
+
+**Manuscript sync**: §7.8's subgroup table was still the stale pre-fix version, with an explicit
+"not independently rerun" disclosure that was no longer true after round 4's fix. Replaced with the
+regenerated numbers (84 evaluable, supported MCC 0.539, partially-supported 0.564, 165 distinct CWEs,
+CWE-22 0.845) and removed the stale disclosure. Also fixed, in the same pass: the paragraph before
+§7.9's table ("reported as identical to acceptance coverage" → actually shows "N/A: not recoverable");
+§7.8's opening paragraph (still cited the round-1 153-case report as current); and §7.3's stability
+discussion ("not explained by ordinary sampling noise" for the 2 exception models overstated what 5
+repeats can establish — softened to "unknown cause, not ruled out as sampling variability either").
+
+**Execution logs published**: the reviewer confirmed the GitHub repo genuinely has the pipeline code
+and benchmark data (resolving the round-4 "zero scripts" discrepancy — that observation was about a
+different artifact, as suspected) but still needs `results/`/`results_corrected/` to actually run the
+scripts. This reverses the user's original "no log files" instruction for the public repo, so this
+was confirmed with the user directly before acting: **a separate GitHub Release asset, not the main
+git repository**, per the user's explicit choice. Built from only the run directories any script
+actually reads (`runs_phase5_primary`, `runs_phase5_stability_rep1-5`, `runs_c2_primary`, `runs_c3`,
+`runs_c4`, `runs_pilot_screening`, `runs_pilot_rerun_fixed`) — excluding a 907MB leftover repo-clone
+cache from an early, unreported smoke-test run (`runs_final_realsmoke_20260928_212325`, debris from
+before the validator went clone-free, Section 12.24) that would otherwise have dominated the archive
+size for zero benefit. The same CASE-0122 API key already redacted in `benchmark/cases/` was found
+embedded, as case context, in 4 C3/C4 episode log files, and redacted identically before packaging; a
+full secret scan (AWS/Google/GitHub/Slack key patterns, private-key headers) found nothing else.
+Published to `https://github.com/AbrarSoul/SS-Analysis/releases/tag/reproducibility-data-v1` (3.1MB
+compressed, SHA-256 `c0e1abdb20709c8f7687322e87628fc2c6fbed090aeb8117ea578ea69fe95dc3`) with the
+checksum and usage instructions documented in `Reproducibility_Package.md` and the repo's `README.md`.
+**Verified before publishing, and again independently by the reviewer afterward**: a completely fresh
+`git clone` + release download + `python pipeline/build_step4_tables.py` reproduces the published
+report byte-for-byte.
+
+### 2026-10-07 — External reviewer feedback round 6: three final wording corrections, no new findings
+
+All three were editing-only fixes, confirmed by the reviewer as not requiring new experiments:
+
+1. **§7.8's subgroup-interpretation paragraph** still cited stale CIs (pre-round-4 values) and
+   claimed CWE-level estimates were "identical to the uncorrected run" — no longer true (CWE-22 moved
+   0.707→0.845). Replaced with current CI values; the patch-size trend is now described as descriptive
+   only, with an explicit note that overlapping CIs don't establish a between-group difference either
+   way (the earlier "at least suggestive since CIs only narrowly overlap" framing overstated this).
+2. **§7.9 contained a logically flawed claim**: that compile rate and acceptance coverage "would be
+   identical if compile rate COULD be recovered." This doesn't follow — a rule can compile (valid
+   YAML) and still fail validation (wrong discrimination) in general; the two are only
+   indistinguishable in this specific condition's retained records, because Autogrep's retry loop
+   discards every intermediate attempt. Replaced with the reviewer's exact wording: "Attempted-
+   candidate compilation rate cannot be recovered from the retained records. Acceptance coverage is
+   reported separately."
+3. **§7.3 still described the 6 non-exception models' ranking changes as "resolved as ordinary ...
+   sampling variation"** — falling inside a 5-repeat empirical range is consistent with sampling
+   variability, but does not itself establish that as the cause (no test was run to confirm that
+   mechanism over any other explanation consistent with the same data). Softened throughout (the
+   per-model bullet, the inline table note, and the "Net status" summary) to "consistent with sampling
+   variability, does not establish the cause of ranking changes" — the reviewer's suggested wording.
