@@ -156,13 +156,30 @@ parameter choice, data remanence, or business/authorization logic spread across
 multiple non-local steps). Per the study's protocol, only supported cases
 contribute to the primary model comparison; partially supported cases are
 analyzed separately; unsupported cases are excluded from comparative metrics
-but their count is reported. The final distribution:
+but their count is reported. **[CORRECTED, 2026-10-07, following further
+reviewer feedback] The distribution below is now presented for the 299
+cases actually retained** (CASE-0166 removed, §2.2 — it carried the
+`unsupported` label, so only that row's count changes from the original
+300-case freeze), **with the 5 ground-truth-exclusion cases (§2.4 below,
+Priority 2) shown as a separate annotation, not folded into the
+representability counts themselves** — representability is a property of
+the case's vulnerable-code shape; the ground-truth exclusion is a separate
+property of whether the labeled fix is fully trustworthy, and conflating
+the two would make it impossible to tell which of the two corrections
+changed a given count:
 
-| Representability | Cases |
-|---|---:|
-| Supported | 153 |
-| Partially supported | 99 |
-| Unsupported | 48 |
+| Representability (299 retained cases) | Cases | Of which: ground-truth-excluded (Priority 2) | Eligible for comparison |
+|---|---:|---:|---:|
+| Supported | 153 | 3 | **150** |
+| Partially supported | 99 | 2 | **97** |
+| Unsupported | 47 | 0 | 47 (already excluded from comparative metrics) |
+| **Total** | **299** | **5** | — |
+
+The rightmost column — 150 eligible supported, 97 eligible partially
+supported — is the frozen population every headline comparison in this
+document uses (`pipeline/eligible_cases.py` v2026-10-07.1). "153 supported"
+and "150 eligible supported" are both correct, documented numbers for two
+different, clearly-labeled things; neither silently replaces the other.
 
 *This classification was made by a single rater during dataset construction.
 A second-rater agreement check was completed in two rounds during the
@@ -299,7 +316,7 @@ originally reported in earlier drafts of this document counted a Semgrep match
 anywhere in the transformed file as a hit, not necessarily a match on the
 transformed vulnerability itself. This was corrected retroactively (new
 per-variant line-range annotations, derived without re-running any model or
-Semgrep call — see `Research_Log/Correction_Log.md`, Finding 1): **21.6% of
+Semgrep call — see `Research_Log/Correction_Log.md`, Finding 1): **22.0% of
 all "detected" hidden-variant positives across the whole study (879 of 4,063)
 were wrong-location matches**, now correctly reclassified. Every VGR/MCC number
 in the sections below reflects this correction. The pilot screening numbers in
@@ -343,30 +360,35 @@ corrected sample data (Finding 1's location-correctness fix,
 
 | Rank | Model | MCC | PDS | VGR | FPR | ESR |
 |---:|---|---:|---:|---:|---:|---:|
-| 1 | DeepHat-V1-7B | 0.545 | 0.327* | 0.445* | 0.085* | 0.060 |
-| 2 | Qwen2.5-Coder-32B | 0.539 | 0.261* | 0.533* | 0.123* | 0.047 |
-| 3 | Yi-Coder-9B | 0.534 | 0.248* | 0.478* | 0.096* | 0.053 |
-| 4 | CodeGemma-7B | 0.521 | 0.157* | 0.375* | 0.060* | 0.020 |
-| 5 | Qwen2.5-Coder-7B-Instruct | 0.513 | 0.248* | 0.510* | 0.111* | 0.047 |
-| 6 | Magicoder-7B | 0.427 | 0.065* | 0.233* | 0.067* | 0.007 |
-| 7 | DeepSeek-Coder-6.7B | 0.373 | 0.085* | 0.222* | 0.074* | 0.013 |
-| — | CodeLlama-7B-Instruct (FP16, precision outlier) | 0.510 | 0.150* | 0.292* | 0.056* | 0.007 |
+| 1 | DeepHat-V1-7B | 0.545 | 0.327 | 0.454 | 0.086 | 0.060 |
+| 2 | Qwen2.5-Coder-32B | 0.539 | 0.260 | 0.544 | 0.126 | 0.047 |
+| 3 | Yi-Coder-9B | 0.534 | 0.247 | 0.477 | 0.091 | 0.053 |
+| 4 | CodeGemma-7B | 0.521 | 0.160 | 0.375 | 0.060 | 0.020 |
+| 5 | Qwen2.5-Coder-7B-Instruct | 0.513 | 0.247 | 0.500 | 0.106 | 0.047 |
+| 6 | Magicoder-7B | 0.427 | 0.067 | 0.250 | 0.048 | 0.007 |
+| 7 | DeepSeek-Coder-6.7B | 0.373 | 0.087 | 0.222 | 0.074 | 0.013 |
+| — | CodeLlama-7B-Instruct (FP16, precision outlier) | 0.510 | 0.140 | 0.273 | 0.045 | 0.007 |
 
-*MCC and ESR are recomputed directly on the 150-case population
-(`pipeline/build_step4_tables.py`); PDS/VGR/FPR columns marked `*` are
-carried over from the 153-case computation rather than individually
-rerun — §10's sensitivity table shows the 153→150 effect on MCC/ESR is
-≤0.005 for 7 of 8 models (the one exception, Magicoder-7B, is shown with
-its real recomputed 150-case MCC above, 0.427, not the stale 0.374), so the
-carried-over PDS/VGR/FPR values are a reasonable approximation but not
-independently verified at the 150-case population for this table.
+**[CORRECTED, 2026-10-07, following further reviewer feedback]** Every
+column in this table is now computed directly on the 150-case population,
+with no carried-over approximation. This also required fixing a real bug,
+not just rerunning a filter: `analyze_phase5_primary.py`'s pooled-sample
+accumulation (which VGR/FPR/PDS/MCC are all built from) read every case's
+sample records unconditionally, without checking whether that case's rule
+was actually accepted — for the autogrep condition this has no effect (its
+sample records only ever exist for accepted cases), but it DOES matter
+project-wide for the raw condition (§7.2 below). A single shared helper
+(`gated_samples()` in `analyze_phase5_primary.py`) now enforces the correct
+gate everywhere sample records are pooled into a conditional metric, used
+identically by this script, `build_step4_tables.py`, and
+`analyze_section22_corrected.py`.
 
 **This ranking changed from an earlier draft of this document as a direct
 consequence of the audit's Finding 1.** VGR (and therefore MCC, which pools
 hidden-variant samples into its confusion matrix) had never actually checked
 whether a hidden-variant detection landed on the correct, transformed
 vulnerable construct — only whether Semgrep fired anywhere in the file. Fixed
-retroactively without re-running any model (see §5's note above); 21.6% of
+retroactively without re-running any model (see §5's note above); 22.0% of
 all hidden-variant "detections" study-wide were wrong-location matches, now
 correctly reclassified as misses. The two models with the weakest
 format-following/discipline elsewhere in this study (`deepseek-coder:6.7b`,
@@ -400,25 +422,49 @@ sobering for every model.**
   detection of both hidden variants, and the visible pair being discriminated
   correctly. This corroborates and sharpens the pilot's own low-coverage
   finding (§6), and is explored fully in §7.9's explicit end-to-end tables.
-- **[CORRECTED, 2026-10-07 audit round 2] Feedback-driven repair produces a
-  large conditional-MCC gain — but this is no longer reported as the
-  study's headline finding, and the earlier claim that it was
-  "statistically confirmed" is retracted.** Pooled across all eight models
-  with repository-aware bootstrap on the 150-case eligible population, the
-  raw-vs-autogrep conditional MCC gain is large for every model (e.g.
-  `qwen2.5-coder:7b-instruct` moves from raw MCC 0.101 to autogrep MCC
-  0.513) and each gap individually bootstraps to `p < 0.0001`. **But raw and
-  autogrep conditional MCC are each computed only among that condition's own
-  accepted cases — different, self-selected populations, not the same 150
-  cases for both** — so this comparison cannot distinguish "repair makes the
-  same cases' rules better" from "repair changes which cases become
-  acceptable at all." Repeating the comparison on the end-to-end metric
-  (§7.9: identical 150-case denominator for both conditions, no selection
-  effect) shows **0 of 8 models with a statistically detectable raw-vs-
-  autogrep difference after Holm correction** (repo-aware bootstrap,
+- **[CORRECTED AGAIN, 2026-10-07, following further reviewer feedback] The
+  earlier claim that feedback-driven repair produces a large conditional-MCC
+  GAIN was itself built on a real bug, not just a selection-effect
+  ambiguity — fixing it reverses the direction.** The reported "raw MCC
+  0.101" figure came from `analyze_section22_corrected.py` pooling every
+  case's sample records into the conditional-MCC calculation without
+  checking whether that case's rule had actually been accepted. The raw
+  condition (unlike autogrep) records a real, scored sample bundle for a
+  case whenever its rule's YAML parsed, regardless of whether it went on to
+  pass semgrep validation — so this silently mixed a large number of
+  rejected-rule samples into what was reported everywhere as "conditional
+  MCC among accepted cases." Fixed with a single shared gating helper
+  (`gated_samples()`) now used identically by every script that pools
+  samples into a conditional metric; see §7.1's note above and
+  `Research_Log/Correction_Log.md` for the full root-cause account.
+
+  **The corrected picture is the opposite of what was previously reported.**
+  Recomputed on the same 150-case population with the fix applied
+  identically to raw and autogrep: raw's conditional MCC is numerically
+  **higher** than autogrep's for 7 of 8 models (e.g.
+  `qwen2.5-coder:7b-instruct` raw MCC 0.626 vs. autogrep MCC 0.513 — not
+  0.101 vs. 0.513 as previously reported), and this difference is
+  statistically significant after Holm correction for **2 of 8 models**
+  (repo-aware bootstrap,
   `results_corrected/section22_corrected_report_round2.txt`, Comparison 4).
-  Both numbers are reported in §7.8/§7.9; the end-to-end result, not the
-  conditional-MCC gap, is what this paper's conclusion is built on.
+  `codellama:7b-instruct-fp16` (the precision outlier) is the one exception,
+  with autogrep and raw essentially tied (0.510 vs. 0.503).
+
+  As before, raw and autogrep conditional MCC are each computed only among
+  that condition's own accepted cases — different, self-selected
+  populations — so this still cannot distinguish "repair makes the same
+  cases' rules better or worse" from "repair changes which cases become
+  acceptable at all," and it is reported with that caveat, not as a
+  same-population comparison. Repeating the comparison on the end-to-end
+  metric (§7.9: identical 150-case denominator for both conditions, no
+  selection effect, and unaffected by this specific bug since ESR was always
+  gated correctly) continues to show **0 of 8 models with a statistically
+  detectable raw-vs-autogrep end-to-end difference after Holm correction**.
+  **Put together, there is no remaining basis in this document for a claim
+  that feedback-driven repair improves rule quality — on the metric without
+  a selection-effect confound there is no detectable difference, and on the
+  conditional-quality metric, to the extent a real difference exists, it
+  points toward raw being as good or better, not worse.**
 
 ### 7.3 Stability experiment
 
@@ -527,10 +573,13 @@ explicit per-case budget (at most 6 LLM calls, 30,000 combined input tokens,
 6,000 combined output tokens, 3 repair rounds, 10 minutes wall clock). This
 is distinct from the study's existing "autogrep" condition in two ways:
 autogrep's own retry loop has no cumulative token or wall-clock budget (only
-a 3-attempt cap), and C2's purpose is specifically to be the fair,
-budget-matched baseline for an eventual C2-vs-C3 (multi-agent) comparison —
-C3 does not exist yet, so what follows is an interim reference point, not
-the design's intended final test.
+a 3-attempt cap), and C2's purpose is specifically to be the reference point
+for an eventual C2-vs-C3 (multi-agent) comparison — **not a "budget-matched"
+baseline**: C2's explicit per-case budget is not enforced equivalently
+against autogrep's unmatched retry loop, so the two conditions are complete,
+differently-configured workflows, not a controlled budget comparison (see
+§2's workflow-comparability note). C3 does not exist yet, so what follows is
+an interim reference point, not the design's intended final test.
 
 One methodological choice is worth surfacing: the budget's own numbers
 resolve an ambiguity the spec's prose leaves open. Interpreting "interprets
@@ -554,30 +603,33 @@ CodeLlama-7B-Instruct 0.510 vs. 0.510), and the largest remaining gap
 150) were bound by the output-token cap specifically, showing it is a real
 constraint and not merely a theoretical one.
 
-**[CORRECTED, 2026-10-07] Every model's C2 conditional MCC is far above its
-raw (single-shot) conditional MCC — but this is no longer presented as "the
-single most robust finding in the study," and the earlier "p≈0.0000"
-figure is retracted along with it.** Re-examining this comparison for audit
-round 2's Priority 6/8: conditional MCC for raw and C2 is each computed only
-among that condition's OWN accepted cases — different, self-selected
-populations, not the same 150 cases for both. Repeating the comparison on
-the end-to-end metric instead (§7.9: same 150-case denominator for every
-condition, no selection effect) shows **0 of 8 models with a statistically
-detectable raw-vs-C2 difference after Holm correction** (repo-aware
-bootstrap, `results_corrected/section22_corrected_report_round2.txt`,
-Comparison 5) — a materially different conclusion from the conditional-MCC
-read above. Both numbers are reported here, but the end-to-end result is
-the one this paper's conclusion is built on; the large conditional-MCC gap
-is consistent with "repair changes which cases become acceptable" and
-cannot, on its own, support a claim that repair improves rule quality on a
-fixed population of cases.
+**[CORRECTED AGAIN, 2026-10-07, following further reviewer feedback] The
+previous claim here — that C2's conditional MCC is "far above" raw's — was
+built on the same pooling bug described in §7.2, and is also reversed once
+fixed.** Raw's conditional MCC is numerically **higher** than C2's for 7 of
+8 models (`qwen2.5-coder:7b-instruct`: raw 0.626 vs. C2 0.502;
+`qwen2.5-coder:32b`: 0.628 vs. 0.539; `DeepHat-V1-7B`: 0.593 vs. 0.545;
+`deepseek-coder:6.7b`: 0.481 vs. 0.373; `codegemma:7b`: 0.580 vs. 0.521;
+`magicoder:7b`: 0.520 vs. 0.403; `yi-coder:9b`: 0.583 vs. 0.516), and this
+is statistically significant after Holm correction for 2 of 8 models
+(repo-aware bootstrap,
+`results_corrected/section22_corrected_report_round2.txt`, Comparison 5).
+`codellama:7b-instruct-fp16` is again the one exception, with C2 marginally
+higher (0.510 vs. 0.503, not significant). As in §7.2, this is a
+different-population comparison (each condition's own accepted cases), so
+it is not conclusive evidence that C2's repair loop makes rules worse — but
+it is conclusive evidence that the earlier claimed direction (C2 much
+better) does not hold. On the end-to-end metric (§7.9: same 150-case
+denominator, no selection effect, unaffected by this bug) there remains
+**0 of 8 models with a statistically detectable raw-vs-C2 difference after
+Holm correction**.
 
 **Interim reading, stated as interim**: giving a single model a richer,
-explicitly budgeted repair loop produces conditional MCC about as well as
-the simpler retry mechanism already built into the pipeline, among each
-condition's own accepted cases — but neither condition detectably
+explicitly budgeted repair loop does not produce higher conditional MCC
+than the simpler retry mechanism already built into the pipeline — if
+anything the reverse, for most models — and neither condition detectably
 outperforms the other end-to-end, on the shared 150-case population. If a
-future C3 is to outperform C2, the design's own framing suggests the
+future C3 is to outperform both, the design's own framing suggests the
 mechanism will need to be genuine role specialization, not simply more
 attempts at the same undifferentiated task — and any such claim should be
 checked against the end-to-end metric, not conditional MCC alone.
@@ -998,6 +1050,49 @@ binary ESR outcome. Per the audit's explicit instruction, every
 nonsignificant result below is reported as **"no statistically detectable
 difference"** — not as evidence of equivalence.
 
+**[ADDED, 2026-10-07, following further reviewer feedback] The repo-aware
+bootstrap procedure, stated precisely rather than left as a label**
+(`pipeline/stats_section22.py:repo_aware_bootstrap`/`paired_case_bootstrap`,
+independently verified against known-answer examples in
+`pipeline/tests/test_stats_section22.py` before being trusted on real
+data): group the common case set by repository; resample REPOSITORIES
+(not cases) with replacement, `n_boot = 10,000` times, same fixed seed
+(`42`) every run for reproducibility; each resample's case set is every
+case belonging to a sampled repository (a repository sampled twice
+contributes its cases twice); recompute each condition's pooled metric
+(MCC or ESR) on that resampled case set for both conditions and record
+the difference. The reported 95% CI is the resample distribution's
+2.5th/97.5th percentile; the two-sided p-value is `2 × min(share of
+resamples with diff ≤ 0, share with diff ≥ 0)`, capped at 1.0 — the
+standard bootstrap p-value construction, with no special tie-handling
+needed since MCC/ESR differences are continuous-valued, not ranks. A
+degenerate resample (a condition with zero pooled samples, which could in
+principle occur for the smallest-coverage conditions under resampling)
+returns `0.0` for that condition's metric rather than raising, so it would
+still contribute a point to the resample distribution rather than being
+silently dropped. Checked by direct simulation (not just argued) for this
+study's two lowest-coverage conditions, `magicoder:7b`-autogrep (9.3%
+acceptance) and C4-A (7.3%) — the ones most likely to produce a
+zero-sample resample: 0 degenerate resamples out of 10,000 for either,
+at the same seed (`42`) used throughout. Holm-Bonferroni
+step-down correction (`pipeline/stats_section22.py:holm_correct`) is the
+declared multiple-testing family wherever more than one pairwise test is
+run within the same comparison (the small-model-family and C3-vs-C4
+pairwise follow-ups, and the 8-model aggregates for comparisons 4–5) — a
+single comparison (e.g. 7B vs 32B) needs no such correction.
+
+**A second methodology caveat, not previously stated**: the Friedman
+omnibus tests (comparisons 3 and 7 below) are NOT repository-aware —
+scipy's `friedmanchisquare` assumes independent per-case rows, which is
+false here for cases sharing a repository, exactly the assumption this
+section's own repo-aware bootstrap exists to avoid elsewhere. Building a
+repository-aware omnibus test was not attempted for this pass (it would
+need a new, independently-verified bootstrap variant of Friedman's
+statistic, not a one-line fix). Until that exists, **the Friedman omnibus
+p-values below are reported as descriptive/exploratory, not confirmatory
+— only the repo-aware bootstrap pairwise follow-ups that come after each
+omnibus result carry a repository-aware significance claim.**
+
 **Results [CORRECTED, 2026-10-07 audit round 2, Priority 6]**: rerun on the
 150-case eligible population (`pipeline/eligible_cases.py` v2026-10-07.1),
 with repository-aware bootstrapping now extended to the ESR/end-to-end
@@ -1017,66 +1112,89 @@ comparison. Full output:
 2. **Qwen2.5-Coder 7B vs DeepHat 7B**: no statistically detectable
    difference on either metric (ESR p = 0.551; MCC p = 0.463).
 3. **Small code-model family effect** (6 models, ~7–9B scale, Friedman on
-   ESR): omnibus **is** significant (p = 0.008). Running the Holm-corrected
-   pairwise follow-ups with the same repo-aware bootstrap used for MCC
-   (not McNemar), **2 of 15 pairs survive correction**: CodeGemma-7B vs
-   DeepHat-V1-7B (Holm-adj p = 0.042) and Magicoder-7B vs Yi-Coder-9B
-   (Holm-adj p = 0.039). A real, specific aggregate difference exists
-   within this family at the ~7–9B scale, not just an unresolved omnibus
-   signal.
-4. **Raw vs Autogrep, all 8 models**: **0 of 8 models show a statistically
-   detectable end-to-end (ESR) difference after Holm correction**
-   (repo-aware bootstrap p ranging 0.10–1.00, all non-significant). The
-   **conditional-MCC bootstrap shows a large, "p < 0.0001" difference for
-   every model** (e.g. `qwen2.5-coder:7b-instruct` 0.101 → 0.513) — but
-   raw and autogrep conditional MCC are each computed only among that
-   condition's own accepted cases, not the same 150 cases for both, so
-   this is evidence repair changes which cases become acceptable, not
-   directly evidence it improves rule quality on a fixed population. **This
-   replaces the earlier claim that the MCC gain was "the single most
-   robust, best-powered finding in the whole analysis" — on the metric
-   with no selection-effect confound, there is no detectable difference.**
-5. **C1 vs C2**: same shape and conclusion as #4 for all 8 models — 0 of 8
-   detectable end-to-end, large but selection-confounded conditional-MCC
-   gaps (expected, since C2 and Autogrep were already known to track
-   closely).
+   ESR): omnibus p = 0.008 — **descriptive/exploratory only, per the
+   Friedman repo-awareness caveat above, not a confirmed finding on its
+   own.** The pairwise follow-ups ARE repo-aware (same bootstrap used for
+   MCC, not McNemar), and **2 of 15 pairs survive Holm correction**:
+   CodeGemma-7B vs DeepHat-V1-7B (Holm-adj p = 0.042) and Magicoder-7B vs
+   Yi-Coder-9B (Holm-adj p = 0.039) — these two ARE repository-aware,
+   confirmed findings; the omnibus p-value that motivated looking for them
+   is not itself one.
+4. **[CORRECTED AGAIN, 2026-10-07] Raw vs Autogrep, all 8 models**: **0 of 8
+   models show a statistically detectable end-to-end (ESR) difference
+   after Holm correction** (repo-aware bootstrap p ranging 0.10–1.00, all
+   non-significant) — unchanged by the fix below, since ESR was always
+   gated correctly. The **conditional-MCC comparison previously reported
+   here was wrong**: a sample-pooling bug (§7.2) made raw's conditional MCC
+   look far lower than autogrep's (reported as 0.101 vs. 0.513 for
+   `qwen2.5-coder:7b-instruct`) when the true, correctly-gated values are
+   **0.626 vs. 0.513 — raw HIGHER, not lower**. Recomputed for all 8
+   models: raw's conditional MCC is numerically higher for 7 of 8 (the
+   exception, `codellama`, is flat), and the difference is statistically
+   significant after Holm correction for **2 of 8 models** (repo-aware
+   bootstrap, direction: raw > autogrep). **This replaces both the earlier
+   claim that the MCC gain was "the single most robust, best-powered
+   finding in the whole analysis" AND the subsequent, still-wrong claim
+   that repair's conditional-MCC advantage was merely "selection-confounded
+   but real" — there is no conditional-MCC advantage for autogrep over raw
+   to explain away; if anything the reverse is true for some models.**
+5. **C1 vs C2**: same shape as #4 for all 8 models — 0 of 8 detectable
+   end-to-end differences; conditional MCC (same bug, same fix) shows raw
+   numerically higher than C2 for 7 of 8 models, significant after Holm
+   correction for 2 of 8 (expected, since C2 and Autogrep were already
+   known to track closely — see §7.4).
 6. **C2 vs C3**: no statistically detectable difference on either metric
    for either model pair (ESR — 32B: p = 0.909; 7B: p = 0.121 — MCC — 32B:
    p = 0.099; 7B: p = 0.633). Report as "no statistically detectable
    difference," not as evidence the two conditions perform equivalently,
    and not as a confirmed role-separation effect even for the 32B pair,
    which trends in that direction on MCC without clearing significance on
-   either metric.
-7. **C3 vs C4**: Friedman omnibus on ESR is significant (p = 0.028,
-   consistent with round 1's finding). Running BOTH pairwise follow-up
-   families with the repo-aware bootstrap: of the 6 ESR pairs, **none reach
-   significance after Holm correction** (closest: C3-S vs C4-A, raw
-   p = 0.024, Holm-adjusted p = 0.142); of the 6 conditional-MCC pairs
-   (the metric the original C4-A/C4-B narrative was built on), **none reach
-   significance after Holm correction either** (closest: C3-S vs C4-A, raw
-   p = 0.107, Holm-adjusted p = 0.644). The omnibus signal does not resolve
-   into any specific confirmed pairwise difference on either metric.
+   either metric. (C2/C3 do not use the raw condition, so this comparison
+   is unaffected by §7.2/§7.4's bug.)
+7. **C3 vs C4**: Friedman omnibus on ESR, p = 0.028 — again
+   descriptive/exploratory only, not confirmatory on its own (same caveat
+   as #3). Running BOTH repo-aware pairwise follow-up families: of the 6
+   ESR pairs, **none reach significance after Holm correction** (closest:
+   C3-S vs C4-A, raw p = 0.024, Holm-adjusted p = 0.142); of the 6
+   conditional-MCC pairs (the metric the original C4-A/C4-B narrative was
+   built on), **none reach significance after Holm correction either**
+   (closest: C3-S vs C4-A, raw p = 0.107, Holm-adjusted p = 0.644). Neither
+   the omnibus signal nor either pairwise family resolves into a specific
+   confirmed difference. (C3/C4 do not use the raw condition either, so
+   unaffected by §7.2/§7.4's bug.)
 
-**Overall reading [CORRECTED, 2026-10-07 audit round 2]**: this study's
-previously-reported headline finding — that feedback-driven repair
-produces a large, statistically established end-to-end quality improvement
-— does not survive repeating the comparison on a metric without the
-conditional-MCC selection-effect confound. **Across every one of the 7
-predefined comparisons, 0 of 8 per-model end-to-end (ESR) differences are
-statistically detectable after Holm correction**, and the one comparison
-family with real aggregate significance (comparison 3's small-model-family
-Friedman omnibus) resolves to exactly 2 specific pairwise differences out of
-15, not a general pattern. The large, consistently "p < 0.0001" conditional-
-MCC gaps for raw-vs-autogrep and C1-vs-C2 remain real and worth reporting,
-but as evidence about *which cases become acceptable* under repair, not as
-evidence repair improves rule quality on a shared population of cases — the
-two things this paper previously conflated. The multi-agent findings (C2 vs
-C3, C3 vs C4) remain directionally interesting, mechanistically
-well-motivated HYPOTHESES, not confirmed effects, given how few cases are
-ever accepted under the stricter multi-agent conditions. **The paper's
-central empirical result is now the gap between visible-validation
-acceptance and end-to-end hidden-test success (§7.9), not a repair-superiority
-claim** — see the Conclusion for the restated main claim.
+**Overall reading [CORRECTED AGAIN, 2026-10-07, following further reviewer
+feedback]**: this study's previously-reported headline finding — that
+feedback-driven repair produces a large, statistically established
+end-to-end quality improvement — does not survive repeating the comparison
+on a metric without the conditional-MCC selection-effect confound.
+**Across every one of the 7 predefined comparisons, 0 of 8 per-model
+end-to-end (ESR) differences are statistically detectable after Holm
+correction** (this remains true and was never affected by the bug below),
+and the one comparison family with a repo-aware, confirmed pairwise
+difference (comparison 3's two surviving pairs) resolves to 2 specific
+model pairs out of 15, not a general pattern — its own Friedman omnibus is
+descriptive only (not repository-aware, see above).
+
+A sample-pooling bug, not just a selection-effect ambiguity, was also found
+and fixed in this pass: conditional MCC for the raw condition had been
+computed by pooling sample records regardless of whether the case's rule
+was actually accepted, silently mixing in rejected-rule samples. Corrected,
+**raw's conditional MCC is numerically higher than autogrep's and C2's for
+7 of 8 models, and statistically significant (Holm-corrected) for 2 of 8 —
+the opposite of the direction this document previously reported.** There is
+therefore no remaining basis anywhere in this document for a claim that
+feedback-driven repair improves rule quality: not on the end-to-end metric
+(no detectable difference, any condition), and not on conditional MCC
+either (to the extent a real difference exists, it points toward raw being
+as good or better, not worse). The multi-agent findings (C2 vs C3, C3 vs
+C4) remain directionally interesting, mechanistically well-motivated
+HYPOTHESES, not confirmed effects, given how few cases are ever accepted
+under the stricter multi-agent conditions. **The paper's central empirical
+result is the gap between visible-validation acceptance and end-to-end
+hidden-test success (§7.9); there is no repair-superiority finding of any
+kind left standing in this document** — see the Conclusion for the
+restated main claim.
 
 **Subgroup analysis (§22.4) [CORRECTED]**, applied to the primary benchmark's
 `autogrep` condition on the full dataset (most statistical power in the
@@ -1181,21 +1299,30 @@ unrecoverable, exactly as this document stated before the (now-retracted)
 | Model / condition | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate | Of non-accepted: confirmed parse-fail / reason-unrecoverable |
 |---|---:|---:|---:|---:|---:|---:|
 | DeepHat-V1-7B — autogrep | 36.0% | 36.0% | 0.545 | 16.3% (49/300) | 6.0% (9/150) | 6 / 90 |
-| DeepHat-V1-7B — raw | 94.7% | 28.0% | 0.593 | 14.7% (44/300) | 5.3% (8/150) | — |
+| DeepHat-V1-7B — raw | 83.3% | 28.0% | 0.593 | 14.7% (44/300) | 5.3% (8/150) | — |
 | Qwen2.5-Coder-32B — autogrep | 30.0% | 30.0% | 0.539 | 16.3% (49/300) | 4.7% (7/150) | 9 / 96 |
-| Qwen2.5-Coder-32B — raw | 94.0% | 26.0% | 0.628 | 16.3% (49/300) | 4.7% (7/150) | — |
+| Qwen2.5-Coder-32B — raw | 80.0% | 26.0% | 0.628 | 16.3% (49/300) | 4.7% (7/150) | — |
 | Yi-Coder-9B — autogrep | 29.3% | 29.3% | 0.534 | 14.0% (42/300) | 5.3% (8/150) | 9 / 97 |
-| Yi-Coder-9B — raw | 92.0% | 19.3% | 0.583 | 10.7% (32/300) | 3.3% (5/150) | — |
+| Yi-Coder-9B — raw | 77.3% | 19.3% | 0.583 | 10.7% (32/300) | 3.3% (5/150) | — |
 | Qwen2.5-Coder-7B-Instruct — autogrep | 31.3% | 31.3% | 0.513 | 15.7% (47/300) | 4.7% (7/150) | 12 / 91 |
 | Qwen2.5-Coder-7B-Instruct — raw | 74.0% | 24.0% | 0.626 | 14.7% (44/300) | 4.0% (6/150) | — |
 | CodeLlama-7B-Instruct — autogrep | 14.7% | 14.7% | 0.510 | 4.0% (12/300) | 0.7% (1/150) | 13 / 115 |
-| CodeLlama-7B-Instruct — raw | 65.3% | 10.0% | 0.503 | 2.3% (7/300) | 0.0% (0/150) | — |
+| CodeLlama-7B-Instruct — raw | 70.0% | 10.0% | 0.503 | 2.3% (7/300) | 0.0% (0/150) | — |
 | CodeGemma-7B — autogrep | 18.7% | 18.7% | 0.521 | 7.0% (21/300) | 2.0% (3/150) | 14 / 108 |
-| CodeGemma-7B — raw | 76.7% | 13.3% | 0.580 | 5.7% (17/300) | 2.0% (3/150) | — |
+| CodeGemma-7B — raw | 72.0% | 13.3% | 0.580 | 5.7% (17/300) | 2.0% (3/150) | — |
 | Magicoder-7B — autogrep | 9.3% | 9.3% | 0.427 | 2.3% (7/300) | 0.7% (1/150) | 23 / 113 |
-| Magicoder-7B — raw | 70.0% | 4.0% | 0.520 | 1.7% (5/300) | 0.7% (1/150) | — |
+| Magicoder-7B — raw | 56.7% | 4.0% | 0.520 | 1.7% (5/300) | 0.7% (1/150) | — |
 | DeepSeek-Coder-6.7B — autogrep | 12.0% | 12.0% | 0.373 | 2.7% (8/300) | 1.3% (2/150) | 16 / 116 |
-| DeepSeek-Coder-6.7B — raw | 68.0% | 6.7% | 0.481 | 1.7% (5/300) | 0.7% (1/150) | — |
+| DeepSeek-Coder-6.7B — raw | 73.3% | 6.7% | 0.481 | 1.7% (5/300) | 0.7% (1/150) | — |
+
+**[CORRECTED, 2026-10-07, following further reviewer feedback]** The raw
+row's compile-rate figures above were previously stale — pulled from an
+earlier run of `build_step4_tables.py` before a later fix (restoring the
+`is_semgrep_parse_error()` check, needed when the "Finding 2" misdiagnosis
+above was retracted) was ever re-synced into this table. These are now the
+exact, freshly-regenerated values from `results_corrected/step4_tables_report.txt`;
+this table is generated directly from that script's output going forward,
+not hand-copied, to prevent this exact class of staleness recurring.
 
 *Reading this table: "confirmed parse-fail" counts non-accepted cases whose
 stored error text genuinely says `"failed to parse/sanitize into a rule"`
@@ -1431,20 +1558,28 @@ rejected), broken down by Semgrep's own reported error type:
 **Semantic failures** (1,372 records, 57.2% of all raw attempts — by far
 the largest category): the rule is syntactically valid and runs cleanly
 in Semgrep, but fails Autogrep's own correctness bar (doesn't flag the
-vulnerable sample, or does flag the patched sample, or both). This
-single number is the strongest evidence in the whole study for why
-Autogrep's retry/feedback loop produces the large, highly significant MCC
-gains reported in §7.8's comparison 4 — the dominant failure mode by far
-is a plain discrimination miss, exactly the kind of failure a
-feedback-driven repair attempt can plausibly fix, unlike a YAML-level
-format failure the model would need to see a DIFFERENT kind of signal to
-correct. §24's finer semantic subcategories (wrong mechanism, source-sink
-lost, sanitizer ignored, vulnerable/fixed reversed, over/under-
-generalization) were explicitly instrumented for ONE condition in this
-study — Phase 3's semantic-review role screening (§7.5) — where the
-screening test set's own categories (MISS / PATCHED_CODE_FINDING /
-OVER_GENERALIZATION / UNDER_GENERALIZATION / NONE) map directly onto
-§24's taxonomy; not re-run across the full 2,400-record primary set here.
+vulnerable sample, or does flag the patched sample, or both). **[CORRECTED,
+2026-10-07, following further reviewer feedback] This figure is retained
+as a real, direct measurement of the raw condition's own failure
+composition, but the causal claim built on it — that this discrimination-miss
+rate "is the strongest evidence in the whole study for why Autogrep's
+retry/feedback loop produces large, highly significant MCC gains" — is
+retracted along with the finding it was explaining.** §7.8's comparison 4 no
+longer reports an autogrep MCC gain over raw to explain: a sample-pooling
+bug meant the originally-reported gain never existed, and the corrected
+comparison shows raw's conditional MCC is, if anything, numerically higher
+than autogrep's for most models (§7.2, §7.8). A plain discrimination miss
+being the dominant raw-condition failure mode remains true and interesting
+in its own right (it says raw one-shot generation mostly produces
+syntactically fine, semantically wrong rules, not malformed ones) — it no
+longer supports any specific claim about what repair subsequently achieves.
+§24's finer semantic subcategories (wrong mechanism, source-sink lost,
+sanitizer ignored, vulnerable/fixed reversed, over/under-generalization)
+were explicitly instrumented for ONE condition in this study — Phase 3's
+semantic-review role screening (§7.5) — where the screening test set's own
+categories (MISS / PATCHED_CODE_FINDING / OVER_GENERALIZATION /
+UNDER_GENERALIZATION / NONE) map directly onto §24's taxonomy; not re-run
+across the full 2,400-record primary set here.
 
 **Multi-agent failures.** Every one of §24's eight listed multi-agent
 failure modes has a concrete, already-documented instance from this
@@ -1563,12 +1698,55 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   sensitivity to the ground-truth correction, not a uniformly negligible
   one, and is disclosed as such rather than smoothed into a single
   cross-model number. Full recomputation: `pipeline/build_step4_tables.py`.
+
+  **[ADDED, 2026-10-07, following further reviewer feedback] The table
+  above covered the autogrep condition only; extended here to raw, C2, C3,
+  and C4, using the same finalized location annotations on both sides of
+  each 153→150 comparison, so the exclusion effect is isolated from the
+  separate scoring corrections** (Finding 1's location-correctness fix,
+  already baked into `results_corrected/` on both sides equally):
+
+  | Raw condition | Accept. (153→150) | Conditional MCC (153→150) | E2E detection (153→150) | E2E success (153→150) |
+  |---|---:|---:|---:|---:|
+  | Qwen2.5-Coder-7B-Instruct | 24.2%→24.0% | 0.627→0.626 | 15.0%→14.7% | 3.9%→4.0% |
+  | Qwen2.5-Coder-32B | 25.5%→26.0% | 0.628→0.628 | 16.0%→16.3% | 4.6%→4.7% |
+  | DeepHat-V1-7B | 28.1%→28.0% | 0.589→0.593 | 14.4%→14.7% | 5.2%→5.3% |
+  | DeepSeek-Coder-6.7B | 6.5%→6.7% | 0.481→0.481 | 1.6%→1.7% | 0.7%→0.7% |
+  | CodeGemma-7B | 13.1%→13.3% | 0.580→0.580 | 5.6%→5.7% | 2.0%→2.0% |
+  | Magicoder-7B | 3.9%→4.0% | 0.520→0.520 | 1.6%→1.7% | 0.7%→0.7% |
+  | Yi-Coder-9B | 19.0%→19.3% | 0.583→0.583 | 10.5%→10.7% | 3.3%→3.3% |
+  | CodeLlama-7B-Instruct | 11.1%→10.0% | 0.500→0.503 | 2.9%→2.3% | 0.0%→0.0% |
+
+  | C2 | Accept. (153→150) | Conditional MCC (153→150) | E2E detection (153→150) | E2E success (153→150) |
+  |---|---:|---:|---:|---:|
+  | Qwen2.5-Coder-7B-Instruct | 32.0%→32.0% | 0.504→0.502 | 16.0%→15.7% | 4.6%→4.7% |
+  | Qwen2.5-Coder-32B | 30.1%→30.0% | 0.536→0.539 | 16.0%→16.3% | 4.6%→4.7% |
+  | DeepHat-V1-7B | 35.9%→36.0% | 0.543→0.545 | 16.0%→16.3% | 5.9%→6.0% |
+  | DeepSeek-Coder-6.7B | 11.8%→12.0% | 0.373→0.373 | 2.6%→2.7% | 1.3%→1.3% |
+  | CodeGemma-7B | 18.3%→18.7% | 0.521→0.521 | 6.9%→7.0% | 2.0%→2.0% |
+  | **Magicoder-7B** | 13.1%→12.7% | **0.364→0.403** | 2.6%→2.7% | 0.7%→0.7% |
+  | Yi-Coder-9B | 30.1%→30.0% | 0.511→0.516 | 14.1%→14.0% | 5.2%→5.3% |
+  | CodeLlama-7B-Instruct | 15.7%→14.7% | 0.508→0.510 | 4.6%→4.0% | 0.7%→0.7% |
+
+  | C3 / C4 | Accept. (153→150) | Conditional MCC (153→150) | E2E detection (153→150) | E2E success (153→150) |
+  |---|---:|---:|---:|---:|
+  | C3-S | 22.9%→23.3% | 0.649→0.649 | 16.3%→16.7% | 5.2%→5.3% |
+  | C3-E | 8.5%→8.7% | 0.545→0.545 | 4.6%→4.7% | 1.3%→1.3% |
+  | C4-A | 7.2%→7.3% | 0.524→0.524 | 3.9%→4.0% | 0.7%→0.7% |
+  | C4-B | 17.0%→17.3% | 0.668→0.668 | 13.4%→13.7% | 3.9%→4.0% |
+
+  The pattern holds across every workflow, not just autogrep: negligible
+  movement (≤0.04 MCC, mostly ≤0.005) for every model/condition except
+  Magicoder-7B under C2, which moves +0.039 (0.364→0.403) for the same
+  small-denominator reason as its autogrep exception above. No condition's
+  ranking among the others changes as a result of this exclusion anywhere
+  in this table.
 - **One case (`CASE-0166`) was excluded post-hoc during the audit** after
   confirming its upstream-patched revision does not compile (§2.2) — the
   dataset is 299 cases as of this writing, not 300.
 - **A real scoring gap (location-correctness never checked for hidden
   variant samples) was found and fixed during the audit** (§5) — every
-  VGR/MCC number in this document reflects the correction; 21.6% of all
+  VGR/MCC number in this document reflects the correction; 22.0% of all
   hidden-variant "detections" study-wide were wrong-location matches,
   now corrected.
 - **C2, C3, and C4 are not a controlled comparison of "role separation"
@@ -1688,24 +1866,37 @@ a pre-existing, already-documented diagnostic-text bug
 any actual pass/fail outcome; and completed the long-pending second-rater
 check (twice, the second time with a clean, zero-overlap sample).
 
-**The most consequential change of the second audit pass**: every causal
-claim about multi-agent configurations remains hedged as a hypothesis
-unless formal significance testing confirmed it, and this document's
-previous claim that feedback-driven repair's MCC gain was "the single
-most robust finding in the whole study, unaffected by any correction" is
-**retracted**. That claim rested on comparing conditional MCC between raw
-and repaired conditions — each computed only among that condition's own
-accepted cases, a different, self-selected population for each side.
-Repeating the same comparisons on the end-to-end metric (identical 150-case
-denominator for every condition, no selection effect) finds **0 of 8
-models with a statistically detectable raw-vs-autogrep or C1-vs-C2
-end-to-end difference, after Holm correction, anywhere in the study**
-(`results_corrected/section22_corrected_report_round2.txt`). The large
-conditional-MCC gaps are still reported, but as evidence about which cases
-become acceptable under repair, not as evidence of an established
-end-to-end quality improvement. The paper's central result is now the gap
-between visible-validation acceptance and end-to-end hidden-test success
-(§7.9), not a repair-superiority claim.
+**The most consequential change of the second audit pass, corrected twice**:
+every causal claim about multi-agent configurations remains hedged as a
+hypothesis unless formal significance testing confirmed it, and this
+document's previous claim that feedback-driven repair's MCC gain was "the
+single most robust finding in the whole study, unaffected by any
+correction" is **retracted**. On the end-to-end metric (identical 150-case
+denominator for every condition, repository-aware bootstrap), **0 of 8
+models show a statistically detectable raw-vs-autogrep or C1-vs-C2
+end-to-end difference, after Holm correction** — true throughout this
+pass and unaffected by the correction below.
+
+The conditional-MCC side of this comparison was first (incorrectly)
+described as a real but selection-confounded "large gain for autogrep,"
+and was then found to rest on an actual bug, not just a selection-effect
+ambiguity: a sample-pooling error made raw's conditional MCC look far lower
+than it really is. Corrected, raw's conditional MCC is numerically **higher**
+than autogrep's and C2's for 7 of 8 models, significant after Holm
+correction for 2 of 8 — the opposite direction from every previous version
+of this claim. There is no remaining basis anywhere in this document for a
+conditional-MCC-based repair-superiority claim either.
+
+A small number of OTHER comparisons do carry confirmed, repository-aware
+significance — these are not end-to-end raw/autogrep/C2 differences, and
+are stated precisely rather than folded into "no significant differences
+anywhere": comparison 3's small-code-model-family analysis finds 2 of 15
+pairwise end-to-end differences significant after Holm correction
+(CodeGemma-7B vs. DeepHat-V1-7B; Magicoder-7B vs. Yi-Coder-9B, §7.8), and
+the corrected conditional-MCC comparisons above are significant for 2 of 8
+models. The paper's central result is the gap between visible-validation
+acceptance and end-to-end hidden-test success (§7.9), not a
+repair-superiority claim in either direction.
 
 *Reproducibility note for the eventual paper's methods/appendix: the dataset's
 content-hash, every pinned software version (Autogrep commit, Semgrep version),

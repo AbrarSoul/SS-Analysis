@@ -726,7 +726,7 @@ extracted-helper definition was found and used instead. Full reasoning for all 2
 `benchmark/variant_lines_manual_adjudication.json`. `benchmark/variant_vulnerable_lines.jsonl`
 updated in place (`confidence: "manual"`); `pipeline/rescore_variant_location.py` updated to trust
 `confidence in ("high", "manual")`. Rerunning the rescoring pipeline moved the TP→FN flip rate from
-879/4072 (21.6%) to 897/4072 (22.1%) -- a small further correction on top of Finding 1's original
+879/4072 (21.6%) to 897/4072 (22.0% -- corrected from an earlier arithmetic slip that said 22.1%) -- a small further correction on top of Finding 1's original
 fix, now with zero unresolved annotations (571 "high" + 29 "manual" = 600/600).
 
 **Priority 2 — ground-truth exclusion standard, applied to all 10 flagged cases.** Established one
@@ -935,3 +935,88 @@ carried forward rather than resolved (stated plainly, not hidden): §7.3's 2-mod
 screening recomputation; a controlled multi-agent-causality rerun and a corrected-wrapper rerun, both
 explicitly scoped as unnecessary for this document's current (non-causal, implementation-scoped)
 claims but required for any future, broader claim.
+
+### 2026-10-07 — External reviewer feedback round 3: a real pooling bug, not just a selection-effect caveat, found and fixed
+
+The user relayed detailed external reviewer feedback on the published GitHub repository (7 numbered
+items). The single highest-priority item -- an exact MCC contradiction between
+`step4_tables_report.txt` (raw `qwen2.5-coder:7b-instruct` MCC = 0.626) and
+`section22_corrected_report_round2.txt` (same model/condition/population, MCC = 0.101) -- led to
+finding a real bug, not a selection-effect subtlety as previously assumed.
+
+**Root cause**: `analyze_section22_corrected.py`'s three data loaders (`load_primary_corrected`,
+`load_c2_corrected`, `load_multiagent_corrected`) stored `case_samples = smp_by_case.get(cid, [])`
+unconditionally -- every case's sample records, regardless of whether that case's rule was actually
+accepted -- then `pooled_mcc_fn` read this `"samples"` field directly with no re-check. Verified
+directly: the RAW condition (unlike autogrep) records a real, scored `sample_execution_log` entry
+whenever a rule's YAML parses, REGARDLESS of whether it goes on to pass `semgrep_valid` -- 215 of 269
+one model's raw sample-bearing cases were NOT accepted, confirming this wasn't a one-off. The same
+unconditional-pooling pattern was independently present in `analyze_phase5_primary.py`'s
+`analyze_model()` (which `build_step4_tables.py`'s own `primary_table_row` was NOT affected by -- it
+already correctly gated -- but this project's original, very first analysis script, used for every
+pre-audit "headline ranking" claim, was never gated either, meaning the raw condition's pooled
+MCC/VGR/FPR has been subject to this bug since before either audit round began).
+
+**Fix**: added one shared helper, `gated_samples(cid, is_accepted, smp_by_case)`, to
+`analyze_phase5_primary.py`, and rewired all three previously-independent call sites
+(`analyze_phase5_primary.analyze_model`, `build_step4_tables.py`'s two table-row functions,
+`analyze_section22_corrected.py`'s three loaders) to use it, so this exact class of bug cannot recur
+silently across scripts again. Reran every affected script; `step4_tables_report.txt` and
+`section22_corrected_report_round2.txt` now agree exactly (raw qwen2.5-coder:7b-instruct MCC = 0.626
+in both).
+
+**The corrected finding reverses this document's entire conditional-MCC narrative about repair,
+not just adds a caveat to it.** With the bug fixed, raw's conditional MCC is numerically HIGHER than
+autogrep's (and C2's) for 7 of 8 models, and the difference is statistically significant after Holm
+correction for 2 of 8 models (repo-aware bootstrap) -- the opposite direction from every previous
+version of this claim, including the "selection-confounded but real large gain for autogrep" framing
+written earlier this same day. Combined with the already-established, unaffected end-to-end result
+(0/8 models significant, any comparison), there is no remaining basis anywhere in this document for a
+repair-superiority claim in either direction on either metric. `Paper_Draft_Notes.md` rewritten
+throughout (§7.1, §7.2, §7.4, §7.8, §7.9's closing paragraph, §9, the document's closing note) to
+reflect this.
+
+**Also addressed from the same feedback, in the same pass**:
+- **PDS/VGR/FPR recomputed for real** on the 150-case population for all 8 models × 2 conditions
+  (§7.1's headline table), replacing the previous "carried over from 153, reasonable approximation"
+  disclosure -- now computed directly via the same shared, gated helper.
+- **§7.9's compilation-rate table was stale**, not wrong in a new way: the raw-condition compile
+  rates shown (94.7%/94.0%/65.3% for DeepHat/Qwen32B/CodeLlama) predated a same-day fix (restoring
+  `is_semgrep_parse_error()`) that was never re-synced into the manuscript table. Corrected to the
+  verified current report values (83.3%/80.0%/70.0%).
+- **Friedman omnibus tests (comparisons 3 and 7) are not repository-aware** -- `scipy.friedmanchisquare`
+  assumes independent rows, false here. Rather than build an unverified repo-aware omnibus variant
+  under time pressure, reported these omnibus p-values as descriptive/exploratory only; only their
+  repo-aware bootstrap pairwise follow-ups carry a confirmatory significance claim. The bootstrap
+  procedure itself (resampling unit, n_boot=10,000, fixed seed 42, two-sided p-value construction,
+  Holm-Bonferroni as the declared multiple-testing family) is now documented precisely in §7.8, and
+  degenerate (zero-sample) resamples were checked by direct simulation for this study's two
+  lowest-coverage conditions (0/10,000 for both) rather than asserted away.
+- **Ground-truth sensitivity analysis (Priority 5) extended to raw, C2, C3, and C4** -- previously
+  autogrep-only. Same negligible pattern holds throughout (Magicoder-7B under C2 is the one other
+  real exception, +0.039 MCC, same small-denominator mechanism as its autogrep exception).
+- **Dataset composition table corrected to total 299**, with the 5 ground-truth exclusions shown as
+  a separate annotation column rather than folded into (or confused with) the representability
+  labels themselves.
+- **A real arithmetic slip fixed**: 897/4072 rounds to 22.0%, not 22.1% as stated when Priority 1 was
+  first logged (also not the stale pre-Priority-1 21.6% that had re-appeared in three places in
+  `Paper_Draft_Notes.md`) -- all four locations corrected to 22.0%.
+- **§7.4's "budget-matched baseline" language removed** -- C2's explicit budget is not enforced
+  equivalently against autogrep's unmatched retry loop, so this was a real residual overclaim, not a
+  caveat gap.
+- **§9's causal claim retracted**: the raw condition's 57.2% semantic-failure rate was cited as "the
+  strongest evidence... for why Autogrep's retry/feedback loop produces large, highly significant MCC
+  gains" -- with no such gain left standing to explain, this specific causal sentence is retracted;
+  the 57.2% figure itself is retained as a real, valid measurement of raw's own failure composition.
+- **Reproducibility_Package.md**: added an explicit "recomputing from stored records (possible) vs.
+  re-executing the historical generated rules (impossible)" section, and disclosed that
+  positive-sample (vulnerable-sample) validity evidence exists but is distributed across 300
+  individual per-case build scripts, not consolidated into one index file -- real evidence, not
+  fabricated completeness, but real remaining work to consolidate it.
+
+**A process note, stated plainly, again**: this is the second time in one day a causal/quantitative
+claim in this document was found to rest on a coding bug rather than a genuine methodological
+subtlety, and the second time an external check (first `Implementation_Log.md`, now a reviewer)
+caught something this session's own re-analysis had not. The lesson from the first entry is repeated
+and extended: cross-check every reported number against an independent recomputation path BEFORE
+writing a causal explanation for it, not just BEFORE publishing the explanation.

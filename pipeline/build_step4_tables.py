@@ -55,7 +55,7 @@ from collections import defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from analyze_phase5_primary import confusion_from_samples, mcc, rate
+from analyze_phase5_primary import confusion_from_samples, mcc, rate, gated_samples
 from analyze_section22 import PRIMARY_MODEL_DIRS, C2_MODEL_DIRS
 from eligible_cases import eligible_supported_cases, VERSION as ELIGIBLE_VERSION
 
@@ -99,8 +99,7 @@ def primary_table_row(label, model_dir, condition, case_filter):
 
     accepted_samples = []
     for cid, g in gen_c.items():
-        if g["yaml_valid"] and g["semgrep_valid"]:
-            accepted_samples.extend(smp_by_case.get(cid, []))
+        accepted_samples.extend(gated_samples(cid, bool(g["yaml_valid"] and g["semgrep_valid"]), smp_by_case))
     cond_mcc = mcc(confusion_from_samples(accepted_samples)) if accepted_samples else None
 
     e2e_tp, e2e_total = 0, 0
@@ -156,8 +155,7 @@ def multiagent_table_row(label, results_subdir, variant, case_filter):
 
     accepted_samples = []
     for cid, e in ep_by_case.items():
-        if e["accepted"]:
-            accepted_samples.extend(smp_by_case.get(cid, []))
+        accepted_samples.extend(gated_samples(cid, bool(e["accepted"]), smp_by_case))
     cond_mcc = mcc(confusion_from_samples(accepted_samples)) if accepted_samples else None
 
     e2e_tp, e2e_total = 0, 0

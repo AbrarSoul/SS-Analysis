@@ -5,14 +5,6 @@ list of what is NOT available and why. Nothing in this file is duplicated elsewh
 a path into the existing repository, not a copy. See `Research_Log/Correction_Log.md` for the full
 narrative history behind each correction referenced here.
 
-**Note on paths in this file, for readers of the public repository specifically**: this document was
-written against the original private working repository's layout. In this public repository, the
-curated plain-text analysis reports it refers to under `results_corrected/*.txt` are at
-`analysis_reports/*.txt` instead; `results/` and `results_corrected/`'s raw per-call JSONL logs are
-not included here at all (see the top-level `README.md`'s "What's deliberately not included"
-section) — the scoring scripts in §2 below are included and will regenerate those reports from raw
-logs if you have or recreate them.
-
 ## 1. Dataset and eligibility
 
 | Artifact | Path | Notes |
@@ -66,6 +58,52 @@ rounds with before/after numbers. Git history from tag `baseline-pre-audit` onwa
 trail as individually-reviewable commits; `git log --oneline baseline-pre-audit..HEAD` lists them in
 order.
 
+## 5a. Two different things reviewers sometimes conflate, stated separately
+(added 2026-10-07, following further reviewer feedback)
+
+- **Recomputing statistics from stored execution records — possible, and
+  what §2's scripts do.** `sample_execution_log.jsonl` (in both `results/`
+  and `results_corrected/`) stores, per case/condition/sample, the real
+  TP/FP/FN/TN outcome a rule produced when it was run, during the original
+  study, against this case's 6-sample bundle. Every metric in this document
+  (MCC, VGR, FPR, PDS, ESR, and every statistical test) is recomputed from
+  these stored outcomes — no rule is re-executed to produce them.
+- **Re-executing the historical generated rules against the bundles again —
+  currently impossible.** The rule YAML text itself was never retained
+  (§6 below), so there is no way to take "the rule qwen2.5-coder:32b
+  generated for CASE-0101" and run it again, today, to confirm the stored
+  outcome independently, or to test it against a modified bundle, or to
+  inspect it for a specific false positive's root cause. Any new generation
+  — even using the identical model, prompt, and config — would produce a
+  NEW rule (a fresh LLM sample), not a recovery of the one actually scored
+  in this study's results, and must be reported as a separately-identified
+  rerun, not as verification of the historical numbers.
+
+## 5b. Positive-sample (vulnerable-sample) validity evidence
+
+The ground-truth exclusion standard (§1 above, Priority 2) addresses
+whether a case's PATCHED sample is a trustworthy negative. A separate
+question — whether each case's VULNERABLE sample actually exhibits the
+labeled weakness — was checked during original dataset curation, but the
+evidence is **distributed across 300 individual per-case build scripts**
+(`pipeline/section9_final/build_bundle_case*.py`), not consolidated into
+one index file. Each script embeds its own case-specific verification (for
+example, CASE-0248's script captures a real logging handler's output at
+runtime and asserts the leaked credential actually appears in it for the
+vulnerable/renamed/restructured variants and does not for the patched/safe
+ones — not just asserted by construction). `Research_Log/Implementation_Log.md`
+documents numerous instances of catching and re-deriving cases where an
+initially-extracted "vulnerable" function was unrelated to the real
+vulnerability (e.g. Sections on `CASE-0042`, `CASE-0043`, `CASE-0116`,
+`CASE-0221`), and `transformation_manifest_final.jsonl` records a
+`"validation"` block per sample (`parses`, `label_preserved`,
+`no_new_vulnerability_introduced`, ...) as a declared, not just implied,
+check. **No single consolidated "positive-sample adjudication file" exists
+across all 299 cases** — building one (indexing each case's specific
+verification method and whether it was construction-time-only or
+independently executed) is disclosed here as real, additional work not yet
+done, not fabricated as already complete.
+
 ## 6. Missing artifacts, stated explicitly (per Priority 8's instruction)
 
 - **Generated rule YAML text** for the primary benchmark, stability experiment, C2, C3, and C4 (§3
@@ -94,3 +132,6 @@ order.
   (`Paper_Draft_Notes.md` §10), this document's conclusions are explicitly scoped to the tested
   Autogrep implementation as configured, not to LLM-to-Semgrep rule generation as a general capability
   claim.
+- **A single consolidated positive-sample (vulnerable-sample) validity index across all 299 cases**
+  (§5b above) — the underlying per-case verification exists, scattered across 300 individual build
+  scripts, but has not been indexed into one file stating, per case, what was checked and how.
