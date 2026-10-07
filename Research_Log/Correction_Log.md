@@ -892,3 +892,46 @@ exactly this kind of implementation-level bug-and-fix, and checking it first wou
 Section 12.30 immediately instead of independently (and incorrectly) re-diagnosing the same
 symptom. Recorded here so the lesson is explicit: check the existing implementation/correction logs
 for a documented explanation before treating a surprising data pattern as a new discovery.
+
+### 2026-10-07 — Priority 8 complete: §7.3 resolved, two scope decisions written in, reproducibility package assembled
+
+**§7.3's stability-ranking discrepancy**, open since round 1, investigated directly rather than left
+as a blanket mystery. Three possible artifacts ruled out first: (1) the table-generating script itself
+was found to still read from uncorrected `results/` in every path despite being labeled "corrected
+data" — fixed (`pipeline/analyze_phase5_stability.py` now reads `results_corrected/`), and rerunning
+reproduces the existing table almost exactly (confirming this wasn't the cause); (2) averaging 5
+per-repeat MCCs vs. pooling all 5 repeats' samples into one confusion matrix gives essentially the
+same ranking, ruling out a mean-of-ratios artifact; (3) `environment.json` diffed identical between
+primary and stability runs for the most-swapped models, apart from temperature, ruling out a
+config/model-version confound. With those ruled out: 6 of 8 models' single temp-0 MCC value falls
+inside that model's own 5-repeat temp-0.2 range -- ordinary single-draw sampling noise among
+closely-clustered MCCs (roughly 0.45-0.57) at a 51-case subset size, not a mystery. 2 of 8
+(`qwen2.5-coder:32b`, `codellama:7b-instruct-fp16`) remain a genuine, same-direction exception (temp-0
+scores above their ENTIRE 5-repeat range) -- carried forward as an explicit, untested hypothesis
+(determinism specifically benefiting these two, one already precision-confounded), not claimed as
+resolved.
+
+**Two scope decisions**, written explicitly into `Paper_Draft_Notes.md` §10 rather than left implicit:
+(a) given the wrapper-level composite-pattern restriction (§10's existing bullet), this document's
+conclusions are now explicitly scoped to the tested Autogrep implementation, not to "LLM-to-Semgrep
+rule generation" as a general claim; (b) a controlled rerun isolating role separation from the other
+3 C2/C3/C4 confounds is stated as unnecessary under this document's actual claims (no causal
+role-separation claim is made anywhere, and §7.8 finds no significant pairwise difference in most of
+these comparisons regardless of cause) -- needed only if a future paper wants to make that causal
+claim.
+
+**Reproducibility package assembled**: `Research_Log/Reproducibility_Package.md`, a single index (not
+a duplication) of the dataset/eligibility artifacts, the scoring-script run order, what's retained in
+`results/`/`results_corrected/`, the configuration/pinning docs, and -- per Priority 8's explicit
+instruction -- a stated list of missing artifacts: no generated rule YAML text survives for the
+primary benchmark, stability experiment, or C2/C3/C4 (only the 40-case pilot retains it); no per-case
+token/latency for the primary benchmark or C3/C4; the specific parse-vs-discrimination reason for
+most autogrep-condition rejections (per the Finding-2 retraction above); the pilot's un-recomputed
+numbers; and the two not-yet-run investigations (case-level flip analysis for §7.3's 2-model residual,
+a controlled C2/C3/C4 rerun) tied to their respective open items above.
+
+**This completes Priority 8 and the second audit round's explicit checklist.** Remaining open items,
+carried forward rather than resolved (stated plainly, not hidden): §7.3's 2-model residual; the pilot
+screening recomputation; a controlled multi-agent-causality rerun and a corrected-wrapper rerun, both
+explicitly scoped as unnecessary for this document's current (non-causal, implementation-scoped)
+claims but required for any future, broader claim.
