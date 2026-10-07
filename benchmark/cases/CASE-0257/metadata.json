@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0257",
+  "original_source_case_id": "github.com_pgadmin-org_pgadmin4_4e49d752fba72953acceeb7f4aa2e6e32d25853d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-2044",
+  "cve_ids_all": [
+    "CVE-2024-2044"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-31"
+  ],
+  "language": "python",
+  "repository": "pgadmin-org/pgadmin4",
+  "repository_url": "https://github.com/pgadmin-org/pgadmin4",
+  "vulnerable_commit": "0cbb5324bf56aac66f58887fd67776b080082fda",
+  "fixed_commit": "4e49d752fba72953acceeb7f4aa2e6e32d25853d",
+  "changed_file": "web/pgadmin/utils/session.py",
+  "changed_function": "def new_session(self):",
+  "vulnerable_lines": [
+    203,
+    221
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 19,
+  "patch_size_deleted": 10,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0257/vulnerable_source.py": "d44b729740a208ef13a9ed47d5f5d3cb8d99030f676728da91bc1e84d2bbd505",
+    "cases/CASE-0257/patched_source.py": "14d076fc852c088165412d752a1c220bfd81eb23a753a867c46339de0af0de75",
+    "cases/CASE-0257/patch.diff": "af95135863f2e739b84059895d4a73b9943e3f2588e86aaec7ca48cf9b41f2a5",
+    "cases/CASE-0257/metadata.json": "0255b06dffb5c23e49d0dfbad85585a7224a2ecd41b9144d3ea2fd9d4b45f680",
+    "model_context/CASE-0257.json": "e4fa87bf71bed395736d73f5e3eb949a41c3a4c4e1fc57a070267b9eff262b96",
+    "difficulty/CASE-0257.json": "333f85ccdb58d4b0c765304e35ba6d091e0f00c0027d8eb66764000a6f51759a"
+  },
+  "case_level_hash": "321322cde99b7edb8217379796ebdda9861238b16f6657bcc03ab8f6d6787247"
+}

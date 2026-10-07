@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0251",
+  "original_source_case_id": "github.com_openstack_storlets_5ad58804af885db3eb7a78bea5000c401eeeb70e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-28717",
+  "cve_ids_all": [
+    "CVE-2024-28717"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "python",
+  "repository": "openstack/storlets",
+  "repository_url": "https://github.com/openstack/storlets",
+  "vulnerable_commit": "9aa8ab2cdaadd387282701d43463e486d29fa91d",
+  "fixed_commit": "5ad58804af885db3eb7a78bea5000c401eeeb70e",
+  "changed_file": "storlets/gateway/gateways/docker/gateway.py",
+  "changed_function": "def bring_from_cache(self, obj_name, sreq, is_storlet):",
+  "vulnerable_lines": [
+    255,
+    357
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 8,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0251/vulnerable_source.py": "a866c4556769de80c538a405582072c309fd25562026015e5c6fce30cc139ff9",
+    "cases/CASE-0251/patched_source.py": "beac68c15fa0293a880f549c243d218184484948ba61161578fc71a21bc82c7c",
+    "cases/CASE-0251/patch.diff": "6b9af5aae932450971cf7fac4ae280e1d4a02f0b419380b9d9a22aa317d80a84",
+    "cases/CASE-0251/metadata.json": "da892ea5ea18cfe8fb173e851affb56de1757d4d42387eb9fe3f2c6755c21b7d",
+    "model_context/CASE-0251.json": "f90091b5a9adf4eadc2ae503de8cf82a2964cc89b5b6d7d777d79c8062407c0b",
+    "difficulty/CASE-0251.json": "5347c399258ece070c0aca22d2724fc70ceec400ff8f6c40322c0c341ea6fa81"
+  },
+  "case_level_hash": "ddb92aa0285497c9c353a693a9412bc9a9420e1b7aa8e9eac70f1a0dca6b9118"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0110",
+  "original_source_case_id": "github.com_apache_poi_25bc679244188d63de690354db0e3f301291e252",
+  "selection_batch": "final",
+  "cve_id": "CVE-2012-0213",
+  "cve_ids_all": [
+    "CVE-2012-0213"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-399"
+  ],
+  "language": "java",
+  "repository": "apache/poi",
+  "repository_url": "https://github.com/apache/poi",
+  "vulnerable_commit": "d9cd6b276c1b41faf1acdb81b9a4c6cfa5512ceb",
+  "fixed_commit": "25bc679244188d63de690354db0e3f301291e252",
+  "changed_file": "src/scratchpad/src/org/apache/poi/hwpf/model/UnhandledDataStructure.java",
+  "changed_function": "public UnhandledDataStructure(byte[] buf, int offset, int length)",
+  "vulnerable_lines": [
+    27,
+    37
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0110/vulnerable_source.java": "495248ea064988c36ccab60518458b6b15939c7bc58360f0532fecd983ec7430",
+    "cases/CASE-0110/patched_source.java": "18bc9e231dbcc38a7a8b035d2eb9b12eaf04980659402729b4c630ae7e76ff4e",
+    "cases/CASE-0110/patch.diff": "82658e912e568ffa4f8c31ee96f0178ea1089a5b775c81d941c46816fb374267",
+    "cases/CASE-0110/metadata.json": "15e01b1b98f73ae3897a55f93433148883fd42688a495ddefe1308b544ccbdef",
+    "model_context/CASE-0110.json": "1ad1f1d00b6463e6baf61ae2126887db12aaafc485c20ca48c16fa9da9dc103c",
+    "difficulty/CASE-0110.json": "d8aabece6f13169903ab23f8a717444b06d2293f3c174d4030cd81c8d8a7fd01"
+  },
+  "case_level_hash": "c555218f4aae3d6df8985a12b1f160ff8bf2069230a7b563ae0d80860a3a3a36"
+}

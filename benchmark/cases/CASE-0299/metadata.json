@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0299",
+  "original_source_case_id": "github.com_themoken_canto-curses_2817869f98c54975f31e2dd674c1aefa70749cca",
+  "selection_batch": "topup30",
+  "cve_id": "CVE-2013-7416",
+  "cve_ids_all": [
+    "CVE-2013-7416"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "themoken/canto-curses",
+  "repository_url": "https://github.com/themoken/canto-curses",
+  "vulnerable_commit": "2d87b4a369fc0a9bd6e812c436bda9e66e781c60",
+  "fixed_commit": "2817869f98c54975f31e2dd674c1aefa70749cca",
+  "changed_file": "canto_curses/guibase.py",
+  "changed_function": "def _fork(self, path, href, text, fetch=False):",
+  "vulnerable_lines": [
+    112,
+    179
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0299/vulnerable_source.py": "87fd39942fc62e6d5398aba75529b0fddb7bf11ebe34bbbc501d5fcbb4d27be7",
+    "cases/CASE-0299/patched_source.py": "f21f127efabb3f07f5c12de005edfb39728f504b25f01e313cd64a7926c799cc",
+    "cases/CASE-0299/patch.diff": "687259dd6609aabaad29a0feb83f1a9ac9888d563e67563308fe0e6438ec959d",
+    "cases/CASE-0299/metadata.json": "ec172bc18ae4a4eb85884c1be12cd72c5f359c4a04ab19b28dae941911393e7d",
+    "model_context/CASE-0299.json": "54ef62415bcdc7780edf735aa7ee2c03d75b687d6919aa3bea380509f777f444",
+    "difficulty/CASE-0299.json": "5fdf2561440d5bceb0df7825c8cb1051297595c557004973c7b0ed638fddb9b3"
+  },
+  "case_level_hash": "2ed79cac26e901df2609a2d97b75cf5962d8b10cc4870bbe9dcfb3e8e902222f"
+}

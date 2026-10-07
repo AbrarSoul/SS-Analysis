@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0068",
+  "original_source_case_id": "github.com_OWASP_NodeGoat_4a4d1db74c63fb4ff8d366551c3af006c25ead12",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-4247",
+  "cve_ids_all": [
+    "CVE-2021-4247"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-404"
+  ],
+  "language": "javascript",
+  "repository": "OWASP/NodeGoat",
+  "repository_url": "https://github.com/OWASP/NodeGoat",
+  "vulnerable_commit": "b9e2c49cc951c7c3e8625bcdaa69a18be8ced45d",
+  "fixed_commit": "4a4d1db74c63fb4ff8d366551c3af006c25ead12",
+  "changed_file": "app/routes/research.js",
+  "changed_function": "return needle.get(url, (error, newResponse) => {",
+  "vulnerable_lines": [
+    16,
+    26
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0068/vulnerable_source.js": "39ec5fdfea497d245348f79c4f57a4cbd5afedf3c2dec27af43700129315094e",
+    "cases/CASE-0068/patched_source.js": "e399f3c70436fa160f00835626bf50f88980268fcd143436af97c9d2297c1d92",
+    "cases/CASE-0068/patch.diff": "2dd40fa49650bc56b2eac89ac37d1037ef7df4156b19de4ef78c2260c4f59829",
+    "cases/CASE-0068/metadata.json": "1e6e3acec6da99e20f2c31ad8c65a1ec309ed82400d5355799793216b924e8ee",
+    "model_context/CASE-0068.json": "8210bc0312202618f1d2999ca748f9d42eccb911c86850f0e230676e7c5e4b4f",
+    "difficulty/CASE-0068.json": "1ece0eb6aaa38db10a0a8b8eeffaf5b0fe245202604c0bd039e08cb079d982b4"
+  },
+  "case_level_hash": "998c308b6e57fc809253bdce9d35ed94e16f2748c51ee42c7ff5d6abbbb0b2b6"
+}

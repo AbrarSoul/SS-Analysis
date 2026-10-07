@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0164",
+  "original_source_case_id": "github.com_flitto_express-param_db94f7391ad0a16dcfcba8b9be1af385b25c42db",
+  "selection_batch": "final",
+  "cve_id": "CVE-2017-20160",
+  "cve_ids_all": [
+    "CVE-2017-20160"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-235",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "flitto/express-param",
+  "repository_url": "https://github.com/flitto/express-param",
+  "vulnerable_commit": "4ea89e59c8fb917c9a63a19b37c04840136d0d55",
+  "fixed_commit": "db94f7391ad0a16dcfcba8b9be1af385b25c42db",
+  "changed_file": "lib/fetchParams.js",
+  "changed_function": "function requiredParameter(req, required_expressions) {",
+  "vulnerable_lines": [
+    174,
+    221
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 40,
+  "patch_size_deleted": 8,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0164/vulnerable_source.js": "c7eb88b8c3697c424049884aa59eaa5fdb0b60f9ef1cb342137b2abbd3f1e975",
+    "cases/CASE-0164/patched_source.js": "5e0ccdd807903730b84cd60503034628f417381b507690b7d71c08a9c9d603d9",
+    "cases/CASE-0164/patch.diff": "2cc6760b3ecc7dd77b376b30dff037774ea7addaf439106aad11853d39ecefdc",
+    "cases/CASE-0164/metadata.json": "43803629b36090e0b3533b78f46a67a27b5d1ab64034dd548c6f9aa1bee5c4db",
+    "model_context/CASE-0164.json": "65b61694f612be77300dda1a10785b30a0dd05847a880172ca652a6c01b338ed",
+    "difficulty/CASE-0164.json": "7bb522f4adee705447f555c64297934f3a19c16ee7366ebe155de39b74397d2a"
+  },
+  "case_level_hash": "356e1a4002b3bade14cb5c12171ddbb9a5ead69710c486ef3c9701c11e4a92c6"
+}

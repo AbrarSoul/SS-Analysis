@@ -1,0 +1,34 @@
+diff --git a/server/Auth.js b/server/Auth.js
+index 0000000..0000000 100644
+--- a/server/Auth.js
++++ b/server/Auth.js
+@@ -10,6 +10,7 @@
+ const OpenIDClient = require('openid-client')
+ const Database = require('./Database')
+ const Logger = require('./Logger')
++const { escapeRegExp } = require('./utils')
+ 
+ /**
+  * @class Class for handling all the authentication related functionality.
+@@ -18,7 +19,11 @@
+   constructor() {
+     // Map of openId sessions indexed by oauth2 state-variable
+     this.openIdAuthSession = new Map()
+-    this.ignorePatterns = [/\/api\/items\/[^/]+\/cover/, /\/api\/authors\/[^/]+\/image/]
++    const escapedRouterBasePath = escapeRegExp(global.RouterBasePath)
++    this.ignorePatterns = [
++      new RegExp(`^(${escapedRouterBasePath}/api)?/items/[^/]+/cover$`), 
++      new RegExp(`^(${escapedRouterBasePath}/api)?/authors/[^/]+/image$`)
++    ]
+   }
+ 
+   /**
+@@ -28,7 +33,7 @@
+    * @private
+    */
+   authNotNeeded(req) {
+-    return req.method === 'GET' && this.ignorePatterns.some((pattern) => pattern.test(req.originalUrl))
++    return req.method === 'GET' && this.ignorePatterns.some((pattern) => pattern.test(req.path))
+   }
+ 
+   ifAuthNeeded(middleware) {

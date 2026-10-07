@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0114",
+  "original_source_case_id": "github.com_apache_struts_3292152f8c0a77ee4827beede82b6580478a2c2a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-41835",
+  "cve_ids_all": [
+    "CVE-2023-41835"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-459"
+  ],
+  "language": "java",
+  "repository": "apache/struts",
+  "repository_url": "https://github.com/apache/struts",
+  "vulnerable_commit": "28498a807d4741f1438aedf6da6a26fe8d20a97a",
+  "fixed_commit": "3292152f8c0a77ee4827beede82b6580478a2c2a",
+  "changed_file": "core/src/main/java/org/apache/struts2/dispatcher/multipart/JakartaMultiPartRequest.java",
+  "changed_function": "protected void processNormalFormField(FileItem item, String charset) throws UnsupportedEncodingException {",
+  "vulnerable_lines": [
+    130,
+    164
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 41,
+  "patch_size_deleted": 38,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0114/vulnerable_source.java": "0668936b215376c2c9edbe7b02e6f948010ba3bc6ecf4f787883c951bda3e310",
+    "cases/CASE-0114/patched_source.java": "ce7b7d8b5933a39614ca09d398df06025d721ba2b6f9401669953e8469749668",
+    "cases/CASE-0114/patch.diff": "16bfee969ccb29bdb297991778ee6ebd4c92438cfbef4edde0e6076538684c5c",
+    "cases/CASE-0114/metadata.json": "33aafd6cc02bb1b605caa632dca16e991d5e9d8da7c276db61050b6324f52c8d",
+    "model_context/CASE-0114.json": "3e92bc6b97788c4d78abb65088c7d83fa76f6bb386e0033dc6d39bb10728ca7e",
+    "difficulty/CASE-0114.json": "6bda2799c5a84dc8d5f7c588d2337c6889c49bd348c5abc3e7a928b857f9a002"
+  },
+  "case_level_hash": "e8d615b45a1b4d594b0076b9b3fe421d96a2a38723de757fdd8d029466bab340"
+}

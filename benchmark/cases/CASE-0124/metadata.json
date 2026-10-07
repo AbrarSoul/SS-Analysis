@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0124",
+  "original_source_case_id": "github.com_aws_sagemaker-python-sdk_2d873d53f708ea570fc2e2a6974f8c3097fe9df5",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2024-34073",
+  "cve_ids_all": [
+    "CVE-2024-34073"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "aws/sagemaker-python-sdk",
+  "repository_url": "https://github.com/aws/sagemaker-python-sdk",
+  "vulnerable_commit": "d27836eab1575d90db676ab2667b4816eaf45af0",
+  "fixed_commit": "2d873d53f708ea570fc2e2a6974f8c3097fe9df5",
+  "changed_file": "src/sagemaker/serve/save_retrive/version_1_0_0/save/utils.py",
+  "changed_function": "def capture_dependencies(requirements_path: str):",
+  "vulnerable_lines": [
+    77,
+    106
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 4,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0124/vulnerable_source.py": "2f8c29cde2cf1b76c3d023fbd73ff9b9ebcec6ac01d524500d0bafef3afd87b2",
+    "cases/CASE-0124/patched_source.py": "d109b3b74c4e72f18a7b13f4c92f980ddbdfd9a187ffbc6360379be1ee661044",
+    "cases/CASE-0124/patch.diff": "24fb980c3462ae2d789931fa2a28524d1d42eb7053068bc6e2e5f4cb344dd173",
+    "cases/CASE-0124/metadata.json": "2e7007aa944ac96e6b32c23a6acda38a81daffe5af696c181067abc979298141",
+    "model_context/CASE-0124.json": "91f66179b44fb31d5e831dc0ad2e412eb13f98beb690148500be84dd70f69f6d",
+    "difficulty/CASE-0124.json": "d055ab715098f7d957b44fcc08fc23ff68ecd32afba195c6dcf53e929e5ae01f"
+  },
+  "case_level_hash": "5b1e1871f410a012520ffa76057f4f7dac5d6bccf1523b7646f5b1ef43fa6347"
+}

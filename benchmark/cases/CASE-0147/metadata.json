@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0147",
+  "original_source_case_id": "github.com_directus_directus_a8ef790ea2d28b1727f9027d99bd360920d57919",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-27295",
+  "cve_ids_all": [
+    "CVE-2024-27295"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-706"
+  ],
+  "language": "typescript",
+  "repository": "directus/directus",
+  "repository_url": "https://github.com/directus/directus",
+  "vulnerable_commit": "a5a1c26ac48795ed3212a4c51b9523588aff4fa0",
+  "fixed_commit": "a8ef790ea2d28b1727f9027d99bd360920d57919",
+  "changed_file": "api/src/services/users.ts",
+  "changed_function": "async requestPasswordReset(email: string, url: string | null, subject?: string | null): Promise<void> {",
+  "vulnerable_lines": [
+    433,
+    476
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0147/vulnerable_source.ts": "f84597f06ca88ad474bf9ae2acd0ed8d1bb4fbba666c45ab559479416e256caa",
+    "cases/CASE-0147/patched_source.ts": "273b9c19e2ec9988a83f6e4b5e6b0768faa47d54b948e6e5c5a2bc51b2d38402",
+    "cases/CASE-0147/patch.diff": "449757ba309a16295327b967c77e7cedec74eaf4e6168da479bed37d5396f14c",
+    "cases/CASE-0147/metadata.json": "18c99c1fb711db9898222a6192ed8cadbfc2b647da019453f412a522ae7c8e5b",
+    "model_context/CASE-0147.json": "3ab01342ec7f1dd362c5458720d4fce7a12d64ba14da879baab2f961b2c8a3f0",
+    "difficulty/CASE-0147.json": "523ed559e30bb273b5bf9878a1af3677f1ae83c01b7dd52e96393036fcb4e43f"
+  },
+  "case_level_hash": "d8fcc3e2c26e8623fad516fedfae1ae86cde96403dd0ea0f857013ebd58ca562"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0171",
+  "original_source_case_id": "github.com_graphhopper_graphhopper_eb189be1fa7443ebf4ae881e737a18f818c95f41",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-29506",
+  "cve_ids_all": [
+    "CVE-2021-29506"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "java",
+  "repository": "graphhopper/graphhopper",
+  "repository_url": "https://github.com/graphhopper/graphhopper",
+  "vulnerable_commit": "744f0e2535355e67aefbb6906303332b8aff0a7f",
+  "fixed_commit": "eb189be1fa7443ebf4ae881e737a18f818c95f41",
+  "changed_file": "navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java",
+  "changed_function": "private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {",
+  "vulnerable_lines": [
+    190,
+    204
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0171/vulnerable_source.java": "0f629f66cfcbe4700c393b835891c45a092b85f5824abb002a2f53b29eaf5671",
+    "cases/CASE-0171/patched_source.java": "632fd82cd9d40bf25cd577462ba00f194ea4e5dcfefb8c98354a8b4953d18e09",
+    "cases/CASE-0171/patch.diff": "ee070290e0f732d4c0138f632f4e087a753a713b452810b9b85b1224106ae784",
+    "cases/CASE-0171/metadata.json": "41fa8bf0b66193d7ebdf3ca5b2c1d761b32c72f63d97addb989f13075d3e4d00",
+    "model_context/CASE-0171.json": "0c25044a01ca8e19cb0cca16ebbcaebb82d4b84f62b3434208ebe320f55688a3",
+    "difficulty/CASE-0171.json": "ba388d00416fe8e7c5fb63d4bd536157eea2036799c2769e18e0ea8c1944d92b"
+  },
+  "case_level_hash": "762c2dc92462b0a01a9ec1d6a60bb9491aad9deab3d104a0c69ccea83d4cd968"
+}

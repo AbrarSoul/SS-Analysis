@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0306",
+  "original_source_case_id": "github.com_totaljs_cms_75205f93009db3cf8c0b0f4f1fc8ab82d70da8ad",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2019-10260",
+  "cve_ids_all": [
+    "CVE-2019-10260",
+    "CVE-2019-8903"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22",
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "totaljs/cms",
+  "repository_url": "https://github.com/totaljs/cms",
+  "vulnerable_commit": "ff81eb74c1a15fab765a2127950d115bdbdd07dd",
+  "fixed_commit": "75205f93009db3cf8c0b0f4f1fc8ab82d70da8ad",
+  "changed_file": "themes/admin/public/ui.js",
+  "changed_function": "self.redraw = function() {",
+  "vulnerable_lines": [
+    550,
+    578
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0306/vulnerable_source.js": "3522e106e2cef3d6c25a66449c5f6d8751eb718cdf6ecc52f907816ef3ac5457",
+    "cases/CASE-0306/patched_source.js": "e4c4cd311813eeb10eccadd0305db1dff9781706fceabce69728846ce5e8d782",
+    "cases/CASE-0306/patch.diff": "b74b7f619fb22f158834a398c125b0aa19621da961621cdc64ee2071566d3ac2",
+    "cases/CASE-0306/metadata.json": "459609707c9bbab48243ae5409f3b4d3555a2b8ebba6456459f466dc30ec0d4c",
+    "model_context/CASE-0306.json": "afd126f9eaa2c7e46691a5cdfa9aca494c43d39dfc021647f2992dc6f0b03d9b",
+    "difficulty/CASE-0306.json": "4c1b3109cd41107092739c4ac31ae23bde24582cc167d2a36a3e66aa5890037a"
+  },
+  "case_level_hash": "ec0e5839535d37a22bfb12a42fdc1ff4e755d1a675808bf97675b3842ba23ce7"
+}

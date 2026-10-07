@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0107",
+  "original_source_case_id": "github.com_apache_netbeans-html4j_fa70e507e5555e1adb4f6518479fc408a7abd0e6",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-17534",
+  "cve_ids_all": [
+    "CVE-2020-17534"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "language": "java",
+  "repository": "apache/netbeans-html4j",
+  "repository_url": "https://github.com/apache/netbeans-html4j",
+  "vulnerable_commit": "d1dcd9c0542ac46d7764256a81057dfbe2d8805a",
+  "fixed_commit": "fa70e507e5555e1adb4f6518479fc408a7abd0e6",
+  "changed_file": "webkit/src/main/java/org/netbeans/html/presenters/webkit/UnJarResources.java",
+  "changed_function": "static URL extract(URL url) throws IOException {",
+  "vulnerable_lines": [
+    33,
+    66
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0107/vulnerable_source.java": "566585c7fbee47184341f03efdd8f35ef3f6fa9d75a8d12d05f1b639524a79c1",
+    "cases/CASE-0107/patched_source.java": "1e0c839111e6fb56ff9b3eeb284ff6698ca9767209b02d0f5da60e7403bbd6be",
+    "cases/CASE-0107/patch.diff": "916b981bf3914822b7e60ade645c2eca7c4afe9aca0c5733a2bdf8817d0e9fb0",
+    "cases/CASE-0107/metadata.json": "8a219d8aa9ce4d11b200fdc955c51da5382c4114a9aa91d6c9795c6b07c194a0",
+    "model_context/CASE-0107.json": "445e0e5c90883baefc65a82527513985fe28a3bfbd9a1362abebcfa3f69ec66e",
+    "difficulty/CASE-0107.json": "6bad3691f84fc0dbd6fda286a98e52f514e8866c3d920ab7f5896840274e84bf"
+  },
+  "case_level_hash": "650719b7de96bbd57701ec6f095f9fbf7ab3893c1b98d4881f5b9f25aefe9df1"
+}

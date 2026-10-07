@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0133",
+  "original_source_case_id": "github.com_bsv-blockchain_ts-sdk_d8cf6930028372079d977138ae9eaa03ae2f50bb",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-69287",
+  "cve_ids_all": [
+    "CVE-2025-69287"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-573"
+  ],
+  "language": "typescript",
+  "repository": "bsv-blockchain/ts-sdk",
+  "repository_url": "https://github.com/bsv-blockchain/ts-sdk",
+  "vulnerable_commit": "3688b75888a01ef1dcb236e5f8b0a83710849d1a",
+  "fixed_commit": "d8cf6930028372079d977138ae9eaa03ae2f50bb",
+  "changed_file": "src/auth/Peer.ts",
+  "changed_function": "private async processInitialRequest (message: AuthMessage): Promise<void> {",
+  "vulnerable_lines": [
+    481,
+    552
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0133/vulnerable_source.ts": "c80dbc2f2e6caa3de9e0ea81675c290c6dce3580b49b8a4da393f0d385aebec3",
+    "cases/CASE-0133/patched_source.ts": "8669eb7cd59e497bbe79753688dc5947a947a1167156f2a88bab7b3d89427927",
+    "cases/CASE-0133/patch.diff": "7709939451bbc9f6f44f2a780f9cef78a866e11060e9941f40a3cef877bfb23c",
+    "cases/CASE-0133/metadata.json": "dc02e93b1557df3cbb001222f33e4de815a332b597b827c930d69a98068a0739",
+    "model_context/CASE-0133.json": "97f615c3b76cee31a9edc34625734cf48cbc5eb9bcac58c7aeba1deb776f9062",
+    "difficulty/CASE-0133.json": "103c9da9b1638ebb57a430b3d9f9cba5f1d15aa82de6ec978f64f137fb31ff66"
+  },
+  "case_level_hash": "ccf79b427379b71ea327e0de13c4067d23dd06f79c0c7e595084cf65ae7590ad"
+}

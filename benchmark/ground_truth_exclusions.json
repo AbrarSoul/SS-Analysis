@@ -1,0 +1,37 @@
+{
+  "_meta": "Cases excluded from their representability population because the LABELED vulnerability's upstream patch is measurably still exploitable (not merely a different, unrelated bug co-existing in the file) -- decided 2026-10-07 per the second audit-feedback round, Priority 2. The 'patched' sample for these cases cannot serve as a verified-safe negative without this caveat. Applied consistently: a case is excluded here only if the evidence shows the SAME labeled vulnerability mechanism remains triggerable in the patched/upstream-fixed code, not merely a different bug, an incomplete fix elsewhere in the file, or uncertainty about the VULNERABLE sample's own exploitability (a different axis, not covered by this exclusion).",
+  "excluded_cases": [
+    {
+      "case_id": "CASE-0125",
+      "original_representability": "partially_supported",
+      "reason": "Disputed advisory: measured directly (14 tested string URLs) that old and new isURLSameOrigin logic are behaviorally identical for ordinary inputs. The patch does not change behavior for the cases that matter."
+    },
+    {
+      "case_id": "CASE-0140",
+      "original_representability": "supported",
+      "reason": "Upstream denylist bypassable via percent-encoding (auto%44eserialize=true decodes to active autoDeserialize=true against the real mysql-connector-j 8.4.0), measured directly."
+    },
+    {
+      "case_id": "CASE-0156",
+      "original_representability": "supported",
+      "reason": "Upstream denylist bypassed via a relative-path scan combined with glob, measured directly."
+    },
+    {
+      "case_id": "CASE-0174",
+      "original_representability": "partially_supported",
+      "reason": "ReDoS fix is mitigated but not eliminated -- still quadratic-time (not exponential), measured directly. The same vulnerability class (ReDoS) remains triggerable with sufficient input size."
+    },
+    {
+      "case_id": "CASE-0194",
+      "original_representability": "supported",
+      "reason": "Path check uses startsWith without a separator -- classic sibling-directory prefix bypass, measured directly (same class as CASE-0140/0156)."
+    }
+  ],
+  "reviewed_and_kept": [
+    {"case_id": "CASE-0107", "representability": "supported", "reason": "A DIFFERENT, unrelated zip-slip bug co-exists in both vulnerable and patched code; the fix for the LABELED vulnerability itself is not disputed."},
+    {"case_id": "CASE-0154", "representability": "partially_supported", "reason": "Measured concern is about whether the VULNERABLE sample is truly exploitable (writes plain STRING cells, never FORMULA cells) -- a different axis than whether the patched sample is a verified-safe negative, not covered by this exclusion criterion."},
+    {"case_id": "CASE-0170", "representability": "partially_supported", "reason": "Upstream fix misses a SIBLING log call in a different function/location; the specific construct this case's test targets is correctly fixed."},
+    {"case_id": "CASE-0199", "representability": "unsupported", "reason": "Already outside every comparative population via its representability label -- no further action needed."},
+    {"case_id": "CASE-0211", "representability": "unsupported", "reason": "Already outside every comparative population via its representability label -- no further action needed."}
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0170",
+  "original_source_case_id": "github.com_getsentry_sentry_d5b34568d9f1c41362ccb62141532a0a2169512f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-32474",
+  "cve_ids_all": [
+    "CVE-2024-32474"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-117",
+    "CWE-312"
+  ],
+  "language": "python",
+  "repository": "getsentry/sentry",
+  "repository_url": "https://github.com/getsentry/sentry",
+  "vulnerable_commit": "a837111ea0fddc0da93f5d0aed793070c0a4101c",
+  "fixed_commit": "d5b34568d9f1c41362ccb62141532a0a2169512f",
+  "changed_file": "src/sentry/api/endpoints/auth_index.py",
+  "changed_function": "def _validate_superuser(",
+  "vulnerable_lines": [
+    127,
+    164
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 0,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0170/vulnerable_source.py": "45f7ce97fade4a664b0cbb831713ec9e9657f3bb67e45e24848f109da1913771",
+    "cases/CASE-0170/patched_source.py": "9579d609a73d1e4b93894f05ecc36de264d2d70382d5ba9df9292a1d9e5445e7",
+    "cases/CASE-0170/patch.diff": "c6e01a9ad8b9187c740500a9520ade6d56eca4b8e24c8121d4018d591968e397",
+    "cases/CASE-0170/metadata.json": "2e8156f346c17f68d16c1f7bb8683f3fd905047a55ace7aa864df23c70d25fe0",
+    "model_context/CASE-0170.json": "fe84343edb975e83864b3d66db7e75aded5ad017f8df3fb4942abd89a13a4015",
+    "difficulty/CASE-0170.json": "52d7411d8703583648d6410c6b5a2cca0f6ce4bee0173c8ef5f7d2af81b573f4"
+  },
+  "case_level_hash": "f84f36919c637fb271eb4dcc8db2afa5984db76b1e434196531233a5a17b667d"
+}

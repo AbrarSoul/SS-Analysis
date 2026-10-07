@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0190",
+  "original_source_case_id": "github.com_jenkinsci_openid-plugin_5a91a74a94e44d87cd61afc2441aab42b7542bf0",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-1003098",
+  "cve_ids_all": [
+    "CVE-2019-1003098",
+    "CVE-2019-1003099"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-352",
+    "CWE-862"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/openid-plugin",
+  "repository_url": "https://github.com/jenkinsci/openid-plugin",
+  "vulnerable_commit": "c86cbb4dd57d40749a9ba398b8fbb9bf657af9e0",
+  "fixed_commit": "5a91a74a94e44d87cd61afc2441aab42b7542bf0",
+  "changed_file": "src/main/java/hudson/plugins/openid/OpenIdSsoSecurityRealm.java",
+  "changed_function": "public FormValidation doValidate(@QueryParameter String endpoint) {",
+  "vulnerable_lines": [
+    222,
+    229
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 7,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0190/vulnerable_source.java": "f9cacd6114f3f1776c4596d8738ffefa22aa73ffd039820c0c574dc14298c064",
+    "cases/CASE-0190/patched_source.java": "cd41378973cde73ced2d58ca63b473cac739675398cec8624d7fec3c168b8c00",
+    "cases/CASE-0190/patch.diff": "3a32bd0af95db4066629091441cda10a14412503af29f9c868257a2d62096ec8",
+    "cases/CASE-0190/metadata.json": "6416791f184575ba528f84beddc40f694855da704e385a1bd3e8d8ff7eefa9ae",
+    "model_context/CASE-0190.json": "faae20b8c8bb264e46881ec132306c15fc2d6e05ca43f0bf90bcf02dfbf0d654",
+    "difficulty/CASE-0190.json": "08ebbbe2be4ab978daa99c09dba05c5517eadd6b01b2a92b2bde4d9df7f0aa53"
+  },
+  "case_level_hash": "21c62c89c495d923f8bd1f20fb8cc4c0902f5ff09591d4a5c96c21036052a15c"
+}

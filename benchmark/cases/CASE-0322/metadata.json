@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0322",
+  "original_source_case_id": "github.com_voila-dashboards_voila_c045be6988539d07cceeb9f82fc660a49485d504",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-30265",
+  "cve_ids_all": [
+    "CVE-2024-30265"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-73"
+  ],
+  "language": "python",
+  "repository": "voila-dashboards/voila",
+  "repository_url": "https://github.com/voila-dashboards/voila",
+  "vulnerable_commit": "ae0ec0458818723560fa452c7b3513372df7ab49",
+  "fixed_commit": "c045be6988539d07cceeb9f82fc660a49485d504",
+  "changed_file": "voila/app.py",
+  "changed_function": "def start(self):",
+  "vulnerable_lines": [
+    400,
+    532
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 0,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0322/vulnerable_source.py": "3f6321f830bda2323647a221785b9002085b226bf7ab0286b4a59f15e0f19449",
+    "cases/CASE-0322/patched_source.py": "d12ae05f568f3f6aab7cc9f47a0eb60acf4ec88289b933edf84e6392db7809c8",
+    "cases/CASE-0322/patch.diff": "c884bdf4ee1ca46748db724dcad88774b5d4f66f13308954ab8ced7fcde5cf56",
+    "cases/CASE-0322/metadata.json": "07eddf3704a8caeb85cfc0fc5c4d92c546c38119368fa5442e16270541e59188",
+    "model_context/CASE-0322.json": "608069d835f30c94a32b4f16547bd08e45dd6c4546f02bdd46baeaae8b5b2ee4",
+    "difficulty/CASE-0322.json": "7a2db4f90024ea8c65184d9df108ef4b334384fe056f7eecfea57f8967c2c8dd"
+  },
+  "case_level_hash": "ce1dd3ecc8ea0214fee316de563857823edec7628c1491441df4fddcc5a6fae6"
+}

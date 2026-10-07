@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0261",
+  "original_source_case_id": "github.com_plone_volto_58d9f82d2d50ca9a87edbe16fed91762e57c109c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-61668",
+  "cve_ids_all": [
+    "CVE-2025-61668"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-476",
+    "CWE-754"
+  ],
+  "language": "javascript",
+  "repository": "plone/volto",
+  "repository_url": "https://github.com/plone/volto",
+  "vulnerable_commit": "c4f9477a3ee0aa22d569834e0dc7e9c8deeca15b",
+  "fixed_commit": "58d9f82d2d50ca9a87edbe16fed91762e57c109c",
+  "changed_file": "packages/volto/src/middleware/api.js",
+  "changed_function": "else if (error?.response?.statusCode === 401) {",
+  "vulnerable_lines": [
+    408,
+    417
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0261/vulnerable_source.js": "b395897ad759eca90f4c53e3f9c0bf81379e320d11d8b854461fc7a33b04eb32",
+    "cases/CASE-0261/patched_source.js": "7d57561b41ed88d0a79766fcf2144d7a37e0f51d5b660c24e2a7eaee9342a5bb",
+    "cases/CASE-0261/patch.diff": "5312d77225a90960f1c4713b1822b51f118b5c44b647888fc7af170818b176a7",
+    "cases/CASE-0261/metadata.json": "4d48cea88b74b7a04ff069d1479c409af2f6d0301989b883884163d8de5811be",
+    "model_context/CASE-0261.json": "09ef310071bcead3537fdf512a2c141f8db980cba9bb2fef84e434ec3897dece",
+    "difficulty/CASE-0261.json": "cba848c246efa85c9d80780f46acd34cffb64a15a13532916e9a149d9d97e949"
+  },
+  "case_level_hash": "3773451ed903f79a6d3cce5aca6e659954e160b88fce9cac908b462af0de37b7"
+}

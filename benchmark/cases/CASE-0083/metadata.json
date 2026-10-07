@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0083",
+  "original_source_case_id": "github.com_adfinis_document-merge-service_a1edd39d33d1bdf75c31ea01c317547be90ca074",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-37301",
+  "cve_ids_all": [
+    "CVE-2024-37301"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1336"
+  ],
+  "language": "python",
+  "repository": "adfinis/document-merge-service",
+  "repository_url": "https://github.com/adfinis/document-merge-service",
+  "vulnerable_commit": "696f920a66c7c9d45638f97c62f6480506d87fdb",
+  "fixed_commit": "a1edd39d33d1bdf75c31ea01c317547be90ca074",
+  "changed_file": "document_merge_service/api/jinja.py",
+  "changed_function": "def get_jinja_env():",
+  "vulnerable_lines": [
+    100,
+    104
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0083/vulnerable_source.py": "42db9e63b34e734bf3d95341da72ddb52b4ad03ef760488a1480854c8533a625",
+    "cases/CASE-0083/patched_source.py": "bac2d9a32711ae4f9acd9b8280d6a9f6c66b7e7887ad8bb1dd10062dc44cffce",
+    "cases/CASE-0083/patch.diff": "6e1061cc4ae0e3eb25f8152766c212deb7a5aeb3c6c41252a457bdddcf383ddd",
+    "cases/CASE-0083/metadata.json": "8462bb068ce6bd8ec34283164012f5606a00890df133edce3bd852fcdc93eaaf",
+    "model_context/CASE-0083.json": "e77c2cd1de688a71781e9ed7e6c78e970de5287849e6fdbdfad903f4891ae821",
+    "difficulty/CASE-0083.json": "34818a67bf82f7f4c370b624d4cdc24c5414e8a90cfe15b1a311d5d49933d392"
+  },
+  "case_level_hash": "b85de0effa19899434ef2f03aa12c76f2c6dca1ace44a9751f5e8742c933e14e"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0060",
+  "original_source_case_id": "github.com_Mintplex-Labs_anything-llm_21ce03087145a4261c1de03b056fba639f699c09",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2026-45403",
+  "cve_ids_all": [
+    "CVE-2026-45403"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-59"
+  ],
+  "language": "javascript",
+  "repository": "Mintplex-Labs/anything-llm",
+  "repository_url": "https://github.com/Mintplex-Labs/anything-llm",
+  "vulnerable_commit": "ce900cb517f81a4f0c45392918654b9b28005b32",
+  "fixed_commit": "21ce03087145a4261c1de03b056fba639f699c09",
+  "changed_file": "server/utils/agents/aibitat/plugins/filesystem/copy-file.js",
+  "changed_function": "async function copyRecursive(source, destination) {",
+  "vulnerable_lines": [
+    5,
+    20
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 8,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0060/vulnerable_source.js": "65650ff3a9616780446adc7b90f984319408e7b0369db8792f3915c551b97360",
+    "cases/CASE-0060/patched_source.js": "de71ade9eb1977a9f9bbb57812e996226cec476abdb67ac88a29fd90faf86ab9",
+    "cases/CASE-0060/patch.diff": "f34676a66b0c2eeacd965ea0fa81bb183315301d7d026f91d00aae3e6eb2a510",
+    "cases/CASE-0060/metadata.json": "fe671511f7624f1428fc85ff953805d357d880adb5bcfd1d95e551af460bb860",
+    "model_context/CASE-0060.json": "614115b040b7884c107ddc2bda03408657128ad2326059dcd3083bcb96905fc7",
+    "difficulty/CASE-0060.json": "0ae8f09bceb5868613633f5c55f65ca25a2c77d48e1984a2dae4e28e8b1e1029"
+  },
+  "case_level_hash": "a6c4d00d87d9a70db502820465c8a0f7b9db2f17e16a7fc70898fd6397989f7e"
+}

@@ -1,0 +1,6 @@
+rules:
+  - id: test-valid-match
+    pattern: $PATH = $BASE.joinpath($NAME).resolve()
+    languages: [python]
+    message: test rule, should match sample_target.py
+    severity: ERROR

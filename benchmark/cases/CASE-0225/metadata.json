@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0225",
+  "original_source_case_id": "github.com_mintplex-labs_anything-llm_bfedfebfab032e6f4d5a369c8a2f947c5d0c5286",
+  "selection_batch": "topup18",
+  "cve_id": "CVE-2024-3104",
+  "cve_ids_all": [
+    "CVE-2024-3104"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "mintplex-labs/anything-llm",
+  "repository_url": "https://github.com/mintplex-labs/anything-llm",
+  "vulnerable_commit": "2374939ffb551ab2929d7f9d5827fe6597fa8caa",
+  "fixed_commit": "bfedfebfab032e6f4d5a369c8a2f947c5d0c5286",
+  "changed_file": "server/utils/helpers/updateENV.js",
+  "changed_function": "async function dumpENV() {",
+  "vulnerable_lines": [
+    542,
+    583
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 11,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0225/vulnerable_source.js": "3a47d378cffa8c0add0bbcf818338fde1ef6c89ff98c7d55389daa2fb55cf959",
+    "cases/CASE-0225/patched_source.js": "f4f0be1fccbe4871c44b8c37f928f3708a93d1b20a75367e82fbf2a9bfec7452",
+    "cases/CASE-0225/patch.diff": "24c358508c0b0db7c070c9001e6e3ae8773583b3fbc1c297b592985ec4292d62",
+    "cases/CASE-0225/metadata.json": "a417bb700fdf931204b0323d74ce9b5949b18e1a441b32e9a3f09c8ffe8312f4",
+    "model_context/CASE-0225.json": "4fe2ac6118fa4d3b65e8d5fffc2a7047bc8ad3ab927bbafee9e8f3e8dacde5a1",
+    "difficulty/CASE-0225.json": "0bb2893aae2dfe0dca423713189d8917525c872f192d05a45a244484e0649d69"
+  },
+  "case_level_hash": "8c5d4f150144b7a8cefb72003c7bc0c91e962b850e278d8bd694057d923b25bc"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0129",
+  "original_source_case_id": "github.com_bigbluebutton_bigbluebutton_7dcdfb191373684bafa7b11cdd0128c9869040a1",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-27601",
+  "cve_ids_all": [
+    "CVE-2020-27601"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "language": "javascript",
+  "repository": "bigbluebutton/bigbluebutton",
+  "repository_url": "https://github.com/bigbluebutton/bigbluebutton",
+  "vulnerable_commit": "a0e02932c6b00bf58bfee1ac31d8e6fa82263ee8",
+  "fixed_commit": "7dcdfb191373684bafa7b11cdd0128c9869040a1",
+  "changed_file": "bigbluebutton-html5/imports/ui/components/chat/service.js",
+  "changed_function": "const isChatLocked = (receiverID) => {",
+  "vulnerable_lines": [
+    134,
+    156
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0129/vulnerable_source.js": "8de2c053019a5bf612fe2f369bbaa7710aba4a9f7bd1496c4c250cb225f579fe",
+    "cases/CASE-0129/patched_source.js": "17e801ecddff27aecd387c7b756d09f35aa0f843c3b57f29b7f5f21b81a2f65b",
+    "cases/CASE-0129/patch.diff": "e7a17a2d4037235495a11120afba81b173353391eb5d578efbed3f18f595b728",
+    "cases/CASE-0129/metadata.json": "440eb792aa02229f46b837d0faac87e72da7e0f9f5f4167e37f39eb78c28cec1",
+    "model_context/CASE-0129.json": "1f87906faae201303e2980ee6654c8eec13fe8b7d2be40aa3ffbfbdf71d79598",
+    "difficulty/CASE-0129.json": "182a31f073f6ed40d22fa01e6f2686600f5f90433b18d702ff94875e085d023b"
+  },
+  "case_level_hash": "a9c0de2f6fb8014d8611c38c39fcf82da72c2e08c40868837f9607bbbb427690"
+}

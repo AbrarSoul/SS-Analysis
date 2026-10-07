@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0248",
+  "original_source_case_id": "github.com_openstack_glance_store_d6e531af4821c8466b1e9404f12f89f6216417f2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-1141",
+  "cve_ids_all": [
+    "CVE-2024-1141"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-779",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "openstack/glance_store",
+  "repository_url": "https://github.com/openstack/glance_store",
+  "vulnerable_commit": "e823a3caa000ee72c8115f4e455fff840eec0df4",
+  "fixed_commit": "d6e531af4821c8466b1e9404f12f89f6216417f2",
+  "changed_file": "glance_store/_drivers/s3.py",
+  "changed_function": "def get(self, location, offset=0, chunk_size=None, context=None):",
+  "vulnerable_lines": [
+    521,
+    558
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0248/vulnerable_source.py": "f34134c6c806219fda947380ab9c61c6dc56408758c279e1c7fe6ba37c0f0231",
+    "cases/CASE-0248/patched_source.py": "85e47d8c7f78015d7d3d60d7db8af41e85b6e1821887aadc427d060c9826b9b3",
+    "cases/CASE-0248/patch.diff": "c02d729b7818d7378cc1da62b3af4a97f12e98d7224fd6a7ced054278b99fb80",
+    "cases/CASE-0248/metadata.json": "a6b2174024f68732af75502316407e84189e483a1a11bc88d08fe005d0d1a8fa",
+    "model_context/CASE-0248.json": "625f8862c4ec16b340813bfb6e267d85b0e755654eb3d41aecc72ae5c9315305",
+    "difficulty/CASE-0248.json": "56db813138da88488d1442778a9196b60da2398dd671a81407899d5c3c28635b"
+  },
+  "case_level_hash": "afc5acae76373d500d70fdf5638c2298dfa0368e0ff523cae205fe60e6886f7c"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0313",
+  "original_source_case_id": "github.com_tryton_trytond_d059ebb792401ded3129cd9402d7392dc34b81e3",
+  "selection_batch": "final",
+  "cve_id": "CVE-2012-0215",
+  "cve_ids_all": [
+    "CVE-2012-0215"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-264"
+  ],
+  "language": "python",
+  "repository": "tryton/trytond",
+  "repository_url": "https://github.com/tryton/trytond",
+  "vulnerable_commit": "e7b1f97390980475746332e8bd3e8e1c339825b8",
+  "fixed_commit": "d059ebb792401ded3129cd9402d7392dc34b81e3",
+  "changed_file": "trytond/model/modelstorage.py",
+  "changed_function": "def __init__(self):",
+  "vulnerable_lines": [
+    43,
+    58
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 12,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0313/vulnerable_source.py": "1d67ccdccc039e566da8bc5214ac053c4ab0559106b8022ba42e7b4e8f10d23d",
+    "cases/CASE-0313/patched_source.py": "5ccdd226aff9ec96bfff26e365ab1072e5a10cb06547c66d6e113bd42a4c73ab",
+    "cases/CASE-0313/patch.diff": "35c03cdc21bec25088aa70bdd6b4e2736c6e980c376a7d9ee5d1f3f6483a3313",
+    "cases/CASE-0313/metadata.json": "3cc6f5a9555b4453abf4d4bb554cddbc9e8fc4b85c70a88ac7ddd8fab7f6b529",
+    "model_context/CASE-0313.json": "badd4e0f1471a7b443995dc68ee0eea9d7ed475142c58f3974c7b1c0364f83eb",
+    "difficulty/CASE-0313.json": "6b3b07a78fadfbf91c3192fe1399485498a8d7dacd1980b80fcf9a5349b82519"
+  },
+  "case_level_hash": "9e35652b0935f64814b78b98cfd132f989909e79f7bf4ba073d705efce08b233"
+}

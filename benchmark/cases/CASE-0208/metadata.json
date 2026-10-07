@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0208",
+  "original_source_case_id": "github.com_keylime_keylime_e1ae8de1f7b1385eaeec66572a92ff1338e6e157",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-13609",
+  "cve_ids_all": [
+    "CVE-2025-13609"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-694"
+  ],
+  "language": "python",
+  "repository": "keylime/keylime",
+  "repository_url": "https://github.com/keylime/keylime",
+  "vulnerable_commit": "b1a9a8ac6572d0851896afa407b5808087ace6ff",
+  "fixed_commit": "e1ae8de1f7b1385eaeec66572a92ff1338e6e157",
+  "changed_file": "keylime/cloud_verifier_tornado.py",
+  "changed_function": "async def notify_error(",
+  "vulnerable_lines": [
+    1856,
+    1891
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0208/vulnerable_source.py": "1b7d29c358103eb4a75ec4556daacada0bb2e8b14487107d1082581cdfd4dfd8",
+    "cases/CASE-0208/patched_source.py": "24dcb063cf8d397f02828fa61a71b6032c6f629893501b0c5bc6cd1eef385afc",
+    "cases/CASE-0208/patch.diff": "5fa6693406ed85836c1ebe68c6b6d0fd724131b52a6de99e0554df962a88876e",
+    "cases/CASE-0208/metadata.json": "d4227e5531d3a53bbeefea6a2196be3f770819b7301c9f87fc0f5405759424e7",
+    "model_context/CASE-0208.json": "c9768f8e732b40313a348690a67a7e4e3532d2bee4f1d60eabfb36ea4ae32c54",
+    "difficulty/CASE-0208.json": "ad7121fed977143c105e1bbff97b185173f7fc9652a0079895483afdf63c7f59"
+  },
+  "case_level_hash": "2f01c8d659f60a8314774ce1e4adb11317cc73b8850868dc7f6611258ece8756"
+}

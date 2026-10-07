@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0209",
+  "original_source_case_id": "github.com_keylime_keylime_ea5d0373fa2c050d5d95404eb779be7e8327b911",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-23950",
+  "cve_ids_all": [
+    "CVE-2022-23950"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-379",
+    "CWE-668"
+  ],
+  "language": "python",
+  "repository": "keylime/keylime",
+  "repository_url": "https://github.com/keylime/keylime",
+  "vulnerable_commit": "e019609c9b9b450e91eacfbd598eb75029f15031",
+  "fixed_commit": "ea5d0373fa2c050d5d95404eb779be7e8327b911",
+  "changed_file": "keylime/revocation_notifier.py",
+  "changed_function": "def worker():",
+  "vulnerable_lines": [
+    28,
+    45
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 15,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0209/vulnerable_source.py": "61b8e4f0defd305c94be9eb34d020f7508934205a202d9af8865fc1427e55b41",
+    "cases/CASE-0209/patched_source.py": "8ecd83126e2426c5c18d5b51f935e78a0df811c44628d19c249667e07fe6de12",
+    "cases/CASE-0209/patch.diff": "83a6474dbac6a895c92e3919b13992fa1c43eb84d2eed06cb2c4dbdfc6bf2eba",
+    "cases/CASE-0209/metadata.json": "e869bbd5d40fde3e553a4edf0573a3061df3d0a35339b2441c88346e35cdc021",
+    "model_context/CASE-0209.json": "264f82e9ed475330cd5427a1bdc17d202d2fce0c5e2ed37463349fc50ea98238",
+    "difficulty/CASE-0209.json": "ea3ba76f3884d2d30e25f1a401bd504119a434f00d86bab37dea32addc675934"
+  },
+  "case_level_hash": "0f01365e350105f667cee27badf3508ddacb557e3de200102a08dbd21948e0d6"
+}

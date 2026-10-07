@@ -1,0 +1,6 @@
+rules:
+  - id: test-no-match
+    pattern: os.system($CMD)
+    languages: [python]
+    message: test rule, should NOT match sample_target.py
+    severity: ERROR

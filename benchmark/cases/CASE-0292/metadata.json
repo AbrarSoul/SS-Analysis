@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0292",
+  "original_source_case_id": "github.com_spiral-project_ihatemoney_8d77cf5d5646e1d2d8ded13f0660638f57e98471",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-15120",
+  "cve_ids_all": [
+    "CVE-2020-15120"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "python",
+  "repository": "spiral-project/ihatemoney",
+  "repository_url": "https://github.com/spiral-project/ihatemoney",
+  "vulnerable_commit": "040d76af83411fb58ab400dc4eac909191a3e5fa",
+  "fixed_commit": "8d77cf5d5646e1d2d8ded13f0660638f57e98471",
+  "changed_file": "ihatemoney/models.py",
+  "changed_function": "def get_by_name(self, name, project):",
+  "vulnerable_lines": [
+    380,
+    386
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0292/vulnerable_source.py": "674eeb36269ccb17893c17d26723b692ad080032c7a3cda829b4dcfc5aa24f83",
+    "cases/CASE-0292/patched_source.py": "00ed0f443e5392162c65dc0f1ebb5c405ab6c038bbb2f85b3eaa4a5401a23f3b",
+    "cases/CASE-0292/patch.diff": "423a07ef1192a93221679241cacab3983cb1729a421b8a41c04d1ca5b9310ca5",
+    "cases/CASE-0292/metadata.json": "241062ec618f238110a76b367a775eb3f555e863d1b394f6ffd072fee1ff1662",
+    "model_context/CASE-0292.json": "1d85dbc0c4e63281ca4a1ed0cf48ea95a1b2455ecd69268a59ed504c4e0ae58e",
+    "difficulty/CASE-0292.json": "53fd7821d956773788baf0a5c368219dc2e075631ded1f959dc6fc3c63e18a73"
+  },
+  "case_level_hash": "155bbbe0d25dc7e77fcd7304d7dc693624c9751ea15fa470d430e042306fa173"
+}

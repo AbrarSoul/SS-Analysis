@@ -1,0 +1,24 @@
+--- upstream/patch_processor.py (ace3c87a)
++++ ours/patch_processor.py
+@@ -17,6 +17,21 @@
+     repo_name: str
+     commit_id: str
+     file_changes: List[FileChange]
++    # Optional, populated only by pipeline/case_loader.py from a curated
++    # benchmark/cases/CASE-XXXX case (design doc Section 10 manifest +
++    # Section 8 Step 5 model context) once Phase 2 dataset curation exists.
++    # None for the raw-.patch-file flow (Phase 1's original smoke-test
++    # path), which has no case metadata to draw on. llm_client.py's
++    # _build_prompt_design_v1() uses these when present and falls back to
++    # diff-derived reconstruction with placeholder CVE/CWE otherwise.
++    case_id: Optional[str] = None
++    cve_id: Optional[str] = None
++    cwe_ids: Optional[List[str]] = None
++    cwe_definitions: Optional[List[str]] = None
++    vulnerable_function: Optional[str] = None
++    patched_function: Optional[str] = None
++    containing_class_declaration: Optional[str] = None
++    imports: Optional[List[str]] = None
+ 
+ class PatchProcessor:
+     def __init__(self, config: Config):

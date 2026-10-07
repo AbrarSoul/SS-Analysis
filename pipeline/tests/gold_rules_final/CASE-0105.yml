@@ -1,0 +1,10 @@
+rules:
+- id: gold-non-constant-time-mac-compare
+  message: MAC or signature compared with Arrays.equals (non-constant-time)
+  severity: ERROR
+  languages: [java]
+  patterns:
+    - pattern: Arrays.equals($A, $B)
+    - metavariable-regex:
+        metavariable: $A
+        regex: (?i).*(sig|mac|token|secret).*

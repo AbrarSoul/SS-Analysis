@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0186",
+  "original_source_case_id": "github.com_jenkinsci_jenkins_ad38d8480f20ce3cbf8fec3e2003bc83efda4f7d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2014-2059",
+  "cve_ids_all": [
+    "CVE-2014-2059"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/jenkins",
+  "repository_url": "https://github.com/jenkinsci/jenkins",
+  "vulnerable_commit": "622e39f8b4c4764a0768bf58645767405ba9ccaa",
+  "fixed_commit": "ad38d8480f20ce3cbf8fec3e2003bc83efda4f7d",
+  "changed_file": "core/src/main/java/hudson/cli/CreateJobCommand.java",
+  "changed_function": "protected int run() throws Exception {",
+  "vulnerable_lines": [
+    49,
+    77
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0186/vulnerable_source.java": "fbb01659f5fffe2e56081b4cebd3a1ff3676604f2d7c52783b79d9501a495e49",
+    "cases/CASE-0186/patched_source.java": "a9af15d49c387a1285684d6a7dbd6dab57df53ad11cbfae4fdc4dc4e65b2ece2",
+    "cases/CASE-0186/patch.diff": "7d90b478e85c1baa4eba38bed1e3cdaa873a1a8a807b22e1ec256561846f21ad",
+    "cases/CASE-0186/metadata.json": "8c0fb53d28a4dd3b6ddb0f241bd1e09a2e3b83b523af66494fb531580053ec69",
+    "model_context/CASE-0186.json": "821270b18236cbfa2045c844e8ee56402ab87079f1a08a9bdaf38a9111f047a6",
+    "difficulty/CASE-0186.json": "5581f668d963fd0d2328c61f0792a3a194215480285dc18dcda1dcd2ca0cd2c6"
+  },
+  "case_level_hash": "cec88909c8a5b6df836731869290396c8fcf6ba0162936c93165ebd9c374ab4a"
+}

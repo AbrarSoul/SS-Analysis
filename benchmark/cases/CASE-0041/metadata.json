@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0041",
+  "original_source_case_id": "github.com_1Panel-dev_MaxKB_24cd68acae5f726eed828e2ac801827a2a70536f",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2026-39424",
+  "cve_ids_all": [
+    "CVE-2026-39424"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1236"
+  ],
+  "language": "python",
+  "repository": "1Panel-dev/MaxKB",
+  "repository_url": "https://github.com/1Panel-dev/MaxKB",
+  "vulnerable_commit": "675fdd0f309d878afe559c803461346ba0e036cf",
+  "fixed_commit": "24cd68acae5f726eed828e2ac801827a2a70536f",
+  "changed_file": "apps/application/serializers/application_chat.py",
+  "changed_function": "def reset_value(value):",
+  "vulnerable_lines": [
+    193,
+    201
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0041/vulnerable_source.py": "3b63c33cd4c9fc5b132ca24d4ec684547201781474ef5a031ecc52f744b483e8",
+    "cases/CASE-0041/patched_source.py": "413cf87b5a25d657272aa15d998edc8668e4b59fe72ff2095f3b2392a236500a",
+    "cases/CASE-0041/patch.diff": "bac30e95b1954c54046d9249a55dd0ceaf1c0db262e6d36c408eb2a93abcf96b",
+    "cases/CASE-0041/metadata.json": "3b9b8049a50b5a562317d33f5c604f5e53d4553aecbd1d608b2d78de64fdab2b",
+    "model_context/CASE-0041.json": "5438a06ac7cb975ed433c4141ef876358f8d635a39a4a4003f88290f9295b229",
+    "difficulty/CASE-0041.json": "7539ca24a85dc77db17d428f6e6e62c21eb999fc22a4a14f96c66279a72b566f"
+  },
+  "case_level_hash": "6fbf889b1f0c1c2e969a1e1d27d4dde3b3dd325ddb34ae16cd17426c16e6598c"
+}

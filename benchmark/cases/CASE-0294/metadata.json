@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0294",
+  "original_source_case_id": "github.com_spring-projects_spring-framework_297cbae2990e1413537c55845a7e0ea0ffd9f9bb",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-22259",
+  "cve_ids_all": [
+    "CVE-2024-22259"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-601"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "274fba47f3b15bc12c8d81571c68987989f812e8",
+  "fixed_commit": "297cbae2990e1413537c55845a7e0ea0ffd9f9bb",
+  "changed_file": "spring-web/src/main/java/org/springframework/web/util/UriComponentsBuilder.java",
+  "changed_function": "public static UriComponentsBuilder fromUriString(String uri) {",
+  "vulnerable_lines": [
+    227,
+    274
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 8,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0294/vulnerable_source.java": "95df300f43fa1268f48dc32704a650822ff91aca6d30b4cb2d6087e20ff74306",
+    "cases/CASE-0294/patched_source.java": "182793d035e64f8441b110e75442fb5f57352cc1519a0c8e49e37bb8692b4435",
+    "cases/CASE-0294/patch.diff": "579bd4c019e14cae872434dc401841ca80c0da188cece9fa91a9bbca6e33ccd4",
+    "cases/CASE-0294/metadata.json": "8b52929844dd2b726f59eb6c728b14897270419afd6afd1e91be734b0a911f96",
+    "model_context/CASE-0294.json": "ca379129ce12676eace00d85169b8ebab6cfd9c74ac6d4b2784cdd15b7e5c239",
+    "difficulty/CASE-0294.json": "5008a94adfeae18885ac766f6ff7e4de599e63d5d9f0e73236349d9a26d4bf82"
+  },
+  "case_level_hash": "2e355858984b42a34c398aba7cb4a7a3e26df6eabea62537fd2802e9f38b6758"
+}

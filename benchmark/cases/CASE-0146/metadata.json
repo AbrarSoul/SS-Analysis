@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0146",
+  "original_source_case_id": "github.com_directus_directus_243eed781b42d6b4948ddb8c3792bcf5b44f55bb",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-45820",
+  "cve_ids_all": [
+    "CVE-2023-45820"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-755"
+  ],
+  "language": "typescript",
+  "repository": "directus/directus",
+  "repository_url": "https://github.com/directus/directus",
+  "vulnerable_commit": "adb1617fef732544769fbedf839a32556963a957",
+  "fixed_commit": "243eed781b42d6b4948ddb8c3792bcf5b44f55bb",
+  "changed_file": "api/src/websocket/controllers/base.ts",
+  "changed_function": "this.server.handleUpgrade(request, socket, head, async (ws) => {",
+  "vulnerable_lines": [
+    155,
+    169
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0146/vulnerable_source.ts": "d8dcf0624bb473124a51f60f2f7341e006d1be611a7ecc3f51db0eef1d1aedb9",
+    "cases/CASE-0146/patched_source.ts": "ea909bdf6c4fddcd62aadd84f7d9d9860884ae4e61a943147374075fbac1cae5",
+    "cases/CASE-0146/patch.diff": "6b44f40802682e535ea2525f50b89ca53bd43eb2af51cbe77a0573e410f01e89",
+    "cases/CASE-0146/metadata.json": "479ebaacdc8df923035a0af3532761ac57040a1a9d008b13efda434b4cdfecc3",
+    "model_context/CASE-0146.json": "c5214af90c933e852232e218d24e8ec42141170908f395b0a71ff5edb7bf5a44",
+    "difficulty/CASE-0146.json": "1b990678aa095fcbecfbcfadd686b11d6a8ec67bafd40509041831f369ff6cb9"
+  },
+  "case_level_hash": "9290e2ffaa24c8a3a00e93b9ab6f733f72074c1f2a74fb945e89bc5f2902f5b3"
+}

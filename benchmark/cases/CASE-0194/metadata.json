@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0194",
+  "original_source_case_id": "github.com_jenkinsci_sidebar-link-plugin_1bfd878ee107cdf349bc6a6bf3e9e6e25ef95ad5",
+  "selection_batch": "topup10",
+  "cve_id": "CVE-2023-32985",
+  "cve_ids_all": [
+    "CVE-2023-32985"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/sidebar-link-plugin",
+  "repository_url": "https://github.com/jenkinsci/sidebar-link-plugin",
+  "vulnerable_commit": "0f93746cf7236a8997e461cac12f518325354580",
+  "fixed_commit": "1bfd878ee107cdf349bc6a6bf3e9e6e25ef95ad5",
+  "changed_file": "src/main/java/hudson/plugins/sidebar_link/SidebarLinkPlugin.java",
+  "changed_function": "public FormValidation doCheckLinkIcon(@QueryParameter String value) {",
+  "vulnerable_lines": [
+    137,
+    153
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 42,
+  "patch_size_deleted": 15,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0194/vulnerable_source.java": "27589a92559972b94c1df400c8b8abf5e8d80ba7012ef7dd73cc4073f5dd001a",
+    "cases/CASE-0194/patched_source.java": "f6410d58c3d6661ca0718f9ad0c608b363320eed0f43e51bf869415975191a57",
+    "cases/CASE-0194/patch.diff": "a8afc7a50afbb80669b762d4be67ecdd9097e31146e33553eda92e6dd2035032",
+    "cases/CASE-0194/metadata.json": "2e7201f16f560a51ac2653dea05ce0e1e1a903eebe9f1d3f9926ba89f490e428",
+    "model_context/CASE-0194.json": "e8d44d527433bcb7975586ab95d54ecb8e9fcfcc5591f30d33306d690d282e9f",
+    "difficulty/CASE-0194.json": "3bbd32d76d996acf9cba522d120cea900534e8cc260db621fbb02d4ba103906d"
+  },
+  "case_level_hash": "050033da7a9058b90eb1fc631b40d55eb002bfd8e3d96114fffb72c58091c6f2"
+}

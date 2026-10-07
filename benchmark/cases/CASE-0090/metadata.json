@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0090",
+  "original_source_case_id": "github.com_airbnb_knowledge-repo_f026ad2afea14e0ffc91f1aa0eaedcdc72c63167",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2018-12104",
+  "cve_ids_all": [
+    "CVE-2018-12104"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "airbnb/knowledge-repo",
+  "repository_url": "https://github.com/airbnb/knowledge-repo",
+  "vulnerable_commit": "d1874d3e71994cd9bb769d60133c046b6d2b8bb5",
+  "fixed_commit": "f026ad2afea14e0ffc91f1aa0eaedcdc72c63167",
+  "changed_file": "knowledge_repo/app/routes/comment.py",
+  "changed_function": "def post_comment():",
+  "vulnerable_lines": [
+    26,
+    56
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0090/vulnerable_source.py": "05ed0ddea20885455d11c02e28b41bccc20d5b6cd353e415a79ecb42547ce850",
+    "cases/CASE-0090/patched_source.py": "cfd5a5c62af9c263690ead592f62f5384ce021b2b6005185f7448066aea742de",
+    "cases/CASE-0090/patch.diff": "e6813c7f452a21e86755203f04a87c951681daee74aca98fb133700e35b27642",
+    "cases/CASE-0090/metadata.json": "d2fefb2bd509b1669e39e981d0effac7b5f67778c04f6d1292e10aa2d1551e05",
+    "model_context/CASE-0090.json": "4942d95b53d706fc5db4011e64f890558951a8cec7dc372fff8bb0054dc78a75",
+    "difficulty/CASE-0090.json": "7f9544036cfe3df0cd6e094dfca54126ec870975cc79d279b7d1f6f8b9677d53"
+  },
+  "case_level_hash": "2df13dac8432e7be0031f12abb47cebc94db5d352739291505aae27a0f7f3527"
+}

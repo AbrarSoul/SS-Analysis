@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0234",
+  "original_source_case_id": "github.com_neo4j-contrib_neo4j-apoc-procedures_d2f415c6f703bbc2cda4a753928821ff15d5c620",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-37423",
+  "cve_ids_all": [
+    "CVE-2022-37423"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "java",
+  "repository": "neo4j-contrib/neo4j-apoc-procedures",
+  "repository_url": "https://github.com/neo4j-contrib/neo4j-apoc-procedures",
+  "vulnerable_commit": "b069e2bfd51b3015d29452aeddda6059cff6bc0f",
+  "fixed_commit": "d2f415c6f703bbc2cda4a753928821ff15d5c620",
+  "changed_file": "core/src/main/java/apoc/log/Neo4jLogStream.java",
+  "changed_function": "@Description( \"apoc.log.stream('neo4j.log', { last: n }) - retrieve log file contents, optionally return only the last n lines\" )",
+  "vulnerable_lines": [
+    43,
+    89
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0234/vulnerable_source.java": "d733e61e8bb109bc40683e341ec8beda8edeb910d431ca5109aa55d92f456a63",
+    "cases/CASE-0234/patched_source.java": "c62f6610018b25b43a082c36c782f45f1778e5b86a450bacf9894468be3728fd",
+    "cases/CASE-0234/patch.diff": "e977b26336613f5f39cf40006a88fd8110f95fca61ea2aedb08279fe5620ea72",
+    "cases/CASE-0234/metadata.json": "37264c9854f64128ea3df23e63dea03428561061aa4df4e80b1f06a246581ae6",
+    "model_context/CASE-0234.json": "ab67ad04275feb849469320c414f952d8c7406a4faaeba36309d9fdd37eb98ee",
+    "difficulty/CASE-0234.json": "b6d663e1e0b2eebda14f950e4d22052a7361446aec4142d369b8cb66d7c08fc9"
+  },
+  "case_level_hash": "e4bd4523e9b6c7bd477c8b4f8c7feb54911672156f84831bf6f4f877a6a9ca55"
+}

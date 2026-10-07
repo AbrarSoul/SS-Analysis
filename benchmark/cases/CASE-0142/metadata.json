@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0142",
+  "original_source_case_id": "github.com_decolua_9router_428e2c045cb9c0eb8080e8b580471a9c2eaa95ca",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-10269",
+  "cve_ids_all": [
+    "CVE-2026-10269"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-266",
+    "CWE-285"
+  ],
+  "language": "javascript",
+  "repository": "decolua/9router",
+  "repository_url": "https://github.com/decolua/9router",
+  "vulnerable_commit": "368f4c3e7fad00e64caf57843c9230ae53af226e",
+  "fixed_commit": "428e2c045cb9c0eb8080e8b580471a9c2eaa95ca",
+  "changed_file": "src/dashboardGuard.js",
+  "changed_function": "function isLocalRequest(request) {",
+  "vulnerable_lines": [
+    23,
+    27
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 20,
+  "patch_size_deleted": 11,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0142/vulnerable_source.js": "63bccca31212ac254102adafed018d3806eba3450e3f28b3c6293e120affbb03",
+    "cases/CASE-0142/patched_source.js": "ac66f44e91ac7aae81e7e3abaab73282dcb1aa247ae3ad8b7d4c694c5446fb0f",
+    "cases/CASE-0142/patch.diff": "c3fe06efa6b67b445091c02a4b767040cf4b7b2e91a21b4ec3b629a8a6b7d47d",
+    "cases/CASE-0142/metadata.json": "53576fe72a0cf433b13d2d9661a9a651f654f8748989fa064ca35c215a29e4cd",
+    "model_context/CASE-0142.json": "fdb405f1e3919626e19c7b0bfcb11e51c4fb1cf92a0303fd5722623e4e59d27f",
+    "difficulty/CASE-0142.json": "1c87c17ec9fd2421b3622c3dfd45b5a1f669ceff1944cbaab20fba5cb8eedf76"
+  },
+  "case_level_hash": "1bbeda2bcfe8c67175350ef4f5ceb733eaf75d0e0c44eac47d190db0fb61e43d"
+}

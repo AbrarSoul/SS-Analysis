@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0101",
+  "original_source_case_id": "github.com_apache_calcite_43eeafcbac29d02c72bd520c003cdfc571de2d15",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-13955",
+  "cve_ids_all": [
+    "CVE-2020-13955"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "java",
+  "repository": "apache/calcite",
+  "repository_url": "https://github.com/apache/calcite",
+  "vulnerable_commit": "ab19f98172848fe303a18173946c2def0b0d0312",
+  "fixed_commit": "43eeafcbac29d02c72bd520c003cdfc571de2d15",
+  "changed_file": "core/src/main/java/org/apache/calcite/runtime/HttpUtils.java",
+  "changed_function": "public static HttpURLConnection getURLConnection(String url)",
+  "vulnerable_lines": [
+    38,
+    54
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 16,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0101/vulnerable_source.java": "d88403ffce0fc6aae64944f1cee1d39e879e67c41c09517f6df08631e67729ce",
+    "cases/CASE-0101/patched_source.java": "078eb43ad4b5e36a5b684b4e3f029556ccb1dde063a9e690b74e886b1d9ef7a8",
+    "cases/CASE-0101/patch.diff": "e5afa59096d5cc574114c7ffeafbd4ab2c57edbc79ec80e68eb02ae05771781d",
+    "cases/CASE-0101/metadata.json": "4c085fc2883c4b1b492233ee582ab7dd98f191c7802077d4e237a791df5f4269",
+    "model_context/CASE-0101.json": "89ceb0a31a4e7c0e57e2f9c3c4e3a98c35630c406440c9f53e4b8225d6d69cf6",
+    "difficulty/CASE-0101.json": "4e65c16452bfcfab847ccafe804d75ad6195991763e84995057544e0809cfe40"
+  },
+  "case_level_hash": "9f1c6a1bb89b290931a89045cf8ea86e24a6a17489238f7a453b46021b0d3243"
+}

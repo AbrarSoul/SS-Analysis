@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0148",
+  "original_source_case_id": "github.com_dom4j_dom4j_1707bf3d898a8ada3b213acb0e3b38f16eaae73d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-10683",
+  "cve_ids_all": [
+    "CVE-2020-10683"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "dom4j/dom4j",
+  "repository_url": "https://github.com/dom4j/dom4j",
+  "vulnerable_commit": "223ae0639d5d73a5a25fddec8b16c7071ee10e3d",
+  "fixed_commit": "1707bf3d898a8ada3b213acb0e3b38f16eaae73d",
+  "changed_file": "src/main/java/org/dom4j/DocumentHelper.java",
+  "changed_function": "public static Document parseText(String text) throws DocumentException {",
+  "vulnerable_lines": [
+    271,
+    287
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 8,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0148/vulnerable_source.java": "f50cae5637d76b39d331476806869497a7400f31f8f2baf8f5397d4a7194be7f",
+    "cases/CASE-0148/patched_source.java": "144cb7579f71bd8a414c8b57ce1f313668741a2eead41043141244162f9239f6",
+    "cases/CASE-0148/patch.diff": "816689cfc7c3376de94a7e65d75894aeef493404933482932868c7195bbc9e62",
+    "cases/CASE-0148/metadata.json": "cf38d52248eb01f0d1310114c3bdd99d5d401b16f467617f36221df4464b314d",
+    "model_context/CASE-0148.json": "1f82511ab3b8f7cd6f9e48511e48fc4146650e1d60aa36933e12cb43210d8044",
+    "difficulty/CASE-0148.json": "f450c3dfa5dcb38028ce337a4b5f32cf152cff245931a7828f44b424ea4f4a48"
+  },
+  "case_level_hash": "a2eec3d1ab66ac285533653d2d8844b9a75e8261b95f409f159545480a1ca7a9"
+}

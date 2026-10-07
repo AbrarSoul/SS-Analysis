@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0238",
+  "original_source_case_id": "github.com_nocodb_nocodb_079e3abe",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-22121",
+  "cve_ids_all": [
+    "CVE-2022-22121"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1236"
+  ],
+  "language": "typescript",
+  "repository": "nocodb/nocodb",
+  "repository_url": "https://github.com/nocodb/nocodb",
+  "vulnerable_commit": "f46e89b07912464b89ac876db0971104e82e0e44",
+  "fixed_commit": "079e3abe98a054f5304592def7a0e8fdb9b06eee",
+  "changed_file": "packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts",
+  "changed_function": "public async extractCsvData(args: any = {}, fields = null) {",
+  "vulnerable_lines": [
+    2449,
+    2570
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 15,
+  "patch_size_deleted": 10,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0238/vulnerable_source.ts": "4927910dd941506d6acc3709ceb094296dc20f7207d82dfa9f7fa83df3dbdd32",
+    "cases/CASE-0238/patched_source.ts": "61d4da8d16077cda4a6017f49c1ad01a185a76385ae2d4edca196969b942b034",
+    "cases/CASE-0238/patch.diff": "a8f18e4391f60a0a27630ee3df12281c5b58c2bfe663f78a2e1b991c477430fa",
+    "cases/CASE-0238/metadata.json": "9f676e184718a57ca4f84c399c1988b2fb4b78c9407c6cdad7e47908fc773462",
+    "model_context/CASE-0238.json": "a3936108a02da4ed523b1872951656aed0d0052f66140f8b2487d22eb82b25a7",
+    "difficulty/CASE-0238.json": "69870baf904e144f8973144b6f3b0424c20426cfb6c7d93b89e4d01210855454"
+  },
+  "case_level_hash": "c84435522e22b0573f10a0e70b836a7bb2042fdba6eab3fe561c283a162b6e49"
+}

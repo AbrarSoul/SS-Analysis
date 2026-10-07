@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0260",
+  "original_source_case_id": "github.com_plantuml_plantuml_6826315db092d2e432aeab1a0894e08017c6e4bd",
+  "selection_batch": "topup19",
+  "cve_id": "CVE-2026-0858",
+  "cve_ids_all": [
+    "CVE-2026-0858"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "plantuml/plantuml",
+  "repository_url": "https://github.com/plantuml/plantuml",
+  "vulnerable_commit": "6eb58928bbdce2572cbc660fbdbb500c261cd7d7",
+  "fixed_commit": "6826315db092d2e432aeab1a0894e08017c6e4bd",
+  "changed_file": "src/main/java/net/sourceforge/plantuml/directdot/PSystemDot.java",
+  "changed_function": "final protected ImageData exportDiagramNow(OutputStream os, int num, FileFormatOption fileFormat)",
+  "vulnerable_lines": [
+    75,
+    96
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 38,
+  "auto_locate_confidence": "hand_retargeted",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0260/vulnerable_source.java": "db19b005e36bcaf25565a7a897aea2fa2ce8700907cc1466765f9ccb7757763d",
+    "cases/CASE-0260/patched_source.java": "bb334664974b173c0bebd062b80f4d78abb4bfdeea6068aa972fe4a8367bdc37",
+    "cases/CASE-0260/patch.diff": "c1f55a7ef27cafcf6a58e0759176a8345ed9696d3c255efaeb27a4b6ecb6802c",
+    "model_context/CASE-0260.json": "43e2897ec0e82845de26c7b0ec936be762380b187e499da23ef0d07e6cd55dfc",
+    "difficulty/CASE-0260.json": "08baf573b1caa14f9f37637a199a869a1dc24ff81bd22410ba239b20665b3508",
+    "cases/CASE-0260/metadata.json": "5c4bbcea1e45c20f9f207e37d59d3a6a9421f3f1a398af8eafd6e39f3a4e0251"
+  },
+  "case_level_hash": "ad15cb457b4eb713522fd5088016e54de1fe581f42cb9b8511204e5c4ed82e7b"
+}

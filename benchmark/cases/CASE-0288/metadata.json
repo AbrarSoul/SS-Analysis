@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0288",
+  "original_source_case_id": "github.com_simplerisk_code_591405b4ed160fbefc1dca1e55c5745079a7bb48",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-4269",
+  "cve_ids_all": [
+    "CVE-2021-4269"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-707",
+    "CWE-79"
+  ],
+  "language": "javascript",
+  "repository": "simplerisk/code",
+  "repository_url": "https://github.com/simplerisk/code",
+  "vulnerable_commit": "267f37d99dd2ea87ac5ca612d605048ee52877af",
+  "fixed_commit": "591405b4ed160fbefc1dca1e55c5745079a7bb48",
+  "changed_file": "simplerisk/js/common.js",
+  "changed_function": ")",
+  "vulnerable_lines": [
+    326,
+    346
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0288/vulnerable_source.js": "cb8501ee0e5b5914ebe17b855797a911634940a3a102c043392961c9b2562bea",
+    "cases/CASE-0288/patched_source.js": "11b11460123f979397954f481f836fa5d4b1e29ed96d525db00c6f33ac2b0c57",
+    "cases/CASE-0288/patch.diff": "c48a183394c3b5c423df139939c4b6391720ca551be7cc2fa241ce7cd4d214f1",
+    "cases/CASE-0288/metadata.json": "3220e2b272c1a6bc3d07e19c9afee90034f5968421a718d97ca22013b2d77ac7",
+    "model_context/CASE-0288.json": "36cd3f10740087aefe066081e9560771497d96e68b35026f7c2f0a1386e04198",
+    "difficulty/CASE-0288.json": "a65c3a7cf98efed4134aad3fc058b5c4c264ce9c206f71bbbae65dc5d872cedf"
+  },
+  "case_level_hash": "b74b0b25ca684f1cdd14e8ca21973cd8faf97504c6b722023a5ae69e357c7b29"
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0097",
+  "original_source_case_id": "github.com_ansible_ansible-modules-core_1182d1f0b76d56f3667e27987a10b9ec8f03357d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-8614",
+  "cve_ids_all": [
+    "CVE-2016-8614"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-320",
+    "CWE-358"
+  ],
+  "language": "python",
+  "repository": "ansible/ansible-modules-core",
+  "repository_url": "https://github.com/ansible/ansible-modules-core",
+  "vulnerable_commit": "ac314a5e3db5fc7d8a6953775f9b00c3ed4f5451",
+  "fixed_commit": "1182d1f0b76d56f3667e27987a10b9ec8f03357d",
+  "changed_file": "packaging/os/apt_key.py",
+  "changed_function": "def main():",
+  "vulnerable_lines": [
+    261,
+    350
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0097/vulnerable_source.py": "06c4b80af37ed13ad10cfbd6712eb028b4ce4ade3c7ed92b746ddd1c4595e08c",
+    "cases/CASE-0097/patched_source.py": "c6b712046ee122ad3d305921f261d6740113f9d373c453c6ea2069cd2a77bad9",
+    "cases/CASE-0097/patch.diff": "837e2b856d66a1cd4350d5e6e30de48bf9ecf15418694870797a3a6e1d6d7c68",
+    "cases/CASE-0097/metadata.json": "f9478d0017f2a27d932b71ce08234db52f19b350c467ac793050522965625996",
+    "model_context/CASE-0097.json": "89aafa5496f8ac81dc92837e1eec4f6a10fc8803817343e90e243182f7e02a9e",
+    "difficulty/CASE-0097.json": "5559026c5ea2a76778f190bf9bcf5d2ea2d1d998a9b782f5a691d69df238a454"
+  },
+  "case_level_hash": "ac2bbe201d4b3c7662adfef1afb4681db7dc4033dbf6f8427b36abcbe2455d13"
+}

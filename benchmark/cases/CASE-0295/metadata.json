@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0295",
+  "original_source_case_id": "github.com_spring-projects_spring-framework_3a5af35d37c79d0644d49b93f792a4c18fe8eb71",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2010-1622",
+  "cve_ids_all": [
+    "CVE-2010-1622"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-framework",
+  "repository_url": "https://github.com/spring-projects/spring-framework",
+  "vulnerable_commit": "dea5918d66aa25ea9ad9f44598cea3f765e21f75",
+  "fixed_commit": "3a5af35d37c79d0644d49b93f792a4c18fe8eb71",
+  "changed_file": "org.springframework.beans/src/main/java/org/springframework/beans/CachedIntrospectionResults.java",
+  "changed_function": "PropertyDescriptor[] getPropertyDescriptors() {",
+  "vulnerable_lines": [
+    281,
+    284
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 37,
+  "patch_size_deleted": 15,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0295/vulnerable_source.java": "6dab8b9cc76487caa14574e8df15408758f3f9bbb85d840334099d0637779cc7",
+    "cases/CASE-0295/patched_source.java": "4b4b6a822436850e932751ded7e82186e71c2a167d4725597e655eb8ad1ee9f3",
+    "cases/CASE-0295/patch.diff": "484b5f02578077a925d98b59714c08e8b2e67ad73331173e65f08102ff012105",
+    "cases/CASE-0295/metadata.json": "074ca8f123ee51d5f67a012fdf9c01a8758f3298e1a7fc9d54b386273c6a35e9",
+    "model_context/CASE-0295.json": "b35486186959be7d5c1ceb9077cdaf934fcfae1b0abbc36a3ead6df53ae82e57",
+    "difficulty/CASE-0295.json": "d1a32f9678f905854bf7ef01daf14ab3be951da43cb50c62712815b8ef0cc1b6"
+  },
+  "case_level_hash": "ddd0dd7d437447af2dc8fcdb65643900247ef44647e3aafa7adc92a9c117ae44"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0330",
+  "original_source_case_id": "github.com_wekan_wekan_7ed76c180ede46ab1dac6b8ad27e9128a272c2c8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-25568",
+  "cve_ids_all": [
+    "CVE-2026-25568"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "javascript",
+  "repository": "wekan/wekan",
+  "repository_url": "https://github.com/wekan/wekan",
+  "vulnerable_commit": "f244a43771f6ebf40218b83b9f46dba6b940d7de",
+  "fixed_commit": "7ed76c180ede46ab1dac6b8ad27e9128a272c2c8",
+  "changed_file": "models/boards.js",
+  "changed_function": "JsonRoutes.add('POST', '/api/boards', function(req, res) {",
+  "vulnerable_lines": [
+    2274,
+    2310
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 31,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0330/vulnerable_source.js": "c7f73538d945748e015dbc0e385eea9f79d81e871f7a7b4029243b46abcbb1be",
+    "cases/CASE-0330/patched_source.js": "bf8b5e9500de41af9e6bc20e93eeb7504c88a57d9851f3f31b8e621f910cc154",
+    "cases/CASE-0330/patch.diff": "192e79706ad630ab8d0f55cebf7b7d68f9aef60944cfdf136eb7c839716634bd",
+    "cases/CASE-0330/metadata.json": "7f22bd6d9d320b5652873a1e2caa39e8452694b896daec499a14e94641b47d4c",
+    "model_context/CASE-0330.json": "255c6f6e0a4d243017916c110f619edbb07617e6a0573f85c3e46ff8f5619c9a",
+    "difficulty/CASE-0330.json": "da5c87af44071e8101113a1fa1dffc8f780adf5a6583b2eee6b998d0214a2566"
+  },
+  "case_level_hash": "418decf619bdc9267e0d712f89d3c842e62fe81b76051517b5626ce06e1b7358"
+}

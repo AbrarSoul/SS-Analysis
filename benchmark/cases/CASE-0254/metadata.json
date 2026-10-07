@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0254",
+  "original_source_case_id": "github.com_parisneo_lollms_76a54f0df2df8a5b254aa627d487b5dc939a0263",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-0560",
+  "cve_ids_all": [
+    "CVE-2026-0560"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "python",
+  "repository": "parisneo/lollms",
+  "repository_url": "https://github.com/parisneo/lollms",
+  "vulnerable_commit": "a6625dc83786ff21d109b0d545ca61b770607ef3",
+  "fixed_commit": "76a54f0df2df8a5b254aa627d487b5dc939a0263",
+  "changed_file": "backend/routers/files.py",
+  "changed_function": "def _download_image_to_temp(src: str) -> str:",
+  "vulnerable_lines": [
+    284,
+    304
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 53,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0254/vulnerable_source.py": "f038abd4a670dec3af60d78e901ae9a7d8f1bcd742ba93de753c681d49818d22",
+    "cases/CASE-0254/patched_source.py": "2491cf67100589233a55eda658cb47ffb70da6347ccac555118ca53adf111a5a",
+    "cases/CASE-0254/patch.diff": "550304224bb16fc5dc14d7aef59066d45224e1a776cb4a39ca59d5492ac90ac8",
+    "cases/CASE-0254/metadata.json": "7164dc167cbc0fb1731070a539555c952f13ee9964a6673f4a5df9f111651011",
+    "model_context/CASE-0254.json": "c288290eac1057171414ed619a0831d688b851dedbe2b55449b346aed7dc6b08",
+    "difficulty/CASE-0254.json": "d762beffbb9aded3d822c3f933449102421fc2390b085717d4106d2119d9e635"
+  },
+  "case_level_hash": "9bc70816fb5b6435bfdcfe96572ea2a0f2a31ff91f3b615d8a6146c5ec7c814d"
+}

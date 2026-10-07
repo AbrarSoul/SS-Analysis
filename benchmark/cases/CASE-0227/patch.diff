@@ -1,0 +1,13 @@
+diff --git a/collector/utils/files/index.js b/collector/utils/files/index.js
+index 9b56bb5b..51d0a682 100644
+--- a/collector/utils/files/index.js
++++ b/collector/utils/files/index.js
+@@ -122,7 +122,7 @@ function isWithin(outer, inner) {
+ 
+ function normalizePath(filepath = "") {
+   const result = path
+-    .normalize(filepath.trim())
++    .normalize(filepath.replace(/\s/g, "-").trim())
+     .replace(/^(\.\.(\/|\\|$))+/, "")
+     .trim();
+   if (["..", ".", "/"].includes(result)) throw new Error("Invalid path.");

@@ -1,0 +1,44 @@
+Section 22.4 subgroup analysis -- model=qwen2.5-coder:32b, condition=autogrep, n=300 cases (full 300-case set, NOT restricted to 'supported' -- subgroup analysis needs the volume).
+(86 of these have evaluable samples; the rest had no executable rule and contribute 0 to pooled MCC's denominator terms the same way the primary analysis has always treated them.)
+
+  -- By language --
+    python                    n=100 (90 repos)  MCC=+0.719  95% CI=(+0.622, +0.809)
+    java                      n=100 (82 repos)  MCC=+0.544  95% CI=(+0.473, +0.615)
+    javascript                n= 77 (65 repos)  MCC=+0.603  95% CI=(+0.436, +0.752)
+    typescript                n= 23 (22 repos)  MCC=+0.507  95% CI=(+0.354, +0.706)
+
+  -- Pattern vs taint --
+    pattern                   n=220 (190 repos)  MCC=+0.587  95% CI=(+0.517, +0.658)
+    taint                     n= 80 (79 repos)  MCC=+0.673  95% CI=(+0.602, +0.746)
+
+  -- Structural vs context-heavy --
+    context_heavy             n=183 (157 repos)  MCC=+0.602  95% CI=(+0.519, +0.683)
+    structural                n=117 (114 repos)  MCC=+0.615  95% CI=(+0.536, +0.691)
+
+  -- Supported vs partially supported (unsupported excluded) --
+    supported                 n=153 (142 repos)  MCC=+0.589  95% CI=(+0.509, +0.668)
+    partially_supported       n= 99 (92 repos)  MCC=+0.599  95% CI=(+0.496, +0.702)
+
+  (median CVE year across all cases: 2023 -- note: substitutes for the never-populated `advisory_date` field, year-level granularity only, flagged in scope doc)
+
+  -- Older vs newer CVE --
+    <= 2023 (older)           n=175 (156 repos)  MCC=+0.571  95% CI=(+0.501, +0.639)
+    > 2023 (newer)            n=125 (109 repos)  MCC=+0.692  95% CI=(+0.596, +0.791)
+
+  -- Patch size (tertiles) --
+    small (<= 5 lines)        n=100 (96 repos)  MCC=+0.671  95% CI=(+0.558, +0.775)
+    medium (5-14 lines)       n=100 (94 repos)  MCC=+0.607  95% CI=(+0.540, +0.672)
+    large (>= 15 lines)       n=100 (92 repos)  MCC=+0.544  95% CI=(+0.429, +0.658)
+
+  -- CWE breakdown (166 distinct CWE IDs across 300 cases) --
+  6 CWE(s) have >= 10 cases (CI reported); 160 CWE(s) have < 10 cases (count only, no CI -- too sparse for a meaningful bootstrap CI, stated explicitly rather than silently dropped)
+
+  -- CWEs with >= 10 cases --
+    NVD-CWE-noinfo            n= 18 (16 repos)  MCC=+0.554  95% CI=(+0.348, +0.753)
+    CWE-22                    n= 16 (16 repos)  MCC=+0.707  95% CI=(+0.447, +1.000)
+    CWE-79                    n= 15 (15 repos)  MCC=+0.642  95% CI=(+0.500, +0.707)
+    CWE-200                   n= 12 (11 repos)  MCC=+0.605  95% CI=(+0.447, +0.845)
+    CWE-78                    n= 11 (11 repos)  MCC=+0.798  95% CI=(+0.707, +1.000)
+    CWE-94                    n= 10 (9 repos)  MCC=+0.507  95% CI=(+0.126, +0.920)
+
+  Sparse CWEs (count only): [('NVD-CWE-Other', 9), ('CWE-400', 8), ('CWE-502', 8), ('CWE-20', 8), ('CWE-74', 7), ('CWE-77', 7), ('CWE-918', 7), ('CWE-89', 7), ('CWE-284', 6), ('CWE-285', 6), ('CWE-862', 5), ('CWE-287', 5), ('CWE-1321', 5), ('CWE-668', 5), ('CWE-611', 5), ('CWE-362', 4), ('CWE-346', 4), ('CWE-1236', 3), ('CWE-522', 3), ('CWE-326', 3)] ... (truncated)

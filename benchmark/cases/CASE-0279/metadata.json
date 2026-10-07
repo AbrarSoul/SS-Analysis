@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0279",
+  "original_source_case_id": "github.com_quarkusio_quarkus_80b8eb41678cdccb46e964dc324d048a5ef00f4b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-1634",
+  "cve_ids_all": [
+    "CVE-2025-1634"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-401"
+  ],
+  "language": "java",
+  "repository": "quarkusio/quarkus",
+  "repository_url": "https://github.com/quarkusio/quarkus",
+  "vulnerable_commit": "d925ec2df557731b2ead4162edc44ff810caad30",
+  "fixed_commit": "80b8eb41678cdccb46e964dc324d048a5ef00f4b",
+  "changed_file": "extensions/resteasy-classic/resteasy/runtime/src/main/java/io/quarkus/resteasy/runtime/standalone/VertxHttpResponse.java",
+  "changed_function": "public void finish() throws IOException {",
+  "vulnerable_lines": [
+    139,
+    159
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 11,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0279/vulnerable_source.java": "f87fa626897a8a08663f4b9fa788431c28e5dc4a15edd32a784e8f344cb1c613",
+    "cases/CASE-0279/patched_source.java": "bb3e574a001d8963e97bdb58ed4751b5cc9e1099e9eec75361d51e91251e91bf",
+    "cases/CASE-0279/patch.diff": "c7e8945276ffef116d1846820e74a6f3682fd2d4bc2c1edd647a34a3c7a97766",
+    "cases/CASE-0279/metadata.json": "042b40cdbeba06d30d873c2ac27fc568b0ce16257e503872da021dd3b0365798",
+    "model_context/CASE-0279.json": "7fc04432cd9b64320d1c6ccc1c0f2cd567820723224a7c25f6e8e01bf31c5f55",
+    "difficulty/CASE-0279.json": "5aa4b9a758b1446179043a5c93cc692051eaab81bf2fce49acebaf79666f40fb"
+  },
+  "case_level_hash": "75748da1f77ba7adbff9d76e791c97fe52fff3252030e157dc1a04aae3b53580"
+}

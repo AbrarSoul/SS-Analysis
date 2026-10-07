@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0159",
+  "original_source_case_id": "github.com_eventlet_eventlet_51e3c4928d4938beb576eff34f3bf97e6e64e6b4",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-29483",
+  "cve_ids_all": [
+    "CVE-2023-29483"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-292"
+  ],
+  "language": "python",
+  "repository": "eventlet/eventlet",
+  "repository_url": "https://github.com/eventlet/eventlet",
+  "vulnerable_commit": "b6f6e7c3a81853c2bf380f48bc0da7b894a3a903",
+  "fixed_commit": "51e3c4928d4938beb576eff34f3bf97e6e64e6b4",
+  "changed_file": "eventlet/support/greendns.py",
+  "changed_function": "def udp(q, where, timeout=DNS_QUERY_TIMEOUT, port=53,",
+  "vulnerable_lines": [
+    713,
+    840
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 38,
+  "patch_size_deleted": 18,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0159/vulnerable_source.py": "a17bd3c6e7196fd45c82930e8c6e12ce571544e92f092ac512509eea64dded33",
+    "cases/CASE-0159/patched_source.py": "5f5c3520d4b302e76b74f215835f4c011466739a35a64ccce02fa0420594d19f",
+    "cases/CASE-0159/patch.diff": "e5fa718f361d1b792079e500f6475a8ebbb73337b74f49c5c6afef055291b779",
+    "cases/CASE-0159/metadata.json": "de6d7b9e62045185843c43831906fddc78ddc771550a94e7061d302f0d941a62",
+    "model_context/CASE-0159.json": "f78ef01947d82c92a7bda0228572fa3dd6fbca8af97f0b7b2d75acaffd374c95",
+    "difficulty/CASE-0159.json": "f838879b39024b8723db7dc5e15f67e4b94a5fdd86a5f0d7b8808cbc092abf14"
+  },
+  "case_level_hash": "d1cabe08573068ac65af9dfecff39b2d7e8e2d073924dad0de10026c6a1f4a8a"
+}

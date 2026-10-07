@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0220",
+  "original_source_case_id": "github.com_mhuertos_phpLDAPadmin_dd6e9583a2eb2ca085583765e8a63df5904cb036",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-15039",
+  "cve_ids_all": [
+    "CVE-2016-15039"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-444"
+  ],
+  "language": "javascript",
+  "repository": "mhuertos/phpLDAPadmin",
+  "repository_url": "https://github.com/mhuertos/phpLDAPadmin",
+  "vulnerable_commit": "665dbc2690ebeb5392d38f1fece0a654225a0b38",
+  "fixed_commit": "dd6e9583a2eb2ca085583765e8a63df5904cb036",
+  "changed_file": "htdocs/js/ajax_functions.js",
+  "changed_function": "function makeHttpRequest(url,parameters,meth,successCallbackFunctionName,errorCallbackFunctionName,div) {",
+  "vulnerable_lines": [
+    172,
+    210
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 0,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0220/vulnerable_source.js": "4ea6e5785572dca9b5cd25daeb954b47978e4ed298738389e40cf5589ae3347f",
+    "cases/CASE-0220/patched_source.js": "13c9c539030f70d1dd82d74b6b2b6dfa2a6ef747de53c12db9402615a3267e52",
+    "cases/CASE-0220/patch.diff": "0a547727506afcdba37a006505ddea70a97af7b05a7df919af82f3d4c9668af8",
+    "cases/CASE-0220/metadata.json": "3aa403005090dfc871059248c8073c2c506f71f76d3c37dac5820acdbf134ee1",
+    "model_context/CASE-0220.json": "ed3ca42254684c62c3e847754386bfc2a472b141b240442216f1d9b1e981f86c",
+    "difficulty/CASE-0220.json": "155a7dc11046eb8034d8e1db144fd1b40b961893477e0be8271bd0407bd93b92"
+  },
+  "case_level_hash": "ff5343f5950e0154ad0e7b68471a795ca9e33153c173e210c02ec5abadb56875"
+}

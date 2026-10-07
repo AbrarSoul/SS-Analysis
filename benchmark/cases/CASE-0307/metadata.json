@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0307",
+  "original_source_case_id": "github.com_totaljs_framework_b3f901561d66ab799a4a99279893b94cad7ae4ff",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-28495",
+  "cve_ids_all": [
+    "CVE-2020-28495"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "totaljs/framework",
+  "repository_url": "https://github.com/totaljs/framework",
+  "vulnerable_commit": "1e1faeb20d2291038e10b98f2046a4058135e767",
+  "fixed_commit": "b3f901561d66ab799a4a99279893b94cad7ae4ff",
+  "changed_file": "utils.js",
+  "changed_function": "exports.set = function(obj, path, value) {",
+  "vulnerable_lines": [
+    6606,
+    6627
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 4,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0307/vulnerable_source.js": "cf8e1f125ba5103eefc01d9f73db6ed9765a6b656c2252649fe371e1e4b65144",
+    "cases/CASE-0307/patched_source.js": "e8c960bba8301d08c6f4b1439a57e71a21ef8123590e950be57414fd8fceab45",
+    "cases/CASE-0307/patch.diff": "f279c96e37be3606d288393dd27a4b3cc5fd579114f3aaf29222502fb5f0c2ce",
+    "cases/CASE-0307/metadata.json": "7c8bdd86622a41c1c093e754e18ffea496a0876a4a1b1ccfe84e70be8f837423",
+    "model_context/CASE-0307.json": "f64db260a122eef1a12b37443dec2cb2323887113c0e2534e0f7056c215c1ba4",
+    "difficulty/CASE-0307.json": "079e02a1b753682c26b90dabb6301cc264d2adc06e924579095260fadb41a3ef"
+  },
+  "case_level_hash": "2f0eddecbb95d1db08a70c5ce4f1fcc5763d3056d2067fc467eb7fad6feee9e5"
+}

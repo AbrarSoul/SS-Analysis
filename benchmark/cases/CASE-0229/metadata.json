@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0229",
+  "original_source_case_id": "github.com_mitreid-connect_OpenID-Connect-Java-Spring-Server_7eba3c12fed82388f917e8dd9b73e86e3a311e4c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-26715",
+  "cve_ids_all": [
+    "CVE-2021-26715",
+    "CVE-2021-27582"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1321",
+    "CWE-918"
+  ],
+  "language": "java",
+  "repository": "mitreid-connect/OpenID-Connect-Java-Spring-Server",
+  "repository_url": "https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server",
+  "vulnerable_commit": "0d4ef2cb4f77bea5df9e2d4f1cfff4dffb7045c0",
+  "fixed_commit": "7eba3c12fed82388f917e8dd9b73e86e3a311e4c",
+  "changed_file": "openid-connect-server/src/main/java/org/mitre/oauth2/web/OAuthConfirmationController.java",
+  "changed_function": "@PreAuthorize(\"hasRole('ROLE_USER')\")",
+  "vulnerable_lines": [
+    104,
+    225
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0229/vulnerable_source.java": "5826a13bba78121f5f6e401633941e97882f86dea218e45b448451297c9c7605",
+    "cases/CASE-0229/patched_source.java": "6b17de9a84ba5d8afd23bfaf2f533f99ea87db4b45351ad8873bb06df6509b7c",
+    "cases/CASE-0229/patch.diff": "319377398f98cfc8b6364b981b67cf477d41f45923e991d52ceead9d3953306d",
+    "cases/CASE-0229/metadata.json": "ab018763633eb00e7a93a33dfa4d3dfdbe4a9b895376655901dbdd5cad639af2",
+    "model_context/CASE-0229.json": "554f9c3e3f910893b9c8c1e881ead2f1c8f51d7f1c13578da28c7b9564d153ad",
+    "difficulty/CASE-0229.json": "bb5f9eb127ff9f181d09114897683f701e80d44518633345f16c5322b8a70536"
+  },
+  "case_level_hash": "01f29077f4cfc0565df558387388cefa667c8a79dffbeb4c16f01be5069ebac3"
+}

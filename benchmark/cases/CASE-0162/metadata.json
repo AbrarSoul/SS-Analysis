@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0162",
+  "original_source_case_id": "github.com_fedora-selinux_setroubleshoot_dda55aa50db95a25f0d919c3a0d5871827cdc40f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-4989",
+  "cve_ids_all": [
+    "CVE-2016-4989"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "fedora-selinux/setroubleshoot",
+  "repository_url": "https://github.com/fedora-selinux/setroubleshoot",
+  "vulnerable_commit": "e69378d7e82a503534d29c5939fa219341e8f2ad",
+  "fixed_commit": "dda55aa50db95a25f0d919c3a0d5871827cdc40f",
+  "changed_file": "framework/src/SetroubleshootFixit.py",
+  "changed_function": "def run_fix(self, local_id, analysis_id):",
+  "vulnerable_lines": [
+    16,
+    20
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0162/vulnerable_source.py": "1ba11763077213f435ecf22c8291410bfb55fa0f8b8bebc0bc9a8e675a009201",
+    "cases/CASE-0162/patched_source.py": "075fb7912e65019f78d23bebf6f785de5fa2242206ce903fa51daa5cf8b0f2f6",
+    "cases/CASE-0162/patch.diff": "3f5a5caf37b8113f142c42b9f263f3bda26cb4df15836196a38e408d8ef3d852",
+    "cases/CASE-0162/metadata.json": "d404b5a9009aabc46a84e87c5e2ea09c9898c6e36617186525e5a65c354c153b",
+    "model_context/CASE-0162.json": "2a09d6a51bd90e1ff139e77a342d8dfc498f51296b1462ad12eaa15affa507a9",
+    "difficulty/CASE-0162.json": "910ec36475d5ffb454098fe22c31071848e2e3eb6ff0dc81ccd4e0024dc7705d"
+  },
+  "case_level_hash": "f87a2902702acc6ab2294bae709e65cde80d4ec6c293a801a7a515edd8b09f69"
+}

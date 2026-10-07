@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0160",
+  "original_source_case_id": "github.com_facebook_fbthrift_a56346ceacad28bf470017a6bda1d5518d0bd943",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-3559",
+  "cve_ids_all": [
+    "CVE-2019-3559"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-755",
+    "CWE-834"
+  ],
+  "language": "java",
+  "repository": "facebook/fbthrift",
+  "repository_url": "https://github.com/facebook/fbthrift",
+  "vulnerable_commit": "9443939948a77691ec96df25bb9d46c7f98aa2b9",
+  "fixed_commit": "a56346ceacad28bf470017a6bda1d5518d0bd943",
+  "changed_file": "thrift/lib/java/thrift/src/main/java/com/facebook/thrift/protocol/TProtocolUtil.java",
+  "changed_function": "public static void skip(TProtocol prot, byte type, int maxDepth)",
+  "vulnerable_lines": [
+    73,
+    171
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0160/vulnerable_source.java": "20c30512146ee386eb488dd9e4ca5a2d0bf64d3d7769ffbd257fced6be1a28f3",
+    "cases/CASE-0160/patched_source.java": "ee7ec2a28b785bd043fc506c024af98521643910043dfdff2982b2bba63b0849",
+    "cases/CASE-0160/patch.diff": "48469403ffc59c1ef77e52ad79c70b93ddd5674333714823adfbcdcb2532a1e6",
+    "cases/CASE-0160/metadata.json": "afa644950300363f094d021f236eec8e417d7657ef0b9288ed9f33415b8240d5",
+    "model_context/CASE-0160.json": "7f7393824fbeaef83cb303dd736ef75ea382a304f4279cf357b06a2169513c4c",
+    "difficulty/CASE-0160.json": "62cd18dcf1f837dbf8a03bec55c9f7721a11a12dc2b654c6864125a1c144250e"
+  },
+  "case_level_hash": "826a2b52b3819b6049fc8605b2ecc458616184bd9f7219784e0c828a61c439cb"
+}

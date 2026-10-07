@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0126",
+  "original_source_case_id": "github.com_badkeys_badkeys_de631f69f040974bb5fb442cdab9a1d904c64087",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-21439",
+  "cve_ids_all": [
+    "CVE-2026-21439"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-150"
+  ],
+  "language": "python",
+  "repository": "badkeys/badkeys",
+  "repository_url": "https://github.com/badkeys/badkeys",
+  "vulnerable_commit": "75b7b58874e2c31c9e2e85508a94c354a609c254",
+  "fixed_commit": "de631f69f040974bb5fb442cdab9a1d904c64087",
+  "changed_file": "badkeys/dkim.py",
+  "changed_function": "def parsedkim(line):",
+  "vulnerable_lines": [
+    11,
+    50
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0126/vulnerable_source.py": "1f0ce0b0f8a9f2461de6615243ffccfecc43f1bc41f07ed8c5a9beed85d589a0",
+    "cases/CASE-0126/patched_source.py": "f07aa01c3c8198192bbcdf4add0acaa5ffdd1e0474529b7f9c27d1fbb47d12b6",
+    "cases/CASE-0126/patch.diff": "e399d6267acbd73e72078aff731cc955e636741fa63efc1bd3414110ea62b6a9",
+    "cases/CASE-0126/metadata.json": "fac41e329fc76d3674089ab70ae05a1220f0a1bfe76a4ea6721d596125ae4faf",
+    "model_context/CASE-0126.json": "435eecbcc9693815d900b0f032780dd561bf28228f3e48f739905a62886725c4",
+    "difficulty/CASE-0126.json": "75729c7667cd910d337dddbb1cd3c6a2d2d326f9869b48f902c416791982b911"
+  },
+  "case_level_hash": "cfe10c096eb975a544b7f5d034707684422637cde76ebec0c0f5763e6fe0cc29"
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0168",
+  "original_source_case_id": "github.com_gaizhenbiao_chuanhuchatgpt_71cb89c4c948dae5aaa0ae64b98f98e3965bdb37",
+  "selection_batch": "topup14",
+  "cve_id": "CVE-2024-6037",
+  "cve_ids_all": [
+    "CVE-2024-6037"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-770",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "python",
+  "repository": "gaizhenbiao/chuanhuchatgpt",
+  "repository_url": "https://github.com/gaizhenbiao/chuanhuchatgpt",
+  "vulnerable_commit": "fcdd5fd6b05ef537a1db185ab115758d87e1ba3f",
+  "fixed_commit": "71cb89c4c948dae5aaa0ae64b98f98e3965bdb37",
+  "changed_file": "modules/utils.py",
+  "changed_function": "def get_history_names(user_name=\"\"):",
+  "vulnerable_lines": [
+    480,
+    490
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0168/vulnerable_source.py": "4286c7da84cb2107dc030c40b32409b2dc26b6372354f6ca6a23715edbde0e0f",
+    "cases/CASE-0168/patched_source.py": "eec59b279143c3f8a2f3ca8cbd8b7b5a04148cb8802e202fd822b03cedd57233",
+    "cases/CASE-0168/patch.diff": "6873bd99ce63766b398c5f5dc2183af7ec368e1e7d6b6725cdcfe8755b5ed47c",
+    "cases/CASE-0168/metadata.json": "b16c21905f2c7a8e84783895d419c2f0851af9fa7d02b25d1c005d66b6b6ef03",
+    "model_context/CASE-0168.json": "8ca2adf08cc05ea4f9b637a90fa0f1cbfeeaafcde1e799748396ad4f8bdd814d",
+    "difficulty/CASE-0168.json": "e2daede96996cb8621a52546dfc9003708eee8fb9211589d52e72cd24cfd30a0"
+  },
+  "case_level_hash": "52abf3f7d245a113c37a5a5042ec1b7f4098648edcf77914e156710d579f4bd4"
+}

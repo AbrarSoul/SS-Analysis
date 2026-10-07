@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0302",
+  "original_source_case_id": "github.com_theonedev_onedev_adb6e31476621f824fc3227a695232df830d83ab",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-39207",
+  "cve_ids_all": [
+    "CVE-2022-39207"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-732",
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "theonedev/onedev",
+  "repository_url": "https://github.com/theonedev/onedev",
+  "vulnerable_commit": "f2334ba7e41a543d128f6085f34514fd4f122a17",
+  "fixed_commit": "adb6e31476621f824fc3227a695232df830d83ab",
+  "changed_file": "server-core/src/main/java/io/onedev/server/web/resource/ArtifactResource.java",
+  "changed_function": "protected ResourceResponse newResourceResponse(Attributes attributes) {",
+  "vulnerable_lines": [
+    44,
+    124
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 9,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0302/vulnerable_source.java": "d1b06e54eb03bc0d13da08fed94199a2dd8a818d234194d588cec23998a04a3f",
+    "cases/CASE-0302/patched_source.java": "29f05021733058a3ec9704ba71124861e0e35f710ca2edf270ae8824a72c2406",
+    "cases/CASE-0302/patch.diff": "644f45086432c26b2f6906e7fddffe6eddc37922ec9d0d70d0ef2bfbc6b81f82",
+    "cases/CASE-0302/metadata.json": "07878385d7519e59f467b005d94334f33014604fa67c1cc30adf4a571bf3006d",
+    "model_context/CASE-0302.json": "29aab92d7775ae1a0487b6a8cb8f61d68fe3acda3659cadbe50423acd36cfb52",
+    "difficulty/CASE-0302.json": "9889ab9ebba2fd0764961afbfd3fe8c84d28b2acdfc200afe527836ff590414b"
+  },
+  "case_level_hash": "b44870353313be7faa58c92e02ac6422b7d8965a2b79067332d170e50f69d90c"
+}

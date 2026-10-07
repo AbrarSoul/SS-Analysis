@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0315",
+  "original_source_case_id": "github.com_undertow-io_undertow_90f202ada89b6d9883beed0f1fe10c99d470d9a8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-6162",
+  "cve_ids_all": [
+    "CVE-2024-6162"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-488"
+  ],
+  "language": "java",
+  "repository": "undertow-io/undertow",
+  "repository_url": "https://github.com/undertow-io/undertow",
+  "vulnerable_commit": "5ed2b4f05b54024792459a490cc84d32e37cfb66",
+  "fixed_commit": "90f202ada89b6d9883beed0f1fe10c99d470d9a8",
+  "changed_file": "core/src/main/java/io/undertow/server/protocol/ajp/AjpRequestParser.java",
+  "changed_function": "private String decode(String url, final boolean containsUrlCharacters) throws UnsupportedEncodingException {",
+  "vulnerable_lines": [
+    509,
+    521
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0315/vulnerable_source.java": "f676d4ece94d7395bcd51427b9f833328d088e9ebb133fdef6066ce9e301e38e",
+    "cases/CASE-0315/patched_source.java": "dfc75b4d5d6ff94b7878d189531e5eb0c732c050c449383dbeb934bc1ec372f9",
+    "cases/CASE-0315/patch.diff": "075dc16bd506e4210ff0fb7bcd61d472e80f8d6abaefcd748de1bb04d4156d37",
+    "cases/CASE-0315/metadata.json": "5521958486da3e915895b61a426264f07c35001b68341d54245b51e83e81323c",
+    "model_context/CASE-0315.json": "0a8d4d36458dca33fc88b4701f3c707845467fb22d7bea47347b581a53a19fe3",
+    "difficulty/CASE-0315.json": "1f5b39f705dc895976a29a2fda52383008806e043dce7a33f6b522616274682c"
+  },
+  "case_level_hash": "60e439771164b8e3377cb35ccac7d2310b24e4ff60a7f961a2a1eae1e21e498d"
+}

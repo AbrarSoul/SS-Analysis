@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0134",
+  "original_source_case_id": "github.com_caronc_apprise_e20fce630d55e4ca9b0a1e325a5fea6997489831",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2021-39229",
+  "cve_ids_all": [
+    "CVE-2021-39229"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "python",
+  "repository": "caronc/apprise",
+  "repository_url": "https://github.com/caronc/apprise",
+  "vulnerable_commit": "81d1ea72bcee4441278a809a95fc0f91dc916402",
+  "fixed_commit": "e20fce630d55e4ca9b0a1e325a5fea6997489831",
+  "changed_file": "apprise/plugins/NotifyIFTTT.py",
+  "changed_function": "def parse_native_url(url):",
+  "vulnerable_lines": [
+    350,
+    372
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0134/vulnerable_source.py": "3d5250dc3942604da0dd3dc59f1c58d7c11ddfef58ab26b1124808b08164452d",
+    "cases/CASE-0134/patched_source.py": "66422cb9cbaa25f7768af076279dfac14321bf4a7a52b14809fcfe5764d8fe78",
+    "cases/CASE-0134/patch.diff": "7095f66fbbbbeed480c08fa1c4db3e39a804371c20dfda7917c4d11baa6c3f83",
+    "cases/CASE-0134/metadata.json": "1398089ccaa3f6ada4f5a349e033a9c7a9a5eaf01091800b13e2e3c42579227c",
+    "model_context/CASE-0134.json": "546b0fd276c3e91ff1821b5d71a4514b5ee37fea1b400a751c15a9c41c4f511d",
+    "difficulty/CASE-0134.json": "76e2af2d52a0c9963fc7c21247a1f0c347a3ed1aa3cee7ade36bd40b854d13b5"
+  },
+  "case_level_hash": "fd60fd2367c4c401bb0f601e58b430c590a0132f403ed01c501ac2d56e821240"
+}

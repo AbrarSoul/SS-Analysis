@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-0086",
+  "original_source_case_id": "github.com_agenticmail_agenticmail_1408de543fa3577d8c2d4fdb289c75fe6faafac7",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-47255",
+  "cve_ids_all": [
+    "CVE-2026-47255"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [],
+  "language": "typescript",
+  "repository": "agenticmail/agenticmail",
+  "repository_url": "https://github.com/agenticmail/agenticmail",
+  "vulnerable_commit": "41dd8153809cabbc9b79aba1b726266af923a1b7",
+  "fixed_commit": "1408de543fa3577d8c2d4fdb289c75fe6faafac7",
+  "changed_file": "packages/api/src/routes/storage.ts",
+  "changed_function": "function extractTableRefs(sql: string): string[] {",
+  "vulnerable_lines": [
+    208,
+    213
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 34,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0086/vulnerable_source.ts": "09a1410067e201d11cbade3bb4da92504e9435fd33fc1a60c1e4bed253215dd8",
+    "cases/CASE-0086/patched_source.ts": "822bb0ad3c31c27943937dfaa5c92515609a65ab2501faad3e77bfe812653f03",
+    "cases/CASE-0086/patch.diff": "701de280cc0f6c50b6aae8b776276b27158d5dde58c74041716c33c57f5a2152",
+    "cases/CASE-0086/metadata.json": "c08554329d135800fe80d9eab254878ee3be667a53ab15f5e6973187d8a95a9b",
+    "model_context/CASE-0086.json": "f370411e923f4e12e67082aa2030f36a11956cf9826ab604d03609ba71ecdfe3",
+    "difficulty/CASE-0086.json": "7de2b5d6dfa16c9c5128de675a2bd4c9630924e8d9657cbcbd8e461b70fb9d03"
+  },
+  "case_level_hash": "5f4623e05374a83bf4402bf567b68b26a4eac0c5b98cc7fb4532d48e79693e8b"
+}

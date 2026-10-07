@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0176",
+  "original_source_case_id": "github.com_indutny_elliptic_856fe4d99fe7b6200556e6400b3bf585b1721bec",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-13822",
+  "cve_ids_all": [
+    "CVE-2020-13822"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-190"
+  ],
+  "language": "javascript",
+  "repository": "indutny/elliptic",
+  "repository_url": "https://github.com/indutny/elliptic",
+  "vulnerable_commit": "60489415e545efdfd3010ae74b9726facbf08ca8",
+  "fixed_commit": "856fe4d99fe7b6200556e6400b3bf585b1721bec",
+  "changed_file": "lib/elliptic/ec/signature.js",
+  "changed_function": "Signature.prototype._importDER = function _importDER(data, enc) {",
+  "vulnerable_lines": [
+    56,
+    92
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 36,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0176/vulnerable_source.js": "42d664f201e77a1b060ccf2f11842c4d399fbba99640d3ccddcc69def096135c",
+    "cases/CASE-0176/patched_source.js": "2640d437e1852a70d1eef14e8ec47248cb6ddced1d52c3b6a904d10195588ffa",
+    "cases/CASE-0176/patch.diff": "ab15148b41447134e3b6d8c49bb4c42579f92e9f995bdff03e61dd1cf4cd36f7",
+    "cases/CASE-0176/metadata.json": "c715d95b5825028807a040b7c742e5ac691d5319e311bf133d158a8413596a41",
+    "model_context/CASE-0176.json": "cbddd6d6f86df2a176abbba8dbde9128b03fba4bb2e10a2316b7d67d4211ffea",
+    "difficulty/CASE-0176.json": "deeefeed17c5616d642c87732b6460c272a2f0c8c5fbf5c771ac74b24c58d5cf"
+  },
+  "case_level_hash": "cb3c034be196308951c50990dad6a2022836922c2045744c908f724b5ed46d2c"
+}

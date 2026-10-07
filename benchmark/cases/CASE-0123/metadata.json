@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0123",
+  "original_source_case_id": "github.com_avwo_whistle_d1b8ca275dc4e453bd2efed392c0fd4b92f73cdf",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-55500",
+  "cve_ids_all": [
+    "CVE-2024-55500"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-352"
+  ],
+  "language": "javascript",
+  "repository": "avwo/whistle",
+  "repository_url": "https://github.com/avwo/whistle",
+  "vulnerable_commit": "ed8002e8265bfbaaf9dbc0c83f7c22d4b775e42d",
+  "fixed_commit": "d1b8ca275dc4e453bd2efed392c0fd4b92f73cdf",
+  "changed_file": "biz/webui/lib/index.js",
+  "changed_function": "function checkAllowOrigin(req) {",
+  "vulnerable_lines": [
+    303,
+    348
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 32,
+  "patch_size_deleted": 39,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0123/vulnerable_source.js": "128f8ff90249d0192719901934aca4a1b1eef08abeabae7b91b43c24fe60f5b0",
+    "cases/CASE-0123/patched_source.js": "4795c3f3d2c1bf177e751c54611cb947aaa326be0cb12319507c72f422c61cc7",
+    "cases/CASE-0123/patch.diff": "3343757695f4fe14cb8ec12b88a19d41f3705dc30bddf1e6a12b0da8921556ca",
+    "cases/CASE-0123/metadata.json": "fd0f5796d17bb918e8ba44c68d16ba9c74f2bc4cbaeb067ada4874c17f2a2cae",
+    "model_context/CASE-0123.json": "1754a84f5e05903cce0e325ca298d76f48da4e93c786cf7fad51f08fbf9bd8c8",
+    "difficulty/CASE-0123.json": "d01299bb6f1e22b1d182f2ce658b32ec938888d8e68d004eb43bfef137d6cbf0"
+  },
+  "case_level_hash": "6126b2ef9b49ef8f096bd58cc7cb5f957273cc873344d102fea173db26d773cb"
+}

@@ -1,0 +1,41 @@
+--- upstream/main.py (ace3c87a)
++++ ours/main.py
+@@ -21,15 +21,25 @@
+         self.git_manager = GitManager(config)
+         self.rule_validator = RuleValidator(config)
+         
+-    def process_patch(self, patch_file: Path) -> Optional[Tuple[dict, PatchInfo]]:
+-        """Process a single patch file with improved rule checking."""
++    def process_patch(self, patch_file: Path, patch_info_override: Optional[PatchInfo] = None) -> Optional[Tuple[dict, PatchInfo]]:
++        """Process a single patch file with improved rule checking.
++
++        patch_info_override: when given (pipeline/case_loader.py's
++        curated-case PatchInfo, carrying real CVE/CWE/function data),
++        used instead of re-deriving a PatchInfo from patch_file's own
++        content/filename -- so the real generation retry loop below (not
++        just a one-off prompt render) uses the enriched data. patch_file
++        is still used for cache-manager bookkeeping (by name) and should
++        be a stable, case-derived path even though its content isn't
++        read in this mode.
++        """
+         # Check if patch has already been processed
+         if self.config.cache_manager.is_patch_processed(patch_file.name):
+             logging.info(f"Skipping already processed patch: {patch_file.name}")
+             return None
+-            
++
+         try:
+-            patch_info = self.patch_processor.process_patch(patch_file)
++            patch_info = patch_info_override or self.patch_processor.process_patch(patch_file)
+             if not patch_info:
+                 self.config.cache_manager.mark_patch_processed(patch_file.name)
+                 logging.warning(f"Failed to process patch file: {patch_file}")
+@@ -73,7 +83,7 @@
+                 
+                 rule = self.llm_client.generate_rule(patch_info, error_msg)
+                 if not rule:
+-                    error_msg = "Failed to generate valid rule structure"
++                    error_msg = self.llm_client.last_error or "Failed to generate valid rule structure"
+                     continue
+                 
+                 is_valid, validation_error = self.rule_validator.validate_rule(

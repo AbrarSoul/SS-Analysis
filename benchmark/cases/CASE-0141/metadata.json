@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0141",
+  "original_source_case_id": "github.com_datasharingframework_dsf_d3ca59b4daccde16a006fedeccce28fd1f826908",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-40942",
+  "cve_ids_all": [
+    "CVE-2026-40942"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-670"
+  ],
+  "language": "java",
+  "repository": "datasharingframework/dsf",
+  "repository_url": "https://github.com/datasharingframework/dsf",
+  "vulnerable_commit": "c43c3b8079ac7786156c20f9423137859669f10a",
+  "fixed_commit": "d3ca59b4daccde16a006fedeccce28fd1f826908",
+  "changed_file": "dsf-bpe/dsf-bpe-server/src/main/java/dev/dsf/bpe/client/oidc/OidcClientWithCache.java",
+  "changed_function": "public DecodedJWT getAccessTokenDecoded(Configuration configuration, Jwks jwks) throws OidcClientException",
+  "vulnerable_lines": [
+    116,
+    130
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0141/vulnerable_source.java": "959beee4412ac41e8256fedfb07a1265e83ec781bc9ed2c9f72528af55994af2",
+    "cases/CASE-0141/patched_source.java": "9fdbc90913e5a0ef140df955a5b460b501f8bb858d2f7c8d369bd1c534af70e4",
+    "cases/CASE-0141/patch.diff": "c5a7898017a642f077812625ae6f0f141253ebfe1744bb1e64a471a277249c79",
+    "cases/CASE-0141/metadata.json": "3de2978dade708b490c1c69e0dd5baa0433c6e5326930542769ce2d6e984cfd2",
+    "model_context/CASE-0141.json": "713534591886089ab53325b98450b76094e12ffcaa6dcfad42d4e2b27cb622af",
+    "difficulty/CASE-0141.json": "255f7a0ae573b13444a54157e179211a48468e77ad992a6ad3afae2bc8fbbbfd"
+  },
+  "case_level_hash": "9ca9cf1d432709ef55e974898c14bb89184bb94a42e739e8419bc79fc51db662"
+}

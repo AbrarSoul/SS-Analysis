@@ -1,0 +1,8 @@
+rules:
+- id: gold-new-buffer-nonliteral
+  message: deprecated new Buffer() applied to a non-literal value
+  severity: ERROR
+  languages: [javascript]
+  patterns:
+    - pattern: new Buffer($X)
+    - pattern-not: new Buffer("...")

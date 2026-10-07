@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0080",
+  "original_source_case_id": "github.com_Yonle_bostr_49181f4ec9ae1472c6675cab56bbc01e723855af",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-41962",
+  "cve_ids_all": [
+    "CVE-2024-41962"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-285",
+    "NVD-CWE-Other"
+  ],
+  "language": "javascript",
+  "repository": "Yonle/bostr",
+  "repository_url": "https://github.com/Yonle/bostr",
+  "vulnerable_commit": "8b131e239b92db889ac5d8fd02bee1d3a035fd9d",
+  "fixed_commit": "49181f4ec9ae1472c6675cab56bbc01e723855af",
+  "changed_file": "auth.js",
+  "changed_function": "module.exports = (authKey, data, ws, req) => {",
+  "vulnerable_lines": [
+    14,
+    45
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0080/vulnerable_source.js": "a79f7896365ad5c4f5e2f6c17cbd78c4b1c838eb572e1ae3e6d1271d4fc4f3f8",
+    "cases/CASE-0080/patched_source.js": "51bc7e3f46151c6f7b31b2bc14137701b56eb5feaf6c245c62457cdf51b8dc05",
+    "cases/CASE-0080/patch.diff": "9daa3fcb70f5e99afdbe0f22b05dfe2a74009c3184f96a7c17e1efc0be70f7fd",
+    "cases/CASE-0080/metadata.json": "efbc218eb4891175ef70a252aa227aad6cc18c5dcbf618b0c4bb08abbaca66e2",
+    "model_context/CASE-0080.json": "cf4e0478001737e29872f41f4108f555078b612730475eaee2ce6e66eef12906",
+    "difficulty/CASE-0080.json": "44556f629e2968cc0905ce60592117734bfd725457c3cea204168274ec36f5ca"
+  },
+  "case_level_hash": "27fd15aeb2c6d4aaede2f53f38568142cad2f0ef0febc76f483559c8adf3e069"
+}

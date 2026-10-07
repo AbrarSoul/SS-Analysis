@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0222",
+  "original_source_case_id": "github.com_mindsdb_mindsdb_083afcf6567cf51aa7d89ea892fd97689919053b",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-38699",
+  "cve_ids_all": [
+    "CVE-2023-38699"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-311"
+  ],
+  "language": "python",
+  "repository": "mindsdb/mindsdb",
+  "repository_url": "https://github.com/mindsdb/mindsdb",
+  "vulnerable_commit": "bc5d275345028a952a78b2a0b6e27957feec6b93",
+  "fixed_commit": "083afcf6567cf51aa7d89ea892fd97689919053b",
+  "changed_file": "mindsdb/integrations/handlers/dremio_handler/dremio_handler.py",
+  "changed_function": "def connect(self) -> dict:",
+  "vulnerable_lines": [
+    56,
+    75
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0222/vulnerable_source.py": "937e53cd77a3ad0a3cd2e89211def65ed8d0c1ffe0365fc50fdaca09151c5b64",
+    "cases/CASE-0222/patched_source.py": "d78b54e5f670149f7f054260ad3db605d0c747d28b2828eecc8f91f0b2a60887",
+    "cases/CASE-0222/patch.diff": "f88cb0e527041e975bc3530c6f3cea8ed5db4b9fda78098b54be0e35dbffc557",
+    "cases/CASE-0222/metadata.json": "98121f69d94d302966b10c6b93a2c30a4a5d7dcc636e54196441e63cbddfdeca",
+    "model_context/CASE-0222.json": "ec05274cfe8cb7a60ea99714e6bdea66e33f28ab288c20cc1ff419e11a18611f",
+    "difficulty/CASE-0222.json": "cc87ff5395ecffb61539117c85ac0a52914165afdac00c24b914058051ad737b"
+  },
+  "case_level_hash": "1378241cbc9384e6c11a19100d65287ff9cd35bfdb85afcb5785a608dced651f"
+}

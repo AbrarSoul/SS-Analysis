@@ -1,0 +1,56 @@
+--- upstream/config.py (ace3c87a)
++++ ours/config.py
+@@ -1,5 +1,6 @@
+ from dataclasses import dataclass, field
+ from pathlib import Path
++from typing import Optional
+ import os
+ from cache_manager import CacheManager
+ 
+@@ -13,6 +14,46 @@
+     max_retries: int = 8
+     openrouter_api_key: str = os.getenv("OPENROUTER_API_KEY")
+     openrouter_base_url: str = "https://openrouter.ai/api/v1"
++    # Despite the field names above (kept as-is to avoid touching every call
++    # site), this project points them at the GPT-Lab OpenAI-compatible API,
++    # not OpenRouter. model_name/generation_temperature default to Autogrep's
++    # original hardcoded values so upstream behavior is unchanged unless a
++    # caller explicitly overrides them (see pipeline/gptlab_config.py).
++    model_name: str = "deepseek/deepseek-chat"
++    generation_temperature: float = 0.6
++    # "autogrep_default": the original, unmodified prompt built into
++    # llm_client.py (long-form, with embedded per-language example rules).
++    # "design_v1": the shorter template specified in the research design
++    # doc's Section 13.2, with vulnerable/patched code shown as separate
++    # clean blocks rather than an interleaved +/- diff. Both are real,
++    # runnable options -- see llm_client.py's _build_prompt().
++    prompt_variant: str = "autogrep_default"
++    # Bounds a single generate_rule() API call. Without this the OpenAI client
++    # has no default timeout and a stalled GPT-Lab host (observed repeatedly
++    # on deepseek-coder:6.7b / GPU-farmi-004, ~10-20 minute hangs with no
++    # forward progress) blocks the whole sequential run indefinitely. 120s is
++    # generous relative to normal observed call latency (single-digit to low
++    # tens of seconds, even for the 32b model) but short enough to bound a
++    # stall to a small multiple of a real call instead of the double-digit
++    # minutes actually observed.
++    request_timeout_seconds: float = 120.0
++    # When set, GitManager clones each repository ONCE into this shared
++    # location (across every model/prompt run that uses this Config), and
++    # gives each run its own `git worktree` checkout under repos_cache_dir
++    # instead of a full independent clone. Cuts repo storage roughly in
++    # proportion to the number of models sharing this directory, since the
++    # expensive part (full commit history/objects) is downloaded once, not
++    # once per model. None preserves the original behavior (clone directly
++    # into repos_cache_dir) -- used by pipeline/tests/, which doesn't need
++    # cross-run sharing. See GitManager.prepare_repo().
++    shared_repos_cache_dir: Optional[Path] = None
++    # Design doc Section 13.3's primary deterministic configuration pins this at 2048. Previously specified
++    # but never actually sent to the API (generate_rule()'s chat.completions.create() call had no max_tokens
++    # argument at all -- an unbounded response was possible on every call). None preserves the original
++    # Autogrep behavior (no cap) for pipeline/tests/'s raw-.patch-file smoke tests, which predate this value
++    # and don't need to match the frozen research configuration. Found and fixed in the Section 30
++    # preregistration audit, Implementation Log Section 12.25.
++    max_output_tokens: Optional[int] = None
+     cache_manager: CacheManager = field(init=False)
+ 
+     def __post_init__(self):

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0244",
+  "original_source_case_id": "github.com_opencast_opencast_b157e1fb3b35991ca7bf59f0730329fbe7ce82e8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-5206",
+  "cve_ids_all": [
+    "CVE-2020-5206"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-285",
+    "CWE-287"
+  ],
+  "language": "java",
+  "repository": "opencast/opencast",
+  "repository_url": "https://github.com/opencast/opencast",
+  "vulnerable_commit": "1a7172c95af8d542a77ae5b153e4c834dd4788a6",
+  "fixed_commit": "b157e1fb3b35991ca7bf59f0730329fbe7ce82e8",
+  "changed_file": "modules/kernel/src/main/java/org/opencastproject/kernel/security/SecurityServiceSpringImpl.java",
+  "changed_function": "public User getUser() throws IllegalStateException {",
+  "vulnerable_lines": [
+    90,
+    148
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 10,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0244/vulnerable_source.java": "14648469ff46de7e8a551e3bf79f72b37176d61dd4401c3a73d13201e7dff087",
+    "cases/CASE-0244/patched_source.java": "6146c0951072a938ac7e5058ab332e2343fd5ec69a860a59f7ff6fc6ef049d3c",
+    "cases/CASE-0244/patch.diff": "f56e83907346c99be582d5bd1e28b2e3b226bc09b7396eeab8d74a4382750c82",
+    "cases/CASE-0244/metadata.json": "935fa2ee37595e22100bc933477ce6b3812b90027c92f60f05065691cd9dcf92",
+    "model_context/CASE-0244.json": "0730519c12efd57d4ba3f0baf0719e968ee144deb4f8a573ea585783096511a4",
+    "difficulty/CASE-0244.json": "ad034eea57e8aa9cb4d56d9dce6bcbd777edc8a7cb82aa581ac6b945948a90f3"
+  },
+  "case_level_hash": "5f26c5a915bfbbab9952c0e9f3a06a0e5cd2e9d283ae67c9793b5938cefdfe2b"
+}

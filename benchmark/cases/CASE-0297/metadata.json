@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0297",
+  "original_source_case_id": "github.com_spring-projects_spring-session_c98a7be0e2ced7f795018f05397dca4bd5ca8212",
+  "selection_batch": "topup27",
+  "cve_id": "CVE-2023-20866",
+  "cve_ids_all": [
+    "CVE-2023-20866"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "spring-projects/spring-session",
+  "repository_url": "https://github.com/spring-projects/spring-session",
+  "vulnerable_commit": "8f9c69ea02748a32188c3ea581d01dc5acebbd8e",
+  "fixed_commit": "c98a7be0e2ced7f795018f05397dca4bd5ca8212",
+  "changed_file": "spring-session-core/src/main/java/org/springframework/session/web/http/HeaderHttpSessionIdResolver.java",
+  "changed_function": "public List<String> resolveSessionIds(HttpServletRequest request) {",
+  "vulnerable_lines": [
+    99,
+    103
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0297/vulnerable_source.java": "e75d496d4e9b308a114f8433a5528d494bc66d3d65b960b9f6c9114b61bc60b2",
+    "cases/CASE-0297/patched_source.java": "8a496ace21e0df0a293c31d6cb619847117b3578506605bd2e419c3351401bed",
+    "cases/CASE-0297/patch.diff": "324908f883a46bf2931bbcd2407480d74e01c5916f69af3ed748454ec8dcd3af",
+    "cases/CASE-0297/metadata.json": "944d11a865c1994ef127b2afbecc5f24055df7132e4a075ea14c495abb8832a0",
+    "model_context/CASE-0297.json": "5baab53532d506573a8f375ac7150ab6cbb651d20f30e1688c75a50159e1c874",
+    "difficulty/CASE-0297.json": "920bedfb940bfb7b3c8905faa291a8558307d835831c173c51980349dee8ba71"
+  },
+  "case_level_hash": "3f9b69a96948ca9731eff43c8a62f1c0932be096b17c114abe5e64529d2654c6"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0104",
+  "original_source_case_id": "github.com_apache_hadoop_8c2836402fbb2f619f1fef4ef625a8542e853a64",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-23454",
+  "cve_ids_all": [
+    "CVE-2024-23454"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-378"
+  ],
+  "language": "java",
+  "repository": "apache/hadoop",
+  "repository_url": "https://github.com/apache/hadoop",
+  "vulnerable_commit": "5e30d28d7e524dd3eed179d81c38e2eb82ae4673",
+  "fixed_commit": "8c2836402fbb2f619f1fef4ef625a8542e853a64",
+  "changed_file": "hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/RunJar.java",
+  "changed_function": "public void run(String[] args) throws Throwable {",
+  "vulnerable_lines": [
+    244,
+    332
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 7,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0104/vulnerable_source.java": "46b5b41e379e7886b1386e2af6d96da015bfdd62bbea1e78974dcce8f276a564",
+    "cases/CASE-0104/patched_source.java": "bd6449c6f7d72a262c5fb72adb3cb5914b81ab5c0d44e460470b7cb43bf009ea",
+    "cases/CASE-0104/patch.diff": "306b387037174edea4fc856dc404de4ef13973d031c52ba4816b7131d006694f",
+    "cases/CASE-0104/metadata.json": "cc38e8ce760545dea36540e2b96cc8c17a14f6603aeea1362f40254d20cf85b4",
+    "model_context/CASE-0104.json": "bbe027b66d33a58a040ac01d6f7ede432fc97c99e948e1cff40483e0b88b2294",
+    "difficulty/CASE-0104.json": "269ae7d67867d8feeb0964824a4b8d27c812fbf5c0555c66ae52e8df2a950a17"
+  },
+  "case_level_hash": "caf4a66ac4263dbaf91dfc14c49cac3a9dea41be78e6318b6de6f048befd2b0b"
+}

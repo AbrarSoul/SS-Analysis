@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0324",
+  "original_source_case_id": "github.com_wagtail_wagtail_3c030490ed575bb9cd01dfb3a890477dcaeb2edf",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-11037",
+  "cve_ids_all": [
+    "CVE-2020-11037"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-208",
+    "CWE-362"
+  ],
+  "language": "python",
+  "repository": "wagtail/wagtail",
+  "repository_url": "https://github.com/wagtail/wagtail",
+  "vulnerable_commit": "baa4accbd0c2c5bbeab38b9d30341f18e5b3a19a",
+  "fixed_commit": "3c030490ed575bb9cd01dfb3a890477dcaeb2edf",
+  "changed_file": "wagtail/core/forms.py",
+  "changed_function": "def clean_password(self):",
+  "vulnerable_lines": [
+    14,
+    20
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0324/vulnerable_source.py": "f98f58297f77378182eff8097842a384bf04e3324d79a7b84a35c5876cc33827",
+    "cases/CASE-0324/patched_source.py": "a4329755cca4dcdefef67166866e49ab07bdf217de473e2b76b7327ab8472fdd",
+    "cases/CASE-0324/patch.diff": "920b78fe23c9bad905a84db21112a4a56e3422f74cf9e8d7bb6a0059ba393a4f",
+    "cases/CASE-0324/metadata.json": "176c708887785dfae9c2ba4887d2dba3ba64973d759b480f9858f94aadd46594",
+    "model_context/CASE-0324.json": "5912a21c0362aa752defb6bef2439134be4e3c62d7fd7b8c4229a498d3496dfc",
+    "difficulty/CASE-0324.json": "cc12c513e1c6b074d4cf305c40ec11f71c073901a50b94789d7e9b72603abe5b"
+  },
+  "case_level_hash": "a624baae7941f243c4d6ec87fc493229ef692f3eac60d2a1c679039609049bfc"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0059",
+  "original_source_case_id": "github.com_LibrIT_passhport_366b03f607729c4538e91b634ecc57c8398522a1",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-3027",
+  "cve_ids_all": [
+    "CVE-2021-3027"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "python",
+  "repository": "LibrIT/passhport",
+  "repository_url": "https://github.com/LibrIT/passhport",
+  "vulnerable_commit": "ca8c1c248daa10e2d9ef6ee7919ac707c7a5b6bc",
+  "fixed_commit": "366b03f607729c4538e91b634ecc57c8398522a1",
+  "changed_file": "passhportd/app/views_mod/user/user.py",
+  "changed_function": "def useruid(s, login):",
+  "vulnerable_lines": [
+    19,
+    44
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0059/vulnerable_source.py": "d1337ca960e58ed44d41c1d51965a0fa930acc72f9eaf3ba453a5d4abf688357",
+    "cases/CASE-0059/patched_source.py": "61cf1a62fd6f3f96bea51a52409a32e3416b41ef6160be360d075455a9853752",
+    "cases/CASE-0059/patch.diff": "ca0dda44323680912a2d1eac5293d818264adc3e89f2b97379274f68b8f40668",
+    "cases/CASE-0059/metadata.json": "479a7c5d49bc856ea99202e16ec422622230ce53e32606796641f52e1ee3673a",
+    "model_context/CASE-0059.json": "09a8534d51ce2e914659978c87b938d33ef3724933bfdafe43d97e21153ec75a",
+    "difficulty/CASE-0059.json": "be94c0a5a7bb79ec43c40f56bc0c2661cd3fb672d337b3b81b41b098a0845bd2"
+  },
+  "case_level_hash": "9e1505d0346fde6d2fdf1104c6e84546d472c1e5d803843aa00f9a0d88f73662"
+}

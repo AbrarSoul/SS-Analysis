@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0255",
+  "original_source_case_id": "github.com_patriksimek_vm2_d534e5785f38307b70d3aac1945260a261a94d50",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-29017",
+  "cve_ids_all": [
+    "CVE-2023-29017"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-913"
+  ],
+  "language": "javascript",
+  "repository": "patriksimek/vm2",
+  "repository_url": "https://github.com/patriksimek/vm2",
+  "vulnerable_commit": "e541782b7ff709c07676d07d982517d0591e5774",
+  "fixed_commit": "d534e5785f38307b70d3aac1945260a261a94d50",
+  "changed_file": "lib/setup-sandbox.js",
+  "changed_function": "const newWrapped = (error, sst) => {",
+  "vulnerable_lines": [
+    278,
+    288
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 21,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0255/vulnerable_source.js": "eba2f94f002d7060ba92bb49a0dfa81cde7ffb958eaf32665f7659fa907eded8",
+    "cases/CASE-0255/patched_source.js": "06800f12286dc72822ca5ec9111c2739fef5f17064e6b58add39aea1a54bd99d",
+    "cases/CASE-0255/patch.diff": "35fdd52c339f0546f4a9895e0397af31206ba419e4a208342fb80f765a16f7f6",
+    "cases/CASE-0255/metadata.json": "e51b14db8995e73ac860ba43ff0353428b4bda47eb48cb4c1d077f6712b57a5f",
+    "model_context/CASE-0255.json": "e08a607673d5f8fab82a4381ee592ea17ac3dd542183f8f9d196ed35197fa654",
+    "difficulty/CASE-0255.json": "995f72abe56eb6abc18bfc52508083f27e774bba745c0623648351c7c1bbd58d"
+  },
+  "case_level_hash": "6c9d662371be1faf13f9b52048e673a4da7a456bd3233e93d4b92d9105975c78"
+}

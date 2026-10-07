@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0202",
+  "original_source_case_id": "github.com_jonschlinkert_assign-deep_19953a8c089b0328c470acaaaf6accdfcb34da11",
+  "selection_batch": "final",
+  "cve_id": "CVE-2018-3720",
+  "cve_ids_all": [
+    "CVE-2018-3720"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-471",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "jonschlinkert/assign-deep",
+  "repository_url": "https://github.com/jonschlinkert/assign-deep",
+  "vulnerable_commit": "f6cba02d11a1d293593be0e942aff60bfd5a5711",
+  "fixed_commit": "19953a8c089b0328c470acaaaf6accdfcb34da11",
+  "changed_file": "index.js",
+  "changed_function": "function extend(target, obj) {",
+  "vulnerable_lines": [
+    36,
+    53
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0202/vulnerable_source.js": "9eddd47c5747562a016f64f92fff9ff9ca0efe6c357cbe8589e67de01366ba44",
+    "cases/CASE-0202/patched_source.js": "12710bc9587032b203b67e9927a13ae183f048eab3696b287812cd8502ddb98a",
+    "cases/CASE-0202/patch.diff": "4a5158d72e6530096598a52f69a8c6fad16bf3fe13b5dd1b2d3dea942ce5550f",
+    "cases/CASE-0202/metadata.json": "19ea242396b58bc4ac26a0bc774b6ed45a27de2cb347e12341ac542545c09d86",
+    "model_context/CASE-0202.json": "bb79efb7fb086e4bc5dff7c39ab965a2996337650567b2becad9c33b7d6d49bf",
+    "difficulty/CASE-0202.json": "7756ecf371ac6e94a5b562053c49d187e15efc3cc5491247e1cea6b60063d427"
+  },
+  "case_level_hash": "a328accf32c3e058011c62d1084864888a050ea23c87c3d83c046b4400767175"
+}

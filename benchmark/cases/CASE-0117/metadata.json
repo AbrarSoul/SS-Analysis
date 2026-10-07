@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0117",
+  "original_source_case_id": "github.com_apache_thrift_80184ddca4d4f60ac657bd82b2abc47269814f79",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-43870",
+  "cve_ids_all": [
+    "CVE-2026-43870"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-113",
+    "CWE-22",
+    "CWE-346",
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "apache/thrift",
+  "repository_url": "https://github.com/apache/thrift",
+  "vulnerable_commit": "158edaa9606772763f0089a3a1a5d9891d8b458b",
+  "fixed_commit": "80184ddca4d4f60ac657bd82b2abc47269814f79",
+  "changed_file": "lib/nodejs/lib/thrift/web_server.js",
+  "changed_function": ")",
+  "vulnerable_lines": [
+    544,
+    608
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 25,
+  "patch_size_deleted": 9,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0117/vulnerable_source.js": "12abdc0f307a1dd0d9231a818d614dcc958fa47ceca62f3dd4a0f1a0c67aaeb7",
+    "cases/CASE-0117/patched_source.js": "a09560e49bbde858f2bd893d7e3f679a5363d544c10ad60d8d0bcf124b381c53",
+    "cases/CASE-0117/patch.diff": "26cf9ba966d532e6d84c7ef8b06e48b1d4a634209632f56940fe2bc02a2bf80b",
+    "cases/CASE-0117/metadata.json": "96511d03756747c43da419353292dd222c201bdc8a3907b64f9419715c63006b",
+    "model_context/CASE-0117.json": "2007b3aa79eb775756ffd2c9b0c0ac6fe342c65fe7744fee282ec4d7d783957f",
+    "difficulty/CASE-0117.json": "099972425a38c180c6f468e7094332b0f8cd50b4a6ef905ea4a0d24aae6d623b"
+  },
+  "case_level_hash": "304fbc1fdef3cf8ac3cb2aa2906fa28d4952e2162d9a42f8db365002f6208bd4"
+}

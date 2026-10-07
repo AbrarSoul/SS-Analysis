@@ -1,0 +1,6 @@
+rules:
+- id: gold-and-returns-nonbool
+  message: return x and x == y can return a non-boolean falsy value
+  severity: ERROR
+  languages: [python]
+  pattern: return $X and $X == $Y

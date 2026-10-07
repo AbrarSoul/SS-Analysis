@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0283",
+  "original_source_case_id": "github.com_sebhildebrandt_systeminformation_bad372e654cdd549e7d786acbba0035ded54c607",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-26300",
+  "cve_ids_all": [
+    "CVE-2020-26300"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-78"
+  ],
+  "language": "javascript",
+  "repository": "sebhildebrandt/systeminformation",
+  "repository_url": "https://github.com/sebhildebrandt/systeminformation",
+  "vulnerable_commit": "147550532ab11cac4b609844a519a1d945f5c103",
+  "fixed_commit": "bad372e654cdd549e7d786acbba0035ded54c607",
+  "changed_file": "lib/util.js",
+  "changed_function": "function sanitizeShellString(str) {",
+  "vulnerable_lines": [
+    488,
+    507
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0283/vulnerable_source.js": "2899ca4a4435059853e4dcd8ae16db69be746359da9cdf50edff718e222281c3",
+    "cases/CASE-0283/patched_source.js": "d59d8981375e4a8dc38f3651aa85c5bc95771f85a507bf1f56646a0718b4a054",
+    "cases/CASE-0283/patch.diff": "b2e36b3f5b4dae6f220be71d97eafb56474fc0bc29f856d3f32291ddd0d214db",
+    "cases/CASE-0283/metadata.json": "e6e79776a3640f7d78a5e553821d6b2521216b405b5f87596328ee5a7786ec34",
+    "model_context/CASE-0283.json": "2dbd73e9f67d5890a3669da855db9e6002f21eaa9197eeb47e6e988cea6a2eb1",
+    "difficulty/CASE-0283.json": "1692b7bf072cf8da792d9cf1bc8250dd5dc62cf259871729c2063a0d9d40f921"
+  },
+  "case_level_hash": "72b303978ebf03f78eb7e3b03cc1268b6d34080ddeba9a6a85d5bc3d1ff093a9"
+}

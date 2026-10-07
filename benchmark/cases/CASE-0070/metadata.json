@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0070",
+  "original_source_case_id": "github.com_OpenRefine_OpenRefine_8060477fa53842ebabf43b63e039745932fa629d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-47880",
+  "cve_ids_all": [
+    "CVE-2024-47880"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-348",
+    "CWE-79"
+  ],
+  "language": "java",
+  "repository": "OpenRefine/OpenRefine",
+  "repository_url": "https://github.com/OpenRefine/OpenRefine",
+  "vulnerable_commit": "10bf0874d67f1018a58b3732332d76b840192fea",
+  "fixed_commit": "8060477fa53842ebabf43b63e039745932fa629d",
+  "changed_file": "main/src/com/google/refine/commands/project/ExportRowsCommand.java",
+  "changed_function": "public void doPost(HttpServletRequest request, HttpServletResponse response)",
+  "vulnerable_lines": [
+    87,
+    165
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0070/vulnerable_source.java": "cfa421327617c73dd937bf12bd255f433f92b49a357e2f782c5bd790e36ec31e",
+    "cases/CASE-0070/patched_source.java": "c7f79cd2bff193be3cee0657ffbcdcb740ee76d28916cd579ebf4cc96df16723",
+    "cases/CASE-0070/patch.diff": "ef5bcee76fced83fa15b168ab4d56ee528a830181a14d7491d9681c5bc2a5cb4",
+    "cases/CASE-0070/metadata.json": "fe4f4402001a6fdd04ad935b2846987f9e5d77bcad0f92bf9a9597ca1f2de206",
+    "model_context/CASE-0070.json": "c6ee8a36121c621eb0b22d543227431e9ce3788040b94e6cfe63bf99a7e537a7",
+    "difficulty/CASE-0070.json": "80c93c53d28c8a85230246e6f7a225759d74d558027a467be8f738349af331a7"
+  },
+  "case_level_hash": "d2e0dedd83066af3597f022f3e5f27630efa07133371ad60c27584370ecec3e3"
+}

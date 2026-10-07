@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0193",
+  "original_source_case_id": "github.com_jenkinsci_semantic-versioning-plugin_8df2fabd7d7396ae29c374914d1357744d3e454f",
+  "selection_batch": "topup16",
+  "cve_id": "CVE-2023-24430",
+  "cve_ids_all": [
+    "CVE-2023-24430"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-611"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/semantic-versioning-plugin",
+  "repository_url": "https://github.com/jenkinsci/semantic-versioning-plugin",
+  "vulnerable_commit": "c67a89822f86a7d10498ea2783b833052b719086",
+  "fixed_commit": "8df2fabd7d7396ae29c374914d1357744d3e454f",
+  "changed_file": "src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java",
+  "changed_function": "public Document invoke(File pom, VirtualChannel channel)",
+  "vulnerable_lines": [
+    92,
+    106
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0193/vulnerable_source.java": "e0c2b25eb5d9140bf1d14b2ca47b52be4576712a8e3bee743425e07e13f894b0",
+    "cases/CASE-0193/patched_source.java": "d85c426ef727e8aa497924543de8773bc3285fb35d04d517d989411be5b3b671",
+    "cases/CASE-0193/patch.diff": "36869b6163e8d62ca83c96813783593e64afcaae6e08525bb5eea8a18feb423c",
+    "cases/CASE-0193/metadata.json": "08d634f303040d437799ccd23967c055557f032d7bb16beeee4233c5b63586bd",
+    "model_context/CASE-0193.json": "c856a0c358ee1e75701bbe7e1a1ae6c36f2cfd9995b647dc1b16141850341af1",
+    "difficulty/CASE-0193.json": "9dcbee3f449266dcb5f8cde3d20545bd4d72c6c34cf67e988d78ad5907f0ad0c"
+  },
+  "case_level_hash": "0d1b3f5e95a2baf03b26266d4e990ca415ca5e9e60f8c6540ecac88b1c1a2c98"
+}

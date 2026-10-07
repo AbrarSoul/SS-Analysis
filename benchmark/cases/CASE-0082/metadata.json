@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0082",
+  "original_source_case_id": "github.com_absolunet_kafe_c644c798bfcdc1b0bbb1f0ca59e2e2664ff3fdd0",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-7761",
+  "cve_ids_all": [
+    "CVE-2020-7761"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "javascript",
+  "repository": "absolunet/kafe",
+  "repository_url": "https://github.com/absolunet/kafe",
+  "vulnerable_commit": "23a7af9bee56dd95600505ee1a14fbcc2abe54c6",
+  "fixed_commit": "c644c798bfcdc1b0bbb1f0ca59e2e2664ff3fdd0",
+  "changed_file": "src/kafe/string-validate.js",
+  "changed_function": "validate.isEmail = function(str) {",
+  "vulnerable_lines": [
+    46,
+    50
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0082/vulnerable_source.js": "629a0ce76c580a1e6a67b88039733defac7b5bc7cb149d3e63f2fa041fd3599b",
+    "cases/CASE-0082/patched_source.js": "85861b5d7442acccd806012f010e61e76ef8c703d19a0c330ee5252b71a07dbd",
+    "cases/CASE-0082/patch.diff": "7de71af5724d89bc6b9b816f65e761a794e2abbcb250c1afdfacac0f18a9952b",
+    "cases/CASE-0082/metadata.json": "3cb530bbd0f787ca55703df6d741c841a0b2e400708acbd6e04959b03db7133a",
+    "model_context/CASE-0082.json": "8b5e8e6c22fc562f8048678c8619b56c2820573cfe6d35ac8120cf854f9abd50",
+    "difficulty/CASE-0082.json": "a432e6e9adca4fe9c10f1e94e255e904663287d62c60a901831ce47764b32e18"
+  },
+  "case_level_hash": "5e00ae58bc12a2acc1f3dc10d40debb61c66cb8090d187b542d0011b7e5996c6"
+}

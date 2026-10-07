@@ -1,0 +1,63 @@
+diff --git a/server-simple.mjs b/server-simple.mjs
+index 773eb0b..d73e1c2 100755
+--- a/server-simple.mjs
++++ b/server-simple.mjs
+@@ -18,11 +18,12 @@ import { createRequire } from 'module';
+ const require = createRequire(import.meta.url);
+ 
+ // Required libraries
+-const { spawn, exec } = require('child_process');
++const { spawn, exec, execFile } = require('child_process');
+ const { promisify } = require('util');
+ const sshConfig = require('ssh-config');
+ 
+ const execAsync = promisify(exec);
++const execFileAsync = promisify(execFile);
+ 
+ // Silent mode for MCP clients - disable debug output when used as MCP server
+ const SILENT_MODE = process.env.MCP_SILENT === 'true' || process.argv.includes('--silent');
+@@ -167,11 +168,10 @@ class SSHClient {
+ 
+   async runRemoteCommand(hostAlias, command) {
+     try {
+-      // Use local ssh command - much simpler and more reliable
+-      const sshCommand = `ssh "${hostAlias}" "${command.replace(/"/g, '\\"')}"`;
+-      debugLog(`Executing: ${sshCommand}\n`);
++      // Use execFile for security - prevents command injection
++      debugLog(`Executing: ssh ${hostAlias} ${command}\n`);
+       
+-      const { stdout, stderr } = await execAsync(sshCommand, {
++      const { stdout, stderr } = await execFileAsync('ssh', [hostAlias, command], {
+         timeout: 30000, // 30 second timeout
+         maxBuffer: 1024 * 1024 * 10 // 10MB buffer
+       });
+@@ -217,10 +217,11 @@ class SSHClient {
+ 
+   async uploadFile(hostAlias, localPath, remotePath) {
+     try {
+-      const scpCommand = `scp "${localPath}" "${hostAlias}:${remotePath}"`;
+-      debugLog(`Executing: ${scpCommand}\n`);
++      debugLog(`Executing: scp ${localPath} ${hostAlias}:${remotePath}\n`);
+       
+-      await execAsync(scpCommand, { timeout: 60000 }); // 60 second timeout for file transfer
++      await execFileAsync('scp', [localPath, `${hostAlias}:${remotePath}`], { 
++        timeout: 60000 // 60 second timeout for file transfer
++      });
+       return true;
+     } catch (error) {
+       debugLog(`Error uploading file to ${hostAlias}: ${error.message}\n`);
+@@ -230,10 +231,11 @@ class SSHClient {
+ 
+   async downloadFile(hostAlias, remotePath, localPath) {
+     try {
+-      const scpCommand = `scp "${hostAlias}:${remotePath}" "${localPath}"`;
+-      debugLog(`Executing: ${scpCommand}\n`);
++      debugLog(`Executing: scp ${hostAlias}:${remotePath} ${localPath}\n`);
+       
+-      await execAsync(scpCommand, { timeout: 60000 }); // 60 second timeout for file transfer
++      await execFileAsync('scp', [`${hostAlias}:${remotePath}`, localPath], { 
++        timeout: 60000 // 60 second timeout for file transfer
++      });
+       return true;
+     } catch (error) {
+       debugLog(`Error downloading file from ${hostAlias}: ${error.message}\n`);

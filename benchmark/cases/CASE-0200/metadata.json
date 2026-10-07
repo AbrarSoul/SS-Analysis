@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0200",
+  "original_source_case_id": "github.com_jitsi_jitsi_8aa7be58522f4264078d54752aae5483bfd854b2",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-43550",
+  "cve_ids_all": [
+    "CVE-2022-43550"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-77",
+    "CWE-78"
+  ],
+  "language": "java",
+  "repository": "jitsi/jitsi",
+  "repository_url": "https://github.com/jitsi/jitsi",
+  "vulnerable_commit": "08fd0a8ee531c07cab3526405d69d79659a1b087",
+  "fixed_commit": "8aa7be58522f4264078d54752aae5483bfd854b2",
+  "changed_file": "modules/service/browserlauncher/src/main/java/net/java/sip/communicator/impl/browserlauncher/BrowserLauncherImpl.java",
+  "changed_function": "public void openURL(final String url)",
+  "vulnerable_lines": [
+    141,
+    161
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0200/vulnerable_source.java": "c8141fc260f399a5e0d5daa7362417b74ded717d33e1ac3a9abfba84643a7119",
+    "cases/CASE-0200/patched_source.java": "58cd33052047fc63e01e42dac455b12c75cc965867e12288ef0b88753f114a17",
+    "cases/CASE-0200/patch.diff": "493a1aaf96206fb97c8c9abe00a139c68f6585056ffb3cacd2813ce8c337633a",
+    "cases/CASE-0200/metadata.json": "1af3891dc73d1de5a7ddca7b43331a3e6ceac86d02fef9541fa631f2d8d803c1",
+    "model_context/CASE-0200.json": "73a95e716fe032a5520dc0286d5e1e9f4e4468bb510ec2f0f1ea21200913b6af",
+    "difficulty/CASE-0200.json": "d9eba14bfbbc1ab614b631f7da14be3cccc3c5373e8fd82a5c33767c52f77790"
+  },
+  "case_level_hash": "fd935f3b34c1387cb03aee118e7f9cce0d533691b6f3355460b417a05c09a4dc"
+}

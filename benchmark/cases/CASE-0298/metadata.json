@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0298",
+  "original_source_case_id": "github.com_streetwriters_notesnook_e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7",
+  "selection_batch": "topup24",
+  "cve_id": "CVE-2026-31876",
+  "cve_ids_all": [
+    "CVE-2026-31876"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "typescript",
+  "repository": "streetwriters/notesnook",
+  "repository_url": "https://github.com/streetwriters/notesnook",
+  "vulnerable_commit": "d44792d132ed60b93a98b41c527d729fee4aae67",
+  "fixed_commit": "e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7",
+  "changed_file": "packages/editor/src/extensions/embed/component.tsx",
+  "changed_function": "function tweetToEmbed(src: string, isDarkTheme: boolean) {",
+  "vulnerable_lines": [
+    207,
+    212
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 7,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0298/vulnerable_source.ts": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+    "cases/CASE-0298/patched_source.ts": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37",
+    "cases/CASE-0298/patch.diff": "07f052d85944a81b9b9ca90fbefc82245b43ac762ec057d2062dcf62eaf16c9b",
+    "cases/CASE-0298/metadata.json": "47227b3e6d995907195534663a09d9d085f0cf3ce59ce0da26a48c4a2251dd25",
+    "model_context/CASE-0298.json": "a465847a2fc33ca9e970d6ba924f0d249d23b50c3c08455ac12d9f085a3768d0",
+    "difficulty/CASE-0298.json": "c20524aa70b85b18396911f8c26eb3367a28c28d6880ed3e57139c4a88aa7f48"
+  },
+  "case_level_hash": "493ad0e84c070776d36cac5288a58c342155edb233909c6af4f36de3ae0896f8"
+}

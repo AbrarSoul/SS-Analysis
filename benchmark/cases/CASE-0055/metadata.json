@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0055",
+  "original_source_case_id": "github.com_Josh-XT_AGiXT_2079ea5a88fa671a921bf0b5eba887a5a1b73d5f",
+  "selection_batch": "topup4",
+  "cve_id": "CVE-2026-39981",
+  "cve_ids_all": [
+    "CVE-2026-39981"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "Josh-XT/AGiXT",
+  "repository_url": "https://github.com/Josh-XT/AGiXT",
+  "vulnerable_commit": "872f519fcc75eb574d717ea10ca91fc089718ffe",
+  "fixed_commit": "2079ea5a88fa671a921bf0b5eba887a5a1b73d5f",
+  "changed_file": "agixt/extensions/essential_abilities.py",
+  "changed_function": "def safe_join(self, paths) -> str:",
+  "vulnerable_lines": [
+    424,
+    442
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0055/vulnerable_source.py": "494ae4efa35cf7b67c2a99923c1a16e4283b070c21de3416617746444133bf74",
+    "cases/CASE-0055/patched_source.py": "218950e0dbd5fdd401cbc467daaba5c51899210a01d03fb5a9c1ff986e24e95b",
+    "cases/CASE-0055/patch.diff": "e53038824fd69f34cf382fb494951a2703f85e1861a79cbd01493f931b5450d1",
+    "cases/CASE-0055/metadata.json": "8fee8f7b08f5a07ed7fae4c0044f1cffa601896d9cf182a2fd5d7d4049104c7a",
+    "model_context/CASE-0055.json": "86ac7666d0e09448b51f9b9f3de9663f613a280402c0b9e58b3ed53c3adc5472",
+    "difficulty/CASE-0055.json": "54494536294dfeb155bed6d88bfa4869ab59cab4d41d71731e07cfc38157ba70"
+  },
+  "case_level_hash": "c0cd105bbec2b7874bd7523c342643c2a5b74cb1d1d01dfc8b0212babd04ee71"
+}

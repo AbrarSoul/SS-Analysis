@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0227",
+  "original_source_case_id": "github.com_mintplex-labs_anything-llm_e208074ef4c240fe03e4147ab097ec3b52b97619",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-5211",
+  "cve_ids_all": [
+    "CVE-2024-5211"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-29"
+  ],
+  "language": "javascript",
+  "repository": "mintplex-labs/anything-llm",
+  "repository_url": "https://github.com/mintplex-labs/anything-llm",
+  "vulnerable_commit": "e2439c6d4c3cfdacd96cd1b7b92d1f89c3cc8459",
+  "fixed_commit": "e208074ef4c240fe03e4147ab097ec3b52b97619",
+  "changed_file": "collector/utils/files/index.js",
+  "changed_function": "function normalizePath(filepath = \"\") {",
+  "vulnerable_lines": [
+    123,
+    130
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0227/vulnerable_source.js": "0615add992607e46201bf6ff963ce41e8ddcf6a1269e138dd5e56a9d9c82bb7d",
+    "cases/CASE-0227/patched_source.js": "9a9bfc9cb60729599bc982a61f183f39cfe7b122f25a947818198ec0c53f1a94",
+    "cases/CASE-0227/patch.diff": "91bd562f3c7ac8d1a16b2b4abc19a61893008fe316f6f3e67305b0201866e2e8",
+    "cases/CASE-0227/metadata.json": "d248b3932957e3e9e793b0a79e75f6e1514109c6eba59bf9dbc30b2936233af1",
+    "model_context/CASE-0227.json": "df01155c42e101f0e31fcfaf2314eb6eec7359df76788f7aab9dc7169ff90e50",
+    "difficulty/CASE-0227.json": "86f4d487a1cd0aee3acac5cd7ab3c64fa54de969f2c2fc1faf41d10d2b7fbf8a"
+  },
+  "case_level_hash": "8a004e37fde017323757365c73fb4faba961ad20d16bc29ed68e6df2423d63a7"
+}

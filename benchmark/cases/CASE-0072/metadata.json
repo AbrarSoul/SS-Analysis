@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0072",
+  "original_source_case_id": "github.com_PerfreeBlog_PerfreeBlog_103c79165e3a41a1729188fdc8a1e90c97c0a06d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-60319",
+  "cve_ids_all": [
+    "CVE-2025-60319"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "java",
+  "repository": "PerfreeBlog/PerfreeBlog",
+  "repository_url": "https://github.com/PerfreeBlog/PerfreeBlog",
+  "vulnerable_commit": "33ed859c7ad887eeb3a33bf18ec213b5001dc9e3",
+  "fixed_commit": "103c79165e3a41a1729188fdc8a1e90c97c0a06d",
+  "changed_file": "perfree-system/perfree-system-biz/src/main/java/com/perfree/controller/auth/attach/AttachController.java",
+  "changed_function": "public CommonResult<AttachByUrlRespVO> uploadAttachByUrl(@Valid @RequestBody AttachUploadByUrlVO attachUploadByUrlVO) {",
+  "vulnerable_lines": [
+    90,
+    95
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0072/vulnerable_source.java": "ed78dd959a06143bac5f98c347fb01d0e09d4857440ef3a117ef9539ab86eb42",
+    "cases/CASE-0072/patched_source.java": "0698e1f9d75404285d8a7d672c46c89963fea29e766201ebfc538cefa28f996b",
+    "cases/CASE-0072/patch.diff": "61a4a4d4ce8c680c26aeccb1cb3df5b9185ed982245cf39d98f3d037f7c3bcc5",
+    "cases/CASE-0072/metadata.json": "68c4d41b196ce98285042834dd852fbb09c8ab828e41fd9e9b4ed29bf205eeb2",
+    "model_context/CASE-0072.json": "6ce26fb819fb832f6f3503692a994c42d603519259404f310b7f35d6ef0b4f22",
+    "difficulty/CASE-0072.json": "b9a50f2c2fded45d89d355684930a2ec4ad5393ef4c6ccd0e40ef41c36d75ff3"
+  },
+  "case_level_hash": "7ca92ddd4676891e8dee386a355dd8154c1cac3b647cc446618f661935e0031f"
+}

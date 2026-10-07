@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0105",
+  "original_source_case_id": "github.com_apache_hive_b418e3c9f479ba8e7d31e6470306111002ffa809",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-23953",
+  "cve_ids_all": [
+    "CVE-2024-23953"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-208"
+  ],
+  "language": "java",
+  "repository": "apache/hive",
+  "repository_url": "https://github.com/apache/hive",
+  "vulnerable_commit": "564d7e54d2360488611da39d0e5f027a2d574fc1",
+  "fixed_commit": "b418e3c9f479ba8e7d31e6470306111002ffa809",
+  "changed_file": "llap-common/src/java/org/apache/hadoop/hive/llap/security/LlapSignerImpl.java",
+  "changed_function": "public void checkSignature(byte[] message, byte[] signature, int keyId)",
+  "vulnerable_lines": [
+    58,
+    63
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0105/vulnerable_source.java": "d1ff4e5eb71a23848683c63bd5f2be62c621d5d74fa9bcf66bd5de3e8d9ffcf3",
+    "cases/CASE-0105/patched_source.java": "2a8bb352fc8211da9677af7230095a025fe26ec0ab9ea2facf62799c38374028",
+    "cases/CASE-0105/patch.diff": "2e7b57eb9531c69e96533d2174497f7d8c470edde44b2d2ed1c9e20e6bee63eb",
+    "cases/CASE-0105/metadata.json": "09b9f349bca3c27e717eed003b4e98519887ab1a10e5113d072a199614b92427",
+    "model_context/CASE-0105.json": "7b1e17414f791572033878672b4fcc81985cf64d517124ee82d9fcb90d6bf5a9",
+    "difficulty/CASE-0105.json": "8a268ce2dfb3160bc5d6fb00664fcbb1615bbbe0964dea84e24dabe72a5ee302"
+  },
+  "case_level_hash": "a02ffba923e79b83fcd42b601e9d239bca3bf26c41f472194c9f9989def8018d"
+}

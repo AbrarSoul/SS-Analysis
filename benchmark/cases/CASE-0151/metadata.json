@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-0151",
+  "original_source_case_id": "github.com_electerm_electerm_9dd8295e37d53396b980cd45dfc5ed11ad79b937",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-45787",
+  "cve_ids_all": [
+    "CVE-2026-45787"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-329",
+    "CWE-353",
+    "CWE-759",
+    "CWE-916"
+  ],
+  "language": "javascript",
+  "repository": "electerm/electerm",
+  "repository_url": "https://github.com/electerm/electerm",
+  "vulnerable_commit": "22c61257837f2bccb34d224a4620c6fb2fa8fb9c",
+  "fixed_commit": "9dd8295e37d53396b980cd45dfc5ed11ad79b937",
+  "changed_file": "src/app/lib/enc.js",
+  "changed_function": "exports.decrypt = function (",
+  "vulnerable_lines": [
+    34,
+    48
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 64,
+  "patch_size_deleted": 23,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0151/vulnerable_source.js": "013af8435449218188b6b5e0134945f32b5dad70db16d5b65bdbba6423204d7e",
+    "cases/CASE-0151/patched_source.js": "76ff72486e8b2124770ddca346e291dbd0e4db3a3e19ef58b56732be78186e42",
+    "cases/CASE-0151/patch.diff": "da4535e6c3df3aadf6977b543e1d54e72be6062020165637d299f79ff7dc5493",
+    "cases/CASE-0151/metadata.json": "f67b977227491aa6a07a32dc6052ae825453caa125511a6478de6cb0b7f977b1",
+    "model_context/CASE-0151.json": "a8549dadbfa165d6b3365ad336f3827b773a432391a4fa2836946a32c487f5ec",
+    "difficulty/CASE-0151.json": "c7091cfd71346e2746d41c4190151b78ea9591522d35940a9d5c3d7ee3a17e07"
+  },
+  "case_level_hash": "db3332c8b71393dc635d38980a1ece72a0ba50ffabad1cca31370265985774b1"
+}

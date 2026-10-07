@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0278",
+  "original_source_case_id": "github.com_quarkusio_quarkus_3a3b0d739222a2e476e085a955cfa090739f5924",
+  "selection_batch": "topup31",
+  "cve_id": "CVE-2024-1979",
+  "cve_ids_all": [
+    "CVE-2024-1979"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200"
+  ],
+  "language": "java",
+  "repository": "quarkusio/quarkus",
+  "repository_url": "https://github.com/quarkusio/quarkus",
+  "vulnerable_commit": "1a6f4cbb196eec44277b900451ad2aee9710cac1",
+  "fixed_commit": "3a3b0d739222a2e476e085a955cfa090739f5924",
+  "changed_file": "extensions/kubernetes/vanilla/deployment/src/main/java/io/quarkus/kubernetes/deployment/KubernetesCommonHelper.java",
+  "changed_function": "private static List<DecoratorBuildItem> createAnnotationDecorators(Optional<Project> project, String target, String name,",
+  "vulnerable_lines": [
+    959,
+    1035
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0278/vulnerable_source.java": "226cf528c0a7f599e79b45e0ee9e88e2dddc76a8c5e6440af9d7f4b349c65406",
+    "cases/CASE-0278/patched_source.java": "6df75aad06cb2545ce5e6e5dafb1d081282880d86ec71bfc0bc07ddc011e0015",
+    "cases/CASE-0278/patch.diff": "3dfb50d17fb3343c28486ba0ea51c154cd3b9d3b913cccdd9b36d73ba5b5b483",
+    "cases/CASE-0278/metadata.json": "14e7013841194e855a39c36fc4e63c33b4eddf5e19eb18074300c8e0c34df881",
+    "model_context/CASE-0278.json": "8911b6e15ac1da7d252ccc678f746d0191982be62f5bf5bb6328540c43ff0735",
+    "difficulty/CASE-0278.json": "104f07299d113d0c2b77365c2c425f5011023a7d3734c2e3744a564b7363b421"
+  },
+  "case_level_hash": "3ac7308f76c7d4fa13532e8a7757548b3ff1dc3e9a501b9ec1c3591beef94d3f"
+}

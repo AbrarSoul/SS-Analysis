@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0282",
+  "original_source_case_id": "github.com_run-llama_llama_index_bd827c30484fa085ec769fa55dc7f2add8006ac8",
+  "selection_batch": "topup29",
+  "cve_id": "CVE-2024-45201",
+  "cve_ids_all": [
+    "CVE-2024-45201"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "python",
+  "repository": "run-llama/llama_index",
+  "repository_url": "https://github.com/run-llama/llama_index",
+  "vulnerable_commit": "ece8f2ddc4669b5cc820261329bf68bf99999e48",
+  "fixed_commit": "bd827c30484fa085ec769fa55dc7f2add8006ac8",
+  "changed_file": "llama-index-core/llama_index/core/download/integration.py",
+  "changed_function": "def download_integration(module_str: str, module_import_str: str, cls_name: str) -> Any:",
+  "vulnerable_lines": [
+    13,
+    29
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 0,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0282/vulnerable_source.py": "d4e20ce237c48b5244648fb36162984582815f2065a38768bce8d9df16cd0830",
+    "cases/CASE-0282/patched_source.py": "acdb012063181a9307f1e1a70ff83d62759fd9d2f0db3903ae5aab28a8778a07",
+    "cases/CASE-0282/patch.diff": "0a1588d7135e335dc9275563a68db0cc9a33ba666e96ddecd4ae6cce4407c70f",
+    "cases/CASE-0282/metadata.json": "585c86c111b463130bb69d174d55319be9885073faa01eaf8e3a192a4b16126a",
+    "model_context/CASE-0282.json": "fffb058bb60f408cb677b30e3bab2d6ec98c887d36cf8dec97881e4ef5e23c2b",
+    "difficulty/CASE-0282.json": "639d36eb0305a72acbfe3e4f8435327aa4751e57777a35cf73e48de14a8e39fc"
+  },
+  "case_level_hash": "e58277887a240dfb7deb31c226fab7749f8cb78aeaad7afb21ae5faf26c045ad"
+}

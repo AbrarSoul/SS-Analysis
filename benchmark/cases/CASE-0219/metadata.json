@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0219",
+  "original_source_case_id": "github.com_metersphere_metersphere_c59e381d368990214813085a1a4877c5ef865411",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-32699",
+  "cve_ids_all": [
+    "CVE-2023-32699"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-770"
+  ],
+  "language": "java",
+  "repository": "metersphere/metersphere",
+  "repository_url": "https://github.com/metersphere/metersphere",
+  "vulnerable_commit": "26a4cc505f9f398bc2793138aebb6b5d1775bca8",
+  "fixed_commit": "c59e381d368990214813085a1a4877c5ef865411",
+  "changed_file": "framework/gateway/src/main/java/io/metersphere/gateway/service/UserLoginService.java",
+  "changed_function": "public boolean checkUserPassword(String userId, String password) {",
+  "vulnerable_lines": [
+    350,
+    360
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 7,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0219/vulnerable_source.java": "cd5fe44e9e53f5daa5e2e591b1e253f79f7895c2c4a4f997001b94687c468252",
+    "cases/CASE-0219/patched_source.java": "295d08f88f550b7040ba2af0b9031cf5e23339b952face5d3547ee5cfe065cdd",
+    "cases/CASE-0219/patch.diff": "c32d665b81e87c96cd593b15ab63e3abfac8e002c49dfab1d2c68e2bbd9ffdcc",
+    "cases/CASE-0219/metadata.json": "885d4b18ca6f6247cad5b038df9bfda98cbb4ca0239338531bd802a08059e4b2",
+    "model_context/CASE-0219.json": "4357ed6aa5a8a6714147f63c624cdd8698199ec7b3605b528ca4f378c511a6f8",
+    "difficulty/CASE-0219.json": "78c7f449ac3e09ca0f891399fadb3af88886e2f6d103608a9b5413139f5bd9b4"
+  },
+  "case_level_hash": "3db8467cbce5a0e2484f6bb4500f270228f1c1effd468d365448efb13fb6b78e"
+}

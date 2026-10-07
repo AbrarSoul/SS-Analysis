@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0167",
+  "original_source_case_id": "github.com_frappe_press_5d118a902872d7941f099ad1fb918e2421e79ccd",
+  "selection_batch": "topup6",
+  "cve_id": "CVE-2024-49751",
+  "cve_ids_all": [
+    "CVE-2024-49751"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "frappe/press",
+  "repository_url": "https://github.com/frappe/press",
+  "vulnerable_commit": "54ef1a30db4e1738a63f3bb0bc51c5bdb2b3113c",
+  "fixed_commit": "5d118a902872d7941f099ad1fb918e2421e79ccd",
+  "changed_file": "press/api/saas.py",
+  "changed_function": "def account_request(",
+  "vulnerable_lines": [
+    24,
+    86
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0167/vulnerable_source.py": "d99c2614ea8f1d7a035a5baa7d8fb6aa9bab558c5b3e9d056e12d4b0b8dbd325",
+    "cases/CASE-0167/patched_source.py": "f9741687b17af4e9e2c007dbd071e7e57c4b5af7c87bff57fc1ef100cd02e936",
+    "cases/CASE-0167/patch.diff": "e5b3b7cc083089cdc56d7bea2d46fb7fb607ba3bd0b19efa28fa7a28b225278a",
+    "cases/CASE-0167/metadata.json": "bca4f325beb2658421f8bae56c5d7bde14484cfd41bbb9d13e3dac453e7be562",
+    "model_context/CASE-0167.json": "b35dec61a094e906dad99be66e7927fa2b510cf2ee2e5842a728ab993c27b8b7",
+    "difficulty/CASE-0167.json": "1d42a424611ea8356da763116dcdeaacb1dbb9f89447c85f8d2029c939b4cee9"
+  },
+  "case_level_hash": "4822d7d71c4c519bd9a2d05eb3be716d59e36bb18b773c327fc98463879dde00"
+}

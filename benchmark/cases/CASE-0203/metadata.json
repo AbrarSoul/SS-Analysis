@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0203",
+  "original_source_case_id": "github.com_jorenbroekema_expr-eval_6c475a118643ae0efe012de283e932fb8b74324b",
+  "selection_batch": "topup2",
+  "cve_id": "CVE-2025-13204",
+  "cve_ids_all": [
+    "CVE-2025-13204"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "javascript",
+  "repository": "jorenbroekema/expr-eval",
+  "repository_url": "https://github.com/jorenbroekema/expr-eval",
+  "vulnerable_commit": "a556e27b93e467559f5ef6e1001b559f208f7fa0",
+  "fixed_commit": "6c475a118643ae0efe012de283e932fb8b74324b",
+  "changed_file": "src/evaluate.js",
+  "changed_function": "else if (type === IVAR) {",
+  "vulnerable_lines": [
+    43,
+    56
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0203/vulnerable_source.js": "d7c11289d56284a5d68ae6613f345da9a5068e9e454206b2b3d51691745a0bc9",
+    "cases/CASE-0203/patched_source.js": "99d5cef0bafb65e8878c048294218c12a30a71cd236d3a19302ef1d53821d8ef",
+    "cases/CASE-0203/patch.diff": "d0ab276fe1d780165fff911be789d172cd00b91b2071124a4d42e3ac1e4f6342",
+    "cases/CASE-0203/metadata.json": "4b1135af1d6f05c6968475bfbb5b80348e9fa4a91da3be2a0bc890f9ec653bbc",
+    "model_context/CASE-0203.json": "f460596e3f108725f0911e7524dfd0e328a9e00c3bee07a6f061824f0b02943f",
+    "difficulty/CASE-0203.json": "3255bcc4164d4a9855be8ccbcd3ce890eac9e7316dca59d8553ccb0d31fe504c"
+  },
+  "case_level_hash": "c39ff4437b8c491e08fa18d4539e28e1f0df4fbc15e22ad9dea07bddce5b04aa"
+}

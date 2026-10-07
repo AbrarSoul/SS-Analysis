@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0116",
+  "original_source_case_id": "github.com_apache_thrift_0919c3d5506151514e283a63e1fe1ce83e2449d8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-43869",
+  "cve_ids_all": [
+    "CVE-2026-43869"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-297"
+  ],
+  "language": "java",
+  "repository": "apache/thrift",
+  "repository_url": "https://github.com/apache/thrift",
+  "vulnerable_commit": "81fc6d54bbb3a37132e6d59cc0ad357f8759511e",
+  "fixed_commit": "0919c3d5506151514e283a63e1fe1ce83e2449d8",
+  "changed_file": "lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java",
+  "changed_function": "private static TSocket createClient(SSLSocketFactory factory, String host, int port, int timeout)",
+  "vulnerable_lines": [
+    341,
+    353
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0116/vulnerable_source.java": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d",
+    "cases/CASE-0116/patched_source.java": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e",
+    "cases/CASE-0116/patch.diff": "a150c773074236ab8bc2341b46601ca7a876f8f7f011352d9d04b1697411b990",
+    "cases/CASE-0116/metadata.json": "f34938e736bde233093d04964249771570fa40b5e4971bccdfed640b973fd045",
+    "model_context/CASE-0116.json": "b54d8a90ee53ae1e172f6db09668263574a992696d6dcfb9864f29231cc0135a",
+    "difficulty/CASE-0116.json": "f098a7a52416a80b1cbb8d55f935ee5752ea8d8f1ad3059723a3b1d3d545d730"
+  },
+  "case_level_hash": "f722872e3980a773d6ac6678dfcbc9c0d9fda172119e7720a27b346430889a3a"
+}

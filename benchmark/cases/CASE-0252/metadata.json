@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0252",
+  "original_source_case_id": "github.com_pallets_werkzeug_00bc43b1672e662e5e3b8cecd79e67fc968fa246",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-14806",
+  "cve_ids_all": [
+    "CVE-2019-14806"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-331"
+  ],
+  "language": "python",
+  "repository": "pallets/werkzeug",
+  "repository_url": "https://github.com/pallets/werkzeug",
+  "vulnerable_commit": "2cbdf2b02273daccf85845b1e1569096e65ffe58",
+  "fixed_commit": "00bc43b1672e662e5e3b8cecd79e67fc968fa246",
+  "changed_file": "src/werkzeug/debug/__init__.py",
+  "changed_function": "def _generate():",
+  "vulnerable_lines": [
+    69,
+    120
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 13,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0252/vulnerable_source.py": "5a30ff5714ee2bde6a02144cc3fb1d3f36cc26d71649e1c828247535da7e2fa2",
+    "cases/CASE-0252/patched_source.py": "068dc7be04cd638350ff68d13934a4debd52719713fe0ff8127b874e32b2aca3",
+    "cases/CASE-0252/patch.diff": "0a9c92f44d6ed2a02a5d348e67ae8ef7cd867f228389c88bd863f7d1f2d8ac51",
+    "cases/CASE-0252/metadata.json": "42d074eb2319ab7d41a876091d68538cef36c67deb1eb70bf11b2fe6b25ef8df",
+    "model_context/CASE-0252.json": "014e6020e574932d9e64cfc4c355af7eeeff6d2a112e0565022895b151ea29a6",
+    "difficulty/CASE-0252.json": "86a71fd7ff465f29e0cf7a77ba22967390740b0f712163e37acc8318b4d4dd0d"
+  },
+  "case_level_hash": "cffc0d1c44f7c15377059373deda1a7e4923dbd08416a1968aac469007a03ae3"
+}

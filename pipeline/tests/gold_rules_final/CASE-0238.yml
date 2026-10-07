@@ -1,0 +1,7 @@
+rules:
+- id: gold-papaparse-unparse-no-escape
+  message: Papaparse.unparse without escapeFormulae
+  severity: ERROR
+  languages: [typescript]
+  patterns:
+    - pattern: Papaparse.unparse($ARG)

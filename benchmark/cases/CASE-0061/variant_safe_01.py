@@ -1,0 +1,31 @@
+import re
+
+_VALID_NICK_RE = re.compile(r"^[A-Za-z0-9_^{}`|-]+$")
+
+
+def kick(bot, trigger):
+    """Kick a user from the channel."""
+    chanops = get_chanops(str(trigger.sender), bot.memory['channelmgnt']['jdcache'])
+    dodeop = False
+    if chanops:
+        if bot.channels[trigger.sender].privileges[bot.nick] < OP and trigger.account in chanops:
+            bot.say('Please wait...')
+            bot.say('op ' + trigger.sender, 'ChanServ')
+            time.sleep(1)
+            dodeop = True
+        text = trigger.group().split()
+        argc = len(text)
+        if argc < 2:
+            return
+        nick = Identifier(text[1])
+        reason = ' '.join(text[2:])
+        if not _VALID_NICK_RE.match(str(nick)):
+            return bot.reply('Unable to kick. Invalid nickname.')
+        if nick != bot.config.core.nick and trigger.account in chanops:
+            bot.write(['KICK', trigger.sender, nick, ':' + reason])
+            if dodeop:
+                deopbot(trigger.sender, bot)
+        else:
+            bot.reply('Access Denied. If in error, please contact the channel founder.')
+    else:
+        bot.reply(f'No ChanOps Found. Please ask for assistance in {bot.settings.channelmgnt.support_channel}')

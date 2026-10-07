@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0341",
+  "original_source_case_id": "github.com_AUTOMATIC1111_stable-diffusion-webui_d9708c92b444894bce8070e4dcfaa093f8eb8d43",
+  "selection_batch": "topup40",
+  "cve_id": "CVE-2024-31462",
+  "cve_ids_all": [
+    "CVE-2024-31462"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-22"
+  ],
+  "language": "python",
+  "repository": "AUTOMATIC1111/stable-diffusion-webui",
+  "repository_url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+  "vulnerable_commit": "e1640314df34b4cc8ed0422ab04a2886a3d9beb3",
+  "fixed_commit": "d9708c92b444894bce8070e4dcfaa093f8eb8d43",
+  "changed_file": "modules/ui_extensions.py",
+  "changed_function": "def save_config_state(name):",
+  "vulnerable_lines": [
+    59,
+    73
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0341/vulnerable_source.py": "e106bc2aae1f9ee60b4983e836eeeee8071a2252afaeace986323ed633002209",
+    "cases/CASE-0341/patched_source.py": "72f4d27c74918b12ac045f9d7ae6af6584cc6acaced70baa0c95bca23f90fcfb",
+    "cases/CASE-0341/patch.diff": "c2ccec0ec658893468576755a88db1205ca91b6f8eb406e2fe34bd7738e865b4",
+    "cases/CASE-0341/metadata.json": "3a5f77731b87f96cd0525328e58597ee9e555e4c3f00a222897fdc1ceeca94a5",
+    "model_context/CASE-0341.json": "7239c591d9888c8e6009c23e07a217aed98926cbfbcb2278a962934e17101701",
+    "difficulty/CASE-0341.json": "9d987dbb6d93834a5e31b26a1faacb58ec249b0abfde4a664d4a147b113d906e"
+  },
+  "case_level_hash": "0611b306985000d342dd77d6457a6012620155591a94bf6592cc7096f2a354b0"
+}

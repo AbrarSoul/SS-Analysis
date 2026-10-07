@@ -1,0 +1,31 @@
+--- upstream/rule_filter.py (ace3c87a)
++++ ours/rule_filter.py
+@@ -22,10 +22,17 @@
+     accepted_rules: int = 0
+ 
+ class RuleFilter:
+-    def __init__(self, input_dir: Path, output_dir: Path, model_name: str = 'all-MiniLM-L6-v2'):
++    def __init__(self, input_dir: Path, output_dir: Path, model_name: str = 'all-MiniLM-L6-v2',
++                 judge_api_key: str = None, judge_base_url: str = "https://openrouter.ai/api/v1",
++                 judge_model: str = "deepseek/deepseek-chat"):
+         self.input_dir = input_dir
+         self.output_dir = output_dir
+-        self.client = OpenAI(api_key= os.getenv("OPENROUTER_API_KEY"), base_url="https://openrouter.ai/api/v1")  # Still needed for rule quality evaluation
++        # judge_api_key/judge_base_url/judge_model default to Autogrep's original
++        # OpenRouter+deepseek-chat behavior; this project overrides them to point
++        # at a fixed GPT-Lab judge model (see pipeline/gptlab_config.py) so the
++        # generalizability judge is never the same model being evaluated.
++        self.client = OpenAI(api_key=judge_api_key or os.getenv("OPENROUTER_API_KEY"), base_url=judge_base_url)
++        self.judge_model = judge_model
+         self.stats = defaultdict(RuleStats)
+         self.embeddings_cache = {}
+         
+@@ -175,7 +182,7 @@
+ Second line: Brief reason specifically mentioning if it uses project-specific code or standard libraries"""
+ 
+             response = self.client.chat.completions.create(
+-                model="deepseek/deepseek-chat",
++                model=self.judge_model,
+                 messages=[
+                     {"role": "system", "content": "You are a security expert evaluating Semgrep rules."},
+                     {"role": "user", "content": prompt}

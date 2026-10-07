@@ -1,0 +1,12 @@
+diff --git a/src/type.js b/src/type.js
+index 978baf94..4392c1e0 100644
+--- a/src/type.js
++++ b/src/type.js
+@@ -29,6 +29,7 @@ var Enum      = require("./enum"),
+  * @param {Object.<string,*>} [options] Declared options
+  */
+ function Type(name, options) {
++    name = name.replace(/\W/g, "");
+     Namespace.call(this, name, options);
+ 
+     /**

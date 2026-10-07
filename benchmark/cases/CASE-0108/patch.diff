@@ -1,0 +1,20 @@
+diff --git a/openmeetings-web/src/main/java/org/apache/openmeetings/web/common/InvitationForm.java b/openmeetings-web/src/main/java/org/apache/openmeetings/web/common/InvitationForm.java
+index 39365a6e0..d6d16f616 100644
+--- a/openmeetings-web/src/main/java/org/apache/openmeetings/web/common/InvitationForm.java
++++ b/openmeetings-web/src/main/java/org/apache/openmeetings/web/common/InvitationForm.java
+@@ -150,9 +150,14 @@ public abstract class InvitationForm extends Form<Invitation> {
+ 
+ 	protected void updateButtons(AjaxRequestTarget target) {
+ 		Collection<User> recpnts = recipients.getModelObject();
++		boolean generateEnabled = false;
++		if (recpnts.size() == 1) {
++			User u = recpnts.iterator().next();
++			generateEnabled = getUserId().equals(u.getId()) || User.Type.CONTACT == u.getType();
++		}
+ 		target.add(
+ 				dialog.getSend().setEnabled(!recpnts.isEmpty())
+-				, dialog.getGenerate().setEnabled(recpnts.size() == 1)
++				, dialog.getGenerate().setEnabled(generateEnabled)
+ 				);
+ 	}
+ 

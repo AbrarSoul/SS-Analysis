@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0276",
+  "original_source_case_id": "github.com_python_cpython_482d6f8bdba9da3725d272e8bb4a2d25fb6a603e",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2026-2297",
+  "cve_ids_all": [
+    "CVE-2026-2297"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-668"
+  ],
+  "language": "python",
+  "repository": "python/cpython",
+  "repository_url": "https://github.com/python/cpython",
+  "vulnerable_commit": "fb83592b562b785e56b1bdb0fa52d90d8a29de6a",
+  "fixed_commit": "482d6f8bdba9da3725d272e8bb4a2d25fb6a603e",
+  "changed_file": "Lib/importlib/_bootstrap_external.py",
+  "changed_function": "def get_data(self, path):",
+  "vulnerable_lines": [
+    1211,
+    1219
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0276/vulnerable_source.py": "a97a03ea9f9d38d90c8a50942183382ff5a479e7c4c5163c2ac5bae3561444ae",
+    "cases/CASE-0276/patched_source.py": "9623292c307de38721ab92efcb2ba44bbb663f9140edd585aaf29179841f16a8",
+    "cases/CASE-0276/patch.diff": "b8f37a90e071caebf3c631a8f59e369d5789d86b4fa099f72782af8cd6346708",
+    "cases/CASE-0276/metadata.json": "45e2f452b0d1bbc66a419735146eb32ef753d2860269e1911de71b1045c8698d",
+    "model_context/CASE-0276.json": "50ce60abaef50eb5762b726c9cc773978a18877e1b03780288f671318842d9be",
+    "difficulty/CASE-0276.json": "d8ba7dce2cece38cb68d6b39195d1c83d300bd286d239a18c65d4aeaf8735c02"
+  },
+  "case_level_hash": "62ae416c649393216b398fc142552f36df096e82c746f1a8883ab54f03f1fea0"
+}

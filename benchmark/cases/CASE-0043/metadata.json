@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0043",
+  "original_source_case_id": "github.com_9001_copyparty_e0a92ba72d46074209a9c304eb2a01ca0429e60c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-58753",
+  "cve_ids_all": [
+    "CVE-2025-58753"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-552",
+    "CWE-862"
+  ],
+  "language": "python",
+  "repository": "9001/copyparty",
+  "repository_url": "https://github.com/9001/copyparty",
+  "vulnerable_commit": "98386f28f0789c86973a5c6829fddb4640ff33e2",
+  "fixed_commit": "e0a92ba72d46074209a9c304eb2a01ca0429e60c",
+  "changed_file": "copyparty/authsrv.py",
+  "changed_function": "def canonical(self, rem: str, resolve: bool = True) -> str:",
+  "vulnerable_lines": [
+    627,
+    634
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 44,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0043/vulnerable_source.py": "0cf134c1096009bdac9cbd9308d77466db55f5eb98702b60f1eb186bfcb8e119",
+    "cases/CASE-0043/patched_source.py": "b8ac2b15b9dceab3a9e03241c9dbe2641576d2a31da0427d9e60b645390d5a98",
+    "cases/CASE-0043/patch.diff": "d143a7700b289a63c10dc392a924087ca48a3253344f7604f7253a262b2fbcda",
+    "cases/CASE-0043/metadata.json": "919e9ff396b70435027d10b1d0c4b38d5a2dc6c3ac946f34de4a5888ff4c5ae8",
+    "model_context/CASE-0043.json": "fb4cf79b80ef05547502ad07a686df2095250a977571985bc9368ac49ba6708e",
+    "difficulty/CASE-0043.json": "a1c32388f64b10fb870db2486b9b3e88abf5ffb3c5e259dff98cce070550932d"
+  },
+  "case_level_hash": "8b508ef9bf996762b0ea5930a7990fa075cd3284993568a9d99e70da3d12543a"
+}

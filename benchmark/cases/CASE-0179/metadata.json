@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0179",
+  "original_source_case_id": "github.com_jaredhanson_passport_7e9b9cf4d7be02428e963fc729496a45baeea608",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-25896",
+  "cve_ids_all": [
+    "CVE-2022-25896"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "language": "javascript",
+  "repository": "jaredhanson/passport",
+  "repository_url": "https://github.com/jaredhanson/passport",
+  "vulnerable_commit": "5e6d92f1ef2adf21b54492cc86a7c066ef3f1e98",
+  "fixed_commit": "7e9b9cf4d7be02428e963fc729496a45baeea608",
+  "changed_file": "lib/sessionmanager.js",
+  "changed_function": "this._serializeUser(user, req, function(err, obj) {",
+  "vulnerable_lines": [
+    14,
+    27
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 20,
+  "patch_size_deleted": 10,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0179/vulnerable_source.js": "047020afce807fbd53e6c43f49139527118b41463e06db05e24615893ea043cb",
+    "cases/CASE-0179/patched_source.js": "b425d975c7f125385384569bb619d397ce0b8c266ba5db5941aa7511c04b0cfc",
+    "cases/CASE-0179/patch.diff": "51d57fa9717de376385e54424cbbf084b4337a32eeada00fb3d73a41440c86ce",
+    "cases/CASE-0179/metadata.json": "2be1156749ea417a5814ac76ed934a6b6d5361c7a46b957bb51b9676c0c2c555",
+    "model_context/CASE-0179.json": "3703ff73082c4072976e95747cd6e71685c6fb9e6d8ffc626c99b72142243e4c",
+    "difficulty/CASE-0179.json": "7131342e6ae22c7d49c02b6d8e1979ab05f10087a62b3339e79a04c870b63e31"
+  },
+  "case_level_hash": "fb6022d0465d5cd40bec7be6532cbec1345f6021282ff55cd0718f1c45b2b712"
+}

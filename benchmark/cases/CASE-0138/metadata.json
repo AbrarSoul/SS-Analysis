@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0138",
+  "original_source_case_id": "github.com_danswer-ai_danswer_89ff07a96b41be9e05256bd252105be233f4d28a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-32881",
+  "cve_ids_all": [
+    "CVE-2024-32881"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-285"
+  ],
+  "language": "python",
+  "repository": "danswer-ai/danswer",
+  "repository_url": "https://github.com/danswer-ai/danswer",
+  "vulnerable_commit": "be12e4fa645ed435734a5ee36bdd3b415b40af2c",
+  "fixed_commit": "89ff07a96b41be9e05256bd252105be233f4d28a",
+  "changed_file": "backend/danswer/server/manage/slack_bot.py",
+  "changed_function": "def put_tokens(tokens: SlackBotTokens) -> None:",
+  "vulnerable_lines": [
+    195,
+    197
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0138/vulnerable_source.py": "2503a162b59993b4d993ae0cefc4997bbee922237979124d7bb1389ea539ccc7",
+    "cases/CASE-0138/patched_source.py": "4cdcb53a121bedc8406e1f364cd5739b65fb72312219b5139b74685d92904c70",
+    "cases/CASE-0138/patch.diff": "7db59644f283d91fea5e5b8a324ffc6f38ee057c71b925133336386016001ca1",
+    "cases/CASE-0138/metadata.json": "e8ddb537d04d798126843eb62be4f9aeb9ea425c8e96bc261c504851b22b7253",
+    "model_context/CASE-0138.json": "cf9f78de5f6aa6e3374a21b0c27c148b459f0451a038fdffe7142e55119f120d",
+    "difficulty/CASE-0138.json": "0e1c08bd34c2110a431d18527d8a5b19c57575ad9deabb0f108d9a704e6a956c"
+  },
+  "case_level_hash": "4ca3da599f219162508e2d3648d4048137169cc5b1dd43b4e33441aa44a7d72d"
+}

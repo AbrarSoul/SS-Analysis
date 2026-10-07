@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0241",
+  "original_source_case_id": "github.com_open-iscsi_rtslib-fb_b23d061ee0fa7924d2cdce6194c313b9ee06c468",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-14019",
+  "cve_ids_all": [
+    "CVE-2020-14019"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-276"
+  ],
+  "language": "python",
+  "repository": "open-iscsi/rtslib-fb",
+  "repository_url": "https://github.com/open-iscsi/rtslib-fb",
+  "vulnerable_commit": "dffcf83bead64e959505d64ad587768647caab3a",
+  "fixed_commit": "b23d061ee0fa7924d2cdce6194c313b9ee06c468",
+  "changed_file": "rtslib/root.py",
+  "changed_function": "def save_to_file(self, save_file=None, so_path=None):",
+  "vulnerable_lines": [
+    449,
+    491
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0241/vulnerable_source.py": "bccf30a395d5c76e8db1d42f71780c16f6f537990d450c3d254bb0dd9fb85cbf",
+    "cases/CASE-0241/patched_source.py": "97f7fdeb9e97d9e1603b92b95449512b846e8c6ccffabadeb0d4f68dfcf3b7e0",
+    "cases/CASE-0241/patch.diff": "55d179c82c00bd0fc4ae89a8d553d9dedce749dbe892d985c2c89774c6e44636",
+    "cases/CASE-0241/metadata.json": "dd63bc9c44d0f7046f378d61e16b96ae188f2f643d044a2b0a970c3cbf4f6a3a",
+    "model_context/CASE-0241.json": "9f28e9603f27ae7c5c3ecbf744898abd286b261af7b142f9febbd510e27a0b68",
+    "difficulty/CASE-0241.json": "399a1f733b6b6b076ed6b82a0e5a4aa8d8be5d4a11b8a04121f084249ce3d384"
+  },
+  "case_level_hash": "e5e35078a9ad61e33060e046a0351671212539c961692233cc5ac80288624cf6"
+}

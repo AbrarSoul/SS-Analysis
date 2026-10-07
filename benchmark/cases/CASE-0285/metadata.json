@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0285",
+  "original_source_case_id": "github.com_sequelize_sequelize_c876192aa6ce1f67e22b26a4d175b8478615f42d",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-10554",
+  "cve_ids_all": [
+    "CVE-2016-10554"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "javascript",
+  "repository": "sequelize/sequelize",
+  "repository_url": "https://github.com/sequelize/sequelize",
+  "vulnerable_commit": "7dc35e3889e3fa0859b96be41092717444cc2a38",
+  "fixed_commit": "c876192aa6ce1f67e22b26a4d175b8478615f42d",
+  "changed_file": "lib/sql-string.js",
+  "changed_function": "SqlString.escape = function(val, stringifyObjects, timeZone, dialect) {",
+  "vulnerable_lines": [
+    10,
+    57
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0285/vulnerable_source.js": "b2af9ba5fa25b31ad0162c3b4f3ba48df8773f9751999a21f9c24d7ae1c09df8",
+    "cases/CASE-0285/patched_source.js": "9b716090a38f3f6f66cc09538240a78c7ce94ee812ac12b4b0f1d12051221c6f",
+    "cases/CASE-0285/patch.diff": "36c4e5b7a16b4373f1ce65f4823dea1eef91149292a14863a59e5cb560503e3d",
+    "cases/CASE-0285/metadata.json": "d5c172eb3deef09fef2869f421138b1d26a686899411eb1921f6f1e7d3fc5931",
+    "model_context/CASE-0285.json": "6ae92d46c6cac9880fbf3ba5d82dd4564988a17e5a9c823793b15b1cfbcb96c5",
+    "difficulty/CASE-0285.json": "622965163e53be147405e101d2b37d8ba84b5a70fce7a77da3eb42c3d48a84cf"
+  },
+  "case_level_hash": "731c2c067be9ed342c4e6c4022094a3d9e817f31f95de091af40cbe28ada804b"
+}

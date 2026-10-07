@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0269",
+  "original_source_case_id": "github.com_pugjs_pug_32acfe8f197dc44c54e8af32c7d7b19aa9d350fb",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2024-36361",
+  "cve_ids_all": [
+    "CVE-2024-36361"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-94"
+  ],
+  "language": "javascript",
+  "repository": "pugjs/pug",
+  "repository_url": "https://github.com/pugjs/pug",
+  "vulnerable_commit": "4767cafea0af3d3f935553df0f9a8a6e76d470c2",
+  "fixed_commit": "32acfe8f197dc44c54e8af32c7d7b19aa9d350fb",
+  "changed_file": "packages/pug-code-gen/index.js",
+  "changed_function": "function Compiler(node, options) {",
+  "vulnerable_lines": [
+    50,
+    78
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 22,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0269/vulnerable_source.js": "b3fb0c4545bd7d404306b52f1751c942c5928f46133631ef414128eac504c2b0",
+    "cases/CASE-0269/patched_source.js": "7c6ef2ffc9a4de12f7d27fe74a863e2fdd94ae690f3c5a4edc2757d1ad750284",
+    "cases/CASE-0269/patch.diff": "32f2c0b720ca71242b57c724a8982c5af5ec9a2f64ac4023c74d4a72fcc20169",
+    "cases/CASE-0269/metadata.json": "5294a286d3153821649b65bd40c3e4ac456f7bc3149d090a1b218a2f20b916b0",
+    "model_context/CASE-0269.json": "bd3b1eae7b6d4eb0a104d747ee8540a005d146050fac7af61dd4b3f4d46f7b2e",
+    "difficulty/CASE-0269.json": "dfec830c66910153c8f142e223adfa413025ee0a32a9ba3d2b9452fce56d76ee"
+  },
+  "case_level_hash": "1615a959d9532e6e3202fdd21d9695e1503846ea8037e3a321c51c44ee692e84"
+}

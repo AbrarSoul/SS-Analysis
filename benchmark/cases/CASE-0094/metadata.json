@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0094",
+  "original_source_case_id": "github.com_ajenti_ajenti_7aa146b724e0e20cfee2c71ca78fafbf53a8767c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2019-25066",
+  "cve_ids_all": [
+    "CVE-2019-25066"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-269",
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "ajenti/ajenti",
+  "repository_url": "https://github.com/ajenti/ajenti",
+  "vulnerable_commit": "ef385f96d7e9e09b81ca5e48dc4e04042d5a74a4",
+  "fixed_commit": "7aa146b724e0e20cfee2c71ca78fafbf53a8767c",
+  "changed_file": "ajenti-core/aj/auth.py",
+  "changed_function": "def authenticate(self, username, password):",
+  "vulnerable_lines": [
+    100,
+    116
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 8,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0094/vulnerable_source.py": "b5d79ff0d67a48bcda5ef082d301e090518e7f375339ab5fb06c3c65f98c8c23",
+    "cases/CASE-0094/patched_source.py": "6904400d8335113fd0b16cec8e718ca096b19b12a233158eb2b1b4aacc1d00a5",
+    "cases/CASE-0094/patch.diff": "f9bde2e88be1756828e97209f35c704211120e6ebd948ae49eb347566659a59c",
+    "cases/CASE-0094/metadata.json": "39926c42c7a0ec1f2854c8d826f249345e1b178b057ee79a563a485e6e3a6465",
+    "model_context/CASE-0094.json": "8c3f145da903b852c8de314081efc983760f3a8ce50ef075c7f059f5a4bd67b1",
+    "difficulty/CASE-0094.json": "77044f93656903cfb5b474cd25b53892f08ed7e12d5f9e223f458019375044e8"
+  },
+  "case_level_hash": "7579bcd35d4836e2d1617430cbc377726bef73044aeccd2b79a28733be59262b"
+}

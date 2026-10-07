@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0336",
+  "original_source_case_id": "github.com_yogeshojha_rengine_8277cec0f008a0451371a92e7e0bf082ab3f0c34",
+  "selection_batch": "topup25",
+  "cve_id": "CVE-2022-1813",
+  "cve_ids_all": [
+    "CVE-2022-1813"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "yogeshojha/rengine",
+  "repository_url": "https://github.com/yogeshojha/rengine",
+  "vulnerable_commit": "72a5fb2eb766c7b0334a3420af7576a60c95b182",
+  "fixed_commit": "8277cec0f008a0451371a92e7e0bf082ab3f0c34",
+  "changed_file": "web/reNgine/common_func.py",
+  "changed_function": "def get_cms_details(url):",
+  "vulnerable_lines": [
+    668,
+    710
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 7,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0336/vulnerable_source.py": "77bac053ee1b56ecab5f7264dd04223626f22cfad6881c3d4243333990769bf0",
+    "cases/CASE-0336/patched_source.py": "fc7330098627654f3bc165e09b1335dd6870b6183e6ce84dae06ec7988dcd276",
+    "cases/CASE-0336/patch.diff": "296e5e992ad0160d0b428249645231de9758a09e65004d1de17588c4e2f614aa",
+    "cases/CASE-0336/metadata.json": "30d46d3f8391e2b65b44cb959d4bd58d1063d715c28015d8631823f3fd7f1ed3",
+    "model_context/CASE-0336.json": "e176b59dbc31af39e0355bfa45189341454723e2e525bc03656f31ced1037f16",
+    "difficulty/CASE-0336.json": "bb7c81a130594b56df417e89724a0ec10646c1536a7a4967aa73f84312819924"
+  },
+  "case_level_hash": "30dcbdf3e3929155a5ec1fe30b4513a6c8b9e35694046fb833d09b50db4ed009"
+}

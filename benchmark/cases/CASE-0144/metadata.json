@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0144",
+  "original_source_case_id": "github.com_dgtlmoon_changedetection.io_ec7d56f85d1e9690fca7cb4711c1fb20dffec780",
+  "selection_batch": "topup5",
+  "cve_id": "CVE-2026-29038",
+  "cve_ids_all": [
+    "CVE-2026-29038"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79"
+  ],
+  "language": "python",
+  "repository": "dgtlmoon/changedetection.io",
+  "repository_url": "https://github.com/dgtlmoon/changedetection.io",
+  "vulnerable_commit": "417d57e5749441e4be9acc4010369bded805d66f",
+  "fixed_commit": "ec7d56f85d1e9690fca7cb4711c1fb20dffec780",
+  "changed_file": "changedetectionio/blueprint/rss/tag.py",
+  "changed_function": "def construct_tag_routes(rss_blueprint, datastore):",
+  "vulnerable_lines": [
+    1,
+    96
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0144/vulnerable_source.py": "75ca3b2e9ef2288568ea9456f8de6f8cc337f705439c5d77de0e29a9ac4a4a24",
+    "cases/CASE-0144/patched_source.py": "25552a2bffa27354abd056db9ed261f8ecd9866853cd696536a3505374583eef",
+    "cases/CASE-0144/patch.diff": "a1e7c11576ef1bdb5a2bc19db29306f64f3629906d1b075c7a5d80037829622b",
+    "cases/CASE-0144/metadata.json": "b0cecc00006c9919cc9765c04d502ec335b907105a0593a7a6521db04ff62578",
+    "model_context/CASE-0144.json": "8cd40125780fde3fc5c22cdb04f43d6f4108911ca8985d7893b19b8218ac65c2",
+    "difficulty/CASE-0144.json": "49cc76e375884cc8a7bcdfa3c394803df7a5dab95d4522617e79637b57901cff"
+  },
+  "case_level_hash": "7cb338fdf1a5eb55d5df1d1b78f1abb515d0ea1ab720307cd7ad09e1c8a291f5"
+}

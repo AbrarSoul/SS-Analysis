@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0205",
+  "original_source_case_id": "github.com_juliangruber_keypair_9596418d3363d3e757676c0b6a8f2d35a9d1cb18",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-41117",
+  "cve_ids_all": [
+    "CVE-2021-41117"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-335"
+  ],
+  "language": "javascript",
+  "repository": "juliangruber/keypair",
+  "repository_url": "https://github.com/juliangruber/keypair",
+  "vulnerable_commit": "87c62f255baa12c1ec4f98a91600f82af80be6db",
+  "fixed_commit": "9596418d3363d3e757676c0b6a8f2d35a9d1cb18",
+  "changed_file": "index.js",
+  "changed_function": "function defaultSeedFile(needed) {",
+  "vulnerable_lines": [
+    966,
+    1014
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0205/vulnerable_source.js": "0f98352ae13e8748884b1027e794a961b8d1462f923ac603d6724fcff53608d9",
+    "cases/CASE-0205/patched_source.js": "0ca2f28d00f8006f5d594e20fafc9368c5d56a0ad2e465b4e62e9885a7d1ac83",
+    "cases/CASE-0205/patch.diff": "f13b3514248ece3e03c9c528fd790da97c9c7f60429973cb7515f2777a39aed5",
+    "cases/CASE-0205/metadata.json": "5bb0586195f0adbf9b5b93232d9a9b93c96cf659e28fb1c6d21282cfcc4d6128",
+    "model_context/CASE-0205.json": "1472daeac2ba81183f0b38fb2eebf25c623e0e7cdbb9054488adf8dd4fb8ed96",
+    "difficulty/CASE-0205.json": "8423c22b104488d5d22f383d83452cf5ba46fba2445bacf745e50d918657a596"
+  },
+  "case_level_hash": "174a306f11e2a780f3b28858e9e324251a364b09d2b5d9113de35cdf69bd24d3"
+}

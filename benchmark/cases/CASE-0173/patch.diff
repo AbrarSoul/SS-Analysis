@@ -1,0 +1,13 @@
+diff --git a/src/adapter/cloudflare-workers/utils.ts b/src/adapter/cloudflare-workers/utils.ts
+index af7cf92a..74f7114c 100644
+--- a/src/adapter/cloudflare-workers/utils.ts
++++ b/src/adapter/cloudflare-workers/utils.ts
+@@ -36,7 +36,7 @@ export const getContentFromKVAsset = async (
+     ASSET_NAMESPACE = __STATIC_CONTENT
+   }
+ 
+-  const key = ASSET_MANIFEST[path] || path
++  const key = ASSET_MANIFEST[path]
+   if (!key) {
+     return null
+   }

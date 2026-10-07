@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0187",
+  "original_source_case_id": "github.com_jenkinsci_mercurial-plugin_54b4f82e80c89d51b12bc64258f6b59e98b0c16a",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2018-1000112",
+  "cve_ids_all": [
+    "CVE-2018-1000112"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-863"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/mercurial-plugin",
+  "repository_url": "https://github.com/jenkinsci/mercurial-plugin",
+  "vulnerable_commit": "f6e5f0bff2d8678c0e7cb13d0db031b45c7a0437",
+  "fixed_commit": "54b4f82e80c89d51b12bc64258f6b59e98b0c16a",
+  "changed_file": "src/main/java/hudson/plugins/mercurial/MercurialStatus.java",
+  "changed_function": "public String getSearchUrl() {",
+  "vulnerable_lines": [
+    53,
+    55
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0187/vulnerable_source.java": "456e9a9559946bcc9642ad9ffe7c872d158eff3dca3bde13af24bdd873eb8847",
+    "cases/CASE-0187/patched_source.java": "ad258dca11d10e323a110749c5e30806ce97b582f8edbe38f743358813500f90",
+    "cases/CASE-0187/patch.diff": "dc9d733abef69c02101dc22c02e5977c2e75f11aec960141d450f9af67fef9f8",
+    "cases/CASE-0187/metadata.json": "bb9d495948bb3ec862810684ab44f5e9deef2aa89edebc2d1f220d0bdc8363a5",
+    "model_context/CASE-0187.json": "cc864ddacc5a4b77b7c49f240a2a953d62681da447eaa71ab03353948c3a6ecf",
+    "difficulty/CASE-0187.json": "8807d9cc40a770a4a18ecca7b8266bc2ca2903a328ff328f50e0525fde6b7849"
+  },
+  "case_level_hash": "a5455cde98675a279090cf469dcd914f9048ee73ed0cb47c4605b3c67aaec5d0"
+}

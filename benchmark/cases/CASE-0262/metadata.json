@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0262",
+  "original_source_case_id": "github.com_poezio_slixmpp_22664ee7b86c8e010f312b66d12590fb47160ad8",
+  "selection_batch": "topup21",
+  "cve_id": "CVE-2017-5591",
+  "cve_ids_all": [
+    "CVE-2017-5591"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-346"
+  ],
+  "language": "python",
+  "repository": "poezio/slixmpp",
+  "repository_url": "https://github.com/poezio/slixmpp",
+  "vulnerable_commit": "6476cfcde58ed9b3e2abcf6eac70b1998ae1ec08",
+  "fixed_commit": "22664ee7b86c8e010f312b66d12590fb47160ad8",
+  "changed_file": "slixmpp/plugins/xep_0280/carbons.py",
+  "changed_function": "def _handle_carbon_received(self, msg):",
+  "vulnerable_lines": [
+    63,
+    65
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 4,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0262/vulnerable_source.py": "2f7bc26dad7a54e1f79aff4a4835387a31fe4bfcaf9e9ecc859cd80fd50de0f0",
+    "cases/CASE-0262/patched_source.py": "98b3533321eee4912549daea86283f365bbe97d20e2fc3c54255868d72eacd21",
+    "cases/CASE-0262/patch.diff": "02fd03126d9967c26315431bae2cfb1a203386d4e1a2c6e844344004473f91e8",
+    "cases/CASE-0262/metadata.json": "651c993bc71759591feb006a84f64024e06284c5202360efe8e7ea2bbfdf20ed",
+    "model_context/CASE-0262.json": "b3aecc26233bffd2fd6118d53023725eede7e0faebbf621a422cab82ab197b56",
+    "difficulty/CASE-0262.json": "66a1273be654631bfd50c6bb579e1075ee0b393ad5c5c268af84d2e924ebb886"
+  },
+  "case_level_hash": "fb99000f40f1f33c7ab812957f6c024ee5f0a8a333d806ce79aaa690c85eaf13"
+}

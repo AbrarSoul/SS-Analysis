@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0314",
+  "original_source_case_id": "github.com_undertow-io_undertow_1302c8cf4476936802504efe0d36c58dcd954f78",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-1108",
+  "cve_ids_all": [
+    "CVE-2023-1108"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-835"
+  ],
+  "language": "java",
+  "repository": "undertow-io/undertow",
+  "repository_url": "https://github.com/undertow-io/undertow",
+  "vulnerable_commit": "a511cb5cfc8e9b5653f1b796704e36575f471829",
+  "fixed_commit": "1302c8cf4476936802504efe0d36c58dcd954f78",
+  "changed_file": "core/src/main/java/io/undertow/protocols/ssl/SslConduit.java",
+  "changed_function": "private SSLEngineResult wrapAndFlip(ByteBuffer[] userBuffers, int off, int len) throws IOException {",
+  "vulnerable_lines": [
+    1000,
+    1011
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0314/vulnerable_source.java": "1c5d791a3b65764ce302f5fb8471e16a8059a0919c13ec3a51ebf009fcd20d3d",
+    "cases/CASE-0314/patched_source.java": "870452ac1221dd9bf6132fded9dc75538dba3e8fa169299000912f84920c33d3",
+    "cases/CASE-0314/patch.diff": "216132ba9bce9a962b8a1e10b99f53d1159069b863f4afe36b9076f396d8f243",
+    "cases/CASE-0314/metadata.json": "fdcd547bf35067d491be6ae50e3f4fe1ac55cef536dbd4a208944c6103d4ace3",
+    "model_context/CASE-0314.json": "57b855f4885c1cde2a15e6aa411d1fa56585a88fd8a8d3c4baa163f3db28e96e",
+    "difficulty/CASE-0314.json": "1f429ac5f3d451054e2094f9b448919702eb3af4a24350d206f42a50c5bb4798"
+  },
+  "case_level_hash": "76f3e86bcb9cd80e058a86c0a8427c45fc5ae979e1a8cfc3e011f31ddb78bb65"
+}

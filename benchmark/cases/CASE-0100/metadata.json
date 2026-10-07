@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0100",
+  "original_source_case_id": "github.com_apache_axis-axis1-java_7e66753427466590d6def0125e448d2791723210",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2023-40743",
+  "cve_ids_all": [
+    "CVE-2023-40743"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-20",
+    "CWE-75"
+  ],
+  "language": "java",
+  "repository": "apache/axis-axis1-java",
+  "repository_url": "https://github.com/apache/axis-axis1-java",
+  "vulnerable_commit": "75e8c723c489761388e48c6df6f00d6061928cea",
+  "fixed_commit": "7e66753427466590d6def0125e448d2791723210",
+  "changed_file": "axis-rt-core/src/main/java/org/apache/axis/client/ServiceFactory.java",
+  "changed_function": "public static Service getService(Map environment)",
+  "vulnerable_lines": [
+    86,
+    130
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0100/vulnerable_source.java": "4490d2ca65839ddf63a5f874eda6adc50a05d5b7f23d94086bcee30dd808dddf",
+    "cases/CASE-0100/patched_source.java": "f11deea5147acd7b148c7abd5765dc0423307165112dffb162178f442450d3d4",
+    "cases/CASE-0100/patch.diff": "01571b21282dba269e13e8e272b980f016bd7d813e1e76368272b75960897f90",
+    "cases/CASE-0100/metadata.json": "09b841a1d1b7445c96d2f62acd9894a2ec2e593b6d0740310a646f7eee610b02",
+    "model_context/CASE-0100.json": "f96c6337cc60f172210448e24fbf9dacdd53ec8c3d80019261fe9a37610ddaeb",
+    "difficulty/CASE-0100.json": "9b49815c01f142e0b20ff072b78444a695c5ecaf13a9de6a5e38488458dc1aa7"
+  },
+  "case_level_hash": "5f1bb7b2ce66633f1a7923c59b564a40e8baa1c8a8e0713d4354a0026d9d2340"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0242",
+  "original_source_case_id": "github.com_open-webui_open-webui_167c8bf00d165af523acfc3b870749f6be6d3e57",
+  "selection_batch": "topup20",
+  "cve_id": "CVE-2026-45347",
+  "cve_ids_all": [
+    "CVE-2026-45347"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-918"
+  ],
+  "language": "python",
+  "repository": "open-webui/open-webui",
+  "repository_url": "https://github.com/open-webui/open-webui",
+  "vulnerable_commit": "14398ab62847c1840a9413efa0a34cf12df89dad",
+  "fixed_commit": "167c8bf00d165af523acfc3b870749f6be6d3e57",
+  "changed_file": "backend/open_webui/utils/pdf_generator.py",
+  "changed_function": "def _build_html_message(self, message: Dict[str, Any]) -> str:",
+  "vulnerable_lines": [
+    42,
+    76
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 7,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0242/vulnerable_source.py": "78429837621393f58076682ab28c360e66acfa93bcf1293dba343e1da283679a",
+    "cases/CASE-0242/patched_source.py": "a50cd5a95aea5d356ac62ec59d33edc54c9bb8b755cfa2f28f97bac52e2533b9",
+    "cases/CASE-0242/patch.diff": "973c8188b92705f28b46ab89111dfae85da37e1a4882f4cccd8daba25e0e975c",
+    "cases/CASE-0242/metadata.json": "9805f2a7e6b5699a1c4d232386ca2e9c104a0da931e2d2d0b31ac68537d72610",
+    "model_context/CASE-0242.json": "995570db870dc63528f6844766065fd9217e6bf4b1bebd60dc1cbe70094a13c7",
+    "difficulty/CASE-0242.json": "3d04e8d56666221df669e200fb5339333381c14ac62f2fedac655505a48fae7d"
+  },
+  "case_level_hash": "f9a86fc085677e65efb7c612e68fc38d7f03378661de3cc40e4e5053751f3933"
+}

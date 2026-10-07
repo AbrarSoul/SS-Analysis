@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0139",
+  "original_source_case_id": "github.com_dataease_dataease_3c52cc26c4cca1000294346cf99a84b25d38bfb2",
+  "selection_batch": "topup9",
+  "cve_id": "CVE-2025-62422",
+  "cve_ids_all": [
+    "CVE-2025-62422"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "dataease/dataease",
+  "repository_url": "https://github.com/dataease/dataease",
+  "vulnerable_commit": "083c2e35c766037fccac307d5ec7d1909589bdf9",
+  "fixed_commit": "3c52cc26c4cca1000294346cf99a84b25d38bfb2",
+  "changed_file": "core/core-backend/src/main/java/io/dataease/datasource/provider/EsProvider.java",
+  "changed_function": "public List<TableField> fetchTableField(DatasourceRequest datasourceRequest) {",
+  "vulnerable_lines": [
+    93,
+    108
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0139/vulnerable_source.java": "5d68177b427afbd257fde0617c15572f33f153e782930b6b1eb9454ef0f3bd95",
+    "cases/CASE-0139/patched_source.java": "050cc389a83bc981de702ff18ee4b7c042c37977c839f4c73f32ec7499773c37",
+    "cases/CASE-0139/patch.diff": "2dae9a048c543b63ac56bf7604f297a2d18777f04e64a491f9042c23a427cec6",
+    "cases/CASE-0139/metadata.json": "f22b108404368cf51b01b93741e37fe84063d7912a5d06fd3458d73a3a47214b",
+    "model_context/CASE-0139.json": "0d419925cc7358ef2f79134e26d49dc24ce38afb66749f2156e4c2382414cbc6",
+    "difficulty/CASE-0139.json": "30525f121d87b5764e853a6adbbc35353ba6238f86ad13e713b032dc55bd7e6e"
+  },
+  "case_level_hash": "710754cb097ce93d9e6634b0b7cd480f6fa738e17322f3d12ec362a008cb7f7b"
+}

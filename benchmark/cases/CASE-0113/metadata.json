@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0113",
+  "original_source_case_id": "github.com_apache_solr_35fc4bdc48171d9a64251c54a1e76deb558cf9d8",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-50290",
+  "cve_ids_all": [
+    "CVE-2023-50290"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "apache/solr",
+  "repository_url": "https://github.com/apache/solr",
+  "vulnerable_commit": "0a6a114319cbc2fcda1e36bbcb157e1841555884",
+  "fixed_commit": "35fc4bdc48171d9a64251c54a1e76deb558cf9d8",
+  "changed_file": "solr/core/src/java/org/apache/solr/servlet/CoreContainerProvider.java",
+  "changed_function": "private void setupJvmMetrics(CoreContainer coresInit, MetricsConfig config) {",
+  "vulnerable_lines": [
+    415,
+    486
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 0,
+  "patch_size_deleted": 12,
+  "auto_locate_confidence": "hand_retargeted",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0113/vulnerable_source.java": "de915982792b7288807b7e6163ca9d281d16d18acb651137f0a19d943056a66c",
+    "cases/CASE-0113/patched_source.java": "fff9e92c36348a1b1e30607fa447a00d566e2059ed926c02182ff6e35fbbb048",
+    "cases/CASE-0113/patch.diff": "2f02b4e742b86e9eca3ad123cf52733306a8c6d3891e73bfd6335dea8624eee2",
+    "model_context/CASE-0113.json": "bf7ecf9e6cb88de521c714138f917ff8f0c82b31992d4b0f5ff98353f32f2f1e",
+    "difficulty/CASE-0113.json": "fa4967f6489dd758aec87b6596e091d511fc7c0eba928795cc287a77a3e5b027",
+    "cases/CASE-0113/metadata.json": "945bd227eb7c9ab00cc7537e9fa04f9d0d8afdd28e058d02d2d7f3897f957375"
+  },
+  "case_level_hash": "500fc66f6b93b190d443f6bb4f6b64f1ff64b73f4ddfe73294511879f5986d29"
+}

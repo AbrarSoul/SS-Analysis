@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0311",
+  "original_source_case_id": "github.com_trevp_tlslite_aca8d4f898b436ff6754e1a9ab96cae976c8a853",
+  "selection_batch": "final",
+  "cve_id": "CVE-2015-3220",
+  "cve_ids_all": [
+    "CVE-2015-3220"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-119"
+  ],
+  "language": "python",
+  "repository": "trevp/tlslite",
+  "repository_url": "https://github.com/trevp/tlslite",
+  "vulnerable_commit": "496980fdc2bc980ca120aed511cffdf8766d9ffe",
+  "fixed_commit": "aca8d4f898b436ff6754e1a9ab96cae976c8a853",
+  "changed_file": "tlslite/tlsrecordlayer.py",
+  "changed_function": "def _decryptRecord(self, recordType, b):",
+  "vulnerable_lines": [
+    958,
+    1039
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0311/vulnerable_source.py": "854a129b9211f1a2a5ae9d5646aa74254a78371784ce50692c245bf000cfb962",
+    "cases/CASE-0311/patched_source.py": "1fcad1e1db4b2115d71fc401d1d18fad5b3b9a3ee8b3117744db184e9494696f",
+    "cases/CASE-0311/patch.diff": "4d21482cd428130973ea355758d11adba0cc630cfaae7ea609ce08d1460376d6",
+    "cases/CASE-0311/metadata.json": "e0c56381e4bbd3fcc3764b9510c27cbef3da16f0b9fca9e4f61c6c3d36aa4386",
+    "model_context/CASE-0311.json": "da8a3eca9be3ac9770190da8cf5550bcf9aa316e0c8ea749549179f45336dda8",
+    "difficulty/CASE-0311.json": "0c0afbb60f0f8e5082618fc677117b5ff57167d070a4768aeeb19875c22636ef"
+  },
+  "case_level_hash": "8bc18598bf93b577b14cc63b5959c3d2beaa185653a8f11bbd2e462663367e43"
+}

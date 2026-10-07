@@ -1,0 +1,41 @@
+Section 22.4 subgroup analysis -- CORRECTED -- model=qwen2.5-coder:32b, condition=autogrep, n=300 cases.
+(86 have evaluable samples.)
+
+  -- By language --
+    python                    n=100 (90 repos)  MCC=+0.662  95% CI=(+0.537, +0.770)
+    java                      n=100 (82 repos)  MCC=+0.479  95% CI=(+0.379, +0.573)
+    javascript                n= 77 (65 repos)  MCC=+0.573  95% CI=(+0.404, +0.729)
+    typescript                n= 23 (22 repos)  MCC=+0.430  95% CI=(+0.155, +0.680)
+
+  -- Pattern vs taint --
+    pattern                   n=220 (190 repos)  MCC=+0.536  95% CI=(+0.448, +0.620)
+    taint                     n= 80 (79 repos)  MCC=+0.606  95% CI=(+0.513, +0.696)
+
+  -- Structural vs context-heavy --
+    context_heavy             n=183 (157 repos)  MCC=+0.545  95% CI=(+0.441, +0.643)
+    structural                n=117 (114 repos)  MCC=+0.561  95% CI=(+0.467, +0.651)
+
+  -- Supported vs partially supported (unsupported excluded) --
+    supported                 n=153 (142 repos)  MCC=+0.536  95% CI=(+0.444, +0.626)
+    partially_supported       n= 99 (92 repos)  MCC=+0.558  95% CI=(+0.433, +0.677)
+
+  (median CVE year: 2023)
+
+  -- Older vs newer CVE --
+    <= 2023 (older)           n=175 (156 repos)  MCC=+0.536  95% CI=(+0.454, +0.612)
+    > 2023 (newer)            n=125 (109 repos)  MCC=+0.593  95% CI=(+0.441, +0.727)
+
+  -- Patch size (tertiles) --
+    small (<= 5 lines)        n=100 (96 repos)  MCC=+0.640  95% CI=(+0.514, +0.755)
+    medium (5-14 lines)       n=100 (94 repos)  MCC=+0.515  95% CI=(+0.422, +0.606)
+    large (>= 15 lines)       n=100 (92 repos)  MCC=+0.501  95% CI=(+0.359, +0.637)
+
+  -- CWE breakdown (166 distinct IDs), 6 with >= 10 cases --
+
+  -- CWEs with >= 10 cases --
+    NVD-CWE-noinfo            n= 18 (16 repos)  MCC=+0.554  95% CI=(+0.348, +0.753)
+    CWE-22                    n= 16 (16 repos)  MCC=+0.707  95% CI=(+0.447, +1.000)
+    CWE-79                    n= 15 (15 repos)  MCC=+0.642  95% CI=(+0.500, +0.707)
+    CWE-200                   n= 12 (11 repos)  MCC=+0.605  95% CI=(+0.447, +0.845)
+    CWE-78                    n= 11 (11 repos)  MCC=+0.798  95% CI=(+0.707, +1.000)
+    CWE-94                    n= 10 (9 repos)  MCC=+0.430  95% CI=(+0.126, +0.707)

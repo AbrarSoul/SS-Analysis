@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0085",
+  "original_source_case_id": "github.com_aedart_ion_c3e2ee08710d4164d796ecb66ed291335dae9291",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-30857",
+  "cve_ids_all": [
+    "CVE-2023-30857"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "typescript",
+  "repository": "aedart/ion",
+  "repository_url": "https://github.com/aedart/ion",
+  "vulnerable_commit": "300421f269959af1198b3757c4bd5f24df699f98",
+  "fixed_commit": "c3e2ee08710d4164d796ecb66ed291335dae9291",
+  "changed_file": "packages/support/src/meta/meta.ts",
+  "changed_function": "function resolveMetadataRecord(owner: object, context: Context, useMetaFromContext: boolean): MetadataRecord",
+  "vulnerable_lines": [
+    212,
+    231
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0085/vulnerable_source.ts": "28d487a8b73c294e4a65cae13bb6163c0f5ab4842498b3499baffecb75b2af68",
+    "cases/CASE-0085/patched_source.ts": "6b13cc82bd32e0e75b8dce4d42251af955d2da3e7910f9386bfad425c2076eea",
+    "cases/CASE-0085/patch.diff": "4672395ac1993ea2933af062724b97c4784f5dc5856ae163ec073f6da8eb78cb",
+    "cases/CASE-0085/metadata.json": "411bb32a931a95e1acef416b498e97b7f7cf250ea1c78dc03683b32b62223563",
+    "model_context/CASE-0085.json": "32af2be444c288bb653177b873f68b07a0ef20e0fdd7ca8ed0533a07a13fa5e4",
+    "difficulty/CASE-0085.json": "d3269b17641eb19672d35cb8ab4c498d7fe230e16240f6f7cb7875bde791045c"
+  },
+  "case_level_hash": "ca1ef7250f671a5ecb65433aed37bc01a152b114405cdb381eebde01766316c8"
+}

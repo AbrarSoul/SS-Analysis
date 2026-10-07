@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0047",
+  "original_source_case_id": "github.com_DSpace_DSpace_afcc6c3389729b85d5c7b0230cbf9aaf7452f31a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-31189",
+  "cve_ids_all": [
+    "CVE-2022-31189"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-209"
+  ],
+  "language": "java",
+  "repository": "DSpace/DSpace",
+  "repository_url": "https://github.com/DSpace/DSpace",
+  "vulnerable_commit": "ebb83a75234d3de9be129464013e998dc929b68d",
+  "fixed_commit": "afcc6c3389729b85d5c7b0230cbf9aaf7452f31a",
+  "changed_file": "dspace-jspui/src/main/java/org/dspace/app/webui/servlet/InternalErrorServlet.java",
+  "changed_function": "protected void doGet(HttpServletRequest request,",
+  "vulnerable_lines": [
+    37,
+    57
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0047/vulnerable_source.java": "867459b7949be49c7507491ecaf717aabfef137ece4d585c14d1d170b4e009eb",
+    "cases/CASE-0047/patched_source.java": "a30c71cab3359e16f3dc7a50c159782cc76181935b7de30b073b6f3d80de24a0",
+    "cases/CASE-0047/patch.diff": "651e87b4d34260fdde4d7aa6e2752f5a94acc96e3e502d25a8333b06efcd5f54",
+    "cases/CASE-0047/metadata.json": "d5c6d7f155be8b3a080869bd03a5c9785d56dc965b5e54194857938b67633e14",
+    "model_context/CASE-0047.json": "76115421594447a6e007cdf31e7e72dcc965888852239998666b9b7f128fca3b",
+    "difficulty/CASE-0047.json": "c8720e84affd5b3909b8f4089c4a15f2daa6bf92932174cb1181e9311d5f238d"
+  },
+  "case_level_hash": "c49797b50ac5692315b822ae4b8fd5ab84c1f466acb4c8b2aeeb750d178e85f8"
+}

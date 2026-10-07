@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0153",
+  "original_source_case_id": "github.com_electron_packager_d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-29900",
+  "cve_ids_all": [
+    "CVE-2024-29900"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-402",
+    "NVD-CWE-Other"
+  ],
+  "language": "typescript",
+  "repository": "electron/packager",
+  "repository_url": "https://github.com/electron/packager",
+  "vulnerable_commit": "224cc6a28ddfcf4d1a184a25d10833cf153e3bda",
+  "fixed_commit": "d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+  "changed_file": "src/resedit.ts",
+  "changed_function": "export async function resedit(exePath: string, options: ExeMetadata) {",
+  "vulnerable_lines": [
+    40,
+    131
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 8,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0153/vulnerable_source.ts": "92d41df87aa5371835fd23fc2e9e792086e35973e66a492e8c4f48ac4d9b52d8",
+    "cases/CASE-0153/patched_source.ts": "6593f25307bd41c8bd3d57bc081a6bf43f13196697242bfb0dda40e5899244ec",
+    "cases/CASE-0153/patch.diff": "29960db84d924cc62471aef707ef2fa5314b2be95227f73ec4a9076a8bb7d7d5",
+    "cases/CASE-0153/metadata.json": "a5c3ddddbf762f60c01e326e6b52245c419b17eb65bafa3b2dba0f455c70412f",
+    "model_context/CASE-0153.json": "22c84da9116fe43f7a4d63b34247187b128589740bb204e77425ba9a65f0a583",
+    "difficulty/CASE-0153.json": "0f469b8e8693796eb47868391760fe4ea37aa7c640314fc9decec82d7f471095"
+  },
+  "case_level_hash": "525906f638782743048b48f7073a5370d278eec34166cd8d243edd9909778517"
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0286",
+  "original_source_case_id": "github.com_shsuishang_modulithshop_42bcb9463425d1be906c3b290cf29885eb5a2324",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2026-5328",
+  "cve_ids_all": [
+    "CVE-2026-5328"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-74",
+    "CWE-89"
+  ],
+  "language": "java",
+  "repository": "shsuishang/modulithshop",
+  "repository_url": "https://github.com/shsuishang/modulithshop",
+  "vulnerable_commit": "829bac71f507e84684c782b9b062b8bf3b5585d6",
+  "fixed_commit": "42bcb9463425d1be906c3b290cf29885eb5a2324",
+  "changed_file": "src/main/java/com/suisung/shopsuite/pt/service/impl/ProductIndexServiceImpl.java",
+  "changed_function": "public ItemListRes listItem(ProductItemInput productItemListReq) {",
+  "vulnerable_lines": [
+    527,
+    631
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 19,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0286/vulnerable_source.java": "9098a883e13977dbd8555e85897c901aebebbbca4b8273c83c3ac669b62c773e",
+    "cases/CASE-0286/patched_source.java": "b1ba86f24b7478a5ebdc453dadcacc0fdb5c693b2b3e6e330757fe62c3c15ddf",
+    "cases/CASE-0286/patch.diff": "d4e3f941818720fd747f858198bfa8d86e769c752cb6a332df4854f07e5b099a",
+    "cases/CASE-0286/metadata.json": "cfd189bd6c1b264ace9e83960d22ffef155e960ecc4a8772f5f168fe9ce6233a",
+    "model_context/CASE-0286.json": "fe1bb64e0225b35be3b01910b6f0802cf375d093867bced107b794b4e63ebddb",
+    "difficulty/CASE-0286.json": "34556d5ef4c5d6de7424d6c14c87c90f41011720814ab1755f4be0d0bf2f7b12"
+  },
+  "case_level_hash": "d097e0396a9b7572f8cac34b605f12bb58b6e885157d9ab9ede4330948068924"
+}

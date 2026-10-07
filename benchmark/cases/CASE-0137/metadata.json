@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0137",
+  "original_source_case_id": "github.com_cryptpad_cryptpad_d5e4830ba104a4a442cb23aab5378b8565a95607",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-49590",
+  "cve_ids_all": [
+    "CVE-2025-49590"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-692"
+  ],
+  "language": "javascript",
+  "repository": "cryptpad/cryptpad",
+  "repository_url": "https://github.com/cryptpad/cryptpad",
+  "vulnerable_commit": "f624f9d457d36040f57c7598d98a8b9461b79837",
+  "fixed_commit": "d5e4830ba104a4a442cb23aab5378b8565a95607",
+  "changed_file": "www/bounce/main.js",
+  "changed_function": "define(['/api/config'], function (ApiConfig) {",
+  "vulnerable_lines": [
+    5,
+    96
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 14,
+  "patch_size_deleted": 13,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0137/vulnerable_source.js": "ad04817f7d928f37bf5a78b0fcbe251301517cbd1612af71106891d455c648d2",
+    "cases/CASE-0137/patched_source.js": "1a83e77b895dbd0aa63d71643d80a48144b85d8f83c2b4f180eee7d1071909f1",
+    "cases/CASE-0137/patch.diff": "07e0997727fea05d65240e4b81ea41128675aac88fafa456c678b7e174839a0b",
+    "cases/CASE-0137/metadata.json": "0a1ce337feb0543b2c162fdf920237aaa4f36914b2a7b3dd4a9d0338f81adf4d",
+    "model_context/CASE-0137.json": "30d662db332d7dcb1a5c7449a0066c091aa7efb601e6e389e780652b16b65e5d",
+    "difficulty/CASE-0137.json": "1dd188c5f5369df829c768bfb4a1aab8f32952c1df45b4af0fc03e0a28d43302"
+  },
+  "case_level_hash": "cf59874c7253b8427e2c7ad26a21eaec5e7ada418fd03f46a1606883beaf1ff7"
+}

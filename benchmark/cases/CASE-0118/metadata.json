@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0118",
+  "original_source_case_id": "github.com_apache_tomcat_0f01966eb60015d975525019e12a087f05ebf01a",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-46701",
+  "cve_ids_all": [
+    "CVE-2025-46701"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-178"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "708c683fa3fe4f5dff22d0abcf78ab3817d85822",
+  "fixed_commit": "0f01966eb60015d975525019e12a087f05ebf01a",
+  "changed_file": "java/org/apache/catalina/servlets/CGIServlet.java",
+  "changed_function": "protected String[] findCGI(String contextPath, String servletPath, String pathInfo, String cgiPathPrefix) {",
+  "vulnerable_lines": [
+    808,
+    907
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 22,
+  "patch_size_deleted": 15,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0118/vulnerable_source.java": "38aefd871c6fce4f27771160f23e8a3e3ece5d07e64c803f4961cdae96d7ba8f",
+    "cases/CASE-0118/patched_source.java": "25e8725cd513f4fa8bc514c99dacdff56728241a0ca00893ac2df6836d6fda49",
+    "cases/CASE-0118/patch.diff": "1d3f59b090857b73ee687ae01b5e66487ec3b35e2082ec73f07b29275d534636",
+    "cases/CASE-0118/metadata.json": "58303fccd9985c0524aaeae925390970b1ffdb7c8a17dc0b88fdbee23c424384",
+    "model_context/CASE-0118.json": "f7a6ea7e8a7ee3b63c00ac8626390620597a7cfe32f689a445bfeadaf683b24e",
+    "difficulty/CASE-0118.json": "839dd1da1ec4f8195c2c9333a4ec3b21c9dceec295e8f5b55807564155fe9b90"
+  },
+  "case_level_hash": "125afc33ed95b207b116f43a633109bf7ba87f2bb13321f3ec692cdd91008b9b"
+}

@@ -1,0 +1,6 @@
+rules:
+- id: gold-snakeyaml-default-constructor
+  message: SnakeYAML parser built with the default (unsafe) constructor
+  severity: ERROR
+  languages: [java]
+  pattern: new Yaml()

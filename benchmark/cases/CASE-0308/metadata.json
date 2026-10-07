@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0308",
+  "original_source_case_id": "github.com_traccar_traccar_cc69a9907ac9878db3750aa14ffedb28626455da",
+  "selection_batch": "final",
+  "cve_id": "CVE-2021-21292",
+  "cve_ids_all": [
+    "CVE-2021-21292"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-428"
+  ],
+  "language": "java",
+  "repository": "traccar/traccar",
+  "repository_url": "https://github.com/traccar/traccar",
+  "vulnerable_commit": "5d0bacea7ebdd169d55c7da0f7d6f3ae1ecf372f",
+  "fixed_commit": "cc69a9907ac9878db3750aa14ffedb28626455da",
+  "changed_file": "src/main/java/org/traccar/WindowsService.java",
+  "changed_function": "public void install(",
+  "vulnerable_lines": [
+    48,
+    89
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0308/vulnerable_source.java": "51603d493d34b6108a98f2f95c58d80c54cfed09e92674e24418149c1d0cd380",
+    "cases/CASE-0308/patched_source.java": "c102404ff5149e9a07878dc3b06dd83818d8f85cd5052b532e8b8806eef335bd",
+    "cases/CASE-0308/patch.diff": "b776ee085cd512f71ecb5f1f7c85f3e42d85b6065373f7f21fbf499312dc438c",
+    "cases/CASE-0308/metadata.json": "aa1fd0e2c4eaf501b97ce7cbac58ee2c90620522efeff05dee5b7d886192aa03",
+    "model_context/CASE-0308.json": "d611093a7eb20cabe4a357b06bc8ed0ff7a9c731fb99e5e12e7716bbe851c496",
+    "difficulty/CASE-0308.json": "b8110a8f251e35f789dd0eea826208accd2ed9b02672c290c7173c8ca6018854"
+  },
+  "case_level_hash": "6dea30650b7d50d5ccf98628fae8fa03d5b029c5d5a3bed79bce86b4b529cd35"
+}

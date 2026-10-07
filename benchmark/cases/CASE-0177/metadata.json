@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0177",
+  "original_source_case_id": "github.com_jaketcooper_Minecraft-rcon_31272b541482d095d1578855c2b571268eb9b877",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-61680",
+  "cve_ids_all": [
+    "CVE-2025-61680"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-256"
+  ],
+  "language": "typescript",
+  "repository": "jaketcooper/Minecraft-rcon",
+  "repository_url": "https://github.com/jaketcooper/Minecraft-rcon",
+  "vulnerable_commit": "3b95dec8e7a087503a6b40421fbfa6cd5d3e04b7",
+  "fixed_commit": "31272b541482d095d1578855c2b571268eb9b877",
+  "changed_file": "src/extension.ts",
+  "changed_function": "export function activate(context: vscode.ExtensionContext) {",
+  "vulnerable_lines": [
+    7,
+    99
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 26,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0177/vulnerable_source.ts": "817371bafc644e71471db1b34722eea986f84b0dbc3add642b86f662f7f99fbb",
+    "cases/CASE-0177/patched_source.ts": "efb3a4b1cdd9c1992a9521fa5ecaab4d46a1ee9c61b65bdce992c7d89680a3bb",
+    "cases/CASE-0177/patch.diff": "71c438b17eeafc4566b9ea422da3a2a944e31291e658d750beadc1a35669a10b",
+    "cases/CASE-0177/metadata.json": "0cb0f81f93b1363bf4730b2b931ef4dda6bc8058eab3dd9ea5666bfce430e9e4",
+    "model_context/CASE-0177.json": "062fc14321bbf466e1c56a608f23c8f4a964642b5ef430c9a9008a26e2e15a34",
+    "difficulty/CASE-0177.json": "49b6e392a870b167ff81e2a4127137a69a9baa213377e84c1ae8550a1761306a"
+  },
+  "case_level_hash": "def71de553cd7f3f3976e92059f8c0552711f3edcf62dcb00d54d6131a803fda"
+}

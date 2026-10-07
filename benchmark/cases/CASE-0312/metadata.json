@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0312",
+  "original_source_case_id": "github.com_trpc_trpc_78629d524968ef8db5a7adf68d8b95a44369d77e",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2025-68130",
+  "cve_ids_all": [
+    "CVE-2025-68130"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "typescript",
+  "repository": "trpc/trpc",
+  "repository_url": "https://github.com/trpc/trpc",
+  "vulnerable_commit": "f476d39932b12801fa7dd51620d458a48171dc69",
+  "fixed_commit": "78629d524968ef8db5a7adf68d8b95a44369d77e",
+  "changed_file": "packages/server/src/unstable-core-do-not-import/http/formDataToObject.ts",
+  "changed_function": "function set(",
+  "vulnerable_lines": [
+    5,
+    33
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 18,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0312/vulnerable_source.ts": "3989275f847b802241f17c4ed9978e04b0f6de2020183035125484d03cbaef94",
+    "cases/CASE-0312/patched_source.ts": "a6c43cf1a39f19340100d274e10f1c167709399f2dba577dc2292ee59284de30",
+    "cases/CASE-0312/patch.diff": "86c1d523ffaf681416ad4fee3f42cd4e735c46d870173e7f668beecb3c7cb6fe",
+    "cases/CASE-0312/metadata.json": "5989b82708bccb3c584fabd315e991ef73719771440d8937d0f1e8bea73f8f16",
+    "model_context/CASE-0312.json": "afc41d9b3aeb5ab5bd5b0680f32cb874942868d1426920a7f83ec97382d2a156",
+    "difficulty/CASE-0312.json": "57a6f286f9e0ef06cc07fae68d5564f596ba6cfa9bb9be27cc43ad3d8d0df1e5"
+  },
+  "case_level_hash": "d1e50e48644ba94237506e0176f04d1302f7a8960fb6aeb9025850a270bf8d5e"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0180",
+  "original_source_case_id": "github.com_jaspernbrouwer_powerline-gitstatus_fe8e963b3489e4cceaa2c1f26f2bcc2ef405364c",
+  "selection_batch": "topup12",
+  "cve_id": "CVE-2022-42906",
+  "cve_ids_all": [
+    "CVE-2022-42906"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-77"
+  ],
+  "language": "python",
+  "repository": "jaspernbrouwer/powerline-gitstatus",
+  "repository_url": "https://github.com/jaspernbrouwer/powerline-gitstatus",
+  "vulnerable_commit": "8000c7f41305ddb421528dd00b6292ffd121c2c2",
+  "fixed_commit": "fe8e963b3489e4cceaa2c1f26f2bcc2ef405364c",
+  "changed_file": "powerline_gitstatus/segments.py",
+  "changed_function": "def get_base_command(self, cwd, use_dash_c):",
+  "vulnerable_lines": [
+    28,
+    41
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0180/vulnerable_source.py": "0f77329cd7fc0fcd7de03f3213a7015a12671445340a4c515ebff74f9c411412",
+    "cases/CASE-0180/patched_source.py": "1fe67bbc2580162c1aa45096d9871d75608106119243cd553338ae5ffb1046e4",
+    "cases/CASE-0180/patch.diff": "136cfb314b1673a323829488ffc4ea0e4306e1e02a5c94ee6710b145000aeff0",
+    "cases/CASE-0180/metadata.json": "ecb01023c205fb585d95c1ddac155585d009f02459e37b25ff8c2483bec53d1b",
+    "model_context/CASE-0180.json": "b596085de65769786434ce90cbb99e14edc86b75a04ad17bb02db22bf8f24076",
+    "difficulty/CASE-0180.json": "078a36e2036b8344fe90d1c56dc185db0e58b6ee83d891332a070c065e9df989"
+  },
+  "case_level_hash": "b7da36b8d82ec47aeb584bdddc2678bc1f8f140e234f97d5b9061933cdfb6c58"
+}

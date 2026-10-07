@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0078",
+  "original_source_case_id": "github.com_Tethik_flask-session-captcha_ab36ee2208993ca7907d1c1b8cef5778a28a3e0e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-24880",
+  "cve_ids_all": [
+    "CVE-2022-24880"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-253",
+    "CWE-394",
+    "CWE-754"
+  ],
+  "language": "python",
+  "repository": "Tethik/flask-session-captcha",
+  "repository_url": "https://github.com/Tethik/flask-session-captcha",
+  "vulnerable_commit": "0c6e2eccc970939d7d48012d7f91011c73ae8274",
+  "fixed_commit": "ab36ee2208993ca7907d1c1b8cef5778a28a3e0e",
+  "changed_file": "flask_session_captcha/__init__.py",
+  "changed_function": "def validate(self, form_key=\"captcha\", value=None):",
+  "vulnerable_lines": [
+    70,
+    88
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0078/vulnerable_source.py": "e2e8bea265be4931fd052f14beac4b988a539c1a5d8d2f39dc9a5ab519b485a6",
+    "cases/CASE-0078/patched_source.py": "9fc83b9e60ace07b8e75e82c9fda5da785b6dd39ea618a30e49ff528bcc4eb2f",
+    "cases/CASE-0078/patch.diff": "3c1d0d94237a306c71929282a7279561058d8f5c5b925d00f27cf60b3c6022d3",
+    "model_context/CASE-0078.json": "86cb9003f4d94eb17fbdd0c518c713ec3a19875c58197fe2031c1b658faf2dfa",
+    "difficulty/CASE-0078.json": "9eb229169c1f96b0586eab0cc89becce9e8f3b3e93a5252f31cae01e0af363b2",
+    "cases/CASE-0078/metadata.json": "e17a2e6082f7732ce9d15a38c31519a534014f73d6213e111e7543071bbcd9fd"
+  },
+  "case_level_hash": "53067ead7842795133cb5bc2de8872d65e875fa6082c2d64ca077fcccbfb0309"
+}

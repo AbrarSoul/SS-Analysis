@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0044",
+  "original_source_case_id": "github.com_Aarondoran_servify-express_8dff7f56504b356278d849734ef2050e5cd23b61",
+  "selection_batch": "topup2",
+  "cve_id": "CVE-2025-67731",
+  "cve_ids_all": [
+    "CVE-2025-67731"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "Aarondoran/servify-express",
+  "repository_url": "https://github.com/Aarondoran/servify-express",
+  "vulnerable_commit": "96462ae7cb3462c8178eb6cf1a1fdbc1bcdfd40d",
+  "fixed_commit": "8dff7f56504b356278d849734ef2050e5cd23b61",
+  "changed_file": "index.js",
+  "changed_function": "static listen(port) {",
+  "vulnerable_lines": [
+    4,
+    19
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 10,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0044/vulnerable_source.js": "36891ed3e1d696a96afbbf2ac0837baaecedf4a4d192d66db82f89febde15b71",
+    "cases/CASE-0044/patched_source.js": "c05e95849336217ee7a10afde1f1821e37ccf51295d3f4af63ddd4817a6ad81d",
+    "cases/CASE-0044/patch.diff": "9583a197d634dcd4c3f94454f41cdb64652cd863331e7469ab0ff803aecfb219",
+    "cases/CASE-0044/metadata.json": "e7d2f4b069a5aae3fae1b45687fadd26b11e7d6c765a27083bbf44f17d9eaa60",
+    "model_context/CASE-0044.json": "93fcb4fae3b9723db153d45cd5f8e0ee65db368ff022c2073d9f18900532f3a7",
+    "difficulty/CASE-0044.json": "fdbe012fd009a90b7054e0dd0b7a3f7c4f09827c9869cc8c2f76339324544c2e"
+  },
+  "case_level_hash": "ae0f500d79632f5e4ed22e48ab6227eb5e18987e0269df7c4ca64869a176d5a3"
+}

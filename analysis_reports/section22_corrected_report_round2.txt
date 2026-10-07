@@ -1,0 +1,179 @@
+eligible_cases.py v2026-10-07.1: 150 eligible supported cases (CASE-0166 dataset exclusion + 3 ground-truth exclusions applied). Using CORRECTED sample data (results_corrected/) + REPOSITORY-AWARE bootstrap throughout, extended to the ESR/end-to-end comparisons as well as MCC (2026-10-07 audit round 2, Priority 6).
+
+====================================================================================================
+COMPARISON 1: Qwen2.5-Coder 7B vs 32B (scale effect) -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct  vs  qwen2.5-coder:32b   (n=150 common cases)
+    ESR: 0.047 vs 0.047  |  diff=+0.000  95% CI=(-0.033, +0.033)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=3 c=3  p=1.0000
+    MCC (conditional, among accepted cases only): 0.513 vs 0.539  |  diff=-0.027  95% CI=(-0.129, +0.071)  repo-aware bootstrap p=0.5864
+
+====================================================================================================
+COMPARISON 2: Qwen2.5-Coder 7B vs DeepHat 7B (security fine-tuning effect) -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct  vs  DeepHat-V1-7B   (n=150 common cases)
+    ESR: 0.047 vs 0.060  |  diff=-0.013  95% CI=(-0.047, +0.020)  repo-aware bootstrap p=0.5512  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=2 c=4  p=0.6875
+    MCC (conditional, among accepted cases only): 0.513 vs 0.545  |  diff=-0.033  95% CI=(-0.120, +0.049)  repo-aware bootstrap p=0.4630
+
+====================================================================================================
+COMPARISON 3: Small code-model family effect (Friedman omnibus on ESR) -- CORRECTED
+====================================================================================================
+  Friedman omnibus (n=150, k=6): stat=15.536  p=0.0083
+    qwen2.5-coder:7b-instruct: ESR=0.047
+    deepseek-coder:6.7b: ESR=0.013
+    codegemma:7b: ESR=0.020
+    magicoder:7b: ESR=0.007
+    yi-coder:9b: ESR=0.053
+    DeepHat-V1-7B: ESR=0.060
+  Omnibus significant -- running repo-aware ESR bootstrap pairwise follow-ups
+  (not McNemar: cases sharing a repo aren't independent, Section22_Scope.md):
+    qwen2.5-coder:7b-instruct vs deepseek-coder:6.7b: raw p=0.1196  Holm-adj p=0.9568
+    qwen2.5-coder:7b-instruct vs codegemma:7b: raw p=0.2012  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs magicoder:7b: raw p=0.0332  Holm-adj p=0.3984
+    qwen2.5-coder:7b-instruct vs yi-coder:9b: raw p=0.8842  Holm-adj p=1.0000
+    qwen2.5-coder:7b-instruct vs DeepHat-V1-7B: raw p=0.5512  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs codegemma:7b: raw p=0.8262  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs magicoder:7b: raw p=0.7904  Holm-adj p=1.0000
+    deepseek-coder:6.7b vs yi-coder:9b: raw p=0.0678  Holm-adj p=0.6760
+    deepseek-coder:6.7b vs DeepHat-V1-7B: raw p=0.0366  Holm-adj p=0.4026
+    codegemma:7b vs magicoder:7b: raw p=0.4460  Holm-adj p=1.0000
+    codegemma:7b vs yi-coder:9b: raw p=0.0676  Holm-adj p=0.6760
+    codegemma:7b vs DeepHat-V1-7B: raw p=0.0030  Holm-adj p=0.0420 *
+    magicoder:7b vs yi-coder:9b: raw p=0.0026  Holm-adj p=0.0390 *
+    magicoder:7b vs DeepHat-V1-7B: raw p=0.0072  Holm-adj p=0.0936
+    yi-coder:9b vs DeepHat-V1-7B: raw p=0.8692  Holm-adj p=1.0000
+
+====================================================================================================
+COMPARISON 4: Raw vs Autogrep (pipeline effect), all 8 models -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (raw)  vs  qwen2.5-coder:7b-instruct (autogrep)   (n=150 common cases)
+    ESR: 0.040 vs 0.047  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7368  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): 0.101 vs 0.513  |  diff=-0.412  95% CI=(-0.503, -0.329)  repo-aware bootstrap p < 0.0001
+
+  qwen2.5-coder:32b (raw)  vs  qwen2.5-coder:32b (autogrep)   (n=150 common cases)
+    ESR: 0.047 vs 0.047  |  diff=+0.000  95% CI=(+0.000, +0.000)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=0  p=1.0000
+    MCC (conditional, among accepted cases only): 0.145 vs 0.539  |  diff=-0.395  95% CI=(-0.484, -0.316)  repo-aware bootstrap p < 0.0001
+
+  DeepHat-V1-7B (raw)  vs  DeepHat-V1-7B (autogrep)   (n=150 common cases)
+    ESR: 0.053 vs 0.060  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7356  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): 0.073 vs 0.545  |  diff=-0.472  95% CI=(-0.564, -0.389)  repo-aware bootstrap p < 0.0001
+
+  deepseek-coder:6.7b (raw)  vs  deepseek-coder:6.7b (autogrep)   (n=150 common cases)
+    ESR: 0.007 vs 0.013  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7296  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): -0.099 vs 0.373  |  diff=-0.472  95% CI=(-0.640, -0.307)  repo-aware bootstrap p < 0.0001
+
+  codegemma:7b (raw)  vs  codegemma:7b (autogrep)   (n=150 common cases)
+    ESR: 0.020 vs 0.020  |  diff=+0.000  95% CI=(+0.000, +0.000)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=0  p=1.0000
+    MCC (conditional, among accepted cases only): -0.092 vs 0.521  |  diff=-0.613  95% CI=(-0.722, -0.514)  repo-aware bootstrap p < 0.0001
+
+  magicoder:7b (raw)  vs  magicoder:7b (autogrep)   (n=150 common cases)
+    ESR: 0.007 vs 0.007  |  diff=+0.000  95% CI=(+0.000, +0.000)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=0  p=1.0000
+    MCC (conditional, among accepted cases only): -0.064 vs 0.427  |  diff=-0.491  95% CI=(-0.646, -0.341)  repo-aware bootstrap p < 0.0001
+
+  yi-coder:9b (raw)  vs  yi-coder:9b (autogrep)   (n=150 common cases)
+    ESR: 0.033 vs 0.053  |  diff=-0.020  95% CI=(-0.045, +0.000)  repo-aware bootstrap p=0.0956  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=3  p=0.2500
+    MCC (conditional, among accepted cases only): 0.015 vs 0.534  |  diff=-0.519  95% CI=(-0.625, -0.420)  repo-aware bootstrap p < 0.0001
+
+  codellama:7b-instruct-fp16 (raw)  vs  codellama:7b-instruct-fp16 (autogrep)   (n=150 common cases)
+    ESR: 0.000 vs 0.007  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7368  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): -0.113 vs 0.510  |  diff=-0.623  95% CI=(-0.738, -0.520)  repo-aware bootstrap p < 0.0001
+
+  Aggregate: 0/8 models show a significant raw-vs-autogrep ESR difference after Holm correction (repo-aware bootstrap p-values).
+
+====================================================================================================
+COMPARISON 5: C1 vs C2 (iterative feedback effect), all 8 models -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:7b-instruct (C1/raw)  vs  qwen2.5-coder:7b-instruct (C2)   (n=150 common cases)
+    ESR: 0.040 vs 0.047  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7368  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): 0.101 vs 0.502  |  diff=-0.401  95% CI=(-0.491, -0.318)  repo-aware bootstrap p < 0.0001
+
+  qwen2.5-coder:32b (C1/raw)  vs  qwen2.5-coder:32b (C2)   (n=150 common cases)
+    ESR: 0.047 vs 0.047  |  diff=+0.000  95% CI=(+0.000, +0.000)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=0  p=1.0000
+    MCC (conditional, among accepted cases only): 0.145 vs 0.539  |  diff=-0.395  95% CI=(-0.484, -0.316)  repo-aware bootstrap p < 0.0001
+
+  DeepHat-V1-7B (C1/raw)  vs  DeepHat-V1-7B (C2)   (n=150 common cases)
+    ESR: 0.053 vs 0.060  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7356  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): 0.073 vs 0.545  |  diff=-0.472  95% CI=(-0.564, -0.389)  repo-aware bootstrap p < 0.0001
+
+  deepseek-coder:6.7b (C1/raw)  vs  deepseek-coder:6.7b (C2)   (n=150 common cases)
+    ESR: 0.007 vs 0.013  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7296  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): -0.099 vs 0.373  |  diff=-0.472  95% CI=(-0.640, -0.307)  repo-aware bootstrap p < 0.0001
+
+  codegemma:7b (C1/raw)  vs  codegemma:7b (C2)   (n=150 common cases)
+    ESR: 0.020 vs 0.020  |  diff=+0.000  95% CI=(+0.000, +0.000)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=0  p=1.0000
+    MCC (conditional, among accepted cases only): -0.092 vs 0.521  |  diff=-0.613  95% CI=(-0.722, -0.514)  repo-aware bootstrap p < 0.0001
+
+  magicoder:7b (C1/raw)  vs  magicoder:7b (C2)   (n=150 common cases)
+    ESR: 0.007 vs 0.007  |  diff=+0.000  95% CI=(+0.000, +0.000)  repo-aware bootstrap p=1.0000  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=0  p=1.0000
+    MCC (conditional, among accepted cases only): -0.064 vs 0.403  |  diff=-0.467  95% CI=(-0.603, -0.335)  repo-aware bootstrap p < 0.0001
+
+  yi-coder:9b (C1/raw)  vs  yi-coder:9b (C2)   (n=150 common cases)
+    ESR: 0.033 vs 0.053  |  diff=-0.020  95% CI=(-0.045, +0.000)  repo-aware bootstrap p=0.0956  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=3  p=0.2500
+    MCC (conditional, among accepted cases only): 0.015 vs 0.516  |  diff=-0.501  95% CI=(-0.609, -0.399)  repo-aware bootstrap p < 0.0001
+
+  codellama:7b-instruct-fp16 (C1/raw)  vs  codellama:7b-instruct-fp16 (C2)   (n=150 common cases)
+    ESR: 0.000 vs 0.007  |  diff=-0.007  95% CI=(-0.021, +0.000)  repo-aware bootstrap p=0.7368  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=0 c=1  p=1.0000
+    MCC (conditional, among accepted cases only): -0.113 vs 0.510  |  diff=-0.623  95% CI=(-0.738, -0.520)  repo-aware bootstrap p < 0.0001
+
+  Aggregate: 0/8 models show a significant C1-vs-C2 ESR difference after Holm correction (repo-aware bootstrap p-values).
+
+====================================================================================================
+COMPARISON 6: C2 vs C3 (role-separation effect) -- CORRECTED
+====================================================================================================
+
+  qwen2.5-coder:32b (C2)  vs  C3-S   (n=150 common cases)
+    ESR: 0.047 vs 0.053  |  diff=-0.007  95% CI=(-0.059, +0.042)  repo-aware bootstrap p=0.9094  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=6 c=7  p=1.0000
+    MCC (conditional, among accepted cases only): 0.539 vs 0.649  |  diff=-0.110  95% CI=(-0.238, +0.020)  repo-aware bootstrap p=0.0992
+
+  qwen2.5-coder:7b-instruct (C2)  vs  C3-E   (n=150 common cases)
+    ESR: 0.047 vs 0.013  |  diff=+0.033  95% CI=(-0.007, +0.075)  repo-aware bootstrap p=0.1208  [no statistically detectable difference]
+    (descriptive only, assumes independent pairs) McNemar b=7 c=2  p=0.1797
+    MCC (conditional, among accepted cases only): 0.502 vs 0.545  |  diff=-0.043  95% CI=(-0.232, +0.150)  repo-aware bootstrap p=0.6330
+
+====================================================================================================
+COMPARISON 7: C3 vs C4 (heterogeneous assignment effect) -- CORRECTED
+====================================================================================================
+  Friedman omnibus (n=150, k=4): stat=9.140  p=0.0275
+    C3-S: ESR=0.053
+    C3-E: ESR=0.013
+    C4-A: ESR=0.007
+    C4-B: ESR=0.040
+
+  Pairwise ESR (end-to-end) repo-aware bootstrap for all 6 pairs:
+    C3-S vs C3-E: ESR diff=+0.040  95% CI=(+0.000, +0.086)  raw p=0.0874  Holm-adj p=0.3496
+    C3-S vs C4-A: ESR diff=+0.047  95% CI=(+0.007, +0.092)  raw p=0.0236  Holm-adj p=0.1416
+    C3-S vs C4-B: ESR diff=+0.013  95% CI=(-0.020, +0.053)  raw p=0.6144  Holm-adj p=1.0000
+    C3-E vs C4-A: ESR diff=+0.007  95% CI=(-0.014, +0.031)  raw p=0.7890  Holm-adj p=1.0000
+    C3-E vs C4-B: ESR diff=-0.027  95% CI=(-0.066, +0.007)  raw p=0.2106  Holm-adj p=0.6318
+    C4-A vs C4-B: ESR diff=-0.033  95% CI=(-0.069, +0.000)  raw p=0.0672  Holm-adj p=0.3360
+
+  Pairwise MCC (conditional, among accepted cases only) repo-aware bootstrap for all 6
+  pairs -- the metric the original C4-A/C4-B narrative was built on:
+    C3-S vs C3-E: MCC diff=+0.104  95% CI=(-0.091, +0.308)  raw p=0.3024  Holm-adj p=0.9072
+    C3-S vs C4-A: MCC diff=+0.125  95% CI=(-0.029, +0.274)  raw p=0.1074  Holm-adj p=0.6444
+    C3-S vs C4-B: MCC diff=-0.018  95% CI=(-0.131, +0.086)  raw p=0.7644  Holm-adj p=1.0000
+    C3-E vs C4-A: MCC diff=+0.021  95% CI=(-0.207, +0.235)  raw p=0.8488  Holm-adj p=1.0000
+    C3-E vs C4-B: MCC diff=-0.123  95% CI=(-0.319, +0.055)  raw p=0.1892  Holm-adj p=0.7568
+    C4-A vs C4-B: MCC diff=-0.144  95% CI=(-0.319, +0.031)  raw p=0.1148  Holm-adj p=0.6444

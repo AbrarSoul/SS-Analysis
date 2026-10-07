@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0050",
+  "original_source_case_id": "github.com_FasterXML_jackson-databind_998efd708284778f29d83d7962a9bd935c228317",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2019-14893",
+  "cve_ids_all": [
+    "CVE-2019-14893"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-200",
+    "CWE-502"
+  ],
+  "language": "java",
+  "repository": "FasterXML/jackson-databind",
+  "repository_url": "https://github.com/FasterXML/jackson-databind",
+  "vulnerable_commit": "41b7f9b90149e9d44a65a8261a8deedc7186f6af",
+  "fixed_commit": "998efd708284778f29d83d7962a9bd935c228317",
+  "changed_file": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java",
+  "changed_function": "static {",
+  "vulnerable_lines": [
+    30,
+    115
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0050/vulnerable_source.java": "0d248e1867bbba2b9288c1281b873d335ba185b301fcf221652db240b70dee2a",
+    "cases/CASE-0050/patched_source.java": "dac5bb1da25f319b0a0e98d3c155ea0ee9c96ab401733e6da0f279f4b879220f",
+    "cases/CASE-0050/patch.diff": "375ba559b392792a6ac0b0deda28de142749ae06c8df32bb2ca387a562697be4",
+    "cases/CASE-0050/metadata.json": "1a9d758afc7573958715cdd0d252abad05c68afb9adb793c59d9dfcda72c76a1",
+    "model_context/CASE-0050.json": "7a6d8a95fec056e91189cd38abc0323c199631172fee06dc540f974703888129",
+    "difficulty/CASE-0050.json": "22ff65fd76444620bcb12af02353840abc3c7e1342a3e373b07a884391df2005"
+  },
+  "case_level_hash": "71c010fda9d98892cc6e4c16bf9fb5c6c729cbea7c08e6e2f488901a707036bd"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0319",
+  "original_source_case_id": "github.com_usmannasir_cyberpanel_6778ad1eaae41f72365da8fd021f9a60369600dc",
+  "selection_batch": "final",
+  "cve_id": "CVE-2024-54679",
+  "cve_ids_all": [
+    "CVE-2024-54679"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "language": "python",
+  "repository": "usmannasir/cyberpanel",
+  "repository_url": "https://github.com/usmannasir/cyberpanel",
+  "vulnerable_commit": "94733d206cedb2812cf80f86e59eee28494f13c0",
+  "fixed_commit": "6778ad1eaae41f72365da8fd021f9a60369600dc",
+  "changed_file": "databases/views.py",
+  "changed_function": "def restartMySQL(request):",
+  "vulnerable_lines": [
+    400,
+    420
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0319/vulnerable_source.py": "13a04c20b0dd61b745f91b5655968d9ac9f0e4a4b426708a4949f4240e47ed30",
+    "cases/CASE-0319/patched_source.py": "8ba05f24a05cfd91ef0109b0e0b6a53183fe05875e246c000b9ae00f6f0d601b",
+    "cases/CASE-0319/patch.diff": "53042d3400e4bf4f8a05d5f2b2fa4f289a92d00221aec7bce9c4c78c7066e168",
+    "cases/CASE-0319/metadata.json": "20cca506fb74297e6d3524982a66fb0fce7846959320769348955bd3a7875aa0",
+    "model_context/CASE-0319.json": "cfcda4e64ee832479bb490ea0884b3b20e993d321d7a5fc065d5837672e2528f",
+    "difficulty/CASE-0319.json": "34bdca631d0f871dbd4da50a6f4ef1359b5c1c01ffdae446c714bcf8069a64fb"
+  },
+  "case_level_hash": "957c1f7dbd97c0bda578c274066277d9ade891c1c9d07a99fad8a7d13b323ec1"
+}

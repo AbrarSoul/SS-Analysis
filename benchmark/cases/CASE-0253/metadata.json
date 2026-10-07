@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0253",
+  "original_source_case_id": "github.com_parallax_jsPDF_2863e5c26afef211a545e8c174ab4d5fce3b8c0e",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-24040",
+  "cve_ids_all": [
+    "CVE-2026-24040"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "language": "javascript",
+  "repository": "parallax/jsPDF",
+  "repository_url": "https://github.com/parallax/jsPDF",
+  "vulnerable_commit": "efe54bf50f3f5e5416b2495e3c24624fc80b6cff",
+  "fixed_commit": "2863e5c26afef211a545e8c174ab4d5fce3b8c0e",
+  "changed_file": "src/modules/javascript.js",
+  "changed_function": "jsPDFAPI.addJS = function(javascript) {",
+  "vulnerable_lines": [
+    44,
+    66
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0253/vulnerable_source.js": "ab76506fa586b6c7928c2a493da13773312d938897d653c46beba9c99f8f3746",
+    "cases/CASE-0253/patched_source.js": "cbf753d7b22ba616165e258d4e1326e08ff5a16c7e194ed24e731647dfc94a58",
+    "cases/CASE-0253/patch.diff": "a9bd4d4d6138d07b115a2af193d820545223b00ec1d218488800761333950f12",
+    "cases/CASE-0253/metadata.json": "65f79e91cb9faa4757e0bb16db4a9b9ac8264a230e73c87fc6f543b3069ba12c",
+    "model_context/CASE-0253.json": "e0119a9dd5d895f63ddd53cc58cdc163ba54282c79f98fb44d02271de0d8c7d5",
+    "difficulty/CASE-0253.json": "522c47ee5413b2864d91b36e953a2969eb363be27e9135c845d609697ae23b78"
+  },
+  "case_level_hash": "df0fdf8ebc04dfbd991c827747e5aa76ed8bc97d078369e859a7ab6971a42395"
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0267",
+  "original_source_case_id": "github.com_psf_requests_66d21cb07bd6255b1280291c4fafb71803cdb3b7",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-25645",
+  "cve_ids_all": [
+    "CVE-2026-25645"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-377"
+  ],
+  "language": "python",
+  "repository": "psf/requests",
+  "repository_url": "https://github.com/psf/requests",
+  "vulnerable_commit": "8b9bc8fc0f63be84602387913c4b689f19efd028",
+  "fixed_commit": "66d21cb07bd6255b1280291c4fafb71803cdb3b7",
+  "changed_file": "src/requests/utils.py",
+  "changed_function": "def extract_zipped_paths(path):",
+  "vulnerable_lines": [
+    257,
+    292
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 7,
+  "patch_size_deleted": 6,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0267/vulnerable_source.py": "cec5300f875827b186f7b8beada50b8b82c073ab357dbc6bc836b2c849707922",
+    "cases/CASE-0267/patched_source.py": "c433154e14f78de6d50ea7fe753825b8bbb3c9459468dee052f8b68edc2572dc",
+    "cases/CASE-0267/patch.diff": "028fd932b923b18c6a26be7b2bc17a7fbd61d5ce0080ce2dc2db34d9b2a5e0b0",
+    "cases/CASE-0267/metadata.json": "f3107aae5c3687fb4bbdacf82c3cdb8bb718e963326e7a1e302b505fa4c92531",
+    "model_context/CASE-0267.json": "f53809b9a6403ef6807f77bfa1b0c20252ab0a5218ae1be553fb46e9c4f7a94a",
+    "difficulty/CASE-0267.json": "ae1001c8107df6e0e6a544b4009e2e354250760e7959830e1680d9f8b0631095"
+  },
+  "case_level_hash": "c6fcdffb2570552e31baceeba473cee1b824a5b0e2b93a15572486b556f0c157"
+}

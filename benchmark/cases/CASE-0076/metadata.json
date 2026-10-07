@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0076",
+  "original_source_case_id": "github.com_Tautulli_Tautulli_ec77a70aafc555e1aad0d9981f719d1200c117f1",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-58761",
+  "cve_ids_all": [
+    "CVE-2025-58761",
+    "CVE-2025-58763"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-27",
+    "CWE-78"
+  ],
+  "language": "python",
+  "repository": "Tautulli/Tautulli",
+  "repository_url": "https://github.com/Tautulli/Tautulli",
+  "vulnerable_commit": "47566128e2e5dde98980d59b7a51b98173bc0b40",
+  "fixed_commit": "ec77a70aafc555e1aad0d9981f719d1200c117f1",
+  "changed_file": "plexpy/webserve.py",
+  "changed_function": "def real_pms_image_proxy(self, img=None, rating_key=None, width=750, height=1000,",
+  "vulnerable_lines": [
+    4726,
+    4855
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 4,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0076/vulnerable_source.py": "214ff0f0bb4e4b176321002bef1fe9fdd741c28a6b2c20004aa1f9fb239d13ea",
+    "cases/CASE-0076/patched_source.py": "da909b44f8c561f3848c86e8d6752a10f1e35486cd1639ca1f95823021395516",
+    "cases/CASE-0076/patch.diff": "3fd85d5a9af23b38e534c41ec7c0436d62c23614b45147863b18bb70abda4c3b",
+    "cases/CASE-0076/metadata.json": "8dc34081d5f38250edb6e2cdb95dc36ea337c680a9162a2d0748437b23aa7866",
+    "model_context/CASE-0076.json": "32d2d3fb5a1310099321039d5697689fb541b741cc9c5f172293a6a7bf3f2737",
+    "difficulty/CASE-0076.json": "2f0d7eae71ba4864308979ee50b1c885514f5e52541f5d8c3bf5fec5a70836f8"
+  },
+  "case_level_hash": "fc2390bdd52f36fff4f05b781038c21d1de5037e73d9587e97944ce4de1db429"
+}

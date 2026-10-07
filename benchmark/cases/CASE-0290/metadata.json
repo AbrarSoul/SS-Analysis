@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0290",
+  "original_source_case_id": "github.com_solana-labs_solana-pay_ac6ce0d0a81137700874a8bf5a7caac3be999fad",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-35917",
+  "cve_ids_all": [
+    "CVE-2022-35917"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-670"
+  ],
+  "language": "typescript",
+  "repository": "solana-labs/solana-pay",
+  "repository_url": "https://github.com/solana-labs/solana-pay",
+  "vulnerable_commit": "f41701dc7931f7882c6eb0582c9ddd796eb9d3aa",
+  "fixed_commit": "ac6ce0d0a81137700874a8bf5a7caac3be999fad",
+  "changed_file": "core/src/validateTransfer.ts",
+  "changed_function": "async function validateSPLTokenTransfer(",
+  "vulnerable_lines": [
+    97,
+    114
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 60,
+  "patch_size_deleted": 18,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0290/vulnerable_source.ts": "4e107c0fadaf890d7184f5a8e55f43f20ff74c5b4031e97bdc6f088f78b5fcb0",
+    "cases/CASE-0290/patched_source.ts": "87af8e95b28892c96b62ba95b0a1c8587a17e648d779aa2cb2979d817edc0fca",
+    "cases/CASE-0290/patch.diff": "4ff386da8a4a88653810d424537226f94ce65f035a203af7cfe6d8c0ac4d0148",
+    "cases/CASE-0290/metadata.json": "300e491aafffb6f20792bf0b450c78f1747f92d7123f816513be74fb21f677be",
+    "model_context/CASE-0290.json": "075a4da620ec417abf341330144d8fe93fc4f40179c7a878aab97703c549067c",
+    "difficulty/CASE-0290.json": "8d8a507d5842bb32bd580a47e6c383ff3c0d9d9aac3b96583f5663027a75e9ae"
+  },
+  "case_level_hash": "bbe253c4f6397aec16c9fc9587e4deb0a7a0af75188cc787725a570a68ad3524"
+}

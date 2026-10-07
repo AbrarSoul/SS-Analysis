@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0084",
+  "original_source_case_id": "github.com_advplyr_audiobookshelf_ec6537656925a43871b07cfee12c9f383844d224",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-25205",
+  "cve_ids_all": [
+    "CVE-2025-25205"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-202",
+    "CWE-287",
+    "CWE-400"
+  ],
+  "language": "javascript",
+  "repository": "advplyr/audiobookshelf",
+  "repository_url": "https://github.com/advplyr/audiobookshelf",
+  "vulnerable_commit": "068ba84a8c5e9f4630df4d0c7f013dddbdbd5d1f",
+  "fixed_commit": "ec6537656925a43871b07cfee12c9f383844d224",
+  "changed_file": "server/Auth.js",
+  "changed_function": "constructor() {",
+  "vulnerable_lines": [
+    18,
+    22
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 7,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0084/vulnerable_source.js": "03a61990760354aa34ceebac086312cd9c4bcabf0b1d12f43ff63ebda16431e1",
+    "cases/CASE-0084/patched_source.js": "578e8effebef0c310ee2ef468e8410865baabf1b8c885bce7c620a10e2b0492b",
+    "cases/CASE-0084/patch.diff": "e231f8cb614cf72ca6a246371f1b599f2ceabce05e04d3ba10a598f319cef96a",
+    "model_context/CASE-0084.json": "a9fcd0c6bbd97bad144b52e67c0c32d99ec6ae6bb4ba0ff0a22618d1ef63163f",
+    "difficulty/CASE-0084.json": "69a742858230511bd0a5e9a635a1d2b27b648f474cb550ec0b6872a86dadb34c",
+    "cases/CASE-0084/metadata.json": "bedaa29a0422b76a358583ab54ff4a47fecec3f670db30ccd11b5c81daed79fc"
+  },
+  "case_level_hash": "3f1d5b188b7b01972d44dfa6041399e0a0be5c522308a9b72b0b156937f6337c"
+}

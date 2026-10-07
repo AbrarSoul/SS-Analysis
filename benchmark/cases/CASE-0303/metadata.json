@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0303",
+  "original_source_case_id": "github.com_thlorenz_browserify-shim_97855e622b6dcd117c77e6583701962ff45e7338",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2022-37617",
+  "cve_ids_all": [
+    "CVE-2022-37617",
+    "CVE-2022-37621",
+    "CVE-2022-37623"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1321"
+  ],
+  "language": "javascript",
+  "repository": "thlorenz/browserify-shim",
+  "repository_url": "https://github.com/thlorenz/browserify-shim",
+  "vulnerable_commit": "bae7ece76cf76a5c0382468db324d61c1f533929",
+  "fixed_commit": "97855e622b6dcd117c77e6583701962ff45e7338",
+  "changed_file": "lib/resolve-shims.js",
+  "changed_function": "Object.keys(shims).forEach(function (k) {",
+  "vulnerable_lines": [
+    125,
+    134
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0303/vulnerable_source.js": "bfd2afdc2e6be74e06d15e226f177535361f87e847c703f555a264eaddb228d9",
+    "cases/CASE-0303/patched_source.js": "1d766d4720829822efc29eefb29d0c59eeef6cbd9efdc1dac175ec5e1d26f6b0",
+    "cases/CASE-0303/patch.diff": "7a0aed1028ae69cf6d1bf45f1af404052debf1cd60d7ea1a78bba53323aa0725",
+    "cases/CASE-0303/metadata.json": "ae927aade1d1e5ba8a54aab5b5e2e4d049eb64e6a02991e269d4207316312a2d",
+    "model_context/CASE-0303.json": "db83fd5008990bfcd225b540f31eab174af3775eb85b522c9a747527a44cb19c",
+    "difficulty/CASE-0303.json": "5c196ed139080bdd50b92e07b812f98992c92c19310420296d560b9b9aa08a04"
+  },
+  "case_level_hash": "16cc83c9523dcc654b048c54a4ccf34b25d5de5faebaffacd2a9e47a8358691b"
+}

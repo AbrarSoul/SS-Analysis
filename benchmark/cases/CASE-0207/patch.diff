@@ -1,0 +1,13 @@
+diff --git a/quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/legacy/infinispan/CacheManagerFactory.java b/quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/legacy/infinispan/CacheManagerFactory.java
+index da4db0ccf7..2f63124350 100644
+--- a/quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/legacy/infinispan/CacheManagerFactory.java
++++ b/quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/legacy/infinispan/CacheManagerFactory.java
+@@ -179,7 +179,7 @@ public class CacheManagerFactory {
+             transportConfig.defaultTransport().stack(transportStack);
+         }
+ 
+-        if (Configuration.isTrue(CachingOptions.CACHE_REMOTE_TLS_ENABLED)) {
++        if (Configuration.isTrue(CachingOptions.CACHE_EMBEDDED_MTLS_ENABLED_PROPERTY)) {
+             validateTlsAvailable(transportConfig.build());
+             var tls = new TLS()
+                     .enabled(true)

@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0189",
+  "original_source_case_id": "github.com_jenkinsci_monitoring-plugin_f0f6aeef2032696c97d4b015dd51fa2b841b0473",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2014-3678",
+  "cve_ids_all": [
+    "CVE-2014-3678",
+    "CVE-2014-3679"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-79",
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/monitoring-plugin",
+  "repository_url": "https://github.com/jenkinsci/monitoring-plugin",
+  "vulnerable_commit": "f574a976b9cb4c3aad7f8af5e7f1eaa12f6bd548",
+  "fixed_commit": "f0f6aeef2032696c97d4b015dd51fa2b841b0473",
+  "changed_file": "src/main/java/org/jvnet/hudson/plugins/monitoring/HudsonMonitoringFilter.java",
+  "changed_function": "public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)",
+  "vulnerable_lines": [
+    59,
+    90
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0189/vulnerable_source.java": "f60f056911083ccccadeb3851baaaed1cd2b04d15d477d3f81eb0a2b1e50deab",
+    "cases/CASE-0189/patched_source.java": "397eef9cf8acc351db2800f48a03d1d34091f5c510ae7de2481bd138c67e80a4",
+    "cases/CASE-0189/patch.diff": "94c5799e5f9a10187ea66d5803291864bd05d77d393bbcf18f3d65b3265ea6e8",
+    "cases/CASE-0189/metadata.json": "7f8b04059395b32a2f18cfc7e771d02d2fbc4932c0fd2314c0e8552dbf8eb10c",
+    "model_context/CASE-0189.json": "aa03aca03b6b29b8670d3abb5813a3375299f97ea6a503043ccde180cf53e2c5",
+    "difficulty/CASE-0189.json": "fd4449771b6840a4863dcdd6fed0c2db20bbfea0b1c5616063ff4478253d96e2"
+  },
+  "case_level_hash": "f2924d691d60efa6a623a5ee2411548ed58aa2950ab0ad688253403da00fc468"
+}

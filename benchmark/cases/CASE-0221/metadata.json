@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0221",
+  "original_source_case_id": "github.com_micronaut-projects_micronaut-core_9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-7611",
+  "cve_ids_all": [
+    "CVE-2020-7611"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-444"
+  ],
+  "language": "java",
+  "repository": "micronaut-projects/micronaut-core",
+  "repository_url": "https://github.com/micronaut-projects/micronaut-core",
+  "vulnerable_commit": "a2392f4289f7777c4a310c3ae3bb4bc0ce5a65c2",
+  "fixed_commit": "9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1",
+  "changed_file": "http-netty/src/main/java/io/micronaut/http/netty/NettyHttpHeaders.java",
+  "changed_function": "public NettyHttpHeaders() {",
+  "vulnerable_lines": [
+    55,
+    58
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0221/vulnerable_source.java": "96a93ef66a2e02ffd7be4b16dde3db1314fd6dfc1f44116a6404ca9c1383862b",
+    "cases/CASE-0221/patched_source.java": "f6eccb5863308fb9d75ab30d8fcebd2a68293805153bf16399d865b65d3d5b01",
+    "cases/CASE-0221/patch.diff": "9726e45a7bfd9b27ff07be3e8fca73160759216c2e0dc64bcef521c758fd7959",
+    "cases/CASE-0221/metadata.json": "72088d410a92891bb5ac941345a482b7335c85f73d95c27f24458189a686d184",
+    "model_context/CASE-0221.json": "15bef46124f7d41d5faf47ae54a1b5fb2cb2cd32fc08132968baaf46f63219f2",
+    "difficulty/CASE-0221.json": "089a34e4aaf8d0bf9ea85cd8f265f7b614aa650c8fc82049c15454d54626fbfe"
+  },
+  "case_level_hash": "d05db1e363d256a9e8fa08691422106bee1a068322e0971f1b2c894e45c977b6"
+}

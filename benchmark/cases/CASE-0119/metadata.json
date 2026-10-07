@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0119",
+  "original_source_case_id": "github.com_apache_tomcat_2cb9c724e6a2d15a5bc909c4bf1ab9dfc26fa362",
+  "selection_batch": "final",
+  "cve_id": "CVE-2017-5650",
+  "cve_ids_all": [
+    "CVE-2017-5650"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-404"
+  ],
+  "language": "java",
+  "repository": "apache/tomcat",
+  "repository_url": "https://github.com/apache/tomcat",
+  "vulnerable_commit": "2c84783ac9a7a5f7d9cf56a58792c609016ce87a",
+  "fixed_commit": "2cb9c724e6a2d15a5bc909c4bf1ab9dfc26fa362",
+  "changed_file": "java/org/apache/coyote/http2/Http2UpgradeHandler.java",
+  "changed_function": "private void close() {",
+  "vulnerable_lines": [
+    984,
+    991
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0119/vulnerable_source.java": "6298fee95397ab0e201114b52121a25bc94d1e1eb29d2005ffa0e5f2d11c870a",
+    "cases/CASE-0119/patched_source.java": "a5b09f5a3c6577af51c7c91a61031fe0e1615d6b60a95422e93ef8884456d745",
+    "cases/CASE-0119/patch.diff": "66abba6baf4c582493eb37b1873fbf871a9c4f6a3796a19dcc2ab8a1685718cc",
+    "cases/CASE-0119/metadata.json": "0046b0fab3f97cef0fb083fecfe249c05ddb98e11710051f4f6b0570632fc7e7",
+    "model_context/CASE-0119.json": "ecba4df5584b5afee72045c2f369d1295fd7e52d8d6f689a31c95b5fad08342a",
+    "difficulty/CASE-0119.json": "82c7011c142a480c09d1859ae1bb5d621a7e42e08db3a9336baaede50e1668a9"
+  },
+  "case_level_hash": "4bbbbd7b75497fa6a3018e3ffd3d885a76e74c430ad3c41f1ea2c0fabe5f39a5"
+}

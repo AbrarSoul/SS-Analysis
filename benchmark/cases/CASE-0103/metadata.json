@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0103",
+  "original_source_case_id": "github.com_apache_cxf_1a4fe22fc297f8be204788bcdfcd498e91201a01",
+  "selection_batch": "final",
+  "cve_id": "CVE-2017-5656",
+  "cve_ids_all": [
+    "CVE-2017-5656"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-384"
+  ],
+  "language": "java",
+  "repository": "apache/cxf",
+  "repository_url": "https://github.com/apache/cxf",
+  "vulnerable_commit": "22a58c399ccdb94f5969ab3be9dfad46cf222af2",
+  "fixed_commit": "1a4fe22fc297f8be204788bcdfcd498e91201a01",
+  "changed_file": "rt/ws/security/src/main/java/org/apache/cxf/ws/security/trust/DefaultSTSTokenCacher.java",
+  "changed_function": "private static String getIdFromToken(Element token) {",
+  "vulnerable_lines": [
+    166,
+    178
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 35,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0103/vulnerable_source.java": "6ae9d1e2bb3fd3198366f22fb6650bdd5cb9eb11016afa1fa2394fd49a9783bf",
+    "cases/CASE-0103/patched_source.java": "75fe522f822e91f2b21d8554ac867ee28a0e06b9ca4e666410cc89cfb29691c1",
+    "cases/CASE-0103/patch.diff": "8b822f7dae1303c5a3f7523e8d24bf205493e485ecad3a6fc709cbe44b41af99",
+    "cases/CASE-0103/metadata.json": "e9770b5f1049a8a6cbb1d5c1f6b3864210b29e98f9c6b41c5ed6c2491dbccdce",
+    "model_context/CASE-0103.json": "2ae0ccde33a740fea9a87dc97f6adcc0e905a79c2c546e057fad5cab7a807980",
+    "difficulty/CASE-0103.json": "309db028673717c00f6c79ca56f288b57b85119cd0daa03cae158a90db770bff"
+  },
+  "case_level_hash": "22b884c1f056ef23c7132130ec412a83e85cf327917611ee832a430906e90869"
+}

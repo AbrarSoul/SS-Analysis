@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0095",
+  "original_source_case_id": "github.com_alexta69_metube_0072d3488ae5b8d922d3ee87458d829993742a32",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-7581",
+  "cve_ids_all": [
+    "CVE-2026-7581"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-346",
+    "CWE-942"
+  ],
+  "language": "python",
+  "repository": "alexta69/metube",
+  "repository_url": "https://github.com/alexta69/metube",
+  "vulnerable_commit": "0b3645aea1546f74fc6b26e7936e51863248079e",
+  "fixed_commit": "0072d3488ae5b8d922d3ee87458d829993742a32",
+  "changed_file": "app/main.py",
+  "changed_function": "async def on_prepare(request, response):",
+  "vulnerable_lines": [
+    914,
+    918
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 6,
+  "patch_size_deleted": 3,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0095/vulnerable_source.py": "0420c2cdc7201653cfeeb5f57844cb40435d1ce48b33922b4c4e09ad57a89e85",
+    "cases/CASE-0095/patched_source.py": "dacbfa3900746af5bb04cd32333a6efe3b4d7483853cdeb0ae77b8d3e6b5c39e",
+    "cases/CASE-0095/patch.diff": "03fa5cbe3e818fbee848f9dac57443f3781ee47c9dc236c8a5096a75a23e354e",
+    "cases/CASE-0095/metadata.json": "1cdd96bb0f31864c2930bcc44eb91a3e3a1c86910975341704080d467056311a",
+    "model_context/CASE-0095.json": "0dd7db2611dad8b9a061d46e356cdad4cfdf60301bbb46d8e5f94d11b6513748",
+    "difficulty/CASE-0095.json": "856cea67844b0104fb1ad0aee0355dafd114ac95ef567930dcf9f35c0e83ab84"
+  },
+  "case_level_hash": "6c5d83c0c500b86ccd805e7c795597b81da4a7d4d5efea4b1052db079b07196f"
+}

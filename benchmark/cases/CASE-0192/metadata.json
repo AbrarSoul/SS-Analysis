@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0192",
+  "original_source_case_id": "github.com_jenkinsci_rhnpush-plugin_7827db39925d0fc8f5b95e013466987b513b3f3c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2022-36892",
+  "cve_ids_all": [
+    "CVE-2022-36892"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-862"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/rhnpush-plugin",
+  "repository_url": "https://github.com/jenkinsci/rhnpush-plugin",
+  "vulnerable_commit": "8b36f5655d27d3fecda5dd155fcf3435a2239708",
+  "fixed_commit": "7827db39925d0fc8f5b95e013466987b513b3f3c",
+  "changed_file": "src/main/java/jenkins/plugins/rhnpush/RhnPush.java",
+  "changed_function": "public FormValidation doCheckIncludes(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException, InterruptedException {",
+  "vulnerable_lines": [
+    298,
+    308
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0192/vulnerable_source.java": "37a26c03f670f19c0b4bbf9c1378a8d7843406f52a89398623c8fca0e68b3524",
+    "cases/CASE-0192/patched_source.java": "776e9903cb1cb94f9f44c7b8b8f492e3c0dfd61fed3527d00f9d235d6dcf1ef8",
+    "cases/CASE-0192/patch.diff": "22b84d742c08eb2070834ab1e4aadc6e1a173a6c1dfd8b991425d6cadeac03d9",
+    "cases/CASE-0192/metadata.json": "3a2fabb93a170a996b40915687c9f4557e546ed1bee39b0dc3d7f50b778b1f04",
+    "model_context/CASE-0192.json": "d2d724fff084710e8bddf31d544c85732dd7dd7d8571ee3f09cbf14451c4179b",
+    "difficulty/CASE-0192.json": "12b146e1db36b7e874a955c977cda4c0ad40a60f7c1985af4deb25aff2dcb972"
+  },
+  "case_level_hash": "43572980a0cc864b526dc391540603f6faac497786f2d50e0fa0900f95304d87"
+}

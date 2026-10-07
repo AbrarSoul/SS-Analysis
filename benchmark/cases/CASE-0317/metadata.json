@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0317",
+  "original_source_case_id": "github.com_urllib3_urllib3_c32cdbc16a9634fa0f8c829d1270301570158715",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-9015",
+  "cve_ids_all": [
+    "CVE-2016-9015"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-295"
+  ],
+  "language": "python",
+  "repository": "urllib3/urllib3",
+  "repository_url": "https://github.com/urllib3/urllib3",
+  "vulnerable_commit": "7d01b990cf77b33659e562189e6962862b292170",
+  "fixed_commit": "c32cdbc16a9634fa0f8c829d1270301570158715",
+  "changed_file": "urllib3/contrib/pyopenssl.py",
+  "changed_function": "def verify_mode(self, value):",
+  "vulnerable_lines": [
+    373,
+    375
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 4,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0317/vulnerable_source.py": "01947c504cb9220a2a099e5b53c7886b6221752487cb8f85425feae5885ce819",
+    "cases/CASE-0317/patched_source.py": "6f8192fead95468f0d913370ddefe57344371e1c4acd417a2e9306f16aa35f2c",
+    "cases/CASE-0317/patch.diff": "de311c3a7758a8f86dc083253e6ca0f29d8baefb3a1e51ca4bf83a135e7c0306",
+    "cases/CASE-0317/metadata.json": "e173ccea035a9fd4e5ea59677b82c37cb8721ed6c5c4f7e1ad4bd24892786e6b",
+    "model_context/CASE-0317.json": "0d79bd56f9ff5c40af2b2b8da2cb1f24895f2e52f1db4b23342ee435da024803",
+    "difficulty/CASE-0317.json": "cc8064e8cc3056ec53681d002037d18ddeb614b2db2e63c55ee2f941f5ad4750"
+  },
+  "case_level_hash": "cf05131a06738e1a0d893c981f98598db4e623e7c5512dbb25078dcc3a35ecab"
+}

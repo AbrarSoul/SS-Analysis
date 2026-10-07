@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0122",
+  "original_source_case_id": "github.com_aryan6673_project-ai_8db90e3d9777850741804533ebde5824b4a5795c",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-48491",
+  "cve_ids_all": [
+    "CVE-2025-48491"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-798"
+  ],
+  "language": "python",
+  "repository": "aryan6673/project-ai",
+  "repository_url": "https://github.com/aryan6673/project-ai",
+  "vulnerable_commit": "c1fb156418d98a1e6c60bb680db57e9558785093",
+  "fixed_commit": "8db90e3d9777850741804533ebde5824b4a5795c",
+  "changed_file": "backup/kvs.py",
+  "changed_function": "def __init__(self):",
+  "vulnerable_lines": [
+    8,
+    41
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 2,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0122/vulnerable_source.py": "8a17c31f51d342e0add913726f4fb8b4577de81b4b75f02d0d390dfa93ba0adb",
+    "cases/CASE-0122/patched_source.py": "a4b14838ae58427b9584ccc5b17ac67fc8be6f7d40194126f5d6d5b308921393",
+    "cases/CASE-0122/patch.diff": "c5cb61c15f1a0f648f264fa361b817730a53bf1c682a628f50ed28d0c4f54466",
+    "cases/CASE-0122/metadata.json": "5967ddaf200c028751aff523990713ee55faafd510f91a9e09196fd7a3148e4d",
+    "model_context/CASE-0122.json": "e41d1bf3d3255ceddd1cae75ba2c3b9c4541df4faa084660e67230e82e26f350",
+    "difficulty/CASE-0122.json": "cccc53d85665aefe94e50dd2fbc2a65750590f3386dd6b5786e8de676441b859"
+  },
+  "case_level_hash": "5c8a8fa9e062c551243a60a2168bbf53203258e43192b4495ed21179bd4ba4d8"
+}

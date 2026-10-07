@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0289",
+  "original_source_case_id": "github.com_socketio_engine.io-client_2c55b278a491bf45313ecc0825cf800e2f7ff5c1",
+  "selection_batch": "final",
+  "cve_id": "CVE-2016-10536",
+  "cve_ids_all": [
+    "CVE-2016-10536"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-295",
+    "CWE-300"
+  ],
+  "language": "javascript",
+  "repository": "socketio/engine.io-client",
+  "repository_url": "https://github.com/socketio/engine.io-client",
+  "vulnerable_commit": "6045ccf5aa3ad5dbd976acb1e722a9692a5d55fb",
+  "fixed_commit": "2c55b278a491bf45313ecc0825cf800e2f7ff5c1",
+  "changed_file": "lib/socket.js",
+  "changed_function": "function Socket (uri, opts) {",
+  "vulnerable_lines": [
+    28,
+    104
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 1,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0289/vulnerable_source.js": "35c831f65616d0cf952171637090e33e98e8316456e4b3566a583c4d078c4d94",
+    "cases/CASE-0289/patched_source.js": "2f8751b50ad98708ef562553608bdb705ba1525af66618f6580db703c0e2a8c0",
+    "cases/CASE-0289/patch.diff": "8be9af02768a05e35870ee37ff464d32523a8716414016d58849ac49e944210a",
+    "cases/CASE-0289/metadata.json": "3492921b7dee83012752546e12845d7c3b72d44e5d0115f973517a9e21563ded",
+    "model_context/CASE-0289.json": "1de3b54e8a1646bcc5f3b92d6b35c39c61248ba36542f9c8d300e5071f5532dc",
+    "difficulty/CASE-0289.json": "c21963dc47bb3fc0fc94882879f8b7d72233f15b3e93afe289f4a14f2588d735"
+  },
+  "case_level_hash": "01af3858afe0d1515a4335b155df9288f0be19f7dc6d14f014726894bf134e98"
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-0157",
+  "original_source_case_id": "github.com_ether_etherpad-lite_53f126082a8b3d094e48b159f0f0bc8a5db4b2f4",
+  "selection_batch": "final",
+  "cve_id": "CVE-2020-22781",
+  "cve_ids_all": [
+    "CVE-2020-22781",
+    "CVE-2020-22783"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-312",
+    "CWE-89"
+  ],
+  "language": "javascript",
+  "repository": "ether/etherpad-lite",
+  "repository_url": "https://github.com/ether/etherpad-lite",
+  "vulnerable_commit": "3e8b4268471d7f5d0356c593c636b496ffac4cc5",
+  "fixed_commit": "53f126082a8b3d094e48b159f0f0bc8a5db4b2f4",
+  "changed_file": "src/node/db/SessionStore.js",
+  "changed_function": "SessionStore.prototype.set = function(sid, sess, fn) {",
+  "vulnerable_lines": [
+    38,
+    45
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 5,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0157/vulnerable_source.js": "590c0c46aaa44e7f5f98b880d80c38f79bf1be228aa69395a6a16f0bfdaa6c0d",
+    "cases/CASE-0157/patched_source.js": "e11a22a0573ddeb3a53030b348a1173cd3d058f5cdebec6eefedfdfb3bdc62c1",
+    "cases/CASE-0157/patch.diff": "3fe0e1f9b2b518d8ef22d97ca2b08fe8948cbdd6e39381dc903e6046b002ebc7",
+    "cases/CASE-0157/metadata.json": "ba16913ddf1bcdea46072a152f78e3b901cc99d508f445b7f7861197d51b2d43",
+    "model_context/CASE-0157.json": "7a24e63b00acb74422b26063a45d9da6dca87239b1c0361df3efa2d51ba3da5a",
+    "difficulty/CASE-0157.json": "416f9f6ce4614270f38231940330774c1353388b1f91fd0b385abb1c3d789d6a"
+  },
+  "case_level_hash": "cd3003c3e9c49533c7692aee8b6b80945e69b97dc56aaed758e9bb1e6e02174e"
+}

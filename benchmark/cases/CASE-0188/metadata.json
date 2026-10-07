@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0188",
+  "original_source_case_id": "github.com_jenkinsci_mercurial-plugin_edd59db1eec7e3c8d467372cd8417ae65eeb29dd",
+  "selection_batch": "topup3",
+  "cve_id": "CVE-2020-2306",
+  "cve_ids_all": [
+    "CVE-2020-2306"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "NVD-CWE-noinfo"
+  ],
+  "language": "java",
+  "repository": "jenkinsci/mercurial-plugin",
+  "repository_url": "https://github.com/jenkinsci/mercurial-plugin",
+  "vulnerable_commit": "304e1b4732ad623f88e8102baae891f6c7a24403",
+  "fixed_commit": "edd59db1eec7e3c8d467372cd8417ae65eeb29dd",
+  "changed_file": "src/main/java/hudson/plugins/mercurial/traits/MercurialInstallationSCMSourceTrait.java",
+  "changed_function": "@Restricted(NoExternalUse.class) // stapler",
+  "vulnerable_lines": [
+    179,
+    188
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 9,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0188/vulnerable_source.java": "977fa157c2c8dd39cc68c1e2c8dcb2abb32b6ce3ff03c2c4aa493a706e9500ad",
+    "cases/CASE-0188/patched_source.java": "62f4c23c4af7f6207be585946fb9e82da8e8a1537e1696238ca63ca6d95a62e6",
+    "cases/CASE-0188/patch.diff": "601c64c1fa3bc047990d0b73531fd4400e3d27442c4bbdaa8901760cc22e6d14",
+    "cases/CASE-0188/metadata.json": "ea69200403d6a8fb06fdf47cd71d228486ee270e5cd459efb0c0a0da19920da9",
+    "model_context/CASE-0188.json": "7c523834d3e2ca9db13ab4f564462cad14b8d528f7855b3773412a26ef605182",
+    "difficulty/CASE-0188.json": "a29ed0b3f03c6b4e7867e27c93ca9cbcdc317a1e548eb0c1bda06544c94fdd1c"
+  },
+  "case_level_hash": "24a5cd0f0443c4d2ddcafa66ab58f515a4b2a3754c40b6db8ad02d38ba430bcf"
+}

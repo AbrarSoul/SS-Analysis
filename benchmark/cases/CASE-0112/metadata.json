@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0112",
+  "original_source_case_id": "github.com_apache_sling-org-apache-sling-jcr-base_6ed0a030fd5f13774aff0073c55cbe3ace0153cb",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-25141",
+  "cve_ids_all": [
+    "CVE-2023-25141"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "java",
+  "repository": "apache/sling-org-apache-sling-jcr-base",
+  "repository_url": "https://github.com/apache/sling-org-apache-sling-jcr-base",
+  "vulnerable_commit": "97ea7f527040b1bcb0f7f9888a4c599ca91f58cb",
+  "fixed_commit": "6ed0a030fd5f13774aff0073c55cbe3ace0153cb",
+  "changed_file": "src/main/java/org/apache/sling/jcr/base/util/RepositoryAccessor.java",
+  "changed_function": "public Repository getRepository(String repositoryName,",
+  "vulnerable_lines": [
+    59,
+    131
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "taint",
+  "patch_size_added": 27,
+  "patch_size_deleted": 114,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0112/vulnerable_source.java": "7ed576185234c0251f8691d307ad6fd3c560c25cab6d9513b56148f5df585b66",
+    "cases/CASE-0112/patched_source.java": "33c65771fe54fceeed272bac726cf75fb94dd2bd0d9a4a31b59b1d78c96e2093",
+    "cases/CASE-0112/patch.diff": "9840a0ae3e55198df470c45aa4eea0e5d0da6fa777354a54b382d66023802989",
+    "cases/CASE-0112/metadata.json": "43e2d89a54cd39f7827e488f10debbcb8a3ea4b00b11b73bebe506d875a94bd8",
+    "model_context/CASE-0112.json": "46072eb94b311db52d9e7b5fad2c3e447ce3cee8c667c8b4f0678fa404acb182",
+    "difficulty/CASE-0112.json": "0c0321f0a1a667cb63e35c9864d8be2e03bd385ed8ff3284a41aa8822372a854"
+  },
+  "case_level_hash": "4c9ef0b56a14e7033daa677a768006aadf78f8a4170530d7921ac52dac0cfbd4"
+}

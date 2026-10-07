@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-0062",
+  "original_source_case_id": "github.com_Morgan-Phoenix_EnroCrypt_e652d56ac60eadfc26489ab83927af13a9b9d8ce",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2021-39182",
+  "cve_ids_all": [
+    "CVE-2021-39182"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-326",
+    "CWE-327",
+    "CWE-328",
+    "CWE-916"
+  ],
+  "language": "python",
+  "repository": "Morgan-Phoenix/EnroCrypt",
+  "repository_url": "https://github.com/Morgan-Phoenix/EnroCrypt",
+  "vulnerable_commit": "d02050267cecbe4f2877a07ca8a930129528ac05",
+  "fixed_commit": "e652d56ac60eadfc26489ab83927af13a9b9d8ce",
+  "changed_file": "enrocrypt/hashing.py",
+  "changed_function": "def MD5(self,data:str):",
+  "vulnerable_lines": [
+    69,
+    73
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 0,
+  "patch_size_deleted": 5,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0062/vulnerable_source.py": "16b4cc1b15ed8fe3d9dff667ff090c7e42641dcd20c90444f74c88f8611e783b",
+    "cases/CASE-0062/patched_source.py": "d2f961da041adbaf6bbe49d0ee2d39ad3d174fd68144522aed8842a3083f99f7",
+    "cases/CASE-0062/patch.diff": "9af15bea3c6f6336a71cd38a5f20c3f56afd7e884f85388d19afd229b4a05e68",
+    "cases/CASE-0062/metadata.json": "5e64749e4f85c055e23d5c2974e251a87076b9ad9af99a34805c43cce3be0a78",
+    "model_context/CASE-0062.json": "e49734a0b2ecebcb78f41896a6df9bf26518ff97d9d592f77d3982563c7d0bd0",
+    "difficulty/CASE-0062.json": "fa863537187a4542e98158346d93342251393accef83d824dea30711ffc957db"
+  },
+  "case_level_hash": "5e3478a780b93fe8f857270e6f7f3cd40dadd01f2c6345ec15151fb8598694c4"
+}

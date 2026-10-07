@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0230",
+  "original_source_case_id": "github.com_mlflow_mlflow_432b8ccf27fd3a76df4ba79bb1bec62118a85625",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2023-6709",
+  "cve_ids_all": [
+    "CVE-2023-6709"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-1336"
+  ],
+  "language": "python",
+  "repository": "mlflow/mlflow",
+  "repository_url": "https://github.com/mlflow/mlflow",
+  "vulnerable_commit": "42f57ff7be3a22e072f48b011ed2c5e15efd71b6",
+  "fixed_commit": "432b8ccf27fd3a76df4ba79bb1bec62118a85625",
+  "changed_file": "mlflow/recipes/cards/__init__.py",
+  "changed_function": "def to_html(self) -> str:",
+  "vulnerable_lines": [
+    117,
+    127
+  ],
+  "context_complexity": "structural",
+  "semgrep_representability": "supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 3,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0230/vulnerable_source.py": "877106935e2c9e223411c9b54d879f0cd1a6da62b1e7d8aaeab48ad1da484230",
+    "cases/CASE-0230/patched_source.py": "8a51f3612929243db6221c9c6291d8ab9415f0b6c14d1dbb6b4f52900616e2c0",
+    "cases/CASE-0230/patch.diff": "0918d89a3f8749d1142168d9bf2d83862aadd4e2f7f17a86628f44531eb0eb2e",
+    "cases/CASE-0230/metadata.json": "79b807edfd2e48249617132646bdf1832de658a50debcd4c5538ba2ff45da045",
+    "model_context/CASE-0230.json": "a003a86b610e94f99bc1356f84e8cd866f280a6e14f81fe2a9dac5237d1805a6",
+    "difficulty/CASE-0230.json": "fe3f3c0766908bc2652320a61ab9d671d6652b6041b2ab4bbc7d4c8a900b77ea"
+  },
+  "case_level_hash": "68dd17a8609ee9ea00804310d0066c4ea15168a4f1deedc25d3101e8127adc93"
+}

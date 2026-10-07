@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0056",
+  "original_source_case_id": "github.com_Kozea_Radicale_059ba8dec1f22ccbeab837e288b3833a099cee2d",
+  "selection_batch": "topup",
+  "cve_id": "CVE-2017-8342",
+  "cve_ids_all": [
+    "CVE-2017-8342"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-362"
+  ],
+  "language": "python",
+  "repository": "Kozea/Radicale",
+  "repository_url": "https://github.com/Kozea/Radicale",
+  "vulnerable_commit": "78e0bfd44957c253874c4a634089c76afa3e2576",
+  "fixed_commit": "059ba8dec1f22ccbeab837e288b3833a099cee2d",
+  "changed_file": "radicale/auth.py",
+  "changed_function": "def is_authenticated(self, user, password):",
+  "vulnerable_lines": [
+    186,
+    198
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "unsupported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 2,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0056/vulnerable_source.py": "5d67935bba135adb32192a9671089382060eb7011d92084b499d305633c844e4",
+    "cases/CASE-0056/patched_source.py": "b4de8f3b045b41eac184983930e562f76a67a40f8f4ef1a01d64a7972832adab",
+    "cases/CASE-0056/patch.diff": "0ba92fd743ad18d6313acd69a7a6611b75406b5f96f077a25c4a451adfd6e53a",
+    "cases/CASE-0056/metadata.json": "b3a35620823642592a4ebd7a8d071315a58a1fd13140471f0c457a47fd27280d",
+    "model_context/CASE-0056.json": "e372fc9abac6245b6a32b497f68821d532612c087531dbdd70241a8bf3f0ac38",
+    "difficulty/CASE-0056.json": "722e9c4f802608d218daafd88530773cceb9158edb5429c52a734f196cfac527"
+  },
+  "case_level_hash": "b10827906361b8112f8a0454fce3613275dd4e24b313e96b52ba3e6fd5d6e683"
+}

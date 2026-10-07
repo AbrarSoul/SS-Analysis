@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-0237",
+  "original_source_case_id": "github.com_new-usemame_Calibre-Web-NextGen_9f50bb2c16160564c9f8777dc2ceed3eb95e4807",
+  "selection_batch": "final",
+  "cve_id": "CVE-2026-7713",
+  "cve_ids_all": [
+    "CVE-2026-7713"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-266",
+    "CWE-285"
+  ],
+  "language": "python",
+  "repository": "new-usemame/Calibre-Web-NextGen",
+  "repository_url": "https://github.com/new-usemame/Calibre-Web-NextGen",
+  "vulnerable_commit": "09bf581ca38d115e30b67283bb99575ee7cdef89",
+  "fixed_commit": "9f50bb2c16160564c9f8777dc2ceed3eb95e4807",
+  "changed_file": "cps/kobo_auth.py",
+  "changed_function": "def generate_auth_token(user_id):",
+  "vulnerable_lines": [
+    72,
+    110
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 12,
+  "patch_size_deleted": 0,
+  "auto_locate_confidence": "auto_low_confidence",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0237/vulnerable_source.py": "078824792a3a72160028693affd19dc7ae6eb730354f3a4eb734c418c4065614",
+    "cases/CASE-0237/patched_source.py": "6f2afb06ebe2de8e2d786b0d0b98862ac51c5f91c10730013fa66fa4871754be",
+    "cases/CASE-0237/patch.diff": "7b7b2e528da703163c06635babb61a807fafa45f205b64ff6b8c93c4a88cd7c6",
+    "cases/CASE-0237/metadata.json": "604360e57afafad1feb3afc1da8cd2eee31f982cbe7a187e66346563998c239c",
+    "model_context/CASE-0237.json": "5c919fd934d29a2c52d79e77cde5657de50d4264dbe182f6196789cffdcd47b8",
+    "difficulty/CASE-0237.json": "09fbae49a2226eac8fb8a64e4395d19b601ccb19427b809e6e73441ed419e54e"
+  },
+  "case_level_hash": "6bd146953e0d656a7c9a71df067ff5285c1a1f014e494aee39f78cac724ca957"
+}

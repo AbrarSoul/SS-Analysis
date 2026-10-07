@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0154",
+  "original_source_case_id": "github.com_elunez_eladmin_d6a16e9afc0a3b96a56f1a24ed167e1beec6ce2f",
+  "selection_batch": "final",
+  "cve_id": "CVE-2025-22978",
+  "cve_ids_all": [
+    "CVE-2025-22978"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-74"
+  ],
+  "language": "java",
+  "repository": "elunez/eladmin",
+  "repository_url": "https://github.com/elunez/eladmin",
+  "vulnerable_commit": "6159b94c90854c34a52b5031ef60f51ccc2cc818",
+  "fixed_commit": "d6a16e9afc0a3b96a56f1a24ed167e1beec6ce2f",
+  "changed_file": "eladmin-common/src/main/java/me/zhengjie/utils/FileUtil.java",
+  "changed_function": "public static void downloadExcel(List<Map<String, Object>> list, HttpServletResponse response) throws IOException {",
+  "vulnerable_lines": [
+    212,
+    233
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 20,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0154/vulnerable_source.java": "f6f96164e62338d174cabf966e88dc2992e5d30322ae83218b785975a41d8fef",
+    "cases/CASE-0154/patched_source.java": "eea74d943e24b9b5569cb08ffeb958671b9232091bd3c627ddca52cd920e9ff5",
+    "cases/CASE-0154/patch.diff": "ef4db3c5dbcca512863884879135cdaf3ba2351f8646433c93a2527c6decb8e7",
+    "cases/CASE-0154/metadata.json": "44a9f24f447e976d49587fd67a6aee25038589cfa63444120588806c33e512d6",
+    "model_context/CASE-0154.json": "1b81e843b8078f85efb60f5c60a27b55de4e5022f0fdb900b767135ad44ed60f",
+    "difficulty/CASE-0154.json": "60cbc066055f9e7435a7cbf07731e2a5f7024684aa674b1b8cc18e5433e3d89f"
+  },
+  "case_level_hash": "dfb35a9cb62c051274542c3efe64be1b54cc7e95d749472788c519c5edba073b"
+}

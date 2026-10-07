@@ -1,0 +1,43 @@
+{
+  "case_id": "CASE-0108",
+  "original_source_case_id": "github.com_apache_openmeetings_1fb71af36",
+  "selection_batch": "final",
+  "cve_id": "CVE-2023-28326",
+  "cve_ids_all": [
+    "CVE-2023-28326"
+  ],
+  "ghsa_id": null,
+  "cwe_ids": [
+    "CWE-306"
+  ],
+  "language": "java",
+  "repository": "apache/openmeetings",
+  "repository_url": "https://github.com/apache/openmeetings",
+  "vulnerable_commit": "2b088f4357b03fa09c4ed64651789183e7f3c343",
+  "fixed_commit": "1fb71af36b660b12031628bf237c04940ebc5cd0",
+  "changed_file": "openmeetings-web/src/main/java/org/apache/openmeetings/web/common/InvitationForm.java",
+  "changed_function": "protected void updateButtons(AjaxRequestTarget target) {",
+  "vulnerable_lines": [
+    151,
+    157
+  ],
+  "context_complexity": "context_heavy",
+  "semgrep_representability": "partially_supported",
+  "pattern_or_taint": "pattern",
+  "patch_size_added": 6,
+  "patch_size_deleted": 1,
+  "auto_locate_confidence": "auto",
+  "advisory_date": null,
+  "repository_license": null,
+  "split": "final",
+  "source_urls": [],
+  "artifact_hashes": {
+    "cases/CASE-0108/vulnerable_source.java": "7732a38dc209e0f3661727a5468717aca49c1627a25bceb7b5c0e354c55db6ae",
+    "cases/CASE-0108/patched_source.java": "c5f552f1f4646ceff11820d471f839481e955238d52f2aa8d17b1f158890e5e6",
+    "cases/CASE-0108/patch.diff": "a8c67655492bc8394bd4320ee023ee610db3ed6050d35e377fbe2b7c440e1cda",
+    "cases/CASE-0108/metadata.json": "4909e83c242d3e80a9177132a036118f7095465b27dd739ebea6f3e91523a852",
+    "model_context/CASE-0108.json": "dbfae9c15dc6b21f07614cccf59e615c03c5417e0702bfdf0eedf61a0031fed4",
+    "difficulty/CASE-0108.json": "773ba1eca1df2b844631a15d5176900df5d8ea6abb174e1effad3b0b28972353"
+  },
+  "case_level_hash": "c6a8c40afc4dc7692d911776d84036c092c1c3bb807d9dc0807600f39bda6fd0"
+}
