@@ -565,11 +565,19 @@ uninvestigated discrepancy. Investigating it directly for this audit pass:
   (0.498, [0.458, 0.605]), `deepseek-coder:6.7b` (0.452, [0.385, 0.509]),
   `codegemma:7b` (0.528, [0.496, 0.543]), `magicoder:7b` (0.566,
   [0.364, 0.592] — its new value is also inside this wide range),
-  `yi-coder:9b` (0.557, [0.443, 0.575]). **This resolves the bulk of the
-  apparent ranking swap**: several models' MCCs cluster tightly (roughly
-  0.45–0.57) at this small subset size, where ordinary single-draw sampling
-  noise is enough to reorder them — the temp-0 ranking is one specific
-  noisy realization, not a more "correct" ranking than the 5-repeat average.
+  `yi-coder:9b` (0.557, [0.443, 0.575]). **[CORRECTED, 2026-10-07,
+  following further reviewer feedback] For these six models, the
+  temperature-zero estimate falls within the five-repeat temperature-0.2
+  range, which is consistent with sampling variability but does not
+  establish the cause of ranking changes.** An earlier version of this
+  bullet stated this "resolves" the ranking swap and identified ordinary
+  sampling noise as the explanation — that overstates what falling inside
+  an empirical range can show: consistency with a hypothesis is not
+  confirmation of it. Several models' MCCs do cluster tightly (roughly
+  0.45–0.57) at this small subset size, where sampling variability alone
+  could plausibly produce the observed reordering, but no test was run to
+  confirm that mechanism specifically over any other explanation consistent
+  with the same data.
 - **[CORRECTED, 2026-10-07, following further reviewer feedback] The same 2
   of 8 models remain a genuine, same-direction exception, whose values fall
   outside their own 5-repeat empirical range — stated precisely as
@@ -594,9 +602,11 @@ uninvestigated discrepancy. Investigating it directly for this audit pass:
 
 **Net status**: the original "case composition, not temperature" explanation
 remains withdrawn (it does not hold under corrected scoring). In its place,
-6 of 8 models' ranking swap is now resolved as ordinary single-draw sampling
-variation among closely-clustered MCCs, confirmed not to be a script, config,
-or averaging-method artifact. `qwen2.5-coder:32b` and `codellama:7b-instruct-fp16`
+for 6 of 8 models the temperature-zero estimate falls within the five-repeat
+temperature-0.2 range — consistent with sampling variability, but this does
+not establish the cause of their ranking changes, only that the data does
+not contradict that explanation; confirmed not to be a script, config, or
+averaging-method artifact. `qwen2.5-coder:32b` and `codellama:7b-instruct-fp16`
 remain a genuine residual whose cause is unknown — not confirmed as a real
 model-specific effect, and not ruled out as sampling variability either —
 carried forward as an open question, not a resolved mechanism.
@@ -1294,7 +1304,7 @@ repository level, since CVEs from the same repo aren't independent —
 | Structural vs context-heavy | structural 0.561 (0.467–0.651); context-heavy 0.551 (0.441–0.655) — essentially flat |
 | Supported vs partially supported | supported 0.539 (0.446–0.632); partially supported 0.564 (0.436–0.686) — essentially flat |
 | Older vs newer CVE (median year 2023) | newer 0.600 (0.445–0.738); older 0.538 (0.456–0.614) |
-| Patch size (tertiles) | small 0.638 (0.508–0.758); medium 0.522 (0.432–0.610); large 0.510 (0.354–0.654) — visually monotonic decline |
+| Patch size (tertiles) | small 0.638 (0.508–0.758); medium 0.522 (0.432–0.610); large 0.510 (0.354–0.654) — descriptive monotonic trend in point estimates, CIs overlap |
 | CWE (≥10 cases only) | CWE-22 0.845 (0.707–1.000); CWE-78 0.798 (0.707–1.000); CWE-79 0.642 (0.500–0.707); CWE-200 0.605 (0.447–0.845); NVD-CWE-noinfo 0.554 (0.348–0.753); CWE-94 0.430 (0.126–0.707) |
 
 **The CWE-22 shift is the concrete reason the earlier "plausibly
@@ -1322,14 +1332,20 @@ accepted cases total) and are deliberately not broken out.
 
 No pairwise significance testing was run across these subgroup buckets
 (§22.4 asks for descriptive reporting with CIs, not pairwise tests).
-Reading the overlapping CIs directly: language, structural-complexity, and
-supported-vs-partial splits show substantial CI overlap (no strong
-evidence of a real difference); patch size still shows a visually monotonic
-decline from small to large patches after correction, at least suggestive
-since the small-vs-large CIs (0.514–0.755 vs 0.359–0.637) only narrowly
-overlap. The CWE-level point estimates are identical to the uncorrected run
-for this particular model/condition — those specific cases happened not to
-be affected by any location-correctness flip.
+**[CORRECTED, 2026-10-07, following further reviewer feedback]** Reading
+the CIs directly: language, structural-complexity, and supported-vs-partial
+splits show substantial CI overlap (no strong evidence of a real
+difference). Patch size shows a monotonic decline in the point estimates
+from small to large (0.638 → 0.522 → 0.510), but this is reported
+descriptively, not as evidence of a real effect — the small- and
+large-patch CIs (0.508–0.758 and 0.354–0.654) overlap substantially, and
+overlapping confidence intervals on their own do not establish a
+between-group difference either way. The earlier version of this paragraph
+also claimed CWE-level point estimates were "identical to the uncorrected
+run" — that was true only before this table was rerun against the final
+eligible population, and is no longer accurate: CWE-22 alone moved from
+0.707 to 0.845 (the table above), the concrete case already discussed
+following it.
 
 **This completes Section 22 in full** — both the 7 predefined comparisons
 (§22.3) and the subgroup analysis (§22.4), both rerun against corrected data
@@ -1393,16 +1409,23 @@ is retracted along with the infra-failure story.
 Per Priority 7's actual instruction ("mark Autogrep's attempted-candidate
 compilation rate as unavailable unless recoverable"): it is **not**
 recoverable. **[CORRECTED, 2026-10-07, following further reviewer
-feedback]** Compile rate for the autogrep condition is therefore reported
-as **"N/A: not recoverable"** — not as a number identical to acceptance
-coverage, which an earlier version of this paragraph said and which the
-table below briefly also did. Reporting the same percentage in both
-columns reads as if compile rate were a real, independently-recovered
-figure that happens to equal acceptance; it is not recovered at all.
-Autogrep's retry loop only ever returns an already-fully-validated rule, so
-the two numbers would be identical if compile rate COULD be recovered —
-but since it can't, there is no number to put in that column, only the
-explicit unavailability label.
+feedback, twice]** **Attempted-candidate compilation rate cannot be
+recovered from the retained records. Acceptance coverage is reported
+separately.** An earlier version of this paragraph reported compile rate
+as a number identical to acceptance coverage, which the table below
+briefly also did — reporting the same percentage in both columns reads as
+if compile rate were a real, independently-recovered figure that happens
+to equal acceptance; it is not recovered at all, so it is shown as
+**"N/A: not recoverable"**, never a number. A subsequent version of this
+paragraph then over-corrected into a different error, reasoning that "the
+two numbers would be identical if compile rate COULD be recovered" — that
+does not follow: a rule can compile (valid YAML, parses successfully) and
+still fail validation (wrong discrimination, doesn't match the
+vulnerability correctly), so compile rate and acceptance coverage are not
+necessarily identical in general, only indistinguishable in THIS
+condition's retained records specifically, because Autogrep's retry loop
+discards every intermediate attempt and the top-level fields only reflect
+the final, already-fully-validated-or-exhausted state.
 
 **Primary benchmark, 150 eligible supported cases — autogrep row directly above its raw-condition counterpart, per model:**
 
