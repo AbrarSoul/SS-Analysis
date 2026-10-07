@@ -570,28 +570,36 @@ uninvestigated discrepancy. Investigating it directly for this audit pass:
   0.45–0.57) at this small subset size, where ordinary single-draw sampling
   noise is enough to reorder them — the temp-0 ranking is one specific
   noisy realization, not a more "correct" ranking than the 5-repeat average.
-- **The same 2 of 8 models remain a genuine, same-direction exception, not
-  explained by ordinary sampling noise, and reported as an open hypothesis
-  rather than resolved**: `qwen2.5-coder:32b` (temp-0 MCC 0.563, ABOVE its
-  entire 5-repeat range [0.424, 0.479]) and `codellama:7b-instruct-fp16`
-  (temp-0 MCC 0.547, ABOVE its entire 5-repeat range [0.422, 0.505]) both
-  score better at temp=0 than on any of their 5 stochastic draws. One
-  plausible, untested hypothesis: determinism specifically benefits these
-  two models more than the others — `codellama` is already flagged
-  elsewhere in this document as precision/quantization-confounded, and a
-  quantized or otherwise less-robust model could plausibly be more
+- **[CORRECTED, 2026-10-07, following further reviewer feedback] The same 2
+  of 8 models remain a genuine, same-direction exception, whose values fall
+  outside their own 5-repeat empirical range — stated precisely as
+  unexplained, not as disproven to be sampling noise**: `qwen2.5-coder:32b`
+  (temp-0 MCC 0.563, above its entire 5-repeat range [0.424, 0.479]) and
+  `codellama:7b-instruct-fp16` (temp-0 MCC 0.547, above its entire 5-repeat
+  range [0.422, 0.505]) both score better at temp=0 than on any of their 5
+  stochastic draws. An earlier version of this bullet said this was "not
+  explained by ordinary sampling noise" — that overstates what 5 repeats can
+  establish: landing outside a 5-point empirical range is consistent with a
+  real, systematic effect, but 5 draws are too few to rule out that this is
+  simply a rarer tail event than the other 6 models happened to show at this
+  sample size. One plausible, untested hypothesis: determinism specifically
+  benefits these two models more than the others — `codellama` is already
+  flagged elsewhere in this document as precision/quantization-confounded,
+  and a quantized or otherwise less-robust model could plausibly be more
   sensitive to temperature-induced decode variance than the others. This is
-  stated as a hypothesis, not confirmed; a direct case-level investigation
-  of which specific samples flip for these two models would be needed to
-  test it, and was not run as part of this audit.
+  stated as a hypothesis, not confirmed and not ruled out as ordinary
+  variability either; a direct case-level investigation of which specific
+  samples flip for these two models, or more repeats, would be needed to
+  distinguish the two, and neither was run as part of this audit.
 
 **Net status**: the original "case composition, not temperature" explanation
 remains withdrawn (it does not hold under corrected scoring). In its place,
 6 of 8 models' ranking swap is now resolved as ordinary single-draw sampling
 variation among closely-clustered MCCs, confirmed not to be a script, config,
 or averaging-method artifact. `qwen2.5-coder:32b` and `codellama:7b-instruct-fp16`
-remain a genuine, unresolved residual, carried forward as an open hypothesis
-rather than a confirmed mechanism.
+remain a genuine residual whose cause is unknown — not confirmed as a real
+model-specific effect, and not ruled out as sampling variability either —
+carried forward as an open question, not a resolved mechanism.
 
 ### 7.4 C2 (iterative single agent): an interim comparison
 
@@ -1057,15 +1065,23 @@ Both C4 configurations are now complete.
 
 ### 7.8 Formal statistical analysis (§22) [CORRECTED, rerun on corrected data]
 
-The 7 predefined comparisons (§22.3), formally tested on the 153 supported
-cases, **rerun in full against the Finding-1-corrected data, with
-repository-aware bootstrapping applied consistently to every comparison**
-(the original run used case-level bootstrapping for the 7 main comparisons
-and repository-level for the subgroup analysis only — an inconsistency found
-during the audit and fixed here; cases from the same repository are not
-independent, and every comparison below now accounts for that). Full
-methodology in `Research_Log/Section22_Scope.md`; full output in
-`results_corrected/comparisons_1_7_corrected_report.txt`.
+**[CORRECTED, 2026-10-07, following further reviewer feedback]** The 7
+predefined comparisons (§22.3) were originally formally tested on the
+153 supported cases (round 1), with repository-aware bootstrapping applied
+consistently to every comparison for the first time (the original run used
+case-level bootstrapping for the 7 main comparisons and repository-level
+for the subgroup analysis only — an inconsistency fixed in round 1). That
+round's full output is `results_corrected/comparisons_1_7_corrected_report.txt`,
+retained as a historical artifact. **Every comparison below is now the
+round-2/3 rerun on the 150-case eligible population**
+(`pipeline/eligible_cases.py` v2026-10-07.1), with repository-aware
+bootstrapping further extended to the end-to-end (ESR) metric, not just
+MCC — full methodology in `Research_Log/Section22_Scope.md`; current
+output in `results_corrected/section22_corrected_report_round2.txt`. The
+Friedman-omnibus exception to "every comparison accounts for repository
+dependence" is stated explicitly below, not implied away: comparisons 3 and
+7's omnibus tests are NOT repository-aware (only their pairwise bootstrap
+follow-ups are); see the methodology note after this paragraph.
 
 One methodology note stated up front: §22.2 specifies Wilcoxon
 signed-rank for paired MCC, but MCC here has always been a pooled
@@ -1260,39 +1276,49 @@ hidden-test success (§7.9); there is no repair-superiority finding of any
 kind left standing in this document** — see the Conclusion for the
 restated main claim.
 
-**Subgroup analysis (§22.4) [CORRECTED]**, applied to the primary benchmark's
-`autogrep` condition on the full dataset (most statistical power in the
-study), for the representative model `qwen2.5-coder:32b` (86 evaluable
-cases). Every CI below uses a repository-aware bootstrap (resampling at the
+**Subgroup analysis (§22.4) [CORRECTED, 2026-10-07, following further
+reviewer feedback — now actually rerun, not just planned]**, applied to the
+primary benchmark's `autogrep` condition on the 294-case dataset remaining
+after `eligible_cases.py`'s 6 exclusions (CASE-0166 plus the 5
+ground-truth-excluded cases, applied globally, not just to the
+representability bucket — §7.9's note), for the representative model
+`qwen2.5-coder:32b` (**84 evaluable cases**, down from the previously-stale
+86). Every CI below uses a repository-aware bootstrap (resampling at the
 repository level, since CVEs from the same repo aren't independent —
-§22.4's own requirement). **Not independently rerun against
-`pipeline/eligible_cases.py`'s round-2 corrections** (unlike every other
-table in this document): checked directly that CASE-0166 was never accepted
-for this model (`semgrep_valid: false`), so its dataset exclusion has no
-effect here; the 5 ground-truth exclusions could affect at most a handful
-of this 86-case population, in line with the sensitivity analysis above
-showing a ≤1.3-point effect for 7 of 8 models — plausibly negligible here
-too, but not directly verified for this specific table.
+§22.4's own requirement). Full output: `results_corrected/subgroup_corrected_report.txt`.
 
 | Subgroup | Buckets (MCC, 95% CI) |
 |---|---|
-| Language | python 0.662 (0.537–0.770); javascript 0.573 (0.404–0.729); java 0.479 (0.379–0.573); typescript 0.430 (0.155–0.680) |
-| Pattern vs taint | taint 0.606 (0.513–0.696); pattern 0.536 (0.448–0.620) |
-| Structural vs context-heavy | structural 0.561 (0.467–0.651); context-heavy 0.545 (0.441–0.643) — essentially flat |
-| Supported vs partially supported | supported 0.536 (0.444–0.626); partially supported 0.558 (0.433–0.677) — essentially flat |
-| Older vs newer CVE (median year 2023) | newer 0.593 (0.441–0.727); older 0.536 (0.454–0.612) |
-| Patch size (tertiles) | small 0.640 (0.514–0.755); medium 0.515 (0.422–0.606); large 0.501 (0.359–0.637) — visually monotonic decline |
-| CWE (≥10 cases only) | CWE-78 0.798; CWE-22 0.707; CWE-79 0.642; CWE-200 0.605; NVD-CWE-noinfo 0.554; CWE-94 0.430 |
+| Language | python 0.662 (0.537–0.773); javascript 0.582 (0.398–0.748); java 0.482 (0.381–0.576); typescript 0.430 (0.155–0.680) |
+| Pattern vs taint | taint 0.615 (0.520–0.708); pattern 0.538 (0.449–0.624) |
+| Structural vs context-heavy | structural 0.561 (0.467–0.651); context-heavy 0.551 (0.441–0.655) — essentially flat |
+| Supported vs partially supported | supported 0.539 (0.446–0.632); partially supported 0.564 (0.436–0.686) — essentially flat |
+| Older vs newer CVE (median year 2023) | newer 0.600 (0.445–0.738); older 0.538 (0.456–0.614) |
+| Patch size (tertiles) | small 0.638 (0.508–0.758); medium 0.522 (0.432–0.610); large 0.510 (0.354–0.654) — visually monotonic decline |
+| CWE (≥10 cases only) | CWE-22 0.845 (0.707–1.000); CWE-78 0.798 (0.707–1.000); CWE-79 0.642 (0.500–0.707); CWE-200 0.605 (0.447–0.845); NVD-CWE-noinfo 0.554 (0.348–0.753); CWE-94 0.430 (0.126–0.707) |
 
-166 distinct CWE IDs appear across the dataset; only 6 have ≥10 cases
-(CI reported above), the other 160 are reported as counts only — stated
-explicitly as too sparse for a meaningful CI rather than silently dropped
-or given a misleading one. `advisory_date` was never populated for any
-case, so the older/newer split substitutes the CVE year parsed from
-`cve_id` — a coarser (year-level) approximation, stated rather than
-hidden. The 153-case multi-agent conditions (C2/C3/C4) are too sparse for
-subgroup breakdowns (C4-A has only 11 accepted cases total) and are
-deliberately not broken out.
+**The CWE-22 shift is the concrete reason the earlier "plausibly
+negligible, not directly verified" disclosure was the wrong call to make
+without actually checking**: CWE-22 moved from 0.707 to **0.845** — a
+0.138 swing, far larger than anything in the ≤1.3-point pattern the
+overall sensitivity analysis (§10) showed for pooled, model-wide metrics.
+A small (n=15), CWE-specific bucket is exactly where removing even one or
+two ground-truth-excluded cases can move a bucket's MCC substantially,
+even when the same exclusion barely moves an 8-model, 150-case pooled
+average. The general lesson, not just this one number: a "small overall
+effect" finding at one level of aggregation does not transfer to smaller
+subgroups without checking them directly — which is now done.
+
+**165** distinct CWE IDs appear across the 294-case dataset (down from the
+stale 166, since CASE-0166 and the 5 ground-truth exclusions are no longer
+counted); only 6 have ≥10 cases (CI reported above), the other 159 are
+reported as counts only — stated explicitly as too sparse for a meaningful
+CI rather than silently dropped or given a misleading one. `advisory_date`
+was never populated for any case, so the older/newer split substitutes the
+CVE year parsed from `cve_id` — a coarser (year-level) approximation,
+stated rather than hidden. The 150-case eligible multi-agent conditions
+(C2/C3/C4) are too sparse for subgroup breakdowns (C4-A has only 11
+accepted cases total) and are deliberately not broken out.
 
 No pairwise significance testing was run across these subgroup buckets
 (§22.4 asks for descriptive reporting with CIs, not pairwise tests).
@@ -1366,11 +1392,17 @@ is retracted along with the infra-failure story.
 
 Per Priority 7's actual instruction ("mark Autogrep's attempted-candidate
 compilation rate as unavailable unless recoverable"): it is **not**
-recoverable. Compile rate for the autogrep condition is therefore reported
-as identical to acceptance coverage — Autogrep's retry loop only ever
-returns an already-fully-validated rule, so this is structurally
-unrecoverable, exactly as this document stated before the (now-retracted)
-"Finding 2" detour, just for a more precisely documented reason.
+recoverable. **[CORRECTED, 2026-10-07, following further reviewer
+feedback]** Compile rate for the autogrep condition is therefore reported
+as **"N/A: not recoverable"** — not as a number identical to acceptance
+coverage, which an earlier version of this paragraph said and which the
+table below briefly also did. Reporting the same percentage in both
+columns reads as if compile rate were a real, independently-recovered
+figure that happens to equal acceptance; it is not recovered at all.
+Autogrep's retry loop only ever returns an already-fully-validated rule, so
+the two numbers would be identical if compile rate COULD be recovered —
+but since it can't, there is no number to put in that column, only the
+explicit unavailability label.
 
 **Primary benchmark, 150 eligible supported cases — autogrep row directly above its raw-condition counterpart, per model:**
 
