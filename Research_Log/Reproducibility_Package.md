@@ -5,6 +5,32 @@ list of what is NOT available and why. Nothing in this file is duplicated elsewh
 a path into the existing repository, not a copy. See `Research_Log/Correction_Log.md` for the full
 narrative history behind each correction referenced here.
 
+## 0. Execution logs (added 2026-10-07, following further reviewer feedback)
+
+The public GitHub repository intentionally does not include `results/`/`results_corrected/` (per the
+project's own curation intent — these are raw per-call logs, not reports). **Running the scripts in
+§2 below requires them**, so they are published separately as a GitHub Release asset on the same repo:
+
+- **Download**: https://github.com/AbrarSoul/SS-Analysis/releases/tag/reproducibility-data-v1
+  (`ss_analysis_execution_logs.tar.gz`, 3.1MB compressed / 51MB extracted)
+- **SHA-256**: `c0e1abdb20709c8f7687322e87628fc2c6fbed090aeb8117ea578ea69fe95dc3`
+- **To use**: clone the repo, extract this archive into its root (`results/` and `results_corrected/`
+  land alongside `pipeline/` and `benchmark/`), then run any script in §2 directly.
+- **Verified before publishing**: running `python pipeline/build_step4_tables.py` against this exact
+  archive (combined with the published `pipeline/` and `benchmark/`) reproduces
+  `analysis_reports/step4_tables_report.txt` byte-for-byte.
+- **Scope**: every run directory any script in §2 actually reads (`runs_phase5_primary`,
+  `runs_phase5_stability_rep1-5`, `runs_c2_primary`, `runs_c3`, `runs_c4`, plus `runs_pilot_screening`
+  and `runs_pilot_rerun_fixed` — the one run with retained rule text). **Deliberately excluded**: a
+  907MB leftover repo-clone cache from an early, unreported smoke-test run
+  (`runs_final_realsmoke_20260928_212325`), debris from before the validator went clone-free
+  (`Implementation_Log.md` Section 12.24) — not part of any reported result and containing full
+  third-party repository clones with no reason to redistribute here.
+- **One redaction applied**: the same CASE-0122 API key already redacted in the published
+  `benchmark/cases/CASE-0122/` also appears, embedded as case context, in 4 C3/C4 episode log files —
+  redacted identically before packaging. A full secret scan (AWS/Google/GitHub/Slack key patterns,
+  private-key headers) found nothing else.
+
 ## 1. Dataset and eligibility
 
 | Artifact | Path | Notes |
