@@ -247,11 +247,14 @@ def main():
         print("  Friedman omnibus degenerate.")
     else:
         print(f"  Friedman omnibus (n={len(common)}, k={len(family_models)}): stat={stat:.3f}  p={p:.4f}")
+        print("  (descriptive/exploratory only -- NOT repository-aware; scipy's friedmanchisquare")
+        print("  assumes independent rows, false here since cases share repositories. Only the")
+        print("  repo-aware bootstrap pairwise follow-ups below carry a confirmatory claim.)")
         for m in family_models:
             esr_m = sum(family_data[m][c]["esr"] for c in common) / len(common)
             print(f"    {m}: ESR={esr_m:.3f}")
         if p < 0.05:
-            print("  Omnibus significant -- running repo-aware ESR bootstrap pairwise follow-ups")
+            print("  Omnibus p<0.05 (descriptive) -- running repo-aware ESR bootstrap pairwise follow-ups")
             print("  (not McNemar: cases sharing a repo aren't independent, Section22_Scope.md):")
             pairs = [(i, j) for i in range(len(family_models)) for j in range(i + 1, len(family_models))]
             raw_ps = []
@@ -333,6 +336,8 @@ def main():
         print("  Friedman omnibus degenerate.")
     else:
         print(f"  Friedman omnibus (n={len(common)}, k={len(labels)}): stat={stat:.3f}  p={p:.4f}")
+        print("  (descriptive/exploratory only -- NOT repository-aware; see Comparison 3's note.")
+        print("  Only the repo-aware bootstrap pairwise follow-ups below carry a confirmatory claim.)")
         for lb in labels:
             esr_lb = sum(ma_data[lb][c]["esr"] for c in common) / len(common)
             print(f"    {lb}: ESR={esr_lb:.3f}")

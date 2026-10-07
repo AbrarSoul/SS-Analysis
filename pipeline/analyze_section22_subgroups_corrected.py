@@ -4,6 +4,19 @@ sample data from Finding 1's fix. Same model/condition choice as the original
 (analyze_section22_subgroups.py: qwen2.5-coder:32b, autogrep, full 300-case set) for direct
 comparability -- only the sample_execution_log source changes (results_corrected/ instead of
 results/); generation_log (unaffected by Finding 1) still comes from results/.
+
+Correction (2026-10-07, external reviewer feedback round 3): this script's case population was
+NEVER filtered through `eligible_cases.py` -- it used the raw 300-case manifest directly, so
+CASE-0166 (post-hoc dataset exclusion) and the 5 ground-truth-excluded cases (Priority 2) were
+still being pooled into every bucket here, including the "Supported vs partially supported"
+bucket's own MCC. Caught concretely: this script's "supported" bucket reported qwen2.5-coder:32b
+MCC 0.536 while the primary headline table (built on the 150-case eligible population) reports
+0.539 for the same model/condition -- same underlying inconsistency Priority 4 already fixed
+everywhere else. Fixed by filtering `all_cases` through `eligible_cases.py`'s exclusions globally
+(not just for the representability bucket) -- a case whose ground truth is untrustworthy shouldn't
+be used in ANY subgroup breakdown (language, CWE, patch size, CVE age), since its recorded TP/FP
+outcomes rest on that same questionable patched-sample label regardless of which bucket it's
+sliced into.
 """
 import json
 import re
@@ -19,6 +32,7 @@ from analyze_section22_subgroups import (
     cve_year, repo_aware_bootstrap_mcc, print_bucket_table, load_full_manifest,
 )
 from analyze_section22_corrected import RESULTS, RESULTS_CORRECTED
+from eligible_cases import POST_HOC_DATASET_EXCLUSIONS, GROUND_TRUTH_EXCLUSIONS, VERSION as ELIGIBLE_VERSION
 
 warnings.filterwarnings("ignore", category=RuntimeWarning, module="scipy")
 
@@ -42,10 +56,12 @@ def main():
     manifest = load_full_manifest()
     case_to_samples = load_corrected_full()
     case_to_repo = {cid: manifest[cid]["repository"] for cid in manifest}
-    all_cases = [cid for cid in manifest if cid in case_to_samples]
+    excluded = POST_HOC_DATASET_EXCLUSIONS | GROUND_TRUTH_EXCLUSIONS
+    all_cases = [cid for cid in manifest if cid in case_to_samples and cid not in excluded]
 
     print(f"Section 22.4 subgroup analysis -- CORRECTED -- model={MODEL}, condition={CONDITION}, "
-          f"n={len(all_cases)} cases.")
+          f"n={len(all_cases)} cases (eligible_cases.py v{ELIGIBLE_VERSION}: {len(excluded)} "
+          f"cases excluded -- CASE-0166 dataset exclusion + 5 ground-truth exclusions).")
     print(f"({sum(1 for c in all_cases if case_to_samples[c])} have evaluable samples.)")
 
     buckets = defaultdict(list)

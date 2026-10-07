@@ -474,26 +474,44 @@ with the selection method and random seed fixed before any primary-run result
 existed, to avoid post-hoc subset selection) was run following completion of
 the primary run described in §7.1–7.2.
 
+**[CORRECTED, 2026-10-07, following further reviewer feedback] The stability
+subset's "51 supported cases" was not itself checked against the ground-truth
+exclusions (Priority 2) until now.** Checked directly: 2 of the 51
+(`CASE-0140`, `CASE-0194`) are ground-truth-excluded, leaving **49 eligible
+cases** — `pipeline/analyze_phase5_stability.py` now filters through
+`eligible_cases.py` the same way every other table in this document does.
+The pooled MCC mean/min/max below are unchanged to 3 decimals from the
+51-case version (these 2 cases contributed no accepted samples in any of
+the 5 repeats, for any model, so excluding them doesn't move a pooled
+metric) — but the per-case agreement figures below, and one previously-stale
+MCC-mean value, do change slightly.
+
 **Case-level outcome agreement is high across all eight models.** For each
 case and model, the fraction of the five repeats matching the single most
 common outcome (both for the narrow validate-or-not outcome and for the full
-six-sample bundle pattern) ranges from 93.3% to 98.4% — even the least
+six-sample bundle pattern) ranges from 93.5% to 98.8% — even the least
 consistent model agrees with its own most frequent result on roughly 19 of
 every 20 repeats.
 
-**Metric-level spread on the 51 supported cases within the subset** (autogrep
-condition, MCC mean/min/max across the five repeats, **corrected data**):
+**Metric-level spread on the 49 eligible supported cases within the subset**
+(autogrep condition, MCC mean/min/max across the five repeats, **corrected
+data**):
 
 | Model | MCC mean | MCC min | MCC max |
 |---|---:|---:|---:|
 | Yi-Coder-9B | 0.522 | 0.443 | 0.575 |
 | CodeGemma-7B | 0.517 | 0.496 | 0.543 |
 | DeepHat-V1-7B | 0.515 | 0.458 | 0.605 |
-| Magicoder-7B | 0.485 | 0.364 | 0.592 |
 | Qwen2.5-Coder-7B-Instruct | 0.481 | 0.451 | 0.507 |
+| Magicoder-7B | 0.477 | 0.364 | 0.592 |
 | CodeLlama-7B-Instruct (FP16) | 0.471 | 0.422 | 0.505 |
 | Qwen2.5-Coder-32B | 0.452 | 0.424 | 0.479 |
 | DeepSeek-Coder-6.7B | 0.419 | 0.385 | 0.509 |
+
+(Magicoder-7B's mean moves from a previously-stale 0.485 to 0.477 — flagged
+in prose earlier in this document as a known, not-yet-applied 0.008 shift
+from Priority 1's later manual location-annotation fixes; now actually
+applied to the table itself, not just disclosed as pending.)
 
 **[CORRECTED, 2026-10-07 audit round 2, Priority 8] A methodological
 finding, re-investigated and now resolved for most of the ranking, with a
@@ -531,31 +549,41 @@ uninvestigated discrepancy. Investigating it directly for this audit pass:
   (temp 0.2) runs for the models with the largest rank swaps shows the same
   host, same Autogrep commit, same Semgrep version, same prompt variant —
   temperature is the only varied setting.
-- **For 6 of 8 models, the single temp-0 draw's MCC falls inside that
-  model's own 5-repeat temp-0.2 range**, computed directly:
+- **[CORRECTED, 2026-10-07, following further reviewer feedback] Recomputed
+  at n=49 (the 51-case subset minus its own 2 ground-truth-excluded cases,
+  per the §7.3 note above) rather than the stale n=51.** The temp-0.2 side's
+  5-repeat ranges are unchanged (those 2 cases contributed no accepted
+  autogrep samples in any repeat, for any model), but the temp-0 point
+  values shift substantially for some models — most dramatically
+  `magicoder:7b` (0.422 → 0.566) and `codellama:7b-instruct-fp16`
+  (0.566 → 0.547) — because pooled MCC at this small a case count is
+  sensitive to exactly which cases are in the denominator. **The conclusion
+  is unchanged, by coincidence of where these two models' values land, not
+  because the shift didn't matter**: for 6 of 8 models, the single temp-0
+  draw's MCC still falls inside that model's own 5-repeat temp-0.2 range:
   `qwen2.5-coder:7b-instruct` (0.499, range [0.451, 0.507]), `DeepHat-V1-7B`
-  (0.492, [0.458, 0.605]), `deepseek-coder:6.7b` (0.452, [0.385, 0.509]),
-  `codegemma:7b` (0.528, [0.496, 0.543]), `magicoder:7b` (0.422,
-  [0.364, 0.592]), `yi-coder:9b` (0.557, [0.443, 0.575]). **This resolves
-  the bulk of the apparent ranking swap**: several models' MCCs cluster
-  tightly (roughly 0.45–0.57) at this 51-case subset size, where ordinary
-  single-draw sampling noise is enough to reorder them — the temp-0
-  ranking is one specific noisy realization, not a more "correct" ranking
-  than the 5-repeat average.
-- **2 of 8 models are a genuine, same-direction exception, not explained by
-  ordinary sampling noise, and reported as an open hypothesis rather than
-  resolved**: `qwen2.5-coder:32b` (temp-0 MCC 0.550, ABOVE its entire
-  5-repeat range [0.424, 0.479]) and `codellama:7b-instruct-fp16` (temp-0
-  MCC 0.566, ABOVE its entire 5-repeat range [0.422, 0.505]) both score
-  better at temp=0 than on any of their 5 stochastic draws. One plausible,
-  untested hypothesis: determinism specifically benefits these two models
-  more than the others — `codellama` is already flagged elsewhere in this
-  document as precision/quantization-confounded, and a quantized or
-  otherwise less-robust model could plausibly be more sensitive to
-  temperature-induced decode variance than the others. This is stated as a
-  hypothesis, not confirmed; a direct case-level investigation of which
-  specific samples flip for these two models would be needed to test it,
-  and was not run as part of this audit.
+  (0.498, [0.458, 0.605]), `deepseek-coder:6.7b` (0.452, [0.385, 0.509]),
+  `codegemma:7b` (0.528, [0.496, 0.543]), `magicoder:7b` (0.566,
+  [0.364, 0.592] — its new value is also inside this wide range),
+  `yi-coder:9b` (0.557, [0.443, 0.575]). **This resolves the bulk of the
+  apparent ranking swap**: several models' MCCs cluster tightly (roughly
+  0.45–0.57) at this small subset size, where ordinary single-draw sampling
+  noise is enough to reorder them — the temp-0 ranking is one specific
+  noisy realization, not a more "correct" ranking than the 5-repeat average.
+- **The same 2 of 8 models remain a genuine, same-direction exception, not
+  explained by ordinary sampling noise, and reported as an open hypothesis
+  rather than resolved**: `qwen2.5-coder:32b` (temp-0 MCC 0.563, ABOVE its
+  entire 5-repeat range [0.424, 0.479]) and `codellama:7b-instruct-fp16`
+  (temp-0 MCC 0.547, ABOVE its entire 5-repeat range [0.422, 0.505]) both
+  score better at temp=0 than on any of their 5 stochastic draws. One
+  plausible, untested hypothesis: determinism specifically benefits these
+  two models more than the others — `codellama` is already flagged
+  elsewhere in this document as precision/quantization-confounded, and a
+  quantized or otherwise less-robust model could plausibly be more
+  sensitive to temperature-induced decode variance than the others. This is
+  stated as a hypothesis, not confirmed; a direct case-level investigation
+  of which specific samples flip for these two models would be needed to
+  test it, and was not run as part of this audit.
 
 **Net status**: the original "case composition, not temperature" explanation
 remains withdrawn (it does not hold under corrected scoring). In its place,
@@ -1064,17 +1092,45 @@ contributes its cases twice); recompute each condition's pooled metric
 the difference. The reported 95% CI is the resample distribution's
 2.5th/97.5th percentile; the two-sided p-value is `2 × min(share of
 resamples with diff ≤ 0, share with diff ≥ 0)`, capped at 1.0 — the
-standard bootstrap p-value construction, with no special tie-handling
-needed since MCC/ESR differences are continuous-valued, not ranks. A
-degenerate resample (a condition with zero pooled samples, which could in
+standard bootstrap p-value construction. **[CORRECTED, 2026-10-07,
+following further reviewer feedback]** An earlier version of this note
+wrongly claimed MCC/ESR differences are "continuous-valued, not ranks,"
+as if exact ties don't occur — they clearly do, and are visible directly
+in this document's own printed output (e.g. several raw-vs-autogrep ESR
+comparisons above show `diff=+0.000` exactly, both conditions landing on
+the identical pooled rate). ESR specifically is a POOLED RATE over binary
+per-case outcomes, a discrete-valued statistic with relatively few
+achievable values at this sample size — exact ties between the observed
+difference and individual bootstrap resamples, and between resamples
+themselves, are expected and do occur; MCC is less coarse (built from
+larger TP/FP/FN/TN counts) but not strictly continuous either. This does
+not require a different method: the tail-proportion p-value construction
+above handles ties correctly without a continuity correction (unlike, say,
+a rank-based test, which needs one) — a tie simply counts toward whichever
+side of zero it falls on (or both, if it IS zero), exactly as the formula
+already does. No special tie-handling was ever needed; the claim that
+there were no ties to handle was simply wrong, now corrected. A degenerate
+resample (a condition with zero pooled samples, which could in
 principle occur for the smallest-coverage conditions under resampling)
 returns `0.0` for that condition's metric rather than raising, so it would
 still contribute a point to the resample distribution rather than being
-silently dropped. Checked by direct simulation (not just argued) for this
-study's two lowest-coverage conditions, `magicoder:7b`-autogrep (9.3%
-acceptance) and C4-A (7.3%) — the ones most likely to produce a
-zero-sample resample: 0 degenerate resamples out of 10,000 for either,
-at the same seed (`42`) used throughout. Holm-Bonferroni
+silently dropped. **[CORRECTED, 2026-10-07, following further reviewer
+feedback] An earlier version of this check covered only 2 conditions
+(`magicoder:7b`-autogrep and C4-A) and claimed this resolved the question —
+it didn't, since neither was the actual lowest-coverage condition.**
+Checked by direct simulation across all 28 conditions actually used in
+comparisons 4–7 (every model's raw/autogrep/C2, plus C3-S/C3-E/C4-A/C4-B),
+same seed (`42`): 27 of 28 show zero degenerate resamples out of 10,000.
+**The one exception is `magicoder:7b` (raw), the single lowest-coverage
+condition in the whole study at 6/150 accepted cases: 27 of 10,000
+resamples (0.27%) are degenerate.** This does not appear to produce a
+false-positive significance claim: a degenerate resample returns `mcc=0.0`
+for that side, an extreme value relative to the observed 0.520, which
+widens that comparison's CI/p-value in the conservative direction (harder
+to reach significance), not the anti-conservative one — and the magicoder
+raw-vs-autogrep comparison is in fact not significant (§7.8, Comparison 4).
+Disclosed precisely rather than smoothed over: 1 of 28 tested conditions
+has a small but nonzero degenerate-resample rate. Holm-Bonferroni
 step-down correction (`pipeline/stats_section22.py:holm_correct`) is the
 declared multiple-testing family wherever more than one pairwise test is
 run within the same comparison (the small-model-family and C3-vs-C4
@@ -1168,13 +1224,21 @@ feedback]**: this study's previously-reported headline finding — that
 feedback-driven repair produces a large, statistically established
 end-to-end quality improvement — does not survive repeating the comparison
 on a metric without the conditional-MCC selection-effect confound.
-**Across every one of the 7 predefined comparisons, 0 of 8 per-model
+**[CORRECTED, 2026-10-07, following further reviewer feedback] The 0/8
+finding is specifically about comparisons 4 and 5** — the only two of the
+7 predefined comparisons structured as 8 independent per-model tests
+(raw-vs-autogrep, raw-vs-C2) — **not a blanket statement about all 7
+comparisons, which differ in structure** (1, 2, and 6 are single model/
+condition pairs; 3 and 7 are omnibus-plus-pairwise-follow-up families, not
+8-model aggregates). Within comparisons 4 and 5: 0 of 8 per-model
 end-to-end (ESR) differences are statistically detectable after Holm
-correction** (this remains true and was never affected by the bug below),
-and the one comparison family with a repo-aware, confirmed pairwise
-difference (comparison 3's two surviving pairs) resolves to 2 specific
-model pairs out of 15, not a general pattern — its own Friedman omnibus is
-descriptive only (not repository-aware, see above).
+correction (this remains true and was never affected by the bug below).
+Separately, comparison 3's small-model-family analysis DOES have a
+repo-aware, confirmed pairwise difference — 2 specific model pairs out of
+15 tested, not a general pattern — with its own Friedman omnibus reported
+as descriptive only (not repository-aware, see above). Comparisons 6 and 7
+found no statistically detectable pairwise difference either, on either
+metric.
 
 A sample-pooling bug, not just a selection-effect ambiguity, was also found
 and fixed in this pass: conditional MCC for the raw condition had been
@@ -1243,12 +1307,26 @@ be affected by any location-correctness flip.
 
 **This completes Section 22 in full** — both the 7 predefined comparisons
 (§22.3) and the subgroup analysis (§22.4), both rerun against corrected data
-with consistent repository-aware bootstrapping throughout.
+with consistent repository-aware bootstrapping throughout. **[CORRECTED,
+2026-10-07, following further reviewer feedback]** This claim was
+previously made before the subgroup analysis had actually been filtered
+through `eligible_cases.py`'s final eligibility rules — a real gap, now
+closed: `analyze_section22_subgroups_corrected.py` now excludes CASE-0166
+and the 5 ground-truth-excluded cases the same way every other script in
+this document does (caught concretely: the "supported" bucket's MCC had
+been 0.536, the stale 153-case value, while the primary table already
+showed the corrected 0.539 for the identical model/condition). Rerun;
+the table above reflects the corrected n=150/97 populations.
 
 ### 7.9 The explicit end-to-end picture (audit Step 4's requirement)
 
-Every metric reported in §7.1–7.8 above is a **conditional** quality
+**[CORRECTED, 2026-10-07, following further reviewer feedback]** Most, but
+not all, metrics reported in §7.1–§7.7 are a **conditional** quality
 measure — computed only among cases where a rule was actually accepted.
+§7.8 is a mix: its conditional-MCC results are the same kind of conditional
+measure, but its ESR (end-to-end) results already use the full,
+not-accepted-counts-as-failure denominator this section formalizes — they
+are not conditional, and §7.8 says so explicitly for each comparison.
 This section reports the full, explicit breakdown the 2026-10-06/07 audit
 specifically required: five rows with stated denominators, for every
 condition, treating a missing or rejected rule as a failure on every
@@ -1298,22 +1376,30 @@ unrecoverable, exactly as this document stated before the (now-retracted)
 
 | Model / condition | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate | Of non-accepted: confirmed parse-fail / reason-unrecoverable |
 |---|---:|---:|---:|---:|---:|---:|
-| DeepHat-V1-7B — autogrep | 36.0% | 36.0% | 0.545 | 16.3% (49/300) | 6.0% (9/150) | 6 / 90 |
+| DeepHat-V1-7B — autogrep | N/A: not recoverable | 36.0% | 0.545 | 16.3% (49/300) | 6.0% (9/150) | 6 / 90 |
 | DeepHat-V1-7B — raw | 83.3% | 28.0% | 0.593 | 14.7% (44/300) | 5.3% (8/150) | — |
-| Qwen2.5-Coder-32B — autogrep | 30.0% | 30.0% | 0.539 | 16.3% (49/300) | 4.7% (7/150) | 9 / 96 |
+| Qwen2.5-Coder-32B — autogrep | N/A: not recoverable | 30.0% | 0.539 | 16.3% (49/300) | 4.7% (7/150) | 9 / 96 |
 | Qwen2.5-Coder-32B — raw | 80.0% | 26.0% | 0.628 | 16.3% (49/300) | 4.7% (7/150) | — |
-| Yi-Coder-9B — autogrep | 29.3% | 29.3% | 0.534 | 14.0% (42/300) | 5.3% (8/150) | 9 / 97 |
+| Yi-Coder-9B — autogrep | N/A: not recoverable | 29.3% | 0.534 | 14.0% (42/300) | 5.3% (8/150) | 9 / 97 |
 | Yi-Coder-9B — raw | 77.3% | 19.3% | 0.583 | 10.7% (32/300) | 3.3% (5/150) | — |
-| Qwen2.5-Coder-7B-Instruct — autogrep | 31.3% | 31.3% | 0.513 | 15.7% (47/300) | 4.7% (7/150) | 12 / 91 |
+| Qwen2.5-Coder-7B-Instruct — autogrep | N/A: not recoverable | 31.3% | 0.513 | 15.7% (47/300) | 4.7% (7/150) | 12 / 91 |
 | Qwen2.5-Coder-7B-Instruct — raw | 74.0% | 24.0% | 0.626 | 14.7% (44/300) | 4.0% (6/150) | — |
-| CodeLlama-7B-Instruct — autogrep | 14.7% | 14.7% | 0.510 | 4.0% (12/300) | 0.7% (1/150) | 13 / 115 |
+| CodeLlama-7B-Instruct — autogrep | N/A: not recoverable | 14.7% | 0.510 | 4.0% (12/300) | 0.7% (1/150) | 13 / 115 |
 | CodeLlama-7B-Instruct — raw | 70.0% | 10.0% | 0.503 | 2.3% (7/300) | 0.0% (0/150) | — |
-| CodeGemma-7B — autogrep | 18.7% | 18.7% | 0.521 | 7.0% (21/300) | 2.0% (3/150) | 14 / 108 |
+| CodeGemma-7B — autogrep | N/A: not recoverable | 18.7% | 0.521 | 7.0% (21/300) | 2.0% (3/150) | 14 / 108 |
 | CodeGemma-7B — raw | 72.0% | 13.3% | 0.580 | 5.7% (17/300) | 2.0% (3/150) | — |
-| Magicoder-7B — autogrep | 9.3% | 9.3% | 0.427 | 2.3% (7/300) | 0.7% (1/150) | 23 / 113 |
+| Magicoder-7B — autogrep | N/A: not recoverable | 9.3% | 0.427 | 2.3% (7/300) | 0.7% (1/150) | 23 / 113 |
 | Magicoder-7B — raw | 56.7% | 4.0% | 0.520 | 1.7% (5/300) | 0.7% (1/150) | — |
-| DeepSeek-Coder-6.7B — autogrep | 12.0% | 12.0% | 0.373 | 2.7% (8/300) | 1.3% (2/150) | 16 / 116 |
+| DeepSeek-Coder-6.7B — autogrep | N/A: not recoverable | 12.0% | 0.373 | 2.7% (8/300) | 1.3% (2/150) | 16 / 116 |
 | DeepSeek-Coder-6.7B — raw | 73.3% | 6.7% | 0.481 | 1.7% (5/300) | 0.7% (1/150) | — |
+
+**[CORRECTED, 2026-10-07, following further reviewer feedback]** Autogrep's
+compile-rate column now literally reads "N/A: not recoverable" rather than
+repeating the acceptance-coverage figure — the earlier version showed the
+same percentage in both columns, which reads as a real, independently
+recovered number that happens to equal acceptance; it is not recovered at
+all (§7.9's explanation above still applies to WHY). `build_step4_tables.py`
+generates this exact text now; it is not a manuscript-only annotation.
 
 **[CORRECTED, 2026-10-07, following further reviewer feedback]** The raw
 row's compile-rate figures above were previously stale — pulled from an

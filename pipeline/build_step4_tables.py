@@ -87,11 +87,16 @@ def primary_table_row(label, model_dir, condition, case_filter):
 
     # Autogrep's attempted-candidate compile rate is NOT recoverable (attempt_trail is documented as
     # unreliable for curated cases, Implementation_Log.md Section 12.30) -- its retry loop only ever
-    # returns an already-fully-validated rule, so compile rate equals acceptance coverage exactly for
-    # this condition specifically, per Priority 7. "raw" has no retry loop, so its own top-level
-    # yaml_valid IS the real, trustworthy compile signal and is used directly.
+    # returns an already-fully-validated rule, so the top-level yaml_valid/semgrep_valid fields can't
+    # distinguish "never produced valid YAML" from "produced valid YAML but didn't pass." Per external
+    # reviewer feedback (2026-10-07, round 3): reporting 36.0% (say) in BOTH the compile and acceptance
+    # columns reads as if compile rate were a real, independently-recovered number that happens to
+    # equal acceptance -- it is not recovered at all, so it is reported as None here (printed as
+    # "N/A: not recoverable", never a number) rather than a duplicate of acceptance coverage. "raw" has
+    # no retry loop, so its own top-level yaml_valid IS the real, trustworthy compile signal and is
+    # used directly, unaffected by this.
     if condition == "autogrep":
-        n_compiled_candidate = n_accepted
+        n_compiled_candidate = None
     else:
         n_compiled_candidate = sum(1 for g in gen_c.values() if g["yaml_valid"] and not is_semgrep_parse_error(g.get("validation_error")))
     n_parse_fail = sum(1 for g in gen_c.values() if g.get("validation_error") == "failed to parse/sanitize into a rule")
@@ -122,7 +127,7 @@ def primary_table_row(label, model_dir, condition, case_filter):
 
     return {
         "label": label, "n_requested": n_requested,
-        "compilation_rate": rate(n_compiled_candidate, n_requested),
+        "compilation_rate": rate(n_compiled_candidate, n_requested) if n_compiled_candidate is not None else None,
         "acceptance_coverage": rate(n_accepted, n_requested),
         "conditional_mcc": cond_mcc,
         "e2e_hidden_detection_rate": rate(e2e_tp, e2e_total), "e2e_tp": e2e_tp, "e2e_total": e2e_total,
@@ -189,11 +194,11 @@ def print_row(r):
     cm = f"{r['conditional_mcc']:.3f}" if r["conditional_mcc"] is not None else "n/a (0 accepted)"
     note = ""
     if r.get("condition") == "autogrep":
-        note = (f"  [compile=accept: Autogrep's retry loop only returns an already-validated rule; "
-                 f"of non-accepted: confirmed_parse_fail={r['parse_fail']} "
+        note = (f"  [of non-accepted: confirmed_parse_fail={r['parse_fail']} "
                  f"real_reject_reason_unrecoverable={r['infra_fail']} (Implementation_Log.md Sec 12.30)]")
+    compile_str = f"{r['compilation_rate']*100:5.1f}%" if r["compilation_rate"] is not None else "N/A: not recoverable"
     print(f"{r['label']:38s} n={r['n_requested']:4d}  "
-          f"compile={r['compilation_rate']*100:5.1f}%  "
+          f"compile={compile_str:>20s}  "
           f"accept={r['acceptance_coverage']*100:5.1f}%  "
           f"cond.MCC={cm:>8s}  "
           f"e2e-detect={r['e2e_hidden_detection_rate']*100:5.1f}% ({r['e2e_tp']}/{r['e2e_total']})  "
@@ -206,13 +211,16 @@ def main():
     print(f"eligible_cases.py version {ELIGIBLE_VERSION} -- {len(supported)} eligible supported cases "
           f"(Priority 2+3 corrections: CASE-0166 dataset exclusion + 3 ground-truth exclusions)")
     print()
-    print("Note on the autogrep condition's 'compile' column: equals acceptance coverage exactly,")
-    print("per Priority 7 -- NOT recoverable. An earlier pass wrongly claimed this WAS recoverable")
-    print("from attempt_trail and attributed the compile-accept gap to a validator infra failure;")
-    print("that was retracted after checking Implementation_Log.md Section 12.30, which already")
-    print("documents the real cause: a pre-existing, already-fixed-going-forward diagnostic-text bug")
-    print("in a function independent of Autogrep's real retry loop -- confirmed to never affect any")
-    print("actual pass/fail outcome, only the human-readable reason string for genuine rejections.")
+    print("Note on the autogrep condition's 'compile' column: printed as 'N/A: not recoverable',")
+    print("per Priority 7 and external reviewer feedback (round 3) -- NOT a number, and specifically")
+    print("not a duplicate of the acceptance-coverage figure (an earlier version of this table showed")
+    print("the same percentage in both columns, which reads as a real recovered number that happens")
+    print("to equal acceptance; it is not recovered at all). An even earlier pass wrongly claimed this")
+    print("WAS recoverable from attempt_trail and attributed the compile-accept gap to a validator")
+    print("infra failure; that was retracted after checking Implementation_Log.md Section 12.30, which")
+    print("documents the real cause: a pre-existing, already-fixed-going-forward diagnostic-text bug in")
+    print("a function independent of Autogrep's real retry loop -- confirmed to never affect any actual")
+    print("pass/fail outcome, only the human-readable reason string for genuine rejections.")
     print("Raw-condition rows follow directly after each model's autogrep row for direct comparison.")
 
     print("\n" + "=" * 130)
