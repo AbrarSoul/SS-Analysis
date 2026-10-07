@@ -70,6 +70,26 @@ def rate(num, denom):
     return (num / denom) if denom else None
 
 
+def gated_samples(cid, is_accepted, smp_by_case):
+    """THE single shared rule for which sample records feed any 'accepted-only'/'conditional'
+    pooled metric (MCC/VGR/FPR/PDS): a case's samples count only if that case is accepted
+    (yaml_valid AND semgrep_valid for primary/raw, or the episode's own `accepted` flag for
+    C2/C3/C4). Needed because sample_execution_log.jsonl is NOT reliably empty for non-accepted
+    cases in every condition -- confirmed directly for "raw" (the pilot/primary benchmark's
+    one-shot condition): it records a real, scored sample bundle whenever the rule's YAML parsed,
+    REGARDLESS of whether semgrep_valid is True, unlike "autogrep" (whose sample records only ever
+    exist for already-accepted cases, by construction of its retry loop). Before this helper
+    existed, three independent call sites each re-implemented this gate, and two of them (this
+    file's analyze_model() and analyze_section22_corrected.py's three loaders) did it WITHOUT the
+    gate -- silently pooling rejected raw-condition rules' samples into what was reported
+    everywhere as "conditional MCC among accepted cases," producing self-contradictory numbers
+    across reports (e.g. qwen2.5-coder:7b-instruct raw MCC reported as both 0.626 and 0.101 for
+    the supposedly identical metric on the identical population -- found and fixed 2026-10-07 per
+    reviewer feedback on audit round 2). Every caller of this function now shares one
+    implementation of the gate, so this class of bug can't reappear silently."""
+    return smp_by_case.get(cid, []) if is_accepted else []
+
+
 def is_semgrep_parse_error(validation_error) -> bool:
     """True when the rule reached Semgrep but Semgrep itself rejected it (a real syntax/pattern
     error) -- as opposed to a schema-validation failure (never reached Semgrep at all, already
@@ -133,7 +153,9 @@ def analyze_model(model_dir_name, gen, smp, manifest, rep_filter):
         fpr_values = []
 
         for cid in included_cases:
-            case_samples = smp_by_case.get(cid, [])
+            g = next((g for g in gen_c if g["case_id"] == cid), None)
+            executable = g is not None and g["yaml_valid"] and g["semgrep_valid"]
+            case_samples = gated_samples(cid, executable, smp_by_case)
             all_samples.extend(case_samples)
             if not case_samples:
                 continue
@@ -144,8 +166,6 @@ def analyze_model(model_dir_name, gen, smp, manifest, rep_filter):
                 fpr_values.append(fpr)
             if vuln_tp and patched_tn:
                 pds_num += 1
-            g = next((g for g in gen_c if g["case_id"] == cid), None)
-            executable = g is not None and g["yaml_valid"] and g["semgrep_valid"]
             for vgr_t in (0.60, 0.80, 1.00):
                 for fpr_t in (0.00, 0.10, 0.20):
                     ok = (executable and vuln_tp and patched_tn

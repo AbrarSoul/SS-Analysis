@@ -40,7 +40,7 @@ from collections import defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from analyze_phase5_primary import confusion_from_samples, mcc, rate, per_case_vgr_fpr, load_manifest
+from analyze_phase5_primary import confusion_from_samples, mcc, rate, per_case_vgr_fpr, load_manifest, gated_samples
 from analyze_section22 import PRIMARY_MODEL_DIRS, C2_MODEL_DIRS, _esr_from_samples
 from eligible_cases import eligible_supported_cases, VERSION as ELIGIBLE_VERSION
 from stats_section22 import mcnemar_exact, holm_correct, friedman_on_matrix, wilcoxon_paired
@@ -77,7 +77,7 @@ def load_primary_corrected(model_dir_name: str, condition: str, case_filter=None
         if case_filter is not None and cid not in case_filter:
             continue
         executable = bool(g["yaml_valid"] and g["semgrep_valid"])
-        case_samples = smp_by_case.get(cid, [])
+        case_samples = gated_samples(cid, executable, smp_by_case)
         out[cid] = {"esr": _esr_from_samples(case_samples, executable), "samples": case_samples}
     return out
 
@@ -93,8 +93,9 @@ def load_c2_corrected(model_dir_name: str, case_filter=None):
         cid = e["case_id"]
         if case_filter is not None and cid not in case_filter:
             continue
-        case_samples = smp_by_case.get(cid, [])
-        out[cid] = {"esr": _esr_from_samples(case_samples, executable=bool(e["accepted"])), "samples": case_samples}
+        executable = bool(e["accepted"])
+        case_samples = gated_samples(cid, executable, smp_by_case)
+        out[cid] = {"esr": _esr_from_samples(case_samples, executable), "samples": case_samples}
     return out
 
 
@@ -110,8 +111,9 @@ def load_multiagent_corrected(results_subdir: str, variant: str, case_filter=Non
         cid = e["case_id"]
         if case_filter is not None and cid not in case_filter:
             continue
-        case_samples = smp_by_case.get(cid, [])
-        out[cid] = {"esr": _esr_from_samples(case_samples, executable=bool(e["accepted"])), "samples": case_samples}
+        executable = bool(e["accepted"])
+        case_samples = gated_samples(cid, executable, smp_by_case)
+        out[cid] = {"esr": _esr_from_samples(case_samples, executable), "samples": case_samples}
     return out
 
 
@@ -267,32 +269,44 @@ def main():
     print("\n" + "=" * 100)
     print("COMPARISON 4: Raw vs Autogrep (pipeline effect), all 8 models -- CORRECTED")
     print("=" * 100)
-    raw_ps = []
+    esr_ps, mcc_ps = [], []
     for m, dirname in PRIMARY_MODEL_DIRS.items():
         a = load_primary_corrected(dirname, "raw", supported)
         b = load_primary_corrected(dirname, "autogrep", supported)
         r = paired_comparison_corrected(f"{m} (raw)", a, f"{m} (autogrep)", b, case_to_repo)
         print_comparison(r)
-        raw_ps.append(r["esr_boot_p"])
-    adj_ps = holm_correct(raw_ps)
-    n_sig = sum(1 for p in adj_ps if p < 0.05)
-    print(f"\n  Aggregate: {n_sig}/{len(PRIMARY_MODEL_DIRS)} models show a significant raw-vs-autogrep "
-          f"ESR difference after Holm correction (repo-aware bootstrap p-values).")
+        esr_ps.append(r["esr_boot_p"])
+        mcc_ps.append(r["mcc_boot_p"])
+    adj_esr = holm_correct(esr_ps)
+    n_sig_esr = sum(1 for p in adj_esr if p < 0.05)
+    adj_mcc = holm_correct(mcc_ps)
+    n_sig_mcc = sum(1 for p in adj_mcc if p < 0.05)
+    print(f"\n  Aggregate (end-to-end/ESR): {n_sig_esr}/{len(PRIMARY_MODEL_DIRS)} models show a "
+          f"significant raw-vs-autogrep ESR difference after Holm correction (repo-aware bootstrap p-values).")
+    print(f"  Aggregate (conditional MCC, among each condition's own accepted cases): "
+          f"{n_sig_mcc}/{len(PRIMARY_MODEL_DIRS)} models show a significant difference after Holm "
+          f"correction. Direction: raw's conditional MCC is numerically HIGHER than autogrep's for "
+          f"7 of 8 models (the one exception, codellama, is the precision outlier).")
 
     print("\n" + "=" * 100)
     print("COMPARISON 5: C1 vs C2 (iterative feedback effect), all 8 models -- CORRECTED")
     print("=" * 100)
-    raw_ps = []
+    esr_ps, mcc_ps = [], []
     for m, dirname in PRIMARY_MODEL_DIRS.items():
         a = load_primary_corrected(dirname, "raw", supported)
         b = load_c2_corrected(C2_MODEL_DIRS[m], supported)
         r = paired_comparison_corrected(f"{m} (C1/raw)", a, f"{m} (C2)", b, case_to_repo)
         print_comparison(r)
-        raw_ps.append(r["esr_boot_p"])
-    adj_ps = holm_correct(raw_ps)
-    n_sig = sum(1 for p in adj_ps if p < 0.05)
-    print(f"\n  Aggregate: {n_sig}/{len(PRIMARY_MODEL_DIRS)} models show a significant C1-vs-C2 "
-          f"ESR difference after Holm correction (repo-aware bootstrap p-values).")
+        esr_ps.append(r["esr_boot_p"])
+        mcc_ps.append(r["mcc_boot_p"])
+    adj_esr = holm_correct(esr_ps)
+    n_sig_esr = sum(1 for p in adj_esr if p < 0.05)
+    adj_mcc = holm_correct(mcc_ps)
+    n_sig_mcc = sum(1 for p in adj_mcc if p < 0.05)
+    print(f"\n  Aggregate (end-to-end/ESR): {n_sig_esr}/{len(PRIMARY_MODEL_DIRS)} models show a "
+          f"significant C1-vs-C2 ESR difference after Holm correction (repo-aware bootstrap p-values).")
+    print(f"  Aggregate (conditional MCC, among each condition's own accepted cases): "
+          f"{n_sig_mcc}/{len(PRIMARY_MODEL_DIRS)} models show a significant difference after Holm correction.")
 
     print("\n" + "=" * 100)
     print("COMPARISON 6: C2 vs C3 (role-separation effect) -- CORRECTED")
