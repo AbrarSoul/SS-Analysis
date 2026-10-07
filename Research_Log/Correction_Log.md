@@ -704,3 +704,144 @@ genuine category-boundary difficulty rather than a systematic labeling error.
 
 Both rounds' raw data are preserved: `benchmark/second_rater/` (round 1, now-rated) and
 `benchmark/second_rater_v2/` (round 2, now-rated), neither overwritten.
+
+### 2026-10-07 — Audit round 2: a second, deeper feedback pass (Priorities 1–8)
+
+The user sent a second, more detailed audit-feedback table after reviewing round 1's corrections,
+explicitly noting most of it "require[s] reviewing existing data and recalculating results, rather
+than generating new rules." The entries below cover Priorities 1–3 and the canonical eligibility
+module; Priorities 4–8 continue in later entries as they're completed.
+
+**Priority 1 — manually resolved all 29 low-confidence variant line-range annotations.** An
+automated global-alignment resolver (`difflib.SequenceMatcher` full-file bracketing-anchor search)
+was tried first and failed on all 29 -- confirming the original LOW-confidence flagging was
+correct, not overcautious. Each of the 29 was then resolved by direct inspection: reading the
+original vulnerable construct and locating its corresponding text in the variant, following
+renames/refactors to their actual definition site rather than the nearest call site. 11 of the 29
+involved a refactor that extracted the vulnerable construct into a new helper function; for those,
+the resolved range covers the helper's definition (where the security-relevant content sits), not
+the now-trivial call site. One case (CASE-0265) caught and corrected a false lead during review: an
+anchor search on a literal string match initially pointed at the call site before the actual
+extracted-helper definition was found and used instead. Full reasoning for all 29:
+`benchmark/variant_lines_manual_adjudication.json`. `benchmark/variant_vulnerable_lines.jsonl`
+updated in place (`confidence: "manual"`); `pipeline/rescore_variant_location.py` updated to trust
+`confidence in ("high", "manual")`. Rerunning the rescoring pipeline moved the TP→FN flip rate from
+879/4072 (21.6%) to 897/4072 (22.1%) -- a small further correction on top of Finding 1's original
+fix, now with zero unresolved annotations (571 "high" + 29 "manual" = 600/600).
+
+**Priority 2 — ground-truth exclusion standard, applied to all 10 flagged cases.** Established one
+explicit rule (confirmed with the user via two separate approvals): a case is excluded from its
+representability population only if the evidence shows the SAME labeled vulnerability's upstream
+fix is measurably still exploitable -- not a different, unrelated bug, and not uncertainty about the
+vulnerable sample's own exploitability (a different axis). Applying this consistently across all 10
+previously-flagged cases: **5 excluded** (CASE-0125, partially_supported — the "disputed advisory"
+behaves identically for ordinary inputs, measured directly; CASE-0140, supported — upstream denylist
+bypassable via percent-encoding, measured directly against the real mysql-connector-j 8.4.0;
+CASE-0156, supported — upstream denylist bypassed via relative-path-scan + glob, measured directly;
+CASE-0174, partially_supported — ReDoS fix is mitigated but still quadratic-time, same vulnerability
+class remains triggerable; CASE-0194, supported — path check uses `startsWith` without a separator,
+same sibling-directory-prefix-bypass class as 0140/0156) and **5 kept** (CASE-0107, CASE-0154,
+CASE-0170, CASE-0199, CASE-0211 — each reviewed and found to fail the exclusion criterion for a
+specific, documented reason: an unrelated co-existing bug, a different-axis exploitability question,
+a sibling-location miss, or already outside every comparative population by representability label).
+Full reasoning: `benchmark/ground_truth_exclusions.json`.
+
+**Priority 3 — one canonical, versioned eligible-case module.** `pipeline/eligible_cases.py`
+(`VERSION = "2026-10-07.1"`) is now the single source every analysis script imports from, rather
+than each script re-deriving its own case population from the raw manifest. It encodes both
+corrections in one place: the CASE-0166 post-hoc dataset exclusion (Correction_Log's earlier entry)
+and the 3 ground-truth exclusions from supported (above). Verified output: 299 total cases after
+CASE-0166's removal (150 supported, 97 partially_supported, 47 unsupported, plus 3
+ground-truth-excluded from supported and 2 from partially_supported) -- exactly matching the user's
+stated target counts. `eligible_supported_cases()` (150 cases) is now the frozen primary-comparison
+population for every downstream script.
+
+**Priority 4 + a new finding (Finding 2) — regenerated the end-to-end metric table, and found a
+second, previously-missed data problem while doing it.** `pipeline/build_step4_tables.py` now
+imports `eligible_cases.eligible_supported_cases()` (150, not the old 153) and prints each model's
+autogrep row directly above its raw-condition counterpart for direct comparison, per the
+instruction to put raw rows "beside" autogrep rows.
+
+**Finding 2**: while regenerating this table, found that the primary benchmark's **autogrep
+condition** records `validation_error: "repo not available for validation"` for 60–77% of cases, in
+every one of the 8 models (verified by direct inspection of `generation_log.jsonl` across all 8
+model directories). This is Autogrep's own internal repo-checkout step failing transiently inside
+its 3-retry validation loop -- NOT a judgment about the generated rule. Every one of those records'
+`attempt_trail` entries still shows `yaml_valid: true` for the candidate that was actually generated;
+checking all 8 models' complete logs, there is not one single instance anywhere of a rule that
+reached semgrep with the repo available and was then rejected for a wrong discrimination verdict --
+every non-accepted autogrep-condition case resolves to either a YAML/schema parse failure (6–23
+cases/model) or this repo-unavailable infra failure (90–116 cases/model). This directly contradicts
+round 1's §7.9 footnote, which attributed the compile-accept gap to "discrimination failure, not a
+syntax/schema problem" -- that attribution is not supported by the data for this condition. The rule
+text itself was never persisted for the affected cases (`rule_path` is null, no raw-output directory
+exists), so this cannot be fixed by re-running validation alone; it would require new LLM generation
+for the affected ~70%. Presented this finding to the user directly (given its scale and effect on an
+already-published "headline result") before proceeding; the user chose to keep the autogrep-condition
+numbers in the table with an explicit, prominent caveat rather than exclude the condition or attempt
+a costly rerun. `build_step4_tables.py`'s `compilation_rate` for the autogrep condition is now
+recovered from `attempt_trail` (did ANY retry produce valid YAML) rather than the top-level
+`yaml_valid` field, and the table reports the parse-fail/infra-fail breakdown explicitly per model.
+Recovered compile rates land at 87–96% for both conditions -- close to a ceiling, consistent across
+models -- a dramatically different picture from the pre-finding "compile rate = acceptance coverage"
+framing. `Paper_Draft_Notes.md` §7.9 rewritten with the corrected table, the Finding 2 explanation,
+and the false discrimination-failure claim removed. Full output:
+`results_corrected/step4_tables_report.txt`.
+
+**Priority 6 — statistics rerun on the frozen 150-case population, with repository-awareness
+extended to the end-to-end (ESR) comparisons.** `pipeline/analyze_section22_corrected.py` now (a)
+uses `eligible_cases.eligible_supported_cases()` instead of its own uncorrected 153-case
+`supported_case_ids()`, and (b) runs the SAME repository-level paired bootstrap already used for
+MCC on the ESR (end-to-end) metric too -- the exact McNemar test previously used for ESR assumes
+discordant pairs are independent, which this project's own stated principle
+(`Section22_Scope.md`) says is false for cases sharing a repository. McNemar's b/c counts are kept
+printed for descriptive context only; the repo-aware bootstrap p-value is now what Holm correction
+and the significance call are based on throughout. Bootstrap p-values that round to 0.0000 at
+n_boot=10,000 are now printed as `p < 0.0001` (the test's resolution floor), never as an exact zero.
+Full output: `results_corrected/section22_corrected_report_round2.txt`.
+
+**This directly produces the evidence behind the user's explicit final instruction to remove the
+"repair produces a large, statistically established quality improvement" claim.** Round 1's log
+(above) stated this MCC gain was "the single most robust finding in the whole study... the one claim
+in the entire document that survived completely unscathed" -- **that statement is retracted by this
+entry.** Re-run on the same eligible population with repo-aware ESR bootstrapping:
+**0/8 models show a statistically detectable raw-vs-autogrep end-to-end (ESR) difference after Holm
+correction, and 0/8 show a detectable C1-vs-C2 end-to-end difference** (repo-aware bootstrap p
+ranging 0.09–1.00 before correction, every one non-significant after). Meanwhile the conditional MCC
+comparison for the exact same model pairs shows large, "highly significant" differences (diff
+-0.40 to -0.62, p < 0.0001) in every single case. Side by side, this is direct, reproducible evidence
+of the selection-effect confound the user flagged: conditional MCC for condition A vs. condition B
+each draws only from that condition's OWN accepted cases -- different, self-selected populations --
+so a large conditional-MCC gap is consistent with "repair changes which cases become acceptable"
+rather than "repair makes the same cases' rules better," and the end-to-end metric (same 150-case
+denominator for every condition) shows no detectable difference at all.
+
+**Priority 5 — ground-truth sensitivity analysis, a real before/after table.** Recomputed
+acceptance coverage, conditional MCC, end-to-end detection, and end-to-end success for all 8 models'
+autogrep condition under both the 153-case (uncorrected) and 150-case (eligible) populations side by
+side (`pipeline/build_step4_tables.py`). 7 of 8 models move by ≤1.3 points on every metric --
+genuinely negligible, as previously claimed, but the previous claim ("only 1 sample record out of
+several thousand affected") understated it: removing 3 cases removes every one of their sample
+records, not one classification outcome. **Magicoder-7B is a real, disclosed exception**: its
+conditional MCC moves +0.053 (0.374→0.427) because it accepts very few rules overall, so removing 3
+cases' worth of samples from a small pooled confusion matrix has a proportionally larger effect. This
+doesn't change any model's rank, but is model-specific, not uniformly negligible, and is now stated
+as such rather than smoothed into one cross-model number.
+
+**Manuscript propagated to match, section by section**: §1 (study overview), §7.1 (headline ranking,
+now on the 150-case population, MCC/ESR recomputed directly, PDS/VGR/FPR carried over from 153 with
+that caveat disclosed), §7.2 (repair-gain bullet rewritten with the selection-effect caveat and the
+real end-to-end result), §7.4 (C2-vs-autogrep MCC comparison, same treatment), §7.8 (all 7 Section 22
+comparisons rewritten with the repo-aware ESR bootstrap results and the retracted "most robust
+finding" framing), §7.9 (already covered above), §10 (the sensitivity table above, replacing the
+stale "11 cases kept, negligible impact" bullet), and the document's closing "note on what changed"
+paragraph (the reader-facing summary of the whole audit history). The paper's conclusion is now the
+gap between visible-validation acceptance and end-to-end hidden-test success, not a repair-
+superiority claim, per the user's explicit final instruction.
+
+**Still pending as of this entry**: Priority 7's remaining items (the C2/C3/C4 workflow-description
+language was already compliant from round 1; Autogrep's compile rate is now recovered rather than
+marked unavailable, per Finding 2, which is a stronger fix than the instruction asked for); Priority
+8's two decisions (restricted-wrapper scope, multi-agent-causality rerun) and its reproducibility
+packaging; and §7.3's stability-ranking discrepancy, still flagged open rather than resolved or
+withdrawn.

@@ -17,6 +17,20 @@ a REPOSITORY-level bootstrap (cases from the same repo aren't independent -- thi
 stated principle, Section22_Scope.md). This script uses repository-level resampling throughout, for
 every comparison, closing that inconsistency per the audit's explicit "repository-aware uncertainty
 estimates" instruction (Step 6).
+
+Correction (2026-10-07 audit round 2, Priority 3+6): two further fixes.
+1. Case population switched from analyze_section22.supported_case_ids() (the uncorrected 153,
+   no CASE-0166/ground-truth exclusions) to pipeline/eligible_cases.py's frozen 150-case
+   eligible_supported_cases() -- "paired comparisons on the SAME eligible population" (Priority 6).
+2. Repository-awareness EXTENDED to the end-to-end (ESR) comparisons, not just MCC: the exact
+   McNemar test on discordant pairs assumes pairs are independent, which Section22_Scope.md's own
+   stated principle says is false for cases sharing a repo. `pooled_esr_fn` + the same
+   `repo_aware_bootstrap` primitive already used for MCC now also produces a repo-aware CI/p-value
+   for the ESR difference; THAT p-value (not McNemar's) is now what Holm correction and the
+   "SIGNIFICANT" flag are based on. McNemar's b/c counts are kept printed for descriptive context
+   only. Also: a bootstrap p-value of exactly 0 with n_boot=10000 means "no resample crossed zero,"
+   not "p is truly 0" -- printed as "p < 0.0001" (the test's resolution floor) instead of "p=0.0000"
+   per the audit's explicit instruction to never report p=0.0000 as if it were an exact value.
 """
 import json
 import random
@@ -27,8 +41,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analyze_phase5_primary import confusion_from_samples, mcc, rate, per_case_vgr_fpr, load_manifest
-from analyze_section22 import PRIMARY_MODEL_DIRS, C2_MODEL_DIRS, supported_case_ids, _esr_from_samples
+from analyze_section22 import PRIMARY_MODEL_DIRS, C2_MODEL_DIRS, _esr_from_samples
+from eligible_cases import eligible_supported_cases, VERSION as ELIGIBLE_VERSION
 from stats_section22 import mcnemar_exact, holm_correct, friedman_on_matrix, wilcoxon_paired
+
+
+def fmt_p(p):
+    """Never prints a rounded-to-zero p-value as if it were exact (audit instruction)."""
+    return "p < 0.0001" if p < 0.0001 else f"p={p:.4f}"
 
 warnings.filterwarnings("ignore", category=RuntimeWarning, module="scipy")
 
@@ -150,13 +170,22 @@ def pooled_mcc_fn(cond_data):
     return fn
 
 
+def pooled_esr_fn(cond_data):
+    def fn(ids):
+        return sum(cond_data[cid]["esr"] for cid in ids) / len(ids) if ids else 0.0
+    return fn
+
+
 def paired_comparison_corrected(label_a, data_a, label_b, data_b, case_to_repo, n_boot=10000):
     common = sorted(set(data_a) & set(data_b))
     b = sum(1 for c in common if data_a[c]["esr"] == 1 and data_b[c]["esr"] == 0)
     cc = sum(1 for c in common if data_a[c]["esr"] == 0 and data_b[c]["esr"] == 1)
-    mcnemar_p = mcnemar_exact(b, cc)
+    mcnemar_p = mcnemar_exact(b, cc)  # descriptive only -- assumes independent pairs, not used for significance
     esr_a = sum(data_a[c]["esr"] for c in common) / len(common)
     esr_b = sum(data_b[c]["esr"] for c in common) / len(common)
+
+    esr_fn_a, esr_fn_b = pooled_esr_fn(data_a), pooled_esr_fn(data_b)
+    esr_diff, esr_lo, esr_hi, esr_boot_p = repo_aware_bootstrap(common, case_to_repo, esr_fn_a, esr_fn_b, n_boot=n_boot)
 
     fn_a, fn_b = pooled_mcc_fn(data_a), pooled_mcc_fn(data_b)
     diff, lo, hi, boot_p = repo_aware_bootstrap(common, case_to_repo, fn_a, fn_b, n_boot=n_boot)
@@ -164,26 +193,30 @@ def paired_comparison_corrected(label_a, data_a, label_b, data_b, case_to_repo, 
     return {
         "label_a": label_a, "label_b": label_b, "n_common": len(common),
         "esr_a": esr_a, "esr_b": esr_b, "mcnemar_b": b, "mcnemar_c": cc, "mcnemar_p": mcnemar_p,
+        "esr_diff": esr_diff, "esr_ci": (esr_lo, esr_hi), "esr_boot_p": esr_boot_p,
         "mcc_a": fn_a(common), "mcc_b": fn_b(common),
         "mcc_diff": diff, "mcc_ci": (lo, hi), "mcc_boot_p": boot_p,
     }
 
 
 def print_comparison(r):
-    sig = "no statistically detectable difference" if r["mcc_boot_p"] >= 0.05 else "SIGNIFICANT"
+    sig = "no statistically detectable difference" if r["esr_boot_p"] >= 0.05 else "SIGNIFICANT"
     print(f"\n  {r['label_a']}  vs  {r['label_b']}   (n={r['n_common']} common cases)")
-    print(f"    ESR: {r['esr_a']:.3f} vs {r['esr_b']:.3f}  |  McNemar b={r['mcnemar_b']} c={r['mcnemar_c']}  p={r['mcnemar_p']:.4f}")
-    print(f"    MCC: {r['mcc_a']:.3f} vs {r['mcc_b']:.3f}  |  diff={r['mcc_diff']:+.3f}  "
-          f"95% CI=({r['mcc_ci'][0]:+.3f}, {r['mcc_ci'][1]:+.3f})  repo-aware bootstrap p={r['mcc_boot_p']:.4f}  [{sig}]")
+    print(f"    ESR: {r['esr_a']:.3f} vs {r['esr_b']:.3f}  |  diff={r['esr_diff']:+.3f}  "
+          f"95% CI=({r['esr_ci'][0]:+.3f}, {r['esr_ci'][1]:+.3f})  repo-aware bootstrap {fmt_p(r['esr_boot_p'])}  [{sig}]")
+    print(f"    (descriptive only, assumes independent pairs) McNemar b={r['mcnemar_b']} c={r['mcnemar_c']}  {fmt_p(r['mcnemar_p'])}")
+    print(f"    MCC (conditional, among accepted cases only): {r['mcc_a']:.3f} vs {r['mcc_b']:.3f}  |  diff={r['mcc_diff']:+.3f}  "
+          f"95% CI=({r['mcc_ci'][0]:+.3f}, {r['mcc_ci'][1]:+.3f})  repo-aware bootstrap {fmt_p(r['mcc_boot_p'])}")
 
 
 def main():
-    supported = supported_case_ids()
+    supported = eligible_supported_cases()
     manifest = load_manifest()
     case_to_repo = {cid: manifest[cid]["repository"] for cid in manifest}
-    print(f"Loaded {len(supported)} supported cases. Using CORRECTED sample data "
-          f"(results_corrected/) + REPOSITORY-AWARE bootstrap throughout (fixes the case-level/"
-          f"repo-level inconsistency flagged during the audit).\n")
+    print(f"eligible_cases.py v{ELIGIBLE_VERSION}: {len(supported)} eligible supported cases "
+          f"(CASE-0166 dataset exclusion + 3 ground-truth exclusions applied). Using CORRECTED "
+          f"sample data (results_corrected/) + REPOSITORY-AWARE bootstrap throughout, extended to "
+          f"the ESR/end-to-end comparisons as well as MCC (2026-10-07 audit round 2, Priority 6).\n")
 
     print("=" * 100)
     print("COMPARISON 1: Qwen2.5-Coder 7B vs 32B (scale effect) -- CORRECTED")
@@ -216,17 +249,18 @@ def main():
             esr_m = sum(family_data[m][c]["esr"] for c in common) / len(common)
             print(f"    {m}: ESR={esr_m:.3f}")
         if p < 0.05:
+            print("  Omnibus significant -- running repo-aware ESR bootstrap pairwise follow-ups")
+            print("  (not McNemar: cases sharing a repo aren't independent, Section22_Scope.md):")
             pairs = [(i, j) for i in range(len(family_models)) for j in range(i + 1, len(family_models))]
             raw_ps = []
             for i, j in pairs:
                 ma, mb = family_models[i], family_models[j]
-                b_ = sum(1 for c in common if family_data[ma][c]["esr"] == 1 and family_data[mb][c]["esr"] == 0)
-                c_ = sum(1 for c in common if family_data[ma][c]["esr"] == 0 and family_data[mb][c]["esr"] == 1)
-                raw_ps.append(mcnemar_exact(b_, c_))
+                _, _, _, boot_p = repo_aware_bootstrap(common, case_to_repo, pooled_esr_fn(family_data[ma]), pooled_esr_fn(family_data[mb]))
+                raw_ps.append(boot_p)
             adj_ps = holm_correct(raw_ps)
             for (i, j), raw_p, adj_p in zip(pairs, raw_ps, adj_ps):
                 flag = " *" if adj_p < 0.05 else ""
-                print(f"    {family_models[i]} vs {family_models[j]}: raw p={raw_p:.4f}  Holm-adj p={adj_p:.4f}{flag}")
+                print(f"    {family_models[i]} vs {family_models[j]}: raw {fmt_p(raw_p)}  Holm-adj {fmt_p(adj_p)}{flag}")
         else:
             print("  Omnibus not significant -- no pairwise follow-ups run.")
 
@@ -239,11 +273,11 @@ def main():
         b = load_primary_corrected(dirname, "autogrep", supported)
         r = paired_comparison_corrected(f"{m} (raw)", a, f"{m} (autogrep)", b, case_to_repo)
         print_comparison(r)
-        raw_ps.append(r["mcnemar_p"])
+        raw_ps.append(r["esr_boot_p"])
     adj_ps = holm_correct(raw_ps)
     n_sig = sum(1 for p in adj_ps if p < 0.05)
     print(f"\n  Aggregate: {n_sig}/{len(PRIMARY_MODEL_DIRS)} models show a significant raw-vs-autogrep "
-          f"ESR difference after Holm correction.")
+          f"ESR difference after Holm correction (repo-aware bootstrap p-values).")
 
     print("\n" + "=" * 100)
     print("COMPARISON 5: C1 vs C2 (iterative feedback effect), all 8 models -- CORRECTED")
@@ -254,11 +288,11 @@ def main():
         b = load_c2_corrected(C2_MODEL_DIRS[m], supported)
         r = paired_comparison_corrected(f"{m} (C1/raw)", a, f"{m} (C2)", b, case_to_repo)
         print_comparison(r)
-        raw_ps.append(r["mcnemar_p"])
+        raw_ps.append(r["esr_boot_p"])
     adj_ps = holm_correct(raw_ps)
     n_sig = sum(1 for p in adj_ps if p < 0.05)
     print(f"\n  Aggregate: {n_sig}/{len(PRIMARY_MODEL_DIRS)} models show a significant C1-vs-C2 "
-          f"ESR difference after Holm correction.")
+          f"ESR difference after Holm correction (repo-aware bootstrap p-values).")
 
     print("\n" + "=" * 100)
     print("COMPARISON 6: C2 vs C3 (role-separation effect) -- CORRECTED")
@@ -289,9 +323,24 @@ def main():
             esr_lb = sum(ma_data[lb][c]["esr"] for c in common) / len(common)
             print(f"    {lb}: ESR={esr_lb:.3f}")
 
-    print("\n  Pairwise MCC repo-aware bootstrap for all 6 pairs (MCC is the metric the original")
-    print("  C4-A/C4-B narrative was built on):")
     pairs = [(i, j) for i in range(len(labels)) for j in range(i + 1, len(labels))]
+
+    print("\n  Pairwise ESR (end-to-end) repo-aware bootstrap for all 6 pairs:")
+    raw_ps_esr = []
+    results_esr = []
+    for i, j in pairs:
+        la, lb = labels[i], labels[j]
+        diff, lo, hi, boot_p = repo_aware_bootstrap(common, case_to_repo, pooled_esr_fn(ma_data[la]), pooled_esr_fn(ma_data[lb]))
+        raw_ps_esr.append(boot_p)
+        results_esr.append((la, lb, diff, lo, hi, boot_p))
+    adj_ps_esr = holm_correct(raw_ps_esr)
+    for (la, lb, diff, lo, hi, boot_p), adj_p in zip(results_esr, adj_ps_esr):
+        flag = " *" if adj_p < 0.05 else ""
+        print(f"    {la} vs {lb}: ESR diff={diff:+.3f}  95% CI=({lo:+.3f}, {hi:+.3f})  "
+              f"raw {fmt_p(boot_p)}  Holm-adj {fmt_p(adj_p)}{flag}")
+
+    print("\n  Pairwise MCC (conditional, among accepted cases only) repo-aware bootstrap for all 6")
+    print("  pairs -- the metric the original C4-A/C4-B narrative was built on:")
     raw_ps = []
     results7 = []
     for i, j in pairs:
@@ -304,7 +353,7 @@ def main():
     for (la, lb, diff, lo, hi, boot_p), adj_p in zip(results7, adj_ps):
         flag = " *" if adj_p < 0.05 else ""
         print(f"    {la} vs {lb}: MCC diff={diff:+.3f}  95% CI=({lo:+.3f}, {hi:+.3f})  "
-              f"raw p={boot_p:.4f}  Holm-adj p={adj_p:.4f}{flag}")
+              f"raw {fmt_p(boot_p)}  Holm-adj {fmt_p(adj_p)}{flag}")
 
 
 if __name__ == "__main__":
