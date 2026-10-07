@@ -54,10 +54,10 @@ import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
     private static int i = 0;
-    private static String API_KEY = "AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM";
+    private static String API_KEY = "REDACTED_API_KEY_SEE_ORIGINAL_PUBLIC_REPO";
     private static String CUSTOM_SEARCH_ENGINE_ID = "016436735745445346824:fgyqgo18wfm";
     private final String[] ids = new String[]{"016436735745445346824:fgyqgo18wfm", "014099384324434647311:udrkfx4-ipk"};
-    private final String[] keys = new String[]{"AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM", "AIzaSyC-k_Cm_xClsqzeOGk8Dh5ECaZ449Vf6Ic"};
+    private final String[] keys = new String[]{"REDACTED_API_KEY_SEE_ORIGINAL_PUBLIC_REPO", "REDACTED_API_KEY_SEE_ORIGINAL_PUBLIC_REPO"};
     private Request request;
     private Response response;
     private User usr;

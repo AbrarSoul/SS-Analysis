@@ -4,7 +4,7 @@ import customtkinter as ctk
 import google.generativeai as genai
 import threading
 
-_API_KEY = "AIzaSyCkFVihZnx6NfKyGq1O4PTx5A6yDnfg_To"
+_API_KEY = "REDACTED_API_KEY_SEE_ORIGINAL_PUBLIC_REPO"
 
 
 class AIAssistantApp(ctk.CTk):
