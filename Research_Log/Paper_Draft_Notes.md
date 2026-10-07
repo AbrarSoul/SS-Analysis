@@ -36,10 +36,13 @@ Java, JavaScript, TypeScript).
 **Two methodological audits (2026-10-06/07, and a second, deeper pass on
 2026-10-07, full record in `Research_Log/Correction_Log.md`) found and
 corrected a real scoring gap, several confounds in the C2/C3/C4 comparison,
-a validator infrastructure failure affecting most of the primary
-benchmark's autogrep-condition acceptance numbers, and a selection-effect
-confound in the paper's previous headline finding — and reran the full
-statistical analysis on corrected data each time.** Every section below
+and a selection-effect confound in the paper's previous headline finding —
+and reran the full statistical analysis on corrected data each time.**
+(A validator infrastructure failure was also briefly suspected and reported
+to the user during the second pass, then found to be a misdiagnosis of an
+already-documented, already-fixed diagnostic bug, §7.9 — correcting that
+suspicion is included in "and corrected," not left as a separate claim.)
+Every section below
 reflects the corrected numbers; where a claim changed as a result, that is
 stated explicitly rather than silently updated. Read this note once, up
 front, rather than have it repeated at every affected number: **the
@@ -446,25 +449,75 @@ condition, MCC mean/min/max across the five repeats, **corrected data**):
 | Qwen2.5-Coder-32B | 0.452 | 0.424 | 0.479 |
 | DeepSeek-Coder-6.7B | 0.419 | 0.385 | 0.509 |
 
-**A methodological finding, re-examined after the Finding-1 correction and
-now reported as OPEN rather than resolved.** Before correction, this
-section claimed the stability-run ranking's mismatch with §7.1's primary
-ranking was fully explained by case-composition (restricting the primary
-run's own temperature-0 results to the same 51-case subset reproduced the
-stability ranking almost exactly). **Re-checked after applying the Finding-1
-correction to both sides of that comparison: the match is no longer close.**
-The same-subset temperature-0 ranking (corrected) is `codellama` >
-`yi-coder` > `qwen32b` > `codegemma` > `qwen7b` > `DeepHat` > `deepseek-coder`
-> `magicoder`, while the temperature-0.2 stability-run ranking above is
-`yi-coder` > `codegemma` > `DeepHat` > `magicoder` > `qwen7b` > `codellama` >
-`qwen32b` > `deepseek-coder` — `DeepHat` and `codellama` in particular swap
-dramatically (3rd vs. 6th, and 6th vs. 1st) between the two. **This
-discrepancy is not yet explained and is flagged here as unresolved**, rather
-than keep the original "case-composition, not temperature" explanation now
-that it no longer holds up under the corrected scoring. A fresh investigation
-of this specific divergence is needed before either explanation (temperature
-sensitivity, case composition, or some interaction of both with the
-location-correctness fix) can be stated with confidence.
+**[CORRECTED, 2026-10-07 audit round 2, Priority 8] A methodological
+finding, re-investigated and now resolved for most of the ranking, with a
+smaller residual explicitly flagged rather than left as a blanket
+mystery.** Before correction, this section claimed the stability-run
+ranking's mismatch with §7.1's primary ranking was fully explained by
+case-composition (restricting the primary run's own temperature-0 results
+to the same 51-case subset reproduced the stability ranking almost
+exactly). Re-checked after applying the Finding-1 correction to both sides:
+the match was no longer close, and round 1 left this flagged as an open,
+uninvestigated discrepancy. Investigating it directly for this audit pass:
+
+- **Ruled out a script/config bug first.** This table's own generating
+  script (`pipeline/analyze_phase5_stability.py`) was found, while
+  investigating this discrepancy, to still be reading `sample_execution_log`
+  from the uncorrected `results/` tree in every code path, despite this
+  document labeling its output "corrected data" — that label was not
+  actually true of the script's own committed state (likely a one-off
+  corrected run was done by hand and never fixed back into the script).
+  Fixed to read from `results_corrected/`, matching the pattern used
+  throughout the rest of this audit; rerunning now reproduces this table's
+  existing numbers almost exactly (one model, Magicoder-7B, shifts by
+  0.008 due to Priority 1's later manual location-annotation fixes). The
+  table above is correct and reproducible going forward — this was a
+  pipeline-hygiene problem, not the source of the ranking discrepancy.
+- **Ruled out an averaging-method artifact.** "MCC mean" above averages 5
+  separately-computed per-repeat MCC values; pooling all 5 repeats' raw
+  samples into one confusion matrix per model and computing MCC once
+  instead produces essentially the same ranking (`yi-coder` >
+  `codegemma` > `DeepHat` > `magicoder` ≈ `qwen7b` > `codellama` >
+  `qwen32b` > `deepseek-coder`) — ruling out mean-of-ratios vs.
+  ratio-of-pooled-sums as the explanation.
+- **Confirmed identical run configuration apart from temperature.**
+  Diffing `environment.json` between the primary (temp 0) and stability
+  (temp 0.2) runs for the models with the largest rank swaps shows the same
+  host, same Autogrep commit, same Semgrep version, same prompt variant —
+  temperature is the only varied setting.
+- **For 6 of 8 models, the single temp-0 draw's MCC falls inside that
+  model's own 5-repeat temp-0.2 range**, computed directly:
+  `qwen2.5-coder:7b-instruct` (0.499, range [0.451, 0.507]), `DeepHat-V1-7B`
+  (0.492, [0.458, 0.605]), `deepseek-coder:6.7b` (0.452, [0.385, 0.509]),
+  `codegemma:7b` (0.528, [0.496, 0.543]), `magicoder:7b` (0.422,
+  [0.364, 0.592]), `yi-coder:9b` (0.557, [0.443, 0.575]). **This resolves
+  the bulk of the apparent ranking swap**: several models' MCCs cluster
+  tightly (roughly 0.45–0.57) at this 51-case subset size, where ordinary
+  single-draw sampling noise is enough to reorder them — the temp-0
+  ranking is one specific noisy realization, not a more "correct" ranking
+  than the 5-repeat average.
+- **2 of 8 models are a genuine, same-direction exception, not explained by
+  ordinary sampling noise, and reported as an open hypothesis rather than
+  resolved**: `qwen2.5-coder:32b` (temp-0 MCC 0.550, ABOVE its entire
+  5-repeat range [0.424, 0.479]) and `codellama:7b-instruct-fp16` (temp-0
+  MCC 0.566, ABOVE its entire 5-repeat range [0.422, 0.505]) both score
+  better at temp=0 than on any of their 5 stochastic draws. One plausible,
+  untested hypothesis: determinism specifically benefits these two models
+  more than the others — `codellama` is already flagged elsewhere in this
+  document as precision/quantization-confounded, and a quantized or
+  otherwise less-robust model could plausibly be more sensitive to
+  temperature-induced decode variance than the others. This is stated as a
+  hypothesis, not confirmed; a direct case-level investigation of which
+  specific samples flip for these two models would be needed to test it,
+  and was not run as part of this audit.
+
+**Net status**: the original "case composition, not temperature" explanation
+remains withdrawn (it does not hold under corrected scoring). In its place,
+6 of 8 models' ranking swap is now resolved as ordinary single-draw sampling
+variation among closely-clustered MCCs, confirmed not to be a script, config,
+or averaging-method artifact. `qwen2.5-coder:32b` and `codellama:7b-instruct-fp16`
+remain a genuine, unresolved residual, carried forward as an open hypothesis
+rather than a confirmed mechanism.
 
 ### 7.4 C2 (iterative single agent): an interim comparison
 
@@ -1078,60 +1131,80 @@ ground-truth exclusions removed; 2026-10-07 audit round 2, Priorities 2–4).
 Full methodology and per-model output: `pipeline/build_step4_tables.py`,
 `results_corrected/step4_tables_report.txt`.
 
-**[CORRECTED, 2026-10-07] A second, previously-missed finding surfaced
-while regenerating this table ("Finding 2" in `Correction_Log.md`): the
-primary benchmark's autogrep condition records a `validation_error` of
-`"repo not available for validation"` for 60–77% of cases, in every one of
-the 8 models — a transient failure of Autogrep's own repo-checkout step
-inside its validator, not a judgment about the generated rule. Every one
-of those records' `attempt_trail` entries still shows `yaml_valid: true`,
-and checking all 8 models' full logs directly, there is not one single
-instance, anywhere, of a rule that reached semgrep with the repo available
-and was then rejected for getting the discrimination wrong — every
-non-accepted case resolves to either a YAML/schema parse failure or this
-repo-unavailable infra failure. The table below therefore reports an
-additional, recovered "compile rate" column (did any of the up-to-3 retries
-ever produce valid YAML, read directly from `attempt_trail` — independent
-of whether the repo was available to finish validating it) alongside the
-parse-failure and infra-failure counts, so the acceptance-coverage gap is no
-longer attributed to a discrimination failure that the data does not show.**
+**[CORRECTED, 2026-10-07, twice]** While regenerating this table, the
+primary benchmark's autogrep condition was found to record a
+`validation_error` of `"repo not available for validation"` for 60–77% of
+cases, in every one of the 8 models. **An earlier version of this section
+misdiagnosed that as a new, previously-undiscovered validator
+infrastructure failure, and attempted to "recover" a true compile rate
+from `attempt_trail`'s per-attempt `yaml_valid` field — that diagnosis was
+wrong and is retracted.** Checking `Research_Log/Implementation_Log.md`
+Section 12.30 (written by the original study team before any audit, and
+missed when this section was first drafted) found the real, already-fixed
+root cause: `reconstruct_attempt_trail()` — a diagnostic-only re-evaluation
+function, independent of Autogrep's own real retry loop — was never updated
+after the validator went clone-free for curated cases, so it still gates on
+`repo_path.exists()`, which is `False` by design for every curated case (a
+synthetic marker path, since validation reads each case's own stored source
+files directly, no clone needed). This makes the function discard the real
+per-attempt outcome and substitute a generic placeholder for every curated
+case — but, verified directly in that log entry, **every one of the 1,746
+affected records has `semgrep_valid == False`: a real rejection, never a
+wrong pass.** Only the human-readable failure-REASON text is corrupted (and
+the whole `attempt_trail` diagnostic list is documented there as
+"unreliable for curated cases" as a result) — so the specific reason for
+these rejections (parse failure vs. discrimination failure) cannot be
+recovered from stored data, and the "recovered 87–96% compile rate" claim
+is retracted along with the infra-failure story.
+
+Per Priority 7's actual instruction ("mark Autogrep's attempted-candidate
+compilation rate as unavailable unless recoverable"): it is **not**
+recoverable. Compile rate for the autogrep condition is therefore reported
+as identical to acceptance coverage — Autogrep's retry loop only ever
+returns an already-fully-validated rule, so this is structurally
+unrecoverable, exactly as this document stated before the (now-retracted)
+"Finding 2" detour, just for a more precisely documented reason.
 
 **Primary benchmark, 150 eligible supported cases — autogrep row directly above its raw-condition counterpart, per model:**
 
-| Model / condition | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate | Of non-accepted: parse-fail / infra-fail (repo unavailable) |
+| Model / condition | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate | Of non-accepted: confirmed parse-fail / reason-unrecoverable |
 |---|---:|---:|---:|---:|---:|---:|
-| DeepHat-V1-7B — autogrep | 96.0% | 36.0% | 0.545 | 16.3% (49/300) | 6.0% (9/150) | 6 / 90 |
+| DeepHat-V1-7B — autogrep | 36.0% | 36.0% | 0.545 | 16.3% (49/300) | 6.0% (9/150) | 6 / 90 |
 | DeepHat-V1-7B — raw | 94.7% | 28.0% | 0.593 | 14.7% (44/300) | 5.3% (8/150) | — |
-| Qwen2.5-Coder-32B — autogrep | 94.0% | 30.0% | 0.539 | 16.3% (49/300) | 4.7% (7/150) | 9 / 96 |
+| Qwen2.5-Coder-32B — autogrep | 30.0% | 30.0% | 0.539 | 16.3% (49/300) | 4.7% (7/150) | 9 / 96 |
 | Qwen2.5-Coder-32B — raw | 94.0% | 26.0% | 0.628 | 16.3% (49/300) | 4.7% (7/150) | — |
-| Yi-Coder-9B — autogrep | 94.7% | 29.3% | 0.534 | 14.0% (42/300) | 5.3% (8/150) | 9 / 97 |
+| Yi-Coder-9B — autogrep | 29.3% | 29.3% | 0.534 | 14.0% (42/300) | 5.3% (8/150) | 9 / 97 |
 | Yi-Coder-9B — raw | 92.0% | 19.3% | 0.583 | 10.7% (32/300) | 3.3% (5/150) | — |
-| Qwen2.5-Coder-7B-Instruct — autogrep | 96.0% | 31.3% | 0.513 | 15.7% (47/300) | 4.7% (7/150) | 12 / 91 |
-| Qwen2.5-Coder-7B-Instruct — raw | 90.7% | 24.0% | 0.626 | 14.7% (44/300) | 4.0% (6/150) | — |
-| CodeLlama-7B-Instruct — autogrep | 95.3% | 14.7% | 0.510 | 4.0% (12/300) | 0.7% (1/150) | 13 / 115 |
-| CodeLlama-7B-Instruct — raw | 88.0% | 10.0% | 0.503 | 2.3% (7/300) | 0.0% (0/150) | — |
-| CodeGemma-7B — autogrep | 92.7% | 18.7% | 0.521 | 7.0% (21/300) | 2.0% (3/150) | 14 / 108 |
-| CodeGemma-7B — raw | 92.0% | 13.3% | 0.580 | 5.7% (17/300) | 2.0% (3/150) | — |
-| Magicoder-7B — autogrep | 96.0% | 9.3% | 0.427 | 2.3% (7/300) | 0.7% (1/150) | 23 / 113 |
-| Magicoder-7B — raw | 90.7% | 4.0% | 0.520 | 1.7% (5/300) | 0.7% (1/150) | — |
-| DeepSeek-Coder-6.7B — autogrep | 92.7% | 12.0% | 0.373 | 2.7% (8/300) | 1.3% (2/150) | 16 / 116 |
-| DeepSeek-Coder-6.7B — raw | 87.3% | 6.7% | 0.481 | 1.7% (5/300) | 0.7% (1/150) | — |
+| Qwen2.5-Coder-7B-Instruct — autogrep | 31.3% | 31.3% | 0.513 | 15.7% (47/300) | 4.7% (7/150) | 12 / 91 |
+| Qwen2.5-Coder-7B-Instruct — raw | 74.0% | 24.0% | 0.626 | 14.7% (44/300) | 4.0% (6/150) | — |
+| CodeLlama-7B-Instruct — autogrep | 14.7% | 14.7% | 0.510 | 4.0% (12/300) | 0.7% (1/150) | 13 / 115 |
+| CodeLlama-7B-Instruct — raw | 65.3% | 10.0% | 0.503 | 2.3% (7/300) | 0.0% (0/150) | — |
+| CodeGemma-7B — autogrep | 18.7% | 18.7% | 0.521 | 7.0% (21/300) | 2.0% (3/150) | 14 / 108 |
+| CodeGemma-7B — raw | 76.7% | 13.3% | 0.580 | 5.7% (17/300) | 2.0% (3/150) | — |
+| Magicoder-7B — autogrep | 9.3% | 9.3% | 0.427 | 2.3% (7/300) | 0.7% (1/150) | 23 / 113 |
+| Magicoder-7B — raw | 70.0% | 4.0% | 0.520 | 1.7% (5/300) | 0.7% (1/150) | — |
+| DeepSeek-Coder-6.7B — autogrep | 12.0% | 12.0% | 0.373 | 2.7% (8/300) | 1.3% (2/150) | 16 / 116 |
+| DeepSeek-Coder-6.7B — raw | 68.0% | 6.7% | 0.481 | 1.7% (5/300) | 0.7% (1/150) | — |
 
-*Reading this table: compile rate (recovered) is now consistently 87–96%
-for BOTH conditions — close to a ceiling, and no longer the artificially
-depressed, condition-specific number reported before this correction. The
-gap from there down to acceptance coverage (9–36%) is real, but for the
-autogrep condition specifically, most of it (6–23 cases on YAML/schema
-failure vs. 90–116 cases on the repo-unavailable infra failure, per model)
-is NOT evidence the generated rule was wrong — it is evidence the repo
-checkout the validator needed did not finish inside the 3-retry budget. The
-raw condition has no such infra dependency, so its acceptance-coverage
-numbers are a cleaner read of model-quality-driven rejection.*
+*Reading this table: "confirmed parse-fail" counts non-accepted cases whose
+stored error text genuinely says `"failed to parse/sanitize into a rule"`
+(trustworthy — this string is not produced by the buggy diagnostic
+function). "Reason-unrecoverable" counts cases whose error text is the
+corrupted `"repo not available for validation"` placeholder — these are
+confirmed real rejections, but whether each one was actually a parse
+problem or a discrimination problem cannot be determined from the stored
+logs. No claim is made here about which of those two explanations
+predominates for the autogrep condition. Raw-condition compile rates (used
+directly, not affected by this bug at all — it is specific to the
+clone-free autogrep validator path) are substantially higher than autogrep's
+acceptance coverage in every case, consistent with (but not proof of) real
+discrimination failure being a meaningful contributor for raw; the same
+inference cannot be drawn for autogrep.*
 
-**C2 / C3 / C4, 150 eligible supported cases (corrected data — these
-compile-rate numbers are unaffected by the repo-checkout issue above; their
-validators recorded real discrimination outcomes throughout, confirmed by
-direct inspection of every episode log):**
+**C2 / C3 / C4, 150 eligible supported cases (corrected data — unaffected by
+the above: their validators recorded real discrimination outcomes
+throughout, via a different, unrelated code path, confirmed by direct
+inspection of every episode log):**
 
 | Condition | Compile rate | Acceptance coverage | Conditional MCC | End-to-end hidden-positive detection | End-to-end successful-rule rate |
 |---|---:|---:|---:|---:|---:|
@@ -1148,33 +1221,31 @@ direct inspection of every episode log):**
 | C4-A | 68.7% | 7.3% | 0.524 | 4.0% (12/300) | 0.7% (1/150) |
 | C4-B | 62.7% | 17.3% | 0.668 | 13.7% (41/300) | 4.0% (6/150) |
 
-**This is still the headline result of the entire corrected analysis, but
-with a corrected explanation.** End-to-end hidden-positive detection rates
-run **1.7%–16.7%** across every condition in the study, and end-to-end
-successful-rule rates run **0.0%–6.0%** — both dramatically lower than the
-conditional MCC/VGR numbers (0.37–0.67 MCC among accepted cases) reported
-throughout §7.1–7.8. **Even the best-performing condition in this entire
-study (`DeepHat-V1-7B` at 6.0% under either the autogrep or C2 condition)
-solves fewer than 1 in 16 requested cases completely end-to-end.** Read
-together with the compile-vs-accept gap above, the earlier framing — that
-most of that gap is discrimination failure — does not hold up: for the
-autogrep condition, the data shows almost no discrimination failure at all
-(models produce valid YAML 87–96% of the time, essentially at ceiling), and
-most of the drop to acceptance coverage is the repo-checkout infra failure
-documented above. For C2/C3/C4, by contrast, the compile-accept gap IS a
-real discrimination-failure signal (their validators ran to completion and
-recorded genuine pass/fail outcomes). The paper's strongest current focus
-is unchanged: **the gap between visible validation and reliable
-hidden-test performance, together with the coverage and quality tradeoffs
-of the tested workflows** — but readers should not infer from the autogrep
-condition's low acceptance coverage that its rule quality was worse than
-C2/C3/C4's; a large share of its shortfall is a validation-infrastructure
-artifact of this run, not a demonstrated quality difference. Whether
-Autogrep or multi-agent processing improves END-TO-END performance — as
-opposed to conditional quality among the cases each happens to accept —
-should be read from this table, not from §7.1–7.8's conditional numbers
-alone, and the autogrep-condition acceptance numbers specifically should be
-read with the infra caveat above in mind.
+**This is the headline result of the entire corrected analysis.**
+End-to-end hidden-positive detection rates run **1.7%–16.7%** across every
+condition in the study, and end-to-end successful-rule rates run
+**0.0%–6.0%** — both dramatically lower than the conditional MCC/VGR
+numbers (0.37–0.67 MCC among accepted cases) reported throughout §7.1–7.8.
+**Even the best-performing condition in this entire study
+(`DeepHat-V1-7B` at 6.0% under either the autogrep or C2 condition) solves
+fewer than 1 in 16 requested cases completely end-to-end.** For the
+autogrep condition specifically, the compile-vs-accept gap cannot be
+attributed to discrimination failure OR ruled out as one — compile rate
+equals acceptance coverage exactly (Autogrep's retry loop only ever
+returns an already-fully-validated rule), and most of the remaining
+rejections have an unrecoverable specific reason (above). For C2/C3/C4 and
+for the raw condition, by contrast, compile rate is a genuine, independent
+signal, and each shows compile rate substantially exceeding acceptance
+coverage — consistent with discrimination failure being a real, measurable
+contributor to their compile-accept gap specifically (their validators ran
+to completion and recorded genuine pass/fail outcomes via a different,
+unrelated code path from autogrep's). The paper's strongest current focus
+remains: **the gap between visible validation and reliable hidden-test
+performance, together with the coverage and quality tradeoffs of the
+tested workflows.** Whether Autogrep or multi-agent processing improves
+END-TO-END performance — as opposed to conditional quality among the cases
+each happens to accept — should be read from this table, not from
+§7.1–7.8's conditional numbers alone.
 
 ## 8. Contamination controls (§23)
 
@@ -1416,13 +1487,13 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   methodologically stronger round, and the one that supersedes Round 1)
   found: `pattern_or_taint` 91.1%/κ=0.802 (almost perfect),
   `structural_or_context_heavy` 93.3%/κ=0.860 (almost perfect), **and
-  `semgrep_representability` — the field defining the 153-case "supported"
-  scope every headline comparison in this document uses — 77.8%/κ=0.662
+  `semgrep_representability` — the field defining the 150-case eligible
+  "supported" scope every headline comparison in this document uses — 77.8%/κ=0.662
   (substantial), up from Round 1's 64.4%/κ=0.448.** Disagreements
   concentrated around the `partially_supported` boundary in both rounds, in
   both directions, not a one-way bias — consistent with a genuine
   category-boundary difficulty. This is reported as a real but now smaller
-  validity consideration for the 153-case comparison scope, not a resolved
+  validity consideration for the 150-case comparison scope, not a resolved
   footnote and not a confirmed non-issue either. Full numbers for both
   rounds: `Research_Log/Correction_Log.md`.
 - **CodeLlama's inclusion is precision-confounded** by infrastructure
@@ -1499,9 +1570,21 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   difference, are stated as hypotheses throughout, not confirmed findings
   — consistent with the formal significance testing (§7.8), which finds no
   statistically detectable difference in most of these comparisons anyway.
-- **The primary comparison set (153 of 299 supported cases) is smaller than
-  the full dataset.** Confidence intervals are now computed and reported at
-  this effective sample size throughout (§22, complete).
+  **[DECISION, 2026-10-07 audit round 2, Priority 8]** A controlled rerun
+  that isolates role separation from these 3 confounds is only necessary if
+  this document claims role separation ITSELF causes any observed
+  improvement. It does not make that claim anywhere — every C2/C3/C4
+  comparison above is reported as a descriptive comparison of complete,
+  differently-configured workflows, and §7.8's formal tests additionally
+  find no statistically detectable pairwise difference in most of these
+  comparisons regardless of cause. No controlled rerun was conducted; none
+  is needed under this document's actual (non-causal) claims. A future
+  paper that DOES want to claim role separation causes a specific effect
+  would need that rerun first.
+- **The primary comparison set (150 of 299 eligible supported cases — 153
+  minus 3 ground-truth exclusions, §2.4) is smaller than the full
+  dataset.** Confidence intervals are now computed and reported at this
+  effective sample size throughout (§22, complete).
 - **Generalization claims in this document (VGR) are about controlled,
   within-dataset transformations, not unseen real-world vulnerabilities**
   — stated explicitly in §1 and repeated here per the audit's instruction,
@@ -1520,6 +1603,19 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   but this is a real structural ceiling on achievable FPR (a model that
   would otherwise use `pattern-not` to exclude a benign look-alike cannot
   succeed) that applies to every result in this document.
+  **[DECISION, 2026-10-07 audit round 2, Priority 8]** Given this
+  restriction, this document's conclusions are scoped explicitly to **the
+  tested Autogrep implementation and wrapper as configured in this study**
+  — not to "LLM-to-Semgrep rule generation" as a general capability claim.
+  Every model in every condition was constrained by the same wrapper-level
+  restriction, so within-study comparisons (model-vs-model, raw-vs-autogrep,
+  condition-vs-condition) remain valid; what is NOT supported is a broader
+  claim about what these models could achieve against an unrestricted
+  Semgrep rule schema. A study making that broader claim would need to rerun
+  against a corrected wrapper that accepts composite patterns — not done
+  here, and not retroactively possible from existing data (no raw rule text
+  was retained for the affected condition to re-validate against a fixed
+  wrapper without new generation calls).
 
 ## 11. Not yet done (tracking, for completeness of the eventual paper)
 
@@ -1540,10 +1636,18 @@ study's own C2/C3/C4 work, rather than being a hypothetical category:
   infer it from the aggregate pattern — not run, since the formal
   significance test (§7.8) already found no confirmed pairwise difference
   to explain.
-- §7.3's stability-ranking discrepancy, newly surfaced while correcting this
-  document (the "case composition, not temperature" explanation no longer
-  holds once Finding 1's correction is applied to both sides of that
-  comparison) — flagged as open, not yet investigated further.
+- **[RESOLVED, mostly] §7.3's stability-ranking discrepancy** — investigated
+  directly for audit round 2's Priority 8. Ruled out a script bug
+  (`analyze_phase5_stability.py` was fixed to actually read
+  `results_corrected/`, confirming the table's existing numbers were already
+  right) and an averaging-method artifact (pooled vs. mean-of-ratios MCC
+  gives the same ranking). 6 of 8 models' temp-0 single-draw MCC falls
+  inside their own 5-repeat temp-0.2 range — ordinary sampling noise among
+  closely-clustered MCCs. 2 models (`qwen2.5-coder:32b`,
+  `codellama:7b-instruct-fp16`) remain a genuine exception, carried forward
+  as an untested hypothesis (determinism specifically benefiting these two),
+  not a confirmed mechanism — a case-level investigation of their specific
+  sample flips would be needed to test it, and was not run.
 - The pilot screening numbers (§6) have not been recomputed with Finding 1's
   location-correctness fix — out of scope for this audit pass since the
   pilot only informed early prompt-template/model-direction decisions, not
@@ -1561,11 +1665,17 @@ against an earlier version**: two methodological audits
 fixed); several unmatched variables in the C2/C3/C4 comparison; all 29
 previously-unresolved variant line-range annotations, now manually
 resolved; a principled ground-truth exclusion standard, now applied
-consistently (150 eligible supported cases, down from 153); a validator
-infrastructure failure in the primary benchmark's autogrep condition
-(`"repo not available for validation"` for 60–77% of cases per model —
-§7.9's Finding 2); and completed the long-pending second-rater check
-(twice, the second time with a clean, zero-overlap sample).
+consistently (150 eligible supported cases, down from 153); resolved most
+of §7.3's stability-ranking discrepancy (newly surfaced during the first
+audit pass) to ordinary sampling variation, with a smaller residual
+honestly flagged as an untested hypothesis rather than a confirmed
+mechanism; corrected a misdiagnosis of the primary benchmark autogrep
+condition's `"repo not available for validation"` pattern — not a new
+infrastructure failure as an earlier draft of this document claimed, but
+a pre-existing, already-documented diagnostic-text bug
+(`Research_Log/Implementation_Log.md` Section 12.30) that never affected
+any actual pass/fail outcome; and completed the long-pending second-rater
+check (twice, the second time with a clean, zero-overlap sample).
 
 **The most consequential change of the second audit pass**: every causal
 claim about multi-agent configurations remains hedged as a hypothesis

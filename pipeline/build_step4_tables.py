@@ -21,22 +21,32 @@ Correction (2026-10-07 audit round 2, Priority 3+4+7): now uses pipeline/eligibl
 150-case eligible-supported population (not analyze_section22.supported_case_ids()'s uncorrected
 153, which has no CASE-0166/ground-truth exclusions applied) for every row in this file.
 
-Correction (2026-10-07 audit round 2, Priority 7 + new finding): the primary benchmark's "autogrep"
-condition's top-level `yaml_valid`/`validation_error` fields do NOT measure "did the model's
-candidate rule compile" -- they measure "did the candidate survive Autogrep's internal retry loop,
-including a repo-checkout step that failed transiently (`validation_error ==
-"repo not available for validation"`) for 60-77% of cases across all 8 models, verified against
-generation_log.jsonl's attempt_trail (see Correction_Log.md, 2026-10-07 entry "Finding 2"). Every
-trail entry under that error still reports yaml_valid=True, proving the candidate itself was fine --
-the repo simply wasn't checked out yet when the validator tried to run semgrep against it, within
-the 3-retry budget. No discrimination-failure (valid YAML + repo available + wrong verdict) appears
-anywhere in any of the 8 models' logs: EVERY non-accepted record resolves to either a parse/schema
-failure or this repo-unavailable infra failure. `compiled_candidate` below recovers the true
-attempted-candidate compile signal from attempt_trail (did ANY retry produce valid YAML); `accepted`
-is unchanged (still requires a repo-available run that actually passed); `parse_fail_count` and
-`infra_fail_count` make the previously-invisible breakdown explicit, per the audit's Priority 7
-instruction not to let acceptance coverage stand in for an unrecoverable compile rate -- here it IS
-recoverable, so we recover it rather than mark it unavailable.
+Correction (2026-10-07 audit round 2, Priority 7) -- CORRECTED AGAIN, same day: an earlier version
+of this comment (and of Correction_Log.md's "Finding 2") claimed the primary benchmark autogrep
+condition's high rate of `validation_error == "repo not available for validation"` (60-77% of cases
+per model) was a real, previously-undiscovered validator infrastructure failure, and attempted to
+"recover" a true compile rate from `attempt_trail`'s per-attempt `yaml_valid` field. **That claim was
+wrong and is retracted** -- `Research_Log/Implementation_Log.md` Section 12.30 already documents the
+real, pre-existing root cause, found and fixed by the original study team before any audit:
+`reconstruct_attempt_trail()` (a diagnostic-only re-evaluation, independent of Autogrep's own real
+retry loop) was never updated after Section 12.24's clone-free validator refactor, so it still gates
+on `repo_path.exists()` -- which is `False` BY DESIGN for every curated case (a synthetic marker
+path, since no clone is needed for curated cases at all). This makes it discard the real per-attempt
+outcome and substitute a generic "can't validate" placeholder for every curated case, regardless of
+what actually happened. Critically, Implementation_Log.md verified directly that this bug "never
+produced a wrong pass, only a wrong failure-reason string" -- every one of the 1,746 affected
+top-level records has `semgrep_valid == False`, a REAL rejection, not an infra-blocked one. Since
+`attempt_trail` itself is documented there as "unreliable for curated cases," its `yaml_valid` field
+is not a trustworthy recovered compile signal either -- the earlier "recovered 87-96% compile rate"
+claim is retracted along with the infra-failure story. Per Priority 7's actual instruction ("mark
+Autogrep's attempted-candidate compilation rate as unavailable unless recoverable"): it is NOT
+recoverable, so `compilation_rate` for the autogrep condition is reported as unavailable (identical
+to `acceptance_coverage`, since Autogrep's retry loop only ever returns an already-fully-validated
+rule) -- the pre-round-2 manuscript's original framing was correct, for a more precisely-documented
+reason than originally stated. `parse_fail`/`infra_fail` below are kept as accurate counts of the
+stored `validation_error` STRING (useful for knowing how many are a confirmed parse/schema failure
+vs. a real rejection whose specific reason is unrecoverable) but are no longer used to support any
+"most of the gap is/isn't discrimination failure" causal claim.
 """
 import json
 import re
@@ -75,12 +85,15 @@ def primary_table_row(label, model_dir, condition, case_filter):
     n_requested = len(case_filter)
     n_accepted = sum(1 for g in gen_c.values() if g["yaml_valid"] and g["semgrep_valid"])
 
-    # Recovered attempted-candidate compile signal (condition == "autogrep" only needs this; "raw"
-    # has no retry loop, so its own top-level yaml_valid is already the real compile signal).
-    n_compiled_candidate = sum(
-        1 for g in gen_c.values()
-        if g["yaml_valid"] or any(a["yaml_valid"] for a in (g.get("attempt_trail") or []))
-    )
+    # Autogrep's attempted-candidate compile rate is NOT recoverable (attempt_trail is documented as
+    # unreliable for curated cases, Implementation_Log.md Section 12.30) -- its retry loop only ever
+    # returns an already-fully-validated rule, so compile rate equals acceptance coverage exactly for
+    # this condition specifically, per Priority 7. "raw" has no retry loop, so its own top-level
+    # yaml_valid IS the real, trustworthy compile signal and is used directly.
+    if condition == "autogrep":
+        n_compiled_candidate = n_accepted
+    else:
+        n_compiled_candidate = sum(1 for g in gen_c.values() if g["yaml_valid"] and not is_semgrep_parse_error(g.get("validation_error")))
     n_parse_fail = sum(1 for g in gen_c.values() if g.get("validation_error") == "failed to parse/sanitize into a rule")
     n_infra_fail = sum(1 for g in gen_c.values() if g.get("validation_error") == "repo not available for validation")
 
@@ -178,7 +191,9 @@ def print_row(r):
     cm = f"{r['conditional_mcc']:.3f}" if r["conditional_mcc"] is not None else "n/a (0 accepted)"
     note = ""
     if r.get("condition") == "autogrep":
-        note = f"  [of non-accepted: parse_fail={r['parse_fail']} infra_fail(repo unavailable)={r['infra_fail']}]"
+        note = (f"  [compile=accept: Autogrep's retry loop only returns an already-validated rule; "
+                 f"of non-accepted: confirmed_parse_fail={r['parse_fail']} "
+                 f"real_reject_reason_unrecoverable={r['infra_fail']} (Implementation_Log.md Sec 12.30)]")
     print(f"{r['label']:38s} n={r['n_requested']:4d}  "
           f"compile={r['compilation_rate']*100:5.1f}%  "
           f"accept={r['acceptance_coverage']*100:5.1f}%  "
@@ -193,11 +208,14 @@ def main():
     print(f"eligible_cases.py version {ELIGIBLE_VERSION} -- {len(supported)} eligible supported cases "
           f"(Priority 2+3 corrections: CASE-0166 dataset exclusion + 3 ground-truth exclusions)")
     print()
-    print("Note on the autogrep condition's 'compile' column: recovered from attempt_trail (did ANY")
-    print("retry produce valid YAML), not the top-level yaml_valid field, which conflates a genuine")
-    print("compile failure with the validator's repo-checkout step never becoming available within")
-    print("the 3-retry budget (see Correction_Log.md 'Finding 2', 2026-10-07). Raw-condition rows")
-    print("follow directly after each model's autogrep row for direct comparison.")
+    print("Note on the autogrep condition's 'compile' column: equals acceptance coverage exactly,")
+    print("per Priority 7 -- NOT recoverable. An earlier pass wrongly claimed this WAS recoverable")
+    print("from attempt_trail and attributed the compile-accept gap to a validator infra failure;")
+    print("that was retracted after checking Implementation_Log.md Section 12.30, which already")
+    print("documents the real cause: a pre-existing, already-fixed-going-forward diagnostic-text bug")
+    print("in a function independent of Autogrep's real retry loop -- confirmed to never affect any")
+    print("actual pass/fail outcome, only the human-readable reason string for genuine rejections.")
+    print("Raw-condition rows follow directly after each model's autogrep row for direct comparison.")
 
     print("\n" + "=" * 130)
     print(f"PRIMARY BENCHMARK, {len(supported)} eligible supported cases -- autogrep row, raw row, per model")

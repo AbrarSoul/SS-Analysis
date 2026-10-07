@@ -22,6 +22,15 @@ therefore a documented methodology choice, not a literal spec requirement:
 
 Both measures restrict to `supported` cases within the subset (Section 7.3's primary-ranking scope),
 matching analyze_phase5_primary.py's own convention.
+
+Correction (2026-10-07 audit round 2, Priority 8): this script previously read sample_execution_log
+from `results/` (original, uncorrected data) in every code path, despite Paper_Draft_Notes.md's §7.3
+labeling its output "corrected data" -- that label was not actually true of this script's own output.
+Finding 1's location-correctness fix changes hidden-variant TP/FN outcomes, which both PART 1 (MCC/
+VGR/FPR/ESR) and PART 2 (full-behavior agreement fingerprint) depend on directly. Fixed to read
+generation_log from `results/` (visible-pair accept/reject is unaffected by Finding 1) and
+sample_execution_log from `results_corrected/` (where Finding 1's fix lives) -- the same split
+already used throughout `analyze_section22_corrected.py` and `build_step4_tables.py`.
 """
 import glob
 import json
@@ -30,12 +39,21 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from analyze_phase5_primary import load_manifest, load_run_dir, analyze_model
+from analyze_phase5_primary import load_manifest, analyze_model
 
 BENCH_DIR = Path(__file__).resolve().parent.parent / "benchmark"
 RESULTS_ROOT = Path(__file__).resolve().parent.parent / "results"
+RESULTS_CORRECTED_ROOT = Path(__file__).resolve().parent.parent / "results_corrected"
 CODELLAMA = "codellama:7b-instruct-fp16"
 N_REPEATS = 5
+
+
+def load_run_dir_corrected(d: Path, corrected_d: Path):
+    """gen from the original run dir (unaffected by Finding 1); smp from its results_corrected/
+    counterpart (where Finding 1's location-correctness fix lives)."""
+    gen = [json.loads(l) for l in (d / "generation_log.jsonl").read_text().splitlines()]
+    smp = [json.loads(l) for l in (corrected_d / "sample_execution_log.jsonl").read_text().splitlines()]
+    return gen, smp
 
 
 def load_stability_subset_ids():
@@ -63,7 +81,7 @@ def main():
           f"(metrics below use supported cases only, n={len(supported_ids)}, matching Section 7.3's primary scope)")
 
     rep1_dirs = sorted(glob.glob(str(RESULTS_ROOT / "runs_phase5_stability_rep1" / "*__autogrep_default")))
-    models = [load_run_dir(Path(d))[0][0]["model_tag"] for d in rep1_dirs]
+    models = [json.loads((Path(d) / "generation_log.jsonl").read_text().splitlines()[0])["model_tag"] for d in rep1_dirs]
 
     per_repeat_metrics = defaultdict(lambda: defaultdict(list))  # model -> metric -> [val x5]
     per_repeat_raw = defaultdict(dict)  # model -> rep -> (gen, smp)
@@ -71,7 +89,9 @@ def main():
     for rep in range(1, N_REPEATS + 1):
         dirs = sorted(glob.glob(str(RESULTS_ROOT / f"runs_phase5_stability_rep{rep}" / "*__autogrep_default")))
         for d in dirs:
-            gen, smp = load_run_dir(Path(d))
+            d = Path(d)
+            corrected_d = RESULTS_CORRECTED_ROOT / f"runs_phase5_stability_rep{rep}" / d.name
+            gen, smp = load_run_dir_corrected(d, corrected_d)
             model = gen[0]["model_tag"]
             per_repeat_raw[model][rep] = (gen, smp)
             autogrep = analyze_model(model, gen, smp, subset_manifest, {"supported"})["autogrep"]

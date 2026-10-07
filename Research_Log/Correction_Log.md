@@ -845,3 +845,50 @@ marked unavailable, per Finding 2, which is a stronger fix than the instruction 
 8's two decisions (restricted-wrapper scope, multi-agent-causality rerun) and its reproducibility
 packaging; and §7.3's stability-ranking discrepancy, still flagged open rather than resolved or
 withdrawn.
+
+### 2026-10-07 — "Finding 2" was wrong: the real root cause was already documented by the original study
+
+While starting Priority 8's reproducibility packaging (checking `pipeline/PINNED_CONFIG.md` and
+`Research_Log/Implementation_Log.md` for what to include), found Implementation_Log.md Section 12.30
+("A real bug found auditing inputs before Phase 7 analysis: `reconstruct_attempt_trail()` never
+updated for the clone-free refactor") — written by the original study team BEFORE any audit, and
+missed when "Finding 2" was written up in this log's previous entry. **It already fully explains and
+root-causes the exact same `"repo not available for validation"` pattern "Finding 2" claimed to
+newly discover, and the real explanation is different from what was claimed.**
+
+**What "Finding 2" got wrong**: it claimed this was a real, previously-undiscovered validator
+infrastructure failure (a transient repo-checkout race condition), and that the candidate's true
+compile rate was "recoverable" from `attempt_trail`'s per-attempt `yaml_valid` field (87-96% across
+all 8 models) — attributing most of the autogrep condition's compile-accept gap to this infra issue
+rather than to discrimination failure.
+
+**What Implementation_Log.md Section 12.30 actually documents**: `reconstruct_attempt_trail()` is a
+diagnostic-only re-evaluation function, independent of Autogrep's own real retry loop, that gates on
+`repo_path.exists()`. Section 12.24's earlier clone-free refactor made curated cases (100% of the
+primary benchmark) validate directly against each case's own stored `vulnerable_source`/
+`patched_source` files, with `prepare_repo()` returning a synthetic, intentionally-non-existent
+marker path — so `repo_path.exists()` is `False` BY DESIGN for every curated case, and always was,
+from the moment that refactor landed. `reconstruct_attempt_trail()` was never updated to know this,
+so it discards the REAL per-attempt outcome for every curated case and substitutes a generic "can't
+validate" placeholder, labeled `"repo not available for validation"`. **Verified directly in that
+entry: all 1,746 affected top-level records have `semgrep_valid == False` — a real rejection, never
+a wrong pass.** The bug corrupts the FAILURE-REASON TEXT (and the whole `attempt_trail` diagnostic
+list, confirmed "unreliable for curated cases" there), not the actual pass/fail determination.
+
+**What this means for Round 2's own work**: `pipeline/build_step4_tables.py`'s `n_accepted` and
+every other table/statistic built on the top-level `yaml_valid`/`semgrep_valid` fields (Priority 4's
+tables, Priority 5's sensitivity table, Priority 6's statistics, the 0/8-significant end-to-end
+result) are **unaffected and remain correct** — they were never built on `attempt_trail`. Only the
+"recovered compile rate" column and its infra-failure narrative, both newly added in the "Finding 2"
+entry, are wrong and are retracted. Corrected: `compilation_rate` for the autogrep condition is now
+reported as unavailable/identical to acceptance coverage (matching Priority 7's actual instruction
+and the pre-round-2 manuscript's original framing, now for a precisely-documented reason rather than
+an invented one); `Paper_Draft_Notes.md` §7.9 updated to remove the infra-failure causal story and
+cite `Implementation_Log.md` Section 12.30 directly instead.
+
+**A process note, stated plainly**: this should have been caught before presenting "Finding 2" to
+the user and writing it into the manuscript — `Implementation_Log.md` is the project's own record of
+exactly this kind of implementation-level bug-and-fix, and checking it first would have surfaced
+Section 12.30 immediately instead of independently (and incorrectly) re-diagnosing the same
+symptom. Recorded here so the lesson is explicit: check the existing implementation/correction logs
+for a documented explanation before treating a surprising data pattern as a new discovery.
