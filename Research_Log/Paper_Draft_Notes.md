@@ -785,12 +785,12 @@ uses the deterministic Semgrep Executor's result directly rather than a
 second Semantic Review call — spending the full six-call budget with no
 slack, rather than silently exceeding it.
 
-**C3-E's results (153 supported cases)**: 13 accepted (8.5% coverage),
-every one on the first pass — not one of 140 repair attempts recovered a
-case. Pooled MCC over the accepted cases is 0.545 (corrected), close to this
-same model's MCC under the simpler C2 (0.504, corrected) and autogrep (0.514,
-corrected) conditions — quality among accepted rules is not materially worse
-here. Coverage is: the
+**C3-E's results (150 eligible supported cases)**: 13 accepted (8.7%
+coverage), every one on the first pass — not one of 140 repair attempts
+recovered a case. Pooled MCC over the accepted cases is 0.545 (corrected),
+close to this same model's MCC under the simpler C2 (0.502, corrected) and
+autogrep (0.513, corrected) conditions — quality among accepted rules is not
+materially worse here. Coverage is: the
 single-agent conditions accept something on roughly a quarter to a third of
 cases; C3-E accepts on well under a tenth.
 
@@ -814,8 +814,8 @@ from a verification pass before the full run: the same model's Syntax
 Review step correctly diagnosed a DSL-level error in one case but proposed
 a "correction" reproducing the identical invalid syntax, unchanged.
 
-**C3-S's results tell a different story.** Coverage is 35/153 (22.9%,
-against C3-E's 8.5%), and the repair round actually recovers cases: 12 of
+**C3-S's results tell a different story.** Coverage is 35/150 (23.3%,
+against C3-E's 8.7%), and the repair round actually recovers cases: 12 of
 130 attempts (9.2%), against C3-E's zero. The larger model's self-assessment
 weakness clearly attenuates with scale — a live check reproduced the exact
 scenario from §7.6's investigation (an obviously broken rule given the same
@@ -835,16 +835,16 @@ call-count ceiling, not an isolated test of "role separation."**
 
 | Model | Condition | Coverage | MCC | VGR | FPR | PDS |
 |---|---|---:|---:|---:|---:|---:|
-| Qwen2.5-Coder-32B | C3-S | 22.9% | **0.649** | 0.714 | 0.143 | 0.216 |
-| Qwen2.5-Coder-32B | C2 | 30.1% | 0.536 | 0.533 | 0.123 | 0.261 |
-| Qwen2.5-Coder-7B-Instruct | C3-E | 8.5% | 0.545 | 0.538 | 0.154 | 0.085 |
-| Qwen2.5-Coder-7B-Instruct | C2 | 32.0% | 0.504 | 0.500 | 0.116 | 0.255 |
+| Qwen2.5-Coder-32B | C3-S | 23.3% | **0.649** | 0.714 | 0.143 | 0.220 |
+| Qwen2.5-Coder-32B | C2 | 30.0% | 0.539 | 0.544 | 0.126 | 0.260 |
+| Qwen2.5-Coder-7B-Instruct | C3-E | 8.7% | 0.545 | 0.538 | 0.154 | 0.087 |
+| Qwen2.5-Coder-7B-Instruct | C2 | 32.0% | 0.502 | 0.490 | 0.111 | 0.253 |
 
 The two model scales still produce an opposite-signed pattern after
 correction, though the magnitudes moved: for the larger model, C3-S trades
-coverage for a real MCC gain over C2 (0.536 → 0.649), still driven mainly by
-better VGR (0.533 → 0.714). For the smaller model, C3-E trades away most of
-its coverage for a small, likely-noise MCC difference (0.504 → 0.545).
+coverage for a real MCC gain over C2 (0.539 → 0.649), still driven mainly by
+better VGR (0.544 → 0.714). For the smaller model, C3-E trades away most of
+its coverage for a small, likely-noise MCC difference (0.502 → 0.545).
 
 **What can and cannot be claimed here, stated precisely per the audit**:
 the pattern above is consistent with "role separation helps a capable model
@@ -864,15 +864,17 @@ repair round, no second Semantic Review call, §7.6). Whether an
 unrestricted-budget variant — §20 explicitly permits this as a secondary
 analysis — narrows or widens the gap in either direction remains open.
 
-**Formal significance testing (§7.8, rerun on corrected data with
-repository-aware bootstrapping)**: the `qwen2.5-coder:32b` C2-vs-C3-S MCC
-difference is **not statistically significant** — 95% CI (−0.238, +0.015),
-p = 0.081. The `qwen2.5-coder:7b-instruct` C2-vs-C3-E difference is also not
-significant, p = 0.669, with a wide CI that crosses zero. **Report both as
-"no statistically detectable difference," not as evidence of equivalence
-and not as a confirmed role-separation effect** — the point estimates above
-are directionally suggestive but neither comparison clears conventional
-significance at this sample size.
+**Formal significance testing (§7.8, rerun on the 150-case eligible
+population with repository-aware bootstrapping extended to both metrics)**:
+the `qwen2.5-coder:32b` C2-vs-C3-S MCC difference is **not statistically
+significant** — 95% CI (−0.238, +0.020), p = 0.099 — and neither is the
+end-to-end (ESR) difference between the same two conditions, p = 0.909. The
+`qwen2.5-coder:7b-instruct` C2-vs-C3-E difference is also not significant on
+either metric (MCC p = 0.633; ESR p = 0.121), with wide CIs that cross zero.
+**Report both as "no statistically detectable difference," not as evidence
+of equivalence and not as a confirmed role-separation effect** — the point
+estimates above are directionally suggestive but neither comparison clears
+conventional significance at this sample size on either metric.
 
 ### 7.7 C4-A (heterogeneous, best model per role): measured-best roles do not compose [CORRECTED]
 
@@ -892,17 +894,18 @@ syntax review → `qwen2.5-coder:7b-instruct`, semantic review →
 selection was needed — this configuration is exactly Phase 3's measured
 output, run once through the unchanged §17.1 workflow and §20 budget.
 
-Full run on all 153 supported cases, verified complete (153/153 episodes,
-66 sample records = 11 accepted × 6, exact match). Results, alongside every
-other condition measured so far on the same case set:
+Full run on all 153 of the then-current supported cases, verified complete
+(153/153 episodes, 66 sample records = 11 accepted × 6, exact match) —
+figures below rerun on the 150-case eligible population (§2.4) alongside
+every other condition measured so far on the same case set:
 
 | Condition | Roles | Coverage | MCC | VGR | FPR | PDS |
 |---|---|---|---|---|---|---|
-| C3-S | all roles: 32B | 22.9% | **0.649** | 0.714 | 0.143 | 0.216 |
-| C2 (32B) | single agent | 30.1% | 0.536 | 0.533 | 0.123 | 0.261 |
-| C2 (7B) | single agent | 32.0% | 0.504 | 0.500 | 0.116 | 0.255 |
-| C3-E | all roles: 7B | 8.5% | 0.545 | 0.538 | 0.154 | 0.085 |
-| **C4-A** | best model per role (4 distinct models) | **7.2%** | **0.524** | 0.545 | 0.152 | **0.065** |
+| C3-S | all roles: 32B | 23.3% | **0.649** | 0.714 | 0.143 | 0.220 |
+| C2 (32B) | single agent | 30.0% | 0.539 | 0.544 | 0.126 | 0.260 |
+| C2 (7B) | single agent | 32.0% | 0.502 | 0.490 | 0.111 | 0.253 |
+| C3-E | all roles: 7B | 8.7% | 0.545 | 0.538 | 0.154 | 0.087 |
+| **C4-A** | best model per role (4 distinct models) | **7.3%** | **0.524** | 0.545 | 0.152 | **0.067** |
 
 **C4-A is the lowest-performing condition measured so far on MCC and PDS**,
 and close to lowest on VGR. This is a striking result on its face precisely
@@ -937,21 +940,22 @@ C4-A's four-distinct-model configuration, or whether any cross-model
 interface mismatch is enough to reproduce the same collapse.
 
 **C4-B result: it does degrade more gracefully — quality is essentially
-preserved.** Full run, 153/153 complete (26/153 accepted, 17.0% coverage —
-between C4-A's 7.2% and C3-S's 22.9%, as expected for "some heterogeneity,
-not maximal"). Pooled quality metrics (corrected): MCC 0.668, VGR 0.788,
-FPR 0.192, PDS 0.170.
+preserved.** Full run, 153/153 of the then-current supported cases complete
+(26 accepted, 17.3% coverage on the 150-case eligible population — between
+C4-A's 7.3% and C3-S's 23.3%, as expected for "some heterogeneity, not
+maximal"). Pooled quality metrics (corrected, 150-case population): MCC
+0.668, VGR 0.788, FPR 0.192, PDS 0.173.
 
 The complete six-condition picture, ranked by MCC **[CORRECTED]**:
 
 | Condition | Roles | Coverage | MCC | VGR | FPR | PDS |
 |---|---|---|---|---|---|---|
-| **C4-B** | 32B (analysis/gen/repair) + 7B (syntax/semantic) | 17.0% | **0.668** | **0.788** | 0.192 | 0.170 |
-| C3-S | all roles: 32B | 22.9% | 0.649 | 0.714 | 0.143 | 0.216 |
-| C2 (32B) | single agent | 30.1% | 0.536 | 0.533 | 0.123 | 0.261 |
-| C3-E | all roles: 7B | 8.5% | 0.545 | 0.538 | 0.154 | 0.085 |
-| C2 (7B) | single agent | 32.0% | 0.504 | 0.500 | 0.116 | 0.255 |
-| C4-A | best model per role (4 distinct models) | 7.2% | 0.524 | 0.545 | 0.152 | 0.065 |
+| **C4-B** | 32B (analysis/gen/repair) + 7B (syntax/semantic) | 17.3% | **0.668** | **0.788** | 0.192 | 0.173 |
+| C3-S | all roles: 32B | 23.3% | 0.649 | 0.714 | 0.143 | 0.220 |
+| C2 (32B) | single agent | 30.0% | 0.539 | 0.544 | 0.126 | 0.260 |
+| C3-E | all roles: 7B | 8.7% | 0.545 | 0.538 | 0.154 | 0.087 |
+| C2 (7B) | single agent | 32.0% | 0.502 | 0.490 | 0.111 | 0.253 |
+| C4-A | best model per role (4 distinct models) | 7.3% | 0.524 | 0.545 | 0.152 | 0.067 |
 
 **C4-B's corrected MCC (0.668) is now the highest of all six conditions**,
 narrowly ahead of C3-S (0.649), and its VGR (0.788) remains the highest of
@@ -1079,7 +1083,14 @@ claim** — see the Conclusion for the restated main claim.
 study), for the representative model `qwen2.5-coder:32b` (86 evaluable
 cases). Every CI below uses a repository-aware bootstrap (resampling at the
 repository level, since CVEs from the same repo aren't independent —
-§22.4's own requirement):
+§22.4's own requirement). **Not independently rerun against
+`pipeline/eligible_cases.py`'s round-2 corrections** (unlike every other
+table in this document): checked directly that CASE-0166 was never accepted
+for this model (`semgrep_valid: false`), so its dataset exclusion has no
+effect here; the 5 ground-truth exclusions could affect at most a handful
+of this 86-case population, in line with the sensitivity analysis above
+showing a ≤1.3-point effect for 7 of 8 models — plausibly negligible here
+too, but not directly verified for this specific table.
 
 | Subgroup | Buckets (MCC, 95% CI) |
 |---|---|
