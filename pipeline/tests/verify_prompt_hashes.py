@@ -23,6 +23,9 @@ from llm_client import LLMClient  # noqa: E402
 PINNED = {
     "_build_prompt_autogrep_default": "6e7d840e71782db4c9bd367d1e2a846f0f7b8707c9f2aacc6b040482c1613e42",
     "_build_prompt_design_v1": "ae50ab374bb441f08e466491d0cf1099c2c5576255ed5833e89de7e27419edaf",
+    # Run v2 (Research_Log/Run_v2_Specification.md). Provisional until the run is frozen: if this prompt is
+    # deliberately changed before the freeze, update this hash in the same commit and say why.
+    "_build_prompt_autogrep_v2": "904a00fba5a778329afe19c21ae0842f480e49e7f9126d1578d3da278a27adbd",
 }
 
 if __name__ == "__main__":

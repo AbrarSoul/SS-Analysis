@@ -98,13 +98,25 @@ class SampleExecutionRecord:
     detected: bool
     finding_location_correct: Optional[bool] = None  # meaningful only when label == "positive"
     finding_lines: Optional[List[int]] = None
-    outcome: Optional[str] = None  # "TP" | "FP" | "FN" | "TN" -- derived if not given
+    outcome: Optional[str] = None  # "TP" | "FP" | "FN" | "TN" (run v2 also "ERROR") -- derived if not given
+    # Run v2 (Issue 3). Absent (None) in every v1 record, so v1 readers and results are unaffected.
+    # finding_spans: [[start_line, end_line], ...], one per Semgrep finding (v1 kept only start lines).
+    # location_by_method: {"overlap": bool, "contained": bool, "start_line": bool} for positive samples
+    # with annotated ranges; finding_location_correct holds the primary method's verdict ("overlap").
+    finding_spans: Optional[List[List[int]]] = None
+    location_by_method: Optional[dict] = None
+    # Run v2 (Issue 4). None in v1 records. One of pipeline/semgrep_runner.STATUSES; anything other than "ok"
+    # means the scan did not fully happen, and the outcome is "ERROR" instead of TP/FP/FN/TN.
+    scan_status: Optional[str] = None
+    scan_message: Optional[str] = None
 
     def __post_init__(self):
         if self.outcome is None:
             self.outcome = self._derive_outcome()
 
     def _derive_outcome(self) -> str:
+        if self.scan_status not in (None, "ok"):
+            return "ERROR"  # run v2: an incomplete scan is never scored as if it had happened
         # Per design doc Section 9.3: a positive sample only counts as a true
         # positive if the finding is at the correct location, not merely
         # somewhere in the file.

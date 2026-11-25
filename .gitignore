@@ -26,3 +26,7 @@ review/.tools/
 #   and a judge who could read another judge's records would no longer be independent.
 #   Remove this line when the review is complete.
 review/cases_reviewed_*/
+
+# Run v2: smoke tests and dry runs are never analysed or published
+results_v2_smoke/
+results_v2_dryrun/

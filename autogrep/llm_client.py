@@ -270,6 +270,81 @@ rules:
 
 
 
+# 2026-11-25, run v2 (Research_Log/Run_v2_Specification.md, supervisor Issue 1): the example rules for
+# prompt variant "autogrep_v2". The content is exactly autogrep_default's own examples (EXAMPLE_RULES):
+# EXAMPLE_RULES_V2 is that content with only whitespace and quoting changed so that it is valid YAML
+# (pipeline/tests/test_run_v2_issue1.py checks both properties and runs `semgrep --validate` on every rule).
+# The one addition is a typescript entry, because autogrep_default silently gave TypeScript cases no
+# example at all. It reuses the javascript rules with the language changed, so no new example content is
+# introduced. EXAMPLE_RULES_V3 is deliberately NOT used: it was revised after looking at specific benchmark
+# cases' failures (CASE-0221, CASE-0238) and its typescript rule restates CASE-0238's own fix, so using it in
+# the main run would tune the prompt on the evaluation set.
+EXAMPLE_RULES_RUN_V2 = {
+    **EXAMPLE_RULES_V2,
+    "typescript": EXAMPLE_RULES_V2["javascript"].replace("languages: [javascript]", "languages: [typescript]"),
+}
+
+
+# Condition B's worked examples (typed-JSON form of autogrep_default's own example rules). Moved here from inside
+# LLMClient._build_prompt_typed_json on 2026-11-25 so run v2 can add a TypeScript entry; the v1 typed prompt renders
+# byte-identically (pipeline/tests/test_run_v2_issue7.py checks this over all 150 eligible cases).
+EXAMPLE_RULES_TYPED_JSON = {
+    "python": [
+        {"id": "unsafe-deserialization", "pattern": "pickle.loads($DATA)",
+         "pattern_not": ["pickle.loads(trusted_data)"],
+         "pattern_inside": "def $FUNC(...):\n    ...",
+         "languages": ["python"],
+         "message": "Detected unsafe deserialization using pickle.loads(). This can lead to remote code execution.",
+         "severity": "ERROR",
+         "metadata": {"category": "security", "cwe": "CWE-502",
+                      "owasp": "A8:2017-Insecure Deserialization",
+                      "references": ["https://docs.python.org/3/library/pickle.html#pickle.loads"]}},
+        {"id": "sql-injection", "pattern": "execute($QUERY)",
+         "pattern_not": ['execute("SELECT ...")', "execute(sanitized_query)"],
+         "languages": ["python"],
+         "message": "Potential SQL injection detected. Use parameterized queries instead.",
+         "severity": "ERROR",
+         "metadata": {"category": "security", "cwe": "CWE-89"}},
+    ],
+    "javascript": [
+        {"id": "xss-innerHTML", "pattern": "$ELEMENT.innerHTML = $DATA",
+         "pattern_not_inside": "$ELEMENT.innerHTML = DOMPurify.sanitize($DATA)",
+         "languages": ["javascript"],
+         "message": "Potential XSS vulnerability using innerHTML. Use DOMPurify or safe alternatives.",
+         "severity": "ERROR",
+         "metadata": {"category": "security", "cwe": "CWE-79"}},
+        {"id": "eval-injection", "pattern": "eval($DATA)",
+         "pattern_not": ['eval("trusted_static_string")'],
+         "languages": ["javascript"],
+         "message": "Dangerous use of eval() detected. This can lead to code injection.",
+         "severity": "ERROR",
+         "metadata": {"category": "security", "cwe": "CWE-95"}},
+    ],
+    "java": [
+        {"id": "path-traversal", "pattern": "new File($PATH)",
+         "pattern_not": ["new File(sanitized_path)"],
+         "pattern_inside": "class $CLASS {\n    ...\n}",
+         "languages": ["java"],
+         "message": "Potential path traversal vulnerability. Validate and sanitize file paths.",
+         "severity": "ERROR",
+         "metadata": {"category": "security", "cwe": "CWE-22"}},
+        {"id": "weak-cipher", "pattern": 'Cipher.getInstance("DES")',
+         "languages": ["java"],
+         "message": "Usage of weak cryptographic algorithm DES detected. Use AES instead.",
+         "severity": "ERROR",
+         "metadata": {"category": "security", "cwe": "CWE-326"}},
+    ],
+}
+
+
+# Run v2 (Issue 7): the typed prompt gets the same TypeScript entry as the free-form prompt (EXAMPLE_RULES_RUN_V2),
+# so the two construction conditions show the same example rules for every language.
+EXAMPLE_RULES_TYPED_JSON_RUN_V2 = {
+    **EXAMPLE_RULES_TYPED_JSON,
+    "typescript": [{**ex, "languages": ["typescript"]} for ex in EXAMPLE_RULES_TYPED_JSON["javascript"]],
+}
+
+
 def _make_suggested_id(patch_info: PatchInfo) -> str:
     """Builds the "vuln-{repo}-{commit}" id suggested to the model and used
     as _sanitize_rule()'s fallback. Real repo names can contain characters
@@ -302,6 +377,13 @@ class LLMClient:
         # structure" message was used for this category, which gave the model
         # nothing specific to correct across retries.
         self.last_error: Optional[str] = None
+        # Run v2 (Issue 1): WHERE the last failure happened, next to last_error's free text, so failures can
+        # be counted by stage instead of being lumped together as "YAML did not parse" (v1's yaml_valid
+        # flag only meant "a rule came out of parsing"). One of: "empty_response", "no_rule_text",
+        # "yaml_parse", "json_parse" (typed mode), "rule_count", "schema", "api_error", "parse_crash"; None after a
+        # success. Never changes what any
+        # method returns, so every v1 code path behaves exactly as before.
+        self.last_failure_stage: Optional[str] = None
         
     def extract_response(self, text: str) -> str:
         """Remove thinking tags and extract the YAML content from markdown
@@ -480,18 +562,21 @@ class LLMClient:
         of what the retry loop subsequently did with that same attempt."""
         if not content:
             self.last_error = "Empty response from LLM"
+            self.last_failure_stage = "empty_response"
             logging.error(self.last_error)
             return None
 
         rule_text = self.extract_response(content)
         if not rule_text:
             self.last_error = "No valid content after extracting response"
+            self.last_failure_stage = "no_rule_text"
             logging.error(self.last_error)
             return None
 
         rule_text = self.clean_yaml_text(rule_text)
         if not rule_text:
             self.last_error = "Failed to clean YAML text"
+            self.last_failure_stage = "yaml_parse"
             logging.error(self.last_error)
             return None
 
@@ -501,20 +586,24 @@ class LLMClient:
                 candidates = rule_data.get("rules") if isinstance(rule_data, dict) else None
                 if not isinstance(candidates, list) or len(candidates) != 1 or not isinstance(candidates[0], dict):
                     self.last_error = "Expected exactly one rule mapping"
+                    self.last_failure_stage = "rule_count"
                     return None
             rule = self._sanitize_rule(rule_data, patch_info)
 
             is_valid, error = self.validate_rule_schema(rule)
             if not is_valid:
                 self.last_error = f"Invalid rule schema: {error}"
+                self.last_failure_stage = "schema"
                 logging.error(self.last_error)
                 return None
 
             self.last_error = None
+            self.last_failure_stage = None
             return rule
 
         except (yaml.YAMLError, RecursionError) as e:
             self.last_error = f"Error parsing generated rule YAML: {e}"
+            self.last_failure_stage = "yaml_parse"
             logging.error(self.last_error)
             return None
 
@@ -530,6 +619,7 @@ class LLMClient:
         if getattr(self.config, "construction_mode", "original_prompt") == "typed_json":
             return self._generate_rule_typed_json(patch_info, error_feedback)
         prompt = self._build_prompt(patch_info, error_feedback)
+        got_response = False  # run v2 (Issue 1): tells an API failure from a crash while parsing the reply
 
         try:
             kwargs = {}
@@ -547,14 +637,17 @@ class LLMClient:
 
             if not response.choices:
                 self.last_error = "No response generated from LLM"
+                self.last_failure_stage = "empty_response"
                 logging.error(self.last_error)
                 return None
 
+            got_response = True
             content = response.choices[0].message.content
             return self.parse_and_sanitize_response(content, patch_info)
 
         except Exception as e:
             self.last_error = f"Error generating rule: {e}"
+            self.last_failure_stage = "parse_crash" if got_response else "api_error"
             logging.error(self.last_error)
             return None
 
@@ -603,7 +696,8 @@ class LLMClient:
     pattern_not_inside (a single negative-scope pattern string). taint rules cannot combine with
     pattern_not/pattern_inside/pattern_not_inside."""
 
-    def _build_prompt_typed_json(self, patch_info: PatchInfo, error_feedback: Optional[str] = None) -> str:
+    def _build_prompt_typed_json(self, patch_info: PatchInfo, error_feedback: Optional[str] = None,
+                                 examples: Optional[dict] = None) -> str:
         """Condition B's prompt: same patch context as autogrep_default (repo/commit/diff), but asks
         for the typed-field JSON object instead of free-form YAML, and never mentions Semgrep's
         pattern-not/pattern-inside/patterns: composition syntax at all -- the model only needs to name
@@ -621,54 +715,6 @@ class LLMClient:
         so no expressiveness gap forced a different example set."""
         import json as _json
 
-        EXAMPLE_RULES_TYPED_JSON = {
-            "python": [
-                {"id": "unsafe-deserialization", "pattern": "pickle.loads($DATA)",
-                 "pattern_not": ["pickle.loads(trusted_data)"],
-                 "pattern_inside": "def $FUNC(...):\n    ...",
-                 "languages": ["python"],
-                 "message": "Detected unsafe deserialization using pickle.loads(). This can lead to remote code execution.",
-                 "severity": "ERROR",
-                 "metadata": {"category": "security", "cwe": "CWE-502",
-                              "owasp": "A8:2017-Insecure Deserialization",
-                              "references": ["https://docs.python.org/3/library/pickle.html#pickle.loads"]}},
-                {"id": "sql-injection", "pattern": "execute($QUERY)",
-                 "pattern_not": ['execute("SELECT ...")', "execute(sanitized_query)"],
-                 "languages": ["python"],
-                 "message": "Potential SQL injection detected. Use parameterized queries instead.",
-                 "severity": "ERROR",
-                 "metadata": {"category": "security", "cwe": "CWE-89"}},
-            ],
-            "javascript": [
-                {"id": "xss-innerHTML", "pattern": "$ELEMENT.innerHTML = $DATA",
-                 "pattern_not_inside": "$ELEMENT.innerHTML = DOMPurify.sanitize($DATA)",
-                 "languages": ["javascript"],
-                 "message": "Potential XSS vulnerability using innerHTML. Use DOMPurify or safe alternatives.",
-                 "severity": "ERROR",
-                 "metadata": {"category": "security", "cwe": "CWE-79"}},
-                {"id": "eval-injection", "pattern": "eval($DATA)",
-                 "pattern_not": ['eval("trusted_static_string")'],
-                 "languages": ["javascript"],
-                 "message": "Dangerous use of eval() detected. This can lead to code injection.",
-                 "severity": "ERROR",
-                 "metadata": {"category": "security", "cwe": "CWE-95"}},
-            ],
-            "java": [
-                {"id": "path-traversal", "pattern": "new File($PATH)",
-                 "pattern_not": ["new File(sanitized_path)"],
-                 "pattern_inside": "class $CLASS {\n    ...\n}",
-                 "languages": ["java"],
-                 "message": "Potential path traversal vulnerability. Validate and sanitize file paths.",
-                 "severity": "ERROR",
-                 "metadata": {"category": "security", "cwe": "CWE-22"}},
-                {"id": "weak-cipher", "pattern": 'Cipher.getInstance("DES")',
-                 "languages": ["java"],
-                 "message": "Usage of weak cryptographic algorithm DES detected. Use AES instead.",
-                 "severity": "ERROR",
-                 "metadata": {"category": "security", "cwe": "CWE-326"}},
-            ],
-        }
-
         all_changes = []
         for file_change in patch_info.file_changes:
             file_header = f"File: {file_change.file_path}\n"
@@ -676,7 +722,7 @@ class LLMClient:
         combined_changes = "\n\n".join(all_changes)
         language = patch_info.file_changes[0].language
         suggested_id = _make_suggested_id(patch_info)
-        examples = EXAMPLE_RULES_TYPED_JSON.get(language, [])
+        examples = (EXAMPLE_RULES_TYPED_JSON if examples is None else examples).get(language, [])
         examples_text = "\n\n".join(_json.dumps(ex, indent=2) for ex in examples)
 
         prompt = f"""Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in {language} code.
@@ -723,6 +769,11 @@ class LLMClient:
 
         return prompt
 
+    def _build_prompt_typed_json_v2(self, patch_info: PatchInfo, error_feedback: Optional[str] = None) -> str:
+        """Run v2's typed prompt (Issue 7): the v1 typed prompt with EXAMPLE_RULES_TYPED_JSON_RUN_V2, i.e. identical
+        except that TypeScript cases now get the JavaScript examples, as in the free-form autogrep_v2 prompt."""
+        return self._build_prompt_typed_json(patch_info, error_feedback, examples=EXAMPLE_RULES_TYPED_JSON_RUN_V2)
+
     def _extract_json_text(self, text: str) -> str:
         """Parallel to extract_response() but for condition B's JSON contract -- strips thinking
         tags and prefers the content of a fenced code block (```json, ```, or no fence at all) over
@@ -751,12 +802,14 @@ class LLMClient:
 
         if not content:
             self.last_error = "Empty response from LLM"
+            self.last_failure_stage = "empty_response"
             logging.error(self.last_error)
             return None
 
         text = self._extract_json_text(content)
         if not text:
             self.last_error = "No valid content after extracting response"
+            self.last_failure_stage = "no_rule_text"
             logging.error(self.last_error)
             return None
 
@@ -764,11 +817,13 @@ class LLMClient:
             decoded = _json.loads(text)
         except _json.JSONDecodeError as e:
             self.last_error = f"Invalid JSON: {e}"
+            self.last_failure_stage = "json_parse"
             logging.error(self.last_error)
             return None
 
         if not isinstance(decoded, dict):
             self.last_error = f"Expected a single JSON object, got {type(decoded).__name__}"
+            self.last_failure_stage = "rule_count"
             logging.error(self.last_error)
             return None
 
@@ -790,6 +845,7 @@ class LLMClient:
             typed_rule = TypedRule(**decoded)
         except TypeError as e:
             self.last_error = f"Unexpected or missing field in typed rule JSON: {e}"
+            self.last_failure_stage = "schema"
             logging.error(self.last_error)
             return None
 
@@ -797,10 +853,12 @@ class LLMClient:
             rule_dict = typed_rule.to_dict()
         except ValueError as e:
             self.last_error = f"Invalid typed rule: {e}"
+            self.last_failure_stage = "schema"
             logging.error(self.last_error)
             return None
 
         self.last_error = None
+        self.last_failure_stage = None
         return rule_dict
 
     def _system_message(self) -> str:
@@ -811,8 +869,10 @@ class LLMClient:
         fix's own caveat flagged (Research_Log/Diagnostic_20261010/README.md): enabling the parser to
         accept composite/taint rules does nothing if the system message still only asks for `pattern`."""
         variant = getattr(self.config, "prompt_variant", "autogrep_default")
+        # autogrep_v2 (run v2, Issue 1) shares this message: once every matching form is accepted, the
+        # system message must not ask only for `pattern`.
         if variant in ("diagnostic_mechanism_v1", "diagnostic_mechanism_v2", "diagnostic_mechanism_v3",
-                       "diagnostic_mechanism_v4"):
+                       "diagnostic_mechanism_v4", "autogrep_v2"):
             return """You generate Semgrep rules in YAML format.
     Return only the raw YAML content without any markdown formatting or additional text.
     Always include these required fields: id, message, severity, languages, plus at least one of:
@@ -846,6 +906,8 @@ class LLMClient:
         sibling top-level `pattern-not` composition bug already confirmed (via an isolated test) in
         the mechanism_v2 review, now shown to be a real, recurring model tendency, not a one-off."""
         variant = getattr(self.config, "prompt_variant", "autogrep_default")
+        if variant == "autogrep_v2":
+            return self._build_prompt_autogrep_v2(patch_info, error_feedback)
         if variant == "design_v1":
             return self._build_prompt_design_v1(patch_info, error_feedback)
         if variant == "diagnostic_mechanism_v1":
@@ -1131,6 +1193,95 @@ severity must be one of: ERROR, WARNING, INFO."""
         if error_feedback:
             prompt += f"\n\nPREVIOUS ERROR TO FIX:\n{error_feedback}\nEnsure your next attempt addresses these issues."
             
+        return prompt
+
+    def _build_prompt_autogrep_v2(self, patch_info: PatchInfo, error_feedback: Optional[str] = None) -> str:
+        """Run v2's prompt (Research_Log/Run_v2_Specification.md, supervisor Issue 1).
+
+        autogrep_default's text with ONLY the defects that are visible by reading it corrected. Nothing here
+        comes from looking at model output on benchmark cases (unlike diagnostic_mechanism_v3/v4):
+          1. example rules: EXAMPLE_RULES_RUN_V2 (same rules, valid YAML, plus a typescript entry);
+          2. "REQUIRED FIELDS 2. pattern" listed only `pattern`, although run v2 accepts every Semgrep
+             matching form (rule_schema_policy "semgrep_search_taint_v2") -- now lists them all;
+          3. "Use |> to pipe patterns together" removed: `|>` is not Semgrep syntax;
+          4. the response template was itself invalid YAML (`pattern:` not indented under `- id:`) -- fixed;
+          5. the response must contain exactly one rule (the run v2 parser requires that, and the two
+             examples per language could otherwise read as an invitation to return two) -- now said.
+        Everything else is byte-identical to autogrep_default, including the error-feedback suffix."""
+        all_changes = []
+        for file_change in patch_info.file_changes:
+            file_header = f"File: {file_change.file_path}\n"
+            all_changes.append(file_header + file_change.changes)
+
+        combined_changes = "\n\n".join(all_changes)
+
+        language = patch_info.file_changes[0].language
+        suggested_id = _make_suggested_id(patch_info)
+        examples = EXAMPLE_RULES_RUN_V2.get(language, "")
+
+        prompt = f"""Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in {language} code.
+
+    CONTEXT:
+    Repository: github.com/{patch_info.repo_owner}/{patch_info.repo_name}
+    Commit: {patch_info.commit_id}
+
+    PATCH CHANGES:
+    {combined_changes}
+
+    SEMGREP PATTERN SYNTAX GUIDE:
+    - Use $VARNAME to match any expression
+    - Use ... to match any sequence of statements
+    - Use pattern-inside to limit matches to specific code blocks
+    - Use pattern-not to exclude specific patterns (like the fixed version)
+    - Use metavariable-pattern to add constraints on variables
+
+    REQUIRED FIELDS:
+    1. id: "{suggested_id}" (must be unique and descriptive)
+    2. A matching clause: pattern, patterns, pattern-either or pattern-regex; or, for a taint rule, mode: taint with pattern-sources and pattern-sinks
+    3. languages: ["{language}"]
+    4. message: Detailed description of:
+    - What the vulnerability is
+    - Why it's dangerous
+    - How to fix it
+    5. severity: One of [ERROR, WARNING, INFO]
+
+    RECOMMENDED FIELDS:
+    - pattern-not: Pattern that should not match (e.g., fixed version)
+    - pattern-inside: Context pattern for where the rule should match
+    - pattern-not-inside: Context pattern for where the rule should not match
+    - metadata:
+        source-url: github.com/{patch_info.repo_owner}/{patch_info.repo_name}/commit/{patch_info.commit_id}
+        category: security
+        cwe: [relevant CWE number]
+        owasp: [relevant OWASP category]
+        references: [links to documentation or standards]
+        technology: [{language}]
+
+    IMPORTANT GUIDELINES:
+    1. Make patterns as specific as possible to minimize false positives
+    2. Include pattern-not for the fixed version when possible
+    3. Add relevant metadata like CWE numbers and OWASP categories
+    4. Write clear, actionable messages explaining both the problem and solution
+    5. Consider different variations of the vulnerable pattern
+
+    EXAMPLES OF HIGH-QUALITY RULES:
+    {examples}
+
+    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT CONTAINING EXACTLY ONE RULE:
+    rules:
+    - id: "{suggested_id}"
+      pattern: [Your pattern here]
+      pattern-not: [Fixed version pattern]
+      languages: ["{language}"]
+      message: [Clear description]
+      severity: ERROR
+      metadata: [Additional context]
+
+    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."""
+
+        if error_feedback:
+            prompt += f"\n\nPREVIOUS ERROR TO FIX:\n{error_feedback}\nEnsure your next attempt addresses these issues."
+
         return prompt
 
     def _build_prompt_diagnostic_mechanism_v1(self, patch_info: PatchInfo, error_feedback: Optional[str] = None,

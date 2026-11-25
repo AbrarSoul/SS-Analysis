@@ -213,3 +213,92 @@ def evaluate_case_bundle(
         Path(rule_file).unlink(missing_ok=True)
 
     return records, rule_error
+
+
+# ------------------------------------------------------------------------------------------------
+# Run v2 (Research_Log/Run_v2_Specification.md, supervisor Issue 3): location by the finding's full span.
+# v1's evaluate_case_bundle() above is left unchanged so every v1 result stays reproducible.
+# ------------------------------------------------------------------------------------------------
+LOCATION_METHODS = ("overlap", "contained", "start_line")
+PRIMARY_LOCATION_METHOD = "overlap"
+
+
+def _finding_spans(results: list) -> List[List[int]]:
+    """[[start_line, end_line], ...] for every finding. A finding without an end line spans its start line."""
+    spans = []
+    for r in results:
+        start = r.get("start", {}).get("line")
+        if start is None:
+            continue
+        end = r.get("end", {}).get("line") or start
+        spans.append([start, max(start, end)])
+    return spans
+
+
+def location_verdicts(spans: List[List[int]], ranges) -> Optional[dict]:
+    """Whether any finding is at an annotated location, under each method. None if there is nothing to check.
+
+    overlap    (primary)   the finding's span shares at least one line with a range
+    contained  (strict)    the finding's span lies entirely inside a range
+    start_line (v1's rule) the finding's first line lies inside a range
+    """
+    if not spans or not ranges:
+        return None
+    return {
+        "overlap": any(s <= hi and e >= lo for s, e in spans for lo, hi in ranges),
+        "contained": any(lo <= s and e <= hi for s, e in spans for lo, hi in ranges),
+        "start_line": any(lo <= s <= hi for s, _ in spans for lo, hi in ranges),
+    }
+
+
+def evaluate_case_bundle_v2(
+    rule: dict,
+    case_dir: Path,
+    language: str,
+    run_id: str,
+    case_id: str,
+    model_tag: str,
+    condition: str,
+    location_ranges: Dict[str, list],
+    scanner=None,
+    only_samples=None,
+):
+    """Like evaluate_case_bundle(), with these changes for run v2:
+    - Issue 3: every positive sample with an annotated range gets a location check (v1 checked only
+      original_vulnerable here and added the variants in a later rescoring step), using each finding's full
+      span under all three LOCATION_METHODS; the primary one decides finding_location_correct, and all three
+      are stored so the analysis can report the others as pre-declared sensitivity checks;
+    - Issue 4: Semgrep runs through pipeline/semgrep_runner (the pinned binary, one call for all six samples),
+      and every record carries the scan's status. A sample whose scan was not "ok" gets outcome "ERROR".
+    location_ranges comes from location_ranges.load_location_ranges(case_id). scanner defaults to
+    semgrep_runner.scan (replaceable in tests). only_samples limits the scan to some sample types (the run v2
+    acceptance check uses the visible pair only). Returns (records, rule_error); rule_error is set only when
+    Semgrep rejected the rule itself."""
+    import semgrep_runner
+    scanner = scanner or semgrep_runner.scan
+    ext = _EXT_BY_LANGUAGE[language]
+
+    samples = [(st, label, str(case_dir / f"{stem}.{ext}")) for st, stem, label in _BUNDLE_SAMPLES
+               if (case_dir / f"{stem}.{ext}").exists() and (only_samples is None or st in only_samples)]
+    scans = scanner(rule, [t for _, _, t in samples])
+
+    rule_error = None
+    records = []
+    for sample_type, label, target in samples:
+        sr = scans[target]
+        if sr.status == "rule_error":
+            rule_error = rule_error or sr.message
+        spans = _finding_spans(sr.results) if sr.ok else []
+        verdicts = location_verdicts(spans, location_ranges.get(sample_type)) if (label == "positive" and sr.ok) else None
+        records.append(SampleExecutionRecord(
+            run_id=run_id, case_id=case_id, model_tag=model_tag, condition=condition,
+            sample_type=sample_type, label=label,
+            detected=bool(sr.results),
+            finding_location_correct=verdicts[PRIMARY_LOCATION_METHOD] if verdicts else None,
+            finding_lines=[s for s, _ in _finding_spans(sr.results)] or None,
+            finding_spans=_finding_spans(sr.results) or None,
+            location_by_method=verdicts,
+            scan_status=sr.status,
+            scan_message=sr.message,
+        ))
+    return records, rule_error

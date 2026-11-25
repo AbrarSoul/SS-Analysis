@@ -1,0 +1,31 @@
+{
+  "status": "DRAFT 2026-11-26 - not frozen. Commercial models, Part II size and stability size are still open decisions (Run_v2_Specification.md section 12). Hosts of the four new models are from the 8 Sept 2026 catalogue snapshot and must be confirmed live before the freeze.",
+  "part1_models": [
+    {"tag": "qwen2.5-coder:7b-instruct", "provider": "gptlab", "host": "GPU-farmi-001"},
+    {"tag": "qwen2.5-coder:32b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "codellama:7b-instruct-fp16", "provider": "gptlab", "host": "GPU-farmi-003"},
+    {"tag": "deepseek-coder:6.7b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "codegemma:7b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "yi-coder:9b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "magicoder:7b", "provider": "gptlab", "host": "GPU-farmi-001"},
+    {"tag": "DeepHat/DeepHat-V1-7B", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "qwen3-coder:30b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "gpt-oss:20b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "opencoder:8b-instruct-q4_K_M", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "granite-code:8b-instruct-128k-q4_1", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "llama3.1:8b-instruct-q4_K_M", "provider": "gptlab", "host": "GPU-farmi-001"},
+    {"tag": "hf.co/lmstudio-community/Mistral-Small-24B-Instruct-2501-GGUF:Q8_0", "provider": "gptlab", "host": "GPU-farmi-001"},
+    {"tag": "phi4:14b-q4_K_M", "provider": "gptlab", "host": "GPU-farmi-001"},
+    {"tag": "qwen3-coder-next:latest", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "gpt-oss:120b", "provider": "gptlab", "host": "GPU-farmi-004"},
+    {"tag": "qwen3.6:35b", "provider": "gptlab", "host": "GPU-farmi-003"},
+    {"tag": "gemma4:26b", "provider": "gptlab", "host": "CSC-P100"}
+  ],
+  "commercial_models": [],
+  "part2_models": [
+    {"tag": "qwen3-coder:30b", "provider": "gptlab", "host": "GPU-farmi-004"}
+  ],
+  "stability": {"repeats": 3, "temperature": 0.2},
+  "part2": {"cases": "all", "repeats": 3},
+  "max_concurrent_per_host": 1
+}
