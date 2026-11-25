@@ -1,0 +1,24 @@
+[
+  {
+    "case_id": "CASE-0075",
+    "file": "metadata.json",
+    "field": "vulnerable_lines",
+    "old": [91, 122],
+    "new": [[91, 122], [133, 160]],
+    "reason": "Same bug and same upstream fix also in extractMinecraft; check F",
+    "rule": "R-F1: vulnerable_lines must cover every function the upstream fix touches",
+    "decided_by": ["R1", "R2"],
+    "date": "YYYY-MM-DD",
+    "effect": "rescore only"
+  },
+  {
+    "case_id": "CASE-0075",
+    "file": "variant_vulnerable_01.java",
+    "change": "line 72: extractZip( -> unpackResourcePack(",
+    "reason": "Variant did not compile after rename; check H",
+    "rule": "R-H1: every generated sample must compile with the same errors as the original only",
+    "decided_by": ["R1", "R2"],
+    "date": "YYYY-MM-DD",
+    "effect": "rerun models on this sample"
+  }
+]

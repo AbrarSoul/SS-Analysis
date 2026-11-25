@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Review Admin</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/base.css">
+<style>
+body { margin: 0; }
+html, body { height: auto; }
+[hidden] { display: none !important; }
+.wrap { max-width: 920px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 16px; }
+.head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.head h1 { font-size: 20px; font-weight: 600; margin-right: auto; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 10px; }
+.card h2 { font-size: 15px; font-weight: 600; }
+.card p { margin: 0; color: var(--muted); font-size: 13.5px; max-width: 70ch; }
+.form { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; }
+.form label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
+.form input { padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; }
+#f-tag { width: 90px; font-family: var(--font-code); } #f-name { width: 240px; max-width: 100%; }
+.linkbox { display: grid; gap: 6px; padding: 10px 12px; border-radius: 6px; background: var(--yes-soft); }
+.linkbox code { font-family: var(--font-code); font-size: 12.5px; word-break: break-all; user-select: all; }
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line-soft); white-space: nowrap; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; }
+td.mono { font-family: var(--font-code); }
+.off { color: var(--faint); text-decoration: line-through; }
+.dl { display: flex; gap: 8px; flex-wrap: wrap; }
+.dl a.btn { text-decoration: none; color: var(--fg); }
+.err { color: var(--no); font-size: 13px; margin: 0; }
+.warn { border-color: var(--unsure); background: var(--unsure-soft); }
+.warn p { color: var(--fg); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head"><h1>Review admin</h1><a class="btn ghost" href="/logout">Sign out</a></div>
+
+  <div class="card warn">
+    <p><b>You are also a reviewer (R1).</b> Progress counts below are fine to look at. Download other reviewers' records only after your own reviews are final, so their answers can't influence yours. To review cases yourself, add yourself as R1 below and open that link (in a private window, or after signing out here).</p>
+  </div>
+
+  <div class="card">
+    <h2>Add a reviewer</h2>
+    <p>Each reviewer gets a personal link. Send it to them privately: anyone with the link can review as that person. The link is shown only once; if it's lost, use “New link” (the old one stops working).</p>
+    <form class="form" id="add-form">
+      <label for="f-tag">Tag<input id="f-tag" placeholder="R2" maxlength="3" autocomplete="off" required></label>
+      <label for="f-name">Private note (optional)<input id="f-name" placeholder="leave blank to stay anonymous" maxlength="80" autocomplete="off"></label>
+      <button class="btn primary" type="submit">Create link</button>
+    </form>
+    <p class="err" id="add-err" hidden></p>
+    <div class="linkbox" id="link-box" hidden><span id="link-label"></span><code id="link-code"></code><div><button class="btn" type="button" id="link-copy">Copy link</button></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Reviewers</h2>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Tag</th><th>Note</th><th>Final</th><th>Draft</th><th>Last activity</th><th></th></tr></thead>
+      <tbody id="rows"><tr><td colspan="6">Loading…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>Downloads</h2>
+    <p>All records, one folder per reviewer (<span class="mono">cases_reviewed_r2/CASE-XXXX.md</span>, <span class="mono">progress.csv</span>, <span class="mono">records.json</span>), in the format <span class="mono">agreement.py</span> reads. The backup is the whole database, including the full edit history.</p>
+    <div class="dl"><a class="btn primary" href="/api/admin/export.zip">Download all records (.zip)</a><a class="btn" href="/api/admin/backup.db">Download database backup (.db)</a></div>
+  </div>
+</div>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+async function call(path, body) {
+  const r = await fetch(path, { method: body ? "POST" : "GET", credentials: "same-origin", headers: body ? { "Content-Type": "application/json" } : {}, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || "Request failed.");
+  return j;
+}
+function showLink(tag, link) {
+  $("#link-label").textContent = `Personal link for ${tag}. Copy it now; it won't be shown again.`;
+  $("#link-code").textContent = link; $("#link-box").hidden = false;
+}
+async function load() {
+  try {
+    const { reviewers, total_cases } = await call("/api/admin/reviewers");
+    $("#rows").innerHTML = reviewers.length ? reviewers.map(r => `<tr>
+      <td class="mono ${r.disabled ? "off" : ""}">${esc(r.tag)}</td><td>${esc(r.name)}</td>
+      <td>${r.final || 0} / ${total_cases}</td><td>${r.draft || 0}</td><td>${r.last ? esc(new Date(r.last).toLocaleString()) : "—"}</td>
+      <td><button class="btn ghost" type="button" data-act="newlink" data-id="${r.id}">New link</button>
+          <button class="btn ghost" type="button" data-act="${r.disabled ? "enable" : "disable"}" data-id="${r.id}">${r.disabled ? "Enable" : "Disable"}</button></td></tr>`).join("")
+      : `<tr><td colspan="6">No reviewers yet. Add one above.</td></tr>`;
+  } catch (e) { $("#rows").innerHTML = `<tr><td colspan="6">${esc(e.message)}</td></tr>`; }
+}
+$("#add-form").addEventListener("submit", async e => {
+  e.preventDefault(); $("#add-err").hidden = true;
+  try { const j = await call("/api/admin/reviewers", { tag: $("#f-tag").value, name: $("#f-name").value }); showLink(j.tag, j.link); $("#f-tag").value = ""; $("#f-name").value = ""; load(); }
+  catch (x) { $("#add-err").textContent = x.message; $("#add-err").hidden = false; }
+});
+$("#rows").addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  try { const j = await call(`/api/admin/reviewers/${b.dataset.id}/${b.dataset.act}`, {}); if (j.link) showLink(j.tag, j.link); load(); }
+  catch (x) { alert(x.message); }
+});
+$("#link-copy").addEventListener("click", () => { navigator.clipboard?.writeText($("#link-code").textContent).then(() => ($("#link-copy").textContent = "Copied"), () => {}); });
+load();
+})();
+</script>
+</body>
+</html>

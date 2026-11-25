@@ -1,0 +1,166 @@
+CASE-0042: 2 flag(s) compile_variant_vulnerable_01;leak_benign_lookalike
+CASE-0045: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0046: 2 flag(s) compile_benign_lookalike;compile_variant_safe_01
+CASE-0048: 3 flag(s) fix_outside_lines;leak_benign_lookalike;stub_benign_lookalike
+CASE-0049: 0 flag(s) 
+CASE-0050: 0 flag(s) 
+CASE-0051: 0 flag(s) 
+CASE-0052: 6 flag(s) compile_benign_lookalike;compile_variant_safe_01;fix_outside_lines;leak_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0055: 5 flag(s) leak_benign_lookalike;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0057: 1 flag(s) leak_benign_lookalike
+CASE-0059: 7 flag(s) compile_benign_lookalike;compile_variant_safe_01;compile_variant_vulnerable_01;fix_outside_lines;leak_benign_lookalike;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0062: 1 flag(s) leak_benign_lookalike
+CASE-0063: 1 flag(s) leak_benign_lookalike
+CASE-0064: 4 flag(s) leak_benign_lookalike;stub_benign_lookalike;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0068: 0 flag(s) 
+CASE-0070: 6 flag(s) fix_outside_lines;leak_benign_lookalike;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0072: 4 flag(s) compile_benign_lookalike;compile_variant_safe_01;compile_variant_vulnerable_02;leak_benign_lookalike
+CASE-0073: 2 flag(s) leak_benign_lookalike;leak_variant_safe_01
+CASE-0074: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0075: 6 flag(s) compile_variant_safe_01;compile_variant_vulnerable_01;fix_outside_lines;leak_benign_lookalike;stub_benign_lookalike;stub_variant_safe_01
+CASE-0076: 4 flag(s) compile_variant_vulnerable_01;leak_benign_lookalike;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0077: 1 flag(s) leak_benign_lookalike
+CASE-0079: 1 flag(s) leak_benign_lookalike
+CASE-0081: 1 flag(s) fix_outside_lines
+CASE-0082: 1 flag(s) leak_benign_lookalike
+CASE-0083: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0084: 8 flag(s) fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0088: 6 flag(s) leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0089: 6 flag(s) leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0090: 1 flag(s) fix_outside_lines
+CASE-0092: 1 flag(s) fix_outside_lines
+CASE-0093: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0094: 1 flag(s) fix_outside_lines
+CASE-0095: 4 flag(s) fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0098: 8 flag(s) compile_benign_lookalike;fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0099: 5 flag(s) fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0100: 4 flag(s) leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0101: 1 flag(s) fix_outside_lines
+CASE-0102: 4 flag(s) compile_benign_lookalike;compile_variant_safe_01;compile_variant_vulnerable_02;stub_benign_lookalike
+CASE-0104: 5 flag(s) fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0105: 4 flag(s) fix_outside_lines;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0106: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0107: 0 flag(s) 
+CASE-0112: 3 flag(s) compile_variant_safe_01;fix_outside_lines;leak_benign_lookalike
+CASE-0113: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0116: 1 flag(s) fix_outside_lines
+CASE-0122: 7 flag(s) fix_outside_lines;github_A;github_B;hash_mismatch;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0123: 1 flag(s) fix_outside_lines
+CASE-0124: 4 flag(s) fix_outside_lines;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0128: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0130: 1 flag(s) fix_outside_lines
+CASE-0134: 0 flag(s) 
+CASE-0136: 1 flag(s) fix_outside_lines
+CASE-0138: 1 flag(s) fix_outside_lines
+CASE-0139: 3 flag(s) compile_patched_source;compile_variant_safe_01;leak_benign_lookalike
+CASE-0140: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0142: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0143: 6 flag(s) fix_outside_lines;leak_benign_lookalike;stub_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0144: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0145: 2 flag(s) compile_benign_lookalike;leak_benign_lookalike
+CASE-0148: 4 flag(s) compile_benign_lookalike;compile_patched_source;compile_variant_safe_01;leak_benign_lookalike
+CASE-0149: 5 flag(s) github_A;github_B;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0150: 5 flag(s) compile_benign_lookalike;compile_patched_source;fix_outside_lines;github_A;github_B
+CASE-0151: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0155: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0156: 1 flag(s) leak_benign_lookalike
+CASE-0158: 1 flag(s) leak_benign_lookalike
+CASE-0162: 1 flag(s) leak_benign_lookalike
+CASE-0163: 0 flag(s) 
+CASE-0166: 4 flag(s) compile_patched_source;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0168: 7 flag(s) leak_benign_lookalike;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0169: 8 flag(s) fix_outside_lines;leak_benign_lookalike;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0171: 0 flag(s) 
+CASE-0172: 3 flag(s) leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0173: 0 flag(s) 
+CASE-0177: 6 flag(s) fix_outside_lines;github_A;github_B;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0179: 3 flag(s) fix_outside_lines;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0180: 1 flag(s) leak_benign_lookalike
+CASE-0181: 1 flag(s) leak_benign_lookalike
+CASE-0183: 4 flag(s) compile_benign_lookalike;compile_patched_source;compile_variant_safe_01;fix_outside_lines
+CASE-0184: 7 flag(s) fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0185: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0186: 2 flag(s) compile_patched_source;leak_benign_lookalike
+CASE-0187: 4 flag(s) fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0188: 5 flag(s) compile_benign_lookalike;compile_patched_source;compile_variant_safe_01;fix_outside_lines;leak_benign_lookalike
+CASE-0190: 4 flag(s) compile_benign_lookalike;compile_patched_source;compile_variant_safe_01;fix_outside_lines
+CASE-0191: 1 flag(s) compile_variant_safe_01
+CASE-0192: 3 flag(s) compile_patched_source;compile_variant_safe_01;fix_outside_lines
+CASE-0193: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0194: 5 flag(s) compile_patched_source;fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0196: 1 flag(s) fix_outside_lines
+CASE-0197: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0201: 0 flag(s) 
+CASE-0202: 0 flag(s) 
+CASE-0204: 1 flag(s) fix_outside_lines
+CASE-0209: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0214: 7 flag(s) fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0220: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0221: 0 flag(s) 
+CASE-0222: 1 flag(s) fix_outside_lines
+CASE-0223: 0 flag(s) 
+CASE-0225: 0 flag(s) 
+CASE-0226: 1 flag(s) fix_outside_lines
+CASE-0228: 4 flag(s) fix_outside_lines;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0230: 4 flag(s) leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0231: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0232: 1 flag(s) fix_outside_lines
+CASE-0233: 1 flag(s) fix_outside_lines
+CASE-0234: 0 flag(s) 
+CASE-0235: 1 flag(s) leak_benign_lookalike
+CASE-0238: 4 flag(s) compile_variant_safe_01;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0239: 0 flag(s) 
+CASE-0240: 5 flag(s) fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0241: 0 flag(s) 
+CASE-0248: 1 flag(s) fix_outside_lines
+CASE-0254: 5 flag(s) fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0256: 6 flag(s) fix_outside_lines;leak_benign_lookalike;leak_variant_safe_01;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0257: 4 flag(s) fix_outside_lines;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0258: 2 flag(s) leak_benign_lookalike;leak_variant_safe_01
+CASE-0259: 1 flag(s) leak_benign_lookalike
+CASE-0264: 1 flag(s) fix_outside_lines
+CASE-0267: 4 flag(s) leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0269: 5 flag(s) fix_outside_lines;leak_benign_lookalike;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0275: 0 flag(s) 
+CASE-0276: 6 flag(s) leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0282: 1 flag(s) leak_benign_lookalike
+CASE-0283: 0 flag(s) 
+CASE-0291: 7 flag(s) compile_patched_source;compile_variant_safe_01;fix_outside_lines;leak_benign_lookalike;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0293: 6 flag(s) compile_patched_source;compile_variant_safe_01;compile_variant_vulnerable_02;fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01
+CASE-0298: 1 flag(s) leak_benign_lookalike
+CASE-0299: 1 flag(s) leak_variant_safe_01
+CASE-0300: 2 flag(s) compile_variant_vulnerable_02;fix_outside_lines
+CASE-0301: 5 flag(s) compile_patched_source;compile_variant_safe_01;fix_outside_lines;leak_benign_lookalike;leak_variant_safe_01
+CASE-0303: 1 flag(s) leak_benign_lookalike
+CASE-0304: 5 flag(s) fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0305: 7 flag(s) leak_benign_lookalike;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0306: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0307: 4 flag(s) leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0309: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0312: 5 flag(s) compile_benign_lookalike;compile_patched_source;compile_variant_safe_01;fix_outside_lines;leak_variant_safe_01
+CASE-0318: 1 flag(s) leak_benign_lookalike
+CASE-0321: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0322: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0323: 3 flag(s) stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0324: 1 flag(s) fix_outside_lines
+CASE-0325: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0333: 7 flag(s) compile_patched_source;compile_variant_safe_01;github_A;github_B;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0334: 11 flag(s) compile_patched_source;compile_variant_safe_01;fix_outside_lines;github_A;github_B;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0335: 4 flag(s) github_A;github_B;leak_benign_lookalike;leak_variant_safe_01
+CASE-0336: 4 flag(s) fix_outside_lines;leak_variant_safe_01;leak_variant_vulnerable_01;leak_variant_vulnerable_02
+CASE-0339: 1 flag(s) leak_benign_lookalike
+CASE-0340: 2 flag(s) fix_outside_lines;leak_benign_lookalike
+CASE-0341: 6 flag(s) github_A;github_B;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+CASE-0342: 7 flag(s) compile_patched_source;compile_variant_safe_01;fix_outside_lines;leak_benign_lookalike;stub_variant_safe_01;stub_variant_vulnerable_01;stub_variant_vulnerable_02
+
+cases checked: 154
+cases with no flags: 19
+
+ 145  stub_<sample>
+ 142  leak_<sample>
+  78  fix_outside_lines
+  60  compile_<sample>
+   8  github_A
+   8  github_B
+   1  hash_mismatch
+

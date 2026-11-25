@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ground-Truth Case Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/base.css">
+<style>
+body { margin: 0; }
+[hidden] { display: none !important; }
+/* ---- guide ---- */
+.guide { position: sticky; top: -16px; z-index: 5; margin: -16px -16px 14px; padding: 14px 16px 12px; background: var(--accent-soft); border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.guide .eyebrow { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.guide h3 { font-size: 15px; font-weight: 600; }
+.guide p { margin: 0; font-size: 13px; color: var(--fg); }
+.steps { display: flex; gap: 4px; }
+.steps button { flex: 1; height: 6px; border-radius: 3px; border: 0; padding: 0; background: var(--line); cursor: pointer; }
+.steps button.done { background: var(--yes); }
+.steps button.cur { background: var(--accent); }
+.guide .actions .btn:not(.primary) { background: var(--panel); }
+.flash { animation: flash 1.4s ease-out; }
+@keyframes flash { 0% { box-shadow: 0 0 0 3px var(--accent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+details.ex { font-size: 12.5px; }
+details.ex summary { cursor: pointer; color: var(--accent); }
+details.ex .good, details.ex .weak { margin: 6px 0 0; padding: 6px 8px; border-radius: 4px; }
+details.ex .good { background: var(--yes-soft); }
+details.ex .weak { background: var(--no-soft); }
+.ex-tag { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 4px; background: var(--benign-soft); color: var(--benign); font-weight: 600; margin-left: 4px; }
+/* ---- help + example dialogs ---- */
+dialog.wide { width: min(820px, calc(100vw - 32px)); }
+.help-grid { display: grid; gap: 14px; }
+.help-grid section { display: grid; gap: 6px; }
+.help-grid h4 { margin: 0; font-size: 14px; }
+.help-grid ol, .help-grid ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; color: var(--fg); }
+.md { font-size: 13.5px; max-height: 65vh; overflow: auto; border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; background: var(--bg); }
+.md h1 { font-size: 17px; margin: 4px 0 8px; } .md h2 { font-size: 14px; margin: 14px 0 6px; }
+.md table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 6px 0; }
+.md td, .md th { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+.md code { font-family: var(--font-code); font-size: 12px; background: var(--sunk); padding: 0 3px; border-radius: 3px; }
+.md .tblw { overflow-x: auto; }
+.md ul { padding-left: 18px; }
+.topbar a.btn { text-decoration: none; color: var(--fg); }
+/* ---- attack tips ---- */
+.tips { gap: 10px; }
+.tips > summary { cursor: pointer; font-weight: 600; font-size: 13px; list-style: none; display: flex; gap: 8px; align-items: baseline; }
+.tips > summary::-webkit-details-marker { display: none; }
+.tips > summary::before { content: "▸"; color: var(--accent); }
+.tips[open] > summary::before { content: "▾"; }
+.fam { display: grid; gap: 6px; font-size: 13px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.fam h5 { margin: 0; font-size: 13px; }
+.fam .cw { font-family: var(--font-code); font-size: 11.5px; color: var(--muted); font-weight: 400; }
+.fam ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; }
+.fam code { font-family: var(--font-code); font-size: 12px; background: var(--sunk); padding: 0 4px; border-radius: 3px; word-break: break-word; }
+.fam .k { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+.fam .weak li { color: var(--fg); }
+/* ---- guided tour ---- */
+.tour-spot { position: fixed; z-index: 40; pointer-events: none; border-radius: 8px; box-shadow: 0 0 0 3px var(--accent), 0 0 0 9999px rgba(8, 12, 18, .45); transition: top .2s, left .2s, width .2s, height .2s; }
+.tour-pop { position: fixed; z-index: 41; width: min(360px, calc(100vw - 24px)); background: var(--panel); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 40px rgba(0, 0, 0, .3); padding: 14px 16px; display: grid; gap: 8px; }
+.tour-pop .eyebrow { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.tour-pop h4 { margin: 0; font-size: 15px; font-weight: 600; text-wrap: balance; }
+.tour-pop p { margin: 0; font-size: 13.5px; line-height: 1.5; }
+.tour-pop .done { font-size: 12px; font-weight: 600; color: var(--yes); }
+.tour-pop .todo { font-size: 12px; color: var(--unsure); font-weight: 600; }
+.tour-foot { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.tour-foot .count { font-size: 12px; color: var(--muted); margin-right: auto; font-variant-numeric: tabular-nums; }
+.tour-x { position: absolute; top: 8px; right: 8px; border: 0; background: transparent; color: var(--muted); font-size: 18px; cursor: pointer; line-height: 1; padding: 4px; }
+@media (max-width: 700px) { .tour-pop { left: 12px !important; right: 12px; top: auto !important; bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important; width: auto; } }
+@media (prefers-reduced-motion: reduce) { .tour-spot { transition: none; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><h1>Ground-Truth Case Review</h1><span class="sub">Checks A–J · blind to model results</span></div>
+    <div class="progress" id="progress" aria-live="polite"></div>
+    <span class="chip" id="tag-chip"></span>
+    <span class="save-state" id="save-state" aria-live="polite"></span>
+    <button class="btn primary" id="guide-btn" type="button">Guide me</button>
+    <button class="btn" id="help-btn" type="button">Help</button>
+    <a class="btn" id="export-btn" href="/api/export/mine.zip">Download my records</a>
+    <a class="btn ghost" href="/logout">Sign out</a>
+  </header>
+  <div id="banners"></div>
+  <div class="main">
+    <aside class="queue" aria-label="Case queue">
+      <div class="queue-tools">
+        <input type="search" id="q" placeholder="Search ID, CVE, repo" aria-label="Search cases">
+        <div class="seg" id="f-batch" role="group" aria-label="Batch">
+          <button type="button" data-v="all" aria-pressed="true">All</button>
+          <button type="button" data-v="1" aria-pressed="false">Batch 1</button>
+          <button type="button" data-v="2" aria-pressed="false">Batch 2</button>
+        </div>
+        <div class="seg" id="f-status" role="group" aria-label="Your status">
+          <button type="button" data-v="all" aria-pressed="true">All</button>
+          <button type="button" data-v="todo" aria-pressed="false">To do</button>
+          <button type="button" data-v="draft" aria-pressed="false">Draft</button>
+          <button type="button" data-v="final" aria-pressed="false">Final</button>
+        </div>
+        <select id="f-lang" aria-label="Language">
+          <option value="all">All languages</option><option value="python">Python</option><option value="java">Java</option><option value="javascript">JavaScript</option><option value="typescript">TypeScript</option>
+        </select>
+      </div>
+      <div class="queue-count" id="queue-count"></div>
+      <div class="list" id="list"><p class="queue-count">Loading cases…</p></div>
+    </aside>
+    <section class="work" aria-label="Case under review">
+      <div class="col code-col" id="code-col"></div>
+      <div class="col form-col" id="form-col"></div>
+    </section>
+  </div>
+</div>
+
+<dialog id="help-dlg" class="wide">
+  <div class="dlg">
+    <h3>How this review works</h3>
+    <div class="help-grid">
+      <section>
+        <h4>What you are checking</h4>
+        <p>Each case is a real security fix from GitHub (a CVE), plus six files that a research benchmark uses as test material. You check that the facts and labels are right: the files labelled vulnerable really are vulnerable, and the files labelled safe really are safe. You are not judging any AI model, and you never see model results.</p>
+      </section>
+      <section>
+        <h4>The screen</h4>
+        <ul>
+          <li><b>Left:</b> your case list. Start at the top of Batch 1. A dot shows your progress: empty = not started, amber = draft, green = final.</li>
+          <li><b>Middle:</b> the code. One tab per file. <i>Compare with</i> shows exactly what changed against the original.</li>
+          <li><b>Right:</b> your review record. The blue box at the top always tells you the next step. Everything saves as you type.</li>
+          <li><b>Guide me</b> (top bar) walks you through the current case one small step at a time: it highlights where to look and says exactly what to do. Use it for your first few cases.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Three rules</h4>
+        <ol>
+          <li><b>Your bug location comes first.</b> Write where you think the bug is and lock it. Only then does the case's official location appear.</li>
+          <li><b>Every answer needs evidence:</b> what you did and what you saw. Running code is welcome but not required. If you only read the code, tick <i>Read / reasoned</i>.</li>
+          <li><b>Work independently.</b> Don't look at any model output, and don't discuss cases with other reviewers until you have finished.</li>
+        </ol>
+      </section>
+      <section>
+        <h4>When you finish</h4>
+        <p>Use <i>Download my records</i> any time to keep a copy. The study coordinator can also collect your final records from the server.</p>
+      </section>
+    </div>
+    <div class="row-btns">
+      <button class="btn" type="button" id="help-example">See a worked example</button>
+      <button class="btn" type="button" id="help-close">Close</button>
+      <button class="btn primary" type="button" id="help-tour">Show me around</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="ex-dlg" class="wide">
+  <div class="dlg">
+    <h3>Worked example: a finished record</h3>
+    <p>This is how a complete review looks (CASE-0075, a zip-slip bug in Java). Notice that every answer says what was done and what was seen. Because its answers are shown here, CASE-0075 is marked <span class="ex-tag">example</span> in your list. Skip it.</p>
+    <div class="md" id="ex-body">Loading…</div>
+    <div class="row-btns"><button class="btn primary" type="button" id="ex-close">Close</button></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+(() => {
+"use strict";
+
+/* ================= static definitions ================= */
+const ROLES = [
+  { key: "vulnerable_source", label: "Vulnerable", sub: "original", kind: "vuln", expect: "Labelled vulnerable" },
+  { key: "patched_source", label: "Patched", sub: "original", kind: "safe", expect: "Labelled safe" },
+  { key: "patch", label: "patch.diff", sub: "", kind: "diff", expect: "Upstream fix" },
+  { key: "variant_vulnerable_01", label: "Variant 01", sub: "renamed", kind: "vuln", expect: "Labelled vulnerable" },
+  { key: "variant_vulnerable_02", label: "Variant 02", sub: "restructured", kind: "vuln", expect: "Labelled vulnerable" },
+  { key: "variant_safe_01", label: "Alt fix", sub: "variant_safe_01", kind: "safe", expect: "Labelled safe" },
+  { key: "benign_lookalike", label: "Look-alike", sub: "benign", kind: "benign", expect: "Labelled safe" },
+];
+const ROLE = Object.fromEntries(ROLES.map(r => [r.key, r]));
+const CHECKS = [
+  { k: "A", t: "Vulnerable file = real pre-fix code", h: "Open “File @ vulnerable commit” (link under the case title) and compare it with the Vulnerable tab. Stage 1 already compared hashes and GitHub copies: look for the flags hash_mismatch and github_A.",
+    good: "Opened the file at the vulnerable commit on GitHub and compared it with the Vulnerable tab: identical. No hash_mismatch or github_A flag.", weak: "Looks right." },
+  { k: "B", t: "Patched file + diff = real fix", h: "Same for “File @ fixed commit” against Patched, and check that patch.diff matches the fix commit on GitHub. Stage 1 flag: github_B.",
+    good: "File at the fixed commit is identical to Patched; patch.diff shows the same change as the fix commit on GitHub.", weak: "Same as GitHub." },
+  { k: "C", t: "Commit is the fix for this CVE", h: "Open the CVE record or advisory. Does it reference this commit? Do the affected versions and dates fit?",
+    good: "CVE record lists this commit as the fix; affected versions ≤ 1.4.0, fixed in 1.4.1, which matches the commit's release.", weak: "CVE matches." },
+  { k: "D", t: "CWE correct", h: "Which CWE(s) does the CVE record assign, and is that the right weakness for this code?",
+    good: "CVE assigns CWE-22. The bug builds a file path from an archive entry name without checking it, which is path traversal (CWE-22).", weak: "OK." },
+  { k: "E", t: "Real fix really fixes it", h: "Does the upstream fix stop the attack? Best: run the exploit plus bypass attempts against both versions. If you reasoned it through without running it, tick only Read / reasoned.", m: true,
+    good: "Executed: 7 crafted zips. Vulnerable writes outside the target folder for ../ and ../../; Patched blocks all 7 and still extracts the normal file.  Or, reasoned: Patched resolves the canonical path and rejects anything outside the target, which blocks ../, absolute paths and sibling-prefix tricks.", weak: "The fix works." },
+  { k: "F", t: "vulnerable_lines locate the bug", h: "Compare your own bug location with the revealed vulnerable_lines (highlighted in the Vulnerable tab). The range must cover every place the fix touches.", gated: true,
+    good: "I found the bug at lines 105–109 and 147–151. vulnerable_lines 91–122 covers only the first function; the same bug in the second function (≈133–160) is missing.", weak: "Close enough." },
+  { k: "G", t: "Representability label correct", h: "Is there a local source → sink, or a matchable dangerous construct, consistent with the label shown under the case title (representability · pattern or taint)?",
+    good: "Source: entry.getName() → sink: new File(dest, name), with no check in between, all in one function. A taint rule can express this, so “supported · taint” fits.", weak: "Seems supported." },
+  { k: "H", t: "Both reworded variants vulnerable, same way", h: "Variant 01 and Variant 02 must both still be exploitable by the same mechanism, and must parse/compile (Stage 1 compile_* flags).", m: true,
+    good: "Variant 01: same unchecked path join, but line 72 calls the old method name, so it doesn't compile. Variant 02: same mechanism, compiles, exploitable with the same zip.", weak: "Both vulnerable." },
+  { k: "I", t: "Alternative fix safe", h: "Alt fix must block every attack. Watch for startsWith without a separator, deny-lists, and decode-after-check.", m: true,
+    good: "Alt fix uses getCanonicalPath() and startsWith(dest + separator). Tried ../, absolute path, backslash and ../dest_evil/: all blocked.", weak: "Safe." },
+  { k: "J", t: "Benign look-alike safe and a real look-alike", h: "Look-alike must be safe AND contain the same kind of code. Flag stubs, omitted bodies, and comments or names that give the label away.", m: true,
+    good: "Safe, but it contains no extraction code at all (body omitted), and a comment says the input is trusted, which gives the label away. Needs a real look-alike.", weak: "Fine." },
+];
+const METHODS = [["read", "Read / reasoned"], ["compiled", "Parsed / compiled"], ["executed", "Executed"], ["exploit", "Exploit-tested"]];
+const DECISIONS = ["Keep", "Keep with corrections", "Exclude"];
+const FLAG_HELP = {
+  fix_outside_lines: "The upstream patch touches lines outside the case's vulnerable_lines.",
+  hash_mismatch: "A stored file's SHA-256 does not match the recorded artifact hash.",
+  github_A: "The vulnerable file did not match (or could not be fetched from) GitHub.",
+  github_B: "The patched file did not match (or could not be fetched from) GitHub.",
+};
+function flagHelp(f) {
+  if (FLAG_HELP[f]) return FLAG_HELP[f];
+  const m = f.match(/^(stub|leak|compile)_(.+)$/); if (!m) return f;
+  return m[1] === "stub" ? `${m[2]} contains stubbed or omitted code.` : m[1] === "leak" ? `${m[2]} has comments or names that may reveal its label.` : `${m[2]} fails to parse or compile.`;
+}
+const ansDone = (r, k) => !!(r?.answers?.[k] && (r.evidence?.[k] || "").trim() && (!CHECKS.find(c => c.k === k).m || (r.methods?.[k] || []).length));
+const STEPS = [
+  { t: "Write and lock your own bug location", d: "Open the Vulnerable tab and patch.diff. Work out where the bug is, write it in box 1, then lock it. The case's official location appears only after that.", tab: "vulnerable_source", target: "#blk-loc", done: r => !!r?.locationLockedAt },
+  { t: "Check the facts (A–D)", d: "Use the links under the case title: the file at each commit, the fix commit, and the CVE record. Answer A to D and say what you compared.", target: '[data-check="A"]', done: r => ["A", "B", "C", "D"].every(k => ansDone(r, k)) },
+  { t: "Does the real fix stop the attack? (E)", d: "Open Patched with “Compare with Vulnerable” to see the fix, and open “Attack ideas for this case”. Run an attack if you can; otherwise reason it through and tick Read / reasoned.", tab: "patched_source", compare: "vulnerable_source", target: '[data-check="E"]', done: r => ansDone(r, "E") },
+  { t: "Compare with the official location (F)", d: "The official vulnerable_lines are now highlighted in the Vulnerable tab. Do they cover every place the fix touches?", tab: "vulnerable_source", target: '[data-check="F"]', done: r => ansDone(r, "F") },
+  { t: "Is the label right? (G)", d: "The label is under the case title (for example supported · taint). Is there a source → sink, or a construct a rule could match?", target: '[data-check="G"]', done: r => ansDone(r, "G") },
+  { t: "Check the generated files (H, I, J)", d: "Open Variant 01 and Variant 02 (should still be vulnerable), Alt fix (should be safe) and Look-alike (should be safe but similar). “Compare with Vulnerable” shows what changed; the attack ideas help for H and I.", tab: "variant_vulnerable_01", compare: "vulnerable_source", target: '[data-check="H"]', done: r => ["H", "I", "J"].every(k => ansDone(r, k)) },
+  { t: "Decide", d: "Keep, Keep with corrections (list them), or Exclude (say why). Add your test materials if you ran anything.", target: "#blk-dec", done: r => !!r?.decision && (r.decision !== "Keep with corrections" || (r.corrections || "").trim()) && (r.decision !== "Exclude" || (r.exclusionReason || "").trim()) },
+  { t: "Confirm and mark final", d: "Tick the box confirming you did not look at model results, then press Mark final.", target: "#blk-final", done: r => r?.status === "final" },
+];
+
+/* ================= attack ideas per weakness family ================= */
+const FAMILIES = [
+  { id: "path", name: "Path traversal", cwes: [22, 23, 24, 27, 29, 31, 36, 59, 73, 610],
+    what: "A file path is built from outside input, so the input can point outside the intended folder.",
+    tries: ["../../etc/passwd", "..\\..\\windows\\win.ini (backslashes)", "/etc/passwd (absolute path)", "%2e%2e%2f%2e%2e%2f (URL-encoded ../)", "....// (survives a filter that removes ../ once)", "uploads/../../secret (traversal after an allowed prefix)", "../uploads_evil/x (sibling folder that starts with the same name)", "an archive entry named ../../evil.txt (zip slip)"],
+    vuln: "a file outside the intended folder is read, written or deleted.",
+    fix: "resolves the full (canonical) path and checks it is inside the base folder, comparing with a trailing separator.",
+    weak: ["startsWith(base) without a separator, so ../base_evil passes", "removing ../ only once", "checking before URL-decoding", "blocking ../ but not absolute paths or backslashes"] },
+  { id: "cmd", name: "Command injection", cwes: [77, 78, 88],
+    what: "Outside input ends up in a shell command or in a command's arguments.",
+    tries: ["; id", "&& whoami", "| id", "$(id)", "`id`", "%0aid (newline)", "a value starting with - so it is read as an option, e.g. --output=/tmp/x (argument injection, CWE-88)"],
+    vuln: "your extra command or option takes effect (a file you name appears, or the output of id shows up).",
+    fix: "passes arguments as a list without a shell (no shell=True, no exec of one string), validates against a strict allowlist, and puts -- before user arguments.",
+    weak: ["escaping ; but not $( ) or backticks", "quoting for the wrong shell", "a deny-list of words such as rm"] },
+  { id: "code", name: "Code or template injection", cwes: [94, 95, 470, 917, 1336],
+    what: "Outside input is evaluated as code, or rendered as a template.",
+    tries: ["{{7*7}}: if 49 appears, template code ran", "${7*7}, #{7*7}, <%= 7*7 %>", "__import__('os').system('id') (Python eval/exec)", "require('child_process').execSync('id') (JavaScript)", "a class or method name of the attacker's choice (unsafe reflection, CWE-470)"],
+    vuln: "the expression is evaluated (49 appears, or a command runs).",
+    fix: "never evaluates outside input: a sandboxed template environment, a fixed allowlist, or plain data handling.",
+    weak: ["blocking a few keywords such as import or os", "sandboxes that can be escaped through __class__ or constructor"] },
+  { id: "xss", name: "Cross-site scripting", cwes: [79, 80, 116],
+    what: "Outside input is written into a web page (or script) without being encoded.",
+    tries: ["<script>alert(1)<\/script>", "<img src=x onerror=alert(1)>", "<svg onload=alert(1)>", "\" onmouseover=\"alert(1) (breaks out of an attribute)", "javascript:alert(1) (inside a link)", "</textarea><script>alert(1)<\/script>"],
+    vuln: "the input reaches the HTML unencoded, so the script would run in a browser.",
+    fix: "encodes output for its context (HTML, attribute, URL, JavaScript) or uses an allowlist sanitizer.",
+    weak: ["removing only <script>", "encoding < and > but not quotes inside attributes", "sanitizing, then decoding again later"] },
+  { id: "query", name: "SQL, LDAP or XPath injection", cwes: [89, 90, 91, 643, 943],
+    what: "Outside input is joined into a database, LDAP or XML query.",
+    tries: ["' OR '1'='1", "1 OR 1=1 (numeric field)", "admin'-- ", "'; DROP TABLE t;--", "*)(uid=*))(|(uid=* (LDAP, CWE-90)", "' or '1'='1 inside an XPath expression (CWE-91)"],
+    vuln: "the input changes the query's structure: more rows come back, or a condition is bypassed.",
+    fix: "uses parameterised queries / prepared statements, or the correct escaping function for LDAP or XPath.",
+    weak: ["escaping quotes but concatenating numbers", "a deny-list of SQL words", "parameterising values but not ORDER BY or column names"] },
+  { id: "deser", name: "Unsafe deserialization or object manipulation", cwes: [470, 471, 502, 915, 1321],
+    what: "Untrusted data is turned into objects, or used to set an object's properties.",
+    tries: ["Python: pickle.loads or yaml.load on data whose __reduce__ calls os.system", "Java: a gadget class name in JSON type information (e.g. @type, polymorphic typing)", "JavaScript: {\"__proto__\": {\"isAdmin\": true}} or constructor.prototype (prototype pollution, CWE-1321)", "extra fields such as role=admin in a request (mass assignment, CWE-915)"],
+    vuln: "code runs while the data is loaded, or a property you should not control changes.",
+    fix: "uses a safe loader (yaml.safe_load, plain JSON), an allowlist of classes, or blocks __proto__, constructor and prototype keys.",
+    weak: ["a deny-list of known gadget classes (new gadgets get through)", "blocking __proto__ but not constructor.prototype"] },
+  { id: "xxe", name: "XML external entities", cwes: [611, 776],
+    what: "An XML parser resolves entities or DTDs supplied by the attacker.",
+    tries: ["<!DOCTYPE x [<!ENTITY e SYSTEM \"file:///etc/passwd\">]><x>&e;</x>", "a parameter entity (%e;) that loads an external DTD", "nested entities that expand hugely (billion laughs)"],
+    vuln: "the parser resolves the entity: file contents appear, or it fetches a URL.",
+    fix: "disables DOCTYPE / external entities on the parser actually used (disallow-doctype-decl, resolve_entities=False, defusedxml).",
+    weak: ["disabling general entities but not parameter entities", "configuring a different parser object than the one that parses"] },
+  { id: "ssrf", name: "Server-side request forgery", cwes: [918],
+    what: "The server fetches a URL that outside input controls.",
+    tries: ["http://127.0.0.1:<port>/", "http://169.254.169.254/latest/meta-data/ (cloud metadata)", "http://[::1]/, http://0/, http://2130706433/ (other ways to write 127.0.0.1)", "a hostname that resolves to an internal address", "an allowed host that redirects to an internal one", "file:///etc/passwd, gopher://"],
+    vuln: "the server requests an address you chose, including internal ones.",
+    fix: "allowlists schemes and hosts, checks the resolved IP address, and re-checks after redirects.",
+    weak: ["string checks on the host name (other IP formats or DNS get around them)", "no re-check after a redirect"] },
+  { id: "authz", name: "Access control", cwes: [15, 266, 269, 272, 276, 281, 284, 285, 287, 306, 639, 697, 732, 862, 863],
+    what: "An action, setting or file is available to someone who should not have it.",
+    tries: ["call the endpoint or function without logging in", "call it as a normal user instead of an admin", "change an id in the request to another user's object", "look at file permissions the code sets (0644 / 0777 = readable by others)", "values that differ only in case, or share a prefix, when the code compares them (CWE-697)"],
+    vuln: "the action succeeds for the wrong user, or the file is readable or writable by others.",
+    fix: "checks the user's permission on every path to the action, or sets restrictive permissions.",
+    weak: ["checking only in the user interface", "checking one route but not another that reaches the same code"] },
+  { id: "info", name: "Information exposure", cwes: [200, 202, 203, 208, 256, 312, 311, 359, 522, 532, 538, 668, 922],
+    what: "Data that should stay private is returned, logged, stored in plain text, or can be inferred.",
+    tries: ["trigger an error and read the message", "request something you should not see and check what comes back", "compare responses or timing for a valid vs an invalid user or token (CWE-203, CWE-208)", "check whether secrets are stored or sent in plain text (CWE-256, 311, 522)"],
+    vuln: "the private data is visible to someone who should not see it.",
+    fix: "removes the data from the output, encrypts it, or compares secrets in constant time (hmac.compare_digest, MessageDigest.isEqual).",
+    weak: ["hiding the data in one response but not another", "comparing secrets with == (leaks timing)"] },
+  { id: "crypto", name: "Weak cryptography, certificates or secrets", cwes: [295, 297, 321, 326, 327, 328, 329, 330, 335, 338, 353, 759, 798, 916],
+    what: "A weak algorithm, key, salt, random source or certificate check is used for security, or a secret is hard-coded.",
+    tries: ["look for MD5, SHA-1, DES, ECB mode, fixed IVs, short keys, unsalted or single-round hashes", "look for Random / Math.random used for tokens or keys", "TLS: verify=False, a trust-all TrustManager, a hostname verifier that returns true", "passwords or keys written directly in the code (CWE-798)"],
+    vuln: "the weak choice protects something that matters. These are usually checked by reading; running code rarely adds much.",
+    fix: "uses a strong algorithm (bcrypt, scrypt, Argon2 or PBKDF2 for passwords; AES-GCM), a secure random source, full certificate and hostname checks, and secrets from configuration.",
+    weak: ["a stronger hash that is still unsalted or single-round", "certificate checks on but hostname checks off"] },
+  { id: "dos", name: "Denial of service and resource limits", cwes: [185, 248, 307, 400, 404, 674, 770, 779, 834, 1333],
+    what: "Input can use unbounded time, memory or attempts, or crash the process.",
+    tries: ["a very large input (a 10 MB string, a million items)", "\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!\" against nested quantifiers such as (a+)+ (ReDoS, CWE-1333)", "many attempts in a loop (brute force, CWE-307)", "input that raises an uncaught exception (CWE-248)", "opening many files or connections that are never closed (CWE-404)"],
+    vuln: "time or memory grows without limit, attempts are never limited, or the process crashes.",
+    fix: "limits size, count or rate, uses a linear-time regex, closes resources, or catches the exception.",
+    weak: ["a limit applied only after the expensive work"] },
+  { id: "web", name: "Web request and session issues", cwes: [346, 348, 349, 352, 358, 384, 444, 601, 614, 942, 1021, 1275],
+    what: "The web layer trusts the wrong request, origin, header, cookie or redirect target.",
+    tries: ["CSRF: send the request from another site's form without a token (CWE-352)", "open redirect: ?next=https://evil.example, //evil.example, /\\evil.example (CWE-601)", "session fixation: does the session id change after login? (CWE-384)", "cookies without Secure, HttpOnly or SameSite (CWE-614, CWE-1275)", "Origin: https://evil.example reflected with credentials (CORS, CWE-346, CWE-942)", "X-Forwarded-For: 127.0.0.1 trusted as the client address (CWE-348)", "conflicting Content-Length and Transfer-Encoding (request smuggling, CWE-444)"],
+    vuln: "the forged request, origin or header is accepted.",
+    fix: "requires a CSRF token, allowlists redirect targets and origins, sets cookie flags, renews the session id, and ignores untrusted headers.",
+    weak: ["checking only that the URL starts with /", "reflecting the Origin header back"] },
+  { id: "tmp", name: "Temporary files and race conditions", cwes: [362, 367, 377, 378, 379],
+    what: "A file is created or checked in a way another user or process can interfere with.",
+    tries: ["is the temp file name predictable, or the file readable by others?", "can another user create the file or a symlink first?", "is there a gap between checking a file and using it (time-of-check / time-of-use)?"],
+    vuln: "another user can read, replace or redirect the file.",
+    fix: "uses mkstemp / Files.createTempFile with restrictive permissions and opens files atomically.",
+    weak: ["a random name but default (world-readable) permissions"] },
+  { id: "upload", name: "Unrestricted file upload", cwes: [434],
+    what: "Uploaded files are stored or served without enough checks.",
+    tries: ["upload shell.php, evil.html or evil.jsp", "a double extension such as a.php.jpg", "a fake Content-Type", "a file name containing ../"],
+    vuln: "a dangerous file is stored where it can be executed or served.",
+    fix: "allowlists extensions, checks the content, renames files, and stores them outside the web root.",
+    weak: ["checking only the Content-Type header", "a deny-list of extensions"] },
+  { id: "fmt", name: "Format string", cwes: [134],
+    what: "Outside input is used as a format string.",
+    tries: ["%s%s%s%n", "%(password)s", "{0.__class__} with Python str.format", "{x.__globals__} reaching module variables"],
+    vuln: "the format string reads or writes data it should not.",
+    fix: "never uses outside input as the format; passes it as an argument instead.",
+    weak: ["stripping % but not { }"] },
+  { id: "inject", name: "Injection (general)", cwes: [19, 20, 74, 75, 164, 184, 830],
+    what: "Input reaches a command, query, header, file or code without its special characters being neutralised. Find where the input ends up (the sink), then use the tips for that kind of sink.",
+    tries: ["quotes ' \" and backslash", "; | & $( ) `", "{{7*7}}", "%0d%0a (line breaks, for header or log injection)", "%00 (null byte)", "unexpected types or lengths (a list instead of a string, a very long value)"],
+    vuln: "the special characters change what the sink does.",
+    fix: "validates input against what is allowed, and encodes or parameterises it for the specific sink.",
+    weak: ["deny-lists of a few characters", "validating in one code path but not another"] },
+];
+const FAM_BY_CWE = {};
+for (const f of FAMILIES) for (const n of f.cwes) (FAM_BY_CWE[n] ||= []).push(f);
+const GENERIC_TIPS = {
+  name: "General approach", cwes: [],
+  what: "Find where outside input enters the code (the source) and where it does something risky (the sink).",
+  tries: ["trace one input from the source to the sink, line by line", "try inputs that would change what the sink does", "check every path to the sink, not only the one the fix touches"],
+  vuln: "an input you control changes the sink's behaviour in a harmful way.",
+  fix: "neutralises such inputs on every path to the sink.",
+  weak: ["a check on one path only", "a deny-list instead of an allowlist"] };
+function familiesFor(c) {
+  const out = []; let noinfo = false;
+  for (const w of c.cwe) {
+    const m = w.match(/^CWE-(\d+)$/);
+    if (!m) { noinfo = true; continue; }
+    for (const f of FAM_BY_CWE[+m[1]] || []) if (!out.includes(f)) out.push(f);
+  }
+  return { fams: out.length ? out : [GENERIC_TIPS], noinfo };
+}
+function tipsHtml(c) {
+  const { fams, noinfo } = familiesFor(c);
+  const label = fams.map(f => f.name).join(" · ");
+  const famHtml = f => TIP_FAM_HTML(f, c);
+  return tipsShell(c, fams, noinfo, label, famHtml);
+}
+function TIP_FAM_HTML(f, c) {
+  return `<div class="fam">
+      <h5>${esc(f.name)} ${f.cwes.length ? `<span class="cw">${esc(c.cwe.filter(w => f.cwes.includes(+(w.split("-")[1]))).join(", "))}</span>` : ""}</h5>
+      <div>${esc(f.what)}</div>
+      <div class="k">Try these inputs</div><ul>${f.tries.map(t => `<li><code>${esc(t)}</code></li>`).join("")}</ul>
+      <div><span class="k">Vulnerable if</span> ${esc(f.vuln)}</div>
+      <div><span class="k">A real fix</span> ${esc(f.fix)}</div>
+      <div class="k">Weak fixes to watch for (useful for Alt fix, check I)</div><ul class="weak">${f.weak.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+    </div>`;
+}
+function tipsShell(c, fams, noinfo, label, famHtml) {
+  return `<details class="block tips" id="attack-tips">
+    <summary>Attack ideas for this case <span class="muted" style="font-weight:400">${esc(label)}</span></summary>
+    ${noinfo ? `<p class="hint">The CVE record gives no specific CWE here. Read the advisory to see what kind of bug it is.</p>` : ""}
+    <p class="hint">Use these for checks E, H and I. Can't run the code? Trace each input through the code by reading, and tick <i>Read / reasoned</i>.</p>
+    <p class="hint">These tips follow the CWE in the CVE record. If the code shows a different kind of bug (that is also a finding for check D), pick that kind here:
+      <select id="tips-other" aria-label="Show attack ideas for another kind of weakness"><option value="">Other kinds of weakness…</option>${FAMILIES.filter(f => !fams.includes(f)).map(f => `<option value="${f.id}">${esc(f.name)}</option>`).join("")}</select></p>
+    ${fams.map(famHtml).join("")}
+    <div id="tips-extra"></div>
+  </details>`;
+}
+
+/* ================= state ================= */
+const S = {
+  me: null, INDEX: [], BY_ID: {}, records: {}, current: null, rec: null,
+  pending: new Map(), saving: false, saveTimer: 0, readonly: false,
+  text: new Map(), names: new Map(), hl: new Map(), reveal: new Map(),
+  tab: "vulnerable_source", compare: "", wrap: false,
+  filter: { batch: "all", status: "all", lang: "all", q: "" },
+};
+
+/* ================= helpers ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+const statusOf = id => S.records[id]?.status || "none";
+function toast(msg, ms = 3200) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), ms); }
+function lsGet(k) { try { return localStorage.getItem(k); } catch { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); } catch {} }
+function banner(kind, text, key = "main") {
+  let el = document.querySelector(`[data-banner="${key}"]`);
+  if (!el) { el = document.createElement("div"); el.dataset.banner = key; $("#banners").append(el); }
+  el.className = "banner " + kind; el.textContent = text;
+}
+async function api(path, opts = {}) {
+  const res = await fetch(path, { credentials: "same-origin", ...opts, headers: { ...(opts.body ? { "Content-Type": "application/json" } : {}), ...(S.me ? { "X-Reviewer": S.me.tag } : {}), ...(opts.headers || {}) } });
+  if (res.status === 401) { S.readonly = true; banner("warn", "Your session has ended. Open your personal link again to keep working.", "auth"); throw Object.assign(new Error("auth"), { status: 401 }); }
+  if (res.status === 409) { const j = await res.clone().json().catch(() => ({})); if (j.switched) { switchedTo(j.current); throw Object.assign(new Error("switched"), { status: 409 }); } }
+  return res;
+}
+function switchedTo(tag) {
+  S.readonly = true; S.switched = tag; setSave("Not saved", true);
+  banner("warn", `Stopped: this browser is now signed in as ${tag}, because that reviewer's link was opened in this browser. Changes in this tab (reviewer ${S.me.tag}) were NOT saved. Open your own personal link again to continue as ${S.me.tag}, and use a separate browser or private window for each reviewer link.`, "auth");
+  renderForm?.();
+}
+async function apiJson(path, opts) { const r = await api(path, opts); const j = await r.json().catch(() => ({})); if (!r.ok) throw Object.assign(new Error(j.error || r.statusText), { status: r.status, body: j }); return j; }
+
+/* ================= code loading ================= */
+async function fileText(id, role) {
+  const key = id + "/" + role;
+  if (S.text.has(key)) return S.text.get(key);
+  const r = await api(`/api/case/${id}/file/${role}`);
+  if (!r.ok) return null;
+  const t = await r.text();
+  S.text.set(key, t); S.names.set(key, r.headers.get("X-File-Name") || "");
+  return t;
+}
+function hlLang(id, role) { return role === "patch" ? "diff" : S.BY_ID[id]?.lang; }
+function splitHL(html) {
+  const lines = [], stack = []; let cur = "", i = 0;
+  while (i < html.length) {
+    const c = html[i];
+    if (c === "<") { const j = html.indexOf(">", i); const tag = html.slice(i, j + 1); if (tag[1] === "/") stack.pop(); else stack.push(tag); cur += tag; i = j + 1; continue; }
+    if (c === "\n") { cur += "</span>".repeat(stack.length); lines.push(cur); cur = stack.join(""); i++; continue; }
+    cur += c; i++;
+  }
+  lines.push(cur + "</span>".repeat(stack.length));
+  return lines;
+}
+async function hlLines(id, role) {
+  const key = id + "/" + role;
+  if (S.hl.has(key)) return S.hl.get(key);
+  const text = await fileText(id, role);
+  if (text == null) return null;
+  let lines = null; const lang = hlLang(id, role);
+  if (window.hljs && text.length < 600000 && hljs.getLanguage(lang)) { try { lines = splitHL(hljs.highlight(text, { language: lang, ignoreIllegals: true }).value); } catch { lines = null; } }
+  if (!lines) lines = esc(text).split("\n");
+  if (lines.length > 1 && lines[lines.length - 1] === "") lines.pop();
+  S.hl.set(key, lines);
+  return lines;
+}
+async function getReveal(id) {
+  if (S.reveal.has(id)) return S.reveal.get(id);
+  try { const j = await apiJson(`/api/case/${id}/reveal`); S.reveal.set(id, j); return j; } catch { return null; }
+}
+
+/* Myers line diff with common prefix/suffix trimmed */
+function diffLines(a, b) {
+  let pre = 0; while (pre < a.length && pre < b.length && a[pre] === b[pre]) pre++;
+  let suf = 0; while (suf < a.length - pre && suf < b.length - pre && a[a.length - 1 - suf] === b[b.length - 1 - suf]) suf++;
+  const A = a.slice(pre, a.length - suf), B = b.slice(pre, b.length - suf);
+  const N = A.length, M = B.length, trace = []; let found = -1; const LIMIT = 2500;
+  for (let d = 0; d <= Math.min(N + M, LIMIT); d++) {
+    const cur = new Int32Array(2 * d + 1), prev = trace[d - 1];
+    for (let k = -d; k <= d; k += 2) {
+      let x;
+      if (d === 0) x = 0;
+      else if (k === -d || (k !== d && prev[k - 1 + d - 1] < prev[k + 1 + d - 1])) x = prev[k + 1 + d - 1];
+      else x = prev[k - 1 + d - 1] + 1;
+      let y = x - k;
+      while (x < N && y < M && A[x] === B[y]) { x++; y++; }
+      cur[k + d] = x;
+      if (x >= N && y >= M) { found = d; break; }
+    }
+    trace.push(cur);
+    if (found >= 0) break;
+  }
+  if (found < 0) return null;
+  const ops = []; let x = N, y = M;
+  for (let d = found; d > 0; d--) {
+    const prev = trace[d - 1], k = x - y;
+    const down = k === -d || (k !== d && prev[k - 1 + d - 1] < prev[k + 1 + d - 1]);
+    const pk = down ? k + 1 : k - 1, px = prev[pk + d - 1], py = px - pk;
+    while (x > px && y > py) { ops.push(["eq", x - 1, y - 1]); x--; y--; }
+    if (down) { ops.push(["ins", -1, y - 1]); y--; } else { ops.push(["del", x - 1, -1]); x--; }
+  }
+  while (x > 0 && y > 0) { ops.push(["eq", x - 1, y - 1]); x--; y--; }
+  ops.reverse();
+  const out = [];
+  for (let i = 0; i < pre; i++) out.push(["eq", i, i]);
+  for (const [t, i, j] of ops) out.push([t, i < 0 ? -1 : i + pre, j < 0 ? -1 : j + pre]);
+  for (let i = 0; i < suf; i++) out.push(["eq", a.length - suf + i, b.length - suf + i]);
+  return out;
+}
+
+/* ================= saving ================= */
+function touch() {
+  if (!S.rec || S.readonly) return;
+  S.records[S.rec.case_id] = clone(S.rec);
+  S.pending.set(S.rec.case_id, clone(S.rec));
+  setSave("Unsaved changes");
+  clearTimeout(S.saveTimer); S.saveTimer = setTimeout(runQueue, 1000);
+  renderRow(S.rec.case_id); renderProgress(); renderGuide();
+}
+async function runQueue() {
+  clearTimeout(S.saveTimer);
+  if (S.saving || !S.pending.size) return;
+  S.saving = true; setSave("Saving…");
+  let failed = null;
+  while (S.pending.size) {
+    const [id, rec] = S.pending.entries().next().value;
+    S.pending.delete(id);
+    try {
+      const saved = await apiJson(`/api/records/${id}`, { method: "PUT", body: JSON.stringify(rec) });
+      if (!S.pending.has(id)) { S.records[id] = saved; if (S.current === id && S.rec) { S.rec.updatedAt = saved.updatedAt; S.rec.finalizedAt = saved.finalizedAt; } }
+    } catch (e) {
+      if (e.status === 401 || e.status === 409) { if (!S.pending.has(id)) S.pending.set(id, rec); failed = e; break; }
+      if (e.status === 400 && e.body?.missing) {
+        if (S.records[id]) S.records[id].status = "draft";
+        if (S.current === id && S.rec) { S.rec.status = "draft"; renderForm(); showMissing(e.body.missing); }
+        continue;
+      }
+      if (!S.pending.has(id)) S.pending.set(id, rec);
+      failed = e; break;
+    }
+  }
+  S.saving = false;
+  if (failed) { setSave("Not saved, retrying…", true); if (failed.status !== 401 && failed.status !== 409) S.saveTimer = setTimeout(runQueue, 4000); else setSave("Not saved", true); }
+  else if (S.pending.size) runQueue();
+  else setSave("Saved");
+}
+function setSave(t, err) { const el = $("#save-state"); el.textContent = t; el.classList.toggle("err", !!err); }
+
+/* ================= queue ================= */
+function filtered() {
+  const f = S.filter, q = f.q.trim().toLowerCase();
+  return S.INDEX.filter(c => (f.batch === "all" || String(c.b) === f.batch) && (f.lang === "all" || c.lang === f.lang) &&
+    (f.status === "all" || (f.status === "todo" ? statusOf(c.id) === "none" : statusOf(c.id) === f.status)) &&
+    (!q || c.id.toLowerCase().includes(q) || c.cve.toLowerCase().includes(q) || c.repo.toLowerCase().includes(q)));
+}
+function rowHtml(c) {
+  const st = statusOf(c.id);
+  return `<button type="button" class="row" data-id="${c.id}" aria-current="${c.id === S.current}">
+    <span class="dot ${st}" title="${st === "none" ? "Not started" : st === "draft" ? "Draft" : "Final"}"></span>
+    <span class="id">${c.id}${c.example ? `<span class="ex-tag">example</span>` : ""}</span><span class="lang">${esc(c.lang)}</span>
+    <span class="meta">${esc(c.cve)} · ${esc(c.repo)}</span></button>`;
+}
+function renderList() {
+  const items = filtered(); let html = "", lastB = null;
+  for (const c of items) { if (c.b !== lastB) { lastB = c.b; html += `<div class="group-h">Batch ${c.b}${c.b === 1 ? " · review first" : ""}</div>`; } html += rowHtml(c); }
+  $("#list").innerHTML = html || `<p class="queue-count">No cases match these filters.</p>`;
+  $("#queue-count").textContent = `${items.length} of ${S.INDEX.length} cases`;
+}
+function renderRow(id) { const el = document.querySelector(`.row[data-id="${id}"]`); if (el && S.BY_ID[id]) el.outerHTML = rowHtml(S.BY_ID[id]); }
+function renderProgress() {
+  const T = S.INDEX.length || 1; let f = 0, d = 0;
+  for (const id in S.records) { if (!S.BY_ID[id] || S.BY_ID[id].example) continue; const s = S.records[id].status; if (s === "final") f++; else if (s === "draft") d++; }
+  $("#progress").innerHTML = `<span><b>${f}</b> final · <b>${d}</b> draft · ${T}</span><span class="bar" aria-hidden="true"><i class="f" style="width:${(100 * f / T).toFixed(2)}%"></i><i class="d" style="width:${(100 * d / T).toFixed(2)}%"></i></span>`;
+}
+
+/* ================= case selection ================= */
+function selectCase(id, fromHash) {
+  if (!S.BY_ID[id]) return;
+  if (TOUR.steps && TOUR.steps[0]?.m !== undefined) endTour();
+  if (S.pending.size) runQueue();
+  S.current = id; S.rec = S.records[id] ? clone(S.records[id]) : null;
+  S.tab = "vulnerable_source"; S.compare = "";
+  if (!fromHash && location.hash.slice(1) !== id) history.replaceState(null, "", "#" + id);
+  document.querySelectorAll(".row[aria-current]").forEach(r => r.setAttribute("aria-current", String(r.dataset.id === id)));
+  renderCase(); renderForm();
+  $("#code-col").scrollTop = 0; $("#form-col").scrollTop = 0;
+}
+function ensureRec() {
+  if (!S.rec) S.rec = { case_id: S.current, status: "draft", blind: false, ownLocation: "", locationLockedAt: null, answers: {}, evidence: {}, methods: {}, decision: "", corrections: "", exclusionReason: "", testMaterials: "" };
+  return S.rec;
+}
+
+/* ================= case header + code ================= */
+function renderCase() {
+  const col = $("#code-col"), c = S.BY_ID[S.current];
+  if (!c) { col.innerHTML = ""; return; }
+  const gh = `https://github.com/${c.repo}`;
+  const links = [[`${gh}/blob/${c.v}/${c.file}`, "File @ vulnerable commit"], [`${gh}/blob/${c.f}/${c.file}`, "File @ fixed commit"], [`${gh}/commit/${c.f}`, "Fix commit"],
+    [`https://www.cve.org/CVERecord?id=${c.cve}`, "CVE record"], [`https://nvd.nist.gov/vuln/detail/${c.cve}`, "NVD"]];
+  if (c.ghsa) links.push([`https://github.com/advisories/${c.ghsa}`, c.ghsa]);
+  const cweHtml = c.cwe.map(w => { const n = w.match(/^CWE-(\d+)$/); return n ? `<a href="https://cwe.mitre.org/data/definitions/${n[1]}.html" target="_blank" rel="noopener noreferrer">${esc(w)}</a>` : esc(w); }).join(", ");
+  const flags = c.flags.length ? c.flags.map(f => `<span class="flag" title="${esc(flagHelp(f))}">${esc(f)}</span>`).join("") : `<span class="flag none">No Stage 1 flags</span>`;
+  col.innerHTML = `
+    <div class="case-head">
+      <div class="case-title"><h2>${c.id}</h2><span class="cve">${esc(c.cve)}</span><span class="muted">${cweHtml}</span></div>
+      <div class="facts">
+        <span><span class="k">Repo</span><span class="v">${esc(c.repo)}</span></span>
+        <span><span class="k">File</span><span class="v">${esc(c.file)}</span></span>
+        <span><span class="k">Lang</span><span class="v">${esc(c.lang)}</span></span>
+        <span><span class="k">Label</span><span class="v">${esc(c.rep)} · ${esc(c.pt)} · ${esc(c.cx)}</span></span>
+      </div>
+      <div class="links">${links.map(([u, t]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)} ↗</a>`).join("")}</div>
+      <div class="flags" aria-label="Stage 1 flags">${flags}</div>
+      ${c.example ? `<div class="note-ex">This case is the worked example shown in Help. Skip it.</div>` : ""}
+      ${c.ex ? `<div class="note-ex">This case was excluded from the evaluation earlier. Review it the same way as any other.</div>` : ""}
+    </div>
+    <div class="tabs" role="tablist">${ROLES.map(r => `<button type="button" role="tab" class="tab" data-tab="${r.key}" aria-selected="${r.key === S.tab}"><span class="sw ${r.kind}"></span>${esc(r.label)}${r.sub ? ` <small>${esc(r.sub)}</small>` : ""}</button>`).join("")}</div>
+    <div class="code-wrap" id="code-wrap"><div class="empty-code">Loading…</div></div>`;
+  renderCode();
+}
+function setTab(tab, compare) {
+  S.tab = tab; if (compare !== undefined) S.compare = compare === tab ? "" : compare;
+  document.querySelectorAll(".tab").forEach(x => x.setAttribute("aria-selected", String(x.dataset.tab === tab)));
+  renderCode();
+}
+async function renderCode() {
+  const wrap = $("#code-wrap"); if (!wrap) return;
+  const id = S.current, role = S.tab, r = ROLE[role];
+  const lines = await hlLines(id, role).catch(() => null);
+  if (id !== S.current || role !== S.tab) return;
+  if (!lines) { wrap.innerHTML = `<div class="empty-code">This file couldn't be loaded. Reload the page to try again.</div>`; return; }
+  const canCompare = role !== "patch";
+  if (!canCompare || S.compare === role) S.compare = "";
+  const rev = S.rec?.locationLockedAt ? (await getReveal(id))?.vulnerable_lines : null;
+  if (id !== S.current || role !== S.tab) return;
+  const inVL = n => Array.isArray(rev) && rev.length === 2 && n >= rev[0] && n <= rev[1];
+  const text = S.text.get(id + "/" + role);
+  const bar = `<div class="code-bar">
+      <span class="label ${r.kind}">${esc(r.expect)}</span>
+      <span class="mono">${esc(S.names.get(id + "/" + role) || "")}</span><span>${lines.length} lines</span>
+      ${canCompare ? `<label>Compare with <select id="cmp"><option value="">nothing</option>${["vulnerable_source", "patched_source"].filter(k => k !== role).map(k => `<option value="${k}" ${S.compare === k ? "selected" : ""}>${esc(ROLE[k].label)} (original)</option>`).join("")}</select></label>` : ""}
+      <span class="sp"></span>
+      <label><input type="checkbox" id="wrap-t" ${S.wrap ? "checked" : ""}> Wrap</label>
+      <button class="btn ghost" type="button" id="copy-file">Copy file</button>
+    </div>`;
+  let body;
+  if (S.compare && canCompare) {
+    const aT = await fileText(id, S.compare), aH = await hlLines(id, S.compare);
+    if (id !== S.current || role !== S.tab) return;
+    const ops = aT == null ? null : diffLines(aT.split("\n"), text.split("\n"));
+    body = ops ? renderDiff(ops, aH, lines, S.compare === "vulnerable_source" ? inVL : () => false) : `<div class="empty-code">These two files differ too much for a line-by-line view. Read them one after the other instead.</div>`;
+  } else if (role === "patch") {
+    const raw = text.split("\n");
+    body = lines.map((h, i) => { const s = raw[i] || ""; const cls = s.startsWith("@@") ? "hunk" : s.startsWith("+") && !s.startsWith("+++") ? "add" : s.startsWith("-") && !s.startsWith("---") ? "del" : ""; return `<div class="ln-row ${cls}"><span class="ln">${i + 1}</span><span class="lc">${h || " "}</span></div>`; }).join("");
+  } else {
+    const mark = role === "vulnerable_source" ? inVL : () => false;
+    body = lines.map((h, i) => `<div class="ln-row${mark(i + 1) ? " mark" : ""}"><span class="ln">${i + 1}</span><span class="lc">${h || " "}</span></div>`).join("");
+  }
+  wrap.innerHTML = bar + `<div class="code${S.wrap ? " wrap" : ""}" id="code">${body}</div>`;
+  $("#cmp")?.addEventListener("change", e => { S.compare = e.target.value; renderCode(); });
+  $("#wrap-t").addEventListener("change", e => { S.wrap = e.target.checked; $("#code").classList.toggle("wrap", S.wrap); });
+  $("#copy-file").addEventListener("click", () => {
+    const fail = () => toast("Copy was blocked. Select the code and copy it instead.");
+    try { navigator.clipboard.writeText(text).then(() => toast("File copied."), fail); } catch { fail(); }
+  });
+  if (role === "vulnerable_source" && rev && !S.compare) document.querySelector("#code .ln-row.mark")?.scrollIntoView({ block: "center" });
+}
+let FOLDS = [];
+function renderDiff(ops, aH, bH, markA) {
+  FOLDS = []; const CTX = 4, rows = []; let add = 0, del = 0;
+  const line = ([t, i, j]) => {
+    if (t === "eq") return `<div class="ln-row${markA(i + 1) ? " mark" : ""}"><span class="ln two">${i + 1}</span><span class="ln two">${j + 1}</span><span class="sgn"> </span><span class="lc">${bH[j] || " "}</span></div>`;
+    if (t === "del") { del++; return `<div class="ln-row del"><span class="ln two">${i + 1}</span><span class="ln two"></span><span class="sgn">−</span><span class="lc">${aH[i] || " "}</span></div>`; }
+    add++; return `<div class="ln-row add"><span class="ln two"></span><span class="ln two">${j + 1}</span><span class="sgn">+</span><span class="lc">${bH[j] || " "}</span></div>`;
+  };
+  let k = 0;
+  while (k < ops.length) {
+    if (ops[k][0] !== "eq") { rows.push(line(ops[k])); k++; continue; }
+    let e = k; while (e < ops.length && ops[e][0] === "eq") e++;
+    const run = ops.slice(k, e), head = k === 0 ? 0 : CTX, tail = e === ops.length ? 0 : CTX;
+    if (run.length > head + tail + 3) {
+      run.slice(0, head).forEach(o => rows.push(line(o)));
+      const hidden = run.slice(head, run.length - tail);
+      FOLDS.push(hidden.map(line).join(""));
+      rows.push(`<button type="button" class="fold" data-fold="${FOLDS.length - 1}">Show ${hidden.length} unchanged lines</button>`);
+      run.slice(run.length - tail).forEach(o => rows.push(line(o)));
+    } else run.forEach(o => rows.push(line(o)));
+    k = e;
+  }
+  return `<div class="ln-row hunk"><span class="lc">${add} line${add === 1 ? "" : "s"} added, ${del} removed, compared with ${esc(ROLE[S.compare].label)} (original)${add + del === 0 ? ": identical" : ""}</span></div>` + rows.join("");
+}
+
+/* ================= guide ================= */
+function renderGuide() {
+  const g = $("#guide"); if (!g) return;
+  const r = S.rec, done = STEPS.map(s => !!s.done(r));
+  const cur = done.indexOf(false);
+  const dots = STEPS.map((s, i) => `<button type="button" data-step="${i}" class="${done[i] ? "done" : i === cur ? "cur" : ""}" title="${i + 1}. ${esc(s.t)}${done[i] ? " (done)" : ""}" aria-label="Step ${i + 1}: ${esc(s.t)}"></button>`).join("");
+  if (cur < 0) {
+    const next = filtered().find(c => c.id !== S.current && !c.example && statusOf(c.id) !== "final");
+    g.innerHTML = `<span class="eyebrow">All steps done</span><h3>This case is final</h3><p>Thank you. Pick the next case in the list.</p><div class="steps">${dots}</div>
+      <div class="actions">${next ? `<button class="btn" type="button" data-next="${next.id}">Go to ${next.id}</button>` : ""}</div>`;
+  } else {
+    const s = STEPS[cur];
+    g.innerHTML = `<span class="eyebrow">Next step · ${cur + 1} of ${STEPS.length}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p><div class="steps">${dots}</div>
+      <div class="actions"><button class="btn primary" type="button" data-walk="${cur}">Walk me through this step</button><button class="btn" type="button" data-show="${cur}">Just show me where</button></div>`;
+  }
+}
+function showStep(i) {
+  const s = STEPS[i]; if (!s) return;
+  if (s.tab) setTab(s.tab, s.compare ?? "");
+  const el = document.querySelector("#form-col " + s.target);
+  if (el) { el.scrollIntoView({ block: "start", behavior: "smooth" }); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }
+}
+
+/* ================= guided tour (spotlight + step card) ================= */
+const tabSel = k => `.tab[data-tab="${k}"]`;
+const openTips = () => { const d = document.getElementById("attack-tips"); if (d) d.open = true; };
+const checkStep = (m, k, title, text) => ({ m, target: `[data-check="${k}"]`, title, text, done: r => ansDone(r, k) });
+function screenTour() {
+  return [
+    { target: "#list", title: "Your case list", text: "All cases you review. Start at the top of Batch 1. The dot shows your progress: empty = not started, amber = draft, green = final." },
+    { target: ".case-head", title: "The case", text: "The CVE, the weakness (CWE), the repository and file, and the labels the benchmark gave this case. The links open GitHub and the CVE record in a new tab." },
+    { target: ".flags", title: "Automatic warnings", text: "Stage 1 checks ran on every case. Hover over a flag to see what it means. For example, compile_variant_vulnerable_01 means that file doesn't compile." },
+    { target: ".tabs", title: "The files", text: "One tab per file. Red = labelled vulnerable, green = labelled safe, blue = the benign look-alike. Your job is to check that each label is true." },
+    { target: [".code-bar select", ".code-bar"], title: "Compare with", text: "Shows a file as changes against the original: green lines added, red removed. The easiest way to see what a variant or a fix changed." },
+    { target: "#guide", title: "Next step", text: "This box always says what to do next. “Walk me through this step” starts a guided walkthrough like this one, for the actual review." },
+    { target: "#blk-loc", title: "Your review record", text: "Everything you write here saves automatically. Work top to bottom: your bug location, checks A to J, decision, then Mark final." },
+    { target: "#attack-tips", title: "Attack ideas", text: "Inputs to try for this case's kind of weakness, and the weak fixes to watch for. Open it when you reach checks E, H and I.", action: () => {} },
+    { target: ["#guide-btn"], title: "Guide me", text: "Press this at any time for a step-by-step walkthrough of the case you are on. Press Help to see the rules and a worked example again." },
+  ];
+}
+function caseTour() {
+  return [
+    { m: 0, target: tabSel("vulnerable_source"), action: () => setTab("vulnerable_source", ""), title: "Read the vulnerable code", text: "This is the real code before the fix. Skim it to see what the file does. You don't need to understand every line." },
+    { m: 0, target: tabSel("patch"), action: () => setTab("patch", ""), title: "See what the fix changed", text: "patch.diff is the real fix. Red lines (−) were removed, green lines (+) were added. The bug is where the fix changes code." },
+    { m: 0, target: ["#own-loc"], title: "Write where the bug is", text: "In your own words: the function name and line numbers in the Vulnerable file, and what goes wrong. Example: “extractZip, lines 105–109: entry name joined to the folder without a check”.", done: r => !!r?.locationLockedAt || ((document.getElementById("own-loc")?.value || "").trim().length >= 4) },
+    { m: 0, target: ["#lock-loc", "#blk-loc"], title: "Lock it", text: "Press “Lock location”. Your text is saved with the time, and only then does the case's official location (vulnerable_lines) appear, highlighted in yellow in the Vulnerable tab.", done: r => !!r?.locationLockedAt },
+    { m: 1, target: ".links", title: "Open the sources", text: "These links open GitHub and the CVE record in a new tab. You'll use them for checks A to D." },
+    checkStep(1, "A", "A: is the vulnerable file real?", "Open “File @ vulnerable commit”. Is it the same code as the Vulnerable tab? A hash_mismatch or github_A flag would warn you if not. Answer, and write what you compared."),
+    checkStep(1, "B", "B: is the fix real?", "Open “File @ fixed commit” and “Fix commit”. Do they match the Patched tab and patch.diff?"),
+    checkStep(1, "C", "C: is this the fix for this CVE?", "Open “CVE record” (or the advisory). Does it mention this commit or this repository's fixed version?"),
+    checkStep(1, "D", "D: is the weakness type right?", "Which CWE does the CVE record give? Does it describe this bug?"),
+    { m: 2, target: [".code-bar select", ".code-bar"], action: () => setTab("patched_source", "vulnerable_source"), title: "Look at the fix up close", text: "Patched is now shown as changes against Vulnerable. Read what the new lines check or prevent." },
+    { m: 2, target: "#attack-tips", action: openTips, title: "Pick attacks to try", text: "These are inputs that exploit this kind of weakness. For each one, ask: does it work on Vulnerable? Is it blocked by Patched?" },
+    checkStep(2, "E", "E: does the fix stop the attack?", "Answer E. Tick how you checked: “Executed” or “Exploit-tested” if you ran it, “Read / reasoned” if you traced it by reading. Then write what you tried and what happened."),
+    { m: 3, target: tabSel("vulnerable_source"), action: () => setTab("vulnerable_source", ""), title: "See the official location", text: "The yellow lines are the case's vulnerable_lines. Compare them with the location you wrote." },
+    checkStep(3, "F", "F: does vulnerable_lines cover the bug?", "Yes if the yellow range covers every place the fix touches. No if it misses one; say which function or lines are missing."),
+    { m: 4, target: ".facts", title: "Find the label", text: "“Label” shows how the benchmark classified the case, for example “supported · taint · structural”." },
+    checkStep(4, "G", "G: is the label right?", "“taint” = input flows from a source to a dangerous sink. “pattern” = one recognisable risky construct. Does that match what you saw?"),
+    { m: 5, target: tabSel("variant_vulnerable_01"), action: () => setTab("variant_vulnerable_01", "vulnerable_source"), title: "Variant 01: renamed copy", text: "Same bug with names changed. Check that the bug is still there and still reachable, and that nothing broke (for example an old name left behind)." },
+    { m: 5, target: tabSel("variant_vulnerable_02"), action: () => setTab("variant_vulnerable_02", "vulnerable_source"), title: "Variant 02: restructured copy", text: "Same bug with the code reorganised. The same attack should still work through the new structure." },
+    checkStep(5, "H", "H: are both variants still vulnerable?", "Yes only if both are exploitable in the same way AND both compile. A compile_ flag or a missing piece means No."),
+    { m: 5, target: tabSel("variant_safe_01"), action: () => setTab("variant_safe_01", "vulnerable_source"), title: "Alt fix: a different fix", text: "A different way of fixing the bug. Try the attack ideas against it, and look for the weak fixes listed in the attack ideas card." },
+    checkStep(5, "I", "I: is the alternative fix really safe?", "Yes only if every attack you tried is blocked. Say which attacks you tried."),
+    { m: 5, target: tabSel("benign_lookalike"), action: () => setTab("benign_lookalike", "vulnerable_source"), title: "Look-alike: safe but similar", text: "Should contain the same kind of code but be safe. Watch for empty or stubbed bodies, and for comments or names that give the label away (e.g. “this input is trusted”)." },
+    checkStep(5, "J", "J: is the look-alike safe and similar?", "Yes only if it's safe AND really looks like the vulnerable code."),
+    { m: 6, target: "#blk-dec", title: "Decide", text: "Keep = everything correct. Keep with corrections = fixable problems (list each: file, what to change, why). Exclude = the case can't be scored soundly (say why).", done: STEPS[6].done },
+    { m: 7, target: "#blk-final", title: "Confirm and finish", text: "Tick the box confirming you did not look at model results, then press Mark final. If anything is missing, the list tells you what.", done: STEPS[7].done },
+    { m: 7, target: "#list", title: "On to the next case", text: "Done. Pick the next case in the list. Press Guide me again whenever you want this walkthrough." },
+  ];
+}
+const TOUR = { steps: null, i: 0, raf: 0, spot: null, pop: null, sig: "" };
+function startTour(steps, i = 0) {
+  endTour();
+  TOUR.steps = steps; TOUR.i = Math.max(0, Math.min(i, steps.length - 1));
+  TOUR.spot = Object.assign(document.createElement("div"), { className: "tour-spot" });
+  TOUR.pop = Object.assign(document.createElement("div"), { className: "tour-pop" });
+  TOUR.pop.setAttribute("role", "dialog"); TOUR.pop.setAttribute("aria-live", "polite");
+  document.body.append(TOUR.spot, TOUR.pop);
+  TOUR.pop.addEventListener("click", e => { const b = e.target.closest("[data-tour]"); if (!b) return; const a = b.dataset.tour; if (a === "next") goTour(1); else if (a === "back") goTour(-1); else endTour(); });
+  showTourStep();
+  const loop = () => { if (!TOUR.steps) return; placeTour(); TOUR.raf = requestAnimationFrame(loop); };
+  TOUR.raf = requestAnimationFrame(loop);
+}
+function endTour() { cancelAnimationFrame(TOUR.raf); TOUR.spot?.remove(); TOUR.pop?.remove(); TOUR.steps = null; TOUR.spot = TOUR.pop = null; }
+function goTour(d) { const n = TOUR.i + d; if (n < 0) return; if (n >= TOUR.steps.length) return endTour(); TOUR.i = n; showTourStep(); }
+function tourTarget(s) { for (const sel of [].concat(s.target || [])) { const e = document.querySelector(sel); if (e && e.getClientRects().length) return e; } return null; }
+function showTourStep() {
+  const s = TOUR.steps[TOUR.i];
+  TOUR.sig = "";
+  if (s.action) s.action();
+  setTimeout(() => { const t = tourTarget(s); if (t) t.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); }, 60);
+  setTimeout(() => TOUR.pop?.querySelector('[data-tour="next"]')?.focus({ preventScroll: true }), 80);
+}
+function placeTour() {
+  const s = TOUR.steps[TOUR.i], t = tourTarget(s), last = TOUR.i === TOUR.steps.length - 1;
+  const done = s.done ? !!s.done(S.rec) : null;
+  const sig = TOUR.i + "|" + done;
+  if (sig !== TOUR.sig) {
+    TOUR.sig = sig;
+    const sec = s.m !== undefined ? `Step ${s.m + 1} of ${STEPS.length} · ${esc(STEPS[s.m].t)}` : "Screen tour";
+    TOUR.pop.innerHTML = `<button class="tour-x" type="button" data-tour="close" aria-label="Close the guide">×</button>
+      <span class="eyebrow">${sec}</span><h4>${esc(s.title)}</h4><p>${esc(s.text)}</p>
+      ${done === true ? `<span class="done">✓ Done</span>` : done === false ? `<span class="todo">Do this now, then press Next</span>` : ""}
+      <div class="tour-foot"><span class="count">${TOUR.i + 1} / ${TOUR.steps.length}</span>
+        <button class="btn" type="button" data-tour="back" ${TOUR.i === 0 ? "disabled" : ""}>Back</button>
+        <button class="btn primary" type="button" data-tour="next">${last ? "Finish" : "Next"}</button></div>`;
+  }
+  const vw = innerWidth, vh = innerHeight, pw = TOUR.pop.offsetWidth, ph = TOUR.pop.offsetHeight, pad = 6;
+  if (!t) { TOUR.spot.style.cssText = "width:0;height:0;top:50%;left:50%"; TOUR.pop.style.left = Math.max(12, (vw - pw) / 2) + "px"; TOUR.pop.style.top = Math.max(12, (vh - ph) / 2) + "px"; return; }
+  const r = t.getBoundingClientRect();
+  const top = Math.max(4, r.top - pad), left = Math.max(4, r.left - pad), w = Math.min(r.width + 2 * pad, vw - left - 4), h = Math.min(r.height + 2 * pad, vh - top - 4);
+  Object.assign(TOUR.spot.style, { top: top + "px", left: left + "px", width: w + "px", height: Math.max(h, 8) + "px" });
+  let y = r.bottom + 12, x = Math.min(Math.max(12, r.left), vw - pw - 12);
+  if (y + ph > vh - 12) y = r.top - ph - 12;
+  if (y < 12) { y = Math.min(vh - ph - 12, Math.max(12, r.top + 12)); x = r.right + 12 + pw < vw ? r.right + 12 : Math.max(12, r.left - pw - 12); }
+  TOUR.pop.style.left = x + "px"; TOUR.pop.style.top = y + "px";
+}
+function walkFrom(m) { const steps = caseTour(); startTour(steps, Math.max(0, steps.findIndex(s => s.m === m))); }
+document.addEventListener("keydown", e => {
+  if (!TOUR.steps) return;
+  const typing = /^(TEXTAREA|INPUT|SELECT)$/.test(document.activeElement?.tagName || "");
+  if (e.key === "Escape") endTour();
+  else if (!typing && e.key === "ArrowRight") goTour(1);
+  else if (!typing && e.key === "ArrowLeft") goTour(-1);
+});
+
+/* ================= checklist form ================= */
+function locked() { return S.rec?.status === "final" || S.readonly; }
+async function renderForm() {
+  const col = $("#form-col"), c = S.BY_ID[S.current];
+  if (!c) { col.innerHTML = ""; return; }
+  const r = S.rec, st = r?.status || "none", L = locked(), dis = L ? "disabled" : "";
+  const isLocked = !!r?.locationLockedAt;
+  let revealHtml = "";
+  if (isLocked) {
+    const rv = await getReveal(c.id);
+    if (c.id !== S.current) return;
+    const vl = rv?.vulnerable_lines;
+    revealHtml = `<div class="reveal">
+      <div><span class="methods-k">vulnerable_lines</span> <span class="mono">${Array.isArray(vl) ? esc(vl.join("–")) : "not recorded"}</span>
+      ${rv?.auto_locate_confidence ? ` · <span class="methods-k">located</span> <span class="mono">${esc(rv.auto_locate_confidence)}</span>` : ""}
+      ${rv?.changed_function ? ` · <span class="methods-k">function</span> <span class="mono">${esc(rv.changed_function)}</span>` : ""}</div>
+      ${rv?.stage1_notes ? `<div><span class="methods-k">Stage 1 notes</span><div class="stage1-notes">${esc(rv.stage1_notes.split(" | ").join("\n"))}</div></div>` : ""}
+    </div>`;
+  }
+  const checkBlock = ch => {
+    const off = ch.gated && !isLocked;
+    const a = r?.answers?.[ch.k] || "", ev = r?.evidence?.[ch.k] || "", ms = r?.methods?.[ch.k] || [];
+    return `<div class="block" data-check="${ch.k}">
+      <h4><span class="key">${ch.k}</span>${esc(ch.t)}</h4>
+      <p class="hint">${off ? "Lock your own bug location in box 1 first. Then vulnerable_lines is revealed and you can answer F." : esc(ch.h)}</p>
+      <details class="ex"><summary>Example of good evidence</summary><div class="good">${esc(ch.good)}</div><div class="weak">Too weak: “${esc(ch.weak)}”</div></details>
+      <div class="ans" role="group" aria-label="Answer for ${ch.k}">${["Yes", "No", "Unsure"].map(v => `<button type="button" data-ans="${ch.k}" data-v="${v}" aria-pressed="${a === v}" ${dis || (off ? "disabled" : "")}>${v}</button>`).join("")}</div>
+      ${ch.m ? `<div class="methods" role="group" aria-label="How you verified ${ch.k}"><span class="methods-k">Verified by</span>${METHODS.map(([v, t]) => `<label><input type="checkbox" data-meth="${ch.k}" value="${v}" ${ms.includes(v) ? "checked" : ""} ${dis}> ${t}</label>`).join("")}</div>` : ""}
+      <textarea id="ev-${ch.k}" data-ev="${ch.k}" placeholder="Evidence: what you did and what you saw (a diff, a test run, a URL)" ${dis || (off ? "disabled" : "")}>${esc(ev)}</textarea>
+    </div>`;
+  };
+  col.innerHTML = `
+    <div class="guide" id="guide" aria-live="polite"></div>
+    <div class="form-head"><h3>Review record · ${esc(c.id)}</h3><span class="status-pill ${st}">${st === "none" ? "Not started" : st}</span></div>
+    <div class="block ${isLocked ? "locked" : ""}" id="blk-loc">
+      <h4><span class="key">1</span>Your own bug location</h4>
+      <p class="hint">${isLocked ? `Locked ${esc(new Date(r.locationLockedAt).toLocaleString())}, before vulnerable_lines was revealed.` : "Read Vulnerable and patch.diff, then write every function or line range where the bug occurs. Do this before you see the case's official location."}</p>
+      <textarea id="own-loc" data-field="ownLocation" placeholder="e.g. extractZip, lines 105–109: entry name joined to the target folder without a check" ${isLocked || L ? "disabled" : ""}>${esc(r?.ownLocation || "")}</textarea>
+      ${isLocked ? revealHtml : `<div class="actions"><button class="btn primary" type="button" id="lock-loc" ${L ? "disabled" : ""}>Lock location and reveal vulnerable_lines</button></div>`}
+    </div>
+    <div class="sec-title">Checks</div>
+    ${tipsHtml(c)}
+    ${CHECKS.map(checkBlock).join("")}
+    <div class="sec-title">Decision</div>
+    <div class="block" id="blk-dec">
+      <div class="ans dec" role="group" aria-label="Decision">${DECISIONS.map(v => `<button type="button" data-dec="${v}" aria-pressed="${r?.decision === v}" ${dis}>${v}</button>`).join("")}</div>
+      <label class="hint" for="corr">Corrections proposed: one per line (file, what to change, why)</label>
+      <textarea id="corr" data-field="corrections" ${dis}>${esc(r?.corrections || "")}</textarea>
+      <div id="excl-wrap" ${r?.decision === "Exclude" ? "" : "hidden"}><label class="hint" for="excl">Exclusion reason</label><textarea id="excl" data-field="exclusionReason" ${dis}>${esc(r?.exclusionReason || "")}</textarea></div>
+      <label class="hint" for="tm">Test materials: attack inputs used, where your test files are, what counted as success</label>
+      <textarea id="tm" data-field="testMaterials" ${dis}>${esc(r?.testMaterials || "")}</textarea>
+    </div>
+    <div class="block" id="blk-final">
+      <label class="attest"><input type="checkbox" id="blind" ${r?.blind ? "checked" : ""} ${dis}> I reviewed this case without looking at any model output or results.</label>
+      <ul class="missing" id="missing" hidden></ul>
+      <div class="actions">
+        ${st === "final" ? `<button class="btn" type="button" id="reopen" ${S.readonly ? "disabled" : ""}>Reopen as draft</button><span class="hint">Final ${esc(new Date(r.finalizedAt || r.updatedAt || Date.now()).toLocaleString())}</span>`
+          : `<button class="btn primary" type="button" id="finalize" ${L ? "disabled" : ""}>Mark final</button><span class="hint">Your work saves as you type.</span>`}
+      </div>
+    </div>`;
+  renderGuide();
+  bindForm();
+}
+function bindForm() {
+  const col = $("#form-col");
+  col.querySelectorAll("[data-ans]").forEach(b => b.addEventListener("click", () => {
+    const rec = ensureRec(), k = b.dataset.ans, v = b.dataset.v;
+    rec.answers[k] = rec.answers[k] === v ? "" : v;
+    b.parentElement.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.v === rec.answers[k])));
+    touch(); renderStatusPill();
+  }));
+  col.querySelectorAll("[data-meth]").forEach(cb => cb.addEventListener("change", () => {
+    const rec = ensureRec(), k = cb.dataset.meth, set = new Set(rec.methods[k] || []);
+    cb.checked ? set.add(cb.value) : set.delete(cb.value);
+    rec.methods[k] = METHODS.map(m => m[0]).filter(m => set.has(m)); touch();
+  }));
+  col.querySelectorAll("[data-ev]").forEach(t => t.addEventListener("input", () => { ensureRec().evidence[t.dataset.ev] = t.value; touch(); }));
+  col.querySelectorAll("[data-field]").forEach(t => t.addEventListener("input", () => { ensureRec()[t.dataset.field] = t.value; touch(); }));
+  col.querySelectorAll("[data-dec]").forEach(b => b.addEventListener("click", () => {
+    const rec = ensureRec(); rec.decision = rec.decision === b.dataset.dec ? "" : b.dataset.dec;
+    col.querySelectorAll("[data-dec]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.dec === rec.decision)));
+    $("#excl-wrap").hidden = rec.decision !== "Exclude"; touch(); renderStatusPill();
+  }));
+  $("#blind")?.addEventListener("change", e => { ensureRec().blind = e.target.checked; touch(); });
+  $("#tips-other")?.addEventListener("change", e => { const f = FAMILIES.find(x => x.id === e.target.value); $("#tips-extra").innerHTML = f ? TIP_FAM_HTML(f, S.BY_ID[S.current]) : ""; });
+  $("#lock-loc")?.addEventListener("click", async () => {
+    const loc = $("#own-loc").value.trim();
+    if (loc.length < 4) { toast("Write your own bug location first. It is recorded before vulnerable_lines is revealed."); $("#own-loc").focus(); return; }
+    const id = S.current;
+    try {
+      if (S.pending.has(id)) await runQueue();
+      const saved = await apiJson(`/api/records/${id}/lock`, { method: "POST", body: JSON.stringify({ ownLocation: loc }) });
+      S.records[id] = saved; if (S.current === id) { S.rec = clone(saved); renderForm(); renderCode(); renderRow(id); renderProgress(); }
+      toast("Location locked. vulnerable_lines is now shown and highlighted.");
+    } catch (e) { if (e.status !== 401) toast("Couldn't lock the location. Check your connection and try again."); }
+  });
+  $("#finalize")?.addEventListener("click", () => {
+    const miss = missingItems(S.rec); if (miss.length) { showMissing(miss); return; }
+    S.rec.status = "final"; touch(); runQueue(); renderForm(); toast(`${S.current} marked final.`);
+  });
+  $("#reopen")?.addEventListener("click", () => { S.rec.status = "draft"; touch(); renderForm(); });
+}
+function showMissing(miss) { const ul = $("#missing"); if (!ul) return; ul.innerHTML = miss.map(m => `<li>${esc(m)}</li>`).join(""); ul.hidden = false; ul.scrollIntoView({ block: "nearest" }); }
+function renderStatusPill() { const p = document.querySelector(".status-pill"); if (!p) return; const st = S.rec?.status || "none"; p.className = "status-pill " + st; p.textContent = st === "none" ? "Not started" : st; }
+function missingItems(r) {
+  const m = []; if (!r) return ["Nothing recorded yet."];
+  if (!r.locationLockedAt) m.push("Lock your own bug location.");
+  for (const ch of CHECKS) {
+    if (!r.answers?.[ch.k]) m.push(`${ch.k}: choose Yes, No or Unsure.`);
+    if (!(r.evidence?.[ch.k] || "").trim()) m.push(`${ch.k}: write the evidence.`);
+    if (ch.m && !(r.methods?.[ch.k] || []).length) m.push(`${ch.k}: tick how you verified it.`);
+  }
+  if (!r.decision) m.push("Choose a decision.");
+  if (r.decision === "Keep with corrections" && !(r.corrections || "").trim()) m.push("List the corrections.");
+  if (r.decision === "Exclude" && !(r.exclusionReason || "").trim()) m.push("Write the exclusion reason.");
+  if (!r.blind) m.push("Confirm you did not look at model results.");
+  return m;
+}
+
+/* ================= worked example (tiny markdown renderer) ================= */
+function inlineMd(s) { return esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>"); }
+function renderMd(md) {
+  let body = md, fm = "";
+  const m = md.match(/^---\n([\s\S]*?)\n---\n?/); if (m) { fm = m[1]; body = md.slice(m[0].length); }
+  const out = []; const lines = body.split("\n"); let i = 0;
+  if (fm) out.push(`<p><b>Answers:</b> ${fm.split("\n").filter(l => /^[A-J]:|^decision:/.test(l)).map(l => esc(l)).join(" · ")}</p>`);
+  while (i < lines.length) {
+    const l = lines[i];
+    if (/^\|/.test(l)) {
+      const rows = []; while (i < lines.length && /^\|/.test(lines[i])) { rows.push(lines[i]); i++; }
+      const cells = r => r.replace(/^\||\|$/g, "").split(/(?<!\\)\|/).map(c => inlineMd(c.trim().replace(/\\\|/g, "|")));
+      const head = cells(rows[0]), rest = rows.slice(2).map(cells);
+      out.push(`<div class="tblw"><table><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rest.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+      continue;
+    }
+    if (/^- /.test(l)) { const items = []; while (i < lines.length && /^- /.test(lines[i])) { items.push(`<li>${inlineMd(lines[i].slice(2))}</li>`); i++; } out.push(`<ul>${items.join("")}</ul>`); continue; }
+    if (/^## /.test(l)) out.push(`<h2>${inlineMd(l.slice(3))}</h2>`);
+    else if (/^# /.test(l)) out.push(`<h1>${inlineMd(l.slice(2))}</h1>`);
+    else if (l.trim() && !/^<!--/.test(l)) out.push(`<p>${inlineMd(l)}</p>`);
+    i++;
+  }
+  return out.join("");
+}
+async function openExample() {
+  try { $("#ex-dlg").showModal(); } catch {}
+  try { const j = await apiJson("/api/example"); $("#ex-body").innerHTML = renderMd(j.markdown || ""); } catch { $("#ex-body").textContent = "The example couldn't be loaded."; }
+}
+
+/* ================= wiring ================= */
+$("#list").addEventListener("click", e => { const b = e.target.closest(".row"); if (b) selectCase(b.dataset.id); });
+$("#q").addEventListener("input", e => { S.filter.q = e.target.value; renderList(); });
+$("#f-lang").addEventListener("change", e => { S.filter.lang = e.target.value; renderList(); });
+for (const [sel, key] of [["#f-batch", "batch"], ["#f-status", "status"]]) {
+  $(sel).addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.filter[key] = b.dataset.v; $(sel).querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderList(); });
+}
+$("#code-col").addEventListener("click", e => {
+  const t = e.target.closest(".tab"); if (t) { setTab(t.dataset.tab); return; }
+  const f = e.target.closest(".fold"); if (f) { f.insertAdjacentHTML("afterend", FOLDS[+f.dataset.fold]); f.remove(); }
+});
+$("#form-col").addEventListener("click", e => {
+  const w = e.target.closest("[data-walk]"); if (w) { walkFrom(+w.dataset.walk); return; }
+  const s = e.target.closest("[data-show]"); if (s) { showStep(+s.dataset.show); return; }
+  const d = e.target.closest("[data-step]"); if (d) { showStep(+d.dataset.step); return; }
+  const n = e.target.closest("[data-next]"); if (n) selectCase(n.dataset.next);
+});
+$("#help-btn").addEventListener("click", () => { try { $("#help-dlg").showModal(); } catch {} });
+$("#help-close").addEventListener("click", () => $("#help-dlg").close());
+$("#help-tour").addEventListener("click", () => { $("#help-dlg").close(); startTour(screenTour()); });
+$("#guide-btn").addEventListener("click", () => { const cur = STEPS.findIndex(s => !s.done(S.rec)); walkFrom(cur < 0 ? 0 : cur); });
+$("#help-example").addEventListener("click", () => { $("#help-dlg").close(); openExample(); });
+$("#ex-close").addEventListener("click", () => $("#ex-dlg").close());
+window.addEventListener("hashchange", () => { const id = location.hash.slice(1); if (S.BY_ID[id] && id !== S.current) selectCase(id, true); });
+window.addEventListener("beforeunload", e => { if (S.pending.size) { runQueue(); e.preventDefault(); e.returnValue = ""; } });
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden" && S.pending.size) runQueue();
+  if (document.visibilityState === "visible" && S.me && !S.switched) apiJson("/api/me").then(m => { if (m.tag !== S.me.tag) switchedTo(m.tag); }).catch(() => {});
+});
+
+/* ================= boot ================= */
+(async () => {
+  try {
+    const [me, index, records] = await Promise.all([apiJson("/api/me"), apiJson("/api/index"), apiJson("/api/records")]);
+    S.me = me; S.INDEX = index; S.BY_ID = Object.fromEntries(index.map(c => [c.id, c])); S.records = records;
+    $("#tag-chip").innerHTML = `Reviewer <b class="mono">${esc(me.tag)}</b>${me.name ? ` · ${esc(me.name)}` : ""}`;
+    const h = location.hash.slice(1);
+    const first = S.BY_ID[h] ? h : (index.find(c => !c.example && statusOf(c.id) !== "final") || index[0]).id;
+    renderList(); renderProgress(); selectCase(first, true);
+    if (!lsGet("gt-help-seen-" + me.tag)) { lsSet("gt-help-seen-" + me.tag, "1"); try { $("#help-dlg").showModal(); } catch {} }
+  } catch (e) {
+    if (e.status !== 401) banner("warn", "The review server couldn't be reached. Check your connection and reload the page.");
+  }
+})();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+cases checked: 154
+cases with no flags: 19
+
+ 145  stub_<sample>
+ 142  leak_<sample>
+  78  fix_outside_lines
+  60  compile_<sample>
+   8  github_A
+   8  github_B
+   1  hash_mismatch

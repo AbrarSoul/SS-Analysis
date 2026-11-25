@@ -1,3 +1,4 @@
+
 # Large, re-downloadable source data (MoreFixes dump, cloned repo caches)
 data/
 
@@ -8,12 +9,20 @@ __pycache__/
 *.pyc
 .DS_Store
 
-# Secrets and local config -- never commit
+# Secrets and local config -- never commit. The review-case skill is shared, so it is the one exception.
 .env
 .env.*
-.claude/
+.claude/*
+!.claude/skills/
 
-# Upstream autogrep history moved aside (restore with: mv autogrep_upstream.git.bak autogrep/.git)
-autogrep_upstream.git.bak/
-results/runs_final_realsmoke_20260928_212325/
-results/runs_final_realsmoke_FAILED_401_bad_key/
+# Autogrep's per-run repo caches inside result folders (bookkeeping only; clones are never redistributed)
+results/**/cache/
+results/**/shared_cache/
+
+# Ground-truth review
+# - local tool installs (tsc for Stage 1 checks): reinstall with npm into review/.tools
+review/.tools/
+# - reviewer records and harnesses stay private until every judge has finished: the repo is public,
+#   and a judge who could read another judge's records would no longer be independent.
+#   Remove this line when the review is complete.
+review/cases_reviewed_*/

@@ -1,0 +1,193 @@
+{
+ "contract": 1,
+ "case_id": "CASE-0075",
+ "harness": {
+  "title": "Zip slip: extract crafted archives and look for files written outside dest/",
+  "built_by": "R1 (Claude Code session), converted from the review kit's example harness",
+  "sha256": "c5d29ebf8c76da0e20a9a1b65ff53b0ae01d46320cdd7bd412c27f1d9709b06b",
+  "attacks": [
+   {
+    "id": "1_plain_dotdot",
+    "input": "../ESCAPED_1.txt",
+    "what": "plain parent-directory entry"
+   },
+   {
+    "id": "2_nested_dotdot",
+    "input": "textures/../../ESCAPED_2.txt",
+    "what": "traversal after a normal folder"
+   },
+   {
+    "id": "3_deep_dotdot",
+    "input": "../../outside/ESCAPED_3.txt",
+    "what": "two levels up, into a new folder"
+   },
+   {
+    "id": "4_absolute_path",
+    "input": "/tmp/ESCAPED_4.txt",
+    "what": "absolute path"
+   },
+   {
+    "id": "5_backslash",
+    "input": "..\\ESCAPED_5.txt",
+    "what": "Windows-style separator"
+   },
+   {
+    "id": "7_sibling_dir",
+    "input": "../dest_evil/ESCAPED_7.txt",
+    "what": "sibling folder sharing the dest prefix"
+   },
+   {
+    "id": "8_prefixed_dotdot",
+    "input": "assets/minecraft/../../../../ESCAPED_8.txt",
+    "what": "traversal hidden behind the assets/minecraft/ prefix that extractMinecraft looks for"
+   }
+  ],
+  "control": {
+   "id": "6_benign_control",
+   "input": "assets/minecraft/ok.txt"
+  },
+  "success_criterion": "An attack counts as exploited when its marker file exists anywhere outside that run's dest/ folder. Each attack runs in a fresh folder; extractZip and extractMinecraft (where present) are both tested."
+ },
+ "runtime_image": "sha256:5f09a6909ed47217869ccf7001c7c6a54219c5820f42b0c315e7440ab652a2d5",
+ "run_at": "2026-11-24T19:20:03+00:00",
+ "isolation": "docker, --network none, read-only root, 1 GB, 2 CPUs, 120 s per sample",
+ "samples": {
+  "vulnerable_source": {
+   "file": "vulnerable_source.java",
+   "sha256": "86392abea66d43607d95b3d95998b6b3cc18e4fa385201ee005b8bb7be08f89d",
+   "label": "vulnerable",
+   "result": {
+    "compiled": true,
+    "attacks": {
+     "1_plain_dotdot": true,
+     "2_nested_dotdot": false,
+     "3_deep_dotdot": true,
+     "4_absolute_path": false,
+     "5_backslash": false,
+     "7_sibling_dir": true,
+     "8_prefixed_dotdot": true
+    },
+    "control_ok": true,
+    "modified": [],
+    "skipped": null,
+    "notes": "tested cz.speedy11.mcrpx.common.util.ZipUtil: extractZip, extractMinecraft"
+   },
+   "verdict": "exploitable (4 attacks worked)",
+   "matches_label": true,
+   "exit_code": 0,
+   "log_tail": "_dir/dest_evil/ESCAPED_7.txt\n      log: Extracting resource pack 7_sibling_dir.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractZip           8_prefixed_dotdot  ESCAPED -> /run/extractZip/ESCAPED_8.txt\n      log: Extracting resource pack 8_prefixed_dotdot.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractZip           6_benign_control   control file extracted: True\n      log: Extracting resource pack 6_benign_control.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractMinecraft     1_plain_dotdot     contained\n      log: Extracting resource pack from Minecraft 1_plain_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     2_nested_dotdot    contained\n      log: Extracting resource pack from Minecraft 2_nested_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     3_deep_dotdot      contained\n      log: Extracting resource pack from Minecraft 3_deep_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     4_absolute_path    contained\n      log: Extracting resource pack from Minecraft 4_absolute_path.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     5_backslash        contained\n      log: Extracting resource pack from Minecraft 5_backslash.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     7_sibling_dir      contained\n      log: Extracting resource pack from Minecraft 7_sibling_dir.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     8_prefixed_dotdot  ESCAPED -> /run/extractMinecraft/ESCAPED_8.txt\n      log: Extracting resource pack from Minecraft 8_prefixed_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Extracting assets/minecraft/../../../../ESCAPED_8.txt\n  extractMinecraft     6_benign_control   control file extracted: True\n      log: Extracting resource pack from Minecraft 6_benign_control.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Extracting assets/minecraft/ok.txt\nRESULT {\"compiled\": true, \"attacks\": {\"1_plain_dotdot\": true, \"2_nested_dotdot\": false, \"3_deep_dotdot\": true, \"4_absolute_path\": false, \"5_backslash\": false, \"7_sibling_dir\": true, \"8_prefixed_dotdot\": true}, \"control_ok\": true, \"modified\": [], \"skipped\": null, \"notes\": \"tested cz.speedy11.mcrpx.common.util.ZipUtil: extractZip, extractMinecraft\"}"
+  },
+  "patched_source": {
+   "file": "patched_source.java",
+   "sha256": "816a1b0b64478ea60d83e8eb40e572157072d80e1577ba06ca80c60a737fbca6",
+   "label": "safe",
+   "result": {
+    "compiled": true,
+    "attacks": {
+     "1_plain_dotdot": false,
+     "2_nested_dotdot": false,
+     "3_deep_dotdot": false,
+     "4_absolute_path": false,
+     "5_backslash": false,
+     "7_sibling_dir": false,
+     "8_prefixed_dotdot": false
+    },
+    "control_ok": true,
+    "modified": [],
+    "skipped": null,
+    "notes": "tested cz.speedy11.mcrpx.common.util.ZipUtil: extractZip, extractMinecraft"
+   },
+   "verdict": "blocked every attack",
+   "matches_label": true,
+   "exit_code": 0,
+   "log_tail": "ir      contained\n      log: Extracting resource pack 7_sibling_dir.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractZip           8_prefixed_dotdot  contained\n      log: Extracting resource pack 8_prefixed_dotdot.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractZip           6_benign_control   control file extracted: True\n      log: Extracting resource pack 6_benign_control.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractMinecraft     1_plain_dotdot     contained\n      log: Extracting resource pack from Minecraft 1_plain_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Skipping ../ESCAPED_1.txt: Invalid path\n  extractMinecraft     2_nested_dotdot    contained\n      log: Extracting resource pack from Minecraft 2_nested_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Skipping textures/../../ESCAPED_2.txt: Invalid path\n  extractMinecraft     3_deep_dotdot      contained\n      log: Extracting resource pack from Minecraft 3_deep_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Skipping ../../outside/ESCAPED_3.txt: Invalid path\n  extractMinecraft     4_absolute_path    contained\n      log: Extracting resource pack from Minecraft 4_absolute_path.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     5_backslash        contained\n      log: Extracting resource pack from Minecraft 5_backslash.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Skipping ..\\ESCAPED_5.txt: Invalid path\n  extractMinecraft     7_sibling_dir      contained\n      log: Extracting resource pack from Minecraft 7_sibling_dir.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Skipping ../dest_evil/ESCAPED_7.txt: Invalid path\n  extractMinecraft     8_prefixed_dotdot  contained\n      log: Extracting resource pack from Minecraft 8_prefixed_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Skipping assets/minecraft/../../../../ESCAPED_8.txt: Invalid path\n  extractMinecraft     6_benign_control   control file extracted: True\n      log: Extracting resource pack from Minecraft 6_benign_control.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Extracting assets/minecraft/ok.txt\nRESULT {\"compiled\": true, \"attacks\": {\"1_plain_dotdot\": false, \"2_nested_dotdot\": false, \"3_deep_dotdot\": false, \"4_absolute_path\": false, \"5_backslash\": false, \"7_sibling_dir\": false, \"8_prefixed_dotdot\": false}, \"control_ok\": true, \"modified\": [], \"skipped\": null, \"notes\": \"tested cz.speedy11.mcrpx.common.util.ZipUtil: extractZip, extractMinecraft\"}"
+  },
+  "variant_vulnerable_01": {
+   "file": "variant_vulnerable_01.java",
+   "sha256": "7445043380c5e398e1fa6a98eab68a853a1c3766a926c16d6aaea6893770e3b2",
+   "label": "vulnerable",
+   "result": {
+    "compiled": false,
+    "attacks": {},
+    "control_ok": null,
+    "modified": [],
+    "skipped": null,
+    "notes": "javac failed: /tmp/w/src/cz/speedy11/mcrpx/common/util/ZipUtil.java:72: error: cannot find symbol"
+   },
+   "verdict": "did not compile / load",
+   "matches_label": false,
+   "exit_code": 0,
+   "log_tail": "/tmp/w/src/cz/speedy11/mcrpx/common/util/ZipUtil.java:72: error: cannot find symbol\n                    extractZip(file, destDirectory, listener);\n                    ^\n  symbol:   method extractZip(File,File,ExtractTaskListener)\n  location: class ZipUtil\n1 error\n\nRESULT {\"compiled\": false, \"attacks\": {}, \"control_ok\": null, \"modified\": [], \"skipped\": null, \"notes\": \"javac failed: /tmp/w/src/cz/speedy11/mcrpx/common/util/ZipUtil.java:72: error: cannot find symbol\"}"
+  },
+  "variant_vulnerable_02": {
+   "file": "variant_vulnerable_02.java",
+   "sha256": "eb503e243d32f7fc576f4571e1e3df86a54aaaaca0af657400868de511c15ae5",
+   "label": "vulnerable",
+   "result": {
+    "compiled": true,
+    "attacks": {
+     "1_plain_dotdot": true,
+     "2_nested_dotdot": false,
+     "3_deep_dotdot": true,
+     "4_absolute_path": false,
+     "5_backslash": false,
+     "7_sibling_dir": true,
+     "8_prefixed_dotdot": true
+    },
+    "control_ok": true,
+    "modified": [],
+    "skipped": null,
+    "notes": "tested cz.speedy11.mcrpx.common.util.ZipUtil: extractZip, extractMinecraft"
+   },
+   "verdict": "exploitable (4 attacks worked)",
+   "matches_label": true,
+   "exit_code": 0,
+   "log_tail": "_dir/dest_evil/ESCAPED_7.txt\n      log: Extracting resource pack 7_sibling_dir.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractZip           8_prefixed_dotdot  ESCAPED -> /run/extractZip/ESCAPED_8.txt\n      log: Extracting resource pack 8_prefixed_dotdot.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractZip           6_benign_control   control file extracted: True\n      log: Extracting resource pack 6_benign_control.zip to directory dest\n          log: Extracting pack.mcmeta\n          log: Extracting assets/minecraft/.keep\n  extractMinecraft     1_plain_dotdot     contained\n      log: Extracting resource pack from Minecraft 1_plain_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     2_nested_dotdot    contained\n      log: Extracting resource pack from Minecraft 2_nested_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     3_deep_dotdot      contained\n      log: Extracting resource pack from Minecraft 3_deep_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     4_absolute_path    contained\n      log: Extracting resource pack from Minecraft 4_absolute_path.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     5_backslash        contained\n      log: Extracting resource pack from Minecraft 5_backslash.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     7_sibling_dir      contained\n      log: Extracting resource pack from Minecraft 7_sibling_dir.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Successfully extracted 1 elements\n  extractMinecraft     8_prefixed_dotdot  ESCAPED -> /run/extractMinecraft/ESCAPED_8.txt\n      log: Extracting resource pack from Minecraft 8_prefixed_dotdot.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Extracting assets/minecraft/../../../../ESCAPED_8.txt\n  extractMinecraft     6_benign_control   control file extracted: True\n      log: Extracting resource pack from Minecraft 6_benign_control.zip to directory dest\n          log: Extracting assets/minecraft/.keep\n          log: Extracting assets/minecraft/ok.txt\nRESULT {\"compiled\": true, \"attacks\": {\"1_plain_dotdot\": true, \"2_nested_dotdot\": false, \"3_deep_dotdot\": true, \"4_absolute_path\": false, \"5_backslash\": false, \"7_sibling_dir\": true, \"8_prefixed_dotdot\": true}, \"control_ok\": true, \"modified\": [], \"skipped\": null, \"notes\": \"tested cz.speedy11.mcrpx.common.util.ZipUtil: extractZip, extractMinecraft\"}"
+  },
+  "variant_safe_01": {
+   "file": "variant_safe_01.java",
+   "sha256": "ae54ff51d449cb7694907b15aef43313c367b27d8d8c87e4c025ddb76e45a740",
+   "label": "safe",
+   "result": {
+    "compiled": true,
+    "attacks": {
+     "1_plain_dotdot": false,
+     "2_nested_dotdot": false,
+     "3_deep_dotdot": false,
+     "4_absolute_path": false,
+     "5_backslash": false,
+     "7_sibling_dir": false,
+     "8_prefixed_dotdot": false
+    },
+    "control_ok": true,
+    "modified": [
+     "added the missing import of ExtractTaskListener",
+     "filled in the omitted extractFile body with a plain file copy, so writes can be observed (path checks untouched)"
+    ],
+    "skipped": null,
+    "notes": "tested SafeZipExtractor: extractZip"
+   },
+   "verdict": "blocked every attack",
+   "matches_label": true,
+   "exit_code": 0,
+   "log_tail": "sample variant_safe_01.java as SafeZipExtractor; methods tested: extractZip\n  extractZip           1_plain_dotdot     contained\n      log: Skipping ../ESCAPED_1.txt: resolves outside destination directory\n          log: Successfully extracted 2 elements\n  extractZip           2_nested_dotdot    contained\n      log: Skipping textures/../../ESCAPED_2.txt: resolves outside destination directory\n          log: Successfully extracted 2 elements\n  extractZip           3_deep_dotdot      contained\n      log: Skipping ../../outside/ESCAPED_3.txt: resolves outside destination directory\n          log: Successfully extracted 2 elements\n  extractZip           4_absolute_path    contained\n      log: Successfully extracted 3 elements\n  extractZip           5_backslash        contained\n      log: Successfully extracted 3 elements\n  extractZip           7_sibling_dir      contained\n      log: Skipping ../dest_evil/ESCAPED_7.txt: resolves outside destination directory\n          log: Successfully extracted 2 elements\n  extractZip           8_prefixed_dotdot  contained\n      log: Skipping assets/minecraft/../../../../ESCAPED_8.txt: resolves outside destination directory\n          log: Successfully extracted 2 elements\n  extractZip           6_benign_control   control file extracted: True\n      log: Successfully extracted 3 elements\nRESULT {\"compiled\": true, \"attacks\": {\"1_plain_dotdot\": false, \"2_nested_dotdot\": false, \"3_deep_dotdot\": false, \"4_absolute_path\": false, \"5_backslash\": false, \"7_sibling_dir\": false, \"8_prefixed_dotdot\": false}, \"control_ok\": true, \"modified\": [\"added the missing import of ExtractTaskListener\", \"filled in the omitted extractFile body with a plain file copy, so writes can be observed (path checks untouched)\"], \"skipped\": null, \"notes\": \"tested SafeZipExtractor: extractZip\"}"
+  },
+  "benign_lookalike": {
+   "file": "benign_lookalike.java",
+   "sha256": "a81ff32fda20d041dac569d6af90c22985841687c886f2b4fc4a4fb51050b0f6",
+   "label": "safe",
+   "result": {
+    "compiled": false,
+    "attacks": {},
+    "control_ok": null,
+    "modified": [],
+    "skipped": "has no archive-extraction method (no method taking a zip file, a destination and a listener)",
+    "notes": ""
+   },
+   "verdict": "not testable: has no archive-extraction method (no method taking a zip file, a destination and a listener)",
+   "matches_label": false,
+   "exit_code": 0,
+   "log_tail": "RESULT {\"compiled\": false, \"attacks\": {}, \"control_ok\": null, \"modified\": [], \"skipped\": \"has no archive-extraction method (no method taking a zip file, a destination and a listener)\", \"notes\": \"\"}"
+  }
+ }
+}

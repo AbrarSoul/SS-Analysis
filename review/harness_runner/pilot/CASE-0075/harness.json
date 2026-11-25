@@ -1,0 +1,49 @@
+{
+  "contract": 1,
+  "case_id": "CASE-0075",
+  "title": "Zip slip: extract crafted archives and look for files written outside dest/",
+  "built_by": "R1 (Claude Code session), converted from the review kit's example harness",
+  "date": "2026-11-24",
+  "attacks": [
+    {
+      "id": "1_plain_dotdot",
+      "input": "../ESCAPED_1.txt",
+      "what": "plain parent-directory entry"
+    },
+    {
+      "id": "2_nested_dotdot",
+      "input": "textures/../../ESCAPED_2.txt",
+      "what": "traversal after a normal folder"
+    },
+    {
+      "id": "3_deep_dotdot",
+      "input": "../../outside/ESCAPED_3.txt",
+      "what": "two levels up, into a new folder"
+    },
+    {
+      "id": "4_absolute_path",
+      "input": "/tmp/ESCAPED_4.txt",
+      "what": "absolute path"
+    },
+    {
+      "id": "5_backslash",
+      "input": "..\\ESCAPED_5.txt",
+      "what": "Windows-style separator"
+    },
+    {
+      "id": "7_sibling_dir",
+      "input": "../dest_evil/ESCAPED_7.txt",
+      "what": "sibling folder sharing the dest prefix"
+    },
+    {
+      "id": "8_prefixed_dotdot",
+      "input": "assets/minecraft/../../../../ESCAPED_8.txt",
+      "what": "traversal hidden behind the assets/minecraft/ prefix that extractMinecraft looks for"
+    }
+  ],
+  "control": {
+    "id": "6_benign_control",
+    "input": "assets/minecraft/ok.txt"
+  },
+  "success_criterion": "An attack counts as exploited when its marker file exists anywhere outside that run's dest/ folder. Each attack runs in a fresh folder; extractZip and extractMinecraft (where present) are both tested."
+}
