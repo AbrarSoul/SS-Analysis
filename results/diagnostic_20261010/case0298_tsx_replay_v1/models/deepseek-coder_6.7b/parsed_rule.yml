@@ -1,0 +1,25 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: 'This rule detects the creation of a Twitter anchor element in JSX syntax.
+
+    The vulnerability is that the href attribute of the anchor element is set dynamically,
+    potentially leading to potential XSS vulnerabilities.
+
+    To fix it, ensure that the href attribute is set statically or securely.
+
+    '
+  metadata:
+    category: security
+    cwe:
+    - 79
+    owasp:
+    - A3
+    references: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: $JSX_EXPR[$A]($JSX_ATTRS)
+  pattern-not: $JSX_EXPR[$A]($JSX_ATTRS).children
+  severity: ERROR

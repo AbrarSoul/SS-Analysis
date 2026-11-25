@@ -1,0 +1,88 @@
+{
+  "created_utc": "2026-10-13T01:24:54.312911+00:00",
+  "known_reproductions": [
+    {
+      "case": "python_exception_binding",
+      "vulnerable_result": "ineligible",
+      "patched_result": "valid source unchanged"
+    },
+    {
+      "case": "javascript_default_scope",
+      "vulnerable_result": "ineligible",
+      "patched_result": "valid source unchanged"
+    },
+    {
+      "case": "typescript_typed_default",
+      "vulnerable_result": "ineligible"
+    }
+  ],
+  "coverage_counts": {
+    "total": 100,
+    "passed": 94,
+    "missed": 6,
+    "patched_findings": 0
+  },
+  "eligible_cases": [
+    "CASE-0046",
+    "CASE-0124",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0171",
+    "CASE-0173",
+    "CASE-0184",
+    "CASE-0222",
+    "CASE-0231",
+    "CASE-0276",
+    "CASE-0340"
+  ],
+  "failures": [
+    [
+      "qwen3-coder:30b",
+      "B",
+      1,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      2,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      3,
+      "CASE-0171"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      2,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0173"
+    ]
+  ],
+  "covered_accepted": 100,
+  "all_accepted": 195,
+  "uncovered_accepted": 95,
+  "prior_results_unchanged": true,
+  "previous_reviewed_inputs_changed": [
+    "pipeline/dev_probe.py",
+    "pipeline/tests/test_dev_probe.py"
+  ],
+  "tests": "32 probe tests passed in 0.71s; full suite not rerun by this review",
+  "model_calls": 0,
+  "semgrep_scans": 0,
+  "scope": "Known counterexamples closed; no exhaustive binding-form certification."
+}

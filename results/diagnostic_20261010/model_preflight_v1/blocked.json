@@ -1,0 +1,8 @@
+{
+  "reason": "GPTLAB_API_KEY unavailable; zero model calls made",
+  "created_utc": "2026-10-10T12:28:10.948817+00:00",
+  "model": "qwen3-coder:30b",
+  "runner_sha256": "4623f4d1c55c6e47470dc6b4c2abef5de83c065c28a52d49d41aacba7c05d481",
+  "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "semgrep_preflight_performed": false
+}

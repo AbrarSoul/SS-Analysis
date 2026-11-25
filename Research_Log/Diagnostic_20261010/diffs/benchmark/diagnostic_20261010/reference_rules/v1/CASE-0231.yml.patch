@@ -1,0 +1,21 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0231.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0231.yml
+@@ -0,0 +1,18 @@
++rules:
++- id: diagnostic-case-0231
++  message: Request-derived workflow filename reaches deletion
++  severity: WARNING
++  languages:
++  - python
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  mode: taint
++  pattern-sources:
++  - pattern: request.json
++  pattern-sinks:
++  - pattern: os.remove($PATH)
++  pattern-sanitizers:
++  - pattern: os.path.basename(...)
++  - pattern: _safe_workflow_name(...)

@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "python",
+    "vulnerable_function_sha256": "d44ea7cdd86beda9f408f6d45da005cadab48623ef325a78c84314e0f71d2b21",
+    "patched_function_sha256": "a7fc56b3b1c134b7f03512e21ee27ea6325aa6879d1ad29a774c27456364be31",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0124",
+      "language": "python",
+      "old_name": "sagemaker_dependency",
+      "new_name": "sagemaker_dependency_renamed",
+      "vulnerable_probe": "def capture_dependencies(requirements_path: str):\n    \"\"\"Placeholder docstring\"\"\"\n    logger.info(\"Capturing dependencies...\")\n\n    try:\n        import pigar\n\n        pigar.__version__  # pylint: disable=W0104\n    except ModuleNotFoundError:\n        logger.warning(\n            \"pigar module is not installed in python environment, \"\n            \"dependency generation may be incomplete\"\n            \"Checkout the instructions on the installation page of its repo: \"\n            \"https://github.com/damnever/pigar \"\n            \"And follow the ones that match your environment.\"\n            \"Please note that you may need to restart your runtime after installation.\"\n        )\n        import sagemaker\n\n        sagemaker_dependency_renamed = f\"{sagemaker.__package__}=={sagemaker.__version__}\"\n        with open(requirements_path, \"w\") as f:\n            f.write(sagemaker_dependency_renamed)\n        return\n\n    command = f\"pigar gen -f {Path(requirements_path)} {os.getcwd()}\"\n    logging.info(\"Running command %s\", command)\n\n    os.system(command)\n    logger.info(\"Dependencies captured successfully\")",
+      "patched_probe": "def capture_dependencies(requirements_path: str):\n    \"\"\"Placeholder docstring\"\"\"\n    logger.info(\"Capturing dependencies...\")\n\n    try:\n        import pigar\n\n        pigar.__version__  # pylint: disable=W0104\n    except ModuleNotFoundError:\n        logger.warning(\n            \"pigar module is not installed in python environment, \"\n            \"dependency generation may be incomplete\"\n            \"Checkout the instructions on the installation page of its repo: \"\n            \"https://github.com/damnever/pigar \"\n            \"And follow the ones that match your environment.\"\n            \"Please note that you may need to restart your runtime after installation.\"\n        )\n        import sagemaker\n\n        sagemaker_dependency_renamed = f\"{sagemaker.__package__}=={sagemaker.__version__}\"\n        with open(requirements_path, \"w\") as f:\n            f.write(sagemaker_dependency_renamed)\n        return\n\n    command = [\"pigar\", \"gen\", \"-f\", str(Path(requirements_path)), str(os.getcwd())]\n    logging.info(\"Running command: %s\", \" \".join(command))\n\n    subprocess.run(command, check=True, capture_output=True)\n    logger.info(\"Dependencies captured successfully\")",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "71f729af8f0e89640327079796cfff8083319dc8ca54e0cdf14fb536084a0e97"
+}

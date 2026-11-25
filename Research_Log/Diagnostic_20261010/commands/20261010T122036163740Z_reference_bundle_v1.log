@@ -1,0 +1,37 @@
+CASE-0323: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0276: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0221: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0134: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0136: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0220: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0340: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0238: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0193: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0124: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0063: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0184: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0173: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2}}
+CASE-0222: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0163: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2}}
+CASE-0171: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0046: {"reference": {"accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2}}
+CASE-0239: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2}}
+CASE-0235: {"reference": {"accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2}}
+CASE-0298: {"reference": {"accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2}}
+CASE-0116: {"reference": {"accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2}}
+CASE-0231: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+CASE-0339: {"reference": {"accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2}}
+CASE-0081: {"reference": {"accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2}}
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "reference": {
+      "accepted": 19,
+      "visible_correct": 19,
+      "complete_success": 12,
+      "hidden_positive_hits_all_requested": 35,
+      "expected_hidden_positives": 48
+    }
+  }
+}

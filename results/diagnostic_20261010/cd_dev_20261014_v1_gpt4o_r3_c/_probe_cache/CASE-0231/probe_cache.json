@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "python",
+    "vulnerable_function_sha256": "c6fc3f2af0fb9b27deced8e291f587d9f7c2d9bfbe21ef7f76cbaf1c8efa6ed9",
+    "patched_function_sha256": "ba007606850844a71ff136689f82550ebad66fa8fdc5e7f794d260d79ab83063",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0231",
+      "language": "python",
+      "old_name": "user_dir",
+      "new_name": "user_dir_renamed",
+      "vulnerable_probe": "def _delete_workflow() -> Response:\n    \"\"\"\n    Deletes a workflow JSON file from the user folder.\n    \"\"\"\n    user_login = session.get(\"user_login\", \"local_user\")\n    user_dir_renamed = os.path.join(_cache_dir, user_login)\n    if not os.path.exists(user_dir_renamed):\n        os.makedirs(user_dir_renamed)\n\n    data = request.json\n    filename = data.get(\"filename\")\n    if not filename:\n        return jsonify({\"error\": \"Filename is required\"})\n\n    filepath = os.path.join(user_dir_renamed, filename)\n    if not os.path.exists(filepath):\n        return jsonify({\"error\": \"File not found\"})\n\n    try:\n        os.remove(filepath)\n        return jsonify({\"message\": \"Workflow file deleted successfully\"})\n    except Exception as e:\n        return jsonify({\"error\": str(e)})",
+      "patched_probe": "def _delete_workflow() -> Response:\n    \"\"\"\n    Deletes a workflow JSON file from the user folder.\n    \"\"\"\n    user_login = session.get(\"user_login\", \"local_user\")\n    user_dir_renamed = os.path.join(_cache_dir, user_login)\n    if not os.path.exists(user_dir_renamed):\n        os.makedirs(user_dir_renamed)\n\n    data = request.json\n    filename = data.get(\"filename\")\n    if not filename:\n        return jsonify({\"error\": \"Filename is required\"})\n\n    if not filename.endswith(\".json\"):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"})\n\n    filename = os.path.basename(filename)\n\n    filepath = os.path.join(user_dir_renamed, filename)\n    if not os.path.exists(filepath):\n        return jsonify({\"error\": \"File not found\"})\n\n    try:\n        os.remove(filepath)\n        return jsonify({\"message\": \"Workflow file deleted successfully\"})\n    except Exception as e:\n        return jsonify({\"error\": str(e)})",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "9dbcf2d2b10f7de21498d99bb3f27090037efa8a611fc6a54461137a4e191793"
+}

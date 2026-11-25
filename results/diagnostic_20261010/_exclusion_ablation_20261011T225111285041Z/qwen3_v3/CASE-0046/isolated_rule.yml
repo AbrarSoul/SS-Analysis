@@ -1,0 +1,25 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  patterns:
+  - pattern: "if $KEY not in $LIST:\n    ...\n"
+  - pattern-inside: "for $KEY, $VALUE in $DICT.items():\n    ...\n"
+  languages:
+  - python
+  message: Detected insecure blacklist-based key filtering that is vulnerable to mass
+    assignment attacks. The code uses a blacklist (`dont_save_keys`) instead of a
+    whitelist (`allowed_keys`) to control which keys can be assigned, allowing attackers
+    to bypass restrictions by using keys not included in the blacklist. Fix by implementing
+    a whitelist approach where only explicitly allowed keys are permitted.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe:
+    - CWE-20
+    - CWE-94
+    owasp: A01:2021-Broken Access Control, A03:2021-Injection
+    references:
+    - https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A01_Broken_Access_Control
+    - https://owasp.org/www-community/attacks/Mass_assignment
+    technology:
+    - python

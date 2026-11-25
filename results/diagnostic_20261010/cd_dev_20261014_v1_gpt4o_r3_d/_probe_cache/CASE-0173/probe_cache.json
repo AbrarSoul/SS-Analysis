@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "typescript",
+    "vulnerable_function_sha256": "65218e04bfa72a587c6ca07ce8eccb7b42e10565551059904379adecd0969aa0",
+    "patched_function_sha256": "759fdc31b47ffcc0217183d54bb16cd5ee8466419a28a475e48d966463cd9267",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0173",
+      "language": "typescript",
+      "old_name": "key",
+      "new_name": "key_renamed",
+      "vulnerable_probe": "  const key_renamed = ASSET_MANIFEST[path] || path\n  if (!key_renamed) {\n    return null\n  }",
+      "patched_probe": "  const key_renamed = ASSET_MANIFEST[path]\n  if (!key_renamed) {\n    return null\n  }",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "f4a2de8866e427902447d052b91fafcb2c038629894c1bf0a997ac01c94d5ac4"
+}

@@ -1,0 +1,14 @@
+{
+  "model_tag": "gpt-4o",
+  "base_url": "https://api.openai.com/v1",
+  "temperature": 0.0,
+  "max_retries": 3,
+  "max_files_changed_configured": 1,
+  "max_files_changed_note": "NOT enforced by Autogrep itself -- see PINNED_CONFIG.md",
+  "prompt_variant": "autogrep_default",
+  "python_version": "3.14.4",
+  "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O",
+  "recorded_at": 1791575936.077635,
+  "semgrep_version": "1.140.0",
+  "autogrep_commit": "ace3c87a707a5b02632906b76195b6f97d411b8d"
+}

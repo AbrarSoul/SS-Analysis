@@ -1,0 +1,22 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  patterns:
+  - pattern: "if ($X.indexOf($Y) !== 0) {\n  ...\n}\n"
+  - pattern-not: "if ($X.indexOf($Y) !== 0) {\n    $RES.statusCode = 403;\n    $RES.end();\n\
+      \    return;\n}\n"
+  pattern-inside: "function $FUNC(...) {\n  ...\n  $REQ.url\n  ...\n}\n"
+  message: Path traversal vulnerability detected. The code checks if a pathname starts
+    with a public directory but does not properly validate or sanitize the input before
+    processing. This can allow attackers to access files outside the intended directory
+    by manipulating the request path. Ensure proper validation and sanitization of
+    user inputs before using them in file operations.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    category: security
+    cwe:
+    - CWE-22
+    technology:
+    - typescript

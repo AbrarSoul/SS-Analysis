@@ -1,0 +1,41 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/codegemma_7b__autogrep_default/raw/codegemma_7b__20260929T052727Z/CASE-0298.json",
+  "raw_response_sha256": "fcfad1a4455deb96939fd4667c225ff0d6aa00dc67e10eef7b12ed30e930106c",
+  "parsed_rule_sha256": "deeebb3458fdc45e065443cecaf12d73d346c74ee6a8147d2301fe6f4e388892",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

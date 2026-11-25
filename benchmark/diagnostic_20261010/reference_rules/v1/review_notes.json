@@ -1,0 +1,366 @@
+{
+  "authorship": "assistant after bundle inspection",
+  "purpose": "development diagnostics; no expert-ceiling claim",
+  "cases": [
+    {
+      "case_id": "CASE-0323",
+      "language": "javascript",
+      "rule_sha256": "63f8f72c7ab87e9158b3f9fb47c1fef4e4f04954d757af3168e2989ec0662193",
+      "rationale_and_limitations": "CKEditor allows script tags and wildcard attributes. Lexical configuration signature; requires review of editor filtering semantics and multiline/object rewrites.",
+      "bundle_sha256": {
+        "vulnerable_source": "1bf46195bb5fff90dfd11654098238a4f787e7f13acca9f9a133b88a45804c61",
+        "patched_source": "8fc2da1189276ad6f5e2d189522f7a7e9d238d5f0498868d9c93e67440d55fc7",
+        "variant_vulnerable_01": "9d6ad8cf6f29e149898b882969b9663b91bc7e0e04101b21a8ebbff322bcf7e7",
+        "variant_vulnerable_02": "eb677dd6f2d49664f020d3e696c0c59972c6fc5295861134251455f09bb5bf18",
+        "variant_safe_01": "a1557831c4c84819f24e014405d6ed67e10a0273c2fc0a3220d3516c7642b029",
+        "benign_lookalike": "77dc2e8e289d0e81ee6f66bfa0eb8a5b18b000ba6438477bc548ab18a99e52a0"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0276",
+      "language": "python",
+      "rule_sha256": "8c4d8f2fe0ad894e263a639635424e37472336df334c3b8d9c8b8f4e559241a2",
+      "rationale_and_limitations": "open_code selection omits SourcelessFileLoader. API-specific incomplete allowlist signature; does not prove the surrounding fallback is exploitable.",
+      "bundle_sha256": {
+        "vulnerable_source": "a97a03ea9f9d38d90c8a50942183382ff5a479e7c4c5163c2ac5bae3561444ae",
+        "patched_source": "9623292c307de38721ab92efcb2ba44bbb663f9140edd585aaf29179841f16a8",
+        "variant_vulnerable_01": "f90366f14ef86bab70b1087c2c5aa730e1b0a0ab770721d7be38fb76f71e2f26",
+        "variant_vulnerable_02": "a00a153fc4ca77527982985745572998886615fc58f0752cea29d2027763045b",
+        "variant_safe_01": "80be33cd6b5717246058244ff65edffa1bbd57ae9f1de3402a6cb8d6190fc2fc",
+        "benign_lookalike": "3a66c81149c4c1b13964d4714c3d8bb94a7c2eefc99bd107f50e9bffe57d7020"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0221",
+      "language": "java",
+      "rule_sha256": "01606f5e089d40f026b3d3d4e8908b5df6c4e445393df05bff945f3e7c84d085",
+      "rationale_and_limitations": "Netty header validation disabled by boolean constructor argument. Review whether upstream inputs are independently validated.",
+      "bundle_sha256": {
+        "vulnerable_source": "96a93ef66a2e02ffd7be4b16dde3db1314fd6dfc1f44116a6404ca9c1383862b",
+        "patched_source": "f6eccb5863308fb9d75ab30d8fcebd2a68293805153bf16399d865b65d3d5b01",
+        "variant_vulnerable_01": "53ffeb9d06a712c1cd069096fb8b395e2ea3d147cbf25896b1e6f4020158772a",
+        "variant_vulnerable_02": "f1c270165bd53a438fb72a6c9ca9a36f0690a56fbd732cb05eceee606178fa93",
+        "variant_safe_01": "22bef1d0f95507352739681b46d6ff8d9ec421076e607a9a40dfd6441a085a9f",
+        "benign_lookalike": "732c0425af91849b7156a534f5638013cfc09f369367f3185ca8ebabf705867d"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0134",
+      "language": "python",
+      "rule_sha256": "76046303b3eb153cf75dd3955f38ca1e619f14263457d0c99c73204844cfeff4",
+      "rationale_and_limitations": "Ambiguous nested repetition with an optional separator. Exact vulnerable regex fragment; data reachability and engine behavior are not established by this signature.",
+      "bundle_sha256": {
+        "vulnerable_source": "3d5250dc3942604da0dd3dc59f1c58d7c11ddfef58ab26b1124808b08164452d",
+        "patched_source": "66422cb9cbaa25f7768af076279dfac14321bf4a7a52b14809fcfe5764d8fe78",
+        "variant_vulnerable_01": "444917ebe689e78b1fc1525fa9310e6d778cc709aaa6525ac2a5bf1c7ec96279",
+        "variant_vulnerable_02": "5739b27d404e7e767d1a2578d591f65da84c5e509a734b3ad2dd7e73f077edb3",
+        "variant_safe_01": "66ac250576ec7e44885db51d49692f0c82ddf4671a9e7f0b79e3bab8e598a55b",
+        "benign_lookalike": "65de8a3da3fe83ef0c9a6afff3b5973ac226e01fab609ea95921d756529556ad"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0136",
+      "language": "java",
+      "rule_sha256": "2892ff22b558c08a0e8dd2286a76e8cd95f7016909323e0dcc5e48f3afa47a49",
+      "rationale_and_limitations": "Default-directory temporary-file creation replaced with Files API. Limited to two-argument calls; permissions, JDK behavior and directory guarantees need review.",
+      "bundle_sha256": {
+        "vulnerable_source": "2861ce68fae7747477b67017b0bfd34b74d460abbf4f383d9e7ba42f7a4d9b01",
+        "patched_source": "ee3624ba0bedf3b5c9b6edf7af638fea5e9b7f5707bbdbd00f013765f2ea2207",
+        "variant_vulnerable_01": "070003bf7af5ec3dfde910d421657a8498420463084c87463debaa063581b0ba",
+        "variant_vulnerable_02": "d74e2411a8d49c508999e243f10add0f06cc60a9ae1ce0a5690e2c81fefbcc65",
+        "variant_safe_01": "843d55aa2eff028ac67094f5983a70fa8e016b93e312fca43e7629976c2c261b",
+        "benign_lookalike": "98d6a90361ad179af1acfa00fbb29cabde9b78fab361480d33927b7a8d9987c6"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0220",
+      "language": "javascript",
+      "rule_sha256": "ebdbce96f32de4ccdc14bf75d2ad77d80ee79224fa879d745692b5d8dc234d9e",
+      "rationale_and_limitations": "Patch removes manually supplied transport headers. Browser/runtime restrictions may change the security interpretation; independent label review is especially important.",
+      "bundle_sha256": {
+        "vulnerable_source": "4ea6e5785572dca9b5cd25daeb954b47978e4ed298738389e40cf5589ae3347f",
+        "patched_source": "13c9c539030f70d1dd82d74b6b2b6dfa2a6ef747de53c12db9402615a3267e52",
+        "variant_vulnerable_01": "29bffe7db1d6e013359bd5beaf7fb04c8950415149e6b22ee94dff002f90aa07",
+        "variant_vulnerable_02": "60e0d036736af288dba490cadc454c256d8a1daf425de8b106554d4ba31f9641",
+        "variant_safe_01": "40c90284ce0dde21024269dd0112c5051621418e86b73a4c8568e2a4629dc301",
+        "benign_lookalike": "57f415e3177e823d8e8609d496a77e06a25714cb5018dc8c3b169e5811b686c9"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0340",
+      "language": "typescript",
+      "rule_sha256": "315270ef09f74ae5b8df61e2b2555d04ddd01b1cb4d95104f541eb8b785d1262",
+      "rationale_and_limitations": "Dynamic shell command versus argument-vector execFileSync. Constant exclusion is only an approximation; input validation and template matching require review.",
+      "bundle_sha256": {
+        "vulnerable_source": "7287e65bab1cc21fdc37449313762403211f6425916c01c00220c68af261e8c4",
+        "patched_source": "5ad89e44af65c7308c5c40460744f8a9a5ce84febc49809c822c5def8efd8381",
+        "variant_vulnerable_01": "f4b90cc368868a808fcbdceee15f296a03d960bfe8b5247ecf7b3daed5edc03e",
+        "variant_vulnerable_02": "6a40b3671b534bc5e679c64b4bcc13e9c7e13e36def7d43d939aebd502378943",
+        "variant_safe_01": "be58dbfb14849dc9b8f299f3e02bcf7fb150b679fd020968a29ae7e862ffa911",
+        "benign_lookalike": "c64b4f6a9ddf193190cc0ab5c8f61bf5e8f731f4e44ee7c7d6a90dbe3480ccbd"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0238",
+      "language": "typescript",
+      "rule_sha256": "ca4a03dd2f6f5e69d6f70013cd1040bc56208b599dfe47ae2e5dbea49e218fc5",
+      "rationale_and_limitations": "CSV formula injection without export-level escaping. Broad candidate does not recognize pre-sanitized cells or harmless data; false positives are expected and retained.",
+      "bundle_sha256": {
+        "vulnerable_source": "4927910dd941506d6acc3709ceb094296dc20f7207d82dfa9f7fa83df3dbdd32",
+        "patched_source": "61d4da8d16077cda4a6017f49c1ad01a185a76385ae2d4edca196969b942b034",
+        "variant_vulnerable_01": "a724bc82ec9acade8f4a3aa9356bbeb95d13467f97a890e6ebdcf4bfd69b84d2",
+        "variant_vulnerable_02": "e878d143b7536d8ce8945741a59d70faf76e532b35a0917772c19c8c7c298347",
+        "variant_safe_01": "cfb6dab7da6fc0417a8e0729594ab0ca502d44cc0065650931594560db53fdd7",
+        "benign_lookalike": "f1e47206d38cbd20adcfefbd5223dd76077f86dc348bf2b95194cb09cb4f0585"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0193",
+      "language": "java",
+      "rule_sha256": "663058c705535819e0f41daa3bf418d16461c9a3b3d3a4069f80f1031e0ec5dd",
+      "rationale_and_limitations": "Default XML parser without explicit external-entity restrictions. Does not model untrusted input or factory aliases; constant-XML benign input may be flagged.",
+      "bundle_sha256": {
+        "vulnerable_source": "e0c2b25eb5d9140bf1d14b2ca47b52be4576712a8e3bee743425e07e13f894b0",
+        "patched_source": "d85c426ef727e8aa497924543de8773bc3285fb35d04d517d989411be5b3b671",
+        "variant_vulnerable_01": "e27d8a39a2f53bf5e31d917e747a9220e604e429c0b944521928c45974a9ed2d",
+        "variant_vulnerable_02": "731cf558ab59a259c742ba3ebde9c7cbd078dbda833b2e722044f9fff7596888",
+        "variant_safe_01": "f55fe0bc6b6d6bee12e5bb829a53ab4b47d95ba31998554049d5f8027aff64c2",
+        "benign_lookalike": "1455cf1e7ebaa6f2c567f03764871e53e9096b4013aaaf087dd83aaaed31bf8b"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0124",
+      "language": "python",
+      "rule_sha256": "2d85615835d065aa37a79adc935e68c006a225e9540f266d84163aeab00a9866",
+      "rationale_and_limitations": "Function input reaches shell execution; integer conversion treated as a sanitizer. Check parameter-source coverage, string/list propagation and actual trust boundaries.",
+      "bundle_sha256": {
+        "vulnerable_source": "2f8c29cde2cf1b76c3d023fbd73ff9b9ebcec6ac01d524500d0bafef3afd87b2",
+        "patched_source": "d109b3b74c4e72f18a7b13f4c92f980ddbdfd9a187ffbc6360379be1ee661044",
+        "variant_vulnerable_01": "eb9bca3007b737394f4620fa5ea3c4c160b21070e4eacb4d00d4fa055e69779a",
+        "variant_vulnerable_02": "672553f7ef1e7150b38fff94b3f8b9abeadf1149463604f289ac9ad2f878a631",
+        "variant_safe_01": "968c6fc731ec6b2f5f2e29461034c39c91969bab316630026b897dc7fc4b586f",
+        "benign_lookalike": "0026dc8a99ee36deef7bc9f99c0d7e334b8ad22ba092f40ba31c7845f95af1b7"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0063",
+      "language": "javascript",
+      "rule_sha256": "518eac313b842a29fd007f7f13728b3709928668509a6ff14a0bd9d94ff9e3d3",
+      "rationale_and_limitations": "Overlapping repetitions in a data-URL regex. Lexical candidate lacks attacker-controlled-input analysis; the constant-input benign example is expected to expose this limitation.",
+      "bundle_sha256": {
+        "vulnerable_source": "d03310d0a5d5a8b6bf3190bcd5dab344a64ecb48aa23d1b861c16c8ce8b53292",
+        "patched_source": "1d9ee5c9ed66d7f39a86f38c2df3b9b976127ff9fc4b080cc2f609742f454746",
+        "variant_vulnerable_01": "e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090",
+        "variant_vulnerable_02": "32fbfb3adc888f8e57ece01d8e49b7b341b83cd93799f068d34d91bcf51e2cb3",
+        "variant_safe_01": "57e05c6cdd002fd74f43f61f5e705a23da6f5155ad2fb1e328d079e71ce6b074",
+        "benign_lookalike": "6d33caaaf449eb6fa8a7aec3cd8c205eb10eaadaddbce8c2f087b92a2d8f78df"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0184",
+      "language": "java",
+      "rule_sha256": "4a1bb085d1b784079a9e382ec68097a252f7c3bf823060f33ad017ed659076d2",
+      "rationale_and_limitations": "Temporary files may inherit unsuitable permissions. Broad candidate lacks private-directory reasoning and can flag safe calls; retained to identify context needed for an expert rule.",
+      "bundle_sha256": {
+        "vulnerable_source": "c21fb47a26cb910ee1c02a9211615273cad92481a68deb5bf207380170c05eca",
+        "patched_source": "15e3206c98ffa7939dbbdde7cedc0527b1d2a4f163e248b86376f0a694c41a7c",
+        "variant_vulnerable_01": "a2bad99b2d622e3ea07fe4e5f8b4aa79b5e5ebac27b69e23d2b73fbf4e6dd6a4",
+        "variant_vulnerable_02": "d88dc97eeb41f00e5250bcec04680f337b11d894ba8559336d80e70a3ab0666b",
+        "variant_safe_01": "1a2fa184f82765514a4d67288992f398d64cebe4131cfa701ba30281e81c62fa",
+        "benign_lookalike": "6f324fbf56d21694b2a4ee735995e242ba096f594745ff40ca4882cc30494e84"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0173",
+      "language": "typescript",
+      "rule_sha256": "6014fb74ba3bdbe0c69185ed036b9535e4e0da8d00d8a6816d6075d402c77e71",
+      "rationale_and_limitations": "Unknown manifest key falls back to the requested path itself. Relational pattern survives renaming/helper extraction but needs asset-serving context on other projects.",
+      "bundle_sha256": {
+        "vulnerable_source": "ed7fa0c3cf911aebef0b2259710af3d7dfc53e29f638bf88e2743a0914041ad5",
+        "patched_source": "35ec7619eec63023dfc3d65c9414b0cfc9314dabbb333743d418bd23c0c1a30c",
+        "variant_vulnerable_01": "e972fc0edbc7a12f8b9a9d48f06d814f5859af4d264431ca24b270109b853ebb",
+        "variant_vulnerable_02": "aa3758a5f401a390e1cba25f17830572ebd98213834edd01609c50ce4682ef89",
+        "variant_safe_01": "1e8a16b7f8f5dfa967c44728e2064d053de87870b33a859d6c8db7e02cd326d0",
+        "benign_lookalike": "5969146b3728fcb04558dbaa6cc62b3dad26a2b4b44528908cad411f269f66aa"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0222",
+      "language": "python",
+      "rule_sha256": "843100e81905a7ff4626d8fac76d981db7b3d1afda0e2c7cad98945c354e241d",
+      "rationale_and_limitations": "Requests certificate verification disabled at call or session level. Session assignment branch needs receiver-type/trust-boundary review outside this bundle.",
+      "bundle_sha256": {
+        "vulnerable_source": "937e53cd77a3ad0a3cd2e89211def65ed8d0c1ffe0365fc50fdaca09151c5b64",
+        "patched_source": "d78b54e5f670149f7f054260ad3db605d0c747d28b2828eecc8f91f0b2a60887",
+        "variant_vulnerable_01": "e2b45b0da753ba741176e3505f46b28db8d984ed982ce9d783d2eef99b269f92",
+        "variant_vulnerable_02": "e21393ce2082aa0a0fa13fdf73e42fb6a75a9fb2bd11faed7aabeaf12f32100c",
+        "variant_safe_01": "eb8187fb47f3cd2f375a19204cdb8ccc395bb61aca0e67e7c872f419f49637d6",
+        "benign_lookalike": "a0177951d0d201d89431e9b6e43c192845e51369d16ce557b19d3bc0df7b9388"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0163",
+      "language": "javascript",
+      "rule_sha256": "1cffac434a498e31c6c89ebb26415338afaae548dbdd8e2d72b285719da5a08b",
+      "rationale_and_limitations": "Git clone arguments lack option terminator. Does not yet recognize explicit leading-dash rejection, so safe-transform false positives are possible.",
+      "bundle_sha256": {
+        "vulnerable_source": "40e55a2ebf02415fb31b111fe7c10f6d3b184b8416eb6b1026254ea7a0efa9a5",
+        "patched_source": "af2341ab0803fcf565e07b591ee53eb7703fab8821c7a84fdee5c78b7a5a499a",
+        "variant_vulnerable_01": "587260819b23deae6e70506c119a6b827caec1441a313afdf681275828bf58b7",
+        "variant_vulnerable_02": "4cca8704a267792ca92c0420a3b47cb9420f5da9baac3d47b6b958509d3f8601",
+        "variant_safe_01": "96f4e3609d4439f734ee73e0be86b53cfb552b3cc58b98f322286eb75d625482",
+        "benign_lookalike": "1368c42cec4e0285e6484aa122a52803df7a202ee76e81810379078ee8d473fc"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0171",
+      "language": "java",
+      "rule_sha256": "9fc7f8648e7b5462f42c21e854043fbd806e6044eff5b3d110519b30c09a4903",
+      "rationale_and_limitations": "Dynamic input interpolated into Java regex. Pattern.quote and literal-prefix alternatives differ syntactically; trust of the interpolated value still requires review.",
+      "bundle_sha256": {
+        "vulnerable_source": "0f629f66cfcbe4700c393b835891c45a092b85f5824abb002a2f53b29eaf5671",
+        "patched_source": "632fd82cd9d40bf25cd577462ba00f194ea4e5dcfefb8c98354a8b4953d18e09",
+        "variant_vulnerable_01": "f32e6c1e5c037f3cee8f051f5cff46c4df212ff45758345c19c6f1d65cdd6190",
+        "variant_vulnerable_02": "f71263a700e8bbf88766155d526d9f8132bc8f95da2d982dcfe26887112a64d8",
+        "variant_safe_01": "0f44fd0bee23d7955b5d0d4848a2930812aa551c92132becb9d861edbf65d03d",
+        "benign_lookalike": "26a277ab130212d5e672e9a2082c93d09acb33683b25d67f503c1400e1629569"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0046",
+      "language": "python",
+      "rule_sha256": "6dadf995e22d4301a698be6c37e893142ddce7b448047d6a352e138f17060a31",
+      "rationale_and_limitations": "Mass assignment through per-key updates after blacklist filtering. Deliberately broad first pass; source trust, allowlist logic and destination privileges are unresolved.",
+      "bundle_sha256": {
+        "vulnerable_source": "bc5483b0b4890b44db85e238154d20050332ee18d2c06bca5fa476e0803a92f9",
+        "patched_source": "295215d6a6ec9f5b7197217ca2b8d397df8a501f1560bd6bc9e39df02a4978e7",
+        "variant_vulnerable_01": "47851cfd5be5d0dda714a1a7299dc323572a6c3f2a2d4c3b09b2eda5e73623ce",
+        "variant_vulnerable_02": "a89fbaf6b13bd7ed3da799772511b23a53c2ac0f1fef550ec5b974590602aeb6",
+        "variant_safe_01": "393fb07a03ed5ba861e8c56e387073238f495ba55a61aa2e4c4e71314b26d405",
+        "benign_lookalike": "8d3653f07d571b8b97c760de2ec21cd7d27a0eb26ddbcc2266f19df1c092ba2e"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0239",
+      "language": "javascript",
+      "rule_sha256": "e473b01673f4c26129ef2ab1f2c72517532bc6a953d848271b9139dfeecf5426",
+      "rationale_and_limitations": "Overlapping optional regex repetitions in hosted Git URL parsing. Signature detects the problematic fragment, not general ReDoS or exploit reachability.",
+      "bundle_sha256": {
+        "vulnerable_source": "e5b8f03df0f14afb00ba0ca7c82a6cdea76a12673b7d27ef93c93d5db91e3f00",
+        "patched_source": "519dbed3316df01a81732f519749fea55c8721316f317250c3f2ca7617cdb2fe",
+        "variant_vulnerable_01": "50f7c7b0668d73e8d35594a1b0495ebb598d23b3d7ba6ace4b556df2a1fda3e7",
+        "variant_vulnerable_02": "7a34ad46ef5856e90862b65d407c2d88a510b84bcbf86d1886b9b4e304855017",
+        "variant_safe_01": "3e031986327aeaa4fa5bcf5448657fc173adeb9509b66e67206fe75b0468645b",
+        "benign_lookalike": "b1f0ded8b78fc1b4f37153a8bf99a0e5538e497768b0417f1b652c018aaf4971"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0235",
+      "language": "typescript",
+      "rule_sha256": "14c736f73cc0b5b0fa00eb4a7393d8ba112cd681f39d0d6fd0d58d59825c7c08",
+      "rationale_and_limitations": "URL pathname joined into public directory. Candidate intentionally lacks post-join containment reasoning and may flag the original patched sample.",
+      "bundle_sha256": {
+        "vulnerable_source": "dc02c5db6957daba99442fda7ebadf78070809425350b081c5aad4f92b87ee9d",
+        "patched_source": "cc34482e5d64ac51fd09e36a591890da08b8534401a74fbadeb6258e3b2d23bb",
+        "variant_vulnerable_01": "35b8b09579436f2adb62fa4373b7902fdd3b8f7e63c6f587feb0439c5f064052",
+        "variant_vulnerable_02": "16830b9408655fa8ccefe30006959e9b32999ab55a34093f8250c623d3215206",
+        "variant_safe_01": "927bfd3b774079df2df1224ce2faf163681f91071f99e5e46f8329761f011c56",
+        "benign_lookalike": "4782b988d1e9b69fac23af258c477e8ed215c61ef2a1354b247813bd4c110073"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0298",
+      "language": "typescript",
+      "rule_sha256": "519be5ff38193d555115ff8339008b914621482ae581e4560563d9d94dab1168",
+      "rationale_and_limitations": "Raw interpolation into HTML href attribute. Does not distinguish previously escaped/trusted values; AST/dataflow generalization remains pending.",
+      "bundle_sha256": {
+        "vulnerable_source": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+        "patched_source": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37",
+        "variant_vulnerable_01": "34443a1bb436b02f61cebc53d7d923305b0657b34d407963337c3c663bd6bfe6",
+        "variant_vulnerable_02": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6",
+        "variant_safe_01": "3913dd6f0d7f1cea2f4f3a6c32ecb1ff28e5517f4d580579f7655f3fe8473f19",
+        "benign_lookalike": "c7c9530576f1842d5ce1c6987597885859085e6da0b7c830824c7b3d763727ab"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0116",
+      "language": "java",
+      "rule_sha256": "78ba1ac3ad9903ff1e90b4db2be5feb56eb8ee79cd75e42ae104befc6908ee08",
+      "rationale_and_limitations": "TLS socket handed to Thrift without demonstrated hostname verification. Broad candidate cannot establish absence of preceding checks and is expected to flag safe examples.",
+      "bundle_sha256": {
+        "vulnerable_source": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d",
+        "patched_source": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e",
+        "variant_vulnerable_01": "0b0b38757396b4c0a940c51b0e713d3f2370245cbc633a95c46760084578f767",
+        "variant_vulnerable_02": "201b9be20fb812ccb5e3fa44488cbd2c7fe8ae44e37f20ff4d7eb1d065804b32",
+        "variant_safe_01": "1f267c4315c8cb62960953a7eaea74a26a5ff5e67176caddc2ff418c3a9285e2",
+        "benign_lookalike": "4c40f086a14084615465fa318a04f52dc91e051d5301a4c3295f409652f7da1f"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0231",
+      "language": "python",
+      "rule_sha256": "cc7cdb31201242d3b7d7a71e9f8487e30e309f1e3a5ff86207c9029ce0e44302",
+      "rationale_and_limitations": "Request-derived workflow filename reaches deletion. Project-specific safe-helper summary was added after reading its basename/validation implementation; not an independently inferred sanitizer.",
+      "bundle_sha256": {
+        "vulnerable_source": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea",
+        "patched_source": "ffbd3796730e446c45e23e9550eb85077dba6b5212474efaf067c4a5701941d7",
+        "variant_vulnerable_01": "06fc66f9b92f1498cb89e22113bb6381985d05baaeaea907292bd4801b8a5eed",
+        "variant_vulnerable_02": "9a667fc163519cb3b497411f37bb81a336680e037b2de5a2db99aa2a5bec7285",
+        "variant_safe_01": "5247a68745f55f5b9cc94ac24d421d08a9f456f765fef5c95172c609ceaf3a5a",
+        "benign_lookalike": "d8ed43adfdb32057772eeb87476bd011e08220516f15abc9f5cbf7bd41d786ea"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0339",
+      "language": "javascript",
+      "rule_sha256": "c57900455a0194869471653763a738f2a5c34c5fd75fd3bc3bc4160db48f4465",
+      "rationale_and_limitations": "Regex-looking string is used as a literal replacement pattern. Exact signature preserves the known bug but is sensitive to quote/format changes.",
+      "bundle_sha256": {
+        "vulnerable_source": "53faa686f95dcd0fdc5eeec8368a710854d42d94416b4be3193733ab2e15809a",
+        "patched_source": "7bd19828db7b06dd55011bd79340e8e4a42873543f35d0bd84756ab0b1581f82",
+        "variant_vulnerable_01": "9b4f8267696d54111592abffa28a963224b91623eeaf36d7103be29be7184ba1",
+        "variant_vulnerable_02": "59295cb9ae4a13ecb906f73367f46cc3afed1ea7f98aed6ac0c07f5753bbd049",
+        "variant_safe_01": "184a97a86239434f4a7cfc77c11fefc523c64b8ae3219a68dcaf185e6a2e933d",
+        "benign_lookalike": "72f8a4498852ec5872b4e476a2c9f7b09b639d9cffd7de86e89f02e8e450571f"
+      },
+      "independent_review": "pending"
+    },
+    {
+      "case_id": "CASE-0081",
+      "language": "typescript",
+      "rule_sha256": "d84b59745128d54ba4c00d9f8d239985e00d5bcb671bf3c0044673b6eb79f24a",
+      "rationale_and_limitations": "Unescaped environment assignment inserted by string replacement. First-pass sink signature lacks provenance and escaping analysis; lambda replacement is excluded syntactically only.",
+      "bundle_sha256": {
+        "vulnerable_source": "55e9ec5c0031da0f0f9823d9f9a3e7411291725778ea8a3c871142f8787a2977",
+        "patched_source": "2e90ea3c0b159a6e76bfbf6c79bef89509f2dd095727adda5b35067ba0a42a39",
+        "variant_vulnerable_01": "483c9e464331119013175badec637fdcd4521e8beaced6930ca05f35c2e7fed6",
+        "variant_vulnerable_02": "2b599164d2348fe91e266ad037f527bd81116a35c563d6b0fea9c487261d174b",
+        "variant_safe_01": "0f41363c483c3c60da595c8802e21cc42b8d22fb5565fcdff03517f273e5a405",
+        "benign_lookalike": "18956d3736025e4ea6d4523e770694fe980f1a3099bb38c25a3ef8009c2bf40e"
+      },
+      "independent_review": "pending"
+    }
+  ]
+}

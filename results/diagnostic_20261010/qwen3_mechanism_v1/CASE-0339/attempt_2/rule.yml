@@ -1,0 +1,20 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  patterns:
+  - pattern: $RESULT.$FIELD.replace(/[<{}]/g, ...)
+  - pattern-inside: "function $FUNC(...) {\n  ...\n  $RESULT = {...};\n  ...\n}\n"
+  message: Potential XSS vulnerability due to unsafe HTML character escaping. The
+    regex pattern /[<{}]/g is missing the '/' character which should be escaped to
+    prevent XSS attacks in highlighted note path titles. This allows malicious input
+    to inject HTML or script content.
+  severity: ERROR
+  languages:
+  - javascript
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe:
+    - 79
+    technology:
+    - javascript
+  pattern-not: $RESULT.$FIELD.replace(/[<{}\/]/g, ...)

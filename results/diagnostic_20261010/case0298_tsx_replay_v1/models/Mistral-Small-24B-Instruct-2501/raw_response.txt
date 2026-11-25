@@ -1,0 +1,24 @@
+```yaml
+rules:
+  - id: "vuln-notesnook-e87f5e5f"
+    pattern: |
+      const $VAR = document.createElement("a");
+      $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;
+      ...
+      <p lang="en" dir="ltr"><a href="${$SRC}?ref_src=twsrc%5Etfw"></a></blockquote>
+    pattern-not: |
+      const $VAR = document.createElement("a");
+      $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;
+      ...
+      <p lang="en" dir="ltr">${$VAR.outerHTML}</p></blockquote>
+    languages: ["typescript"]
+    message: |
+      The code constructs an anchor element with a URL containing user input without proper sanitization. This can lead to Cross-Site Scripting (XSS) vulnerabilities if the user input is not properly validated or escaped. To fix this, use a safe method to construct the anchor element and ensure that any user input is properly sanitized.
+    severity: ERROR
+    metadata:
+      source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+      category: security
+      cwe: [CWE-79]
+      owasp: [A7:2017 - Cross-Site Scripting (XSS)]
+      references: [OWASP XSS Prevention Cheat Sheet]
+      technology: [typescript]

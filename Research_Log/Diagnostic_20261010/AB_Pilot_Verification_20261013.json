@@ -1,0 +1,2414 @@
+{
+  "verified_utc": "2026-10-12T22:49:04.887707+00:00",
+  "per_run": [
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "input_tokens": 33817,
+      "output_tokens": 10893,
+      "generation_seconds": 101.56653120700867,
+      "calls": 36,
+      "accepted": 18,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 6,
+      "iterative_evaluated": 18,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 6,
+      "unaccepted": 6
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "input_tokens": 47297,
+      "output_tokens": 11006,
+      "generation_seconds": 99.33351587501966,
+      "calls": 45,
+      "accepted": 15,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 6,
+      "first_parsed_and_scan_ok": 18,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 6,
+      "raw_complete_success": 5,
+      "iterative_evaluated": 15,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 7,
+      "unaccepted": 9
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "input_tokens": 44426,
+      "output_tokens": 7505,
+      "generation_seconds": 71.26119950300563,
+      "calls": 43,
+      "accepted": 15,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 4,
+      "iterative_evaluated": 15,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 5,
+      "unaccepted": 9
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "input_tokens": 39284,
+      "output_tokens": 9790,
+      "generation_seconds": 86.3998067089924,
+      "calls": 41,
+      "accepted": 16,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 2,
+      "first_parsed_and_scan_ok": 22,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 2,
+      "raw_complete_success": 6,
+      "iterative_evaluated": 16,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 6,
+      "unaccepted": 8
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "input_tokens": 38016,
+      "output_tokens": 9616,
+      "generation_seconds": 86.11863387397534,
+      "calls": 40,
+      "accepted": 16,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 5,
+      "iterative_evaluated": 16,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 5,
+      "unaccepted": 8
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "input_tokens": 43450,
+      "output_tokens": 7308,
+      "generation_seconds": 67.89869966400875,
+      "calls": 42,
+      "accepted": 15,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 5,
+      "iterative_evaluated": 15,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 5,
+      "unaccepted": 9
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "input_tokens": 46698,
+      "output_tokens": 10759,
+      "generation_seconds": 127.52292158200362,
+      "calls": 44,
+      "accepted": 16,
+      "first_unparsed": 1,
+      "first_visible_scan_errors": 6,
+      "first_parsed_and_scan_ok": 17,
+      "raw_evaluated": 23,
+      "raw_scan_errors": 6,
+      "raw_complete_success": 5,
+      "iterative_evaluated": 16,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 7,
+      "unaccepted": 8
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "input_tokens": 33612,
+      "output_tokens": 10894,
+      "generation_seconds": 87.24921262200951,
+      "calls": 36,
+      "accepted": 18,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 6,
+      "iterative_evaluated": 18,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 6,
+      "unaccepted": 6
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "input_tokens": 33817,
+      "output_tokens": 10913,
+      "generation_seconds": 88.78820595599245,
+      "calls": 36,
+      "accepted": 18,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 6,
+      "iterative_evaluated": 18,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 6,
+      "unaccepted": 6
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "input_tokens": 44921,
+      "output_tokens": 10480,
+      "generation_seconds": 84.40884704500422,
+      "calls": 43,
+      "accepted": 16,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 6,
+      "first_parsed_and_scan_ok": 18,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 6,
+      "raw_complete_success": 6,
+      "iterative_evaluated": 16,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 7,
+      "unaccepted": 8
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "input_tokens": 41495,
+      "output_tokens": 6835,
+      "generation_seconds": 66.18679596201036,
+      "calls": 40,
+      "accepted": 16,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 7,
+      "iterative_evaluated": 16,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 7,
+      "unaccepted": 8
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "input_tokens": 38016,
+      "output_tokens": 9458,
+      "generation_seconds": 93.58991991699804,
+      "calls": 40,
+      "accepted": 16,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 1,
+      "first_parsed_and_scan_ok": 23,
+      "raw_evaluated": 24,
+      "raw_scan_errors": 1,
+      "raw_complete_success": 5,
+      "iterative_evaluated": 16,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 5,
+      "unaccepted": 8
+    }
+  ],
+  "group_totals": [
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "input_tokens": 101246,
+      "output_tokens": 32700,
+      "generation_seconds": 277.6039497850106,
+      "calls": 108,
+      "accepted": 54,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 3,
+      "first_parsed_and_scan_ok": 69,
+      "raw_evaluated": 72,
+      "raw_scan_errors": 3,
+      "raw_complete_success": 18,
+      "iterative_evaluated": 54,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 18,
+      "unaccepted": 18
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "input_tokens": 138916,
+      "output_tokens": 32245,
+      "generation_seconds": 311.2652845020275,
+      "calls": 132,
+      "accepted": 47,
+      "first_unparsed": 1,
+      "first_visible_scan_errors": 18,
+      "first_parsed_and_scan_ok": 53,
+      "raw_evaluated": 71,
+      "raw_scan_errors": 18,
+      "raw_complete_success": 16,
+      "iterative_evaluated": 47,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 21,
+      "unaccepted": 25
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "input_tokens": 129371,
+      "output_tokens": 21648,
+      "generation_seconds": 205.34669512902474,
+      "calls": 125,
+      "accepted": 46,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 3,
+      "first_parsed_and_scan_ok": 69,
+      "raw_evaluated": 72,
+      "raw_scan_errors": 3,
+      "raw_complete_success": 16,
+      "iterative_evaluated": 46,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 17,
+      "unaccepted": 26
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "input_tokens": 115316,
+      "output_tokens": 28864,
+      "generation_seconds": 266.1083604999658,
+      "calls": 121,
+      "accepted": 48,
+      "first_unparsed": 0,
+      "first_visible_scan_errors": 4,
+      "first_parsed_and_scan_ok": 68,
+      "raw_evaluated": 72,
+      "raw_scan_errors": 4,
+      "raw_complete_success": 16,
+      "iterative_evaluated": 48,
+      "iterative_scan_errors": 0,
+      "iterative_complete_success": 16,
+      "unaccepted": 24
+    }
+  ],
+  "paired_changes": [
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0063",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": -1.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0136",
+      "a_successes_of_3": 1,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.6666666666666666
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0220",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 1,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "mean_rate_delta": -0.6666666666666666
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0239",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 1,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "mean_rate_delta": 0.3333333333333333
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0276",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 1.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0340",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 1.0
+    }
+  ],
+  "all_case_rates": [
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0046",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0063",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": -1.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0081",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0116",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0124",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0134",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0136",
+      "a_successes_of_3": 1,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.6666666666666666
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0163",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0171",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0173",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0184",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0193",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0220",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 1,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "mean_rate_delta": -0.6666666666666666
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0221",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0222",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0231",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0235",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0238",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0239",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 1,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "mean_rate_delta": 0.3333333333333333
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0276",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 1.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0298",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0323",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0339",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "gpt-4o",
+      "case_id": "CASE-0340",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0046",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0063",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0081",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0116",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0124",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0134",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0136",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0163",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0171",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0173",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0184",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0193",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0220",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0221",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0222",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0231",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0235",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0238",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0239",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0276",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0298",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0323",
+      "a_successes_of_3": 3,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0339",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 0,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "mean_rate_delta": 0.0
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "case_id": "CASE-0340",
+      "a_successes_of_3": 0,
+      "b_successes_of_3": 3,
+      "a_by_repeat": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "b_by_repeat": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "mean_rate_delta": 1.0
+    }
+  ],
+  "first_attempt_errors": [
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0116",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_a.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)\n\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0063",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_b.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39:\n Invalid pattern for JavaScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nvar extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0116",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "socket.getSSLParameters();\n      socket.setSSLParameters(...)",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_b.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0193",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[1].pattern-not"
+      ],
+      "pattern_text": "DocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_b.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd:\n Invalid pattern for Java: Failure: no pattern found\n----- pattern -----\nDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0235",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[2].pattern-not"
+      ],
+      "pattern_text": "if (pathname.indexOf(publicDir) !== 0) {",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_b.CASE-0235.attempt_1.vuln-ws-scrcpy-e83cf654:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nif (pathname.indexOf(publicDir) !== 0) {\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern-either[0].pattern"
+      ],
+      "pattern_text": "const $VAR = \"<p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${...}?ref_src=twsrc%5Etfw\"></a></blockquote>\"",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = \"<p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${...}?ref_src=twsrc%5Etfw\"></a></blockquote>\"\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0323",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "div(embeddedContent,oembed-provider-*) script",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r1_b.CASE-0323.attempt_1.ckeditor-oembed-plugin-xss:\n Invalid pattern for JavaScript: Failure: no pattern found\n----- pattern -----\ndiv(embeddedContent,oembed-provider-*) script\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[1].pattern-not"
+      ],
+      "pattern_text": "const anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r1_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0193",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "$DBF = DocumentBuilderFactory.newInstance()\n...\n$DB = $DBF.newDocumentBuilder()",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r1_a.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$DBF = DocumentBuilderFactory.newInstance()\n...\n$DB = $DBF.newDocumentBuilder()\n\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r1_a.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `\n\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r2_a.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[1].pattern-not"
+      ],
+      "pattern_text": "const anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r2_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0063",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39:\n Invalid pattern for JavaScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nvar extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0116",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "socket.getSSLParameters();\n      socket.setSSLParameters(...)",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0173",
+      "stage": "response_decoder_or_schema",
+      "feedback": "Invalid typed rule: pattern_not must be a list of strings, got str"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0193",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[1].pattern-not"
+      ],
+      "pattern_text": "DocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd:\n Invalid pattern for Java: Failure: no pattern found\n----- pattern -----\nDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0235",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[2].pattern-not"
+      ],
+      "pattern_text": "if (pathname.indexOf(publicDir) !== 0) {",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0235.attempt_1.vuln-ws-scrcpy-e83cf654:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nif (pathname.indexOf(publicDir) !== 0) {\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern-either[0].pattern"
+      ],
+      "pattern_text": "const $VAR = \"<p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${...}?ref_src=twsrc%5Etfw\"></a></blockquote>\"",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = \"<p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${...}?ref_src=twsrc%5Etfw\"></a></blockquote>\"\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0323",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "div(embeddedContent,oembed-provider-*) script",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0323.attempt_1.ckeditor-oembed-plugin-xss:\n Invalid pattern for JavaScript: Failure: no pattern found\n----- pattern -----\ndiv(embeddedContent,oembed-provider-*) script\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0116",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_a.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)\n\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0116",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_a.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)\n\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0063",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "var extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39:\n Invalid pattern for JavaScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nvar extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0116",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "socket.getSSLParameters();\n      socket.setSSLParameters(...)",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0235",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[2].pattern-not"
+      ],
+      "pattern_text": "if (pathname.indexOf(publicDir) !== 0) {",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0235.attempt_1.vuln-ws-scrcpy-e83cf654:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nif (pathname.indexOf(publicDir) !== 0) {\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0238",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[1].pattern-inside"
+      ],
+      "pattern_text": "const data = Papaparse.unparse(",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0238.attempt_1.vuln-nocodb-079e3abe:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst data = Papaparse.unparse(\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0239",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern"
+      ],
+      "pattern_text": "var shortcutMatch = url.match(new RegExp\\('^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)'\\))",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0239.attempt_1.vuln-hosted-git-info-29adfe5e:\n Invalid pattern for JavaScript: Failure: no pattern found\n----- pattern -----\nvar shortcutMatch = url.match(new RegExp\\('^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)'\\))\n----- end pattern -----\n"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[0].pattern-either[0].pattern"
+      ],
+      "pattern_text": "const $VAR = document.createElement(\"a\");\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = document.createElement(\"a\");\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "patterns[1].pattern-not"
+      ],
+      "pattern_text": "const anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;\n----- end pattern -----\n"
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0298",
+      "stage": "semgrep_rule_parse",
+      "pattern_paths": [
+        "pattern"
+      ],
+      "pattern_text": "><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `",
+      "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_gpt4o_r3_a.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `\n\n----- end pattern -----\n"
+    }
+  ],
+  "total_calls": 486,
+  "episodes_verified": 288,
+  "allocation_inputs_unchanged": true,
+  "recorded_run_start_order_matches_allocation": true,
+  "reviewed_sha256": {
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0046/episode.json": "e38cdb47913c53f5405e73e2baced1034076e4e7e47c88e3316c3e2ba0b80691",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0046.json": "b5a3471c125a518fef4268cae972b1527bf85409f96d8024814f1db3d77e40ad",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0063/episode.json": "c44b770b13c20df5806259c9e702dd85ef0930df5694d3a436cbd4ff52a07775",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0063.json": "596ebc5bfb43758c76ecc2670c24453b90a13cd01ef49fe3bf6ca93f9b01780c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0081/episode.json": "2cf859620365bd7e7e08b01f9fc83c36ef5e993112f2af99ff239a1eb1e209ec",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0081.json": "917b2669aa7b34b2b62d2a60af0c173bc2e4982185efe4de8ecacef918cc8923",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0081_attempt2.json": "465b435366e4697eebe6d2544acda3b9758ded03b4a33ddb8f24fe0195cb089a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0081_attempt3.json": "2f9745aa0f3ac0fae7688e9ac0687555599475b2e0dcab5a289ac7387b636aaf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0116/episode.json": "fa0e2d065c8877095528fa3b89a0b121e55652f1dcbff30935449c19e48fadd7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0116.json": "5010be3132e5259c60245a7c3e366be652032ad603a73f2ee429280f42e3b351",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0116_attempt2.json": "e25b54c3fbb98fb9b36f85439b2206d17591b805a04f72b6bff96ae5b3ac0696",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0116_attempt3.json": "4984319d6a1cb25c10c115b9f264f349efc14ca517b2619c367f7462442ec948",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0124/episode.json": "7d240b2423bb7b6cc219f77fabfbb17000495068f363043533cb11d8ae834b5a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0124.json": "89f9d334a2c7b67583c9945159d6ad0ca53250dc5e0879c809cd2a429a1e1a30",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0134/episode.json": "4426d5fd51c978eb085e41a5de5839f349fbec950d93a5a6530330970d77ae98",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0134.json": "a8cf2527cb7cb824011b538fc6f403b923287a947e298b84264c7d86bafdec87",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0136/episode.json": "5a1e44bc0a19c99e6f51a0cd9fd3a3c2e561fb80b5102ddc74fa4d13a2857841",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0136.json": "49009b8232f82881b763e3de0a367e1429ef9e7b9c13e5f9d971155eb5fcfbdd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0163/episode.json": "d610268436572bc6e8617cb5cfa752734422a70df3dc92f0c5ec8ee3d3756ddc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0163.json": "7ddaddbe12426e4b1397ca08ef84fca3b6055b0de70c7fff233e835f8804e418",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0171/episode.json": "66c2dbdf2d157be0ee69264dff586a65f0e80de4dff00c48a3b7986aaaef7818",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0171.json": "fe5124768ad908d1352ce62a2a778716e11f9d2676002cead0ef45f39f2ade30",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0173/episode.json": "ed2f00c77d1b141e68f05e41d18e4dbca80a88853599f1b277963fa3504c8372",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0173.json": "7dc4128843d4c1f7607050ba7406be88347168d09d68c756998e1dfb7ec3063c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0184/episode.json": "d987ffa5f3a6e766aa7268cc99c41cd0377f6fb3b7809fde06dcd2fb60ac67bb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0184.json": "3b99057a984b2e5284b0b25b0370256c669d79852ac309ddb2f3e294e9a4e2a3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0193/episode.json": "6b7e557e7020911b14d0a421a123df3713c7cb37d3f859be92e5f415d1d2c2c6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0193.json": "205cdb1bc64b0cce01b721008c32f27a149ea0355480906675d976e5142249af",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0220/episode.json": "35ba975bfab4c071e254c858ce3817fa48dcc0e40579e93cbee9eb812503fc74",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0220.json": "f529c8ca7cf67a00f416b3a765ab0072a4d04fc031f66dd55cacb6c9b2d65cbc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0221/episode.json": "c5f5119b72ef70b017808e96ab0bd3a096eb6338d8d60bc0386a410e2ceeebb7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0221.json": "917120191aa086103f736eb79a627fb2d0208c57699365f076df7af05f0dd6e4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0222/episode.json": "04907675bcfca2b38f136cf09f449966531e60103a52462d6b88d0591e91c3aa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0222.json": "319fc840780fb6294f46aa7e0cd54c6568b33a64aabc599444d0c4a96ed18842",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0231/episode.json": "e0cc446adc31b8b571a78431c478b38050637f22349f795653153e62f5482d0b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0231.json": "43fd80122442fbb16cab1936a6c64829434219786dacd6b21c9e5076188196fe",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0231_attempt2.json": "c06e34622ea521665e223858e69c4ab1665aa9505d684f797644559f4b22ed4a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0231_attempt3.json": "1c0f187f5a0b756f0a805e133d76201ee142f9da19b0f0781a45b7906f3d99fd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0235/episode.json": "0d59b85cce27d8de59c8b62b87770c3c1c4b631bdbf79036b2cbf56358f88bcf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0235.json": "bff4ce02b79bb15e4fdb1c372b664433058979a9db3b7ec44adc77467dce5d73",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0235_attempt2.json": "e547d9ee115df5ef41ff6575c850bff496bcd6602a58b3b943d4b69a1eb412fa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0235_attempt3.json": "8e9000b02bc059eb9e455b087ed2a67b30d04ddee74503e4d6a97edf9667fa4e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0238/episode.json": "15852910099a9c96bbc32c38311734699d096df1546452007e8c0a5adf88f864",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0238.json": "7e6e6368422a2298be11486053bc20286f90f884f2e1e3996ada14301ba89967",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0239/episode.json": "7e0beb321ffcc9e774d18ace8614abb23669167c8a3fc377f2e79f2b6a80e00e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0239.json": "b01f2bf12689ccd3857927e8e5cc9ba9e1cb1775660a87831441cfc34223c509",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0276/episode.json": "4a1d8f27e74de0edb6207214064a0ab13db98c65eaac7600771025cdb4fdbb5c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0276.json": "0f753cb6b19b1758363f162fc8e399c6af21aeb7f4d55ab216ac02015ed30f72",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0298/episode.json": "45897cff9deca0db74c1d4826cb8525c397803ba8eebbd879dde0fa8cda1ace5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0298.json": "8a2af28207de18d315236b1abd3a6a54d1222a8d10ee5c4ceb70d318624407a6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0298_attempt2.json": "9273959f32762a31b1aa3c2f475598f24a180e98d0a930ca6710005cb628e08f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0298_attempt3.json": "db4dd2b88e69d190a79f002d71a4841669877658179fd92d79ecc2e2ea752317",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0323/episode.json": "f85f040f4da8223aed2e4d34e99c6fe732f6631d392474d8bb360a824d97d81b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0323.json": "97bde6f3de7665df9ceda403306dbc54bd2dfd899966544a40a6af5864c274e2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0339/episode.json": "4e17369af26522b9fddb6e8c8bf43518f93270c84ddf2562beeb5b732d7a9de3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0339.json": "b3780b574a1d6c409045a504898da160c521b9a7f81027c2225b71e8fe6da358",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0339_attempt2.json": "43baec76143c6ab75c44a17eb3f597ba4de982a78f1e0aee8f0adca6cc5a0576",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw_retries/diagnostic/CASE-0339_attempt3.json": "b3b48f1268e31cd9471d587df202bee20a54284635f7a4e0620798247dc5d89b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0340/episode.json": "d50913551b75dca4009c7b0a0d0132999da8aa7fc32130236274009c470b89bc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/raw/diagnostic/CASE-0340.json": "1690763a27deb9e943bdf54a1f949180c0860fed69d0b952979857ee6969f634",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/environment.json": "97186db4702eb373404c510adc5b40875344ff2f14400b9120d45580ebd7e38e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/selection.json": "6083c54f04fd8342aeaa4019ab36e85e3483b8ded4d0ecfcb6e88e239909fb33",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/summary.json": "6a2fcf746fefa63c0c1fd3cb22e6d952b45326ffc94b5862591155a47bc29385",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0046/episode.json": "d845b7a056e72ded2e6314c3d01f43843f7766a2bd54edd28c6b2d77d08f1199",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0046.json": "da6603c455ead4d438b54ab461175c778ac4662bc86dfc5c3943631c14b34148",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0063/episode.json": "bd61b9ca0226e515356966b4d7b6a825cef8864aac1048ee7a4c114fbe35ebc2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0063.json": "0c8a81e40f0fe84519f2f936a29ee21484354dd5160735e0366cd5af8f117e7a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0063_attempt2.json": "9f0502e77b03b371cd1bffa810514b133170d857fdc9c5657ab6aaa5d9bc015a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0063_attempt3.json": "0938eacb5dc2d7f44399f937c174f270bd6ccba45c83e0166ad6bc6cf8983312",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0081/episode.json": "dbad68d4f0895d0b664a4fef8d7c0046f9136d62e9d69c9d9e6c3651568d2183",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0081.json": "7655e24524cc400f1652b05aef3624ef294a69fb617c8664c16e83f58cd02d90",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0081_attempt2.json": "7214bc297ffa2426133201e7b6f136edbb7059111dd92be47166f9c020758ed9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0081_attempt3.json": "3a4acc0fcc34c7b17763c94aa5894313e448cab97706006c456045be5401b383",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0116/episode.json": "a1cbb73e18b8d815eb42f7b691bab1128fa46b30a95c4c5708b24d4a52643d1f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0116.json": "ed5b05f5f962d432b74b2c359b1ebabbdacf09158ed38e0cd357799a98102184",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0116_attempt2.json": "6fdb81b7036e663c82a68c41a45f89695815b4338780abd741908c3d0d38bce7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0116_attempt3.json": "b9e4ba54a1af62c378f0069e1ef9158ff60a61da65ce67af2d6ead4caf78f044",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0124/episode.json": "5f11535f752b76441d756074dad74fb3c9492427a2b128c15386f7b6d0929a36",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0124.json": "c76c1e3eb26aa4b8fd0d60d1c6af189173f498760667474f5a477ce4e8a246e0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0134/episode.json": "f8c96f9adf760e30f7c66dc7bd131a6fd456835db90ddac604496f30d3b72141",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0134.json": "575442a8a8cc0f919677d42fa46561cd9305c7ce182c3c79668540b7822bb662",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0136/episode.json": "77310f38bea058e4665003e19285771457c2402488a302ef80c77e8b0d8e17f1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0136.json": "4aa324c747e0ddb8f14f087049091de212839325d75ab846ff95d8e7345bcfa2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0163/episode.json": "a6b7effe664e35b87f63a23b509f34d36132d7502aebe5a9f5d28b110e640a7a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0163.json": "8fd6fc4ef7b18c80f05ba7730fab9fd3ad41cde6b903791d08ab4fc198cc0394",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0171/episode.json": "a60c68962a23f0192de4153fc597479b1ebf9d249c13b0a75f396008fee85191",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0171.json": "472cc5372e1438627542cde006dc753caf34597ef13f165ed89e69808b5794bd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0173/episode.json": "7cec4195913c8d85d4ec9f4d07229b036489ff5d1ff07d2369d97bff49597537",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0173.json": "883f5b5acc4e8153f0ea3f07cf008efeb4b7cecdc2006fe1cb4455f0b7120bcc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0173_attempt2.json": "16236a1128395203ed0bbb8721d1684949d60dfe002c52eea088ec460adfc10a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0173_attempt3.json": "00aa54cc74e03e0c6b67e8d28285dcbb48279540f2870bc461113d46d81d0f93",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0184/episode.json": "15dc382c1be2bd6726dbd469017e46a31f406a4c71190ff712abce437e980dcf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0184.json": "6b595b4f2dc4dea1b22dc9e5739d2596631590a7c53a866a43999500fc48da46",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0193/episode.json": "d0c38f9a03119de378710a8958e1692ddb28e0f6e89ebaba7fd0880ffc88f473",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0193.json": "dd25d59624db366aaee9a2d504c9654477b3097214cad544b69f83fd24179938",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0193_attempt2.json": "98caeaeebbc17c335575b8bbc23c1b1dec4a63c6bc60dad77d2ac4da05d40e3c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0193_attempt3.json": "fe0c234bf42d39441a352819f5e64058f8daa0ea646ef456c8236fb0a1d80e97",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0220/episode.json": "22c3d4d9e75bf7b590690f0973af2238c9b016f403849e2c1f6e4a8fdc0e7177",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0220.json": "c8270ddd24d58ef22fb7faf407681bff3147f10104b1ece05685b3e9df754aba",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0220_attempt2.json": "96c04158575a2d566774410435cbc3ecc25cacd655181ca929e81645359833ed",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0221/episode.json": "3bbebf8a9b4ca4493a53de37723635121de89f0e69af15b308616a68fde85024",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0221.json": "80ff17518eccc04a1fa31a1111ee50c2acfdea329b263ea5ceddb0c6e5158050",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0222/episode.json": "26c02a4839c691889217b15a887775db835a97f0895cfab9fbd5695277ddc86f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0222.json": "a84aa7a770b8220c1593615c8c2abd268f5b63e7add7918da9f430e61476377b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0231/episode.json": "70b782df7b02d1d6b9d6e4f9b9c01b79d6699449aac38e0554b338afd186f825",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0231.json": "9f1d4b3ce6ac3257ed9072ed87be93ab07b6c6c0d2e46596337d4dd081efba81",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0231_attempt2.json": "c0f64ff0a9b7060f48821981d32515830adc4c3cbb6374ce3a7393c17e15b207",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0231_attempt3.json": "8a97d465443889dad504c97246b374037af731e25ea2ecc21a75b04bf4027eb9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0235/episode.json": "d0f058d5ec800e81af8672af2f10350245fc287dd9c59415e23d85c07c31c8b3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0235.json": "809833ad52120ab07fe32941a11429690abe4c9a8dc0bf38bbb14c140cfdf16c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0235_attempt2.json": "6fdf5f8a4072f0ae9c987730de24710b2fb116bfeb242bde4d4c33934d9cae4f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0235_attempt3.json": "665151bad2038bb15c2fb64bc093daf5d3247dbec5d1236a1acd9e38f373681e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0238/episode.json": "cac668a513fc57886350a473e96ce1f00981e9c992f28cbefe4137b2ebeb8dc7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0238.json": "f1fcd1ca346738e4ef002be7d3a767d41ef5a5a30311e1e62bb57ba5b1a540a1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0239/episode.json": "0d6096d2648ededf70a7adc6d9ac92afe494371934c276b03d4a2357f6fdacfc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0239.json": "f82ca9fcaf4998e5aabe5d55e86b1ae2208ce43f07922400d193c04d7c68d082",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0276/episode.json": "58e2b4a74e873636e24ddfabafa822054033f063d768076de8f21c3b7ac4a771",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0276.json": "2d89f34342e1082b1c2f409bbeeccb310a0f2082d5491d4f7b3a9cc236d37893",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0298/episode.json": "fc02a298783ad9254a2805160bb34dd389ad1b899be2f0817d7b70bb5cbf172f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0298.json": "1716e73defd923f6a02e7f1e9422bf72e89724c945d77c0905048841e2ff1eeb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0298_attempt2.json": "c06d2975266641a6a16dee18bb3623370a3a8e4eac9794e9b6ef7de8f0004d2c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0298_attempt3.json": "ea35f84ec5646bfdf2ce8eaa76490e948ea7df60864a775594e52a71544c4389",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0323/episode.json": "ee332f9c039e402c20cedafb32c76a051a1457bd30fde3c9c0910cb9baa24d24",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0323.json": "2ac75f6db4c7d7c7b48657f73921324bce00e6cae1455dcb56a7ac23df68b3dd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0323_attempt2.json": "12ce596933941f062381f460a2cd469414884566d3e00769ad0d3295ede73600",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0323_attempt3.json": "67b6b70e22bdc67cf33f9a6a80f0d968541d84d1928e46c05dcf74ba8cde5e4d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0339/episode.json": "305f34dc0c5314bdab6bcbd6f2f5b7ca4cc41426e00b2e97ec8c5218158736ff",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0339.json": "54bd8ebbce1965dfe4130581b4dcba9b059b446f98a78be5131397e6e69822bd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0339_attempt2.json": "901a4a166a5f300ae1976186831fd02dce24e0fe4c24462806d308b0d4288e53",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw_retries/diagnostic/CASE-0339_attempt3.json": "8c94ef9b596b1329133218b2d9c36762ea7d8211e164c4b8cafc75e347800f88",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0340/episode.json": "6c035c685395fe2ee5468fd1d48db35540b7687cf093753d13bb4c9e455f24d8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/raw/diagnostic/CASE-0340.json": "ff148218d39d4ab5a61deaea6ef530508139f89d4d5eed0184a9fa924b775377",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/environment.json": "20b8be16b8474e96bcb233ee094a4f4f27b435493dc28b51096f7ce3d2930d70",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/selection.json": "6083c54f04fd8342aeaa4019ab36e85e3483b8ded4d0ecfcb6e88e239909fb33",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/summary.json": "82ae8c05960d52936efbb5fcab6b88794d2e93ced5f99c0c41e74a560db6694d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0046/episode.json": "ed049959f3115e52b292c36433ba883b9228ce3acd93fcbb33a599f76720aea6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0046.json": "08a80f6e635f0069d3fecea5d68af8145933613497a002be3ef3168deaa6ce56",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0046_attempt2.json": "60601508a2d1236a45ff0da5aa15553c5b6a27d59f1e8936c1f78d0ecedb535a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0046_attempt3.json": "559936f5f0f2bb740b0b3b89e54ed998768969c819730f9baeb11a534a239be1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0063/episode.json": "333788fdbf1cb88619452542c37ee950541d8c9e36215588ffe1a44c36ede72d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0063.json": "c0aeeb07074b880bb9c59673c7f0d531084da986785d9b1ea94bd238c9edf116",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0081/episode.json": "509c189aba24e0abac9ec21068476e809e3446fe2ad9ce9cb876bf178e613355",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0081.json": "5675073409e79bf460711baccfc870e93fd77584cd2b03d6507294449f226179",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0116/episode.json": "4108e91715159e57356b16599bb0d56dfea50e299594fc1d1959951cd5a5dc0f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0116.json": "2a57d03c8a30020042323cdfd395530de3855dc01c898e00945851d084851f1b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0116_attempt2.json": "ec44f974e242ab113dcff5f4e95f0fded47b542743bda57873f15bb75976e450",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0116_attempt3.json": "d93d20b6aa6a9ed2e67a1c178863092e86aae9031836726946473d22581c79c2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0124/episode.json": "63a4735edc2196ec4d544513193545446c9a68526d41d3b805b4d2b078f492c5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0124.json": "04eec35152f7f82766dbb773d0b40b681fed2929993a6994f04e26687e60edb3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0134/episode.json": "bd05e2b4465fb33e24d70ef27ff80913f10f16a1f7130b51bb758b1fd0c02c38",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0134.json": "6a7d5e6e1027d44c4b9bba6f6f5de2396ebe804151f13ab4036c1987ee4f7dd8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0136/episode.json": "e8da33159cd15704b9baed75b579e89208bbaf738d6b4b7d4c0de8773208c99a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0136.json": "c39dbc9353e152aada39778f585c31ba6284ea30ee7e5433a7f9724996e86e90",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0163/episode.json": "19d0a0dc6906806664b43d0edf212775218c495ee93bba98d5ed514645d59574",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0163.json": "57e9db7f255d9e88ae78baccac3d34e1f75c837c7e5dfcfa41bfbc05e4c260ed",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0171/episode.json": "6a0627d6182ec3ee217f37415a30b13c644666c9ca0a6526e5896aaf5c6a972f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0171.json": "bf0f5bd0544041e0075d428160a49e87a9232b3e7e243436f15b76d1148f0bf0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0173/episode.json": "561cee9b6442b9245ff4ed69ac267c2c3949ade703703b5d0736f3f871557e88",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0173.json": "28442df09729f203bdff4a0b7651a88b5bcdf4a42f3be3e906de34fc5b492c55",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0184/episode.json": "590d8d424f9240ac2be4d80d62932a2263d68d6f07311a670f1db7aea60cf0a7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0184.json": "44c9d6a1376035e8274b3fd4eb279fdca44ca90374a0ccb9c0b8f2a5d283a149",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0184_attempt2.json": "37dd3bae07de115c1f950f382a1074149458000147e1d1a113d0aa12d536d33d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0184_attempt3.json": "cf27981bd2acf49af5b781e2f82e3fc20ebd4505c58c090f70c0481cad0a71a4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0193/episode.json": "bdc38330e325f207229ad79f0ebe1195298778d271f39eba5e2bb45fe0302360",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0193.json": "dea5e592bf36cd32521e5dd1d64d028b0d0cd70f7418589d0c2b5888ad41c1ea",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0193_attempt2.json": "1306a8936ec4f14d4d218aa519f44602a5b26e433347732b9e85c8cc1158edf0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0193_attempt3.json": "464144e7163ff1a36a4795650961b6cb01c9e9e388e1b983092de97ef8ec45c5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0220/episode.json": "a1fdb2d6e2ae1c1dfac27e0f9346e1dad183ceb8a8874b0666349f65a4aee834",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0220.json": "65c2370b0830362e83749ddc8660594331453da88994d69a61ac9fc0af744b6d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0220_attempt2.json": "50675f88508ec688a0a42c5d7d4b4d3f3e054064339f6fa6af5b79117c8b006e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0220_attempt3.json": "7d4d8723bf6946041fe174f4284c7fad3fb92131eac6ab8bb55700def923ae5e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0221/episode.json": "a88a345daa64c85332cd6da7b08c7ac2dc7964c9a40100eb8a33368b10b478af",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0221.json": "e8e44e16e6a44cd6bf8c1fdd52b2d1190d7bde9696b04057dad40563062887d4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0222/episode.json": "2e310bbcc3b424ae8ba409673ae98181175b12bc30b0699faa344b51460fd5cd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0222.json": "343f9a9222738b412074d63d8dad8d6ca4a47f5fdc6510e914082fbffb990d38",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0231/episode.json": "42f6251e680d730386163d0177259ee546729b9e1f6c9c1ae3696663c44d130e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0231.json": "6de6d23cc90090952e3127676078f71583b261da1009d743224dd16d7899268f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0231_attempt2.json": "7287eb9bb9273b885bc7edc230782a21e001ee4cbf96bab405c588fef90acfac",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0231_attempt3.json": "2b234f0a8614f22bc365117085110a6dfcdc8f8f95da9d2310ab5e35466fdb17",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0235/episode.json": "acc842cf58fdc3b18ecc5a4f835e53643abbdcf104b4de61dac0b08d496d15ec",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0235.json": "916fd48e63b0803d7f02cad08ef7255e33506de5e7ec34525c04fe57eb9deace",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0235_attempt2.json": "17496f9c2e12bf7ac8d5092aa37d9ba1a60c1dc3382ff5958c41a35b75d108e1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0235_attempt3.json": "82679f5e3b33b87acf9fccc3ffd01e92109ac209948383f78e0b2369396ed203",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0238/episode.json": "7a3b7b1a0d04cb974967fbdeba74092f6ca051057291f3001c66a137b6793798",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0238.json": "3f6aed89aaebcf78189b3e0e652455de708121c751a7bce68444e950a4e47830",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0239/episode.json": "d23584660365518dcf7c2c7efdcf93bb474b14cea01dd38cd224eb425cd068d4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0239.json": "cba544aa5998a1df9331aed6fd2348ca073e1396d807e190d3a9ce7108e43879",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0276/episode.json": "35a00e59a919e0a48c1309e399af8ccdeaebcbd0543db0d954d34174fae3c164",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0276.json": "960a06ce7482e7f5928ad55db7292dff14cc753eb40e8383dddd0bc22fffb546",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0298/episode.json": "5592d5630f28752a659667167973f416300dd39cf87682b6542b23f97b831d81",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0298.json": "c78ae15644e08062cb69814744918c745d1715f745b62995c14b27d8fbd4e22b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0298_attempt2.json": "532c79290e96e1646eb8c504ca096c4ad8a5925c8fcc79592a9f48b79af926a8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0298_attempt3.json": "5de658257fdd098b43027866e185340324e5e563f8e3029c0bc5d3d14cae5c51",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0323/episode.json": "4ae4ad265351ade0703416e828d3249edac4bb59acb12405081cf0df75b9b9cf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0323.json": "176445845a14063b7f5072194ce1882e676a2fd82d7697246d6b975e9f67b4a0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0323_attempt2.json": "a6fe346836b0ea76d2e9fa481d3a9b26f590dfff478f444cb5d2e177762cacaa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0339/episode.json": "2c876abc4334451dd7d658e3ad0e59eeaa4b9954a3027bf1530cb32d188c3337",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0339.json": "95d9e438bb8875c6bd14ded29afe8fd28f27a49c94e1a0813e92e8c2d17e07cd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0340/episode.json": "ad4aa015efd74299422044170faba486dac7c20138d01c8df577ecf969e57d0a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw/diagnostic/CASE-0340.json": "a33aa9bbcfe6302e740c3942e41653431e6a6816263b2d288eaf5f517fc35548",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0340_attempt2.json": "d3f78b8e0661135652c8e4f8ae0718da324242a4a940e819f6bc91103255fa46",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/raw_retries/diagnostic/CASE-0340_attempt3.json": "5bef361a4896b3ca51252f5715c6aac05ab22005f0e8c9e3a00690e8049756cc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/environment.json": "982de35f8e88b21697e038b95f03d423d44f894a4447701ba5696546bfa35556",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/selection.json": "6083c54f04fd8342aeaa4019ab36e85e3483b8ded4d0ecfcb6e88e239909fb33",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/summary.json": "c18db990da939c2ed3ea97f22dee00f1c93381305797476fbd37faa857de23df",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0046/episode.json": "4515ce08f78bfeb06dca90596358689780413db55a55bfd299a88e94787977ee",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0046.json": "2ae5cefe5c56a1e0be67d994c92a9427a17a640f3345c4d0b0853e1fc31e9403",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0046_attempt2.json": "d866c20ded81cdfa72fd3011b8e35d9356908fc411fe65b67ad6cf9501878854",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0046_attempt3.json": "a1946699d3278d7160897642b4d64c05ba7aa6bd555657afb2a34041698d2c0e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0063/episode.json": "bfae77d1a278bd8d966b6cd0431871957418ba0d515edea28755f6e2a25e4c18",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0063.json": "30191a2ae4994c133718f191cda402efa8224817b70c818f0191a85ab67d310e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0081/episode.json": "bb90358973110c73cc8ae15b2168ff22fcd7055478faa8d02f1f64fdf8c8fe0b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0081.json": "b6f260434b09183fb186f97dd7c8a25d1fd6c7e92b88282df9ce0c4d4756f24e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0116/episode.json": "7f20bb186174bdc5f31f7ed05669bbf684afe0f01216fad324190ef8c35835c6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0116.json": "e1fd816948c08d6a21c4cc072572463004c6e4b72a079f1f192b9f214672681b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0116_attempt2.json": "2ed04efd2748f25f60eb9c1b32993b9355085f1f0372ee479b585a791a44e69f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0116_attempt3.json": "c1907120d1575ad31a7470af32e78bc17c640002ec22a4d3de292c24349d12bf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0124/episode.json": "bf2d6b80a12ed4407aa3cdaec19e7a8c368abe252ef2c1ae307bdc4c3bbd9185",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0124.json": "65423ecbfe5717f64e8a5e7fa47bf6d22feac6a8bbda867fbe0d3c45cba56883",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0134/episode.json": "879e3aa4c2298a86e19c07c808e36d454da01f31872f0ff9569e4fedb201cc6b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0134.json": "2a06a19baf8ca3c03180c3758e80605d6d83fe2e23c67e09501b21581dbe140e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0136/episode.json": "e74479e6e0e87c4c7caa59e84c13cf04e3443d8d858a9e6141e470af0597e739",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0136.json": "853915001d2c22b3df4c486f435bf440b7499d68ae17ac4bd270ce0b604eda9a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0163/episode.json": "107a73f5d41670babd0737b5c43b2235a0d03b83f0ae1025d1bee6c24753a8ce",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0163.json": "07fef9219b059cc62328175b08ed3883370f41cfc54cb7222775588089768706",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0171/episode.json": "e801a54f575d91370e1c988323c94c37a89f078ece1bda59213f3828eb51bceb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0171.json": "2809380a0ca8c6541c3a6fe97a378dfd74e2b0f254ddf09de73691b3b5363145",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0173/episode.json": "318652775df635b0d611c6fe7007c8c0592bdbbb282e42b9ddcd125dcf3aa2ba",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0173.json": "0da293a6cd0f8fa0b7dc9d1a0209e57514ccb472323aa6c7b28b78c4a8c12c80",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0184/episode.json": "91d2bd25f2da30fb975992acadb37b41f4a327884e0d21f02438ca42137c5926",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0184.json": "32fcc347c5bf214f6ca841728e788631ae0c852a598c13c5bf4eb2b0f1c1f19d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0184_attempt2.json": "b89db6d4383040819676de70f45616ba5adf95a0edd110f988f1a3304cf089c9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0184_attempt3.json": "57a1dd3fdd4f57cc8e98db27ae20fecd672352e8188d6206f3c463b72057cdcb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0193/episode.json": "419803741ba33282abc4c62ed79372f17e6cb91b42db975d55890d8560c6ba76",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0193.json": "97df2cb4e5c18a48281aab36de64dfaaaba90c0fe6645e2c18ceb7f612ebc44a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0193_attempt2.json": "633a1862aa6630cfa72b2cd316e883c710dd5c8f292709960ec22cf0a4f1c53a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0193_attempt3.json": "9a3df8aa2bfc1b4f176ddfc7ecf35af6be0f61681b9d1987ef593bb50cc442ec",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0220/episode.json": "e1f4581003418b07cdb807e69a1f0c7ab9159f620d63460455e1243f363240d4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0220.json": "d8731c429085eba92eba946c1746170e43ce999da2cb05692d6dbeb0f84d3ab2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0221/episode.json": "56f32503f227528ab02365ef2cb777b2b45f762b73cacee23ccf3af064ffe969",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0221.json": "96b3b9d4b941bd10f2c596e30b9bd0945b29e95cddd7790ad1777a6ce7b78580",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0222/episode.json": "99daf19f806a1274552b6a33323319937841034c165588e26e6afcda8f82c134",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0222.json": "5997a3fef43202977b99870d4e69694cbe095a40f770f1d7c204478a96522cb9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0231/episode.json": "07956aee667f5a7d6f0c3b33e545a9d90f5a267ffe82eae16ea66835a5507d30",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0231.json": "eb5cea2d76c35056079ddfa8cfc709cfcc02c829a22f49b16db4d98c84aa562d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0231_attempt2.json": "a406b56dc8897522549714be914a08b0000409bc5281c44f7e368ac0fe23f0d6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0231_attempt3.json": "d0deebbd0b8bfb5e9f9813b72989baf6cf58a88e4fec5295f3ca29515c2ff821",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0235/episode.json": "46166ac6297587099924cb7edf1b866dee284a7d0b4c2e24d4417ea7233dbe0b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0235.json": "76b426ea40d2bb57e1c4eafeb23c4986b427d168533d693e642b9e3977efbcb6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0235_attempt2.json": "2380f56dbaefc023c6f2649669464a8a1b8df22a518928b1361124e54668a2ec",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0235_attempt3.json": "86fde9a3e2468acafabed5bf1c53099642257c9970b810a94cd07da8d7d91cf0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0238/episode.json": "79c72b829c3e6fac61fb9b8a642d9821a5b2dae1263366a5fa76599a5b538b43",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0238.json": "c56bace885ce258f51472c747d2769b070f465da05a4623312d1eea5c8237b9d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0239/episode.json": "e90ecb585566954ff83e1bdc63c289b45fca59c3ec431151ebdc5968318db1fb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0239.json": "2f3ca1a5987c62873ea3ea22114a8ab2c5ed4381d458dd89a20bba4ff168756e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0276/episode.json": "86880ff265ca2fc9f52a462e2c0f7c56508c29a33585d9fcb04f2ac4267f3cbd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0276.json": "c8e65c2b5b0223441e653c53ae5458ba038e49f15c35e9fc181f601c78158998",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0276_attempt2.json": "2b3e3c43e6c411acb37749d177d63addc9cc6f60850fcde5a036f52f37154aa1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0276_attempt3.json": "decd1d20387746845a1ed7eb4ac102a09b58441266c6577d65a4a2e79f7a3f1a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0298/episode.json": "a9a53de5ca441b5cf10713344308aa3591a8a89215d9f3cb2dfb9e37a92cf0a8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0298.json": "6bcc4c132221e954195610a99c075e229e9fb4d986cf747360e5494bd4d2af40",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0298_attempt2.json": "d75333728381d2529915be79e12aea163b69f6133d9c97bd4a5fb56e91933375",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0298_attempt3.json": "974fb5b4138b1880a8aba0503914598d3e04cdd6828b5d16f5868949142fa406",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0323/episode.json": "f13d3fd131acde55ed3046f97b0526512127e54a568481feebd0c728552c75a8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0323.json": "79dee9933a4712a8e96e5f2c13fcb5c12c5fdfca77ebd16d4f591a94ed9b8043",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0339/episode.json": "55d87f81e2a872a2014032dd840235a4b6782f597422af0e64c777443bcd4ff8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0339.json": "7115f727f855f991f29fb81e22bf81f5eed24f91b2633375af87b2111045328c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw_retries/diagnostic/CASE-0339_attempt2.json": "1771784186477f158589ddfb3f013227971ea14042633b76bdd9c827a2d7dcc2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0340/episode.json": "6113e5d3d21bf9909379c9e8bc6488197b6d4523357539fda40cbe41ab7080b4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/raw/diagnostic/CASE-0340.json": "bf87d0e69f37a1a1e0be9ff3035a3015875a9336dd76e2b9cf2d91e8db509220",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/environment.json": "159ce2eaa1a95f6667c91298efc73bfeb55368b5c490b41ce294356288263846",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/selection.json": "6083c54f04fd8342aeaa4019ab36e85e3483b8ded4d0ecfcb6e88e239909fb33",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/summary.json": "942b6e07bc30179b86384c3989cc5c3ebaf628d3cb58becf19c39a643dd9fe9a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0046/episode.json": "ac92291ab44aff01a2a4e1cb8acd4ae1cc0c5d4ca667680d95cebbcf3dbdae84",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0046.json": "cbb4e00dee2e680a5d07a214faf9f2d76a089585a6f11f08383ec280bd1dcd7a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0046_attempt2.json": "af7d601cfb48dee4cbf2ee0113057294a96b4c311d387db9a88677e898bdffb5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0046_attempt3.json": "9ad561b0c41eeb8df12a5855f94c9d67ef0adb6326e495fbb5b21ede668652d7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0063/episode.json": "7d222a11990193eb61258eaafb9e5337e7726b469e3cc19bcbb11283fa26fef3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0063.json": "56bc7f3461cbeba884ad4180614e39dcbf569033920591a86d834188961b0f04",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0081/episode.json": "1de5231e59cf901f75a483c283be1a6dd5b33cc466d74ee128bf22fd94ca62b8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0081.json": "d5f9d0b688941c2d77eec0cdf29204fe167eacd1c800bf1a6a6e5162ed2c25b5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0116/episode.json": "5a5cd46d60b8d05e25d9a873d80bac5cdf0cab43141c0d50a5e5d40915ebae50",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0116.json": "c25a339c9a979059e06000cc62fd66c127c9e821ed569121cf4844528b59d037",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0116_attempt2.json": "dcbedcfa75aa06006163b2127414ced556f2ecff985fd704ba4f071e0f2f1152",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0116_attempt3.json": "7f08de71a64914184a02baac519be054519983f6f0c011c0413e9ee94c5371bf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0124/episode.json": "852d87fce1a1041d63d886d27765d3bdfe69c5791adcf6481df042758ef90f1f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0124.json": "2e731aeb8e1399b5def8817cc30d5c6fc0858e66dadf6c78a6d0cdd2676de442",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0134/episode.json": "aaafc2e97b1b0a9befbfd7c77831affb40eef9bce2abaef27ea5dde5622c4cd1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0134.json": "f543ec745a983c28609bed170a201379e3a64ae8122c34de34d2eb9818477a1b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0136/episode.json": "f7a3bedf6084d442a8196e55ee1ae2bf9a3aecd1e71e10f0b4074621572dad60",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0136.json": "859ecfae484c1a9382164bc726eaaac1dd679b93a6d81bd95b43583f58524a2f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0163/episode.json": "7ce67930d404a07458f5b71032807a7eb18282efd70bbd37f6d484697cddde39",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0163.json": "cfa6a5cef5cb7981d71360a2881486f6a4779d4b74da922f5ca4b7bdeb3ec19e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0171/episode.json": "9eee83f17fd2f5054d9bfac85320e551303f314a8c563e52a870f18a847e8e8f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0171.json": "698b0717db085ffb9ef939497c031cc3cbbddca57b2d876c3cc403425c1a6ee5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0173/episode.json": "915a83879aafda616951a4e18db4e4244cd7a2adf5305eb5b82551f5a529ec1e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0173.json": "ad1cb92b5128b94324d3d46f8bff99171be82e02e3e292ad339f2fbcf9392cc4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0184/episode.json": "e4607c2224669d838c8ed3a184207edbe71926105c547381e297ecfe70df8747",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0184.json": "217f1af0729e878c6639612133850cee53e39de279e463e6bbb5086d1a2522b6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0184_attempt2.json": "053be48da96a05455a63af20f73c449db736b463546d0901b7fcc798e4408ef4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0184_attempt3.json": "3e66d12d89e14cf4a86dee2884f1fc23428898f019951a728343ba92072a44df",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0193/episode.json": "30f6d0f477459f9f64937efce975099bc8ea1392494f57af4bf426d65ccd2441",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0193.json": "fe7a1125b1d838a6dc47f844c50f625f4e0c0197005956bb9e8711305dd0ac4b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0193_attempt2.json": "9379ecfd6cbc60345647de6f31750de524dcaa9d9c10bc62845925ec0a651fcd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0193_attempt3.json": "5f4d6cc0b8a71d96b2d5f5018a995a13ba1ffd3576776846995fb402991e1256",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0220/episode.json": "fd562f60859ac55994d225ff3da258ece7914fa4a6b7bf855ad463cc88b170ff",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0220.json": "777a1a8ef344aac1ff489272441d98cd1db58dbe8782211efa290d0554624f1e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0221/episode.json": "a96cf04b3a1fb265b0d43778155ea2ad66639de305858daacc9bd35107a0d50e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0221.json": "dc21403aa1132fc2918a52a20d1b39f32e1546a5582e58b6dbd97d8dae49a302",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0222/episode.json": "7a073790fc2aa04253fc2b7c7478d4c859be21808f5b5cc5414c427381f0bafd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0222.json": "895ec94aa9499a407c038e7670c20ce361e33d0574ec333a314af9bac73aad53",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0231/episode.json": "6462d28b0b8c0d6a7d893eadd20315512049bfde0d6cf5e91fe8ad486b32b4e9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0231.json": "e2b2221af5f76e3de8441bb2cffbf55b68f7cd6c70eee92bfe7c5c5983427342",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0231_attempt2.json": "ef066823f53e47197affb85d798ee33300916160a46f2a079928696fc98a1d6b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0231_attempt3.json": "c44ee3eb3624ba0bc50393bddd6ee30d96dc07f4880ec09d864ada44c588d50d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0235/episode.json": "bed2971989244510692be1f29889bf5ce9e2bb31bbdedf24ca17dd447e6b0ee6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0235.json": "e2054d705850c0ecdab575eab5049801a1aef59e47f5f4889503b7e981bfec94",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0235_attempt2.json": "c7d1d0f6d5da9e130b57bb7fe6aede072e4b768875ba3311d9c85afe38e66ca5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0235_attempt3.json": "904da985e1fd79fd6b2fa63ce61af650a9fbe2805bb0d3840ac18d3bf84305cd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0238/episode.json": "3cd5ffd08f35373792ef8b6de353fd682f8dd095dab19a47e4f1d0d0804f013c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0238.json": "7eb0dad418af17343693af9c10648f21943aba5d3532a0041ee89ad20c8298c6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0239/episode.json": "9a7db915833ad2f912390092584b6c53a86ff5386a074b9f5fe7abd7922643a5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0239.json": "d820855b905641062aae402da92c7e3e01896332f7c6ad379ab75b711a7b599a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0276/episode.json": "6a9f723497b5a91056dddd083c9251b469eae240b4e1040674f204b5567232bd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0276.json": "ab67f768f7b4f743d044b968e5fb136fb62bd322bcc5f57cd107d59bcca3cd84",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0276_attempt2.json": "5f3af1f920638b39fc3e905d00928867434d57abcc207e894738278f65844fb5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0276_attempt3.json": "1c1e240a597d15a72875ef144dc0bab4d8dddb2108650b18a604cf869eb7b341",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0298/episode.json": "dfa3caf4ad166e552c00fd765b814deeb35002f41d7847d1163a51d36d927e64",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0298.json": "580ded50247e5f435516013c6d4789b75bf04053c44d85e72382ed7cc231574b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0298_attempt2.json": "a0bfc3da06c7c4fa039bedae3f82900f50ff9f49bf7551923127ef80859b3b39",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw_retries/diagnostic/CASE-0298_attempt3.json": "ce9e3fcaebad6dbf7312f33e4c0fe28c406e9577db3ffa048c49de7d8497bfc2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0323/episode.json": "c32ed8ef02dc659d1db0c733490230e22cb90f49cc0a1d70e9bb16e796027bf4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0323.json": "d3064a540a6f4f57576ca765f53a688aca9474b0ade02384f83c0eb48b1efcd4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0339/episode.json": "a8e5bf52c70efcf70486ba4a466de079486b2d8432daae6d34af922388901444",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0339.json": "e053aac4ab1ad96a0de4027d3b49dcc63ccaedf3f164315067f50543df51c0a1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0340/episode.json": "00f8ef7e486202fba1eda777875502fd0811138895f516f7911a61b6bfe69841",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/raw/diagnostic/CASE-0340.json": "cb21fa9742788a97b5d22f63ec62712bb041063629b4b0e9fe183429d7168668",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/environment.json": "246c24650792b09f40f6ea0feecdcfe1301bbf0b563ff5b71d36c76cf02d2ad8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/selection.json": "786f8c49b05503884e5ba1b488cae993a31b4849e80d2a6794264088da88a785",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/summary.json": "e4c9880e3ed319c4497aabc51c992fdb12658799c0eeaf3bb732464b9bce5a94",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0046/episode.json": "caf2cf6ec46eea2b0b8749fb1ed1226a0bf3192b94635c5b18bd1becbf0f0b65",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0046.json": "d5ad25c882283dee8136e59f394d5dcc0038766267926ec8f472ae6158cf15f7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0046_attempt2.json": "daadb0a73320a864d0933fe4bb0564141d9d244450e6601465b6ba3d5fbe4833",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0046_attempt3.json": "39b39bab3beef11ef584b5b70983f689a858568a7f4f47cd85e119e727093b27",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0063/episode.json": "c29c3d37419cd945a210c9d11e96012601487df9944ac9001c88e82a7e68de2c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0063.json": "66d28f1bdb3cf2dfdafa1e0c2eca5dc397ed9ece3353790f50614c23a974c731",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0081/episode.json": "ec5b23297d71cce469882b6544d942321c6fe8d2dc4535cbd7a7988bfd4641b6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0081.json": "f6cacfb962489759aedcab16abd243727b6ca19ec1b8b239b70ac93f00b74945",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0116/episode.json": "29edad961ac7eca11fab0037a2b282f5467bff9e804bc398368ef481852dc170",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0116.json": "c8e31d04e76beb604e83bfb1c69e26df27e06bbe016357ddf26d9ebddb310b23",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0116_attempt2.json": "9f30e29648b818cd62088da9fb0eee0f847d91b20604142c0af4be7e8b5c2352",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0116_attempt3.json": "398bc2e7102ac75693bef21358562989bc2b58b72766c699a98e51bd521762c2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0124/episode.json": "4674198f9cdbfd1b8a60170c78fb9b6a09aebc25b9c02afaeb4b3f0c16397387",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0124.json": "0a9575e43878ffa0dfa02681a12521303b767d7e2259e0d640ebe72da85b61b0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0134/episode.json": "a4ddb5ce921b262609bb1858c7816e66ee567e68f0985b6e420986361817c472",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0134.json": "bdb04ef936deb68eb31d5453ccea120b934f54276e9eb042d2958fec39fef850",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0136/episode.json": "a0f126ff1abea3d7b1c72ee15deeaef330ff3b4c48e7547f3f0332d59203bf11",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0136.json": "14ef9aae6d4a66c046fb8be8e7c8fd8a14c7fc0baa868b67da107d374023c044",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0163/episode.json": "9b4011a4d245ab1ad2a5f36583cc828ea977c87c2417b143cc2929818521700a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0163.json": "8ace6bd354da1cd4c5f826321ba2ceceb4c098c75645dd8ff0b17d2406d8e1bf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0171/episode.json": "7f732af784c857a79c776c06b1ea732e25f75ba07f064fff8cd033b5093c1ef9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0171.json": "1a1c500bda44dc202ebf247329e3f2f3649582a9ac3c952e0fd3411c6f0156ff",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0173/episode.json": "6080e1166656069fc722340b883c95700ad09871c2cf5363780f6aa193d1eef2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0173.json": "d9d76eac250390b961560d455dffadc0643a9bd415db6b3661614ee835fecb32",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0184/episode.json": "abb5fa4f1c9adcdf43284a888d0138e1b772c76223e1df9c08cd774db1bc164b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0184.json": "6610d9a8d8d7b9426fa91e85ef6d4a3150dae9e55827742552a6ec256da93829",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0184_attempt2.json": "5bdf31d533bfea2cd7462988d88823ab3668d564e5de86877940ceff7772d688",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0184_attempt3.json": "393ec3df4588babb2011e3ad8e0f95c2658a8cf9ce1af1f0d115a3849f902abd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0193/episode.json": "f647f3cbf093b4dd91f45608ff72e556621e2df89f85ec0b9676229717f8164d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0193.json": "f77c515d8872cd98d89ce160452b1b39055be4c62861684b97d46a25c179b321",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0193_attempt2.json": "249eccd84fade864bb2782e245c3a994c3710d4792c584825a25979a883eae01",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0193_attempt3.json": "afcdd833adbb1da71c0d63bd3c4e37823ccb3791a80e8ec834e8659c9de73b14",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0220/episode.json": "56a2e6a824f2b695f8d9cc481fe62b4a7e97bfeb4e78bf6eefae93b5001c9f34",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0220.json": "80ee5ccc71190e249cc8db8ee3f46e5df4e0911a7a3730449a7f3de5ac167bb2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0220_attempt2.json": "4294276de8125888b4b004195cb62481f5441de1eb5163e89fdcf07b90184c7d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0220_attempt3.json": "c2f80792a900f544fd8ef5e49c64654b60732475963ec5ed2cfd6c41b0229002",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0221/episode.json": "3004bae1bb65197689af04356cb0f441d74c2a55ef79d4e9b3c3a496c20f288b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0221.json": "2ee1589d3941565d06261ef659fa6607d126887c2e33e9ad1d4d92ac196f3e3e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0222/episode.json": "916c1a637832918709a7463908e646bce0d31d086336831b62765698ab594516",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0222.json": "970d51ff3045c06a76c344235f84174af00b84a3e50a6a6895383fa1919aeb8f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0231/episode.json": "6e3311ea2577c3597e6b2ad3973d50db1fd49c6f1be74216b21a97458f2a091e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0231.json": "9fc450f8c17997d20328892d2b30b7e40294dd7ff500ca5fc66004fdb63ffc55",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0231_attempt2.json": "93cab923d7dc3714b56a948afdb902b42572fbf3c1c322a6308270b10af10859",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0231_attempt3.json": "de878fec32b22c96753bab3ad1d9020a6bf9225f10eaab4915395d7232c14625",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0235/episode.json": "92422612706f39ccd9ecb362fdb5716f10cd2ac9eb24c54d94ff0e0836aa158f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0235.json": "66963b87253da047ffc5b5f1b58056dfacf316fcd21ceca84545941a0749f84a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0235_attempt2.json": "11ea41188be098f763afd95d8108a597c6fe54d2ca8127d0564d796dab74c9ef",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0235_attempt3.json": "7a43ad2af3918971e248702fd9208f5d3d60767eb06ca14172f5ffebdd70ea99",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0238/episode.json": "3f67cca431d453e37cb0a7c1c4a56154f4a1e90a1607b3923c46fd51d557bfcf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0238.json": "c17329515574dd9e10bdd5f4345523ce83ee235e190c16ef79870676aa4c7721",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0239/episode.json": "2f9fb01b7d24e3d1ed27cc71460d00211afe004829b9088ef457971b35e144b9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0239.json": "483fea7cd9235f04f47d7c58c8ec43fbdfdd2eed779d75926cd3d5a8c85a4ec2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0276/episode.json": "0b6bf8cf3071cec00b868418e8eab6f0b7668ed46a8a6617fe7b0cc49990cce3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0276.json": "e54f1c5e7f7decae4bd9b243c6c0d28c966689d7095ea04b1acd30b5c606f92a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0298/episode.json": "f479d36d9a479bac71624a8b9cd3f4a69fa59b39aaf311053e41c45aead11f65",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0298.json": "020cb7c6c2a5c86c1aa10397a37f235904703f949d956dbc4943dc714531efc4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0298_attempt2.json": "009c2794ff35c8513d0cb8b36892cdcda392af157e6ab5290ff730af8e062a89",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0298_attempt3.json": "5f8495dda0774b98f51a3c580de27377644355332d56d04d4607511f77eb0b16",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0323/episode.json": "2286ba5cbc3603ef1845ea3e8d5954a0d2c2b823bba0887b787e755888aa161a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0323.json": "41a4f35720fc76ecdb31667f034e79e2342130e943d84fcb8431b24b5c87d754",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0339/episode.json": "e26a1327801def6150cb850ff028511e5074d08cf61246d2e9e1c54bd4d10c29",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0339.json": "3d4b297179aad4570bd239801c24b10ed81260d89316674f54022e4f6c7a9b55",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0340/episode.json": "98ce354c70de39741cda7d4e02c72380da7859abac50899f999ba55ba46e8c45",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw/diagnostic/CASE-0340.json": "b6ff2391b1c48c1eb94555de62029a3c6c62c221c961773069755f22220470be",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0340_attempt2.json": "f7360b61d2b5a50766363ea4d677f06ac5c8b155c61316c4adf0e459946bbd7c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/raw_retries/diagnostic/CASE-0340_attempt3.json": "a9647b4cd9df024e163cf44d5b059abe8420b605ecfadca1fa46b7dab6721416",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/environment.json": "7c794b4d4793b7e9a5426cc9b7833dd5aa3bd8407988ee9155365c6d9cc0f76c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/selection.json": "786f8c49b05503884e5ba1b488cae993a31b4849e80d2a6794264088da88a785",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/summary.json": "73e6d389f9f7a6f769486a35b4f07f29474237e88659b7edc89cb50a9c27ff2a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0046/episode.json": "45734cdeb918bb9cb13c97824cd9b4bef2dc64fc39c763b3f609b5fdd83b74a0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0046.json": "32a6807af842fa1ae3b8b27655b38150fd59f1cb5cb347dfe9f7b6a45c911959",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0063/episode.json": "8bee9915658c3461f677d4e171c80d070f8c7dbdf3802f114ea01238a8444f1a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0063.json": "3091536ef4db5cc9b20636ded6cb8f72a45d45a6a0e6c5a6e917809293105985",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0063_attempt2.json": "3a6fbf75b145801ccb38e796bfc34a0e69c2a2b32b343867f85b323b1b8f99fc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0063_attempt3.json": "c0dcf9f6bd5ebc24f0a7d8d54cec62187d1275e02a16d74b0a03e19b1170bd74",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0081/episode.json": "9b346dcbbe892c7ac17be5fd54bfd9d293cdc8879ab167c82fec8b09e71e90ad",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0081.json": "c90fe718cc1e35ad512c769deaa161b42e1e6a81b79b804edfd04875be234ef8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0081_attempt2.json": "cf39553c7dce368b6b515761f59aa5ef9565af23512dae1dde70bdcdb9634e73",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0081_attempt3.json": "89e9d56dd2bb15d59dc52dc8fa993e0e8976cfe6a11a43ea1a5c353220569daa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0116/episode.json": "43c930e0f89c823f227dadd6b0051981e8d486ed9b0308accdd0f27b6c147a6b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0116.json": "90aad8d3cd327d4e3be8bbed91f2c28d9211a35677aef9f7be274ed93f6163f8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0116_attempt2.json": "fa01b3cd7a4b8ec181b1a4629a727463ea28020bbaa6bc96fb0d664bd73fcaad",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0116_attempt3.json": "0a02a233f1f355acb183068ec9c418d857f50cfbc7bc5484ad9d336931b09df9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0124/episode.json": "81738636147b797dc2a76c1dca07c181ec7e1e4eaf64a070dec22a12bb63f9c5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0124.json": "99ad503bcad301def5360bab0eb0bfb75630c87777397cec0a456cac010f651c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0134/episode.json": "088460d9e8d043550811eacc72a99f5d5465dd0d94aa78e3d3df9403ac89448d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0134.json": "50200c267598e1ed68426514c1504c8c0f72490617bd25e54d75d40e423ba5f8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0136/episode.json": "f9c81a37f31a1212c3f690bc2377e79df0f456b57d28d84bb0f2747e735216d9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0136.json": "a0221a672ff6aeae9283268458885205e481e18259e845f1367edf8e58b167cf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0163/episode.json": "ce341ec1f282b655b68a343f0982b3a6e61751cd1957350fe6c02258eb735f7f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0163.json": "c4412d08478cde56efeb19536d9999da4ef0e24d37f1c86613e9403a10e97c19",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0171/episode.json": "44f2d0b4e8e7ee00eae165718566b19b447815afdc6b735cde934fc7584590fd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0171.json": "11c5245d830540806bca310fa18eac92e816192479ed72d40e61326b288d8e2f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0173/episode.json": "116a4dfc3f4483b05de1fab7edfd2afca2c891b6c056fab460b51aafa32567b7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0173.json": "fa9c6f675b22366e5bfbb7b20744d0a4c8d1f970137c67c82684369b9bb57a05",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0173_attempt2.json": "80567340d1fc427d897a03e8a70deb659bf819cab3dc81bec30cba04c88ff191",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0184/episode.json": "86d39a51bae3a0f4b17b5bc5ee4f1ca362040fe8fdfe187d4e3ed02119f28eaf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0184.json": "6cf26c24bef2ca2b644efb252c3526c4dc5d16a393a3ac1f1c72f84462cd77bd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0193/episode.json": "6dedd96ef1e8eac82b880e4cb6167b3dc036e52585ee7d39fa21dac3ec50bbb6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0193.json": "785cf3bca77bc0be3403a0e27af065fdb4abee0df68ef9a894b86f86304caab2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0193_attempt2.json": "c40ce6819b263bb1e5d2801b9300de2f3463a481f41ef22905dbf157d098e0c7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0193_attempt3.json": "baaa6dad366b209c6e55e0c51182844f0422f59dd943c7cc88be2d7eb1f1a9f8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0220/episode.json": "3aaef5b85e301c3d05c85c440ddcf70eb6ff8bfe608c1cc3176756d829c27715",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0220.json": "5a5469b07cd3e46fa0eab822e88fd741eb7a4a799d67283d0545e6b35edf155b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0220_attempt2.json": "3350d5305bd992f9e0645716021fe0056f510d6e408352737f19d74d68d783d3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0221/episode.json": "06f614d615c90ab310a5bab75faee2623ad30e533feb513fdb51ac6e523c605c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0221.json": "99a25061e4babf3b4855e7ce97e39129071df700ab771403687935d42a75b081",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0222/episode.json": "17cfc7298b97bc9a779a44bbdbf30f7c17f87483cbe64a2423f3a3439f9e9e1f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0222.json": "7097d6a2fa8474dba0bd6889adecfabc6c82aae949dcf829eb69788427419a0e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0231/episode.json": "0c7b9cfc7943a36809709f3563b6c73886dccbf01479177e24762a6135c3864b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0231.json": "7d95439367d3deba1da5cf572911d83031d3cb0f8c110aff1fc6d902b490842a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0231_attempt2.json": "4d4d3802edfe76a83523408c1a48a376dfebaa12f12d7af3e9ac9ee1d0d0fed4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0231_attempt3.json": "4dedaa350de30192c322e7aae693922f3a8b85ac49cbd7d9ece8c6bacda0744e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0235/episode.json": "033207650f01a1b684c36beb21e98fb362213a0164af69e345e79e19bfee58f1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0235.json": "e54d2a234704153289a88a7cf337e21e6b661943102ecbbae79a1abcdc9b5603",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0235_attempt2.json": "22aaab701c628f8768adf05c0762c2daf0d5b1d2f3ad7d7fe547231ef262964d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0235_attempt3.json": "f22593477a2a4037c0b94f2cee5d16d89ada9753ec65a63b7b9a79a6a83edb06",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0238/episode.json": "6628f889bd4718c9a2e9fd86772b2cee8d5142755e87e57d7483ad359e7a35ec",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0238.json": "d3d32aa1f6fe9af73fd1c25c43c0d27cd3c4fdeb8dafb24d899e932fb83667a6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0239/episode.json": "5851ae7a6cec3b4a313d0a247767a310cf70864a56ea1535e7a9de34c298fb88",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0239.json": "45e57065e0cb7a59bbbb120ae31a9cdeb90149af0a36cc5c5142093ed4ea1d52",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0276/episode.json": "45a62cf0d1833b37db0725762b0fdf08344f9a775aa99d81b646bfb7102af33b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0276.json": "f16dbff3a541029c8d795017d3ae3be33dddfacca3f4f34919e35c69febbc5a9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0298/episode.json": "89bb406b5923a7a79b6e39afeae01f9c910553d1babccaeb122c6d2fbca24bd6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0298.json": "36d2af3e36880788708cc2484c82a64aa8fee63b39a7035918a1843070e290c0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0298_attempt2.json": "f3b3c529ee5a84a787356c7d5e293644041961ff5cc0df7f006325356ea94438",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0298_attempt3.json": "9dd0a3c99e0fdc279f5c28c79c7ba65643f144f7ba6e0c1c9c7a57ebcfe219fd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0323/episode.json": "c8bb7cbdd2d4a016a26c2068b99ee3adc07ec6f507d9da579460d47eee96cc8f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0323.json": "12a02bf245ace77f26924b97cd1b39e518227f494b8fcda05eb3ae87e4f427a0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0323_attempt2.json": "9c6a7e58c047ad5cb067991cdf742ed7cd3140080a2d077752152776b811611a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0323_attempt3.json": "97965d8901fe17f4936cc698bc5c023231ec91510e85fd3dac38f6bccbb184b1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0339/episode.json": "2f2500b2a6320eef686e020e8a8d6eacff0a86ed30a1f91350069787405e5e91",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0339.json": "e85370a60819ca078248802090b2d5b650aa0fa1a39a09eae119bf9b0055ad18",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0339_attempt2.json": "8886302f6f88604355ad7d9b601496c59b2c0f7f8d248cf4926475284c1f0caf",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw_retries/diagnostic/CASE-0339_attempt3.json": "1a85549810e16cb940a2929f22a01d784ca6963f2af6f919fa165546384a2cae",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0340/episode.json": "0babf4d90002af19b1a97a9d3a671008c7a41a83bb6e847109bb4f7c77300efe",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/raw/diagnostic/CASE-0340.json": "5d1fe6d6d9039420b3073fd6af7f35dd157bc9943a84ce7ca0d6272c874988c2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/environment.json": "1be8943ced57aa154e54378f7da8a992be14f8d2fea1138f92bc1690a689fa97",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/selection.json": "786f8c49b05503884e5ba1b488cae993a31b4849e80d2a6794264088da88a785",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/summary.json": "6ada1cd8e874b27e50405cc1326d9673a9ca77d8dc4a2da4efc936bfe4ea2825",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0046/episode.json": "c037b7fbedfe88b3fae74bd0be46981f30f69195ea427d30dab88b596ae9eb8c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0046.json": "450323216c2ff72291014dbefc9610b86a06618bdaf67dfd42671e6001e494fd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0063/episode.json": "79118192a95a989a08d47366b8e084ccf5ba4f03214fce8a4a04df36ae85b6d7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0063.json": "0fca413f6e352aa4d5b5372fe1038db13a9a95c0e66cef25a860fba9f6adf605",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0081/episode.json": "8ddbf3f548393358c3cef042a41c7b415cadcc00eb1f0c18684936b7b8427d2f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0081.json": "cf3460082575901ba1cc0fb6b1d149ccd37f444ee0ee4489eb8ae210451a5c52",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0081_attempt2.json": "9cd548844523c9947d3832edd445fe6e425cacda6bf7b1c04fd54925f851dad9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0081_attempt3.json": "e4ba0704a8a589d14fa74ac403d6d38c150ef38ca02eb7657e32a0a8ea8e7c4a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0116/episode.json": "98c09be0833e19ff61a584ba8e9f93a39f5cc66e83e479978d5ce1a58d650c34",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0116.json": "cf24317b5923e4b67dd1aeabd97c00b48fce3c7c98e8130040a88d80c282918f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0116_attempt2.json": "beb2c2ef42aec86d75bf3523c95c3f02597fd3bdab779ed4ac97a246bf50da53",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0116_attempt3.json": "131819238e0917d9675fc1f2fd8e7ad55cf7841236e04794f2c2f379527449fd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0124/episode.json": "405c08d715ee0b00bad9f6378179657604a56432d18db6fc85236613c10efb7f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0124.json": "75cbd201e1fa259a27cbe75b0312eda14ffaa6d45e774e2dff947f53bc804c1b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0134/episode.json": "af8cd248f1ab79efaf91c4734a4e909de80bca74f0fed91a7a9bd315d798aca3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0134.json": "b7896d9d7f9897995066ebca56b87dd947361656a2548a8ebdd0efc28734192b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0136/episode.json": "3c2ffaba20b3f518f4ef0441e791edd474f2db8eb10d9667a99fd2f2ee6c8653",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0136.json": "53ea6f5a29c05281cc5451bf6d5b57a31889d9d99c9f39177a7dcff279ec6561",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0163/episode.json": "254742e1be4307cb65c725a5563d7af1d21aa94427906eb166db3f9c28251b7e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0163.json": "efc29f7bfcad02bfd6d9e17448d2814d157b01919e81c7cd424444a8037535ae",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0171/episode.json": "9f50d49df781cc8f072fdc85aae30a41aaa59312472a9f917dc03f46f1b623d5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0171.json": "6a0b69f06d04af9c99ea4062d6afd3c938d8358bb3fbca0f9c8a41f6905bbb71",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0173/episode.json": "56731b1708599e5664ae62ec4054935cb6ebf8fbd6c00846e7a0713b444bbb2c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0173.json": "f9f99f64e905712f46866132d28d02a0b70b1b795ac61b68ce7f389dd2c6f7fc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0184/episode.json": "2266cde07b9febe474043e6661c23da5ee7fee2c0e38d22aabde12c7e297cd5c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0184.json": "6c105496af44db146118859dff25e910ac4f0488994c533b4149c70a93a14d2d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0193/episode.json": "38b379f4b4fc68cbbe026289a98ee3b779e0ccde54b1492a8da46a12c6ec745b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0193.json": "f4ac50c53b0607e06377282394ec5febc64c64171b3dd431bf9be3432daca6ab",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0220/episode.json": "09b096d94dcdff73844c81beec10ad6ea8ba8b1c14479625888378a97155a817",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0220.json": "98da6d43104f493a454f9594b5849a78a685bcfd6302aa6493d4dbf07f6d6c62",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0221/episode.json": "abed8ca065ad5f85f12b47377913d8fbb2507994b8a1327da3a22b2db1ddd28f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0221.json": "dbf0d9c40fef191980e61b8164f5bf0a393aff85adac198900c3136902ecac7c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0222/episode.json": "d0c1b1eb3089fbe890129f7191c52df15536ce9d4f239d436738bc30884ae0ea",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0222.json": "a45b17a27e06308b43e0f228a7a8ff0f4d380cf2200400ce49c7fdc700a98a09",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0231/episode.json": "d98267e1440edc721f9d0c7b00531b1a095fb2453afc733f08d6384ad1fc7885",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0231.json": "fd693afffbf9ffdfe673666d5af7c97d394da87f2ee0ce4d67e854877cea35ce",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0231_attempt2.json": "f0c7f11ca8b2974cf175a000159154b05243d53d1fee1f8183aa69b9dfff2dff",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0231_attempt3.json": "a7b4aba1b36d18888a31d9657e2cf5a3638a7cb1f962e4c6a9f505e506d9808d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0235/episode.json": "ba8e9994472eded206eb22e81bc3308a34a1e2188f89c53a22ca3054dea85f98",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0235.json": "ee06ace809c9788d68cabafdd2d745b0e8a5fa9e90b0586f65b20075e2b65de7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0235_attempt2.json": "e32aa84cdaf7b474d288e83037961e353fbdd95b4f842da2043201c58a1c8c45",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0235_attempt3.json": "0dd919d050ef68bddf2190a3ba723dac215de959b1a6471339bb5beb3d371bb0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0238/episode.json": "1339cb8d57520d4498d38b9ae80e8504103a8c91dfce7008c0505810e35c6c71",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0238.json": "497726c0c152f1e738d11a6e1ce0fca3ee10a28d26dd5960bcffb0386c546d43",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0239/episode.json": "a7897db99bdaa14ce0f6fd2c2792e0af0047b2466c526c1228f69895905acfe3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0239.json": "12021bdf5e54b59e9abb4402be1447aaae54e639035c5660aaf95465b7539f7b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0276/episode.json": "6e07bc75b5aec57629df405d0be5b209d33fbc5c2d65fafa8a19433f8eb4078e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0276.json": "634377e2cd2a25aaa3ba549d150efbde589f43ab7f027daa49215aff50807017",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0298/episode.json": "e293a818ef972fac9bb502080b339b27144f02bd0c0994ff963ee9a78a1da58f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0298.json": "090ee7a6a34c0c49694fe7c2baad32238a8d1d6810ed011b9d77c92cf37becd8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0298_attempt2.json": "007c3593916c18423a9bc624c0b64e440d9dc94b78bc9ac8fb5ac020d0dc01b4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0298_attempt3.json": "bde6fdcddb509dcd2fc179985c74f4d51869e8dee8cad308ea7560d1b8902edd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0323/episode.json": "edcf511bc4e0820c7d7dce064736ff6a07169241da3ff98c8b16160a5bbef885",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0323.json": "d78140f0092f5d10ea2ea5a1d943e353b975e1a7196cf1f52679065c57bfb73f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0339/episode.json": "e44bfbfec9fd25ccedcdc2fb0cb19dc8029541382ff99f849922fd99b189f655",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0339.json": "527474b53ccb603e724c7b68c7e00fe14f54dcd37d203c46064e77f3d1146dfb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0339_attempt2.json": "7e12154d90be99b97fab8da231512fd3463f8b7c49949e1c64447883c720f41f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw_retries/diagnostic/CASE-0339_attempt3.json": "24b707d42345b728b5970806c6eb4dd99c24387191fcca04d1bd49da49611dc9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0340/episode.json": "85ab55d144999c733ffc42e89dfe58376d9f5ad18dd8af68f589fb49322644fa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/raw/diagnostic/CASE-0340.json": "3667fb2448843ad527d2e38da5aa3a5b3ea01dc30648abac92fbfc2f861345c9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/environment.json": "c12948a18ee72d93bf995feefe0bd84d9a0868ac4c371a4c953b54d170ac10d2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/selection.json": "786f8c49b05503884e5ba1b488cae993a31b4849e80d2a6794264088da88a785",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/summary.json": "6a2fcf746fefa63c0c1fd3cb22e6d952b45326ffc94b5862591155a47bc29385",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0046/episode.json": "9a247097290a290efbeab9f471a77dd699ecbedd7ef90f9a0f7e3db61d7fe91f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0046.json": "d82c98656648e04c5ae44fdf81fc8cf86ee3e766bdd009f11e9adbec61c2896a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0063/episode.json": "ae1c29cc50018d1ca5547e7cf5e58f6da8f8c063b6de664e9500eb16d5ab6f11",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0063.json": "02b7225337eec5a56180e8fdfa98105ad31b12eb4789b95509ee5b592fdf13a4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0081/episode.json": "25eb9035a6a3026d132301979224e1d3d11a9895fe019fba817ef34efa585c67",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0081.json": "28fbd40d0c3ecb479b8a9b5a6e455b14000a79dda25a2e8438621836382385c1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0081_attempt2.json": "3ea61195a75c035e38d2f9ac3fa8a3dee7ebae7a4910806ec60051e5690427a0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0081_attempt3.json": "b0048a168cd2644197904b4633065fcd3b27785e91ec75f0702f78a649bcca4a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0116/episode.json": "33a2fed71dd8408a221dc21bc1121363dfc17ae7c555c171eb8bccb936db278f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0116.json": "e983b65df2394f45be19d1612f065339fe1bdd67fd3773a58300827193fb361d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0116_attempt2.json": "d6bdb073d7acfc80deed3e772db9b7761367558d1f07c1ede2cabdaad4b8ab8e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0116_attempt3.json": "9495033b79f53a5b9a2c74c072c34869ab72d3f5893e2cd9cd500f827ff72257",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0124/episode.json": "fb41d2ff722abb55c2e52ce85e57fe1bf6909214d8a00a003cc5296e5a95e2f0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0124.json": "f14b6a86030a50528087c0fe42c85779eb2a1d654d11174d9e5c33115858aab6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0134/episode.json": "83ff250abdeff906dd9d7e4c244f8958d45fe9c80935ec1d0117088999b0b855",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0134.json": "8c4d10e73609476665929a45a452027fbc4b875c1c9e2c65180847555d612224",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0136/episode.json": "045e5fae05c55dff6a61a30738cf721a64b3250d0d5fa55c39eb235fc02c1fd0",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0136.json": "f2d97235b7f96ebb3deb27b17f4fa4e4e7f857caba00fa87c274bc123d5053b7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0163/episode.json": "14e71c0125df823311d758de2467c1541d90c02e4de98cfd6b395db50fe50714",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0163.json": "236d57c29efb1c4739901296ed6a5fdc94462543ba9b6761a5fc560056c42e33",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0171/episode.json": "56d03c7549ba6e1dc3b2f310cd64078e8cbda21abec1d05175bcc24fd4f7465d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0171.json": "8989bddef333edc15c6ec9b69a41b8e4d875648c2d2e262fc465fa86f5177ff8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0173/episode.json": "63c31a2a413f7b83db78e0eeb0a047c5aa633dcc852040c19588bcb2e41b56f2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0173.json": "5e3ccffe5f189f6c61d43ae152b1b79a2edc1ed597d658809dd0f5c45ec0624d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0184/episode.json": "fb1fad643cdc1adbdee49ad625f2fd435507cccc373c752138b08b02a322d07c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0184.json": "8ae87bf0fc875bb3c212bd092a1ea086bf1fe1cc47d7400c97e2a844f07c7a10",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0193/episode.json": "3634e14312905cd009667aa992f674a71a12c538da3d7a479be3cab02a9ce67b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0193.json": "9c6c521dbc129160493708ad8107ecb9b0e4038f1dcbfa415e00c56c6f9359fe",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0220/episode.json": "0ed152329384b380b426b83101a5f0e0ef6bbaa1dcea7d467a1972c91f26d55d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0220.json": "94e2bfbc91a21a2eaecd568f5f6b414508caff38967a206ddcd937bbd27a4693",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0221/episode.json": "4f0fb6b859f0ce39351ab886b013fda71d3af0f57a2863b4ccfd95ba07625e46",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0221.json": "e86caef5e3b903fb8c05aaa241d43ab6012db7f2aa0e8fe3fe20830d76c0e796",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0222/episode.json": "99650fd806c589b1b981f0159cbb3e1a5606719787e63fc50cbda6df1729df75",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0222.json": "6908e3508f072e4368e687aa23226ea65ff02815bf11ed84500b4029ff789686",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0231/episode.json": "9eb4d7c4e8fc2667cf256d15a98747b025994fdad06d3ab667f17c29b014ada8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0231.json": "9176a2024bd49ddc34e283d3d61376fd2cc517fd209510d7edaf8ad819d71a6f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0231_attempt2.json": "bbeed4eebf61875f1bf52ccecd3cfe76b4d73bace67f05273083e3a7469b2f23",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0231_attempt3.json": "25b9c8fd326b0d012688f128c1276912d6a145d7e0c35408c5563e07cc63219b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0235/episode.json": "178ea724c2a90ad3ba6ee37c18062a269a0434b144b20126dbad7e2e39bb5448",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0235.json": "8f9efd17c3a4dea492237883c8b65ea5f0b2b39d516405e46c784337fd170845",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0235_attempt2.json": "e7503203f133215b1cbccb0f6d592369054b65aa6bd7af247905926ad303fbb5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0235_attempt3.json": "0e4488a4101f47a2d3196d07ca29fcb7e059b8ffc686bf103c94c8535f7c1106",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0238/episode.json": "2b841044fbc0dbda8ea5e97e72fd44dde6531a3fe122cbe8498164cef3445382",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0238.json": "54afa140926c32714a8f3f6e43eb581fbc1645e56e84e836aa2ec6ff355f01b4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0239/episode.json": "1a3265b370cbcbe2aa802d1ecd3674a02840732b0b778c99d3c8b4ab962bcc85",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0239.json": "fdf2883066d17520a3c0ede639149bbdddab5ada9f0d3863e4119500209ea0a9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0276/episode.json": "932e1381cac5cd38c5980a1fbd3d34c33053c884ec90cf0afd06b70dec53be6f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0276.json": "1cc14b7b1cdc5686280034515e747c8b423665cf05cec8166da148293d8335e8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0298/episode.json": "ace13023efe73fb9930a8d63f05fffca2630b6a2c88784f83c8396815ebe54e4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0298.json": "c639c8ecf92ea122176ca24c75f660bf687c77c4c320eefdb6a1beda669afd56",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0298_attempt2.json": "c85231311bd5256de4b0d8109351a9b0b6f62ef12faff3d9bc85b9602f89a7c8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0298_attempt3.json": "dc0fdf6ebe79c1764344b714c3e9eb23bd2bcee817560c32ed04ab82bf8d8ee4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0323/episode.json": "8edcc267dd028313484afbaa3ca99cff68130012e339d85fec0374721337aefd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0323.json": "640584f0001457bb4b2e94c52f0ec12ef73083c11d865825600ed6184f438663",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0339/episode.json": "60774a3b2e475526572ded7c3da7f6a825859676dd8d3667cedf577b3db19730",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0339.json": "26fbad479d15db52db4ceecaa217afab460d737e9d5104ebc3dfdce7992d13fd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0339_attempt2.json": "667f2211d1218cea8addee83ef7a382b437183df41c9c95a8e1651502eed647a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw_retries/diagnostic/CASE-0339_attempt3.json": "bc4a35096cb8efbfaf96a82a9825dcc0b8080705cde0ba629262a93a5e3c1d3a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0340/episode.json": "cf65a3b3aee19a69af8dd9e0c5d29b16f6d4cd4c6989a7f1da5c62d62ddba361",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/raw/diagnostic/CASE-0340.json": "b0fbab79bff8ceb845e4d88ba326475dfd6f5e722fb86d5cb0f35750090b3de4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/environment.json": "2d5565cdc54ec63e96aa0a1692d8f43565395ec910b06688b3b546a7575a1f31",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/selection.json": "c41aacbca9e05ca86497d32dcd4bde4ce9385df2d9695c160f7e1020bf09d4aa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/summary.json": "6a2fcf746fefa63c0c1fd3cb22e6d952b45326ffc94b5862591155a47bc29385",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0046/episode.json": "1040717d8598c38cad396e0d75e88beb3f045fc87b2f0dceac3f0662b297fbb4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0046.json": "84b162de02eccfad0009cb0ef370a325e1e7dffbb565953e802b018aa52cf355",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0063/episode.json": "98e7522ffe03ed969ba340c4a572051a590b48ea2413e614cc0aed442c85d808",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0063.json": "f3bbb75e732420d7d2c852d4ec4f1def4f10d51cb7ea3b4df1c89bdb557e0306",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0063_attempt2.json": "eef2428d90e0e889aff708de282fa74a39efde590d0c94795e5c22ca0d7d6803",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0063_attempt3.json": "1850ecc30710ff50f102e661ffc28cae65db9efa78475e7cdf92c06a12cd7417",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0081/episode.json": "91f02fb0f6ba032c50d94f64f722e2aed8a7d7c60d645f74369b5ffd463ea31f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0081.json": "8383875f643153142f5ab9c6e3beeb9acdeaeab6dc96ebd559fbf71ae873f294",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0081_attempt2.json": "8ea82f4ed0318d97021764234a6869bca91764e20b2e9c48bc307c2960f25f59",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0081_attempt3.json": "6776a8744d3a254c18a4bf8da87ece8740650e9fbe8bdeff1fd0a8c97e9b1bbd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0116/episode.json": "fcce9778add64b766703bdfe37c59ce2f6cb80b4887882bc22b32f66ebd1e3ba",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0116.json": "41fc3659ff15d4ba40a8d16a3dcd19b9535600a06aa201b2fab2e5a5e6c225ef",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0116_attempt2.json": "cbedb76ceb4fbcae303876e3c01066201e80b3479b7ab2fd07b1d434c209270c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0116_attempt3.json": "f4636c507ed2e6e6164c62599b2944ba2ca8b5b62796617ac1a777db46fd18e2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0124/episode.json": "a291be31883303169ac6e80e931471d4a3c63f2f5ffe5a5a8362264332a46508",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0124.json": "d6d2bf48f476c13cf7843cafd6d1f4da86c9f44c5f76dec7a1f3b178af109e72",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0134/episode.json": "c45e20fcad292cf98ac761c2968b2826eea16506c09fd0b9f88ee0c91e912039",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0134.json": "4d6b85bedbe45033ec6b47946acda16b708c15bf226bd3f90c9874fb07e738bc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0136/episode.json": "0cc7a9e25e89b7b44aa0b38042284134c7f14dbf4f1e27e7c9bdbf37d629ce96",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0136.json": "7cf496d7ebbc4d2e88c0bd91419b00d422589779f86de55d0c394ceb74179c8e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0163/episode.json": "b31d49e11939710f466bca69ec8119ce47c276d38fbf6d0187e6ee5988a9c698",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0163.json": "90c61f79b131135d835c856b93664a99263243f56e985de27be583b6abcc4881",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0171/episode.json": "36131cf80b3e5f8fc35a77fcfd2522d504321d7e7edaccc7131d16c0031dda95",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0171.json": "b2c563d55fd69ce4c6d4f5d535cfed73268eb510d9e504144fabceb79aa55c34",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0173/episode.json": "f23fb372e5c76cce1c5e96dbacdae6684eb877d58ceac92c4cc4c9f3556eba60",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0173.json": "179b2531120d455b543850d3ed0741ec6671a68cde8d02e3564d251e336110ea",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0173_attempt2.json": "a8e5b8364bb3f4526d5c58ae725af93616cf88b13633e32307937f3c49feaf88",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0173_attempt3.json": "34100629c3840141617d15e150411a131c54410038c40c245b5dfb403410cfda",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0184/episode.json": "b47424294b083e72cded111dd06b38f6ee0b6e955c01b1fbb368234b109fb053",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0184.json": "661432aa73eefbbbb761f80fd0f06af5dafed54dfacfcf2bfc0a2185600de447",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0193/episode.json": "08c6496e057186f3729a7114e64cda1617f5d479cd88b240d42c761a1ccab95a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0193.json": "7352dba2474a26ba931245ea52a05f0226656b6cfe47c7dc4b3410086a77f1ff",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0220/episode.json": "3ce92a8f1051b6dbb6d499aacd76959dea90b131b7eddd2091c20116432d80ad",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0220.json": "029be54a1e951efc2f4efa20d9abd9ce0be9d8553020f5fb89cff218f2366a18",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0220_attempt2.json": "4433f01cf5b78aeeaad25f479534f31404ead54f707ef79a58eb61002ff71f3c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0221/episode.json": "1009891444f257a9cfcb784e21d32c3a43aa09df14197082e8c256bd3eae732d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0221.json": "0ec05ebb78d99797902ad460148aaa773511a3a27b314f832431ad5d6beaf122",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0222/episode.json": "bd0846ac612fec807e780f80b9bbb98bf2cf0e0da306dbe17fced38f6c0158c4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0222.json": "d6a7e046c91e2640414a575de908e9f68df93aadcc4683f45653bf00f79bfaa1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0231/episode.json": "276a8fbb2e1359e8fb240565af144cd6f26f2e0a1d536c464f49cb288af821d6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0231.json": "e85a1bf78d8fe3e82e520a36304b0959bc75fa9c6f56eb73975e810e0a56f08d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0231_attempt2.json": "6f0192259b26719d66d2654193d19f60867c7f247dbda71d706929525787f56c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0231_attempt3.json": "8210565dbcfbc0bc4504ba4c138e84acb37331ef641222a46cd54ee570c7e5ca",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0235/episode.json": "a8a61eef95cdc647f82f2dd668f3a54337aed7f80174f4f2c9a457e86991cdb7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0235.json": "4b87b6065f836b83943af638c62f6b79670579b47d9f81f8e416ac5bf738e032",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0235_attempt2.json": "1191cd886c3a4d51fbbfdf58fcf367e6c3b6ca753c3c2115b651ebf55d62bd85",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0235_attempt3.json": "ef0957ed3d5be906c12015b10a840ef11b2d688e6051e621fb137cc6f1e87767",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0238/episode.json": "c30bcad209657623f28f8da3f421790ad6cc607e47503dfe7d82a9c360dd33eb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0238.json": "76a46fc5743a712d6e1de35f4b5c84cef4d1f8f7b42d4f1ddc663a47bd07b175",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0238_attempt2.json": "70965b91329b17236a4d23b75dd1e7322579b1e9125f3ef97b26e5095d442b73",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0239/episode.json": "9a4480d2e41007d18bc5089529e24b445d65b4dcc886a3eee3f15f29640ffcfd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0239.json": "90477d8a235b7c9c13aead14df596bbea6f38a63ab294ccb728b71c9bafeb99a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0239_attempt2.json": "c3f3a095ca93f96b069a76d67745200027fa0c4e91d6cfb1fe690ce77ad9fd0f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0276/episode.json": "706589bd5936c9e5bc0c13325cac98e5e533efd941605ec3fd50808e3b8685f8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0276.json": "cf1b4e92a9b6323980715735716e412ee0ef6ad6118fb41b59381710405ec362",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/episode.json": "a255e01307318dd00b5e0819bc0e8b0e833c9c689ed9e9fd2a1adceacd338a66",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0298.json": "23c64722ce25cd00bc3d34248e27b88705d9a56f582ee21c34e7d808f4efdbc9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0298_attempt2.json": "6fdba450d8d20bf798084be7b5e6290d1492da8bfa50508642d99d71849479dd",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0298_attempt3.json": "ebc796a36f1bd060c88412d9e4bbc8496dc41a55798288c988beab7a94e30ca7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0323/episode.json": "8b41934dc93ac3cd670b77feb6368650f740f3069f81cbf9acf91e4c38bcd652",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0323.json": "3dd9050759dace35f93d4ab2c70a842e0310e4e4ba7e784146537b5b0d57ebcb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0339/episode.json": "1d39fd37e54f3af46a62c770d33bed0c2780e4c2d2ad5cc7b587660ca690b1eb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0339.json": "47a9b7c5b4595342d0c4a195b9e4a4c449c71aeb46e2f315897e5a5e1d3844d1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0339_attempt2.json": "4caf6a80fdc470e3734191f68f575d4f02c6917f097e9414c3d024f26dc048e6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw_retries/diagnostic/CASE-0339_attempt3.json": "0ff91e95f7dc7418d014c50b3ec2ecb03bf49fd24399c8c8cd69c60736cf134a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0340/episode.json": "89f43356ae14441b8e49724a5a54e46504b46ecf97a2fbf5fb2fdb47681507a3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/raw/diagnostic/CASE-0340.json": "0056944c2846dd51b6f745ccddb3c2b1c105b452c4fe493e67d646013266da05",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/environment.json": "51adf2a942d8963d9801e62ba737a8b23a8fb2bafa4a3f86c4c5fdad936bc72c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/selection.json": "c41aacbca9e05ca86497d32dcd4bde4ce9385df2d9695c160f7e1020bf09d4aa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/summary.json": "95a2aa19cf953fd3ac906340b91d975800dd949554b2f8b0c89ee9281938db6b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0046/episode.json": "6c8c7bf1872f603428ca84b63b2feec1c95a7609d49db8cfec3d55b9c0fef692",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0046.json": "75113ddf3e2fa4d4950adc43d9d9c3f02c0bf129d9ff23e7c79bccd87398bd3d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0046_attempt2.json": "089133b06f9661961c2b8c78d8d0e70cc197939ca093c58c4c1911f3d99b928b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0046_attempt3.json": "3895f9857afdf7aad0930ec8a21e19ffac85f47f18a5a9323d44e25571f47d40",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0063/episode.json": "73ecc7f06c0d3d724e27f805de31a3a0f913479c6c224a34e34cb53641c03b72",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0063.json": "a67ff3447f4193630616e469ac39c77ab30f3c8f0613c395fe8ff071bbaedb08",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0081/episode.json": "d63bc53fb8e9be69c00dec9c13f46ae62048793e0ef215afdd64963549f3c621",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0081.json": "ab88f9ce142f7800f8b535e6e4e25b85421a379860f26ae7e3965674dcf13e08",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0116/episode.json": "ca2e373c036a7957f89bf957247cf92159a690ab65ddcfe9919487953dafcfab",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0116.json": "945504bfed1edfed04340a9cd585b143f6c6a3c8fab09172a88fdad815b65aa6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0116_attempt2.json": "655ffd6750c34ce6d75c784c67e72901625978c1134d7e2ffad02e606fa4e61d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0116_attempt3.json": "54ce1639960147b45937d59c7a52b65c55ae8a0896f9cb7bffb8f2dd3e39302a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0124/episode.json": "686da7957ee0770856fcbd6b8ded55cb215809ce6f84560f9fec9b641d122937",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0124.json": "15ca925daba49d1b329ebd815e777bfe1a1929477c97fd35dce0f8fa80ec701e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0134/episode.json": "ec50ccfe38cfd20feb9624c36b50ce04d34c00425cea88909bd67e717fa07ac7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0134.json": "102e45b636e788847d1abfe58ffe9ebbc1181e00c350166b072d18bedc26d46b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0136/episode.json": "cbacbc47557a04a05683b0de92159b2e0636a23fddadb99e5b1ba0702f0ecd1f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0136.json": "42ec1cd74f1ba632ef415af5c9e9c44669f3228d26d82d71b6a3adce133da7d1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0163/episode.json": "0034463a2557698b0f2a001f52ce73748a820ab67a633b4c11a2ef126e587fa7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0163.json": "e90a8fd0286789bd4fda9e79ac07c9ead984a7517d2e68faa7e86d85db989be1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0171/episode.json": "226e447a5080ac253ed600f7cb758a108035bf950202666105f632ab05bc6efa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0171.json": "d3bf11b23cf174128b21f5fbbc5ac638c972aa74becd43412a55ce0b6b517210",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0173/episode.json": "3645a14c81bf5e4753bd034b2d0363742eb246deba2a6a098c53adefec1aaab9",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0173.json": "4bdb2c5967a767b39f41402fa11912077bafeed39ecccc0d411c944693c60c75",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0184/episode.json": "f40f5bcb37d5680e87d5ac9f4a7c3527879dc602a0781fb522f5b1972c87c13f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0184.json": "f22613fc89821fd5ed6863304bd4847eda92959c35a0dfc325497f97c97e89b5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0184_attempt2.json": "d152a0a89f352ccb307023d3e1a5a4beb4ac13f885b7cee2627a56bfc7bffda2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0184_attempt3.json": "cef0ea1d3a2e71ddb3ca8ee1e46b18e8b8738e8bd02edf0d350dbf502a8b332c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0193/episode.json": "5a6e46f7c26317f5b8702572937cbda20badada784bae444632e23dc9f4e50d4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0193.json": "cf85b489b4b76272427548c8107d0f381064de81d266af4ace36ec0644ba3621",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0193_attempt2.json": "8291ab0f11ce3441276729d4daf6311648c9d67aac603a10e0c34fbdb451c3fc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0193_attempt3.json": "e8dccb5bdb2c6b726f1c1d90ffc053bbaa6a5143ff45c45c97881836862e814f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0220/episode.json": "b9b9a52ee22268f48397d6c437a643d5ec8d57d5d7398e749a85331379bca267",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0220.json": "dac53d5adbb94e16a102468bfd5ecd28abb86247baf8fbd0b7ce47cb2912a1aa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0221/episode.json": "2a7c17d960609ef2ec7be29c127892127aae5f69679c1f3a1d8b012025ca700f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0221.json": "d9878bd79cb411785fe2f5261a9513a7b857e0f27f3d8a01e6fe5094e8c0ae07",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0222/episode.json": "176234f46fb02f9b0a8813292da3e70c5a2b1aa36dd01f89213453b6942cef9d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0222.json": "d10e7f68d18ec892591c5e3f3589ed0986444bd7fb58542c801ddf743f14f605",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0231/episode.json": "fb7439724fc10a006015dcb9a140a5cb7d19fdcd9466bfc078a2699ede87c2d7",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0231.json": "3656fb1436330191133dfebaff66f9cca4f32fa8b2707ab00c9c1f97feb76233",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0231_attempt2.json": "f24aff715f3db3b6e0a9e41b15fa12667e162e79f73c7177f4a9d6b26cefddc1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0231_attempt3.json": "69521709b8fd932f6c38b6b2a6072ad95523c0bfc0cab262fdd574bcc00f3de4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0235/episode.json": "0ed8da70e20babfb1f06d1e28a605b04801d5b78c2fb3a998959982b9dfdc4f4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0235.json": "6e5c89ce79416414205e05f93a6c34142579d63b2d1f0c35a7acf3f8de3817ee",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0235_attempt2.json": "aa92ea71b2ea69619524c284624aba2e518601b45ca688a49da2c3dfc0b0c40f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0235_attempt3.json": "226484646b906f67d66b9f0f62ca03acc408f574a13c41b0104778261fe56e96",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0238/episode.json": "2d638d154d9453cacd60b25260e59c113f6eda1573814dd2f3d4014b04763805",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0238.json": "bcfc8c63c944da6c0890c963d0228ca9180d8682bdc420d041bbf9b4ff2c8975",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0239/episode.json": "59aeba75ec1ca8f2a3aca1a440b6af54c77c46ecbbed243153966c84f7184c83",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0239.json": "267354b1405d03914e91024d721c75baf915b3111b4e9cf5868a36ec4bb658ce",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0276/episode.json": "8310d1d3414aac583dea3c24ca99b6fd41209e58e9d4ec99f069140ecc459c91",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0276.json": "80d872f4feb8bec2d9c1a9dc0340669f7492b60f4cd9d60d0660912b632860f3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0298/episode.json": "394af67c6fe2906d08aa0270b87da1e2c200a9e9b59012ea1d56040b34646f58",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0298.json": "bcdcc3925f3bf375b87001af7f956353015e76e74814797c954bae6420398b38",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0298_attempt2.json": "7c128f77bc1da9d992ea9b6d8f1832048430448e7fbd84484c1b3aa6369d871d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0298_attempt3.json": "307d95b0f1dd1d10f15c16bf802dec4611433d399cf4803404593c0a353f3404",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0323/episode.json": "047d11d44c1a4e128e6c14271f1b053aaf2e72a33b667b3ca9c463f9e85ee775",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0323.json": "8709c65a1f1f5384e9f04e7798c120bccd90994a9fa4e42ecc1b4695004accee",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0339/episode.json": "3e9e0609444699a540ace71db9fa62b497929c1c5cbd56c78ce180e60fd0e87f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0339.json": "46ad3fc6b78386a578ad75cf37c070b6135c7973c5407dd1c0563a3f8437f167",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0340/episode.json": "05fd68a8e94894e8d9f7c349701d18fbeb29e6cd200037cde400b1a910843de1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw/diagnostic/CASE-0340.json": "50894aab49cdaf341ab0485c1e68a41fdfe1d5736f573896942b71e3beb9c32a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0340_attempt2.json": "195204ee28bb301192b169f4c9ad8b98bf00802cbb89176f0f35e600f63d62c6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/raw_retries/diagnostic/CASE-0340_attempt3.json": "a2e5682c4b96dd45cda0cb926a485a7e2ff7045c1982c29a60184288e802f714",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/environment.json": "423deebc80b85c8d810298af27aff5bf361b7b168b0a7223d7353770aedfe398",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/selection.json": "c41aacbca9e05ca86497d32dcd4bde4ce9385df2d9695c160f7e1020bf09d4aa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/summary.json": "c6c7d94dcd52a272af5fc52bbcafc5ea422f5f899ea7be81114d1a1800961e0a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0046/episode.json": "651501319dd4bff344085c7fbbfa766a26f8e88ed5c1cf2719d9defd7eb87f00",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0046.json": "b03d8e699738d5f5d313699888f437ca002b4de459ea8f0cfe65172f0b785658",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0046_attempt2.json": "b47e910f106b090c9ea09c25eaa2530ec640fba0adac6b3e81340802dacf98f8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0046_attempt3.json": "6fa34dec48b50a88b25488a14778697a84bf337c1896977ea70f7da60577caec",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0063/episode.json": "537975b3c37f9c0890a002d53a8761586f4619c6d45606118d4ae4f8dbc67546",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0063.json": "ec1986a369ddbeb2073b289b96587c2cffb2b2e42908f26cdbd4e31b40d3e91a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0081/episode.json": "a74a3d29fceb30ac1b392c32a5db38231abf44bbd688e1a921f5c177e852b2b5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0081.json": "5dd56521fd3c9e8491757c634e5029b0e707e2dba90a3ad5881d9f993ab78656",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0116/episode.json": "072b045f50384f4288c9daedfe773ae0996e15bf317d7d1401fe2230bb7370e6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0116.json": "b45c2e8a9e07c01e716ef8efe49d20aa968573550c673a78dc7c02aab718c403",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0116_attempt2.json": "f7857eaa0f5db15c28b869cc46ca499bb1860e234cc47daedaf0a61f849eb356",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0116_attempt3.json": "14ca5ae460353aad3dd5bc306de7f45dd0ba2b5bba5f10cb56e97ee9578aac5c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0124/episode.json": "616e6c992bd3aaf675aae178704d6319b5442c2234054eb4900dbed26b8c1439",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0124.json": "a83d52bd23f62b3aee000829fd495777801adc0b4931d65051139f044723a64d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0134/episode.json": "cf386ac7bedb5e9e63f350c81cbf2aadd3983dc5bc6f4d10f4e5c0d377bd7e2e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0134.json": "dc61922778b7e22fe17b1f234520d162a49296bcbd1c3bf311f556d4cf48f3c4",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0136/episode.json": "99cac9eff9c43ba09f8ec8612234f71dce69984e47511e24408996af55e5c0bb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0136.json": "2c263dc279b0d4b4e7a8a0b3867492ad4d74223b1a9c2a8805179ca337271654",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0163/episode.json": "0e25a798aa4800e893f9464dbe538ca73ea177b5906bca5ac2d8fd1ae275ba14",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0163.json": "053cd8d66f31b243a60085f34d7677636a58ff287ab9bdc021a20a484c50584a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0171/episode.json": "ce4d26fa40f9705308f9efbb540a0f5a4f1c6a296d8b73d6e7123d68e556f05d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0171.json": "ae3ac1c6e6e82e8e6876a72c779b2d0a33fc5c8cc4d0e6662b435e103d13b91a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0173/episode.json": "dd58a91891be2493d90bce6773d7b7cc935443e588b5e127a730e075e30c6423",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0173.json": "bfb0e22d79d351ed1efc1615e7f7ee931e9593ba1f9d6e3e66db559d5f3b7662",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0184/episode.json": "cedc604abf20a832e856f354141896a4b795caf7f7291e3b4fc64109e8306bc6",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0184.json": "2a673e1687cdc0502c2c86a140509182614082cc82c599c91297e32b85b98dff",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0184_attempt2.json": "9104e19b2b1d50a039c600f3f084b7eca8e143b8d3aa553a29761865a3bac487",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0184_attempt3.json": "1043bd530aca3d551ce13ab9bb4e4a788ead79c1a13fe5dd861aef181e0ddfb5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0193/episode.json": "3d6dc4c0357592ff4839b0b19172377a838d2576cd40f717a18db88fb0702149",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0193.json": "03ab4f2952e0372e4d4e619f23201d82e2751bb3c728b94a3138a224aba27e50",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0193_attempt2.json": "5b36a60c3eea2c23834696e605ac51a5676db60e2ddabb0b36391f95b89934b2",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0193_attempt3.json": "cd7154d5506601f1f9062f67689733309b3a55fa596343451025977bc4b6cc0d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0220/episode.json": "9006f1c495294fa3494f00e7ec10eac2b211aef606f3d7239121f9c0ae45d981",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0220.json": "66416e38ae17eeb03138563617fea6fc5417f74be85e51a00082565f77e61dea",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0221/episode.json": "2109e71e13fc92b37e663ec435cc1d633493bc329169a4ce3d2b31b8c7d87107",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0221.json": "fa747c6ea46b9c874e6417e688d18c4183955834a568dcadefcfed70196929bc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0222/episode.json": "332058a579fd8f7931c6154961710fe1ad71e951c22b83cffbc69b609596c1d1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0222.json": "876fe1fc2c3d9f4030ddd750567020fded52b029e2e03aee0c4b8771c45a0691",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0231/episode.json": "e56f727ad3d5e1cfea01bd4b4c37c1fe9a0184ee3070e16d386af7e9856cdccc",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0231.json": "4a749025844c8e5e325cd97ea6efafd1fe949f9eeea3be08deacc6272347b805",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0231_attempt2.json": "21ba3968590d4896b86b0647f6880c66ea48d27581d2d23532f3591712837323",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0231_attempt3.json": "dec6ba25c11f154abd3ff8fd4b759e4b69b24b0407e8ccdacf08f6eced62c20e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0235/episode.json": "b57034bc879237b1295207f4dafef76cd7c055f2adfaebc09ea7ebeed4df8b5b",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0235.json": "c9aede3a8878e5ffb4ddf4b8609128641bcb6e13c3745de417ec88faa9d6e3b5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0235_attempt2.json": "565883c63ee156d386fcba8d450f57f7d71b4ac13c980bdc34d6e074c675c69e",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0235_attempt3.json": "198a44495d0aa07ffa8a6d7f876e6f9df1d22a769c479de3dab0f9c9e9271e05",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0238/episode.json": "270bb730c38ce755151439db916e0be0dd59ee0bd62f197af77d40c2bdeb7ae3",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0238.json": "7f8fdb87764ae34290de84041b58ae1f1993b0a6bdd787e21d657d3c2814002f",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0239/episode.json": "58f5daafb0f85e2ba1a87ef632cca60e31f369efe8df8d88c551daf404b162ce",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0239.json": "c0c01b59e96db63703bfe00da17e8d4af7d4de44a1ba4c1b55d576cebc3bd44d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0276/episode.json": "c0ac5e1ee7b54ef6c53a085768abfd98f835ddcdf3dc8f333423840eb5822ed5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0276.json": "de16a8d5c03474c497428526a9e2885a984adba9f62f8de44d53a51a4d1b5a24",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0276_attempt2.json": "6cc6a29a4cf3051f1be49cdddcf5bb3dd72e57cfefdc61b360d67f786228c673",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0276_attempt3.json": "fa2a2912d9ad544264d1bdaa96b909b5ac89b7183cbbd3fc255b99d4cc344e29",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0298/episode.json": "2d9517a25f5a0634f8070def63b5b47719cebd1825566944417425abc6aa8903",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0298.json": "fc52772086b0a2f8b2d7b2f3ae5b6cb965d53a1ba665a7a31ba5e7f0fb6fde1c",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0298_attempt2.json": "a55d38ac67782dbf48ef7e2480e07be7f78a6910d9c6b206a62b23cca8ada6f1",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw_retries/diagnostic/CASE-0298_attempt3.json": "893f9d073c5ca30166647fb4d5f95e0f9ede5df52afa675862f7df95baa609a5",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0323/episode.json": "1b7549fd6613d759aeeaa4b81097b46599f92e9be49e33453271778b38ad581d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0323.json": "67bd1d4c9f29115a13fc41ed145a228c3740924aec2a72756e8cb808b389dd0a",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0339/episode.json": "f83a9db316c88924e6f77261d2c768f80d817904adb82eb8ac83b57d497a3190",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0339.json": "19c01004623bb020a24d4c04a2cfdc24cbb261cd0547f7255f55c575cf46b66d",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0340/episode.json": "3d2f05ab1b82a399cc8845d0cdf74d29234a45a4204af427663f9c914eee4405",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/raw/diagnostic/CASE-0340.json": "0b911c18c4ce2235061fcd75aa2b8d90097e71ea367d128a131d482f70a431cb",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/environment.json": "4656401e71f1c4c2593e034dc2ef2969b69b8c16b79b8eff47efa61c9ac5a4a8",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/selection.json": "c41aacbca9e05ca86497d32dcd4bde4ce9385df2d9695c160f7e1020bf09d4aa",
+    "results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/summary.json": "056df298d8cbd3d67286c36093d20e7d55e719347ce54870e9fecfd348273361",
+    "Research_Log/Diagnostic_20261010/AB_Pilot_Allocation_20261012_v1/allocation.json": "a7d282beef59b3e8dbe1d4102cd793daf04de8b2fca0c2480247ec3863f80463",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "be78e92051954d8e4972ed79730274d0b24a6f631fdd39b2e8f1d27454a23957",
+    "Research_Log/Correction_Log.md": "b6568991e4f2e3f6366dceb1213b071420cce9acee6c3ae800d212074d766b2c",
+    "Research_Log/Diagnostic_20261010/audit_ab_pilot_20261013.py": "261103bec110330ad0983ccd4262a38aa25c12b1851a2d27d72b57d0ddd3b176"
+  },
+  "limitations": "Retained evidence audit; deleted stale-directory contents and remote execution histories cannot be independently reconstructed.",
+  "new_model_calls": 0,
+  "new_semgrep_scans": 0
+}

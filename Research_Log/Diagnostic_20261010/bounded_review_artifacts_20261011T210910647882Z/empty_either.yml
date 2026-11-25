@@ -1,0 +1,8 @@
+rules:
+- id: review-example
+  patterns:
+  - pattern-either: []
+  languages:
+  - python
+  message: Synthetic review fixture
+  severity: WARNING

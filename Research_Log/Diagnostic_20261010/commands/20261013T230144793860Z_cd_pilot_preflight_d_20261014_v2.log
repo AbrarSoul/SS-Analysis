@@ -1,0 +1,55 @@
+{
+  "version": "diagnostic-v2.1",
+  "created_utc": "2026-10-13T23:01:46.403055+00:00",
+  "mode": "preflight",
+  "model": null,
+  "temperature": 0,
+  "max_tokens": 2048,
+  "max_attempts": 3,
+  "schema_policy": "semgrep_search_taint_v2",
+  "prompt_policy": "CONDITION_D_TYPED_JSON_WITH_PROBES",
+  "requested_prompt_variant": "autogrep_default",
+  "prompt_variant_ignored": true,
+  "prompt_variant": "autogrep_default",
+  "acceptance_policy": "corrected",
+  "construction_mode": "typed_json",
+  "semgrep_version": "1.177.0",
+  "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "code_sha256": {
+    "pipeline/diagnostic_v2.py": "452bc7a04aed1d59625554ab2a3a7d80bccf999f0f1f20c6238cdc58d1da2d5d",
+    "pipeline/raw_capture.py": "c344d041cd6b171183b1ae886f99cd34155c316f7fc07e0924f6bb3ff4435f4a",
+    "autogrep/llm_client.py": "25634033d3f46a32ea81f7fa423d087f09ba283680fd13a2194cac86971c0068",
+    "autogrep/config.py": "97dbf09b495fc2e4d020f04a8b99c8c1dbb3578cc023a1c0b69e5f38555838ca",
+    "pipeline/case_loader.py": "8e63d27b5ae1c387a96d3553af705fbcc938fddee518abeee9afdd5c31a38d95",
+    "pipeline/gptlab_config.py": "d8a520a229647c13a708570949a577fc8aeed537a0a38432b5c141be47ecf2e8",
+    "autogrep/patch_processor.py": "a75d86f5af85469d79e56eaa2462ee0afae059d843f8ef55db60cc1993c270e1",
+    "pipeline/eligible_cases.py": "9d08921914d393ad5beb66d7401c35b0b3951de6c5b2fabdcdaf896b5e60962c",
+    "pipeline/typed_rule.py": "5d39dae947e7d4b183a82d695871b1cc0b60ddbf27be34b3f83f3e9ad75fd2d1",
+    "pipeline/cd_experiment.py": "a7d420c39d44559399214d97a07f2160c92311a378f34ea2a3de1d84e7298a01",
+    "pipeline/probe_cache.py": "baab8da9901d026d9ce0ec6812cd5740fab823735669cc93c764cfc3142bcd03",
+    "pipeline/dev_probe.py": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "pipeline/combined_gate.py": "2ecebcaf51d95a252f5409f4285de7ce6e393b06a1e9ba0142e6dcae890e8de5",
+    "pipeline/probe_coverage_check.py": "4b99ebc251337b7e466395bd8f564fee8783cccda5c2df5e9d67d9eb80269cb7"
+  },
+  "annotation_sha256": {
+    "benchmark/variant_vulnerable_lines.jsonl": "c50838d1f19a304b503fb569cfad9466270ffa8e595b7231251016a235a51d79",
+    "benchmark/variant_vulnerable_lines_v2_additions.jsonl": "e7cd40664fbd3126ac2afd9b0e01b6e8115240f7cf1190697b3557e38ffd8345"
+  },
+  "credential_available": false,
+  "reference_authorship": "assistant-authored after bundle inspection; independent expert review pending",
+  "condition": "D",
+  "probe_manifest_sha256": "771400b84983a11b4edb97129e454ab860208b7727e7316a2c4b1689e093104f",
+  "probe_coverage": {
+    "requested_cases": 24,
+    "eligible_cases": 11,
+    "ineligible_cases": 13
+  },
+  "probe_parser_versions": {
+    "tree_sitter": "0.26.0",
+    "tree_sitter_java": "0.23.5",
+    "tree_sitter_javascript": "0.25.0",
+    "tree_sitter_typescript": "0.23.2",
+    "python": "3.14.4"
+  },
+  "probe_builder_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114"
+}

@@ -1,0 +1,34 @@
+rules:
+- id: ebay-mcp-env-file-injection
+  patterns:
+  - pattern: 'import { writeFileSync } from ''fs'';
+
+      ...
+
+      writeFileSync($PATH, $CONTENT, ''utf-8'');
+
+      '
+  - pattern-not: 'import dotenv from ''dotenv'';
+
+      ...
+
+      const safeEnvContent = stringify($MERGED_ENV);
+
+      ...
+
+      writeFileSync($PATH, safeEnvContent, ''utf-8'');
+
+      '
+  languages:
+  - typescript
+  message: Potential environment file injection vulnerability. Untrusted data is directly
+    written to .env file without proper sanitization or parsing. This can lead to
+    arbitrary code execution or configuration compromise. Fix by using dotenv and
+    dotenv-stringify libraries to safely merge and serialize environment variables.
+  severity: ERROR
+  metadata:
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    category: security
+    cwe: CWE-94
+    technology:
+    - typescript

@@ -1,0 +1,59 @@
+{
+  "attempt": 1,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0298/attempt_1/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0298/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx"
+    ],
+    "validation_seconds": 1.4898639579914743,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+        "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+        "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+      }
+    ]
+  },
+  "probe_evaluation": null,
+  "gate_decision": {
+    "accept": false,
+    "stop": false,
+    "reason": "visible_correct failed",
+    "is_fallback": false,
+    "probe_eligible": false,
+    "probe_checks": null
+  },
+  "feedback": "Rule failed to detect vulnerability in original version"
+}

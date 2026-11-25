@@ -1,0 +1,20 @@
+rules:
+- id: notesnook-untrusted-url-in-embed
+  patterns:
+  - pattern: document.createElement("a")
+  - pattern: anchor.href = $SRC
+  - pattern: $X.innerHTML = $Y + anchor.outerHTML + $Z
+  pattern-not:
+  - pattern: anchor.href = `${$SRC}?ref_src=twsrc%5Etfw`
+  languages:
+  - typescript
+  message: 'Potential XSS vulnerability: untrusted URL source is directly concatenated
+    into HTML innerHTML. The href attribute should be properly sanitized or encoded
+    before being used in DOM manipulation to prevent cross-site scripting attacks.'
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: CWE-79
+    technology:
+    - typescript

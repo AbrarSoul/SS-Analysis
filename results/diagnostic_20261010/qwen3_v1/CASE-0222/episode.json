@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0222",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Error generating rule: Invalid or Missing Bearer Token"
+    },
+    {
+      "attempt": 2,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Error generating rule: Invalid or Missing Bearer Token"
+    },
+    {
+      "attempt": 3,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Error generating rule: Invalid or Missing Bearer Token"
+    }
+  ],
+  "raw": null,
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "calls_recorded": 3,
+  "input_tokens": null,
+  "output_tokens": null,
+  "generation_seconds": 0.027610250006546266
+}

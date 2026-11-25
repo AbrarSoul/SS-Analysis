@@ -1,0 +1,106 @@
+ERROR:root:Invalid JSON: Expecting value: line 1 column 1 (char 0)
+ERROR:root:Invalid JSON: Expecting value: line 1 column 1 (char 0)
+ERROR:root:Invalid JSON: Expecting value: line 1 column 1 (char 0)
+ERROR:root:Invalid JSON: Expecting value: line 1 column 1 (char 0)
+ERROR:root:Error generating rule: synthetic timeout
+ERROR:root:Error generating rule: synthetic timeout
+ERROR:root:Error generating rule: synthetic timeout
+{
+  "evidence_directory": "Research_Log/Diagnostic_20261010/Condition_B_Offline_Evidence_20261012T092303419272Z",
+  "scenarios": [
+    {
+      "scenario": "json_repair_then_accept",
+      "construction_mode": "typed_json",
+      "calls": 2,
+      "accepted": true,
+      "events": [
+        "model_stub",
+        "model_stub",
+        "visible_stub",
+        "hidden_stub"
+      ]
+    },
+    {
+      "scenario": "json_budget_exhaustion",
+      "construction_mode": "typed_json",
+      "calls": 3,
+      "accepted": false,
+      "events": [
+        "model_stub",
+        "model_stub",
+        "model_stub"
+      ]
+    },
+    {
+      "scenario": "compiler_then_location_repair",
+      "construction_mode": "typed_json",
+      "calls": 3,
+      "accepted": true,
+      "events": [
+        "model_stub",
+        "visible_stub",
+        "model_stub",
+        "visible_stub",
+        "model_stub",
+        "visible_stub",
+        "hidden_stub",
+        "hidden_stub"
+      ]
+    },
+    {
+      "scenario": "early_accept",
+      "construction_mode": "typed_json",
+      "calls": 1,
+      "accepted": true,
+      "events": [
+        "model_stub",
+        "visible_stub",
+        "hidden_stub",
+        "hidden_stub"
+      ]
+    },
+    {
+      "scenario": "timeout_budget_exhaustion",
+      "construction_mode": "typed_json",
+      "calls": 3,
+      "accepted": false,
+      "events": [
+        "model_stub",
+        "model_stub",
+        "model_stub"
+      ]
+    },
+    {
+      "scenario": "a_default_dispatch",
+      "construction_mode": "original_prompt",
+      "calls": 1,
+      "accepted": true,
+      "events": [
+        "model_stub",
+        "visible_stub",
+        "hidden_stub",
+        "hidden_stub"
+      ]
+    }
+  ],
+  "prompt_a_chars": 3399,
+  "prompt_b_chars": 2035,
+  "b_removes_a_worked_examples": true,
+  "typed_json_default_prompt_policy_label": "historical_autogrep_default_unchanged",
+  "reviewed_sha256": {
+    "autogrep/config.py": "97dbf09b495fc2e4d020f04a8b99c8c1dbb3578cc023a1c0b69e5f38555838ca",
+    "autogrep/llm_client.py": "b7282beabcdfe41a3031055fe3a2816a50ba1df8efb57aad15ddaebeeae6c061",
+    "pipeline/gptlab_config.py": "d8a520a229647c13a708570949a577fc8aeed537a0a38432b5c141be47ecf2e8",
+    "pipeline/diagnostic_v2.py": "95197ed911ba6be773c02132694cd85bca3e5acbf81d1893fa06f48210b2df4e",
+    "pipeline/typed_rule.py": "5d39dae947e7d4b183a82d695871b1cc0b60ddbf27be34b3f83f3e9ad75fd2d1",
+    "pipeline/raw_capture.py": "c344d041cd6b171183b1ae886f99cd34155c316f7fc07e0924f6bb3ff4435f4a",
+    "pipeline/tests/test_typed_json_construction.py": "07f0d0a5a5ee1a85a40b26639e2d7b7b868a7eaa8ecb5846a326b409df6aa57e",
+    "Research_Log/Diagnostic_20261010/Controlled_2x2_Protocol_Draft_20261012.md": "45a2536e8894d79381f19a6f33c9cb99f9d375a6069cc2ee4845364a3b5849ca",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "926e6197919ef0c7bd62f3c1eee63b542bff2318e49f01ac9111f447d01e5769",
+    "Research_Log/Correction_Log.md": "41558d82de34e32461070f8b41c4a52b7dedb918852898c0cf43131118a6bbb1",
+    "Research_Log/Diagnostic_20261010/verify_condition_b_workflow.py": "5115d0044155a5094f712a5812496464c974f4543264bffa00ccc3458413a58e"
+  },
+  "limitations": "SDK and scanner are mocked; real Semgrep behavior is covered by the separate regression run.",
+  "model_calls": 0,
+  "semgrep_scans": 0
+}

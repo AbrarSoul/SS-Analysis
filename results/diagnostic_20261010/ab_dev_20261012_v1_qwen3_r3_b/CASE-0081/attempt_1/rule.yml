@@ -1,0 +1,33 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  patterns:
+  - pattern-either:
+    - pattern: 'const $VAR = existsSync($PATH) ? readFileSync($PATH, ''utf-8'') :
+        ''''; ... const $REGEX = new RegExp(...); ... if ($REGEX.test($CONTENT)) {
+        ... $CONTENT = $CONTENT.replace($REGEX, $NEWLINE); } else { ... $CONTENT +=
+        ''\n'' + $NEWLINE; }'
+    - pattern: 'let $VAR = existsSync($PATH) ? readFileSync($PATH, ''utf-8'') : '''';
+        ... const $REGEX = new RegExp(...); ... if ($REGEX.test($VAR)) { ... $VAR
+        = $VAR.replace($REGEX, $NEWLINE); } else { ... $VAR += ''\n'' + $NEWLINE;
+        }'
+  - pattern-not: 'const existingEnv = existsSync($PATH) ? dotenv.parse(readFileSync($PATH,
+      ''utf-8'')) : {}; ... const mergedEnv = { ...existingEnv, ...$UPDATES }; ...
+      const safeEnvContent = stringify(mergedEnv); ... writeFileSync($PATH, safeEnvContent,
+      ''utf-8'');'
+  languages:
+  - typescript
+  message: Insecure .env file handling vulnerability. The original code used regex-based
+    string manipulation to update environment variables in .env files, which is prone
+    to injection attacks and improper escaping. This approach can lead to malformed
+    .env files or unintended variable overwrites. The fix properly parses existing
+    .env content into an object, merges updates securely, and uses a dedicated stringify
+    function to ensure proper formatting. This pattern should be avoided as it introduces
+    potential security risks through improper string handling in configuration files.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-117
+    owasp: OWASP-A03:2021
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    technology:
+    - typescript

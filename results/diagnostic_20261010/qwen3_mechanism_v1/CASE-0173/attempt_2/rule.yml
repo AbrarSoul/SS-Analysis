@@ -1,0 +1,22 @@
+rules:
+- id: vuln-hono-cf9a78db
+  patterns:
+  - pattern: const $KEY = $MANIFEST[$PATH] || $PATH
+  - pattern-not: const $KEY = $MANIFEST[$PATH]
+  pattern-inside: "function $FUNC(...) {\n  ...\n}\n"
+  message: Potential insecure default value in asset manifest lookup. The code falls
+    back to using the original path when a manifest key is not found, which could
+    allow unauthorized access to files. Remove the fallback to prevent potential information
+    disclosure or path traversal vulnerabilities.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    category: security
+    cwe:
+    - CWE-20
+    impact: High
+    likelihood: Medium
+    technology:
+    - typescript

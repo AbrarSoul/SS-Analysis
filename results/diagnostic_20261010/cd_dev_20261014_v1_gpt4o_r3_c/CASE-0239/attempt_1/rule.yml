@@ -1,0 +1,24 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  pattern: 'var $VAR = $URL.match(new RegExp(''^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)''))
+
+    '
+  pattern-not: 'var $VAR = $URL.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)/)
+
+    '
+  languages:
+  - javascript
+  message: Potential Regular Expression vulnerability in URL parsing. The pattern
+    may incorrectly handle URLs with '.git' suffix, leading to incorrect project name
+    extraction. Ensure the '.git' suffix is properly handled by using a safer regex
+    pattern.
+  severity: ERROR
+  metadata:
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    category: security
+    cwe: CWE-20
+    owasp: A6:2017-Security Misconfiguration
+    references:
+    - https://github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    technology:
+    - javascript

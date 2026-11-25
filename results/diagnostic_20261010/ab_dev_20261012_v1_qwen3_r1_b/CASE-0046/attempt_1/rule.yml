@@ -1,0 +1,22 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  patterns:
+  - pattern: "if $KEY not in $DONT_SAVE_KEYS:\n    ..."
+  - pattern-not: "if $KEY in $ALLOWED_KEYS:\n    ..."
+  languages:
+  - python
+  message: Detected insecure blacklist-based key validation that can be bypassed.
+    The code uses a blacklist (dont_save_keys) instead of a whitelist (allowed_keys),
+    which is vulnerable to batch assignment attacks. An attacker could inject keys
+    not in the blacklist, leading to unauthorized data manipulation. Fix by switching
+    to a whitelist approach where only explicitly allowed keys are processed.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: A03:2021-Injection
+    references:
+    - https://github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    technology:
+    - python

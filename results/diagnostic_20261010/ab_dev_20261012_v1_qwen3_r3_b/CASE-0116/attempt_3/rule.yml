@@ -1,0 +1,20 @@
+rules:
+- id: vuln-thrift-0919c3d5
+  patterns:
+  - pattern: "socket.getSSLParameters();\n      socket.setSSLParameters(...)"
+  - pattern-not: "socket.getSSLParameters();\n      SSLParameters sslParams = socket.getSSLParameters();\n\
+      \      sslParams.setEndpointIdentificationAlgorithm(\"HTTPS\");\n      socket.setSSLParameters(sslParams);"
+  languages:
+  - java
+  message: Missing endpoint identification algorithm configuration in SSL transport.
+    This vulnerability allows for man-in-the-middle attacks as the client does not
+    verify the server's identity. Fix by setting the endpoint identification algorithm
+    to "HTTPS" using SSLParameters.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-295
+    owasp: OWASP-A03:2021
+    source-url: github.com/apache/thrift/commit/0919c3d5506151514e283a63e1fe1ce83e2449d8
+    technology:
+    - java

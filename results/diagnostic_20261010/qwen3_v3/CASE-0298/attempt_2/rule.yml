@@ -1,0 +1,30 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  pattern: '}><p lang="en" dir="ltr"><a href="${src}?ref_src=twsrc%5Etfw"></a></blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `;
+
+    '
+  pattern-not: '}><p lang="en" dir="ltr">${anchor.outerHTML}</p></blockquote> <script
+    async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `;
+
+    '
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in embed component. The src URL is directly
+    inserted into an HTML anchor tag without proper sanitization, which could allow
+    attackers to inject malicious scripts. Fix by creating a DOM element and using
+    outerHTML instead of direct string interpolation.
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - 79
+    owasp:
+    - A03:2021 - Injection
+    references:
+    - https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A03_2021-Injection
+    technology:
+    - typescript

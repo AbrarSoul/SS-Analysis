@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-10-13T08:45:30.878292+00:00",
+  "model_calls": 0,
+  "semgrep_scans": 0,
+  "coverage_counts": {
+    "total": 100,
+    "passed": 94,
+    "missed": 6,
+    "patched_findings": 0
+  },
+  "failures": [
+    [
+      "qwen3-coder:30b",
+      "B",
+      1,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      2,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      3,
+      "CASE-0171"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      2,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0173"
+    ]
+  ],
+  "eligibility": "11/24",
+  "covered_accepted": "100/195",
+  "uncovered_accepted": 95,
+  "per_case_decisions_reproduced": true,
+  "frozen_builder_hash_matches": true,
+  "previous_reviewed_inputs_changed": [
+    "pipeline/dev_probe.py",
+    "pipeline/tests/test_dev_probe.py"
+  ],
+  "versions": {
+    "python": "3.14.4",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_java": "0.23.5",
+    "tree_sitter_javascript": "0.25.0",
+    "tree_sitter_typescript": "0.23.2"
+  },
+  "tests": "38 probe tests passed in 1.59s; full 82-test suite not rerun"
+}
+Counterexamples retained: 3

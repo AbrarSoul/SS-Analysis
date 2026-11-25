@@ -1,0 +1,44 @@
+{
+  "scan_ok": true,
+  "returncode": 0,
+  "all_targets_scanned": true,
+  "errors": [],
+  "command": [
+    "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+    "--config",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0235/attempt_2/rule.yml",
+    "--json",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-git-ignore",
+    "--jobs=1",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0235/vulnerable_source.ts",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0235/patched_source.ts"
+  ],
+  "validation_seconds": 1.262783792000846,
+  "legacy_accepted": false,
+  "visible_correct": false,
+  "complete_success": false,
+  "samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "label": "positive",
+      "detected": false,
+      "finding_location_correct": false,
+      "finding_lines": [],
+      "outcome": "FN",
+      "sample_path": "benchmark/cases/CASE-0235/vulnerable_source.ts",
+      "sample_sha256": "dc02c5db6957daba99442fda7ebadf78070809425350b081c5aad4f92b87ee9d"
+    },
+    {
+      "sample_type": "original_patched",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0235/patched_source.ts",
+      "sample_sha256": "cc34482e5d64ac51fd09e36a591890da08b8534401a74fbadeb6258e3b2d23bb"
+    }
+  ]
+}

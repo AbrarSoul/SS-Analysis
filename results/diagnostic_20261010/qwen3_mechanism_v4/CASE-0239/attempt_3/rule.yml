@@ -1,0 +1,20 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  pattern-either:
+  - patterns:
+    - pattern: var $MATCH = $URL.match(new RegExp('^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)'))
+    - pattern: var $MATCH = $URL.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)/)
+    - pattern-not: var $MATCH = $URL.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)(?:\.git)?($|#)/)
+  languages:
+  - javascript
+  message: Vulnerable regex matching in hosted-git-info can lead to incorrect project
+    parsing. The regex pattern does not properly handle .git suffix removal, potentially
+    allowing malicious input to bypass validation. Fix by ensuring proper handling
+    of .git suffix in the captured group before decoding.
+  severity: ERROR
+  metadata:
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    category: security
+    cwe: CWE-20
+    technology:
+    - javascript

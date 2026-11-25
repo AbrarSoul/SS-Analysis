@@ -1,0 +1,27 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern-either:
+    - pattern: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+        \n  }><p lang=\"en\" dir=\"ltr\">${$SRC}</p></blockquote>"
+    - pattern: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+        \n  }><p lang=\"en\" dir=\"ltr\">${$SRC}</p></blockquote>\n<script async src=\"\
+        https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>"
+  - pattern-not: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href =\
+      \ `${$SRC}?ref_src=twsrc%5Etfw`;\n\n  }><p lang=\"en\" dir=\"ltr\">${$ANCHOR.outerHTML}</p></blockquote>"
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in embed component. The code directly interpolates
+    user-provided 'src' URL into HTML without proper sanitization, which could allow
+    attackers to inject malicious scripts. The fix properly creates an anchor element
+    and uses outerHTML to safely insert it. To prevent this vulnerability, always
+    sanitize dynamic content before inserting into HTML, or use safe DOM manipulation
+    methods like createElement() with explicit attribute setting.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '79'
+    owasp: OWASP Top 10:2021 - A03:2021 - Injection
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

@@ -1,0 +1,18 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0081.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0081.yml
+@@ -0,0 +1,15 @@
++rules:
++- id: diagnostic-case-0081
++  message: Unescaped environment assignment inserted by string replacement
++  severity: WARNING
++  languages:
++  - typescript
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  patterns:
++  - pattern: $TEXT.replace($REGEX, $ASSIGNMENT)
++  - metavariable-regex:
++      metavariable: $ASSIGNMENT
++      regex: ^[A-Za-z_$][A-Za-z0-9_$]*$

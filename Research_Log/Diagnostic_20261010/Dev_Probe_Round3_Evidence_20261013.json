@@ -1,0 +1,310 @@
+{
+  "created_utc": "2026-10-13T01:01:15.877823+00:00",
+  "model_calls": 0,
+  "semgrep_scans": 0,
+  "previous_counterexamples": [
+    {
+      "label": "patched_global_reference",
+      "status": "fixed: valid unchanged patched source still returns 7"
+    },
+    {
+      "label": "python_comprehension_scope",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "python_default_argument_scope",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "java_block_local_vs_field",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "invalid_patched",
+      "status": "fixed: rejected"
+    }
+  ],
+  "new_counterexamples": [
+    {
+      "label": "python_exception_binding",
+      "input": "def f():\n    token = 1\n    try:\n        raise ValueError(7)\n    except ValueError as token:\n        return token\n",
+      "result": {
+        "case_id": "python_exception_binding",
+        "language": "python",
+        "old_name": "token",
+        "new_name": "token_renamed",
+        "vulnerable_probe": "def f():\n    token_renamed = 1\n    try:\n        raise ValueError(7)\n    except ValueError as token:\n        return token_renamed",
+        "patched_probe": "def f():\n    token_renamed = 1\n    try:\n        raise ValueError(7)\n    except ValueError as token:\n        return token_renamed",
+        "patched_probe_renamed": true
+      },
+      "before": {
+        "type": "ValueError",
+        "str": "7"
+      },
+      "after": {
+        "type": "int",
+        "str": "1"
+      }
+    },
+    {
+      "label": "javascript_default_scope",
+      "input": "function f(x=token) { let token=1; return x+token; }",
+      "result": {
+        "case_id": "javascript_default_scope",
+        "language": "javascript",
+        "old_name": "token",
+        "new_name": "token_renamed",
+        "vulnerable_probe": "function f(x=token_renamed) { let token_renamed=1; return x+token_renamed; }",
+        "patched_probe": "function f(x=token_renamed) { let token_renamed=1; return x+token_renamed; }",
+        "patched_probe_renamed": true
+      },
+      "before": {
+        "value": 11
+      },
+      "after": {
+        "error": "ReferenceError",
+        "message": "token_renamed is not defined"
+      }
+    }
+  ],
+  "coverage_counts": {
+    "total": 100,
+    "passed": 94,
+    "missed": 6,
+    "patched_findings": 0
+  },
+  "groups": {
+    "qwen3-coder:30b / A": {
+      "total": 30,
+      "passed": 30,
+      "missed": 0
+    },
+    "qwen3-coder:30b / B": {
+      "total": 28,
+      "passed": 25,
+      "missed": 3
+    },
+    "gpt-4o / A": {
+      "total": 21,
+      "passed": 18,
+      "missed": 3
+    },
+    "gpt-4o / B": {
+      "total": 21,
+      "passed": 21,
+      "missed": 0
+    }
+  },
+  "failures": [
+    [
+      "qwen3-coder:30b",
+      "B",
+      1,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      2,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      3,
+      "CASE-0171"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      2,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0173"
+    ]
+  ],
+  "eligible_cases": [
+    "CASE-0046",
+    "CASE-0124",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0171",
+    "CASE-0173",
+    "CASE-0184",
+    "CASE-0222",
+    "CASE-0231",
+    "CASE-0276",
+    "CASE-0340"
+  ],
+  "accepted_episodes": 195,
+  "uncovered_accepted": 95,
+  "unchanged_failure_set": true,
+  "previous_reviewed_inputs_changed": [
+    "pipeline/dev_probe.py",
+    "pipeline/tests/test_dev_probe.py"
+  ],
+  "reviewed_sha256": {
+    "Research_Log/Diagnostic_20261010/Dev_Probe_Followup_Evidence_20261013.json": "9446c27fe96b4352bae0df34e849a2297afd0d335124726d412cb46839bbdbc2",
+    "Research_Log/Diagnostic_20261010/audit_dev_probe_round3_20261013.py": "700558e229afc8bb92f25b056d6c37dbcd02b8f219c313a47ce5cecb8310e7ab",
+    "benchmark/model_context/CASE-0046.json": "1d9fad9455176eb4539337cd4deb246ad1655d8e47190a04b057702b3d8a7bbd",
+    "benchmark/model_context/CASE-0063.json": "86ca4ea8930282f6555539dd18fa4d8195692f4ec49af279636b15d04c3ccd52",
+    "benchmark/model_context/CASE-0081.json": "c1059be5bf714c686fe6cee5391d66aa8b736bb34f8368b93d919b33498a439c",
+    "benchmark/model_context/CASE-0116.json": "b54d8a90ee53ae1e172f6db09668263574a992696d6dcfb9864f29231cc0135a",
+    "benchmark/model_context/CASE-0124.json": "91f66179b44fb31d5e831dc0ad2e412eb13f98beb690148500be84dd70f69f6d",
+    "benchmark/model_context/CASE-0134.json": "546b0fd276c3e91ff1821b5d71a4514b5ee37fea1b400a751c15a9c41c4f511d",
+    "benchmark/model_context/CASE-0136.json": "db43e7c364b128ae082e93d302ed78538ac90752a38cf6e557fc306454f6a335",
+    "benchmark/model_context/CASE-0163.json": "cf38666233a3973b24c933e8a7be50882a24e84989216a325a4b5130d7de1c1e",
+    "benchmark/model_context/CASE-0171.json": "0c25044a01ca8e19cb0cca16ebbcaebb82d4b84f62b3434208ebe320f55688a3",
+    "benchmark/model_context/CASE-0173.json": "876e9ac80d8a28653db2c81660a23e14327763f426ed626491b118e1a8973280",
+    "benchmark/model_context/CASE-0184.json": "f9f4b262f384fe7a84630fb8ad5dba0c4853df5dcc3700a8751fd03a42e86afd",
+    "benchmark/model_context/CASE-0193.json": "c856a0c358ee1e75701bbe7e1a1ae6c36f2cfd9995b647dc1b16141850341af1",
+    "benchmark/model_context/CASE-0220.json": "ed3ca42254684c62c3e847754386bfc2a472b141b240442216f1d9b1e981f86c",
+    "benchmark/model_context/CASE-0221.json": "15bef46124f7d41d5faf47ae54a1b5fb2cb2cd32fc08132968baaf46f63219f2",
+    "benchmark/model_context/CASE-0222.json": "ec05274cfe8cb7a60ea99714e6bdea66e33f28ab288c20cc1ff419e11a18611f",
+    "benchmark/model_context/CASE-0231.json": "23a3bfa7282f40b96cc2495f7a392ff4c3a87be629bf0bfc3841056f9ccbd1dc",
+    "benchmark/model_context/CASE-0235.json": "5ad432c17825071d81a833c5ba79a2fbe26b961a846cd5408d05652577b77ef2",
+    "benchmark/model_context/CASE-0238.json": "a3936108a02da4ed523b1872951656aed0d0052f66140f8b2487d22eb82b25a7",
+    "benchmark/model_context/CASE-0239.json": "18f445d6bb5903fb0a41f226894005ca7d84d68953c7885b2304843d2eab3572",
+    "benchmark/model_context/CASE-0276.json": "50ce60abaef50eb5762b726c9cc773978a18877e1b03780288f671318842d9be",
+    "benchmark/model_context/CASE-0298.json": "a465847a2fc33ca9e970d6ba924f0d249d23b50c3c08455ac12d9f085a3768d0",
+    "benchmark/model_context/CASE-0323.json": "3311df0946f8cc8da124122252c6a740fb133bab2753c888f38a846294d3011c",
+    "benchmark/model_context/CASE-0339.json": "93543b21a8214acce67f39fa09575030ca9df75f9154faaaacbd822a8a4d4246",
+    "benchmark/model_context/CASE-0340.json": "fae119ec749c8bf162f39233e9e8cb914b6c62ee8a0de9b298a394873915bdc1",
+    "pipeline/dev_probe.py": "4e6ddeaff0c7d174bef171fa9a4759f95dd582ed2185a3376ec0eb7e5d391779",
+    "pipeline/probe_coverage_check.py": "4b99ebc251337b7e466395bd8f564fee8783cccda5c2df5e9d67d9eb80269cb7",
+    "pipeline/tests/test_dev_probe.py": "f7144781d6848752d5d3b887dfc89a061ec781ddb7b0b92446ff5d72c6467af3",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0046/patched_probe.py": "64d670d523b8e8ae366d44a146ac8e27b05d7f000e3592d3715ad845a90e9c49",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0046/vulnerable_probe.py": "fefcba322b918d3eb9fd729789e6cc5b628e2931260dc8ad7bb65bdc13c5f375",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0124/patched_probe.py": "85fe4d2115a24caa59eca1993e33913d00779bb072fbc55f2c08a2e0b39e53bc",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0124/vulnerable_probe.py": "2ae8ce46c3adc4965ebda0dec3b6b2a45925040cd7e30beba1b6c3d1893068de",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0134/patched_probe.py": "68e9fb89e61b313d508ec8bc253afa42c7f4fe6022bc9c39fdc444d6fd6f637c",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0134/vulnerable_probe.py": "d71eb0504b213a777bbba5f3bd29b8d575b4d6c540638e8413d5c1f7e593e957",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0136/patched_probe.java": "0978ba115f658052e57b2ee31f3e7069fda2dfd025a9faf21b5f467a7279201c",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0136/vulnerable_probe.java": "592748b817eb05976d0d94fdecc5be3506efffa54e2b15bbabbc50049524ff31",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0171/patched_probe.java": "58253bc9c1fd00517cfe3c74a8d47a24909bfc6dd8dd21c0d25912305273b472",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0171/vulnerable_probe.java": "aa67693669b3359bab9156852dd03322bbf508672b16525be7d4ab371b645265",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0173/patched_probe.ts": "86ecf91a3ef83fce58d46b121cdfbaf7c6720674b91bd36cfc8c9455c04250dd",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0173/vulnerable_probe.ts": "63bab04963352f5414c12cbb568353e7c59d6dec76bb7d685639ea645bc51ea0",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0184/patched_probe.java": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0184/vulnerable_probe.java": "99da2c3c0e019c2f34af1ac539c186622126120769452fe18ec77f60d6389fbc",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0222/patched_probe.py": "f16b5726dc17417ce86a67d5d868b48675f6ca73a14832be5ea62859d5ae7d72",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0222/vulnerable_probe.py": "9f9c2a0bf1ca4f93190c2809aef1eaa0f3c3f075538ccd5116d8e65a0a1a38fb",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0231/patched_probe.py": "595e81bd7daeb7bcb27fb22a0718c3a5716d606f63529eb571b81114d3d729b2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0231/vulnerable_probe.py": "62cca48c46fa99eae864606398a1b8175a8912e5bd5fbd6ef84145e96bc4bb07",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0276/patched_probe.py": "2ca6848196b893bd8ef46aee089bed39c545e7f606c9676eb06146554d2c27a2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0276/vulnerable_probe.py": "a1f7156c8c5cc1ac6fc8bb277a3d8274931ad21828fc49672f0402404e7f4657",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0340/patched_probe.ts": "036f8e37f71f0b5947eec67803299c27a798615da1a6ab6bc7b8f49f22920ddf",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/_probe_inputs/CASE-0340/vulnerable_probe.ts": "b71bc75753051a27e3be595ffc352a13bfefbf9592c24872a7540461746ac582",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0124/stdout.json": "3b7b737e040f4c88bbf96446df096ef88f320b958c0b7220c4a087e71e6cf391",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0134/stdout.json": "a3a90caa7474261d22c08c833d15a00f90ba810ee56dbaa0bcff9218692cf3a1",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0136/stdout.json": "9c2657223303cd15d302b222d0310dd157ba9925e417c75799d6e56cc7bf0c33",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0171/stdout.json": "87c14e003a99adafa8d591d653689cb548b394ec96dcbb7b328e56870b0e7fbc",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0173/stdout.json": "6b215169ea28f495b775606893d3cc23af4bd6f0d43b9ea5c44f72ee3c5aa68d",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0222/stdout.json": "04ebdca130ea5d0b1d2b01c4985be358d7774a4814bff1134897776f6aeb5382",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r1/CASE-0340/stdout.json": "f5fc7da8140cf7ea7e582469f6e3937156f3287955d494d6656bb6ea1772e91d",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0124/stdout.json": "76f0ca29658ba06c705e5c3b598855c1ccb9bf7afe06b339d89cbf89e0f03db3",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0134/stdout.json": "9f0f125619b78509ae931a06f9d48c13b037fda9ff13fd8191008317af2f090b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0136/stdout.json": "0f97cdcfe9c46d90ac239727c1a6881dc5c531853eed4ff2a8fbcb5edfcfff93",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0171/stdout.json": "e4d8781c991b0a2f5e59bcbad1959628b9ee42a7b424b6d804fdaccda364b70f",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0173/stdout.json": "ffa231e03182966049933cdecb37911295a1e38b259cb5bf6b3f092a889230b2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0222/stdout.json": "8d2f6ca1a0d2da5414b5b9de1648ce618e9703ba06bb36398cc5cb353771a6a4",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r2/CASE-0340/stdout.json": "a8a12c17e9894784c888f9026d6cf24678f28c0bcfac0afa2cb728cc387ae1b3",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0124/stdout.json": "80698235a5f413bbf17aad8c3cb78d3aa1961d2075edaa91fbbbc5f5ace1cdef",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0134/stdout.json": "5000cc07c776fef78fe98834a01fc5699e3ef29cf41451fc9a0c082fe5afadf5",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0136/stdout.json": "e1ef151feccbbe4f3085e4ed0dfd4a74b52ebf506a828f31de1741e396b99d9c",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0171/stdout.json": "5c9f96d60af26548bea7b4a8861812470c0d6f357ec2f4503de724ec77d23e65",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0173/stdout.json": "928027d9bceceaca972431f6a212c0e87acceee449215e05a931445b28c3fda8",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0222/stdout.json": "54b2eba68af056613da27adcc777219b05455ef45e22ccbff7ed3ef728f5b502",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/A/r3/CASE-0340/stdout.json": "7e5b479c430d53da37d05da440446e7d1bc996b0943d00d4377b3f957eba10a6",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0124/stdout.json": "8d5cdcf89d1696137638cc02917ad8c9b2b4efb1dc67c3f3987df65848b4fd0a",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0134/stdout.json": "f1cb81ca48ba1804d2bcf47b667737f2ee5ded498b74eb08cedb43aa4977bfb8",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0136/stdout.json": "8886d7959606cbacb7336b73f6a91e4dd1f414f20d4e8921ca73ee8efd227ce2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0171/stdout.json": "d1fe0240169efb88223989004bc03653b7f4c39704acd42fda1af6c80d3766e1",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0173/stdout.json": "98901f6edb4fe3d569cb216e178d9a9d4329821ea47a838edf0ad53d3c8a9680",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0222/stdout.json": "c4ba527d4c6ae4f627bba79ee2aa52f32f69cfc04de378ac2f4a41cf1d5ee8f4",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r1/CASE-0276/stdout.json": "f9f54dd9e2a74db29a9636058a17afc4fe024bcc37151f84c19760f98abd7dfe",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0124/stdout.json": "d9aaea8964e7c5b205dbf993f5878986076d7ed9ebc9851f82bb5486aaf3443c",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0134/stdout.json": "633b62251d656809fc3e84ef7e0dc7309afd9f2ef555c2775ecc89f62fefe3de",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0136/stdout.json": "dda9d654ae69510088db0218a16f8af25ecb26b5728d1e6edf79fb7feee1f0b2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0171/stdout.json": "b5419e48fb230a75cab05db37a47b6ad8447cb971f7f57a1a110502723bfec79",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0173/stdout.json": "df105452350166b4fccdbf3e1420fc087898f0a7d232e149dc023a778020dda1",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0222/stdout.json": "ee8e94bb5dd00b2f31275f4b843009c0006661c6d2366905a65da5d3799ae204",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r2/CASE-0276/stdout.json": "dc8aa412dfa40ea58abb851aabd834903c407daaa89fd4a4672868c1b150d5a5",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0124/stdout.json": "c6724fc4f3a538a20acf6632cd97ec2343427c0ba2ebb4b7a8ac8f02c94f9a83",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0134/stdout.json": "4c0660c82d568a9212499abab550c50ce64847c6fd6508ccc6b2cdbeffa2b0c3",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0136/stdout.json": "c8748d234aa0f67a0d92b476a74c7f3fc3caa7a67e1bfd333ef255e830e2bac4",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0171/stdout.json": "fd1056a782042f4cec7aa80efce40a827cdc3e65b061cb173241755602bf1af6",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0173/stdout.json": "79d828d8f39062590443f262450cfc2a4820e6d593d3d4623098892c590c5abc",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0222/stdout.json": "42cf84540287215cebf9d4fda0716032b107c71ca70081ffcc8fc108897c18b7",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/gpt-4o/B/r3/CASE-0276/stdout.json": "2177ca99eedfd49333152dd85829f397fe374c01a212b662f654a887dec7b8d6",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0046/stdout.json": "cab9edb1e502e8bb8a08e70ad91a4bb4145354c048c7eb7dd965ee0fdb9f9c92",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0124/stdout.json": "a19cfc2904cdfdf1c9966d4886fe5978a9e1949097d7be98c7e7f2517f773f5b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0134/stdout.json": "a6e10841b7f90ff6dad8209222d7abeef3cac894e8c01675caa6bd3228d54bcb",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0136/stdout.json": "8ca8809e2d0ef506a507954d2563793028774c9f5d456535e067b4bfe5e0ae7a",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0171/stdout.json": "4d7879933b95382c0cdfc0ac1739f44332380cd7b6c1c32b4de2e166ab94c5a2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0173/stdout.json": "4d8900c649e348bf64729395465de832847856fcf22004486530723b06974a8b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0184/stdout.json": "01582680f3e0e766fb81d294d0e4ec5cf4228d89bb484c0212ed556e92b7509b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0222/stdout.json": "c26f724e204f06a1468b9c0e0b31463850aec2f0122df920c92b9026ce7371a0",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0276/stdout.json": "8ffeb8371404886f18c9dfcd6505b01aa71c2480ba996c10c49c5733d6e70e6b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r1/CASE-0340/stdout.json": "9b09fb6a907fe1ab648e898e02e55ab26c677a2c5009ee922130815c9903897b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0046/stdout.json": "180df085a158a421cabbfb48d74130a14fbc5904375560dc9ac188354b59998e",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0124/stdout.json": "9a33d75624d48e6d7ae72d9f040e1a3c1b161fcb60e9516a167a0ff124e3c446",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0134/stdout.json": "47ae054f9c9f134d0aae9424fede3af9b5f24771d1775dabedfbb940ada37f79",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0136/stdout.json": "92eaefb6c2e428f8ab9de78ee00fa17e4558eff56db59f622fd70076a89a88dd",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0171/stdout.json": "ad191d29fc9492eec5d625dde1da5d8d87fc800774cc08a2075b8cbac783d1e8",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0173/stdout.json": "4aba05d0536e0be751d143cd6e110e1995c261f8d4ab6f85339489044fdcca98",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0184/stdout.json": "8fedf00ea1242ff11a04793432f46f037316f611fe66ad8caf36409da2c1f6e0",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0222/stdout.json": "ddd2b4d9654901ecfb55d229c1daa635bd9b8166ed79f1155fdc7717cdacfaef",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0276/stdout.json": "93d6031801159a3eea5316830a1e607ed778f4fa0f6f9552ae746c0efbadbc17",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r2/CASE-0340/stdout.json": "8415ee17df1ba13f7dcbca8ed1f549895da0c5f3f2129691fd23e2fc7b5faec2",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0046/stdout.json": "ab58381c5a2fad1c078d01419b57e03e2e339773c8206e0962c31204cff13166",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0124/stdout.json": "32a3f1a0ebb347edb1575fcadfae09c1f23a63985ae111f1c1e9bdf9f745c484",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0134/stdout.json": "861e91d9947964cd5385a91904d8955b5cff044fd8b60bdd6d2ca36cca0fc529",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0136/stdout.json": "c276083277ea74f83341f945dc5dbb0a4f55387fdf45f7395e3a5303d7e5dd29",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0171/stdout.json": "f72b7b77f20387eeb32721e9401f818922185b1212ef508ed48fc463e83fa2cb",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0173/stdout.json": "11209ff6c90e250bb1f41165f84f7c1efc4673fa1016ba891a0546f83c5ebec1",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0184/stdout.json": "aea832425f31dde3f685dbee30d7eefcb0cc325604020162fa0aaa5c6b4acc7e",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0222/stdout.json": "1a68ea707c41839d23fbdbeef0e1b83e8cf8f9126d28fbae2ae1be47729adfca",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0276/stdout.json": "b52c792e2b008da89dbd1cada4a591bf2938e9ab829649237870275ac7014aa8",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/A/r3/CASE-0340/stdout.json": "bf3658eb7f1e77e9caabc449ec99c84ae0c5d6e232e32905e0a6750ca716d61d",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0046/stdout.json": "366cf588b85bc01bd037f42b19ab64617e7e99e2a92da8a019cdb0086aa614bd",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0124/stdout.json": "a0afc685240ded947763d1a5662120511823cb9578285152553e8b00f65c9956",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0134/stdout.json": "8557e4bd3972dc027900c64e888255a27392559fe41eb0ac7df8d8e372d8a712",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0136/stdout.json": "1d143ae44fad61f27f5f57ff9b4987bb83b8a81822cece47266f801fcd00bd58",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0171/stdout.json": "3e5a3113086723607147c0c12c6edff7519de94fb41a116408e8ed43737e0df9",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0184/stdout.json": "7f3e616d19e33b96712a7d1a33a9b8f1889342920a46df3b7c4ba25049bf3f55",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0222/stdout.json": "8ac119e8ef389b9ad647abc68f3eb5129ca9202ce17adb780c80be31d072d5df",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0276/stdout.json": "06cd88e2a39d4a84fc457e3e6a3dc65f2d13d4ee3c0326ca3cbeff92f20f3683",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r1/CASE-0340/stdout.json": "10747c36f5f10bd5a636e96ee022bef79a537c5e91edd994813f48a38a82c267",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0046/stdout.json": "3736b32736ddfc6f8e750a73768a9dd8888f19afa5a04806f58c0e7bc780cc31",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0124/stdout.json": "79a80a826416ead1ea65dec212c05a1437ccb43fc56282b2242f40879e4a7f99",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0134/stdout.json": "4f19218de301b313b6f9d0decb1602fb84b537432ba5575914c2a8af01eb5e98",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0136/stdout.json": "0e4d87a4eff6e0818c820b69e9d99d744504a000447e10f21f148fc66026c93b",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0171/stdout.json": "06ef2a3e6aa735c26f3cceb6ad494b72a3012b11ae6fc7d12bd3f53cb74abd01",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0173/stdout.json": "7cfdcd89f9bd50dc7535dea86fa6178b81a1e873814c8383cf66d7f1d4ffa56e",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0184/stdout.json": "164c879ccee318397da261c616284c68ae96d4d1f35e23a9b06bb56978b4c38f",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0222/stdout.json": "5bf43fac77e1aa932c42c4d26b8f8188437f90df5f005ab91b3350f534dd1101",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0276/stdout.json": "7b15149a234f0ef255aa7ee7d34352356111b8bf514cfbad845eda35e63916aa",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r2/CASE-0340/stdout.json": "f36dd6b2b7f164df7f5c5bb04e45937721883b5a2054ddce8d669741c72e0960",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0046/stdout.json": "10a3001bbacbd8bcaa098ab9463dc4670e225a483819508c4fb62a0c4eb676bf",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0124/stdout.json": "75acee2459aa097e16d029f97ba7b0a10e892562dfd50cb2fc5896665b1a1952",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0134/stdout.json": "0f935d941d134b2b05b4f5fa5688dfad381ef91abc2c907ba0d7d7e729662dc3",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0136/stdout.json": "f9d3f0fa31d8fad9888c23ac06c1336cf7a6882abf1c14163b85b670b2dc3e9f",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0171/stdout.json": "4e7e580a9fb87ac717177663a610ea81d43c6a6726b2647756ba6df88949b742",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0184/stdout.json": "a8347f910450ec92cf55da5939c3b610fdec159533cf2f0eb3931820556f65e6",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0222/stdout.json": "ccc1742dc0c1b1f9366b25c9762df2f5481356d39a46f8a703da45fc7004c1c3",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0276/stdout.json": "a43639d8783ef08cb0264a41cf00bcf0f10f6f24739adf2cd873dad065e307ce",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/qwen3-coder_30b/B/r3/CASE-0340/stdout.json": "401a3ad3e62ebf46cde1a0100e5d1d2884e75f03b1fbe947b267259e676c21bd",
+    "results/diagnostic_20261010/_probe_coverage_20261013T005231042394Z/summary.json": "3f8fb469ef37e62d9467de0dd72fe7fdc46ea94c8ec4cad6198bd0f5dfb721f8"
+  }
+}

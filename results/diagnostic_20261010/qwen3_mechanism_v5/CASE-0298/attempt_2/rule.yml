@@ -1,0 +1,25 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: '}><p lang="en" dir="ltr"><a href="${...}"></a></blockquote> <script
+      async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      `;
+
+      '
+  - pattern-not: "const anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n\
+      }><p lang=\"en\" dir=\"ltr\">${\n  anchor.outerHTML\n}</p></blockquote> <script\
+      \ async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\
+      \ `;\n"
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in Twitter embed component. Untrusted source
+    URL is directly inserted into HTML without proper sanitization or escaping, allowing
+    potential injection of malicious scripts. Fix by creating a proper DOM element
+    and using outerHTML instead of direct string interpolation.
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: CWE-79
+    technology:
+    - typescript

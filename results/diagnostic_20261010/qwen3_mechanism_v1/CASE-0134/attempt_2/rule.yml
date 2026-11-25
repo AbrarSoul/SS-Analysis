@@ -1,0 +1,24 @@
+rules:
+- id: vuln-apprise-e20fce63
+  patterns:
+  - pattern: re.compile(r'(?P<events>([A-Z0-9_-]+/?)+)?')
+  - pattern-not: re.compile(r'((?P<events>(/[A-Z0-9_-]+)+))\?')
+  pattern-inside: "def $FUNC(...):\n  ...\n"
+  message: 'Vulnerable regex pattern allows for path traversal or injection attacks
+    due to improper handling of event names in IFTTT notifications. The regex pattern
+    ''([A-Z0-9_-]+/?)+'' permits nested slashes and can be exploited to manipulate
+    the event path. Fix by using a stricter pattern that only allows forward slashes
+    at the beginning of each segment: ''((?P<events>(/[A-Z0-9_-]+)+))?'''
+  severity: ERROR
+  languages:
+  - python
+  metadata:
+    source-url: github.com/caronc/apprise/commit/e20fce630d55e4ca9b0a1e325a5fea6997489831
+    category: security
+    cwe:
+    - CWE-20
+    technology:
+    - python
+  fix: Change regex pattern from r'(?P<events>([A-Z0-9_-]+/?)+)?' to r'((?P<events>(/[A-Z0-9_-]+)+))?'
+  metavariable-pattern:
+    $FUNC: .*

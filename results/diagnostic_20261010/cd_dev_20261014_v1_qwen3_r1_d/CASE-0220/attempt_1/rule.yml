@@ -1,0 +1,20 @@
+rules:
+- id: vuln-phpldapadmin-dd6e9583
+  patterns:
+  - pattern: http_request.setRequestHeader('Content-length', parameters.length);
+  - pattern-not: http_request.setRequestHeader('Content-length', parameters.length);
+  - pattern-not: http_request.setRequestHeader('Connection','close');
+  languages:
+  - javascript
+  message: Potential insecure HTTP header manipulation vulnerability. The code sets
+    the 'Content-length' header based on parameters.length, which could allow an attacker
+    to manipulate request size and potentially bypass security checks or cause denial
+    of service. Remove or properly validate all dynamic header values.
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-16
+    owasp: OWASP-A03:2021
+    source-url: github.com/mhuertos/phpLDAPadmin/commit/dd6e9583a2eb2ca085583765e8a63df5904cb036
+    technology:
+    - javascript

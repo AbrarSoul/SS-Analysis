@@ -1,0 +1,76 @@
+"""Freeze a 24-case, outcome-stratified DEVELOPMENT diagnostic; never a test set."""
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import random
+
+from eligible_cases import eligible_supported_cases, load_manifest, VERSION
+
+ROOT = Path(__file__).resolve().parents[1]
+DEST = ROOT / "benchmark/diagnostic_20261010"
+MODEL_DIR = "qwen3-coder_30b__autogrep_default"
+SEED = 20261010
+
+
+def main():
+    manifest = load_manifest()
+    eligible = eligible_supported_cases(manifest)
+    gen_path = ROOT / "results/runs_followup_20261008" / MODEL_DIR / "generation_log.jsonl"
+    samples_path = ROOT / "results_corrected/runs_followup_20261008" / MODEL_DIR / "sample_execution_log.jsonl"
+    gen = {g["case_id"]: g for g in map(json.loads, gen_path.read_text().splitlines())
+           if g["condition"] == "autogrep" and g["case_id"] in eligible}
+    samples = defaultdict(dict)
+    for s in map(json.loads, samples_path.read_text().splitlines()):
+        if s["condition"] == "autogrep":
+            samples[s["case_id"]][s["sample_type"]] = s["outcome"]
+    strata = defaultdict(list)
+    for cid in sorted(eligible):
+        g, s = gen[cid], samples[cid]
+        if not (g["yaml_valid"] and g["semgrep_valid"] and s.get("original_vulnerable") == "TP"
+                and s.get("original_patched") == "TN"):
+            category = "visible_failure"
+        elif any(s.get(k) != "TP" for k in ("variant_vulnerable_1", "variant_vulnerable_2")):
+            category = "hidden_positive_failure"
+        elif any(s.get(k) != "TN" for k in ("variant_safe", "benign_lookalike")):
+            category = "hidden_negative_failure"
+        else:
+            category = "complete_success"
+        strata[category].append(cid)
+    # Scarce strata first; within each stratum prefer unused repositories and
+    # languages least represented in the selection so far. Seeded tie breaks.
+    rng = random.Random(SEED)
+    tie = {c: rng.random() for c in sorted(eligible)}
+    lang_counts, used_repos, selected = Counter(), set(), []
+    for category in sorted(strata, key=lambda s: (len(strata[s]), s)):
+        remaining = list(strata[category])
+        if len(remaining) < 6:
+            raise RuntimeError(f"Insufficient cases for frozen stratum {category}")
+        for _ in range(6):
+            cid = min(remaining, key=lambda c: (manifest[c]["repository"] in used_repos,
+                      lang_counts[manifest[c]["language"]], tie[c]))
+            remaining.remove(cid)
+            m = manifest[cid]
+            lang_counts[m["language"]] += 1
+            used_repos.add(m["repository"])
+            selected.append({"case_id": cid, "stratum": category, "language": m["language"],
+                             "repository": m["repository"], "historical_outcomes": samples[cid]})
+    payload = {"version": "diagnostic-20261010-v1", "purpose": "outcome-stratified development; not confirmatory",
+               "seed": SEED, "eligibility_version": VERSION, "source_model": "qwen3-coder:30b",
+               "created_utc": datetime.now(timezone.utc).isoformat(),
+               "selection_method": "6 per mutually exclusive stratum; scarce strata first, unused repos, least represented language, seeded tie break",
+               "population_counts": {k: len(v) for k, v in sorted(strata.items())},
+               "selected_language_counts": dict(lang_counts), "case_ids": [r["case_id"] for r in selected],
+               "cases": selected, "source_sha256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                                                        for p in (gen_path, samples_path)}}
+    DEST.mkdir(parents=True, exist_ok=True)
+    target = DEST / "selection.json"
+    with target.open("x") as f:
+        json.dump(payload, f, indent=2)
+        f.write("\n")
+    print(json.dumps(payload, indent=2))
+
+
+if __name__ == "__main__":
+    main()

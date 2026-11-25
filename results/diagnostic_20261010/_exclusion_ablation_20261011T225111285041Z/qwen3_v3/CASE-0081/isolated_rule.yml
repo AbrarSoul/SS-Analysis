@@ -1,0 +1,31 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  patterns:
+  - pattern: "import { readFileSync, writeFileSync, existsSync } from 'fs';\n...\n\
+      let $ENVCONTENT = existsSync($PATH) ? readFileSync($PATH, 'utf-8') : '';\n...\n\
+      for (const [key, value] of Object.entries($UPDATES)) {\n    const regex = new\
+      \ RegExp(`^(#\\\\s*)?${key}=.*$`, 'gm');\n    const newLine = `${key}=\"${value}\"\
+      `;\n    if (regex.test($ENVCONTENT)) {\n        $ENVCONTENT = $ENVCONTENT.replace(regex,\
+      \ newLine);\n    } else {\n        $ENVCONTENT += `\\n${newLine}`;\n    }\n\
+      }\n...\nwriteFileSync($PATH, $ENVCONTENT, 'utf-8');\n"
+  languages:
+  - typescript
+  message: Vulnerable .env file manipulation pattern detected. The code directly manipulates
+    environment variable content using regex replacement which can lead to injection
+    vulnerabilities and improper handling of special characters. This approach is
+    dangerous because it doesn't properly escape values or handle edge cases in environment
+    variable parsing. Fix by using a proper dotenv parsing and stringifying library
+    like 'dotenv' and 'dotenv-stringify' to safely merge and write environment variables.
+  severity: ERROR
+  metadata:
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    category: security
+    cwe:
+    - CWE-77
+    owasp:
+    - OWASP-A03:2021
+    references:
+    - https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A03_2021-Injection
+    - https://github.com/motdotla/dotenv
+    technology:
+    - typescript

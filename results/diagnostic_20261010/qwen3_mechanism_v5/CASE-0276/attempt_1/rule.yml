@@ -1,0 +1,25 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  pattern-either:
+  - 'isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+
+    '
+  - 'isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+
+    '
+  pattern-not: isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Missing SourcelessFileLoader in isinstance check. This vulnerability allows
+    unauthorized code execution by bypassing security checks for sourceless file loading.
+    Fix by including SourcelessFileLoader in the isinstance condition.
+  severity: ERROR
+  metadata:
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    category: security
+    cwe: CWE-22
+    references:
+    - https://docs.python.org/3/library/importlib.html#module-importlib._bootstrap_external
+    technology:
+    - python

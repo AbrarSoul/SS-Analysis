@@ -1,0 +1,20 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[$CHARS]/g,
+    '');
+  pattern-not: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<{}]/g,
+    '');
+  languages:
+  - javascript
+  message: Potential insecure regex pattern in string replacement. The regex '/[<{}]/g'
+    is vulnerable to regex injection attacks and should be properly escaped or validated.
+    Use a more restrictive character class or sanitize input before regex operations.
+  severity: ERROR
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-117
+    owasp: OWASP-A03:2021
+    references:
+    - https://owasp.org/www-community/attacks/Command_Injection
+    technology: javascript

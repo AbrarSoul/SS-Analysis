@@ -1,0 +1,139 @@
+{
+  "verified_utc": "2026-10-12T00:53:57.998269+00:00",
+  "reference_cases": 24,
+  "sample_outcomes": {
+    "TP": 72,
+    "FP": 12,
+    "TN": 60,
+    "complete_success": 15
+  },
+  "precision_gap_cases": {
+    "CASE-0046": [
+      "original_patched"
+    ],
+    "CASE-0063": [
+      "benign_lookalike"
+    ],
+    "CASE-0116": [
+      "original_patched",
+      "variant_safe"
+    ],
+    "CASE-0163": [
+      "variant_safe"
+    ],
+    "CASE-0184": [
+      "benign_lookalike"
+    ],
+    "CASE-0193": [
+      "benign_lookalike"
+    ],
+    "CASE-0235": [
+      "original_patched"
+    ],
+    "CASE-0238": [
+      "variant_safe",
+      "benign_lookalike"
+    ],
+    "CASE-0339": [
+      "original_patched",
+      "variant_safe"
+    ]
+  },
+  "limitations": [
+    "Location correctness checked against retained evaluation fields; annotations not independently adjudicated.",
+    "Passing a reference rule does not establish transformation semantics.",
+    "Power scenarios omit repeated-trial correlation, repository clustering and multiplicity."
+  ],
+  "power_method": "Two-sided exact conditional McNemar; unconditional power summed over discordance count.",
+  "power_scenarios": [
+    {
+      "absolute_difference": 0.1,
+      "discordance": 0.25,
+      "two_sided_alpha": 0.05,
+      "alternative_win_probability": 0.175,
+      "alternative_loss_probability": 0.075,
+      "first_n_with_at_least_80_percent_power": 207,
+      "power_by_n": {
+        "80": 0.3536779376900717,
+        "100": 0.43991834900126986,
+        "200": 0.7867739340859115,
+        "207": 0.801765562939864
+      }
+    },
+    {
+      "absolute_difference": 0.05,
+      "discordance": 0.25,
+      "two_sided_alpha": 0.05,
+      "alternative_win_probability": 0.15,
+      "alternative_loss_probability": 0.1,
+      "first_n_with_at_least_80_percent_power": 817,
+      "power_by_n": {
+        "80": 0.09879868835894232,
+        "100": 0.11919687185703941,
+        "200": 0.24974485084794504,
+        "817": 0.8003174141579906
+      }
+    }
+  ],
+  "scipy_version": "1.18.1",
+  "reviewed_sha256": {
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0046/evaluation.json": "89e1378f0548f45ac6eb937d28e0422e6c929a3e2c4ac44a5014d9285f4fe53f",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0046/stdout.json": "546c43afcce86b59d5955b2eb0c8badc509abe9a8d023e2be9f14138456f2822",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0063/evaluation.json": "f898e298d9ea1bf1e86ab61fe19c8b90c5b1dfac95dc11750b8a32b16d7b45b1",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0063/stdout.json": "7a381fc167b052aca3ac1d723f4bffc6d43f2d48cceca98de0f6d8e07fd655ac",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0081/evaluation.json": "ecdf64f20fb99b2af66a782a8d53e54202f8817d4121944f43c284066109172d",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0081/stdout.json": "7d4977fc91c80435adf22b7f83cd78c7e2d7eafb8f393eb4013de2400ce61f44",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0116/evaluation.json": "a00f8e443a8db26d9694183f5faa1ab47e3f3a1749601bdc47bd3764698d34ed",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0116/stdout.json": "9388f7aff9db7a85655de0ebe266eee0616451be8204ce6cb24bf7f4156e2a11",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0124/evaluation.json": "6138dd72cfb9811753b7bda5e347379adc1929768cb47cbbe6d0cf337818598d",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0124/stdout.json": "d6f656bed7a2bf12acd41249d3d66272d78100fc79166b6f386de3bf983b0bf3",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0134/evaluation.json": "6022b99cc737f99d01ae2e5ad33808f68573c7a74253f8a96c7e81bca9736f56",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0134/stdout.json": "2d352ec5ec0999910d2817dc91daac54c38a301431c5a3a3e28d0be6c4bef3e0",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0136/evaluation.json": "daba2c15d8eceae67088e627dafe98ace55aac45eb57b28a93698563aa89cc78",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0136/stdout.json": "5f3bab4d2c498a4fe9924108805a29d810d4b651bb911ba33b0dc1968314b45f",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0163/evaluation.json": "4ae26447a6ebe63cec13ec4624828006912fd2590db76c79199644b45cbc8ef4",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0163/stdout.json": "a6b1caa80c65c5b76246c06f250ec8acf3f9bda13e174863cedbba76bdd218e3",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0171/evaluation.json": "78e86caf4ed2a5e63c3e5bb6c281ea32976a3ea776f75d61b112bcc844876131",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0171/stdout.json": "901f4dc5c8b5fe48093a791c6df4feee0baaec045c8d68fc308bf458d147f69e",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0173/evaluation.json": "cba6d920272bc86e1df638a8a928616ecbcc18e447a92949ed1e8186ef9c5a9f",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0173/stdout.json": "5d45614cc1dd0c359c7f137a6a27252a06975fc2b70f32122f29172d96c45a7a",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0184/evaluation.json": "9a6b31592b13208b303b423eca98527410ed28b22037f2ee8171e1bf5e73231b",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0184/stdout.json": "1cf6b1f0df7bcaacde498f7ff53d19e577eb44c60fdc5f5005eb057dd3c37f0e",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0193/evaluation.json": "3b1cf89ced79267848c3a2a3f02d4b6fbdda5c521a7697ac0cf0418733b97172",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0193/stdout.json": "79ffac08bbd5e2eb25f732e0b0058c4519d387f8bb01ab32d16b3b214129cd14",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0220/evaluation.json": "1b13ae867b5bec15951296a12b70bb4c455020a2ff4fba89acc3366d9a0bc9ee",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0220/stdout.json": "0ae7bf73cd9be94e155615462261307d3c635e2a562d6a0b12aac01f0f71d89b",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0221/evaluation.json": "948e12c2fa55ab7411d78832d62c1c31c0c142b3206caca7648f149dc7fde61e",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0221/stdout.json": "70287430a2f87b00b2671e0c025fc31eec0ad3b0e4ea5cdba75a04b832349cc0",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0222/evaluation.json": "4cca6fe06a49c0f632b0680a8545ef064c553deba3b8842882f0ebef5a89ec7b",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0222/stdout.json": "056d267e8d781983bb6b74d19821e4c6ab45c76a34bc9e7b9e4fe1ff8eaeb1aa",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0231/evaluation.json": "3eb9173446cf9173e97f82e044819ccbaefc99c9c0003ee094c6d96e40644c1d",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0231/stdout.json": "61128f4af846ac22e5ebe5303eff5a33daf536f57c68696e09b69fed4421c33b",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0235/evaluation.json": "fdc971b7fe9dbc0d47bf726c1d64aba499d0d952ad0306ec30174390affdcd14",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0235/stdout.json": "32ebe2bf8673d8e8bc2257e19479b7a8457384055cc24fe0e6a79de4d9670809",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0238/evaluation.json": "829be96f668f40af91b0448737582851f405c8d1ed92817a958f27c5bb330053",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0238/stdout.json": "2cdd70e5aa8bf30876ee7139c79427c6dc5084efbce395f2ea11c9033eb25761",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0239/evaluation.json": "8044532ac0feb50c6d596d0c03247bd093f067349eebe00510bdaf47c15c7ab9",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0239/stdout.json": "ded97d4a993e640215d31af641caf8b1c7f8ce7a67fb30073e0517ba3382b47b",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0276/evaluation.json": "a0c7bd5ffc26b12bc45abbaa5452a53ca19aebfcd44e63c566d8de38ddfffab8",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0276/stdout.json": "e717f0952bf1625530410e1a78e921fbc50400e82f16dc34e2b518dc0411e99a",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0298/evaluation.json": "5b0f22f51c75bdb5356f6dccccb446b6e48be53253b5defa31679885e4785f2d",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0298/stdout.json": "13a0443172adac00f3a0e7f74f86733947ad68195a21dc16120cad2bdb8a20a7",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0323/evaluation.json": "ff20bda8de5e91c63b8d84a0e3ee668dcf8a919429020bbb8975717ec1e20c2b",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0323/stdout.json": "8e3468b94b61cc291c39dda286d8e26ff1d6025e606dcf0f84368d86ef8a2c5a",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0339/evaluation.json": "bd289e8d1a260b8192ff5095d4c26cf13889bf0b4b33f101a793d9cb80a33b7f",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0339/stdout.json": "8e01c3634339cda0e36202983b4b47d2a813b8dd6083296ee6cc08188dd13f9e",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0340/evaluation.json": "4b76cbfd420c38c8a9c965eb0584d41d9d752a230327d34cd294a1cafe25c5a9",
+    "results/diagnostic_20261010/_item3_reference_rule_check/CASE-0340/stdout.json": "d7bcb4dd0b005f78ccab90edcffa187522bca0939ac038e7ab66a86d782c661a",
+    "results/diagnostic_20261010/_item3_reference_rule_check/summary.json": "a23eab231841165a9953980802233c04d050cbb74e3b3aeb3c8a6e204d2e135a",
+    "Research_Log/Diagnostic_20261010/Controlled_2x2_Protocol_Draft_20261012.md": "a09eacf1fda4ab4669bd847cb52aa3d1930a19b4465c055b0101fa932e98b902",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "ad334b6956426b272efd6e8d1d242249e869c5d58979961e0a8d1147f3758955",
+    "Research_Log/Correction_Log.md": "6f1554b47663d97a3256bb77b4a5e8fb900b771977409dbf476be1bb04f88fce",
+    "pipeline/diagnostic_v2.py": "b767dfee70546a5a1c05dee45db928e926e3e4517d6e002fdc64cb45e9ec2aba",
+    "pipeline/typed_rule.py": "5d39dae947e7d4b183a82d695871b1cc0b60ddbf27be34b3f83f3e9ad75fd2d1",
+    "pipeline/tests/test_typed_rule.py": "565095b7693172688ab50ef0f1ba3010b688c631da3e3824d813cad6deae852f",
+    "Research_Log/Diagnostic_20261010/verify_item3_and_protocol_power.py": "d1e4e53afa4fcc74c8a75ab8e3a10c42d92b55612af5a56def61bda5fa58bdbc"
+  },
+  "model_calls": 0,
+  "new_semgrep_scans": 0
+}

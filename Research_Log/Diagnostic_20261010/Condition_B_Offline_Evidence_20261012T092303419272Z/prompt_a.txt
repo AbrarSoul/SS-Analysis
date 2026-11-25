@@ -1,0 +1,91 @@
+Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in python code.
+
+    CONTEXT:
+    Repository: github.com/review-owner/review-repo
+    Commit: deadbeef
+
+    PATCH CHANGES:
+    File: app.py
+-foo(untrusted)
++foo("safe")
+
+    SEMGREP PATTERN SYNTAX GUIDE:
+    - Use $VARNAME to match any expression
+    - Use ... to match any sequence of statements
+    - Use |> to pipe patterns together
+    - Use pattern-inside to limit matches to specific code blocks
+    - Use pattern-not to exclude specific patterns (like the fixed version)
+    - Use metavariable-pattern to add constraints on variables
+
+    REQUIRED FIELDS:
+    1. id: "vuln-review-repo-deadbeef" (must be unique and descriptive)
+    2. pattern: Clear pattern matching the vulnerable code structure
+    3. languages: ["python"]
+    4. message: Detailed description of:
+    - What the vulnerability is
+    - Why it's dangerous
+    - How to fix it
+    5. severity: One of [ERROR, WARNING, INFO]
+
+    RECOMMENDED FIELDS:
+    - pattern-not: Pattern that should not match (e.g., fixed version)
+    - pattern-inside: Context pattern for where the rule should match
+    - pattern-not-inside: Context pattern for where the rule should not match
+    - metadata:
+        source-url: github.com/review-owner/review-repo/commit/deadbeef
+        category: security
+        cwe: [relevant CWE number]
+        owasp: [relevant OWASP category]
+        references: [links to documentation or standards]
+        technology: [python]
+
+    IMPORTANT GUIDELINES:
+    1. Make patterns as specific as possible to minimize false positives
+    2. Include pattern-not for the fixed version when possible
+    3. Add relevant metadata like CWE numbers and OWASP categories
+    4. Write clear, actionable messages explaining both the problem and solution
+    5. Consider different variations of the vulnerable pattern
+
+    EXAMPLES OF HIGH-QUALITY RULES:
+    
+    rules:
+    - id: "unsafe-deserialization"
+        pattern: pickle.loads($DATA)
+        pattern-not: pickle.loads(trusted_data)
+        pattern-inside: |
+            def $FUNC(...):
+                ...
+        languages: ["python"]
+        message: "Detected unsafe deserialization using pickle.loads(). This can lead to remote code execution."
+        severity: ERROR
+        metadata:
+            category: security
+            cwe: CWE-502
+            owasp: A8:2017-Insecure Deserialization
+            references:
+                - https://docs.python.org/3/library/pickle.html#pickle.loads
+
+    - id: "sql-injection"
+        patterns:
+            - pattern: execute($QUERY)
+            - pattern-not: execute("SELECT ...")
+            - pattern-not: execute(sanitized_query)
+        languages: ["python"]
+        message: "Potential SQL injection detected. Use parameterized queries instead."
+        severity: ERROR
+        metadata:
+            category: security
+            cwe: CWE-89
+    
+
+    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:
+    rules:
+    - id: "vuln-review-repo-deadbeef"
+    pattern: [Your pattern here]
+    pattern-not: [Fixed version pattern]
+    languages: ["python"]
+    message: [Clear description]
+    severity: ERROR
+    metadata: [Additional context]
+
+    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.

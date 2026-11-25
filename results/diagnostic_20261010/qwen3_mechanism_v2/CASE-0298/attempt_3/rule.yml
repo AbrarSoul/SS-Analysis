@@ -1,0 +1,34 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: 'const $ANCHOR = document.createElement("a");
+
+      $ANCHOR.href = $SRC;
+
+      ...
+
+      $ANCHOR.outerHTML
+
+      '
+  - pattern-not: 'const $ANCHOR = document.createElement("a");
+
+      $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;
+
+      ...
+
+      $ANCHOR.outerHTML
+
+      '
+  message: Potential XSS vulnerability due to untrusted source data being directly
+    inserted into HTML. The src value should be properly sanitized or escaped before
+    being used in DOM operations to prevent cross-site scripting attacks.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - 79
+    technology:
+    - typescript

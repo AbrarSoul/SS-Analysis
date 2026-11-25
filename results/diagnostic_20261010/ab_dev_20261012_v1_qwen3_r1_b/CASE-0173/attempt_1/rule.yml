@@ -1,0 +1,22 @@
+rules:
+- id: vuln-hono-cf9a78db
+  patterns:
+  - pattern: const $KEY = ASSET_MANIFEST[$PATH] || $PATH
+  - pattern-inside: src/adapter/cloudflare-workers/utils.ts
+  - pattern-not: const $KEY = ASSET_MANIFEST[$PATH]
+  languages:
+  - typescript
+  message: 'Potential path traversal vulnerability in Cloudflare Workers asset manifest
+    handling. The code previously fell back to using the raw path when ASSET_MANIFEST[path]
+    was undefined, which could allow attackers to access arbitrary files by manipulating
+    the path parameter. This bypasses the intended manifest-based lookup and can lead
+    to information disclosure or unauthorized file access. Fix: Remove the fallback
+    to direct path usage and only use ASSET_MANIFEST[path] for secure asset resolution.'
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '22'
+    owasp: OWASP Top 10:2021 - A01:2021 - Broken Access Control
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    technology:
+    - typescript

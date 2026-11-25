@@ -1,0 +1,26 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  patterns:
+  - pattern-either:
+    - pattern: res.writeHead(...); ... res.end();
+    - pattern: res.statusCode = 403; ... res.end();
+    - pattern: res.writeHead(...); ... return;
+  - pattern-inside: class HttpServer { ... }
+  - pattern-not: if (pathname.indexOf(publicDir) !== 0) {
+  - pattern-not: res.statusCode = 403;
+  - pattern-not: res.end();
+  languages:
+  - typescript
+  message: Directory traversal vulnerability in HttpServer.ts. The application fails
+    to validate that the requested pathname is within the allowed public directory,
+    allowing attackers to access arbitrary files on the server. This occurs when pathname.indexOf(publicDir)
+    !== 0 check is missing or bypassed. The fix requires validating that the requested
+    path starts with the public directory path before processing the request.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    owasp: OWASP-A05:2021
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    technology:
+    - typescript

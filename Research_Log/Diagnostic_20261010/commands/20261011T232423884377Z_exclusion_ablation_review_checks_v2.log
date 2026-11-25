@@ -1,0 +1,157 @@
+python_current_serializer {'lines': [2, 4], 'scan_ok': True, 'target_sha256': '51da0e516f420fc411e0c20a5453c79be8b09aa30cc356e4ab055ee05cae78c8'}
+python_nested_control {'lines': [2], 'scan_ok': True, 'target_sha256': '51da0e516f420fc411e0c20a5453c79be8b09aa30cc356e4ab055ee05cae78c8'}
+real_bare {'lines': [633], 'scan_ok': True, 'target_sha256': 'e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090'}
+real_sibling_named {'lines': [633], 'scan_ok': True, 'target_sha256': 'e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090'}
+real_nested_named {'lines': [], 'scan_ok': True, 'target_sha256': 'e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090'}
+real_nested_anonymous {'lines': [633], 'scan_ok': True, 'target_sha256': 'e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090'}
+real_sibling_impossible {'lines': [633], 'scan_ok': True, 'target_sha256': 'e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090'}
+Evidence: /Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/exclusion_review_artifacts_20261011T232424448186Z/findings.json
+{
+  "instances": 42,
+  "gained": 0,
+  "lost": 9,
+  "unchanged": 33,
+  "losses": [
+    [
+      "qwen3_v3",
+      "CASE-0220"
+    ],
+    [
+      "qwen3_v3",
+      "CASE-0323"
+    ],
+    [
+      "qwen3_mechanism_v2",
+      "CASE-0220"
+    ],
+    [
+      "qwen3_mechanism_v3",
+      "CASE-0220"
+    ],
+    [
+      "qwen3_mechanism_v3",
+      "CASE-0323"
+    ],
+    [
+      "qwen3_mechanism_v4",
+      "CASE-0063"
+    ],
+    [
+      "qwen3_mechanism_v4",
+      "CASE-0220"
+    ],
+    [
+      "qwen3_mechanism_v4",
+      "CASE-0323"
+    ],
+    [
+      "qwen3_mechanism_v5",
+      "CASE-0323"
+    ]
+  ],
+  "original_to_isolated_success_losses": 1,
+  "isolated_to_rewritten_success_losses": 8,
+  "exclusion_loss_patterns": [
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "pattern": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection', 'close');\n",
+      "pattern_not": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection', 'close');\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "4b6c0e08443621e8f56b3d31e91960a03efa32776a1d52f1019c4769d32f92be"
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "pattern": "'div(embeddedContent,oembed-provider-*) script': {\n    attributes: '*'\n}\n",
+      "pattern_not": "'div(embeddedContent,oembed-provider-*) script': {\n    attributes: '*'\n},\n",
+      "exact_text_equal": false,
+      "semantic_pair_sha256": "be86b393ae33ceafd6667af7564557248bf3be0eccf3b3e6ebfa77d3e46a8b3b"
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "pattern": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection','close');\n",
+      "pattern_not": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection','close');\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "d73264aebf7357fcc5b9cd60d5fed89810be0e7b2419fc8b6374e0f8ff665f0c"
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "pattern": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection','close');\n",
+      "pattern_not": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection','close');\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "d73264aebf7357fcc5b9cd60d5fed89810be0e7b2419fc8b6374e0f8ff665f0c"
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "pattern": "'div(embeddedContent,oembed-provider-*) script': {\n    attributes: '*'\n},\n",
+      "pattern_not": "'div(embeddedContent,oembed-provider-*) script': {\n    attributes: '*'\n},\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "b8a3b57b2dada810c71f9e918529d3bdbee102b4da78ec527615ad056b7220cc"
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "pattern": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection','close');\n",
+      "pattern_not": "$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\n$HTTP_REQUEST.setRequestHeader('Connection','close');\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "d73264aebf7357fcc5b9cd60d5fed89810be0e7b2419fc8b6374e0f8ff665f0c"
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "pattern": "{\n    'div(embeddedContent,oembed-provider-*) script': {\n        attributes: '*'\n    }\n}\n",
+      "pattern_not": "{\n    'div(embeddedContent,oembed-provider-*) script': {\n        attributes: '*'\n    }\n}\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "a75d7c4e5ffc665a750e99f3405e98871efe3a565465e260a786c0614f958775"
+    },
+    {
+      "run": "qwen3_mechanism_v5",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "pattern": "'div(embeddedContent,oembed-provider-*) script': {\n    attributes: '*'\n}\n",
+      "pattern_not": "'div(embeddedContent,oembed-provider-*) script': {\n    attributes: '*'\n}\n",
+      "exact_text_equal": true,
+      "semantic_pair_sha256": "69986e7707ddd2a0f6daf793a74b1ca4b44343e742210e8931d9d40797bc3a94"
+    }
+  ],
+  "hidden_fp_removed": [
+    [
+      "qwen3_v3",
+      "CASE-0184",
+      "benign_lookalike"
+    ]
+  ],
+  "scan_failures": [
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0184",
+      "arm": "rewritten",
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "results.diagnostic_20261010._exclusion_ablation_20261011T225111285041Z.qwen3_v3.CASE-0184.vuln-git-client-plugin-75ea3fe0",
+          "message": "Rule parse error in rule results.diagnostic_20261010._exclusion_ablation_20261011T225111285041Z.qwen3_v3.CASE-0184.vuln-git-client-plugin-75ea3fe0:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nFile.createTempFile($PREFIX, $SUFFIX)\nFile.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)\nFile.createTempFile($PREFIX, $SUFFIX, $WORKSPACE).toFile()\n\n----- end pattern -----\n"
+        },
+        {
+          "message": "Semgrep exited with status 2"
+        }
+      ]
+    }
+  ],
+  "all_126_scans_clean": false,
+  "all_source_hashes_and_sample_hashes_verified": true,
+  "full_original_outcome_vectors_match_historical": true
+}

@@ -1,0 +1,168 @@
+{
+  "real_model_calls": 0,
+  "real_semgrep_scans": 0,
+  "scenarios": {
+    "normal": {
+      "accepted": true,
+      "generation_calls": 1,
+      "actual_probe_invocations": 1,
+      "reported_resources": {
+        "generation_calls": 1,
+        "visible_scans": 1,
+        "probe_scans": 1,
+        "repair_calls": 0
+      },
+      "verified_probe_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+      },
+      "scan_inputs": [
+        {
+          "vulnerable_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+          "patched_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+        }
+      ],
+      "probe_errors": [
+        null
+      ],
+      "snapshot_filenames": [
+        "patched.py",
+        "vulnerable.py"
+      ]
+    },
+    "original_during_generation": {
+      "accepted": true,
+      "generation_calls": 1,
+      "actual_probe_invocations": 1,
+      "reported_resources": {
+        "generation_calls": 1,
+        "visible_scans": 1,
+        "probe_scans": 1,
+        "repair_calls": 0
+      },
+      "verified_probe_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+      },
+      "scan_inputs": [
+        {
+          "vulnerable_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+          "patched_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+        }
+      ],
+      "probe_errors": [
+        null
+      ],
+      "snapshot_filenames": [
+        "patched.py",
+        "vulnerable.py"
+      ]
+    },
+    "original_between_attempts": {
+      "accepted": true,
+      "generation_calls": 2,
+      "actual_probe_invocations": 2,
+      "reported_resources": {
+        "generation_calls": 2,
+        "visible_scans": 2,
+        "probe_scans": 2,
+        "repair_calls": 1
+      },
+      "verified_probe_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+      },
+      "scan_inputs": [
+        {
+          "vulnerable_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+          "patched_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+        },
+        {
+          "vulnerable_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+          "patched_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+        }
+      ],
+      "probe_errors": [
+        null,
+        null
+      ],
+      "snapshot_filenames": [
+        "patched.py",
+        "vulnerable.py"
+      ]
+    },
+    "crlf": {
+      "rejected_before_generation": true
+    },
+    "same_basename": {
+      "accepted": false,
+      "generation_calls": 3,
+      "actual_probe_invocations": 0,
+      "reported_resources": {
+        "generation_calls": 3,
+        "visible_scans": 3,
+        "probe_scans": 3,
+        "repair_calls": 2
+      },
+      "verified_probe_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+      },
+      "scan_inputs": [],
+      "probe_errors": [
+        "probe snapshot integrity check failed before scan",
+        "probe snapshot integrity check failed before scan",
+        "probe snapshot integrity check failed before scan"
+      ],
+      "snapshot_filenames": [
+        "function.py"
+      ]
+    },
+    "snapshot_drift": {
+      "accepted": false,
+      "generation_calls": 3,
+      "actual_probe_invocations": 0,
+      "reported_resources": {
+        "generation_calls": 3,
+        "visible_scans": 3,
+        "probe_scans": 3,
+        "repair_calls": 2
+      },
+      "verified_probe_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "730c723b23e17070a1063743f242bb4e4a7ef4f13f771f5a2d8db709baf30f0c"
+      },
+      "scan_inputs": [],
+      "probe_errors": [
+        "probe snapshot integrity check failed before scan",
+        "probe snapshot integrity check failed before scan",
+        "probe snapshot integrity check failed before scan"
+      ],
+      "snapshot_filenames": [
+        "patched.py",
+        "vulnerable.py"
+      ]
+    }
+  },
+  "collection": {
+    "count": 143,
+    "files": [
+      "pipeline/tests/test_combined_gate.py",
+      "pipeline/tests/test_run_model_case_cd.py",
+      "pipeline/tests/test_diagnostic_regressions.py",
+      "pipeline/tests/test_dev_probe.py",
+      "pipeline/tests/test_typed_json_construction.py",
+      "pipeline/tests/test_typed_rule.py",
+      "pipeline/tests/test_rule_validator_classification.py"
+    ],
+    "summary": "143 tests collected in 0.61s",
+    "full_suite_executed_by_review": false
+  },
+  "reviewed_sha256": {
+    "pipeline/diagnostic_v2.py": "241307f19727d46bdf7cfc22e552c52987b8edd55259d88933da7993420baef4",
+    "pipeline/tests/test_run_model_case_cd.py": "8686ea8770cbb5c75d5e066c7dbd327c7132184c03132e81292a56b601f57025",
+    "pipeline/dev_probe.py": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "pipeline/probe_cache.py": "baab8da9901d026d9ce0ec6812cd5740fab823735669cc93c764cfc3142bcd03",
+    "pipeline/combined_gate.py": "2ecebcaf51d95a252f5409f4285de7ce6e393b06a1e9ba0142e6dcae890e8de5"
+  }
+}

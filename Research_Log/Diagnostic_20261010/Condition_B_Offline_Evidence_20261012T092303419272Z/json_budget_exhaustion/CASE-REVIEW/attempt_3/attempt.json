@@ -1,0 +1,7 @@
+{
+  "attempt": 3,
+  "parsed": false,
+  "rule_path": null,
+  "visible_evaluation": null,
+  "feedback": "Invalid JSON: Expecting value: line 1 column 1 (char 0)"
+}

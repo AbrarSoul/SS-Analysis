@@ -1,0 +1,294 @@
+{
+  "case_id": "CASE-0298",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f",
+            "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = document.createElement(\"a\");\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+          "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx"
+        ],
+        "validation_seconds": 1.5589706250029849,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+            "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+            "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+          }
+        ]
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nconst $VAR = document.createElement(\\\"a\\\");\\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\\n  }><p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${$SRC}?ref_src=twsrc%5Etfw\\\"></a></blockquote>\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    },
+    {
+      "attempt": 2,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_2/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_2.vuln-notesnook-e87f5e5f",
+            "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_2.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = document.createElement(\"a\");\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_2/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+          "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx"
+        ],
+        "validation_seconds": 1.291290666002169,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+            "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+            "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+          }
+        ]
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_2.vuln-notesnook-e87f5e5f\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_2.vuln-notesnook-e87f5e5f:\\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nconst $VAR = document.createElement(\\\"a\\\");\\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\\n  }><p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${$SRC}?ref_src=twsrc%5Etfw\\\"></a></blockquote>\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    },
+    {
+      "attempt": 3,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_3/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f",
+            "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = document.createElement(\"a\");\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_3/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+          "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx"
+        ],
+        "validation_seconds": 1.3127674169991224,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+            "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+            "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+          }
+        ]
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f:\\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nconst $VAR = document.createElement(\\\"a\\\");\\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\\n  }><p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${$SRC}?ref_src=twsrc%5Etfw\\\"></a></blockquote>\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    }
+  ],
+  "raw": {
+    "scan_ok": false,
+    "returncode": 2,
+    "all_targets_scanned": true,
+    "errors": [
+      {
+        "code": 2,
+        "level": "error",
+        "type": "Rule parse error",
+        "rule_id": "results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f",
+        "message": "Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r3_b.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst $VAR = document.createElement(\"a\");\n  $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n  }><p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>\n----- end pattern -----\n"
+      },
+      {
+        "message": "Semgrep exited with status 2"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0298/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/variant_vulnerable_01.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/variant_vulnerable_02.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/variant_safe_01.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/benign_lookalike.tsx"
+    ],
+    "validation_seconds": 1.2459653750011057,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+        "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+        "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/variant_vulnerable_01.tsx",
+        "sample_sha256": "34443a1bb436b02f61cebc53d7d923305b0657b34d407963337c3c663bd6bfe6"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/variant_vulnerable_02.tsx",
+        "sample_sha256": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/variant_safe_01.tsx",
+        "sample_sha256": "3913dd6f0d7f1cea2f4f3a6c32ecb1ff28e5517f4d580579f7655f3fe8473f19"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/benign_lookalike.tsx",
+        "sample_sha256": "c7c9530576f1842d5ce1c6987597885859085e6da0b7c830824c7b3d763727ab"
+      }
+    ]
+  },
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "calls_recorded": 3,
+  "input_tokens": 3197,
+  "output_tokens": 1081,
+  "generation_seconds": 8.024965248998342
+}

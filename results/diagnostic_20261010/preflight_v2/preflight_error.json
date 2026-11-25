@@ -1,0 +1,5 @@
+{
+  "error": "Pinned Semgrep 1.177.0 required",
+  "stdout": "1.140.0\n",
+  "stderr": "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.5.0) or chardet (7.4.3)/charset_normalizer (3.4.4) doesn't match a supported version!\n  warnings.warn(\n"
+}

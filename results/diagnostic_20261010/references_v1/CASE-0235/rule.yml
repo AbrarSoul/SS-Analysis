@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0235
+  message: URL pathname joined into public directory
+  severity: WARNING
+  languages:
+  - typescript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern: path.join($ROOT, ($URL.pathname || ".").replace(...))

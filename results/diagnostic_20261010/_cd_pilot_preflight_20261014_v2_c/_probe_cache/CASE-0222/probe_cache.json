@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "python",
+    "vulnerable_function_sha256": "d7cdfcb8662cce84a26b4a9a8998b2d9036472c0ab30587cc4b919208251fa5c",
+    "patched_function_sha256": "cd6ffee534b5bc2b09ce2bf091c3f5224e6c0b27b03a7d97c3fbac132897584d",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0222",
+      "language": "python",
+      "old_name": "headers",
+      "new_name": "headers_renamed",
+      "vulnerable_probe": "def connect(self) -> dict:\n    \"\"\"\n    Set up the connection required by the handler.\n    Returns:\n        HandlerStatusResponse\n    \"\"\"\n\n    headers_renamed = {\n        'Content-Type': 'application/json',\n    }\n\n    data = '{' + f'\"userName\": \"{self.connection_data[\"username\"]}\",\"password\": \"{self.connection_data[\"password\"]}\"' + '}'\n\n    response = requests.post(self.base_url + '/apiv2/login', headers=headers_renamed, data=data, verify=False)\n\n    return {\n        'Authorization': '_dremio' + response.json()['token'],\n        'Content-Type': 'application/json',\n    }",
+      "patched_probe": "def connect(self) -> dict:\n    \"\"\"\n    Set up the connection required by the handler.\n    Returns:\n        HandlerStatusResponse\n    \"\"\"\n\n    headers_renamed = {\n        'Content-Type': 'application/json',\n    }\n\n    data = '{' + f'\"userName\": \"{self.connection_data[\"username\"]}\",\"password\": \"{self.connection_data[\"password\"]}\"' + '}'\n\n    response = requests.post(self.base_url + '/apiv2/login', headers=headers_renamed, data=data)\n\n    return {\n        'Authorization': '_dremio' + response.json()['token'],\n        'Content-Type': 'application/json',\n    }",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "0647ec6cdefe56e41e47bb847ff24280c0bf2f2479d2055ef8f6026885059026"
+}

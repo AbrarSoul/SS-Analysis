@@ -1,0 +1,19 @@
+rules:
+- id: vuln-micronaut-core-9d1eff5c
+  pattern: new DefaultHttpHeaders(false)
+  pattern-not: new DefaultHttpHeaders()
+  languages:
+  - java
+  message: Usage of DefaultHttpHeaders constructor with 'false' parameter detected.
+    This can lead to security vulnerabilities by disabling header validation. Remove
+    the 'false' parameter to enable proper header validation and prevent potential
+    header injection attacks.
+  severity: ERROR
+  metadata:
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    category: security
+    cwe: CWE-113
+    owasp: OWASP-A01:2021
+    references:
+    - https://owasp.org/www-community/attacks/HTTP_Response_Splitting
+    technology: java

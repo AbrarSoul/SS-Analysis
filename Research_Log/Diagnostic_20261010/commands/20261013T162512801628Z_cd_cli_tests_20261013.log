@@ -1,0 +1,576 @@
+.FFFFFFFFFF............................................................. [ 83%]
+..............                                                           [100%]
+=================================== FAILURES ===================================
+_________ test_cd_cli_complete_offline_24_case_run[C-original_prompt] __________
+
+cli = (<function cli.<locals>.invoke at 0x10bcc5220>, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10ba8d220>
+condition = 'C', construction = 'original_prompt'
+
+    @pytest.mark.parametrize("condition,construction", [("C", "original_prompt"), ("D", "typed_json")])
+    def test_cd_cli_complete_offline_24_case_run(cli, monkeypatch, condition, construction):
+        invoke, auth_calls = cli
+        active = {}
+        events = []
+        original_load = dv.load_case
+        def load(cid, config):
+            active.update(cid=cid, call=0)
+            return original_load(cid, config)
+        monkeypatch.setattr(dv, "load_case", load)
+        real_llm = dv.LLMClient
+        def factory(config):
+            assert config.construction_mode == construction
+            llm = object.__new__(real_llm)
+            llm.config, llm.last_error = config, None
+            def completion(**kwargs):
+                active["call"] += 1
+                cid, attempt = active["cid"], active["call"]
+                events.append((cid, "generation", attempt))
+                assert kwargs["temperature"] == 0 and kwargs["max_tokens"] == 2048
+                rule = {"id": "offline-rule", "message": "offline", "severity": "ERROR",
+                        "languages": [cd.validate_frozen_manifest(cd.DEFAULT_MANIFEST)[0]["entries"][cid]["language"]],
+                        "pattern": "foo($X)"}
+                # Decoder failure consumes a call, not a scan, in both construction paths.
+                text = "unparseable output" if cid == "CASE-0134" and attempt == 1 else (
+                    json.dumps(rule) if construction == "typed_json" else yaml.safe_dump({"rules": [rule]}))
+                return NS(choices=[NS(message=NS(content=text))], usage=NS(prompt_tokens=10, completion_tokens=5))
+            llm.client = NS(chat=NS(completions=NS(create=completion)))
+            return llm
+        monkeypatch.setattr(dv, "LLMClient", factory)
+        def visible(rule, cid, manifest, ann, out, *, hidden):
+            events.append((cid, "hidden" if hidden else "visible", active["call"]))
+            return {"scan_ok": True, "visible_correct": True, "legacy_accepted": True,
+                    "complete_success": hidden, "samples": [], "errors": []}
+        monkeypatch.setattr(dv, "scan", visible)
+        def probe_scan(rule, vp, pp, out):
+            cid, attempt = active["cid"], active["call"]
+            events.append((cid, "probe", attempt))
+            assert "_probe_snapshot" in vp.parts and vp != pp
+            assert vp.is_file() and pp.is_file()
+            if cid == "CASE-0136":
+                raise subprocess.TimeoutExpired("offline-semgrep", 120)
+            return {"scan_ok": True, "vulnerable_detected": not (cid == "CASE-0046" and attempt == 1),
+                    "patched_detected": False}
+        monkeypatch.setattr(probe_coverage_check, "scan_probe", probe_scan)
+>       out = invoke("model", condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_cd_cli.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10bff6120>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+____________ test_cd_cli_complete_offline_24_case_run[D-typed_json] ____________
+
+cli = (<function cli.<locals>.invoke at 0x10c0ec0f0>, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10bcbeb10>
+condition = 'D', construction = 'typed_json'
+
+    @pytest.mark.parametrize("condition,construction", [("C", "original_prompt"), ("D", "typed_json")])
+    def test_cd_cli_complete_offline_24_case_run(cli, monkeypatch, condition, construction):
+        invoke, auth_calls = cli
+        active = {}
+        events = []
+        original_load = dv.load_case
+        def load(cid, config):
+            active.update(cid=cid, call=0)
+            return original_load(cid, config)
+        monkeypatch.setattr(dv, "load_case", load)
+        real_llm = dv.LLMClient
+        def factory(config):
+            assert config.construction_mode == construction
+            llm = object.__new__(real_llm)
+            llm.config, llm.last_error = config, None
+            def completion(**kwargs):
+                active["call"] += 1
+                cid, attempt = active["cid"], active["call"]
+                events.append((cid, "generation", attempt))
+                assert kwargs["temperature"] == 0 and kwargs["max_tokens"] == 2048
+                rule = {"id": "offline-rule", "message": "offline", "severity": "ERROR",
+                        "languages": [cd.validate_frozen_manifest(cd.DEFAULT_MANIFEST)[0]["entries"][cid]["language"]],
+                        "pattern": "foo($X)"}
+                # Decoder failure consumes a call, not a scan, in both construction paths.
+                text = "unparseable output" if cid == "CASE-0134" and attempt == 1 else (
+                    json.dumps(rule) if construction == "typed_json" else yaml.safe_dump({"rules": [rule]}))
+                return NS(choices=[NS(message=NS(content=text))], usage=NS(prompt_tokens=10, completion_tokens=5))
+            llm.client = NS(chat=NS(completions=NS(create=completion)))
+            return llm
+        monkeypatch.setattr(dv, "LLMClient", factory)
+        def visible(rule, cid, manifest, ann, out, *, hidden):
+            events.append((cid, "hidden" if hidden else "visible", active["call"]))
+            return {"scan_ok": True, "visible_correct": True, "legacy_accepted": True,
+                    "complete_success": hidden, "samples": [], "errors": []}
+        monkeypatch.setattr(dv, "scan", visible)
+        def probe_scan(rule, vp, pp, out):
+            cid, attempt = active["cid"], active["call"]
+            events.append((cid, "probe", attempt))
+            assert "_probe_snapshot" in vp.parts and vp != pp
+            assert vp.is_file() and pp.is_file()
+            if cid == "CASE-0136":
+                raise subprocess.TimeoutExpired("offline-semgrep", 120)
+            return {"scan_ok": True, "vulnerable_detected": not (cid == "CASE-0046" and attempt == 1),
+                    "patched_detected": False}
+        monkeypatch.setattr(probe_coverage_check, "scan_probe", probe_scan)
+>       out = invoke("model", condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_cd_cli.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10bfed9b0>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+____ test_conflicting_condition_flags_fail_before_provider_access[C-extra0] ____
+
+cli = (<function cli.<locals>.invoke at 0x10c0ec9e0>, []), condition = 'C'
+extra = ['--construction-mode', 'typed_json']
+
+    @pytest.mark.parametrize("condition,extra", [
+        ("C", ["--construction-mode", "typed_json"]), ("D", ["--construction-mode", "original_prompt"]),
+        ("C", ["--acceptance-policy", "legacy"]), ("D", ["--prompt-variant", "design_v1"])])
+    def test_conflicting_condition_flags_fail_before_provider_access(cli, condition, extra):
+        invoke, auth_calls = cli
+        with pytest.raises(SystemExit):
+>           invoke("model", condition, extra)
+
+pipeline/tests/test_cd_cli.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c042510>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+____ test_conflicting_condition_flags_fail_before_provider_access[D-extra1] ____
+
+cli = (<function cli.<locals>.invoke at 0x10c0ec7d0>, []), condition = 'D'
+extra = ['--construction-mode', 'original_prompt']
+
+    @pytest.mark.parametrize("condition,extra", [
+        ("C", ["--construction-mode", "typed_json"]), ("D", ["--construction-mode", "original_prompt"]),
+        ("C", ["--acceptance-policy", "legacy"]), ("D", ["--prompt-variant", "design_v1"])])
+    def test_conflicting_condition_flags_fail_before_provider_access(cli, condition, extra):
+        invoke, auth_calls = cli
+        with pytest.raises(SystemExit):
+>           invoke("model", condition, extra)
+
+pipeline/tests/test_cd_cli.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c0431d0>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+____ test_conflicting_condition_flags_fail_before_provider_access[C-extra2] ____
+
+cli = (<function cli.<locals>.invoke at 0x10c0ed430>, []), condition = 'C'
+extra = ['--acceptance-policy', 'legacy']
+
+    @pytest.mark.parametrize("condition,extra", [
+        ("C", ["--construction-mode", "typed_json"]), ("D", ["--construction-mode", "original_prompt"]),
+        ("C", ["--acceptance-policy", "legacy"]), ("D", ["--prompt-variant", "design_v1"])])
+    def test_conflicting_condition_flags_fail_before_provider_access(cli, condition, extra):
+        invoke, auth_calls = cli
+        with pytest.raises(SystemExit):
+>           invoke("model", condition, extra)
+
+pipeline/tests/test_cd_cli.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c043d10>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+____ test_conflicting_condition_flags_fail_before_provider_access[D-extra3] ____
+
+cli = (<function cli.<locals>.invoke at 0x10c0ed7a0>, []), condition = 'D'
+extra = ['--prompt-variant', 'design_v1']
+
+    @pytest.mark.parametrize("condition,extra", [
+        ("C", ["--construction-mode", "typed_json"]), ("D", ["--construction-mode", "original_prompt"]),
+        ("C", ["--acceptance-policy", "legacy"]), ("D", ["--prompt-variant", "design_v1"])])
+    def test_conflicting_condition_flags_fail_before_provider_access(cli, condition, extra):
+        invoke, auth_calls = cli
+        with pytest.raises(SystemExit):
+>           invoke("model", condition, extra)
+
+pipeline/tests/test_cd_cli.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c0847d0>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+___________ test_manifest_deviation_rejected_before_provider_access ____________
+
+cli = (<function cli.<locals>.invoke at 0x10c0eeae0>, [])
+tmp_path = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-84/test_manifest_deviation_reject0')
+
+    def test_manifest_deviation_rejected_before_provider_access(cli, tmp_path):
+        invoke, auth_calls = cli
+        frozen = json.loads(cd.DEFAULT_MANIFEST.read_bytes())
+        frozen["entries"]["CASE-0046"]["vulnerable_probe_sha256"] = "0" * 64
+        wrong = tmp_path / "wrong.json"
+        wrong.write_text(json.dumps(frozen))
+        with pytest.raises(cd.ExperimentManifestError):
+>           invoke("model", "C", ["--probe-manifest", str(wrong)])
+
+pipeline/tests/test_cd_cli.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c085310>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+_____ test_preflight_prepares_all_inputs_without_credentials_or_models[C] ______
+
+cli = (<function cli.<locals>.invoke at 0x10c0edfe0>, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10c0a3110>
+condition = 'C'
+
+    @pytest.mark.parametrize("condition", ["C", "D"])
+    def test_preflight_prepares_all_inputs_without_credentials_or_models(cli, monkeypatch, condition):
+        invoke, auth_calls = cli
+        monkeypatch.setattr(dv, "LLMClient", lambda *a: pytest.fail("preflight must not construct a model"))
+>       out = invoke("preflight", condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_cd_cli.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c085e50>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+_____ test_preflight_prepares_all_inputs_without_credentials_or_models[D] ______
+
+cli = (<function cli.<locals>.invoke at 0x10c0ef950>, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10c0a3d40>
+condition = 'D'
+
+    @pytest.mark.parametrize("condition", ["C", "D"])
+    def test_preflight_prepares_all_inputs_without_credentials_or_models(cli, monkeypatch, condition):
+        invoke, auth_calls = cli
+        monkeypatch.setattr(dv, "LLMClient", lambda *a: pytest.fail("preflight must not construct a model"))
+>       out = invoke("preflight", condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_cd_cli.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c086a50>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+_________________ test_ab_preflight_defaults_remain_unchanged __________________
+
+cli = (<function cli.<locals>.invoke at 0x10c0efab0>, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10bc7f070>
+
+    def test_ab_preflight_defaults_remain_unchanged(cli, monkeypatch):
+        invoke, auth_calls = cli
+        monkeypatch.setattr(cd, "validate_frozen_manifest", lambda *a: pytest.fail("A/B must not call probe loader"))
+>       out = invoke("preflight")
+              ^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_cd_cli.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_cd_cli.py:46: in invoke
+    dv.main()
+pipeline/diagnostic_v2.py:674: in main
+    parser.add_argument("--probe-manifest", type=Path,
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1563: in add_argument
+    return self._add_action(action)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1985: in _add_action
+    self._optionals._add_action(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1786: in _add_action
+    action = super(_ArgumentGroup, self)._add_action(action)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1577: in _add_action
+    self._check_conflict(action)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1719: in _check_conflict
+    conflict_handler(action, confl_optionals)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <argparse._ArgumentGroup object at 0x10c043b90>
+action = _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None, default=None, type=<c...viewed development probe manifest (C/D only; defaults to dev_probe_manifest_v1.json).', metavar=None, deprecated=False)
+conflicting_actions = [('--probe-manifest', _StoreAction(option_strings=['--probe-manifest'], dest='probe_manifest', nargs=None, const=None,...'s output) to validate every C/D case's probe against. Ignored unless --use-probes.", metavar=None, deprecated=False))]
+
+    def _handle_conflict_error(self, action, conflicting_actions):
+        message = ngettext('conflicting option string: %s',
+                           'conflicting option strings: %s',
+                           len(conflicting_actions))
+        conflict_string = ', '.join([option_string
+                                     for option_string, action
+                                     in conflicting_actions])
+>       raise ArgumentError(action, message % conflict_string)
+E       argparse.ArgumentError: argument --probe-manifest: conflicting option string: --probe-manifest
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:1728: ArgumentError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_cd_cli.py::test_cd_cli_complete_offline_24_case_run[C-original_prompt]
+FAILED pipeline/tests/test_cd_cli.py::test_cd_cli_complete_offline_24_case_run[D-typed_json]
+FAILED pipeline/tests/test_cd_cli.py::test_conflicting_condition_flags_fail_before_provider_access[C-extra0]
+FAILED pipeline/tests/test_cd_cli.py::test_conflicting_condition_flags_fail_before_provider_access[D-extra1]
+FAILED pipeline/tests/test_cd_cli.py::test_conflicting_condition_flags_fail_before_provider_access[C-extra2]
+FAILED pipeline/tests/test_cd_cli.py::test_conflicting_condition_flags_fail_before_provider_access[D-extra3]
+FAILED pipeline/tests/test_cd_cli.py::test_manifest_deviation_rejected_before_provider_access
+FAILED pipeline/tests/test_cd_cli.py::test_preflight_prepares_all_inputs_without_credentials_or_models[C]
+FAILED pipeline/tests/test_cd_cli.py::test_preflight_prepares_all_inputs_without_credentials_or_models[D]
+FAILED pipeline/tests/test_cd_cli.py::test_ab_preflight_defaults_remain_unchanged
+10 failed, 76 passed in 2.50s

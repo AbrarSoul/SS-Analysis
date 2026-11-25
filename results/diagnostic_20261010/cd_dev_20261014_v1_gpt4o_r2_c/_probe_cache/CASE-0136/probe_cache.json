@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "java",
+    "vulnerable_function_sha256": "f6f1145859a07904abb023ed314f429c8cbb6bf7e4bb297066feb18ef5a2b38a",
+    "patched_function_sha256": "f3dda3c8b01d91236603fcc1430afc9e61afd25162e5d242b064f656b9531773",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0136",
+      "language": "java",
+      "old_name": "f",
+      "new_name": "f_renamed",
+      "vulnerable_probe": "    public File provide() throws IOException\n    {\n        File f_renamed = File.createTempFile(_prefix, _suffix);\n        f_renamed.deleteOnExit();\n        return f_renamed;\n    }",
+      "patched_probe": "    public File provide() throws IOException\n    {\n        File f_renamed = Files.createTempFile(_prefix, _suffix).toFile();\n        f_renamed.deleteOnExit();\n        return f_renamed;\n    }",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "c7b28e8b5cb379328238f7f99284052f0a931524ee9cfe37655397dc4740e276"
+}

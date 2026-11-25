@@ -1,0 +1,26 @@
+{
+  "original to isolated": {
+    "evaluable_pairs": 42,
+    "unevaluable_pairs": 0,
+    "hidden_tp_lost": 4,
+    "hidden_tp_gained": 0,
+    "hidden_fp_lost": 0,
+    "hidden_fp_gained": 0
+  },
+  "isolated to rewritten": {
+    "evaluable_pairs": 41,
+    "unevaluable_pairs": 1,
+    "hidden_tp_lost": 16,
+    "hidden_tp_gained": 0,
+    "hidden_fp_lost": 0,
+    "hidden_fp_gained": 0
+  },
+  "original to rewritten": {
+    "evaluable_pairs": 41,
+    "unevaluable_pairs": 1,
+    "hidden_tp_lost": 20,
+    "hidden_tp_gained": 0,
+    "hidden_fp_lost": 0,
+    "hidden_fp_gained": 0
+  }
+}

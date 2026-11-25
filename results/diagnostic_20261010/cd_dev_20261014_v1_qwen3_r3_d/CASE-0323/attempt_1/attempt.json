@@ -1,0 +1,61 @@
+{
+  "attempt": 1,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0323/attempt_1/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0323/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0323/vulnerable_source.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0323/patched_source.js"
+    ],
+    "validation_seconds": 1.26867991600011,
+    "legacy_accepted": true,
+    "visible_correct": true,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          82
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0323/vulnerable_source.js",
+        "sample_sha256": "1bf46195bb5fff90dfd11654098238a4f787e7f13acca9f9a133b88a45804c61"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0323/patched_source.js",
+        "sample_sha256": "8fc2da1189276ad6f5e2d189522f7a7e9d238d5f0498868d9c93e67440d55fc7"
+      }
+    ]
+  },
+  "probe_evaluation": null,
+  "gate_decision": {
+    "accept": true,
+    "stop": true,
+    "reason": "visible_correct (no probe check applied)",
+    "is_fallback": true,
+    "probe_eligible": false,
+    "probe_checks": null
+  },
+  "feedback": null
+}

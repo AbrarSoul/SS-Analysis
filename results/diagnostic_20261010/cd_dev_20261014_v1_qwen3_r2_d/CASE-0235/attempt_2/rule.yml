@@ -1,0 +1,25 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  patterns:
+  - pattern-either:
+    - pattern: if (pathname.indexOf(...) !== 0) { ... }
+    - pattern: if (pathname.startsWith(...) === false) { ... }
+    - pattern: if (!pathname.startsWith(...)) { ... }
+  - pattern-not: if (pathname.indexOf(publicDir) !== 0) {
+  - pattern-not: if (pathname.startsWith(publicDir) === false) {
+  - pattern-not: if (!pathname.startsWith(publicDir)) {
+  languages:
+  - typescript
+  message: Directory traversal vulnerability detected. The application does not properly
+    validate the 'pathname' parameter against the 'publicDir' before serving files,
+    allowing attackers to access arbitrary files on the server. This can lead to sensitive
+    information disclosure or remote code execution. Fix by adding a check that ensures
+    pathname starts with publicDir before processing the request.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    owasp: OWASP Top 10:2021 - A01:2021 - Broken Access Control
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    technology:
+    - typescript

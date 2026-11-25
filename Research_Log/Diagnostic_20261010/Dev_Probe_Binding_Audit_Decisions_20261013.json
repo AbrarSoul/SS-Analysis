@@ -1,0 +1,168 @@
+[
+  {
+    "case_id": "CASE-0046",
+    "language": "python",
+    "eligible": true,
+    "old_name": "dont_save_keys",
+    "new_name": "dont_save_keys_renamed",
+    "patched_probe_renamed": false
+  },
+  {
+    "case_id": "CASE-0063",
+    "language": "javascript",
+    "eligible": false,
+    "reason": "vulnerable_function does not parse cleanly"
+  },
+  {
+    "case_id": "CASE-0081",
+    "language": "typescript",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0116",
+    "language": "java",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0124",
+    "language": "python",
+    "eligible": true,
+    "old_name": "sagemaker_dependency",
+    "new_name": "sagemaker_dependency_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0134",
+    "language": "python",
+    "eligible": true,
+    "old_name": "result",
+    "new_name": "result_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0136",
+    "language": "java",
+    "eligible": true,
+    "old_name": "f",
+    "new_name": "f_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0163",
+    "language": "javascript",
+    "eligible": false,
+    "reason": "vulnerable_function does not parse cleanly"
+  },
+  {
+    "case_id": "CASE-0171",
+    "language": "java",
+    "eligible": true,
+    "old_name": "url",
+    "new_name": "url_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0173",
+    "language": "typescript",
+    "eligible": true,
+    "old_name": "key",
+    "new_name": "key_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0184",
+    "language": "java",
+    "eligible": true,
+    "old_name": "msg",
+    "new_name": "msg_renamed",
+    "patched_probe_renamed": false
+  },
+  {
+    "case_id": "CASE-0193",
+    "language": "java",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0220",
+    "language": "javascript",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0221",
+    "language": "java",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0222",
+    "language": "python",
+    "eligible": true,
+    "old_name": "headers",
+    "new_name": "headers_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0231",
+    "language": "python",
+    "eligible": true,
+    "old_name": "user_dir",
+    "new_name": "user_dir_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0235",
+    "language": "typescript",
+    "eligible": false,
+    "reason": "vulnerable_function does not parse cleanly"
+  },
+  {
+    "case_id": "CASE-0238",
+    "language": "typescript",
+    "eligible": false,
+    "reason": "vulnerable_function does not parse cleanly"
+  },
+  {
+    "case_id": "CASE-0239",
+    "language": "javascript",
+    "eligible": false,
+    "reason": "vulnerable_function does not parse cleanly"
+  },
+  {
+    "case_id": "CASE-0276",
+    "language": "python",
+    "eligible": true,
+    "old_name": "file",
+    "new_name": "file_renamed",
+    "patched_probe_renamed": true
+  },
+  {
+    "case_id": "CASE-0298",
+    "language": "typescript",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0323",
+    "language": "javascript",
+    "eligible": false,
+    "reason": "vulnerable_function does not parse cleanly"
+  },
+  {
+    "case_id": "CASE-0339",
+    "language": "javascript",
+    "eligible": false,
+    "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+  },
+  {
+    "case_id": "CASE-0340",
+    "language": "typescript",
+    "eligible": true,
+    "old_name": "output",
+    "new_name": "output_renamed",
+    "patched_probe_renamed": true
+  }
+]

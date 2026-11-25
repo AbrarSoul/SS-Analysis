@@ -1,0 +1,18 @@
+rules:
+- id: vuln-micronaut-core-9d1eff5c
+  patterns:
+  - pattern: new DefaultHttpHeaders(false)
+  - pattern-not: new DefaultHttpHeaders()
+  languages:
+  - java
+  message: Insecure instantiation of DefaultHttpHeaders with validation disabled.
+    This can lead to security vulnerabilities as headers are not validated. Use the
+    default constructor to enable validation.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: A5:2017-Security Misconfiguration
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    technology:
+    - java

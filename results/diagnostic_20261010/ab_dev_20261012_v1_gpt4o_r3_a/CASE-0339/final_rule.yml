@@ -1,0 +1,23 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern: '$RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(''/[<\{\}]/g'',
+    '''');
+
+    '
+  pattern-not: '$RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<{}]/g,
+    '''');
+
+    '
+  languages:
+  - javascript
+  message: Improper use of regex string in replace function leading to potential security
+    issues. Ensure regex is correctly formatted without enclosing quotes.
+  severity: ERROR
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-20
+    owasp: A1:2017-Injection
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+    technology: javascript

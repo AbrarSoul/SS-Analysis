@@ -1,0 +1,52 @@
+{
+  "attempt": 1,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0238/attempt_1/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0238/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0238/vulnerable_source.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0238/patched_source.ts"
+    ],
+    "validation_seconds": 1.2793542920007894,
+    "legacy_accepted": true,
+    "visible_correct": true,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          2559
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0238/vulnerable_source.ts",
+        "sample_sha256": "4927910dd941506d6acc3709ceb094296dc20f7207d82dfa9f7fa83df3dbdd32"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0238/patched_source.ts",
+        "sample_sha256": "61d4da8d16077cda4a6017f49c1ad01a185a76385ae2d4edca196969b942b034"
+      }
+    ]
+  },
+  "feedback": null
+}

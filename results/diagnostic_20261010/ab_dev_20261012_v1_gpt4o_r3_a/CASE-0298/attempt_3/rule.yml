@@ -1,0 +1,33 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  pattern: '><p lang="en" dir="ltr"><a href="${src}?ref_src=twsrc%5Etfw"></a></blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `
+
+    '
+  pattern-not: '><p lang="en" dir="ltr">${anchor.outerHTML}</p></blockquote> <script
+    async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `
+
+    '
+  languages:
+  - typescript
+  message: 'This code directly embeds a URL into an HTML string without proper sanitization,
+    which can lead to security vulnerabilities such as XSS (Cross-Site Scripting).
+    The fixed version creates an anchor element and sets its href attribute, which
+    is a safer approach. Ensure URLs are properly sanitized before embedding them
+    into HTML.
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - CWE-79
+    owasp:
+    - A7:2017-Cross-Site Scripting (XSS)
+    references:
+    - https://owasp.org/www-community/attacks/xss/
+    technology:
+    - typescript

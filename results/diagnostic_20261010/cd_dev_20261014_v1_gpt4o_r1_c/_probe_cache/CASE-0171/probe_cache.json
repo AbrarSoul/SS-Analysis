@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "java",
+    "vulnerable_function_sha256": "37b094f8be523fca5e44dd1bb2093468e96859e524a5131ec7a776ebcbc9fb35",
+    "patched_function_sha256": "87b8aede624edb9a60d9276333a2dc769d046f9a922174a06fd44fd10eb3af3a",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0171",
+      "language": "java",
+      "old_name": "url",
+      "new_name": "url_renamed",
+      "vulnerable_probe": "    private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {\n\n        String url_renamed = httpServletRequest.getRequestURI();\n        url_renamed = url_renamed.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n        url_renamed = url_renamed.replaceAll(\"\\\\?[*]\", \"\");\n\n        String[] pointStrings = url_renamed.split(\";\");\n\n        List<GHPoint> points = new ArrayList<>(pointStrings.length);\n        for (int i = 0; i < pointStrings.length; i++) {\n            points.add(GHPoint.fromStringLonLat(pointStrings[i]));\n        }\n\n        return points;\n    }",
+      "patched_probe": "    private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {\n        String url_renamed = httpServletRequest.getRequestURI();\n        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n        if (!url_renamed.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url_renamed);\n        url_renamed = url_renamed.substring(urlStart.length());\n        String[] pointStrings = url_renamed.split(\";\");\n        List<GHPoint> points = new ArrayList<>(pointStrings.length);\n        for (int i = 0; i < pointStrings.length; i++) {\n            points.add(GHPoint.fromStringLonLat(pointStrings[i]));\n        }\n\n        return points;\n    }",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "8cff4b71f8d02047419a716e5df874b1c4dff9e8fccfaac2189adca558f2544b"
+}

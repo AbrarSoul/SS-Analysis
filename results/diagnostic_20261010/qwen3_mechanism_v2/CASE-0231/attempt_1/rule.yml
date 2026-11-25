@@ -1,0 +1,32 @@
+rules:
+- id: vuln-agentscope-7d285e86
+  pattern-either:
+  - patterns:
+    - pattern: "if $COND:\n    ...\n    return jsonify({\"error\": ...})\n"
+    - pattern-not: "if not $VAR.endswith(\".json\"):\n    return jsonify({\"error\"\
+        : \"Only JSON files can be deleted\"})\n"
+    - pattern: 'filename = os.path.basename($FILENAME)
+
+        ...
+
+        $FUNC(filename)
+
+        '
+  - patterns:
+    - pattern: "def $FUNC(...):\n    ...\n    $VAR = os.path.basename($FILENAME)\n\
+        \    ...\n    $FUNC2($VAR)\n"
+    - pattern-not: "if not $VAR.endswith(\".json\"):\n    return jsonify({\"error\"\
+        : \"Only JSON files can be deleted\"})\n"
+  languages:
+  - python
+  message: Potential path traversal vulnerability detected. The code does not validate
+    that the filename ends with '.json' before processing, which could allow deletion
+    of non-JSON files. Add a validation check to ensure only JSON files are processed.
+  severity: ERROR
+  metadata:
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    category: security
+    cwe:
+    - CWE-22
+    technology:
+    - python

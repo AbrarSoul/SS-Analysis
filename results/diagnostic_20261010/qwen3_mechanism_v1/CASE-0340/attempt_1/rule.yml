@@ -1,0 +1,25 @@
+rules:
+- id: vuln-logkitty-ef2f673e
+  patterns:
+  - pattern: execSync(...)
+  - pattern: spawn(...)
+  - pattern: ChildProcess
+  - pattern-not: execFileSync(...)
+  - pattern-not: String
+  - pattern-inside: 'import { spawn, execSync, ChildProcess } from ''child_process'';
+
+      '
+  message: Use of execSync() with untrusted input can lead to command injection vulnerabilities.
+    The patched code uses execFileSync() instead, which is safer and avoids shell
+    injection risks. Replace execSync() calls with execFileSync() and pass arguments
+    as an array to prevent shell interpretation.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf
+    category: security
+    cwe:
+    - CWE-78
+    technology:
+    - typescript

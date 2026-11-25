@@ -1,0 +1,31 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  pattern: 'var $MATCH = $URL.match(/^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)/)
+
+    ...
+
+    $PROJECT = decodeURIComponent($MATCH[3])
+
+    '
+  pattern-not: 'var $MATCH = $URL.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)/)
+
+    ...
+
+    $PROJECT = decodeURIComponent($MATCH[3].replace(/\.git$/, ''''))
+
+    '
+  languages:
+  - javascript
+  message: Potential insecure regex matching in hosted-git-info can lead to incorrect
+    project name extraction. The vulnerable pattern does not properly handle git URL
+    formats and may cause incorrect decoding of project names. Fix by using a more
+    precise regex that correctly handles optional components and ensures proper URL
+    parsing before decoding.
+  severity: WARNING
+  metadata:
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    category: security
+    cwe:
+    - CWE-20
+    technology:
+    - javascript

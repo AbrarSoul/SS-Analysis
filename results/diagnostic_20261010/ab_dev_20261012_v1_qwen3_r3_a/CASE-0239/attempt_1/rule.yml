@@ -1,0 +1,34 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  pattern: 'var $MATCH = $URL.match(new RegExp(''^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)''))
+
+    ...
+
+    $PROJECT = decodeURIComponent($MATCH[3])
+
+    '
+  pattern-not: 'var $MATCH = $URL.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)/)
+
+    ...
+
+    $PROJECT = decodeURIComponent($MATCH[3].replace(/\.git$/, ''''))
+
+    '
+  languages:
+  - javascript
+  message: Potential path traversal vulnerability in hosted-git-info. The regex pattern
+    does not properly handle .git suffix removal, allowing potential manipulation
+    of project names. Fix by using a more precise regex that separates the git suffix
+    handling from the capture groups and properly sanitizes the project name.
+  severity: ERROR
+  metadata:
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    category: security
+    cwe:
+    - CWE-22
+    owasp:
+    - OWASP-A03:2021
+    references:
+    - https://cwe.mitre.org/data/definitions/22.html
+    technology:
+    - javascript

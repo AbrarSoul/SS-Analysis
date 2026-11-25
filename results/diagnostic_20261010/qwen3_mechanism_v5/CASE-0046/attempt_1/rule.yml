@@ -1,0 +1,26 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  pattern-either:
+  - patterns:
+    - pattern: "$DICT[$KEY] = ...\n...\nif $KEY not in $LIST:\n    ...\n"
+    - pattern-not: "$DICT[$KEY] = ...\n...\nif $KEY in $ALLOWED_LIST:\n    ...\n"
+  - patterns:
+    - pattern: "for $KEY in $ITERABLE:\n    ...\n    if $KEY not in $LIST:\n     \
+        \   ...\n"
+    - pattern-not: "for $KEY in $ITERABLE:\n    ...\n    if $KEY in $ALLOWED_LIST:\n\
+        \        ...\n"
+  languages:
+  - python
+  message: Potential batch assignment vulnerability detected. The code uses a blacklist
+    approach to filter keys, which is insecure and can be bypassed. Use an allowlist
+    instead to prevent unauthorized key assignments. This vulnerability allows attackers
+    to inject arbitrary keys into the dictionary, potentially leading to privilege
+    escalation or data corruption.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe: CWE-20
+    owasp: A03:2021-Injection
+    technology:
+    - python

@@ -1,0 +1,13 @@
+rules:
+- id: diagnostic-case-0220
+  message: Patch removes manually supplied transport headers
+  severity: WARNING
+  languages:
+  - javascript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-either:
+  - pattern: $REQUEST.setRequestHeader("Content-length", $VALUE)
+  - pattern: $REQUEST.setRequestHeader("Connection", "close")

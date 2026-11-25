@@ -1,0 +1,22 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  pattern-either:
+  - pattern: isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+  - pattern: isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+  pattern-not: isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Detected potential vulnerability in importlib loader handling. The code
+    checks for isinstance with SourceLoader and ExtensionFileLoader but omits SourcelessFileLoader,
+    which could allow unsafe code execution. Fix by including SourcelessFileLoader
+    in the isinstance check to ensure all loader types are properly handled.
+  severity: ERROR
+  metadata:
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    category: security
+    cwe: CWE-264
+    references:
+    - https://github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    technology:
+    - python

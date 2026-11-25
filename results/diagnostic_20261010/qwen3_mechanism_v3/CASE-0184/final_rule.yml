@@ -1,0 +1,31 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  pattern-either:
+  - patterns:
+    - pattern: File.createTempFile($PREFIX, $SUFFIX)
+    - pattern-not: File.createTempFile($PREFIX, $SUFFIX, $DIR)
+    - pattern-not: Files.createTempFile($PREFIX, $SUFFIX)
+    - pattern-not: Files.createTempFile($PATH, $PREFIX, $SUFFIX)
+  - patterns:
+    - pattern: File.createTempFile($PREFIX, $SUFFIX, $DIR)
+    - pattern-not: File.createTempFile($PREFIX, $SUFFIX, $DIR)
+    - pattern-not: Files.createTempFile($PREFIX, $SUFFIX, $DIR)
+    - pattern-not: Files.createTempFile($PATH, $PREFIX, $SUFFIX)
+  languages:
+  - java
+  message: Insecure temporary file creation using File.createTempFile() without proper
+    file permissions. This can lead to privilege escalation vulnerabilities on Unix-like
+    systems where temporary files are created with world-readable permissions. The
+    fix ensures that temporary files are created with restrictive permissions (rw-------)
+    using Files.createTempFile() with appropriate FileAttribute. Replace File.createTempFile()
+    calls with a secure helper method that creates temp files with restricted permissions.
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    category: security
+    cwe: CWE-732
+    technology:
+    - java
+  pattern-not-inside: "class $CLASS {\n    ...\n    private File createTempFileInSystemDir($PREFIX,\
+    \ $SUFFIX) {\n        ...\n        return Files.createTempFile($PREFIX, $SUFFIX,\
+    \ $FILE_ATTRIBUTE).toFile();\n    }\n    ...\n}"

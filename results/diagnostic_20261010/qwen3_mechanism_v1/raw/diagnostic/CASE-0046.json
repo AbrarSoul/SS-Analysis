@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0046",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791669781.4829519,
+  "raw_content": "rules:\n- id: vuln-quark-auto-save-ea8377a5\n  patterns:\n  - pattern: |\n      for key in $VAR:\n          if key not in $LIST:\n              ...\n  - pattern: |\n      for key in $VAR:\n          if key not in $LIST:\n              ...\n  pattern-not: |\n      for key in $VAR:\n          if key in $ALLOWED_LIST:\n              ...\n  message: \"Potential batch assignment attack vulnerability: untrusted input is checked against a blacklist instead of a whitelist. This allows attackers to bypass restrictions by using keys not in the blacklist. Use an allowlist approach to prevent unauthorized assignments.\"\n  severity: ERROR\n  languages: [python]\n  metadata:\n    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b\n    category: security\n    cwe: [CWE-20]\n  pattern-inside: |\n      def $FUNC(...):\n          ...\n          for key in $VAR:\n              if key not in $LIST:\n                  ...\n          ...",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in python code.\n\n    CONTEXT:\n    Repository: github.com/Cp0204/quark-auto-save\n    Commit: ea8377a596446291953dbe36e2d119d85bcd865b\n\n    PATCH CHANGES:\n    File: app/run.py\n--- a/app/run.py\n+++ b/app/run.py\n-    dont_save_keys = [\"task_plugins_config_default\", \"api_token\"]\n+    # \u4f7f\u7528\u5141\u8bb8\u5217\u8868\u9632\u6b62\u6279\u91cf\u8d4b\u503c\u653b\u51fb\n+    allowed_keys = [\"cookie\", \"crontab\", \"push_config\", \"tasklist\",\n+                    \"magic_regex\", \"plugins\", \"source\"]\n-        if key not in dont_save_keys:\n+        if key in allowed_keys:\n\n    UNDERSTAND THE MECHANISM FIRST:\n    Before writing a rule, identify the underlying vulnerability MECHANISM the patch fixes -- the\n    specific unsafe condition (e.g. untrusted data reaching a dangerous sink without a check, a\n    missing bounds/escaping/validation step, an unsafe default). Do not simply pattern-match the\n    exact expression shown in the diff: the same vulnerable mechanism will also appear, in the held-out\n    test variants, with renamed identifiers AND with the vulnerable logic moved into a different\n    function or otherwise restructured (e.g. extracted into a small helper, inlined, or reordered).\n    Write the rule to catch the mechanism wherever it appears in the file, not only at this exact\n    call site or inside this exact function.\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n    - A single `pattern` is only one option. Where the vulnerable mechanism can show up in more\n      than one syntactic shape (e.g. the same unsafe call reachable through a helper function, or\n      several equivalent call forms), prefer `patterns`/`pattern-either` to cover them together,\n      rather than only the one shape seen in this diff.\n    - For a mechanism that is really about untrusted data reaching a dangerous sink, consider a\n      taint-mode rule instead: `mode: taint` with `pattern-sources` (where the untrusted data\n      enters) and `pattern-sinks` (the dangerous use) -- this generalizes across refactors that a\n      single structural pattern cannot, since it tracks the data, not the exact code shape.\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-quark-auto-save-ea8377a5\" (must be unique and descriptive)\n    2. At least one of: pattern, patterns, pattern-either, pattern-regex, or (mode: taint with)\n       pattern-sources and pattern-sinks\n    3. languages: [\"python\"]\n    4. message: Detailed description of what the vulnerability is, why it's dangerous, how to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside / pattern-not-inside: Context pattern for where the rule should/should not match\n    - metadata:\n        source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b\n        category: security\n        cwe: [relevant CWE number]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives on the patched/safe code\n    2. Include pattern-not for the fixed version when possible\n    3. Consider that the vulnerable mechanism may be reached through a renamed or restructured\n       call site, not only the exact one shown in the diff\n    4. Write clear, actionable messages explaining both the problem and solution\n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT with exactly one rule under `rules:`. Do not\n    include Markdown fences or prose before or after it.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, message, severity, languages, plus at least one of:\n    pattern, patterns, pattern-either, pattern-regex, or (for taint-mode rules) pattern-sources and pattern-sinks."
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in python code.\n\n    CONTEXT:\n    Repository: github.com/Cp0204/quark-auto-save\n    Commit: ea8377a596446291953dbe36e2d119d85bcd865b\n\n    PATCH CHANGES:\n    File: app/run.py\n--- a/app/run.py\n+++ b/app/run.py\n-    dont_save_keys = [\"task_plugins_config_default\", \"api_token\"]\n+    # \u4f7f\u7528\u5141\u8bb8\u5217\u8868\u9632\u6b62\u6279\u91cf\u8d4b\u503c\u653b\u51fb\n+    allowed_keys = [\"cookie\", \"crontab\", \"push_config\", \"tasklist\",\n+                    \"magic_regex\", \"plugins\", \"source\"]\n-        if key not in dont_save_keys:\n+        if key in allowed_keys:\n\n    UNDERSTAND THE MECHANISM FIRST:\n    Before writing a rule, identify the underlying vulnerability MECHANISM the patch fixes -- the\n    specific unsafe condition (e.g. untrusted data reaching a dangerous sink without a check, a\n    missing bounds/escaping/validation step, an unsafe default). Do not simply pattern-match the\n    exact expression shown in the diff: the same vulnerable mechanism will also appear, in the held-out\n    test variants, with renamed identifiers AND with the vulnerable logic moved into a different\n    function or otherwise restructured (e.g. extracted into a small helper, inlined, or reordered).\n    Write the rule to catch the mechanism wherever it appears in the file, not only at this exact\n    call site or inside this exact function.\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n    - A single `pattern` is only one option. Where the vulnerable mechanism can show up in more\n      than one syntactic shape (e.g. the same unsafe call reachable through a helper function, or\n      several equivalent call forms), prefer `patterns`/`pattern-either` to cover them together,\n      rather than only the one shape seen in this diff.\n    - For a mechanism that is really about untrusted data reaching a dangerous sink, consider a\n      taint-mode rule instead: `mode: taint` with `pattern-sources` (where the untrusted data\n      enters) and `pattern-sinks` (the dangerous use) -- this generalizes across refactors that a\n      single structural pattern cannot, since it tracks the data, not the exact code shape.\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-quark-auto-save-ea8377a5\" (must be unique and descriptive)\n    2. At least one of: pattern, patterns, pattern-either, pattern-regex, or (mode: taint with)\n       pattern-sources and pattern-sinks\n    3. languages: [\"python\"]\n    4. message: Detailed description of what the vulnerability is, why it's dangerous, how to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside / pattern-not-inside: Context pattern for where the rule should/should not match\n    - metadata:\n        source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b\n        category: security\n        cwe: [relevant CWE number]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives on the patched/safe code\n    2. Include pattern-not for the fixed version when possible\n    3. Consider that the vulnerable mechanism may be reached through a renamed or restructured\n       call site, not only the exact one shown in the diff\n    4. Write clear, actionable messages explaining both the problem and solution\n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT with exactly one rule under `rules:`. Do not\n    include Markdown fences or prose before or after it."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-585",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "rules:\n- id: vuln-quark-auto-save-ea8377a5\n  patterns:\n  - pattern: |\n      for key in $VAR:\n          if key not in $LIST:\n              ...\n  - pattern: |\n      for key in $VAR:\n          if key not in $LIST:\n              ...\n  pattern-not: |\n      for key in $VAR:\n          if key in $ALLOWED_LIST:\n              ...\n  message: \"Potential batch assignment attack vulnerability: untrusted input is checked against a blacklist instead of a whitelist. This allows attackers to bypass restrictions by using keys not in the blacklist. Use an allowlist approach to prevent unauthorized assignments.\"\n  severity: ERROR\n  languages: [python]\n  metadata:\n    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b\n    category: security\n    cwe: [CWE-20]\n  pattern-inside: |\n      def $FUNC(...):\n          ...\n          for key in $VAR:\n              if key not in $LIST:\n                  ...\n          ...",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791669781,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 1029,
+      "total_tokens": 1285,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 3.579524125001626,
+  "error": null,
+  "input_tokens": 1029,
+  "output_tokens": 256
+}

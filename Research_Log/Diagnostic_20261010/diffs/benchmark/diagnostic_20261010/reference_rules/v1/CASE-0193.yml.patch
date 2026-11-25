@@ -1,0 +1,14 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0193.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0193.yml
+@@ -0,0 +1,11 @@
++rules:
++- id: diagnostic-case-0193
++  message: Default XML parser without explicit external-entity restrictions
++  severity: WARNING
++  languages:
++  - java
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  pattern: DocumentBuilderFactory.newInstance().newDocumentBuilder()

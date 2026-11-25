@@ -1,0 +1,404 @@
+....................F.F.FF.....F.FFF......FF                             [100%]
+=================================== FAILURES ===================================
+_________ test_valid_rule_with_real_match_returns_results_and_no_error _________
+
+validator = <rule_validator.RuleValidator object at 0x10db3e120>
+
+    def test_valid_rule_with_real_match_returns_results_and_no_error(validator):
+        results, error = validator._run_semgrep(
+            str(FIXTURES / "valid_matching_rule.yml"),
+            str(FIXTURES / "sample_target.py"),
+        )
+        assert error is None
+>       assert len(results) > 0
+E       assert 0 > 0
+E        +  where 0 = len([])
+
+pipeline/tests/test_rule_validator_classification.py:42: AssertionError
+____ test_invalid_metavariable_rule_surfaces_as_an_error_not_a_silent_miss _____
+
+validator = <rule_validator.RuleValidator object at 0x10db88910>
+
+    def test_invalid_metavariable_rule_surfaces_as_an_error_not_a_silent_miss(validator):
+        """The exact regression this suite exists for: an invalid rule (lowercase
+        metavariables) must be surfaced with a non-None error, not returned as
+        a clean "[], None" that looks identical to a legitimate non-match."""
+        results, error = validator._run_semgrep(
+            str(FIXTURES / "invalid_metavariable_rule.yml"),
+            str(FIXTURES / "sample_target.py"),
+        )
+        assert results == []
+>       assert error is not None
+E       assert None is not None
+
+pipeline/tests/test_rule_validator_classification.py:65: AssertionError
+_______ test_unknown_future_error_types_default_to_surfaced_not_silenced _______
+
+validator = <rule_validator.RuleValidator object at 0x10dac3950>
+
+    def test_unknown_future_error_types_default_to_surfaced_not_silenced(validator):
+        """Guards against reintroducing the allow-list pattern: any error type
+        that isn't a recognized file-parse error must be surfaced by default,
+        not silently ignored just because its exact string hasn't been seen
+        before. Simulated by re-using the invalid-metavariable fixture, which
+        is unlikely to ever become a 'known' file-parse-error string."""
+        results, error = validator._run_semgrep(
+            str(FIXTURES / "invalid_metavariable_rule.yml"),
+            str(FIXTURES / "sample_target.py"),
+        )
+>       assert error is not None, (
+            "An unrecognized Semgrep error type was silently treated as 'no error' -- "
+            "this is exactly the bug this test suite exists to prevent. Check whether "
+            "rule_validator.py's error classification reverted to an allow-list."
+        )
+E       AssertionError: An unrecognized Semgrep error type was silently treated as 'no error' -- this is exactly the bug this test suite exists to prevent. Check whether rule_validator.py's error classification reverted to an allow-list.
+E       assert None is not None
+
+pipeline/tests/test_rule_validator_classification.py:91: AssertionError
+___________________ test_valid_json_becomes_executable_rule ____________________
+
+client = <llm_client.LLMClient object at 0x10dc36360>
+patch_info = PatchInfo(repo_owner='example-owner', repo_name='example-repo', commit_id='deadbeef00', file_changes=[FileChange(file_...cwe_definitions=None, vulnerable_function=None, patched_function=None, containing_class_declaration=None, imports=None)
+
+    def test_valid_json_becomes_executable_rule(client, patch_info):
+        """Valid JSON -> a rule dict that, wrapped and dumped exactly like run_model_case() does for
+        condition A, real Semgrep accepts with --validate."""
+        content = '{"id": "test-rule", "message": "m", "severity": "ERROR", "languages": ["python"], "pattern": "foo($X)"}'
+        rule = client._parse_typed_json_response(content, patch_info)
+        assert rule is not None
+        assert client.last_error is None
+        rule_yaml = yaml.dump({"rules": [rule]}, sort_keys=False, default_flow_style=False)
+        with tempfile.NamedTemporaryFile("w", suffix=".yml", delete=False) as tf:
+            tf.write(rule_yaml)
+            rule_path = tf.name
+        proc = subprocess.run([str(SEMGREP), "--validate", "--config", rule_path],
+                               capture_output=True, text=True, env=_semgrep_env(), timeout=60)
+>       assert proc.returncode == 0, proc.stderr
+E       AssertionError: Fatal error: exception Failure: ca-certs: empty trust anchors.
+E         Please report an issue at https://github.com/mirage/ca-certs, including:
+E         - the output of uname -s
+E         - the distribution you use
+E         - the location of default trust anchors (if known)
+E         
+E         Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
+E         Called from CamlinternalLazy.do_force_block in file "camlinternalLazy.ml", line 49, characters 17-27
+E         Re-raised at CamlinternalLazy.do_force_block in file "camlinternalLazy.ml", line 56, characters 4-11
+E         Called from Conduit_lwt_unix.default_ctx in file "src/conduit-lwt-unix/conduit_lwt_unix.ml", line 160, characters 26-79
+E         Called from CamlinternalLazy.do_force_block in file "camlinternalLazy.ml", line 49, characters 17-27
+E         Re-raised at CamlinternalLazy.do_force_block in file "camlinternalLazy.ml", line 56, characters 4-11
+E         Called from Cohttp_lwt_unix__Net.default_ctx in file "cohttp-lwt-unix/src/net.ml", line 34, characters 12-51
+E         Called from CamlinternalLazy.do_force_block in file "camlinternalLazy.ml", line 49, characters 17-27
+E         Re-raised at CamlinternalLazy.do_force_block in file "camlinternalLazy.ml", line 56, characters 4-11
+E         Called from CamlinternalLazy.force_gen_lazy_block in file "camlinternalLazy.ml" (inlined), line 74, characters 9-27
+E         Called from CamlinternalLazy.force_lazy_block in file "camlinternalLazy.ml" (inlined), line 78, characters 27-67
+E         Called from Cohttp_lwt__Connection_cache.Make.create in file "cohttp-lwt/src/connection_cache.ml" (inlined), line 52, characters 21-47
+E         Called from Cohttp_lwt__Connection_cache.Make_proxy.create.create_default in file "cohttp-lwt/src/connection_cache.ml" (inlined), line 337, characters 6-67
+E         Called from Proxy.configure_proxy in file "OSS/libs/networking/proxy/proxy.ml", lines 239-240, characters 7-56
+E         Called from CLI.main.(fun) in file "OSS/src/osemgrep/cli/CLI.ml", line 312, characters 6-42
+E         Called from Stdlib__Fun.protect in file "fun.ml", line 34, characters 8-15
+E         Re-raised at Stdlib__Fun.protect in file "fun.ml", line 39, characters 6-52
+E         Called from Common.protect in file "OSS/libs/commons/Common.ml", line 53, characters 6-31
+E         Called from Stdlib__Fun.protect in file "fun.ml", line 34, characters 8-15
+E         Re-raised at Stdlib__Fun.protect in file "fun.ml", line 39, characters 6-52
+E         Called from Common.protect in file "OSS/libs/commons/Common.ml", line 53, characters 6-31
+E         Called from Dune__exe__Main.(fun) in file "OSS/src/main/Main.ml", line 114, characters 22-35
+E         Called from Pyro_caml_instruments.maybe_with_memprof_sampler in file "lib/Pyro_caml_instruments.ml" (inlined), line 114, characters 49-53
+E         Called from Dune__exe__Main in file "OSS/src/main/Main.ml", lines 105-127, characters 2-24
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep', '--validate', '--config', '/var/folders/d5/...e 114, characters 49-53\nCalled from Dune__exe__Main in file "OSS/src/main/Main.ml", lines 105-127, characters 2-24\n').returncode
+
+pipeline/tests/test_typed_json_construction.py:63: AssertionError
+__________ test_composite_rule_behavioral_composition_not_just_syntax __________
+
+client = <llm_client.LLMClient object at 0x10db4aa50>
+patch_info = PatchInfo(repo_owner='example-owner', repo_name='example-repo', commit_id='deadbeef00', file_changes=[FileChange(file_...cwe_definitions=None, vulnerable_function=None, patched_function=None, containing_class_declaration=None, imports=None)
+tmp_path = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-7/test_composite_rule_behavioral0')
+
+    def test_composite_rule_behavioral_composition_not_just_syntax(client, patch_info, tmp_path):
+        """The actual regression this whole investigation was about: correct SYNTAX alone (passing
+        --validate) is not evidence a pattern_not actually excludes. This JSON response includes a
+        pattern_not; the resulting rule, run through real Semgrep against real target files, must
+        exclude the safe line and keep matching the unsafe one -- not just validate cleanly."""
+        content = ('{"id": "test-rule", "message": "m", "severity": "ERROR", "languages": ["python"], '
+                   '"pattern": "foo($X)", "pattern_not": ["foo(\\"safe\\")"]}')
+        rule = client._parse_typed_json_response(content, patch_info)
+        assert rule is not None
+        assert "patterns" in rule, "a pattern_not must always compose via patterns:, never a sibling"
+    
+        target = tmp_path / "target.py"
+        target.write_text('foo("unsafe")\nfoo("safe")\n')
+        rule_yaml = yaml.dump({"rules": [rule]}, sort_keys=False, default_flow_style=False)
+        with tempfile.NamedTemporaryFile("w", suffix=".yml", delete=False) as tf:
+            tf.write(rule_yaml)
+            rule_path = tf.name
+        proc = subprocess.run([str(SEMGREP), "--config", rule_path, "--json", "--metrics=off",
+                                "--disable-version-check", "--jobs=1", str(target)],
+                               capture_output=True, text=True, env=_semgrep_env(), timeout=60)
+        import json
+>       data = json.loads(proc.stdout)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_typed_json_construction.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10a528050>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:363: JSONDecodeError
+___________________ test_single_exclusion_actually_excludes ____________________
+
+unsafe_safe_target = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-7/test_single_exclusion_actually0/target.py')
+
+    def test_single_exclusion_actually_excludes(unsafe_safe_target):
+        """The regression this file exists for: a single pattern_not must actually exclude the safe
+        line under real execution, not just pass schema validation."""
+        tr = TypedRule(id="test-rule", message="m", severity="ERROR", languages=["python"],
+                        pattern='foo($X)', pattern_not=['foo("safe")'])
+>       matched = _matched_lines(tr.to_semgrep_yaml(), unsafe_safe_target)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_typed_rule.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_typed_rule.py:39: in _matched_lines
+    data = __import__("json").loads(proc.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10a528050>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:363: JSONDecodeError
+_____________ test_pattern_either_with_exclusion_actually_excludes _____________
+
+unsafe_safe_target = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-7/test_pattern_either_with_exclu0/target.py')
+
+    def test_pattern_either_with_exclusion_actually_excludes(unsafe_safe_target):
+        tr = TypedRule(id="test-rule", message="m", severity="ERROR", languages=["python"],
+                        pattern_either=['foo($X)', 'bar($X)'], pattern_not=['foo("safe")'])
+>       matched = _matched_lines(tr.to_semgrep_yaml(), unsafe_safe_target)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_typed_rule.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_typed_rule.py:39: in _matched_lines
+    data = __import__("json").loads(proc.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10a528050>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:363: JSONDecodeError
+___________ test_bare_pattern_no_exclusion_still_matches_everything ____________
+
+unsafe_safe_target = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-7/test_bare_pattern_no_exclusion0/target.py')
+
+    def test_bare_pattern_no_exclusion_still_matches_everything(unsafe_safe_target):
+        """Sanity check: with NO pattern_not at all, both lines should match -- confirms the test
+        fixture itself is meaningful (both lines really do match the bare pattern)."""
+        tr = TypedRule(id="test-rule", message="m", severity="ERROR", languages=["python"], pattern='foo($X)')
+>       matched = _matched_lines(tr.to_semgrep_yaml(), unsafe_safe_target)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_typed_rule.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_typed_rule.py:39: in _matched_lines
+    data = __import__("json").loads(proc.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10a528050>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:363: JSONDecodeError
+_________________ test_pattern_inside_actually_restricts_scope _________________
+
+inside_outside_target = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-7/test_pattern_inside_actually_r0/target.py')
+
+    def test_pattern_inside_actually_restricts_scope(inside_outside_target):
+        """A brief, incorrect fix was made and reverted the same day (see to_dict()'s docstring for the
+        full history). What actually happened: a sibling (non-nested) pattern_inside is SILENTLY
+        IGNORED by Semgrep, never enforced -- reproduced directly with a probe a positive-only fixture
+        can't catch: a sibling pattern_inside naming a function that doesn't exist in the target file
+        still matches. This test requires BOTH an in-scope and an out-of-scope call, specifically so a
+        serializer that silently drops the scope constraint (matching both lines) cannot pass it --
+        the exact gap a positive-only fixture left open before."""
+        tr = TypedRule(id="test-rule", message="m", severity="ERROR", languages=["python"],
+                        pattern='foo($X)', pattern_inside="def allowed(...):\n    ...")
+        rule_dict = tr.to_dict()
+        assert "patterns" in rule_dict, "pattern_inside must be composed via patterns:, never a sibling"
+>       matched = _matched_lines(tr.to_semgrep_yaml(), inside_outside_target)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_typed_rule.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_typed_rule.py:39: in _matched_lines
+    data = __import__("json").loads(proc.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10a528050>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:363: JSONDecodeError
+______ test_bare_pattern_inside_sibling_is_silently_ignored_not_enforced _______
+
+inside_outside_target = PosixPath('/private/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/pytest-of-nkabmo/pytest-7/test_bare_pattern_inside_sibli0/target.py')
+
+    def test_bare_pattern_inside_sibling_is_silently_ignored_not_enforced(inside_outside_target):
+        """Documents the actual defect found 2026-10-12 (not the misdiagnosis that briefly replaced
+        it): a bare top-level sibling pattern_inside -- what to_dict() must NEVER emit -- matches both
+        the in-scope and out-of-scope line, because Semgrep silently ignores an un-nested
+        pattern-inside rather than enforcing or rejecting it. This test exists so a future change can't
+        reintroduce the sibling form without this regression test failing first."""
+        sibling_yaml = yaml.dump({"rules": [{
+            "id": "test-rule", "pattern": "foo($X)", "pattern-inside": "def allowed(...):\n    ...",
+            "languages": ["python"], "message": "m", "severity": "ERROR"}]}, sort_keys=False)
+>       matched = _matched_lines(sibling_yaml, inside_outside_target)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_typed_rule.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pipeline/tests/test_typed_rule.py:39: in _matched_lines
+    data = __import__("json").loads(proc.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10a528050>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py:363: JSONDecodeError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_rule_validator_classification.py::test_valid_rule_with_real_match_returns_results_and_no_error
+FAILED pipeline/tests/test_rule_validator_classification.py::test_invalid_metavariable_rule_surfaces_as_an_error_not_a_silent_miss
+FAILED pipeline/tests/test_rule_validator_classification.py::test_unknown_future_error_types_default_to_surfaced_not_silenced
+FAILED pipeline/tests/test_typed_json_construction.py::test_valid_json_becomes_executable_rule
+FAILED pipeline/tests/test_typed_json_construction.py::test_composite_rule_behavioral_composition_not_just_syntax
+FAILED pipeline/tests/test_typed_rule.py::test_single_exclusion_actually_excludes
+FAILED pipeline/tests/test_typed_rule.py::test_pattern_either_with_exclusion_actually_excludes
+FAILED pipeline/tests/test_typed_rule.py::test_bare_pattern_no_exclusion_still_matches_everything
+FAILED pipeline/tests/test_typed_rule.py::test_pattern_inside_actually_restricts_scope
+FAILED pipeline/tests/test_typed_rule.py::test_bare_pattern_inside_sibling_is_silently_ignored_not_enforced
+10 failed, 34 passed in 3.10s

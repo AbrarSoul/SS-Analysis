@@ -1,0 +1,16 @@
+rules:
+- id: micronaut-netty-http-headers-default-constructor
+  patterns:
+  - pattern: new DefaultHttpHeaders(false)
+  languages:
+  - java
+  message: Use of DefaultHttpHeaders(false) constructor can lead to security vulnerabilities
+    due to improper header handling. The fix is to use DefaultHttpHeaders() without
+    the 'false' parameter to ensure proper header validation and sanitization.
+  severity: WARNING
+  metadata:
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    category: security
+    cwe: CWE-117
+    technology:
+    - java

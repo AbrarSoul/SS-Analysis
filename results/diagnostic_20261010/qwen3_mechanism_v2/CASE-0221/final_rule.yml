@@ -1,0 +1,16 @@
+rules:
+- id: vuln-micronaut-core-9d1eff5c
+  pattern: new DefaultHttpHeaders(false)
+  pattern-not: new DefaultHttpHeaders()
+  languages:
+  - java
+  message: Use of DefaultHttpHeaders with 'false' parameter may lead to security vulnerabilities
+    due to improper header handling. Remove the 'false' argument to use default behavior
+    which ensures proper header validation and security.
+  severity: ERROR
+  metadata:
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    category: security
+    cwe: CWE-319
+    technology:
+    - java

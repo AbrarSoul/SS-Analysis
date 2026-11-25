@@ -1,0 +1,22 @@
+rules:
+- id: vuln-java-merge-sort-450fdee7
+  pattern-either:
+  - new File(File.createTempFile($PREFIX, $SUFFIX))
+  - File.createTempFile($PREFIX, $SUFFIX)
+  pattern-not: Files.createTempFile($PREFIX, $SUFFIX).toFile()
+  languages:
+  - java
+  message: Use of deprecated File.createTempFile() method without proper handling.
+    The vulnerable code creates a temporary file using File.createTempFile() which
+    can lead to security issues such as predictable file names or insecure temporary
+    file creation. Upgrade to java.nio.file.Files.createTempFile() and convert the
+    result to File using .toFile() for secure temporary file handling.
+  severity: WARNING
+  metadata:
+    source-url: github.com/cowtowncoder/java-merge-sort/commit/450fdee70b5f181c2afc5d817f293efa1a543902
+    category: security
+    cwe: CWE-377
+    owasp: OWASP-A04:2021
+    asvs: 4.3.2
+    technology:
+    - java

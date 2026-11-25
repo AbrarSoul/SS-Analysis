@@ -1,0 +1,36 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  patterns:
+  - pattern-either:
+    - pattern: 'const $VAR = existsSync($PATH) ? readFileSync($PATH, ''utf-8'') :
+        ''''; ... for (const [key, value] of Object.entries($UPDATES)) { ... const
+        regex = new RegExp(`^(#\s*)?${key}=.*$`, ''gm''); ... if (regex.test($CONTENT))
+        { ... $CONTENT = $CONTENT.replace(regex, $NEWLINE); ... } else { ... $CONTENT
+        += `\n${$NEWLINE}`; ... } ... }'
+    - pattern: 'let $VAR = existsSync($PATH) ? readFileSync($PATH, ''utf-8'') : '''';
+        ... for (const [key, value] of Object.entries($UPDATES)) { ... const regex
+        = new RegExp(`^(#\s*)?${key}=.*$`, ''gm''); ... if (regex.test($CONTENT))
+        { ... $CONTENT = $CONTENT.replace(regex, $NEWLINE); ... } else { ... $CONTENT
+        += `\n${$NEWLINE}`; ... } ... }'
+  - pattern-not: 'const existingEnv = existsSync($PATH) ? dotenv.parse(readFileSync($PATH,
+      ''utf-8'')) : {}; ... const mergedEnv = { ...existingEnv, ...$UPDATES }; ...
+      const safeEnvContent = stringify(mergedEnv); ... writeFileSync($PATH, safeEnvContent,
+      ''utf-8'');'
+  languages:
+  - typescript
+  message: Insecure .env file handling with regex-based string manipulation can lead
+    to injection vulnerabilities. The original code used regex pattern matching and
+    string replacement on environment variable content, which is prone to injection
+    attacks if user-provided values contain special regex characters. This vulnerability
+    allows attackers to inject malicious content into the .env file. The fix properly
+    parses existing environment variables using dotenv.parse() and merges with new
+    updates before securely stringifying with dotenv-stringify, preventing injection
+    attacks.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '77'
+    owasp: OWASP Top 10:2021 - A03:2021 - Injection
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    technology:
+    - typescript

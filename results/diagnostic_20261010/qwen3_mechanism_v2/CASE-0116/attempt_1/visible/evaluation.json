@@ -1,0 +1,55 @@
+{
+  "scan_ok": false,
+  "returncode": 2,
+  "all_targets_scanned": true,
+  "errors": [
+    {
+      "code": 2,
+      "level": "error",
+      "type": "Rule parse error",
+      "rule_id": "results.diagnostic_20261010.qwen3_mechanism_v2.CASE-0116.attempt_1.vuln-thrift-0919c3d5",
+      "message": "Rule parse error in rule results.diagnostic_20261010.qwen3_mechanism_v2.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\n$SOCKET.getSSLParameters()\n...\n$SOCKET.setSSLParameters($PARAMS)\n\n----- end pattern -----\n"
+    },
+    {
+      "message": "Semgrep exited with status 2"
+    }
+  ],
+  "command": [
+    "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+    "--config",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0116/attempt_1/rule.yml",
+    "--json",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-git-ignore",
+    "--jobs=1",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/vulnerable_source.java",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/patched_source.java"
+  ],
+  "validation_seconds": 1.264464207997662,
+  "legacy_accepted": false,
+  "visible_correct": false,
+  "complete_success": false,
+  "samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "label": "positive",
+      "detected": false,
+      "finding_location_correct": false,
+      "finding_lines": [],
+      "outcome": "FN",
+      "sample_path": "benchmark/cases/CASE-0116/vulnerable_source.java",
+      "sample_sha256": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d"
+    },
+    {
+      "sample_type": "original_patched",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0116/patched_source.java",
+      "sample_sha256": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e"
+    }
+  ]
+}

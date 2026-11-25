@@ -1,0 +1,34 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0046",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791664133.027735,
+  "raw_content": null,
+  "prompt_text": null,
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in python code.\n\n    CONTEXT:\n    Repository: github.com/Cp0204/quark-auto-save\n    Commit: ea8377a596446291953dbe36e2d119d85bcd865b\n\n    PATCH CHANGES:\n    File: app/run.py\n--- a/app/run.py\n+++ b/app/run.py\n-    dont_save_keys = [\"task_plugins_config_default\", \"api_token\"]\n+    # \u4f7f\u7528\u5141\u8bb8\u5217\u8868\u9632\u6b62\u6279\u91cf\u8d4b\u503c\u653b\u51fb\n+    allowed_keys = [\"cookie\", \"crontab\", \"push_config\", \"tasklist\",\n+                    \"magic_regex\", \"plugins\", \"source\"]\n-        if key not in dont_save_keys:\n+        if key in allowed_keys:\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-quark-auto-save-ea8377a5\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"python\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [python]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n    rules:\n    - id: \"unsafe-deserialization\"\n        pattern: pickle.loads($DATA)\n        pattern-not: pickle.loads(trusted_data)\n        pattern-inside: |\n            def $FUNC(...):\n                ...\n        languages: [\"python\"]\n        message: \"Detected unsafe deserialization using pickle.loads(). This can lead to remote code execution.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-502\n            owasp: A8:2017-Insecure Deserialization\n            references:\n                - https://docs.python.org/3/library/pickle.html#pickle.loads\n\n    - id: \"sql-injection\"\n        patterns:\n            - pattern: execute($QUERY)\n            - pattern-not: execute(\"SELECT ...\")\n            - pattern-not: execute(sanitized_query)\n        languages: [\"python\"]\n        message: \"Potential SQL injection detected. Use parameterized queries instead.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-89\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-quark-auto-save-ea8377a5\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"python\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.\n\nPREVIOUS ERROR TO FIX:\nError generating rule: Invalid or Missing Bearer Token\nEnsure your next attempt addresses these issues."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": null,
+  "generation_seconds": 0.009122041999944486,
+  "error": {
+    "type": "AuthenticationError",
+    "message": "Invalid or Missing Bearer Token"
+  },
+  "input_tokens": null,
+  "output_tokens": null
+}

@@ -1,0 +1,55 @@
+{
+  "same_six_example_ids": {
+    "python": [
+      "unsafe-deserialization",
+      "sql-injection"
+    ],
+    "javascript": [
+      "xss-innerHTML",
+      "eval-injection"
+    ],
+    "java": [
+      "path-traversal",
+      "weak-cipher"
+    ]
+  },
+  "typed_examples_validate": 6,
+  "typescript_has_no_examples_in_either_condition": true,
+  "prompt_policies": {
+    "original_prompt": "historical_autogrep_default_unchanged",
+    "typed_json": "CONDITION_B_TYPED_JSON"
+  },
+  "credential_scenarios": [
+    {
+      "model": "gpt-4o",
+      "key_present": false,
+      "result": "correct_missing_key_error"
+    },
+    {
+      "model": "gpt-4o",
+      "key_present": true,
+      "result": "provider_resolved_transport_mocked"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "key_present": false,
+      "result": "correct_missing_key_error"
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "key_present": true,
+      "result": "provider_resolved_transport_mocked"
+    }
+  ],
+  "network_requests": 0,
+  "model_calls": 0,
+  "allocation": "Research_Log/Diagnostic_20261010/AB_Pilot_Allocation_20261012_v1/allocation.json",
+  "reviewed_sha256": {
+    "autogrep/llm_client.py": "25634033d3f46a32ea81f7fa423d087f09ba283680fd13a2194cac86971c0068",
+    "pipeline/diagnostic_v2.py": "3a648c80adbeee1042771d9bf9413b2b2888cf96b1edabd02203384273ed4ea4",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "8989fedf198d8b0a43c686aecedd5fb00df24176ee02e8e41a7a6ba901be8625",
+    "Research_Log/Correction_Log.md": "e38a12d4fe0d277c87a3676307138965f96d6bdb524c900f783831332ecbe16c",
+    "Research_Log/Diagnostic_20261010/Controlled_2x2_Protocol_Draft_20261012.md": "45a2536e8894d79381f19a6f33c9cb99f9d375a6069cc2ee4845364a3b5849ca",
+    "Research_Log/Diagnostic_20261010/prepare_ab_pilot_20261012.py": "4715276234052fba21412d49f52446e277f8a729b5ecbcbc38fbd5963554f491"
+  }
+}

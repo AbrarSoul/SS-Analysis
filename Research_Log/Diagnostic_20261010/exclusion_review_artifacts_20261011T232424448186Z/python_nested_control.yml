@@ -1,0 +1,9 @@
+rules:
+- id: scope-review
+  message: Scope review
+  severity: WARNING
+  languages:
+  - python
+  patterns:
+  - pattern: foo($X)
+  - pattern-inside: "def allowed(...):\n    ..."

@@ -1,0 +1,21 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[$PATTERN]/g,
+    '');
+  pattern-not: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<{}]/g,
+    '');
+  languages:
+  - javascript
+  message: Potential insecure regex pattern in string replacement. The original vulnerable
+    code used '/[<{}>]/g' which incorrectly included '>' in the character class, potentially
+    allowing bypass of security filters. Fix by removing the incorrect character or
+    ensuring proper escaping to prevent injection vulnerabilities.
+  severity: ERROR
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-116
+    owasp: OWASP-A03:2021
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+    technology: javascript

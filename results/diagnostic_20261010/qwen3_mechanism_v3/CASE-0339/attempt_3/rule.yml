@@ -1,0 +1,22 @@
+rules:
+- id: trilium-xss-path-title
+  pattern: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[$PATTERN]/g,
+    '');
+  pattern-not: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<{}]/g,
+    '');
+  pattern-inside: "function $FUNC(...) {\n  ...\n  $RESULT.highlightedNotePathTitle\
+    \ = $RESULT.notePathTitle.replace(/[$PATTERN]/g, '');\n  ...\n}\n"
+  languages:
+  - javascript
+  message: Potential XSS vulnerability in note path title handling. The regex pattern
+    excludes '<' and '{' characters but may still allow other dangerous HTML characters
+    through. This could lead to cross-site scripting if untrusted input is not properly
+    sanitized. Fix by ensuring all potentially dangerous HTML characters are escaped
+    or by using a more comprehensive sanitization approach.
+  severity: WARNING
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-79
+    technology:
+    - javascript

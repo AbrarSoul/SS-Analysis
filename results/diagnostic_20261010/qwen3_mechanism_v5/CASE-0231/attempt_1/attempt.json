@@ -1,0 +1,86 @@
+{
+  "attempt": 1,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": false,
+    "returncode": 7,
+    "all_targets_scanned": false,
+    "errors": [
+      {
+        "code": 4,
+        "level": "error",
+        "type": "InvalidRuleSchemaError",
+        "long_msg": "These options were both specified, but they are mutually exclusive: 'pattern-either', 'patterns'",
+        "short_msg": "Invalid rule schema",
+        "spans": [
+          {
+            "file": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+            "start": {
+              "line": 2,
+              "col": 3,
+              "offset": -1
+            },
+            "end": {
+              "line": 38,
+              "col": 1,
+              "offset": -1
+            },
+            "source_hash": "ba992adab47de9b0ec84bcc540c98beaa9f7fa8bb28fc1630899dad7e0a01b38"
+          }
+        ]
+      },
+      {
+        "code": 7,
+        "level": "error",
+        "type": "SemgrepError",
+        "message": "invalid configuration file found (1 configs were invalid)"
+      },
+      {
+        "message": "Semgrep exited with status 7"
+      },
+      {
+        "message": "Semgrep did not scan every requested sample"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/vulnerable_source.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/patched_source.py"
+    ],
+    "validation_seconds": 1.1150169160100631,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0231/vulnerable_source.py",
+        "sample_sha256": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0231/patched_source.py",
+        "sample_sha256": "ffbd3796730e446c45e23e9550eb85077dba6b5212474efaf067c4a5701941d7"
+      }
+    ]
+  },
+  "feedback": "Semgrep scan error: [{\"code\": 4, \"level\": \"error\", \"type\": \"InvalidRuleSchemaError\", \"long_msg\": \"These options were both specified, but they are mutually exclusive: 'pattern-either', 'patterns'\", \"short_msg\": \"Invalid rule schema\", \"spans\": [{\"file\": \"/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml\", \"start\": {\"line\": 2, \"col\": 3, \"offset\": -1}, \"end\": {\"line\": 38, \"col\": 1, \"offset\": -1}, \"source_hash\": \"ba992adab47de9b0ec84bcc540c98beaa9f7fa8bb28fc1630899dad7e0a01b38\"}]}, {\"code\": 7, \"level\": \"error\", \"type\": \"SemgrepError\", \"message\": \"invalid configuration file found (1 configs were invalid)\"}, {\"message\": \"Semgrep exited with status 7\"}, {\"message\": \"Semgrep did not scan every requested sample\"}]"
+}

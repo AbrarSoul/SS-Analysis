@@ -1,0 +1,13 @@
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "reference": {
+      "accepted": 19,
+      "visible_correct": 19,
+      "complete_success": 12,
+      "hidden_positive_hits_all_requested": 35,
+      "expected_hidden_positives": 48
+    }
+  }
+}

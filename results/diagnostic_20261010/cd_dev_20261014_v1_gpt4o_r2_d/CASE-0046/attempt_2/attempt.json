@@ -1,0 +1,59 @@
+{
+  "attempt": 2,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r2_d/CASE-0046/attempt_2/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r2_d/CASE-0046/attempt_2/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/vulnerable_source.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/patched_source.py"
+    ],
+    "validation_seconds": 1.6025149170018267,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0046/vulnerable_source.py",
+        "sample_sha256": "bc5483b0b4890b44db85e238154d20050332ee18d2c06bca5fa476e0803a92f9"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0046/patched_source.py",
+        "sample_sha256": "295215d6a6ec9f5b7197217ca2b8d397df8a501f1560bd6bc9e39df02a4978e7"
+      }
+    ]
+  },
+  "probe_evaluation": null,
+  "gate_decision": {
+    "accept": false,
+    "stop": false,
+    "reason": "visible_correct failed",
+    "is_fallback": false,
+    "probe_eligible": true,
+    "probe_checks": null
+  },
+  "feedback": "Rule failed to detect vulnerability in original version"
+}

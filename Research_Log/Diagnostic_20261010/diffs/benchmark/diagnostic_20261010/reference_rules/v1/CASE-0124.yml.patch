@@ -1,0 +1,23 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0124.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0124.yml
+@@ -0,0 +1,20 @@
++rules:
++- id: diagnostic-case-0124
++  message: Function input reaches shell execution; integer conversion treated as a
++    sanitizer
++  severity: WARNING
++  languages:
++  - python
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  mode: taint
++  pattern-sources:
++  - patterns:
++    - pattern-inside: "def $F(..., $ARG, ...):\n    ..."
++    - focus-metavariable: $ARG
++  pattern-sinks:
++  - pattern: os.system($CMD)
++  pattern-sanitizers:
++  - pattern: int(...)

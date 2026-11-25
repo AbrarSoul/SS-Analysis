@@ -1,0 +1,20 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  patterns:
+  - pattern: var shortcutMatch = url.match(new RegExp\('^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)'\))
+  - pattern-not: var shortcutMatch = url.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)/)
+  - pattern-not: project = decodeURIComponent(shortcutMatch[3].replace(/\.git$/, ''))
+  languages:
+  - javascript
+  message: Vulnerable regex pattern in hosted-git-info can lead to catastrophic backtracking
+    and denial of service. The original regex uses nested quantifiers that cause exponential
+    time complexity when matching certain inputs. Fix by using a more efficient regex
+    without nested quantifiers and properly handling .git suffix removal.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-1333
+    owasp: OWASP-A03:2021
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    technology:
+    - javascript

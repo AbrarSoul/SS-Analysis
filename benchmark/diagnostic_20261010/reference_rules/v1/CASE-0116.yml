@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0116
+  message: TLS socket handed to Thrift without demonstrated hostname verification
+  severity: WARNING
+  languages:
+  - java
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern: new TSocket($SOCKET)

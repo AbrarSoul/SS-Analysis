@@ -1,0 +1,31 @@
+{
+  "attempt": 1,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/Condition_B_Offline_Evidence_20261012T092411725871Z/compiler_then_location_repair/CASE-REVIEW/attempt_1/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": false,
+    "errors": [
+      "synthetic compile failure"
+    ],
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "detected": true,
+        "finding_location_correct": false,
+        "finding_lines": [
+          1
+        ],
+        "outcome": "FN"
+      },
+      {
+        "sample_type": "original_patched",
+        "detected": false,
+        "outcome": "TN"
+      }
+    ]
+  },
+  "feedback": "Semgrep scan error: [\"synthetic compile failure\"]"
+}

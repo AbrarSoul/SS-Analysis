@@ -1,0 +1,14 @@
+/Users/nkabmo/Desktop/Tools/SS/.venv/lib/python3.14/site-packages/scipy/stats/_stats_py.py:8776: RuntimeWarning: invalid value encountered in scalar divide
+  statistic = (12.0 / (k*count*(k+1)) * ssbn - 3*count*(k+1)) / c
+[PASS] mcnemar_exact(10,2) matches known textbook p-value
+[PASS] mcnemar_exact(5,5) == 1.0 (perfectly balanced discordance)
+[PASS] mcnemar_exact(0,0) == 1.0 (no discordant pairs)
+[PASS] holm_correct basic 4-test example
+[PASS] holm_correct order-independence
+[PASS] paired_case_bootstrap: constant difference detected correctly
+[PASS] paired_case_bootstrap: null case (identical conditions) -> diff=0, p=1.0
+[PASS] friedman_on_matrix: clear pattern is significant
+[PASS] friedman_on_matrix: degenerate all-tied input handled without crashing
+[PASS] wilcoxon_paired: clear difference is significant
+
+All stats_section22 checks PASSED.

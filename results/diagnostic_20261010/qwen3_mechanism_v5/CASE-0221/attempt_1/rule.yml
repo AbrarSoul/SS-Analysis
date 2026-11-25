@@ -1,0 +1,20 @@
+rules:
+- id: micronaut-netty-http-headers-default-constructor
+  pattern-either:
+  - new DefaultHttpHeaders(false)
+  - new DefaultHttpHeaders($X, false)
+  - new DefaultHttpHeaders($X, $Y, false)
+  pattern-not: new DefaultHttpHeaders()
+  languages:
+  - java
+  message: Use of DefaultHttpHeaders with 'false' parameter may lead to security vulnerabilities.
+    The 'false' parameter disables validation, which can allow malicious headers to
+    be processed without proper sanitization. Remove the 'false' argument to enable
+    default header validation.
+  severity: WARNING
+  metadata:
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    category: security
+    cwe: CWE-776
+    technology:
+    - java

@@ -1,0 +1,32 @@
+rules:
+- id: agentscope-studio-file-deletion-vulnerability
+  pattern-either:
+  - patterns:
+    - pattern: "def $FUNC(...):\n    ...\n    if not $FILENAME.endswith(\".json\"\
+        ):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"\
+        })\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n    ...\n    $CALL($FILENAME)\n"
+    - pattern-not: "def $FUNC(...):\n    ...\n    if not $FILENAME.endswith(\".json\"\
+        ):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"\
+        })\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n    ...\n    $CALL($FILENAME)\n\
+        \    ...\n    if not $FILENAME.endswith(\".json\"):\n        return jsonify({\"\
+        error\": \"Only JSON files can be deleted\"})\n"
+    - pattern-not-inside: "def $FUNC(...):\n    ...\n    if not $FILENAME.endswith(\"\
+        .json\"):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"\
+        })\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n    ...\n    $CALL($FILENAME)\n\
+        \    ...\n    if not $FILENAME.endswith(\".json\"):\n        return jsonify({\"\
+        error({\"error\": \"Only JSON files can be deleted\"})\n"
+  - pattern: "def $FUNC(...):\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n\
+      \    ...\n    $CALL($FILENAME)\n"
+  languages:
+  - python
+  message: Potential directory traversal vulnerability in file deletion logic. The
+    filename is sanitized with os.path.basename() but lacks proper validation to ensure
+    only JSON files are processed, allowing potential arbitrary file access if the
+    check is bypassed or skipped.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    technology:
+    - python

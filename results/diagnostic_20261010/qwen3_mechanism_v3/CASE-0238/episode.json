@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0238",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Failed to clean YAML text"
+    },
+    {
+      "attempt": 2,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Failed to clean YAML text"
+    },
+    {
+      "attempt": 3,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Failed to clean YAML text"
+    }
+  ],
+  "raw": null,
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "calls_recorded": 3,
+  "input_tokens": 3790,
+  "output_tokens": 635,
+  "generation_seconds": 5.612947457993869
+}

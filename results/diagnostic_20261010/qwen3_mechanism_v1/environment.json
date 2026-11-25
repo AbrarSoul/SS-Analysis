@@ -1,0 +1,26 @@
+{
+  "version": "diagnostic-v2.1",
+  "created_utc": "2026-10-10T21:59:43.191402+00:00",
+  "mode": "model",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "max_tokens": 2048,
+  "max_attempts": 3,
+  "schema_policy": "semgrep_search_taint_v2",
+  "prompt_policy": "EXPLICIT_REVISED_CONDITION:diagnostic_mechanism_v1",
+  "prompt_variant": "diagnostic_mechanism_v1",
+  "semgrep_version": "1.177.0",
+  "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "code_sha256": {
+    "pipeline/diagnostic_v2.py": "82bcb158e3b7f13d4d10302e1be9d1e54e82e8eabe84401207f40fa91175976f",
+    "pipeline/raw_capture.py": "c344d041cd6b171183b1ae886f99cd34155c316f7fc07e0924f6bb3ff4435f4a",
+    "autogrep/llm_client.py": "0319a039721f75f6ec461e8b32963c630c2ae78c04dbc98c9e4c83aa7428e59f",
+    "autogrep/config.py": "8d6040e070c9a40e0c02e062cc797cb2f7fd236daaa7ca07a514e81cd020de38",
+    "pipeline/case_loader.py": "8e63d27b5ae1c387a96d3553af705fbcc938fddee518abeee9afdd5c31a38d95",
+    "pipeline/gptlab_config.py": "534cebf592916dea54e13310d91dc49c5bbc781eee24483773744163a70e182b",
+    "autogrep/patch_processor.py": "a75d86f5af85469d79e56eaa2462ee0afae059d843f8ef55db60cc1993c270e1",
+    "pipeline/eligible_cases.py": "9d08921914d393ad5beb66d7401c35b0b3951de6c5b2fabdcdaf896b5e60962c"
+  },
+  "credential_available": true,
+  "reference_authorship": "assistant-authored after bundle inspection; independent expert review pending"
+}

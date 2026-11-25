@@ -1,0 +1,21 @@
+rules:
+- id: vuln-semantic-versioning-plugin-8df2fabd
+  patterns:
+  - pattern: DocumentBuilderFactory.newInstance().newDocumentBuilder()
+  - pattern-not: "DocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n\
+      \        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA,\
+      \ \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()"
+  languages:
+  - java
+  message: Insecure XML processing vulnerability. The code creates a DocumentBuilderFactory
+    without setting ACCESS_EXTERNAL_DTD and ACCESS_EXTERNAL_SCHEMA attributes to empty
+    strings, which can lead to XXE (XML External Entity) attacks. Fix by setting these
+    attributes to empty strings to disable external entity resolution.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-611
+    owasp: OWASP Top 10:2021 - A03:2021 - Injection
+    source-url: github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f
+    technology:
+    - java

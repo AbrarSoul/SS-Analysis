@@ -1,0 +1,6 @@
+{
+  "description": "2026-10-09 diagnostic subset: the 37 eligible-supported cases where qwen3-coder:30b (follow-up campaign's best performer) was accepted and correctly discriminated the original vulnerable/patched pair, but failed to generalize to one or both hidden transformed variants (hurdle 3 of the four-hurdle ESR structure). Used to test gpt-4o on the identical cases to distinguish an open-weight capability gap from a fundamental task/pipeline limitation.",
+  "source_model": "qwen3-coder:30b",
+  "source_run": "results_corrected/runs_followup_20261008/qwen3-coder_30b__autogrep_default",
+  "case_ids": ["CASE-0042","CASE-0046","CASE-0048","CASE-0062","CASE-0068","CASE-0077","CASE-0079","CASE-0082","CASE-0090","CASE-0105","CASE-0113","CASE-0122","CASE-0158","CASE-0162","CASE-0163","CASE-0171","CASE-0172","CASE-0173","CASE-0179","CASE-0181","CASE-0185","CASE-0191","CASE-0202","CASE-0222","CASE-0223","CASE-0225","CASE-0230","CASE-0239","CASE-0256","CASE-0267","CASE-0275","CASE-0306","CASE-0309","CASE-0324","CASE-0334","CASE-0341","CASE-0342"]
+}

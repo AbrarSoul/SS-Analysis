@@ -1,0 +1,32 @@
+rules:
+- id: vuln-agentscope-7d285e86
+  pattern-either:
+  - '$APP.delete($FILENAME)
+
+    ...
+
+    $FILENAME = os.path.basename($FILENAME)
+
+    '
+  - '$APP.delete($FILENAME)
+
+    ...
+
+    $FILENAME = os.path.abspath($FILENAME)
+
+    '
+  pattern-not: "if not $FILENAME.endswith(\".json\"):\n    return jsonify({\"error\"\
+    : \"Only JSON files can be deleted\"})\n"
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Potential path traversal vulnerability in file deletion. The filename parameter
+    is not validated to ensure it's a JSON file before processing, allowing arbitrary
+    file deletion. Fix by adding validation to ensure only .json files can be deleted.
+  severity: ERROR
+  metadata:
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    category: security
+    cwe: CWE-22
+    technology:
+    - python

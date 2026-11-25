@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0171",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791935618.991341,
+  "raw_content": "rules:\n- id: \"vuln-graphhopper-eb189be1\"\n  pattern: |\n    $URL = $URL.replaceFirst(\"/navigate/directions/v5/gh/\" + $PROFILE + \"/\", \"\");\n    $URL = $URL.replaceAll(\"\\\\?[*]\", \"\");\n  pattern-not: |\n    String urlStart = \"/navigate/directions/v5/gh/\" + $PROFILE + \"/\";\n    if (!$URL.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + $URL);\n    $URL = $URL.substring(urlStart.length());\n  languages: [\"java\"]\n  message: \"Potential insecure URL handling vulnerability. The code uses replaceFirst and replaceAll operations that may not properly validate URL prefixes, leading to potential path manipulation or injection attacks. Fix by validating the URL prefix before processing and throwing an exception for invalid URLs.\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41\n    category: security\n    cwe: CWE-20\n    owasp: OWASP-M01\n    technology: java\n    references:\n      - https://owasp.org/www-community/attacks/Path_Traversal\n      - https://cwe.mitre.org/data/definitions/20.html",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/graphhopper/graphhopper\n    Commit: eb189be1fa7443ebf4ae881e737a18f818c95f41\n\n    PATCH CHANGES:\n    File: navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n--- a/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n+++ b/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n-\n-        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n-        url = url.replaceAll(\"\\\\?[*]\", \"\");\n-\n+        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n+        if (!url.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url);\n+        url = url.substring(urlStart.length());\n-\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-graphhopper-eb189be1\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"java\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [java]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n    rules:\n    - id: \"path-traversal\"\n        pattern: new File($PATH)\n        pattern-not: new File(sanitized_path)\n        pattern-inside: |\n            class $CLASS {\n                ...\n            }\n        languages: [\"java\"]\n        message: \"Potential path traversal vulnerability. Validate and sanitize file paths.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-22\n\n    - id: \"weak-cipher\"\n        pattern: Cipher.getInstance(\"DES\")\n        languages: [\"java\"]\n        message: \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-326\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-graphhopper-eb189be1\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"java\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/graphhopper/graphhopper\n    Commit: eb189be1fa7443ebf4ae881e737a18f818c95f41\n\n    PATCH CHANGES:\n    File: navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n--- a/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n+++ b/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n-\n-        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n-        url = url.replaceAll(\"\\\\?[*]\", \"\");\n-\n+        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n+        if (!url.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url);\n+        url = url.substring(urlStart.length());\n-\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-graphhopper-eb189be1\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"java\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [java]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n    rules:\n    - id: \"path-traversal\"\n        pattern: new File($PATH)\n        pattern-not: new File(sanitized_path)\n        pattern-inside: |\n            class $CLASS {\n                ...\n            }\n        languages: [\"java\"]\n        message: \"Potential path traversal vulnerability. Validate and sanitize file paths.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-22\n\n    - id: \"weak-cipher\"\n        pattern: Cipher.getInstance(\"DES\")\n        languages: [\"java\"]\n        message: \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-326\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-graphhopper-eb189be1\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"java\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-905",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "rules:\n- id: \"vuln-graphhopper-eb189be1\"\n  pattern: |\n    $URL = $URL.replaceFirst(\"/navigate/directions/v5/gh/\" + $PROFILE + \"/\", \"\");\n    $URL = $URL.replaceAll(\"\\\\?[*]\", \"\");\n  pattern-not: |\n    String urlStart = \"/navigate/directions/v5/gh/\" + $PROFILE + \"/\";\n    if (!$URL.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + $URL);\n    $URL = $URL.substring(urlStart.length());\n  languages: [\"java\"]\n  message: \"Potential insecure URL handling vulnerability. The code uses replaceFirst and replaceAll operations that may not properly validate URL prefixes, leading to potential path manipulation or injection attacks. Fix by validating the URL prefix before processing and throwing an exception for invalid URLs.\"\n  severity: ERROR\n  metadata:\n    source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41\n    category: security\n    cwe: CWE-20\n    owasp: OWASP-M01\n    technology: java\n    references:\n      - https://owasp.org/www-community/attacks/Path_Traversal\n      - https://cwe.mitre.org/data/definitions/20.html",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791935618,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 297,
+      "prompt_tokens": 944,
+      "total_tokens": 1241,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 2.352512708006543,
+  "error": null,
+  "input_tokens": 944,
+  "output_tokens": 297
+}

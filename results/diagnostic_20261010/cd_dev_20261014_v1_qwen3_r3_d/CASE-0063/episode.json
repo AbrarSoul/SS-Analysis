@@ -1,0 +1,368 @@
+{
+  "case_id": "CASE-0063",
+  "condition": "D",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r3_d.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39",
+            "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r3_d.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39:\n Invalid pattern for JavaScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nvar extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/vulnerable_source.js",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/patched_source.js"
+        ],
+        "validation_seconds": 1.3122067079966655,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0063/vulnerable_source.js",
+            "sample_sha256": "d03310d0a5d5a8b6bf3190bcd5dab344a64ecb48aa23d1b861c16c8ce8b53292"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0063/patched_source.js",
+            "sample_sha256": "1d9ee5c9ed66d7f39a86f38c2df3b9b976127ff9fc4b080cc2f609742f454746"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": false,
+        "reason": "visible_correct failed",
+        "is_fallback": false,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r3_d.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r3_d.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39:\\n Invalid pattern for JavaScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nvar extractedInfo = /^data:(\\\\w*\\\\/\\\\w*);*(charset=[\\\\w=-]*)*;*$/.exec(\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    },
+    {
+      "attempt": 2,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/attempt_2/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": true,
+        "returncode": 0,
+        "all_targets_scanned": true,
+        "errors": [],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/attempt_2/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/vulnerable_source.js",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/patched_source.js"
+        ],
+        "validation_seconds": 1.3173625829949742,
+        "legacy_accepted": true,
+        "visible_correct": true,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": true,
+            "finding_location_correct": true,
+            "finding_lines": [
+              633
+            ],
+            "outcome": "TP",
+            "sample_path": "benchmark/cases/CASE-0063/vulnerable_source.js",
+            "sample_sha256": "d03310d0a5d5a8b6bf3190bcd5dab344a64ecb48aa23d1b861c16c8ce8b53292"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0063/patched_source.js",
+            "sample_sha256": "1d9ee5c9ed66d7f39a86f38c2df3b9b976127ff9fc4b080cc2f609742f454746"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": true,
+        "stop": true,
+        "reason": "visible_correct (no probe check applied)",
+        "is_fallback": true,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": null
+    }
+  ],
+  "raw": {
+    "scan_ok": false,
+    "returncode": 2,
+    "all_targets_scanned": true,
+    "errors": [
+      {
+        "code": 2,
+        "level": "error",
+        "type": "Rule parse error",
+        "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r3_d.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39",
+        "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r3_d.CASE-0063.attempt_1.vuln-jspdf-d8bb3b39:\n Invalid pattern for JavaScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nvar extractedInfo = /^data:(\\w*\\/\\w*);*(charset=[\\w=-]*)*;*$/.exec(\n----- end pattern -----\n"
+      },
+      {
+        "message": "Semgrep exited with status 2"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/vulnerable_source.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/patched_source.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/variant_vulnerable_01.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/variant_vulnerable_02.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/variant_safe_01.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/benign_lookalike.js"
+    ],
+    "validation_seconds": 1.3369100409909151,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0063/vulnerable_source.js",
+        "sample_sha256": "d03310d0a5d5a8b6bf3190bcd5dab344a64ecb48aa23d1b861c16c8ce8b53292"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0063/patched_source.js",
+        "sample_sha256": "1d9ee5c9ed66d7f39a86f38c2df3b9b976127ff9fc4b080cc2f609742f454746"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0063/variant_vulnerable_01.js",
+        "sample_sha256": "e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0063/variant_vulnerable_02.js",
+        "sample_sha256": "32fbfb3adc888f8e57ece01d8e49b7b341b83cd93799f068d34d91bcf51e2cb3"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0063/variant_safe_01.js",
+        "sample_sha256": "57e05c6cdd002fd74f43f61f5e705a23da6f5155ad2fb1e328d079e71ce6b074"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0063/benign_lookalike.js",
+        "sample_sha256": "6d33caaaf449eb6fa8a7aec3cd8c205eb10eaadaddbce8c2f087b92a2d8f78df"
+      }
+    ]
+  },
+  "iterative": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/attempt_2/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/vulnerable_source.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/patched_source.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/variant_vulnerable_01.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/variant_vulnerable_02.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/variant_safe_01.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0063/benign_lookalike.js"
+    ],
+    "validation_seconds": 1.3391447080066428,
+    "legacy_accepted": true,
+    "visible_correct": true,
+    "complete_success": true,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          633
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0063/vulnerable_source.js",
+        "sample_sha256": "d03310d0a5d5a8b6bf3190bcd5dab344a64ecb48aa23d1b861c16c8ce8b53292"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0063/patched_source.js",
+        "sample_sha256": "1d9ee5c9ed66d7f39a86f38c2df3b9b976127ff9fc4b080cc2f609742f454746"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          633
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0063/variant_vulnerable_01.js",
+        "sample_sha256": "e23570af7e2a6a5d8401d7f7d4a5031722b92f6040be99aa0e50e0d00021f090"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          634
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0063/variant_vulnerable_02.js",
+        "sample_sha256": "32fbfb3adc888f8e57ece01d8e49b7b341b83cd93799f068d34d91bcf51e2cb3"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0063/variant_safe_01.js",
+        "sample_sha256": "57e05c6cdd002fd74f43f61f5e705a23da6f5155ad2fb1e328d079e71ce6b074"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0063/benign_lookalike.js",
+        "sample_sha256": "6d33caaaf449eb6fa8a7aec3cd8c205eb10eaadaddbce8c2f087b92a2d8f78df"
+      }
+    ]
+  },
+  "final_rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r3_d/CASE-0063/final_rule.yml",
+  "final_rule_sha256": "2e4f7a9a7b0afa371d34cdc435a494ec634a99b5d6ba8d2138bc108b716b6f12",
+  "probe_eligible": false,
+  "probe_ineligible_reason": "vulnerable_function does not parse cleanly",
+  "verified_probe_hashes": null,
+  "probe_provenance": {
+    "manifest_sha256": "771400b84983a11b4edb97129e454ab860208b7727e7316a2c4b1689e093104f",
+    "context_sha256": "86ca4ea8930282f6555539dd18fa4d8195692f4ec49af279636b15d04c3ccd52",
+    "reviewed_entry": {
+      "case_id": "CASE-0063",
+      "language": "javascript",
+      "vulnerable_function_sha256": "61637a751c50dd72796ccedaf511b4ab953ffd8cf24080455da0afa7ba3fab63",
+      "patched_function_sha256": "8e515b0e11be0981e647b26dcc04c36329021a465afa0fefeb3ff7acde368417",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "cache_status": "miss_built"
+  },
+  "probe_snapshot_paths": null,
+  "probe_fallback_used": true,
+  "resource_accounting": {
+    "generation_calls": 2,
+    "visible_scans": 2,
+    "probe_scans": 0,
+    "repair_calls": 1
+  },
+  "calls_recorded": 2,
+  "input_tokens": 2242,
+  "output_tokens": 456,
+  "generation_seconds": 3.652822791991639
+}

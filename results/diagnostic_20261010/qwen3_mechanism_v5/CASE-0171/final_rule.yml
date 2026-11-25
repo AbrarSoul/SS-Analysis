@@ -1,0 +1,22 @@
+rules:
+- id: vuln-graphhopper-eb189be1
+  pattern-either:
+  - patterns:
+    - pattern: $URL.replaceFirst("/navigate/directions/v5/gh/" + $PROFILE + "/", ...)
+    - pattern-not: $URL.startsWith("/navigate/directions/v5/gh/" + $PROFILE + "/")
+  - patterns:
+    - pattern: $URL.replaceAll("\\?[*]", ...)
+    - pattern-not: $URL.startsWith("/navigate/directions/v5/gh/" + $PROFILE + "/")
+  languages:
+  - java
+  message: Potential insecure URL handling vulnerability. The code performs URL manipulation
+    without validating that the URL starts with the expected prefix, which could allow
+    arbitrary path traversal or injection attacks. Fix by checking URL prefix before
+    manipulation and throwing an exception if it doesn't match.
+  severity: ERROR
+  metadata:
+    source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41
+    category: security
+    cwe: CWE-20
+    technology:
+    - java

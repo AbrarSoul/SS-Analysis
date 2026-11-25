@@ -1,0 +1,24 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  patterns:
+  - pattern: File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)
+  languages:
+  - java
+  message: Use of File.createTempFile with explicit workspace parameter may lead to
+    insecure temporary file creation. The fix ensures proper permissions are set on
+    Unix-like systems by using Files.createTempFile with appropriate FileAttributes.
+    Replace calls to File.createTempFile() with the custom createTempFile() method
+    that properly handles file permissions.
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    category: security
+    cwe:
+    - CWE-377
+    owasp:
+    - OWASP-M01
+    technology: java
+    references:
+    - https://owasp.org/www-community/attacks/Insecure_Temporary_File
+    - https://docs.oracle.com/javase/8/docs/api/java/io/File.html#createTempFile-java.lang.String-java.lang.String-java.io.File-
+    - https://github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98

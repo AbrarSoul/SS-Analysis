@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0276
+  message: open_code selection omits SourcelessFileLoader
+  severity: WARNING
+  languages:
+  - python
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern: isinstance($SELF, (SourceLoader, ExtensionFileLoader))

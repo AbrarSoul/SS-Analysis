@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "typescript",
+    "vulnerable_function_sha256": "81cf37b5b1fbf7d348b0a5d291258133a0866373274e9703b9c615ed2f3fd908",
+    "patched_function_sha256": "f1496f2f46a419fc9890a16b2f9dd258d3ede9a58ab7bbb3a0f75815b2f65bb4",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0340",
+      "language": "typescript",
+      "old_name": "output",
+      "new_name": "output_renamed",
+      "vulnerable_probe": "export function getApplicationPid(\n  applicationId: string,\n  adbPath?: string\n): number {\n  let output_renamed: Buffer | undefined;\n  try {\n    output_renamed = execSync(\n      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n    );\n  } catch (error) {\n    throw new CodeError(\n      ERR_ANDROID_CANNOT_GET_APP_PID,\n      (error as Error).message\n    );\n  }\n\n  const pid = output_renamed ? parseInt(output_renamed.toString(), 10) : NaN;\n  if (isNaN(pid)) {\n    throw new CodeError(ERR_ANDROID_UNPROCESSABLE_PID);\n  }\n\n  return pid;\n}",
+      "patched_probe": "export function getApplicationPid(\n  applicationId: string,\n  adbPath?: string\n): number {\n  let output_renamed: Buffer | String | undefined;\n  try {\n    output_renamed = execFileSync(getAdbPath(adbPath), [\n      'shell',\n      'pidof',\n      '-s',\n      applicationId,\n    ]);\n  } catch (error) {\n    throw new CodeError(\n      ERR_ANDROID_CANNOT_GET_APP_PID,\n      (error as Error).message\n    );\n  }\n\n  const pid = output_renamed ? parseInt(output_renamed.toString(), 10) : NaN;\n  if (isNaN(pid)) {\n    throw new CodeError(ERR_ANDROID_UNPROCESSABLE_PID);\n  }\n\n  return pid;\n}",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "e0ef015aff9dbce2531ed968860f405d9e0ce510081d63656e38075a17cffc35"
+}

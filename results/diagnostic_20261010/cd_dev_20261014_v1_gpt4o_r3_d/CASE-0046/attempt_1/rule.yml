@@ -1,0 +1,18 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  patterns:
+  - pattern: 'if $KEY not in $DONT_SAVE_KEYS:'
+  - pattern-not: 'if $KEY in $ALLOWED_KEYS:'
+  languages:
+  - python
+  message: Detected potential mass assignment vulnerability by using a denylist approach.
+    This can lead to unauthorized data being saved. Use an allowlist approach to specify
+    which keys are permitted.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-915
+    owasp: A4:2021-Insecure Design
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    technology:
+    - python

@@ -1,0 +1,34 @@
+rules:
+- id: thrift-ssl-endpoint-identification
+  pattern: '$SOCKET.getSSLParameters()
+
+    ...
+
+    $SOCKET.setSSLParameters($PARAMS)
+
+    '
+  pattern-not: '$SOCKET.getSSLParameters()
+
+    ...
+
+    $PARAMS.setEndpointIdentificationAlgorithm("HTTPS")
+
+    ...
+
+    $SOCKET.setSSLParameters($PARAMS)
+
+    '
+  pattern-inside: "class TSSLTransportFactory {\n    ...\n}\n"
+  languages:
+  - java
+  message: Missing endpoint identification algorithm configuration in SSL transport.
+    This vulnerability allows for man-in-the-middle attacks as the SSL connection
+    does not verify the server's identity. Fix by setting 'HTTPS' as the endpoint
+    identification algorithm using setEndpointIdentificationAlgorithm().
+  severity: ERROR
+  metadata:
+    source-url: github.com/apache/thrift/commit/0919c3d5506151514e283a63e1fe1ce83e2449d8
+    category: security
+    cwe: CWE-295
+    technology:
+    - java

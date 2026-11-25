@@ -1,0 +1,40 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: 'const $VAR = document.createElement("a");
+
+      $VAR.href = $SRC;
+
+      ...
+
+      $VAR.outerHTML
+
+      '
+  - pattern: 'const $VAR = document.createElement("a");
+
+      $VAR.href = $SRC;
+
+      ...
+
+      `<...>${$VAR.outerHTML}</...>`
+
+      '
+  pattern-not: 'const $VAR = document.createElement("a");
+
+    $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`;
+
+    '
+  message: Potential XSS vulnerability due to untrusted data being directly inserted
+    into HTML. The href attribute is set from user-provided source without proper
+    sanitization, allowing for malicious script injection. Fix by properly escaping
+    or validating the source before insertion.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: https://github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - 79
+    technology:
+    - typescript

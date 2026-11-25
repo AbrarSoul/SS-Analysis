@@ -1,0 +1,370 @@
+{
+  "case_id": "CASE-0193",
+  "condition": "D",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r2_d.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd",
+            "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r2_d.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd:\n Invalid pattern for Java: Failure: no pattern found\n----- pattern -----\nDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/patched_source.java"
+        ],
+        "validation_seconds": 1.3673518330033403,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0193/vulnerable_source.java",
+            "sample_sha256": "e0c2b25eb5d9140bf1d14b2ca47b52be4576712a8e3bee743425e07e13f894b0"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0193/patched_source.java",
+            "sample_sha256": "d85c426ef727e8aa497924543de8773bc3285fb35d04d517d989411be5b3b671"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": false,
+        "reason": "visible_correct failed",
+        "is_fallback": false,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r2_d.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r2_d.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd:\\n Invalid pattern for Java: Failure: no pattern found\\n----- pattern -----\\nDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \\\"\\\");\\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \\\"\\\");\\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    },
+    {
+      "attempt": 2,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/attempt_2/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": true,
+        "returncode": 0,
+        "all_targets_scanned": true,
+        "errors": [],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/attempt_2/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/patched_source.java"
+        ],
+        "validation_seconds": 1.363742125002318,
+        "legacy_accepted": true,
+        "visible_correct": true,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": true,
+            "finding_location_correct": true,
+            "finding_lines": [
+              97
+            ],
+            "outcome": "TP",
+            "sample_path": "benchmark/cases/CASE-0193/vulnerable_source.java",
+            "sample_sha256": "e0c2b25eb5d9140bf1d14b2ca47b52be4576712a8e3bee743425e07e13f894b0"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0193/patched_source.java",
+            "sample_sha256": "d85c426ef727e8aa497924543de8773bc3285fb35d04d517d989411be5b3b671"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": true,
+        "stop": true,
+        "reason": "visible_correct (no probe check applied)",
+        "is_fallback": true,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": null
+    }
+  ],
+  "raw": {
+    "scan_ok": false,
+    "returncode": 2,
+    "all_targets_scanned": true,
+    "errors": [
+      {
+        "code": 2,
+        "level": "error",
+        "type": "Rule parse error",
+        "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r2_d.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd",
+        "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r2_d.CASE-0193.attempt_1.vuln-semantic-versioning-plugin-8df2fabd:\n Invalid pattern for Java: Failure: no pattern found\n----- pattern -----\nDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n        df.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n        DocumentBuilder documentBuilder = df.newDocumentBuilder()\n----- end pattern -----\n"
+      },
+      {
+        "message": "Semgrep exited with status 2"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/vulnerable_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/patched_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/variant_vulnerable_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/variant_vulnerable_02.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/variant_safe_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/benign_lookalike.java"
+    ],
+    "validation_seconds": 1.2812656669993885,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0193/vulnerable_source.java",
+        "sample_sha256": "e0c2b25eb5d9140bf1d14b2ca47b52be4576712a8e3bee743425e07e13f894b0"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0193/patched_source.java",
+        "sample_sha256": "d85c426ef727e8aa497924543de8773bc3285fb35d04d517d989411be5b3b671"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0193/variant_vulnerable_01.java",
+        "sample_sha256": "e27d8a39a2f53bf5e31d917e747a9220e604e429c0b944521928c45974a9ed2d"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0193/variant_vulnerable_02.java",
+        "sample_sha256": "731cf558ab59a259c742ba3ebde9c7cbd078dbda833b2e722044f9fff7596888"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0193/variant_safe_01.java",
+        "sample_sha256": "f55fe0bc6b6d6bee12e5bb829a53ab4b47d95ba31998554049d5f8027aff64c2"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0193/benign_lookalike.java",
+        "sample_sha256": "1455cf1e7ebaa6f2c567f03764871e53e9096b4013aaaf087dd83aaaed31bf8b"
+      }
+    ]
+  },
+  "iterative": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/attempt_2/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/vulnerable_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/patched_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/variant_vulnerable_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/variant_vulnerable_02.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/variant_safe_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0193/benign_lookalike.java"
+    ],
+    "validation_seconds": 1.2504921249928884,
+    "legacy_accepted": true,
+    "visible_correct": true,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          97
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0193/vulnerable_source.java",
+        "sample_sha256": "e0c2b25eb5d9140bf1d14b2ca47b52be4576712a8e3bee743425e07e13f894b0"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0193/patched_source.java",
+        "sample_sha256": "d85c426ef727e8aa497924543de8773bc3285fb35d04d517d989411be5b3b671"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          97
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0193/variant_vulnerable_01.java",
+        "sample_sha256": "e27d8a39a2f53bf5e31d917e747a9220e604e429c0b944521928c45974a9ed2d"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          93
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0193/variant_vulnerable_02.java",
+        "sample_sha256": "731cf558ab59a259c742ba3ebde9c7cbd078dbda833b2e722044f9fff7596888"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0193/variant_safe_01.java",
+        "sample_sha256": "f55fe0bc6b6d6bee12e5bb829a53ab4b47d95ba31998554049d5f8027aff64c2"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": true,
+        "finding_location_correct": null,
+        "finding_lines": [
+          18
+        ],
+        "outcome": "FP",
+        "sample_path": "benchmark/cases/CASE-0193/benign_lookalike.java",
+        "sample_sha256": "1455cf1e7ebaa6f2c567f03764871e53e9096b4013aaaf087dd83aaaed31bf8b"
+      }
+    ]
+  },
+  "final_rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r2_d/CASE-0193/final_rule.yml",
+  "final_rule_sha256": "e1a1dfc29b35b27e27c9820b3ea23cb4f72fdc2a0eaa6fc6a938d6e68f131df0",
+  "probe_eligible": false,
+  "probe_ineligible_reason": "no eligible local binding found (all candidates excluded or exhausted)",
+  "verified_probe_hashes": null,
+  "probe_provenance": {
+    "manifest_sha256": "771400b84983a11b4edb97129e454ab860208b7727e7316a2c4b1689e093104f",
+    "context_sha256": "c856a0c358ee1e75701bbe7e1a1ae6c36f2cfd9995b647dc1b16141850341af1",
+    "reviewed_entry": {
+      "case_id": "CASE-0193",
+      "language": "java",
+      "vulnerable_function_sha256": "c923f09efeb9a585f73350b962bdfdaefb60e1ba54ad79f4e44854620885ec2a",
+      "patched_function_sha256": "75cac70c0ed7b580e1dc51683c35a7ee77581d95a39d7da92f6b47b54f3b1811",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "cache_status": "miss_built"
+  },
+  "probe_snapshot_paths": null,
+  "probe_fallback_used": true,
+  "resource_accounting": {
+    "generation_calls": 2,
+    "visible_scans": 2,
+    "probe_scans": 0,
+    "repair_calls": 1
+  },
+  "calls_recorded": 2,
+  "input_tokens": 2433,
+  "output_tokens": 508,
+  "generation_seconds": 4.033660875007627
+}

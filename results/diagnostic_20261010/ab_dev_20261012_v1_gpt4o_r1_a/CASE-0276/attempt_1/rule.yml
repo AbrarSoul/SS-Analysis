@@ -1,0 +1,22 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  pattern: 'if isinstance(self, (SourceLoader, ExtensionFileLoader)):
+
+    '
+  pattern-not: 'if isinstance(self, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader)):
+
+    '
+  languages:
+  - python
+  message: Detected missing check for SourcelessFileLoader in isinstance. This can
+    lead to incorrect handling of file loaders, potentially causing security issues.
+    Ensure all relevant loader types are included in the isinstance check.
+  severity: ERROR
+  metadata:
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    category: security
+    cwe: CWE-693
+    owasp: A5:2017-Broken Access Control
+    references:
+    - https://docs.python.org/3/library/importlib.html
+    technology: python

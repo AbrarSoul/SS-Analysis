@@ -1,0 +1,24 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  pattern: 'if $KEY not in $DONT_SAVE_KEYS:
+
+    '
+  pattern-not: 'if $KEY in $ALLOWED_KEYS:
+
+    '
+  languages:
+  - python
+  message: Detected potential mass assignment vulnerability. Using a blacklist approach
+    (checking if a key is not in a list of keys to exclude) can lead to security issues
+    if new keys are added without updating the list. Switch to a whitelist approach
+    (checking if a key is in a list of allowed keys) to prevent unauthorized data
+    from being saved.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe: CWE-915
+    owasp: A5:2017-Broken Access Control
+    references:
+    - https://owasp.org/www-community/attacks/Mass_Assignment
+    technology: python

@@ -1,0 +1,26 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern-either:
+    - pattern: const $VAR = "<p lang=\"en\" dir=\"ltr\"><a href=\"${$SRC}?ref_src=twsrc%5Etfw\"></a></blockquote>"
+    - pattern: const $VAR = `<p lang="en" dir="ltr"><a href="${$SRC}?ref_src=twsrc%5Etfw"></a></blockquote>`
+    - pattern: $VAR = `<p lang="en" dir="ltr"><a href="${$SRC}?ref_src=twsrc%5Etfw"></a></blockquote>`
+  - pattern-not: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href =\
+      \ `${$SRC}?ref_src=twsrc%5Etfw`;\n\n  }><p lang=\"en\" dir=\"ltr\">${\n    $ANCHOR.outerHTML\n\
+      \  }</p></blockquote>"
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in embed component where user-provided 'src'
+    parameter is directly inserted into HTML without proper sanitization. The vulnerability
+    occurs when constructing anchor tags with dynamic href values, which could allow
+    attackers to inject malicious scripts. The fix ensures proper HTML escaping by
+    creating an anchor element and using its outerHTML property instead of direct
+    string interpolation. This prevents script execution in the href attribute.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '79'
+    owasp: OWASP-2021-A03
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

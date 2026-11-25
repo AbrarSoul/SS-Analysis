@@ -1,0 +1,490 @@
+{
+  "format": "reviewed-development-probes-v1",
+  "purpose": "Fixed development subset; not a confirmation protocol freeze",
+  "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "reviewed_edit_report_sha256": "29f6a365e3fb106c858713a5ca6a9486ccf24dd1a9fcb5b89e6a40ad42355e33",
+  "case_ids": [
+    "CASE-0323",
+    "CASE-0276",
+    "CASE-0221",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0220",
+    "CASE-0340",
+    "CASE-0238",
+    "CASE-0193",
+    "CASE-0124",
+    "CASE-0063",
+    "CASE-0184",
+    "CASE-0173",
+    "CASE-0222",
+    "CASE-0163",
+    "CASE-0171",
+    "CASE-0046",
+    "CASE-0239",
+    "CASE-0235",
+    "CASE-0298",
+    "CASE-0116",
+    "CASE-0231",
+    "CASE-0339",
+    "CASE-0081"
+  ],
+  "eligible_cases": 11,
+  "ineligible_cases": 13,
+  "context_sha256": {
+    "CASE-0323": "3311df0946f8cc8da124122252c6a740fb133bab2753c888f38a846294d3011c",
+    "CASE-0276": "50ce60abaef50eb5762b726c9cc773978a18877e1b03780288f671318842d9be",
+    "CASE-0221": "15bef46124f7d41d5faf47ae54a1b5fb2cb2cd32fc08132968baaf46f63219f2",
+    "CASE-0134": "546b0fd276c3e91ff1821b5d71a4514b5ee37fea1b400a751c15a9c41c4f511d",
+    "CASE-0136": "db43e7c364b128ae082e93d302ed78538ac90752a38cf6e557fc306454f6a335",
+    "CASE-0220": "ed3ca42254684c62c3e847754386bfc2a472b141b240442216f1d9b1e981f86c",
+    "CASE-0340": "fae119ec749c8bf162f39233e9e8cb914b6c62ee8a0de9b298a394873915bdc1",
+    "CASE-0238": "a3936108a02da4ed523b1872951656aed0d0052f66140f8b2487d22eb82b25a7",
+    "CASE-0193": "c856a0c358ee1e75701bbe7e1a1ae6c36f2cfd9995b647dc1b16141850341af1",
+    "CASE-0124": "91f66179b44fb31d5e831dc0ad2e412eb13f98beb690148500be84dd70f69f6d",
+    "CASE-0063": "86ca4ea8930282f6555539dd18fa4d8195692f4ec49af279636b15d04c3ccd52",
+    "CASE-0184": "f9f4b262f384fe7a84630fb8ad5dba0c4853df5dcc3700a8751fd03a42e86afd",
+    "CASE-0173": "876e9ac80d8a28653db2c81660a23e14327763f426ed626491b118e1a8973280",
+    "CASE-0222": "ec05274cfe8cb7a60ea99714e6bdea66e33f28ab288c20cc1ff419e11a18611f",
+    "CASE-0163": "cf38666233a3973b24c933e8a7be50882a24e84989216a325a4b5130d7de1c1e",
+    "CASE-0171": "0c25044a01ca8e19cb0cca16ebbcaebb82d4b84f62b3434208ebe320f55688a3",
+    "CASE-0046": "1d9fad9455176eb4539337cd4deb246ad1655d8e47190a04b057702b3d8a7bbd",
+    "CASE-0239": "18f445d6bb5903fb0a41f226894005ca7d84d68953c7885b2304843d2eab3572",
+    "CASE-0235": "5ad432c17825071d81a833c5ba79a2fbe26b961a846cd5408d05652577b77ef2",
+    "CASE-0298": "a465847a2fc33ca9e970d6ba924f0d249d23b50c3c08455ac12d9f085a3768d0",
+    "CASE-0116": "b54d8a90ee53ae1e172f6db09668263574a992696d6dcfb9864f29231cc0135a",
+    "CASE-0231": "23a3bfa7282f40b96cc2495f7a392ff4c3a87be629bf0bfc3841056f9ccbd1dc",
+    "CASE-0339": "93543b21a8214acce67f39fa09575030ca9df75f9154faaaacbd822a8a4d4246",
+    "CASE-0081": "c1059be5bf714c686fe6cee5391d66aa8b736bb34f8368b93d919b33498a439c"
+  },
+  "entries": {
+    "CASE-0323": {
+      "case_id": "CASE-0323",
+      "language": "javascript",
+      "vulnerable_function_sha256": "635fda842eadd4c5d9f9ba951170daa53941e3d6631ee7542f979c1ffc91f241",
+      "patched_function_sha256": "fdc30d653ccc3eedd1c1ed11969e610e13404015388f5491d018cd34d4c47bac",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "CASE-0276": {
+      "case_id": "CASE-0276",
+      "language": "python",
+      "vulnerable_function_sha256": "c5f1ef411a73eaf026e081827451a8c4fa74363edddd3783d67bde4be3bb74ab",
+      "patched_function_sha256": "3bf92cabd90a9785132e7df69bc47f6c41a7c23b52c355fd33d578e025e84e7b",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "file",
+      "new_name": "file_renamed",
+      "vulnerable_probe_sha256": "a1f7156c8c5cc1ac6fc8bb277a3d8274931ad21828fc49672f0402404e7f4657",
+      "patched_probe_sha256": "2ca6848196b893bd8ef46aee089bed39c545e7f606c9676eb06146554d2c27a2",
+      "patched_probe_renamed": true
+    },
+    "CASE-0221": {
+      "case_id": "CASE-0221",
+      "language": "java",
+      "vulnerable_function_sha256": "0a7ffbd1590252f758b3da8ddd42df4574958eb7fea5abf51f17fe9a5326b910",
+      "patched_function_sha256": "04cf4038f7b7fa9960dc1006d57a4d4b6d1e87937a9805037d77874f19937fa4",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "CASE-0134": {
+      "case_id": "CASE-0134",
+      "language": "python",
+      "vulnerable_function_sha256": "67562e8bf2e59e5d560d7be5d491dd0b16b21f1661f5d6b2cb6cced8233004c9",
+      "patched_function_sha256": "c94caf1e3a289d3651a0b1d97b02d3a56c9bb611aeded167117a1f0815f0fb6a",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "result",
+      "new_name": "result_renamed",
+      "vulnerable_probe_sha256": "d71eb0504b213a777bbba5f3bd29b8d575b4d6c540638e8413d5c1f7e593e957",
+      "patched_probe_sha256": "68e9fb89e61b313d508ec8bc253afa42c7f4fe6022bc9c39fdc444d6fd6f637c",
+      "patched_probe_renamed": true
+    },
+    "CASE-0136": {
+      "case_id": "CASE-0136",
+      "language": "java",
+      "vulnerable_function_sha256": "f6f1145859a07904abb023ed314f429c8cbb6bf7e4bb297066feb18ef5a2b38a",
+      "patched_function_sha256": "f3dda3c8b01d91236603fcc1430afc9e61afd25162e5d242b064f656b9531773",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "f",
+      "new_name": "f_renamed",
+      "vulnerable_probe_sha256": "592748b817eb05976d0d94fdecc5be3506efffa54e2b15bbabbc50049524ff31",
+      "patched_probe_sha256": "0978ba115f658052e57b2ee31f3e7069fda2dfd025a9faf21b5f467a7279201c",
+      "patched_probe_renamed": true
+    },
+    "CASE-0220": {
+      "case_id": "CASE-0220",
+      "language": "javascript",
+      "vulnerable_function_sha256": "1410c187cad6b660c003acf2cfe15283756651f412bc118406cf891dfec15db4",
+      "patched_function_sha256": "3deb679bf4bac4bab409b0d05b4ded5e256fa607ab9eb334d296377a61c4d069",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "CASE-0340": {
+      "case_id": "CASE-0340",
+      "language": "typescript",
+      "vulnerable_function_sha256": "81cf37b5b1fbf7d348b0a5d291258133a0866373274e9703b9c615ed2f3fd908",
+      "patched_function_sha256": "f1496f2f46a419fc9890a16b2f9dd258d3ede9a58ab7bbb3a0f75815b2f65bb4",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "output",
+      "new_name": "output_renamed",
+      "vulnerable_probe_sha256": "b71bc75753051a27e3be595ffc352a13bfefbf9592c24872a7540461746ac582",
+      "patched_probe_sha256": "036f8e37f71f0b5947eec67803299c27a798615da1a6ab6bc7b8f49f22920ddf",
+      "patched_probe_renamed": true
+    },
+    "CASE-0238": {
+      "case_id": "CASE-0238",
+      "language": "typescript",
+      "vulnerable_function_sha256": "c2ad094a1934bccb70da4eaecf1e037436429a158d29b2824376d439195108d5",
+      "patched_function_sha256": "d3b22f562616dd370c8174fa09d759fbdb8ac8da57e13c4c6322d772e9dd44ab",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "CASE-0193": {
+      "case_id": "CASE-0193",
+      "language": "java",
+      "vulnerable_function_sha256": "c923f09efeb9a585f73350b962bdfdaefb60e1ba54ad79f4e44854620885ec2a",
+      "patched_function_sha256": "75cac70c0ed7b580e1dc51683c35a7ee77581d95a39d7da92f6b47b54f3b1811",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "CASE-0124": {
+      "case_id": "CASE-0124",
+      "language": "python",
+      "vulnerable_function_sha256": "d44ea7cdd86beda9f408f6d45da005cadab48623ef325a78c84314e0f71d2b21",
+      "patched_function_sha256": "a7fc56b3b1c134b7f03512e21ee27ea6325aa6879d1ad29a774c27456364be31",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "sagemaker_dependency",
+      "new_name": "sagemaker_dependency_renamed",
+      "vulnerable_probe_sha256": "2ae8ce46c3adc4965ebda0dec3b6b2a45925040cd7e30beba1b6c3d1893068de",
+      "patched_probe_sha256": "85fe4d2115a24caa59eca1993e33913d00779bb072fbc55f2c08a2e0b39e53bc",
+      "patched_probe_renamed": true
+    },
+    "CASE-0063": {
+      "case_id": "CASE-0063",
+      "language": "javascript",
+      "vulnerable_function_sha256": "61637a751c50dd72796ccedaf511b4ab953ffd8cf24080455da0afa7ba3fab63",
+      "patched_function_sha256": "8e515b0e11be0981e647b26dcc04c36329021a465afa0fefeb3ff7acde368417",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "CASE-0184": {
+      "case_id": "CASE-0184",
+      "language": "java",
+      "vulnerable_function_sha256": "f2744bb2b83a570975491fc8e4a5a4f87fe7d14aa136bb1ae9811b3ac6d8b7f5",
+      "patched_function_sha256": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "msg",
+      "new_name": "msg_renamed",
+      "vulnerable_probe_sha256": "99da2c3c0e019c2f34af1ac539c186622126120769452fe18ec77f60d6389fbc",
+      "patched_probe_sha256": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5",
+      "patched_probe_renamed": false
+    },
+    "CASE-0173": {
+      "case_id": "CASE-0173",
+      "language": "typescript",
+      "vulnerable_function_sha256": "65218e04bfa72a587c6ca07ce8eccb7b42e10565551059904379adecd0969aa0",
+      "patched_function_sha256": "759fdc31b47ffcc0217183d54bb16cd5ee8466419a28a475e48d966463cd9267",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "key",
+      "new_name": "key_renamed",
+      "vulnerable_probe_sha256": "63bab04963352f5414c12cbb568353e7c59d6dec76bb7d685639ea645bc51ea0",
+      "patched_probe_sha256": "86ecf91a3ef83fce58d46b121cdfbaf7c6720674b91bd36cfc8c9455c04250dd",
+      "patched_probe_renamed": true
+    },
+    "CASE-0222": {
+      "case_id": "CASE-0222",
+      "language": "python",
+      "vulnerable_function_sha256": "d7cdfcb8662cce84a26b4a9a8998b2d9036472c0ab30587cc4b919208251fa5c",
+      "patched_function_sha256": "cd6ffee534b5bc2b09ce2bf091c3f5224e6c0b27b03a7d97c3fbac132897584d",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "headers",
+      "new_name": "headers_renamed",
+      "vulnerable_probe_sha256": "9f9c2a0bf1ca4f93190c2809aef1eaa0f3c3f075538ccd5116d8e65a0a1a38fb",
+      "patched_probe_sha256": "f16b5726dc17417ce86a67d5d868b48675f6ca73a14832be5ea62859d5ae7d72",
+      "patched_probe_renamed": true
+    },
+    "CASE-0163": {
+      "case_id": "CASE-0163",
+      "language": "javascript",
+      "vulnerable_function_sha256": "ada6854069e84936100fd9950072274923ebf8c2f3aece9338df022c6d95684c",
+      "patched_function_sha256": "71649dc352625089fd2077de7a969b364b487ff1c81f8c1551e2e1c08dad83e0",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "CASE-0171": {
+      "case_id": "CASE-0171",
+      "language": "java",
+      "vulnerable_function_sha256": "37b094f8be523fca5e44dd1bb2093468e96859e524a5131ec7a776ebcbc9fb35",
+      "patched_function_sha256": "87b8aede624edb9a60d9276333a2dc769d046f9a922174a06fd44fd10eb3af3a",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "url",
+      "new_name": "url_renamed",
+      "vulnerable_probe_sha256": "aa67693669b3359bab9156852dd03322bbf508672b16525be7d4ab371b645265",
+      "patched_probe_sha256": "58253bc9c1fd00517cfe3c74a8d47a24909bfc6dd8dd21c0d25912305273b472",
+      "patched_probe_renamed": true
+    },
+    "CASE-0046": {
+      "case_id": "CASE-0046",
+      "language": "python",
+      "vulnerable_function_sha256": "6bb2809b45970c7160fb306338d7437680908b450b5f103cdc6fcf2316bdfc83",
+      "patched_function_sha256": "64d670d523b8e8ae366d44a146ac8e27b05d7f000e3592d3715ad845a90e9c49",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "dont_save_keys",
+      "new_name": "dont_save_keys_renamed",
+      "vulnerable_probe_sha256": "fefcba322b918d3eb9fd729789e6cc5b628e2931260dc8ad7bb65bdc13c5f375",
+      "patched_probe_sha256": "64d670d523b8e8ae366d44a146ac8e27b05d7f000e3592d3715ad845a90e9c49",
+      "patched_probe_renamed": false
+    },
+    "CASE-0239": {
+      "case_id": "CASE-0239",
+      "language": "javascript",
+      "vulnerable_function_sha256": "51ae5afa48e3e3ef6c9d5739ca054750aee8cc36e02fcd2f4f7335314c848277",
+      "patched_function_sha256": "41c289d8acc36312faea1e80444bf74c20e3e824c38f441d687f8e811f8a073d",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "CASE-0235": {
+      "case_id": "CASE-0235",
+      "language": "typescript",
+      "vulnerable_function_sha256": "a92f6236ea0fce6f7158e3d567e49545c678a2cb7a725aab092efdddd444116f",
+      "patched_function_sha256": "89548c82c32693a21c71232d26e5d93e9f6160a3a4bac36d0a8c9ea763ffb414",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly"
+    },
+    "CASE-0298": {
+      "case_id": "CASE-0298",
+      "language": "typescript",
+      "vulnerable_function_sha256": "4bd3085d7038a6b68a567b5256c26abc2fa9abd210f449341d12ac74db107281",
+      "patched_function_sha256": "f5334a6f493e701fe726c0b529b79e81f721356c5136ffca0ff9e9d6742d229d",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "CASE-0116": {
+      "case_id": "CASE-0116",
+      "language": "java",
+      "vulnerable_function_sha256": "106b6531ae124d960b7cd546223ace1826e48b098b161c4c73d0fbc17c122a0f",
+      "patched_function_sha256": "b32bbda0c84b4548a38d30c6cad313bec916229367205e61744d047a91cf455a",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "CASE-0231": {
+      "case_id": "CASE-0231",
+      "language": "python",
+      "vulnerable_function_sha256": "c6fc3f2af0fb9b27deced8e291f587d9f7c2d9bfbe21ef7f76cbaf1c8efa6ed9",
+      "patched_function_sha256": "ba007606850844a71ff136689f82550ebad66fa8fdc5e7f794d260d79ab83063",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "user_dir",
+      "new_name": "user_dir_renamed",
+      "vulnerable_probe_sha256": "62cca48c46fa99eae864606398a1b8175a8912e5bd5fbd6ef84145e96bc4bb07",
+      "patched_probe_sha256": "595e81bd7daeb7bcb27fb22a0718c3a5716d606f63529eb571b81114d3d729b2",
+      "patched_probe_renamed": true
+    },
+    "CASE-0339": {
+      "case_id": "CASE-0339",
+      "language": "javascript",
+      "vulnerable_function_sha256": "2593c5f5f193161c8efd67163536b99db9378aa0a300507d0b708612a0136f94",
+      "patched_function_sha256": "085d0992ccb29d8b268481a34544c665322422f4ca2ac760826f740d41997f7b",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "CASE-0081": {
+      "case_id": "CASE-0081",
+      "language": "typescript",
+      "vulnerable_function_sha256": "9dc9ed467913aa0b3a7c3e493ef9134c0e04503b7e9ff04444d61006aa119b9c",
+      "patched_function_sha256": "d0b31f0f1ecf5d94d071195eb1aa738d5c2cda8528f149e797a49cdeef1edc8d",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    }
+  }
+}

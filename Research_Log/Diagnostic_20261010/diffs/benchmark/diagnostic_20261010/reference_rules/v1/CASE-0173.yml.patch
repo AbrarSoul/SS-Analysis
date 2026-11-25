@@ -1,0 +1,14 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0173.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0173.yml
+@@ -0,0 +1,11 @@
++rules:
++- id: diagnostic-case-0173
++  message: Unknown manifest key falls back to the requested path itself
++  severity: WARNING
++  languages:
++  - typescript
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  pattern: $MANIFEST[$PATH] || $PATH

@@ -1,0 +1,20 @@
+rules:
+- id: vuln-micronaut-core-9d1eff5c
+  patterns:
+  - pattern: new DefaultHttpHeaders(false)
+  - pattern-not: new DefaultHttpHeaders()
+  languages:
+  - java
+  message: Use of DefaultHttpHeaders(false) constructor can lead to security vulnerabilities
+    due to improper header handling. The boolean parameter 'false' disables automatic
+    validation of header names and values, which may allow malicious headers to be
+    processed. Fix by using the default constructor DefaultHttpHeaders() without parameters
+    to ensure proper header validation.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-776
+    owasp: OWASP-A03:2021
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    technology:
+    - java

@@ -1,0 +1,32 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: "\"Directly embedding user-controlled URLs in HTML can lead to security\
+    \ vulnerabilities such as XSS. \nInstead, create an anchor element using `document.createElement`\
+    \ and set its `href` attribute \nto safely construct the URL. This approach helps\
+    \ mitigate potential security risks.\"\n"
+  metadata:
+    category: security
+    cwe:
+    - CWE-79
+    owasp:
+    - A7:2017-Cross-Site Scripting (XSS)
+    references:
+    - https://owasp.org/www-community/attacks/xss/
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: '<a href="${src}?ref_src=twsrc%5Etfw"></a>
+
+    '
+  pattern-not: 'const anchor = document.createElement("a");
+
+    anchor.href = `${src}?ref_src=twsrc%5Etfw`;
+
+    ...
+
+    ${anchor.outerHTML}
+
+    '
+  severity: ERROR

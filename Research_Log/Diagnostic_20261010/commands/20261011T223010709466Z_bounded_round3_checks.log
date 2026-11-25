@@ -1,0 +1,106 @@
+Evidence: /Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/bounded_round3_findings_20261011T223011269546Z.json
+{
+  "model_calls": 0,
+  "reviewed_sha256": {
+    "pipeline/diagnostic_v2.py": "b767dfee70546a5a1c05dee45db928e926e3e4517d6e002fdc64cb45e9ec2aba",
+    "pipeline/audit_failure_categories.py": "33926b99036a938abde084415c4d59b833c7eacc81f77470e1782ba2f8406f5d",
+    "pipeline/typed_rule.py": "e176b8a05c0af1c354f78fcd603ccffcc0dc973d98ca4fa425c49b6786d69c33",
+    "pipeline/verify_scan_integration.py": "40ca71b84f4f9a46163e85b19950fa529af4b9e07575e2f600747d4aa1efc6a3",
+    "pipeline/tests/test_diagnostic_regressions.py": "1aed2d8248239a9d54681516d352d58a2cfc1397200b5873f625be376438b993",
+    "pipeline/tests/test_typed_rule.py": "adc55a129bcaa6629ffb18a34b2b1fb56061fb0bdce45685eb824f6363f09841",
+    "Research_Log/Correction_Log.md": "2672385c0cb3c595ad368f6ed50cfe3691477925cfc8913b50a83b6b5eb24241",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "82b83dc6874c7a71b3e3950214002702a8659f68e502f10a968f494b18584598"
+  },
+  "same_process_stale_repaired": true,
+  "same_process_missing_repaired": true,
+  "recorded_policy_field": "visible_correct",
+  "tuple_languages_roundtrip": [
+    "python"
+  ],
+  "invalid_metadata_rejected": true,
+  "corrected_rejection_categories": [
+    "never_accepted",
+    "wrong_location"
+  ],
+  "no_rule_categories": [
+    "never_accepted",
+    "never_parsed",
+    "original_unevaluable"
+  ],
+  "target_only_failure_categories": [
+    "never_accepted",
+    "original_unevaluable",
+    "rule_construction_error",
+    "target_error"
+  ],
+  "mechanism_v1": {
+    "original_miss_clean": 10,
+    "original_unevaluable": 2,
+    "raw_scan_ok": 19,
+    "raw_accepted": 6
+  },
+  "keyword_example_has_banned_calls": false,
+  "keyword_call_before_after_arg_rename": [
+    "unsafe",
+    {
+      "exception": "TypeError",
+      "message": "probe() got an unexpected keyword argument 'token'"
+    }
+  ],
+  "retained_integration_summary": {
+    "created_utc": "2026-10-11T22:20:27.200066+00:00",
+    "semgrep_version": "1.177.0",
+    "source_run_dir": "results/diagnostic_20261010/qwen3_v3",
+    "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+    "report_conditions": {
+      "raw": {
+        "evaluated": 24,
+        "scan_errors": 1,
+        "accepted": 19,
+        "visible_correct": 18,
+        "complete_success": 6,
+        "expected_hidden_positives": 48,
+        "hidden_positive_hits_all_requested": 30,
+        "hidden_false_positives_accepted": 8,
+        "accepted_hidden_negatives_evaluated": 38,
+        "hidden_positive_hits_all_requested_corrected": 30,
+        "hidden_false_positives_accepted_corrected": 8,
+        "accepted_hidden_negatives_evaluated_corrected": 36
+      },
+      "iterative": {
+        "evaluated": 19,
+        "scan_errors": 0,
+        "accepted": 19,
+        "visible_correct": 18,
+        "complete_success": 6,
+        "expected_hidden_positives": 48,
+        "hidden_positive_hits_all_requested": 30,
+        "hidden_false_positives_accepted": 8,
+        "accepted_hidden_negatives_evaluated": 38,
+        "hidden_positive_hits_all_requested_corrected": 30,
+        "hidden_false_positives_accepted_corrected": 8,
+        "accepted_hidden_negatives_evaluated_corrected": 36
+      }
+    },
+    "successful_cases": [
+      "CASE-0134",
+      "CASE-0136",
+      "CASE-0220",
+      "CASE-0221",
+      "CASE-0276",
+      "CASE-0323"
+    ],
+    "expected_iterative_complete_success": 6,
+    "expected_successful_cases": [
+      "CASE-0134",
+      "CASE-0136",
+      "CASE-0220",
+      "CASE-0221",
+      "CASE-0276",
+      "CASE-0323"
+    ],
+    "assertions_passed": true
+  },
+  "retained_integration_summary_sha256": "b5d617842319c881dd43dd0ff220683f77e7591db3bfacc61c4b5e68803477bd",
+  "reviewed_files_unchanged": true
+}

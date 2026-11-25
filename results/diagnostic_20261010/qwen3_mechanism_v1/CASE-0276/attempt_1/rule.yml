@@ -1,0 +1,18 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  patterns:
+  - pattern: isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+  - pattern-not: isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+  message: Missing SourcelessFileLoader in isinstance check. This could allow unauthorized
+    code execution by bypassing security checks that should apply to all file loaders
+    including sourceless ones.
+  languages:
+  - python
+  severity: ERROR
+  metadata:
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    category: security
+    cwe:
+    - CWE-471
+    technology:
+    - python

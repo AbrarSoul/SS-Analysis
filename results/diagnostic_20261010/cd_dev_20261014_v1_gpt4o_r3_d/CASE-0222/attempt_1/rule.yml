@@ -1,0 +1,18 @@
+rules:
+- id: vuln-mindsdb-083afcf6
+  patterns:
+  - pattern: requests.post($URL, headers=$HEADERS, data=$DATA, verify=False)
+  - pattern-not: requests.post($URL, headers=$HEADERS, data=$DATA)
+  languages:
+  - python
+  message: Detected use of requests.post() with 'verify=False', which disables SSL
+    certificate verification and can lead to man-in-the-middle attacks. Remove 'verify=False'
+    to ensure SSL certificates are verified.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-295
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/mindsdb/mindsdb/commit/083afcf6567cf51aa7d89ea892fd97689919053b
+    technology:
+    - python

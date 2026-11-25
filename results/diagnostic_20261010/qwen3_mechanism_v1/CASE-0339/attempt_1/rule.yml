@@ -1,0 +1,26 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  patterns:
+  - pattern: $RESULT.$FIELD.replace(/[<{}]/g, ...)
+  - pattern: $RESULT.$FIELD.replace(/[\{\}<>]/g, ...)
+  - pattern: $RESULT.$FIELD.replace(/[\>\<\{\}]/g, ...)
+  - pattern: $RESULT.$FIELD.replace(/[\{\}\>\<]/g, ...)
+  pattern-not: $RESULT.$FIELD.replace(/[<{}]/g, ...)
+  pattern-not-inside: "function $F(...) {\n  ...\n  $RESULT.$FIELD.replace(/[<{}]/g,\
+    \ ...);\n  ...\n}\n"
+  message: Potential insecure regex replacement in note path title handling. The vulnerable
+    code uses a regex that includes both '<' and '{' characters in the character class,
+    which may allow for injection attacks if untrusted data is processed. The fix
+    removes the problematic character from the regex to prevent potential exploitation.
+  severity: ERROR
+  languages:
+  - javascript
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe:
+    - CWE-77
+    technology:
+    - javascript
+  fix: Replace the regex pattern to remove the problematic character class that includes
+    '<' and '{' to prevent potential injection vulnerabilities.

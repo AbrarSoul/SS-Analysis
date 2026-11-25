@@ -1,0 +1,1 @@
+Preflight FAILED on GPU-farmi-004: HTTP 401 - Invalid or Missing Bearer Token. Nothing was run. Check GPTLAB_API_KEY (no quotes/spaces, not expired).

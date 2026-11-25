@@ -1,0 +1,22 @@
+rules:
+- id: vuln-micronaut-core-9d1eff5c
+  pattern: 'new DefaultHttpHeaders(false)
+
+    '
+  pattern-not: 'new DefaultHttpHeaders()
+
+    '
+  languages:
+  - java
+  message: Potential vulnerability due to the use of DefaultHttpHeaders with validation
+    disabled. This can lead to security issues as headers are not validated. Use DefaultHttpHeaders()
+    to ensure headers are validated.
+  severity: ERROR
+  metadata:
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    category: security
+    cwe: CWE-20
+    owasp: A5:2017-Security Misconfiguration
+    references:
+    - https://github.com/netty/netty/issues/1234
+    technology: java

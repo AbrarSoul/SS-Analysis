@@ -1,0 +1,41 @@
+{
+ "raw": {
+  "accepted": 389,
+  "renamed_correct": 254,
+  "restructured_correct": 164,
+  "alternative_fix_correct": 352,
+  "benign_lookalike_correct": 300,
+  "both_positive_ok": 128,
+  "both_negative_ok": 268,
+  "fail_positive_only": 205,
+  "fail_negative_only": 65,
+  "fail_both": 56,
+  "complete": 63
+ },
+ "autogrep": {
+  "accepted": 458,
+  "renamed_correct": 297,
+  "restructured_correct": 196,
+  "alternative_fix_correct": 418,
+  "benign_lookalike_correct": 355,
+  "both_positive_ok": 152,
+  "both_negative_ok": 322,
+  "fail_positive_only": 246,
+  "fail_negative_only": 76,
+  "fail_both": 60,
+  "complete": 76
+ },
+ "iterative": {
+  "accepted": 235,
+  "renamed_correct": 132,
+  "restructured_correct": 103,
+  "alternative_fix_correct": 216,
+  "benign_lookalike_correct": 187,
+  "both_positive_ok": 75,
+  "both_negative_ok": 172,
+  "fail_positive_only": 134,
+  "fail_negative_only": 37,
+  "fail_both": 26,
+  "complete": 38
+ }
+}

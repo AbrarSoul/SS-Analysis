@@ -1,0 +1,22 @@
+rules:
+- id: vuln-sagemaker-python-sdk-2d873d53
+  pattern: 'os.system($COMMAND)
+
+    '
+  pattern-not: 'subprocess.run($COMMAND, check=True, capture_output=True)
+
+    '
+  languages:
+  - python
+  message: Use of os.system() for executing shell commands is vulnerable to shell
+    injection. Use subprocess.run() with a list of arguments instead to avoid this
+    vulnerability.
+  severity: ERROR
+  metadata:
+    source-url: github.com/aws/sagemaker-python-sdk/commit/2d873d53f708ea570fc2e2a6974f8c3097fe9df5
+    category: security
+    cwe: CWE-78
+    owasp: A1:2017-Injection
+    references:
+    - https://docs.python.org/3/library/subprocess.html#subprocess.run
+    technology: python

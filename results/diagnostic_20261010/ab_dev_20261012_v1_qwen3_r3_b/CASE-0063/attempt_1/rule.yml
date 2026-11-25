@@ -1,0 +1,19 @@
+rules:
+- id: vuln-jspdf-d8bb3b39
+  patterns:
+  - pattern: var extractedInfo = /^data:(\w*\/\w*);*(charset=[\w=-]*)*;*$/.exec(
+  - pattern-not: var extractedInfo = /^data:(\w*\/\w*);*(charset=(?!charset=)[\w=-]*)*;*$/.exec(
+  languages:
+  - javascript
+  message: Insecure regex pattern for data URI parsing allows malicious charset specification.
+    The vulnerable regex does not properly prevent the 'charset=' prefix from being
+    matched, potentially allowing attackers to inject malicious content. Fix by adding
+    a negative lookahead assertion to prevent matching 'charset=' in the charset parameter.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: OWASP-Top-10_A03_2021-Injection
+    source-url: github.com/MrRio/jsPDF/commit/d8bb3b39efcd129994f7a3b01b632164144ec43e
+    technology:
+    - javascript

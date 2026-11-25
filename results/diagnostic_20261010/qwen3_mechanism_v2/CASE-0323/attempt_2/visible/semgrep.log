@@ -1,0 +1,8 @@
+2026-10-11 01:36:37,435 - semgrep.rule_lang - WARNING - semgrep-core rule validation failed (PatternParseError)
+2026-10-11 01:36:37,709 - semgrep.output - INFO - ✅ Scan completed successfully.
+ • Findings: 0 (0 blocking)
+ • Rules run: 1
+ • Targets scanned: 2
+ • Parsed lines: ~100.0%
+ • No ignore information available
+Ran 1 rule on 2 files: 0 findings.

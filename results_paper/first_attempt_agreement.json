@@ -1,0 +1,98 @@
+{
+ "qwen2.5-coder:7b-instruct": {
+  "group": "primary",
+  "single": 45,
+  "first_call": 45,
+  "discordant": 0
+ },
+ "qwen2.5-coder:32b": {
+  "group": "primary",
+  "single": 44,
+  "first_call": 44,
+  "discordant": 0
+ },
+ "DeepHat-V1-7B": {
+  "group": "primary",
+  "single": 47,
+  "first_call": 47,
+  "discordant": 0
+ },
+ "deepseek-coder:6.7b": {
+  "group": "primary",
+  "single": 14,
+  "first_call": 14,
+  "discordant": 0
+ },
+ "codegemma:7b": {
+  "group": "primary",
+  "single": 23,
+  "first_call": 23,
+  "discordant": 0
+ },
+ "magicoder:7b": {
+  "group": "primary",
+  "single": 9,
+  "first_call": 9,
+  "discordant": 2
+ },
+ "yi-coder:9b": {
+  "group": "primary",
+  "single": 35,
+  "first_call": 35,
+  "discordant": 0
+ },
+ "codellama:7b-instruct-fp16": {
+  "group": "primary",
+  "single": 16,
+  "first_call": 16,
+  "discordant": 0
+ },
+ "qwen3-coder:30b": {
+  "group": "followup",
+  "single": 66,
+  "first_call": 63,
+  "discordant": 7
+ },
+ "gpt-oss:20b": {
+  "group": "followup",
+  "single": 13,
+  "first_call": 11,
+  "discordant": 12
+ },
+ "opencoder:8b-instruct-q4_K_M": {
+  "group": "followup",
+  "single": 12,
+  "first_call": 11,
+  "discordant": 1
+ },
+ "granite-code:8b-instruct-128k-q4_1": {
+  "group": "followup",
+  "single": 29,
+  "first_call": 29,
+  "discordant": 0
+ },
+ "llama3.1:8b-instruct-q4_K_M": {
+  "group": "followup",
+  "single": 30,
+  "first_call": 29,
+  "discordant": 9
+ },
+ "Mistral-Small-24B-Instruct-2501": {
+  "group": "followup",
+  "single": 49,
+  "first_call": 49,
+  "discordant": 2
+ },
+ "phi4:14b-q4_K_M": {
+  "group": "followup",
+  "single": 31,
+  "first_call": 28,
+  "discordant": 3
+ },
+ "gpt-4o": {
+  "group": "followup",
+  "single": 62,
+  "first_call": 63,
+  "discordant": 5
+ }
+}

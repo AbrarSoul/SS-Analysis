@@ -1,0 +1,22 @@
+{
+ "qwen_7b_vs_32b": {
+  "model_a": "qwen2.5-coder:7b-instruct",
+  "model_b": "qwen2.5-coder:32b",
+  "n_common": 150,
+  "esr_a": 0.04666666666666667,
+  "esr_b": 0.04666666666666667,
+  "a_only": 3,
+  "b_only": 3,
+  "both": 4
+ },
+ "deephat_vs_qwen_instruct": {
+  "model_a": "DeepHat-V1-7B",
+  "model_b": "qwen2.5-coder:7b-instruct",
+  "n_common": 150,
+  "esr_a": 0.06,
+  "esr_b": 0.04666666666666667,
+  "a_only": 4,
+  "b_only": 2,
+  "both": 5
+ }
+}

@@ -52,7 +52,8 @@ class RawCaptureRecorder:
         self._call_counts.setdefault(case_id, 0)
 
     def record(self, model: Optional[str], temperature, content: Optional[str],
-               prompt_text: Optional[str] = None):
+               prompt_text: Optional[str] = None, *, request=None, response=None,
+               elapsed_seconds=None, error=None):
         case_id = self._current_case_id or "unknown_case"
         self._call_counts[case_id] = self._call_counts.get(case_id, 0) + 1
         attempt_index = self._call_counts[case_id]
@@ -67,13 +68,22 @@ class RawCaptureRecorder:
             "timestamp": time.time(),
             "raw_content": content,
             "prompt_text": prompt_text,
+            "request": request,
+            "response": response,
+            "generation_seconds": elapsed_seconds,
+            "error": error,
         }
+        usage = response.get("usage") if isinstance(response, dict) else None
+        payload["input_tokens"] = usage.get("prompt_tokens") if usage else None
+        payload["output_tokens"] = usage.get("completion_tokens") if usage else None
 
         if attempt_index == 1:
             target = self.raw_dir / f"{case_id}.json"
         else:
             target = self.retries_dir / f"{case_id}_attempt{attempt_index}.json"
-        target.write_text(json.dumps(payload, indent=2))
+        # Reused run IDs must fail visibly instead of overwriting prior evidence.
+        with target.open("x") as f:
+            json.dump(payload, f, indent=2)
         return target
 
 
@@ -83,7 +93,16 @@ class _CompletionsProxy:
         self._recorder = recorder
 
     def create(self, *args, **kwargs):
-        response = self._real_completions.create(*args, **kwargs)
+        started = time.monotonic()
+        try:
+            response = self._real_completions.create(*args, **kwargs)
+        except Exception as exc:
+            self._recorder.record(model=kwargs.get("model"), temperature=kwargs.get("temperature"),
+                                  content=None, request=_plain(kwargs),
+                                  elapsed_seconds=time.monotonic() - started,
+                                  error={"type": type(exc).__name__, "message": str(exc)})
+            raise
+        elapsed = time.monotonic() - started
         try:
             content = response.choices[0].message.content
         except (AttributeError, IndexError):
@@ -100,8 +119,22 @@ class _CompletionsProxy:
             temperature=kwargs.get("temperature"),
             content=content,
             prompt_text=prompt_text,
+            request=_plain(kwargs), response=_plain(response), elapsed_seconds=elapsed,
         )
         return response
+
+
+def _plain(value):
+    """Serialize SDK models and test doubles without collecting client credentials."""
+    if hasattr(value, "model_dump"):
+        return value.model_dump(mode="json")
+    if isinstance(value, dict):
+        return {k: _plain(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_plain(v) for v in value]
+    if hasattr(value, "__dict__"):
+        return _plain(vars(value))
+    return value
 
 
 class _ChatProxy:

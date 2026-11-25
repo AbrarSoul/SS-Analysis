@@ -1,0 +1,156 @@
+--- before/pipeline/diagnostic_audit.py
++++ after/pipeline/diagnostic_audit.py
+@@ -0,0 +1,153 @@
++"""Append-only command journal and before/after inventory for the October diagnostic.
++
++Run commands with ``run LABEL -- COMMAND ...``; stdout/stderr and exit status are
++retained. No environment-variable values are captured. ``checkpoint`` compares
++source files against their pre-edit copies and checks historical result hashes.
++"""
++import argparse
++from datetime import datetime, timezone
++import difflib
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++ROOT = Path(__file__).resolve().parents[1]
++AUDIT = ROOT / "Research_Log/Diagnostic_20261010"
++
++
++def now():
++    return datetime.now(timezone.utc).isoformat()
++
++
++def digest(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def event(kind, **fields):
++    AUDIT.mkdir(parents=True, exist_ok=True)
++    with (AUDIT / "events.jsonl").open("a") as f:
++        f.write(json.dumps({"time_utc": now(), "kind": kind, **fields}) + "\n")
++
++
++def sources():
++    files = set()
++    for folder in ("autogrep", "pipeline", "Research_Log"):
++        for p in (ROOT / folder).rglob("*"):
++            if p.is_file() and p.suffix in {".py", ".md", ".json", ".yml", ".yaml", ".sh"}:
++                if AUDIT not in p.parents and "__pycache__" not in p.parts:
++                    files.add(p)
++    for p in (ROOT / "benchmark/diagnostic_20261010").rglob("*"):
++        if p.is_file():
++            files.add(p)
++    return sorted(files)
++
++
++def init():
++    baseline = AUDIT / "baseline.json"
++    if baseline.exists():
++        raise SystemExit("Baseline already exists; refusing to overwrite it")
++    src = {}
++    for p in sources():
++        rel = p.relative_to(ROOT).as_posix()
++        if rel == "pipeline/diagnostic_audit.py":
++            continue  # This bootstrap helper is the first new file in this task.
++        dst = AUDIT / "before" / rel
++        dst.parent.mkdir(parents=True, exist_ok=True)
++        dst.write_bytes(p.read_bytes())
++        src[rel] = digest(p)
++    protected = {}
++    for folder in ("results", "results_corrected"):
++        for p in (ROOT / folder).rglob("*"):
++            if p.is_file() and p.name in {"generation_log.jsonl", "sample_execution_log.jsonl",
++                    "c2_episode_log.jsonl", "c3_episode_log.jsonl", "c4_episode_log.jsonl",
++                    "environment.json"}:
++                protected[p.relative_to(ROOT).as_posix()] = digest(p)
++    for name in ("manifest_frozen_final.jsonl", "manifest_frozen.jsonl", "labels_final.json",
++                 "ground_truth_exclusions.json", "variant_vulnerable_lines.jsonl",
++                 "transformation_manifest_final.jsonl", "freeze_record_final.json"):
++        p = ROOT / "benchmark" / name
++        protected[p.relative_to(ROOT).as_posix()] = digest(p)
++    state = {"created_utc": now(), "git_head": subprocess.check_output(
++        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
++        "initial_git_status": subprocess.check_output(["git", "status", "--short"],
++                                                       cwd=ROOT, text=True),
++        "source_sha256": src, "protected_sha256": protected}
++    baseline.write_text(json.dumps(state, indent=2) + "\n")
++    event("baseline_created", source_files=len(src), protected_files=len(protected),
++          note="Pre-bootstrap reconnaissance was read-only; commands are summarized in README.md.")
++    print(f"Saved {len(src)} source snapshots and {len(protected)} historical hashes to {AUDIT}")
++
++
++def checkpoint():
++    baseline = json.loads((AUDIT / "baseline.json").read_text())
++    current = {p.relative_to(ROOT).as_posix(): digest(p) for p in sources()}
++    changes = []
++    for rel in sorted(current.keys() | baseline["source_sha256"].keys()):
++        old, new = baseline["source_sha256"].get(rel), current.get(rel)
++        if old == new:
++            continue
++        status = "added" if old is None else ("deleted" if new is None else "modified")
++        changes.append({"path": rel, "status": status, "before_sha256": old, "after_sha256": new})
++        p = ROOT / rel
++        before = (AUDIT / "before" / rel).read_text().splitlines(True) if old else []
++        after = p.read_text().splitlines(True) if new else []
++        diff = "".join(difflib.unified_diff(before, after, fromfile="before/" + rel, tofile="after/" + rel))
++        dst = AUDIT / "diffs" / (rel + ".patch")
++        dst.parent.mkdir(parents=True, exist_ok=True)
++        dst.write_text(diff)
++    historical_changes = [rel for rel, sha in baseline["protected_sha256"].items()
++                          if not (ROOT / rel).exists() or digest(ROOT / rel) != sha]
++    report = {"time_utc": now(), "changes": changes, "protected_files_checked":
++              len(baseline["protected_sha256"]), "historical_changes": historical_changes}
++    (AUDIT / "file_changes.json").write_text(json.dumps(report, indent=2) + "\n")
++    event("checkpoint", changed_source_files=len(changes), historical_changes=historical_changes)
++    # Inventory generated evidence too; exclude this self-referential inventory.
++    inventory = {}
++    for folder in (AUDIT, ROOT / "results/diagnostic_20261010", ROOT / "benchmark/diagnostic_20261010"):
++        for p in sorted(folder.rglob("*")):
++            if p.is_file() and p.name != "artifact_inventory.json":
++                inventory[str(p.relative_to(ROOT))] = {"sha256": digest(p), "bytes": p.stat().st_size}
++    (AUDIT / "artifact_inventory.json").write_text(json.dumps({"time_utc": now(), "files": inventory}, indent=2) + "\n")
++    print(json.dumps(report, indent=2))
++
++
++def run(label, command):
++    if command and command[0] == "--":
++        command = command[1:]
++    if not command:
++        raise SystemExit("A command is required")
++    if not label.replace("-", "").replace("_", "").isalnum():
++        raise SystemExit("Use an alphanumeric label")
++    logs = AUDIT / "commands"
++    logs.mkdir(exist_ok=True)
++    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
++    path = logs / f"{stamp}_{label}.log"
++    event("command_started", label=label, argv=command, log=str(path.relative_to(ROOT)))
++    start = time.monotonic()
++    with path.open("w") as f:
++        result = subprocess.run(command, cwd=ROOT, stdout=f, stderr=subprocess.STDOUT)
++    event("command_finished", label=label, exit_code=result.returncode,
++          elapsed_seconds=time.monotonic() - start, log=str(path.relative_to(ROOT)), sha256=digest(path))
++    print(f"exit={result.returncode} log={path.relative_to(ROOT)}")
++    print(path.read_text()[-14000:])
++    return result.returncode
++
++
++if __name__ == "__main__":
++    parser = argparse.ArgumentParser(description=__doc__)
++    sub = parser.add_subparsers(dest="action", required=True)
++    sub.add_parser("init")
++    sub.add_parser("checkpoint")
++    cmd = sub.add_parser("run")
++    cmd.add_argument("label")
++    cmd.add_argument("command", nargs=argparse.REMAINDER)
++    args = parser.parse_args()
++    if args.action == "init":
++        init()
++    elif args.action == "checkpoint":
++        checkpoint()
++    else:
++        sys.exit(run(args.label, args.command))

@@ -478,20 +478,25 @@ def run_model(model_tag: str, patches_dir: Path, results_root: Path,
 
 
 def preflight_auth(hosts) -> None:
-    """Fail fast if the GPT-Lab key is rejected. Found in the Step 2 real-model smoke test: with a bad key every
+    """Fail fast if the relevant key is rejected. Found in the Step 2 real-model smoke test: with a bad key every
     model call failed instantly, the run recorded blank failures for every case, and Autogrep's own cache marked
-    them all 'processed' so a re-run would silently skip them."""
+    them all 'processed' so a re-run would silently skip them.
+
+    host "OPENAI" (the 2026-10-09 gpt-4o diagnostic) resolves its key via OPENAI_API_KEY instead of
+    GPTLAB_API_KEY -- get_key_for_host() dispatches per host so this one function still covers both
+    without the two credentials ever being conflated."""
     import requests
-    from gptlab_config import host_base_url, get_api_key
-    key = get_api_key()
+    from gptlab_config import host_base_url, get_key_for_host
     for host in sorted(set(hosts)):
+        key = get_key_for_host(host)
         try:
             r = requests.get(f"{host_base_url(host)}/models", headers={"Authorization": f"Bearer {key}"}, timeout=30)
         except requests.RequestException as e:
             sys.exit(f"Preflight FAILED: cannot reach {host}: {e}")
         if r.status_code != 200:
+            env_var = "OPENAI_API_KEY" if host == "OPENAI" else "GPTLAB_API_KEY"
             sys.exit(f"Preflight FAILED on {host}: HTTP {r.status_code} - {r.text[:120]}. "
-                     f"Nothing was run. Check GPTLAB_API_KEY (no quotes/spaces, not expired).")
+                     f"Nothing was run. Check {env_var} (no quotes/spaces, not expired).")
         logging.info(f"Preflight OK on {host} ({len(r.json().get('data', []))} models visible)")
 
 

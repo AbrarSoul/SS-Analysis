@@ -1,0 +1,32 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  pattern: '><p lang="en" dir="ltr"><a href="${src}?ref_src=twsrc%5Etfw"></a></blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `;
+
+    '
+  pattern-not: '><p lang="en" dir="ltr">${anchor.outerHTML}</p></blockquote> <script
+    async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `;
+
+    '
+  languages:
+  - typescript
+  message: 'This code directly embeds a URL with user-controlled input (`src`) into
+    an anchor tag without proper sanitization, which can lead to security vulnerabilities
+    such as XSS. To fix this, create an anchor element using `document.createElement`
+    and set its `href` attribute, then use `outerHTML` to safely embed it.
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - CWE-79
+    owasp:
+    - A7:2017-Cross-Site Scripting (XSS)
+    references:
+    - https://owasp.org/www-community/attacks/xss/
+    technology:
+    - typescript

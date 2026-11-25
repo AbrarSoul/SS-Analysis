@@ -1,0 +1,273 @@
+{
+  "order": 1,
+  "model": "qwen3-coder:30b",
+  "condition": "C",
+  "repeat": 1,
+  "output": "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c",
+  "counts": {
+    "input_tokens": 33817,
+    "output_tokens": 10894,
+    "generation_seconds": 127.41048412497912,
+    "generation_calls": 36,
+    "repair_calls": 12,
+    "eligible": 11,
+    "fallback_accepted": 8,
+    "visible_scan_errors": 3,
+    "probe_scan_errors": 0,
+    "first_unparsed": 0,
+    "first_visible_scan_errors": 1,
+    "visible_scans": 36,
+    "probe_scans": 10,
+    "accepted": 18,
+    "raw_evaluated": 24,
+    "raw_scan_errors": 1,
+    "raw_complete_success": 6,
+    "raw_hidden_positive_scanned": 46,
+    "raw_hidden_tp": 30,
+    "raw_hidden_negative_scanned": 46,
+    "raw_hidden_fp": 9,
+    "iterative_evaluated": 18,
+    "iterative_scan_errors": 0,
+    "iterative_complete_success": 6,
+    "iterative_hidden_positive_scanned": 36,
+    "iterative_hidden_tp": 30,
+    "iterative_hidden_negative_scanned": 36,
+    "iterative_hidden_fp": 8
+  },
+  "cases": [
+    {
+      "case_id": "CASE-0323",
+      "eligible": false,
+      "success": 1,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0276",
+      "eligible": true,
+      "success": 1,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0221",
+      "eligible": false,
+      "success": 1,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0134",
+      "eligible": true,
+      "success": 1,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0136",
+      "eligible": true,
+      "success": 1,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0220",
+      "eligible": false,
+      "success": 1,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0340",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0238",
+      "eligible": false,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0193",
+      "eligible": false,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0124",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0063",
+      "eligible": false,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0184",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0173",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0222",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0163",
+      "eligible": false,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0171",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0046",
+      "eligible": true,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0239",
+      "eligible": false,
+      "success": 0,
+      "calls": 1,
+      "accepted": true
+    },
+    {
+      "case_id": "CASE-0235",
+      "eligible": false,
+      "success": 0,
+      "calls": 3,
+      "accepted": false
+    },
+    {
+      "case_id": "CASE-0298",
+      "eligible": false,
+      "success": 0,
+      "calls": 3,
+      "accepted": false
+    },
+    {
+      "case_id": "CASE-0116",
+      "eligible": false,
+      "success": 0,
+      "calls": 3,
+      "accepted": false
+    },
+    {
+      "case_id": "CASE-0231",
+      "eligible": true,
+      "success": 0,
+      "calls": 3,
+      "accepted": false
+    },
+    {
+      "case_id": "CASE-0339",
+      "eligible": false,
+      "success": 0,
+      "calls": 3,
+      "accepted": false
+    },
+    {
+      "case_id": "CASE-0081",
+      "eligible": false,
+      "success": 0,
+      "calls": 3,
+      "accepted": false
+    }
+  ],
+  "probe_failures": [],
+  "reviewed_sha256": {
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0323/episode.json": "d961250a2a36a7c8c716e30c217af62fd2cd1fc0dc7e7517097260b8b4f76950",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0323.json": "3c1d9db753c8b740a85551c720bc57ed0d1145e60329331d20f99ca61295abd4",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0276/episode.json": "ede64d1263da1044d7674d1cb235cbea5bc372588b122c064b96638a3c697af2",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0276.json": "233efd4259d04fe4c7906c9bb6f6aa65b601aa81fd41a497030f6c63b948e843",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0221/episode.json": "0aee46af5cd52744874b0aec05fdcc3ef8839ab7a2e9d2c61c624b06bea52267",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0221.json": "13ff984877dbfd6ac6440f42421511d0b69463ea12c3f5062b60bba76b153345",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0134/episode.json": "f95c53898dca899e1ca35a1ab8044f7aef815a2740592cb8bf822df149414f52",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0134.json": "19bef56f7133944c98dc5831a996d22bdab50569785b23369ade8a564124cd5c",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0136/episode.json": "5a20e10ed881f5e5fee55aad5cc07519e4ebd0fd96dbce275edf564ee2eb4d39",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0136.json": "c919778bad69027b46c451b8f57ec3f01575feec0243a9a19a4950ee6cd3a0aa",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0220/episode.json": "958d5649d8aac8c4cc801e14437b55f5d1ff6a1f5a4e6b36dadd45a218450f85",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0220.json": "f87d9ce4480124904bbc2002969375b588b59e9a815e77279a5f303537db8031",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0340/episode.json": "d438e80ceda6b73bf5560ac9ed45e28f89fd1740b5dbe1768d8166de088efb9c",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0340.json": "539a58aea32d20e28c6f2e03597f43d77f00afb940a3de1dbbcc3ac215bcfe1b",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0238/episode.json": "d02b3499e4f70d5cff30b9173ee682a17f2073cf58d80c19ff27d42df9352202",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0238.json": "fa8ae93493a0dbdd4c2690c87c0c2bc567d2cd9d1613b5393ec40b40c012e246",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0193/episode.json": "7d95d66c69907c403035e9700bbdb0825abe0e0198f901d05b6ec833fe32809d",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0193.json": "c55bb0d59ee235893fb4e8f6e02c87649426bfa9b1f5716a2fe3d04be080db2f",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0124/episode.json": "f41c61d3545147f590f41691361a3ebe69438ce72061a3e1e5f137ccda43efa5",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0124.json": "71be1b10a3b725344e583a7ddc406a8427d563e5d9455aeba72ba8f7d72d3553",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0063/episode.json": "dec57627562fce84f4c096f068e94cee495717b94331e06bd6c3460be123891d",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0063.json": "1b39a00e503f16d268b3ab9d86fe91a5c4b1eee6880cf907aaf6be561e4cb7d9",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0184/episode.json": "aa5f324a5cad71170264e2c50abdfcb565c3b15bc541e53432a37de7f264a57e",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0184.json": "e6de5e6f6e948f47a13600d379e7d3d23903328538885ccb03c51660268286fa",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0173/episode.json": "647a2a777b6b10b674588a4dad0f4b3732bf9d844e9c72b85c9833574d71c5a8",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0173.json": "3ff9b9dec112b52df9d04cfc619a07b04dfe632f706360165285ddbaad4acd05",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0222/episode.json": "e7ab937c53d37b8ea71c2553bdcd48ae0cca5b8a4b56578fa4c53a836d2b2ec3",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0222.json": "53310aca9a5c6aee58b48caa62a9f4b05da55d0caf926d36eed1e024b3047183",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0163/episode.json": "a0c7f1b5ff4f35f4146e4928d337b2d2d17441908028da1425c94339f2122402",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0163.json": "ed9cd6928c8f305758914f00f2e7414bf693474bf7c201616404a90481fb0986",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0171/episode.json": "44ac2fef1c7623a08a79131e49287e57ec22ecfd413ee8ebb35c3f65d307e688",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0171.json": "e0a1b96f5f6c1af23a2473b2d4399d187313511b156d432fcca03e1351ff38e2",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0046/episode.json": "209782e70f2aa980f0aa7da66cecbb90c01add545c0c981bcff2951ba1ebf7d5",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0046.json": "1c72e50540eb1ab2e5522b88cffc998d52df936e23bd7fe77a0c8913c202fc43",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0239/episode.json": "5458b66604fbb5efebc5a33e2d09065b4a3adf9a49f3b3c2d1cc4d5cb2652080",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0239.json": "bd62893863b3e6c13d4a24f8057768f5efd5c2d0a39bf4163abb96558edc5fde",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0235/episode.json": "b1f63759fdfaf1b0c9f433cd89c3eea69a8eff388c86c4e5c3e797c65b9f3516",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0235.json": "832dc8cc0147905bb8f78b652ffcd169c02c346d358f98e1f5fb72a1feed663a",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0235_attempt2.json": "02003b82747fdd04b89cedd240aff83623327fde1204a987cc07836ddeecc277",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0235_attempt3.json": "66bba2b15d19c41be470470c7dd35e47964a88a295677f1bede3a7a4aa16a8d0",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0298/episode.json": "13ab18ff6811bcc9487aab6a0a8ce37cb38b870ed3e5d86d61a96514a1fcf7f1",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0298.json": "0cd4e68a3df3690a79d74bced7ceaaf34356f2cdfddcd5f0b6ceac360b3c27e2",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0298_attempt2.json": "7910fbcf2cb20d461dbf20783a489c49d6eccba1a9ff8e4abb26cd492e9a06e3",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0298_attempt3.json": "5f3d868a06ce1043faed87f998ef5f786a189b44440224314a112128833e4951",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0116/episode.json": "024919909977808719d68adc2998c8fad6d60e580f650cdeaec61b2646e3580e",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0116.json": "dd3a5163f0857fbd8df8c8f1e77397034ec42c6481e5f264a085e159b4b34696",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0116_attempt2.json": "829cca6ffe4db52b939a7ce804656eff46667473a7655d091334260aea4c3f9e",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0116_attempt3.json": "8d301c064ab960fee09d9d4e53348da1cb4d0b09c479b43b3cb7f2b84077ac35",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0231/episode.json": "0c0c4f56b73a5c7d853239a2d651d267b5408b1412fdf5c4483ea4487e280bfc",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0231.json": "59812d09917cb47245c324221b708f313f7acd91b647237304f4b2adae45ba7f",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0231_attempt2.json": "d52a7442b6f23ef62b810b6d6fd1bab656fb582ca389a79f23940a6c2d48f1f8",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0231_attempt3.json": "ed5f376fadf4b061ecea425f15ce5291cc16f198b03b945225822867c23d43bc",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0339/episode.json": "5dd12528e4f0b626283c9afa636390073351f35c6f9339d4b927682ca4a5f64a",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0339.json": "d60d932598a07dd1e7ba80014f86cae77f84a109e3d3aa9c97409f670a793eb9",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0339_attempt2.json": "fd4c84c3429f37726a4b84306d4f916bfe2b8f162e7d5710045f09e7a94c25cc",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0339_attempt3.json": "c4a5b6ef79bb6b8e7298bc76af0580ff69b31cf9ddcc90f6974c80eaf602eb28",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/CASE-0081/episode.json": "231875e1f9f47dcd6b1dc27d9ad3b1c29064faccaf2c64cd12c7dcb2de3c443a",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw/diagnostic/CASE-0081.json": "116156640abadca3fe1b8998609d0fccb099b6a5849391956ea8610448a31886",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0081_attempt2.json": "85446ed20c48edfc809dbc19e2facfc53b28ee55c37c81e5608f07d4b58b1dfe",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/raw_retries/diagnostic/CASE-0081_attempt3.json": "2c900deb3e5e0d2a8c2bb470f855cacf4d802f94dfc8eeebca651d90803460b4",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/environment.json": "32f4a3cb04b954adb7123c793125b54b0b763753d8e237c5845bac688517595e",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/selection.json": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+    "results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_c/summary.json": "9f62b128b36ba3cdfb8947d8e3b44a33b64310e5882fc506ae31f7971a8f35f4"
+  }
+}

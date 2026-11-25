@@ -1,0 +1,19 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  patterns:
+  - pattern: if ($PATH.indexOf($DIR) === -1) { ... }
+  - pattern-not: if ($PATH.indexOf($DIR) !== 0) { ... }
+  languages:
+  - typescript
+  message: This code allows directory traversal attacks by not properly validating
+    the pathname. An attacker could access sensitive files outside the intended directory.
+    Ensure that the pathname starts with the expected directory path to prevent unauthorized
+    access.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    owasp: A5:2017-Broken Access Control
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    technology:
+    - typescript

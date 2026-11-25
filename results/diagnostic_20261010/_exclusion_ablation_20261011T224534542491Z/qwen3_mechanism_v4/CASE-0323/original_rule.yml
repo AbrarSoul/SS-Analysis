@@ -1,0 +1,20 @@
+rules:
+- id: vuln-ckeditor-oembed-plugin-10f6169e
+  pattern: "{\n    'div(embeddedContent,oembed-provider-*) script': {\n        attributes:\
+    \ '*'\n    }\n}\n"
+  pattern-not: "{\n    'div(embeddedContent,oembed-provider-*) script': {\n      \
+    \  attributes: '*'\n    }\n}\n"
+  languages:
+  - javascript
+  message: 'Potential XSS vulnerability in CKEditor oEmbed plugin. The plugin allows
+    arbitrary script attributes to be set on embedded content, which can lead to code
+    injection. This vulnerability was patched by restricting attribute handling for
+    embedded content. Fix: Remove or restrict the ''*'' attribute wildcard for script
+    tags within embedded content divs.'
+  severity: ERROR
+  metadata:
+    source-url: github.com/w8tcha/CKEditor-oEmbed-Plugin/commit/10f6169e39510bbf5af913886037044458b9dc9b
+    category: security
+    cwe: CWE-79
+    technology:
+    - javascript

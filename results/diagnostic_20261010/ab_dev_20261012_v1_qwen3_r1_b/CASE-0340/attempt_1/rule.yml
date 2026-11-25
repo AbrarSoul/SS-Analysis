@@ -1,0 +1,26 @@
+rules:
+- id: vuln-logkitty-ef2f673e
+  patterns:
+  - pattern-either:
+    - pattern: execSync(`${...} ...`)
+    - pattern: execSync('...' + ...)
+    - pattern: execSync(`...${...}...`)
+  - pattern-not: execFileSync(..., [...])
+  - pattern-not: execFileSync(..., ["..."])
+  languages:
+  - typescript
+  message: Use of execSync with string concatenation creates potential command injection
+    vulnerability. The vulnerable code constructs shell commands by concatenating
+    user-provided values directly into strings, which can be exploited if any part
+    of the input contains malicious shell metacharacters. Switch to execFileSync with
+    array arguments to prevent shell injection and improve security. Additionally,
+    the return type was changed from Buffer to String|Buffer which may affect downstream
+    processing.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '78'
+    owasp: OWASP Top 10:2021 - A03:2021 - Injection
+    source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf
+    technology:
+    - typescript

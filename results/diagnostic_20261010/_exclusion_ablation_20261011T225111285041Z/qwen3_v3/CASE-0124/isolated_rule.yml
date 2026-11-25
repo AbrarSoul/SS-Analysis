@@ -1,0 +1,20 @@
+rules:
+- id: vuln-sagemaker-python-sdk-2d873d53
+  patterns:
+  - pattern: os.system($COMMAND)
+  - pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Detected use of os.system() with string command construction. This is vulnerable
+    to command injection attacks. Replace with subprocess.run() using a list of arguments
+    to prevent shell injection.
+  severity: ERROR
+  metadata:
+    source-url: github.com/aws/sagemaker-python-sdk/commit/2d873d53f708ea570fc2e2a6974f8c3097fe9df5
+    category: security
+    cwe: CWE-78
+    owasp: A01:2021-Broken Access Control
+    references:
+    - https://docs.python.org/3/library/os.html#os.system
+    - https://docs.python.org/3/library/subprocess.html#subprocess.run
+    technology: python

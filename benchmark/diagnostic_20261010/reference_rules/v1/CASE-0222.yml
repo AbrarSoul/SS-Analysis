@@ -1,0 +1,13 @@
+rules:
+- id: diagnostic-case-0222
+  message: Requests certificate verification disabled at call or session level
+  severity: WARNING
+  languages:
+  - python
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-either:
+  - pattern: requests.$METHOD(..., verify=False, ...)
+  - pattern: $SESSION.verify = False

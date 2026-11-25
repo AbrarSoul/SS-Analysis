@@ -1,0 +1,24 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  pattern-either:
+  - patterns:
+    - pattern: File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)
+    - pattern-not: File.createTempFile($PREFIX, $SUFFIX)
+    - pattern-not: File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE_TMP)
+  - patterns:
+    - pattern: File.createTempFile($PREFIX, $SUFFIX)
+    - pattern-not: File.createTempFile($PREFIX, $SUFFIX, $DIR)
+  languages:
+  - java
+  message: Use of File.createTempFile without proper file permissions can lead to
+    insecure temporary files. The patch introduces secure temporary file creation
+    with restricted permissions (rw-------) on non-Windows systems. Replace direct
+    calls to File.createTempFile() with the secure createTempFile() method that ensures
+    proper file permissions.
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    category: security
+    cwe: CWE-732
+    technology:
+    - java

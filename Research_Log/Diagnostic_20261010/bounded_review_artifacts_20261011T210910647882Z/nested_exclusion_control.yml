@@ -1,0 +1,9 @@
+rules:
+- id: review-example
+  message: Synthetic review fixture
+  severity: WARNING
+  languages:
+  - python
+  patterns:
+  - pattern: foo($X)
+  - pattern-not: foo("safe")

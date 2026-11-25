@@ -1,0 +1,22 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  pattern: "if $KEY not in $LIST:\n    ...\n"
+  pattern-not: "if $KEY in $ALLOWED_LIST:\n    ...\n"
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Potential batch assignment attack vulnerability detected. The code uses
+    a blacklist approach to filter keys, which is insecure. Replace with an allowlist
+    to prevent unauthorized key assignments that could lead to privilege escalation
+    or data exposure.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe: CWE-20
+    owasp: A03:2021-Injection
+    references:
+    - https://owasp.org/www-community/attacks/Command_Injection
+    - https://cwe.mitre.org/data/definitions/20.html
+    technology:
+    - python

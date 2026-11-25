@@ -1,0 +1,20 @@
+rules:
+- id: vuln-semantic-versioning-plugin-8df2fabd
+  patterns:
+  - pattern: DocumentBuilderFactory $DBF = DocumentBuilderFactory.newInstance();
+  - pattern-not: $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+  - pattern-not: $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+  languages:
+  - java
+  message: Insecure XML parsing configuration detected. The DocumentBuilderFactory
+    is not configured to prevent external entity injection (XXE) attacks. Ensure that
+    XMLConstants.ACCESS_EXTERNAL_DTD and XMLConstants.ACCESS_EXTERNAL_SCHEMA are set
+    to an empty string to disable external DTDs and schemas.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-611
+    owasp: A4:2017
+    source-url: github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f
+    technology:
+    - java

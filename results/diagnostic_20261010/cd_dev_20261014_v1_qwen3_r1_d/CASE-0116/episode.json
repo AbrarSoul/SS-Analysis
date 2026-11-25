@@ -1,0 +1,354 @@
+{
+  "case_id": "CASE-0116",
+  "condition": "D",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_1.vuln-thrift-0919c3d5",
+            "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/patched_source.java"
+        ],
+        "validation_seconds": 1.4269614579970948,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0116/vulnerable_source.java",
+            "sample_sha256": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0116/patched_source.java",
+            "sample_sha256": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": false,
+        "reason": "visible_correct failed",
+        "is_fallback": false,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_1.vuln-thrift-0919c3d5\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nsocket.getSSLParameters();\\n      socket.setSSLParameters(...)\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    },
+    {
+      "attempt": 2,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_2/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_2.vuln-thrift-0919c3d5",
+            "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_2.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_2/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/patched_source.java"
+        ],
+        "validation_seconds": 1.4050107499933802,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0116/vulnerable_source.java",
+            "sample_sha256": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0116/patched_source.java",
+            "sample_sha256": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": false,
+        "reason": "visible_correct failed",
+        "is_fallback": false,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_2.vuln-thrift-0919c3d5\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_2.vuln-thrift-0919c3d5:\\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nsocket.getSSLParameters();\\n      socket.setSSLParameters(...)\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    },
+    {
+      "attempt": 3,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_3/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_3.vuln-thrift-0919c3d5",
+            "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_3.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_3/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/patched_source.java"
+        ],
+        "validation_seconds": 1.5431521249993239,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0116/vulnerable_source.java",
+            "sample_sha256": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0116/patched_source.java",
+            "sample_sha256": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": true,
+        "reason": "visible_correct failed -- budget exhausted, retaining last candidate as a failure",
+        "is_fallback": false,
+        "probe_eligible": false,
+        "probe_checks": null
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_3.vuln-thrift-0919c3d5\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_3.vuln-thrift-0919c3d5:\\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nsocket.getSSLParameters();\\n      socket.setSSLParameters(...)\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    }
+  ],
+  "raw": {
+    "scan_ok": false,
+    "returncode": 2,
+    "all_targets_scanned": true,
+    "errors": [
+      {
+        "code": 2,
+        "level": "error",
+        "type": "Rule parse error",
+        "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_1.vuln-thrift-0919c3d5",
+        "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_qwen3_r1_d.CASE-0116.attempt_1.vuln-thrift-0919c3d5:\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\n----- pattern -----\nsocket.getSSLParameters();\n      socket.setSSLParameters(...)\n----- end pattern -----\n"
+      },
+      {
+        "message": "Semgrep exited with status 2"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_qwen3_r1_d/CASE-0116/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/vulnerable_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/patched_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/variant_vulnerable_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/variant_vulnerable_02.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/variant_safe_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0116/benign_lookalike.java"
+    ],
+    "validation_seconds": 1.367974958004197,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0116/vulnerable_source.java",
+        "sample_sha256": "d49a1df0ee98307ec42378371a85f17cd159dc41ee0b9d93441f355d4a066d4d"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0116/patched_source.java",
+        "sample_sha256": "5aae761c6ce1cb46515fbd1d75fb5e3038be1889ad109bdc0f4b7f379534013e"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0116/variant_vulnerable_01.java",
+        "sample_sha256": "0b0b38757396b4c0a940c51b0e713d3f2370245cbc633a95c46760084578f767"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0116/variant_vulnerable_02.java",
+        "sample_sha256": "201b9be20fb812ccb5e3fa44488cbd2c7fe8ae44e37f20ff4d7eb1d065804b32"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0116/variant_safe_01.java",
+        "sample_sha256": "1f267c4315c8cb62960953a7eaea74a26a5ff5e67176caddc2ff418c3a9285e2"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0116/benign_lookalike.java",
+        "sample_sha256": "4c40f086a14084615465fa318a04f52dc91e051d5301a4c3295f409652f7da1f"
+      }
+    ]
+  },
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "probe_eligible": false,
+  "probe_ineligible_reason": "no eligible local binding found (all candidates excluded or exhausted)",
+  "verified_probe_hashes": null,
+  "probe_provenance": {
+    "manifest_sha256": "771400b84983a11b4edb97129e454ab860208b7727e7316a2c4b1689e093104f",
+    "context_sha256": "b54d8a90ee53ae1e172f6db09668263574a992696d6dcfb9864f29231cc0135a",
+    "reviewed_entry": {
+      "case_id": "CASE-0116",
+      "language": "java",
+      "vulnerable_function_sha256": "106b6531ae124d960b7cd546223ace1826e48b098b161c4c73d0fbc17c122a0f",
+      "patched_function_sha256": "b32bbda0c84b4548a38d30c6cad313bec916229367205e61744d047a91cf455a",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    },
+    "cache_status": "miss_built"
+  },
+  "probe_snapshot_paths": null,
+  "probe_fallback_used": false,
+  "resource_accounting": {
+    "generation_calls": 3,
+    "visible_scans": 3,
+    "probe_scans": 0,
+    "repair_calls": 2
+  },
+  "calls_recorded": 3,
+  "input_tokens": 3461,
+  "output_tokens": 614,
+  "generation_seconds": 4.747684250003658
+}

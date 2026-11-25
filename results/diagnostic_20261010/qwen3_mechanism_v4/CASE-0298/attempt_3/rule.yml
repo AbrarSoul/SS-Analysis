@@ -1,0 +1,21 @@
+rules:
+- id: notesnook-untrusted-url-injection
+  patterns:
+  - pattern: document.createElement("a")
+  - pattern: anchor.href = $SRC
+  - pattern: anchor.outerHTML
+  pattern-not:
+  - pattern: anchor.href = `${$SRC}?ref_src=twsrc%5Etfw`
+  languages:
+  - typescript
+  message: Potential untrusted URL injection vulnerability. The href attribute is
+    directly set from untrusted source without proper sanitization or validation,
+    which could lead to XSS or phishing attacks. Fix by properly escaping or validating
+    the source before setting it as href.
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: CWE-79
+    technology:
+    - typescript

@@ -1,0 +1,136 @@
+{
+  "created_utc": "2026-10-13T00:31:02.190921+00:00",
+  "model_calls": 0,
+  "semgrep_scans": 0,
+  "prior_counterexample_status": [
+    {
+      "label": "nested_local_changes_global_reference",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "patched_parameter_body_only_renamed",
+      "status": "fixed counterexample: patched source unchanged"
+    },
+    {
+      "label": "patched_name_collision",
+      "status": "fixed counterexample: patched source unchanged"
+    },
+    {
+      "label": "local_callee_reference_not_renamed",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "block_local_changes_global_reference",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "eval_whitespace_bypasses_filter",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "java_public_interface_renamed",
+      "status": "fixed: method name preserved; runtime covered by current test suite"
+    },
+    {
+      "label": "invalid_patched_source_still_eligible",
+      "status": "still open: invalid patched source eligible"
+    }
+  ],
+  "skipped_target_fix": {
+    "scan_ok": false,
+    "error": "target(s) not in paths.scanned: ['/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/probe-followup-vc2jy0kr/v.py', '/var/folders/d5/5xvkptzs6cd9t_077gyhh1400000gr/T/probe-followup-vc2jy0kr/p.py']",
+    "returncode": 0
+  },
+  "counts": {
+    "total": 104,
+    "passed": 98,
+    "missed": 6,
+    "patched_findings": 0
+  },
+  "groups": {
+    "qwen3-coder:30b / A": {
+      "total": 33,
+      "passed": 33,
+      "missed": 0
+    },
+    "qwen3-coder:30b / B": {
+      "total": 29,
+      "passed": 26,
+      "missed": 3
+    },
+    "gpt-4o / A": {
+      "total": 21,
+      "passed": 18,
+      "missed": 3
+    },
+    "gpt-4o / B": {
+      "total": 21,
+      "passed": 21,
+      "missed": 0
+    }
+  },
+  "failures": [
+    [
+      "qwen3-coder:30b",
+      "B",
+      1,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      2,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      3,
+      "CASE-0171"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      2,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0173"
+    ]
+  ],
+  "unchanged_failure_set": true,
+  "eligible_cases": [
+    "CASE-0046",
+    "CASE-0116",
+    "CASE-0124",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0171",
+    "CASE-0173",
+    "CASE-0184",
+    "CASE-0193",
+    "CASE-0222",
+    "CASE-0231",
+    "CASE-0276",
+    "CASE-0340"
+  ],
+  "accepted_episodes": 195,
+  "covered_accepted": 104,
+  "uncovered_accepted": 91,
+  "previous_audit_files_changed": [
+    "autogrep/requirements.txt",
+    "pipeline/dev_probe.py",
+    "pipeline/probe_coverage_check.py",
+    "pipeline/tests/test_dev_probe.py"
+  ]
+}
+Four further scope failures and the still-open invalid-patched case reproduced; evidence: Research_Log/Diagnostic_20261010/Dev_Probe_Followup_Evidence_20261013.json

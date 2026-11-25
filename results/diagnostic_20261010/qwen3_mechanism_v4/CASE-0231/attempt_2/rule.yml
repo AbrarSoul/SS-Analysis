@@ -1,0 +1,24 @@
+rules:
+- id: agentscope-studio-file-deletion-validation
+  pattern-either:
+  - patterns:
+    - pattern: "if $COND:\n    ...\n    return jsonify({...})\n"
+    - pattern-not: "if not $VAR.endswith(\".json\"):\n    ...\n    return jsonify({...})\n"
+  - patterns:
+    - pattern: "filename = os.path.basename($FILENAME)\n...\nif $COND:\n    ...\n\
+        \    return jsonify({...})\n"
+    - pattern-not: "if not $VAR.endswith(\".json\"):\n    ...\n    return jsonify({...})\n"
+  languages:
+  - python
+  message: Missing validation of file extension before deletion operation. This could
+    allow deletion of non-JSON files, potentially leading to unauthorized access or
+    data corruption. Ensure that only .json files are allowed for deletion by checking
+    filename.endswith('.json') before processing.
+  severity: ERROR
+  metadata:
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    category: security
+    cwe: CWE-22
+    owasp: A01:2021-Broken Access Control
+    technology:
+    - python

@@ -1,0 +1,374 @@
+{
+  "case_id": "CASE-0184",
+  "condition": "D",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": true,
+        "returncode": 0,
+        "all_targets_scanned": true,
+        "errors": [],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/patched_source.java"
+        ],
+        "validation_seconds": 1.3944206250016578,
+        "legacy_accepted": true,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": true,
+            "finding_location_correct": false,
+            "finding_lines": [
+              1564,
+              1600,
+              1613,
+              1624,
+              1639,
+              1769,
+              1782,
+              2386
+            ],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0184/vulnerable_source.java",
+            "sample_sha256": "c21fb47a26cb910ee1c02a9211615273cad92481a68deb5bf207380170c05eca"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0184/patched_source.java",
+            "sample_sha256": "15e3206c98ffa7939dbbdde7cedc0527b1d2a4f163e248b86376f0a694c41a7c"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": false,
+        "reason": "visible_correct failed",
+        "is_fallback": false,
+        "probe_eligible": true,
+        "probe_checks": null
+      },
+      "feedback": "Rule detected something in the original vulnerable version, but NOT at the correct location (found at line(s) [1564, 1600, 1613, 1624, 1639, 1769, 1782, 2386], expected within [1420, 1431]). Fix the pattern to match the actual vulnerable construct, not an unrelated part of the file."
+    },
+    {
+      "attempt": 2,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_2/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": true,
+        "returncode": 0,
+        "all_targets_scanned": true,
+        "errors": [],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_2/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/patched_source.java"
+        ],
+        "validation_seconds": 1.4137072919984348,
+        "legacy_accepted": true,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": true,
+            "finding_location_correct": false,
+            "finding_lines": [
+              1564,
+              1600,
+              1613,
+              1624,
+              1639,
+              1769,
+              1782,
+              2386
+            ],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0184/vulnerable_source.java",
+            "sample_sha256": "c21fb47a26cb910ee1c02a9211615273cad92481a68deb5bf207380170c05eca"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0184/patched_source.java",
+            "sample_sha256": "15e3206c98ffa7939dbbdde7cedc0527b1d2a4f163e248b86376f0a694c41a7c"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": false,
+        "reason": "visible_correct failed",
+        "is_fallback": false,
+        "probe_eligible": true,
+        "probe_checks": null
+      },
+      "feedback": "Rule detected something in the original vulnerable version, but NOT at the correct location (found at line(s) [1564, 1600, 1613, 1624, 1639, 1769, 1782, 2386], expected within [1420, 1431]). Fix the pattern to match the actual vulnerable construct, not an unrelated part of the file."
+    },
+    {
+      "attempt": 3,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_3/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": true,
+        "returncode": 0,
+        "all_targets_scanned": true,
+        "errors": [],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_3/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/vulnerable_source.java",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/patched_source.java"
+        ],
+        "validation_seconds": 1.4127690410095965,
+        "legacy_accepted": true,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": true,
+            "finding_location_correct": false,
+            "finding_lines": [
+              1564,
+              1600,
+              1613,
+              1624,
+              1639,
+              1769,
+              1782,
+              2386
+            ],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0184/vulnerable_source.java",
+            "sample_sha256": "c21fb47a26cb910ee1c02a9211615273cad92481a68deb5bf207380170c05eca"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0184/patched_source.java",
+            "sample_sha256": "15e3206c98ffa7939dbbdde7cedc0527b1d2a4f163e248b86376f0a694c41a7c"
+          }
+        ]
+      },
+      "probe_evaluation": null,
+      "gate_decision": {
+        "accept": false,
+        "stop": true,
+        "reason": "visible_correct failed -- budget exhausted, retaining last candidate as a failure",
+        "is_fallback": false,
+        "probe_eligible": true,
+        "probe_checks": null
+      },
+      "feedback": "Rule detected something in the original vulnerable version, but NOT at the correct location (found at line(s) [1564, 1600, 1613, 1624, 1639, 1769, 1782, 2386], expected within [1420, 1431]). Fix the pattern to match the actual vulnerable construct, not an unrelated part of the file."
+    }
+  ],
+  "raw": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r3_d/CASE-0184/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/vulnerable_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/patched_source.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/variant_vulnerable_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/variant_vulnerable_02.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/variant_safe_01.java",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0184/benign_lookalike.java"
+    ],
+    "validation_seconds": 1.631250666003325,
+    "legacy_accepted": true,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": false,
+        "finding_lines": [
+          1564,
+          1600,
+          1613,
+          1624,
+          1639,
+          1769,
+          1782,
+          2386
+        ],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0184/vulnerable_source.java",
+        "sample_sha256": "c21fb47a26cb910ee1c02a9211615273cad92481a68deb5bf207380170c05eca"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0184/patched_source.java",
+        "sample_sha256": "15e3206c98ffa7939dbbdde7cedc0527b1d2a4f163e248b86376f0a694c41a7c"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": false,
+        "finding_lines": [
+          1564,
+          1600,
+          1613,
+          1624,
+          1639,
+          1769,
+          1782,
+          2386
+        ],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0184/variant_vulnerable_01.java",
+        "sample_sha256": "a2bad99b2d622e3ea07fe4e5f8b4aa79b5e5ebac27b69e23d2b73fbf4e6dd6a4"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": false,
+        "finding_lines": [
+          1568,
+          1604,
+          1617,
+          1628,
+          1643,
+          1773,
+          1786,
+          2390
+        ],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0184/variant_vulnerable_02.java",
+        "sample_sha256": "d88dc97eeb41f00e5250bcec04680f337b11d894ba8559336d80e70a3ab0666b"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0184/variant_safe_01.java",
+        "sample_sha256": "1a2fa184f82765514a4d67288992f398d64cebe4131cfa701ba30281e81c62fa"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0184/benign_lookalike.java",
+        "sample_sha256": "6f324fbf56d21694b2a4ee735995e242ba096f594745ff40ca4882cc30494e84"
+      }
+    ]
+  },
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "probe_eligible": true,
+  "probe_ineligible_reason": null,
+  "verified_probe_hashes": {
+    "vulnerable_probe_sha256": "99da2c3c0e019c2f34af1ac539c186622126120769452fe18ec77f60d6389fbc",
+    "patched_probe_sha256": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5"
+  },
+  "probe_provenance": {
+    "manifest_sha256": "771400b84983a11b4edb97129e454ab860208b7727e7316a2c4b1689e093104f",
+    "context_sha256": "f9f4b262f384fe7a84630fb8ad5dba0c4853df5dcc3700a8751fd03a42e86afd",
+    "reviewed_entry": {
+      "case_id": "CASE-0184",
+      "language": "java",
+      "vulnerable_function_sha256": "f2744bb2b83a570975491fc8e4a5a4f87fe7d14aa136bb1ae9811b3ac6d8b7f5",
+      "patched_function_sha256": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5",
+      "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+      "parser_versions": {
+        "tree_sitter": "0.26.0",
+        "tree_sitter_java": "0.23.5",
+        "tree_sitter_javascript": "0.25.0",
+        "tree_sitter_typescript": "0.23.2",
+        "python": "3.14.4"
+      },
+      "eligible": true,
+      "old_name": "msg",
+      "new_name": "msg_renamed",
+      "vulnerable_probe_sha256": "99da2c3c0e019c2f34af1ac539c186622126120769452fe18ec77f60d6389fbc",
+      "patched_probe_sha256": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5",
+      "patched_probe_renamed": false
+    },
+    "cache_status": "miss_built"
+  },
+  "probe_snapshot_paths": [
+    "CASE-0184/_probe_snapshot/vulnerable/vulnerable_probe.java",
+    "CASE-0184/_probe_snapshot/patched/patched_probe.java"
+  ],
+  "probe_fallback_used": false,
+  "resource_accounting": {
+    "generation_calls": 3,
+    "visible_scans": 3,
+    "probe_scans": 0,
+    "repair_calls": 2
+  },
+  "calls_recorded": 3,
+  "input_tokens": 4936,
+  "output_tokens": 479,
+  "generation_seconds": 5.487809667014517
+}

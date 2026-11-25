@@ -1,0 +1,20 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  patterns:
+  - pattern: $VAR.match(new RegExp('^([^:]+):(?:(?:[^@:]+(?:[^@]+)?@)?([^/]*))[/](.+?)(?:[.]git)?($|#)'))
+  - pattern-not: $VAR.match(/^([^:]+):(?:[^@]+@)?(?:([^/]*)\/)?([^#]+)/)
+  languages:
+  - javascript
+  message: The use of an overly permissive regular expression in URL parsing can lead
+    to incorrect handling of URLs, potentially causing security issues. Ensure that
+    the regular expression correctly captures the intended URL components and does
+    not allow unintended patterns. Update the regular expression to the fixed version
+    to prevent such vulnerabilities.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    technology:
+    - javascript

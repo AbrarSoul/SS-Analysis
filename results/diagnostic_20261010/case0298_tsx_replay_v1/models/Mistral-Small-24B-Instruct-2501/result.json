@@ -1,0 +1,41 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/hf.co_lmstudio-community_Mistral-Small-24B-Instruct-2501-GGUF_Q8_0__autogrep_default/raw/hf.co_lmstudio-community_Mistral-Small-24B-Instruct-2501-GGUF_Q8_0__20261008T052232Z/CASE-0298.json",
+  "raw_response_sha256": "f794afab9f607bb66c9b49fd03fd388aa1c4c64413884c6cb242edca4c165cab",
+  "parsed_rule_sha256": "ae6d3419f34164e04444b40a9586f6dc412b3adef4d350e1cec02cde70c626e4",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0193
+  message: Default XML parser without explicit external-entity restrictions
+  severity: WARNING
+  languages:
+  - java
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern: DocumentBuilderFactory.newInstance().newDocumentBuilder()

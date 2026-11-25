@@ -1,0 +1,22 @@
+rules:
+- id: unsafe-shell-execution-with-string-concatenation
+  patterns:
+  - pattern: os.system($CMD)
+  - pattern-inside: "def $FUNC(...):\n    ...\n"
+  - pattern-not: subprocess.run($CMD, ...)
+  languages:
+  - python
+  message: Unsafe shell execution using os.system() with string concatenation. This
+    is vulnerable to command injection. Use subprocess.run() with a list of arguments
+    instead to prevent shell injection.
+  severity: ERROR
+  metadata:
+    source-url: github.com/aws/sagemaker-python-sdk/commit/2d873d53f708ea570fc2e2a6974f8c3097fe9df5
+    category: security
+    cwe: CWE-78
+    owasp: A01:2021-Broken Access Control
+    references:
+    - https://docs.python.org/3/library/os.html#os.system
+    - https://docs.python.org/3/library/subprocess.html#subprocess.run
+    technology:
+    - python

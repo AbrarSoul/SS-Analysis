@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0298
+  message: Raw interpolation into HTML href attribute
+  severity: WARNING
+  languages:
+  - typescript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-regex: <a\s+href=[\"']\$\{

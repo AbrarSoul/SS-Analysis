@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0235",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791841683.855873,
+  "raw_content": "rules:\n- id: \"vuln-ws-scrcpy-e83cf654\"\n  pattern: |\n    if ($X.indexOf($Y) !== 0) {\n        $RES.statusCode = 403;\n        $RES.end();\n        return;\n    }\n  pattern-not: |\n    if ($X.indexOf($Y) !== 0) {\n        $RES.statusCode = 403;\n        $RES.end();\n        return;\n    }\n  languages: [\"typescript\"]\n  message: \"Directory traversal vulnerability detected. The code checks if a path starts with a public directory but doesn't properly validate the full path, allowing attackers to access files outside the intended directory. This can lead to unauthorized file access and information disclosure. Fix by ensuring proper path validation using secure methods like path.resolve() or path.normalize() before checking the prefix.\"\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef\"\n    category: security\n    cwe: [22]\n    owasp: [OWASP Top 10:2021 - A01:2021 - Broken Access Control]\n    references:\n      - \"https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A01_Broken_Access_Control\"\n    technology: [typescript]",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/netristv/ws-scrcpy\n    Commit: e83cf65438bef83a3503b25358bba97bcc156fef\n\n    PATCH CHANGES:\n    File: src/server/services/HttpServer.ts\n--- a/src/server/services/HttpServer.ts\n+++ b/src/server/services/HttpServer.ts\n+            if (pathname.indexOf(publicDir) !== 0) {\n+                res.statusCode = 403;\n+                res.end();\n+                return;\n+            }\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-ws-scrcpy-e83cf654\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-ws-scrcpy-e83cf654\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/netristv/ws-scrcpy\n    Commit: e83cf65438bef83a3503b25358bba97bcc156fef\n\n    PATCH CHANGES:\n    File: src/server/services/HttpServer.ts\n--- a/src/server/services/HttpServer.ts\n+++ b/src/server/services/HttpServer.ts\n+            if (pathname.indexOf(publicDir) !== 0) {\n+                res.statusCode = 403;\n+                res.end();\n+                return;\n+            }\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-ws-scrcpy-e83cf654\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-ws-scrcpy-e83cf654\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-490",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "rules:\n- id: \"vuln-ws-scrcpy-e83cf654\"\n  pattern: |\n    if ($X.indexOf($Y) !== 0) {\n        $RES.statusCode = 403;\n        $RES.end();\n        return;\n    }\n  pattern-not: |\n    if ($X.indexOf($Y) !== 0) {\n        $RES.statusCode = 403;\n        $RES.end();\n        return;\n    }\n  languages: [\"typescript\"]\n  message: \"Directory traversal vulnerability detected. The code checks if a path starts with a public directory but doesn't properly validate the full path, allowing attackers to access files outside the intended directory. This can lead to unauthorized file access and information disclosure. Fix by ensuring proper path validation using secure methods like path.resolve() or path.normalize() before checking the prefix.\"\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef\"\n    category: security\n    cwe: [22]\n    owasp: [OWASP Top 10:2021 - A01:2021 - Broken Access Control]\n    references:\n      - \"https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A01_Broken_Access_Control\"\n    technology: [typescript]",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791841683,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 323,
+      "prompt_tokens": 726,
+      "total_tokens": 1049,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 2.7917058330021973,
+  "error": null,
+  "input_tokens": 726,
+  "output_tokens": 323
+}

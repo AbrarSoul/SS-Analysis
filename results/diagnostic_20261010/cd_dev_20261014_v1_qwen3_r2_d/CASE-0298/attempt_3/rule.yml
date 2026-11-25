@@ -1,0 +1,26 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern-either:
+    - pattern: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+        \n  }><p lang=\"en\" dir=\"ltr\">${$SRC}</p></blockquote>"
+    - pattern: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+        \n  }><p lang=\"en\" dir=\"ltr\">${$SRC}...}</p></blockquote>"
+  - pattern-not: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href =\
+      \ `${$SRC}?ref_src=twsrc%5Etfw`;\n\n  }><p lang=\"en\" dir=\"ltr\">${$ANCHOR.outerHTML}</p></blockquote>"
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in Twitter embed component. The code directly
+    interpolates user-provided 'src' URL into HTML without proper sanitization, which
+    could allow attackers to inject malicious scripts. The fix properly creates an
+    anchor element and uses outerHTML to safely include the href with ref_src parameter.
+    To prevent this vulnerability, always sanitize external URLs before embedding
+    them in HTML or use proper DOM manipulation techniques instead of string interpolation.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '79'
+    owasp: OWASP-2021-A03
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

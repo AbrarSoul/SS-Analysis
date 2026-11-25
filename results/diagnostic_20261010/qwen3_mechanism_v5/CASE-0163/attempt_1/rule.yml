@@ -1,0 +1,25 @@
+rules:
+- id: vuln-git-pull-or-clone-f9ce092b
+  pattern-either:
+  - patterns:
+    - pattern: $CHILD_PROCESS.execFileSync("git", ["clone", $FLAG, $URL, $OUTPATH],
+        ...)
+    - pattern-not: $CHILD_PROCESS.execFileSync("git", ["clone", $FLAG, "--", $URL,
+        $OUTPATH], ...)
+  - patterns:
+    - pattern: $CHILD_PROCESS.spawnSync("git", ["clone", $FLAG, $URL, $OUTPATH], ...)
+    - pattern-not: $CHILD_PROCESS.spawnSync("git", ["clone", $FLAG, "--", $URL, $OUTPATH],
+        ...)
+  languages:
+  - javascript
+  message: Missing '--' separator in git clone command arguments. This can lead to
+    argument injection vulnerabilities where malicious input in the URL is interpreted
+    as a git flag. Fix by adding '--' between the flag and the URL to separate options
+    from positional arguments.
+  severity: ERROR
+  metadata:
+    source-url: github.com/feross/git-pull-or-clone/commit/f9ce092be13cc32e685dfa26e7705e9c6e3108a3
+    category: security
+    cwe: CWE-15
+    technology:
+    - javascript

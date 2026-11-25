@@ -1,0 +1,41 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/deepseek-coder_6.7b__autogrep_default/raw/deepseek-coder_6.7b__20260929T015526Z/CASE-0298.json",
+  "raw_response_sha256": "07db26939c62cd89ec22084d5c842638ce8fe42cfb6fbb63cabdc8b4ac232696",
+  "parsed_rule_sha256": "ebaa00a726f3e288a53955d96272ea27d4e8f9ef5409e138aad33de983ff1246",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

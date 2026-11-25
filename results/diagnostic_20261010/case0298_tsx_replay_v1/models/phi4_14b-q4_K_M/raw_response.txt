@@ -1,0 +1,26 @@
+```yaml
+rules:
+- id: "vuln-notesnook-e87f5e5f"
+  pattern: |
+    $elem = document.createElement("a")
+    $elem.href = $src
+    $elem.outerHTML
+  pattern-not: |
+    $elem = document.createElement("a")
+    $elem.href = $src
+    $anchor = document.createElement("a")
+    $anchor.href = $src
+    $anchor.outerHTML
+  languages: ["typescript"]
+  message: |
+    Potential XSS vulnerability due to direct use of `outerHTML` on a dynamically created anchor element. This can lead to script injection if `src` is not properly sanitized. To fix this, create a separate anchor element and use its `outerHTML` instead.
+  severity: ERROR
+  metadata:
+    source-url: "https://github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7"
+    category: "security"
+    cwe: "CWE-79"
+    owasp: "A1:2017-Injection"
+    references: 
+      - "https://owasp.org/www-project-top-ten/2017/A1_2017-Injection"
+    technology: "typescript"
+```

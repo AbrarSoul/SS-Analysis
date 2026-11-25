@@ -1,0 +1,48 @@
+{
+  "status": "proposals_only_independent_review_pending",
+  "historical_labels_modified": false,
+  "basis": "Assistant inspection and Semgrep 1.177.0 first-pass reference findings; post-hoc development evidence",
+  "location_review": [
+    {
+      "case_id": "CASE-0173",
+      "sample": "variant_vulnerable_02.ts",
+      "existing_range": [41, 44],
+      "finding_lines": [11],
+      "evidence": "manifest[path] || path moved into resolveKey at line 11; the existing range contains its caller.",
+      "proposal": "Review whether the vulnerable fallback expression and its caller should both be accepted locations; use disjoint ranges, not an enlarged unrelated span."
+    },
+    {
+      "case_id": "CASE-0163",
+      "sample": "variant_vulnerable_02.js",
+      "existing_range": [26, 37],
+      "finding_lines": [50],
+      "evidence": "Clone argument construction without -- moved into cloneArgs at line 50; current range covers the caller and spawn.",
+      "proposal": "Review helper expression as an additional valid location. This candidate also flags the safe sample; location adjudication alone would not make it pass."
+    },
+    {
+      "case_id": "CASE-0239",
+      "sample": "variant_vulnerable_02.js",
+      "existing_range": [40, 85],
+      "finding_lines": [38],
+      "evidence": "Vulnerable regular expression moved into SHORTCUT_URL at line 38, outside the consuming function's annotated range.",
+      "proposal": "Review the hoisted regex definition as an additional valid location, retaining current caller locations where justified."
+    },
+    {
+      "case_id": "CASE-0235",
+      "sample": "variant_vulnerable_02.ts",
+      "existing_range": [45, 79],
+      "finding_lines": [41],
+      "evidence": "Unchecked path.join expression moved into resolvePath at line 41; annotated range covers the server callback.",
+      "proposal": "Review helper expression as an additional valid location. Candidate still flags the patched sample, so this alone does not establish success."
+    }
+  ],
+  "parser_review": {
+    "case_id": "CASE-0298",
+    "upstream_path": "packages/editor/src/extensions/embed/component.tsx",
+    "stored_suffix": ".ts",
+    "tested_suffix": ".tsx",
+    "probe": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/probe.json",
+    "result": "Byte-identical .tsx copies produce no parser errors and the frozen candidate finds all three positives and no negatives.",
+    "proposal": "Version the evaluation adapter to stage files with the upstream source suffix. Check every JSX/TSX case before any separate, explicitly labeled rescoring; preserve frozen source bytes and original results."
+  }
+}

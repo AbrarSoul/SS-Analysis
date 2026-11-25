@@ -1,0 +1,26 @@
+rules:
+- id: vuln-hono-cf9a78db
+  patterns:
+  - pattern-either:
+    - pattern: const $KEY = ASSET_MANIFEST[$PATH] || $PATH
+    - pattern: const $KEY = ASSET_MANIFEST[$PATH] || $PATH;
+    - pattern: let $KEY = ASSET_MANIFEST[$PATH] || $PATH
+    - pattern: let $KEY = ASSET_MANIFEST[$PATH] || $PATH;
+  - pattern-not: const key = ASSET_MANIFEST[path]
+  - pattern-not: const key = ASSET_MANIFEST[path];
+  languages:
+  - typescript
+  message: Potential null/undefined access vulnerability in Cloudflare Workers asset
+    manifest handling. The original code used a fallback to 'path' when 'ASSET_MANIFEST[path]'
+    was not found, which could lead to unexpected behavior or errors if the path doesn't
+    exist in the manifest. This pattern can cause runtime issues when accessing properties
+    on potentially undefined values. Fix by removing the fallback and ensuring only
+    valid manifest keys are used.
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-476
+    owasp: OWASP-A03:2021
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    technology:
+    - typescript

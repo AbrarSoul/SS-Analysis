@@ -49,7 +49,36 @@ MULTI_AGENT_MODEL_HOSTS = {
     "ornith-swe:q4": "CSC-P100",
 }
 
-MODEL_HOSTS = {**PRIMARY_MODEL_HOSTS, **MULTI_AGENT_MODEL_HOSTS}
+# A later, separate follow-up campaign (2026-10-08), NOT part of the original 8-model primary
+# benchmark or its audit -- kept in its own dict, never merged into PRIMARY_MODEL_HOSTS, so results
+# from this set are never silently conflated with the audited original study. Each of these 7 was
+# empirically verified instruction-tuned via the same two-probe method (pipeline/verify_instruction_tuning.py)
+# before being added here -- see Research_Log/Correction_Log.md for the verification record.
+# phi4-reasoning:14b was tried first and dropped after repeated infra-level timeouts (60s, then
+# 300s, on a trivial one-sentence probe) -- same precedent as QwQ-32B's drop in the original study;
+# replaced with the standard, non-reasoning phi4:14b-q4_K_M, which passed cleanly.
+FOLLOWUP_MODEL_HOSTS = {
+    "qwen3-coder:30b": "GPU-farmi-004",
+    "gpt-oss:20b": "GPU-farmi-004",
+    "opencoder:8b-instruct-q4_K_M": "GPU-farmi-004",
+    "granite-code:8b-instruct-128k-q4_1": "GPU-farmi-004",
+    "llama3.1:8b-instruct-q4_K_M": "GPU-farmi-001",
+    "hf.co/lmstudio-community/Mistral-Small-24B-Instruct-2501-GGUF:Q8_0": "GPU-farmi-001",
+    "phi4:14b-q4_K_M": "GPU-farmi-001",
+}
+
+# 2026-10-09: a small diagnostic campaign, NOT part of any study condition -- run only to help
+# distinguish "open-weight model capability gap" from "fundamental task/pipeline limitation" on the
+# 37 cases where qwen3-coder:30b (the follow-up campaign's best performer) failed specifically at the
+# hidden-variant-generalization hurdle. Uses the real OpenAI API, not GPT-Lab -- a genuinely different
+# provider/host/key, so it is kept in its own dict and never merged silently into the GPT-Lab-backed
+# MODEL_HOSTS assumption that every host resolves through GPTLAB_BASE_TEMPLATE + GPTLAB_API_KEY.
+OPENAI_BASE_URL = "https://api.openai.com/v1"
+OPENAI_MODEL_HOSTS = {
+    "gpt-4o": "OPENAI",
+}
+
+MODEL_HOSTS = {**PRIMARY_MODEL_HOSTS, **MULTI_AGENT_MODEL_HOSTS, **FOLLOWUP_MODEL_HOSTS, **OPENAI_MODEL_HOSTS}
 
 # Fixed judge model for rule_filter.py's generalizability-review pass. Deliberately
 # never one of the models under evaluation -- an evaluated model must not judge its
@@ -69,12 +98,35 @@ def get_api_key() -> str:
     return key
 
 
+def get_openai_api_key() -> str:
+    key = os.environ.get("OPENAI_API_KEY")
+    if not key:
+        raise RuntimeError(
+            "OPENAI_API_KEY environment variable is not set. "
+            "Export it before running the OpenAI diagnostic (separate credential from GPTLAB_API_KEY)."
+        )
+    return key
+
+
 def host_base_url(host: str) -> str:
+    if host == "OPENAI":
+        return OPENAI_BASE_URL
     return GPTLAB_BASE_TEMPLATE.format(host=host)
+
+
+def get_key_for_host(host: str) -> str:
+    """Dispatches to the right credential for the resolved host -- GPT-Lab hosts never got a
+    second key to worry about until the OpenAI diagnostic needed one, so every existing call site
+    (build_config, build_judge_kwargs, preflight_auth) now resolves its key this way instead of
+    always assuming get_api_key()."""
+    if host == "OPENAI":
+        return get_openai_api_key()
+    return get_api_key()
 
 
 def build_config(model_tag: str, *, temperature: float = 0.0, max_retries: int = 3,
                   max_files_changed: int = 1, prompt_variant: str = "autogrep_default",
+                  construction_mode: str = "original_prompt",
                   max_output_tokens: int = 2048,
                   patches_dir=None, generated_rules_dir=None,
                   repos_cache_dir=None, shared_repos_cache_dir=None) -> Config:
@@ -90,11 +142,12 @@ def build_config(model_tag: str, *, temperature: float = 0.0, max_retries: int =
     kwargs = dict(
         max_files_changed=max_files_changed,
         max_retries=max_retries,
-        openrouter_api_key=get_api_key(),
+        openrouter_api_key=get_key_for_host(host),
         openrouter_base_url=host_base_url(host),
         model_name=model_tag,
         generation_temperature=temperature,
         prompt_variant=prompt_variant,
+        construction_mode=construction_mode,
         max_output_tokens=max_output_tokens,
     )
     if patches_dir is not None:

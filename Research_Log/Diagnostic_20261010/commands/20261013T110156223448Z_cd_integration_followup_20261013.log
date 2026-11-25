@@ -1,0 +1,51 @@
+{
+  "real_model_calls": 0,
+  "real_semgrep_scans": 0,
+  "closed_findings": {
+    "payload_mutation_rejected": true,
+    "self_consistent_wrong_payload_rejected_by_manifest": true,
+    "language_drift_rejected": true,
+    "parser_drift_rejected": true,
+    "decode_failure_accounting": {
+      "generation_calls": 2,
+      "visible_scans": 1,
+      "probe_scans": 1,
+      "repair_calls": 1
+    }
+  },
+  "new_reproductions": {
+    "validated_object_unbound_to_scanned_files": {
+      "validated_text": "def f():\n    token_renamed = 1\n    return token_renamed",
+      "scanner_received_text": "def f(): return 999\n",
+      "accepted_under_mocked_passing_scan": true
+    },
+    "missing_probe_resolution_becomes_fallback": {
+      "probe_argument": null,
+      "generation_calls": 1,
+      "probe_eligible": false,
+      "probe_fallback_used": true
+    },
+    "ab_import_loads_probe_module": true,
+    "ab_import_fails_without_probe_dependencies": {
+      "returncode": 1,
+      "error": "ModuleNotFoundError: synthetic absent probe dependency: tree_sitter_java"
+    }
+  },
+  "integration_requirements": {
+    "probe_timeout": {
+      "raised": "TimeoutExpired",
+      "generation_calls": 1,
+      "attempt_record_exists": false,
+      "episode_record_exists": false
+    },
+    "limit": "Synthetic backend exception; no real timeout or inference. RawCapture may independently retain the call; runner writes no attempt/episode status."
+  },
+  "reviewed_sha256": {
+    "pipeline/combined_gate.py": "2ecebcaf51d95a252f5409f4285de7ce6e393b06a1e9ba0142e6dcae890e8de5",
+    "pipeline/probe_cache.py": "baab8da9901d026d9ce0ec6812cd5740fab823735669cc93c764cfc3142bcd03",
+    "pipeline/diagnostic_v2.py": "47dfa0dadf6da64e4efebe14ebefcf01d88f43a34afa05475ba6e3b7ea75ae2e",
+    "pipeline/dev_probe.py": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "pipeline/tests/test_combined_gate.py": "e999018c88004ca2f49a2c4771749b80065625425a3940245d71b828087dd3e0",
+    "pipeline/tests/test_run_model_case_cd.py": "5a6109bca12535ded317ba91167fc36d89f6c336513c1b088ec66f464b661324"
+  }
+}

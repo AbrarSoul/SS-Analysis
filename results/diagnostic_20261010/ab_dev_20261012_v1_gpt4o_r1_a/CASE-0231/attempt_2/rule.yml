@@ -1,0 +1,21 @@
+rules:
+- id: vuln-agentscope-7d285e86
+  pattern: 'filename = $FUNC(filename)
+
+    '
+  pattern-not: 'filename = os.path.basename(filename)
+
+    '
+  languages:
+  - python
+  message: Potential directory traversal vulnerability. Ensure that the filename is
+    sanitized using os.path.basename() to prevent unauthorized file access.
+  severity: ERROR
+  metadata:
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    category: security
+    cwe: CWE-22
+    owasp: A5:2017-Broken Access Control
+    references:
+    - https://owasp.org/www-community/attacks/Path_Traversal
+    technology: python

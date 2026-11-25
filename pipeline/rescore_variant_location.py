@@ -41,6 +41,24 @@ TARGET_GLOBS = [
     "runs_c2_primary/*/sample_execution_log.jsonl",
     "runs_c3/*/sample_execution_log.jsonl",
     "runs_c4/*/sample_execution_log.jsonl",
+    # 2026-10-08/09: a later, separate 7-model follow-up campaign (not part of the original 8-model
+    # primary benchmark or its audit, see pipeline/gptlab_config.py's FOLLOWUP_MODEL_HOSTS) -- same
+    # correction applied identically, since this fix depends only on the case/variant, not the model.
+    "runs_followup_20261008/*/sample_execution_log.jsonl",
+    # 2026-10-09: the gpt-4o diagnostic (real OpenAI API, not GPT-Lab -- see
+    # pipeline/gptlab_config.py's OPENAI_MODEL_HOSTS) run on the 37-case hard subset where
+    # qwen3-coder:30b failed hidden-variant generalization. Same correction applied identically --
+    # it depends only on the case/variant, not the model or provider.
+    "runs_openai_diagnostic_20261009/*/sample_execution_log.jsonl",
+    # 2026-10-10: the full 300-case gpt-4o campaign (same OPENAI host/provider as the diagnostic
+    # above, same manifest_frozen_final.jsonl scope as the 7-model follow-up) -- same correction
+    # applied identically.
+    "runs_openai_full_20261010/*/sample_execution_log.jsonl",
+    # 2026-10-15: the C2 iterative loop run for the 7 follow-up models + gpt-4o (see
+    # pipeline/run_c2.py), extending runs_c2_primary's 8-model coverage to the same 8 models already
+    # covered by runs_followup_20261008/runs_openai_full_20261010. Same correction applied
+    # identically -- it depends only on the case/variant, not the model or condition.
+    "runs_c2_followup/*/sample_execution_log.jsonl",
 ]
 
 

@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0063
+  message: Overlapping repetitions in a data-URL regex
+  severity: WARNING
+  languages:
+  - javascript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-regex: \(charset=\[\\w=\-\]\*\)\*;\*

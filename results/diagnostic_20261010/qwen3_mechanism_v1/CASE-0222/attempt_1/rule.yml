@@ -1,0 +1,18 @@
+rules:
+- id: vuln-mindsdb-083afcf6
+  patterns:
+  - pattern: requests.post(..., verify=False)
+  - pattern-not: requests.post(..., verify=False, ...)
+  message: Insecure SSL verification detected in requests.post call. This allows for
+    man-in-the-middle attacks as SSL certificates are not validated. Remove the 'verify=False'
+    parameter or set it to True to enforce certificate validation.
+  severity: ERROR
+  languages:
+  - python
+  metadata:
+    source-url: github.com/mindsdb/mindsdb/commit/083afcf6567cf51aa7d89ea892fd97689919053b
+    category: security
+    cwe:
+    - CWE-295
+    technology:
+    - python

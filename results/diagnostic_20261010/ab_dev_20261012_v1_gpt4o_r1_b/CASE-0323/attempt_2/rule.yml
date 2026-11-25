@@ -1,0 +1,20 @@
+rules:
+- id: vuln-ckeditor-oembed-plugin-10f6169e
+  patterns:
+  - pattern: '''div(embeddedContent,oembed-provider-*) script'': { attributes: ''*''
+      }'
+  - pattern-not: '// ''div(embeddedContent,oembed-provider-*) script'': { attributes:
+      ''*'' }'
+  languages:
+  - javascript
+  message: The use of wildcard attributes in script tags within oEmbed providers can
+    lead to security vulnerabilities such as XSS. Remove or restrict the use of wildcard
+    attributes to prevent potential script injection.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-79
+    owasp: A7:2017-Cross-Site Scripting (XSS)
+    source-url: github.com/w8tcha/CKEditor-oEmbed-Plugin/commit/10f6169e39510bbf5af913886037044458b9dc9b
+    technology:
+    - javascript

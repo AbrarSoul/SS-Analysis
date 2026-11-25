@@ -1,0 +1,33 @@
+rules:
+- id: vuln-graphhopper-eb189be1
+  patterns:
+  - pattern: '$URL = $URL.replaceFirst("/navigate/directions/v5/gh/" + $PROFILE +
+      "/", "");
+
+      $URL = $URL.replaceAll("\\?[*]", "");
+
+      '
+  - pattern-not: 'String urlStart = "/navigate/directions/v5/gh/" + $PROFILE + "/";
+
+      if (!$URL.startsWith(urlStart)) throw new IllegalArgumentException("Incorrect
+      URL " + $URL);
+
+      $URL = $URL.substring(urlStart.length());
+
+      '
+  languages:
+  - java
+  message: Potential insecure URL handling vulnerability. The code uses replaceFirst
+    and replaceAll operations that may not properly validate URL prefixes, leading
+    to potential path manipulation or injection attacks. Fix by validating the URL
+    prefix before processing and throwing an exception for invalid URLs.
+  severity: ERROR
+  metadata:
+    source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41
+    category: security
+    cwe: CWE-20
+    owasp: OWASP-M01
+    technology: java
+    references:
+    - https://owasp.org/www-community/attacks/Path_Traversal
+    - https://cwe.mitre.org/data/definitions/20.html

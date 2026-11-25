@@ -1,0 +1,13 @@
+rules:
+- id: diagnostic-case-0163
+  message: Git clone arguments lack option terminator
+  severity: WARNING
+  languages:
+  - javascript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-either:
+  - pattern: '[''clone'', $FLAG, $URL, $DEST]'
+  - pattern: '[''clone'', $FLAG].concat([$URL, $DEST])'

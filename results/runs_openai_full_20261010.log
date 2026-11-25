@@ -1,0 +1,23 @@
+2026-10-10 00:03:53,428 - INFO - Preflight OK on OPENAI (135 models visible)
+2026-10-10 00:04:00,965 - INFO - [gpt-4o] processing 300 curated case(s), run_id=gpt-4o__20261009T210353Z
+2026-10-10 00:04:02,194 - INFO - Attempt 1/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0041.patch
+2026-10-10 00:04:05,216 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:04:08,301 - WARNING - Attempt 1 failed: Rule failed to detect vulnerability in original version
+2026-10-10 00:04:08,301 - INFO - Attempt 2/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0041.patch
+2026-10-10 00:04:10,261 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:04:13,213 - WARNING - Attempt 2 failed: Rule failed to detect vulnerability in original version
+2026-10-10 00:04:13,213 - INFO - Attempt 3/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0041.patch
+2026-10-10 00:04:14,943 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:04:17,862 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version
+2026-10-10 00:04:36,097 - INFO - Attempt 1/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0042.patch
+2026-10-10 00:04:38,179 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:04:41,102 - INFO - Successfully generated valid rule for /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0042.patch
+2026-10-10 00:05:02,437 - INFO - Attempt 1/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0043.patch
+2026-10-10 00:05:05,004 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:05:07,936 - WARNING - Attempt 1 failed: Rule failed to detect vulnerability in original version
+2026-10-10 00:05:07,937 - INFO - Attempt 2/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0043.patch
+2026-10-10 00:05:09,857 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:05:12,819 - WARNING - Attempt 2 failed: Rule failed to detect vulnerability in original version
+2026-10-10 00:05:12,819 - INFO - Attempt 3/3 for patch /Users/nkabmo/Desktop/Tools/SS/results/runs_openai_full_20261010/gpt-4o__autogrep_default/synthetic_patch_names/CASE-0043.patch
+2026-10-10 00:05:15,086 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-10 00:05:18,053 - WARNING - Attempt 3 failed: Rule failed to detect vulnerability in original version

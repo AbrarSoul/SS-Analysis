@@ -1,0 +1,25 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: <a href="${src}?ref_src=twsrc%5Etfw"></a>
+  - pattern-not: 'const anchor = document.createElement("a");
+
+      anchor.href = `${src}?ref_src=twsrc%5Etfw`;
+
+      $... = anchor.outerHTML;'
+  languages:
+  - typescript
+  message: Directly embedding user-controlled URLs into HTML without proper sanitization
+    can lead to security vulnerabilities such as XSS. In this case, the URL is directly
+    inserted into an anchor tag's href attribute, which can be exploited if the URL
+    contains malicious scripts. To fix this, create an anchor element using `document.createElement`
+    and set its `href` property, which ensures proper encoding and reduces the risk
+    of XSS.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-79
+    owasp: A7:2017-Cross-Site Scripting (XSS)
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

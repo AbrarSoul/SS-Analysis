@@ -1,0 +1,30 @@
+rules:
+- id: vuln-mindsdb-083afcf6
+  pattern-either:
+  - patterns:
+    - pattern: requests.post(..., verify=false)
+    - pattern-not: requests.post(..., verify=True)
+  - patterns:
+    - pattern: requests.get(..., verify=false)
+    - pattern-not: requests.get(..., verify=True)
+  - patterns:
+    - pattern: requests.put(..., verify=false)
+    - pattern-not: requests.put(..., verify=True)
+  - patterns:
+    - pattern: requests.delete(..., verify=false)
+    - pattern-not: requests.delete(..., verify=True)
+  - patterns:
+    - pattern: requests.patch(..., verify=false)
+    - pattern-not: requests.patch(..., verify=True)
+  languages:
+  - python
+  message: Detected insecure HTTP request with SSL verification disabled. This can
+    lead to man-in-the-middle attacks and data exposure. Remove the 'verify=False'
+    parameter or explicitly set it to 'verify=True' to ensure secure communication.
+  severity: ERROR
+  metadata:
+    source-url: github.com/mindsdb/mindsdb/commit/083afcf6567cf51aa7d89ea892fd97689919053b
+    category: security
+    cwe: CWE-295
+    technology:
+    - python

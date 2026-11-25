@@ -1,0 +1,23 @@
+{
+  "version": "diagnostic-v2.1",
+  "created_utc": "2026-10-10T12:20:41.082979+00:00",
+  "mode": "references",
+  "model": null,
+  "temperature": 0,
+  "max_tokens": 2048,
+  "max_attempts": 3,
+  "schema_policy": "semgrep_search_taint_v2",
+  "prompt_policy": "historical_autogrep_default_unchanged",
+  "semgrep_version": "1.177.0",
+  "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "code_sha256": {
+    "pipeline/diagnostic_v2.py": "02e0c3eb8887fcb490b343c1b026059734e5c28013295dadac24e8b56ea61e84",
+    "pipeline/raw_capture.py": "c344d041cd6b171183b1ae886f99cd34155c316f7fc07e0924f6bb3ff4435f4a",
+    "autogrep/llm_client.py": "f98bad67dd65efffabfd7cc3785d80869cb9345252837cda288dbfe31e9f36fe",
+    "autogrep/config.py": "8d6040e070c9a40e0c02e062cc797cb2f7fd236daaa7ca07a514e81cd020de38",
+    "pipeline/case_loader.py": "8e63d27b5ae1c387a96d3553af705fbcc938fddee518abeee9afdd5c31a38d95",
+    "pipeline/gptlab_config.py": "534cebf592916dea54e13310d91dc49c5bbc781eee24483773744163a70e182b"
+  },
+  "credential_available": false,
+  "reference_authorship": "assistant-authored after bundle inspection; independent expert review pending"
+}

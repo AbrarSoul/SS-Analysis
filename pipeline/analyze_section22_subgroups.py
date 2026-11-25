@@ -48,7 +48,12 @@ def repo_aware_bootstrap_mcc(case_ids: list, case_to_repo: dict, case_to_samples
     repo_to_cases = defaultdict(list)
     for cid in case_ids:
         repo_to_cases[case_to_repo[cid]].append(cid)
-    repo_ids = list(repo_to_cases.keys())
+    # Sorted, not list(), for the same reason as analyze_section22_corrected.py's
+    # repo_aware_bootstrap() (found 2026-10-20, supervisor review Issue 8 sub-issue 3): case_ids is
+    # frequently a set, whose iteration order varies by process (CPython's per-process string-hash
+    # randomization), so an unsorted key list made seed=42 reproduce a different resample order each
+    # run. sorted() is deterministic regardless of hash seed.
+    repo_ids = sorted(repo_to_cases.keys())
 
     def pooled_mcc_for(cids):
         samples = []

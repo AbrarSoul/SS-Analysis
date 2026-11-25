@@ -1,0 +1,19 @@
+rules:
+- id: vuln-java-merge-sort-450fdee7
+  pattern: File.createTempFile($PREFIX, $SUFFIX)
+  pattern-not: Files.createTempFile($PREFIX, $SUFFIX).toFile()
+  languages:
+  - java
+  message: Use of deprecated File.createTempFile() method. This can lead to security
+    vulnerabilities due to insufficient sandboxing. Replace with java.nio.file.Files.createTempFile()
+    and convert to File using .toFile().
+  severity: ERROR
+  metadata:
+    source-url: github.com/cowtowncoder/java-merge-sort/commit/450fdee70b5f181c2afc5d817f293efa1a543902
+    category: security
+    cwe: CWE-310
+    owasp: OWASP-M01
+    technology: java
+    references:
+    - https://docs.oracle.com/javase/8/docs/api/java/io/File.html#createTempFile-java.lang.String-java.lang.String-
+    - https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#createTempFile-java.lang.String-java.lang.String-

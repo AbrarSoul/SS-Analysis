@@ -1,0 +1,39 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  pattern: "let envContent = existsSync($ENV_PATH) ? readFileSync($ENV_PATH, 'utf-8')\
+    \ : '';\n...\nfor (const [$KEY, $VALUE] of Object.entries($UPDATES)) {\n  const\
+    \ regex = new RegExp(`^(#\\\\s*)?${$KEY}=.*$`, 'gm');\n  const newLine = `${$KEY}=\"\
+    ${$VALUE}\"`;\n  if (regex.test(envContent)) {\n    envContent = envContent.replace(regex,\
+    \ newLine);\n  } else {\n    envContent += `\\n${newLine}`;\n  }\n}\nwriteFileSync($ENV_PATH,\
+    \ envContent, 'utf-8');\n"
+  pattern-not: 'const existingEnv = existsSync($ENV_PATH) ? dotenv.parse(readFileSync($ENV_PATH,
+    ''utf-8'')) : {};
+
+    const mergedEnv = { ...existingEnv, ...$UPDATES };
+
+    const safeEnvContent = stringify(mergedEnv);
+
+    writeFileSync($ENV_PATH, safeEnvContent, ''utf-8'');
+
+    '
+  languages:
+  - typescript
+  message: '"This code directly manipulates environment file content using regular
+    expressions and string concatenation, which can lead to security vulnerabilities
+    such as injection attacks. Instead, use a library like ''dotenv'' to parse and
+    safely update environment variables. This approach prevents potential security
+    issues by ensuring proper handling of special characters and formatting."
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    category: security
+    cwe:
+    - CWE-20
+    owasp:
+    - A5:2017-Broken Access Control
+    references:
+    - https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control
+    technology:
+    - typescript

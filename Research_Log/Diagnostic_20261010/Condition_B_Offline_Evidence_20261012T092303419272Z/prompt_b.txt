@@ -1,0 +1,37 @@
+Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in python code.
+
+    CONTEXT:
+    Repository: github.com/review-owner/review-repo
+    Commit: deadbeef
+
+    PATCH CHANGES:
+    File: app.py
+-foo(untrusted)
++foo("safe")
+
+    JSON FIELDS (emit a single JSON object with exactly these field names):
+    - "id": "vuln-review-repo-deadbeef" (must be unique and descriptive, lowercase letters/digits/hyphens only)
+    - "message": detailed description of what the vulnerability is, why it's dangerous, and how to fix it
+    - "severity": one of "ERROR", "WARNING", "INFO"
+    - "languages": ["python"]
+    - "metadata": an object, e.g. {"category": "security", "cwe": "...", "owasp": "..."}
+    - exactly ONE of:
+        "pattern": a single pattern string matching the vulnerable code structure, using $VARNAME for
+            any expression and ... for any sequence of statements
+        "pattern_either": a list of alternative pattern strings (any of which should match)
+        "taint_sources" + "taint_sinks": each a list of pattern strings (taint-tracking mode)
+    - optionally also:
+        "pattern_not": a list of one or more pattern strings that should NOT match (e.g. the fixed
+            version) -- you do not need to know how this combines with "pattern"; that is handled
+            for you
+        "pattern_inside": a single pattern string restricting matches to inside this context
+        "pattern_not_inside": a single pattern string excluding matches inside this context
+
+    IMPORTANT GUIDELINES:
+    1. Make "pattern" (or "pattern_either") as specific as possible to minimize false positives
+    2. Include "pattern_not" for the fixed version when possible
+    3. Add relevant metadata like CWE numbers and OWASP categories
+    4. Write a clear, actionable "message" explaining both the problem and the fix
+    5. Consider different variations of the vulnerable pattern
+
+    Respond with ONLY the JSON object, nothing else.

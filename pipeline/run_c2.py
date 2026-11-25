@@ -325,9 +325,18 @@ def run_model_on_cases(model_tag: str, case_ids: list, results_root: Path, tempe
 
 def preflight_auth(hosts) -> None:
     import requests
-    from gptlab_config import host_base_url, get_api_key
-    key = get_api_key()
+    from gptlab_config import host_base_url, get_key_for_host
+    # CORRECTED 2026-10-14: previously resolved ONE key via the host-blind get_api_key() (always
+    # GPTLAB_API_KEY) and reused it for every host in the loop below -- harmless for an
+    # all-GPT-Lab --models list, but a real bug for any run that also includes gpt-4o (host
+    # "OPENAI"), which needs OPENAI_API_KEY instead. That mismatch would fail preflight with a
+    # spurious 401 even when OPENAI_API_KEY is set correctly, since the real generation path
+    # (build_config() -> get_key_for_host()) already resolves per-host correctly -- only this
+    # preflight check still used the old single-key assumption. Fixed by resolving the key
+    # per-host, inside the loop, matching every other call site's already-fixed convention
+    # (see get_key_for_host()'s own docstring).
     for host in sorted(set(hosts)):
+        key = get_key_for_host(host)
         try:
             r = requests.get(f"{host_base_url(host)}/models", headers={"Authorization": f"Bearer {key}"}, timeout=30)
         except requests.RequestException as e:

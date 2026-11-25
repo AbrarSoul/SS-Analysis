@@ -1,0 +1,20 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<\{\}]/g,
+    '')
+  pattern-not: $RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<{}]/g,
+    '')
+  languages:
+  - javascript
+  message: 'Potential insecure regex pattern in replace() call. The original regex
+    ''/[<{}]/g'' incorrectly includes the backslash escape for the ''<'' character,
+    which makes it ineffective. This could lead to improper sanitization of note path
+    titles and potential security vulnerabilities. Fix by removing the unnecessary
+    backslash: ''/[<{}]/g'' should be ''/[<{}]/g''.'
+  severity: WARNING
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-116
+    technology:
+    - javascript

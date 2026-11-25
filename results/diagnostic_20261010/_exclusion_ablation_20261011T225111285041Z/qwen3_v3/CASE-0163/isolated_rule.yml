@@ -1,0 +1,21 @@
+rules:
+- id: vuln-git-pull-or-clone-f9ce092b
+  patterns:
+  - pattern: 'const $ARGS = [''clone'', $FLAG, $URL, $OUTPATH]
+
+      '
+  languages:
+  - javascript
+  message: Potential git clone argument injection vulnerability. The '--' separator
+    is missing between flag and URL, which could allow malicious arguments to be interpreted
+    as git options. Add '--' between the flag and URL to prevent argument injection.
+  severity: ERROR
+  metadata:
+    source-url: github.com/feross/git-pull-or-clone/commit/f9ce092be13cc32e685dfa26e7705e9c6e3108a3
+    category: security
+    cwe: CWE-88
+    owasp: OWASP-A03:2021
+    references:
+    - https://owasp.org/www-community/attacks/Command_Injection
+    - https://docs.github.com/en/get-started/using-git/about-git#git-basics
+    technology: javascript

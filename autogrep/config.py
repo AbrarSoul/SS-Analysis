@@ -28,6 +28,14 @@ class Config:
     # clean blocks rather than an interleaved +/- diff. Both are real,
     # runnable options -- see llm_client.py's _build_prompt().
     prompt_variant: str = "autogrep_default"
+    # Controlled_2x2_Protocol_Draft_20261012.md condition B: "original_prompt" (default) is every
+    # historical/diagnostic condition unchanged -- prompt_variant above still selects WHICH
+    # free-form-YAML prompt. "typed_json" is a completely separate output contract: the model emits
+    # a single JSON object matching pipeline/typed_rule.py's TypedRule field names, never YAML, and
+    # never has to get Semgrep operator composition (patterns:/pattern-not/pattern-inside nesting)
+    # right itself -- TypedRule.to_dict() does that deterministically. prompt_variant is ignored
+    # when construction_mode == "typed_json" (see LLMClient._build_prompt_typed_json()).
+    construction_mode: str = "original_prompt"
     # Bounds a single generate_rule() API call. Without this the OpenAI client
     # has no default timeout and a stalled GPT-Lab host (observed repeatedly
     # on deepseek-coder:6.7b / GPU-farmi-004, ~10-20 minute hangs with no
@@ -54,6 +62,9 @@ class Config:
     # and don't need to match the frozen research configuration. Found and fixed in the Section 30
     # preregistration audit, Implementation Log Section 12.25.
     max_output_tokens: Optional[int] = None
+    # Opt-in diagnostic policy. Legacy remains the default so historical runners
+    # retain their frozen schema/prompt behavior unless explicitly versioned.
+    rule_schema_policy: str = "legacy_pattern_only"
     cache_manager: CacheManager = field(init=False)
 
     def __post_init__(self):

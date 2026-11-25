@@ -1,0 +1,17 @@
+rules:
+- id: vuln-semantic-versioning-plugin-8df2fabd
+  patterns:
+  - pattern: "DocumentBuilderFactory.newInstance()\n    .newDocumentBuilder()\n"
+  languages:
+  - java
+  message: Insecure XML parsing vulnerability (XXE) detected. The code creates a DocumentBuilder
+    without setting secure attributes to prevent external entity resolution. This
+    can lead to XML External Entity attacks. Fix by setting ACCESS_EXTERNAL_DTD and
+    ACCESS_EXTERNAL_SCHEMA to empty strings as shown in the patch.
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f
+    category: security
+    cwe: CWE-611
+    technology:
+    - java

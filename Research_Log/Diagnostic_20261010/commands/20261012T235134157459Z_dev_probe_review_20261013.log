@@ -1,0 +1,71 @@
+{
+  "created_utc": "2026-10-12T23:51:35.136854+00:00",
+  "new_model_calls": 0,
+  "new_semgrep_scans": 0,
+  "skipped_targets_mock": {
+    "scan_ok": true,
+    "vulnerable_detected": false,
+    "patched_detected": false
+  },
+  "coverage_summary": "results/diagnostic_20261010/_probe_coverage_20261012T233737252844Z/summary.json",
+  "counts": {
+    "total": 116,
+    "passed": 110,
+    "missed": 6,
+    "false_positive": 0
+  },
+  "groups": {
+    "qwen3-coder:30b / A": {
+      "total": 33,
+      "passed": 33,
+      "missed": 0
+    },
+    "qwen3-coder:30b / B": {
+      "total": 29,
+      "passed": 26,
+      "missed": 3
+    },
+    "gpt-4o / A": {
+      "total": 27,
+      "passed": 24,
+      "missed": 3
+    },
+    "gpt-4o / B": {
+      "total": 27,
+      "passed": 27,
+      "missed": 0
+    }
+  },
+  "eligible_cases": [
+    "CASE-0046",
+    "CASE-0081",
+    "CASE-0116",
+    "CASE-0124",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0171",
+    "CASE-0173",
+    "CASE-0184",
+    "CASE-0193",
+    "CASE-0222",
+    "CASE-0231",
+    "CASE-0276",
+    "CASE-0339",
+    "CASE-0340"
+  ],
+  "eligible_case_count": 15,
+  "accepted_episodes_all_cases": 195,
+  "accepted_without_eligible_probe": 79,
+  "patched_unchanged": [
+    "CASE-0046",
+    "CASE-0184"
+  ],
+  "installed_versions": {
+    "tree_sitter": "0.26.0",
+    "tree_sitter_java": "0.23.5",
+    "tree_sitter_javascript": "0.25.0",
+    "tree_sitter_typescript": "0.23.2"
+  },
+  "allocation_inputs_unchanged": true
+}
+Counterexamples retained: 8; evidence: Research_Log/Diagnostic_20261010/Dev_Probe_Review_Evidence_20261013.json

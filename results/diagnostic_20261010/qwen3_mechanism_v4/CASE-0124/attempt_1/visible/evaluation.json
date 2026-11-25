@@ -1,0 +1,80 @@
+{
+  "scan_ok": false,
+  "returncode": 7,
+  "all_targets_scanned": false,
+  "errors": [
+    {
+      "code": 4,
+      "level": "error",
+      "type": "InvalidRuleSchemaError",
+      "long_msg": "'$CMD = \"$VAR\"\\nos.system($CMD)\\n' is not valid under any of the given schemas",
+      "short_msg": "Invalid rule schema",
+      "spans": [
+        {
+          "file": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0124/attempt_1/rule.yml",
+          "start": {
+            "line": 2,
+            "col": 3,
+            "offset": -1
+          },
+          "end": {
+            "line": 37,
+            "col": 1,
+            "offset": -1
+          },
+          "source_hash": "d1c2090bf9e60c95d895802877a24822dc2f0dae97e0446bac5a68243c6f82fd"
+        }
+      ]
+    },
+    {
+      "code": 7,
+      "level": "error",
+      "type": "SemgrepError",
+      "message": "invalid configuration file found (1 configs were invalid)"
+    },
+    {
+      "message": "Semgrep exited with status 7"
+    },
+    {
+      "message": "Semgrep did not scan every requested sample"
+    }
+  ],
+  "command": [
+    "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+    "--config",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0124/attempt_1/rule.yml",
+    "--json",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-git-ignore",
+    "--jobs=1",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0124/vulnerable_source.py",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0124/patched_source.py"
+  ],
+  "validation_seconds": 1.1487962919927668,
+  "legacy_accepted": false,
+  "visible_correct": false,
+  "complete_success": false,
+  "samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "label": "positive",
+      "detected": false,
+      "finding_location_correct": false,
+      "finding_lines": [],
+      "outcome": "FN",
+      "sample_path": "benchmark/cases/CASE-0124/vulnerable_source.py",
+      "sample_sha256": "2f8c29cde2cf1b76c3d023fbd73ff9b9ebcec6ac01d524500d0bafef3afd87b2"
+    },
+    {
+      "sample_type": "original_patched",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0124/patched_source.py",
+      "sample_sha256": "d109b3b74c4e72f18a7b13f4c92f980ddbdfd9a187ffbc6360379be1ee661044"
+    }
+  ]
+}

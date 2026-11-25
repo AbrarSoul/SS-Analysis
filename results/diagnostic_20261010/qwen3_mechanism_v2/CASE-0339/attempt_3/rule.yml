@@ -1,0 +1,18 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern: $RESULT.HIGHLIGHTEDNOTEPATHTITLE = $RESULT.NOTEPTHTITLE.replace(/[$VAR]/g,
+    '');
+  pattern-not: $RESULT.HIGHLIGHTEDNOTEPATHTITLE = $RESULT.NOTEPTHTITLE.replace(/[<{}]/g,
+    '');
+  languages:
+  - javascript
+  message: Potential insecure regex replacement vulnerability. The regex pattern includes
+    unsafe characters that could allow injection attacks. Remove the problematic characters
+    from the regex character class to prevent potential code execution or data exposure.
+  severity: ERROR
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-117
+    technology:
+    - javascript

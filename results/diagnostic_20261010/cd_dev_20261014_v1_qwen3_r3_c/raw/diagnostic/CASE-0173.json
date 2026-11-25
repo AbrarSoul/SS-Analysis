@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0173",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791935598.6349702,
+  "raw_content": "rules:\n- id: \"vuln-hono-cf9a78db\"\n  pattern: |\n    const $KEY = $MANIFEST[$PATH] || $PATH;\n  pattern-not: |\n    const $KEY = $MANIFEST[$PATH];\n  languages: [\"typescript\"]\n  message: |\n    This code uses a fallback to the original path when a manifest key is not found, which can lead to path traversal vulnerabilities. The vulnerability occurs when user input is used as a key and falls back to the raw input, potentially allowing access to unintended resources. To fix this, remove the fallback and only use the manifest lookup result.\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817\"\n    category: security\n    cwe: [CWE-22]\n    owasp: [OWASP Top 10:2021 - A01:2021 - Broken Access Control]\n    references:\n      - \"https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A01_Broken_Access_Control\"\n    technology: [typescript]",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/honojs/hono\n    Commit: cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817\n\n    PATCH CHANGES:\n    File: src/adapter/cloudflare-workers/utils.ts\n--- a/src/adapter/cloudflare-workers/utils.ts\n+++ b/src/adapter/cloudflare-workers/utils.ts\n-  const key = ASSET_MANIFEST[path] || path\n+  const key = ASSET_MANIFEST[path]\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-hono-cf9a78db\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-hono-cf9a78db\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/honojs/hono\n    Commit: cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817\n\n    PATCH CHANGES:\n    File: src/adapter/cloudflare-workers/utils.ts\n--- a/src/adapter/cloudflare-workers/utils.ts\n+++ b/src/adapter/cloudflare-workers/utils.ts\n-  const key = ASSET_MANIFEST[path] || path\n+  const key = ASSET_MANIFEST[path]\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-hono-cf9a78db\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-hono-cf9a78db\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-318",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "rules:\n- id: \"vuln-hono-cf9a78db\"\n  pattern: |\n    const $KEY = $MANIFEST[$PATH] || $PATH;\n  pattern-not: |\n    const $KEY = $MANIFEST[$PATH];\n  languages: [\"typescript\"]\n  message: |\n    This code uses a fallback to the original path when a manifest key is not found, which can lead to path traversal vulnerabilities. The vulnerability occurs when user input is used as a key and falls back to the raw input, potentially allowing access to unintended resources. To fix this, remove the fallback and only use the manifest lookup result.\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817\"\n    category: security\n    cwe: [CWE-22]\n    owasp: [OWASP Top 10:2021 - A01:2021 - Broken Access Control]\n    references:\n      - \"https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A01_Broken_Access_Control\"\n    technology: [typescript]",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791935598,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 283,
+      "prompt_tokens": 713,
+      "total_tokens": 996,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 2.385392457988928,
+  "error": null,
+  "input_tokens": 713,
+  "output_tokens": 283
+}

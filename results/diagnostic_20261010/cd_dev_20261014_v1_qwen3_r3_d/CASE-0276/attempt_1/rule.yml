@@ -1,0 +1,20 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  patterns:
+  - pattern: isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+  - pattern-not: isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+  languages:
+  - python
+  message: Incomplete isinstance check in importlib._bootstrap_external.py. The fix
+    should include SourcelessFileLoader in the tuple to properly handle all file loader
+    types. This vulnerability could lead to incorrect behavior when loading Python
+    modules, potentially allowing unauthorized code execution or bypassing security
+    checks.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-284
+    owasp: A01:2021-Broken Access Control
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    technology:
+    - python

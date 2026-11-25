@@ -1,0 +1,27 @@
+rules:
+- id: quark-auto-save-batch-assignment-vulnerability
+  pattern-either:
+  - patterns:
+    - pattern: "for $KEY in $DICT:\n    ...\n    if $KEY not in $LIST:\n        ...\n"
+    - pattern-not: "for $KEY in $DICT:\n    ...\n    if $KEY in $ALLOWED_LIST:\n \
+        \       ...\n"
+  - patterns:
+    - pattern: "for $KEY in $DICT:\n    ...\n    if $KEY not in $BLACKLIST:\n    \
+        \    ...\n"
+    - pattern-not: "for $KEY in $DICT:\n    ...\n    if $KEY in $ALLOWED_LIST:\n \
+        \       ...\n"
+  languages:
+  - python
+  message: Potential batch assignment vulnerability detected. The code uses a blacklist
+    approach to filter keys, which is vulnerable to bypass attacks. Switch to an allowlist
+    approach by checking if keys are in an allowed list instead of not being in a
+    blacklist. This prevents attackers from injecting unexpected keys that could lead
+    to privilege escalation or data exposure.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe:
+    - CWE-254
+    technology:
+    - python

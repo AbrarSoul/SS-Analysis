@@ -1,0 +1,19 @@
+rules:
+- id: mindsdb-dremio-handler-insecure-ssl
+  patterns:
+  - pattern: requests.post(..., verify=False)
+  languages:
+  - python
+  message: Insecure SSL verification detected in requests.post(). This vulnerability
+    allows for man-in-the-middle attacks and should be fixed by removing the 'verify=False'
+    parameter or setting it to 'True'.
+  severity: ERROR
+  metadata:
+    source-url: github.com/mindsdb/mindsdb/commit/083afcf6567cf51aa7d89ea892fd97689919053b
+    category: security
+    cwe: CWE-295
+    owasp: A03:2021 - Sensitive Data Exposure
+    references:
+    - https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
+    technology:
+    - python

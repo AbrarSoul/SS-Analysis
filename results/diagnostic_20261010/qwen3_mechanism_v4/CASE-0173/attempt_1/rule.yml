@@ -1,0 +1,22 @@
+rules:
+- id: hono-cf9a78db-asset-manifest-path-access
+  patterns:
+  - pattern: 'const $KEY = ASSET_MANIFEST[$PATH] || $PATH;
+
+      '
+  - pattern-not: 'const $KEY = ASSET_MANIFEST[$PATH];
+
+      '
+  languages:
+  - typescript
+  message: Potential path traversal vulnerability in asset manifest lookup. The code
+    falls back to using the raw path when the manifest key is not found, which could
+    allow unauthorized access to files outside the intended scope. Fix by removing
+    the fallback and only using the manifest key.
+  severity: ERROR
+  metadata:
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    category: security
+    cwe: CWE-22
+    technology:
+    - typescript

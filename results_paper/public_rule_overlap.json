@@ -1,0 +1,40 @@
+{
+ "corpus_rules_with_sha": 1616,
+ "overlap_dataset": [
+  "CASE-0053",
+  "CASE-0103",
+  "CASE-0113",
+  "CASE-0114",
+  "CASE-0152",
+  "CASE-0199",
+  "CASE-0210",
+  "CASE-0214",
+  "CASE-0221",
+  "CASE-0230",
+  "CASE-0285",
+  "CASE-0293",
+  "CASE-0308",
+  "CASE-0309",
+  "CASE-0314"
+ ],
+ "overlap_eligible": [
+  "CASE-0113",
+  "CASE-0214",
+  "CASE-0221",
+  "CASE-0230",
+  "CASE-0293",
+  "CASE-0309"
+ ],
+ "raw": {
+  "overlap_hits": 7,
+  "overlap_n": 90,
+  "rest_hits": 56,
+  "rest_n": 2160
+ },
+ "autogrep": {
+  "overlap_hits": 7,
+  "overlap_n": 90,
+  "rest_hits": 69,
+  "rest_n": 2160
+ }
+}

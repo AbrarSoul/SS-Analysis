@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/exclusion_ablation_review_checks.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/exclusion_ablation_review_checks.py", line 35, in main
+    assert all(e['scan_ok'] for e in evals)
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

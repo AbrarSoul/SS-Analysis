@@ -1,0 +1,24 @@
+rules:
+- id: agentscope-unvalidated-file-deletion
+  pattern: "if $COND:\n    ...\n    $FUNC($FILENAME)\n"
+  pattern-not: "if not $FILENAME.endswith(\".json\"):\n    return jsonify({\"error\"\
+    : \"Only JSON files can be deleted\"})\n"
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Potential directory traversal vulnerability detected. The filename parameter
+    is used directly in file operations without validation to ensure it's a .json
+    file. This could allow attackers to delete arbitrary files if the application
+    does not properly validate input. Fix by validating that the filename ends with
+    '.json' before proceeding with file operations.
+  severity: ERROR
+  metadata:
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    category: security
+    cwe: CWE-22
+    owasp: A01:2021-Broken Access Control
+    references:
+    - https://owasp.org/www-community/attacks/Path_Traversal
+    - https://docs.python.org/3/library/os.path.html#os.path.basename
+    technology:
+    - python

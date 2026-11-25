@@ -1,0 +1,26 @@
+rules:
+- id: vuln-logkitty-ef2f673e
+  pattern: 'execSync($CMD)
+
+    '
+  pattern-not: 'execFileSync($CMD, [...])
+
+    '
+  languages:
+  - typescript
+  message: "\"Use of execSync with concatenated command strings can lead to command\
+    \ injection vulnerabilities. \nIt is safer to use execFileSync with an array of\
+    \ arguments to avoid shell interpretation issues. \nUpdate your code to use execFileSync\
+    \ with separate arguments.\"\n"
+  severity: ERROR
+  metadata:
+    source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf
+    category: security
+    cwe:
+    - CWE-78
+    owasp:
+    - A01:2021-Broken Access Control
+    references:
+    - https://nodejs.org/api/child_process.html#child_processexecfilesyncfile-args-options
+    technology:
+    - typescript

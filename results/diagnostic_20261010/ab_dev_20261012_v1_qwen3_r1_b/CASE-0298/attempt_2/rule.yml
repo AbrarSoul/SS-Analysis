@@ -1,0 +1,28 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern-either:
+    - pattern: const $VAR = "<p lang=\"en\" dir=\"ltr\"><a href=\"${...}?ref_src=twsrc%5Etfw"></a></blockquote>"
+    - pattern: $`<p lang=\"en\" dir=\"ltr\"><a href=\"${...}?ref_src=twsrc%5Etfw"></a></blockquote>`
+    - pattern: const $VAR = `<p lang=\"en\" dir=\"ltr\"><a href=\"${...}?ref_src=twsrc%5Etfw"></a></blockquote>`
+  - pattern-not: const anchor = document.createElement("a");
+  - pattern-not: anchor.href = `${src}?ref_src=twsrc%5Etfw`;
+  - pattern-not: anchor.outerHTML
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in embed component where user-provided 'src'
+    parameter is directly inserted into HTML without proper sanitization. The vulnerable
+    code constructs an HTML string by concatenating the 'src' URL with a fixed ref_src
+    parameter, which could allow attackers to inject malicious scripts if the 'src'
+    contains untrusted input. The fix properly creates an anchor element and uses
+    outerHTML to safely insert it into the DOM. To prevent this vulnerability, always
+    sanitize user inputs before inserting them into HTML strings or use proper DOM
+    manipulation methods instead of string concatenation.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '79'
+    owasp: OWASP Top 10:2021 - A03:2021 - Injection
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

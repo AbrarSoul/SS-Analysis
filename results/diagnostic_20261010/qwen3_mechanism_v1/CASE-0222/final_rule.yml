@@ -1,0 +1,21 @@
+rules:
+- id: vuln-mindsdb-083afcf6
+  patterns:
+  - pattern: requests.post(..., verify=False)
+  - pattern-not: requests.post(..., verify=True)
+  - pattern-not: requests.post(..., verify=verify_param)
+  - pattern-inside: "def $FUNC(...):\n    ...\n    requests.post(...)\n    ...\n"
+  message: Unverified SSL certificate in HTTP request. This vulnerability allows for
+    man-in-the-middle attacks as the client will not verify the server's SSL certificate.
+    Remove the 'verify=False' parameter or explicitly set it to 'True' to enable certificate
+    verification.
+  severity: ERROR
+  languages:
+  - python
+  metadata:
+    source-url: https://github.com/mindsdb/mindsdb/commit/083afcf6567cf51aa7d89ea892fd97689919053b
+    category: security
+    cwe:
+    - CWE-295
+    technology:
+    - python

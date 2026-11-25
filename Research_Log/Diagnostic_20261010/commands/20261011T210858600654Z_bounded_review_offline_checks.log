@@ -1,0 +1,255 @@
+{
+  "artifact_directory": "/Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/bounded_review_artifacts_20261011T210859192346Z",
+  "model_calls": 0,
+  "reviewed_sha256": {
+    "pipeline/diagnostic_v2.py": "505ece1a087921b0196e2ab596ae27ac1d983694a7f3b697a8d25a634615c83e",
+    "pipeline/typed_rule.py": "caac87ba8072a644ffbb59f7522e5d11f038a08beca714b158f7ac8c89d5b150",
+    "pipeline/audit_failure_categories.py": "e0c04162424a3fac35ad857ab56fc2458fbb8288d868b6bd79f6a7fa875ba624",
+    "pipeline/verify_scan_integration.py": "0403613704570908528e0ceddbce571953f840a2fc7382020095c09a2097a6ac",
+    "pipeline/tests/test_diagnostic_regressions.py": "ef813fded387a755a57de89304e1dd542b0eb75845578bf3f67f1eaf747997d8",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "9698ae0c313a7752e5fdf1949c290f6e9d52aea5e14e20e67590952a16a6f0e9",
+    "Research_Log/Correction_Log.md": "f88248f3fb9cdab21723cf6605312239159da92157fdbb15e1188e3d6b245ce2"
+  },
+  "empty_either_serialized": {
+    "id": "review-example",
+    "patterns": [
+      {
+        "pattern-either": []
+      }
+    ],
+    "languages": [
+      "python"
+    ],
+    "message": "Synthetic review fixture",
+    "severity": "WARNING"
+  },
+  "string_either_serialized": {
+    "id": "review-example",
+    "patterns": [
+      {
+        "pattern-either": [
+          {
+            "pattern": "f"
+          },
+          {
+            "pattern": "o"
+          },
+          {
+            "pattern": "o"
+          },
+          {
+            "pattern": "("
+          },
+          {
+            "pattern": ")"
+          }
+        ]
+      }
+    ],
+    "languages": [
+      "python"
+    ],
+    "message": "Synthetic review fixture",
+    "severity": "WARNING"
+  },
+  "taint_exclusion_dropped": {
+    "id": "review-example",
+    "mode": "taint",
+    "pattern-sources": [
+      {
+        "pattern": "source()"
+      }
+    ],
+    "pattern-sinks": [
+      {
+        "pattern": "sink($X)"
+      }
+    ],
+    "languages": [
+      "python"
+    ],
+    "message": "Synthetic review fixture",
+    "severity": "WARNING"
+  },
+  "wrong_location_gate": {
+    "calls": 1,
+    "accepted_final_rule": true,
+    "feedback": [
+      null
+    ]
+  },
+  "stale_stage_reused": true,
+  "partial_stage_not_repaired": true,
+  "runs": {
+    "qwen3_v3": {
+      "raw": {
+        "requested": 24,
+        "missing_evaluation": 0,
+        "success": 6,
+        "categories": {
+          "construction_error": 2,
+          "wrong_original_location": 1,
+          "patched_code_fp": 2,
+          "renamed_miss": 4,
+          "structural_miss": 10,
+          "safe_benign_fp": 7
+        }
+      },
+      "iterative": {
+        "requested": 24,
+        "missing_evaluation": 5,
+        "success": 6,
+        "categories": {
+          "construction_error": 0,
+          "wrong_original_location": 1,
+          "patched_code_fp": 0,
+          "renamed_miss": 1,
+          "structural_miss": 7,
+          "safe_benign_fp": 7
+        }
+      }
+    },
+    "qwen3_mechanism_v1": {
+      "raw": {
+        "requested": 24,
+        "missing_evaluation": 2,
+        "success": 4,
+        "categories": {
+          "construction_error": 3,
+          "wrong_original_location": 0,
+          "patched_code_fp": 1,
+          "renamed_miss": 12,
+          "structural_miss": 12,
+          "safe_benign_fp": 3
+        }
+      },
+      "iterative": {
+        "requested": 24,
+        "missing_evaluation": 13,
+        "success": 4,
+        "categories": {
+          "construction_error": 0,
+          "wrong_original_location": 1,
+          "patched_code_fp": 0,
+          "renamed_miss": 2,
+          "structural_miss": 4,
+          "safe_benign_fp": 4
+        }
+      }
+    },
+    "qwen3_mechanism_v2": {
+      "raw": {
+        "requested": 24,
+        "missing_evaluation": 1,
+        "success": 5,
+        "categories": {
+          "construction_error": 3,
+          "wrong_original_location": 2,
+          "patched_code_fp": 1,
+          "renamed_miss": 8,
+          "structural_miss": 11,
+          "safe_benign_fp": 4
+        }
+      },
+      "iterative": {
+        "requested": 24,
+        "missing_evaluation": 9,
+        "success": 5,
+        "categories": {
+          "construction_error": 0,
+          "wrong_original_location": 2,
+          "patched_code_fp": 0,
+          "renamed_miss": 2,
+          "structural_miss": 7,
+          "safe_benign_fp": 4
+        }
+      }
+    },
+    "qwen3_mechanism_v3": {
+      "raw": {
+        "requested": 24,
+        "missing_evaluation": 2,
+        "success": 5,
+        "categories": {
+          "construction_error": 2,
+          "wrong_original_location": 2,
+          "patched_code_fp": 1,
+          "renamed_miss": 8,
+          "structural_miss": 12,
+          "safe_benign_fp": 5
+        }
+      },
+      "iterative": {
+        "requested": 24,
+        "missing_evaluation": 10,
+        "success": 5,
+        "categories": {
+          "construction_error": 0,
+          "wrong_original_location": 2,
+          "patched_code_fp": 0,
+          "renamed_miss": 2,
+          "structural_miss": 6,
+          "safe_benign_fp": 4
+        }
+      }
+    },
+    "qwen3_mechanism_v4": {
+      "raw": {
+        "requested": 24,
+        "missing_evaluation": 1,
+        "success": 5,
+        "categories": {
+          "construction_error": 1,
+          "wrong_original_location": 2,
+          "patched_code_fp": 2,
+          "renamed_miss": 11,
+          "structural_miss": 12,
+          "safe_benign_fp": 4
+        }
+      },
+      "iterative": {
+        "requested": 24,
+        "missing_evaluation": 9,
+        "success": 6,
+        "categories": {
+          "construction_error": 0,
+          "wrong_original_location": 2,
+          "patched_code_fp": 0,
+          "renamed_miss": 3,
+          "structural_miss": 5,
+          "safe_benign_fp": 5
+        }
+      }
+    },
+    "qwen3_mechanism_v5": {
+      "raw": {
+        "requested": 24,
+        "missing_evaluation": 0,
+        "success": 1,
+        "categories": {
+          "construction_error": 7,
+          "wrong_original_location": 2,
+          "patched_code_fp": 1,
+          "renamed_miss": 9,
+          "structural_miss": 11,
+          "safe_benign_fp": 6
+        }
+      },
+      "iterative": {
+        "requested": 24,
+        "missing_evaluation": 11,
+        "success": 3,
+        "categories": {
+          "construction_error": 0,
+          "wrong_original_location": 1,
+          "patched_code_fp": 0,
+          "renamed_miss": 2,
+          "structural_miss": 4,
+          "safe_benign_fp": 6
+        }
+      }
+    }
+  },
+  "synthetic_original_miss_categories": [],
+  "reviewed_files_unchanged": true
+}

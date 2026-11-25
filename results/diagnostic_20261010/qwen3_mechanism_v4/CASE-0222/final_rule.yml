@@ -1,0 +1,34 @@
+rules:
+- id: vuln-mindsdb-083afcf6
+  pattern-either:
+  - patterns:
+    - pattern: requests.post(..., verify=False)
+    - pattern-not: requests.post(..., verify=True)
+  - patterns:
+    - pattern: requests.get(..., verify=False)
+    - pattern-not: requests.get(..., verify=True)
+  - patterns:
+    - pattern: requests.put(..., verify=False)
+    - pattern-not: requests.put(..., verify=True)
+  - patterns:
+    - pattern: requests.delete(..., verify=False)
+    - pattern-not: requests.delete(..., verify=True)
+  - patterns:
+    - pattern: requests.patch(..., verify=False)
+    - pattern-not: requests.patch(..., verify=True)
+  languages:
+  - python
+  message: Detected insecure SSL verification in HTTP request. The 'verify=False'
+    parameter disables SSL certificate validation, which can lead to man-in-the-middle
+    attacks. Remove the 'verify=False' parameter or set it to 'True' to enforce secure
+    connections.
+  severity: ERROR
+  metadata:
+    source-url: github.com/mindsdb/mindsdb/commit/083afcf6567cf51aa7d89ea892fd97689919053b
+    category: security
+    cwe: CWE-295
+    owasp: A3:2017-Sensitive Data Exposure
+    references:
+    - https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
+    technology:
+    - python

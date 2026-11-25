@@ -1,0 +1,19 @@
+rules:
+- id: vuln-java-merge-sort-450fdee7
+  pattern-either:
+  - File.createTempFile($PREFIX, $SUFFIX)
+  - new File(File.createTempFile($PREFIX, $SUFFIX).toURI())
+  pattern-not: Files.createTempFile($PREFIX, $SUFFIX).toFile()
+  languages:
+  - java
+  message: Use of File.createTempFile() directly instead of java.nio.file.Files.createTempFile()
+    followed by .toFile() can lead to insecure temporary file creation. The patched
+    version uses the more secure NIO.2 API which provides better control over file
+    permissions and reduces the risk of race conditions in temporary file creation.
+  severity: WARNING
+  metadata:
+    source-url: github.com/cowtowncoder/java-merge-sort/commit/450fdee70b5f181c2afc5d817f293efa1a543902
+    category: security
+    cwe: CWE-377
+    technology:
+    - java

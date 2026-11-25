@@ -1,0 +1,23 @@
+rules:
+- id: vulnerable-ifttt-event-pattern
+  pattern-not: r'((?P<events>(/[A-Z0-9_-]+)+))?'
+  patterns:
+  - pattern: r'/?(?P<events>([A-Z0-9_-]+/?)+)?'
+  - pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Vulnerable regex pattern for IFTTT events allows path traversal through
+    improper validation. The regex pattern r'/?(?P<events>([A-Z0-9_-]+/?)+)?' is susceptible
+    to directory traversal attacks because it does not enforce strict path segment
+    boundaries. This can allow attackers to inject malicious paths that bypass intended
+    security checks. Fix by using a stricter regex like r'((?P<events>(/[A-Z0-9_-]+)+))?'
+    which enforces that events must start with a forward slash and consist of only
+    valid path segments.
+  severity: ERROR
+  metadata:
+    source-url: github.com/caronc/apprise/commit/e20fce630d55e4ca9b0a1e325a5fea6997489831
+    category: security
+    cwe: CWE-22
+    owasp: A01:2021-Broken Access Control
+    technology:
+    - python

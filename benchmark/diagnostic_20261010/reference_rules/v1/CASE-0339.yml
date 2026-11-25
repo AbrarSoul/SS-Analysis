@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0339
+  message: Regex-looking string is used as a literal replacement pattern
+  severity: WARNING
+  languages:
+  - javascript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-regex: \.replace\('/\[<\\\{\\\}\]/g',\ ''\)

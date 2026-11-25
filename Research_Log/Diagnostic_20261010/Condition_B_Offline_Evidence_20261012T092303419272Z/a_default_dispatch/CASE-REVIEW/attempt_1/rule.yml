@@ -1,0 +1,12 @@
+rules:
+- id: review-rule
+  languages:
+  - python
+  message: m
+  pattern: foo($X)
+  severity: ERROR
+  metadata:
+    source-url: github.com/review-owner/review-repo/commit/deadbeef
+    category: security
+    technology:
+    - python

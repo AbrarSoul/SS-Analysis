@@ -1,0 +1,28 @@
+id: "vuln-notesnook-e87f5e5f"
+pattern: |
+  ... {
+    $anchor = document.createElement("a");
+    $anchor.href = $src ? "ref_src=twsrc%5Etfw";
+    ...
+    <a href="$src?ref_src=twsrc%5Etfw"></a>
+  }
+pattern-not: |
+  ... {
+    $anchor = document.createElement("a");
+    $anchor.href = $src ? "ref_src=twsrc%5Etfw";
+    ...
+    <p lang="en" dir="ltr">$anchor.outerHTML</p>
+  }
+languages: ["typescript"]
+message: |
+  A potential XSS vulnerability was found in the code.
+  The `href` attribute of the `<a>` tag is not properly sanitized, allowing an attacker to inject malicious code.
+  To fix this issue, use the `outerHTML` property of the `anchor` element instead of directly inserting the `href` attribute.
+severity: ERROR
+metadata:
+  source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+  category: security
+  cwe: [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')]
+  owasp: [OWASP-2016-A9: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')]
+  references: [https://owasp.org/www-content/library/html/xss.html]
+  technology: [typescript]

@@ -1,0 +1,18 @@
+rules:
+- id: vuln-phpldapadmin-dd6e9583
+  patterns:
+  - pattern: $REQUEST.setRequestHeader('Content-length', $PARAM.length);
+  - pattern-not: // Removed Content-length header for security reasons
+  languages:
+  - javascript
+  message: Setting the 'Content-length' header manually can lead to security issues
+    such as request smuggling. It is recommended to let the browser handle this header
+    automatically.
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-444
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/mhuertos/phpLDAPadmin/commit/dd6e9583a2eb2ca085583765e8a63df5904cb036
+    technology:
+    - javascript

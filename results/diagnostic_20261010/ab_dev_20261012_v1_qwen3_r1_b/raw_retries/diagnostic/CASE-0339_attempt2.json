@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0339",
+  "attempt_index": 2,
+  "condition": "retry",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791841777.59308,
+  "raw_content": "{\n  \"id\": \"vuln-trilium-4c3fcc3e\",\n  \"pattern\": \"$RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/\\\\/[<>{}]/g, '');\",\n  \"pattern_not\": [\n    \"$RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<>{}]/g, '');\"\n  ],\n  \"languages\": [\"javascript\"],\n  \"message\": \"Insecure regex pattern in string replacement. The original vulnerable code used '/[<{}]/g' which incorrectly included the forward slash character in the character class, making it vulnerable to injection attacks. The fix removes the forward slash from the regex character class. Ensure all regex patterns are properly escaped and validated.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-117\",\n    \"owasp\": \"OWASP-A03:2021\"\n  }\n}",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in javascript code.\n\n    CONTEXT:\n    Repository: github.com/zadam/trilium\n    Commit: 4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b\n\n    PATCH CHANGES:\n    File: src/services/search/services/search.js\n--- a/src/services/search/services/search.js\n+++ b/src/services/search/services/search.js\n-        result.highlightedNotePathTitle = result.notePathTitle.replace('/[<\\{\\}]/g', '');\n+        result.highlightedNotePathTitle = result.notePathTitle.replace(/[<{}]/g, '');\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-trilium-4c3fcc3e\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"javascript\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    {\n  \"id\": \"xss-innerHTML\",\n  \"pattern\": \"$ELEMENT.innerHTML = $DATA\",\n  \"pattern_not_inside\": \"$ELEMENT.innerHTML = DOMPurify.sanitize($DATA)\",\n  \"languages\": [\n    \"javascript\"\n  ],\n  \"message\": \"Potential XSS vulnerability using innerHTML. Use DOMPurify or safe alternatives.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-79\"\n  }\n}\n\n{\n  \"id\": \"eval-injection\",\n  \"pattern\": \"eval($DATA)\",\n  \"pattern_not\": [\n    \"eval(\\\"trusted_static_string\\\")\"\n  ],\n  \"languages\": [\n    \"javascript\"\n  ],\n  \"message\": \"Dangerous use of eval() detected. This can lead to code injection.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-95\"\n  }\n}\n\n    Respond with ONLY the JSON object, nothing else.\n\nPREVIOUS ERROR TO FIX:\nRule failed to detect vulnerability in original version\nEnsure your next attempt addresses these issues.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rule specifications as a single JSON object.\n    Return ONLY the raw JSON object -- no markdown fences, no YAML, no explanatory text before or after it.\n    Do not compose Semgrep operators (patterns:, pattern-either:, etc.) yourself -- a separate deterministic\n    serializer does that from the plain fields you provide. Supported fields: id, message, severity,\n    languages, metadata (all required except metadata), plus exactly ONE of: pattern (a single pattern\n    string), pattern_either (a list of alternative pattern strings), or taint_sources + taint_sinks\n    (each a list of pattern strings, used together). Optionally also: pattern_not (a list of one or more\n    exclusion pattern strings), pattern_inside (a single scope-restriction pattern string),\n    pattern_not_inside (a single negative-scope pattern string). taint rules cannot combine with\n    pattern_not/pattern_inside/pattern_not_inside."
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in javascript code.\n\n    CONTEXT:\n    Repository: github.com/zadam/trilium\n    Commit: 4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b\n\n    PATCH CHANGES:\n    File: src/services/search/services/search.js\n--- a/src/services/search/services/search.js\n+++ b/src/services/search/services/search.js\n-        result.highlightedNotePathTitle = result.notePathTitle.replace('/[<\\{\\}]/g', '');\n+        result.highlightedNotePathTitle = result.notePathTitle.replace(/[<{}]/g, '');\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-trilium-4c3fcc3e\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"javascript\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    {\n  \"id\": \"xss-innerHTML\",\n  \"pattern\": \"$ELEMENT.innerHTML = $DATA\",\n  \"pattern_not_inside\": \"$ELEMENT.innerHTML = DOMPurify.sanitize($DATA)\",\n  \"languages\": [\n    \"javascript\"\n  ],\n  \"message\": \"Potential XSS vulnerability using innerHTML. Use DOMPurify or safe alternatives.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-79\"\n  }\n}\n\n{\n  \"id\": \"eval-injection\",\n  \"pattern\": \"eval($DATA)\",\n  \"pattern_not\": [\n    \"eval(\\\"trusted_static_string\\\")\"\n  ],\n  \"languages\": [\n    \"javascript\"\n  ],\n  \"message\": \"Dangerous use of eval() detected. This can lead to code injection.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-95\"\n  }\n}\n\n    Respond with ONLY the JSON object, nothing else.\n\nPREVIOUS ERROR TO FIX:\nRule failed to detect vulnerability in original version\nEnsure your next attempt addresses these issues."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-258",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"id\": \"vuln-trilium-4c3fcc3e\",\n  \"pattern\": \"$RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/\\\\/[<>{}]/g, '');\",\n  \"pattern_not\": [\n    \"$RESULT.highlightedNotePathTitle = $RESULT.notePathTitle.replace(/[<>{}]/g, '');\"\n  ],\n  \"languages\": [\"javascript\"],\n  \"message\": \"Insecure regex pattern in string replacement. The original vulnerable code used '/[<{}]/g' which incorrectly included the forward slash character in the character class, making it vulnerable to injection attacks. The fix removes the forward slash from the regex character class. Ensure all regex patterns are properly escaped and validated.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-117\",\n    \"owasp\": \"OWASP-A03:2021\"\n  }\n}",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791841777,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 205,
+      "prompt_tokens": 1009,
+      "total_tokens": 1214,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 1.8232525839994196,
+  "error": null,
+  "input_tokens": 1009,
+  "output_tokens": 205
+}

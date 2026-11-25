@@ -1,0 +1,35 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  pattern: File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)
+  pattern-not: 'File.createTempFile($PREFIX, $SUFFIX)
+
+    File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)
+
+    File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE).toFile()
+
+    '
+  languages:
+  - java
+  message: Use of File.createTempFile with explicit workspace parameter may lead to
+    insecure temporary file creation. The patched version uses createTempFileInSystemDir
+    or createTempFile methods that enforce proper permissions (rw-------) on Unix-like
+    systems. Replace with custom createTempFile method that ensures secure temporary
+    file creation with restricted permissions.
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    category: security
+    cwe:
+    - CWE-377
+    owasp:
+    - OWASP-M01
+    technology: java
+    references:
+    - https://owasp.org/www-community/attacks/Insecure_Temporary_File
+    - https://docs.oracle.com/javase/8/docs/api/java/io/File.html#createTempFile-java.lang.String-java.lang.String-java.io.File-
+    remediation: Replace File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE) calls with
+      custom createTempFile method that ensures secure temporary file creation with
+      proper permissions on Unix-like systems.
+  pattern-not-inside: "private File createTempFileInSystemDir(String prefix, String\
+    \ suffix) throws IOException {\n    ...\n}\nprivate File createTempFile(String\
+    \ prefix, String suffix) throws IOException {\n    ...\n}"

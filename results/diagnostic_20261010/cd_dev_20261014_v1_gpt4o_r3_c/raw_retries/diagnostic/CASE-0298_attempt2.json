@@ -1,0 +1,75 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0298",
+  "attempt_index": 2,
+  "condition": "retry",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "timestamp": 1791936302.25248,
+  "raw_content": "```yaml\nrules:\n  - id: \"vuln-notesnook-e87f5e5f\"\n    pattern: |\n      ><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n    pattern-not: |\n      const anchor = document.createElement(\"a\");\n      anchor.href = `${src}?ref_src=twsrc%5Etfw`;\n      ...\n      ><p lang=\"en\" dir=\"ltr\">${anchor.outerHTML}</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n    languages: [\"typescript\"]\n    message: |\n      Directly embedding user-controlled URLs in HTML can lead to security vulnerabilities such as XSS. \n      Instead, create an anchor element using `document.createElement` and set its `href` attribute to safely construct the URL.\n    severity: ERROR\n    metadata:\n      source-url: \"github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7\"\n      category: security\n      cwe: [\"CWE-79\"]\n      owasp: [\"A7:2017-Cross-Site Scripting (XSS)\"]\n      references: [\"https://owasp.org/www-community/attacks/xss/\"]\n      technology: [\"typescript\"]\n```",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/streetwriters/notesnook\n    Commit: e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7\n\n    PATCH CHANGES:\n    File: packages/editor/src/extensions/embed/component.tsx\n--- a/packages/editor/src/extensions/embed/component.tsx\n+++ b/packages/editor/src/extensions/embed/component.tsx\n+\n+  const anchor = document.createElement(\"a\");\n+  anchor.href = `${src}?ref_src=twsrc%5Etfw`;\n+\n-  }><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n+  }><p lang=\"en\" dir=\"ltr\">${\n+    anchor.outerHTML\n+  }</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-notesnook-e87f5e5f\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-notesnook-e87f5e5f\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.\n\nPREVIOUS ERROR TO FIX:\nSemgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r3_c.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r3_c.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\n><p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${src}?ref_src=twsrc%5Etfw\\\"></a></blockquote> <script async src=\\\"https://platform.twitter.com/widgets.js\\\" charset=\\\"utf-8\\\"></script> `;\\n\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]\nEnsure your next attempt addresses these issues.",
+  "request": {
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/streetwriters/notesnook\n    Commit: e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7\n\n    PATCH CHANGES:\n    File: packages/editor/src/extensions/embed/component.tsx\n--- a/packages/editor/src/extensions/embed/component.tsx\n+++ b/packages/editor/src/extensions/embed/component.tsx\n+\n+  const anchor = document.createElement(\"a\");\n+  anchor.href = `${src}?ref_src=twsrc%5Etfw`;\n+\n-  }><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n+  }><p lang=\"en\" dir=\"ltr\">${\n+    anchor.outerHTML\n+  }</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-notesnook-e87f5e5f\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-notesnook-e87f5e5f\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.\n\nPREVIOUS ERROR TO FIX:\nSemgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r3_c.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r3_c.CASE-0298.attempt_1.vuln-notesnook-e87f5e5f:\\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\n><p lang=\\\"en\\\" dir=\\\"ltr\\\"><a href=\\\"${src}?ref_src=twsrc%5Etfw\\\"></a></blockquote> <script async src=\\\"https://platform.twitter.com/widgets.js\\\" charset=\\\"utf-8\\\"></script> `;\\n\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]\nEnsure your next attempt addresses these issues."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-EYgmKEClWq49FlxUT4s9m7qTp4Wuh",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "```yaml\nrules:\n  - id: \"vuln-notesnook-e87f5e5f\"\n    pattern: |\n      ><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n    pattern-not: |\n      const anchor = document.createElement(\"a\");\n      anchor.href = `${src}?ref_src=twsrc%5Etfw`;\n      ...\n      ><p lang=\"en\" dir=\"ltr\">${anchor.outerHTML}</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n    languages: [\"typescript\"]\n    message: |\n      Directly embedding user-controlled URLs in HTML can lead to security vulnerabilities such as XSS. \n      Instead, create an anchor element using `document.createElement` and set its `href` attribute to safely construct the URL.\n    severity: ERROR\n    metadata:\n      source-url: \"github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7\"\n      category: security\n      cwe: [\"CWE-79\"]\n      owasp: [\"A7:2017-Cross-Site Scripting (XSS)\"]\n      references: [\"https://owasp.org/www-community/attacks/xss/\"]\n      technology: [\"typescript\"]\n```",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": [],
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791936300,
+    "model": "gpt-4o-2024-08-06",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": "default",
+    "system_fingerprint": "fp_cf1866e9bf",
+    "usage": {
+      "completion_tokens": 327,
+      "prompt_tokens": 1058,
+      "total_tokens": 1385,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": null,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null
+      }
+    }
+  },
+  "generation_seconds": 2.2223064999998314,
+  "error": null,
+  "input_tokens": 1058,
+  "output_tokens": 327
+}

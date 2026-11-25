@@ -1,0 +1,23 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: const $ANCHOR = document.createElement("a");
+  - pattern: anchor.href = $SRC;
+  - pattern: '`<p lang="en" dir="ltr"><a href="${$SRC}?ref_src=twsrc%5Etfw"></a></blockquote>`'
+  message: Potential XSS vulnerability when embedding external content. The untrusted
+    source URL is directly inserted into an HTML anchor tag without proper sanitization
+    or escaping, which could allow attackers to inject malicious scripts via the src
+    parameter.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: https://github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - 79
+    technology:
+    - typescript
+  pattern-not:
+  - pattern: anchor.outerHTML
+  pattern-inside: "function $FUNC(...) {\n  ...\n}"

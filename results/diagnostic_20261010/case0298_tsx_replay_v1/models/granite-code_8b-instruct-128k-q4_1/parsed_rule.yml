@@ -1,0 +1,28 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: The code is vulnerable to a cross-site scripting (XSS) attack. The variable
+    'src' is not properly sanitized, allowing an attacker to inject malicious code
+    into the page.
+  metadata:
+    category: security
+    cwe:
+    - 79
+    owasp:
+    - A3
+    references:
+    - https://owasp.org/www-project-top-ten/2017/A3_Cross-Site_Scripting_(XSS)
+    - https://cwe.mitre.org/data/definitions/79.html
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: 'const anchor = document.createElement("a");
+
+    anchor.href = `${src}?ref_src=twsrc%5Etfw`;
+
+    '
+  pattern-not: '<a href="${src}?ref_src=twsrc%5Etfw"></a>
+
+    '
+  severity: ERROR

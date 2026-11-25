@@ -1,0 +1,27 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern-either:
+  - pattern: '$RESULT.HIGHLIGHTEDNOTEPTITLE = $RESULT.NOTEPTITLE.replace(/[$PATTERN]/g,
+      '''');
+
+      '
+  - pattern: '$RESULT.HIGHLIGHTEDNOTEPTITLE = $RESULT.NOTEPTITLE.replace(/[$PATTERN]/g,
+      '''');
+
+      '
+  patterns:
+  - pattern: $RESULT.$FIELD = $RESULT.$OTHER_FIELD.replace(/[$PATTERN]/g, '');
+  - pattern-not: $RESULT.$FIELD = $RESULT.$OTHER_FIELD.replace(/[<{}]/g, '');
+  languages:
+  - javascript
+  message: Potential insecure regex replacement vulnerability. The regex pattern '/[<{}]/g'
+    is missing the '<' character which could lead to incomplete sanitization of user
+    input. This may allow XSS or other injection attacks if untrusted data reaches
+    a dangerous sink. Fix by including all dangerous characters in the regex pattern.
+  severity: WARNING
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-79
+    technology:
+    - javascript

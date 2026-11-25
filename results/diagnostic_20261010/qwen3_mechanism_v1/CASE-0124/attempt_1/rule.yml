@@ -1,0 +1,17 @@
+rules:
+- id: vuln-sagemaker-python-sdk-2d873d53
+  patterns:
+  - pattern: os.system(...)
+  - pattern-not: subprocess.run(...)
+  message: Use of os.system() with untrusted input can lead to command injection vulnerabilities.
+    Replace with subprocess.run() for better security and control.
+  severity: ERROR
+  languages:
+  - python
+  metadata:
+    source-url: github.com/aws/sagemaker-python-sdk/commit/2d873d53f708ea570fc2e2a6974f8c3097fe9df5
+    category: security
+    cwe:
+    - 78
+    technology:
+    - python

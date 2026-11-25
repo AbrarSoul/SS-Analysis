@@ -1,0 +1,357 @@
+--- before/benchmark/diagnostic_20261010/selection.json
++++ after/benchmark/diagnostic_20261010/selection.json
+@@ -0,0 +1,354 @@
++{
++  "version": "diagnostic-20261010-v1",
++  "purpose": "outcome-stratified development; not confirmatory",
++  "seed": 20261010,
++  "eligibility_version": "2026-10-07.1",
++  "source_model": "qwen3-coder:30b",
++  "created_utc": "2026-10-10T11:20:36.625282+00:00",
++  "selection_method": "6 per mutually exclusive stratum; scarce strata first, unused repos, least represented language, seeded tie break",
++  "population_counts": {
++    "complete_success": 11,
++    "hidden_negative_failure": 11,
++    "hidden_positive_failure": 37,
++    "visible_failure": 91
++  },
++  "selected_language_counts": {
++    "javascript": 6,
++    "python": 6,
++    "java": 6,
++    "typescript": 6
++  },
++  "case_ids": [
++    "CASE-0323",
++    "CASE-0276",
++    "CASE-0221",
++    "CASE-0134",
++    "CASE-0136",
++    "CASE-0220",
++    "CASE-0340",
++    "CASE-0238",
++    "CASE-0193",
++    "CASE-0124",
++    "CASE-0063",
++    "CASE-0184",
++    "CASE-0173",
++    "CASE-0222",
++    "CASE-0163",
++    "CASE-0171",
++    "CASE-0046",
++    "CASE-0239",
++    "CASE-0235",
++    "CASE-0298",
++    "CASE-0116",
++    "CASE-0231",
++    "CASE-0339",
++    "CASE-0081"
++  ],
++  "cases": [
++    {
++      "case_id": "CASE-0323",
++      "stratum": "complete_success",
++      "language": "javascript",
++      "repository": "w8tcha/CKEditor-oEmbed-Plugin",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0276",
++      "stratum": "complete_success",
++      "language": "python",
++      "repository": "python/cpython",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0221",
++      "stratum": "complete_success",
++      "language": "java",
++      "repository": "micronaut-projects/micronaut-core",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0134",
++      "stratum": "complete_success",
++      "language": "python",
++      "repository": "caronc/apprise",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0136",
++      "stratum": "complete_success",
++      "language": "java",
++      "repository": "cowtowncoder/java-merge-sort",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0220",
++      "stratum": "complete_success",
++      "language": "javascript",
++      "repository": "mhuertos/phpLDAPadmin",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0340",
++      "stratum": "hidden_negative_failure",
++      "language": "typescript",
++      "repository": "zamotany/logkitty",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "FP"
++      }
++    },
++    {
++      "case_id": "CASE-0238",
++      "stratum": "hidden_negative_failure",
++      "language": "typescript",
++      "repository": "nocodb/nocodb",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "FP",
++        "benign_lookalike": "FP"
++      }
++    },
++    {
++      "case_id": "CASE-0193",
++      "stratum": "hidden_negative_failure",
++      "language": "java",
++      "repository": "jenkinsci/semantic-versioning-plugin",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "FP"
++      }
++    },
++    {
++      "case_id": "CASE-0124",
++      "stratum": "hidden_negative_failure",
++      "language": "python",
++      "repository": "aws/sagemaker-python-sdk",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "FP"
++      }
++    },
++    {
++      "case_id": "CASE-0063",
++      "stratum": "hidden_negative_failure",
++      "language": "javascript",
++      "repository": "MrRio/jsPDF",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "FP"
++      }
++    },
++    {
++      "case_id": "CASE-0184",
++      "stratum": "hidden_negative_failure",
++      "language": "java",
++      "repository": "jenkinsci/git-client-plugin",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "TP",
++        "variant_safe": "TN",
++        "benign_lookalike": "FP"
++      }
++    },
++    {
++      "case_id": "CASE-0173",
++      "stratum": "hidden_positive_failure",
++      "language": "typescript",
++      "repository": "honojs/hono",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0222",
++      "stratum": "hidden_positive_failure",
++      "language": "python",
++      "repository": "mindsdb/mindsdb",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0163",
++      "stratum": "hidden_positive_failure",
++      "language": "javascript",
++      "repository": "feross/git-pull-or-clone",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "FP",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0171",
++      "stratum": "hidden_positive_failure",
++      "language": "java",
++      "repository": "graphhopper/graphhopper",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0046",
++      "stratum": "hidden_positive_failure",
++      "language": "python",
++      "repository": "Cp0204/quark-auto-save",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0239",
++      "stratum": "hidden_positive_failure",
++      "language": "javascript",
++      "repository": "npm/hosted-git-info",
++      "historical_outcomes": {
++        "original_vulnerable": "TP",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "TP",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    },
++    {
++      "case_id": "CASE-0235",
++      "stratum": "visible_failure",
++      "language": "typescript",
++      "repository": "netristv/ws-scrcpy",
++      "historical_outcomes": {}
++    },
++    {
++      "case_id": "CASE-0298",
++      "stratum": "visible_failure",
++      "language": "typescript",
++      "repository": "streetwriters/notesnook",
++      "historical_outcomes": {}
++    },
++    {
++      "case_id": "CASE-0116",
++      "stratum": "visible_failure",
++      "language": "java",
++      "repository": "apache/thrift",
++      "historical_outcomes": {}
++    },
++    {
++      "case_id": "CASE-0231",
++      "stratum": "visible_failure",
++      "language": "python",
++      "repository": "modelscope/agentscope",
++      "historical_outcomes": {}
++    },
++    {
++      "case_id": "CASE-0339",
++      "stratum": "visible_failure",
++      "language": "javascript",
++      "repository": "zadam/trilium",
++      "historical_outcomes": {}
++    },
++    {
++      "case_id": "CASE-0081",
++      "stratum": "visible_failure",
++      "language": "typescript",
++      "repository": "YosefHayim/ebay-mcp",
++      "historical_outcomes": {
++        "original_vulnerable": "FN",
++        "original_patched": "TN",
++        "variant_vulnerable_1": "FN",
++        "variant_vulnerable_2": "FN",
++        "variant_safe": "TN",
++        "benign_lookalike": "TN"
++      }
++    }
++  ],
++  "source_sha256": {
++    "results/runs_followup_20261008/qwen3-coder_30b__autogrep_default/generation_log.jsonl": "4d39ec8e96d6579e4d0a83d4fa2943187b6417fbe08acdb33e0adac9eee70b1b",
++    "results_corrected/runs_followup_20261008/qwen3-coder_30b__autogrep_default/sample_execution_log.jsonl": "f524cd52314fae204bdf23a9cc4678f87b27bf3e3ce175d988832fd9f7101344"
++  }
++}

@@ -1,0 +1,26 @@
+rules:
+- id: agentscope-studio-file-deletion-vulnerability
+  pattern-either:
+  - patterns:
+    - pattern: "if $COND:\n    ...\n    return jsonify({\"error\": \"...\"})\n"
+    - pattern-not: "if not $VAR.endswith(\".json\"):\n    ...\n    return jsonify({\"\
+        error\": \"Only JSON files can be deleted\"})\n"
+  - patterns:
+    - pattern: "filename = os.path.basename($FILENAME)\n...\nif not $COND:\n    ...\n\
+        \    return jsonify({\"error\": \"...\"})\n"
+    - pattern-not: "filename = os.path.basename($FILENAME)\n...\nif not $VAR.endswith(\"\
+        .json\"):\n    ...\n    return jsonify({\"error\": \"Only JSON files can be\
+        \ deleted\"})\n"
+  languages:
+  - python
+  message: Potential directory traversal vulnerability in file deletion logic. The
+    code does not properly validate that the filename ends with '.json' before processing,
+    which could allow deletion of non-JSON files. Ensure proper file extension validation
+    and sanitize input paths.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    technology:
+    - python

@@ -1,0 +1,18 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  patterns:
+  - pattern: isinstance($OBJ, (SourceLoader, ExtensionFileLoader))
+  - pattern-not: isinstance($OBJ, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+  languages:
+  - python
+  message: Detected missing check for SourcelessFileLoader in isinstance() call. This
+    can lead to incorrect handling of file loaders, potentially causing security issues.
+    Ensure that SourcelessFileLoader is included in the isinstance() check.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-693
+    owasp: A5:2021-Security Misconfiguration
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    technology:
+    - python

@@ -1,0 +1,25 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern-either:
+    - pattern: const $VAR = "<a href=\"${...}\"></a>"
+    - pattern: $`<p lang="en" dir="ltr"><a href="${...}"></a></blockquote>`
+    - pattern: anchor.href = "${...}"
+  - pattern-not: anchor.outerHTML
+  - pattern-not: document.createElement("a")
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in embed component where user-provided 'src'
+    parameter is directly inserted into HTML without proper sanitization. The vulnerability
+    occurs when constructing anchor tags with dynamic href values, which could allow
+    attackers to inject malicious scripts. The fix ensures that the href value is
+    properly escaped and sanitized before insertion into the DOM by creating an anchor
+    element and using its outerHTML property instead of direct string interpolation.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '79'
+    owasp: OWASP Top 10:2021 - A03:2021 - Injection
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

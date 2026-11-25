@@ -1,0 +1,23 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  patterns:
+  - pattern: 'let $ENV_CONTENT = existsSync($ENV_PATH) ? readFileSync($ENV_PATH, ''utf-8'')
+      : ''''; ... writeFileSync($ENV_PATH, $ENV_CONTENT, ''utf-8'');'
+  - pattern-not: 'const $EXISTING_ENV = existsSync($ENV_PATH) ? dotenv.parse(readFileSync($ENV_PATH,
+      ''utf-8'')) : {}; const $MERGED_ENV = { ...$EXISTING_ENV, ...$UPDATES }; const
+      $SAFE_ENV_CONTENT = stringify($MERGED_ENV); writeFileSync($ENV_PATH, $SAFE_ENV_CONTENT,
+      ''utf-8'');'
+  languages:
+  - typescript
+  message: Insecure handling of environment variable updates in .env files. Directly
+    manipulating .env content with regex can lead to injection vulnerabilities. Use
+    libraries like dotenv and dotenv-stringify to securely parse and stringify environment
+    variables.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: 'A6: Security Misconfiguration'
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    technology:
+    - typescript

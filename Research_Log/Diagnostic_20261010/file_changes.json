@@ -1,0 +1,235 @@
+{
+  "time_utc": "2026-10-10T12:31:12.955458+00:00",
+  "changes": [
+    {
+      "path": "autogrep/config.py",
+      "status": "modified",
+      "before_sha256": "3a7edd153aa98f255cdbaf330a1674788cbce518c30058329957523279633da8",
+      "after_sha256": "8d6040e070c9a40e0c02e062cc797cb2f7fd236daaa7ca07a514e81cd020de38"
+    },
+    {
+      "path": "autogrep/llm_client.py",
+      "status": "modified",
+      "before_sha256": "9e4eaa82ae83c3f31f1969c1c8fef28604e6f96888453136ee821b9f003d5af2",
+      "after_sha256": "f98bad67dd65efffabfd7cc3785d80869cb9345252837cda288dbfe31e9f36fe"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/adjudication_proposals.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "acb699a42335779ae8cce2e4797aee2cab7670da9f9beb1db592569e9676362e"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0046.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "6dadf995e22d4301a698be6c37e893142ddce7b448047d6a352e138f17060a31"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0063.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "518eac313b842a29fd007f7f13728b3709928668509a6ff14a0bd9d94ff9e3d3"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0081.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "d84b59745128d54ba4c00d9f8d239985e00d5bcb671bf3c0044673b6eb79f24a"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0116.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "78ba1ac3ad9903ff1e90b4db2be5feb56eb8ee79cd75e42ae104befc6908ee08"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0124.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2d85615835d065aa37a79adc935e68c006a225e9540f266d84163aeab00a9866"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0134.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "76046303b3eb153cf75dd3955f38ca1e619f14263457d0c99c73204844cfeff4"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0136.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2892ff22b558c08a0e8dd2286a76e8cd95f7016909323e0dcc5e48f3afa47a49"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0163.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "1cffac434a498e31c6c89ebb26415338afaae548dbdd8e2d72b285719da5a08b"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0171.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "9fc7f8648e7b5462f42c21e854043fbd806e6044eff5b3d110519b30c09a4903"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0173.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "6014fb74ba3bdbe0c69185ed036b9535e4e0da8d00d8a6816d6075d402c77e71"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0184.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4a1bb085d1b784079a9e382ec68097a252f7c3bf823060f33ad017ed659076d2"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0193.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "663058c705535819e0f41daa3bf418d16461c9a3b3d3a4069f80f1031e0ec5dd"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0220.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ebdbce96f32de4ccdc14bf75d2ad77d80ee79224fa879d745692b5d8dc234d9e"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0221.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "01606f5e089d40f026b3d3d4e8908b5df6c4e445393df05bff945f3e7c84d085"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0222.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "843100e81905a7ff4626d8fac76d981db7b3d1afda0e2c7cad98945c354e241d"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0231.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "cc7cdb31201242d3b7d7a71e9f8487e30e309f1e3a5ff86207c9029ce0e44302"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0235.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "14c736f73cc0b5b0fa00eb4a7393d8ba112cd681f39d0d6fd0d58d59825c7c08"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0238.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ca4a03dd2f6f5e69d6f70013cd1040bc56208b599dfe47ae2e5dbea49e218fc5"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0239.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "e473b01673f4c26129ef2ab1f2c72517532bc6a953d848271b9139dfeecf5426"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0276.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "8c4d8f2fe0ad894e263a639635424e37472336df334c3b8d9c8b8f4e559241a2"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0298.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "519be5ff38193d555115ff8339008b914621482ae581e4560563d9d94dab1168"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0323.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "63f8f72c7ab87e9158b3f9fb47c1fef4e4f04954d757af3168e2989ec0662193"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0339.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "c57900455a0194869471653763a738f2a5c34c5fd75fd3bc3bc4160db48f4465"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/CASE-0340.yml",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "315270ef09f74ae5b8df61e2b2555d04ddd01b1cb4d95104f541eb8b785d1262"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/reference_rules/v1/review_notes.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4254c2c6dbbdcb525b78b6b632cfea7714fdc6ce09531b2b63bc2757649f2b0a"
+    },
+    {
+      "path": "benchmark/diagnostic_20261010/selection.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1"
+    },
+    {
+      "path": "pipeline/audit_diagnostic_failures.py",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "88161c14314c0b165c594ef21d013ff2fc8d573ade6a6b300059cfadf35fa99e"
+    },
+    {
+      "path": "pipeline/build_diagnostic_references.py",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "56134f635859412552c20a9870179db7fa27f6d1dcdf3258d56d408b0f95a35a"
+    },
+    {
+      "path": "pipeline/diagnostic_audit.py",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "6656c4ebf17b92cc804a3210d30480677c614075c8da6b9cf3ed2046a19f8d24"
+    },
+    {
+      "path": "pipeline/diagnostic_v2.py",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4623f4d1c55c6e47470dc6b4c2abef5de83c065c28a52d49d41aacba7c05d481"
+    },
+    {
+      "path": "pipeline/raw_capture.py",
+      "status": "modified",
+      "before_sha256": "725aae2d5e8c89614d8d8db269841f252abb82b669a7a5278d38a0e15cac67e6",
+      "after_sha256": "c344d041cd6b171183b1ae886f99cd34155c316f7fc07e0924f6bb3ff4435f4a"
+    },
+    {
+      "path": "pipeline/run_c3.py",
+      "status": "modified",
+      "before_sha256": "133dacf3a187a704a72eed9103cf37139f860a8c52f9a519d59b5846ed081e4d",
+      "after_sha256": "87f12109fd726b2492b4f6ae2e601a53e988b06e2e10ac9079546b6903423114"
+    },
+    {
+      "path": "pipeline/run_c4.py",
+      "status": "modified",
+      "before_sha256": "1a3b0a4f551193edb37542aaf8fa7ae431db44603ee29c863b4956c595b5b9ed",
+      "after_sha256": "3b27f86fd54d31e0a378516326a4142909076f69c25e201b05ebaeb012c0e96a"
+    },
+    {
+      "path": "pipeline/select_diagnostic_cases.py",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "fe1260e032d4b21635abe48573d66f9cb665c1ae728ea3a20cb975f359321490"
+    },
+    {
+      "path": "pipeline/tests/test_diagnostic_regressions.py",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "78f205aa9fdd6143bf455f2bc34bc038731941ce26d109537b9f5964656c63b2"
+    }
+  ],
+  "protected_files_checked": 378,
+  "historical_changes": []
+}

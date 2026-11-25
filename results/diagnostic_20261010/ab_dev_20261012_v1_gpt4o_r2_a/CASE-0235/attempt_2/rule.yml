@@ -1,0 +1,23 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  pattern: "if ($VAR.indexOf($PUBLIC_DIR) === -1) {\n  ...\n}\n"
+  pattern-not: "if ($VAR.indexOf($PUBLIC_DIR) !== 0) {\n  ...\n}\n"
+  languages:
+  - typescript
+  message: "\"This code checks if a path is within a public directory using an incorrect\
+    \ index check. \nThis can lead to directory traversal vulnerabilities, allowing\
+    \ unauthorized access to files outside the intended directory. \nEnsure that the\
+    \ path starts with the public directory path by checking if indexOf returns 0.\"\
+    \n"
+  severity: ERROR
+  metadata:
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    category: security
+    cwe:
+    - CWE-22
+    owasp:
+    - A5:2017-Broken Access Control
+    references:
+    - https://owasp.org/www-community/attacks/Path_Traversal
+    technology:
+    - typescript

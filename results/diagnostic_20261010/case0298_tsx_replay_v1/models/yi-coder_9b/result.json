@@ -1,0 +1,49 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/yi-coder_9b__autogrep_default/raw/yi-coder_9b__20260929T083914Z/CASE-0298.json",
+  "raw_response_sha256": "7dfef8ecec91d2a07a41990bf2d69c0da49cf119c89b1fe8f261059f11c4bb83",
+  "parsed_rule_sha256": "08f8c6696b47a830a3e967813f47f6258bfd31b016aedda4bc02c36263a406dc",
+  "semgrep_returncode": 2,
+  "scan_ok": false,
+  "errors": [
+    {
+      "code": 2,
+      "level": "error",
+      "type": "Rule parse error",
+      "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+      "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n$ANCHOR = document.createElement(\"a\") $ANCHOR.href = $SRC $ANCHOR.outerHTML\n\n----- end pattern -----\n"
+    }
+  ],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scan_error"
+}

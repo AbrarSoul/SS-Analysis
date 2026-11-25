@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0116",
+  "attempt_index": 3,
+  "condition": "retry",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791843146.407072,
+  "raw_content": "{\n  \"id\": \"vuln-thrift-0919c3d5\",\n  \"pattern\": \"socket.getSSLParameters();\\n      socket.setSSLParameters(...)\",\n  \"pattern_not\": [\n    \"socket.getSSLParameters();\\n      SSLParameters sslParams = socket.getSSLParameters();\\n      sslParams.setEndpointIdentificationAlgorithm(\\\"HTTPS\\\");\\n      socket.setSSLParameters(sslParams);\"\n  ],\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Missing endpoint identification algorithm configuration in SSL transport. This vulnerability allows for man-in-the-middle attacks as the client does not verify the server's identity. Fix by setting the endpoint identification algorithm to \\\"HTTPS\\\" using SSLParameters.setEndpointIdentificationAlgorithm().\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-295\",\n    \"owasp\": \"OWASP-A03:2021\"\n  }\n}",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/apache/thrift\n    Commit: 0919c3d5506151514e283a63e1fe1ce83e2449d8\n\n    PATCH CHANGES:\n    File: lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n--- a/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n+++ b/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n+import javax.net.ssl.SSLParameters;\n+      SSLParameters sslParams = socket.getSSLParameters();\n+      sslParams.setEndpointIdentificationAlgorithm(\"HTTPS\");\n+      socket.setSSLParameters(sslParams);\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-thrift-0919c3d5\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"java\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    {\n  \"id\": \"path-traversal\",\n  \"pattern\": \"new File($PATH)\",\n  \"pattern_not\": [\n    \"new File(sanitized_path)\"\n  ],\n  \"pattern_inside\": \"class $CLASS {\\n    ...\\n}\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Potential path traversal vulnerability. Validate and sanitize file paths.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-22\"\n  }\n}\n\n{\n  \"id\": \"weak-cipher\",\n  \"pattern\": \"Cipher.getInstance(\\\"DES\\\")\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-326\"\n  }\n}\n\n    Respond with ONLY the JSON object, nothing else.\n\nPREVIOUS ERROR TO FIX:\nSemgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0116.attempt_2.vuln-thrift-0919c3d5\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0116.attempt_2.vuln-thrift-0919c3d5:\\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nsocket.getSSLParameters();\\n      socket.setSSLParameters(...)\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]\nEnsure your next attempt addresses these issues.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rule specifications as a single JSON object.\n    Return ONLY the raw JSON object -- no markdown fences, no YAML, no explanatory text before or after it.\n    Do not compose Semgrep operators (patterns:, pattern-either:, etc.) yourself -- a separate deterministic\n    serializer does that from the plain fields you provide. Supported fields: id, message, severity,\n    languages, metadata (all required except metadata), plus exactly ONE of: pattern (a single pattern\n    string), pattern_either (a list of alternative pattern strings), or taint_sources + taint_sinks\n    (each a list of pattern strings, used together). Optionally also: pattern_not (a list of one or more\n    exclusion pattern strings), pattern_inside (a single scope-restriction pattern string),\n    pattern_not_inside (a single negative-scope pattern string). taint rules cannot combine with\n    pattern_not/pattern_inside/pattern_not_inside."
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/apache/thrift\n    Commit: 0919c3d5506151514e283a63e1fe1ce83e2449d8\n\n    PATCH CHANGES:\n    File: lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n--- a/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n+++ b/lib/java/src/main/java/org/apache/thrift/transport/TSSLTransportFactory.java\n+import javax.net.ssl.SSLParameters;\n+      SSLParameters sslParams = socket.getSSLParameters();\n+      sslParams.setEndpointIdentificationAlgorithm(\"HTTPS\");\n+      socket.setSSLParameters(sslParams);\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-thrift-0919c3d5\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"java\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    {\n  \"id\": \"path-traversal\",\n  \"pattern\": \"new File($PATH)\",\n  \"pattern_not\": [\n    \"new File(sanitized_path)\"\n  ],\n  \"pattern_inside\": \"class $CLASS {\\n    ...\\n}\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Potential path traversal vulnerability. Validate and sanitize file paths.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-22\"\n  }\n}\n\n{\n  \"id\": \"weak-cipher\",\n  \"pattern\": \"Cipher.getInstance(\\\"DES\\\")\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-326\"\n  }\n}\n\n    Respond with ONLY the JSON object, nothing else.\n\nPREVIOUS ERROR TO FIX:\nSemgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0116.attempt_2.vuln-thrift-0919c3d5\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.ab_dev_20261012_v1_qwen3_r2_b.CASE-0116.attempt_2.vuln-thrift-0919c3d5:\\n Invalid pattern for Java: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nsocket.getSSLParameters();\\n      socket.setSSLParameters(...)\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]\nEnsure your next attempt addresses these issues."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-511",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"id\": \"vuln-thrift-0919c3d5\",\n  \"pattern\": \"socket.getSSLParameters();\\n      socket.setSSLParameters(...)\",\n  \"pattern_not\": [\n    \"socket.getSSLParameters();\\n      SSLParameters sslParams = socket.getSSLParameters();\\n      sslParams.setEndpointIdentificationAlgorithm(\\\"HTTPS\\\");\\n      socket.setSSLParameters(sslParams);\"\n  ],\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Missing endpoint identification algorithm configuration in SSL transport. This vulnerability allows for man-in-the-middle attacks as the client does not verify the server's identity. Fix by setting the endpoint identification algorithm to \\\"HTTPS\\\" using SSLParameters.setEndpointIdentificationAlgorithm().\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-295\",\n    \"owasp\": \"OWASP-A03:2021\"\n  }\n}",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791843146,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 211,
+      "prompt_tokens": 1227,
+      "total_tokens": 1438,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 1.4890818339990801,
+  "error": null,
+  "input_tokens": 1227,
+  "output_tokens": 211
+}

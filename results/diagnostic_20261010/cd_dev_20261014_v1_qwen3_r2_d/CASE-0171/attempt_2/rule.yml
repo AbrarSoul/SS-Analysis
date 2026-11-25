@@ -1,0 +1,23 @@
+rules:
+- id: vuln-graphhopper-eb189be1
+  patterns:
+  - pattern: 'url.replaceFirst("/navigate/directions/v5/gh/" + profile + "/", "");
+
+      url.replaceAll("\\?[*]", "");'
+  - pattern-not: if (!url.startsWith(urlStart)) throw new IllegalArgumentException("Incorrect
+      URL " + url);
+  - pattern-not: String urlStart = "/navigate/directions/v5/gh/" + profile + "/";
+  languages:
+  - java
+  message: Insecure URL handling vulnerability. The code uses replaceFirst() and replaceAll()
+    to strip URL components without proper validation, potentially allowing path traversal
+    or injection attacks. Fix by validating the URL prefix before processing and throwing
+    an exception for invalid URLs.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: OWASP-A03:2021
+    source-url: github.com/graphhopper/graphhopper/commit/eb189be1fa7443ebf4ae881e737a18f818c95f41
+    technology:
+    - java

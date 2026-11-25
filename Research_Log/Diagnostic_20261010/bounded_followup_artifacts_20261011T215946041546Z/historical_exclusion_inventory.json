@@ -1,0 +1,79 @@
+{
+  "qwen3_v3": {
+    "accepted_rules": 19,
+    "sibling_exclusion_rules": 19,
+    "paths": [
+      "results/diagnostic_20261010/qwen3_v3/CASE-0046/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0063/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0081/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0124/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0134/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0136/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0163/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0171/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0173/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0184/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0193/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0220/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0221/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0222/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0238/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0239/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0276/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0323/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_v3/CASE-0340/final_rule.yml"
+    ]
+  },
+  "qwen3_mechanism_v1": {
+    "accepted_rules": 11,
+    "sibling_exclusion_rules": 0,
+    "paths": []
+  },
+  "qwen3_mechanism_v2": {
+    "accepted_rules": 15,
+    "sibling_exclusion_rules": 8,
+    "paths": [
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0046/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0063/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0134/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0163/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0193/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0220/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0221/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0239/final_rule.yml"
+    ]
+  },
+  "qwen3_mechanism_v3": {
+    "accepted_rules": 14,
+    "sibling_exclusion_rules": 8,
+    "paths": [
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0063/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0124/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0136/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0171/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0193/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0220/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0222/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0323/final_rule.yml"
+    ]
+  },
+  "qwen3_mechanism_v4": {
+    "accepted_rules": 15,
+    "sibling_exclusion_rules": 5,
+    "paths": [
+      "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0063/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0193/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0220/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0221/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0323/final_rule.yml"
+    ]
+  },
+  "qwen3_mechanism_v5": {
+    "accepted_rules": 13,
+    "sibling_exclusion_rules": 2,
+    "paths": [
+      "results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0134/final_rule.yml",
+      "results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0323/final_rule.yml"
+    ]
+  }
+}

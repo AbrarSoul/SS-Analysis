@@ -1,0 +1,75 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0238",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "timestamp": 1791842077.9780521,
+  "raw_content": "{\n  \"id\": \"vuln-nocodb-079e3abe\",\n  \"message\": \"The use of Papaparse.unparse without the 'escapeFormulae' option set to true can lead to CSV injection vulnerabilities. This allows attackers to inject malicious formulas into CSV files, which can be executed when the file is opened in spreadsheet software. To fix this, ensure that 'escapeFormulae: true' is included in the options object passed to Papaparse.unparse.\",\n  \"severity\": \"ERROR\",\n  \"languages\": [\"typescript\"],\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-1236\",\n    \"owasp\": \"A1:2017-Injection\"\n  },\n  \"pattern\": \"Papaparse.unparse($OBJ)\",\n  \"pattern_not\": [\n    \"Papaparse.unparse($OBJ, { escapeFormulae: true, ... })\"\n  ]\n}",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/nocodb/nocodb\n    Commit: 079e3abe98a054f5304592def7a0e8fdb9b06eee\n\n    PATCH CHANGES:\n    File: packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n--- a/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n+++ b/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n-    const data = Papaparse.unparse({\n-      fields:\n-        fields &&\n-        fields.filter(\n-          f =>\n-            this.columns.some(c => c._cn === f) ||\n-            this.virtualColumns.some(c => c._cn === f)\n-        ),\n-      data: csvRows\n-    });\n+    const data = Papaparse.unparse(\n+      {\n+        fields:\n+          fields &&\n+          fields.filter(\n+            f =>\n+              this.columns.some(c => c._cn === f) ||\n+              this.virtualColumns.some(c => c._cn === f)\n+          ),\n+        data: csvRows\n+      },\n+      {\n+        escapeFormulae: true\n+      }\n+    );\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-nocodb-079e3abe\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"typescript\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    \n\n    Respond with ONLY the JSON object, nothing else.",
+  "request": {
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rule specifications as a single JSON object.\n    Return ONLY the raw JSON object -- no markdown fences, no YAML, no explanatory text before or after it.\n    Do not compose Semgrep operators (patterns:, pattern-either:, etc.) yourself -- a separate deterministic\n    serializer does that from the plain fields you provide. Supported fields: id, message, severity,\n    languages, metadata (all required except metadata), plus exactly ONE of: pattern (a single pattern\n    string), pattern_either (a list of alternative pattern strings), or taint_sources + taint_sinks\n    (each a list of pattern strings, used together). Optionally also: pattern_not (a list of one or more\n    exclusion pattern strings), pattern_inside (a single scope-restriction pattern string),\n    pattern_not_inside (a single negative-scope pattern string). taint rules cannot combine with\n    pattern_not/pattern_inside/pattern_not_inside."
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/nocodb/nocodb\n    Commit: 079e3abe98a054f5304592def7a0e8fdb9b06eee\n\n    PATCH CHANGES:\n    File: packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n--- a/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n+++ b/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n-    const data = Papaparse.unparse({\n-      fields:\n-        fields &&\n-        fields.filter(\n-          f =>\n-            this.columns.some(c => c._cn === f) ||\n-            this.virtualColumns.some(c => c._cn === f)\n-        ),\n-      data: csvRows\n-    });\n+    const data = Papaparse.unparse(\n+      {\n+        fields:\n+          fields &&\n+          fields.filter(\n+            f =>\n+              this.columns.some(c => c._cn === f) ||\n+              this.virtualColumns.some(c => c._cn === f)\n+          ),\n+        data: csvRows\n+      },\n+      {\n+        escapeFormulae: true\n+      }\n+    );\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-nocodb-079e3abe\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"typescript\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    \n\n    Respond with ONLY the JSON object, nothing else."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-EYIGa4rm4m5iNDRhDrX2cCL6BynGv",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"id\": \"vuln-nocodb-079e3abe\",\n  \"message\": \"The use of Papaparse.unparse without the 'escapeFormulae' option set to true can lead to CSV injection vulnerabilities. This allows attackers to inject malicious formulas into CSV files, which can be executed when the file is opened in spreadsheet software. To fix this, ensure that 'escapeFormulae: true' is included in the options object passed to Papaparse.unparse.\",\n  \"severity\": \"ERROR\",\n  \"languages\": [\"typescript\"],\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-1236\",\n    \"owasp\": \"A1:2017-Injection\"\n  },\n  \"pattern\": \"Papaparse.unparse($OBJ)\",\n  \"pattern_not\": [\n    \"Papaparse.unparse($OBJ, { escapeFormulae: true, ... })\"\n  ]\n}",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": [],
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791842076,
+    "model": "gpt-4o-2024-08-06",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": "default",
+    "system_fingerprint": "fp_cf1866e9bf",
+    "usage": {
+      "completion_tokens": 196,
+      "prompt_tokens": 906,
+      "total_tokens": 1102,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": null,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null
+      }
+    }
+  },
+  "generation_seconds": 1.9062925420003012,
+  "error": null,
+  "input_tokens": 906,
+  "output_tokens": 196
+}

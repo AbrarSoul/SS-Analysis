@@ -1,0 +1,683 @@
+{
+  "created_utc": "2026-10-10T21:51:58.007220+00:00",
+  "purpose": "Offline replay of CASE-0298's raw-condition rule for all 16 headline models, under .tsx target-file staging only (no prompt/workflow change). No new inference -- every rule is reconstructed from a retained raw LLM response.",
+  "semgrep_version_verified": "1.177.0",
+  "pinned_semgrep_expected": "1.177.0",
+  "tsx_staging_hashes": {
+    "vulnerable_source": {
+      "source_ts_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+      "staged_tsx_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+      "identical": true
+    },
+    "patched_source": {
+      "source_ts_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37",
+      "staged_tsx_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37",
+      "identical": true
+    },
+    "variant_vulnerable_01": {
+      "source_ts_sha256": "34443a1bb436b02f61cebc53d7d923305b0657b34d407963337c3c663bd6bfe6",
+      "staged_tsx_sha256": "34443a1bb436b02f61cebc53d7d923305b0657b34d407963337c3c663bd6bfe6",
+      "identical": true
+    },
+    "variant_vulnerable_02": {
+      "source_ts_sha256": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6",
+      "staged_tsx_sha256": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6",
+      "identical": true
+    },
+    "variant_safe_01": {
+      "source_ts_sha256": "3913dd6f0d7f1cea2f4f3a6c32ecb1ff28e5517f4d580579f7655f3fe8473f19",
+      "staged_tsx_sha256": "3913dd6f0d7f1cea2f4f3a6c32ecb1ff28e5517f4d580579f7655f3fe8473f19",
+      "identical": true
+    },
+    "benign_lookalike": {
+      "source_ts_sha256": "c7c9530576f1842d5ce1c6987597885859085e6da0b7c830824c7b3d763727ab",
+      "staged_tsx_sha256": "c7c9530576f1842d5ce1c6987597885859085e6da0b7c830824c7b3d763727ab",
+      "identical": true
+    }
+  },
+  "model_count": 16,
+  "results": {
+    "qwen2.5-coder:7b-instruct": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/qwen2.5-coder_7b-instruct__autogrep_default/raw/qwen2.5-coder_7b-instruct__20260928T211558Z/CASE-0298.json",
+      "raw_response_sha256": "c5af0c88855908df942280aa972a1dd7acf6832e17293a010507419283815fcd",
+      "parsed_rule_sha256": "c7ab8389652b94d51b8635162ea1eb80254565aacfa4aada92c71014e5c2512f",
+      "semgrep_returncode": 2,
+      "scan_ok": false,
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+          "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n$VAR = document.createElement(\"a\")\n$VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`\n... |> $VAR.outerHTML\n\n----- end pattern -----\n"
+        }
+      ],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scan_error"
+    },
+    "qwen2.5-coder:32b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/qwen2.5-coder_32b__autogrep_default/raw/qwen2.5-coder_32b__20260928T211558Z/CASE-0298.json",
+      "raw_response_sha256": "54b16b7fd49a0a35a3db05d3025472fbf53624719893fa578ac2bb37e7b6aca4",
+      "parsed_rule_sha256": "fedcd6303b474c69a8331288d087de8c48733c71f65145dfbcafab1a81a3d10c",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": true,
+          "finding_lines": [
+            211
+          ],
+          "outcome": "FP"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": true,
+          "finding_lines": [
+            211
+          ],
+          "outcome": "FP"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "codellama:7b-instruct-fp16": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/codellama_7b-instruct-fp16__autogrep_default/raw/codellama_7b-instruct-fp16__20260928T211558Z/CASE-0298.json",
+      "raw_response_sha256": "bad3b6dc45c19f175a41c24de4d85cc0f6ba9c6f2a29500e7bf8753586bdd602",
+      "parsed_rule_sha256": "49f002c3ebf4cf4fe8f7ca91289b4dfda8794ae32645818d6a57726db3e8aa0e",
+      "semgrep_returncode": 2,
+      "scan_ok": false,
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+          "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n(\n  anchor = document.createElement(\"a\")\n  anchor.href = $src + \"?ref_src=twsrc%5Etfw\"\n)\n.*\n(\n  <p lang=\"en\" dir=\"ltr\">${anchor.outerHTML}</p>\n)\n\n----- end pattern -----\n"
+        }
+      ],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scan_error"
+    },
+    "deepseek-coder:6.7b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/deepseek-coder_6.7b__autogrep_default/raw/deepseek-coder_6.7b__20260929T015526Z/CASE-0298.json",
+      "raw_response_sha256": "07db26939c62cd89ec22084d5c842638ce8fe42cfb6fbb63cabdc8b4ac232696",
+      "parsed_rule_sha256": "ebaa00a726f3e288a53955d96272ea27d4e8f9ef5409e138aad33de983ff1246",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "codegemma:7b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/codegemma_7b__autogrep_default/raw/codegemma_7b__20260929T052727Z/CASE-0298.json",
+      "raw_response_sha256": "fcfad1a4455deb96939fd4667c225ff0d6aa00dc67e10eef7b12ed30e930106c",
+      "parsed_rule_sha256": "deeebb3458fdc45e065443cecaf12d73d346c74ee6a8147d2301fe6f4e388892",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "yi-coder:9b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/yi-coder_9b__autogrep_default/raw/yi-coder_9b__20260929T083914Z/CASE-0298.json",
+      "raw_response_sha256": "7dfef8ecec91d2a07a41990bf2d69c0da49cf119c89b1fe8f261059f11c4bb83",
+      "parsed_rule_sha256": "08f8c6696b47a830a3e967813f47f6258bfd31b016aedda4bc02c36263a406dc",
+      "semgrep_returncode": 2,
+      "scan_ok": false,
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+          "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n$ANCHOR = document.createElement(\"a\") $ANCHOR.href = $SRC $ANCHOR.outerHTML\n\n----- end pattern -----\n"
+        }
+      ],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scan_error"
+    },
+    "magicoder:7b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/magicoder_7b__autogrep_default/raw/magicoder_7b__20260929T005819Z/CASE-0298.json",
+      "raw_response_sha256": "578ea58cc813c5083990d57999e7ceaee76eac75461b2c4b1f9d426c5505bacb",
+      "status": "rule_never_parsed"
+    },
+    "DeepHat-V1-7B": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/DeepHat_DeepHat-V1-7B__autogrep_default/raw/DeepHat_DeepHat-V1-7B__20260929T115759Z/CASE-0298.json",
+      "raw_response_sha256": "ea3a41ee08120b2242b7571204904f4f120cf64bf70388d9a84b48613950d4cb",
+      "parsed_rule_sha256": "b697f67ad5bf71a2b71abd5ec424b2076a7a719572767b1c36fa041543c6a1ad",
+      "semgrep_returncode": 2,
+      "scan_ok": false,
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+          "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst anchor = document.createElement(\"a\");\nanchor.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n}><p lang=\"en\" dir=\"ltr\">${\n  anchor.outerHTML\n}</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n\n----- end pattern -----\n"
+        }
+      ],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scan_error"
+    },
+    "qwen3-coder:30b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/qwen3-coder_30b__autogrep_default/raw/qwen3-coder_30b__20261008T000640Z/CASE-0298.json",
+      "raw_response_sha256": "0a15aa1354b05e62893add8f2b4e52f26d2217a97366d01350ce0a175d44fa39",
+      "parsed_rule_sha256": "45dd71487cba13daee9aab2c865d5a920e2364c83e80833a0e8f4ccd31c237c0",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": true,
+          "finding_lines": [
+            211
+          ],
+          "outcome": "FP"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": true,
+          "finding_lines": [
+            211
+          ],
+          "outcome": "FP"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "gpt-oss:20b": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/gpt-oss_20b__autogrep_default/raw/gpt-oss_20b__20261008T065953Z/CASE-0298.json",
+      "raw_response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "rule_never_parsed"
+    },
+    "opencoder:8b-instruct-q4_K_M": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/opencoder_8b-instruct-q4_K_M__autogrep_default/raw/opencoder_8b-instruct-q4_K_M__20261008T220009Z/CASE-0298.json",
+      "raw_response_sha256": "7acce98a14867a2c1864eb37bdc8a1f93539bcc7a246a492256666e3f48efd8f",
+      "parsed_rule_sha256": "b306082df0cba6ef48ad1555d68f13b1df7e18acd9d771760e5c1c4932b9879d",
+      "semgrep_returncode": 2,
+      "scan_ok": false,
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+          "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\ndocument.createElement\\(\"a\"\\)\n.href = `${src}\\?ref_src=twsrc%5Etfw\"\\)\n\n----- end pattern -----\n"
+        }
+      ],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scan_error"
+    },
+    "granite-code:8b-instruct-128k-q4_1": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/granite-code_8b-instruct-128k-q4_1__autogrep_default/raw/granite-code_8b-instruct-128k-q4_1__20261009T055621Z/CASE-0298.json",
+      "raw_response_sha256": "f48620397eb7cb026e38c8b038a753312c0c77767832c62e09159049a80b3d8c",
+      "parsed_rule_sha256": "be06d21e5467a10322e071a8ce2ddb1869b2d3d75f6e9fdbde6c0246971ed095",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": true,
+          "finding_lines": [
+            210
+          ],
+          "outcome": "FP"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "llama3.1:8b-instruct-q4_K_M": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/llama3.1_8b-instruct-q4_K_M__autogrep_default/raw/llama3.1_8b-instruct-q4_K_M__20261008T000640Z/CASE-0298.json",
+      "raw_response_sha256": "6a10a5a491a2d59d931cc5199e39f478769b37d695c965ee252a3900f552cbe6",
+      "parsed_rule_sha256": "a0a6cf10e74a8fda2763a346e63967803cafcbdfb288804b54b90540ab15f68e",
+      "semgrep_returncode": 2,
+      "scan_ok": false,
+      "errors": [
+        {
+          "code": 2,
+          "level": "error",
+          "type": "Rule parse error",
+          "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+          "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n... {\n  $anchor = document.createElement(\"a\");\n  $anchor.href = $src ? \"ref_src=twsrc%5Etfw\";\n  ...\n  <a href=\"$src?ref_src=twsrc%5Etfw\"></a>\n}\n\n----- end pattern -----\n"
+        }
+      ],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scan_error"
+    },
+    "Mistral-Small-24B-Instruct-2501": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/hf.co_lmstudio-community_Mistral-Small-24B-Instruct-2501-GGUF_Q8_0__autogrep_default/raw/hf.co_lmstudio-community_Mistral-Small-24B-Instruct-2501-GGUF_Q8_0__20261008T052232Z/CASE-0298.json",
+      "raw_response_sha256": "f794afab9f607bb66c9b49fd03fd388aa1c4c64413884c6cb242edca4c165cab",
+      "parsed_rule_sha256": "ae6d3419f34164e04444b40a9586f6dc412b3adef4d350e1cec02cde70c626e4",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "phi4:14b-q4_K_M": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/phi4_14b-q4_K_M__autogrep_default/raw/phi4_14b-q4_K_M__20261008T232714Z/CASE-0298.json",
+      "raw_response_sha256": "bdb2aad56c693f7e1286978102180a50f9c6f97120426e7f7b37fac89261f2b4",
+      "parsed_rule_sha256": "ac80d36e862a607d542ffc4fe5afcdc85d7230a3b0e8d75bd84572c3abe96549",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    },
+    "gpt-4o": {
+      "source_raw_capture": "/tmp/case0298_replay_staging/runs_openai_full_20261010/gpt-4o__autogrep_default/raw/gpt-4o__20261009T211631Z/CASE-0298.json",
+      "raw_response_sha256": "8bc3d444db9991bddbc2ea8cd671fc5a8b65623f9d4c506ea862fce74d3cdcd1",
+      "parsed_rule_sha256": "32f775a72d1c2af446102bf345df7ccb46b7e4c21483ae2b36f9fab93ed13dea",
+      "semgrep_returncode": 0,
+      "scan_ok": true,
+      "errors": [],
+      "outcomes": {
+        "original_vulnerable": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "original_patched": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "variant_vulnerable_1": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_vulnerable_2": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "FN"
+        },
+        "variant_safe": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        },
+        "benign_lookalike": {
+          "detected": false,
+          "finding_lines": [],
+          "outcome": "TN"
+        }
+      },
+      "status": "scanned"
+    }
+  }
+}

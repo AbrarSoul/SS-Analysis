@@ -1,0 +1,22 @@
+rules:
+- id: hono-cloudflare-workers-asset-manifest-path-access
+  patterns:
+  - pattern: 'const $KEY = ASSET_MANIFEST[$PATH] || $PATH;
+
+      '
+  - pattern-not: 'const $KEY = ASSET_MANIFEST[$PATH];
+
+      '
+  languages:
+  - typescript
+  message: Potential path traversal vulnerability in Cloudflare Workers asset manifest
+    handling. The code falls back to using the raw path when the manifest lookup fails,
+    which could allow arbitrary file access. Remove the fallback to ensure only validated
+    paths from the manifest are used.
+  severity: ERROR
+  metadata:
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    category: security
+    cwe: CWE-22
+    technology:
+    - typescript

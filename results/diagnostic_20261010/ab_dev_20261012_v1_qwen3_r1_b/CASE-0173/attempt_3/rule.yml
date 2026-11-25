@@ -1,0 +1,22 @@
+rules:
+- id: vuln-hono-cf9a78db
+  patterns:
+  - pattern: const $KEY = ASSET_MANIFEST[$PATH] || $PATH
+  - pattern-inside: function.*\(.*\).*{.*}
+  - pattern-not: const $KEY = ASSET_MANIFEST[$PATH]
+  languages:
+  - typescript
+  message: Potential null/undefined key access in ASSET_MANIFEST lookup. The vulnerable
+    code uses 'ASSET_MANIFEST[path] || path' which can lead to unexpected behavior
+    when the manifest contains falsy values (like empty strings, 0, or false) for
+    a given path. This could cause incorrect asset resolution or security issues if
+    malicious paths are used. Fix by removing the fallback and only using ASSET_MANIFEST[path]
+    to ensure strict key validation.
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-471
+    owasp: OWASP-A03:2021
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    technology:
+    - typescript

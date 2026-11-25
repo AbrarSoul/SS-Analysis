@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-10-13T17:17:25.644226+00:00",
+  "status": "bounded_infrastructure_complete",
+  "tests_executed": 86,
+  "tests_passed": 86,
+  "tests_collected": 156,
+  "full_suite_executed_by_this_verification": false,
+  "model_calls": 0,
+  "real_semgrep_scans": 0,
+  "manifest_cases": 24,
+  "eligible_cases": 11,
+  "ineligible_cases": 13,
+  "ab_runner_source_matches_starting_copy": true,
+  "coordination_pending": false,
+  "implementation_sha256": {
+    "pipeline/diagnostic_v2.py": "452bc7a04aed1d59625554ab2a3a7d80bccf999f0f1f20c6238cdc58d1da2d5d",
+    "pipeline/cd_experiment.py": "a7d420c39d44559399214d97a07f2160c92311a378f34ea2a3de1d84e7298a01",
+    "pipeline/tests/test_cd_cli.py": "f523cc12203424d8989b50e2a24f7b0b4cc8bb19fb31104c98975958acf2fe69",
+    "benchmark/diagnostic_20261010/dev_probe_manifest_v1.json": "771400b84983a11b4edb97129e454ab860208b7727e7316a2c4b1689e093104f",
+    "pipeline/dev_probe.py": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "pipeline/probe_cache.py": "baab8da9901d026d9ce0ec6812cd5740fab823735669cc93c764cfc3142bcd03",
+    "pipeline/combined_gate.py": "2ecebcaf51d95a252f5409f4285de7ce6e393b06a1e9ba0142e6dcae890e8de5"
+  },
+  "command_logs": {
+    "Research_Log/Diagnostic_20261010/commands/20261013T171532327930Z_cd_cli_consolidated_verification_20261013.log": "50034b68b8e31864760feb00c186cea7b61a4337e4f3fc74c81ef19de774fcff",
+    "Research_Log/Diagnostic_20261010/commands/20261013T171532328043Z_cd_manifest_consolidated_verification_20261013.log": "3dd02c8418091e18b296dc3b264e0bc380ffe91b24563e8694940a42047b9dcc",
+    "Research_Log/Diagnostic_20261010/commands/20261013T171555091879Z_cd_cli_consolidated_collection_20261013.log": "93779c5d55413b93eab691fccf1c99f09b840c1a185ac975674b2687b2ab5030"
+  },
+  "next_step": "paper synthesis; live inference requires separate budget decision"
+}

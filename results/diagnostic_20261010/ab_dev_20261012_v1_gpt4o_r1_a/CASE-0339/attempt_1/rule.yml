@@ -1,0 +1,22 @@
+rules:
+- id: vuln-trilium-4c3fcc3e
+  pattern: '$RESULT.$PROPERTY = $RESULT.$PROPERTY.replace(''/[<\{\}]/g'', '''')
+
+    '
+  pattern-not: '$RESULT.$PROPERTY = $RESULT.$PROPERTY.replace(/[<{}]/g, '''')
+
+    '
+  languages:
+  - javascript
+  message: Improper use of regex string in replace function. This can lead to incorrect
+    sanitization and potential security vulnerabilities. Use regex literals instead
+    of string patterns for proper escaping.
+  severity: ERROR
+  metadata:
+    source-url: github.com/zadam/trilium/commit/4c3fcc3ea6f37debcb87ac1a7f5698c27be0e67b
+    category: security
+    cwe: CWE-20
+    owasp: A1:2017-Injection
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+    technology: javascript

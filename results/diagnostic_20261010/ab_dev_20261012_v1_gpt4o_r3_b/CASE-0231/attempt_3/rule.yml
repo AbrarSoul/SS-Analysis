@@ -1,0 +1,19 @@
+rules:
+- id: vuln-agentscope-7d285e86
+  patterns:
+  - pattern: filename = $FUNC(filename)
+  - pattern-not: "if not filename.endswith(\".json\"):\n    return jsonify({\"error\"\
+      : \"Only JSON files can be deleted\"})\n\nfilename = os.path.basename(filename)"
+  languages:
+  - python
+  message: Potential directory traversal vulnerability detected. Ensure that the filename
+    is validated to only allow specific file types before using os.path.basename to
+    sanitize it. This prevents unauthorized file access.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    owasp: A5:2017-Broken Access Control
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    technology:
+    - python

@@ -1,0 +1,19 @@
+rules:
+- id: vuln-phpldapadmin-dd6e9583
+  patterns:
+  - pattern: $REQUEST.setRequestHeader('Connection', 'close');
+  - pattern-not: $REQUEST.setRequestHeader('Content-length', $LENGTH);
+  - pattern-not: $REQUEST.setRequestHeader('Connection', 'close');
+  languages:
+  - javascript
+  message: Setting the 'Connection' header to 'close' can lead to unexpected behavior
+    in HTTP requests. It is recommended to remove this header to prevent potential
+    issues.
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-444
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/mhuertos/phpLDAPadmin/commit/dd6e9583a2eb2ca085583765e8a63df5904cb036
+    technology:
+    - javascript

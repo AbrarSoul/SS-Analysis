@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-REVIEW",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Invalid JSON: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "attempt": 2,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Invalid JSON: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "attempt": 3,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Invalid JSON: Expecting value: line 1 column 1 (char 0)"
+    }
+  ],
+  "raw": null,
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "calls_recorded": 3,
+  "input_tokens": 30,
+  "output_tokens": 60,
+  "generation_seconds": 6.6259999584872276e-06
+}

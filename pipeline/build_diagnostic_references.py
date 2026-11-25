@@ -1,0 +1,105 @@
+"""Freeze first-pass, assistant-authored diagnostic rules. Never overwrite a revision.
+
+These rules were authored after inspecting the six-sample bundles. They are
+development artifacts, not independent expert rules or held-out evaluation.
+Broad candidates deliberately expose missing context rather than encode labels.
+"""
+import json
+from pathlib import Path
+import re
+import sys
+
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "pipeline"))
+from diagnostic_v2 import sha, SAMPLES, EXT
+from eligible_cases import load_manifest
+
+
+def either(*patterns):
+    return {"pattern-either": [{"pattern": p} for p in patterns]}
+
+
+# Every note states the mechanism AND a reason why bundle fit is insufficient.
+CANDIDATES = {
+    "0323": ({"pattern-regex": r"['\"][^'\"\n]*\bscript\b[^'\"\n]*['\"]\s*:\s*\{\s*attributes\s*:\s*['\"]\*['\"]"},
+        "CKEditor allows script tags and wildcard attributes. Lexical configuration signature; requires review of editor filtering semantics and multiline/object rewrites."),
+    "0276": ({"pattern": "isinstance($SELF, (SourceLoader, ExtensionFileLoader))"},
+        "open_code selection omits SourcelessFileLoader. API-specific incomplete allowlist signature; does not prove the surrounding fallback is exploitable."),
+    "0221": ({"pattern": "new DefaultHttpHeaders(false)"},
+        "Netty header validation disabled by boolean constructor argument. Review whether upstream inputs are independently validated."),
+    "0134": ({"pattern-regex": re.escape("([A-Z0-9_-]+/?)+")},
+        "Ambiguous nested repetition with an optional separator. Exact vulnerable regex fragment; data reachability and engine behavior are not established by this signature."),
+    "0136": ({"pattern": "File.createTempFile($PREFIX, $SUFFIX)"},
+        "Default-directory temporary-file creation replaced with Files API. Limited to two-argument calls; permissions, JDK behavior and directory guarantees need review."),
+    "0220": (either('$REQUEST.setRequestHeader("Content-length", $VALUE)', '$REQUEST.setRequestHeader("Connection", "close")'),
+        "Patch removes manually supplied transport headers. Browser/runtime restrictions may change the security interpretation; independent label review is especially important."),
+    "0340": ({"patterns": [{"pattern": "execSync($CMD)"}, {"pattern-not": 'execSync("...")'}]},
+        "Dynamic shell command versus argument-vector execFileSync. Constant exclusion is only an approximation; input validation and template matching require review."),
+    "0238": ({"patterns": [{"pattern": "Papaparse.unparse(...)"}, {"pattern-not": "Papaparse.unparse(..., { ..., escapeFormulae: true, ... })"}]},
+        "CSV formula injection without export-level escaping. Broad candidate does not recognize pre-sanitized cells or harmless data; false positives are expected and retained."),
+    "0193": ({"pattern": "DocumentBuilderFactory.newInstance().newDocumentBuilder()"},
+        "Default XML parser without explicit external-entity restrictions. Does not model untrusted input or factory aliases; constant-XML benign input may be flagged."),
+    "0124": ({"mode": "taint", "pattern-sources": [{"patterns": [{"pattern-inside": "def $F(..., $ARG, ...):\n    ..."}, {"focus-metavariable": "$ARG"}]}],
+        "pattern-sinks": [{"pattern": "os.system($CMD)"}], "pattern-sanitizers": [{"pattern": "int(...)"}]},
+        "Function input reaches shell execution; integer conversion treated as a sanitizer. Check parameter-source coverage, string/list propagation and actual trust boundaries."),
+    "0063": ({"pattern-regex": re.escape(r"(charset=[\w=-]*)*;*")},
+        "Overlapping repetitions in a data-URL regex. Lexical candidate lacks attacker-controlled-input analysis; the constant-input benign example is expected to expose this limitation."),
+    "0184": ({"pattern": "File.createTempFile(...)"},
+        "Temporary files may inherit unsuitable permissions. Broad candidate lacks private-directory reasoning and can flag safe calls; retained to identify context needed for an expert rule."),
+    "0173": ({"pattern": "$MANIFEST[$PATH] || $PATH"},
+        "Unknown manifest key falls back to the requested path itself. Relational pattern survives renaming/helper extraction but needs asset-serving context on other projects."),
+    "0222": (either("requests.$METHOD(..., verify=False, ...)", "$SESSION.verify = False"),
+        "Requests certificate verification disabled at call or session level. Session assignment branch needs receiver-type/trust-boundary review outside this bundle."),
+    "0163": (either("['clone', $FLAG, $URL, $DEST]", "['clone', $FLAG].concat([$URL, $DEST])"),
+        "Git clone arguments lack option terminator. Does not yet recognize explicit leading-dash rejection, so safe-transform false positives are possible."),
+    "0171": ({"pattern": '$URL.replaceFirst("..." + $PROFILE + "...", $REPLACEMENT)'},
+        "Dynamic input interpolated into Java regex. Pattern.quote and literal-prefix alternatives differ syntactically; trust of the interpolated value still requires review."),
+    "0046": ({"pattern": "$CONFIG.update({$KEY: $VALUE})"},
+        "Mass assignment through per-key updates after blacklist filtering. Deliberately broad first pass; source trust, allowlist logic and destination privileges are unresolved."),
+    "0239": ({"pattern-regex": re.escape("[^@:]+(?:[^@]+)?@")},
+        "Overlapping optional regex repetitions in hosted Git URL parsing. Signature detects the problematic fragment, not general ReDoS or exploit reachability."),
+    "0235": ({"pattern": 'path.join($ROOT, ($URL.pathname || ".").replace(...))'},
+        "URL pathname joined into public directory. Candidate intentionally lacks post-join containment reasoning and may flag the original patched sample."),
+    "0298": ({"pattern-regex": r"<a\s+href=[\"']\$\{"},
+        "Raw interpolation into HTML href attribute. Does not distinguish previously escaped/trusted values; AST/dataflow generalization remains pending."),
+    "0116": ({"pattern": "new TSocket($SOCKET)"},
+        "TLS socket handed to Thrift without demonstrated hostname verification. Broad candidate cannot establish absence of preceding checks and is expected to flag safe examples."),
+    "0231": ({"mode": "taint", "pattern-sources": [{"pattern": "request.json"}],
+        "pattern-sinks": [{"pattern": "os.remove($PATH)"}],
+        "pattern-sanitizers": [{"pattern": "os.path.basename(...)"}, {"pattern": "_safe_workflow_name(...)"}]},
+        "Request-derived workflow filename reaches deletion. Project-specific safe-helper summary was added after reading its basename/validation implementation; not an independently inferred sanitizer."),
+    "0339": ({"pattern-regex": re.escape(".replace('/[<\\{\\}]/g', '')")},
+        "Regex-looking string is used as a literal replacement pattern. Exact signature preserves the known bug but is sensitive to quote/format changes."),
+    "0081": ({"patterns": [{"pattern": "$TEXT.replace($REGEX, $ASSIGNMENT)"},
+        {"metavariable-regex": {"metavariable": "$ASSIGNMENT", "regex": "^[A-Za-z_$][A-Za-z0-9_$]*$"}}]},
+        "Unescaped environment assignment inserted by string replacement. First-pass sink signature lacks provenance and escaping analysis; lambda replacement is excluded syntactically only."),
+}
+
+
+def main():
+    selection = json.loads((ROOT / "benchmark/diagnostic_20261010/selection.json").read_text())
+    manifest = load_manifest()
+    out = ROOT / "benchmark/diagnostic_20261010/reference_rules/v1"
+    out.mkdir(parents=True, exist_ok=False)
+    notes = []
+    assert set(CANDIDATES) == {cid.removeprefix("CASE-") for cid in selection["case_ids"]}
+    for cid in selection["case_ids"]:
+        body, note = CANDIDATES[cid.removeprefix("CASE-")]
+        language = manifest[cid]["language"]
+        rule = {"id": "diagnostic-" + cid.lower(), "message": note.split(". ")[0],
+                "severity": "WARNING", "languages": [language],
+                "metadata": {"authorship": "assistant", "independent_review": "pending", "revision": "v1"}, **body}
+        target = out / f"{cid}.yml"
+        target.write_text(yaml.safe_dump({"rules": [rule]}, sort_keys=False))
+        inputs = {stem: sha(ROOT / "benchmark/cases" / cid / f"{stem}.{EXT[language]}") for _, stem, _ in SAMPLES}
+        notes.append({"case_id": cid, "language": language, "rule_sha256": sha(target),
+                      "rationale_and_limitations": note, "bundle_sha256": inputs, "independent_review": "pending"})
+    (out / "review_notes.json").write_text(json.dumps({"authorship": "assistant after bundle inspection",
+        "purpose": "development diagnostics; no expert-ceiling claim", "cases": notes}, indent=2) + "\n")
+    print(f"Wrote {len(notes)} first-pass candidates and review notes to {out}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,7 @@
+{
+  "attempt": 1,
+  "parsed": false,
+  "rule_path": null,
+  "visible_evaluation": null,
+  "feedback": "Invalid typed rule: pattern_not must be a list of strings, got str"
+}

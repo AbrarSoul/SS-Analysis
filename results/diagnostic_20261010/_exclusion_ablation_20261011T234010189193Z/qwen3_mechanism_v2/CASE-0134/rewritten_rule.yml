@@ -1,0 +1,20 @@
+rules:
+- id: vuln-apprise-e20fce63
+  patterns:
+  - pattern: 'r''/?(?P<events>([A-Z0-9_-]+/?)+)?''
+
+      '
+  - pattern-not: "r'((?P<events>(/[A-Z0-9_-]+)+))?'  \n"
+  languages:
+  - python
+  message: Potential regex injection vulnerability in IFTTT event handling. The regex
+    pattern allows for unbounded repetition of slashes and characters, which could
+    lead to catastrophic backtracking or unexpected behavior when processing untrusted
+    input. Fix by using a more restrictive regex that prevents excessive repetition.
+  severity: WARNING
+  metadata:
+    source-url: github.com/caronc/apprise/commit/e20fce630d55e4ca9b0a1e325a5fea6997489831
+    category: security
+    cwe: CWE-400
+    technology:
+    - python

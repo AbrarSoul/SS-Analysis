@@ -1,0 +1,19 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  patterns:
+  - pattern: $PROJECT = decodeURIComponent($MATCH[3])
+  - pattern-not: $PROJECT = decodeURIComponent($MATCH[3].replace(/\.git$/, ''))
+  languages:
+  - javascript
+  message: Potential vulnerability in URL parsing where '.git' suffix is not removed
+    from the project name. This can lead to incorrect project identification or security
+    issues. Ensure '.git' is stripped from the project name using .replace(/\.git$/,
+    '').
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    technology:
+    - javascript

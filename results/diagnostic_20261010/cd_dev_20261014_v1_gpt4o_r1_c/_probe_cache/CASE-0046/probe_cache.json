@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "python",
+    "vulnerable_function_sha256": "6bb2809b45970c7160fb306338d7437680908b450b5f103cdc6fcf2316bdfc83",
+    "patched_function_sha256": "64d670d523b8e8ae366d44a146ac8e27b05d7f000e3592d3715ad845a90e9c49",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0046",
+      "language": "python",
+      "old_name": "dont_save_keys",
+      "new_name": "dont_save_keys_renamed",
+      "vulnerable_probe": "def update():\n    global config_data\n    if not is_login():\n        return jsonify({\"success\": False, \"message\": \"\u672a\u767b\u5f55\"})\n    dont_save_keys_renamed = [\"task_plugins_config_default\", \"api_token\"]\n    for key, value in request.json.items():\n        if key not in dont_save_keys_renamed:\n            config_data.update({key: value})\n    Config.write_json(CONFIG_PATH, config_data)\n    # \u91cd\u65b0\u52a0\u8f7d\u4efb\u52a1\n    if reload_tasks():\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u6210\u529f\")\n        return jsonify({\"success\": True, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u6210\u529f\"})\n    else:\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u5931\u8d25\")\n        return jsonify({\"success\": False, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u5931\u8d25\"})",
+      "patched_probe": "def update():\n    global config_data\n    if not is_login():\n        return jsonify({\"success\": False, \"message\": \"\u672a\u767b\u5f55\"})\n    # \u4f7f\u7528\u5141\u8bb8\u5217\u8868\u9632\u6b62\u6279\u91cf\u8d4b\u503c\u653b\u51fb\n    allowed_keys = [\"cookie\", \"crontab\", \"push_config\", \"tasklist\",\n                    \"magic_regex\", \"plugins\", \"source\"]\n    for key, value in request.json.items():\n        if key in allowed_keys:\n            config_data.update({key: value})\n    Config.write_json(CONFIG_PATH, config_data)\n    # \u91cd\u65b0\u52a0\u8f7d\u4efb\u52a1\n    if reload_tasks():\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u6210\u529f\")\n        return jsonify({\"success\": True, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u6210\u529f\"})\n    else:\n        logging.info(f\">>> \u914d\u7f6e\u66f4\u65b0\u5931\u8d25\")\n        return jsonify({\"success\": False, \"message\": \"\u914d\u7f6e\u66f4\u65b0\u5931\u8d25\"})\n",
+      "patched_probe_renamed": false
+    }
+  },
+  "payload_sha256": "4ad36ca7b59c9fb0ec31ffb4a806d27d4a468ff6a19e7ab6ca93a7065be2b749"
+}

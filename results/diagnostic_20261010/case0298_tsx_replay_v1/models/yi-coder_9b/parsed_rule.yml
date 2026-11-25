@@ -1,0 +1,32 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: 'This pattern can lead to potential XSS (Cross-Site Scripting) vulnerabilities.
+    The href attribute of the anchor element is directly interpolated without proper
+    sanitization, which can allow for arbitrary JavaScript to be executed. To fix
+    this, ensure that all user-generated input is properly sanitized and escaped before
+    being used in href attributes.
+
+    '
+  metadata:
+    category: security
+    cwe:
+    - 79
+    - 91
+    owasp:
+    - A1 - Injection
+    - A7 - Cross-Site Scripting (XSS)
+    references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: '$ANCHOR = document.createElement("a") $ANCHOR.href = $SRC $ANCHOR.outerHTML
+
+    '
+  pattern-not: '$ANCHOR = document.createElement("a") $ANCHOR.href = $SRC
+
+    '
+  severity: ERROR

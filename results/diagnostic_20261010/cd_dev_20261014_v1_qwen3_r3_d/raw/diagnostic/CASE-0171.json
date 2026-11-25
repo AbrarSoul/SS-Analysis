@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0171",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791935830.071877,
+  "raw_content": "{\n  \"id\": \"vuln-graphhopper-eb189be1\",\n  \"pattern\": \"url.replaceFirst(\\\"/navigate/directions/v5/gh/\\\" + profile + \\\"/\\\", \\\"\\\");\\nurl.replaceAll(\\\"\\\\\\\\?[*]\\\", \\\"\\\");\",\n  \"pattern_not\": [\n    \"String urlStart = \\\"/navigate/directions/v5/gh/\\\" + profile + \\\"/\\\";\\nif (!url.startsWith(urlStart)) throw new IllegalArgumentException(\\\"Incorrect URL \\\" + url);\\nurl = url.substring(urlStart.length());\"\n  ],\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Insecure URL handling vulnerability. The code uses replaceFirst() and replaceAll() to strip URL components, which can be bypassed by malicious input. This may lead to path traversal or injection attacks. Fix by validating the URL prefix with startsWith() and using substring() to extract the remaining part after the expected prefix.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-22\",\n    \"owasp\": \"OWASP-A01:2021\"\n  }\n}",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/graphhopper/graphhopper\n    Commit: eb189be1fa7443ebf4ae881e737a18f818c95f41\n\n    PATCH CHANGES:\n    File: navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n--- a/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n+++ b/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n-\n-        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n-        url = url.replaceAll(\"\\\\?[*]\", \"\");\n-\n+        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n+        if (!url.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url);\n+        url = url.substring(urlStart.length());\n-\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-graphhopper-eb189be1\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"java\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    {\n  \"id\": \"path-traversal\",\n  \"pattern\": \"new File($PATH)\",\n  \"pattern_not\": [\n    \"new File(sanitized_path)\"\n  ],\n  \"pattern_inside\": \"class $CLASS {\\n    ...\\n}\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Potential path traversal vulnerability. Validate and sanitize file paths.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-22\"\n  }\n}\n\n{\n  \"id\": \"weak-cipher\",\n  \"pattern\": \"Cipher.getInstance(\\\"DES\\\")\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-326\"\n  }\n}\n\n    Respond with ONLY the JSON object, nothing else.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rule specifications as a single JSON object.\n    Return ONLY the raw JSON object -- no markdown fences, no YAML, no explanatory text before or after it.\n    Do not compose Semgrep operators (patterns:, pattern-either:, etc.) yourself -- a separate deterministic\n    serializer does that from the plain fields you provide. Supported fields: id, message, severity,\n    languages, metadata (all required except metadata), plus exactly ONE of: pattern (a single pattern\n    string), pattern_either (a list of alternative pattern strings), or taint_sources + taint_sinks\n    (each a list of pattern strings, used together). Optionally also: pattern_not (a list of one or more\n    exclusion pattern strings), pattern_inside (a single scope-restriction pattern string),\n    pattern_not_inside (a single negative-scope pattern string). taint rules cannot combine with\n    pattern_not/pattern_inside/pattern_not_inside."
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule specification (as a JSON object) to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/graphhopper/graphhopper\n    Commit: eb189be1fa7443ebf4ae881e737a18f818c95f41\n\n    PATCH CHANGES:\n    File: navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n--- a/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n+++ b/navigation/src/main/java/com/graphhopper/navigation/NavigateResource.java\n-\n-        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n-        url = url.replaceAll(\"\\\\?[*]\", \"\");\n-\n+        String urlStart = \"/navigate/directions/v5/gh/\" + profile + \"/\";\n+        if (!url.startsWith(urlStart)) throw new IllegalArgumentException(\"Incorrect URL \" + url);\n+        url = url.substring(urlStart.length());\n-\n\n    JSON FIELDS (emit a single JSON object with exactly these field names):\n    - \"id\": \"vuln-graphhopper-eb189be1\" (must be unique and descriptive, lowercase letters/digits/hyphens only)\n    - \"message\": detailed description of what the vulnerability is, why it's dangerous, and how to fix it\n    - \"severity\": one of \"ERROR\", \"WARNING\", \"INFO\"\n    - \"languages\": [\"java\"]\n    - \"metadata\": an object, e.g. {\"category\": \"security\", \"cwe\": \"...\", \"owasp\": \"...\"}\n    - exactly ONE of:\n        \"pattern\": a single pattern string matching the vulnerable code structure, using $VARNAME for\n            any expression and ... for any sequence of statements\n        \"pattern_either\": a list of alternative pattern strings (any of which should match)\n        \"taint_sources\" + \"taint_sinks\": each a list of pattern strings (taint-tracking mode)\n    - optionally also:\n        \"pattern_not\": a list of one or more pattern strings that should NOT match (e.g. the fixed\n            version) -- you do not need to know how this combines with \"pattern\"; that is handled\n            for you\n        \"pattern_inside\": a single pattern string restricting matches to inside this context\n        \"pattern_not_inside\": a single pattern string excluding matches inside this context\n\n    IMPORTANT GUIDELINES:\n    1. Make \"pattern\" (or \"pattern_either\") as specific as possible to minimize false positives\n    2. Include \"pattern_not\" for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write a clear, actionable \"message\" explaining both the problem and the fix\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULE SPECIFICATIONS:\n    {\n  \"id\": \"path-traversal\",\n  \"pattern\": \"new File($PATH)\",\n  \"pattern_not\": [\n    \"new File(sanitized_path)\"\n  ],\n  \"pattern_inside\": \"class $CLASS {\\n    ...\\n}\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Potential path traversal vulnerability. Validate and sanitize file paths.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-22\"\n  }\n}\n\n{\n  \"id\": \"weak-cipher\",\n  \"pattern\": \"Cipher.getInstance(\\\"DES\\\")\",\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-326\"\n  }\n}\n\n    Respond with ONLY the JSON object, nothing else."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-866",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"id\": \"vuln-graphhopper-eb189be1\",\n  \"pattern\": \"url.replaceFirst(\\\"/navigate/directions/v5/gh/\\\" + profile + \\\"/\\\", \\\"\\\");\\nurl.replaceAll(\\\"\\\\\\\\?[*]\\\", \\\"\\\");\",\n  \"pattern_not\": [\n    \"String urlStart = \\\"/navigate/directions/v5/gh/\\\" + profile + \\\"/\\\";\\nif (!url.startsWith(urlStart)) throw new IllegalArgumentException(\\\"Incorrect URL \\\" + url);\\nurl = url.substring(urlStart.length());\"\n  ],\n  \"languages\": [\n    \"java\"\n  ],\n  \"message\": \"Insecure URL handling vulnerability. The code uses replaceFirst() and replaceAll() to strip URL components, which can be bypassed by malicious input. This may lead to path traversal or injection attacks. Fix by validating the URL prefix with startsWith() and using substring() to extract the remaining part after the expected prefix.\",\n  \"severity\": \"ERROR\",\n  \"metadata\": {\n    \"category\": \"security\",\n    \"cwe\": \"CWE-22\",\n    \"owasp\": \"OWASP-A01:2021\"\n  }\n}",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791935830,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 1039,
+      "total_tokens": 1295,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 2.060364958990249,
+  "error": null,
+  "input_tokens": 1039,
+  "output_tokens": 256
+}

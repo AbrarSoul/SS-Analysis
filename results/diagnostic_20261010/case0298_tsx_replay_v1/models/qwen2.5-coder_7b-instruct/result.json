@@ -1,0 +1,49 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/qwen2.5-coder_7b-instruct__autogrep_default/raw/qwen2.5-coder_7b-instruct__20260928T211558Z/CASE-0298.json",
+  "raw_response_sha256": "c5af0c88855908df942280aa972a1dd7acf6832e17293a010507419283815fcd",
+  "parsed_rule_sha256": "c7ab8389652b94d51b8635162ea1eb80254565aacfa4aada92c71014e5c2512f",
+  "semgrep_returncode": 2,
+  "scan_ok": false,
+  "errors": [
+    {
+      "code": 2,
+      "level": "error",
+      "type": "Rule parse error",
+      "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+      "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n$VAR = document.createElement(\"a\")\n$VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`\n... |> $VAR.outerHTML\n\n----- end pattern -----\n"
+    }
+  ],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scan_error"
+}

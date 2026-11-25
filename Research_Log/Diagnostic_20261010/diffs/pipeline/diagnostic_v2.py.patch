@@ -1,0 +1,296 @@
+--- before/pipeline/diagnostic_v2.py
++++ after/pipeline/diagnostic_v2.py
+@@ -0,0 +1,293 @@
++"""Isolated diagnostic runner: complete artifacts, fixed denominators, no hidden feedback.
++
++References are assistant-authored, post-inspection candidates, not expert labels.
++Model raw/iterative conditions share the first response. Historical files are read
++only. Every invocation creates a NEW output directory and refuses to overwrite one.
++"""
++import argparse
++from datetime import datetime, timezone
++import hashlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++import yaml
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path[:0] = [str(ROOT / "pipeline"), str(ROOT / "autogrep")]
++from config import Config
++from llm_client import LLMClient
++from raw_capture import RawCaptureRecorder, wrap_llm_client
++from case_loader import load_case
++from eligible_cases import load_manifest, eligible_supported_cases
++
++VERSION = "diagnostic-v2.1"
++SEMGREP = ROOT / ".venv/bin/semgrep"
++DEFAULT_SELECTION = ROOT / "benchmark/diagnostic_20261010/selection.json"
++SAMPLES = [("original_vulnerable", "vulnerable_source", True),
++           ("original_patched", "patched_source", False),
++           ("variant_vulnerable_1", "variant_vulnerable_01", True),
++           ("variant_vulnerable_2", "variant_vulnerable_02", True),
++           ("variant_safe", "variant_safe_01", False),
++           ("benign_lookalike", "benign_lookalike", False)]
++EXT = {"python": "py", "java": "java", "javascript": "js", "typescript": "ts"}
++
++
++def sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def save(path, data):
++    path.parent.mkdir(parents=True, exist_ok=True)
++    with path.open("x") as f:
++        json.dump(data, f, indent=2)
++        f.write("\n")
++
++
++def semgrep_env(out):
++    env = os.environ.copy()
++    # semgrep's launcher delegates to pysemgrep via PATH. An absolute launcher
++    # path alone can therefore execute the unrelated system-wide installation.
++    env["PATH"] = str(ROOT / ".venv/bin") + os.pathsep + env.get("PATH", "")
++    env.update(SEMGREP_SETTINGS_FILE=str(out / "semgrep-settings.yml"),
++               SEMGREP_LOG_FILE=str(out / "semgrep.log"),
++               SEMGREP_SEND_METRICS="off", SEMGREP_ENABLE_VERSION_CHECK="0")
++    return env
++
++
++def scan(rule_path, cid, manifest, ann, out, *, hidden):
++    out.mkdir(parents=True, exist_ok=False)
++    language = manifest[cid]["language"]
++    specs = SAMPLES if hidden else SAMPLES[:2]
++    targets = [(kind, ROOT / "benchmark/cases" / cid / f"{stem}.{EXT[language]}", positive)
++               for kind, stem, positive in specs]
++    missing = [str(p) for _, p, _ in targets if not p.is_file()]
++    if missing:
++        result = {"scan_ok": False, "errors": ["Missing bundle files: " + repr(missing)], "samples": []}
++        save(out / "evaluation.json", result)
++        return result
++    command = [str(SEMGREP), "--config", str(rule_path), "--json", "--metrics=off",
++               "--disable-version-check", "--no-git-ignore", "--jobs=1", *[str(p) for _, p, _ in targets]]
++    start = time.monotonic()
++    try:
++        proc = subprocess.run(command, capture_output=True, text=True, env=semgrep_env(out), timeout=120)
++        raw_stdout, raw_stderr, returncode = proc.stdout, proc.stderr, proc.returncode
++    except subprocess.TimeoutExpired as exc:
++        raw_stdout = exc.stdout or b""
++        raw_stderr = exc.stderr or b""
++        raw_stdout = raw_stdout.decode(errors="replace") if isinstance(raw_stdout, bytes) else raw_stdout
++        raw_stderr = raw_stderr.decode(errors="replace") if isinstance(raw_stderr, bytes) else raw_stderr
++        returncode = -1
++    elapsed = time.monotonic() - start
++    (out / "stdout.json").write_text(raw_stdout)
++    (out / "stderr.txt").write_text(raw_stderr)
++    try:
++        data = json.loads(raw_stdout)
++    except json.JSONDecodeError:
++        data = {"errors": [{"message": "Semgrep did not return JSON"}], "results": []}
++    errors = data.get("errors", [])
++    scanned = {str(Path(p).resolve()) for p in data.get("paths", {}).get("scanned", [])}
++    all_scanned = all(str(p.resolve()) in scanned for _, p, _ in targets)
++    if returncode:
++        errors = [*errors, {"message": f"Semgrep exited with status {returncode}"}]
++    if not all_scanned:
++        errors = [*errors, {"message": "Semgrep did not scan every requested sample"}]
++    ok = returncode == 0 and not errors and all_scanned
++    findings = data.get("results", [])
++    records = []
++    for kind, path, positive in targets:
++        found = [r for r in findings if Path(r["path"]).resolve() == path.resolve()]
++        lines = [r["start"]["line"] for r in found]
++        location = None
++        if positive:
++            bounds = manifest[cid]["vulnerable_lines"] if kind == "original_vulnerable" else ann.get((cid, kind))
++            if bounds is None:
++                ok = False
++                errors = [*errors, {"message": f"Missing location annotation for {cid}/{kind}"}]
++            location = bool(bounds and any(bounds[0] <= line <= bounds[1] for line in lines))
++        outcome = ("TP" if location else "FN") if positive else ("FP" if found else "TN")
++        records.append({"sample_type": kind, "label": "positive" if positive else "negative",
++                        "detected": bool(found), "finding_location_correct": location,
++                        "finding_lines": lines, "outcome": outcome,
++                        "sample_path": str(path.relative_to(ROOT)), "sample_sha256": sha(path)})
++    by_type = {r["sample_type"]: r for r in records}
++    legacy_accepted = ok and by_type["original_vulnerable"]["detected"] and not by_type["original_patched"]["detected"]
++    visible_correct = ok and by_type["original_vulnerable"]["outcome"] == "TP" and by_type["original_patched"]["outcome"] == "TN"
++    result = {"scan_ok": ok, "returncode": returncode, "all_targets_scanned": all_scanned,
++              "errors": errors, "command": command, "validation_seconds": elapsed,
++              "legacy_accepted": legacy_accepted, "visible_correct": visible_correct,
++              "complete_success": bool(hidden and ok and all(r["outcome"] in {"TP", "TN"} for r in records)),
++              "samples": records}
++    save(out / "evaluation.json", result)
++    return result
++
++
++def run_model_case(cid, llm, config, recorder, manifest, ann, out):
++    """All model calls and visible scans finish before ANY hidden evaluation."""
++    patch = load_case(cid, config)
++    recorder.begin_case(cid)
++    attempts, error, accepted_rule = [], None, None
++    for attempt in range(1, 4):
++        rule = llm.generate_rule(patch, error_feedback=error)
++        folder = out / cid / f"attempt_{attempt}"
++        folder.mkdir(parents=True, exist_ok=False)
++        evaluation = None
++        if rule is not None:
++            rule_path = folder / "rule.yml"
++            rule_path.write_text(yaml.safe_dump({"rules": [rule]}, sort_keys=False))
++            evaluation = scan(rule_path, cid, manifest, ann, folder / "visible", hidden=False)
++            if evaluation["legacy_accepted"]:
++                accepted_rule = rule_path
++                error = None
++            elif not evaluation["scan_ok"]:
++                error = "Semgrep scan error: " + json.dumps(evaluation["errors"])
++            else:
++                visible = {r["sample_type"]: r for r in evaluation["samples"]}
++                error = ("Rule incorrectly detected vulnerability in fixed version" if visible["original_patched"]["detected"]
++                         else "Rule failed to detect vulnerability in original version")
++        else:
++            error = llm.last_error
++        item = {"attempt": attempt, "parsed": rule is not None,
++                "rule_path": str(folder / "rule.yml") if rule is not None else None,
++                "visible_evaluation": evaluation, "feedback": error}
++        save(folder / "attempt.json", item)
++        attempts.append(item)
++        if accepted_rule:
++            break
++    # No hidden results or reference rules are accessible to the model call path.
++    raw_rule = attempts[0]["rule_path"]
++    raw = scan(Path(raw_rule), cid, manifest, ann, out / cid / "raw_hidden", hidden=True) if raw_rule else None
++    final = scan(accepted_rule, cid, manifest, ann, out / cid / "iterative_hidden", hidden=True) if accepted_rule else None
++    if accepted_rule:
++        (out / cid / "final_rule.yml").write_bytes(accepted_rule.read_bytes())
++    payloads = []
++    for p in [recorder.raw_dir / f"{cid}.json", *sorted(recorder.retries_dir.glob(f"{cid}_attempt*.json"))]:
++        if p.exists():
++            payloads.append(json.loads(p.read_text()))
++    def total(field):
++        values = [p.get(field) for p in payloads]
++        return sum(values) if values and all(v is not None for v in values) else None
++    episode = {"case_id": cid, "attempts": attempts, "raw": raw, "iterative": final,
++               "final_rule_path": str(out / cid / "final_rule.yml") if accepted_rule else None,
++               "final_rule_sha256": sha(accepted_rule) if accepted_rule else None,
++               "calls_recorded": len(payloads), "input_tokens": total("input_tokens"),
++               "output_tokens": total("output_tokens"), "generation_seconds": total("generation_seconds")}
++    save(out / cid / "episode.json", episode)
++    return episode
++
++
++def report(episodes, requested, mode):
++    conditions = ("reference",) if mode == "references" else ("raw", "iterative")
++    result = {"requested_cases": len(requested), "completed_cases": len(episodes), "conditions": {}}
++    for condition in conditions:
++        evaluations = [e.get(condition) for e in episodes]
++        result["conditions"][condition] = {
++            "evaluated": sum(e is not None for e in evaluations),
++            "scan_errors": sum(bool(e and not e["scan_ok"]) for e in evaluations),
++            "accepted": sum(bool(e and e["legacy_accepted"]) for e in evaluations),
++            "visible_correct": sum(bool(e and e["visible_correct"]) for e in evaluations),
++            "complete_success": sum(bool(e and e["complete_success"]) for e in evaluations),
++            "hidden_positive_hits_all_requested": sum(sum(s["outcome"] == "TP" for s in e["samples"]
++                 if s["sample_type"].startswith("variant_vulnerable")) for e in evaluations if e and e["legacy_accepted"] and e["scan_ok"]),
++            "expected_hidden_positives": 2 * len(requested),
++            "hidden_false_positives_accepted": sum(sum(s["outcome"] == "FP" for s in e["samples"]
++                if s["sample_type"] in {"variant_safe", "benign_lookalike"})
++                for e in evaluations if e and e["legacy_accepted"] and e["scan_ok"]),
++            "accepted_hidden_negatives_evaluated": sum(2 for e in evaluations
++                if e and e["legacy_accepted"] and e["scan_ok"])}
++    return result
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("mode", choices=["preflight", "references", "model"])
++    parser.add_argument("--selection", type=Path, default=DEFAULT_SELECTION)
++    parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--reference-version", default="v1")
++    parser.add_argument("--model", default="qwen3-coder:30b")
++    args = parser.parse_args()
++    out = args.output.resolve()
++    # Permit only the dedicated namespace, never a historical run directory.
++    permitted = ROOT / "results/diagnostic_20261010"
++    if permitted not in out.parents:
++        parser.error(f"Output must be a fresh directory beneath {permitted}")
++    out.mkdir(parents=True, exist_ok=False)
++    selection = json.loads(args.selection.read_text())
++    ids = selection["case_ids"]
++    manifest = load_manifest()
++    if not set(ids) <= eligible_supported_cases(manifest) or len(ids) != len(set(ids)):
++        raise RuntimeError("Selection contains ineligible or duplicate cases")
++    if args.mode == "model" and not os.environ.get("GPTLAB_API_KEY"):
++        save(out / "selection.json", selection)
++        save(out / "blocked.json", {"reason": "GPTLAB_API_KEY unavailable; zero model calls made",
++             "created_utc": datetime.now(timezone.utc).isoformat(), "model": args.model,
++             "runner_sha256": sha(__file__), "selection_sha256": sha(args.selection),
++             "semgrep_preflight_performed": False})
++        raise SystemExit("GPTLAB_API_KEY unavailable; no model calls made")
++    ann = {(a["case_id"], a["variant"]): (a["start_line"], a["end_line"])
++           for a in map(json.loads, (ROOT / "benchmark/variant_vulnerable_lines.jsonl").read_text().splitlines())}
++    version = subprocess.run([str(SEMGREP), "--version"], capture_output=True, text=True, env=semgrep_env(out))
++    if version.returncode or version.stdout.strip() != "1.177.0":
++        save(out / "preflight_error.json", {"error": "Pinned Semgrep 1.177.0 required", "stdout": version.stdout, "stderr": version.stderr})
++        raise SystemExit("Pinned Semgrep preflight failed; see preflight_error.json")
++    code = [Path(__file__), ROOT / "pipeline/raw_capture.py", ROOT / "autogrep/llm_client.py",
++            ROOT / "autogrep/config.py", ROOT / "pipeline/case_loader.py", ROOT / "pipeline/gptlab_config.py",
++            ROOT / "autogrep/patch_processor.py", ROOT / "pipeline/eligible_cases.py"]
++    env = {"version": VERSION, "created_utc": datetime.now(timezone.utc).isoformat(), "mode": args.mode,
++           "model": args.model if args.mode == "model" else None, "temperature": 0, "max_tokens": 2048,
++           "max_attempts": 3, "schema_policy": "semgrep_search_taint_v2", "prompt_policy": "historical_autogrep_default_unchanged",
++           "semgrep_version": version.stdout.strip(), "selection_sha256": sha(args.selection),
++           "code_sha256": {str(p.relative_to(ROOT)): sha(p) for p in code},
++           "credential_available": bool(os.environ.get("GPTLAB_API_KEY")),
++           "reference_authorship": "assistant-authored after bundle inspection; independent expert review pending"}
++    save(out / "environment.json", env)
++    save(out / "selection.json", selection)
++    if args.mode == "preflight":
++        print(json.dumps(env, indent=2))
++        return
++    config = Config(openrouter_api_key="offline-reference", repos_cache_dir=out / "cache",
++                    rule_schema_policy="semgrep_search_taint_v2", max_output_tokens=2048)
++    if args.mode == "model":
++        from gptlab_config import build_config
++        config = build_config(args.model, temperature=0, max_retries=3, max_output_tokens=2048,
++                              repos_cache_dir=out / "cache", generated_rules_dir=out / "rules")
++        config.rule_schema_policy = "semgrep_search_taint_v2"
++        config.benchmark_cases_dir = ROOT / "benchmark/cases"
++        recorder = RawCaptureRecorder(out, "diagnostic")
++        llm = LLMClient(config)
++        # Retries are part of this recorded protocol, never hidden SDK retries.
++        llm.client.max_retries = 0
++        wrap_llm_client(llm, recorder)
++    episodes = []
++    for cid in ids:
++        if args.mode == "references":
++            source = ROOT / "benchmark/diagnostic_20261010/reference_rules" / args.reference_version / f"{cid}.yml"
++            if not source.exists():
++                episode = {"case_id": cid, "reference": None, "status": "reference_not_authored"}
++            else:
++                target = out / cid / "rule.yml"
++                target.parent.mkdir(parents=True, exist_ok=False)
++                target.write_bytes(source.read_bytes())
++                parser_client = object.__new__(LLMClient)
++                parser_client.config = config
++                doc = yaml.safe_load(target.read_text())
++                valid, error = parser_client.validate_rule_schema(doc["rules"][0])
++                if not valid:
++                    raise RuntimeError(f"Reference {cid} failed envelope validation: {error}")
++                evaluation = scan(target, cid, manifest, ann, out / cid / "bundle", hidden=True)
++                episode = {"case_id": cid, "reference": evaluation, "source_rule_sha256": sha(source)}
++            save(out / cid / "episode.json", episode)
++        else:
++            episode = run_model_case(cid, llm, config, recorder, manifest, ann, out)
++        episodes.append(episode)
++        print(f"{cid}: " + json.dumps(report([episode], [cid], args.mode)["conditions"]), flush=True)
++    summary = report(episodes, ids, args.mode)
++    save(out / "summary.json", summary)
++    print(json.dumps(summary, indent=2))
++
++
++if __name__ == "__main__":
++    main()

@@ -1,0 +1,19 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  patterns:
+  - pattern: File.createTempFile($PREFIX, $SUFFIX)
+  - pattern-not: createTempFile($PREFIX, $SUFFIX)
+  languages:
+  - java
+  message: Insecure temporary file creation detected. Using File.createTempFile without
+    specifying file permissions can lead to security vulnerabilities. Use Files.createTempFile
+    with appropriate PosixFilePermissions to ensure the file is not accessible by
+    other users.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-377
+    owasp: A9:2017
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    technology:
+    - java

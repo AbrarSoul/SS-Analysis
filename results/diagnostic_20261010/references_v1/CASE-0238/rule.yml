@@ -1,0 +1,13 @@
+rules:
+- id: diagnostic-case-0238
+  message: CSV formula injection without export-level escaping
+  severity: WARNING
+  languages:
+  - typescript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  patterns:
+  - pattern: Papaparse.unparse(...)
+  - pattern-not: 'Papaparse.unparse(..., { ..., escapeFormulae: true, ... })'

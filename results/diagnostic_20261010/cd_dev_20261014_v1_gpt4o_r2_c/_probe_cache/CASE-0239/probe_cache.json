@@ -1,0 +1,24 @@
+{
+  "key": {
+    "language": "javascript",
+    "vulnerable_function_sha256": "51ae5afa48e3e3ef6c9d5739ca054750aee8cc36e02fcd2f4f7335314c848277",
+    "patched_function_sha256": "41c289d8acc36312faea1e80444bf74c20e3e824c38f441d687f8e811f8a073d",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": false,
+    "fields": {
+      "case_id": "CASE-0239",
+      "language": "javascript",
+      "reason": "vulnerable_function does not parse cleanly"
+    }
+  },
+  "payload_sha256": "e3769be8e66c0e8ba03429b5b7d03828c2b512006ee4e5c5c9c1e218654b76b9"
+}

@@ -1,0 +1,2 @@
+foo("unsafe")
+foo("safe")

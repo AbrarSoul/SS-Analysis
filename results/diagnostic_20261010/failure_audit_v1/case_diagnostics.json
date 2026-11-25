@@ -1,0 +1,347 @@
+{
+  "source_run": "results/diagnostic_20261010/references_v1",
+  "cases": [
+    {
+      "case_id": "CASE-0323",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0276",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0221",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0134",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0136",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0220",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0340",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0238",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_safe",
+          "outcome": "FP",
+          "finding_lines": [
+            2564
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        },
+        {
+          "sample_type": "benign_lookalike",
+          "outcome": "FP",
+          "finding_lines": [
+            7
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0193",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "benign_lookalike",
+          "outcome": "FP",
+          "finding_lines": [
+            18
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0124",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0063",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "benign_lookalike",
+          "outcome": "FP",
+          "finding_lines": [
+            9
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0184",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "benign_lookalike",
+          "outcome": "FP",
+          "finding_lines": [
+            22
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0173",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            11
+          ],
+          "accepted_location": [
+            41,
+            44
+          ],
+          "category": "finding_outside_annotation"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0222",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0163",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            50
+          ],
+          "accepted_location": [
+            26,
+            37
+          ],
+          "category": "finding_outside_annotation"
+        },
+        {
+          "sample_type": "variant_safe",
+          "outcome": "FP",
+          "finding_lines": [
+            34
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0171",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0046",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "original_patched",
+          "outcome": "FP",
+          "finding_lines": [
+            197
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0239",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            38
+          ],
+          "accepted_location": [
+            40,
+            85
+          ],
+          "category": "finding_outside_annotation"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0235",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "original_patched",
+          "outcome": "FP",
+          "finding_lines": [
+            47
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        },
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            41
+          ],
+          "accepted_location": [
+            45,
+            79
+          ],
+          "category": "finding_outside_annotation"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0298",
+      "scan_ok": false,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "original_vulnerable",
+          "outcome": "FN",
+          "finding_lines": [],
+          "accepted_location": [
+            207,
+            212
+          ],
+          "category": "scan_invalid"
+        },
+        {
+          "sample_type": "variant_vulnerable_1",
+          "outcome": "FN",
+          "finding_lines": [],
+          "accepted_location": [
+            207,
+            211
+          ],
+          "category": "scan_invalid"
+        },
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [],
+          "accepted_location": [
+            207,
+            215
+          ],
+          "category": "scan_invalid"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0116",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "original_patched",
+          "outcome": "FP",
+          "finding_lines": [
+            350
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        },
+        {
+          "sample_type": "variant_safe",
+          "outcome": "FP",
+          "finding_lines": [
+            352
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0231",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    },
+    {
+      "case_id": "CASE-0339",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "original_patched",
+          "outcome": "FP",
+          "finding_lines": [
+            302
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        },
+        {
+          "sample_type": "variant_safe",
+          "outcome": "FP",
+          "finding_lines": [
+            306
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0081",
+      "scan_ok": true,
+      "complete_success": true,
+      "failures": []
+    }
+  ]
+}

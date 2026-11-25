@@ -1,0 +1,23 @@
+rules:
+- id: vuln-hosted-git-info-29adfe5e
+  patterns:
+  - pattern: var $MATCH = $URL.match(new RegExp(...))
+  - pattern: $MATCH[3]
+  - pattern-not: $MATCH[3].replace(/\.git$/, '')
+  - pattern-not: $MATCH[3].replace(/\.git$/, '')
+  - pattern-inside: "function $FUNC(...) {\n  ...\n  var $MATCH = $URL.match(new RegExp(...));\n\
+      \  ...\n  return decodeURIComponent($MATCH[3]);\n  ...\n}\n"
+  message: Potential path traversal vulnerability in hosted-git-info. The project
+    name extracted from the shortcut match is not properly sanitized to remove '.git'
+    suffix, which could allow directory traversal attacks when processing git URLs.
+    Fix by ensuring the project name is stripped of '.git' before decoding.
+  severity: ERROR
+  languages:
+  - javascript
+  metadata:
+    source-url: github.com/npm/hosted-git-info/commit/29adfe5ef789784c861b2cdeb15051ec2ba651a7
+    category: security
+    cwe:
+    - CWE-22
+    technology:
+    - javascript

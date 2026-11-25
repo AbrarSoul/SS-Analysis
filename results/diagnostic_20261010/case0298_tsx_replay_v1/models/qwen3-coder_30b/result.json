@@ -1,0 +1,45 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/qwen3-coder_30b__autogrep_default/raw/qwen3-coder_30b__20261008T000640Z/CASE-0298.json",
+  "raw_response_sha256": "0a15aa1354b05e62893add8f2b4e52f26d2217a97366d01350ce0a175d44fa39",
+  "parsed_rule_sha256": "45dd71487cba13daee9aab2c865d5a920e2364c83e80833a0e8f4ccd31c237c0",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": true,
+      "finding_lines": [
+        211
+      ],
+      "outcome": "FP"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": true,
+      "finding_lines": [
+        211
+      ],
+      "outcome": "FP"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

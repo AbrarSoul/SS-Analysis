@@ -1,0 +1,20 @@
+rules:
+- id: vuln-ckeditor-oembed-plugin-10f6169e
+  patterns:
+  - pattern: "'div(embeddedContent,oembed-provider-*) script': {\n    attributes:\
+      \ '*'\n},\n"
+  languages:
+  - javascript
+  message: Unrestricted attribute assignment in oEmbed plugin allows potential XSS
+    vulnerabilities. The '*' wildcard permits arbitrary script attributes that can
+    execute malicious code when embedded content is rendered. This vulnerability occurs
+    when untrusted user input reaches the DOM without proper sanitization or attribute
+    restriction. Fix by explicitly defining allowed attributes instead of using a
+    wildcard, or by implementing strict attribute validation.
+  severity: ERROR
+  metadata:
+    source-url: github.com/w8tcha/CKEditor-oEmbed-Plugin/commit/10f6169e39510bbf5af913886037044458b9dc9b
+    category: security
+    cwe: CWE-79
+    technology:
+    - javascript

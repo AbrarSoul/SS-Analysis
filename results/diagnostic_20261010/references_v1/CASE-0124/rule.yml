@@ -1,0 +1,20 @@
+rules:
+- id: diagnostic-case-0124
+  message: Function input reaches shell execution; integer conversion treated as a
+    sanitizer
+  severity: WARNING
+  languages:
+  - python
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  mode: taint
+  pattern-sources:
+  - patterns:
+    - pattern-inside: "def $F(..., $ARG, ...):\n    ..."
+    - focus-metavariable: $ARG
+  pattern-sinks:
+  - pattern: os.system($CMD)
+  pattern-sanitizers:
+  - pattern: int(...)

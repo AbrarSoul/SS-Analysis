@@ -1,0 +1,1225 @@
+{
+  "created_utc": "2026-10-11T22:54:00.043198+00:00",
+  "label": "EXPLORATORY deterministic composition ablation -- not a new model generation result, not proof of improvement on a fresh holdout. Applies only to the 42 already-accepted rules in the frozen inventory; cannot estimate recovery of rejected rules or a different repair-loop policy.",
+  "inventory_sha256": "b98ec6eb0704e838f58b6a93a7a4721a2bb9bbf385a2669cd72a96a01ee4159c",
+  "n_instances_total": 42,
+  "n_instances_rejected": 0,
+  "rejected": [],
+  "n_distinct_case_ids": 19,
+  "distinct_case_ids": [
+    "CASE-0046",
+    "CASE-0063",
+    "CASE-0081",
+    "CASE-0124",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0163",
+    "CASE-0171",
+    "CASE-0173",
+    "CASE-0184",
+    "CASE-0193",
+    "CASE-0220",
+    "CASE-0221",
+    "CASE-0222",
+    "CASE-0238",
+    "CASE-0239",
+    "CASE-0276",
+    "CASE-0323",
+    "CASE-0340"
+  ],
+  "n_replay_mismatches_vs_historical_episode": 0,
+  "note_unit_of_analysis": "42 rule INSTANCES across repeated development runs, covering only 19 distinct case ids -- not independent cases; see per_instance for the run+case_id pairing on every row.",
+  "note_nesting_artifact": "Wrapping pattern/pattern-inside in a patterns: list is NOT always a semantic no-op even with pattern-not entirely absent -- confirmed directly for CASE-0063 (qwen3_mechanism_v4): patterns: wrapper alone, no exclusion, already loses a match the identical sibling pair finds. All totals below separate this unrelated nesting effect (orig -> isolated) from the exclusion becoming operative (isolated -> new) -- conflating them would misattribute a pre-existing patterns:-nesting quirk to the exclusion-composition question this experiment is actually about.",
+  "n_instances_with_nesting_artifact": 2,
+  "complete_success_gained": 0,
+  "complete_success_lost": 9,
+  "complete_success_unchanged": 33,
+  "complete_success_lost_attributed_to_nesting_artifact": 1,
+  "complete_success_lost_attributed_to_exclusion_effect": 8,
+  "hidden_variant_true_positives_gained_total": 0,
+  "hidden_variant_true_positives_lost_total": 22,
+  "hidden_negative_false_positives_gained_total": 0,
+  "hidden_negative_false_positives_lost_total": 1,
+  "nesting_artifact_only__tp_gained": 0,
+  "nesting_artifact_only__tp_lost": 4,
+  "nesting_artifact_only__fp_gained": 0,
+  "nesting_artifact_only__fp_lost": 0,
+  "exclusion_effect_only__tp_gained": 0,
+  "exclusion_effect_only__tp_lost": 18,
+  "exclusion_effect_only__fp_gained": 0,
+  "exclusion_effect_only__fp_lost": 1,
+  "per_run_24_case_denominator": {
+    "qwen3_v3": {
+      "requested": 24,
+      "historical_complete_success": 6,
+      "ablated_complete_success": 4,
+      "ablated_subset_size": 19
+    },
+    "qwen3_mechanism_v1": {
+      "requested": 24,
+      "historical_complete_success": 4,
+      "ablated_complete_success": 4,
+      "ablated_subset_size": 0
+    },
+    "qwen3_mechanism_v2": {
+      "requested": 24,
+      "historical_complete_success": 5,
+      "ablated_complete_success": 4,
+      "ablated_subset_size": 8
+    },
+    "qwen3_mechanism_v3": {
+      "requested": 24,
+      "historical_complete_success": 5,
+      "ablated_complete_success": 3,
+      "ablated_subset_size": 8
+    },
+    "qwen3_mechanism_v4": {
+      "requested": 24,
+      "historical_complete_success": 6,
+      "ablated_complete_success": 3,
+      "ablated_subset_size": 5
+    },
+    "qwen3_mechanism_v5": {
+      "requested": 24,
+      "historical_complete_success": 3,
+      "ablated_complete_success": 2,
+      "ablated_subset_size": 2
+    }
+  },
+  "per_instance": [
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0046",
+      "rule_id": "vuln-quark-auto-save-ea8377a5",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0046/final_rule.yml",
+      "source_sha256": "51a1e1c1832aa4aacb72c21447162b7afb34946ed15da1663fd8afc2f8d7a84f",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0063",
+      "rule_id": "vuln-jspdf-d8bb3b39",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0063/final_rule.yml",
+      "source_sha256": "d2e7f68b32ba6c7d1c7e1eea73fc85a70e09a7cd5444edd98ec6029e4e3208d5",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0081",
+      "rule_id": "vuln-ebay-mcp-aab0bda7",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0081/final_rule.yml",
+      "source_sha256": "81050ee27f589dc3734aabe250ef7d3c9eef55fab3c4dbc426fb7b505e3ae416",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0124",
+      "rule_id": "vuln-sagemaker-python-sdk-2d873d53",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0124/final_rule.yml",
+      "source_sha256": "52f67f86848bd070271c0bcee7995b18a8bca43600293218ae4311a3f5864257",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0134",
+      "rule_id": "vuln-apprise-e20fce63",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0134/final_rule.yml",
+      "source_sha256": "1f880691ff6ab026107c2518bc6d494a5ce4b74432f449002ebfbacbd3275cf0",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0136",
+      "rule_id": "vuln-java-merge-sort-450fdee7",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0136/final_rule.yml",
+      "source_sha256": "e04789f97ef71d7c0b78253402cd9d9e211dde97faea87c63adc507a78b71393",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0163",
+      "rule_id": "vuln-git-pull-or-clone-f9ce092b",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0163/final_rule.yml",
+      "source_sha256": "110634783dc9ae4171263b83a2516a61b6aa22de26149afcb9a28079a8697466",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0171",
+      "rule_id": "vuln-graphhopper-eb189be1",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0171/final_rule.yml",
+      "source_sha256": "95e9c3434425842a3f35edd4fbb62492d53e15282a83532f1d1c6e501f9c8bff",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0173",
+      "rule_id": "vuln-hono-cf9a78db",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0173/final_rule.yml",
+      "source_sha256": "6a3ffb72ac4474655ff15eb44fb8b90f4e11b91c491b0555fc55cbb7710d84ac",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0184",
+      "rule_id": "vuln-git-client-plugin-75ea3fe0",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0184/final_rule.yml",
+      "source_sha256": "d9174ecf37454861a563854687254b44c5fff1122b4cf3114089f1fcf3154f71",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "benign_lookalike": {
+          "from": "FP",
+          "to": "TN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": false,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "benign_lookalike": {
+          "from": "FP",
+          "to": "TN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0193",
+      "rule_id": "vuln-semantic-versioning-plugin-8df2fabd",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0193/final_rule.yml",
+      "source_sha256": "d5b45afc973d7bd61ba9c50a4eb42f2fc4bfcc261991e5d6dabebcf9867e5e0b",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0220/final_rule.yml",
+      "source_sha256": "284ae67053713e0537f14cf74c967f6d1133eb32bb30b1d95c0e0eb6ec4ce772",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0221",
+      "rule_id": "vuln-micronaut-core-9d1eff5c",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0221/final_rule.yml",
+      "source_sha256": "3bb132c1cd4c26bf494bbcb6b6f40ba6268b525486acb008408537f9c51b6d7e",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0222",
+      "rule_id": "vuln-mindsdb-083afcf6",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0222/final_rule.yml",
+      "source_sha256": "c57922f952d3e15c7a05d166266f2feadc572541d050cfd744ac776aed18558f",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0238",
+      "rule_id": "vuln-nocodb-079e3abe",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0238/final_rule.yml",
+      "source_sha256": "488168005be52860f8ac4bc0dcb5fa6a19993e32d189034ce91ef267a070ac34",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0239",
+      "rule_id": "vuln-hosted-git-info-29adfe5e",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0239/final_rule.yml",
+      "source_sha256": "0ee2a71e2ef4a8302a51b732cdbe319c33040f425f4eb28ca5c81600565fa81c",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0276",
+      "rule_id": "vuln-cpython-482d6f8b",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0276/final_rule.yml",
+      "source_sha256": "88cde026296b20eb4c5f9482b0ed556a6f3b4e18bcd8b7860a230ab603af0646",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0323/final_rule.yml",
+      "source_sha256": "d6233663f2356bd93d378cf79d3b29e044ca1298213d8247cb95ec8359999ba0",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_v3",
+      "case_id": "CASE-0340",
+      "rule_id": "vuln-logkitty-ef2f673e",
+      "source_path": "results/diagnostic_20261010/qwen3_v3/CASE-0340/final_rule.yml",
+      "source_sha256": "94be36be61517503c82a4036f4abd30c8f874a7ec0784e70c00402f0c269f39c",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0046",
+      "rule_id": "vuln-quark-auto-save-ea8377a5",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0046/final_rule.yml",
+      "source_sha256": "0257b2333115525bff8c055575321425da4301d95ac51ba84491daab9e2dd045",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0063",
+      "rule_id": "vuln-jspdf-d8bb3b39",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0063/final_rule.yml",
+      "source_sha256": "3f3bdba82e980b883c1f5b2fd74a4c89fb31517c9ccc573913a20fa2198f4592",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0134",
+      "rule_id": "vuln-apprise-e20fce63",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0134/final_rule.yml",
+      "source_sha256": "0f4c88c943820e268d78a977e91508490a386a6f91bdcb84e2ee0fa7746986bb",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0163",
+      "rule_id": "vuln-git-pull-or-clone-f9ce092b",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0163/final_rule.yml",
+      "source_sha256": "d58aee618f77c938b4d36edd1a66280d6b140db00d179fd89c55afa8adc61a32",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0193",
+      "rule_id": "vuln-semantic-versioning-plugin-8df2fabd",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0193/final_rule.yml",
+      "source_sha256": "03c662a423b251a3d951a3c5a531ff24fc260068567c26c626464e7f22cff9da",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0220/final_rule.yml",
+      "source_sha256": "0c3df1a2340f2df7676db5626932f49e0f4448d2240c29ecba9ac9950283d691",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0221",
+      "rule_id": "vuln-micronaut-core-9d1eff5c",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0221/final_rule.yml",
+      "source_sha256": "8f4d8b616227d7fe6ead99e9c0158e5df110f31db9daa7a5530e9ed792e1fb2a",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v2",
+      "case_id": "CASE-0239",
+      "rule_id": "vuln-hosted-git-info-29adfe5e",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0239/final_rule.yml",
+      "source_sha256": "d0b9aafe942ae0338c0fbb7a6de7d5ccb680de3c2cbc451ba77305e777cabb02",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0063",
+      "rule_id": "vuln-jspdf-d8bb3b39",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0063/final_rule.yml",
+      "source_sha256": "a43acdc2ae50e011f763a7d466550aa39a3ebfe7a9efd1907ed5541ecf4eea25",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": true,
+      "nesting_artifact_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0124",
+      "rule_id": "unsafe-shell-execution-with-string-concatenation",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0124/final_rule.yml",
+      "source_sha256": "cce0586b04e1601796f82307427f7a17b6ea92de60a8ef16070dcc5c7ea9de23",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0136",
+      "rule_id": "vuln-java-merge-sort-450fdee7",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0136/final_rule.yml",
+      "source_sha256": "39b5ad70ca1c9b44c968b71ca2a0dda8c187f2340385ca84a6219b662105c1c5",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0171",
+      "rule_id": "vuln-graphhopper-eb189be1",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0171/final_rule.yml",
+      "source_sha256": "a127c8f940369923999260aa6d2d86087eb04ba2aef08b8a8cd4ffa6a98807c6",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0193",
+      "rule_id": "vuln-semantic-versioning-plugin-8df2fabd",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0193/final_rule.yml",
+      "source_sha256": "2e0b5084d8139caa61c60609291c838bae6b4495118995146a1d4284a9a31fb7",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0220/final_rule.yml",
+      "source_sha256": "40882256bcf69b6b2a4aaccb107d0d4de5f421439f3016f7d089f57179d0c32d",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0222",
+      "rule_id": "mindsdb-dremio-handler-insecure-ssl",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0222/final_rule.yml",
+      "source_sha256": "f437eb10c998fe8d4f4b63efa5e83cd8c3eaf4805b5d67c16c50617bef8769e7",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v3",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v3/CASE-0323/final_rule.yml",
+      "source_sha256": "ee67d71862a189f236f38f65f605938da0d0872970bfe6b8a074a319716a4190",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0063",
+      "rule_id": "vuln-jspdf-d8bb3b39",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0063/final_rule.yml",
+      "source_sha256": "e5c19adb0ac4d25e3d02f1c04159cd6088d8230e79c5b93976c173df34ca82df",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": true,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": true,
+      "nesting_artifact_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0193",
+      "rule_id": "vuln-semantic-versioning-plugin-8df2fabd",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0193/final_rule.yml",
+      "source_sha256": "2e0b5084d8139caa61c60609291c838bae6b4495118995146a1d4284a9a31fb7",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": false,
+      "isolated_complete_success": false,
+      "new_complete_success": false,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0220",
+      "rule_id": "vuln-phpldapadmin-dd6e9583",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0220/final_rule.yml",
+      "source_sha256": "73e40224a5e08ccfc11a9b4204fed4e11a6b09333dc304e3deaa193404d684f1",
+      "has_exclusion_keys_beyond_pattern_not": true,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0221",
+      "rule_id": "micronaut-netty-http-headers-default-constructor",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0221/final_rule.yml",
+      "source_sha256": "bee69c51fc908b26829ea74505a5336bbb350077cf3c3c00518d93812bad2039",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v4",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v4/CASE-0323/final_rule.yml",
+      "source_sha256": "a2f6e131ba25e114f2647f3607d28389d5f43b9e0a4cbef1916ad244cf07cd91",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    },
+    {
+      "run": "qwen3_mechanism_v5",
+      "case_id": "CASE-0134",
+      "rule_id": "vuln-apprise-e20fce63",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0134/final_rule.yml",
+      "source_sha256": "52727710c0e61972d3e6ca0ead3a4697ebf216aebb2ce58c008d7fe539ba86f2",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {},
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": true,
+      "complete_success_changed": false,
+      "outcome_changes": {}
+    },
+    {
+      "run": "qwen3_mechanism_v5",
+      "case_id": "CASE-0323",
+      "rule_id": "vuln-ckeditor-oembed-plugin-10f6169e",
+      "source_path": "results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0323/final_rule.yml",
+      "source_sha256": "74a407f503eea0a86416fdfb432c668681426587eee1b8aebfec1be0aa8e1061",
+      "has_exclusion_keys_beyond_pattern_not": false,
+      "has_pattern_inside": false,
+      "replay_matches_historical_episode": true,
+      "nesting_artifact_present": false,
+      "nesting_artifact_changes": {},
+      "exclusion_effect_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      },
+      "orig_scan_ok": true,
+      "new_scan_ok": true,
+      "orig_complete_success": true,
+      "isolated_complete_success": true,
+      "new_complete_success": false,
+      "complete_success_changed": true,
+      "outcome_changes": {
+        "original_vulnerable": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_1": {
+          "from": "TP",
+          "to": "FN"
+        },
+        "variant_vulnerable_2": {
+          "from": "TP",
+          "to": "FN"
+        }
+      }
+    }
+  ]
+}

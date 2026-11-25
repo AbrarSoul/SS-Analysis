@@ -1,0 +1,79 @@
+{
+  "purpose": "post-hoc suffix sensitivity; not historical rescoring",
+  "semgrep_version": "1.177.0",
+  "command": [
+    "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+    "--config",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/references_v1/CASE-0298/rule.yml",
+    "--json",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-git-ignore",
+    "--jobs=1",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/vulnerable_source.tsx",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/patched_source.tsx",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_vulnerable_01.tsx",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_vulnerable_02.tsx",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_safe_01.tsx",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/benign_lookalike.tsx"
+  ],
+  "returncode": 0,
+  "errors": [],
+  "samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "source": "benchmark/cases/CASE-0298/vulnerable_source.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/vulnerable_source.tsx",
+      "sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+      "identical_bytes": true,
+      "finding_lines": [
+        211
+      ]
+    },
+    {
+      "sample_type": "original_patched",
+      "source": "benchmark/cases/CASE-0298/patched_source.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/patched_source.tsx",
+      "sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37",
+      "identical_bytes": true,
+      "finding_lines": []
+    },
+    {
+      "sample_type": "variant_vulnerable_1",
+      "source": "benchmark/cases/CASE-0298/variant_vulnerable_01.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_vulnerable_01.tsx",
+      "sha256": "34443a1bb436b02f61cebc53d7d923305b0657b34d407963337c3c663bd6bfe6",
+      "identical_bytes": true,
+      "finding_lines": [
+        211
+      ]
+    },
+    {
+      "sample_type": "variant_vulnerable_2",
+      "source": "benchmark/cases/CASE-0298/variant_vulnerable_02.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_vulnerable_02.tsx",
+      "sha256": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6",
+      "identical_bytes": true,
+      "finding_lines": [
+        208
+      ]
+    },
+    {
+      "sample_type": "variant_safe",
+      "source": "benchmark/cases/CASE-0298/variant_safe_01.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_safe_01.tsx",
+      "sha256": "3913dd6f0d7f1cea2f4f3a6c32ecb1ff28e5517f4d580579f7655f3fe8473f19",
+      "identical_bytes": true,
+      "finding_lines": []
+    },
+    {
+      "sample_type": "benign_lookalike",
+      "source": "benchmark/cases/CASE-0298/benign_lookalike.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/benign_lookalike.tsx",
+      "sha256": "c7c9530576f1842d5ce1c6987597885859085e6da0b7c830824c7b3d763727ab",
+      "identical_bytes": true,
+      "finding_lines": []
+    }
+  ],
+  "rule_sha256": "519be5ff38193d555115ff8339008b914621482ae581e4560563d9d94dab1168"
+}

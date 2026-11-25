@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0340",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791933831.040404,
+  "raw_content": "rules:\n- id: \"vuln-logkitty-ef2f673e\"\n  pattern: |\n    execSync($CMD, ...)\n  pattern-not: |\n    execFileSync($CMD, ...)\n  languages: [\"typescript\"]\n  message: |\n    Vulnerable use of execSync() function. This can lead to command injection vulnerabilities when user input is included in the command string. The execSync() function executes commands synchronously and can be dangerous if not properly sanitized. Replace with execFileSync() and pass arguments as an array to avoid shell injection risks.\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf\"\n    category: security\n    cwe: \n      - 78\n    owasp:\n      - OWASP Top 10:2021-A03: Injection\n    references:\n      - \"https://nodejs.org/api/child_process.html#child_process_execsync_command_options\"\n      - \"https://nodejs.org/api/child_process.html#child_process_execfilesync_file_args_options\"\n    technology:\n      - typescript",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/zamotany/logkitty\n    Commit: ef2f673e25c629544dd3de6429999318447dd6bf\n\n    PATCH CHANGES:\n    File: src/android/adb.ts\n--- a/src/android/adb.ts\n+++ b/src/android/adb.ts\n-import { spawn, execSync, ChildProcess } from 'child_process';\n+import { spawn, execFileSync, ChildProcess } from 'child_process';\n-    execSync(`${adbPath} logcat -c`);\n+    execFileSync(adbPath, ['logcat', '-c']);\n-  let output: Buffer | undefined;\n+  let output: Buffer | String | undefined;\n-    output = execSync(\n-      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n-    );\n+    output = execFileSync(getAdbPath(adbPath), [\n+      'shell',\n+      'pidof',\n+      '-s',\n+      applicationId,\n+    ]);\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-logkitty-ef2f673e\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-logkitty-ef2f673e\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/zamotany/logkitty\n    Commit: ef2f673e25c629544dd3de6429999318447dd6bf\n\n    PATCH CHANGES:\n    File: src/android/adb.ts\n--- a/src/android/adb.ts\n+++ b/src/android/adb.ts\n-import { spawn, execSync, ChildProcess } from 'child_process';\n+import { spawn, execFileSync, ChildProcess } from 'child_process';\n-    execSync(`${adbPath} logcat -c`);\n+    execFileSync(adbPath, ['logcat', '-c']);\n-  let output: Buffer | undefined;\n+  let output: Buffer | String | undefined;\n-    output = execSync(\n-      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n-    );\n+    output = execFileSync(getAdbPath(adbPath), [\n+      'shell',\n+      'pidof',\n+      '-s',\n+      applicationId,\n+    ]);\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-logkitty-ef2f673e\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-logkitty-ef2f673e\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-490",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "rules:\n- id: \"vuln-logkitty-ef2f673e\"\n  pattern: |\n    execSync($CMD, ...)\n  pattern-not: |\n    execFileSync($CMD, ...)\n  languages: [\"typescript\"]\n  message: |\n    Vulnerable use of execSync() function. This can lead to command injection vulnerabilities when user input is included in the command string. The execSync() function executes commands synchronously and can be dangerous if not properly sanitized. Replace with execFileSync() and pass arguments as an array to avoid shell injection risks.\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf\"\n    category: security\n    cwe: \n      - 78\n    owasp:\n      - OWASP Top 10:2021-A03: Injection\n    references:\n      - \"https://nodejs.org/api/child_process.html#child_process_execsync_command_options\"\n      - \"https://nodejs.org/api/child_process.html#child_process_execfilesync_file_args_options\"\n    technology:\n      - typescript",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791933831,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 271,
+      "prompt_tokens": 839,
+      "total_tokens": 1110,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 2.23814279200451,
+  "error": null,
+  "input_tokens": 839,
+  "output_tokens": 271
+}

@@ -1,0 +1,99 @@
+{
+  "time_utc": "2026-10-12T08:13:27.027575+00:00",
+  "requests_version": "2.34.2",
+  "source_diffs": {
+    "0323": "--- benchmark/cases/CASE-0323/vulnerable_source.js\n+++ benchmark/cases/CASE-0323/variant_vulnerable_02.js\n@@ -60,12 +60,7 @@\n                             }\n                         });\n \n-                    editor.widgets.add('oembed',\n-                        {\n-                            draggable: false,\n-                            mask: true,\n-                            dialog: 'oembed',\n-                            allowedContent: {\n+                    var embedRules = {\n                                 div: {\n                                     styles: 'text-align,float',\n                                     attributes: '*',\n@@ -85,7 +80,14 @@\n                                 'div(embeddedContent,oembed-provider-*) embed': {\n                                     attributes: '*'\n                                 }\n-                            },\n+                    };\n+\n+                    editor.widgets.add('oembed',\n+                        {\n+                            draggable: false,\n+                            mask: true,\n+                            dialog: 'oembed',\n+                            allowedContent: embedRules,\n                             template:\n                                 '<div class=\"' +\n                                     (editor.config.oembed_WrapperClass != null\n",
+    "0276": "--- benchmark/cases/CASE-0276/vulnerable_source.py\n+++ benchmark/cases/CASE-0276/variant_vulnerable_02.py\n@@ -1211,11 +1211,14 @@\n     def get_data(self, path):\n         \"\"\"Return the data from path as raw bytes.\"\"\"\n         if isinstance(self, (SourceLoader, ExtensionFileLoader)):\n-            with _io.open_code(str(path)) as file:\n-                return file.read()\n+            return self._read_with_code_hook(path)\n         else:\n             with _io.FileIO(path, 'r') as file:\n                 return file.read()\n+\n+    def _read_with_code_hook(self, path):\n+        with _io.open_code(str(path)) as file:\n+            return file.read()\n \n     @_check_name\n     def get_resource_reader(self, module):\n",
+    "0221": "--- benchmark/cases/CASE-0221/vulnerable_source.java\n+++ benchmark/cases/CASE-0221/variant_vulnerable_02.java\n@@ -53,8 +53,12 @@\n      * Default constructor.\n      */\n     public NettyHttpHeaders() {\n-        this.nettyHeaders = new DefaultHttpHeaders(false);\n+        this.nettyHeaders = newLenientNettyHeaders();\n         this.conversionService = ConversionService.SHARED;\n+    }\n+\n+    private static io.netty.handler.codec.http.HttpHeaders newLenientNettyHeaders() {\n+        return new DefaultHttpHeaders(false);\n     }\n \n     /**\n",
+    "0136": "--- benchmark/cases/CASE-0136/vulnerable_source.java\n+++ benchmark/cases/CASE-0136/variant_vulnerable_02.java\n@@ -35,7 +35,11 @@\n     @Override\n     public File provide() throws IOException\n     {\n-        File f = File.createTempFile(_prefix, _suffix);\n+        return registerForCleanup(File.createTempFile(_prefix, _suffix));\n+    }\n+\n+    private static File registerForCleanup(File f)\n+    {\n         f.deleteOnExit();\n         return f;\n     }\n",
+    "0340": "--- benchmark/cases/CASE-0340/vulnerable_source.ts\n+++ benchmark/cases/CASE-0340/variant_vulnerable_02.ts\n@@ -45,15 +45,17 @@\n   }\n }\n \n+function runPidof(adb: string, applicationId: string): Buffer {\n+  return execSync(`'${adb}' shell pidof -s ${applicationId}`);\n+}\n+\n export function getApplicationPid(\n   applicationId: string,\n   adbPath?: string\n ): number {\n   let output: Buffer | undefined;\n   try {\n-    output = execSync(\n-      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n-    );\n+    output = runPidof(getAdbPath(adbPath), applicationId);\n   } catch (error) {\n     throw new CodeError(\n       ERR_ANDROID_CANNOT_GET_APP_PID,\n",
+    "0124": "--- benchmark/cases/CASE-0124/vulnerable_source.py\n+++ benchmark/cases/CASE-0124/variant_vulnerable_02.py\n@@ -98,7 +98,8 @@\n             f.write(sagemaker_dependency)\n         return\n \n-    command = f\"pigar gen -f {Path(requirements_path)} {os.getcwd()}\"\n+    parts = [\"pigar\", \"gen\", \"-f\", str(Path(requirements_path)), os.getcwd()]\n+    command = \" \".join(parts)\n     logging.info(\"Running command %s\", command)\n \n     os.system(command)\n",
+    "0222": "--- benchmark/cases/CASE-0222/vulnerable_source.py\n+++ benchmark/cases/CASE-0222/variant_vulnerable_02.py\n@@ -66,12 +66,18 @@\n \n         data = '{' + f'\"userName\": \"{self.connection_data[\"username\"]}\",\"password\": \"{self.connection_data[\"password\"]}\"' + '}'\n \n-        response = requests.post(self.base_url + '/apiv2/login', headers=headers, data=data, verify=False)\n+        response = self._post_login(headers, data)\n \n         return {\n             'Authorization': '_dremio' + response.json()['token'],\n             'Content-Type': 'application/json',\n         }\n+\n+    def _post_login(self, headers, data):\n+        # certificate verification is switched off for this call\n+        session = requests.Session()\n+        session.verify = False\n+        return session.post(self.base_url + '/apiv2/login', headers=headers, data=data)\n \n     def disconnect(self):\n         \"\"\"\n",
+    "0171": "--- benchmark/cases/CASE-0171/vulnerable_source.java\n+++ benchmark/cases/CASE-0171/variant_vulnerable_02.java\n@@ -190,7 +190,7 @@\n     private List<GHPoint> getPointsFromRequest(HttpServletRequest httpServletRequest, String profile) {\n \n         String url = httpServletRequest.getRequestURI();\n-        url = url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n+        url = stripPrefix(url, profile);\n         url = url.replaceAll(\"\\\\?[*]\", \"\");\n \n         String[] pointStrings = url.split(\";\");\n@@ -201,6 +201,10 @@\n         }\n \n         return points;\n+    }\n+\n+    private static String stripPrefix(String url, String profile) {\n+        return url.replaceFirst(\"/navigate/directions/v5/gh/\" + profile + \"/\", \"\");\n     }\n \n     static List<Double> getBearing(String bearingString) {\n",
+    "0298": "--- benchmark/cases/CASE-0298/vulnerable_source.ts\n+++ benchmark/cases/CASE-0298/variant_vulnerable_02.ts\n@@ -204,9 +204,13 @@\n   }\n }\n \n+function tweetLinkHtml(src: string) {\n+  return `<a href=\"${src}?ref_src=twsrc%5Etfw\"></a>`;\n+}\n+\n function tweetToEmbed(src: string, isDarkTheme: boolean) {\n   src = src.replaceAll(\"x.com\", \"twitter.com\");\n   return `<blockquote class=\"twitter-tweet\" data-dnt=\"true\" ${\n     isDarkTheme ? 'data-theme=\"dark\"' : \"\"\n-  }><p lang=\"en\" dir=\"ltr\"><a href=\"${src}?ref_src=twsrc%5Etfw\"></a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n-}\n+  }><p lang=\"en\" dir=\"ltr\">${tweetLinkHtml(src)}</blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script> `;\n+}\n",
+    "0231": "--- benchmark/cases/CASE-0231/vulnerable_source.py\n+++ benchmark/cases/CASE-0231/variant_vulnerable_02.py\n@@ -686,6 +686,10 @@\n     return jsonify(json=data)\n \n \n+def _workflow_file(user_dir: str, filename: str) -> str:\n+    return os.path.join(user_dir, filename)\n+\n+\n @_app.route(\"/save-workflow\", methods=[\"POST\"])\n def _save_workflow() -> Response:\n     \"\"\"\n@@ -764,7 +768,7 @@\n     if not filename:\n         return jsonify({\"error\": \"Filename is required\"})\n \n-    filepath = os.path.join(user_dir, filename)\n+    filepath = _workflow_file(user_dir, filename)\n     if not os.path.exists(filepath):\n         return jsonify({\"error\": \"File not found\"})\n \n",
+    "0081": "--- benchmark/cases/CASE-0081/vulnerable_source.ts\n+++ benchmark/cases/CASE-0081/variant_vulnerable_02.ts\n@@ -17,25 +17,17 @@\n function updateEnvFile(updates: Record<string, string>): void {\n   try {\n     const envPath = join(process.cwd(), '.env');\n-    let envContent = existsSync(envPath) ? readFileSync(envPath, 'utf-8') : '';\n-\n-    // Update each key-value pair\n-    for (const [key, value] of Object.entries(updates)) {\n-      // Match the key with or without value, handling comments\n-      const regex = new RegExp(`^(#\\\\s*)?${key}=.*$`, 'gm');\n-      const newLine = `${key}=\"${value}\"`;\n-\n-      if (regex.test(envContent)) {\n-        // Update existing key (uncomment if needed)\n-        envContent = envContent.replace(regex, newLine);\n-      } else {\n-        // Add new key at the end\n-        envContent += `\\n${newLine}`;\n-      }\n-    }\n-\n-    writeFileSync(envPath, envContent, 'utf-8');\n-    // Tokens updated silently - console output interferes with MCP JSON protocol\n+    const currentText = existsSync(envPath) ? readFileSync(envPath, 'utf-8') : '';\n+    const entries = Object.entries(updates);\n+\n+    const nextText = entries.reduce((acc, [key, value]) => {\n+      const pattern = new RegExp(`^(#\\\\s*)?${key}=.*$`, 'gm');\n+      const assignment = `${key}=\"${value}\"`;\n+      const alreadyPresent = pattern.test(acc);\n+      return alreadyPresent ? acc.replace(pattern, assignment) : `${acc}\\n${assignment}`;\n+    }, currentText);\n+\n+    writeFileSync(envPath, nextText, 'utf-8');\n   } catch (_error) {\n     // Silent failure - error logging interferes with MCP JSON protocol\n     // If needed, check .env file manually\n"
+  },
+  "case_0222_send_settings": [
+    {
+      "environment_override": null,
+      "original": {
+        "verify": false,
+        "url": "https://example.invalid/apiv2/login",
+        "method": "POST",
+        "body": "{}"
+      },
+      "variant": {
+        "verify": false,
+        "url": "https://example.invalid/apiv2/login",
+        "method": "POST",
+        "body": "{}"
+      }
+    },
+    {
+      "environment_override": "REQUESTS_CA_BUNDLE",
+      "original": {
+        "verify": false,
+        "url": "https://example.invalid/apiv2/login",
+        "method": "POST",
+        "body": "{}"
+      },
+      "variant": {
+        "verify": "/review/fake-ca-bundle.pem",
+        "url": "https://example.invalid/apiv2/login",
+        "method": "POST",
+        "body": "{}"
+      }
+    },
+    {
+      "environment_override": "CURL_CA_BUNDLE",
+      "original": {
+        "verify": false,
+        "url": "https://example.invalid/apiv2/login",
+        "method": "POST",
+        "body": "{}"
+      },
+      "variant": {
+        "verify": "/review/fake-ca-bundle.pem",
+        "url": "https://example.invalid/apiv2/login",
+        "method": "POST",
+        "body": "{}"
+      }
+    }
+  ],
+  "reviewed_sha256": {
+    "benchmark/cases/CASE-0323/vulnerable_source.js": "1bf46195bb5fff90dfd11654098238a4f787e7f13acca9f9a133b88a45804c61",
+    "benchmark/cases/CASE-0323/variant_vulnerable_02.js": "eb677dd6f2d49664f020d3e696c0c59972c6fc5295861134251455f09bb5bf18",
+    "benchmark/cases/CASE-0276/vulnerable_source.py": "a97a03ea9f9d38d90c8a50942183382ff5a479e7c4c5163c2ac5bae3561444ae",
+    "benchmark/cases/CASE-0276/variant_vulnerable_02.py": "a00a153fc4ca77527982985745572998886615fc58f0752cea29d2027763045b",
+    "benchmark/cases/CASE-0221/vulnerable_source.java": "96a93ef66a2e02ffd7be4b16dde3db1314fd6dfc1f44116a6404ca9c1383862b",
+    "benchmark/cases/CASE-0221/variant_vulnerable_02.java": "f1c270165bd53a438fb72a6c9ca9a36f0690a56fbd732cb05eceee606178fa93",
+    "benchmark/cases/CASE-0136/vulnerable_source.java": "2861ce68fae7747477b67017b0bfd34b74d460abbf4f383d9e7ba42f7a4d9b01",
+    "benchmark/cases/CASE-0136/variant_vulnerable_02.java": "d74e2411a8d49c508999e243f10add0f06cc60a9ae1ce0a5690e2c81fefbcc65",
+    "benchmark/cases/CASE-0340/vulnerable_source.ts": "7287e65bab1cc21fdc37449313762403211f6425916c01c00220c68af261e8c4",
+    "benchmark/cases/CASE-0340/variant_vulnerable_02.ts": "6a40b3671b534bc5e679c64b4bcc13e9c7e13e36def7d43d939aebd502378943",
+    "benchmark/cases/CASE-0124/vulnerable_source.py": "2f8c29cde2cf1b76c3d023fbd73ff9b9ebcec6ac01d524500d0bafef3afd87b2",
+    "benchmark/cases/CASE-0124/variant_vulnerable_02.py": "672553f7ef1e7150b38fff94b3f8b9abeadf1149463604f289ac9ad2f878a631",
+    "benchmark/cases/CASE-0222/vulnerable_source.py": "937e53cd77a3ad0a3cd2e89211def65ed8d0c1ffe0365fc50fdaca09151c5b64",
+    "benchmark/cases/CASE-0222/variant_vulnerable_02.py": "e21393ce2082aa0a0fa13fdf73e42fb6a75a9fb2bd11faed7aabeaf12f32100c",
+    "benchmark/cases/CASE-0171/vulnerable_source.java": "0f629f66cfcbe4700c393b835891c45a092b85f5824abb002a2f53b29eaf5671",
+    "benchmark/cases/CASE-0171/variant_vulnerable_02.java": "f71263a700e8bbf88766155d526d9f8132bc8f95da2d982dcfe26887112a64d8",
+    "benchmark/cases/CASE-0298/vulnerable_source.ts": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+    "benchmark/cases/CASE-0298/variant_vulnerable_02.ts": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6",
+    "benchmark/cases/CASE-0231/vulnerable_source.py": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea",
+    "benchmark/cases/CASE-0231/variant_vulnerable_02.py": "9a667fc163519cb3b497411f37bb81a336680e037b2de5a2db99aa2a5bec7285",
+    "benchmark/cases/CASE-0081/vulnerable_source.ts": "55e9ec5c0031da0f0f9823d9f9a3e7411291725778ea8a3c871142f8787a2977",
+    "benchmark/cases/CASE-0081/variant_vulnerable_02.ts": "2b599164d2348fe91e266ad037f527bd81116a35c563d6b0fea9c487261d174b",
+    "Research_Log/Diagnostic_20261010/Controlled_2x2_Protocol_Draft_20261012.md": "8c68ffe96c2e793419b631d72e522e120c07f333e7470cbfbffe6fd9d3c6e16b",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "0572718ba7cd276780b00823e0c40148f2bbec4146fb1524dc3cb6fbe8468cbf",
+    "Research_Log/Correction_Log.md": "0c5c1ac843c1375f40ca553f8eea95b7e638126e690f61cabfe5ccec78cb8293",
+    "pipeline/diagnostic_v2.py": "b767dfee70546a5a1c05dee45db928e926e3e4517d6e002fdc64cb45e9ec2aba",
+    "pipeline/typed_rule.py": "5d39dae947e7d4b183a82d695871b1cc0b60ddbf27be34b3f83f3e9ad75fd2d1",
+    "pipeline/tests/test_typed_rule.py": "565095b7693172688ab50ef0f1ba3010b688c631da3e3824d813cad6deae852f",
+    "pipeline/tests/test_diagnostic_regressions.py": "1aed2d8248239a9d54681516d352d58a2cfc1397200b5873f625be376438b993",
+    "Research_Log/Diagnostic_20261010/verify_protocol_followup.py": "f779489486f9b0f2ad6b9af3e2b0c5cc50ad0b6a3edc9ce07aa2c38fc40ba67b"
+  },
+  "model_calls": 0,
+  "semgrep_scans": 0,
+  "network_requests": 0
+}

@@ -1,0 +1,26 @@
+rules:
+- id: vuln-phpldapadmin-dd6e9583
+  patterns:
+  - pattern: '$HTTP_REQUEST.setRequestHeader(''Content-length'', $PARAMETERS.length);
+
+      $HTTP_REQUEST.setRequestHeader(''Connection'',''close'');
+
+      '
+  - pattern-not: '$HTTP_REQUEST.setRequestHeader(''Content-length'', $PARAMETERS.length);
+
+      $HTTP_REQUEST.setRequestHeader(''Connection'',''close'');
+
+      '
+  languages:
+  - javascript
+  message: Potential insecure HTTP request header manipulation. The code sets 'Content-length'
+    and 'Connection' headers which may allow attackers to manipulate the request flow
+    or bypass security checks. Ensure that these headers are not set based on untrusted
+    input and validate all parameters before setting them.
+  severity: WARNING
+  metadata:
+    source-url: github.com/mhuertos/phpLDAPadmin/commit/dd6e9583a2eb2ca085583765e8a63df5904cb036
+    category: security
+    cwe: CWE-119
+    technology:
+    - javascript

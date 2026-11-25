@@ -1,0 +1,124 @@
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0323: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0276: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0221: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0134: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0136: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0220: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0340: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0238: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0193: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0124: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0063: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0184: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0173: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0222: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0163: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0171: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0046: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0239: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0235: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0298: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0116: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0231: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0339: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+ERROR:root:Error generating rule: Invalid or Missing Bearer Token
+CASE-0081: {"raw": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "raw": {
+      "evaluated": 0,
+      "scan_errors": 0,
+      "accepted": 0,
+      "visible_correct": 0,
+      "complete_success": 0,
+      "hidden_positive_hits_all_requested": 0,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 0,
+      "accepted_hidden_negatives_evaluated": 0
+    },
+    "iterative": {
+      "evaluated": 0,
+      "scan_errors": 0,
+      "accepted": 0,
+      "visible_correct": 0,
+      "complete_success": 0,
+      "hidden_positive_hits_all_requested": 0,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 0,
+      "accepted_hidden_negatives_evaluated": 0
+    }
+  }
+}

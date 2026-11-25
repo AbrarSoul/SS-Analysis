@@ -1,0 +1,45 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  pattern: '}><p lang="en" dir="ltr"><a href="${src}?ref_src=twsrc%5Etfw"></a></blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `;'
+  pattern-not: '}><p lang="en" dir="ltr">${anchor.outerHTML}</p></blockquote> <script
+    async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    `;'
+  languages:
+  - typescript
+  message: 'This vulnerability involves direct insertion of user-provided ''src''
+    URL into an HTML anchor tag without proper sanitization. The malicious URL could
+    be used to inject harmful JavaScript or redirect users to phishing sites. The
+    fix properly creates a DOM element and uses outerHTML to safely embed the URL.
+
+
+    To remediate this issue:
+
+    1. Sanitize all user-provided URLs before embedding them in HTML
+
+    2. Use DOM manipulation methods instead of string concatenation for HTML generation
+
+    3. Validate that URLs conform to expected patterns (e.g., only allow https://
+    protocols)
+
+    4. Consider using a proper HTML templating library with built-in escaping
+
+
+    This is a potential XSS vulnerability where untrusted input flows directly into
+    HTML output.
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - 79
+    owasp:
+    - OWASP_A03_2021
+    references:
+    - https://owasp.org/www-community/attacks/xss/
+    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
+    technology:
+    - typescript

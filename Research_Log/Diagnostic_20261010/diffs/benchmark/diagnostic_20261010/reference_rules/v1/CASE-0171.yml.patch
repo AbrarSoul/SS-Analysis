@@ -1,0 +1,14 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0171.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0171.yml
+@@ -0,0 +1,11 @@
++rules:
++- id: diagnostic-case-0171
++  message: Dynamic input interpolated into Java regex
++  severity: WARNING
++  languages:
++  - java
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  pattern: $URL.replaceFirst("..." + $PROFILE + "...", $REPLACEMENT)

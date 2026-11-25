@@ -1,0 +1,75 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0193",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "timestamp": 1791842704.520319,
+  "raw_content": "```yaml\nrules:\n- id: \"vuln-semantic-versioning-plugin-8df2fabd\"\n  pattern: |\n    $DBF = DocumentBuilderFactory.newInstance();\n    $DBF.newDocumentBuilder();\n  pattern-not: |\n    $DBF = DocumentBuilderFactory.newInstance();\n    $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n    $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n    $DBF.newDocumentBuilder();\n  languages: [\"java\"]\n  message: \"Potential XML External Entity (XXE) vulnerability due to unprotected DocumentBuilderFactory. Ensure XMLConstants.ACCESS_EXTERNAL_DTD and XMLConstants.ACCESS_EXTERNAL_SCHEMA are set to empty strings to prevent XXE attacks.\"\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f\"\n    category: security\n    cwe: CWE-611\n    owasp: A4:2017-XML External Entities (XXE)\n    references:\n      - \"https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing\"\n    technology: java\n```",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/jenkinsci/semantic-versioning-plugin\n    Commit: 8df2fabd7d7396ae29c374914d1357744d3e454f\n\n    PATCH CHANGES:\n    File: src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n--- a/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n+++ b/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n+import javax.xml.XMLConstants;\n-import javax.xml.xpath.*;\n+import javax.xml.xpath.XPath;\n+import javax.xml.xpath.XPathExpression;\n+import javax.xml.xpath.XPathExpressionException;\n+import javax.xml.xpath.XPathFactory;\n-\t\t\t\t\t\tDocumentBuilder documentBuilder;\n-\t\t\t\t\t\tdocumentBuilder = DocumentBuilderFactory.newInstance()\n-\t\t\t\t\t\t\t\t.newDocumentBuilder();\n+\t\t\t\t\t\tDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n+\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n+\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n+\t\t\t\t\t\tDocumentBuilder documentBuilder = df.newDocumentBuilder();\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-semantic-versioning-plugin-8df2fabd\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"java\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [java]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n    rules:\n    - id: \"path-traversal\"\n        pattern: new File($PATH)\n        pattern-not: new File(sanitized_path)\n        pattern-inside: |\n            class $CLASS {\n                ...\n            }\n        languages: [\"java\"]\n        message: \"Potential path traversal vulnerability. Validate and sanitize file paths.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-22\n\n    - id: \"weak-cipher\"\n        pattern: Cipher.getInstance(\"DES\")\n        languages: [\"java\"]\n        message: \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-326\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-semantic-versioning-plugin-8df2fabd\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"java\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.",
+  "request": {
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in java code.\n\n    CONTEXT:\n    Repository: github.com/jenkinsci/semantic-versioning-plugin\n    Commit: 8df2fabd7d7396ae29c374914d1357744d3e454f\n\n    PATCH CHANGES:\n    File: src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n--- a/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n+++ b/src/main/java/org/jenkinsci/plugins/SemanticVersioning/parsing/PomParser.java\n+import javax.xml.XMLConstants;\n-import javax.xml.xpath.*;\n+import javax.xml.xpath.XPath;\n+import javax.xml.xpath.XPathExpression;\n+import javax.xml.xpath.XPathExpressionException;\n+import javax.xml.xpath.XPathFactory;\n-\t\t\t\t\t\tDocumentBuilder documentBuilder;\n-\t\t\t\t\t\tdocumentBuilder = DocumentBuilderFactory.newInstance()\n-\t\t\t\t\t\t\t\t.newDocumentBuilder();\n+\t\t\t\t\t\tDocumentBuilderFactory df = DocumentBuilderFactory.newInstance();\n+\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n+\t\t\t\t\t\tdf.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n+\t\t\t\t\t\tDocumentBuilder documentBuilder = df.newDocumentBuilder();\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-semantic-versioning-plugin-8df2fabd\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"java\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [java]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n    rules:\n    - id: \"path-traversal\"\n        pattern: new File($PATH)\n        pattern-not: new File(sanitized_path)\n        pattern-inside: |\n            class $CLASS {\n                ...\n            }\n        languages: [\"java\"]\n        message: \"Potential path traversal vulnerability. Validate and sanitize file paths.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-22\n\n    - id: \"weak-cipher\"\n        pattern: Cipher.getInstance(\"DES\")\n        languages: [\"java\"]\n        message: \"Usage of weak cryptographic algorithm DES detected. Use AES instead.\"\n        severity: ERROR\n        metadata:\n            category: security\n            cwe: CWE-326\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-semantic-versioning-plugin-8df2fabd\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"java\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-EYIQg2ECsEXDRnGj1l6jMIkoGEwEu",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "```yaml\nrules:\n- id: \"vuln-semantic-versioning-plugin-8df2fabd\"\n  pattern: |\n    $DBF = DocumentBuilderFactory.newInstance();\n    $DBF.newDocumentBuilder();\n  pattern-not: |\n    $DBF = DocumentBuilderFactory.newInstance();\n    $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, \"\");\n    $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, \"\");\n    $DBF.newDocumentBuilder();\n  languages: [\"java\"]\n  message: \"Potential XML External Entity (XXE) vulnerability due to unprotected DocumentBuilderFactory. Ensure XMLConstants.ACCESS_EXTERNAL_DTD and XMLConstants.ACCESS_EXTERNAL_SCHEMA are set to empty strings to prevent XXE attacks.\"\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f\"\n    category: security\n    cwe: CWE-611\n    owasp: A4:2017-XML External Entities (XXE)\n    references:\n      - \"https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing\"\n    technology: java\n```",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": [],
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791842702,
+    "model": "gpt-4o-2024-08-06",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": "default",
+    "system_fingerprint": "fp_d866d08b2f",
+    "usage": {
+      "completion_tokens": 264,
+      "prompt_tokens": 985,
+      "total_tokens": 1249,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": null,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null
+      }
+    }
+  },
+  "generation_seconds": 2.3873563750021276,
+  "error": null,
+  "input_tokens": 985,
+  "output_tokens": 264
+}

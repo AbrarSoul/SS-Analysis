@@ -1,0 +1,18 @@
+rules:
+- id: vuln-java-merge-sort-450fdee7
+  patterns:
+  - pattern: File.createTempFile($PREFIX, $SUFFIX)
+  - pattern-not: Files.createTempFile($PREFIX, $SUFFIX).toFile()
+  languages:
+  - java
+  message: Insecure temporary file creation detected. Use Files.createTempFile instead
+    of File.createTempFile to avoid potential security vulnerabilities such as file
+    access race conditions.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-377
+    owasp: A9:2017
+    source-url: github.com/cowtowncoder/java-merge-sort/commit/450fdee70b5f181c2afc5d817f293efa1a543902
+    technology:
+    - java

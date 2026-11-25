@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "python",
+    "vulnerable_function_sha256": "c5f1ef411a73eaf026e081827451a8c4fa74363edddd3783d67bde4be3bb74ab",
+    "patched_function_sha256": "3bf92cabd90a9785132e7df69bc47f6c41a7c23b52c355fd33d578e025e84e7b",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0276",
+      "language": "python",
+      "old_name": "file",
+      "new_name": "file_renamed",
+      "vulnerable_probe": "def get_data(self, path):\n    \"\"\"Return the data from path as raw bytes.\"\"\"\n    if isinstance(self, (SourceLoader, ExtensionFileLoader)):\n        with _io.open_code(str(path)) as file_renamed:\n            return file_renamed.read()\n    else:\n        with _io.FileIO(path, 'r') as file_renamed:\n            return file_renamed.read()",
+      "patched_probe": "def get_data(self, path):\n    \"\"\"Return the data from path as raw bytes.\"\"\"\n    if isinstance(self, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader)):\n        with _io.open_code(str(path)) as file_renamed:\n            return file_renamed.read()\n    else:\n        with _io.FileIO(path, 'r') as file_renamed:\n            return file_renamed.read()",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "5daa16b59185f8b91b1d7961234cbea006cbf9dbe93975df3b5bd6ca1203b4ca"
+}

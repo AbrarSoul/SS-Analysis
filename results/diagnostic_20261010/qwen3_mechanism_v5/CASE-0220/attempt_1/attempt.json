@@ -1,0 +1,86 @@
+{
+  "attempt": 1,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0220/attempt_1/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": false,
+    "returncode": 7,
+    "all_targets_scanned": false,
+    "errors": [
+      {
+        "code": 4,
+        "level": "error",
+        "type": "InvalidRuleSchemaError",
+        "long_msg": "\"$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\\n$HTTP_REQUEST.setRequestHeader('Connection', 'close');\\n\" is not valid under any of the given schemas",
+        "short_msg": "Invalid rule schema",
+        "spans": [
+          {
+            "file": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0220/attempt_1/rule.yml",
+            "start": {
+              "line": 2,
+              "col": 3,
+              "offset": -1
+            },
+            "end": {
+              "line": 32,
+              "col": 1,
+              "offset": -1
+            },
+            "source_hash": "81421e7066feca84ba71a7d03d0a5bcf710f11603aba52e7fed3b50b8a1feff2"
+          }
+        ]
+      },
+      {
+        "code": 7,
+        "level": "error",
+        "type": "SemgrepError",
+        "message": "invalid configuration file found (1 configs were invalid)"
+      },
+      {
+        "message": "Semgrep exited with status 7"
+      },
+      {
+        "message": "Semgrep did not scan every requested sample"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0220/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0220/vulnerable_source.js",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0220/patched_source.js"
+    ],
+    "validation_seconds": 1.0608792089915369,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0220/vulnerable_source.js",
+        "sample_sha256": "4ea6e5785572dca9b5cd25daeb954b47978e4ed298738389e40cf5589ae3347f"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0220/patched_source.js",
+        "sample_sha256": "13c9c539030f70d1dd82d74b6b2b6dfa2a6ef747de53c12db9402615a3267e52"
+      }
+    ]
+  },
+  "feedback": "Semgrep scan error: [{\"code\": 4, \"level\": \"error\", \"type\": \"InvalidRuleSchemaError\", \"long_msg\": \"\\\"$HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length);\\\\n$HTTP_REQUEST.setRequestHeader('Connection', 'close');\\\\n\\\" is not valid under any of the given schemas\", \"short_msg\": \"Invalid rule schema\", \"spans\": [{\"file\": \"/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0220/attempt_1/rule.yml\", \"start\": {\"line\": 2, \"col\": 3, \"offset\": -1}, \"end\": {\"line\": 32, \"col\": 1, \"offset\": -1}, \"source_hash\": \"81421e7066feca84ba71a7d03d0a5bcf710f11603aba52e7fed3b50b8a1feff2\"}]}, {\"code\": 7, \"level\": \"error\", \"type\": \"SemgrepError\", \"message\": \"invalid configuration file found (1 configs were invalid)\"}, {\"message\": \"Semgrep exited with status 7\"}, {\"message\": \"Semgrep did not scan every requested sample\"}]"
+}

@@ -1,0 +1,32 @@
+{
+  "status": "proposed_development_pilot",
+  "case_ids": [
+    "CASE-0339",
+    "CASE-0221",
+    "CASE-0193",
+    "CASE-0220",
+    "CASE-0231",
+    "CASE-0136",
+    "CASE-0238",
+    "CASE-0081",
+    "CASE-0173",
+    "CASE-0323",
+    "CASE-0116",
+    "CASE-0124",
+    "CASE-0239",
+    "CASE-0184",
+    "CASE-0046",
+    "CASE-0276",
+    "CASE-0222",
+    "CASE-0134",
+    "CASE-0171",
+    "CASE-0063",
+    "CASE-0235",
+    "CASE-0340",
+    "CASE-0163",
+    "CASE-0298"
+  ],
+  "source_selection": "results/diagnostic_20261010/qwen3_v3/selection.json",
+  "source_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "order_seed": 20261013
+}

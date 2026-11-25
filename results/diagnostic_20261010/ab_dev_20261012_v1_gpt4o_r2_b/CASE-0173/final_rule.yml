@@ -1,0 +1,20 @@
+rules:
+- id: vuln-hono-cf9a78db
+  patterns:
+  - pattern: const $KEY = $OBJECT[$PROPERTY] || $FALLBACK
+  - pattern-not: const $KEY = $OBJECT[$PROPERTY]
+  languages:
+  - typescript
+  message: Using a fallback value when accessing an object property can lead to unexpected
+    behavior and security issues. In this case, using 'ASSET_MANIFEST[path] || path'
+    may result in using 'path' as a key if 'ASSET_MANIFEST[path]' is falsy, potentially
+    exposing unintended data. To fix this, remove the fallback and ensure 'ASSET_MANIFEST[path]'
+    is properly validated before use.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-704
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    technology:
+    - typescript

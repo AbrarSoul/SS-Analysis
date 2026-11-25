@@ -1,0 +1,33 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: This code creates a new anchor element with a potentially unsafe URL and
+    then uses its outerHTML. This can lead to open redirects if the URL is controlled
+    by an attacker. Ensure that the URL is properly sanitized before using it.
+  metadata:
+    category: security
+    cwe:
+    - CWE-601
+    owasp:
+    - A1: Injection
+    references:
+    - https://owasp.org/www-community/vulnerabilities/Open_redirect
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: '$VAR = document.createElement("a")
+
+    $VAR.href = `${$SRC}?ref_src=twsrc%5Etfw`
+
+    ... |> $VAR.outerHTML
+
+    '
+  pattern-not: 'const anchor = document.createElement("a");
+
+    anchor.href = `${src}?ref_src=twsrc%5Etfw`;
+
+    ... |> anchor.outerHTML
+
+    '
+  severity: ERROR

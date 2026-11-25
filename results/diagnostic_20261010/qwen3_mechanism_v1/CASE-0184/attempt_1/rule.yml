@@ -1,0 +1,28 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  patterns:
+  - pattern: File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)
+  - pattern: File.createTempFile($PREFIX, $SUFFIX)
+  message: Use of File.createTempFile without explicit file permissions can lead to
+    insecure temporary files. The patch introduces explicit permission setting for
+    POSIX systems to ensure temporary files are created with restrictive permissions
+    (rw-------). This prevents potential race conditions and privilege escalation
+    attacks where malicious users might otherwise read or modify the temporary files.
+  severity: ERROR
+  languages:
+  - java
+  metadata:
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    category: security
+    cwe:
+    - CWE-732
+    technology:
+    - java
+  pattern-not:
+  - pattern: Files.createTempFile($PREFIX, $SUFFIX, $FILE_ATTRIBUTE)
+  - pattern: Files.createTempFile($PATH, $PREFIX, $SUFFIX, $FILE_ATTRIBUTE)
+  pattern-inside:
+  - pattern: "import java.nio.file.*;\nimport java.nio.file.attribute.*;\n...\nprivate\
+      \ File createTempFileInSystemDir(String prefix, String suffix) throws IOException\
+      \ {\n    ...\n}\n...\nprivate File createTempFile(String prefix, String suffix)\
+      \ throws IOException {\n    ...\n}"

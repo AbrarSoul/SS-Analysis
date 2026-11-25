@@ -1,0 +1,29 @@
+{
+  "attempt": 2,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/Condition_B_Offline_Evidence_20261012T092303419272Z/compiler_then_location_repair/CASE-REVIEW/attempt_2/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": true,
+    "errors": [],
+    "legacy_accepted": true,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "detected": true,
+        "finding_location_correct": false,
+        "finding_lines": [
+          99
+        ],
+        "outcome": "FN"
+      },
+      {
+        "sample_type": "original_patched",
+        "detected": false,
+        "outcome": "TN"
+      }
+    ]
+  },
+  "feedback": "Rule detected something in the original vulnerable version, but NOT at the correct location (found at line(s) [99], expected within [1, 1]). Fix the pattern to match the actual vulnerable construct, not an unrelated part of the file."
+}

@@ -1,0 +1,27 @@
+Based on the provided context, here is a Semgrep rule that matches the vulnerable code structure:
+
+```yaml
+rules:
+- id: "vuln-notesnook-e87f5e5f"
+  pattern: $JSX_EXPR[$A]($JSX_ATTRS)
+  pattern-not: $JSX_EXPR[$A]($JSX_ATTRS).children
+  languages: ["typescript"]
+  message: |
+    This rule detects the creation of a Twitter anchor element in JSX syntax.
+    The vulnerability is that the href attribute of the anchor element is set dynamically, potentially leading to potential XSS vulnerabilities.
+    To fix it, ensure that the href attribute is set statically or securely.
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: [79]
+    owasp: [A3]
+    references: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    technology: ["typescript"]
+```
+
+This rule uses Semgrep's pattern-not feature to exclude JSX elements that have children. This is because in the fixed version, the JSX element is replaced with the `anchor.outerHTML`, which means the JSX element no longer has children.
+
+Please note that the CWE and OWASP categories are just examples and may not be applicable to your specific case. You should replace them with the relevant CWE and OWASP categories for your specific vulnerability.
+
+Also, the pattern in the rule is a general pattern that matches JSX elements. You should adapt it to match the specific vulnerable code structure in the patch.

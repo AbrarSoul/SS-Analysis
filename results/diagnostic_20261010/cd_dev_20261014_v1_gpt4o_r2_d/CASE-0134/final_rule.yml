@@ -1,0 +1,18 @@
+rules:
+- id: vuln-apprise-e20fce63
+  patterns:
+  - pattern: r'/?(?P<events>([A-Z0-9_-]+/?)+)?'
+  - pattern-not: r'((?P<events>(/[A-Z0-9_-]+)+))?'
+  languages:
+  - python
+  message: The regex pattern allows for optional leading slashes, which can lead to
+    incorrect parsing of event paths. Ensure that event paths start with a slash to
+    avoid misinterpretation.
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-20
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/caronc/apprise/commit/e20fce630d55e4ca9b0a1e325a5fea6997489831
+    technology:
+    - python

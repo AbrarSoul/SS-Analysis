@@ -1,0 +1,33 @@
+{
+  "recorded_utc": "2026-10-14T00:05:49.188846+00:00",
+  "status": "COMPLETED_VERIFIED",
+  "authorization": "User: I can authorize you to do this. In response to the offered 12-run pilot, maximum 864 model calls.",
+  "authorized_runs": 12,
+  "authorized_max_model_calls": 864,
+  "model_calls_consumed": 489,
+  "runs_completed": 12,
+  "attempted_run_order": 1,
+  "exit_code": 1,
+  "blocker": null,
+  "openai_key_present": true,
+  "provider_connectivity_checked": false,
+  "output_directory_created": true,
+  "failed_command_log": "Research_Log/Diagnostic_20261010/commands/20261013T231747936117Z_cd_dev_20261014_v1_qwen3_r1_c.log",
+  "resume_policy": "Supply credential to execution environment, reverify pins, retry first command in unchanged allocation. Destination remains unused and no model budget was consumed. No renewed inference authorization needed.",
+  "credential_source": "~/.config/ss-research/gptlab_api_key (value never recorded)",
+  "active_run_order": null,
+  "verified_run_orders": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ]
+}

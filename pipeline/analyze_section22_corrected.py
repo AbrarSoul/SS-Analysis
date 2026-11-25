@@ -138,7 +138,16 @@ def repo_grouped(case_ids, case_to_repo):
 
 def repo_aware_bootstrap(common_cases, case_to_repo, metric_fn_a, metric_fn_b, n_boot=10000, seed=42):
     groups = repo_grouped(common_cases, case_to_repo)
-    repo_ids = list(groups.keys())
+    # Found 2026-10-20 (supervisor review, Issue 8 sub-issue 3): `common_cases` is frequently a set
+    # (eligible_cases.eligible_supported_cases()'s return type), and Python randomizes string-hash
+    # seeding per process by default -- so a plain list(groups.keys()) had a different ORDER each
+    # process run, meaning the same rng.randrange(n) draw (seed=42 fixes the draw SEQUENCE, not what
+    # each draw points at) sampled a different repo each run. Confirmed directly: the same CI,
+    # recomputed in four separate process invocations, gave four slightly different bounds. sorted()
+    # makes the order canonical regardless of hash seed, restoring the determinism the seed was
+    # supposed to provide. This bug predates today's changes and affects every repo-aware bootstrap
+    # in this file, not just the new single-group variant added below -- see Correction_Log.md.
+    repo_ids = sorted(groups.keys())
     rng = random.Random(seed)
     n = len(repo_ids)
 
@@ -161,6 +170,33 @@ def repo_aware_bootstrap(common_cases, case_to_repo, metric_fn_a, metric_fn_b, n
     n_ge = sum(1 for d in diffs if d >= 0)
     p = min(1.0, 2 * min(n_le, n_ge) / n_boot)
     return observed_diff, lo, hi, p
+
+
+def repo_aware_bootstrap_single(cases, case_to_repo, metric_fn, n_boot=10000, seed=42):
+    """Supervisor review 2026-10-20 (Issue 8, sub-issue 3): a 95% CI around ONE group's own point
+    estimate, not a paired difference between two groups. Same repo-grouped resampling as
+    repo_aware_bootstrap() above (same seed, same n_boot, same percentile convention) -- this is
+    that function with the second metric_fn/subtraction removed, not a different bootstrap design."""
+    groups = repo_grouped(cases, case_to_repo)
+    repo_ids = sorted(groups.keys())  # deterministic order -- see repo_aware_bootstrap()'s comment
+    rng = random.Random(seed)
+    n = len(repo_ids)
+
+    def expand(repo_sample):
+        cids = []
+        for r in repo_sample:
+            cids.extend(groups[r])
+        return cids
+
+    point = metric_fn(cases)
+    values = []
+    for _ in range(n_boot):
+        sample_repos = [repo_ids[rng.randrange(n)] for _ in range(n)]
+        values.append(metric_fn(expand(sample_repos)))
+    values.sort()
+    lo = values[int(0.025 * n_boot)]
+    hi = values[int(0.975 * n_boot) - 1]
+    return point, lo, hi
 
 
 def pooled_mcc_fn(cond_data):

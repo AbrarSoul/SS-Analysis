@@ -1,0 +1,41 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_openai_full_20261010/gpt-4o__autogrep_default/raw/gpt-4o__20261009T211631Z/CASE-0298.json",
+  "raw_response_sha256": "8bc3d444db9991bddbc2ea8cd671fc5a8b65623f9d4c506ea862fce74d3cdcd1",
+  "parsed_rule_sha256": "32f775a72d1c2af446102bf345df7ccb46b7e4c21483ae2b36f9fab93ed13dea",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

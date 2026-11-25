@@ -1,0 +1,22 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  pattern: "if $KEY not in $LIST:\n    ...\n"
+  pattern-not: "if $KEY in $ALLOWED_LIST:\n    ...\n"
+  pattern-inside: "for $KEY in $DICT:\n    ...\n"
+  languages:
+  - python
+  message: Detected insecure blacklist-based key validation that may allow batch assignment
+    attacks. The code uses a 'not in' check against a blacklist instead of an 'in'
+    check against an allowlist. This pattern is vulnerable to bypasses and should
+    be replaced with an allowlist approach where only explicitly permitted keys are
+    accepted. Fix by using an allowed_keys list with 'key in allowed_keys' check.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe: CWE-254
+    owasp: A06:2021-Vulnerable and Outdated Components
+    references:
+    - https://owasp.org/www-community/attacks/Insecure_Direct_Object_Reference
+    - https://github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    technology: python

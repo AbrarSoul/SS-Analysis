@@ -1,0 +1,24 @@
+rules:
+- id: vuln-agentscope-7d285e86
+  patterns:
+  - pattern: "filename = $VAR\n... \nreturn jsonify({\"error\": \"Only JSON files\
+      \ can be deleted\"})\n..."
+  - pattern-not: "if not filename.endswith(\".json\"):\n    return jsonify({\"error\"\
+      : \"Only JSON files can be deleted\"})\n\nfilename = os.path.basename(filename)"
+  languages:
+  - python
+  message: Potential path traversal vulnerability in file deletion logic. The code
+    checks if the filename ends with '.json' but does not sanitize the filename before
+    processing, which could allow attackers to delete arbitrary files by manipulating
+    the filename parameter. Fix by ensuring proper input validation and sanitization
+    using os.path.basename() before any file operations.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    owasp: A01:2021-Broken Access Control
+    references:
+    - https://owasp.org/www-community/attacks/Path_Traversal
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    technology:
+    - python

@@ -1,0 +1,24 @@
+{
+  "key": {
+    "language": "java",
+    "vulnerable_function_sha256": "c923f09efeb9a585f73350b962bdfdaefb60e1ba54ad79f4e44854620885ec2a",
+    "patched_function_sha256": "75cac70c0ed7b580e1dc51683c35a7ee77581d95a39d7da92f6b47b54f3b1811",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": false,
+    "fields": {
+      "case_id": "CASE-0193",
+      "language": "java",
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)"
+    }
+  },
+  "payload_sha256": "d76806992912e7d9386b72a4ad26a5bfc7f69a218e0c41c5b98711387bd01238"
+}

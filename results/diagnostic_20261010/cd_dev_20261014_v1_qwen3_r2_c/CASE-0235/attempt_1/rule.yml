@@ -1,0 +1,26 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  pattern: "if ($X.indexOf($Y) !== 0) {\n    $RES.statusCode = 403;\n    $RES.end();\n\
+    \    return;\n}\n"
+  pattern-not: "if ($X.indexOf($Y) !== 0) {\n    $RES.statusCode = 403;\n    $RES.end();\n\
+    \    return;\n}\n"
+  languages:
+  - typescript
+  message: Directory traversal vulnerability detected. The code checks if a path starts
+    with a public directory but doesn't properly validate the full path, allowing
+    attackers to access files outside the intended directory. This can lead to unauthorized
+    file access and information disclosure. Fix by ensuring proper path validation
+    using secure methods like path.resolve() or path.normalize() before checking the
+    prefix.
+  severity: ERROR
+  metadata:
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    category: security
+    cwe:
+    - 22
+    owasp:
+    - OWASP Top 10:2021 - A01:2021 - Broken Access Control
+    references:
+    - https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/Top_10_A01_Broken_Access_Control
+    technology:
+    - typescript

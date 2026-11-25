@@ -1,0 +1,41 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/phi4_14b-q4_K_M__autogrep_default/raw/phi4_14b-q4_K_M__20261008T232714Z/CASE-0298.json",
+  "raw_response_sha256": "bdb2aad56c693f7e1286978102180a50f9c6f97120426e7f7b37fac89261f2b4",
+  "parsed_rule_sha256": "ac80d36e862a607d542ffc4fe5afcdc85d7230a3b0e8d75bd84572c3abe96549",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

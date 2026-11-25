@@ -1,0 +1,21 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: '$X.innerHTML = $Y;
+
+      '
+  - pattern-not: '$X.innerHTML = $Y + "?ref_src=twsrc%5Etfw";
+
+      '
+  languages:
+  - typescript
+  message: Potential XSS vulnerability due to untrusted data being directly assigned
+    to innerHTML. Sanitize or escape the input before assignment, or use a safer alternative
+    like textContent.
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: CWE-79
+    technology:
+    - typescript

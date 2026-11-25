@@ -1,0 +1,47 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  patterns:
+  - pattern: "import { readFileSync, writeFileSync } from 'fs';\n...\nlet envContent\
+      \ = existsSync(envPath) ? readFileSync(envPath, 'utf-8') : '';\n...\nfor (const\
+      \ [key, value] of Object.entries(updates)) {\n  ...\n  const regex = new RegExp(`^(#\\\
+      \\s*)?${key}=.*$`, 'gm');\n  ...\n  if (regex.test(envContent)) {\n    ...\n\
+      \    envContent = envContent.replace(regex, newLine);\n  } else {\n    ...\n\
+      \    envContent += `\\n${newLine}`;\n  }\n}\n...\nwriteFileSync(envPath, envContent,\
+      \ 'utf-8');\n"
+  pattern-not: 'import dotenv from ''dotenv'';
+
+    import stringify from ''dotenv-stringify'';
+
+    ...
+
+    const existingEnv = existsSync(envPath) ? dotenv.parse(readFileSync(envPath, ''utf-8''))
+    : {};
+
+    ...
+
+    const mergedEnv = { ...existingEnv, ...updates };
+
+    ...
+
+    const safeEnvContent = stringify(mergedEnv);
+
+    ...
+
+    writeFileSync(envPath, safeEnvContent, ''utf-8'');
+
+    '
+  message: Unsafe environment variable file manipulation detected. The code directly
+    modifies .env file content using regex-based string replacement without proper
+    sanitization, which can lead to injection vulnerabilities. Use dotenv and dotenv-stringify
+    libraries for secure environment variable handling.
+  languages:
+  - typescript
+  severity: ERROR
+  metadata:
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    category: security
+    cwe:
+    - CWE-77
+    technology:
+    - typescript
+  pattern-inside: "function updateEnvFile(...) {\n  ...\n}"

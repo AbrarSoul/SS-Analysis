@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0239
+  message: Overlapping optional regex repetitions in hosted Git URL parsing
+  severity: WARNING
+  languages:
+  - javascript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-regex: \[\^@:\]\+\(\?:\[\^@\]\+\)\?@

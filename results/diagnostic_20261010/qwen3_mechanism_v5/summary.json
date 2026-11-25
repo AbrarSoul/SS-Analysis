@@ -1,0 +1,28 @@
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "raw": {
+      "evaluated": 24,
+      "scan_errors": 7,
+      "accepted": 10,
+      "visible_correct": 9,
+      "complete_success": 1,
+      "hidden_positive_hits_all_requested": 14,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 6,
+      "accepted_hidden_negatives_evaluated": 20
+    },
+    "iterative": {
+      "evaluated": 13,
+      "scan_errors": 0,
+      "accepted": 13,
+      "visible_correct": 12,
+      "complete_success": 3,
+      "hidden_positive_hits_all_requested": 20,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 7,
+      "accepted_hidden_negatives_evaluated": 26
+    }
+  }
+}

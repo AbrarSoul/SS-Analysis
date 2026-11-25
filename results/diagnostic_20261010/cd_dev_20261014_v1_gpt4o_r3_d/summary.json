@@ -1,0 +1,48 @@
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "raw": {
+      "evaluated": 24,
+      "scan_errors": 0,
+      "accepted": 16,
+      "visible_correct": 15,
+      "complete_success": 4,
+      "expected_hidden_positives": 48,
+      "hidden_positive_hits_all_requested": 22,
+      "hidden_false_positives_accepted": 7,
+      "accepted_hidden_negatives_evaluated": 32,
+      "hidden_positive_hits_all_requested_corrected": 22,
+      "hidden_false_positives_accepted_corrected": 7,
+      "accepted_hidden_negatives_evaluated_corrected": 30
+    },
+    "iterative": {
+      "evaluated": 15,
+      "scan_errors": 0,
+      "accepted": 15,
+      "visible_correct": 15,
+      "complete_success": 4,
+      "expected_hidden_positives": 48,
+      "hidden_positive_hits_all_requested": 22,
+      "hidden_false_positives_accepted": 7,
+      "accepted_hidden_negatives_evaluated": 30,
+      "hidden_positive_hits_all_requested_corrected": 22,
+      "hidden_false_positives_accepted_corrected": 7,
+      "accepted_hidden_negatives_evaluated_corrected": 30
+    }
+  },
+  "development_probes": {
+    "requested_cases": 24,
+    "completed_cases": 24,
+    "eligible_cases_completed": 11,
+    "ineligible_cases_completed": 13,
+    "fallback_accepted": 8,
+    "probe_scan_errors": 0,
+    "resources": {
+      "generation_calls": 42,
+      "visible_scans": 42,
+      "probe_scans": 7,
+      "repair_calls": 18
+    }
+  }
+}

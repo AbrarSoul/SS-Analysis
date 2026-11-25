@@ -1,0 +1,38 @@
+{
+  "verified_utc": "2026-10-11T23:50:04.647082+00:00",
+  "counts": {
+    "gained": 0,
+    "lost": 9,
+    "unchanged": 33,
+    "evaluable": 41,
+    "tp_lost": 20,
+    "tp_gained": 0,
+    "fp_lost": 0,
+    "fp_gained": 0
+  },
+  "complete_success_losses_by_case": {
+    "CASE-0220": 4,
+    "CASE-0323": 4,
+    "CASE-0063": 1
+  },
+  "unevaluable_pairs": [
+    [
+      "qwen3_v3",
+      "CASE-0184"
+    ]
+  ],
+  "preserved_run_summaries": {
+    "_exclusion_ablation_20261011T224534542491Z": "415763c389b42a883a4db2563ee2d2b22769995cca826ded818bc24340741b4a",
+    "_exclusion_ablation_20261011T225111285041Z": "34186714a526a46d5131d0626577928251ac7311e46651ba37f435711c4d7efd",
+    "_exclusion_ablation_20261011T234010189193Z": "6c5e5f6fd7e6fd80e66e81b9b086e5dd9339966f160a9e03f07f53b15f6d595d"
+  },
+  "reviewed_sha256": {
+    "pipeline/typed_rule.py": "5d39dae947e7d4b183a82d695871b1cc0b60ddbf27be34b3f83f3e9ad75fd2d1",
+    "pipeline/tests/test_typed_rule.py": "565095b7693172688ab50ef0f1ba3010b688c631da3e3824d813cad6deae852f",
+    "pipeline/exclusion_composition_ablation.py": "6b5011be96f58536a037939f76ae2b8e9e6a86b68f979a44b84eb3753ef629f2",
+    "Research_Log/Correction_Log.md": "2724773f35caae059441d16d1317d4cd22a8015b6c089c701e3c6d51a55bef70",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "f537cc14e4f21906c562e3e2ac0bfcceeb2eb3e5372f07e58c57bda117d72b53"
+  },
+  "model_calls": 0,
+  "source_hashes_sample_hashes_and_original_outcome_vectors_verified": true
+}

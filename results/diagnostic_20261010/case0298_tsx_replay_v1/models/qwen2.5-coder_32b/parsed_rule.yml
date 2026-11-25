@@ -1,0 +1,33 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: 'This code constructs an HTML anchor tag directly using a potentially untrusted
+    URL, which can lead to Cross-Site Scripting (XSS) vulnerabilities. An attacker
+    could inject malicious scripts into the URL, which would then be executed in the
+    user''s browser. To fix this, create an anchor element using `document.createElement`
+    and set its `href` attribute, then use `outerHTML` to safely insert it into the
+    DOM.
+
+    '
+  metadata:
+    category: security
+    cwe:
+    - 79
+    owasp:
+    - A7
+    references:
+    - https://owasp.org/www-community/attacks/xss/
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: '`${$SRC}?ref_src=twsrc%5Etfw`
+
+    '
+  pattern-inside: '<a href="${$SRC}?ref_src=twsrc%5Etfw"></a>
+
+    '
+  pattern-not: '`${$ANCHOR.outerHTML}`
+
+    '
+  severity: ERROR

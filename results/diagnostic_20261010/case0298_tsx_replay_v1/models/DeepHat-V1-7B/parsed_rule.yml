@@ -1,0 +1,37 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  languages:
+  - typescript
+  message: 'Potential open redirect vulnerability detected. The href attribute is
+    constructed using user-controlled input without proper validation.
+
+
+    This pattern creates an anchor element with a URL that includes user-controlled
+    data. If this URL is not properly validated, attackers could inject malicious
+    redirects.
+
+
+    To fix this issue, implement proper URL validation before constructing the href
+    attribute.
+
+    '
+  metadata:
+    category: security
+    cwe:
+    - CWE-601
+    owasp:
+    - A05:2021
+    references:
+    - https://owasp.org/www-project-top-ten/2021/A05_2021-Security_Misconfiguration
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript
+  pattern: "const anchor = document.createElement(\"a\");\nanchor.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+    }><p lang=\"en\" dir=\"ltr\">${\n  anchor.outerHTML\n}</p></blockquote> <script\
+    \ async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\
+    \ `;\n"
+  pattern-not: "const anchor = document.createElement(\"a\");\nanchor.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+    }><p lang=\"en\" dir=\"ltr\">${\n  anchor.outerHTML\n}</p></blockquote> <script\
+    \ async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\
+    \ `;\n"
+  severity: ERROR

@@ -1,0 +1,27 @@
+rules:
+- id: vuln-nocodb-079e3abe
+  pattern: "Papaparse.unparse(\n  {\n    fields: $FIELDS,\n    data: $DATA\n  }\n\
+    )\n"
+  pattern-not: "Papaparse.unparse(\n  {\n    fields: $FIELDS,\n    data: $DATA\n \
+    \ },\n  {\n    escapeFormulae: true\n  }\n)\n"
+  languages:
+  - typescript
+  message: 'The use of Papaparse.unparse without the escapeFormulae option set to
+    true can lead to CSV injection vulnerabilities. This can allow an attacker to
+    inject malicious formulas into CSV files, which can be executed when the file
+    is opened in spreadsheet software. To fix this, ensure that the escapeFormulae
+    option is set to true when calling Papaparse.unparse.
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: https://github.com/nocodb/nocodb/commit/079e3abe98a054f5304592def7a0e8fdb9b06eee
+    category: security
+    cwe:
+    - CWE-1236
+    owasp:
+    - A1:2017-Injection
+    references:
+    - https://owasp.org/www-community/attacks/CSV_Injection
+    technology:
+    - typescript

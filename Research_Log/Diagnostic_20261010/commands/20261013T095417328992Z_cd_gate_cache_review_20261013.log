@@ -1,0 +1,90 @@
+{
+  "model_calls": 0,
+  "real_semgrep_scans": 0,
+  "findings": {
+    "unchecked_payload": {
+      "status": "hit",
+      "strict": true,
+      "original": "def f():\n    token_renamed = 1\n    return token_renamed",
+      "returned": "def f():\n    return 999\n"
+    },
+    "language_not_in_key": {
+      "status": "hit",
+      "requested": "typescript",
+      "returned": "javascript",
+      "fresh_builder": "typescript",
+      "key_fields": [
+        "dev_probe_sha256",
+        "patched_function_sha256",
+        "vulnerable_function_sha256"
+      ]
+    },
+    "strict_is_not_reviewed_manifest_enforcement": {
+      "status": "miss_built",
+      "case_id": "UNREVIEWED-CASE",
+      "explanation": "Strict mode builds unseen cases; there is no reviewed input/artifact allowlist."
+    },
+    "decision_count_is_not_scan_count": {
+      "actual_mocked_runner_events": {
+        "model_calls": 2,
+        "visible_scans": 1,
+        "repair_calls": 1
+      },
+      "reported": {
+        "visible_scans": 2,
+        "probe_scans": 0,
+        "repair_calls": 1
+      },
+      "if_unparsed_attempt_omitted": {
+        "visible_scans": 1,
+        "probe_scans": 0,
+        "repair_calls": 0
+      }
+    }
+  },
+  "boundary_hardening_observations": {
+    "over_budget_pass": {
+      "accept": true,
+      "stop": true,
+      "reason": "visible_correct AND both probe checks passed",
+      "is_fallback": false,
+      "probe_checks": {
+        "vulnerable_probe_correct": true,
+        "patched_probe_correct": true,
+        "probe_scan_error": false
+      }
+    },
+    "unknown_condition_pass": {
+      "accept": true,
+      "stop": true,
+      "reason": "visible_correct (no probe check applied)",
+      "is_fallback": false,
+      "probe_checks": null
+    },
+    "limit": "Current real runner bounds attempts with range(1,4); no actual budget overrun demonstrated."
+  },
+  "integration_metadata_requirement": {
+    "failed_ineligible_decision": {
+      "accept": false,
+      "stop": true,
+      "reason": "visible_correct failed -- budget exhausted, retaining last candidate as a failure",
+      "is_fallback": false,
+      "probe_checks": null
+    },
+    "requirement": "Record eligibility and rejection reason separately for ALL episodes, not only accepted fallback decisions."
+  },
+  "versions": {
+    "python": "3.14.4 (v3.14.4:23116f998f6, Apr  7 2026, 09:45:22) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_java": "0.23.5",
+    "tree_sitter_javascript": "0.25.0",
+    "tree_sitter_typescript": "0.23.2"
+  },
+  "reviewed_sha256": {
+    "pipeline/combined_gate.py": "d9849d45404237e83606720f51d1c473d652f24a8c84b21cab0c928786de2707",
+    "pipeline/probe_cache.py": "485f3a08757a42c613c11b46f4cc22dd866aa5208b7a2c7fcd2ebd222f9d1d34",
+    "pipeline/dev_probe.py": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "pipeline/diagnostic_v2.py": "3a648c80adbeee1042771d9bf9413b2b2888cf96b1edabd02203384273ed4ea4",
+    "pipeline/tests/test_combined_gate.py": "250596e17949490e3f8c1b408c55eb33e62b02a71a52929ffebafab232b2d11d"
+  }
+}

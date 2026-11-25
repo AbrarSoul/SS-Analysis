@@ -1,0 +1,52 @@
+{
+  "scan_ok": false,
+  "returncode": 0,
+  "all_targets_scanned": true,
+  "errors": [
+    {
+      "code": 3,
+      "level": "warn",
+      "type": "Syntax error",
+      "message": "Syntax error at line /Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0298/patched_source.ts:1:\n `/*\nThis file is part of the Notesnook project (https://notesnook.com/)\n\nCopyright (C) 2023 Streetwriters (Private) Limited\n\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <http://www.gnu.org/licenses/>.\n*/\n\nimport { Box, Flex } from \"@theme-ui/components\";\nimport { useState } from \"react\";\nimport { EmbedAlignmentOptions, EmbedAttributes } from \"./embed.js\";\nimport { ReactNodeViewProps } from \"../react/index.js\";\nimport { DesktopOnly } from \"../../components/responsive/index.js\";\nimport { ToolbarGroup } from \"../../toolbar/components/toolbar-group.js\";\nimport { Icons } from \"../../toolbar/index.js\";\nimport { Icon } from \"@notesnook/ui\";\nimport { Resizer } from \"../../components/resizer/index.js\";\nimport { useThemeEngineStore } from \"@notesnook/theme\";\nimport { useToolbarStore } from \"../../toolbar/stores/toolbar-store.js\";\n\nexport function EmbedComponent(\n  props: ReactNodeViewProps<EmbedAttributes & EmbedAlignmentOptions>\n) {\n  const { editor, updateAttributes, selected, node } = props;\n  const [isLoading, setIsLoading] = useState(true);\n  const { src, width, height, textDirection } = node.attrs;\n  const theme = useThemeEngineStore((store) => store.theme);\n  const corsHost = useToolbarStore((store) => store.downloadOptions?.corsHost);\n\n  let align = node.attrs.align;\n  if (!align) align = textDirection ? \"right\" : \"left\";\n\n  return (\n    <Flex\n      sx={{\n        justifyContent:\n          align === \"center\" ? \"center\" : align === \"left\" ? \"start\" : \"end\",\n        position: \"relative\",\n    ... (truncated 4742 more characters)",
+      "path": "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0298/patched_source.ts"
+    }
+  ],
+  "command": [
+    "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+    "--config",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v2/CASE-0298/attempt_3/rule.yml",
+    "--json",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-git-ignore",
+    "--jobs=1",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0298/vulnerable_source.ts",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0298/patched_source.ts"
+  ],
+  "validation_seconds": 1.2087452080013463,
+  "legacy_accepted": false,
+  "visible_correct": false,
+  "complete_success": false,
+  "samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "label": "positive",
+      "detected": false,
+      "finding_location_correct": false,
+      "finding_lines": [],
+      "outcome": "FN",
+      "sample_path": "benchmark/cases/CASE-0298/vulnerable_source.ts",
+      "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+    },
+    {
+      "sample_type": "original_patched",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0298/patched_source.ts",
+      "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+    }
+  ]
+}

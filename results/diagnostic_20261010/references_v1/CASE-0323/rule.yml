@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0323
+  message: CKEditor allows script tags and wildcard attributes
+  severity: WARNING
+  languages:
+  - javascript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-regex: '[''\"][^''\"\n]*\bscript\b[^''\"\n]*[''\"]\s*:\s*\{\s*attributes\s*:\s*[''\"]\*[''\"]'

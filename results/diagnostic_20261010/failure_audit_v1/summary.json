@@ -1,0 +1,17 @@
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "reference": {
+      "evaluated": 24,
+      "scan_errors": 1,
+      "accepted": 19,
+      "visible_correct": 19,
+      "complete_success": 12,
+      "hidden_positive_hits_all_requested": 35,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 6,
+      "accepted_hidden_negatives_evaluated": 38
+    }
+  }
+}

@@ -1,0 +1,62 @@
+--- before/autogrep/llm_client.py
++++ after/autogrep/llm_client.py
+@@ -112,7 +112,12 @@
+ 
+     def validate_rule_schema(self, rule: dict) -> Tuple[bool, Optional[str]]:
+         """Validate that the rule has all required fields."""
+-        required_fields = ['id', 'pattern', 'message', 'severity', 'languages']
++        policy = getattr(self.config, "rule_schema_policy", "legacy_pattern_only")
++        if policy not in {"legacy_pattern_only", "semgrep_search_taint_v2"}:
++            return False, f"Unknown rule schema policy: {policy}"
++        required_fields = ['id', 'message', 'severity', 'languages']
++        if policy == "legacy_pattern_only":
++            required_fields.append('pattern')
+         
+         if not isinstance(rule, dict):
+             return False, "Rule must be a dictionary"
+@@ -120,6 +125,19 @@
+         missing_fields = [field for field in required_fields if field not in rule]
+         if missing_fields:
+             return False, f"Missing required fields: {', '.join(missing_fields)}"
++
++        if policy == "semgrep_search_taint_v2":
++            # Lightweight envelope check only. Pinned Semgrep is authoritative
++            # for nested operators, types, and pattern-language correctness.
++            mode = rule.get("mode", "search")
++            if mode == "taint":
++                if not all(key in rule for key in ("pattern-sources", "pattern-sinks")):
++                    return False, "Taint rules require pattern-sources and pattern-sinks"
++            elif mode == "search":
++                if not any(key in rule for key in ("pattern", "patterns", "pattern-either", "pattern-regex")):
++                    return False, "Search rules require pattern, patterns, pattern-either, or pattern-regex"
++            else:
++                return False, f"Unsupported diagnostic rule mode: {mode}"
+             
+         # Validate severity
+         valid_severities = ['ERROR', 'WARNING', 'INFO']
+@@ -127,7 +145,7 @@
+             return False, f"Invalid severity level. Must be one of: {', '.join(valid_severities)}"
+             
+         # Ensure id is properly formatted
+-        if not re.match(r'^[a-z0-9-]+$', rule['id']):
++        if not isinstance(rule['id'], str) or not re.match(r'^[a-z0-9-]+$', rule['id']):
+             return False, "Invalid id format. Must contain only lowercase letters, numbers, and hyphens"
+             
+         return True, None
+@@ -217,6 +235,11 @@
+ 
+         try:
+             rule_data = yaml.safe_load(rule_text)
++            if getattr(self.config, "rule_schema_policy", "legacy_pattern_only") == "semgrep_search_taint_v2":
++                candidates = rule_data.get("rules") if isinstance(rule_data, dict) else None
++                if not isinstance(candidates, list) or len(candidates) != 1 or not isinstance(candidates[0], dict):
++                    self.last_error = "Expected exactly one rule mapping"
++                    return None
+             rule = self._sanitize_rule(rule_data, patch_info)
+ 
+             is_valid, error = self.validate_rule_schema(rule)
+@@ -546,4 +569,4 @@
+         if error_feedback:
+             prompt += f"\n\nPREVIOUS ERROR TO FIX:\n{error_feedback}\nEnsure your next attempt addresses these issues."
+             
+-        return prompt+        return prompt

@@ -1,0 +1,18 @@
+rules:
+- id: vuln-logkitty-ef2f673e
+  patterns:
+  - pattern: execSync(`$COMMAND`)
+  - pattern-not: execFileSync($COMMAND, $ARGS)
+  languages:
+  - typescript
+  message: Using execSync with concatenated strings can lead to command injection
+    vulnerabilities. Replace execSync with execFileSync and pass command arguments
+    as an array to avoid injection risks.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-78
+    owasp: A01:2021-Broken Access Control
+    source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf
+    technology:
+    - typescript

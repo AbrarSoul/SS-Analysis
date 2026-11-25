@@ -1,0 +1,34 @@
+{
+  "case_id": "CASE-0221",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Expected exactly one rule mapping"
+    },
+    {
+      "attempt": 2,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Expected exactly one rule mapping"
+    },
+    {
+      "attempt": 3,
+      "parsed": false,
+      "rule_path": null,
+      "visible_evaluation": null,
+      "feedback": "Expected exactly one rule mapping"
+    }
+  ],
+  "raw": null,
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "calls_recorded": 3,
+  "input_tokens": 3904,
+  "output_tokens": 1026,
+  "generation_seconds": 11.052085875999182
+}

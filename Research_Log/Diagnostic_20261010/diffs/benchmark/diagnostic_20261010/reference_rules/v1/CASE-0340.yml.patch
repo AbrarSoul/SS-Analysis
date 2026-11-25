@@ -1,0 +1,16 @@
+--- before/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0340.yml
++++ after/benchmark/diagnostic_20261010/reference_rules/v1/CASE-0340.yml
+@@ -0,0 +1,13 @@
++rules:
++- id: diagnostic-case-0340
++  message: Dynamic shell command versus argument-vector execFileSync
++  severity: WARNING
++  languages:
++  - typescript
++  metadata:
++    authorship: assistant
++    independent_review: pending
++    revision: v1
++  patterns:
++  - pattern: execSync($CMD)
++  - pattern-not: execSync("...")

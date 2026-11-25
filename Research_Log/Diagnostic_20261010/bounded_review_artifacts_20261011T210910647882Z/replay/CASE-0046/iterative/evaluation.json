@@ -1,0 +1,92 @@
+{
+  "scan_ok": true,
+  "returncode": 0,
+  "all_targets_scanned": true,
+  "errors": [],
+  "command": [
+    "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+    "--config",
+    "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_v3/CASE-0046/final_rule.yml",
+    "--json",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-git-ignore",
+    "--jobs=1",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/vulnerable_source.py",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/patched_source.py",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/variant_vulnerable_01.py",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/variant_vulnerable_02.py",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/variant_safe_01.py",
+    "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0046/benign_lookalike.py"
+  ],
+  "validation_seconds": 1.237350666000566,
+  "legacy_accepted": true,
+  "visible_correct": true,
+  "complete_success": false,
+  "samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "label": "positive",
+      "detected": true,
+      "finding_location_correct": true,
+      "finding_lines": [
+        194
+      ],
+      "outcome": "TP",
+      "sample_path": "benchmark/cases/CASE-0046/vulnerable_source.py",
+      "sample_sha256": "bc5483b0b4890b44db85e238154d20050332ee18d2c06bca5fa476e0803a92f9"
+    },
+    {
+      "sample_type": "original_patched",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0046/patched_source.py",
+      "sample_sha256": "295215d6a6ec9f5b7197217ca2b8d397df8a501f1560bd6bc9e39df02a4978e7"
+    },
+    {
+      "sample_type": "variant_vulnerable_1",
+      "label": "positive",
+      "detected": true,
+      "finding_location_correct": true,
+      "finding_lines": [
+        194
+      ],
+      "outcome": "TP",
+      "sample_path": "benchmark/cases/CASE-0046/variant_vulnerable_01.py",
+      "sample_sha256": "47851cfd5be5d0dda714a1a7299dc323572a6c3f2a2d4c3b09b2eda5e73623ce"
+    },
+    {
+      "sample_type": "variant_vulnerable_2",
+      "label": "positive",
+      "detected": false,
+      "finding_location_correct": false,
+      "finding_lines": [],
+      "outcome": "FN",
+      "sample_path": "benchmark/cases/CASE-0046/variant_vulnerable_02.py",
+      "sample_sha256": "a89fbaf6b13bd7ed3da799772511b23a53c2ac0f1fef550ec5b974590602aeb6"
+    },
+    {
+      "sample_type": "variant_safe",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0046/variant_safe_01.py",
+      "sample_sha256": "393fb07a03ed5ba861e8c56e387073238f495ba55a61aa2e4c4e71314b26d405"
+    },
+    {
+      "sample_type": "benign_lookalike",
+      "label": "negative",
+      "detected": false,
+      "finding_location_correct": null,
+      "finding_lines": [],
+      "outcome": "TN",
+      "sample_path": "benchmark/cases/CASE-0046/benign_lookalike.py",
+      "sample_sha256": "8d3653f07d571b8b97c760de2ec21cd7d27a0eb26ddbcc2266f19df1c092ba2e"
+    }
+  ]
+}

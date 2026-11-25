@@ -1,0 +1,36 @@
+
+Here is a Semgrep rule that detects the vulnerable code structure in the provided patch:
+```yaml
+rules:
+- id: "vuln-notesnook-e87f5e5f"
+  pattern: |
+    (
+      anchor = document.createElement("a")
+      anchor.href = $src + "?ref_src=twsrc%5Etfw"
+    )
+    .*
+    (
+      <p lang="en" dir="ltr">${anchor.outerHTML}</p>
+    )
+  pattern-not: |
+    (
+      anchor = document.createElement("a")
+      anchor.href = $src + "?ref_src=twsrc%5Etfw"
+    )
+    .*
+    (
+      <p lang="en" dir="ltr">${anchor.outerHTML}</p>
+    )
+  languages: ["typescript"]
+  message: |
+    This code is vulnerable to a cross-site scripting (XSS) attack because it uses user input in an unsafe way. The `src` variable is not properly sanitized, which allows an attacker to inject malicious JavaScript code into the page.
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: CWE-79
+    owasp: A3
+    references: [links to documentation or standards]
+    technology: typescript
+```
+This rule matches any code that creates an `a` element, sets its `href` attribute to a user-controlled value, and then uses the `outerHTML` property of the anchor element in a way that could allow an attacker to inject malicious JavaScript code into the page. The rule also includes a `pattern-not` clause that matches the fixed version of the code, which helps to reduce false positives.

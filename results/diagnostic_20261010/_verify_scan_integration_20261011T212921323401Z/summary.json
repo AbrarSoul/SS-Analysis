@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-10-11T21:30:20.881067+00:00",
+  "semgrep_version": "1.177.0",
+  "source_run_dir": "results/diagnostic_20261010/qwen3_v3",
+  "selection_sha256": "b473cb7b4d6737b5d2a822f8a01321e8e984f3cd314b947ee15cd29cd7e591b1",
+  "report_conditions": {
+    "raw": {
+      "evaluated": 24,
+      "scan_errors": 1,
+      "accepted": 19,
+      "visible_correct": 18,
+      "complete_success": 6,
+      "expected_hidden_positives": 48,
+      "hidden_positive_hits_all_requested": 30,
+      "hidden_false_positives_accepted": 8,
+      "accepted_hidden_negatives_evaluated": 38,
+      "hidden_positive_hits_all_requested_corrected": 30,
+      "hidden_false_positives_accepted_corrected": 8,
+      "accepted_hidden_negatives_evaluated_corrected": 36
+    },
+    "iterative": {
+      "evaluated": 19,
+      "scan_errors": 0,
+      "accepted": 19,
+      "visible_correct": 18,
+      "complete_success": 6,
+      "expected_hidden_positives": 48,
+      "hidden_positive_hits_all_requested": 30,
+      "hidden_false_positives_accepted": 8,
+      "accepted_hidden_negatives_evaluated": 38,
+      "hidden_positive_hits_all_requested_corrected": 30,
+      "hidden_false_positives_accepted_corrected": 8,
+      "accepted_hidden_negatives_evaluated_corrected": 36
+    }
+  },
+  "successful_cases": [
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0220",
+    "CASE-0221",
+    "CASE-0276",
+    "CASE-0323"
+  ],
+  "expected_iterative_complete_success": 6,
+  "expected_successful_cases": [
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0220",
+    "CASE-0221",
+    "CASE-0276",
+    "CASE-0323"
+  ],
+  "assertions_passed": true
+}

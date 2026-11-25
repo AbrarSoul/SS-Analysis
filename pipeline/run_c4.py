@@ -117,6 +117,7 @@ def run_c4_episode(case_id: str, variant: str, role_models: dict, clients: dict,
                      "You generate Semgrep rules in YAML format. Return only raw YAML.", max_tokens)
     calls_used += 1
     rule = parser_client.parse_and_sanitize_response(content, patch_info)
+    current_raw_content = content
 
     syntax_round0 = semantic_round0 = rule_repair_result = syntax_round1 = None
     accepted_rule = None
@@ -134,7 +135,7 @@ def run_c4_episode(case_id: str, variant: str, role_models: dict, clients: dict,
             rule_text_for_review = _dump_rule(rule)
             is_valid, semgrep_error = validator.validate_rule(rule, patch_info, repo_path_marker)
         else:
-            rule_text_for_review = content
+            rule_text_for_review = current_raw_content
             is_valid, semgrep_error = False, parser_client.last_error or "failed to parse/sanitize into a rule"
 
         syntax_content = _call(clients["syntax_review"], role_models["syntax_review"],
@@ -152,6 +153,8 @@ def run_c4_episode(case_id: str, variant: str, role_models: dict, clients: dict,
             candidate_rule = parser_client.parse_and_sanitize_response(corrected_text, patch_info)
             if candidate_rule is not None:
                 rule = candidate_rule
+                current_raw_content = corrected_text
+                rule_text_for_review = _dump_rule(rule)
                 is_valid, semgrep_error = validator.validate_rule(rule, patch_info, repo_path_marker)
 
         if round_num == 1:
@@ -190,6 +193,7 @@ def run_c4_episode(case_id: str, variant: str, role_models: dict, clients: dict,
                                 "You are a precise Semgrep rule repair specialist.", max_tokens)
         calls_used += 1
         rule = parser_client.parse_and_sanitize_response(repair_content, patch_info)
+        current_raw_content = repair_content
         rule_repair_result = {"proposed_rule_parsed": rule is not None}
         last_error = semgrep_error
 

@@ -1,0 +1,30 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  pattern: '`${$SRC}?ref_src=twsrc%5Etfw`
+
+    '
+  pattern-not: '`${$SRC}?ref_src=twsrc%5Etfw` + $OTHER
+
+    '
+  languages:
+  - typescript
+  message: 'Potential XSS vulnerability due to direct concatenation of user-provided
+    source URL into HTML attribute without proper sanitization. This can allow attackers
+    to inject malicious scripts through the src parameter. The fix involves creating
+    a DOM element and using its outerHTML property to properly escape the URL. Always
+    sanitize dynamic content before injecting into HTML attributes.
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe:
+    - 79
+    owasp:
+    - A03:2021 - Injection
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+    - https://owasp.org/www-community/attacks/xss/
+    technology:
+    - typescript

@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "python",
+    "vulnerable_function_sha256": "67562e8bf2e59e5d560d7be5d491dd0b16b21f1661f5d6b2cb6cced8233004c9",
+    "patched_function_sha256": "c94caf1e3a289d3651a0b1d97b02d3a56c9bb611aeded167117a1f0815f0fb6a",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0134",
+      "language": "python",
+      "old_name": "result",
+      "new_name": "result_renamed",
+      "vulnerable_probe": "def parse_native_url(url):\n    \"\"\"\n    Support https://maker.ifttt.com/use/WEBHOOK_ID/EVENT_ID\n    \"\"\"\n\n    result_renamed = re.match(\n        r'^https?://maker\\.ifttt\\.com/use/'\n        r'(?P<webhook_id>[A-Z0-9_-]+)'\n        r'/?(?P<events>([A-Z0-9_-]+/?)+)?'\n        r'/?(?P<params>\\?.+)?$', url, re.I)\n\n    if result_renamed:\n        return NotifyIFTTT.parse_url(\n            '{schema}://{webhook_id}{events}{params}'.format(\n                schema=NotifyIFTTT.secure_protocol,\n                webhook_id=result_renamed.group('webhook_id'),\n                events='' if not result_renamed.group('events')\n                else '@{}'.format(result_renamed.group('events')),\n                params='' if not result_renamed.group('params')\n                else result_renamed.group('params')))\n\n    return None",
+      "patched_probe": "def parse_native_url(url):\n    \"\"\"\n    Support https://maker.ifttt.com/use/WEBHOOK_ID/EVENT_ID\n    \"\"\"\n\n    result_renamed = re.match(\n        r'^https?://maker\\.ifttt\\.com/use/'\n        r'(?P<webhook_id>[A-Z0-9_-]+)'\n        r'((?P<events>(/[A-Z0-9_-]+)+))?'\n        r'/?(?P<params>\\?.+)?$', url, re.I)\n\n    if result_renamed:\n        return NotifyIFTTT.parse_url(\n            '{schema}://{webhook_id}{events}{params}'.format(\n                schema=NotifyIFTTT.secure_protocol,\n                webhook_id=result_renamed.group('webhook_id'),\n                events='' if not result_renamed.group('events')\n                else '@{}'.format(result_renamed.group('events')),\n                params='' if not result_renamed.group('params')\n                else result_renamed.group('params')))\n\n    return None",
+      "patched_probe_renamed": true
+    }
+  },
+  "payload_sha256": "5237525f4f9d9ef7e89d0a5e27da257d204a59b4e46e48f24ba68541cbd96cf6"
+}

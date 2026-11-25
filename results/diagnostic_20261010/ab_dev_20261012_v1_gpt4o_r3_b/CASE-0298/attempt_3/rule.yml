@@ -1,0 +1,22 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern: <a href="${src}?ref_src=twsrc%5Etfw"></a>
+  - pattern-not: 'const anchor = document.createElement("a");
+
+      anchor.href = `${src}?ref_src=twsrc%5Etfw`;
+
+      $... = anchor.outerHTML;'
+  languages:
+  - typescript
+  message: This code directly embeds user-controlled URLs into HTML, which can lead
+    to XSS vulnerabilities. To fix this, use the DOM API to safely construct elements
+    and set attributes, as shown in the patched version.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-79
+    owasp: A7:2017-Cross-Site Scripting (XSS)
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

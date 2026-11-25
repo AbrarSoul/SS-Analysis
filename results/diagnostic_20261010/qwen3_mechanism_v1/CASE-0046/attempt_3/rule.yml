@@ -1,0 +1,23 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  patterns:
+  - pattern: "for key in $VAR:\n    if key not in $LIST:\n        ...\n"
+  - pattern: "for key in $VAR:\n    if key not in $LIST:\n        ...\n"
+  pattern-not: "for key in $VAR:\n    if key in $ALLOWED_LIST:\n        ...\n"
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  message: Potential batch assignment attack vulnerability detected. The code uses
+    a blacklist approach to filter keys, which is insecure. An attacker could inject
+    keys not in the blacklist, leading to unauthorized data manipulation. Use an allowlist
+    approach instead by checking if keys are in an allowed list.
+  severity: ERROR
+  languages:
+  - python
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe:
+    - CWE-20
+    technology:
+    - python
+  fix: Replace the blacklist check with an allowlist check. Define an allowed_keys
+    list and use 'if key in allowed_keys:' instead of 'if key not in dont_save_keys:'

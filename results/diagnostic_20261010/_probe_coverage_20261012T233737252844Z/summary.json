@@ -1,0 +1,1353 @@
+{
+  "created_utc": "2026-10-12T23:40:09.712372+00:00",
+  "label": "Research_Direction_20261011.md Item 5 step 3: coverage measurement using already-saved accepted rules from the A/B pilot. No new model calls. Measures detection potential, not whether a model would successfully repair when a probe fails.",
+  "eligibility": {
+    "CASE-0046": {
+      "eligible": true,
+      "language": "python",
+      "old_name": "dont_save_keys",
+      "new_name": "dont_save_keys_renamed",
+      "patched_probe_renamed": false,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0046/vulnerable_probe.py",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0046/patched_probe.py"
+    },
+    "CASE-0063": {
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly",
+      "language": "javascript"
+    },
+    "CASE-0081": {
+      "eligible": true,
+      "language": "typescript",
+      "old_name": "envPath",
+      "new_name": "envPath_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0081/vulnerable_probe.ts",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0081/patched_probe.ts"
+    },
+    "CASE-0116": {
+      "eligible": true,
+      "language": "java",
+      "old_name": "socket",
+      "new_name": "socket_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0116/vulnerable_probe.java",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0116/patched_probe.java"
+    },
+    "CASE-0124": {
+      "eligible": true,
+      "language": "python",
+      "old_name": "sagemaker_dependency",
+      "new_name": "sagemaker_dependency_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0124/vulnerable_probe.py",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0124/patched_probe.py"
+    },
+    "CASE-0134": {
+      "eligible": true,
+      "language": "python",
+      "old_name": "result",
+      "new_name": "result_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0134/vulnerable_probe.py",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0134/patched_probe.py"
+    },
+    "CASE-0136": {
+      "eligible": true,
+      "language": "java",
+      "old_name": "f",
+      "new_name": "f_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0136/vulnerable_probe.java",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0136/patched_probe.java"
+    },
+    "CASE-0163": {
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly",
+      "language": "javascript"
+    },
+    "CASE-0171": {
+      "eligible": true,
+      "language": "java",
+      "old_name": "url",
+      "new_name": "url_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0171/vulnerable_probe.java",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0171/patched_probe.java"
+    },
+    "CASE-0173": {
+      "eligible": true,
+      "language": "typescript",
+      "old_name": "key",
+      "new_name": "key_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0173/vulnerable_probe.ts",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0173/patched_probe.ts"
+    },
+    "CASE-0184": {
+      "eligible": true,
+      "language": "java",
+      "old_name": "msg",
+      "new_name": "msg_renamed",
+      "patched_probe_renamed": false,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0184/vulnerable_probe.java",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0184/patched_probe.java"
+    },
+    "CASE-0193": {
+      "eligible": true,
+      "language": "java",
+      "old_name": "documentBuilder",
+      "new_name": "documentBuilder_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0193/vulnerable_probe.java",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0193/patched_probe.java"
+    },
+    "CASE-0220": {
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)",
+      "language": "javascript"
+    },
+    "CASE-0221": {
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)",
+      "language": "java"
+    },
+    "CASE-0222": {
+      "eligible": true,
+      "language": "python",
+      "old_name": "headers",
+      "new_name": "headers_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0222/vulnerable_probe.py",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0222/patched_probe.py"
+    },
+    "CASE-0231": {
+      "eligible": true,
+      "language": "python",
+      "old_name": "user_dir",
+      "new_name": "user_dir_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0231/vulnerable_probe.py",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0231/patched_probe.py"
+    },
+    "CASE-0235": {
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly",
+      "language": "typescript"
+    },
+    "CASE-0238": {
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly",
+      "language": "typescript"
+    },
+    "CASE-0239": {
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly",
+      "language": "javascript"
+    },
+    "CASE-0276": {
+      "eligible": true,
+      "language": "python",
+      "old_name": "file",
+      "new_name": "file_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0276/vulnerable_probe.py",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0276/patched_probe.py"
+    },
+    "CASE-0298": {
+      "eligible": false,
+      "reason": "no eligible local binding found (all candidates excluded or exhausted)",
+      "language": "typescript"
+    },
+    "CASE-0323": {
+      "eligible": false,
+      "reason": "vulnerable_function does not parse cleanly",
+      "language": "javascript"
+    },
+    "CASE-0339": {
+      "eligible": true,
+      "language": "javascript",
+      "old_name": "tokenRegex",
+      "new_name": "tokenRegex_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0339/vulnerable_probe.js",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0339/patched_probe.js"
+    },
+    "CASE-0340": {
+      "eligible": true,
+      "language": "typescript",
+      "old_name": "output",
+      "new_name": "output_renamed",
+      "patched_probe_renamed": true,
+      "vulnerable_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0340/vulnerable_probe.ts",
+      "patched_probe_path": "results/diagnostic_20261010/_dev_probes/CASE-0340/patched_probe.ts"
+    }
+  },
+  "n_accepted_episodes_with_eligible_probe": 116,
+  "n_scan_ok": 116,
+  "n_probe_pass": 110,
+  "n_probe_fail_miss_vulnerable": 6,
+  "n_probe_fail_false_positive_on_patched": 0,
+  "per_episode": [
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0046",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0046/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0184",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0184/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0193",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0193/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0046",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0046/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": false,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0184",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0184/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_b/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0046",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0046/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0184",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0184/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0193",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0193/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_a/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0046",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0046/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": false,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0184",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0184/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r2_b/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0046",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0046/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0184",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0184/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0193",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0193/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_a/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0046",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0046/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": false,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0184",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0184/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0193",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0193/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "qwen3-coder:30b",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r3_b/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0081",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0081/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0339",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0339/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 1,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_a/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0081",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0081/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 1,
+      "case_id": "CASE-0339",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r1_b/CASE-0339/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0081",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0081/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": false,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0339",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0339/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 2,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_a/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0081",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0081/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 2,
+      "case_id": "CASE-0339",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r2_b/CASE-0339/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0081",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0081/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": false,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": false,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0339",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0339/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "A",
+      "repeat": 3,
+      "case_id": "CASE-0340",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_a/CASE-0340/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0081",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0081/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0124",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0124/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0134",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0134/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0136",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0136/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0171",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0171/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0173",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0173/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0222",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0222/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0276",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0276/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    },
+    {
+      "model": "gpt-4o",
+      "condition": "B",
+      "repeat": 3,
+      "case_id": "CASE-0339",
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_gpt4o_r3_b/CASE-0339/final_rule.yml",
+      "scan_ok": true,
+      "vulnerable_detected": true,
+      "patched_detected": false
+    }
+  ]
+}

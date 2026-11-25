@@ -1,0 +1,1306 @@
+{
+ "Qwen3-Coder-30B": {
+  "cells": {
+   "a": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 0,
+      "iterative": 0
+     }
+    },
+    "per_rep_iterative": [
+     6,
+     6,
+     6
+    ],
+    "per_rep_raw": [
+     6,
+     6,
+     6
+    ],
+    "resources_per_rep": {
+     "calls": [
+      36,
+      36,
+      36
+     ],
+     "input_tokens": [
+      33817,
+      33612,
+      33817
+     ],
+     "output_tokens": [
+      10893,
+      10894,
+      10913
+     ]
+    },
+    "mean_iterative": 6,
+    "mean_raw": 6
+   },
+   "b": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 0,
+      "iterative": 1
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 0.3333333333333333,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 1,
+      "iterative": 1
+     }
+    },
+    "per_rep_iterative": [
+     7,
+     7,
+     7
+    ],
+    "per_rep_raw": [
+     5,
+     5,
+     6
+    ],
+    "resources_per_rep": {
+     "calls": [
+      45,
+      44,
+      43
+     ],
+     "input_tokens": [
+      47297,
+      46698,
+      44921
+     ],
+     "output_tokens": [
+      11006,
+      10759,
+      10480
+     ]
+    },
+    "mean_iterative": 7,
+    "mean_raw": 5.333333333333333
+   },
+   "c": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 0,
+      "iterative": 0
+     }
+    },
+    "per_rep_iterative": [
+     6,
+     6,
+     6
+    ],
+    "per_rep_raw": [
+     6,
+     6,
+     6
+    ],
+    "resources_per_rep": {
+     "calls": [
+      36,
+      36,
+      36
+     ],
+     "input_tokens": [
+      33817,
+      33817,
+      33817
+     ],
+     "output_tokens": [
+      10894,
+      10894,
+      10905
+     ],
+     "probe_scans": [
+      10,
+      10,
+      10
+     ],
+     "fallback_accepted": [
+      8,
+      8,
+      8
+     ]
+    },
+    "mean_iterative": 6,
+    "mean_raw": 6
+   },
+   "d": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 0,
+      "iterative": 0.6666666666666666
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 0,
+      "iterative": 1
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 0.3333333333333333,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 1,
+      "iterative": 1
+     }
+    },
+    "per_rep_iterative": [
+     8,
+     7,
+     8
+    ],
+    "per_rep_raw": [
+     5,
+     5,
+     6
+    ],
+    "resources_per_rep": {
+     "calls": [
+      44,
+      45,
+      44
+     ],
+     "input_tokens": [
+      46142,
+      47379,
+      45630
+     ],
+     "output_tokens": [
+      10822,
+      11027,
+      10666
+     ],
+     "probe_scans": [
+      12,
+      12,
+      11
+     ],
+     "fallback_accepted": [
+      8,
+      7,
+      8
+     ]
+    },
+    "mean_iterative": 7.666666666666667,
+    "mean_raw": 5.333333333333333
+   }
+  },
+  "comparisons": {
+   "b_minus_a": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 1,
+     "cases_gained": [
+      "CASE-0340"
+     ],
+     "cases_lost": []
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 1,
+     "cases_gained": [
+      "CASE-0340"
+     ],
+     "cases_lost": []
+    }
+   },
+   "c_minus_a": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 0,
+     "cases_gained": [],
+     "cases_lost": []
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 0,
+     "cases_gained": [],
+     "cases_lost": []
+    }
+   },
+   "d_minus_b": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 0.6666666666666666,
+     "cases_gained": [
+      "CASE-0063"
+     ],
+     "cases_lost": []
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 0,
+     "cases_gained": [],
+     "cases_lost": []
+    }
+   },
+   "d_minus_a": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 1.6666666666666665,
+     "cases_gained": [
+      "CASE-0063",
+      "CASE-0340"
+     ],
+     "cases_lost": []
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 1,
+     "cases_gained": [
+      "CASE-0340"
+     ],
+     "cases_lost": []
+    }
+   },
+   "d_minus_c": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 1.6666666666666665,
+     "cases_gained": [
+      "CASE-0063",
+      "CASE-0340"
+     ],
+     "cases_lost": []
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 1,
+     "cases_gained": [
+      "CASE-0340"
+     ],
+     "cases_lost": []
+    }
+   }
+  },
+  "probe_eligible_cases": [
+   "CASE-0046",
+   "CASE-0124",
+   "CASE-0134",
+   "CASE-0136",
+   "CASE-0171",
+   "CASE-0173",
+   "CASE-0184",
+   "CASE-0222",
+   "CASE-0231",
+   "CASE-0276",
+   "CASE-0340"
+  ]
+ },
+ "GPT-4o": {
+  "cells": {
+   "a": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 0.3333333333333333,
+      "iterative": 0.3333333333333333
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 0,
+      "iterative": 0
+     }
+    },
+    "per_rep_iterative": [
+     6,
+     5,
+     5
+    ],
+    "per_rep_raw": [
+     6,
+     5,
+     5
+    ],
+    "resources_per_rep": {
+     "calls": [
+      41,
+      40,
+      40
+     ],
+     "input_tokens": [
+      39284,
+      38016,
+      38016
+     ],
+     "output_tokens": [
+      9790,
+      9616,
+      9458
+     ]
+    },
+    "mean_iterative": 5.333333333333333,
+    "mean_raw": 5.333333333333333
+   },
+   "b": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 0.3333333333333333,
+      "iterative": 0.3333333333333333
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0.3333333333333333,
+      "iterative": 0.3333333333333333
+     },
+     "CASE-0276": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 0.6666666666666666,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 0,
+      "iterative": 0
+     }
+    },
+    "per_rep_iterative": [
+     5,
+     5,
+     7
+    ],
+    "per_rep_raw": [
+     4,
+     5,
+     7
+    ],
+    "resources_per_rep": {
+     "calls": [
+      43,
+      42,
+      40
+     ],
+     "input_tokens": [
+      44426,
+      43450,
+      41495
+     ],
+     "output_tokens": [
+      7505,
+      7308,
+      6835
+     ]
+    },
+    "mean_iterative": 5.666666666666667,
+    "mean_raw": 5.333333333333333
+   },
+   "c": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 0.3333333333333333,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0221": {
+      "raw": 0.6666666666666666,
+      "iterative": 0.6666666666666666
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 0,
+      "iterative": 0
+     }
+    },
+    "per_rep_iterative": [
+     6,
+     6,
+     5
+    ],
+    "per_rep_raw": [
+     5,
+     6,
+     4
+    ],
+    "resources_per_rep": {
+     "calls": [
+      42,
+      42,
+      42
+     ],
+     "input_tokens": [
+      39717,
+      39530,
+      40088
+     ],
+     "output_tokens": [
+      9957,
+      9959,
+      10119
+     ],
+     "probe_scans": [
+      9,
+      9,
+      9
+     ],
+     "fallback_accepted": [
+      9,
+      9,
+      9
+     ]
+    },
+    "mean_iterative": 5.666666666666667,
+    "mean_raw": 5
+   },
+   "d": {
+    "per_case_mean": {
+     "CASE-0046": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0063": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0081": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0116": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0124": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0134": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0136": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0163": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0171": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0173": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0184": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0193": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0220": {
+      "raw": 0.3333333333333333,
+      "iterative": 0.3333333333333333
+     },
+     "CASE-0221": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0222": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0231": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0235": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0238": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0239": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0276": {
+      "raw": 0.6666666666666666,
+      "iterative": 0.6666666666666666
+     },
+     "CASE-0298": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0323": {
+      "raw": 1,
+      "iterative": 1
+     },
+     "CASE-0339": {
+      "raw": 0,
+      "iterative": 0
+     },
+     "CASE-0340": {
+      "raw": 0,
+      "iterative": 0
+     }
+    },
+    "per_rep_iterative": [
+     6,
+     5,
+     4
+    ],
+    "per_rep_raw": [
+     6,
+     5,
+     4
+    ],
+    "resources_per_rep": {
+     "calls": [
+      40,
+      40,
+      42
+     ],
+     "input_tokens": [
+      41495,
+      41665,
+      43560
+     ],
+     "output_tokens": [
+      6952,
+      7010,
+      7274
+     ],
+     "probe_scans": [
+      7,
+      8,
+      7
+     ],
+     "fallback_accepted": [
+      9,
+      8,
+      8
+     ]
+    },
+    "mean_iterative": 5,
+    "mean_raw": 5
+   }
+  },
+  "comparisons": {
+   "b_minus_a": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 0.3333333333333333,
+     "cases_gained": [
+      "CASE-0136",
+      "CASE-0239",
+      "CASE-0276"
+     ],
+     "cases_lost": [
+      "CASE-0063",
+      "CASE-0220"
+     ]
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 1.6666666666666667,
+     "cases_gained": [
+      "CASE-0136",
+      "CASE-0276"
+     ],
+     "cases_lost": []
+    }
+   },
+   "c_minus_a": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": 0.33333333333333337,
+     "cases_gained": [
+      "CASE-0136"
+     ],
+     "cases_lost": [
+      "CASE-0221"
+     ]
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 0.6666666666666667,
+     "cases_gained": [
+      "CASE-0136"
+     ],
+     "cases_lost": []
+    }
+   },
+   "d_minus_b": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": -0.6666666666666667,
+     "cases_gained": [],
+     "cases_lost": [
+      "CASE-0239",
+      "CASE-0276"
+     ]
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": -0.33333333333333337,
+     "cases_gained": [],
+     "cases_lost": [
+      "CASE-0276"
+     ]
+    }
+   },
+   "d_minus_a": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": -0.33333333333333337,
+     "cases_gained": [
+      "CASE-0136",
+      "CASE-0276"
+     ],
+     "cases_lost": [
+      "CASE-0063",
+      "CASE-0220"
+     ]
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 1.3333333333333335,
+     "cases_gained": [
+      "CASE-0136",
+      "CASE-0276"
+     ],
+     "cases_lost": []
+    }
+   },
+   "d_minus_c": {
+    "all": {
+     "n_cases": 24,
+     "mean_count_difference": -0.6666666666666667,
+     "cases_gained": [
+      "CASE-0221",
+      "CASE-0276"
+     ],
+     "cases_lost": [
+      "CASE-0063",
+      "CASE-0220"
+     ]
+    },
+    "probe_eligible": {
+     "n_cases": 11,
+     "mean_count_difference": 0.6666666666666666,
+     "cases_gained": [
+      "CASE-0276"
+     ],
+     "cases_lost": []
+    }
+   }
+  },
+  "probe_eligible_cases": [
+   "CASE-0046",
+   "CASE-0124",
+   "CASE-0134",
+   "CASE-0136",
+   "CASE-0171",
+   "CASE-0173",
+   "CASE-0184",
+   "CASE-0222",
+   "CASE-0231",
+   "CASE-0276",
+   "CASE-0340"
+  ]
+ }
+}

@@ -1,0 +1,25 @@
+rules:
+- id: vuln-phpldapadmin-dd6e9583
+  pattern: '$REQUEST.setRequestHeader(''Content-length'', $PARAM.length);
+
+    $REQUEST.setRequestHeader(''Connection'', ''close'');
+
+    '
+  pattern-not: '// No setRequestHeader for ''Content-length'' and ''Connection''
+
+    '
+  languages:
+  - javascript
+  message: Setting 'Content-length' and 'Connection' headers manually can lead to
+    security issues. These headers should be managed by the browser or HTTP client
+    library to prevent potential vulnerabilities.
+  severity: ERROR
+  metadata:
+    source-url: github.com/mhuertos/phpLDAPadmin/commit/dd6e9583a2eb2ca085583765e8a63df5904cb036
+    category: security
+    cwe: CWE-444
+    owasp: A6-Security Misconfiguration
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length
+    - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection
+    technology: javascript

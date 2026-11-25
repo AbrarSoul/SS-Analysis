@@ -1,0 +1,193 @@
+Evidence: /Users/nkabmo/Desktop/Tools/SS/Research_Log/Diagnostic_20261010/bounded_followup_artifacts_20261011T215946041546Z/findings.json
+{
+  "model_calls": 0,
+  "reviewed_sha256": {
+    "pipeline/diagnostic_v2.py": "15b083b99d38b70b352de6a38f9230661ebc7381c2a34b53f1d1d733f5f240c7",
+    "pipeline/typed_rule.py": "4c22f3f32e95e000f0e8e03eeb35f872d7df7589b9a0d499b89fc05336662d67",
+    "pipeline/audit_failure_categories.py": "00a44a0c0a7be577aa38e41fa28e7ad875b8408365f792f2ec1e274c32198634",
+    "pipeline/verify_scan_integration.py": "aeb13a0b1560203eefbc377a8c0a829f693d9bc6f73a44d5167426981957b4e7",
+    "pipeline/tests/test_diagnostic_regressions.py": "1aed2d8248239a9d54681516d352d58a2cfc1397200b5873f625be376438b993",
+    "pipeline/tests/test_typed_rule.py": "adc55a129bcaa6629ffb18a34b2b1fb56061fb0bdce45685eb824f6363f09841",
+    "Research_Log/Correction_Log.md": "2ee7660dbcfb971db3cb708551226c01dc2c2481e88b7e1fb7da98f4042901c8",
+    "Research_Log/Diagnostic_20261010/Bounded_Investigation_Tracking.md": "5855fcd1cbe2b8bd5a71c9554f2b9e6bb99c49ca5e87e1361785e08f538d5a42"
+  },
+  "first_call_repairs_stale_and_missing": true,
+  "second_call_serves_stale_bytes": true,
+  "second_call_leaves_missing_file": true,
+  "no_rule_categories": [
+    "never_accepted",
+    "never_parsed",
+    "original_miss"
+  ],
+  "corrected_rejected_episode_categories": [
+    "wrong_location"
+  ],
+  "target_only_failure_categories": [
+    "never_accepted",
+    "original_miss",
+    "rule_construction_error",
+    "target_error"
+  ],
+  "runs": {
+    "qwen3_v3": {
+      "visible_categories": {
+        "never_parsed": 0,
+        "rule_construction_error": 2,
+        "target_error": 1,
+        "original_miss": 5,
+        "wrong_location": 1,
+        "patched_fp": 3,
+        "never_accepted": 5
+      },
+      "original_miss_without_clean_scan": [
+        "CASE-0298"
+      ],
+      "original_miss_with_clean_scan": 4,
+      "raw_hidden_denominator_labeled_accepted": 22,
+      "actual_legacy_accepted_raw": 19,
+      "actual_corrected_accepted_raw": 18,
+      "raw_complete_success": 6,
+      "iterative_complete_success": 6
+    },
+    "qwen3_mechanism_v1": {
+      "visible_categories": {
+        "never_parsed": 1,
+        "rule_construction_error": 2,
+        "target_error": 1,
+        "original_miss": 12,
+        "wrong_location": 1,
+        "patched_fp": 1,
+        "never_accepted": 13
+      },
+      "original_miss_without_clean_scan": [
+        "CASE-0238",
+        "CASE-0298"
+      ],
+      "original_miss_with_clean_scan": 10,
+      "raw_hidden_denominator_labeled_accepted": 19,
+      "actual_legacy_accepted_raw": 6,
+      "actual_corrected_accepted_raw": 6,
+      "raw_complete_success": 4,
+      "iterative_complete_success": 4
+    },
+    "qwen3_mechanism_v2": {
+      "visible_categories": {
+        "never_parsed": 1,
+        "rule_construction_error": 3,
+        "target_error": 1,
+        "original_miss": 8,
+        "wrong_location": 2,
+        "patched_fp": 2,
+        "never_accepted": 9
+      },
+      "original_miss_without_clean_scan": [
+        "CASE-0116",
+        "CASE-0238",
+        "CASE-0298",
+        "CASE-0323"
+      ],
+      "original_miss_with_clean_scan": 4,
+      "raw_hidden_denominator_labeled_accepted": 20,
+      "actual_legacy_accepted_raw": 13,
+      "actual_corrected_accepted_raw": 11,
+      "raw_complete_success": 5,
+      "iterative_complete_success": 5
+    },
+    "qwen3_mechanism_v3": {
+      "visible_categories": {
+        "never_parsed": 2,
+        "rule_construction_error": 2,
+        "target_error": 1,
+        "original_miss": 9,
+        "wrong_location": 2,
+        "patched_fp": 2,
+        "never_accepted": 10
+      },
+      "original_miss_without_clean_scan": [
+        "CASE-0221",
+        "CASE-0238",
+        "CASE-0298"
+      ],
+      "original_miss_with_clean_scan": 6,
+      "raw_hidden_denominator_labeled_accepted": 20,
+      "actual_legacy_accepted_raw": 13,
+      "actual_corrected_accepted_raw": 12,
+      "raw_complete_success": 5,
+      "iterative_complete_success": 5
+    },
+    "qwen3_mechanism_v4": {
+      "visible_categories": {
+        "never_parsed": 0,
+        "rule_construction_error": 3,
+        "target_error": 1,
+        "original_miss": 7,
+        "wrong_location": 2,
+        "patched_fp": 3,
+        "never_accepted": 9
+      },
+      "original_miss_without_clean_scan": [],
+      "original_miss_with_clean_scan": 7,
+      "raw_hidden_denominator_labeled_accepted": 22,
+      "actual_legacy_accepted_raw": 12,
+      "actual_corrected_accepted_raw": 10,
+      "raw_complete_success": 5,
+      "iterative_complete_success": 6
+    },
+    "qwen3_mechanism_v5": {
+      "visible_categories": {
+        "never_parsed": 0,
+        "rule_construction_error": 10,
+        "target_error": 0,
+        "original_miss": 9,
+        "wrong_location": 2,
+        "patched_fp": 2,
+        "never_accepted": 11
+      },
+      "original_miss_without_clean_scan": [
+        "CASE-0220",
+        "CASE-0221",
+        "CASE-0231"
+      ],
+      "original_miss_with_clean_scan": 6,
+      "raw_hidden_denominator_labeled_accepted": 17,
+      "actual_legacy_accepted_raw": 10,
+      "actual_corrected_accepted_raw": 9,
+      "raw_complete_success": 1,
+      "iterative_complete_success": 3
+    }
+  },
+  "ast_probe_counterexample": {
+    "original": "def probe():\n    token = \"unsafe\"\n    return locals()[\"token\"]\n",
+    "renamed": "def probe():\n    renamed_token = 'unsafe'\n    return locals()['token']",
+    "trees_equal_except_identifier": true,
+    "original_result": "unsafe",
+    "renamed_result": {
+      "exception": "KeyError",
+      "message": "'token'"
+    }
+  },
+  "invalid_metadata_still_accepted": {
+    "id": "review",
+    "pattern": "foo($X)",
+    "languages": [
+      "python"
+    ],
+    "message": "m",
+    "severity": "ERROR",
+    "metadata": [
+      "not a mapping"
+    ]
+  },
+  "accepted_tuple_languages_yaml_roundtrip": "ConstructorError",
+  "verifier_version_probe": {
+    "returncode": 0,
+    "stdout": "1.140.0",
+    "stderr": "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.5.0) or chardet (7.4.3)/charset_normalizer (3.4.4) doesn't match a supported version!\n  warnings.warn(\n\nA new version of Semgrep is available. See https://semgrep.dev/docs/upgrading"
+  },
+  "scan_environment_version_probe": {
+    "returncode": 0,
+    "stdout": "1.177.0",
+    "stderr": ""
+  },
+  "reviewed_files_unchanged": true
+}

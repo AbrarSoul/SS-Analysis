@@ -1,0 +1,166 @@
+{
+ "stages": [
+  "requested",
+  "yaml_parses",
+  "semgrep_loads",
+  "visibly_accepted",
+  "visible_pair_location_correct",
+  "both_hidden_variants_detected",
+  "complete_success"
+ ],
+ "per_model": {
+  "qwen2.5-coder:7b-instruct": {
+   "requested": 150,
+   "yaml_parses": 136,
+   "semgrep_loads": 111,
+   "visibly_accepted": 36,
+   "visible_pair_location_correct": 36,
+   "both_hidden_variants_detected": 14,
+   "complete_success": 6
+  },
+  "qwen2.5-coder:32b": {
+   "requested": 150,
+   "yaml_parses": 141,
+   "semgrep_loads": 120,
+   "visibly_accepted": 39,
+   "visible_pair_location_correct": 39,
+   "both_hidden_variants_detected": 17,
+   "complete_success": 7
+  },
+  "DeepHat-V1-7B": {
+   "requested": 150,
+   "yaml_parses": 142,
+   "semgrep_loads": 125,
+   "visibly_accepted": 42,
+   "visible_pair_location_correct": 42,
+   "both_hidden_variants_detected": 15,
+   "complete_success": 8
+  },
+  "deepseek-coder:6.7b": {
+   "requested": 150,
+   "yaml_parses": 131,
+   "semgrep_loads": 110,
+   "visibly_accepted": 10,
+   "visible_pair_location_correct": 10,
+   "both_hidden_variants_detected": 1,
+   "complete_success": 1
+  },
+  "codegemma:7b": {
+   "requested": 150,
+   "yaml_parses": 138,
+   "semgrep_loads": 108,
+   "visibly_accepted": 20,
+   "visible_pair_location_correct": 20,
+   "both_hidden_variants_detected": 5,
+   "complete_success": 3
+  },
+  "magicoder:7b": {
+   "requested": 150,
+   "yaml_parses": 136,
+   "semgrep_loads": 85,
+   "visibly_accepted": 6,
+   "visible_pair_location_correct": 6,
+   "both_hidden_variants_detected": 2,
+   "complete_success": 1
+  },
+  "yi-coder:9b": {
+   "requested": 150,
+   "yaml_parses": 138,
+   "semgrep_loads": 116,
+   "visibly_accepted": 29,
+   "visible_pair_location_correct": 29,
+   "both_hidden_variants_detected": 10,
+   "complete_success": 5
+  },
+  "codellama:7b-instruct-fp16": {
+   "requested": 150,
+   "yaml_parses": 132,
+   "semgrep_loads": 105,
+   "visibly_accepted": 15,
+   "visible_pair_location_correct": 15,
+   "both_hidden_variants_detected": 1,
+   "complete_success": 0
+  },
+  "qwen3-coder:30b": {
+   "requested": 150,
+   "yaml_parses": 149,
+   "semgrep_loads": 134,
+   "visibly_accepted": 55,
+   "visible_pair_location_correct": 55,
+   "both_hidden_variants_detected": 21,
+   "complete_success": 10
+  },
+  "gpt-oss:20b": {
+   "requested": 150,
+   "yaml_parses": 21,
+   "semgrep_loads": 20,
+   "visibly_accepted": 12,
+   "visible_pair_location_correct": 12,
+   "both_hidden_variants_detected": 6,
+   "complete_success": 2
+  },
+  "opencoder:8b-instruct-q4_K_M": {
+   "requested": 150,
+   "yaml_parses": 143,
+   "semgrep_loads": 74,
+   "visibly_accepted": 9,
+   "visible_pair_location_correct": 9,
+   "both_hidden_variants_detected": 1,
+   "complete_success": 0
+  },
+  "granite-code:8b-instruct-128k-q4_1": {
+   "requested": 150,
+   "yaml_parses": 146,
+   "semgrep_loads": 119,
+   "visibly_accepted": 27,
+   "visible_pair_location_correct": 27,
+   "both_hidden_variants_detected": 4,
+   "complete_success": 3
+  },
+  "llama3.1:8b-instruct-q4_K_M": {
+   "requested": 150,
+   "yaml_parses": 136,
+   "semgrep_loads": 109,
+   "visibly_accepted": 26,
+   "visible_pair_location_correct": 26,
+   "both_hidden_variants_detected": 9,
+   "complete_success": 4
+  },
+  "Mistral-Small-24B-Instruct-2501": {
+   "requested": 150,
+   "yaml_parses": 145,
+   "semgrep_loads": 131,
+   "visibly_accepted": 39,
+   "visible_pair_location_correct": 39,
+   "both_hidden_variants_detected": 13,
+   "complete_success": 8
+  },
+  "phi4:14b-q4_K_M": {
+   "requested": 150,
+   "yaml_parses": 149,
+   "semgrep_loads": 111,
+   "visibly_accepted": 24,
+   "visible_pair_location_correct": 24,
+   "both_hidden_variants_detected": 9,
+   "complete_success": 5
+  },
+  "gpt-4o": {
+   "requested": 150,
+   "yaml_parses": 149,
+   "semgrep_loads": 138,
+   "visibly_accepted": 53,
+   "visible_pair_location_correct": 53,
+   "both_hidden_variants_detected": 19,
+   "complete_success": 11
+  }
+ },
+ "pooled_open_weight": {
+  "requested": 2250,
+  "yaml_parses": 1983,
+  "semgrep_loads": 1578,
+  "visibly_accepted": 389,
+  "visible_pair_location_correct": 389,
+  "both_hidden_variants_detected": 128,
+  "complete_success": 63
+ }
+}

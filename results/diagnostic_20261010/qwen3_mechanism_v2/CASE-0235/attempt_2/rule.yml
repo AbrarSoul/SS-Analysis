@@ -1,0 +1,21 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  patterns:
+  - pattern: "if ($X.indexOf($Y) !== 0) {\n  ...\n}\n"
+  - pattern-not: "if ($X.indexOf($Y) !== 0) {\n    $RES.statusCode = 403;\n    $RES.end();\n\
+      \    return;\n}\n"
+  pattern-inside: "function $FUNC(...) {\n  ...\n  $REQ.url\n  ...\n}\n"
+  message: Directory traversal vulnerability detected. The code checks if a pathname
+    is within a public directory but does not properly validate or restrict access,
+    allowing potential unauthorized file access. Add proper access control and validation
+    to prevent directory traversal attacks.
+  severity: ERROR
+  languages:
+  - typescript
+  metadata:
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    category: security
+    cwe:
+    - CWE-22
+    technology:
+    - typescript

@@ -1,0 +1,25 @@
+ The given patch is related to a potential XSS (Cross-Site Scripting) vulnerability in the Twitter widget code embedded in the "packages/editor/src/extensions/embed/component.tsx" file. 
+
+Here's an example of how you could write a Semgrep rule for this:
+
+```yaml
+rules:
+  - id: "vuln-notesnook-e87f5e5f"
+    pattern: |>
+      !function(a,b){var c=document.createElement("script");c.src="https://platform.twitter.com/widgets.js";
+      a.parentNode.insertBefore(c,a)};
+    languages: ["typescript"]
+    message: "Potential Cross-Site Scripting (XSS) vulnerability in Twitter widget code."
+    severity: ERROR
+    metadata: 
+      source-url: https://github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+      category: security
+      cwe: CWE-80
+      owasp: A6
+      references: https://owasp.org/www-community/attacks/xss/, https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html#rule-2-the-content-type-is-not-set
+      technology: typescript
+```
+
+This rule will match any code that looks like the function call in the pattern, and it will be flagged as an error because of its potential XSS vulnerability. 
+
+Please replace the pattern with your own specific pattern to detect similar issues in your codebase.

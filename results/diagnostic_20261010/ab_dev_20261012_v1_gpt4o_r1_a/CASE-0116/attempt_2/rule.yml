@@ -1,0 +1,23 @@
+rules:
+- id: vuln-thrift-0919c3d5
+  pattern: '$SOCKET.getSSLParameters();
+
+    '
+  pattern-not: '$SOCKET.getSSLParameters().setEndpointIdentificationAlgorithm("HTTPS");
+
+    '
+  languages:
+  - java
+  message: Missing endpoint identification algorithm in SSL parameters. This can lead
+    to man-in-the-middle attacks. Ensure that the endpoint identification algorithm
+    is set to 'HTTPS' to verify the server's identity.
+  severity: ERROR
+  metadata:
+    source-url: github.com/apache/thrift/commit/0919c3d5506151514e283a63e1fe1ce83e2449d8
+    category: security
+    cwe: CWE-295
+    owasp: A6-Security Misconfiguration
+    references:
+    - https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration
+    - https://cwe.mitre.org/data/definitions/295.html
+    technology: java

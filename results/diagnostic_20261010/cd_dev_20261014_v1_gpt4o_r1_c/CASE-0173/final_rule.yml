@@ -1,0 +1,28 @@
+rules:
+- id: vuln-hono-cf9a78db
+  pattern: 'const $KEY = $ASSET_MANIFEST[$PATH] || $PATH
+
+    '
+  pattern-not: 'const $KEY = $ASSET_MANIFEST[$PATH]
+
+    '
+  languages:
+  - typescript
+  message: '"Using a fallback value for asset keys can lead to incorrect asset retrieval,
+    potentially causing security issues or incorrect application behavior. Ensure
+    that the asset key is directly retrieved from the ASSET_MANIFEST without a fallback
+    to avoid these issues."
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    category: security
+    cwe:
+    - CWE-703
+    owasp:
+    - A6:2017-Security Misconfiguration
+    references:
+    - https://github.com/honojs/hono/commit/cf9a78db4d0a19b117aee399cbe9d3a6d9bfd817
+    technology:
+    - typescript

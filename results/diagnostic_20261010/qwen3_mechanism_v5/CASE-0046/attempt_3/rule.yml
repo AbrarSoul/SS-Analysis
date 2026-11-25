@@ -1,0 +1,24 @@
+rules:
+- id: vuln-quark-auto-save-ea8377a5
+  pattern-either:
+  - pattern: "if $KEY not in $LIST:\n    ...\n"
+  - pattern: "if $KEY in $LIST:\n    ...\n"
+  patterns:
+  - pattern: "if $KEY not in $LIST:\n    ...\n"
+  - pattern-not: "if $KEY in allowed_keys:\n    ...\n"
+  pattern-inside: "for $KEY in $DICT:\n    ...\n"
+  languages:
+  - python
+  message: Potential batch assignment vulnerability detected. The code uses a blacklist
+    approach ($LIST) instead of a whitelist approach (allowed_keys). This allows untrusted
+    keys to be processed, potentially leading to unauthorized data manipulation or
+    injection attacks. Fix by using an allowlist approach with explicit validation
+    against a predefined set of allowed keys.
+  severity: ERROR
+  metadata:
+    source-url: github.com/Cp0204/quark-auto-save/commit/ea8377a596446291953dbe36e2d119d85bcd865b
+    category: security
+    cwe: CWE-20
+    owasp: A01:2021-Broken Access Control
+    technology:
+    - python

@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0046
+  message: Mass assignment through per-key updates after blacklist filtering
+  severity: WARNING
+  languages:
+  - python
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern: '$CONFIG.update({$KEY: $VALUE})'

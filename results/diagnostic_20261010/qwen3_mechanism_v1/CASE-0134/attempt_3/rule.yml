@@ -1,0 +1,22 @@
+rules:
+- id: vuln-apprise-e20fce63
+  patterns:
+  - pattern: re.compile(r'(?P<events>([A-Z0-9_-]+/?)+)?')
+  - pattern-not: re.compile(r'((?P<events>(/[A-Z0-9_-]+)+))\?')
+  message: Insecure regex pattern for IFTTT events parameter allows path traversal
+    and arbitrary path matching. The vulnerable pattern '(?P<events>([A-Z0-9_-]+/?)+)?'
+    permits nested slashes and can be exploited to bypass validation checks. This
+    vulnerability could allow attackers to craft malicious event names that match
+    unintended patterns, potentially leading to unauthorized access or data leakage.
+    Fix by using a stricter regex pattern like '((?P<events>(/[A-Z0-9_-]+)+))?' that
+    enforces proper path structure with mandatory leading slashes.
+  severity: ERROR
+  languages:
+  - python
+  metadata:
+    source-url: github.com/caronc/apprise/commit/e20fce630d55e4ca9b0a1e325a5fea6997489831
+    category: security
+    cwe:
+    - CWE-22
+    technology:
+    - python

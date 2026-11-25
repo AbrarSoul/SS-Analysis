@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0134
+  message: Ambiguous nested repetition with an optional separator
+  severity: WARNING
+  languages:
+  - python
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern-regex: \(\[A\-Z0\-9_\-\]\+/\?\)\+

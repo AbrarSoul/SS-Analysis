@@ -1,0 +1,172 @@
+{
+  "summary": {
+    "requested_cases": 24,
+    "completed_cases": 24,
+    "conditions": {
+      "reference": {
+        "evaluated": 24,
+        "scan_errors": 1,
+        "accepted": 19,
+        "visible_correct": 19,
+        "complete_success": 12,
+        "hidden_positive_hits_all_requested": 35,
+        "expected_hidden_positives": 48,
+        "hidden_false_positives_accepted": 6,
+        "accepted_hidden_negatives_evaluated": 38
+      }
+    }
+  },
+  "location_only_failures": [
+    {
+      "case_id": "CASE-0173",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            11
+          ],
+          "accepted_location": [
+            41,
+            44
+          ],
+          "category": "finding_outside_annotation"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0163",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            50
+          ],
+          "accepted_location": [
+            26,
+            37
+          ],
+          "category": "finding_outside_annotation"
+        },
+        {
+          "sample_type": "variant_safe",
+          "outcome": "FP",
+          "finding_lines": [
+            34
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0239",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            38
+          ],
+          "accepted_location": [
+            40,
+            85
+          ],
+          "category": "finding_outside_annotation"
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-0235",
+      "scan_ok": true,
+      "complete_success": false,
+      "failures": [
+        {
+          "sample_type": "original_patched",
+          "outcome": "FP",
+          "finding_lines": [
+            47
+          ],
+          "accepted_location": null,
+          "category": "false_positive"
+        },
+        {
+          "sample_type": "variant_vulnerable_2",
+          "outcome": "FN",
+          "finding_lines": [
+            41
+          ],
+          "accepted_location": [
+            45,
+            79
+          ],
+          "category": "finding_outside_annotation"
+        }
+      ]
+    }
+  ],
+  "tsx_probe_errors": [],
+  "tsx_samples": [
+    {
+      "sample_type": "original_vulnerable",
+      "source": "benchmark/cases/CASE-0298/vulnerable_source.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/vulnerable_source.tsx",
+      "sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449",
+      "identical_bytes": true,
+      "finding_lines": [
+        211
+      ]
+    },
+    {
+      "sample_type": "original_patched",
+      "source": "benchmark/cases/CASE-0298/patched_source.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/patched_source.tsx",
+      "sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37",
+      "identical_bytes": true,
+      "finding_lines": []
+    },
+    {
+      "sample_type": "variant_vulnerable_1",
+      "source": "benchmark/cases/CASE-0298/variant_vulnerable_01.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_vulnerable_01.tsx",
+      "sha256": "34443a1bb436b02f61cebc53d7d923305b0657b34d407963337c3c663bd6bfe6",
+      "identical_bytes": true,
+      "finding_lines": [
+        211
+      ]
+    },
+    {
+      "sample_type": "variant_vulnerable_2",
+      "source": "benchmark/cases/CASE-0298/variant_vulnerable_02.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_vulnerable_02.tsx",
+      "sha256": "001596d4aa5693f3f21a8d2d3d62c15d86b0ac510e123e77da6bb07475726ef6",
+      "identical_bytes": true,
+      "finding_lines": [
+        208
+      ]
+    },
+    {
+      "sample_type": "variant_safe",
+      "source": "benchmark/cases/CASE-0298/variant_safe_01.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/variant_safe_01.tsx",
+      "sha256": "3913dd6f0d7f1cea2f4f3a6c32ecb1ff28e5517f4d580579f7655f3fe8473f19",
+      "identical_bytes": true,
+      "finding_lines": []
+    },
+    {
+      "sample_type": "benign_lookalike",
+      "source": "benchmark/cases/CASE-0298/benign_lookalike.ts",
+      "copy": "results/diagnostic_20261010/failure_audit_v1/case0298_tsx_probe/benign_lookalike.tsx",
+      "sha256": "c7c9530576f1842d5ce1c6987597885859085e6da0b7c830824c7b3d763727ab",
+      "identical_bytes": true,
+      "finding_lines": []
+    }
+  ]
+}

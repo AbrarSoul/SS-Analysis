@@ -1,0 +1,79 @@
+CASE-0323: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0276: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0221: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0134: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0136: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 1, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+ERROR:root:YAML parsing error: while scanning a simple key
+  in "<unicode string>", line 7, column 11:
+              $HTTP_REQUEST.setRequestHeader(' ... 
+              ^
+could not find expected ':'
+  in "<unicode string>", line 8, column 5:
+        - patterns:
+        ^
+ERROR:root:Failed to clean YAML text
+ERROR:root:YAML parsing error: while scanning a simple key
+  in "<unicode string>", line 7, column 7:
+          $HTTP_REQUEST.setRequestHeader(' ... 
+          ^
+could not find expected ':'
+  in "<unicode string>", line 8, column 3:
+      - patterns:
+      ^
+ERROR:root:Failed to clean YAML text
+CASE-0220: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0340: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0238: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 2, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 2, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0193: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0124: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0063: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0184: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0173: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0222: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0163: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0171: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 2, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 1, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0046: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0239: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}, "iterative": {"evaluated": 1, "scan_errors": 0, "accepted": 1, "visible_correct": 1, "complete_success": 0, "hidden_positive_hits_all_requested": 1, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 2}}
+CASE-0235: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0298: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0116: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0231: {"raw": {"evaluated": 1, "scan_errors": 1, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+ERROR:root:YAML parsing error: while scanning a double-quoted scalar
+  in "<unicode string>", line 6, column 12:
+      message: "Potential insecure regex patter ... 
+               ^
+found unknown escape character '{'
+  in "<unicode string>", line 6, column 88:
+     ... () call. The original regex /[<\{\}]/g includes a backslash-esca ... 
+                                         ^
+ERROR:root:Failed to clean YAML text
+CASE-0339: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+CASE-0081: {"raw": {"evaluated": 1, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}, "iterative": {"evaluated": 0, "scan_errors": 0, "accepted": 0, "visible_correct": 0, "complete_success": 0, "hidden_positive_hits_all_requested": 0, "expected_hidden_positives": 2, "hidden_false_positives_accepted": 0, "accepted_hidden_negatives_evaluated": 0}}
+{
+  "requested_cases": 24,
+  "completed_cases": 24,
+  "conditions": {
+    "raw": {
+      "evaluated": 24,
+      "scan_errors": 7,
+      "accepted": 10,
+      "visible_correct": 9,
+      "complete_success": 1,
+      "hidden_positive_hits_all_requested": 14,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 6,
+      "accepted_hidden_negatives_evaluated": 20
+    },
+    "iterative": {
+      "evaluated": 13,
+      "scan_errors": 0,
+      "accepted": 13,
+      "visible_correct": 12,
+      "complete_success": 3,
+      "hidden_positive_hits_all_requested": 20,
+      "expected_hidden_positives": 48,
+      "hidden_false_positives_accepted": 7,
+      "accepted_hidden_negatives_evaluated": 26
+    }
+  }
+}

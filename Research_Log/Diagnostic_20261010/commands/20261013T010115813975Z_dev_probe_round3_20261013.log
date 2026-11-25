@@ -1,0 +1,114 @@
+{
+  "created_utc": "2026-10-13T01:01:15.877823+00:00",
+  "model_calls": 0,
+  "semgrep_scans": 0,
+  "previous_counterexamples": [
+    {
+      "label": "patched_global_reference",
+      "status": "fixed: valid unchanged patched source still returns 7"
+    },
+    {
+      "label": "python_comprehension_scope",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "python_default_argument_scope",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "java_block_local_vs_field",
+      "status": "fixed: rejected"
+    },
+    {
+      "label": "invalid_patched",
+      "status": "fixed: rejected"
+    }
+  ],
+  "coverage_counts": {
+    "total": 100,
+    "passed": 94,
+    "missed": 6,
+    "patched_findings": 0
+  },
+  "groups": {
+    "qwen3-coder:30b / A": {
+      "total": 30,
+      "passed": 30,
+      "missed": 0
+    },
+    "qwen3-coder:30b / B": {
+      "total": 28,
+      "passed": 25,
+      "missed": 3
+    },
+    "gpt-4o / A": {
+      "total": 21,
+      "passed": 18,
+      "missed": 3
+    },
+    "gpt-4o / B": {
+      "total": 21,
+      "passed": 21,
+      "missed": 0
+    }
+  },
+  "failures": [
+    [
+      "qwen3-coder:30b",
+      "B",
+      1,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      2,
+      "CASE-0171"
+    ],
+    [
+      "qwen3-coder:30b",
+      "B",
+      3,
+      "CASE-0171"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      2,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0136"
+    ],
+    [
+      "gpt-4o",
+      "A",
+      3,
+      "CASE-0173"
+    ]
+  ],
+  "eligible_cases": [
+    "CASE-0046",
+    "CASE-0124",
+    "CASE-0134",
+    "CASE-0136",
+    "CASE-0171",
+    "CASE-0173",
+    "CASE-0184",
+    "CASE-0222",
+    "CASE-0231",
+    "CASE-0276",
+    "CASE-0340"
+  ],
+  "accepted_episodes": 195,
+  "uncovered_accepted": 95,
+  "unchanged_failure_set": true,
+  "previous_reviewed_inputs_changed": [
+    "pipeline/dev_probe.py",
+    "pipeline/tests/test_dev_probe.py"
+  ]
+}
+Two additional behavior-changing accepted probes reproduced; evidence: Research_Log/Diagnostic_20261010/Dev_Probe_Round3_Evidence_20261013.json

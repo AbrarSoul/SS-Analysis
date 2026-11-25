@@ -1,0 +1,369 @@
+{
+  "case_id": "CASE-0231",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 7,
+        "all_targets_scanned": false,
+        "errors": [
+          {
+            "code": 4,
+            "level": "error",
+            "type": "InvalidRuleSchemaError",
+            "long_msg": "These options were both specified, but they are mutually exclusive: 'pattern-either', 'patterns'",
+            "short_msg": "Invalid rule schema",
+            "spans": [
+              {
+                "file": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+                "start": {
+                  "line": 2,
+                  "col": 3,
+                  "offset": -1
+                },
+                "end": {
+                  "line": 38,
+                  "col": 1,
+                  "offset": -1
+                },
+                "source_hash": "ba992adab47de9b0ec84bcc540c98beaa9f7fa8bb28fc1630899dad7e0a01b38"
+              }
+            ]
+          },
+          {
+            "code": 7,
+            "level": "error",
+            "type": "SemgrepError",
+            "message": "invalid configuration file found (1 configs were invalid)"
+          },
+          {
+            "message": "Semgrep exited with status 7"
+          },
+          {
+            "message": "Semgrep did not scan every requested sample"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/vulnerable_source.py",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/patched_source.py"
+        ],
+        "validation_seconds": 1.1150169160100631,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0231/vulnerable_source.py",
+            "sample_sha256": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0231/patched_source.py",
+            "sample_sha256": "ffbd3796730e446c45e23e9550eb85077dba6b5212474efaf067c4a5701941d7"
+          }
+        ]
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 4, \"level\": \"error\", \"type\": \"InvalidRuleSchemaError\", \"long_msg\": \"These options were both specified, but they are mutually exclusive: 'pattern-either', 'patterns'\", \"short_msg\": \"Invalid rule schema\", \"spans\": [{\"file\": \"/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml\", \"start\": {\"line\": 2, \"col\": 3, \"offset\": -1}, \"end\": {\"line\": 38, \"col\": 1, \"offset\": -1}, \"source_hash\": \"ba992adab47de9b0ec84bcc540c98beaa9f7fa8bb28fc1630899dad7e0a01b38\"}]}, {\"code\": 7, \"level\": \"error\", \"type\": \"SemgrepError\", \"message\": \"invalid configuration file found (1 configs were invalid)\"}, {\"message\": \"Semgrep exited with status 7\"}, {\"message\": \"Semgrep did not scan every requested sample\"}]"
+    },
+    {
+      "attempt": 2,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_2/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 7,
+        "all_targets_scanned": false,
+        "errors": [
+          {
+            "code": 4,
+            "level": "error",
+            "type": "InvalidRuleSchemaError",
+            "long_msg": "'$APP.delete($FILENAME)\\n...\\n$FILENAME = os.path.abspath($FILENAME)\\n' is not valid under any of the given schemas",
+            "short_msg": "Invalid rule schema",
+            "spans": [
+              {
+                "file": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_2/rule.yml",
+                "start": {
+                  "line": 2,
+                  "col": 3,
+                  "offset": -1
+                },
+                "end": {
+                  "line": 33,
+                  "col": 1,
+                  "offset": -1
+                },
+                "source_hash": "6193cdc2d73484db80ef1da29b84fab1fb3e08730f19debfb66df3195af6af9f"
+              }
+            ]
+          },
+          {
+            "code": 7,
+            "level": "error",
+            "type": "SemgrepError",
+            "message": "invalid configuration file found (1 configs were invalid)"
+          },
+          {
+            "message": "Semgrep exited with status 7"
+          },
+          {
+            "message": "Semgrep did not scan every requested sample"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_2/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/vulnerable_source.py",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/patched_source.py"
+        ],
+        "validation_seconds": 1.1191826670110459,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0231/vulnerable_source.py",
+            "sample_sha256": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0231/patched_source.py",
+            "sample_sha256": "ffbd3796730e446c45e23e9550eb85077dba6b5212474efaf067c4a5701941d7"
+          }
+        ]
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 4, \"level\": \"error\", \"type\": \"InvalidRuleSchemaError\", \"long_msg\": \"'$APP.delete($FILENAME)\\\\n...\\\\n$FILENAME = os.path.abspath($FILENAME)\\\\n' is not valid under any of the given schemas\", \"short_msg\": \"Invalid rule schema\", \"spans\": [{\"file\": \"/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_2/rule.yml\", \"start\": {\"line\": 2, \"col\": 3, \"offset\": -1}, \"end\": {\"line\": 33, \"col\": 1, \"offset\": -1}, \"source_hash\": \"6193cdc2d73484db80ef1da29b84fab1fb3e08730f19debfb66df3195af6af9f\"}]}, {\"code\": 7, \"level\": \"error\", \"type\": \"SemgrepError\", \"message\": \"invalid configuration file found (1 configs were invalid)\"}, {\"message\": \"Semgrep exited with status 7\"}, {\"message\": \"Semgrep did not scan every requested sample\"}]"
+    },
+    {
+      "attempt": 3,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_3/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": false,
+        "returncode": 2,
+        "all_targets_scanned": true,
+        "errors": [
+          {
+            "code": 2,
+            "level": "error",
+            "type": "Rule parse error",
+            "rule_id": "results.diagnostic_20261010.qwen3_mechanism_v5.CASE-0231.attempt_3.vuln-agentscope-7d285e86",
+            "message": "Rule parse error in rule results.diagnostic_20261010.qwen3_mechanism_v5.CASE-0231.attempt_3.vuln-agentscope-7d285e86:\n Invalid pattern for Python: Stdlib.Parsing.Parse_error\n----- pattern -----\n$APP.delete($FILENAME) if not $FILENAME.endswith(\".json\")\n----- end pattern -----\n"
+          },
+          {
+            "message": "Semgrep exited with status 2"
+          }
+        ],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_3/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/vulnerable_source.py",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/patched_source.py"
+        ],
+        "validation_seconds": 1.3938104590051807,
+        "legacy_accepted": false,
+        "visible_correct": false,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": false,
+            "finding_location_correct": false,
+            "finding_lines": [],
+            "outcome": "FN",
+            "sample_path": "benchmark/cases/CASE-0231/vulnerable_source.py",
+            "sample_sha256": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0231/patched_source.py",
+            "sample_sha256": "ffbd3796730e446c45e23e9550eb85077dba6b5212474efaf067c4a5701941d7"
+          }
+        ]
+      },
+      "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.qwen3_mechanism_v5.CASE-0231.attempt_3.vuln-agentscope-7d285e86\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.qwen3_mechanism_v5.CASE-0231.attempt_3.vuln-agentscope-7d285e86:\\n Invalid pattern for Python: Stdlib.Parsing.Parse_error\\n----- pattern -----\\n$APP.delete($FILENAME) if not $FILENAME.endswith(\\\".json\\\")\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+    }
+  ],
+  "raw": {
+    "scan_ok": false,
+    "returncode": 7,
+    "all_targets_scanned": false,
+    "errors": [
+      {
+        "code": 4,
+        "level": "error",
+        "type": "InvalidRuleSchemaError",
+        "long_msg": "These options were both specified, but they are mutually exclusive: 'pattern-either', 'patterns'",
+        "short_msg": "Invalid rule schema",
+        "spans": [
+          {
+            "file": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+            "start": {
+              "line": 2,
+              "col": 3,
+              "offset": -1
+            },
+            "end": {
+              "line": 38,
+              "col": 1,
+              "offset": -1
+            },
+            "source_hash": "ba992adab47de9b0ec84bcc540c98beaa9f7fa8bb28fc1630899dad7e0a01b38"
+          }
+        ]
+      },
+      {
+        "code": 7,
+        "level": "error",
+        "type": "SemgrepError",
+        "message": "invalid configuration file found (1 configs were invalid)"
+      },
+      {
+        "message": "Semgrep exited with status 7"
+      },
+      {
+        "message": "Semgrep did not scan every requested sample"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0231/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/vulnerable_source.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/patched_source.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/variant_vulnerable_01.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/variant_vulnerable_02.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/variant_safe_01.py",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0231/benign_lookalike.py"
+    ],
+    "validation_seconds": 1.140247957999236,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0231/vulnerable_source.py",
+        "sample_sha256": "072be13259d570070ea21adfbe50d68b2205f2b62a06f068618b9fa068cd00ea"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0231/patched_source.py",
+        "sample_sha256": "ffbd3796730e446c45e23e9550eb85077dba6b5212474efaf067c4a5701941d7"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0231/variant_vulnerable_01.py",
+        "sample_sha256": "06fc66f9b92f1498cb89e22113bb6381985d05baaeaea907292bd4801b8a5eed"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0231/variant_vulnerable_02.py",
+        "sample_sha256": "9a667fc163519cb3b497411f37bb81a336680e037b2de5a2db99aa2a5bec7285"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0231/variant_safe_01.py",
+        "sample_sha256": "5247a68745f55f5b9cc94ac24d421d08a9f456f765fef5c95172c609ceaf3a5a"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0231/benign_lookalike.py",
+        "sample_sha256": "d8ed43adfdb32057772eeb87476bd011e08220516f15abc9f5cbf7bd41d786ea"
+      }
+    ]
+  },
+  "iterative": null,
+  "final_rule_path": null,
+  "final_rule_sha256": null,
+  "calls_recorded": 3,
+  "input_tokens": 5148,
+  "output_tokens": 849,
+  "generation_seconds": 6.920242582011269
+}

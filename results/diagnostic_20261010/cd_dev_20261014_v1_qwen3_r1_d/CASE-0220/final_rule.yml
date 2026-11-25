@@ -1,0 +1,19 @@
+rules:
+- id: vuln-phpldapadmin-dd6e9583
+  pattern: $HTTP_REQUEST.setRequestHeader('Content-length', $PARAMETERS.length); ...
+    $HTTP_REQUEST.setRequestHeader('Connection','close');
+  languages:
+  - javascript
+  message: 'Vulnerable code pattern detected: explicit setting of ''Content-length''
+    and ''Connection'' headers in AJAX requests. This can lead to security issues
+    including header injection vulnerabilities and potential manipulation of HTTP
+    request behavior. Remove these manual header settings as they are typically handled
+    automatically by the browser''s XMLHttpRequest implementation.'
+  severity: WARNING
+  metadata:
+    category: security
+    cwe: CWE-1043
+    owasp: OWASP-A03:2021
+    source-url: github.com/mhuertos/phpLDAPadmin/commit/dd6e9583a2eb2ca085583765e8a63df5904cb036
+    technology:
+    - javascript

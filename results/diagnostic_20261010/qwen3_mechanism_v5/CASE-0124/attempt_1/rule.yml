@@ -1,0 +1,21 @@
+rules:
+- id: vuln-sagemaker-python-sdk-2d873d53
+  pattern-either:
+  - pattern: os.system($CMD)
+  - pattern: subprocess.call($CMD)
+  - pattern: subprocess.check_call($CMD)
+  pattern-not: subprocess.run($CMD, check=True, capture_output=True)
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Detected use of unsafe command execution functions (os.system, subprocess.call,
+    subprocess.check_call) with untrusted input. This can lead to command injection
+    vulnerabilities. Use subprocess.run() with a list of arguments instead of a string
+    command to prevent shell injection.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-78
+    source-url: github.com/aws/sagemaker-python-sdk/commit/2d873d53f708ea570fc2e2a6974f8c3097fe9df5
+    technology:
+    - python

@@ -1,0 +1,63 @@
+{
+  "run_id": "diagnostic",
+  "case_id": "CASE-0238",
+  "attempt_index": 1,
+  "condition": "raw",
+  "model": "qwen3-coder:30b",
+  "temperature": 0,
+  "timestamp": 1791935363.211255,
+  "raw_content": "rules:\n- id: \"vuln-nocodb-079e3abe\"\n  pattern: |\n    Papaparse.unparse($ARG1)\n  pattern-not: |\n    Papaparse.unparse($ARG1, { escapeFormulae: true })\n  languages: [\"typescript\"]\n  message: |\n    Missing escapeFormulae option in Papaparse.unparse() call. This vulnerability allows for CSV formula injection attacks where malicious data can contain formulas (like =CMD|cat /etc/passwd) that execute when opened in spreadsheet applications. The fix is to add { escapeFormulae: true } as the second argument to prevent this type of attack.\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/nocodb/nocodb/commit/079e3abe98a054f5304592def7a0e8fdb9b06eee\"\n    category: security\n    cwe: [CWE-1236]\n    owasp: [OWASP Top 10:2021 - A03:2021 - Injection]\n    references:\n      - \"https://owasp.org/www-community/attacks/CSV_Injection\"\n      - \"https://github.com/mholt/PapaParse#escapeformulae\"\n    technology: [typescript]",
+  "prompt_text": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/nocodb/nocodb\n    Commit: 079e3abe98a054f5304592def7a0e8fdb9b06eee\n\n    PATCH CHANGES:\n    File: packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n--- a/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n+++ b/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n-    const data = Papaparse.unparse({\n-      fields:\n-        fields &&\n-        fields.filter(\n-          f =>\n-            this.columns.some(c => c._cn === f) ||\n-            this.virtualColumns.some(c => c._cn === f)\n-        ),\n-      data: csvRows\n-    });\n+    const data = Papaparse.unparse(\n+      {\n+        fields:\n+          fields &&\n+          fields.filter(\n+            f =>\n+              this.columns.some(c => c._cn === f) ||\n+              this.virtualColumns.some(c => c._cn === f)\n+          ),\n+        data: csvRows\n+      },\n+      {\n+        escapeFormulae: true\n+      }\n+    );\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-nocodb-079e3abe\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/nocodb/nocodb/commit/079e3abe98a054f5304592def7a0e8fdb9b06eee\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-nocodb-079e3abe\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue.",
+  "request": {
+    "model": "qwen3-coder:30b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You generate Semgrep rules in YAML format.\n    Return only the raw YAML content without any markdown formatting or additional text.\n    Always include these required fields: id, pattern, message, severity, languages"
+      },
+      {
+        "role": "user",
+        "content": "Analyze the following vulnerability patch and generate a precise Semgrep rule to detect similar vulnerabilities in typescript code.\n\n    CONTEXT:\n    Repository: github.com/nocodb/nocodb\n    Commit: 079e3abe98a054f5304592def7a0e8fdb9b06eee\n\n    PATCH CHANGES:\n    File: packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n--- a/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n+++ b/packages/nocodb/src/lib/dataMapper/lib/sql/BaseModelSql.ts\n-    const data = Papaparse.unparse({\n-      fields:\n-        fields &&\n-        fields.filter(\n-          f =>\n-            this.columns.some(c => c._cn === f) ||\n-            this.virtualColumns.some(c => c._cn === f)\n-        ),\n-      data: csvRows\n-    });\n+    const data = Papaparse.unparse(\n+      {\n+        fields:\n+          fields &&\n+          fields.filter(\n+            f =>\n+              this.columns.some(c => c._cn === f) ||\n+              this.virtualColumns.some(c => c._cn === f)\n+          ),\n+        data: csvRows\n+      },\n+      {\n+        escapeFormulae: true\n+      }\n+    );\n\n    SEMGREP PATTERN SYNTAX GUIDE:\n    - Use $VARNAME to match any expression\n    - Use ... to match any sequence of statements\n    - Use |> to pipe patterns together\n    - Use pattern-inside to limit matches to specific code blocks\n    - Use pattern-not to exclude specific patterns (like the fixed version)\n    - Use metavariable-pattern to add constraints on variables\n\n    REQUIRED FIELDS:\n    1. id: \"vuln-nocodb-079e3abe\" (must be unique and descriptive)\n    2. pattern: Clear pattern matching the vulnerable code structure\n    3. languages: [\"typescript\"]\n    4. message: Detailed description of:\n    - What the vulnerability is\n    - Why it's dangerous\n    - How to fix it\n    5. severity: One of [ERROR, WARNING, INFO]\n\n    RECOMMENDED FIELDS:\n    - pattern-not: Pattern that should not match (e.g., fixed version)\n    - pattern-inside: Context pattern for where the rule should match\n    - pattern-not-inside: Context pattern for where the rule should not match\n    - metadata:\n        source-url: github.com/nocodb/nocodb/commit/079e3abe98a054f5304592def7a0e8fdb9b06eee\n        category: security\n        cwe: [relevant CWE number]\n        owasp: [relevant OWASP category]\n        references: [links to documentation or standards]\n        technology: [typescript]\n\n    IMPORTANT GUIDELINES:\n    1. Make patterns as specific as possible to minimize false positives\n    2. Include pattern-not for the fixed version when possible\n    3. Add relevant metadata like CWE numbers and OWASP categories\n    4. Write clear, actionable messages explaining both the problem and solution\n    5. Consider different variations of the vulnerable pattern\n\n    EXAMPLES OF HIGH-QUALITY RULES:\n    \n\n    FORMAT YOUR RESPONSE AS A SINGLE YAML DOCUMENT:\n    rules:\n    - id: \"vuln-nocodb-079e3abe\"\n    pattern: [Your pattern here]\n    pattern-not: [Fixed version pattern]\n    languages: [\"typescript\"]\n    message: [Clear description]\n    severity: ERROR\n    metadata: [Additional context]\n\n    Remember to adapt the patterns to match the specific vulnerability in the patch while keeping them general enough to catch variations of the same issue."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-586",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "rules:\n- id: \"vuln-nocodb-079e3abe\"\n  pattern: |\n    Papaparse.unparse($ARG1)\n  pattern-not: |\n    Papaparse.unparse($ARG1, { escapeFormulae: true })\n  languages: [\"typescript\"]\n  message: |\n    Missing escapeFormulae option in Papaparse.unparse() call. This vulnerability allows for CSV formula injection attacks where malicious data can contain formulas (like =CMD|cat /etc/passwd) that execute when opened in spreadsheet applications. The fix is to add { escapeFormulae: true } as the second argument to prevent this type of attack.\n  severity: ERROR\n  metadata:\n    source-url: \"github.com/nocodb/nocodb/commit/079e3abe98a054f5304592def7a0e8fdb9b06eee\"\n    category: security\n    cwe: [CWE-1236]\n    owasp: [OWASP Top 10:2021 - A03:2021 - Injection]\n    references:\n      - \"https://owasp.org/www-community/attacks/CSV_Injection\"\n      - \"https://github.com/mholt/PapaParse#escapeformulae\"\n    technology: [typescript]",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1791935363,
+    "model": "qwen3-coder:30b",
+    "object": "chat.completion",
+    "metadata": null,
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_ollama",
+    "usage": {
+      "completion_tokens": 285,
+      "prompt_tokens": 865,
+      "total_tokens": 1150,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    }
+  },
+  "generation_seconds": 2.404136416997062,
+  "error": null,
+  "input_tokens": 865,
+  "output_tokens": 285
+}

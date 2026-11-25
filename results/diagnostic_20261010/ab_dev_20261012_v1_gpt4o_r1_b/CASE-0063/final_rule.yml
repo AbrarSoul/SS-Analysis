@@ -1,0 +1,18 @@
+rules:
+- id: vuln-jspdf-d8bb3b39
+  patterns:
+  - pattern: /^data:(\w*\/\w*);*(charset=[\w=-]*)*;*$/.exec($EXPRESSION)
+  - pattern-not: /^data:(\w*\/\w*);*(charset=(?!charset=)[\w=-]*)*;*$/.exec($EXPRESSION)
+  languages:
+  - javascript
+  message: Potential ReDoS vulnerability due to improper regex handling of 'charset'
+    in data URI. Ensure that the regex pattern properly excludes repeated 'charset='
+    to prevent denial of service attacks.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-400
+    owasp: A6:2017-Security Misconfiguration
+    source-url: github.com/MrRio/jsPDF/commit/d8bb3b39efcd129994f7a3b01b632164144ec43e
+    technology:
+    - javascript

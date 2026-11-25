@@ -1,0 +1,31 @@
+rules:
+- id: vuln-notesnook-e87f5e5f
+  patterns:
+  - pattern-either:
+    - pattern: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+        \n  }><p lang=\"en\" dir=\"ltr\">${\n    $ANCHOR.outerHTML\n  }</p></blockquote>"
+    - pattern: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href = `${$SRC}?ref_src=twsrc%5Etfw`;\n\
+        \n  }><p lang=\"en\" dir=\"ltr\">${\n    $ANCHOR.outerHTML\n  }</p></blockquote>\
+        \ <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"\
+        utf-8\"></script>"
+  - pattern-not: "const $ANCHOR = document.createElement(\"a\");\n  $ANCHOR.href =\
+      \ `${$SRC}?ref_src=twsrc%5Etfw`;\n\n  }><p lang=\"en\" dir=\"ltr\">${\n    $ANCHOR.outerHTML\n\
+      \  }</p></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\"\
+      \ charset=\"utf-8\"></script> `;"
+  languages:
+  - typescript
+  message: Potential XSS vulnerability in Twitter embed component. The original code
+    directly inserted user-provided 'src' URL into an HTML template string without
+    proper sanitization, creating a vector for cross-site scripting attacks. The fix
+    properly creates an anchor element and uses its outerHTML property to ensure safe
+    rendering. This pattern should be avoided when constructing HTML from dynamic
+    content - always sanitize or use proper DOM manipulation methods instead of template
+    strings with unsanitized user input.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: '79'
+    owasp: OWASP_2021_A03
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    technology:
+    - typescript

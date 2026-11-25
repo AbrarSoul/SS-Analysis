@@ -1,0 +1,33 @@
+rules:
+- id: git-pull-or-clone-argument-injection
+  pattern-either:
+  - patterns:
+    - pattern: $CHILD_PROCESS.spawn($CMD, $ARGS, ...)
+    - metavariable-pattern:
+        metavariable: $CMD
+        pattern: git
+    - metavariable-pattern:
+        metavariable: $ARGS
+        pattern:
+        - clone
+        - $FLAG
+        - $URL
+        - $OUTPATH
+  - patterns:
+    - pattern: $CHILD_PROCESS.exec($CMD, ...)
+    - metavariable-pattern:
+        metavariable: $CMD
+        pattern: git clone $FLAG $URL $OUTPATH
+  pattern-not: $ARGS = ["clone", $FLAG, "--", $URL, $OUTPATH]
+  languages:
+  - javascript
+  message: Potential argument injection vulnerability in git clone command. Missing
+    '--' separator between flag and URL can allow malicious arguments to be interpreted
+    as options. Add '--' separator after flag to prevent argument injection.
+  severity: ERROR
+  metadata:
+    source-url: github.com/feross/git-pull-or-clone/commit/f9ce092be13cc32e685dfa26e7705e9c6e3108a3
+    category: security
+    cwe: CWE-15
+    technology:
+    - javascript

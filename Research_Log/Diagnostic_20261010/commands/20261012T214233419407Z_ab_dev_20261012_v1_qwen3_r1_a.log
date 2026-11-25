@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/diagnostic_v2.py", line 469, in <module>
+    main()
+    ~~~~^^
+  File "/Users/nkabmo/Desktop/Tools/SS/pipeline/diagnostic_v2.py", line 370, in main
+    out.mkdir(parents=True, exist_ok=False)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/ab_dev_20261012_v1_qwen3_r1_a'

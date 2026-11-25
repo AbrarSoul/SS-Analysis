@@ -1,0 +1,31 @@
+```yaml
+rules:
+- id: "vuln-notesnook-e87f5e5f"
+  pattern: |
+    document.createElement\("a"\)
+    .href = `${src}\?ref_src=twsrc%5Etfw"\)
+  pattern-not: |
+    document.createElement\("a"\)
+    .href = `${src}\?ref_src=twsrc%5Etfw"\)
+    .outerHTML = 
+  languages: ["typescript"]
+  message: |
+    Detected potential cross-site scripting (XSS) vulnerability in the embed component of Notesnook.
+    This pattern may allow an attacker to inject malicious scripts into the href attribute of the anchor tag.
+    To fix this vulnerability, ensure that the href attribute is properly sanitized and does not contain any user-supplied input.
+  severity: ERROR
+  metadata:
+    source-url: "https://github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7"
+    category: security
+    cwe: ["CWE-79"]
+    owasp: ["A3:2017-Sensitive Data Exposure"]
+    references:
+      - "https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure"
+      - "https://cwe.mitre.org/data/definitions/79.html"
+    technology: ["typescript"]
+```
+Note: The pattern and pattern-not are not fully accurate as they are based on the given patch and the context. The actual pattern may vary based on the exact vulnerability and the codebase.
+Also, the severity is set to ERROR, but it can be adjusted based on the specific severity of the vulnerability.
+The metadata section includes relevant references and OWASP categories for the vulnerability.
+```
+    

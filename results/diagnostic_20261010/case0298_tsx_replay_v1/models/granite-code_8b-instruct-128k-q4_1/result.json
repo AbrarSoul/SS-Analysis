@@ -1,0 +1,43 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_followup_20261008/granite-code_8b-instruct-128k-q4_1__autogrep_default/raw/granite-code_8b-instruct-128k-q4_1__20261009T055621Z/CASE-0298.json",
+  "raw_response_sha256": "f48620397eb7cb026e38c8b038a753312c0c77767832c62e09159049a80b3d8c",
+  "parsed_rule_sha256": "be06d21e5467a10322e071a8ce2ddb1869b2d3d75f6e9fdbde6c0246971ed095",
+  "semgrep_returncode": 0,
+  "scan_ok": true,
+  "errors": [],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": true,
+      "finding_lines": [
+        210
+      ],
+      "outcome": "FP"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scanned"
+}

@@ -1,0 +1,16 @@
+```yaml
+rules:
+- id: "vuln-notesnook-e87f5e5f"
+  pattern: document.createElement("a").href = `${src}?ref_src=twsrc%5Etfw`
+  pattern-not: document.createElement("a").href = "fixed-url"
+  languages: ["typescript"]
+  message: "Vulnerable code creates an anchor tag with an unsafe href attribute. This could allow malicious users to redirect users to phishing websites or other malicious domains."
+  severity: ERROR
+  metadata:
+    source-url: github.com/streetwriters/notesnook/commit/e87f5e5f899f45df28d7c0f33f15e9178d1fbcb7
+    category: security
+    cwe: [CWE-79]
+    owasp: [A9]
+    references: [OWASP Top 10]
+    technology: [typescript]
+```

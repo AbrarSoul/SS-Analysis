@@ -1,0 +1,38 @@
+rules:
+- id: agentscope-studio-file-deletion-vulnerability
+  pattern-either:
+  - patterns:
+    - pattern: "def $FUNC(...):\n    ...\n    if not $FILENAME.endswith(\".json\"\
+        ):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"\
+        })\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n    ...\n    $CALL($FILENAME)\n\
+        \    ...\n"
+    - pattern-not: "def $FUNC(...):\n    ...\n    if not $FILENAME.endswith(\".json\"\
+        ):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"\
+        })\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n    ...\n    $CALL($FILENAME)\n\
+        \    ...\n    if not $FILENAME.endswith(\".json\"):\n        return jsonify({\"\
+        error\": \"Only JSON files can be deleted\"})\n    ...\n"
+  - patterns:
+    - pattern: "def $FUNC(...):\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n\
+        \    ...\n    $CALL($FILENAME)\n    ...\n"
+    - pattern-not: "def $FUNC(...):\n    ...\n    if not $FILENAME.endswith(\".json\"\
+        ):\n        return jsonify({\"error\": \"Only JSON files can be deleted\"\
+        })\n    ...\n    $FILENAME = os.path.basename($FILENAME)\n    ...\n    $CALL($FILENAME)\n\
+        \    ...\n    if not $FILENAME.endswith(\".json\"):\n        return jsonify({\"\
+        error\": \"Only JSON files can be deleted\"})\n    ...\n"
+  languages:
+  - python
+  message: 'Potential file deletion vulnerability in Studio application. The code
+    accepts user-provided filenames and passes them directly to file operations without
+    proper validation. Although a check for .json extension exists, it''s applied
+    after os.path.basename() which may not prevent path traversal attacks. This could
+    allow attackers to delete arbitrary files on the system by manipulating the filename
+    parameter.
+
+    '
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    source-url: github.com/modelscope/agentscope/commit/7d285e862f86fa1d96ed04c4cd40a5f1b8f9189a
+    technology:
+    - python

@@ -1,0 +1,30 @@
+rules:
+- id: vuln-semantic-versioning-plugin-8df2fabd
+  pattern: '$DBF = DocumentBuilderFactory.newInstance();
+
+    $DBF.newDocumentBuilder();
+
+    '
+  pattern-not: '$DBF = DocumentBuilderFactory.newInstance();
+
+    $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+
+    $DBF.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+    $DBF.newDocumentBuilder();
+
+    '
+  languages:
+  - java
+  message: Potential XML External Entity (XXE) vulnerability due to unprotected DocumentBuilderFactory.
+    Ensure XMLConstants.ACCESS_EXTERNAL_DTD and XMLConstants.ACCESS_EXTERNAL_SCHEMA
+    are set to empty strings to prevent XXE attacks.
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/semantic-versioning-plugin/commit/8df2fabd7d7396ae29c374914d1357744d3e454f
+    category: security
+    cwe: CWE-611
+    owasp: A4:2017-XML External Entities (XXE)
+    references:
+    - https://owasp.org/www-project-top-ten/2017/A4_2017-XML_External_Entities_(XXE)
+    technology: java

@@ -1,0 +1,24 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  pattern: 'isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+
+    '
+  pattern-not: 'isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+
+    '
+  languages:
+  - python
+  message: Missing SourcelessFileLoader in isinstance check. This vulnerability could
+    allow unauthorized code execution by bypassing security checks that should apply
+    to all file loaders including sourceless ones. Fix by including SourcelessFileLoader
+    in the tuple of accepted loader types.
+  severity: ERROR
+  metadata:
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    category: security
+    cwe: CWE-284
+    owasp: A01:2021-Broken Access Control
+    technology: python
+    references:
+    - https://docs.python.org/3/library/importlib.html
+    - https://github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e

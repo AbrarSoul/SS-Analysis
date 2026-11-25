@@ -1,0 +1,23 @@
+rules:
+- id: vuln-git-client-plugin-75ea3fe0
+  patterns:
+  - pattern: File.createTempFile($PREFIX, $SUFFIX, $WORKSPACE)
+  - pattern-not: Files.createTempFile($PATH, $PREFIX, $SUFFIX)
+  - pattern-not: Files.createTempFile($PATH, $PREFIX, $SUFFIX, $FILE_ATTRIBUTE)
+  - pattern-not: createTempFile($PREFIX, $SUFFIX)
+  pattern-inside: "class $CLASS {\n  ...\n}\n"
+  message: Use of File.createTempFile with workspace parameter may lead to insecure
+    temporary file creation. The patch introduces proper permission handling for temporary
+    files on non-Windows systems by using Files.createTempFile with PosixFilePermissions.
+    Replace File.createTempFile calls that use workspace directories with the new
+    createTempFile method that ensures secure permissions.
+  languages:
+  - java
+  severity: ERROR
+  metadata:
+    source-url: github.com/jenkinsci/git-client-plugin/commit/75ea3fe05650fc6ca09046a72493e2b3f066fb98
+    category: security
+    cwe:
+    - CWE-377
+    technology:
+    - java

@@ -1,0 +1,30 @@
+rules:
+- id: vuln-logkitty-ef2f673e
+  pattern: 'execSync($CMD, ...)
+
+    '
+  pattern-not: 'execFileSync($CMD, ...)
+
+    '
+  languages:
+  - typescript
+  message: 'Vulnerable use of execSync() function. This can lead to command injection
+    vulnerabilities when user input is included in the command string. The execSync()
+    function executes commands synchronously and can be dangerous if not properly
+    sanitized. Replace with execFileSync() and pass arguments as an array to avoid
+    shell injection risks.
+
+    '
+  severity: ERROR
+  metadata:
+    source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf
+    category: security
+    cwe:
+    - 78
+    owasp:
+    - OWASP Top 10:2021-A03: Injection
+    references:
+    - https://nodejs.org/api/child_process.html#child_process_execsync_command_options
+    - https://nodejs.org/api/child_process.html#child_process_execfilesync_file_args_options
+    technology:
+    - typescript

@@ -1,0 +1,19 @@
+rules:
+- id: vuln-ws-scrcpy-e83cf654
+  patterns:
+  - pattern: if ($PATH.indexOf($PUBLIC_DIR) === -1) { ... }
+  - pattern-not: if ($PATH.indexOf($PUBLIC_DIR) !== 0) { ... }
+  languages:
+  - typescript
+  message: The HTTP server does not properly restrict access to directories outside
+    the intended public directory. This can lead to unauthorized access to sensitive
+    files. Ensure that the pathname starts with the public directory path to prevent
+    directory traversal attacks.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-22
+    owasp: A5:2017-Broken Access Control
+    source-url: github.com/netristv/ws-scrcpy/commit/e83cf65438bef83a3503b25358bba97bcc156fef
+    technology:
+    - typescript

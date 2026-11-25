@@ -1,0 +1,26 @@
+rules:
+- id: vuln-thrift-0919c3d5
+  pattern-either:
+  - patterns:
+    - pattern: $SOCKET.getSSLParameters()
+    - pattern-not: $SOCKET.getSSLParameters().setEndpointIdentificationAlgorithm("HTTPS")
+    - pattern-not: $SOCKET.setSSLParameters($PARAMS)
+    - pattern-not: $SOCKET.getSSLParameters().setEndpointIdentificationAlgorithm(...)
+  - patterns:
+    - pattern: SSLParameters $PARAMS = $SOCKET.getSSLParameters()
+    - pattern-not: $PARAMS.setEndpointIdentificationAlgorithm("HTTPS")
+    - pattern-not: $SOCKET.setSSLParameters($PARAMS)
+  languages:
+  - java
+  message: Missing endpoint identification algorithm configuration in SSL/TLS connection.
+    This vulnerability allows for man-in-the-middle attacks by disabling hostname
+    verification. Fix by setting the endpoint identification algorithm to "HTTPS"
+    using setEndpointIdentificationAlgorithm("HTTPS") on the SSLParameters object
+    before applying it to the socket.
+  severity: ERROR
+  metadata:
+    source-url: github.com/apache/thrift/commit/0919c3d5506151514e283a63e1fe1ce83e2449d8
+    category: security
+    cwe: CWE-295
+    technology:
+    - java

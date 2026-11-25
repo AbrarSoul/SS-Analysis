@@ -1,0 +1,147 @@
+{
+  "real_model_calls": 0,
+  "real_semgrep_scans": 0,
+  "verified_fixes": {
+    "preexisting_file_mismatch_rejected": {
+      "exception": "ProbeMaterializationError",
+      "generation_calls": 0,
+      "probe_scans": 0
+    },
+    "unresolved_state_rejected": {
+      "exception": "ValueError",
+      "generation_calls": 0,
+      "probe_scans": 0
+    },
+    "wrong_language_rejected": {
+      "exception": "ValueError",
+      "generation_calls": 0,
+      "probe_scans": 0
+    },
+    "reason_preserved_on_all_decode_failures": {
+      "accepted": false,
+      "generation_calls": 3,
+      "resources": {
+        "generation_calls": 3,
+        "visible_scans": 0,
+        "probe_scans": 0,
+        "repair_calls": 2
+      },
+      "recorded_hashes": null,
+      "scanner_input_hashes": [],
+      "final_disk_hash": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+      "ineligible_reason": "no eligible local",
+      "attempt_records": 3,
+      "episode_record_exists": true
+    },
+    "three_timeouts_recorded_within_budget": {
+      "accepted": false,
+      "generation_calls": 3,
+      "resources": {
+        "generation_calls": 3,
+        "visible_scans": 3,
+        "probe_scans": 3,
+        "repair_calls": 2
+      },
+      "recorded_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d"
+      },
+      "scanner_input_hashes": [
+        "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d"
+      ],
+      "final_disk_hash": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+      "ineligible_reason": null,
+      "attempt_records": 3,
+      "episode_record_exists": true
+    },
+    "ab_import_isolation": "A/B import isolation verified with probe imports prohibited"
+  },
+  "remaining_gap": {
+    "changed_during_generation": {
+      "accepted": true,
+      "generation_calls": 1,
+      "resources": {
+        "generation_calls": 1,
+        "visible_scans": 1,
+        "probe_scans": 1,
+        "repair_calls": 0
+      },
+      "recorded_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d"
+      },
+      "scanner_input_hashes": [
+        "b53ee2b77c119a0253cf25448cf28dc4f57527efff41ccb5131e3e27c0ad7345"
+      ],
+      "final_disk_hash": "b53ee2b77c119a0253cf25448cf28dc4f57527efff41ccb5131e3e27c0ad7345",
+      "ineligible_reason": null,
+      "attempt_records": 1,
+      "episode_record_exists": true
+    },
+    "changed_between_attempts": {
+      "accepted": true,
+      "generation_calls": 2,
+      "resources": {
+        "generation_calls": 2,
+        "visible_scans": 2,
+        "probe_scans": 2,
+        "repair_calls": 1
+      },
+      "recorded_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d"
+      },
+      "scanner_input_hashes": [
+        "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "b53ee2b77c119a0253cf25448cf28dc4f57527efff41ccb5131e3e27c0ad7345"
+      ],
+      "final_disk_hash": "b53ee2b77c119a0253cf25448cf28dc4f57527efff41ccb5131e3e27c0ad7345",
+      "ineligible_reason": null,
+      "attempt_records": 2,
+      "episode_record_exists": true
+    },
+    "crlf": {
+      "accepted": true,
+      "generation_calls": 1,
+      "resources": {
+        "generation_calls": 1,
+        "visible_scans": 1,
+        "probe_scans": 1,
+        "repair_calls": 0
+      },
+      "recorded_hashes": {
+        "vulnerable_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d",
+        "patched_probe_sha256": "f868b6e7e042864ed96f366f891a12df46155f947de42534d7b423de75e9e54d"
+      },
+      "scanner_input_hashes": [
+        "e930d695958e28cbde5f1597dd9e46b32cc3400f88763605b3362e69eea1b10e"
+      ],
+      "final_disk_hash": "e930d695958e28cbde5f1597dd9e46b32cc3400f88763605b3362e69eea1b10e",
+      "ineligible_reason": null,
+      "attempt_records": 1,
+      "episode_record_exists": true
+    }
+  },
+  "collection": {
+    "count": 135,
+    "files": [
+      "pipeline/tests/test_combined_gate.py",
+      "pipeline/tests/test_run_model_case_cd.py",
+      "pipeline/tests/test_diagnostic_regressions.py",
+      "pipeline/tests/test_dev_probe.py",
+      "pipeline/tests/test_typed_json_construction.py",
+      "pipeline/tests/test_typed_rule.py"
+    ],
+    "summary": "135 tests collected in 0.63s",
+    "scope": "Collection only, not full-suite execution. Independently executed 70 focused tests."
+  },
+  "reviewed_sha256": {
+    "pipeline/diagnostic_v2.py": "4daa711dcc554ff47d12290352e99a2518ed5c18e0470990009e958a728b7887",
+    "pipeline/tests/test_run_model_case_cd.py": "98289d0fdb18e985db1eb2162af33457304c060fad5ca9dbf8654927b7aa4696",
+    "pipeline/probe_cache.py": "baab8da9901d026d9ce0ec6812cd5740fab823735669cc93c764cfc3142bcd03",
+    "pipeline/combined_gate.py": "2ecebcaf51d95a252f5409f4285de7ce6e393b06a1e9ba0142e6dcae890e8de5",
+    "pipeline/dev_probe.py": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114"
+  }
+}

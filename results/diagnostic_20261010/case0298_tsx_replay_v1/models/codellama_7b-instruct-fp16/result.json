@@ -1,0 +1,49 @@
+{
+  "source_raw_capture": "/tmp/case0298_replay_staging/runs_phase5_primary/codellama_7b-instruct-fp16__autogrep_default/raw/codellama_7b-instruct-fp16__20260928T211558Z/CASE-0298.json",
+  "raw_response_sha256": "bad3b6dc45c19f175a41c24de4d85cc0f6ba9c6f2a29500e7bf8753586bdd602",
+  "parsed_rule_sha256": "49f002c3ebf4cf4fe8f7ca91289b4dfda8794ae32645818d6a57726db3e8aa0e",
+  "semgrep_returncode": 2,
+  "scan_ok": false,
+  "errors": [
+    {
+      "code": 2,
+      "level": "error",
+      "type": "Rule parse error",
+      "rule_id": "var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f",
+      "message": "Rule parse error in rule var.folders.d5.5xvkptzs6cd9t_077gyhh1400000gr.T.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\n(\n  anchor = document.createElement(\"a\")\n  anchor.href = $src + \"?ref_src=twsrc%5Etfw\"\n)\n.*\n(\n  <p lang=\"en\" dir=\"ltr\">${anchor.outerHTML}</p>\n)\n\n----- end pattern -----\n"
+    }
+  ],
+  "outcomes": {
+    "original_vulnerable": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "original_patched": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "variant_vulnerable_1": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_vulnerable_2": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "FN"
+    },
+    "variant_safe": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    },
+    "benign_lookalike": {
+      "detected": false,
+      "finding_lines": [],
+      "outcome": "TN"
+    }
+  },
+  "status": "scan_error"
+}

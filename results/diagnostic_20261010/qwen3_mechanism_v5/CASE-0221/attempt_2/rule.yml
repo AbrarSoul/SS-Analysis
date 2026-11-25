@@ -1,0 +1,22 @@
+rules:
+- id: micronaut-netty-http-headers-default-constructor
+  pattern-either:
+  - new DefaultHttpHeaders(false)
+  - new io.netty.handler.codec.http.DefaultHttpHeaders(false)
+  pattern-not: new io.netty.handler.codec.http.DefaultHttpHeaders()
+  languages:
+  - java
+  message: Use of DefaultHttpHeaders constructor with 'false' parameter may lead to
+    security vulnerabilities. The 'false' argument disables header validation, which
+    can allow malicious headers to be processed without proper sanitization. This
+    can result in HTTP response splitting or other header-related attacks. Fix by
+    removing the 'false' argument and using the default constructor that enables header
+    validation.
+  severity: ERROR
+  metadata:
+    source-url: github.com/micronaut-projects/micronaut-core/commit/9d1eff5c8df1d6cda1fe00ef046729b2a6abe7f1
+    category: security
+    cwe:
+    - CWE-113
+    technology:
+    - java

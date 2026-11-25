@@ -1,0 +1,17 @@
+rules:
+- id: csv-formula-injection
+  patterns:
+  - pattern: Papaparse.unparse(...)
+  - pattern-not: 'Papaparse.unparse(..., { escapeFormulae: true })'
+  languages:
+  - typescript
+  message: 'Potential CSV formula injection vulnerability. When using Papaparse.unparse
+    with untrusted data, always pass { escapeFormulae: true } to prevent malicious
+    formula execution in spreadsheet applications.'
+  severity: ERROR
+  metadata:
+    source-url: github.com/nocodb/nocodb/commit/079e3abe98a054f5304592def7a0e8fdb9b06eee
+    category: security
+    cwe: CWE-1236
+    technology:
+    - typescript

@@ -1,0 +1,27 @@
+rules:
+- id: vuln-cpython-482d6f8b
+  pattern-either:
+  - pattern: 'isinstance($SELF, (SourceLoader, ExtensionFileLoader))
+
+      '
+  - pattern: 'isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+
+      '
+  pattern-not: 'isinstance($SELF, (SourceLoader, SourcelessFileLoader, ExtensionFileLoader))
+
+    '
+  pattern-inside: "def $FUNC(...):\n    ...\n"
+  languages:
+  - python
+  message: Incomplete isinstance check for loader types. The code should include SourcelessFileLoader
+    in the isinstance check to prevent potential security issues with untrusted module
+    loading. This vulnerability could allow an attacker to bypass security checks
+    and load malicious modules.
+  severity: ERROR
+  metadata:
+    source-url: github.com/python/cpython/commit/482d6f8bdba9da3725d272e8bb4a2d25fb6a603e
+    category: security
+    cwe:
+    - CWE-284
+    technology:
+    - python

@@ -1,0 +1,16 @@
+rules:
+- id: vuln-logkitty-ef2f673e
+  patterns:
+  - pattern: execSync(...)
+  - pattern-not: execFileSync(...)
+  languages:
+  - typescript
+  message: Use of execSync() can lead to command injection vulnerabilities. Replace
+    with execFileSync() and pass arguments as an array to avoid shell injection risks.
+  severity: ERROR
+  metadata:
+    source-url: github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf
+    category: security
+    cwe: CWE-78
+    technology:
+    - typescript

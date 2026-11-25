@@ -1,0 +1,25 @@
+rules:
+- id: vuln-git-pull-or-clone-f9ce092b
+  pattern-either:
+  - pattern: '$SPAWN(''git'', [''clone'', $FLAG, $URL, $OUTPATH])
+
+      '
+  - pattern: '$SPAWN(''git'', [''clone'', $FLAG, $URL, $OUTPATH, ...])
+
+      '
+  pattern-not: '$SPAWN(''git'', [''clone'', $FLAG, ''--'', $URL, $OUTPATH])
+
+    '
+  languages:
+  - javascript
+  message: Potential command injection vulnerability in git clone operation. The '--'
+    separator is missing after the flag, which could allow malicious input in the
+    URL to be interpreted as additional git clone arguments. Add '--' between the
+    flag and URL to prevent argument injection.
+  severity: ERROR
+  metadata:
+    source-url: github.com/feross/git-pull-or-clone/commit/f9ce092be13cc32e685dfa26e7705e9c6e3108a3
+    category: security
+    cwe: CWE-88
+    technology:
+    - javascript

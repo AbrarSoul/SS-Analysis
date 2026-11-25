@@ -1,0 +1,7 @@
+{
+  "attempt": 2,
+  "parsed": false,
+  "rule_path": null,
+  "visible_evaluation": null,
+  "feedback": "Error generating rule: Invalid or Missing Bearer Token"
+}

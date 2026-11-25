@@ -1,0 +1,11 @@
+rules:
+- id: diagnostic-case-0184
+  message: Temporary files may inherit unsuitable permissions
+  severity: WARNING
+  languages:
+  - java
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  pattern: File.createTempFile(...)

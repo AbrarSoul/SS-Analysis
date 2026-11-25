@@ -1,0 +1,70 @@
+{
+  "attempt": 3,
+  "parsed": true,
+  "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r2_d/CASE-0298/attempt_3/rule.yml",
+  "visible_evaluation": {
+    "scan_ok": false,
+    "returncode": 2,
+    "all_targets_scanned": true,
+    "errors": [
+      {
+        "code": 2,
+        "level": "error",
+        "type": "Rule parse error",
+        "rule_id": "results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r2_d.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f",
+        "message": "Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r2_d.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f:\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\n----- pattern -----\nconst anchor = document.createElement(\"a\");\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\n$... = anchor.outerHTML;\n----- end pattern -----\n"
+      },
+      {
+        "message": "Semgrep exited with status 2"
+      }
+    ],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/cd_dev_20261014_v1_gpt4o_r2_d/CASE-0298/attempt_3/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+      "/Users/nkabmo/Desktop/Tools/SS/results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx"
+    ],
+    "validation_seconds": 1.3570754160027718,
+    "legacy_accepted": false,
+    "visible_correct": false,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/vulnerable_source.tsx",
+        "sample_sha256": "8cff615494b33e1a0605ca440e5dcc5182dbc2c7a415c0c0087893d2cafc9449"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "results/_diagnostic_tsx_stage/CASE-0298/patched_source.tsx",
+        "sample_sha256": "77dadbc396cfc6faf1105a19c68d6cc8b5dd45ce7b76c2fac322807735a22b37"
+      }
+    ]
+  },
+  "probe_evaluation": null,
+  "gate_decision": {
+    "accept": false,
+    "stop": true,
+    "reason": "visible_correct failed -- budget exhausted, retaining last candidate as a failure",
+    "is_fallback": false,
+    "probe_eligible": false,
+    "probe_checks": null
+  },
+  "feedback": "Semgrep scan error: [{\"code\": 2, \"level\": \"error\", \"type\": \"Rule parse error\", \"rule_id\": \"results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r2_d.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f\", \"message\": \"Rule parse error in rule results.diagnostic_20261010.cd_dev_20261014_v1_gpt4o_r2_d.CASE-0298.attempt_3.vuln-notesnook-e87f5e5f:\\n Invalid pattern for TypeScript: Stdlib.Parsing.Parse_error\\n----- pattern -----\\nconst anchor = document.createElement(\\\"a\\\");\\nanchor.href = `${src}?ref_src=twsrc%5Etfw`;\\n$... = anchor.outerHTML;\\n----- end pattern -----\\n\"}, {\"message\": \"Semgrep exited with status 2\"}]"
+}

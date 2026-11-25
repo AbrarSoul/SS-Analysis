@@ -1,0 +1,28 @@
+{
+  "key": {
+    "language": "java",
+    "vulnerable_function_sha256": "f2744bb2b83a570975491fc8e4a5a4f87fe7d14aa136bb1ae9811b3ac6d8b7f5",
+    "patched_function_sha256": "3c1f187679e08838e855d729ae88f4561af039d724b6e51157547fe05a5f4df5",
+    "dev_probe_sha256": "d2d7364a77670e6d448da82bdf895a33aca785e9e08d1fe1941e5fae2af88114",
+    "parser_versions": {
+      "tree_sitter": "0.26.0",
+      "tree_sitter_java": "0.23.5",
+      "tree_sitter_javascript": "0.25.0",
+      "tree_sitter_typescript": "0.23.2",
+      "python": "3.14.4"
+    }
+  },
+  "payload": {
+    "eligible": true,
+    "fields": {
+      "case_id": "CASE-0184",
+      "language": "java",
+      "old_name": "msg",
+      "new_name": "msg_renamed",
+      "vulnerable_probe": "    private void createNote(String note, String namespace, String command ) throws GitException, InterruptedException {\n        File msg_renamed = null;\n        try {\n            msg_renamed = File.createTempFile(\"git-note\", \"txt\", workspace);\n            FileUtils.writeStringToFile(msg_renamed,note);\n            launchCommand(\"notes\", \"--ref=\" + namespace, command, \"-F\", msg_renamed.getAbsolutePath());\n        } catch (IOException | GitException e) {\n            throw new GitException(\"Could not apply note \" + note, e);\n        } finally {\n            deleteTempFile(msg_renamed);\n        }\n    }",
+      "patched_probe": "    private File createTempFileInSystemDir(String prefix, String suffix) throws IOException {\n        if (isWindows()) {\n            return Files.createTempFile(prefix, suffix).toFile();\n        }\n        Set<PosixFilePermission> ownerOnly = PosixFilePermissions.fromString(\"rw-------\");\n        FileAttribute fileAttribute = PosixFilePermissions.asFileAttribute(ownerOnly);\n        return Files.createTempFile(prefix, suffix, fileAttribute).toFile();\n    }",
+      "patched_probe_renamed": false
+    }
+  },
+  "payload_sha256": "e0d08be059645d9220e3b4aee36529099541c5ee9eed6b82ac6051ade8f3bf7c"
+}

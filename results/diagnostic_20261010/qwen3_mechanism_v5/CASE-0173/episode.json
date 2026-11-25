@@ -1,0 +1,243 @@
+{
+  "case_id": "CASE-0173",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0173/attempt_1/rule.yml",
+      "visible_evaluation": {
+        "scan_ok": true,
+        "returncode": 0,
+        "all_targets_scanned": true,
+        "errors": [],
+        "command": [
+          "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+          "--config",
+          "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0173/attempt_1/rule.yml",
+          "--json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--no-git-ignore",
+          "--jobs=1",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/vulnerable_source.ts",
+          "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/patched_source.ts"
+        ],
+        "validation_seconds": 1.226665124995634,
+        "legacy_accepted": true,
+        "visible_correct": true,
+        "complete_success": false,
+        "samples": [
+          {
+            "sample_type": "original_vulnerable",
+            "label": "positive",
+            "detected": true,
+            "finding_location_correct": true,
+            "finding_lines": [
+              39
+            ],
+            "outcome": "TP",
+            "sample_path": "benchmark/cases/CASE-0173/vulnerable_source.ts",
+            "sample_sha256": "ed7fa0c3cf911aebef0b2259710af3d7dfc53e29f638bf88e2743a0914041ad5"
+          },
+          {
+            "sample_type": "original_patched",
+            "label": "negative",
+            "detected": false,
+            "finding_location_correct": null,
+            "finding_lines": [],
+            "outcome": "TN",
+            "sample_path": "benchmark/cases/CASE-0173/patched_source.ts",
+            "sample_sha256": "35ec7619eec63023dfc3d65c9414b0cfc9314dabbb333743d418bd23c0c1a30c"
+          }
+        ]
+      },
+      "feedback": null
+    }
+  ],
+  "raw": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0173/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/vulnerable_source.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/patched_source.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/variant_vulnerable_01.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/variant_vulnerable_02.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/variant_safe_01.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/benign_lookalike.ts"
+    ],
+    "validation_seconds": 1.2194500420009717,
+    "legacy_accepted": true,
+    "visible_correct": true,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          39
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0173/vulnerable_source.ts",
+        "sample_sha256": "ed7fa0c3cf911aebef0b2259710af3d7dfc53e29f638bf88e2743a0914041ad5"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0173/patched_source.ts",
+        "sample_sha256": "35ec7619eec63023dfc3d65c9414b0cfc9314dabbb333743d418bd23c0c1a30c"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0173/variant_vulnerable_01.ts",
+        "sample_sha256": "e972fc0edbc7a12f8b9a9d48f06d814f5859af4d264431ca24b270109b853ebb"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0173/variant_vulnerable_02.ts",
+        "sample_sha256": "aa3758a5f401a390e1cba25f17830572ebd98213834edd01609c50ce4682ef89"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0173/variant_safe_01.ts",
+        "sample_sha256": "1e8a16b7f8f5dfa967c44728e2064d053de87870b33a859d6c8db7e02cd326d0"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0173/benign_lookalike.ts",
+        "sample_sha256": "5969146b3728fcb04558dbaa6cc62b3dad26a2b4b44528908cad411f269f66aa"
+      }
+    ]
+  },
+  "iterative": {
+    "scan_ok": true,
+    "returncode": 0,
+    "all_targets_scanned": true,
+    "errors": [],
+    "command": [
+      "/Users/nkabmo/Desktop/Tools/SS/.venv/bin/semgrep",
+      "--config",
+      "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0173/attempt_1/rule.yml",
+      "--json",
+      "--metrics=off",
+      "--disable-version-check",
+      "--no-git-ignore",
+      "--jobs=1",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/vulnerable_source.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/patched_source.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/variant_vulnerable_01.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/variant_vulnerable_02.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/variant_safe_01.ts",
+      "/Users/nkabmo/Desktop/Tools/SS/benchmark/cases/CASE-0173/benign_lookalike.ts"
+    ],
+    "validation_seconds": 1.1894310830102768,
+    "legacy_accepted": true,
+    "visible_correct": true,
+    "complete_success": false,
+    "samples": [
+      {
+        "sample_type": "original_vulnerable",
+        "label": "positive",
+        "detected": true,
+        "finding_location_correct": true,
+        "finding_lines": [
+          39
+        ],
+        "outcome": "TP",
+        "sample_path": "benchmark/cases/CASE-0173/vulnerable_source.ts",
+        "sample_sha256": "ed7fa0c3cf911aebef0b2259710af3d7dfc53e29f638bf88e2743a0914041ad5"
+      },
+      {
+        "sample_type": "original_patched",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0173/patched_source.ts",
+        "sample_sha256": "35ec7619eec63023dfc3d65c9414b0cfc9314dabbb333743d418bd23c0c1a30c"
+      },
+      {
+        "sample_type": "variant_vulnerable_1",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0173/variant_vulnerable_01.ts",
+        "sample_sha256": "e972fc0edbc7a12f8b9a9d48f06d814f5859af4d264431ca24b270109b853ebb"
+      },
+      {
+        "sample_type": "variant_vulnerable_2",
+        "label": "positive",
+        "detected": false,
+        "finding_location_correct": false,
+        "finding_lines": [],
+        "outcome": "FN",
+        "sample_path": "benchmark/cases/CASE-0173/variant_vulnerable_02.ts",
+        "sample_sha256": "aa3758a5f401a390e1cba25f17830572ebd98213834edd01609c50ce4682ef89"
+      },
+      {
+        "sample_type": "variant_safe",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0173/variant_safe_01.ts",
+        "sample_sha256": "1e8a16b7f8f5dfa967c44728e2064d053de87870b33a859d6c8db7e02cd326d0"
+      },
+      {
+        "sample_type": "benign_lookalike",
+        "label": "negative",
+        "detected": false,
+        "finding_location_correct": null,
+        "finding_lines": [],
+        "outcome": "TN",
+        "sample_path": "benchmark/cases/CASE-0173/benign_lookalike.ts",
+        "sample_sha256": "5969146b3728fcb04558dbaa6cc62b3dad26a2b4b44528908cad411f269f66aa"
+      }
+    ]
+  },
+  "final_rule_path": "/Users/nkabmo/Desktop/Tools/SS/results/diagnostic_20261010/qwen3_mechanism_v5/CASE-0173/final_rule.yml",
+  "final_rule_sha256": "bbb683a43e7409a30a091376b54de29274f8af519d33f9f6d3787beb3ff71e70",
+  "calls_recorded": 1,
+  "input_tokens": 1468,
+  "output_tokens": 188,
+  "generation_seconds": 2.0322722919954685
+}

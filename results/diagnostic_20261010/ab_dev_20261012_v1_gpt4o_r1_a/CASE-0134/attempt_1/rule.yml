@@ -1,0 +1,18 @@
+rules:
+- id: vuln-apprise-e20fce63
+  pattern: r'/?(?P<events>([A-Z0-9_-]+/?)+)?'
+  pattern-not: r'((?P<events>(/[A-Z0-9_-]+)+))?'
+  languages:
+  - python
+  message: Potential regex pattern vulnerability in event matching. The original pattern
+    allows for empty event segments, which can lead to incorrect event parsing. Ensure
+    that event segments are properly prefixed with a slash to avoid misinterpretation.
+  severity: ERROR
+  metadata:
+    source-url: github.com/caronc/apprise/commit/e20fce630d55e4ca9b0a1e325a5fea6997489831
+    category: security
+    cwe: CWE-20
+    owasp: A6:2017-Security Misconfiguration
+    references:
+    - https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration
+    technology: python

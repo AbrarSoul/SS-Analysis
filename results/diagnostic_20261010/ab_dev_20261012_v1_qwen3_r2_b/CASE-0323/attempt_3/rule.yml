@@ -1,0 +1,26 @@
+rules:
+- id: vuln-ckeditor-oembed-plugin-10f6169e
+  patterns:
+  - pattern-either:
+    - pattern: '''div(embeddedContent,oembed-provider-*) script'': { attributes: ''*''
+        }'
+    - pattern: '"div(embeddedContent,oembed-provider-*) script": { attributes: ''*''
+        }'
+  - pattern-not: '''div(embeddedContent,oembed-provider-*) script'': { attributes:
+      { ''src'': $SRC } }'
+  - pattern-not: '"div(embeddedContent,oembed-provider-*) script": { attributes: {
+      ''src'': $SRC } }'
+  languages:
+  - javascript
+  message: Vulnerable CKEditor oEmbed plugin configuration allows arbitrary attribute
+    injection in embedded content scripts. This could enable attackers to inject malicious
+    scripts or modify embedded content behavior. Fix by restricting script attributes
+    to only allow safe values like 'src' and explicitly validate all dynamic content.
+  severity: ERROR
+  metadata:
+    category: security
+    cwe: CWE-94
+    owasp: OWASP-A03:2021
+    source-url: github.com/w8tcha/CKEditor-oEmbed-Plugin/commit/10f6169e39510bbf5af913886037044458b9dc9b
+    technology:
+    - javascript

@@ -1,0 +1,13 @@
+rules:
+- id: diagnostic-case-0340
+  message: Dynamic shell command versus argument-vector execFileSync
+  severity: WARNING
+  languages:
+  - typescript
+  metadata:
+    authorship: assistant
+    independent_review: pending
+    revision: v1
+  patterns:
+  - pattern: execSync($CMD)
+  - pattern-not: execSync("...")

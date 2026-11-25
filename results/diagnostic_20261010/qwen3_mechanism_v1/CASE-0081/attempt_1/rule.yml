@@ -1,0 +1,30 @@
+rules:
+- id: vuln-ebay-mcp-aab0bda7
+  patterns:
+  - pattern: 'const $VAR = existsSync($PATH) ? readFileSync($PATH, ''utf-8'') : '''';
+
+      '
+  - pattern: 'writeFileSync($PATH, $CONTENT, ''utf-8'');
+
+      '
+  - pattern-not: 'const $EXISTING = existsSync($PATH) ? dotenv.parse(readFileSync($PATH,
+      ''utf-8'')) : {};
+
+      '
+  - pattern-not: 'const $SAFE_CONTENT = stringify($MERGED_ENV);
+
+      '
+  message: Potential insecure environment variable file update vulnerability. The
+    code reads an existing .env file and directly modifies its content without proper
+    sanitization or structured parsing, which could lead to injection of malicious
+    values. Use dotenv.parse() and dotenv-stringify to safely merge updates.
+  languages:
+  - typescript
+  severity: ERROR
+  metadata:
+    source-url: github.com/YosefHayim/ebay-mcp/commit/aab0bda75ea9dd27aa37d0d8524d7cf41b3c4a9a
+    category: security
+    cwe:
+    - CWE-15
+    technology:
+    - typescript

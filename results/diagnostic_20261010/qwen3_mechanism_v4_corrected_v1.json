@@ -1,0 +1,683 @@
+[
+  {
+    "case_id": "CASE-0323",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0276",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "FP",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0221",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0134",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0136",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0220",
+    "raw": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0340",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0238",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "FP",
+        "benign_lookalike": "FP"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "FP",
+        "benign_lookalike": "FP"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0193",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "FP"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "FP"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0124",
+    "raw": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "FP"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0063",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": true,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0184",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0173",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0222",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0163",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "FP",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0171",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "FP",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": true,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "FP",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0046",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0239",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0235",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0298",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  },
+  {
+    "case_id": "CASE-0116",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0231",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "TP",
+        "original_patched": "FP",
+        "variant_vulnerable_1": "TP",
+        "variant_vulnerable_2": "TP",
+        "variant_safe": "FP",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0339",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": false,
+      "legacy_accepted": false,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {}
+    }
+  },
+  {
+    "case_id": "CASE-0081",
+    "raw": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    },
+    "iterative": {
+      "scan_ok": true,
+      "legacy_accepted": true,
+      "corrected_accepted": false,
+      "complete_success": false,
+      "outcomes": {
+        "original_vulnerable": "FN",
+        "original_patched": "TN",
+        "variant_vulnerable_1": "FN",
+        "variant_vulnerable_2": "FN",
+        "variant_safe": "TN",
+        "benign_lookalike": "TN"
+      }
+    }
+  }
+]
